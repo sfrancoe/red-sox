@@ -170,20 +170,91 @@ function drawLine(s,upto,opts){
   return head;
 }
 
+// Wally's head — the leading tip of a line being drawn. Vector rather than a
+// bitmap: it stays crisp at any DPR and adds nothing to the payload, and a
+// photo scaled to 28px turns to mush anyway. Authored in a 24-unit box centered
+// on the head, so the line's leading point sits mid-face and never jumps.
+// Draw order matters: head, cap, grin, then nose over the grin, then eyes.
+function drawWally(x,y,size){
+  const s=size/24;
+  ctx.save();
+  ctx.translate(x,y);ctx.scale(s,s);
+  ctx.lineJoin='round';ctx.lineCap='round';
+
+  // fuzzy green head — alternating radii give the fur its ragged edge
+  const N=46;
+  ctx.beginPath();
+  for(let i=0;i<=N;i++){
+    const a=i/N*Math.PI*2;
+    const r=9.7+(i%2?1.0+0.4*Math.sin(i*3.1):0);
+    const px=Math.cos(a)*r*1.06, py=Math.sin(a)*r*0.95;
+    i?ctx.lineTo(px,py):ctx.moveTo(px,py);
+  }
+  ctx.closePath();
+  const fur=ctx.createRadialGradient(-3,-4,1,0,0,13);
+  fur.addColorStop(0,'#63d96e');fur.addColorStop(.55,'#2bb443');fur.addColorStop(1,'#0f7a2e');
+  ctx.fillStyle=fur;ctx.fill();
+
+  // cap, tilted back
+  ctx.save();
+  ctx.translate(-2.2,-8.2);ctx.rotate(-0.36);
+  ctx.fillStyle='#16295c';
+  ctx.beginPath();ctx.moveTo(-6.4,0.9);
+  ctx.bezierCurveTo(-6.6,-4.4,-2.6,-5.4,0.2,-5.4);
+  ctx.bezierCurveTo(3.4,-5.4,6.2,-3.6,6.3,0.6);
+  ctx.lineTo(6.3,1.0);ctx.lineTo(-6.4,0.9);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#101f47';
+  ctx.beginPath();ctx.moveTo(-5.4,0.2);
+  ctx.bezierCurveTo(-9.0,-0.4,-11.0,0.7,-10.7,1.8);
+  ctx.bezierCurveTo(-9.0,2.7,-6.2,2.2,-5.0,1.5);
+  ctx.closePath();ctx.fill();
+  ctx.fillStyle='#c8102e';
+  ctx.font='700 4.2px Georgia, serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('B',0.4,-2.0);
+  ctx.restore();
+
+  // grin — kept inside the fur outline so the tongue never floats loose
+  ctx.fillStyle='#0f1014';
+  ctx.beginPath();
+  ctx.moveTo(-0.6,3.2);
+  ctx.bezierCurveTo(2.6,2.6,6.8,3.2,7.6,4.2);
+  ctx.bezierCurveTo(6.8,7.4,2.8,8.4,0.6,6.2);
+  ctx.closePath();ctx.fill();
+  ctx.fillStyle='#e0243a';
+  ctx.beginPath();ctx.ellipse(4.6,5.6,1.6,1.1,-0.25,0,7);ctx.fill();
+
+  // nose, overlapping the top of the grin
+  const nose=ctx.createRadialGradient(0.9,0.2,0.3,2.2,1.7,4.0);
+  nose.addColorStop(0,'#ffd85c');nose.addColorStop(.5,'#ff9f22');nose.addColorStop(1,'#ee6b00');
+  ctx.fillStyle=nose;
+  ctx.beginPath();ctx.ellipse(2.1,1.5,3.3,2.8,-0.15,0,7);ctx.fill();
+
+  // eyes
+  ctx.fillStyle='#fff';ctx.strokeStyle='#10240f';ctx.lineWidth=0.5;
+  ctx.beginPath();ctx.ellipse(0.2,-3.2,3.0,3.4,-0.1,0,7);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.ellipse(5.6,-2.6,2.5,2.9,0.05,0,7);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#0d0d10';
+  ctx.beginPath();ctx.ellipse(1.0,-2.8,1.35,1.6,0,0,7);ctx.fill();
+  ctx.beginPath();ctx.ellipse(6.1,-2.3,1.2,1.45,0,0,7);ctx.fill();
+  ctx.fillStyle='#fff';
+  ctx.beginPath();ctx.arc(0.6,-3.5,0.45,0,7);ctx.fill();
+  ctx.beginPath();ctx.arc(5.75,-2.95,0.4,0,7);ctx.fill();
+  ctx.restore();
+}
+
 function drawCometHead(s,head){
   const x=xFor(head.g),y=yFor(head.d);
+  const size=W<520?22:28;
+  const rad=size*0.9;
+  // Wally is the same green on all four lines, so the halo carries the season
+  // color — it's what still ties the moving head to the line it belongs to.
   ctx.save();
-  // outer glow
-  const g=ctx.createRadialGradient(x,y,0,x,y,16);
-  g.addColorStop(0,s.color);g.addColorStop(.4,s.color+'88');g.addColorStop(1,s.color+'00');
+  const g=ctx.createRadialGradient(x,y,size*0.35,x,y,rad);
+  g.addColorStop(0,s.color+'99');g.addColorStop(.55,s.color+'44');g.addColorStop(1,s.color+'00');
   ctx.globalAlpha=.9;ctx.fillStyle=g;
-  ctx.beginPath();ctx.arc(x,y,16,0,7);ctx.fill();
-  // core
-  ctx.globalAlpha=1;ctx.fillStyle='#fff';
-  ctx.beginPath();ctx.arc(x,y,3.4,0,7);ctx.fill();
-  ctx.fillStyle=s.color;
-  ctx.beginPath();ctx.arc(x,y,2,0,7);ctx.fill();
+  ctx.beginPath();ctx.arc(x,y,rad,0,7);ctx.fill();
   ctx.restore();
+  drawWally(x,y,size);
 
   // floating label with year + live record
   const gInt=Math.max(0,Math.min(s.endGame,Math.round(head.g)));
@@ -192,8 +263,9 @@ function drawCometHead(s,head){
   ctx.save();
   ctx.font='400 15px AntonX, sans-serif';
   const tw=ctx.measureText(txt).width;
-  let lx=x+14, ly=y-14;
-  if(lx+tw+14>W-6) lx=x-14-tw-8;
+  const off=size*0.5+7;
+  let lx=x+off, ly=y-off;
+  if(lx+tw+14>W-6) lx=x-off-tw-8;
   ctx.globalAlpha=.92;
   ctx.fillStyle='rgba(8,18,12,.72)';
   roundRect(lx-7,ly-15,tw+14,22,6);ctx.fill();
