@@ -56,6 +56,7 @@ function resize(){
   ctx.setTransform(DPR,0,0,DPR,0,0);
   // the right gutter carries year + record + WAR leader, so it needs the room
   padL = W<520?46:64; padR = W<520?96:182; padB = W<520?36:44;
+  buildSegs();   // curve geometry is layout-dependent
 }
 const xFor=g=>padL+(g/GMAX)*(W-padL-padR);
 const yFor=d=>padT+(1-(d-DMIN)/(DMAX-DMIN))*(H-padT-padB);
@@ -136,46 +137,77 @@ function drawGrid(){
   ctx.restore();
 }
 
-// smooth curve through points (Catmull-Rom -> cubic bezier)
-function smoothPath(P){
-  if(!P.length) return;
-  ctx.moveTo(P[0].x,P[0].y);
-  if(P.length<3){ for(let i=1;i<P.length;i++) ctx.lineTo(P[i].x,P[i].y); return; }
-  for(let i=0;i<P.length-1;i++){
-    const p0=P[i-1]||P[i], p1=P[i], p2=P[i+1], p3=P[i+2]||P[i+1];
-    const cp1x=p1.x+(p2.x-p0.x)/6, cp1y=p1.y+(p2.y-p0.y)/6;
-    const cp2x=p2.x-(p3.x-p1.x)/6, cp2y=p2.y-(p3.y-p1.y)/6;
-    ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,p2.x,p2.y);
-  }
+// Each season's curve is fixed geometry — it only depends on the data and the
+// layout — so build it once per resize as Catmull-Rom converted to cubic beziers,
+// one segment per game. Growing the line then means *truncating* this curve, not
+// re-fitting it, which is the whole point: a spline re-fitted every frame through
+// a moving endpoint keeps changing shape near the tip, because each knot's
+// tangent depends on its neighbours. That popped every time a whole game was
+// appended — 26 times a second — and read as stutter.
+function buildSegs(){
+  seasons.forEach(s=>{
+    const P=[];
+    for(let g=0;g<=s.endGame;g++) P.push({x:xFor(g),y:yFor(s.disp[g])});
+    const segs=[];
+    for(let i=0;i<P.length-1;i++){
+      const p0=P[i-1]||P[i], p1=P[i], p2=P[i+1], p3=P[i+2]||P[i+1];
+      segs.push({
+        c1x:p1.x+(p2.x-p0.x)/6, c1y:p1.y+(p2.y-p0.y)/6,
+        c2x:p2.x-(p3.x-p1.x)/6, c2y:p2.y-(p3.y-p1.y)/6,
+        x1:p2.x, y1:p2.y});
+    }
+    s.segs=segs; s.x0=P[0].x; s.y0=P[0].y;
+    const path=new Path2D(); path.moveTo(P[0].x,P[0].y);
+    segs.forEach(g=>path.bezierCurveTo(g.c1x,g.c1y,g.c2x,g.c2y,g.x1,g.y1));
+    s.fullPath=path;   // completed lines redraw from here instead of rebuilding
+  });
 }
 
-// draw a season line up to game `upto` (float), using the smoothed series. glow = active
+// de Casteljau: the piece of one bezier segment from its start to parameter t.
+// Same curve, just stopped early — that's what keeps the tip from wobbling.
+function splitBezier(seg,x0,y0,t){
+  const ax=x0+(seg.c1x-x0)*t,       ay=y0+(seg.c1y-y0)*t;
+  const bx=seg.c1x+(seg.c2x-seg.c1x)*t, by=seg.c1y+(seg.c2y-seg.c1y)*t;
+  const cx=seg.c2x+(seg.x1-seg.c2x)*t,  cy=seg.c2y+(seg.y1-seg.c2y)*t;
+  const dx=ax+(bx-ax)*t, dy=ay+(by-ay)*t;
+  const ex=bx+(cx-bx)*t, ey=by+(cy-by)*t;
+  return {c1x:ax,c1y:ay,c2x:dx,c2y:dy,x1:dx+(ex-dx)*t,y1:dy+(ey-dy)*t};
+}
+
+// draw a season line up to game `upto` (float). glow = active
 function drawLine(s,upto,opts){
   opts=opts||{};
-  const disp=s.disp;
-  const EG=s.endGame;
-  const full = upto>=EG;
-  const whole = Math.min(Math.floor(upto),EG);
-  const P=[];
-  for(let g=0;g<=whole;g++) P.push({x:xFor(g),y:yFor(disp[g])});
-  let head;
-  if(!full && whole<EG){
-    const frac=upto-whole;
-    if(frac>0){
-      const di=disp[whole]+(disp[whole+1]-disp[whole])*frac;
-      P.push({x:xFor(whole+frac),y:yFor(di)});
-      head={g:whole+frac,d:di};
-    } else head={g:whole,d:disp[whole]};
-  } else head={g:EG,d:disp[EG]};
+  const segs=s.segs, EG=s.endGame;
   ctx.save();
   ctx.lineJoin='round';ctx.lineCap='round';
   ctx.strokeStyle=s.color;
   ctx.globalAlpha=opts.alpha!=null?opts.alpha:1;
   ctx.lineWidth=opts.width||(opts.active?3:2);
   if(opts.glow){ctx.shadowColor=s.color;ctx.shadowBlur=opts.active?18:9;}
-  ctx.beginPath();
-  smoothPath(P);
-  ctx.stroke();
+  let head;
+  if(upto>=EG || !segs.length){
+    ctx.stroke(s.fullPath);
+    const last=segs[segs.length-1];
+    head=last?{x:last.x1,y:last.y1,g:EG}:{x:s.x0,y:s.y0,g:0};
+  }else{
+    const whole=Math.max(0,Math.min(Math.floor(upto),segs.length));
+    const frac=upto-whole;
+    let hx=s.x0, hy=s.y0;
+    ctx.beginPath();
+    ctx.moveTo(s.x0,s.y0);
+    for(let i=0;i<whole;i++){
+      const g=segs[i];
+      ctx.bezierCurveTo(g.c1x,g.c1y,g.c2x,g.c2y,g.x1,g.y1);
+      hx=g.x1; hy=g.y1;
+    }
+    if(whole<segs.length && frac>0){
+      const sub=splitBezier(segs[whole],hx,hy,frac);
+      ctx.bezierCurveTo(sub.c1x,sub.c1y,sub.c2x,sub.c2y,sub.x1,sub.y1);
+      hx=sub.x1; hy=sub.y1;
+    }
+    ctx.stroke();
+    head={x:hx,y:hy,g:upto};
+  }
   ctx.restore();
   return head;
 }
@@ -253,7 +285,8 @@ function drawWally(x,y,size){
 }
 
 function drawCometHead(s,head){
-  const x=xFor(head.g),y=yFor(head.d);
+  // head is the point on the curve itself, so Wally rides the line exactly
+  const x=head.x, y=head.y;
   const size=W<520?22:28;
   const rad=size*0.9;
   // Wally is the same green on all four lines, so the halo carries the season
@@ -464,25 +497,52 @@ function drawScrub(){
 // Scoreboard + narration
 // =========================================================
 const el=id=>document.getElementById(id);
+const elCache={};
+const E=id=>elCache[id]||(elCache[id]=document.getElementById(id));
 let activeBeat='';
+
+// The render loop calls updateScoreboard every frame, but what it writes changes
+// a few times a second at most. Writing unconditionally meant a style recalc on
+// every single frame — and setSeasonColor ran a document.querySelector each time
+// on top of that. Memoise: touch the DOM only when a value actually moved.
+const shown={};
+function invalidate(){ for(const k in shown) delete shown[k]; }
+function setText(id,val){
+  const k='t:'+id, v=String(val);
+  if(shown[k]===v) return;
+  shown[k]=v; E(id).textContent=v;
+}
+function setStyle(id,prop,val){
+  const k='s:'+id+':'+prop;
+  if(shown[k]===val) return;
+  shown[k]=val; E(id).style[prop]=val;
+}
+let narrInner=null;
 function setSeasonColor(c){
-  el('scoreboard').style.setProperty('--seasoncol',c);
-  el('nInner').parentElement.style.setProperty('--seasoncol',c);
-  el('nInner').style.setProperty('--seasoncol',c);
-  document.querySelector('.narration .n-inner').style.borderLeftColor=c;
+  if(shown.seasoncol===c) return;
+  shown.seasoncol=c;
+  narrInner=narrInner||document.querySelector('.narration .n-inner');
+  E('scoreboard').style.setProperty('--seasoncol',c);
+  E('nInner').parentElement.style.setProperty('--seasoncol',c);
+  E('nInner').style.setProperty('--seasoncol',c);
+  if(narrInner) narrInner.style.borderLeftColor=c;
 }
 function updateScoreboard(force){
+  if(force) invalidate();
   const inFinale=state.phase>=seasons.length;
   if(inFinale){
-    el('sbYear').textContent='4 SEASONS';
-    el('sbArc').textContent='Same at 108 — then four fates';
-    el('sbW').textContent='57';el('sbL').textContent='51';
-    el('sbGame').textContent='Game 108';
-    el('sbStreak').textContent='—';
-    el('sbDiff').textContent=seasons.map(s=>s.record.replace('-','–')+(s.inProgress?' (live)':'')).join(' · ');
-    el('scoreboard').style.setProperty('--seasoncol','var(--gold)');
-    el('sbYear').style.color='var(--gold)';
-    el('sbYear').style.fontSize='clamp(22px,2.4vw,32px)';
+    setText('sbYear','4 SEASONS');
+    setText('sbArc','Same at 108 — then four fates');
+    setText('sbW','57'); setText('sbL','51');
+    setText('sbGame','Game 108');
+    setText('sbStreak','—');
+    setText('sbDiff',seasons.map(s=>s.record.replace('-','–')+(s.inProgress?' (live)':'')).join(' · '));
+    if(shown.seasoncol!=='var(--gold)'){
+      shown.seasoncol='var(--gold)';
+      E('scoreboard').style.setProperty('--seasoncol','var(--gold)');
+    }
+    setStyle('sbYear','color','var(--gold)');
+    setStyle('sbYear','fontSize','clamp(22px,2.4vw,32px)');
     return;
   }
   const s=seasons[state.phase]; if(!s)return;
@@ -491,13 +551,13 @@ function updateScoreboard(force){
   // scoreboard updates in 5-game steps (snaps to the exact end) to avoid flicker
   const gShow=state.prog>=EG?EG:Math.floor(gTrue/5)*5;
   const w=Math.round(s.cumW[gShow]||0), l=Math.round(s.cumL[gShow]||0), df=(s.pts[gShow]?s.pts[gShow].d:0);
-  el('sbYear').textContent=s.year; el('sbYear').style.fontSize='';
-  el('sbYear').style.color=s.color;
-  el('sbArc').textContent=s.label;
-  el('sbW').textContent=w; el('sbL').textContent=l;
-  el('sbGame').textContent='Game '+gShow;
-  el('sbStreak').textContent = gShow>0 ? s.streak[gShow] : '—';
-  el('sbDiff').textContent = df===0?'Even' : (df>0?('+'+df+' over .500'):(df+' under .500'));
+  setText('sbYear',s.year); setStyle('sbYear','fontSize','');
+  setStyle('sbYear','color',s.color);
+  setText('sbArc',s.label);
+  setText('sbW',w); setText('sbL',l);
+  setText('sbGame','Game '+gShow);
+  setText('sbStreak', gShow>0 ? s.streak[gShow] : '—');
+  setText('sbDiff', df===0?'Even' : (df>0?('+'+df+' over .500'):(df+' under .500')));
   setSeasonColor(s.color);
   // narration beats track the true game so callouts stay on time
   let beat=null;
