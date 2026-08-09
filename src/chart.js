@@ -359,7 +359,7 @@ function updateScoreboard(force){
     el('sbW').textContent='57';el('sbL').textContent='51';
     el('sbGame').textContent='Game 108';
     el('sbStreak').textContent='—';
-    el('sbDiff').textContent='78–84 · 81–81 · 89–73 · 62–51 (live)';
+    el('sbDiff').textContent=seasons.map(s=>s.record.replace('-','–')+(s.inProgress?' (live)':'')).join(' · ');
     el('scoreboard').style.setProperty('--seasoncol','var(--gold)');
     el('sbYear').style.color='var(--gold)';
     el('sbYear').style.fontSize='clamp(22px,2.4vw,32px)';
@@ -436,7 +436,13 @@ function showFinaleNarration(){
   const nInner=el('nInner');
   el('narration').classList.remove('show');
   setTimeout(()=>{
-    nInner.textContent='Four roads met at 57–51 after 108 games — then split: 2023 faded to 78–84, 2024 held at 81–81, 2025 surged to 89–73 and October… and 2026? Still being written (62–51).';
+    // Built from the data so the daily refresh can never leave a stale record here.
+    const R = Object.fromEntries(seasons.map(s=>[s.year, s.record.replace('-','–')]));
+    const live = seasons.find(s=>s.inProgress);
+    nInner.textContent =
+      `Four roads met at 57–51 after 108 games — then split: 2023 faded to ${R[2023]}, `
+      + `2024 held at ${R[2024]}, 2025 surged to ${R[2025]} and October…`
+      + (live ? ` and ${live.year}? Still being written (${R[live.year]}).` : '');
     document.querySelector('.narration .n-inner').style.borderLeftColor='var(--gold)';
     el('narration').classList.add('show');
   },140);
