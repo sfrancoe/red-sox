@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Red Sox Records</title>
+<meta name="description" content="Visual stories from Boston Red Sox box scores.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
+<link rel="stylesheet" href="src/home.css">
+</head>
+<body>
+<main class="home">
+  <header class="home-top">
+    <div class="home-eyebrow">Boston Red Sox</div>
+    <h1 class="home-title">RECORDS</h1>
+    <p class="home-dek">Visual stories pulled from the box scores. Game logs come from the
+      MLB Stats API and refresh daily, so anything about a live season stays current.</p>
+  </header>
+
+  <ul class="story-grid">
+    <li>
+      <a class="story-card" href="stories/four-roads/">
+        <span class="card-kicker">2023 – 2026</span>
+        <span class="card-title">Four Roads,<br><em>One Record</em></span>
+        <span class="card-dek">Four straight seasons arrived at the identical record after
+          108 games — then split toward four completely different endings.</span>
+        <span class="card-go">Open the graphic <span aria-hidden="true">&rarr;</span></span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="home-foot">
+    Game logs via the <a href="https://statsapi.mlb.com/" rel="noreferrer noopener">MLB Stats API</a>.
+    <span id="freshness"></span>
+  </footer>
+</main>
+
+<script type="module">
+  // Show when the data was last refreshed, straight from the generated meta file.
+  try {
+    const meta = await fetch('data/meta.json').then(r => r.json());
+    // generated_at is null until the first CI refresh — and new Date(null) is the
+    // epoch, not an invalid date, so check for the value before parsing it.
+    const when = meta.generated_at ? new Date(meta.generated_at) : null;
+    if (when && !Number.isNaN(when.valueOf())) {
+      document.getElementById('freshness').textContent =
+        ' Updated ' + when.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) + '.';
+    }
+  } catch { /* meta is optional chrome — never let it break the page */ }
+</script>
+</body>
+</html>

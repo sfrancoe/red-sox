@@ -1,0 +1,75 @@
+/* Landing page — shares the chart's chalkboard palette and display fonts. */
+
+@font-face{font-family:'AntonX';font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/anton-400.woff2') format('woff2');}
+@font-face{font-family:'OswaldX';font-style:normal;font-weight:500;font-display:swap;src:url('../assets/fonts/oswald-500.woff2') format('woff2');}
+@font-face{font-family:'OswaldX';font-style:normal;font-weight:700;font-display:swap;src:url('../assets/fonts/oswald-700.woff2') format('woff2');}
+
+:root{
+  --bg0:#08120c; --bg1:#0b1a12; --panel:#0e2118; --panel2:#102a1e;
+  --line:#173023; --ink:#eef4ec; --muted:#8aa393; --chalk:#e9e3d0;
+  --c26:#ff3b47; --gold:#ffcf5a;
+  --display:'AntonX','Arial Narrow',Impact,sans-serif;
+  --cond:'OswaldX','Arial Narrow',sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;background:var(--bg0);}
+body{
+  min-height:100vh;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(255,59,71,.10), transparent 55%),
+    radial-gradient(90% 70% at 5% 6%, rgba(56,189,248,.07), transparent 55%),
+    linear-gradient(180deg,var(--bg1),var(--bg0));
+}
+
+.home{max-width:1000px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,4vw,32px) 48px;}
+
+.home-eyebrow{
+  font-family:var(--cond);font-weight:500;letter-spacing:.32em;text-transform:uppercase;
+  font-size:clamp(10px,1.1vw,13px);color:var(--muted);
+  display:flex;align-items:center;gap:.7em;
+}
+.home-eyebrow::before{content:"";width:26px;height:2px;background:var(--c26);box-shadow:0 0 10px var(--c26);}
+.home-title{
+  font-family:var(--display);font-weight:400;color:var(--chalk);
+  font-size:clamp(46px,11vw,104px);line-height:.92;margin:.1em 0 .18em;letter-spacing:.005em;
+}
+.home-dek{max-width:56ch;color:var(--muted);font-size:clamp(14px,1.2vw,16px);line-height:1.6;margin:0;}
+
+.story-grid{
+  list-style:none;padding:0;margin:clamp(28px,5vw,52px) 0 0;
+  display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));
+}
+
+.story-card{
+  display:flex;flex-direction:column;gap:10px;height:100%;
+  padding:clamp(20px,3vw,28px);
+  background:linear-gradient(180deg,var(--panel2),var(--panel));
+  border:1px solid var(--line);border-radius:16px;text-decoration:none;color:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 34px rgba(0,0,0,.42);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.story-card:hover,.story-card:focus-visible{
+  transform:translateY(-3px);border-color:#20402f;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 20px 44px rgba(0,0,0,.55);
+}
+.story-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+.card-kicker{
+  font-family:var(--cond);font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  font-size:11px;color:var(--muted);
+}
+.card-title{font-family:var(--display);font-size:clamp(28px,4.4vw,38px);line-height:.98;color:var(--chalk);}
+.card-title em{font-style:normal;color:var(--c26);}
+.card-dek{color:var(--muted);font-size:14px;line-height:1.55;flex:1 1 auto;}
+.card-go{
+  font-family:var(--cond);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  font-size:12px;color:var(--gold);margin-top:4px;
+}
+
+.home-foot{
+  margin-top:clamp(32px,6vw,64px);padding-top:18px;border-top:1px solid var(--line);
+  font-family:var(--cond);font-weight:500;font-size:11.5px;letter-spacing:.04em;
+  color:var(--muted);
+}
+.home-foot a{color:var(--muted);}

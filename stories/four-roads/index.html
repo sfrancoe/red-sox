@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Four Roads, One Record — Red Sox 57-51</title>
+<meta name="description" content="Four straight Red Sox seasons hit 57-51 after 108 games, then split toward four different fates.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
+<link rel="stylesheet" href="../../src/styles.css">
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Play the animation with sound">
+    <div class="po-inner">
+      <div class="po-btn"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="34,24 34,76 78,50"/></svg></div>
+      <div class="po-label">Play</div>
+      <div class="po-sub">with sound</div>
+    </div>
+  </div>
+  <header class="top">
+    <div class="brand">
+      <h1 class="title">FOUR ROADS, <em>ONE RECORD</em></h1>
+      <p class="dek">Four straight seasons. The <b>exact</b> same record — <b>57–51</b> — after 108 games, every single time. Press play to watch four wildly different roads meet at one door… then split toward four completely different endings.</p>
+    </div>
+    <div class="scoreboard" id="scoreboard">
+      <div class="sb-year" id="sbYear">2023</div>
+      <div class="sb-arc" id="sbArc">Press play</div>
+      <div class="sb-record"><span id="sbW">0</span><span class="dash">–</span><span id="sbL">0</span></div>
+      <div class="sb-meta">
+        <span id="sbGame">Game 0</span><span class="pip">·</span>
+        <span>Streak <b id="sbStreak">—</b></span><span class="pip">·</span>
+        <span id="sbDiff">Even</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="chartwrap">
+    <canvas id="chart"></canvas>
+    <div class="narration" id="narration" aria-live="polite"><div class="n-inner" id="nInner"></div></div>
+  </div>
+
+  <footer class="controls">
+    <div class="transport">
+      <button id="playBtn" class="btn primary">► Play</button>
+      <button id="restartBtn" class="btn">↻ Restart</button>
+      <button id="muteBtn" class="btn" aria-pressed="false">♪ Music: On</button>
+      <label class="speed">Speed
+        <input id="speed" type="range" min="0.5" max="3" step="0.5" value="1" aria-label="Playback speed">
+        <span id="speedVal">1×</span>
+      </label>
+    </div>
+  </footer>
+</div>
+<script type="module" src="./story.js"></script>
+</body>
+</html>

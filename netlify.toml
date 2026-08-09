@@ -1,0 +1,16 @@
+# Static site — no framework, no bundler. The build step just assembles the
+# public files into _site/ so repo-only files (scripts, docs) are not served.
+
+[build]
+  command = "bash scripts/build_site.sh"
+  publish = "_site"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
