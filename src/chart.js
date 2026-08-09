@@ -55,7 +55,7 @@ function resize(){
   canvas.width=Math.round(W*DPR); canvas.height=Math.round(H*DPR);
   ctx.setTransform(DPR,0,0,DPR,0,0);
   // the right gutter carries year + record + WAR leader, so it needs the room
-  padL = W<520?46:64; padR = W<520?84:158; padB = W<520?36:44;
+  padL = W<520?46:64; padR = W<520?96:182; padB = W<520?36:44;
 }
 const xFor=g=>padL+(g/GMAX)*(W-padL-padR);
 const yFor=d=>padT+(1-(d-DMIN)/(DMAX-DMIN))*(H-padT-padB);
@@ -111,7 +111,15 @@ function drawGrid(){
     ctx.strokeStyle='rgba(23,48,35,.7)';ctx.lineWidth=1;
     ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,H-padB);ctx.stroke();
     ctx.fillStyle='rgba(138,163,147,.75)';
-    ctx.fillText(g===0?'Opening Day':(g===162?'G162 · Finish':('G'+g)),x,H-padB+7);
+    // the finish label sits out in the right gutter — centred on the plot edge it
+    // lands under the narration panel now that the gutter carries WAR lines. On a
+    // phone the panel is wide enough to swallow it either way, and nudging it right
+    // just leaves a fragment poking out, so only do this where there's room.
+    if(g===162 && W>=520){
+      ctx.textAlign='right'; ctx.fillText('G162 · Finish',W-6,H-padB+7); ctx.textAlign='center';
+    }else{
+      ctx.fillText(g===0?'Opening Day':(g===162?'G162 · Finish':('G'+g)),x,H-padB+7);
+    }
   });
   // checkpoint emphasis at 108
   const xc=xFor(108);
@@ -282,6 +290,22 @@ function roundRect(x,y,w,h,r){
   ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
 }
 
+// Small gold crown, marking the season's WAR leader. Drawn rather than typed:
+// an emoji would render differently on every platform, and this page self-hosts
+// its fonts precisely so it looks the same everywhere. Returns its width.
+function drawCrown(x,y,h){
+  const s=h/7;
+  ctx.save();
+  ctx.translate(x,y-h/2); ctx.scale(s,s);
+  ctx.beginPath();
+  ctx.moveTo(0,7); ctx.lineTo(0,1); ctx.lineTo(2.5,4); ctx.lineTo(5,0.4);
+  ctx.lineTo(7.5,4); ctx.lineTo(10,1); ctx.lineTo(10,7);
+  ctx.closePath();
+  ctx.fillStyle='#ffcf5a'; ctx.fill();
+  ctx.restore();
+  return 10*s;
+}
+
 // endpoint tags in right gutter with collision avoidance
 function drawEndpointTags(list,opts){
   opts=opts||{};
@@ -309,14 +333,23 @@ function drawEndpointTags(list,opts){
     // surname when the full name won't fit rather than letting it run off-canvas.
     const wl=s.warLeader;
     if(wl && wl.name){
-      ctx.font='500 '+(big?12:10)+'px OswaldX, sans-serif';
+      ctx.font='500 '+(big?14:12)+'px OswaldX, sans-serif';
       const num=wl.war.toFixed(1), last=wl.name.split(' ').pop();
-      const gutter=(s.inProgress? lx-padL : W-6-lx);
+      // an unfinished season's WAR is a running total, so say so
+      const suf=s.inProgress?' WAR YTD':' WAR';
+      const ch=big?9:8, cw=ch*10/7, gap=4;
+      const gutter=(s.inProgress? lx-padL : W-6-lx)-cw-gap;
       // widest form that still fits the gutter \u2014 on a phone that's the last one
-      const forms=[wl.name+' \u00b7 '+num+' WAR', last+' \u00b7 '+num+' WAR', last+' '+num];
+      const forms=[wl.name+' \u00b7 '+num+suf, last+' \u00b7 '+num+suf,
+                   last+' '+num+(s.inProgress?' YTD':'')];
       const txt=forms.find(t=>ctx.measureText(t).width<=gutter) || forms[forms.length-1];
-      ctx.fillStyle=s.color; ctx.globalAlpha=.85;
-      ctx.fillText(txt, lx, y+(big?17:15));
+      const ty=y+(big?19:16);
+      ctx.globalAlpha=.9;
+      // crown leads the name, whichever side the tag is anchored on
+      const tw=ctx.measureText(txt).width;
+      drawCrown(s.inProgress? lx-tw-gap-cw : lx, ty, ch);
+      ctx.fillStyle=s.color;
+      ctx.fillText(txt, s.inProgress? lx : lx+cw+gap, ty);
     }
     ctx.restore();
   });
