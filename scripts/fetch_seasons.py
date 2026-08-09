@@ -13,6 +13,9 @@ Uses only the standard library so CI needs no dependencies.
 """
 from __future__ import annotations
 
+import csv
+import gzip
+import io
 import json
 import pathlib
 import sys
@@ -28,6 +31,14 @@ API = ("https://statsapi.mlb.com/api/v1/schedule"
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CHECKPOINT = 108  # the game the whole story hangs on
 
+# WAR is not in the MLB Stats API — it's a derived stat. Baseball Reference
+# publishes its bWAR as two plain-text CSVs, rebuilt daily, so the live season's
+# leader stays current. Free, no key, stdlib-parseable.
+WAR_BAT_URL = "https://www.baseball-reference.com/data/war_daily_bat.txt"
+WAR_PITCH_URL = "https://www.baseball-reference.com/data/war_daily_pitch.txt"
+BBREF_TEAM = "BOS"
+UA = "red-sox-records/1.0"
+
 # The premise this project is built on. If real data ever disagrees, say so loudly
 # rather than quietly shipping a graphic that claims something untrue.
 EXPECTED_AT_CHECKPOINT = "57-51"
@@ -38,7 +49,7 @@ def fetch_json(url: str, attempts: int = 4) -> dict:
     last = None
     for i in range(attempts):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "red-sox-records/1.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=30) as r:
                 return json.load(r)
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
@@ -48,6 +59,65 @@ def fetch_json(url: str, attempts: int = 4) -> dict:
                 print(f"    retry {i+1}/{attempts-1} after {wait}s ({e})", file=sys.stderr)
                 time.sleep(wait)
     raise RuntimeError(f"failed to fetch {url}: {last}")
+
+
+def fetch_text(url: str, attempts: int = 4) -> str:
+    """GET a text file with retry + backoff. Asks for gzip — these are ~34 MB raw."""
+    last = None
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(
+                url, headers={"User-Agent": UA, "Accept-Encoding": "gzip"})
+            with urllib.request.urlopen(req, timeout=120) as r:
+                raw = r.read()
+                if r.headers.get("Content-Encoding") == "gzip":
+                    raw = gzip.decompress(raw)
+                return raw.decode("utf-8", errors="replace")
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            last = e
+            if i < attempts - 1:
+                wait = 2 ** i
+                print(f"    retry {i+1}/{attempts-1} after {wait}s ({e})", file=sys.stderr)
+                time.sleep(wait)
+    raise RuntimeError(f"failed to fetch {url}: {last}")
+
+
+def war_leaders(years: list[int]) -> dict[str, dict]:
+    """Highest-bWAR Red Sox player per season, batters and pitchers together."""
+    wanted = set(years)
+    totals: dict[int, dict[str, float]] = {y: {} for y in wanted}
+
+    for label, url in (("batting", WAR_BAT_URL), ("pitching", WAR_PITCH_URL)):
+        print(f"  WAR ({label}): fetching…")
+        rows = 0
+        for row in csv.DictReader(io.StringIO(fetch_text(url))):
+            if row.get("team_ID") != BBREF_TEAM:
+                continue
+            try:
+                year = int(row.get("year_ID") or "")
+                war = float(row.get("WAR") or "")
+            except ValueError:
+                continue          # header repeats, NULLs, blank WAR
+            if year not in wanted:
+                continue
+            name = (row.get("name_common") or "").strip()
+            if not name:
+                continue
+            # A player traded mid-season has one row per stint; a two-way player
+            # appears in both files. Summing is what makes the season total right.
+            totals[year][name] = totals[year].get(name, 0.0) + war
+            rows += 1
+        print(f"    {rows} {BBREF_TEAM} rows in range")
+
+    out: dict[str, dict] = {}
+    for year in sorted(wanted):
+        if not totals[year]:
+            print(f"    WARNING {year}: no {BBREF_TEAM} WAR rows found", file=sys.stderr)
+            continue
+        name, war = max(totals[year].items(), key=lambda kv: kv[1])
+        out[str(year)] = {"name": name, "war": round(war, 1)}
+        print(f"    {year}: {name} — {war:.1f} WAR")
+    return out
 
 
 # A game only counts if it was actually played to a result. Beware: MLB marks
@@ -148,6 +218,11 @@ def main() -> int:
     for y in years:
         seasons[str(y)] = build_season(y)
 
+    print("\nFetching bWAR leaders from Baseball Reference")
+    for year, leader in war_leaders(years).items():
+        if year in seasons:
+            seasons[year]["war_leader"] = leader
+
     # Headline check: is the premise of the graphic still true?
     checks = {y: s.get("checkpoint_record") for y, s in seasons.items() if s.get("checkpoint_record")}
     all_match = checks and all(v == EXPECTED_AT_CHECKPOINT for v in checks.values())
@@ -164,10 +239,12 @@ def main() -> int:
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": "MLB Stats API (statsapi.mlb.com)",
+        "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
         "team_id": BOS,
         "seasons": {y: {"record": s["record"], "games": s["end_game"],
                         "in_progress": s["in_progress"],
-                        "checkpoint_record": s.get("checkpoint_record")}
+                        "checkpoint_record": s.get("checkpoint_record"),
+                        "war_leader": s.get("war_leader")}
                     for y, s in seasons.items()},
         "checkpoint_game": CHECKPOINT,
         "premise_holds": bool(all_match),

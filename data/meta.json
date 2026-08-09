@@ -1,31 +1,48 @@
 {
- "generated_at": "2026-08-09T15:44:34+00:00",
+ "generated_at": "2026-08-09T18:54:46+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 111,
  "seasons": {
   "2023": {
    "record": "78-84",
    "games": 162,
    "in_progress": false,
-   "checkpoint_record": "57-51"
+   "checkpoint_record": "57-51",
+   "war_leader": {
+    "name": "Rafael Devers",
+    "war": 3.5
+   }
   },
   "2024": {
    "record": "81-81",
    "games": 162,
    "in_progress": false,
-   "checkpoint_record": "57-51"
+   "checkpoint_record": "57-51",
+   "war_leader": {
+    "name": "Jarren Duran",
+    "war": 9.0
+   }
   },
   "2025": {
    "record": "89-73",
    "games": 162,
    "in_progress": false,
-   "checkpoint_record": "57-51"
+   "checkpoint_record": "57-51",
+   "war_leader": {
+    "name": "Garrett Crochet",
+    "war": 6.0
+   }
   },
   "2026": {
    "record": "64-52",
    "games": 116,
    "in_progress": true,
-   "checkpoint_record": "57-51"
+   "checkpoint_record": "57-51",
+   "war_leader": {
+    "name": "Ceddanne Rafaela",
+    "war": 5.1
+   }
   }
  },
  "checkpoint_game": 108,

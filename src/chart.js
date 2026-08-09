@@ -35,6 +35,7 @@ const seasons = YEARS.map(y=>{
   return {year:y,color:c.color,label:c.label,beats:c.beats,
           diff:d.diff,seq:d.seq,pts,disp,cumW,cumL,streak,
           record:d.record,endDiff:d.diff[d.diff.length-1],
+          warLeader:d.war_leader||null,
           endGame:d.end_game||d.diff.length, inProgress:!!d.in_progress, visible:true};
 });
 
@@ -53,7 +54,8 @@ function resize(){
   W=r.width; H=r.height;
   canvas.width=Math.round(W*DPR); canvas.height=Math.round(H*DPR);
   ctx.setTransform(DPR,0,0,DPR,0,0);
-  padL = W<520?46:64; padR = W<520?70:132; padB = W<520?36:44;
+  // the right gutter carries year + record + WAR leader, so it needs the room
+  padL = W<520?46:64; padR = W<520?84:158; padB = W<520?36:44;
 }
 const xFor=g=>padL+(g/GMAX)*(W-padL-padR);
 const yFor=d=>padT+(1-(d-DMIN)/(DMAX-DMIN))*(H-padT-padB);
@@ -299,10 +301,23 @@ function drawEndpointTags(list,opts){
     ctx.textAlign=align; ctx.textBaseline='middle';
     ctx.font='400 '+(big?18:15)+'px AntonX, sans-serif';
     ctx.fillStyle=s.color;
-    ctx.fillText(s.inProgress? (s.year+' \u25b8') : (''+s.year), lx, y-(big?8:6));
+    ctx.fillText(s.inProgress? (s.year+' \u25b8') : (''+s.year), lx, y-(big?16:13));
     ctx.font='500 '+(big?13:11)+'px OswaldX, sans-serif';
     ctx.fillStyle='rgba(238,244,236,.9)';
-    ctx.fillText(s.record.replace('-','\u2013')+(s.inProgress?' \u00b7 live':''), lx, y+(big?9:7));
+    ctx.fillText(s.record.replace('-','\u2013')+(s.inProgress?' \u00b7 live':''), lx, y+(big?1:1));
+    // who carried the season \u2014 bWAR leader. The gutter is narrow, so drop to the
+    // surname when the full name won't fit rather than letting it run off-canvas.
+    const wl=s.warLeader;
+    if(wl && wl.name){
+      ctx.font='500 '+(big?12:10)+'px OswaldX, sans-serif';
+      const num=wl.war.toFixed(1), last=wl.name.split(' ').pop();
+      const gutter=(s.inProgress? lx-padL : W-6-lx);
+      // widest form that still fits the gutter \u2014 on a phone that's the last one
+      const forms=[wl.name+' \u00b7 '+num+' WAR', last+' \u00b7 '+num+' WAR', last+' '+num];
+      const txt=forms.find(t=>ctx.measureText(t).width<=gutter) || forms[forms.length-1];
+      ctx.fillStyle=s.color; ctx.globalAlpha=.85;
+      ctx.fillText(txt, lx, y+(big?17:15));
+    }
     ctx.restore();
   });
 }
