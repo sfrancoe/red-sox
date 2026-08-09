@@ -50,14 +50,22 @@ def fetch_json(url: str, attempts: int = 4) -> dict:
     raise RuntimeError(f"failed to fetch {url}: {last}")
 
 
+# A game only counts if it was actually played to a result. Beware: MLB marks
+# postponed and cancelled games with abstractGameState "Final" too, and those carry
+# no winner — counting them is how you end up with a 167-game season.
+PLAYED_STATES = {"Final", "Completed Early", "Game Over"}
+
+
 def season_games(year: int) -> list[dict]:
     """Return completed regular-season games in order, each with the BOS view."""
     payload = fetch_json(API.format(team=BOS, season=year))
-    rows = []
+    rows, skipped = [], {}
     for date in payload.get("dates", []):
         for g in date.get("games", []):
-            # Only games that actually finished. Skips postponed/suspended/scheduled.
-            if g.get("status", {}).get("abstractGameState") != "Final":
+            st = g.get("status", {})
+            detailed = st.get("detailedState", "")
+            if st.get("codedGameState") not in ("F", "O") or detailed not in PLAYED_STATES:
+                skipped[detailed or "unknown"] = skipped.get(detailed or "unknown", 0) + 1
                 continue
             teams = g.get("teams", {})
             for side in ("home", "away"):
@@ -65,15 +73,19 @@ def season_games(year: int) -> list[dict]:
                 if t.get("team", {}).get("id") != BOS:
                     continue
                 rec = t.get("leagueRecord", {})
+                if rec.get("wins") is None or rec.get("losses") is None:
+                    continue
                 rows.append({
                     "date": g.get("officialDate", ""),
                     # gamePk keeps doubleheaders in the order they were played
                     "pk": g.get("gamePk", 0),
-                    "won": bool(t.get("isWinner", False)),
-                    "wins": rec.get("wins"),
-                    "losses": rec.get("losses"),
+                    "wins": rec["wins"],
+                    "losses": rec["losses"],
                 })
     rows.sort(key=lambda r: (r["date"], r["pk"]))
+    if skipped:
+        detail = ", ".join(f"{k}×{v}" for k, v in sorted(skipped.items()))
+        print(f"    skipped {sum(skipped.values())} non-played entries ({detail})")
     return rows
 
 
@@ -83,24 +95,28 @@ def build_season(year: int) -> dict:
     if not rows:
         raise RuntimeError(f"{year}: no completed games returned")
 
+    # Derive each result from the API's own running record rather than from an
+    # isWinner flag: if the record did not move, the game did not count, whatever
+    # its status said. This makes the totals self-correcting by construction.
     diff, seq = [], []
     w = l = 0
     for r in rows:
-        if r["won"]:
-            w += 1
-            seq.append("W")
-        else:
-            l += 1
-            seq.append("L")
+        rw, rl = r["wins"], r["losses"]
+        if rw == w and rl == l:
+            continue                      # record unchanged — not a counted game
+        seq.append("W" if rw > w else "L")
+        w, l = rw, rl
         diff.append(w - l)
 
-    # Cross-check our running tally against MLB's own record on the last game.
+    played = len(diff)
     api_w, api_l = rows[-1]["wins"], rows[-1]["losses"]
-    if (api_w, api_l) != (w, l) and api_w is not None:
+    if (w, l) != (api_w, api_l):
         print(f"    WARNING {year}: computed {w}-{l} but API reports {api_w}-{api_l}",
               file=sys.stderr)
-
-    played = len(rows)
+    if played != w + l:
+        print(f"    WARNING {year}: {played} games but record totals {w + l}", file=sys.stderr)
+    if played > 162:
+        print(f"    WARNING {year}: {played} games exceeds a 162-game season", file=sys.stderr)
     # A season is still in progress if it hasn't reached a full 162-game slate.
     in_progress = played < 162
     out = {
