@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WAR Room &#8212; Red Sox 2026 (design mockup)</title>
+<meta name="description" content="Design mockup: every 2026 Red Sox player ranked by wins above replacement.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
+<style>
+@font-face{font-family:'AntonX';font-style:normal;font-weight:400;font-display:block;src:url('../../assets/fonts/anton-400.woff2') format('woff2');}
+@font-face{font-family:'OswaldX';font-style:normal;font-weight:500;font-display:block;src:url('../../assets/fonts/oswald-500.woff2') format('woff2');}
+@font-face{font-family:'OswaldX';font-style:normal;font-weight:700;font-display:block;src:url('../../assets/fonts/oswald-700.woff2') format('woff2');}
+
+/* The site commits to one visual world &#8212; a night chalkboard scoreboard &#8212; so both
+   themes resolve to the same ground on purpose. */
+:root,:root[data-theme="dark"],:root[data-theme="light"]{
+  --bg0:#08120c; --bg1:#0b1a12; --panel:#0e2118; --panel2:#102a1e;
+  --line:#173023; --grid:#12271c;
+  --ink:#eef4ec; --muted:#8aa393; --dim:#5d7568;
+  --chalk:#e9e3d0;
+  --bat:#ff3b47; --pit:#38bdf8; --gold:#ffcf5a;
+  --up:#4ade80; --down:#ff6b74;
+  --display:'AntonX','Arial Narrow',Impact,sans-serif;
+  --cond:'OswaldX','Arial Narrow',sans-serif;
+  --ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--bg0);color:var(--ink);font-family:var(--ui);
+  -webkit-text-size-adjust:100%;
+  background-image:
+    radial-gradient(120% 70% at 84% -8%, rgba(255,59,71,.11), transparent 55%),
+    radial-gradient(90% 60% at 4% 4%, rgba(56,189,248,.07), transparent 55%),
+    radial-gradient(140% 110% at 50% 118%, rgba(20,80,52,.28), transparent 62%),
+    linear-gradient(180deg,var(--bg1),var(--bg0) 60%);
+  background-attachment:fixed;
+}
+/* scoreboard scanlines, same trick the story pages use */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:99;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);
+  mix-blend-mode:overlay;opacity:.55;
+}
+.wrap{max-width:820px;margin:0 auto;padding:clamp(18px,5vw,44px) clamp(14px,4vw,28px) 72px;}
+
+/* ---------- header ---------- */
+.eyebrow{
+  font-family:var(--cond);font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+  font-size:clamp(9px,2.5vw,12px);color:var(--muted);
+  display:flex;align-items:center;gap:.7em;margin:0 0 .5em;
+}
+.eyebrow::before{content:"";width:24px;height:2px;background:var(--bat);box-shadow:0 0 10px var(--bat);flex:none;}
+h1{
+  font-family:var(--display);font-weight:400;color:var(--chalk);
+  font-size:clamp(52px,15vw,108px);line-height:.86;margin:0;letter-spacing:.004em;
+  text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--bat);text-shadow:0 0 34px rgba(255,59,71,.42);}
+.dek{max-width:60ch;color:var(--muted);font-size:clamp(14px,3.4vw,16px);line-height:1.62;margin:.9em 0 0;}
+.dek b{color:var(--ink);font-weight:600;}
+
+.mockbar{
+  display:flex;gap:10px;align-items:flex-start;
+  margin:22px 0 0;padding:11px 13px;border-radius:3px;
+  background:rgba(255,207,90,.07);border:1px solid rgba(255,207,90,.28);
+  font-size:clamp(12px,3vw,13px);line-height:1.5;color:#f2e3bd;
+}
+.mockbar svg{flex:none;width:16px;height:16px;margin-top:1px;fill:var(--gold);}
+.mockbar b{color:var(--gold);font-weight:700;}
+
+/* ---------- panels ---------- */
+.panel{margin-top:clamp(34px,7vw,58px);}
+.phead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  border-bottom:2px solid var(--line);padding-bottom:9px;margin-bottom:4px;}
+.pnum{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;}
+h2{font-family:var(--display);font-weight:400;color:var(--chalk);
+  font-size:clamp(26px,7vw,42px);line-height:1;margin:0;letter-spacing:.005em;}
+.psub{color:var(--muted);font-size:clamp(13px,3.2vw,14.5px);line-height:1.6;margin:12px 0 0;max-width:62ch;}
+
+/* ---------- filters ---------- */
+.filters{display:flex;gap:7px;margin:18px 0 6px;flex-wrap:wrap;}
+.chip{
+  font-family:var(--cond);font-weight:500;font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  background:var(--panel);color:var(--muted);border:1px solid var(--line);
+  padding:8px 14px;border-radius:2px;cursor:pointer;transition:.16s;
+  -webkit-tap-highlight-color:transparent;
+}
+.chip:hover{color:var(--ink);border-color:#24513a;}
+.chip[aria-pressed="true"]{background:var(--chalk);color:#0b1a12;border-color:var(--chalk);font-weight:700;}
+.chip:focus-visible,.row:focus-visible,.pill:focus-visible,.ghostbtn:focus-visible{
+  outline:2px solid var(--gold);outline-offset:2px;}
+
+/* ---------- the ladder ---------- */
+.board{margin-top:10px;border-top:1px solid var(--line);}
+.row{
+  display:grid;
+  grid-template-columns:26px 1fr 52px;
+  grid-template-areas:"rank name war" "rank bar war";
+  align-items:center;column-gap:10px;row-gap:5px;
+  padding:11px 4px 12px;border-bottom:1px solid var(--grid);
+  cursor:pointer;position:relative;background:none;border-left:0;border-right:0;border-top:0;
+  width:100%;text-align:left;color:inherit;font:inherit;
+  -webkit-tap-highlight-color:transparent;transition:background .15s;
+}
+.row:hover{background:rgba(255,255,255,.022);}
+.row.lead .rk{color:var(--gold);}
+.rk{
+  grid-area:rank;font-family:var(--display);font-size:clamp(17px,4.4vw,21px);
+  color:var(--dim);text-align:right;line-height:1;font-variant-numeric:tabular-nums;
+}
+.nm{grid-area:name;display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-width:0;}
+.nm .who{font-family:var(--cond);font-weight:500;font-size:clamp(15px,4.1vw,18px);color:var(--ink);
+  letter-spacing:.012em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.row.lead .who{color:var(--chalk);}
+.pos{
+  font-family:var(--cond);font-weight:500;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:2px 5px;border-radius:2px;flex:none;
+}
+.pos.bat{color:var(--bat);background:rgba(255,59,71,.13);}
+.pos.pit{color:var(--pit);background:rgba(56,189,248,.13);}
+.mv{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.04em;flex:none;
+  font-variant-numeric:tabular-nums;}
+.mv.up{color:var(--up);} .mv.dn{color:var(--down);} .mv.flat{color:var(--dim);}
+.mv .jump{opacity:.85;font-size:10px;}
+.war{
+  grid-area:war;font-family:var(--display);font-size:clamp(21px,5.6vw,27px);line-height:1;
+  text-align:right;color:var(--chalk);font-variant-numeric:tabular-nums;
+}
+.row.neg .war{color:var(--down);}
+.trk{grid-area:bar;position:relative;height:9px;background:var(--grid);border-radius:1px;overflow:hidden;}
+.zero{position:absolute;top:-2px;bottom:-2px;width:1px;background:#2c5942;left:12%;z-index:2;}
+.bar{position:absolute;top:0;bottom:0;left:12%;width:0;border-radius:1px;
+  transition:width .85s cubic-bezier(.22,.9,.3,1);}
+.bar.bat{background:linear-gradient(90deg,rgba(255,59,71,.55),var(--bat));box-shadow:0 0 14px rgba(255,59,71,.3);}
+.bar.pit{background:linear-gradient(90deg,rgba(56,189,248,.5),var(--pit));box-shadow:0 0 14px rgba(56,189,248,.26);}
+.bar.negb{background:linear-gradient(270deg,rgba(255,107,116,.5),#8c3b41);box-shadow:none;}
+.crown{position:absolute;right:-3px;top:-7px;width:13px;height:13px;fill:var(--gold);
+  filter:drop-shadow(0 0 6px rgba(255,207,90,.65));}
+
+/* expanded detail */
+.det{
+  grid-column:1/-1;display:none;padding:12px 0 4px 36px;
+  color:var(--muted);font-size:13px;line-height:1.62;
+}
+.row[aria-expanded="true"]{background:rgba(255,255,255,.03);}
+.row[aria-expanded="true"] .det{display:block;}
+.det .stats{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:7px;}
+.det .stat b{font-family:var(--display);color:var(--chalk);font-size:16px;margin-right:4px;
+  font-variant-numeric:tabular-nums;}
+.det .stat span{font-family:var(--cond);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
+.det .bought{color:var(--ink);}
+.det .bought b{color:var(--gold);font-weight:600;}
+
+.more{
+  display:block;width:100%;margin:16px 0 0;padding:13px;
+  background:var(--panel);border:1px solid var(--line);border-radius:2px;color:var(--muted);
+  font-family:var(--cond);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  cursor:pointer;transition:.16s;-webkit-tap-highlight-color:transparent;
+}
+.more:hover{color:var(--ink);border-color:#24513a;background:var(--panel2);}
+.more:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+/* ---------- replacement line ---------- */
+.ledger{margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+.lrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px clamp(13px,3.6vw,20px);}
+.lrow .lab{min-width:0;}
+.lrow .lab .t{font-family:var(--cond);font-weight:700;font-size:clamp(12px,3.2vw,14px);
+  letter-spacing:.15em;text-transform:uppercase;color:var(--ink);}
+.lrow .lab .s{font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45;}
+.rec{font-family:var(--display);font-size:clamp(27px,7.6vw,40px);line-height:1;white-space:nowrap;
+  font-variant-numeric:tabular-nums;}
+.rec .dash{opacity:.4;margin:0 .06em;}
+.lrow.real{background:var(--panel2);}
+.lrow.real .rec{color:var(--chalk);}
+.lrow.proj .rec{color:var(--gold);}
+.lrow.ghost{background:#0a1b13;}
+.lrow.ghost .rec{color:var(--dim);}
+.lrow.ghost .lab .t{color:var(--muted);}
+
+/* the literal chalk line */
+.chalkline{position:relative;height:0;border-top:3px solid var(--chalk);opacity:.9;
+  box-shadow:0 0 18px rgba(233,227,208,.28);}
+.chalkline span{
+  position:absolute;left:clamp(13px,3.6vw,20px);top:-8px;background:var(--panel);
+  padding:0 9px;font-family:var(--cond);font-weight:700;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--chalk);
+}
+.gap{
+  padding:13px clamp(13px,3.6vw,20px);border-top:1px solid var(--line);
+  background:rgba(255,59,71,.05);font-size:12.5px;color:var(--muted);line-height:1.55;
+}
+.gap b{color:var(--bat);font-weight:700;}
+
+/* subtract-a-player pills */
+.subhead{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:26px 0 10px;}
+.pills{display:flex;flex-wrap:wrap;gap:6px;}
+.pill{
+  font-family:var(--cond);font-weight:500;font-size:12.5px;letter-spacing:.02em;
+  background:var(--panel);color:var(--ink);border:1px solid var(--line);
+  padding:7px 11px;border-radius:2px;cursor:pointer;transition:.15s;
+  display:flex;align-items:center;gap:6px;-webkit-tap-highlight-color:transparent;
+}
+.pill .w{font-family:var(--display);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;}
+.pill:hover{border-color:#24513a;}
+.pill[aria-pressed="true"]{background:#2a0f12;border-color:#6b2027;color:#8b6d70;text-decoration:line-through;}
+.pill[aria-pressed="true"] .w{color:#6b4348;}
+.ghostbtn{
+  background:none;border:1px solid var(--line);color:var(--muted);border-radius:2px;
+  font-family:var(--cond);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 13px;cursor:pointer;transition:.15s;-webkit-tap-highlight-color:transparent;
+}
+.ghostbtn:hover{color:var(--ink);border-color:#24513a;}
+.btnrow{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap;}
+
+/* ---------- footer ---------- */
+footer{margin-top:clamp(40px,8vw,66px);padding-top:20px;border-top:1px solid var(--line);
+  color:var(--dim);font-size:12px;line-height:1.7;}
+footer a{color:var(--muted);}
+footer b{color:var(--muted);font-weight:600;}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Boston Red Sox &#183; 2026 &#183; Design mockup</p>
+    <h1>WAR <em>ROOM</em></h1>
+    <p class="dek">Every Red Sox player, ranked by the wins he has been worth. Not batting
+      average, not home runs &#8212; <b>wins</b>. The number moves every night, in both directions,
+      and this page is a bet that watching it move is worth a daily visit.</p>
+
+    <div class="mockbar">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 15 14H1L8 1.5Zm0 4.2v4.1m0 1.7v.9"
+        stroke="#ffcf5a" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+      <div><b>Read this first.</b> Every WAR value below is real &#8212; pulled from today's Baseball
+      Reference file. The <b>overnight movement arrows are invented</b>, because the daily archive
+      that would make them real doesn't exist yet. Rafaela's &#8722;0.2 is the one true delta: he was
+      5.1 in yesterday's <code>meta.json</code>.</div>
+    </div>
+  </header>
+
+  <!-- ============ CONCEPT 1 ============ -->
+  <section class="panel">
+    <div class="phead">
+      <div>
+        <div class="pnum">Concept 1</div>
+        <h2>The Ladder</h2>
+      </div>
+    </div>
+    <p class="psub">The board re-sorts itself overnight. Tap any player to see what he's actually
+      made of.</p>
+
+    <div class="filters" role="group" aria-label="Filter the board">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="bat" aria-pressed="false">Hitters</button>
+      <button class="chip" data-f="pit" aria-pressed="false">Pitchers</button>
+    </div>
+
+    <div class="board" id="board"></div>
+    <button class="more" id="more"></button>
+  </section>
+
+  <!-- ============ CONCEPT 2 ============ -->
+  <section class="panel">
+    <div class="phead">
+      <div>
+        <div class="pnum">Concept 2</div>
+        <h2>The Replacement Line</h2>
+      </div>
+    </div>
+    <p class="psub">The "R" in WAR is a team nobody ever sees: the roster you'd have if every one
+      of these men were swapped for a freely available minor-leaguer. Here's that team.</p>
+
+    <div class="ledger">
+      <div class="lrow real">
+        <div class="lab">
+          <div class="t">The team that exists</div>
+          <div class="s">Actual record, 117 games in &#183; 10 Aug 2026</div>
+        </div>
+        <div class="rec">64<span class="dash">&#8211;</span>53</div>
+      </div>
+
+      <div class="lrow proj">
+        <div class="lab">
+          <div class="t">What WAR says they are</div>
+          <div class="s"><span id="projSub">Replacement baseline plus 35.5 wins</span></div>
+        </div>
+        <div class="rec" id="projRec">70<span class="dash">&#8211;</span>47</div>
+      </div>
+
+      <div class="chalkline"><span>Replacement level</span></div>
+
+      <div class="lrow ghost">
+        <div class="lab">
+          <div class="t">The team without them</div>
+          <div class="s">Same schedule, replacement-level everyone</div>
+        </div>
+        <div class="rec">34<span class="dash">&#8211;</span>83</div>
+      </div>
+
+      <div class="gap" id="gapNote">
+        WAR says this roster is worth about <b>70&#8211;47</b>. They're 64&#8211;53. That's roughly
+        <b>six wins</b> left on the table &#8212; bullpen, sequencing, luck, or all three.
+      </div>
+    </div>
+
+    <div class="subhead">Take them away, one at a time</div>
+    <div class="pills" id="pills"></div>
+    <div class="btnrow">
+      <button class="ghostbtn" id="resetBtn">Put everyone back</button>
+      <button class="ghostbtn" id="topBtn">Remove the top 4</button>
+    </div>
+  </section>
+
+  <footer>
+    <b>Mockup, not the real page.</b> WAR values: Baseball Reference daily bWAR
+    (<a href="https://www.baseball-reference.com/data/" rel="noreferrer noopener">baseball-reference.com/data</a>),
+    fetched 10 Aug 2026. Records via the MLB Stats API. bWAR differs from FanGraphs' fWAR &#8212;
+    sometimes by a full win.<br>
+    Replacement level is set at a <b>.294</b> winning percentage (~47.7 wins per 162), the
+    standard convention. The projected record is an <b>estimate</b> and rounds; it isn't a
+    prediction.
+  </footer>
+</div>
+<script type="module" src="./story.js"></script>
+</body>
+</html>
