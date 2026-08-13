@@ -12,7 +12,7 @@ This is a **storytelling** project, not an analytics tool. The bar for each stor
 story depends on it — but the output is a graphic, not a dashboard.
 
 **Primary developer:** Scott Francoe
-**GitHub repo:** https://github.com/sfrancoe/red-sox (private)
+**GitHub repo:** https://github.com/sfrancoe/red-sox (public)
 **Hosting:** Netlify (auto-deploys from `main`)
 **Local path:** `~/Projects/Red-Sox` (i.e. `/Users/sfrancoe/Projects/Red-Sox`)
 
