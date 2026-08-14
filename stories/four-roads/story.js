@@ -65,7 +65,7 @@ function leaderText(season, key) {
 }
 
 const leadersBody = document.getElementById('leadersBody');
-for (const year of YEARS) {
+for (const year of [...YEARS].reverse()) {
   const season = DATA[String(year)];
   const row = document.createElement('tr');
   const yearCell = document.createElement('th');
