@@ -32,6 +32,7 @@ PRIORITY=(
   scripts/story_facts.py
   scripts/build_site.sh
   scripts/build_single_file.py
+  scripts/bundle_for_llm.sh
   netlify.toml
   .github/workflows/refresh-data.yml
   data/meta.json

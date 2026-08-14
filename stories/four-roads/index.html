@@ -9,7 +9,12 @@
 <link rel="stylesheet" href="../../src/styles.css">
 </head>
 <body>
-<div class="stage" id="stage">
+<nav class="view-tabs" role="tablist" aria-label="Story views">
+  <button class="view-tab active" id="storyTab" role="tab" aria-selected="true" aria-controls="stage">Story</button>
+  <button class="view-tab" id="leadersTab" role="tab" aria-selected="false" aria-controls="leadersPanel">Season leaders</button>
+</nav>
+
+<div class="stage" id="stage" role="tabpanel" aria-labelledby="storyTab">
   <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Play the animation with sound">
     <div class="po-inner">
       <div class="po-btn"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="34,24 34,76 78,50"/></svg></div>
@@ -51,6 +56,35 @@
     </div>
   </footer>
 </div>
+
+<section class="leaders-section" id="leadersPanel" role="tabpanel" aria-labelledby="leadersTab" hidden>
+  <div class="leaders-shell">
+    <header class="leaders-header">
+      <div class="leaders-kicker">Four Roads, One Record</div>
+      <h2>Season leaders</h2>
+      <p>The players who led each Red Sox season in overall value and key batting categories.</p>
+    </header>
+    <div class="leaders-content">
+      <table class="leaders-table">
+        <thead>
+          <tr>
+            <th scope="col">Year</th>
+            <th scope="col">bWAR</th>
+            <th scope="col">HR</th>
+            <th scope="col">AVG</th>
+            <th scope="col">OPS</th>
+            <th scope="col">RBI</th>
+          </tr>
+        </thead>
+        <tbody id="leadersBody"></tbody>
+      </table>
+      <p class="leaders-note" id="leadersNote">
+        AVG and OPS leaders are qualified hitters. bWAR via Baseball Reference;
+        batting statistics via MLB Stats API.
+      </p>
+    </div>
+  </div>
+</section>
 <script type="module" src="./story.js"></script>
 </body>
 </html>

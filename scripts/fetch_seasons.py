@@ -28,6 +28,9 @@ BOS = 111  # MLB team id, Boston Red Sox
 SEASONS = [2023, 2024, 2025, 2026]
 API = ("https://statsapi.mlb.com/api/v1/schedule"
        "?sportId=1&teamId={team}&season={season}&gameType=R")
+HITTING_API = ("https://statsapi.mlb.com/api/v1/stats"
+               "?stats=season&group=hitting&teamId={team}&season={season}"
+               "&playerPool={pool}&hydrate=person&limit=100")
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CHECKPOINT = 108  # the game the whole story hangs on
 
@@ -118,6 +121,46 @@ def war_leaders(years: list[int]) -> dict[str, dict]:
         out[str(year)] = {"name": name, "war": round(war, 1)}
         print(f"    {year}: {name} — {war:.1f} WAR")
     return out
+
+
+def batting_leaders(year: int) -> dict[str, dict]:
+    """Red Sox team leaders in HR/RBI and qualified-hitter AVG/OPS."""
+    pools: dict[str, list[dict]] = {}
+    for pool in ("ALL", "QUALIFIED"):
+        payload = fetch_json(HITTING_API.format(team=BOS, season=year, pool=pool))
+        stats = payload.get("stats", [])
+        pools[pool] = stats[0].get("splits", []) if stats else []
+
+    specs = {
+        "hr": ("ALL", "homeRuns", int),
+        "rbi": ("ALL", "rbi", int),
+        "avg": ("QUALIFIED", "avg", float),
+        "ops": ("QUALIFIED", "ops", float),
+    }
+    leaders: dict[str, dict] = {}
+    for label, (pool, field, convert) in specs.items():
+        candidates = []
+        for split in pools[pool]:
+            name = split.get("player", {}).get("fullName", "").strip()
+            raw = split.get("stat", {}).get(field)
+            if not name or raw in (None, "", "-.--"):
+                continue
+            try:
+                numeric = convert(raw)
+            except (TypeError, ValueError):
+                continue
+            candidates.append((numeric, name, raw))
+        if not candidates:
+            print(f"    WARNING {year}: no {label.upper()} leader found", file=sys.stderr)
+            continue
+        best = max(row[0] for row in candidates)
+        tied = sorted(row for row in candidates if row[0] == best)
+        value = tied[0][2]
+        leaders[label] = {
+            "names": [row[1] for row in tied],
+            "value": value,
+        }
+    return leaders
 
 
 # A game only counts if it was actually played to a result. Beware: MLB marks
@@ -218,6 +261,15 @@ def main() -> int:
     for y in years:
         seasons[str(y)] = build_season(y)
 
+    print("\nFetching batting leaders from MLB Stats API")
+    for year in years:
+        print(f"  {year}: hitting leaders…")
+        leaders = batting_leaders(year)
+        seasons[str(year)]["batting_leaders"] = leaders
+        for stat, leader in leaders.items():
+            names = " / ".join(leader["names"])
+            print(f"    {stat.upper()}: {names} — {leader['value']}")
+
     print("\nFetching bWAR leaders from Baseball Reference")
     for year, leader in war_leaders(years).items():
         if year in seasons:
@@ -244,7 +296,8 @@ def main() -> int:
         "seasons": {y: {"record": s["record"], "games": s["end_game"],
                         "in_progress": s["in_progress"],
                         "checkpoint_record": s.get("checkpoint_record"),
-                        "war_leader": s.get("war_leader")}
+                        "war_leader": s.get("war_leader"),
+                        "batting_leaders": s.get("batting_leaders")}
                     for y, s in seasons.items()},
         "checkpoint_game": CHECKPOINT,
         "premise_holds": bool(all_match),

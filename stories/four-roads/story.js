@@ -41,6 +41,49 @@ const YEARS = [2023, 2024, 2025, 2026];
 
 const DATA = await fetch('../../data/seasons.json').then(r => r.json());
 
+const leaderLabels = [
+  ['bWAR', 'war_leader'],
+  ['HR', 'hr'],
+  ['AVG', 'avg'],
+  ['OPS', 'ops'],
+  ['RBI', 'rbi'],
+];
+
+function leaderText(season, key) {
+  if (key === 'war_leader') {
+    const leader = season.war_leader;
+    return leader ? `${leader.name} · ${leader.war.toFixed(1)}${season.in_progress ? ' YTD' : ''}` : '—';
+  }
+  const leader = season.batting_leaders?.[key];
+  if (!leader) return '—';
+  return `${leader.names.join(' / ')} · ${leader.value}${season.in_progress ? ' YTD' : ''}`;
+}
+
+const leadersBody = document.getElementById('leadersBody');
+for (const year of YEARS) {
+  const season = DATA[String(year)];
+  const row = document.createElement('tr');
+  const yearCell = document.createElement('th');
+  yearCell.scope = 'row';
+  yearCell.textContent = year;
+  yearCell.style.setProperty('--seasoncol', CONFIG[year].color);
+  row.appendChild(yearCell);
+  for (const [label, key] of leaderLabels) {
+    const cell = document.createElement('td');
+    cell.dataset.label = label;
+    cell.textContent = leaderText(season, key);
+    row.appendChild(cell);
+  }
+  leadersBody.appendChild(row);
+}
+
+const liveSeason = YEARS.map(year => DATA[String(year)]).find(season => season.in_progress);
+if (liveSeason?.last_game_date) {
+  const through = new Date(`${liveSeason.last_game_date}T12:00:00`);
+  const date = through.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  document.getElementById('leadersNote').prepend(`Live-season statistics through ${date}. `);
+}
+
 // The live season's closing beat has to come from the data, not from a hardcoded
 // string — the daily refresh moves it, and a stale record on screen is exactly the
 // kind of quiet wrongness this project is trying to avoid.
@@ -53,4 +96,38 @@ for (const year of YEARS) {
   });
 }
 
-initStory({ DATA, CONFIG, YEARS });
+const story = initStory({ DATA, CONFIG, YEARS });
+
+const tabs = [document.getElementById('storyTab'), document.getElementById('leadersTab')];
+const stage = document.getElementById('stage');
+const leadersPanel = document.getElementById('leadersPanel');
+
+function selectView(view, focus = false) {
+  const showLeaders = view === 'leaders';
+  tabs[0].classList.toggle('active', !showLeaders);
+  tabs[0].setAttribute('aria-selected', String(!showLeaders));
+  tabs[0].tabIndex = showLeaders ? -1 : 0;
+  tabs[1].classList.toggle('active', showLeaders);
+  tabs[1].setAttribute('aria-selected', String(showLeaders));
+  tabs[1].tabIndex = showLeaders ? 0 : -1;
+  stage.hidden = showLeaders;
+  leadersPanel.hidden = !showLeaders;
+  if (showLeaders) {
+    document.getElementById('playOverlay')?.remove();
+    story.pause();
+  }
+  window.scrollTo(0, 0);
+  if (focus) tabs[showLeaders ? 1 : 0].focus();
+}
+
+tabs[0].addEventListener('click', () => selectView('story'));
+tabs[1].addEventListener('click', () => selectView('leaders'));
+tabs.forEach((tab, index) => {
+  tab.tabIndex = index === 0 ? 0 : -1;
+  tab.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const leaders = event.key === 'ArrowRight' || event.key === 'End';
+    selectView(leaders ? 'leaders' : 'story', true);
+  });
+});

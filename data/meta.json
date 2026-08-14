@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-14T11:44:19+00:00",
+ "generated_at": "2026-08-14T18:39:27+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 111,
@@ -12,6 +12,32 @@
    "war_leader": {
     "name": "Rafael Devers",
     "war": 3.5
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Rafael Devers"
+     ],
+     "value": 33
+    },
+    "rbi": {
+     "names": [
+      "Rafael Devers"
+     ],
+     "value": 100
+    },
+    "avg": {
+     "names": [
+      "Masataka Yoshida"
+     ],
+     "value": ".289"
+    },
+    "ops": {
+     "names": [
+      "Triston Casas"
+     ],
+     "value": ".857"
+    }
    }
   },
   "2024": {
@@ -22,6 +48,32 @@
    "war_leader": {
     "name": "Jarren Duran",
     "war": 9.0
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Tyler O'Neill"
+     ],
+     "value": 31
+    },
+    "rbi": {
+     "names": [
+      "Rafael Devers"
+     ],
+     "value": 83
+    },
+    "avg": {
+     "names": [
+      "Jarren Duran"
+     ],
+     "value": ".285"
+    },
+    "ops": {
+     "names": [
+      "Rafael Devers"
+     ],
+     "value": ".870"
+    }
    }
   },
   "2025": {
@@ -32,6 +84,32 @@
    "war_leader": {
     "name": "Garrett Crochet",
     "war": 6.0
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Trevor Story"
+     ],
+     "value": 25
+    },
+    "rbi": {
+     "names": [
+      "Trevor Story"
+     ],
+     "value": 96
+    },
+    "avg": {
+     "names": [
+      "Trevor Story"
+     ],
+     "value": ".263"
+    },
+    "ops": {
+     "names": [
+      "Jarren Duran"
+     ],
+     "value": ".774"
+    }
    }
   },
   "2026": {
@@ -42,6 +120,32 @@
    "war_leader": {
     "name": "Ceddanne Rafaela",
     "war": 5.2
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Willson Contreras"
+     ],
+     "value": 24
+    },
+    "rbi": {
+     "names": [
+      "Willson Contreras"
+     ],
+     "value": 72
+    },
+    "avg": {
+     "names": [
+      "Ceddanne Rafaela"
+     ],
+     "value": ".288"
+    },
+    "ops": {
+     "names": [
+      "Willson Contreras"
+     ],
+     "value": ".918"
+    }
    }
   }
  },

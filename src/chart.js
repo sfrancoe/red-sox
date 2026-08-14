@@ -35,7 +35,6 @@ const seasons = YEARS.map(y=>{
   return {year:y,color:c.color,label:c.label,beats:c.beats,
           diff:d.diff,seq:d.seq,pts,disp,cumW,cumL,streak,
           record:d.record,endDiff:d.diff[d.diff.length-1],
-          warLeader:d.war_leader||null,
           endGame:d.end_game||d.diff.length, inProgress:!!d.in_progress, visible:true};
 });
 
@@ -54,8 +53,8 @@ function resize(){
   W=r.width; H=r.height;
   canvas.width=Math.round(W*DPR); canvas.height=Math.round(H*DPR);
   ctx.setTransform(DPR,0,0,DPR,0,0);
-  // the right gutter carries year + record + WAR leader, so it needs the room
-  padL = W<520?46:64; padR = W<520?96:182; padB = W<520?36:44;
+  // the right gutter carries only year + record; supporting stats live below the chart
+  padL = W<520?46:64; padR = W<520?96:120; padB = W<520?36:44;
   buildSegs();   // curve geometry is layout-dependent
 }
 const xFor=g=>padL+(g/GMAX)*(W-padL-padR);
@@ -323,23 +322,7 @@ function roundRect(x,y,w,h,r){
   ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
 }
 
-// Small gold crown, marking the season's WAR leader. Drawn rather than typed:
-// an emoji would render differently on every platform, and this page self-hosts
-// its fonts precisely so it looks the same everywhere. Returns its width.
-function drawCrown(x,y,h){
-  const s=h/7;
-  ctx.save();
-  ctx.translate(x,y-h/2); ctx.scale(s,s);
-  ctx.beginPath();
-  ctx.moveTo(0,7); ctx.lineTo(0,1); ctx.lineTo(2.5,4); ctx.lineTo(5,0.4);
-  ctx.lineTo(7.5,4); ctx.lineTo(10,1); ctx.lineTo(10,7);
-  ctx.closePath();
-  ctx.fillStyle='#ffcf5a'; ctx.fill();
-  ctx.restore();
-  return 10*s;
-}
-
-// endpoint tags in right gutter with collision avoidance
+// endpoint tags in the right gutter; supporting player stats stay below the chart
 function drawEndpointTags(list,opts){
   opts=opts||{};
   const big=opts.big;
@@ -351,7 +334,7 @@ function drawEndpointTags(list,opts){
     ctx.fillStyle=s.color;
     ctx.beginPath();ctx.arc(x,y,big?5.5:4,0,7);ctx.fill();
     ctx.restore();
-    // finished seasons tag to the right (in the gutter); 2026 (in progress) tags up-left of its live head
+    // finished seasons tag to the right; the in-progress season tags up-left of its live head
     const lx = s.inProgress ? x-12 : x+12;
     const align = s.inProgress ? 'right' : 'left';
     ctx.save();
@@ -362,28 +345,6 @@ function drawEndpointTags(list,opts){
     ctx.font='500 '+(big?13:11)+'px OswaldX, sans-serif';
     ctx.fillStyle='rgba(238,244,236,.9)';
     ctx.fillText(s.record.replace('-','\u2013')+(s.inProgress?' \u00b7 live':''), lx, y+(big?1:1));
-    // who carried the season \u2014 bWAR leader. The gutter is narrow, so drop to the
-    // surname when the full name won't fit rather than letting it run off-canvas.
-    const wl=s.warLeader;
-    if(wl && wl.name){
-      ctx.font='500 '+(big?14:12)+'px OswaldX, sans-serif';
-      const num=wl.war.toFixed(1), last=wl.name.split(' ').pop();
-      // an unfinished season's WAR is a running total, so say so
-      const suf=s.inProgress?' WAR YTD':' WAR';
-      const ch=big?9:8, cw=ch*10/7, gap=4;
-      const gutter=(s.inProgress? lx-padL : W-6-lx)-cw-gap;
-      // widest form that still fits the gutter \u2014 on a phone that's the last one
-      const forms=[wl.name+' \u00b7 '+num+suf, last+' \u00b7 '+num+suf,
-                   last+' '+num+(s.inProgress?' YTD':'')];
-      const txt=forms.find(t=>ctx.measureText(t).width<=gutter) || forms[forms.length-1];
-      const ty=y+(big?19:16);
-      ctx.globalAlpha=.9;
-      // crown leads the name, whichever side the tag is anchored on
-      const tw=ctx.measureText(txt).width;
-      drawCrown(s.inProgress? lx-tw-gap-cw : lx, ty, ch);
-      ctx.fillStyle=s.color;
-      ctx.fillText(txt, s.inProgress? lx : lx+cw+gap, ty);
-    }
     ctx.restore();
   });
 }
@@ -684,4 +645,5 @@ if(reduce){
   playOverlay.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); startFromOverlay(); } });
   playOverlay.focus();
 }
+return {pause};
 }
