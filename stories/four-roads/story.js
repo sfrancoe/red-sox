@@ -41,6 +41,11 @@ const YEARS = [2023, 2024, 2025, 2026];
 
 const DATA = await fetch('../../data/seasons.json').then(r => r.json());
 
+// A portable single-file build has no site root to return to.
+if (location.protocol === 'file:') {
+  document.querySelectorAll('[data-site-home]').forEach(link => { link.hidden = true; });
+}
+
 const leaderLabels = [
   ['bWAR', 'war_leader'],
   ['HR', 'hr'],

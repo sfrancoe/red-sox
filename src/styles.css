@@ -68,16 +68,12 @@ html,body{background:var(--bg0);margin:0;}
   padding:clamp(64px,8vw,92px) clamp(14px,3vw,40px) clamp(32px,6vw,72px);
 }
 .leaders-shell{max-width:1380px;margin:0 auto;}
-.leaders-header{margin:0 0 clamp(22px,3vw,36px);max-width:720px;}
-.leaders-kicker{
-  margin-bottom:8px;font-family:var(--cond);font-size:10.5px;font-weight:500;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
-}
+.leaders-header{margin:0 0 clamp(24px,3.5vw,42px);max-width:900px;}
 .leaders-header h2{
-  margin:0;color:var(--chalk);font-family:var(--display);font-size:clamp(38px,6vw,70px);
+  margin:12px 0 0;color:var(--chalk);font-family:var(--display);font-size:clamp(54px,8vw,96px);
   font-weight:400;line-height:.95;text-transform:uppercase;
 }
-.leaders-header p{margin:12px 0 0;color:var(--muted);font-size:14px;line-height:1.55;}
+.leaders-header p{margin:14px 0 0;max-width:62ch;color:var(--muted);font-size:clamp(14px,1.4vw,17px);line-height:1.55;}
 .leaders-content{
   padding:6px 18px 18px;overflow-x:auto;border:1px solid var(--line);border-radius:12px;
   background:rgba(14,33,24,.72);box-shadow:0 16px 36px rgba(0,0,0,.24);
@@ -97,17 +93,25 @@ html,body{background:var(--bg0);margin:0;}
 .leaders-table td{font-family:var(--cond);font-size:13px;font-weight:500;color:var(--ink);}
 .leaders-note{margin:12px 10px 0;color:var(--muted);font-family:var(--cond);font-size:11px;line-height:1.5;}
 
-/* ===== Header (minimized — the chart is the point) ===== */
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;z-index:6;}
+/* ===== Story header ===== */
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;padding-right:210px;z-index:6;}
+.brand{max-width:900px;}
+.brand-meta{display:flex;align-items:center;gap:12px;font-family:var(--cond);font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;}
+.site-home{color:var(--chalk);text-decoration:none;transition:color .16s ease;}
+.site-home:hover{color:var(--gold);}
+.site-home:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px;}
+.story-eyebrow{color:var(--muted);}
+.story-eyebrow::before{content:'·';margin-right:12px;color:var(--c26);}
 .title{
   font-family:var(--display);font-weight:400;white-space:nowrap;
-  font-size:clamp(13px,3.6vw,26px);line-height:1;letter-spacing:.005em;
-  margin:0;
+  font-size:clamp(38px,5.3vw,72px);line-height:.94;letter-spacing:.002em;
+  margin:12px 0 0;
   color:var(--chalk);
   text-shadow:0 2px 40px rgba(0,0,0,.5);
 }
 .title em{font-style:normal;color:var(--c26);text-shadow:0 0 34px rgba(255,59,71,.45);}
-.dek{display:none;}
+.dek{display:block;max-width:62ch;margin:10px 0 0;color:var(--muted);font-size:clamp(12px,1.1vw,14px);line-height:1.45;}
+.dek b{color:var(--chalk);font-weight:700;}
 
 /* ===== Scoreboard (hidden — JS still writes to these nodes to drive narration
    timing, so they stay in the DOM but take no visual space) ===== */
@@ -158,12 +162,18 @@ canvas#chart{position:absolute;inset:0;width:100%;height:100%;display:block;}
 
 @media (max-width:720px){
   .stage{padding:8px 10px;gap:6px;}
-  .top{flex-direction:column;}
+  .top{flex-direction:column;padding:36px 0 0;}
+  .brand-meta{font-size:9.5px;}
+  .story-eyebrow{display:none;}
+  .title{font-size:clamp(30px,9vw,42px);margin-top:8px;}
+  .dek{max-width:44ch;margin-top:7px;font-size:11px;line-height:1.35;}
   .controls{flex-direction:column;align-items:stretch;gap:8px;}
   .view-tabs{top:7px;right:8px;}
   .view-tab{padding:6px 8px;font-size:9.5px;}
   .leaders-section{padding:68px 10px 32px;}
-  .leaders-header{padding:0 4px;margin-bottom:20px;}
+  .leaders-header{padding:0 4px;margin-bottom:24px;}
+  .leaders-header h2{font-size:clamp(50px,16vw,70px);margin-top:12px;}
+  .leaders-meta .story-eyebrow{display:none;}
   .leaders-content{padding:0 10px 12px;overflow:visible;}
   .leaders-table,.leaders-table tbody{display:block;}
   .leaders-table thead{display:none;}

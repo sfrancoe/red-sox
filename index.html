@@ -11,23 +11,30 @@
 <body>
 <main class="home">
   <header class="home-top">
-    <div class="home-eyebrow">Boston Red Sox</div>
-    <h1 class="home-title">RECORDS</h1>
-    <p class="home-dek">Visual stories pulled from the box scores. Game logs come from the
-      MLB Stats API and refresh daily, so anything about a live season stays current.</p>
+    <div class="home-eyebrow">Visual stories from Boston baseball</div>
+    <h1 class="home-title">RED SOX<br><em>RECORDS</em></h1>
+    <p class="home-dek">The numbers are real. The point is how they felt. Choose a story
+      and watch a Red Sox season take shape, one game at a time.</p>
   </header>
 
-  <ul class="story-grid">
-    <li>
-      <a class="story-card" href="stories/four-roads/">
-        <span class="card-kicker">2023 – 2026</span>
-        <span class="card-title">Four Roads,<br><em>One Record</em></span>
-        <span class="card-dek">Four straight seasons arrived at the identical record after
-          108 games — then split toward four completely different endings.</span>
-        <span class="card-go">Open the graphic <span aria-hidden="true">&rarr;</span></span>
-      </a>
-    </li>
-  </ul>
+  <section class="stories" aria-labelledby="storiesHeading">
+    <div class="stories-head">
+      <div class="stories-count">Story 01</div>
+      <h2 id="storiesHeading">Featured story</h2>
+      <p>Start with four seasons that somehow found the same door.</p>
+    </div>
+    <ul class="story-grid">
+      <li>
+        <a class="story-card" href="stories/four-roads/">
+          <span class="card-kicker">2023 – 2026</span>
+          <span class="card-title">Four Roads,<br><em>One Record</em></span>
+          <span class="card-dek">Four straight seasons arrived at the identical record after
+            108 games — then split toward four completely different endings.</span>
+          <span class="card-go">Watch the story <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      </li>
+    </ul>
+  </section>
 
   <footer class="home-foot">
     Game logs via the <a href="https://statsapi.mlb.com/" rel="noreferrer noopener">MLB Stats API</a>.
