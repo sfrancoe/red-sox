@@ -14,3 +14,15 @@
   for = "/data/*"
   [headers.values]
     Cache-Control = "public, max-age=300"
+
+# Story pages and their code are small, and stale modules can render a newer data
+# shape incorrectly after a deploy. Always fetch the current release.
+[[headers]]
+  for = "/stories/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/src/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"

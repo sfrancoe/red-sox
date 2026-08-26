@@ -39,7 +39,7 @@ const CONFIG = {
 };
 const YEARS = [2023, 2024, 2025, 2026];
 
-const DATA = await fetch('../../data/seasons.json').then(r => r.json());
+const DATA = await fetch('../../data/seasons.json?v=20260826-top3').then(r => r.json());
 
 // A portable single-file build has no site root to return to.
 if (location.protocol === 'file:') {
