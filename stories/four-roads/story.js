@@ -54,14 +54,29 @@ const leaderLabels = [
   ['RBI', 'rbi'],
 ];
 
-function leaderText(season, key) {
+function leaderEntries(season, key) {
   if (key === 'war_leader') {
-    const leader = season.war_leader;
-    return leader ? `${leader.name} · ${leader.war.toFixed(1)}${season.in_progress ? ' YTD' : ''}` : '—';
+    const leaders = season.war_leaders || (season.war_leader ? [season.war_leader] : []);
+    return leaders.map(leader => ({ name: leader.name, value: leader.war.toFixed(1) }));
   }
-  const leader = season.batting_leaders?.[key];
-  if (!leader) return '—';
-  return `${leader.names.join(' / ')} · ${leader.value}${season.in_progress ? ' YTD' : ''}`;
+  const category = season.batting_leaders?.[key];
+  if (!category) return [];
+  return category.top || category.names.map(name => ({ name, value: category.value }));
+}
+
+function leaderList(season, key) {
+  const entries = leaderEntries(season, key);
+  if (!entries.length) return document.createTextNode('—');
+  const list = document.createElement('ol');
+  list.className = 'leader-ranking';
+  for (const entry of entries) {
+    const item = document.createElement('li');
+    const text = document.createElement('span');
+    text.textContent = `${entry.name} · ${entry.value}${season.in_progress ? ' YTD' : ''}`;
+    item.appendChild(text);
+    list.appendChild(item);
+  }
+  return list;
 }
 
 const leadersBody = document.getElementById('leadersBody');
@@ -72,15 +87,15 @@ const leaderYears = [...YEARS].sort((a, b) => {
 for (const year of leaderYears) {
   const season = DATA[String(year)];
   const row = document.createElement('tr');
+  row.style.setProperty('--seasoncol', CONFIG[year].color);
   const yearCell = document.createElement('th');
   yearCell.scope = 'row';
   yearCell.textContent = year;
-  yearCell.style.setProperty('--seasoncol', CONFIG[year].color);
   row.appendChild(yearCell);
   for (const [label, key] of leaderLabels) {
     const cell = document.createElement('td');
     cell.dataset.label = label;
-    cell.textContent = leaderText(season, key);
+    cell.appendChild(leaderList(season, key));
     row.appendChild(cell);
   }
   leadersBody.appendChild(row);

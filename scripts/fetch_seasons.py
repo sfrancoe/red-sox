@@ -85,8 +85,8 @@ def fetch_text(url: str, attempts: int = 4) -> str:
     raise RuntimeError(f"failed to fetch {url}: {last}")
 
 
-def war_leaders(years: list[int]) -> dict[str, dict]:
-    """Highest-bWAR Red Sox player per season, batters and pitchers together."""
+def war_leaders(years: list[int]) -> dict[str, list[dict]]:
+    """Top three Red Sox players by bWAR, batters and pitchers together."""
     wanted = set(years)
     totals: dict[int, dict[str, float]] = {y: {} for y in wanted}
 
@@ -112,19 +112,24 @@ def war_leaders(years: list[int]) -> dict[str, dict]:
             rows += 1
         print(f"    {rows} {BBREF_TEAM} rows in range")
 
-    out: dict[str, dict] = {}
+    out: dict[str, list[dict]] = {}
     for year in sorted(wanted):
         if not totals[year]:
             print(f"    WARNING {year}: no {BBREF_TEAM} WAR rows found", file=sys.stderr)
             continue
-        name, war = max(totals[year].items(), key=lambda kv: kv[1])
-        out[str(year)] = {"name": name, "war": round(war, 1)}
-        print(f"    {year}: {name} — {war:.1f} WAR")
+        ranked = sorted(totals[year].items(), key=lambda kv: (-kv[1], kv[0]))[:3]
+        out[str(year)] = [
+            {"name": name, "war": round(war, 1)} for name, war in ranked
+        ]
+        summary = " · ".join(
+            f"#{rank} {name} — {war:.1f}" for rank, (name, war) in enumerate(ranked, 1)
+        )
+        print(f"    {year}: {summary} WAR")
     return out
 
 
 def batting_leaders(year: int) -> dict[str, dict]:
-    """Red Sox team leaders in HR/RBI and qualified-hitter AVG/OPS."""
+    """Top three Red Sox in HR/RBI and qualified-hitter AVG/OPS."""
     pools: dict[str, list[dict]] = {}
     for pool in ("ALL", "QUALIFIED"):
         payload = fetch_json(HITTING_API.format(team=BOS, season=year, pool=pool))
@@ -153,12 +158,16 @@ def batting_leaders(year: int) -> dict[str, dict]:
         if not candidates:
             print(f"    WARNING {year}: no {label.upper()} leader found", file=sys.stderr)
             continue
-        best = max(row[0] for row in candidates)
+        ranked = sorted(candidates, key=lambda row: (-row[0], row[1]))[:3]
+        best = ranked[0][0]
         tied = sorted(row for row in candidates if row[0] == best)
         value = tied[0][2]
         leaders[label] = {
             "names": [row[1] for row in tied],
             "value": value,
+            "top": [
+                {"name": name, "value": raw} for _, name, raw in ranked
+            ],
         }
     return leaders
 
@@ -267,13 +276,17 @@ def main() -> int:
         leaders = batting_leaders(year)
         seasons[str(year)]["batting_leaders"] = leaders
         for stat, leader in leaders.items():
-            names = " / ".join(leader["names"])
-            print(f"    {stat.upper()}: {names} — {leader['value']}")
+            summary = " · ".join(
+                f"#{rank} {entry['name']} — {entry['value']}"
+                for rank, entry in enumerate(leader["top"], 1)
+            )
+            print(f"    {stat.upper()}: {summary}")
 
     print("\nFetching bWAR leaders from Baseball Reference")
-    for year, leader in war_leaders(years).items():
+    for year, leaders in war_leaders(years).items():
         if year in seasons:
-            seasons[year]["war_leader"] = leader
+            seasons[year]["war_leaders"] = leaders
+            seasons[year]["war_leader"] = leaders[0]
 
     # Headline check: is the premise of the graphic still true?
     checks = {y: s.get("checkpoint_record") for y, s in seasons.items() if s.get("checkpoint_record")}
@@ -297,6 +310,7 @@ def main() -> int:
                         "in_progress": s["in_progress"],
                         "checkpoint_record": s.get("checkpoint_record"),
                         "war_leader": s.get("war_leader"),
+                        "war_leaders": s.get("war_leaders"),
                         "batting_leaders": s.get("batting_leaders")}
                     for y, s in seasons.items()},
         "checkpoint_game": CHECKPOINT,

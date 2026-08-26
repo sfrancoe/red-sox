@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-26T11:31:01+00:00",
+ "generated_at": "2026-08-26T17:37:00+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 111,
@@ -13,30 +13,100 @@
     "name": "Rafael Devers",
     "war": 3.5
    },
+   "war_leaders": [
+    {
+     "name": "Rafael Devers",
+     "war": 3.5
+    },
+    {
+     "name": "Chris Martin",
+     "war": 3.2
+    },
+    {
+     "name": "Brayan Bello",
+     "war": 3.1
+    }
+   ],
    "batting_leaders": {
     "hr": {
      "names": [
       "Rafael Devers"
      ],
-     "value": 33
+     "value": 33,
+     "top": [
+      {
+       "name": "Rafael Devers",
+       "value": 33
+      },
+      {
+       "name": "Triston Casas",
+       "value": 24
+      },
+      {
+       "name": "Justin Turner",
+       "value": 23
+      }
+     ]
     },
     "rbi": {
      "names": [
       "Rafael Devers"
      ],
-     "value": 100
+     "value": 100,
+     "top": [
+      {
+       "name": "Rafael Devers",
+       "value": 100
+      },
+      {
+       "name": "Justin Turner",
+       "value": 96
+      },
+      {
+       "name": "Masataka Yoshida",
+       "value": 72
+      }
+     ]
     },
     "avg": {
      "names": [
       "Masataka Yoshida"
      ],
-     "value": ".289"
+     "value": ".289",
+     "top": [
+      {
+       "name": "Masataka Yoshida",
+       "value": ".289"
+      },
+      {
+       "name": "Justin Turner",
+       "value": ".276"
+      },
+      {
+       "name": "Rafael Devers",
+       "value": ".271"
+      }
+     ]
     },
     "ops": {
      "names": [
       "Triston Casas"
      ],
-     "value": ".857"
+     "value": ".857",
+     "top": [
+      {
+       "name": "Triston Casas",
+       "value": ".857"
+      },
+      {
+       "name": "Rafael Devers",
+       "value": ".851"
+      },
+      {
+       "name": "Justin Turner",
+       "value": ".800"
+      }
+     ]
     }
    }
   },
@@ -49,30 +119,100 @@
     "name": "Jarren Duran",
     "war": 9.0
    },
+   "war_leaders": [
+    {
+     "name": "Jarren Duran",
+     "war": 9.0
+    },
+    {
+     "name": "Rafael Devers",
+     "war": 3.9
+    },
+    {
+     "name": "Wilyer Abreu",
+     "war": 3.6
+    }
+   ],
    "batting_leaders": {
     "hr": {
      "names": [
       "Tyler O'Neill"
      ],
-     "value": 31
+     "value": 31,
+     "top": [
+      {
+       "name": "Tyler O'Neill",
+       "value": 31
+      },
+      {
+       "name": "Rafael Devers",
+       "value": 28
+      },
+      {
+       "name": "Jarren Duran",
+       "value": 21
+      }
+     ]
     },
     "rbi": {
      "names": [
       "Rafael Devers"
      ],
-     "value": 83
+     "value": 83,
+     "top": [
+      {
+       "name": "Rafael Devers",
+       "value": 83
+      },
+      {
+       "name": "Ceddanne Rafaela",
+       "value": 75
+      },
+      {
+       "name": "Jarren Duran",
+       "value": 75
+      }
+     ]
     },
     "avg": {
      "names": [
       "Jarren Duran"
      ],
-     "value": ".285"
+     "value": ".285",
+     "top": [
+      {
+       "name": "Jarren Duran",
+       "value": ".285"
+      },
+      {
+       "name": "Rafael Devers",
+       "value": ".272"
+      },
+      {
+       "name": "Ceddanne Rafaela",
+       "value": ".246"
+      }
+     ]
     },
     "ops": {
      "names": [
       "Rafael Devers"
      ],
-     "value": ".870"
+     "value": ".870",
+     "top": [
+      {
+       "name": "Rafael Devers",
+       "value": ".870"
+      },
+      {
+       "name": "Jarren Duran",
+       "value": ".834"
+      },
+      {
+       "name": "Ceddanne Rafaela",
+       "value": ".664"
+      }
+     ]
     }
    }
   },
@@ -85,30 +225,100 @@
     "name": "Garrett Crochet",
     "war": 6.0
    },
+   "war_leaders": [
+    {
+     "name": "Garrett Crochet",
+     "war": 6.0
+    },
+    {
+     "name": "Jarren Duran",
+     "war": 4.9
+    },
+    {
+     "name": "Ceddanne Rafaela",
+     "war": 4.9
+    }
+   ],
    "batting_leaders": {
     "hr": {
      "names": [
       "Trevor Story"
      ],
-     "value": 25
+     "value": 25,
+     "top": [
+      {
+       "name": "Trevor Story",
+       "value": 25
+      },
+      {
+       "name": "Wilyer Abreu",
+       "value": 22
+      },
+      {
+       "name": "Alex Bregman",
+       "value": 18
+      }
+     ]
     },
     "rbi": {
      "names": [
       "Trevor Story"
      ],
-     "value": 96
+     "value": 96,
+     "top": [
+      {
+       "name": "Trevor Story",
+       "value": 96
+      },
+      {
+       "name": "Jarren Duran",
+       "value": 84
+      },
+      {
+       "name": "Wilyer Abreu",
+       "value": 69
+      }
+     ]
     },
     "avg": {
      "names": [
       "Trevor Story"
      ],
-     "value": ".263"
+     "value": ".263",
+     "top": [
+      {
+       "name": "Trevor Story",
+       "value": ".263"
+      },
+      {
+       "name": "Jarren Duran",
+       "value": ".256"
+      },
+      {
+       "name": "Ceddanne Rafaela",
+       "value": ".249"
+      }
+     ]
     },
     "ops": {
      "names": [
       "Jarren Duran"
      ],
-     "value": ".774"
+     "value": ".774",
+     "top": [
+      {
+       "name": "Jarren Duran",
+       "value": ".774"
+      },
+      {
+       "name": "Trevor Story",
+       "value": ".741"
+      },
+      {
+       "name": "Ceddanne Rafaela",
+       "value": ".709"
+      }
+     ]
     }
    }
   },
@@ -121,30 +331,100 @@
     "name": "Ceddanne Rafaela",
     "war": 5.8
    },
+   "war_leaders": [
+    {
+     "name": "Ceddanne Rafaela",
+     "war": 5.8
+    },
+    {
+     "name": "Wilyer Abreu",
+     "war": 5.4
+    },
+    {
+     "name": "Willson Contreras",
+     "war": 4.3
+    }
+   ],
    "batting_leaders": {
     "hr": {
      "names": [
       "Willson Contreras"
      ],
-     "value": 26
+     "value": 26,
+     "top": [
+      {
+       "name": "Willson Contreras",
+       "value": 26
+      },
+      {
+       "name": "Wilyer Abreu",
+       "value": 22
+      },
+      {
+       "name": "Jarren Duran",
+       "value": 18
+      }
+     ]
     },
     "rbi": {
      "names": [
       "Willson Contreras"
      ],
-     "value": 78
+     "value": 78,
+     "top": [
+      {
+       "name": "Willson Contreras",
+       "value": 78
+      },
+      {
+       "name": "Wilyer Abreu",
+       "value": 69
+      },
+      {
+       "name": "Ceddanne Rafaela",
+       "value": 66
+      }
+     ]
     },
     "avg": {
      "names": [
       "Ceddanne Rafaela"
      ],
-     "value": ".288"
+     "value": ".288",
+     "top": [
+      {
+       "name": "Ceddanne Rafaela",
+       "value": ".288"
+      },
+      {
+       "name": "Willson Contreras",
+       "value": ".281"
+      },
+      {
+       "name": "Caleb Durbin",
+       "value": ".254"
+      }
+     ]
     },
     "ops": {
      "names": [
       "Willson Contreras"
      ],
-     "value": ".916"
+     "value": ".916",
+     "top": [
+      {
+       "name": "Willson Contreras",
+       "value": ".916"
+      },
+      {
+       "name": "Wilyer Abreu",
+       "value": ".793"
+      },
+      {
+       "name": "Ceddanne Rafaela",
+       "value": ".783"
+      }
+     ]
     }
    }
   }

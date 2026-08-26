@@ -99,6 +99,16 @@ html,body{background:var(--bg0);margin:0;}
   font-family:var(--display);font-size:18px;font-weight:400;color:var(--seasoncol,var(--chalk));
 }
 .leaders-table td{font-family:var(--cond);font-size:13px;font-weight:500;color:var(--ink);}
+.leader-ranking{counter-reset:leader-rank;display:grid;gap:5px;margin:0;padding:0;list-style:none;}
+.leader-ranking li{
+  counter-increment:leader-rank;display:grid;grid-template-columns:15px minmax(0,1fr);gap:3px;
+  color:var(--muted);font-size:12px;line-height:1.28;
+}
+.leader-ranking li::before{
+  content:counter(leader-rank);color:var(--seasoncol,var(--gold));font-size:10px;font-weight:700;
+  line-height:1.55;font-variant-numeric:tabular-nums;
+}
+.leader-ranking li:first-child{color:var(--ink);font-weight:700;}
 .leaders-note{margin:12px 10px 0;color:var(--muted);font-family:var(--cond);font-size:11px;line-height:1.5;}
 
 /* ===== Story header ===== */
@@ -199,6 +209,9 @@ canvas#chart{position:absolute;inset:0;width:100%;height:100%;display:block;}
     content:attr(data-label);display:block;margin-bottom:3px;color:var(--muted);
     font-size:9px;letter-spacing:.1em;text-transform:uppercase;
   }
+  .leader-ranking{gap:4px;}
+  .leader-ranking li{grid-template-columns:13px minmax(0,1fr);font-size:11px;line-height:1.22;}
+  .leader-ranking li::before{font-size:9px;line-height:1.5;}
   .leaders-table td:nth-child(2){grid-column:2/4;grid-row:1;border-bottom:1px solid var(--line);}
   .leaders-table td:nth-child(3){grid-column:2;grid-row:2;}
   .leaders-table td:nth-child(4){grid-column:3;grid-row:2;}
