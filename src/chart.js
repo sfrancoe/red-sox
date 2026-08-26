@@ -43,6 +43,25 @@ const seasons = YEARS.map(y=>{
 // =========================================================
 const canvas=document.getElementById('chart');
 const ctx=canvas.getContext('2d');
+const rootStyle=getComputedStyle(document.documentElement);
+const chartColors={
+  grid:rootStyle.getPropertyValue('--chart-grid').trim(),
+  gridStrong:rootStyle.getPropertyValue('--chart-grid-strong').trim(),
+  label:rootStyle.getPropertyValue('--chart-label').trim(),
+  labelStrong:rootStyle.getPropertyValue('--chart-label-strong').trim(),
+  ink:rootStyle.getPropertyValue('--chart-ink').trim(),
+  scrub:rootStyle.getPropertyValue('--chart-scrub').trim(),
+  tooltipBg:rootStyle.getPropertyValue('--chart-tooltip-bg').trim(),
+  tooltipBorder:rootStyle.getPropertyValue('--chart-tooltip-border').trim(),
+  tooltipLabel:rootStyle.getPropertyValue('--chart-tooltip-label').trim(),
+  tooltipInk:rootStyle.getPropertyValue('--chart-tooltip-ink').trim(),
+  headBg:rootStyle.getPropertyValue('--chart-head-bg').trim(),
+  gold:rootStyle.getPropertyValue('--chart-gold').trim(),
+  goldLine:rootStyle.getPropertyValue('--chart-gold-line').trim(),
+  goldFill:rootStyle.getPropertyValue('--chart-gold-fill').trim(),
+  goldClear:rootStyle.getPropertyValue('--chart-gold-clear').trim(),
+  goldGlow:rootStyle.getPropertyValue('--chart-gold-glow').trim(),
+};
 let W=0,H=0,DPR=1;
 const DMIN=-15.5, DMAX=18, GMAX=162;
 let padL=64,padR=132,padT=26,padB=44;
@@ -90,16 +109,16 @@ function drawGrid(){
     const base = t===0;
     if(base){
       // chalk .500 line (dashed)
-      ctx.strokeStyle='rgba(233,227,208,.55)';
+      ctx.strokeStyle=chartColors.gridStrong;
       ctx.lineWidth=1.5; ctx.setLineDash([7,7]);
       ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);ctx.stroke();
       ctx.setLineDash([]);
     }else{
-      ctx.strokeStyle='rgba(23,48,35,.9)';
+      ctx.strokeStyle=chartColors.grid;
       ctx.lineWidth=1;
       ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);ctx.stroke();
     }
-    ctx.fillStyle=base?'rgba(233,227,208,.9)':'rgba(138,163,147,.75)';
+    ctx.fillStyle=base?chartColors.labelStrong:chartColors.label;
     ctx.textAlign='right';
     const lbl = base?'.500' : (t>0?'+'+t:''+t);
     ctx.fillText(lbl,padL-10,y);
@@ -108,9 +127,9 @@ function drawGrid(){
   ctx.textAlign='center';ctx.textBaseline='top';
   [0,54,162].forEach(g=>{
     const x=xFor(g);
-    ctx.strokeStyle='rgba(23,48,35,.7)';ctx.lineWidth=1;
+    ctx.strokeStyle=chartColors.grid;ctx.lineWidth=1;
     ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,H-padB);ctx.stroke();
-    ctx.fillStyle='rgba(138,163,147,.75)';
+    ctx.fillStyle=chartColors.label;
     // the finish label sits out in the right gutter — centred on the plot edge it
     // lands under the narration panel now that the gutter carries WAR lines. On a
     // phone the panel is wide enough to swallow it either way, and nudging it right
@@ -123,13 +142,13 @@ function drawGrid(){
   });
   // checkpoint emphasis at 108
   const xc=xFor(108);
-  ctx.strokeStyle='rgba(255,207,90,.35)';ctx.lineWidth=1.5;
+  ctx.strokeStyle=chartColors.goldLine;ctx.lineWidth=1.5;
   ctx.setLineDash([3,5]);
   ctx.beginPath();ctx.moveTo(xc,padT);ctx.lineTo(xc,H-padB);ctx.stroke();
   ctx.setLineDash([]);
   ctx.save();
   ctx.translate(xc,padT-2);
-  ctx.fillStyle='rgba(255,207,90,.8)';ctx.textAlign='right';ctx.textBaseline='alphabetic';
+  ctx.fillStyle=chartColors.gold;ctx.textAlign='right';ctx.textBaseline='alphabetic';
   ctx.font='500 10px OswaldX, sans-serif';
   ctx.fillText('GAME 108 · 57–51 EVERY SEASON',-4,10);
   ctx.restore();
@@ -309,7 +328,7 @@ function drawCometHead(s,head){
   let lx=x+off, ly=y-off;
   if(lx+tw+14>W-6) lx=x-off-tw-8;
   ctx.globalAlpha=.92;
-  ctx.fillStyle='rgba(8,18,12,.72)';
+  ctx.fillStyle=chartColors.headBg;
   roundRect(lx-7,ly-15,tw+14,22,6);ctx.fill();
   ctx.globalAlpha=1;ctx.fillStyle=s.color;ctx.textBaseline='alphabetic';
   ctx.fillText(txt,lx,ly);
@@ -343,7 +362,7 @@ function drawEndpointTags(list,opts){
     ctx.fillStyle=s.color;
     ctx.fillText(s.inProgress? (s.year+' \u25b8') : (''+s.year), lx, y-(big?16:13));
     ctx.font='500 '+(big?13:11)+'px OswaldX, sans-serif';
-    ctx.fillStyle='rgba(238,244,236,.9)';
+    ctx.fillStyle=chartColors.ink;
     ctx.fillText(s.record.replace('-','\u2013')+(s.inProgress?' \u00b7 live':''), lx, y+(big?1:1));
     ctx.restore();
   });
@@ -355,17 +374,17 @@ function drawConvergenceBand(alpha){
   ctx.save();
   ctx.globalAlpha=alpha*.5;
   const g=ctx.createLinearGradient(x1,0,x2,0);
-  g.addColorStop(0,'rgba(255,207,90,0)');g.addColorStop(1,'rgba(255,207,90,.18)');
+  g.addColorStop(0,chartColors.goldClear);g.addColorStop(1,chartColors.goldFill);
   ctx.fillStyle=g;
   roundRect(x1,yTop,x2-x1,yBot-yTop,10);ctx.fill();
   ctx.globalAlpha=alpha*.8;
-  ctx.strokeStyle='rgba(255,207,90,.7)';ctx.lineWidth=1.4;ctx.setLineDash([4,4]);
-  ctx.shadowColor='rgba(255,207,90,.6)';ctx.shadowBlur=14;
+  ctx.strokeStyle=chartColors.gold;ctx.lineWidth=1.4;ctx.setLineDash([4,4]);
+  ctx.shadowColor=chartColors.goldGlow;ctx.shadowBlur=14;
   roundRect(x1,yTop,x2-x1,yBot-yTop,10);ctx.stroke();
   ctx.setLineDash([]);
   // caption
   ctx.globalAlpha=alpha;
-  ctx.fillStyle='rgba(255,207,90,.95)';ctx.textAlign='center';
+  ctx.fillStyle=chartColors.gold;ctx.textAlign='center';
   ctx.font='500 12px OswaldX, sans-serif';
   ctx.fillText('57–51 AFTER 108 · EVERY TIME',(x1+x2)/2,yTop-9);
   ctx.restore();
@@ -423,7 +442,7 @@ function drawScrub(){
   g=Math.max(0,Math.min(GMAX,g));
   const x=xFor(g);
   ctx.save();
-  ctx.strokeStyle='rgba(233,227,208,.35)';ctx.lineWidth=1;ctx.setLineDash([3,4]);
+  ctx.strokeStyle=chartColors.scrub;ctx.lineWidth=1;ctx.setLineDash([3,4]);
   ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,H-padB);ctx.stroke();ctx.setLineDash([]);
   // gather
   const rows=revealed.map(s=>{const gg=Math.min(g,s.endGame);return {s,gg,d:s.pts[gg].d,w:Math.round(s.cumW[gg]),l:Math.round(s.cumL[gg])};})
@@ -437,17 +456,17 @@ function drawScrub(){
   const bw=132, lineH=17, bh=14+rows.length*lineH;
   let bx=x+12; if(bx+bw>W-4) bx=x-12-bw;
   let by=padT+8;
-  ctx.fillStyle='rgba(8,18,12,.9)';ctx.strokeStyle='rgba(23,48,35,1)';ctx.lineWidth=1;
+  ctx.fillStyle=chartColors.tooltipBg;ctx.strokeStyle=chartColors.tooltipBorder;ctx.lineWidth=1;
   roundRect(bx,by,bw,bh,8);ctx.fill();ctx.stroke();
   ctx.textBaseline='middle';ctx.textAlign='left';
-  ctx.fillStyle='rgba(138,163,147,.9)';ctx.font='500 11px OswaldX, sans-serif';
+  ctx.fillStyle=chartColors.tooltipLabel;ctx.font='500 11px OswaldX, sans-serif';
   ctx.fillText((g===0?'OPENING DAY':'AFTER GAME '+g),bx+10,by+11);
   rows.forEach((r,i)=>{
     const yy=by+22+i*lineH;
     ctx.fillStyle=r.s.color;ctx.beginPath();ctx.arc(bx+13,yy,3.2,0,7);ctx.fill();
-    ctx.fillStyle='rgba(238,244,236,.92)';ctx.font='400 13px AntonX, sans-serif';
+    ctx.fillStyle=chartColors.tooltipInk;ctx.font='400 13px AntonX, sans-serif';
     ctx.fillText(r.s.year,bx+22,yy+1);
-    ctx.font='500 12px OswaldX, sans-serif';ctx.fillStyle='rgba(238,244,236,.85)';
+    ctx.font='500 12px OswaldX, sans-serif';ctx.fillStyle=chartColors.tooltipInk;
     const rec=r.w+'–'+r.l;
     ctx.textAlign='right';ctx.fillText(rec,bx+bw-10,yy+1);ctx.textAlign='left';
   });

@@ -7,7 +7,7 @@
 import { initStory } from '../../src/chart.js';
 
 const CONFIG = {
-  2023:{color:'#38bdf8',label:'The Grind',beats:[
+  2023:{color:'#087ea4',label:'The Grind',beats:[
     {g:0,t:'2023 · The steady climb begins.'},
     {g:13,t:'Two weeks in — three games under. A soft open.'},
     {g:35,t:'An 8-game winning streak lifts them to +7.'},
@@ -15,14 +15,14 @@ const CONFIG = {
     {g:108,t:'Checkpoint: 57–51. No drama — just a grind.'},
     {g:159,t:'The floor gives way: seven under, the season low.'},
     {g:162,t:'Fade to 78–84. Last place in the AL East.'}]},
-  2024:{color:'#f7b500',label:'The Flatline',beats:[
+  2024:{color:'#9a6700',label:'The Flatline',beats:[
     {g:0,t:'2024 · Life on the .500 tightrope.'},
     {g:46,t:'The season low is just two games under. That is the whole drama.'},
     {g:96,t:'A late surge to +10 — the high-water mark.'},
     {g:108,t:'Checkpoint: 57–51. The exact same number, again.'},
     {g:140,t:'A five-game slide erases the cushion.'},
     {g:162,t:'Dead even: 81–81.'}]},
-  2025:{color:'#ab8bff',label:'The Bounce-Back',beats:[
+  2025:{color:'#7753c7',label:'The Bounce-Back',beats:[
     {g:0,t:'2025 · The best of the four — it just hid it early.'},
     {g:63,t:'Season low: five games under, and sinking.'},
     {g:83,t:'A six-game skid — the worst stretch of the year.'},
@@ -30,7 +30,7 @@ const CONFIG = {
     {g:108,t:'Checkpoint: 57–51 too.'},
     {g:140,t:'+16 — the season high, and clear of the pack.'},
     {g:162,t:'89–73. A Wild Card berth.'}]},
-  2026:{color:'#ff3b47',label:'The Rollercoaster',beats:[
+  2026:{color:'#d52c3a',label:'The Rollercoaster',beats:[
     {g:0,t:'2026 · Buckle up.'},
     {g:6,t:'Five straight losses out of the gate.'},
     {g:72,t:'Rock bottom — FOURTEEN games under .500.'},
