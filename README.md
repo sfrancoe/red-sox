@@ -10,6 +10,9 @@ backend — plain ES modules and `<canvas>`, with game logs pulled from the free
 |---|---|
 | **Four Roads, One Record** (`stories/four-roads/`) | Four straight seasons (2023-26) reached the identical record after 108 games, then split toward four completely different endings. |
 
+The **Globe Headlines** tab is a morning scan of Red Sox headlines and short
+descriptions from The Boston Globe. Every item links to the original article.
+
 ## Run it locally
 
 ES modules and `fetch()` both need a real HTTP origin, so `file://` will not work:
@@ -25,11 +28,12 @@ cd _site && python3 -m http.server 8765
 ```bash
 python3 scripts/fetch_seasons.py          # all seasons
 python3 scripts/fetch_seasons.py 2026     # one season
+python3 scripts/fetch_globe_news.py       # Globe headline metadata
 ```
 
-Writes `data/seasons.json` and `data/meta.json`. Standard library only — no
-dependencies to install. GitHub Actions runs this daily at 11:00 UTC and commits
-the result if anything changed; Netlify redeploys on that commit.
+Writes the generated files in `data/`. Standard library only — no dependencies
+to install. GitHub Actions runs this daily at 11:00 UTC and commits the result
+if anything changed; Netlify redeploys on that commit.
 
 ## Deploy
 

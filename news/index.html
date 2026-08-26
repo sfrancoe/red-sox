@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Globe Headlines | Red Sox Records</title>
+<meta name="description" content="The latest Boston Globe headlines and summaries about the Red Sox.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
+<link rel="stylesheet" href="../src/home.css">
+<link rel="stylesheet" href="../src/news.css">
+</head>
+<body>
+<main class="home news-home">
+  <div class="news-masthead">
+    <a class="news-brand" href="../">Red Sox Records</a>
+    <nav class="site-tabs" aria-label="Red Sox Records sections">
+      <a class="site-tab" href="../">Stories</a>
+      <a class="site-tab is-active" href="./" aria-current="page">Globe headlines</a>
+    </nav>
+  </div>
+
+  <header class="news-top">
+    <div>
+      <div class="home-eyebrow">Morning read <span aria-hidden="true">•</span> The Boston Globe</div>
+      <h1 class="news-title">Red Sox</h1>
+      <p class="news-dek">A quick morning scan of Red Sox reporting from
+        <a href="https://www.bostonglobe.com/sports/baseball/redsox/" target="_blank" rel="noreferrer noopener">The Boston Globe</a>.
+        Open any headline to read the full article there.</p>
+    </div>
+    <a class="globe-link" href="https://www.bostonglobe.com/sports/baseball/redsox/" target="_blank" rel="noreferrer noopener">
+      Visit the Red Sox section <span aria-hidden="true">&nearr;</span>
+    </a>
+  </header>
+
+  <section class="news-section" aria-labelledby="latestHeading">
+    <div class="news-section-head">
+      <h2 id="latestHeading">Latest Red Sox reporting</h2>
+      <p id="newsFreshness" class="news-freshness"></p>
+    </div>
+    <div id="newsStatus" class="news-status" role="status">Loading today’s headlines…</div>
+    <ol id="newsList" class="news-list" hidden></ol>
+    <noscript><p class="news-status">JavaScript is required to load the headline list.</p></noscript>
+  </section>
+
+  <footer class="home-foot news-foot">
+    Headlines and short descriptions are published by The Boston Globe and link to the original articles.
+    A Globe subscription may be required to read them.
+  </footer>
+</main>
+
+<script type="module" src="../src/news.js"></script>
+</body>
+</html>
