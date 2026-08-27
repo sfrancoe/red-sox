@@ -132,8 +132,23 @@ def build_feed(page: str) -> dict[str, Any]:
     }
 
 
+def feed_changed(feed: dict[str, Any]) -> bool:
+    """Return whether publishable feed content differs from the saved file."""
+    try:
+        current = json.loads(OUTPUT_PATH.read_text())
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return True
+
+    keys = ("source", "source_url", "articles")
+    return any(current.get(key) != feed.get(key) for key in keys)
+
+
 def main() -> None:
     feed = build_feed(fetch_page())
+    if not feed_changed(feed):
+        print(f"No Globe headline changes; kept {OUTPUT_PATH}")
+        return
+
     OUTPUT_PATH.write_text(json.dumps(feed, indent=2, ensure_ascii=False) + "\n")
     print(f"Wrote {len(feed['articles'])} Globe headlines to {OUTPUT_PATH}")
 

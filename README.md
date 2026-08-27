@@ -10,8 +10,8 @@ backend — plain ES modules and `<canvas>`, with game logs pulled from the free
 |---|---|
 | **Four Roads, One Record** (`stories/four-roads/`) | Four straight seasons (2023-26) reached the identical record after 108 games, then split toward four completely different endings. |
 
-The **Globe Headlines** tab is a morning scan of Red Sox headlines and short
-descriptions from The Boston Globe. Every item links to the original article.
+The **Globe Headlines** tab tracks Red Sox headlines and short descriptions
+from The Boston Globe. Every item links to the original article.
 
 ## Run it locally
 
@@ -32,8 +32,9 @@ python3 scripts/fetch_globe_news.py       # Globe headline metadata
 ```
 
 Writes the generated files in `data/`. Standard library only — no dependencies
-to install. GitHub Actions runs this daily at 11:00 UTC and commits the result
-if anything changed; Netlify redeploys on that commit.
+to install. GitHub Actions refreshes MLB data daily and checks the Globe page
+every five minutes. It commits only when content changes; Netlify redeploys on
+that commit.
 
 ## Deploy
 

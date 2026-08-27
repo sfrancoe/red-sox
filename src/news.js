@@ -1,6 +1,7 @@
 const status = document.getElementById('newsStatus');
 const list = document.getElementById('newsList');
 const freshness = document.getElementById('newsFreshness');
+let currentGeneration = '';
 
 function formatDate(value, options) {
   const date = value ? new Date(value) : null;
@@ -51,25 +52,43 @@ function makeArticle(article, index) {
   return item;
 }
 
-try {
-  const response = await fetch('../data/globe.json', { cache: 'no-store' });
-  if (!response.ok) throw new Error(`Headline request returned ${response.status}`);
-  const feed = await response.json();
-  if (!Array.isArray(feed.articles) || !feed.articles.length) {
-    throw new Error('Headline feed was empty');
-  }
+function renderFeed(feed) {
+  if (feed.generated_at === currentGeneration) return;
 
   const fragment = document.createDocumentFragment();
   feed.articles.forEach((article, index) => fragment.appendChild(makeArticle(article, index)));
-  list.appendChild(fragment);
+  list.replaceChildren(fragment);
   list.hidden = false;
   status.hidden = true;
+  currentGeneration = feed.generated_at || '';
 
   const updated = formatDate(feed.generated_at, {
     month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
   });
   freshness.textContent = updated ? `Updated ${updated}` : '';
-} catch (error) {
-  console.error(error);
-  status.textContent = 'The Globe headline list could not be loaded right now. Try the Globe link above.';
 }
+
+async function loadFeed() {
+  try {
+    const response = await fetch('../data/globe.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Headline request returned ${response.status}`);
+    const feed = await response.json();
+    if (!Array.isArray(feed.articles) || !feed.articles.length) {
+      throw new Error('Headline feed was empty');
+    }
+    renderFeed(feed);
+  } catch (error) {
+    console.error(error);
+    if (!currentGeneration) {
+      status.textContent = 'The Globe headline list could not be loaded right now. Try the Globe link above.';
+    }
+  }
+}
+
+await loadFeed();
+
+// A reader can leave this tab open during a game or news cycle. Check the
+// generated feed periodically so a Netlify refresh appears without a reload.
+setInterval(() => {
+  if (document.visibilityState === 'visible') loadFeed();
+}, 60_000);

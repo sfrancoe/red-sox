@@ -15,6 +15,13 @@
   [headers.values]
     Cache-Control = "public, max-age=300"
 
+# The Globe feed is polled while its tab is open. Revalidate it so a newly
+# deployed headline list is not hidden behind the general five-minute cache.
+[[headers]]
+  for = "/data/globe.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 # Story pages and their code are small, and stale modules can render a newer data
 # shape incorrectly after a deploy. Always fetch the current release.
 [[headers]]

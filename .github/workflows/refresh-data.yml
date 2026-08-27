@@ -1,7 +1,7 @@
-name: Refresh site data
+name: Refresh MLB data
 
-# Pulls the latest game logs and Globe headline metadata, then commits them if
-# anything changed. Netlify watches the repo, so a commit here redeploys the site.
+# Pulls the latest game logs, then commits them if anything changed. Netlify
+# watches the repo, so a commit here redeploys the site.
 #
 # Runs in the cloud, so it does not depend on any machine being awake.
 
@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: refresh-data
+  group: site-data-writes
   cancel-in-progress: false
 
 jobs:
@@ -31,21 +31,18 @@ jobs:
       - name: Fetch seasons from MLB Stats API
         run: python3 scripts/fetch_seasons.py
 
-      - name: Fetch Red Sox headlines from The Boston Globe
-        run: python3 scripts/fetch_globe_news.py
-
       - name: Show what changed
-        run: git --no-pager diff --stat -- data/ || true
+        run: git --no-pager diff --stat -- data/seasons.json data/meta.json || true
 
       - name: Commit if data changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/; then
+          if git diff --quiet -- data/seasons.json data/meta.json; then
             echo "No data changes — nothing to commit."
           else
-            git add data/
-            git commit -m "Refresh site data ($(date -u +%Y-%m-%d))"
+            git add data/seasons.json data/meta.json
+            git commit -m "Refresh MLB data ($(date -u +%Y-%m-%d))"
             git push
             echo "Pushed refreshed data."
           fi

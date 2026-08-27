@@ -1,0 +1,50 @@
+name: Refresh Globe headlines
+
+# Polls the Globe's Red Sox page frequently. The fetcher leaves globe.json
+# untouched unless article content changes, so new stories trigger a Netlify
+# deploy without creating empty timestamp-only commits.
+
+on:
+  schedule:
+    # Offset from the top of the hour, when GitHub's scheduler is busiest.
+    - cron: '2-57/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Share a lock with the daily MLB refresh because both workflows push to main.
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Red Sox headlines from The Boston Globe
+        run: python3 scripts/fetch_globe_news.py
+
+      - name: Show what changed
+        run: git --no-pager diff --stat -- data/globe.json || true
+
+      - name: Commit if headlines changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/globe.json; then
+            echo "No headline changes — nothing to commit."
+          else
+            git add data/globe.json
+            git commit -m "Refresh Globe headlines ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+            echo "Pushed refreshed headlines."
+          fi
