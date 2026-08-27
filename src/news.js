@@ -1,11 +1,14 @@
-const status = document.getElementById('newsStatus');
-const list = document.getElementById('newsList');
-const freshness = document.getElementById('newsFreshness');
-const panel = document.getElementById('newsPanel');
-const sourceTabs = [...document.querySelectorAll('.newspaper-tab')];
-let activeConfig = null;
-let currentGeneration = '';
-let loadSequence = 0;
+const columns = [...document.querySelectorAll('.newspaper-column')].map(section => ({
+  section,
+  feedUrl: section.dataset.feed,
+  source: section.dataset.source,
+  defaultCategory: section.dataset.defaultCategory || 'Red Sox',
+  status: section.querySelector('.news-status'),
+  list: section.querySelector('.news-list'),
+  freshness: section.querySelector('.news-freshness'),
+  generation: '',
+  loadSequence: 0,
+}));
 
 function formatDate(value, options) {
   const date = value ? new Date(value) : null;
@@ -27,7 +30,7 @@ function addTextElement(parent, tag, className, text) {
   return element;
 }
 
-function makeArticle(article, index, config) {
+function makeArticle(article, index, column) {
   const item = document.createElement('li');
   item.className = 'news-item';
 
@@ -36,13 +39,13 @@ function makeArticle(article, index, config) {
   link.href = article.url;
   link.target = '_blank';
   link.rel = 'noreferrer noopener';
-  link.setAttribute('aria-label', `${article.title} — read at ${config.source}`);
+  link.setAttribute('aria-label', `${article.title} — read at ${column.source}`);
 
   addTextElement(link, 'span', 'news-number', String(index + 1).padStart(2, '0'));
   const body = document.createElement('div');
   const meta = document.createElement('div');
   meta.className = 'news-meta';
-  addTextElement(meta, 'span', 'news-category', article.category || config.defaultCategory);
+  addTextElement(meta, 'span', 'news-category', article.category || column.defaultCategory);
   const publishedDate = formatDate(article.published, { month: 'short', day: 'numeric' });
   const publishedTime = formatTime(article.published);
   const published = publishedDate && publishedTime ? `${publishedDate} · ${publishedTime}` : publishedDate;
@@ -56,99 +59,46 @@ function makeArticle(article, index, config) {
   return item;
 }
 
-function renderFeed(feed, config) {
-  if (feed.generated_at === currentGeneration) return;
+function renderFeed(feed, column) {
+  if (feed.generated_at === column.generation) return;
 
   const fragment = document.createDocumentFragment();
-  feed.articles.forEach((article, index) => fragment.appendChild(makeArticle(article, index, config)));
-  list.replaceChildren(fragment);
-  list.hidden = false;
-  status.hidden = true;
-  currentGeneration = feed.generated_at || '';
+  feed.articles.forEach((article, index) => fragment.appendChild(makeArticle(article, index, column)));
+  column.list.replaceChildren(fragment);
+  column.list.hidden = false;
+  column.status.hidden = true;
+  column.generation = feed.generated_at || '';
 
   const updated = formatDate(feed.generated_at, {
     month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
   });
-  freshness.textContent = updated ? `Updated ${updated}` : '';
+  column.freshness.textContent = updated ? `Updated ${updated}` : '';
 }
 
-function configFromTab(tab) {
-  return {
-    key: tab.dataset.sourceKey,
-    feed: tab.dataset.feed,
-    source: tab.dataset.source,
-    defaultCategory: tab.dataset.defaultCategory || 'Red Sox',
-  };
-}
-
-async function loadFeed(config = activeConfig) {
-  if (!config) return;
-  const sequence = ++loadSequence;
+async function loadFeed(column) {
+  const sequence = ++column.loadSequence;
   try {
-    if (!config.feed || !config.source) throw new Error('Headline source configuration is missing');
-    const response = await fetch(config.feed, { cache: 'no-store' });
+    if (!column.feedUrl || !column.source) throw new Error('Headline source configuration is missing');
+    const response = await fetch(column.feedUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Headline request returned ${response.status}`);
     const feed = await response.json();
     if (!Array.isArray(feed.articles) || !feed.articles.length) {
       throw new Error('Headline feed was empty');
     }
-    if (sequence !== loadSequence || activeConfig?.key !== config.key) return;
-    renderFeed(feed, config);
+    if (sequence !== column.loadSequence) return;
+    renderFeed(feed, column);
   } catch (error) {
     console.error(error);
-    if (sequence === loadSequence && !currentGeneration) {
-      status.textContent = `${config.source || 'The headline source'} could not be loaded right now. Please try again soon.`;
+    if (sequence === column.loadSequence && !column.generation) {
+      column.status.textContent = `${column.source || 'The headline source'} could not be loaded right now. Please try again soon.`;
     }
   }
 }
 
-async function selectSource(key, updateUrl = true) {
-  const selectedTab = sourceTabs.find(tab => tab.dataset.sourceKey === key) || sourceTabs[0];
-  if (!selectedTab) return;
+await Promise.all(columns.map(loadFeed));
 
-  sourceTabs.forEach(tab => {
-    const selected = tab === selectedTab;
-    tab.classList.toggle('active', selected);
-    tab.setAttribute('aria-selected', String(selected));
-    tab.tabIndex = selected ? 0 : -1;
-  });
-
-  activeConfig = configFromTab(selectedTab);
-  panel.setAttribute('aria-labelledby', selectedTab.id);
-  currentGeneration = '';
-  list.replaceChildren();
-  list.hidden = true;
-  freshness.textContent = '';
-  status.textContent = `Loading ${activeConfig.source} headlines…`;
-  status.hidden = false;
-
-  if (updateUrl) {
-    const url = new URL(location.href);
-    if (activeConfig.key === 'globe') url.searchParams.delete('source');
-    else url.searchParams.set('source', activeConfig.key);
-    history.replaceState(null, '', url);
-  }
-
-  await loadFeed(activeConfig);
-}
-
-sourceTabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectSource(tab.dataset.sourceKey));
-  tab.addEventListener('keydown', event => {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-    event.preventDefault();
-    const direction = event.key === 'ArrowRight' ? 1 : -1;
-    const nextTab = sourceTabs[(index + direction + sourceTabs.length) % sourceTabs.length];
-    nextTab.focus();
-    selectSource(nextTab.dataset.sourceKey);
-  });
-});
-
-const requestedSource = new URLSearchParams(location.search).get('source');
-await selectSource(requestedSource === 'herald' ? 'herald' : 'globe', false);
-
-// A reader can leave this tab open during a game or news cycle. Check the
-// generated feed periodically so a Netlify refresh appears without a reload.
+// A reader can leave this page open during a game or news cycle. Check both
+// generated feeds periodically so a Netlify refresh appears without a reload.
 setInterval(() => {
-  if (document.visibilityState === 'visible') loadFeed();
+  if (document.visibilityState === 'visible') columns.forEach(loadFeed);
 }, 60_000);

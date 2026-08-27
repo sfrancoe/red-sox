@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-newspapers">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/news.css?v=20260827-compacttabs">
+<link rel="stylesheet" href="../src/news.css?v=20260827-columns">
 </head>
 <body>
 <header class="site-header">
@@ -24,30 +24,34 @@
 <main class="home news-home">
   <h1 class="sr-only">Red Sox newspaper headlines</h1>
   <section class="news-section" aria-label="Latest Red Sox newspaper reporting">
-    <div class="newspaper-tabs" role="tablist" aria-label="Choose a newspaper">
-      <button class="newspaper-tab active" id="globeTab" type="button" role="tab"
-        aria-selected="true" aria-controls="newsPanel" data-source-key="globe"
-        data-feed="../data/globe.json" data-source="The Boston Globe" data-default-category="Red Sox">
-        Boston Globe
-      </button>
-      <button class="newspaper-tab" id="heraldTab" type="button" role="tab"
-        aria-selected="false" aria-controls="newsPanel" data-source-key="herald"
-        data-feed="../data/herald.json" data-source="The Boston Herald" data-default-category="Boston Red Sox">
-        Boston Herald
-      </button>
-    </div>
-    <div id="newsPanel" role="tabpanel" aria-labelledby="globeTab">
-      <div class="news-section-head">
-        <p id="newsFreshness" class="news-freshness"></p>
-      </div>
-      <div id="newsStatus" class="news-status" role="status">Loading today’s headlines…</div>
-      <ol id="newsList" class="news-list" hidden></ol>
+    <div class="newspaper-columns">
+      <section class="newspaper-column" id="boston-globe"
+        data-feed="../data/globe.json" data-source="The Boston Globe" data-default-category="Red Sox"
+        aria-labelledby="globeHeading">
+        <header class="newspaper-column-head">
+          <h2 id="globeHeading">Boston Globe</h2>
+          <p class="news-freshness"></p>
+        </header>
+        <div class="news-status" role="status">Loading Globe headlines…</div>
+        <ol class="news-list" hidden></ol>
+      </section>
+
+      <section class="newspaper-column" id="boston-herald"
+        data-feed="../data/herald.json" data-source="The Boston Herald" data-default-category="Boston Red Sox"
+        aria-labelledby="heraldHeading">
+        <header class="newspaper-column-head">
+          <h2 id="heraldHeading">Boston Herald</h2>
+          <p class="news-freshness"></p>
+        </header>
+        <div class="news-status" role="status">Loading Herald headlines…</div>
+        <ol class="news-list" hidden></ol>
+      </section>
     </div>
     <noscript><p class="news-status">JavaScript is required to load the headline list.</p></noscript>
   </section>
 
   <footer class="home-foot news-foot">
-    Headlines and short descriptions are published by the selected newspaper and link to the original articles.
+    Headlines and short descriptions are published by each newspaper and link to the original articles.
     A subscription may be required to read them.
   </footer>
 </main>
