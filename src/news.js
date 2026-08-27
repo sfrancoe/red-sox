@@ -69,7 +69,7 @@ function addTextElement(parent, tag, className, text) {
   return element;
 }
 
-function makeArticle(article, index, column) {
+function makeArticle(article, column) {
   const item = document.createElement('li');
   item.className = 'news-item';
 
@@ -80,7 +80,6 @@ function makeArticle(article, index, column) {
   link.rel = 'noreferrer noopener';
   link.setAttribute('aria-label', `${article.title} — read at ${column.source}`);
 
-  addTextElement(link, 'span', 'news-number', String(index + 1).padStart(2, '0'));
   const body = document.createElement('div');
   const meta = document.createElement('div');
   meta.className = 'news-meta';
@@ -102,7 +101,7 @@ function renderFeed(feed, column) {
   if (feed.generated_at === column.generation) return;
 
   const fragment = document.createDocumentFragment();
-  feed.articles.forEach((article, index) => fragment.appendChild(makeArticle(article, index, column)));
+  feed.articles.forEach(article => fragment.appendChild(makeArticle(article, column)));
   column.list.replaceChildren(fragment);
   column.list.hidden = false;
   column.status.hidden = true;
