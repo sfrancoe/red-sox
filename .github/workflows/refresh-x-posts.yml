@@ -2,8 +2,8 @@ name: Refresh filtered X posts
 
 on:
   schedule:
-    # Keep the expression simple so GitHub reliably registers every interval.
-    - cron: '*/5 * * * *'
+    # Explicit minute marks avoid the skipped step-style schedule seen in production.
+    - cron: '3,8,13,18,23,28,33,38,43,48,53,58 * * * *'
   workflow_dispatch:
 
 permissions:
