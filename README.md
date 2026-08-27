@@ -10,9 +10,9 @@ backend — plain ES modules and `<canvas>`, with game logs pulled from the free
 |---|---|
 | **Four Roads, One Record** (`stories/four-roads/`) | Four straight seasons (2023-26) reached the identical record after 108 games, then split toward four completely different endings. |
 
-The **Globe Headlines** and **Herald Headlines** tabs track Red Sox headlines
-and short descriptions from both Boston newspapers. Every item links to the
-original article.
+The **Newspaper Headlines** tab tracks Red Sox headlines and short descriptions
+from The Boston Globe and Boston Herald, with a sub-tab for each newspaper.
+Every item links to the original article.
 
 ## Run it locally
 

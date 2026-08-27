@@ -1,8 +1,11 @@
 const status = document.getElementById('newsStatus');
 const list = document.getElementById('newsList');
 const freshness = document.getElementById('newsFreshness');
-const { feed: feedUrl, source, defaultCategory = 'Red Sox' } = document.body.dataset;
+const panel = document.getElementById('newsPanel');
+const sourceTabs = [...document.querySelectorAll('.newspaper-tab')];
+let activeConfig = null;
 let currentGeneration = '';
+let loadSequence = 0;
 
 function formatDate(value, options) {
   const date = value ? new Date(value) : null;
@@ -24,7 +27,7 @@ function addTextElement(parent, tag, className, text) {
   return element;
 }
 
-function makeArticle(article, index) {
+function makeArticle(article, index, config) {
   const item = document.createElement('li');
   item.className = 'news-item';
 
@@ -33,13 +36,13 @@ function makeArticle(article, index) {
   link.href = article.url;
   link.target = '_blank';
   link.rel = 'noreferrer noopener';
-  link.setAttribute('aria-label', `${article.title} — read at ${source}`);
+  link.setAttribute('aria-label', `${article.title} — read at ${config.source}`);
 
   addTextElement(link, 'span', 'news-number', String(index + 1).padStart(2, '0'));
   const body = document.createElement('div');
   const meta = document.createElement('div');
   meta.className = 'news-meta';
-  addTextElement(meta, 'span', 'news-category', article.category || defaultCategory);
+  addTextElement(meta, 'span', 'news-category', article.category || config.defaultCategory);
   const publishedDate = formatDate(article.published, { month: 'short', day: 'numeric' });
   const publishedTime = formatTime(article.published);
   const published = publishedDate && publishedTime ? `${publishedDate} · ${publishedTime}` : publishedDate;
@@ -53,11 +56,11 @@ function makeArticle(article, index) {
   return item;
 }
 
-function renderFeed(feed) {
+function renderFeed(feed, config) {
   if (feed.generated_at === currentGeneration) return;
 
   const fragment = document.createDocumentFragment();
-  feed.articles.forEach((article, index) => fragment.appendChild(makeArticle(article, index)));
+  feed.articles.forEach((article, index) => fragment.appendChild(makeArticle(article, index, config)));
   list.replaceChildren(fragment);
   list.hidden = false;
   status.hidden = true;
@@ -69,25 +72,80 @@ function renderFeed(feed) {
   freshness.textContent = updated ? `Updated ${updated}` : '';
 }
 
-async function loadFeed() {
+function configFromTab(tab) {
+  return {
+    key: tab.dataset.sourceKey,
+    feed: tab.dataset.feed,
+    source: tab.dataset.source,
+    defaultCategory: tab.dataset.defaultCategory || 'Red Sox',
+  };
+}
+
+async function loadFeed(config = activeConfig) {
+  if (!config) return;
+  const sequence = ++loadSequence;
   try {
-    if (!feedUrl || !source) throw new Error('Headline source configuration is missing');
-    const response = await fetch(feedUrl, { cache: 'no-store' });
+    if (!config.feed || !config.source) throw new Error('Headline source configuration is missing');
+    const response = await fetch(config.feed, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Headline request returned ${response.status}`);
     const feed = await response.json();
     if (!Array.isArray(feed.articles) || !feed.articles.length) {
       throw new Error('Headline feed was empty');
     }
-    renderFeed(feed);
+    if (sequence !== loadSequence || activeConfig?.key !== config.key) return;
+    renderFeed(feed, config);
   } catch (error) {
     console.error(error);
-    if (!currentGeneration) {
-      status.textContent = `${source || 'The headline source'} could not be loaded right now. Please try again soon.`;
+    if (sequence === loadSequence && !currentGeneration) {
+      status.textContent = `${config.source || 'The headline source'} could not be loaded right now. Please try again soon.`;
     }
   }
 }
 
-await loadFeed();
+async function selectSource(key, updateUrl = true) {
+  const selectedTab = sourceTabs.find(tab => tab.dataset.sourceKey === key) || sourceTabs[0];
+  if (!selectedTab) return;
+
+  sourceTabs.forEach(tab => {
+    const selected = tab === selectedTab;
+    tab.classList.toggle('active', selected);
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+
+  activeConfig = configFromTab(selectedTab);
+  panel.setAttribute('aria-labelledby', selectedTab.id);
+  currentGeneration = '';
+  list.replaceChildren();
+  list.hidden = true;
+  freshness.textContent = '';
+  status.textContent = `Loading ${activeConfig.source} headlines…`;
+  status.hidden = false;
+
+  if (updateUrl) {
+    const url = new URL(location.href);
+    if (activeConfig.key === 'globe') url.searchParams.delete('source');
+    else url.searchParams.set('source', activeConfig.key);
+    history.replaceState(null, '', url);
+  }
+
+  await loadFeed(activeConfig);
+}
+
+sourceTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectSource(tab.dataset.sourceKey));
+  tab.addEventListener('keydown', event => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const direction = event.key === 'ArrowRight' ? 1 : -1;
+    const nextTab = sourceTabs[(index + direction + sourceTabs.length) % sourceTabs.length];
+    nextTab.focus();
+    selectSource(nextTab.dataset.sourceKey);
+  });
+});
+
+const requestedSource = new URLSearchParams(location.search).get('source');
+await selectSource(requestedSource === 'herald' ? 'herald' : 'globe', false);
 
 // A reader can leave this tab open during a game or news cycle. Check the
 // generated feed periodically so a Netlify refresh appears without a reload.

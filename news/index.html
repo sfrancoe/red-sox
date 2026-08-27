@@ -3,39 +3,52 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Globe Headlines | Red Sox Records</title>
-<meta name="description" content="The latest Boston Globe headlines and summaries about the Red Sox.">
+<title>Newspaper Headlines | Red Sox Records</title>
+<meta name="description" content="The latest Boston Globe and Boston Herald headlines and summaries about the Red Sox.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
-<link rel="stylesheet" href="../src/site-shell.css?v=20260827-herald">
-<link rel="stylesheet" href="../src/home.css?v=20260827-herald">
-<link rel="stylesheet" href="../src/news.css?v=20260827-herald">
+<link rel="stylesheet" href="../src/site-shell.css?v=20260827-newspapers">
+<link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
+<link rel="stylesheet" href="../src/news.css?v=20260827-newspapers">
 </head>
-<body data-feed="../data/globe.json" data-source="The Boston Globe" data-default-category="Red Sox">
+<body>
 <header class="site-header">
   <div class="site-header__inner">
     <nav class="site-nav" aria-label="Red Sox Records sections">
       <a class="site-nav__link" href="../stories/four-roads/">Game 108 graph</a>
       <a class="site-nav__link" href="../stories/four-roads/?view=leaders">Season leaders</a>
-      <a class="site-nav__link active" href="./" aria-current="page">Globe headlines</a>
-      <a class="site-nav__link" href="../herald/">Herald headlines</a>
+      <a class="site-nav__link active" href="./" aria-current="page">Newspaper headlines</a>
       <a class="site-nav__link" href="../x-posts/">X Posts</a>
     </nav>
   </div>
 </header>
 <main class="home news-home">
-  <h1 class="sr-only">Red Sox headlines from The Boston Globe</h1>
-  <section class="news-section" aria-label="Latest Red Sox reporting">
-    <div class="news-section-head">
-      <p id="newsFreshness" class="news-freshness"></p>
+  <h1 class="sr-only">Red Sox newspaper headlines</h1>
+  <section class="news-section" aria-label="Latest Red Sox newspaper reporting">
+    <div class="newspaper-tabs" role="tablist" aria-label="Choose a newspaper">
+      <button class="newspaper-tab active" id="globeTab" type="button" role="tab"
+        aria-selected="true" aria-controls="newsPanel" data-source-key="globe"
+        data-feed="../data/globe.json" data-source="The Boston Globe" data-default-category="Red Sox">
+        Boston Globe
+      </button>
+      <button class="newspaper-tab" id="heraldTab" type="button" role="tab"
+        aria-selected="false" aria-controls="newsPanel" data-source-key="herald"
+        data-feed="../data/herald.json" data-source="The Boston Herald" data-default-category="Boston Red Sox">
+        Boston Herald
+      </button>
     </div>
-    <div id="newsStatus" class="news-status" role="status">Loading today’s headlines…</div>
-    <ol id="newsList" class="news-list" hidden></ol>
+    <div id="newsPanel" role="tabpanel" aria-labelledby="globeTab">
+      <div class="news-section-head">
+        <p id="newsFreshness" class="news-freshness"></p>
+      </div>
+      <div id="newsStatus" class="news-status" role="status">Loading today’s headlines…</div>
+      <ol id="newsList" class="news-list" hidden></ol>
+    </div>
     <noscript><p class="news-status">JavaScript is required to load the headline list.</p></noscript>
   </section>
 
   <footer class="home-foot news-foot">
-    Headlines and short descriptions are published by The Boston Globe and link to the original articles.
-    A Globe subscription may be required to read them.
+    Headlines and short descriptions are published by the selected newspaper and link to the original articles.
+    A subscription may be required to read them.
   </footer>
 </main>
 
