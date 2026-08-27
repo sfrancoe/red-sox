@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-newspapers">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/news.css?v=20260827-columns">
+<link rel="stylesheet" href="../src/news.css?v=20260827-responsivepapers">
 </head>
 <body>
 <header class="site-header">
@@ -24,8 +24,14 @@
 <main class="home news-home">
   <h1 class="sr-only">Red Sox newspaper headlines</h1>
   <section class="news-section" aria-label="Latest Red Sox newspaper reporting">
+    <div class="mobile-newspaper-tabs" role="tablist" aria-label="Choose a newspaper">
+      <button class="mobile-newspaper-tab active" type="button" role="tab" aria-selected="true"
+        aria-controls="boston-globe" data-target="boston-globe">Boston Globe</button>
+      <button class="mobile-newspaper-tab" type="button" role="tab" aria-selected="false"
+        aria-controls="boston-herald" data-target="boston-herald">Boston Herald</button>
+    </div>
     <div class="newspaper-columns">
-      <section class="newspaper-column" id="boston-globe"
+      <section class="newspaper-column mobile-active" id="boston-globe"
         data-feed="../data/globe.json" data-source="The Boston Globe" data-default-category="Red Sox"
         aria-labelledby="globeHeading">
         <header class="newspaper-column-head">
@@ -56,6 +62,6 @@
   </footer>
 </main>
 
-<script type="module" src="../src/news.js"></script>
+<script type="module" src="../src/news.js?v=20260827-responsivepapers"></script>
 </body>
 </html>

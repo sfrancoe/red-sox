@@ -9,6 +9,45 @@ const columns = [...document.querySelectorAll('.newspaper-column')].map(section 
   generation: '',
   loadSequence: 0,
 }));
+const mobileTabs = [...document.querySelectorAll('.mobile-newspaper-tab')];
+
+function selectMobileColumn(targetId, updateUrl = true) {
+  const selectedTab = mobileTabs.find(tab => tab.dataset.target === targetId) || mobileTabs[0];
+  if (!selectedTab) return;
+
+  mobileTabs.forEach(tab => {
+    const selected = tab === selectedTab;
+    tab.classList.toggle('active', selected);
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  columns.forEach(column => {
+    column.section.classList.toggle('mobile-active', column.section.id === selectedTab.dataset.target);
+  });
+
+  if (updateUrl) {
+    const url = new URL(location.href);
+    url.hash = selectedTab.dataset.target === 'boston-herald' ? 'boston-herald' : '';
+    history.replaceState(null, '', url);
+  }
+}
+
+mobileTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectMobileColumn(tab.dataset.target));
+  tab.addEventListener('keydown', event => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const direction = event.key === 'ArrowRight' ? 1 : -1;
+    const nextTab = mobileTabs[(index + direction + mobileTabs.length) % mobileTabs.length];
+    nextTab.focus();
+    selectMobileColumn(nextTab.dataset.target);
+  });
+});
+
+selectMobileColumn(location.hash === '#boston-herald' ? 'boston-herald' : 'boston-globe', false);
+window.addEventListener('hashchange', () => {
+  selectMobileColumn(location.hash === '#boston-herald' ? 'boston-herald' : 'boston-globe', false);
+});
 
 function formatDate(value, options) {
   const date = value ? new Date(value) : null;
