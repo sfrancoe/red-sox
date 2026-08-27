@@ -73,7 +73,7 @@ function leaderList(season, key) {
   for (const entry of entries) {
     const item = document.createElement('li');
     const text = document.createElement('span');
-    text.textContent = `${entry.name} · ${entry.value}${season.in_progress ? ' YTD' : ''}`;
+    text.textContent = `${entry.name} · ${entry.value}`;
     item.appendChild(text);
     list.appendChild(item);
   }
@@ -91,7 +91,7 @@ for (const year of leaderYears) {
   row.style.setProperty('--seasoncol', CONFIG[year].color);
   const yearCell = document.createElement('th');
   yearCell.scope = 'row';
-  yearCell.textContent = year;
+  yearCell.textContent = season.in_progress ? `${year} YTD` : year;
   row.appendChild(yearCell);
   for (const [label, key] of leaderLabels) {
     const cell = document.createElement('td');
