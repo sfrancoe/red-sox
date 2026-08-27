@@ -29,12 +29,14 @@ PRIORITY=(
   src/news.js
   src/x-posts.css
   news/index.html
+  herald/index.html
   x-posts/index.html
   stories/four-roads/index.html
   stories/four-roads/story.js
   stories/war-room/index.html
   stories/war-room/story.js
   scripts/fetch_seasons.py
+  scripts/fetch_herald_news.py
   scripts/story_facts.py
   scripts/build_site.sh
   scripts/build_single_file.py

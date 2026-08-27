@@ -57,12 +57,12 @@
 }
 
 @media (max-width:700px){
-  :root{--site-header-height:66px;}
+  :root{--site-header-height:154px;}
   .site-header__inner{
     width:calc(100% - 20px);padding:8px 0;
   }
-  .site-nav{width:100%;gap:2px;padding:3px;}
-  .site-nav__link{flex:1;min-width:0;min-height:38px;padding:8px 4px;font-size:10.5px;letter-spacing:.02em;}
+  .site-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:2px;padding:3px;}
+  .site-nav__link{min-width:0;min-height:42px;padding:8px 5px;font-size:12px;letter-spacing:.035em;}
 }
 
 @media (prefers-reduced-motion:reduce){

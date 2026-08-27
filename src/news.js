@@ -1,6 +1,7 @@
 const status = document.getElementById('newsStatus');
 const list = document.getElementById('newsList');
 const freshness = document.getElementById('newsFreshness');
+const { feed: feedUrl, source, defaultCategory = 'Red Sox' } = document.body.dataset;
 let currentGeneration = '';
 
 function formatDate(value, options) {
@@ -32,13 +33,13 @@ function makeArticle(article, index) {
   link.href = article.url;
   link.target = '_blank';
   link.rel = 'noreferrer noopener';
-  link.setAttribute('aria-label', `${article.title} — read at The Boston Globe`);
+  link.setAttribute('aria-label', `${article.title} — read at ${source}`);
 
   addTextElement(link, 'span', 'news-number', String(index + 1).padStart(2, '0'));
   const body = document.createElement('div');
   const meta = document.createElement('div');
   meta.className = 'news-meta';
-  addTextElement(meta, 'span', 'news-category', article.category || 'Red Sox');
+  addTextElement(meta, 'span', 'news-category', article.category || defaultCategory);
   const publishedDate = formatDate(article.published, { month: 'short', day: 'numeric' });
   const publishedTime = formatTime(article.published);
   const published = publishedDate && publishedTime ? `${publishedDate} · ${publishedTime}` : publishedDate;
@@ -70,7 +71,8 @@ function renderFeed(feed) {
 
 async function loadFeed() {
   try {
-    const response = await fetch('../data/globe.json', { cache: 'no-store' });
+    if (!feedUrl || !source) throw new Error('Headline source configuration is missing');
+    const response = await fetch(feedUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Headline request returned ${response.status}`);
     const feed = await response.json();
     if (!Array.isArray(feed.articles) || !feed.articles.length) {
@@ -80,7 +82,7 @@ async function loadFeed() {
   } catch (error) {
     console.error(error);
     if (!currentGeneration) {
-      status.textContent = 'The Globe headline list could not be loaded right now. Try the Globe link above.';
+      status.textContent = `${source || 'The headline source'} could not be loaded right now. Please try again soon.`;
     }
   }
 }

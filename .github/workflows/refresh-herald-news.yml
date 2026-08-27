@@ -1,0 +1,50 @@
+name: Refresh Herald headlines
+
+# Polls the Herald's Red Sox page frequently. The fetcher leaves herald.json
+# untouched unless article content changes, so new stories trigger a Netlify
+# deploy without creating empty timestamp-only commits.
+
+on:
+  schedule:
+    # Offset from the Globe poll and the top of the hour.
+    - cron: '4-59/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Share a lock with the other refresh jobs because they all push to main.
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Red Sox headlines from the Boston Herald
+        run: python3 scripts/fetch_herald_news.py
+
+      - name: Show what changed
+        run: git --no-pager diff --stat -- data/herald.json || true
+
+      - name: Commit if headlines changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/herald.json; then
+            echo "No headline changes — nothing to commit."
+          else
+            git add data/herald.json
+            git commit -m "Refresh Herald headlines ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+            echo "Pushed refreshed headlines."
+          fi
