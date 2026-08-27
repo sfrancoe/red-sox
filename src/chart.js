@@ -73,7 +73,7 @@ function resize(){
   canvas.width=Math.round(W*DPR); canvas.height=Math.round(H*DPR);
   ctx.setTransform(DPR,0,0,DPR,0,0);
   // the right gutter carries only year + record; supporting stats live below the chart
-  padL = W<520?46:64; padR = W<520?96:120; padB = W<520?36:44;
+  padL = W<520?46:64; padR = W<720?56:120; padB = W<520?36:44;
   buildSegs();   // curve geometry is layout-dependent
 }
 const xFor=g=>padL+(g/GMAX)*(W-padL-padR);
