@@ -140,6 +140,12 @@ function selectView(view, focus = false) {
     document.getElementById('playOverlay')?.remove();
     story.pause();
   }
+  if (location.protocol !== 'file:') {
+    const url = new URL(location.href);
+    if (showLeaders) url.searchParams.set('view', 'leaders');
+    else url.searchParams.delete('view');
+    history.replaceState(null, '', url);
+  }
   window.scrollTo(0, 0);
   if (focus) tabs[showLeaders ? 1 : 0].focus();
 }
@@ -155,3 +161,6 @@ tabs.forEach((tab, index) => {
     selectView(leaders ? 'leaders' : 'story', true);
   });
 });
+
+const requestedView = new URLSearchParams(location.search).get('view');
+if (requestedView === 'leaders') selectView('leaders');
