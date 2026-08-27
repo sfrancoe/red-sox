@@ -1,0 +1,676 @@
+{
+  "generated_at": "2026-08-27T21:23:55.771181+00:00",
+  "source": "MLB Stats API",
+  "game_pk": 823825,
+  "game_date": "2026-08-26T22:40:00Z",
+  "venue": "loanDepot park",
+  "innings_count": 9,
+  "result": "Loss",
+  "summary": "Boston was shut out by the Miami Marlins, 4–0, at loanDepot park. Miami Marlins scored in the 1st, 2nd, and 8th innings; Boston finished with 5 hits and 4 errors.",
+  "facts": [
+    "Boston was held scoreless despite putting 5 hits on the board.",
+    "The Red Sox committed 4 errors; 2 opponent runs were unearned.",
+    "Miami Marlins went 6-for-6 on stolen-base attempts.",
+    "Caleb Durbin collected 2 of Boston’s 5 hits.",
+    "Sonny Gray worked 5.0 innings, allowed 2 earned runs, and struck out 5."
+  ],
+  "decisions": {
+    "winner": "Ryan Gusto",
+    "loser": "Sonny Gray",
+    "save": ""
+  },
+  "away": {
+    "side": "away",
+    "id": 111,
+    "name": "Boston Red Sox",
+    "abbreviation": "BOS",
+    "record": "73-60",
+    "runs": 0,
+    "hits": 5,
+    "errors": 4,
+    "left_on_base": 9,
+    "batting": [
+      {
+        "name": "Nick Sogard",
+        "position": "1B",
+        "note": "",
+        "order": 0,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 3,
+        "homeRuns": 0
+      },
+      {
+        "name": "Ceddanne Rafaela",
+        "position": "CF",
+        "note": "",
+        "order": 1,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 0,
+        "homeRuns": 0
+      },
+      {
+        "name": "Wilyer Abreu",
+        "position": "RF",
+        "note": "",
+        "order": 2,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 1,
+        "strikeOuts": 0,
+        "leftOnBase": 0,
+        "homeRuns": 0
+      },
+      {
+        "name": "Caleb Durbin",
+        "position": "3B",
+        "note": "",
+        "order": 3,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 2,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      },
+      {
+        "name": "Mickey Gasper",
+        "position": "DH",
+        "note": "",
+        "order": 4,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 1,
+        "strikeOuts": 0,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      },
+      {
+        "name": "Andruw Monasterio",
+        "position": "SS",
+        "note": "",
+        "order": 5,
+        "atBats": 2,
+        "runs": 0,
+        "hits": 1,
+        "rbi": 0,
+        "baseOnBalls": 1,
+        "strikeOuts": 0,
+        "leftOnBase": 2,
+        "homeRuns": 0
+      },
+      {
+        "name": "Jarren Duran",
+        "position": "LF",
+        "note": "",
+        "order": 6,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 1,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      },
+      {
+        "name": "Eli White",
+        "position": "PH",
+        "note": "a-",
+        "order": 7,
+        "atBats": 1,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      },
+      {
+        "name": "Anthony Seigler",
+        "position": "2B",
+        "note": "",
+        "order": 8,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 1,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 2,
+        "homeRuns": 0
+      },
+      {
+        "name": "Jahmai Jones",
+        "position": "PH",
+        "note": "b-",
+        "order": 9,
+        "atBats": 1,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      },
+      {
+        "name": "Connor Wong",
+        "position": "C",
+        "note": "",
+        "order": 10,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      }
+    ],
+    "pitching": [
+      {
+        "name": "Sonny Gray",
+        "position": "P",
+        "note": "(L, 16-4)",
+        "order": 0,
+        "inningsPitched": "5.0",
+        "hits": 7,
+        "runs": 2,
+        "earnedRuns": 2,
+        "baseOnBalls": 1,
+        "strikeOuts": 5,
+        "homeRuns": 0,
+        "numberOfPitches": 93
+      },
+      {
+        "name": "Jovani Morán",
+        "position": "P",
+        "note": "",
+        "order": 1,
+        "inningsPitched": "2.0",
+        "hits": 1,
+        "runs": 0,
+        "earnedRuns": 0,
+        "baseOnBalls": 1,
+        "strikeOuts": 2,
+        "homeRuns": 0,
+        "numberOfPitches": 33
+      },
+      {
+        "name": "Wyatt Olds",
+        "position": "P",
+        "note": "",
+        "order": 2,
+        "inningsPitched": "1.0",
+        "hits": 2,
+        "runs": 2,
+        "earnedRuns": 0,
+        "baseOnBalls": 1,
+        "strikeOuts": 1,
+        "homeRuns": 0,
+        "numberOfPitches": 25
+      }
+    ],
+    "team_batting": {
+      "flyOuts": 2,
+      "groundOuts": 18,
+      "airOuts": 4,
+      "runs": 0,
+      "doubles": 0,
+      "triples": 0,
+      "homeRuns": 0,
+      "strikeOuts": 4,
+      "baseOnBalls": 3,
+      "intentionalWalks": 0,
+      "hits": 5,
+      "hitByPitch": 2,
+      "avg": ".250",
+      "atBats": 31,
+      "obp": ".324",
+      "slg": ".405",
+      "ops": ".729",
+      "caughtStealing": 0,
+      "stolenBases": 0,
+      "stolenBasePercentage": ".---",
+      "groundIntoDoublePlay": 1,
+      "groundIntoTriplePlay": 0,
+      "plateAppearances": 36,
+      "totalBases": 5,
+      "rbi": 0,
+      "leftOnBase": 13,
+      "sacBunts": 0,
+      "sacFlies": 0,
+      "catchersInterference": 0,
+      "pickoffs": 0,
+      "atBatsPerHomeRun": "-.--",
+      "popOuts": 1,
+      "lineOuts": 1
+    }
+  },
+  "home": {
+    "side": "home",
+    "id": 146,
+    "name": "Miami Marlins",
+    "abbreviation": "MIA",
+    "record": "68-66",
+    "runs": 4,
+    "hits": 10,
+    "errors": 0,
+    "left_on_base": 10,
+    "batting": [
+      {
+        "name": "Kyle Stowers",
+        "position": "DH",
+        "note": "",
+        "order": 0,
+        "atBats": 3,
+        "runs": 1,
+        "hits": 1,
+        "rbi": 0,
+        "baseOnBalls": 2,
+        "strikeOuts": 2,
+        "leftOnBase": 2,
+        "homeRuns": 0
+      },
+      {
+        "name": "Griffin Conine",
+        "position": "1B",
+        "note": "",
+        "order": 1,
+        "atBats": 5,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 2,
+        "leftOnBase": 7,
+        "homeRuns": 0
+      },
+      {
+        "name": "Heriberto Hernández",
+        "position": "LF",
+        "note": "",
+        "order": 2,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 2,
+        "rbi": 1,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 2,
+        "homeRuns": 0
+      },
+      {
+        "name": "Xavier Edwards",
+        "position": "2B",
+        "note": "",
+        "order": 3,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 1,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 4,
+        "homeRuns": 0
+      },
+      {
+        "name": "Jakob Marsee",
+        "position": "CF",
+        "note": "",
+        "order": 4,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 1,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 2,
+        "homeRuns": 0
+      },
+      {
+        "name": "Otto Lopez",
+        "position": "SS",
+        "note": "",
+        "order": 5,
+        "atBats": 4,
+        "runs": 2,
+        "hits": 2,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 2,
+        "homeRuns": 0
+      },
+      {
+        "name": "Owen Caissie",
+        "position": "RF",
+        "note": "",
+        "order": 6,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 3,
+        "homeRuns": 0
+      },
+      {
+        "name": "Joe Mack",
+        "position": "C",
+        "note": "",
+        "order": 8,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 1,
+        "strikeOuts": 2,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      },
+      {
+        "name": "Javier Sanoja",
+        "position": "3B",
+        "note": "",
+        "order": 9,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 3,
+        "rbi": 1,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 0,
+        "homeRuns": 0
+      }
+    ],
+    "pitching": [
+      {
+        "name": "Ryan Gusto",
+        "position": "P",
+        "note": "(W, 1-3)",
+        "order": 0,
+        "inningsPitched": "5.2",
+        "hits": 4,
+        "runs": 0,
+        "earnedRuns": 0,
+        "baseOnBalls": 3,
+        "strikeOuts": 2,
+        "homeRuns": 0,
+        "numberOfPitches": 89
+      },
+      {
+        "name": "Victor Vodnik",
+        "position": "P",
+        "note": "(H, 6)",
+        "order": 1,
+        "inningsPitched": "1.1",
+        "hits": 0,
+        "runs": 0,
+        "earnedRuns": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "homeRuns": 0,
+        "numberOfPitches": 13
+      },
+      {
+        "name": "Janson Junk",
+        "position": "P",
+        "note": "(H, 1)",
+        "order": 2,
+        "inningsPitched": "1.0",
+        "hits": 0,
+        "runs": 0,
+        "earnedRuns": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "homeRuns": 0,
+        "numberOfPitches": 8
+      },
+      {
+        "name": "Dax Fulton",
+        "position": "P",
+        "note": "",
+        "order": 3,
+        "inningsPitched": "1.0",
+        "hits": 1,
+        "runs": 0,
+        "earnedRuns": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "homeRuns": 0,
+        "numberOfPitches": 10
+      }
+    ],
+    "team_batting": {
+      "flyOuts": 4,
+      "groundOuts": 8,
+      "airOuts": 9,
+      "runs": 4,
+      "doubles": 1,
+      "triples": 0,
+      "homeRuns": 0,
+      "strikeOuts": 8,
+      "baseOnBalls": 3,
+      "intentionalWalks": 0,
+      "hits": 10,
+      "hitByPitch": 0,
+      "avg": ".249",
+      "atBats": 35,
+      "obp": ".326",
+      "slg": ".399",
+      "ops": ".725",
+      "caughtStealing": 0,
+      "stolenBases": 6,
+      "stolenBasePercentage": "1.000",
+      "groundIntoDoublePlay": 0,
+      "groundIntoTriplePlay": 0,
+      "plateAppearances": 38,
+      "totalBases": 11,
+      "rbi": 2,
+      "leftOnBase": 23,
+      "sacBunts": 0,
+      "sacFlies": 0,
+      "catchersInterference": 0,
+      "pickoffs": 0,
+      "atBatsPerHomeRun": "-.--",
+      "popOuts": 1,
+      "lineOuts": 4
+    }
+  },
+  "innings": [
+    {
+      "num": 1,
+      "ordinalNum": "1st",
+      "home": {
+        "runs": 1,
+        "hits": 2,
+        "errors": 0,
+        "leftOnBase": 1
+      },
+      "away": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 1,
+        "leftOnBase": 1
+      }
+    },
+    {
+      "num": 2,
+      "ordinalNum": "2nd",
+      "home": {
+        "runs": 1,
+        "hits": 2,
+        "errors": 0,
+        "leftOnBase": 2
+      },
+      "away": {
+        "runs": 0,
+        "hits": 1,
+        "errors": 1,
+        "leftOnBase": 3
+      }
+    },
+    {
+      "num": 3,
+      "ordinalNum": "3rd",
+      "home": {
+        "runs": 0,
+        "hits": 2,
+        "errors": 0,
+        "leftOnBase": 2
+      },
+      "away": {
+        "runs": 0,
+        "hits": 1,
+        "errors": 0,
+        "leftOnBase": 2
+      }
+    },
+    {
+      "num": 4,
+      "ordinalNum": "4th",
+      "home": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 0,
+        "leftOnBase": 0
+      },
+      "away": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 0,
+        "leftOnBase": 0
+      }
+    },
+    {
+      "num": 5,
+      "ordinalNum": "5th",
+      "home": {
+        "runs": 0,
+        "hits": 1,
+        "errors": 0,
+        "leftOnBase": 1
+      },
+      "away": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 0,
+        "leftOnBase": 0
+      }
+    },
+    {
+      "num": 6,
+      "ordinalNum": "6th",
+      "home": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 0,
+        "leftOnBase": 0
+      },
+      "away": {
+        "runs": 0,
+        "hits": 2,
+        "errors": 0,
+        "leftOnBase": 2
+      }
+    },
+    {
+      "num": 7,
+      "ordinalNum": "7th",
+      "home": {
+        "runs": 0,
+        "hits": 1,
+        "errors": 0,
+        "leftOnBase": 2
+      },
+      "away": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 0,
+        "leftOnBase": 0
+      }
+    },
+    {
+      "num": 8,
+      "ordinalNum": "8th",
+      "home": {
+        "runs": 2,
+        "hits": 2,
+        "errors": 0,
+        "leftOnBase": 2
+      },
+      "away": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 2,
+        "leftOnBase": 0
+      }
+    },
+    {
+      "num": 9,
+      "ordinalNum": "9th",
+      "home": {
+        "hits": 0,
+        "errors": 0,
+        "leftOnBase": 0
+      },
+      "away": {
+        "runs": 0,
+        "hits": 1,
+        "errors": 0,
+        "leftOnBase": 1
+      }
+    }
+  ],
+  "scoring_plays": [
+    {
+      "inning": "Bottom 1",
+      "description": "Heriberto Hernández singles on a ground ball to left fielder Jarren Duran. Kyle Stowers scores.",
+      "away_score": 0,
+      "home_score": 1
+    },
+    {
+      "inning": "Bottom 2",
+      "description": "Joe Mack walks.",
+      "away_score": 0,
+      "home_score": 2
+    },
+    {
+      "inning": "Bottom 8",
+      "description": "Owen Caissie reaches on a fielding error by first baseman Nick Sogard. Otto Lopez scores. Owen Caissie to 2nd.",
+      "away_score": 0,
+      "home_score": 3
+    },
+    {
+      "inning": "Bottom 8",
+      "description": "Javier Sanoja singles on a line drive to center fielder Ceddanne Rafaela. Esteury Ruiz scores.",
+      "away_score": 0,
+      "home_score": 4
+    }
+  ],
+  "official_recap": {
+    "headline": "Gusto picks up elusive win for Marlins while Junk saves depleted 'pen",
+    "url": "https://www.mlb.com/news/ryan-gusto-janson-junk-lead-marlins-win-vs-red-sox"
+  },
+  "gameday_url": "https://www.mlb.com/gameday/823825"
+}

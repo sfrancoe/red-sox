@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Upcoming Schedule | Red Sox Records</title>
+<meta name="description" content="Upcoming Boston Red Sox games, opponent records, and announced probable pitchers.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
+<link rel="stylesheet" href="../src/site-shell.css?v=20260827-schedule">
+<link rel="stylesheet" href="../src/home.css?v=20260827-schedule">
+<link rel="stylesheet" href="../src/schedule.css?v=20260827-schedule">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <nav class="site-nav" aria-label="Red Sox Records sections">
+      <a class="site-nav__link" href="../news/">Newspaper headlines</a>
+      <a class="site-nav__link" href="../x-posts/">X Posts</a>
+      <a class="site-nav__link active" href="./" aria-current="page">Upcoming schedule</a>
+      <a class="site-nav__link" href="../recent-game/">Recent game</a>
+      <a class="site-nav__link" href="../stories/four-roads/?view=leaders">Season leaders</a>
+      <a class="site-nav__link" href="../stories/four-roads/?view=story">Game 108 graph</a>
+    </nav>
+  </div>
+</header>
+
+<main class="schedule-home">
+  <header class="schedule-intro">
+    <p class="schedule-eyebrow">Next on deck</p>
+    <h1>UPCOMING<br><em>SCHEDULE</em></h1>
+    <p>Opponent records, game times, and the pitching matchups MLB has announced.</p>
+  </header>
+
+  <div class="schedule-status" id="scheduleStatus" role="status">Loading the upcoming schedule…</div>
+  <section class="next-game" id="nextGame" aria-label="Next Red Sox game" hidden></section>
+
+  <section class="following-games" id="followingGames" hidden>
+    <header class="following-games-head">
+      <h2>Following Games</h2>
+      <span>Times shown locally</span>
+    </header>
+    <ol class="schedule-grid" id="scheduleGrid"></ol>
+  </section>
+
+  <p class="schedule-note">
+    Records and probable pitchers come from MLB. Pitching plans can change before game time.
+  </p>
+</main>
+<script type="module" src="../src/schedule.js?v=20260827-schedule"></script>
+</body>
+</html>

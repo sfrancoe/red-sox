@@ -1,0 +1,47 @@
+name: Refresh schedule and recent game
+
+on:
+  schedule:
+    # Every two hours keeps records and probable pitchers useful without excess deploys.
+    - cron: '17 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Red Sox game data
+        run: |
+          python3 scripts/fetch_schedule.py
+          python3 scripts/fetch_recent_game.py
+
+      - name: Show what changed
+        run: git --no-pager diff --stat -- data/schedule.json data/recent-game.json || true
+
+      - name: Commit if game data changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/schedule.json data/recent-game.json; then
+            echo "No game data changes — nothing to commit."
+          else
+            git add data/schedule.json data/recent-game.json
+            git commit -m "Refresh game pages ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+            echo "Pushed refreshed game data."
+          fi

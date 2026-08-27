@@ -38,6 +38,16 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+[[headers]]
+  for = "/data/schedule.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/data/recent-game.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 # Story pages and their code are small, and stale modules can render a newer data
 # shape incorrectly after a deploy. Always fetch the current release.
 [[headers]]
