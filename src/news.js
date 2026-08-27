@@ -107,11 +107,13 @@ function renderFeed(feed, column) {
   column.list.hidden = false;
   column.status.hidden = true;
   column.generation = feed.generated_at || '';
+}
 
-  const updated = formatDate(feed.generated_at, {
+function markChecked(column) {
+  const checked = formatDate(new Date(), {
     month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
   });
-  column.freshness.textContent = updated ? `Updated ${updated}` : '';
+  column.freshness.textContent = checked ? `Checked ${checked}` : '';
 }
 
 async function loadFeed(column) {
@@ -125,6 +127,7 @@ async function loadFeed(column) {
       throw new Error('Headline feed was empty');
     }
     if (sequence !== column.loadSequence) return;
+    markChecked(column);
     renderFeed(feed, column);
   } catch (error) {
     console.error(error);
