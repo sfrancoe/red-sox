@@ -44,7 +44,10 @@ def strip_modules(js: str) -> str:
 def build(slug: str) -> pathlib.Path:
     story_dir = ROOT / "stories" / slug
     html = (story_dir / "index.html").read_text()
-    css = inline_fonts((ROOT / "src/styles.css").read_text())
+    css = inline_fonts("\n".join([
+        (ROOT / "src/site-shell.css").read_text(),
+        (ROOT / "src/styles.css").read_text(),
+    ]))
     audio_js = strip_modules((ROOT / "src/audio.js").read_text())
     chart_js = strip_modules((ROOT / "src/chart.js").read_text())
     story_js = strip_modules((story_dir / "story.js").read_text())
@@ -61,10 +64,17 @@ def build(slug: str) -> pathlib.Path:
     bundle = "\n".join(["(function(){", audio_js, chart_js, story_js, "})();"])
 
     out = html
-    out = out.replace('<link rel="stylesheet" href="../../src/styles.css">',
-                      f"<style>\n{css}\n</style>")
-    out = out.replace('<script type="module" src="./story.js"></script>',
-                      f"<script>\n{bundle}\n</script>")
+    out = re.sub(
+        r'<link rel="stylesheet" href="../../src/site-shell\.css[^"]*">\s*'
+        r'<link rel="stylesheet" href="../../src/styles\.css[^"]*">',
+        lambda _: f"<style>\n{css}\n</style>",
+        out,
+    )
+    out = re.sub(
+        r'<script type="module" src="\./story\.js[^"]*"></script>',
+        lambda _: f"<script>\n{bundle}\n</script>",
+        out,
+    )
 
     if "<style>" not in out or "createAudio" not in out:
         raise SystemExit(f"{slug}: inlining failed — page markers did not match")

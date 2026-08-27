@@ -43,7 +43,8 @@ const DATA = await fetch('../../data/seasons.json?v=20260826-top3').then(r => r.
 
 // A portable single-file build has no site root to return to.
 if (location.protocol === 'file:') {
-  document.querySelectorAll('[data-site-home]').forEach(link => { link.hidden = true; });
+  document.querySelector('.site-header')?.setAttribute('hidden', '');
+  document.documentElement.style.setProperty('--site-header-height', '0px');
 }
 
 const leaderLabels = [
@@ -129,10 +130,10 @@ const leadersPanel = document.getElementById('leadersPanel');
 function selectView(view, focus = false) {
   const showLeaders = view === 'leaders';
   tabs[0].classList.toggle('active', !showLeaders);
-  tabs[0].setAttribute('aria-selected', String(!showLeaders));
+  tabs[0].setAttribute('aria-pressed', String(!showLeaders));
   tabs[0].tabIndex = showLeaders ? -1 : 0;
   tabs[1].classList.toggle('active', showLeaders);
-  tabs[1].setAttribute('aria-selected', String(showLeaders));
+  tabs[1].setAttribute('aria-pressed', String(showLeaders));
   tabs[1].tabIndex = showLeaders ? 0 : -1;
   stage.hidden = showLeaders;
   leadersPanel.hidden = !showLeaders;

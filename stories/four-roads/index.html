@@ -6,16 +6,25 @@
 <title>Four Roads, One Record — Red Sox 57-51</title>
 <meta name="description" content="Four straight Red Sox seasons hit 57-51 after 108 games, then split toward four different fates.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
-<link rel="stylesheet" href="../../src/styles.css?v=20260826-nav3">
+<link rel="stylesheet" href="../../src/site-shell.css?v=20260826-pro">
+<link rel="stylesheet" href="../../src/styles.css?v=20260826-pro">
 </head>
 <body>
-<nav class="view-tabs" aria-label="Red Sox Records sections">
-  <button class="view-tab active" id="storyTab" role="tab" aria-selected="true" aria-controls="stage">Story</button>
-  <button class="view-tab" id="leadersTab" role="tab" aria-selected="false" aria-controls="leadersPanel">Season leaders</button>
-  <a class="view-tab view-link" href="../../news/">Globe headlines</a>
-</nav>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-wordmark" href="../../">
+      <span class="site-wordmark__mark" aria-hidden="true">B</span>
+      <span class="site-wordmark__text"><strong>Red Sox</strong><small>Records</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Red Sox Records sections">
+      <button class="site-nav__link active" id="storyTab" aria-pressed="true" aria-controls="stage">Story</button>
+      <button class="site-nav__link" id="leadersTab" aria-pressed="false" aria-controls="leadersPanel">Season leaders</button>
+      <a class="site-nav__link" href="../../news/">Globe headlines</a>
+    </nav>
+  </div>
+</header>
 
-<div class="stage" id="stage" role="tabpanel" aria-labelledby="storyTab">
+<div class="stage" id="stage" role="region" aria-labelledby="storyTab">
   <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Play the animation with sound">
     <div class="po-inner">
       <div class="po-btn"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="34,24 34,76 78,50"/></svg></div>
@@ -26,7 +35,6 @@
   <header class="top">
     <div class="brand">
       <div class="brand-meta">
-        <a class="site-home" href="/" data-site-home><span aria-hidden="true">←</span> Red Sox Records</a>
         <span class="story-eyebrow">Visual story 01</span>
       </div>
       <h1 class="title">FOUR ROADS, <em>ONE RECORD</em></h1>
@@ -63,11 +71,10 @@
   </footer>
 </div>
 
-<section class="leaders-section" id="leadersPanel" role="tabpanel" aria-labelledby="leadersTab" hidden>
+<section class="leaders-section" id="leadersPanel" role="region" aria-labelledby="leadersTab" hidden>
   <div class="leaders-shell">
     <header class="leaders-header">
       <div class="brand-meta leaders-meta">
-        <a class="site-home" href="/" data-site-home><span aria-hidden="true">←</span> Red Sox Records</a>
         <span class="story-eyebrow">Four Roads, One Record · Supporting data</span>
       </div>
       <h2>Season leaders</h2>
@@ -95,6 +102,6 @@
     </div>
   </div>
 </section>
-<script type="module" src="./story.js?v=20260826-nav3"></script>
+<script type="module" src="./story.js?v=20260826-pro"></script>
 </body>
 </html>

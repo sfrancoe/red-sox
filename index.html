@@ -6,16 +6,24 @@
 <title>Red Sox Records</title>
 <meta name="description" content="Visual stories from Boston Red Sox box scores.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
-<link rel="stylesheet" href="src/home.css">
+<link rel="stylesheet" href="src/site-shell.css?v=20260826-pro">
+<link rel="stylesheet" href="src/home.css?v=20260826-pro">
 </head>
 <body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-wordmark" href="./" aria-current="page">
+      <span class="site-wordmark__mark" aria-hidden="true">B</span>
+      <span class="site-wordmark__text"><strong>Red Sox</strong><small>Records</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Red Sox Records sections">
+      <a class="site-nav__link active" href="stories/four-roads/">Story</a>
+      <a class="site-nav__link" href="stories/four-roads/?view=leaders">Season leaders</a>
+      <a class="site-nav__link" href="news/">Globe headlines</a>
+    </nav>
+  </div>
+</header>
 <main class="home">
-  <nav class="site-tabs" aria-label="Red Sox Records sections">
-    <a class="site-tab is-active" href="stories/four-roads/" aria-current="page">Story</a>
-    <a class="site-tab" href="stories/four-roads/?view=leaders">Season leaders</a>
-    <a class="site-tab" href="news/">Globe headlines</a>
-  </nav>
-
   <header class="home-top">
     <div class="home-eyebrow">Visual stories from Boston baseball</div>
     <h1 class="home-title">RED SOX<br><em>RECORDS</em></h1>

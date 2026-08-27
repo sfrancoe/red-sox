@@ -22,8 +22,12 @@ PRIORITY=(
   index.html
   src/chart.js
   src/audio.js
+  src/site-shell.css
   src/styles.css
   src/home.css
+  src/news.css
+  src/news.js
+  news/index.html
   stories/four-roads/index.html
   stories/four-roads/story.js
   stories/war-room/index.html

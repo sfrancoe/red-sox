@@ -6,20 +6,26 @@
 <title>Globe Headlines | Red Sox Records</title>
 <meta name="description" content="The latest Boston Globe headlines and summaries about the Red Sox.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
-<link rel="stylesheet" href="../src/home.css">
-<link rel="stylesheet" href="../src/news.css">
+<link rel="stylesheet" href="../src/site-shell.css?v=20260826-pro">
+<link rel="stylesheet" href="../src/home.css?v=20260826-pro">
+<link rel="stylesheet" href="../src/news.css?v=20260826-pro">
 </head>
 <body>
-<main class="home news-home">
-  <div class="news-masthead">
-    <a class="news-brand" href="../">Red Sox Records</a>
-    <nav class="site-tabs" aria-label="Red Sox Records sections">
-      <a class="site-tab" href="../stories/four-roads/">Story</a>
-      <a class="site-tab" href="../stories/four-roads/?view=leaders">Season leaders</a>
-      <a class="site-tab is-active" href="./" aria-current="page">Globe headlines</a>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-wordmark" href="../">
+      <span class="site-wordmark__mark" aria-hidden="true">B</span>
+      <span class="site-wordmark__text"><strong>Red Sox</strong><small>Records</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Red Sox Records sections">
+      <a class="site-nav__link" href="../stories/four-roads/">Story</a>
+      <a class="site-nav__link" href="../stories/four-roads/?view=leaders">Season leaders</a>
+      <a class="site-nav__link active" href="./" aria-current="page">Globe headlines</a>
     </nav>
   </div>
-
+</header>
+<main class="home news-home">
+  <h1 class="sr-only">Red Sox headlines from The Boston Globe</h1>
   <section class="news-section" aria-label="Latest Red Sox reporting">
     <div class="news-section-head">
       <p id="newsFreshness" class="news-freshness"></p>
