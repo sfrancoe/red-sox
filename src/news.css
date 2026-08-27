@@ -74,17 +74,17 @@
   .news-home{width:min(100% - 24px,1420px);padding-top:calc(var(--site-header-height) + 14px);}
   .mobile-newspaper-tabs{
     display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;
-    width:100%;margin:0 0 14px;padding:3px;border:1px solid var(--site-rule);
-    border-radius:11px;background:#e9e3d7;
+    width:100%;margin:0 0 14px;padding:3px;border:1px solid #b7c8be;
+    border-radius:11px;background:#dbe6df;
   }
   .mobile-newspaper-tab{
     min-width:0;min-height:38px;padding:8px 6px;border:0;border-radius:7px;
-    background:transparent;color:var(--site-muted);cursor:pointer;
+    background:rgba(255,255,255,.25);color:#52685d;cursor:pointer;
     font-family:var(--site-cond);font-size:12px;font-weight:700;line-height:1;
     letter-spacing:.045em;text-transform:uppercase;
   }
   .mobile-newspaper-tab.active{
-    color:var(--site-ink);background:var(--site-paper-strong);
+    color:var(--site-ink);background:#fffaf0;
     box-shadow:0 1px 5px rgba(34,43,38,.12),inset 0 -3px 0 var(--site-accent);
   }
   .mobile-newspaper-tab:focus-visible{outline:2px solid var(--site-gold);outline-offset:2px;}
