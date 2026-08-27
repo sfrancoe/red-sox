@@ -1,19 +1,56 @@
-const freshness = document.getElementById('xPostsFreshness');
 const columns = [
   {
     key: 'recent',
+    section: document.getElementById('recentPostsColumn'),
     status: document.getElementById('recentPostsStatus'),
     list: document.getElementById('recentPostsList'),
     emptyMessage: 'No recent Red Sox posts are available right now.',
   },
   {
     key: 'popular',
+    section: document.getElementById('popularPostsColumn'),
     status: document.getElementById('popularPostsStatus'),
     list: document.getElementById('popularPostsList'),
     emptyMessage: 'No Red Sox posts were found in the past 24 hours.',
   },
 ];
+const mobileTabs = [...document.querySelectorAll('.x-posts-mobile-tab')];
 let generation = '';
+
+function selectMobileColumn(key, focus = false, updateUrl = true) {
+  const selectedTab = mobileTabs.find(tab => tab.dataset.target === key) || mobileTabs[0];
+  if (!selectedTab) return;
+
+  mobileTabs.forEach(tab => {
+    const selected = tab === selectedTab;
+    tab.classList.toggle('active', selected);
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  columns.forEach(column => {
+    column.section.classList.toggle('mobile-active', column.key === selectedTab.dataset.target);
+  });
+
+  if (updateUrl) {
+    const url = new URL(location.href);
+    url.hash = selectedTab.dataset.target === 'popular' ? 'popular' : '';
+    history.replaceState(null, '', url);
+  }
+  if (focus) selectedTab.focus();
+}
+
+mobileTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectMobileColumn(tab.dataset.target));
+  tab.addEventListener('keydown', event => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const direction = event.key === 'ArrowRight' ? 1 : -1;
+    const next = mobileTabs[(index + direction + mobileTabs.length) % mobileTabs.length];
+    selectMobileColumn(next.dataset.target, true);
+  });
+});
+
+selectMobileColumn(location.hash === '#popular' ? 'popular' : 'recent', false, false);
 
 function addText(parent, tag, className, text) {
   const element = document.createElement(tag);
@@ -109,9 +146,6 @@ async function loadPosts() {
     if (!Array.isArray(feed.recent) || !feed.recent.length || !Array.isArray(feed.popular)) {
       throw new Error('X post feed was empty');
     }
-    freshness.textContent = `Checked ${new Date().toLocaleTimeString(undefined, {
-      hour: 'numeric', minute: '2-digit',
-    })}`;
     render(feed);
   } catch (error) {
     console.error(error);

@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-newspapers">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/x-posts.css?v=20260827-rankedcolumns">
+<link rel="stylesheet" href="../src/x-posts.css?v=20260827-mobiletabs">
 </head>
 <body>
 <header class="site-header">
@@ -23,26 +23,22 @@
 </header>
 
 <main class="home x-posts-home">
-  <header class="x-posts-header">
-    <div>
-      <p class="x-posts-kicker">Curated by @safbiz234</p>
-      <h1 class="x-posts-title">X POSTS</h1>
-    </div>
-    <a class="x-posts-link" href="https://x.com/i/lists/1431748439818346496" target="_blank" rel="noreferrer noopener">
-      Open on X ↗
-    </a>
-  </header>
-
-  <p class="x-posts-freshness" id="xPostsFreshness"></p>
+  <h1 class="sr-only">Filtered Red Sox X posts</h1>
+  <div class="x-posts-mobile-tabs" role="tablist" aria-label="Choose X post ranking">
+    <button class="x-posts-mobile-tab active" type="button" role="tab" aria-selected="true"
+      aria-controls="recentPostsColumn" data-target="recent">Most Recent</button>
+    <button class="x-posts-mobile-tab" type="button" role="tab" aria-selected="false"
+      aria-controls="popularPostsColumn" data-target="popular">Most Popular</button>
+  </div>
   <div class="x-posts-columns">
-    <section class="x-posts-column" aria-labelledby="recentPostsHeading">
+    <section class="x-posts-column mobile-active" id="recentPostsColumn" aria-labelledby="recentPostsHeading">
       <header class="x-posts-column-head">
         <h2 id="recentPostsHeading">Most Recent</h2>
       </header>
       <div class="x-posts-status" id="recentPostsStatus" role="status">Loading recent Red Sox posts…</div>
       <ol class="x-posts-list" id="recentPostsList" hidden></ol>
     </section>
-    <section class="x-posts-column" aria-labelledby="popularPostsHeading">
+    <section class="x-posts-column" id="popularPostsColumn" aria-labelledby="popularPostsHeading">
       <header class="x-posts-column-head">
         <h2 id="popularPostsHeading">Most Popular</h2>
         <span>Past 24 hours</span>
@@ -56,6 +52,6 @@
     <a href="https://x.com/i/lists/1431748439818346496" target="_blank" rel="noreferrer noopener">open the list on X</a>.
   </p>
 </main>
-<script type="module" src="../src/x-posts.js?v=20260827-rankedcolumns"></script>
+<script type="module" src="../src/x-posts.js?v=20260827-mobiletabs"></script>
 </body>
 </html>
