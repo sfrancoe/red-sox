@@ -84,7 +84,7 @@ const yFor=d=>padT+(1-(d-DMIN)/(DMAX-DMIN))*(H-padT-padB);
 // =========================================================
 const HOLD=0.7;               // pause between seasons (s)
 const BASE_GPS=26;            // games per second at 1x (covers a full 162-game season)
-let state, playing=false, lastT=0, speed=1;
+let state, playing=false, lastT=0, speed=2;
 function reset(toFinale){
   state={phase:0,prog:0,hold:0,finale:0,idle:0,done:false};
   seasons.forEach(s=>s.visible = s.visible!==false);

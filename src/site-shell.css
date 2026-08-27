@@ -31,29 +31,10 @@
   overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
 }
 .site-header__inner{
-  width:min(100% - 36px,1380px);height:100%;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;gap:28px;
+  width:calc(100% - 36px);height:100%;margin:0 auto;
+  display:flex;align-items:center;justify-content:flex-start;
 }
-.site-wordmark{
-  display:inline-flex;align-items:center;gap:11px;min-width:max-content;
-  color:var(--site-ink);text-decoration:none;
-}
-.site-wordmark__mark{
-  display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
-  color:#fff;background:var(--site-accent);border:2px solid var(--site-accent-dark);
-  box-shadow:inset 0 0 0 3px rgba(255,255,255,.18);
-  font-family:var(--site-display);font-size:19px;line-height:1;
-}
-.site-wordmark__text{display:grid;line-height:.88;}
-.site-wordmark__text strong{
-  font-family:var(--site-display);font-size:21px;font-weight:400;letter-spacing:.015em;text-transform:uppercase;
-}
-.site-wordmark__text small{
-  margin-top:4px;color:var(--site-muted);font-family:var(--site-cond);font-size:9px;
-  font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-}
-.site-wordmark:hover .site-wordmark__text strong{color:var(--site-accent);}
-.site-wordmark:focus-visible,.site-nav__link:focus-visible{
+.site-nav__link:focus-visible{
   outline:2px solid var(--site-gold);outline-offset:3px;
 }
 
@@ -65,7 +46,7 @@
   position:relative;display:flex;align-items:center;justify-content:center;
   min-height:36px;padding:8px 15px;border:0;border-radius:7px;
   background:transparent;color:var(--site-muted);cursor:pointer;text-decoration:none;
-  font-family:var(--site-cond);font-size:11px;font-weight:700;line-height:1;
+  font-family:var(--site-cond);font-size:14px;font-weight:700;line-height:1;
   letter-spacing:.085em;text-transform:uppercase;white-space:nowrap;
   transition:background .16s ease,color .16s ease,box-shadow .16s ease;
 }
@@ -76,16 +57,12 @@
 }
 
 @media (max-width:700px){
-  :root{--site-header-height:108px;}
+  :root{--site-header-height:66px;}
   .site-header__inner{
-    width:min(100% - 20px,1380px);padding:10px 0 8px;
-    flex-wrap:wrap;align-content:center;gap:7px 14px;
+    width:calc(100% - 20px);padding:8px 0;
   }
-  .site-wordmark__mark{width:29px;height:29px;font-size:17px;}
-  .site-wordmark__text strong{font-size:18px;}
-  .site-wordmark__text small{font-size:8px;margin-top:3px;}
   .site-nav{width:100%;gap:2px;padding:3px;}
-  .site-nav__link{flex:1;min-width:0;min-height:32px;padding:7px 5px;font-size:10px;letter-spacing:.05em;}
+  .site-nav__link{flex:1;min-width:0;min-height:38px;padding:8px 5px;font-size:12px;letter-spacing:.035em;}
 }
 
 @media (prefers-reduced-motion:reduce){
