@@ -140,7 +140,8 @@ function render(feed) {
 
 async function loadPosts() {
   try {
-    const response = await fetch('../data/x-posts.json', { cache: 'no-store' });
+    let response = await fetch('/api/x-posts');
+    if (!response.ok) response = await fetch('../data/x-posts.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`X post request returned ${response.status}`);
     const feed = await response.json();
     if (!Array.isArray(feed.recent) || !feed.recent.length || !Array.isArray(feed.popular)) {
@@ -160,4 +161,4 @@ async function loadPosts() {
 await loadPosts();
 setInterval(() => {
   if (document.visibilityState === 'visible') loadPosts();
-}, 60_000);
+}, 300_000);
