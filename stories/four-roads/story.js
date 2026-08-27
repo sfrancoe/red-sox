@@ -6,6 +6,11 @@
 // valleys, streaks and records still say what these lines claim.
 import { initStory } from '../../src/chart.js';
 
+const requestedView = new URLSearchParams(location.search).get('view');
+if (location.protocol !== 'file:' && !requestedView) {
+  location.replace('../../news/');
+}
+
 const CONFIG = {
   2023:{color:'#087ea4',label:'The Grind',beats:[
     {g:0,t:'2023 · The steady climb begins.'},
@@ -147,8 +152,7 @@ function selectView(view, focus = false) {
   }
   if (location.protocol !== 'file:') {
     const url = new URL(location.href);
-    if (showLeaders) url.searchParams.set('view', 'leaders');
-    else url.searchParams.delete('view');
+    url.searchParams.set('view', showLeaders ? 'leaders' : 'story');
     history.replaceState(null, '', url);
   }
   window.scrollTo(0, 0);
@@ -167,5 +171,4 @@ tabs.forEach((tab, index) => {
   });
 });
 
-const requestedView = new URLSearchParams(location.search).get('view');
 if (requestedView === 'leaders') selectView('leaders');
