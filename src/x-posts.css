@@ -1,9 +1,9 @@
 .x-posts-home{
-  width:min(100% - 36px,820px);padding-top:calc(var(--site-header-height) + 18px);
+  width:min(100% - 36px,1380px);padding-top:calc(var(--site-header-height) + 18px);
 }
 .x-posts-header{
   display:flex;align-items:end;justify-content:space-between;gap:24px;
-  width:min(84%,700px);margin:0 auto 10px;padding-bottom:9px;border-bottom:2px solid var(--site-ink);
+  width:100%;margin:0 auto 10px;padding-bottom:9px;border-bottom:2px solid var(--site-ink);
 }
 .x-posts-kicker{
   margin:0 0 3px;color:var(--site-accent);font-family:var(--site-cond);
@@ -21,18 +21,32 @@
 .x-posts-link:hover,.x-posts-link:focus-visible{border-color:var(--site-accent);color:var(--site-accent);}
 .x-posts-link:focus-visible{outline:2px solid var(--site-gold);outline-offset:3px;}
 .x-posts-freshness{
-  width:min(84%,700px);min-height:16px;margin:0 auto 5px;color:var(--site-muted);
+  width:100%;min-height:16px;margin:0 auto 5px;color:var(--site-muted);
   font-family:var(--site-cond);font-size:10px;font-weight:700;letter-spacing:.08em;
   text-align:right;text-transform:uppercase;
 }
+.x-posts-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,3vw,42px);align-items:start;}
+.x-posts-column{min-width:0;}
+.x-posts-column-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  min-height:42px;padding:0 2px 8px;border-bottom:3px solid var(--site-ink);
+}
+.x-posts-column-head h2{
+  margin:0;color:var(--site-ink);font-family:var(--site-display);font-size:clamp(25px,2.8vw,34px);
+  font-weight:400;line-height:1;text-transform:uppercase;
+}
+.x-posts-column-head span{
+  color:var(--site-accent);font-family:var(--site-cond);font-size:10px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+}
 .x-posts-status{
-  width:min(84%,700px);margin:0 auto;padding:28px;border:1px solid var(--site-rule);
-  border-radius:9px;background:var(--site-paper-strong);color:var(--site-muted);
+  width:100%;margin:0;padding:28px;border:1px solid var(--site-rule);border-top:0;
+  border-radius:0 0 9px 9px;background:var(--site-paper-strong);color:var(--site-muted);
   font-family:var(--site-ui);font-size:14px;text-align:center;
 }
 .x-posts-list{
-  width:min(84%,700px);margin:0 auto;padding:0;overflow:hidden;list-style:none;
-  border:1px solid var(--site-rule);border-radius:9px;background:var(--site-paper-strong);
+  width:100%;margin:0;padding:0;overflow:hidden;list-style:none;
+  border:1px solid var(--site-rule);border-top:0;border-radius:0 0 9px 9px;background:var(--site-paper-strong);
   box-shadow:0 16px 38px rgba(38,48,42,.08);
 }
 .x-post{border-bottom:1px solid var(--site-rule);}
@@ -53,6 +67,10 @@
   margin:5px 0 0;color:#263a32;font-family:var(--site-ui);font-size:14px;line-height:1.42;
   white-space:pre-line;
 }
+.x-post-likes{
+  margin-top:3px;color:var(--site-accent);font-family:var(--site-cond);font-size:10px;
+  font-weight:700;letter-spacing:.035em;text-transform:uppercase;
+}
 .x-post-quote{
   margin:10px 0 0;padding:10px 12px;border:1px solid var(--site-rule);border-radius:8px;
   color:#43534c;font-family:var(--site-ui);font-size:12px;line-height:1.38;
@@ -66,10 +84,14 @@
 .x-post-arrow{color:var(--site-accent);font-family:var(--site-ui);font-size:16px;transition:transform .15s ease;}
 .x-post-card:hover .x-post-arrow{transform:translate(2px,-2px);}
 .x-posts-note{
-  width:min(84%,700px);margin:10px auto 22px;color:var(--site-muted);font-family:var(--site-ui);
+  width:100%;margin:12px auto 22px;color:var(--site-muted);font-family:var(--site-ui);
   font-size:11px;line-height:1.45;text-align:center;
 }
 .x-posts-note a{color:var(--site-ink);}
+
+@media (max-width:850px){
+  .x-posts-columns{grid-template-columns:1fr;gap:22px;}
+}
 
 @media (max-width:700px){
   .x-posts-home{
@@ -79,8 +101,9 @@
   .x-posts-kicker{font-size:9px;}
   .x-posts-title{font-size:34px;}
   .x-posts-link{padding:7px 8px;font-size:10px;}
-  .x-posts-freshness,.x-posts-status,.x-posts-list{width:100%;}
   .x-posts-freshness{margin-bottom:4px;}
+  .x-posts-column-head{min-height:38px;padding-bottom:7px;}
+  .x-posts-column-head h2{font-size:25px;}
   .x-post-card{grid-template-columns:34px minmax(0,1fr);gap:9px;padding:12px 10px;}
   .x-post-avatar{width:34px;height:34px;}
   .x-post-arrow{display:none;}

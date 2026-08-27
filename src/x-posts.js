@@ -1,6 +1,18 @@
-const status = document.getElementById('xPostsStatus');
-const list = document.getElementById('xPostsList');
 const freshness = document.getElementById('xPostsFreshness');
+const columns = [
+  {
+    key: 'recent',
+    status: document.getElementById('recentPostsStatus'),
+    list: document.getElementById('recentPostsList'),
+    emptyMessage: 'No recent Red Sox posts are available right now.',
+  },
+  {
+    key: 'popular',
+    status: document.getElementById('popularPostsStatus'),
+    list: document.getElementById('popularPostsList'),
+    emptyMessage: 'No Red Sox posts were found in the past 24 hours.',
+  },
+];
 let generation = '';
 
 function addText(parent, tag, className, text) {
@@ -46,6 +58,7 @@ function makePost(post) {
   const published = formatPublished(post.published);
   if (published) addText(authorLine, 'time', 'x-post-date', published);
   body.appendChild(authorLine);
+  addText(body, 'div', 'x-post-likes', `♥ ${Number(post.likes || 0).toLocaleString()} likes`);
   addText(body, 'p', 'x-post-text', post.text);
 
   if (post.quoted_text) {
@@ -76,11 +89,15 @@ function makePost(post) {
 
 function render(feed) {
   if (feed.generated_at === generation) return;
-  const fragment = document.createDocumentFragment();
-  feed.posts.forEach(post => fragment.appendChild(makePost(post)));
-  list.replaceChildren(fragment);
-  list.hidden = false;
-  status.hidden = true;
+  columns.forEach(column => {
+    const posts = feed[column.key];
+    const fragment = document.createDocumentFragment();
+    posts.forEach(post => fragment.appendChild(makePost(post)));
+    column.list.replaceChildren(fragment);
+    column.list.hidden = !posts.length;
+    column.status.hidden = Boolean(posts.length);
+    if (!posts.length) column.status.textContent = column.emptyMessage;
+  });
   generation = feed.generated_at || '';
 }
 
@@ -89,14 +106,20 @@ async function loadPosts() {
     const response = await fetch('../data/x-posts.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`X post request returned ${response.status}`);
     const feed = await response.json();
-    if (!Array.isArray(feed.posts) || !feed.posts.length) throw new Error('X post feed was empty');
+    if (!Array.isArray(feed.recent) || !feed.recent.length || !Array.isArray(feed.popular)) {
+      throw new Error('X post feed was empty');
+    }
     freshness.textContent = `Checked ${new Date().toLocaleTimeString(undefined, {
       hour: 'numeric', minute: '2-digit',
     })}`;
     render(feed);
   } catch (error) {
     console.error(error);
-    if (!generation) status.textContent = 'Red Sox X posts could not be loaded right now. Please try again soon.';
+    if (!generation) {
+      columns.forEach(column => {
+        column.status.textContent = 'Red Sox X posts could not be loaded right now. Please try again soon.';
+      });
+    }
   }
 }
 

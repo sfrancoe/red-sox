@@ -6,7 +6,8 @@ from __future__ import annotations
 import json
 import re
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
@@ -25,7 +26,8 @@ ROSTER_URL = (
 )
 OUTPUT_PATH = Path(__file__).resolve().parents[1] / "data" / "x-posts.json"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
-MAX_POSTS = 30
+MAX_RECENT_POSTS = 24
+MAX_POPULAR_POSTS = 12
 
 TEAM_TERMS = (
     "red sox", "redsox", "#redsox", "@redsox", "bosox", "fenway",
@@ -113,7 +115,8 @@ def fetch_roster_terms() -> set[str]:
 
 
 def clean_text(value: Any) -> str:
-    return re.sub(r"\s+", " ", value if isinstance(value, str) else "").strip()
+    text = value if isinstance(value, str) else ""
+    return re.sub(r"\s+", " ", unescape(text)).strip()
 
 
 def published_iso(value: Any) -> str:
@@ -154,7 +157,7 @@ def media_url(tweet: dict[str, Any]) -> str:
     return clean_text(media[0].get("media_url_https"))
 
 
-def post_from_tweet(tweet: dict[str, Any]) -> dict[str, str] | None:
+def post_from_tweet(tweet: dict[str, Any]) -> dict[str, Any] | None:
     text = clean_text(tweet.get("full_text") or tweet.get("text"))
     user = tweet.get("user") or {}
     handle = clean_text(user.get("screen_name"))
@@ -169,6 +172,7 @@ def post_from_tweet(tweet: dict[str, Any]) -> dict[str, str] | None:
         "text": text,
         "url": f"https://x.com{permalink}",
         "published": published_iso(tweet.get("created_at")),
+        "likes": int(tweet.get("favorite_count") or 0),
         "author": clean_text(user.get("name")) or handle,
         "handle": handle,
         "avatar": clean_text(user.get("profile_image_url_https")),
@@ -180,7 +184,7 @@ def post_from_tweet(tweet: dict[str, Any]) -> dict[str, str] | None:
 
 
 def build_feed(entries: list[dict[str, Any]], roster_terms: set[str]) -> dict[str, Any]:
-    posts: list[dict[str, str]] = []
+    posts: list[dict[str, Any]] = []
     seen: set[str] = set()
     for entry in entries:
         tweet = (entry.get("content") or {}).get("tweet") or {}
@@ -191,15 +195,27 @@ def build_feed(entries: list[dict[str, Any]], roster_terms: set[str]) -> dict[st
             continue
         seen.add(post["id"])
         posts.append(post)
-        if len(posts) == MAX_POSTS:
-            break
     if not posts:
         raise RuntimeError("The Red Sox relevance filter removed every X post")
+
+    posts.sort(key=lambda post: post["published"], reverse=True)
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
+    popular = []
+    for post in posts:
+        try:
+            published = datetime.fromisoformat(post["published"])
+        except (TypeError, ValueError):
+            continue
+        if published >= cutoff:
+            popular.append(post)
+    popular.sort(key=lambda post: (post["likes"], post["published"]), reverse=True)
+
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "X",
         "source_url": f"https://x.com/i/lists/{LIST_ID}",
-        "posts": posts,
+        "recent": posts[:MAX_RECENT_POSTS],
+        "popular": popular[:MAX_POPULAR_POSTS],
     }
 
 
@@ -208,7 +224,7 @@ def feed_changed(feed: dict[str, Any]) -> bool:
         current = json.loads(OUTPUT_PATH.read_text())
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return True
-    return current.get("posts") != feed.get("posts")
+    return any(current.get(key) != feed.get(key) for key in ("recent", "popular"))
 
 
 def main() -> None:
@@ -218,7 +234,10 @@ def main() -> None:
         print(f"No filtered X post changes; kept {OUTPUT_PATH}")
         return
     OUTPUT_PATH.write_text(json.dumps(feed, indent=2, ensure_ascii=False) + "\n")
-    print(f"Wrote {len(feed['posts'])} Red Sox X posts to {OUTPUT_PATH}")
+    print(
+        f"Wrote {len(feed['recent'])} recent and {len(feed['popular'])} popular "
+        f"Red Sox X posts to {OUTPUT_PATH}"
+    )
 
 
 if __name__ == "__main__":

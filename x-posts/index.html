@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-newspapers">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/x-posts.css?v=20260827-filtered">
+<link rel="stylesheet" href="../src/x-posts.css?v=20260827-rankedcolumns">
 </head>
 <body>
 <header class="site-header">
@@ -34,13 +34,28 @@
   </header>
 
   <p class="x-posts-freshness" id="xPostsFreshness"></p>
-  <div class="x-posts-status" id="xPostsStatus" role="status">Filtering the latest Red Sox posts…</div>
-  <ol class="x-posts-list" id="xPostsList" hidden></ol>
+  <div class="x-posts-columns">
+    <section class="x-posts-column" aria-labelledby="recentPostsHeading">
+      <header class="x-posts-column-head">
+        <h2 id="recentPostsHeading">Most Recent</h2>
+      </header>
+      <div class="x-posts-status" id="recentPostsStatus" role="status">Loading recent Red Sox posts…</div>
+      <ol class="x-posts-list" id="recentPostsList" hidden></ol>
+    </section>
+    <section class="x-posts-column" aria-labelledby="popularPostsHeading">
+      <header class="x-posts-column-head">
+        <h2 id="popularPostsHeading">Most Popular</h2>
+        <span>Past 24 hours</span>
+      </header>
+      <div class="x-posts-status" id="popularPostsStatus" role="status">Ranking posts by likes…</div>
+      <ol class="x-posts-list" id="popularPostsList" hidden></ol>
+    </section>
+  </div>
   <p class="x-posts-note">
     Posts are filtered for Red Sox terms, players, affiliates, and team-specific links. If the feed does not load,
     <a href="https://x.com/i/lists/1431748439818346496" target="_blank" rel="noreferrer noopener">open the list on X</a>.
   </p>
 </main>
-<script type="module" src="../src/x-posts.js?v=20260827-filtered"></script>
+<script type="module" src="../src/x-posts.js?v=20260827-rankedcolumns"></script>
 </body>
 </html>
