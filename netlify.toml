@@ -9,6 +9,7 @@
   from = "/"
   to = "/news/"
   status = 302
+  force = true
 
 [[headers]]
   for = "/assets/fonts/*"
