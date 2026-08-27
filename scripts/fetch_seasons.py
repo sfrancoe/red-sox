@@ -31,6 +31,9 @@ API = ("https://statsapi.mlb.com/api/v1/schedule"
 HITTING_API = ("https://statsapi.mlb.com/api/v1/stats"
                "?stats=season&group=hitting&teamId={team}&season={season}"
                "&playerPool={pool}&hydrate=person&limit=100")
+PITCHING_API = ("https://statsapi.mlb.com/api/v1/stats"
+                "?stats=season&group=pitching&teamId={team}&season={season}"
+                "&playerPool=ALL&hydrate=person&limit=100")
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CHECKPOINT = 108  # the game the whole story hangs on
 
@@ -172,6 +175,40 @@ def batting_leaders(year: int) -> dict[str, dict]:
     return leaders
 
 
+def pitching_leaders(year: int) -> dict[str, dict]:
+    """Top three Red Sox pitchers by WHIP, with a 40-inning minimum."""
+    payload = fetch_json(PITCHING_API.format(team=BOS, season=year))
+    stats = payload.get("stats", [])
+    splits = stats[0].get("splits", []) if stats else []
+    candidates = []
+    for split in splits:
+        name = split.get("player", {}).get("fullName", "").strip()
+        stat = split.get("stat", {})
+        raw_whip = stat.get("whip")
+        raw_innings = str(stat.get("inningsPitched") or "0")
+        try:
+            whole, _, outs = raw_innings.partition(".")
+            innings = int(whole) + int(outs or 0) / 3
+            whip = float(raw_whip)
+        except (TypeError, ValueError):
+            continue
+        if not name or innings < 40:
+            continue
+        candidates.append((whip, name, raw_whip))
+
+    if not candidates:
+        print(f"    WARNING {year}: no WHIP leaders found", file=sys.stderr)
+        return {}
+    ranked = sorted(candidates, key=lambda row: (row[0], row[1]))[:3]
+    return {
+        "whip": {
+            "top": [
+                {"name": name, "value": raw} for _, name, raw in ranked
+            ],
+        },
+    }
+
+
 # A game only counts if it was actually played to a result. Beware: MLB marks
 # postponed and cancelled games with abstractGameState "Final" too, and those carry
 # no winner — counting them is how you end up with a 167-game season.
@@ -282,6 +319,18 @@ def main() -> int:
             )
             print(f"    {stat.upper()}: {summary}")
 
+    print("\nFetching pitching leaders from MLB Stats API")
+    for year in years:
+        print(f"  {year}: WHIP leaders…")
+        leaders = pitching_leaders(year)
+        seasons[str(year)]["pitching_leaders"] = leaders
+        for stat, leader in leaders.items():
+            summary = " · ".join(
+                f"#{rank} {entry['name']} — {entry['value']}"
+                for rank, entry in enumerate(leader["top"], 1)
+            )
+            print(f"    {stat.upper()}: {summary}")
+
     print("\nFetching bWAR leaders from Baseball Reference")
     for year, leaders in war_leaders(years).items():
         if year in seasons:
@@ -311,6 +360,7 @@ def main() -> int:
                         "checkpoint_record": s.get("checkpoint_record"),
                         "war_leader": s.get("war_leader"),
                         "war_leaders": s.get("war_leaders"),
+                        "pitching_leaders": s.get("pitching_leaders"),
                         "batting_leaders": s.get("batting_leaders")}
                     for y, s in seasons.items()},
         "checkpoint_game": CHECKPOINT,

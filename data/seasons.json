@@ -252,6 +252,24 @@
     ]
    }
   },
+  "pitching_leaders": {
+   "whip": {
+    "top": [
+     {
+      "name": "Chris Martin",
+      "value": "1.03"
+     },
+     {
+      "name": "Kutter Crawford",
+      "value": "1.11"
+     },
+     {
+      "name": "Nick Pivetta",
+      "value": "1.12"
+     }
+    ]
+   }
+  },
   "war_leaders": [
    {
     "name": "Rafael Devers",
@@ -520,6 +538,24 @@
      {
       "name": "Ceddanne Rafaela",
       "value": ".664"
+     }
+    ]
+   }
+  },
+  "pitching_leaders": {
+   "whip": {
+    "top": [
+     {
+      "name": "Justin Slaten",
+      "value": "1.01"
+     },
+     {
+      "name": "Kenley Jansen",
+      "value": "1.06"
+     },
+     {
+      "name": "Kutter Crawford",
+      "value": "1.12"
      }
     ]
    }
@@ -796,6 +832,24 @@
     ]
    }
   },
+  "pitching_leaders": {
+   "whip": {
+    "top": [
+     {
+      "name": "Aroldis Chapman",
+      "value": "0.70"
+     },
+     {
+      "name": "Garrett Crochet",
+      "value": "1.03"
+     },
+     {
+      "name": "Garrett Whitlock",
+      "value": "1.08"
+     }
+    ]
+   }
+  },
   "war_leaders": [
    {
     "name": "Garrett Crochet",
@@ -948,13 +1002,14 @@
    11,
    12,
    13,
-   14
+   14,
+   13
   ],
-  "seq": "WLLLLLWLLLWWLWWLLWWLLWLLLLWWWLLWLLWWWLWLLWLLWLWWWLLLLWLLWWLWLWLLLLWWLLLLWWLLWLWWWWWLLWWWWWWWWWWLWWWWLWLWWLWWWWWWWWWLLLLLWLWLWWLWWWWW",
-  "record": "73-59",
-  "end_game": 132,
+  "seq": "WLLLLLWLLLWWLWWLLWWLLWLLLLWWWLLWLLWWWLWLLWLLWLWWWLLLLWLLWWLWLWLLLLWWLLLLWWLLWLWWWWWLLWWWWWWWWWWLWWWWLWLWWLWWWWWWWWWLLLLLWLWLWWLWWWWWL",
+  "record": "73-60",
+  "end_game": 133,
   "in_progress": true,
-  "last_game_date": "2026-08-25",
+  "last_game_date": "2026-08-26",
   "checkpoint_record": "57-51",
   "batting_leaders": {
    "hr": {
@@ -1001,11 +1056,11 @@
     "names": [
      "Ceddanne Rafaela"
     ],
-    "value": ".288",
+    "value": ".285",
     "top": [
      {
       "name": "Ceddanne Rafaela",
-      "value": ".288"
+      "value": ".285"
      },
      {
       "name": "Willson Contreras",
@@ -1013,7 +1068,7 @@
      },
      {
       "name": "Caleb Durbin",
-      "value": ".254"
+      "value": ".256"
      }
     ]
    },
@@ -1029,11 +1084,29 @@
      },
      {
       "name": "Wilyer Abreu",
-      "value": ".793"
+      "value": ".790"
      },
      {
       "name": "Ceddanne Rafaela",
-      "value": ".783"
+      "value": ".778"
+     }
+    ]
+   }
+  },
+  "pitching_leaders": {
+   "whip": {
+    "top": [
+     {
+      "name": "Garrett Whitlock",
+      "value": "0.89"
+     },
+     {
+      "name": "Jake Bennett",
+      "value": "1.07"
+     },
+     {
+      "name": "Jovani Mor\u00e1n",
+      "value": "1.07"
      }
     ]
    }
@@ -1041,20 +1114,20 @@
   "war_leaders": [
    {
     "name": "Ceddanne Rafaela",
-    "war": 5.8
+    "war": 5.7
    },
    {
     "name": "Wilyer Abreu",
-    "war": 5.4
+    "war": 5.3
    },
    {
     "name": "Willson Contreras",
-    "war": 4.3
+    "war": 4.5
    }
   ],
   "war_leader": {
    "name": "Ceddanne Rafaela",
-   "war": 5.8
+   "war": 5.7
   }
  }
 }

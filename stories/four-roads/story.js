@@ -39,7 +39,7 @@ const CONFIG = {
 };
 const YEARS = [2023, 2024, 2025, 2026];
 
-const DATA = await fetch('../../data/seasons.json?v=20260826-top3').then(r => r.json());
+const DATA = await fetch('../../data/seasons.json?v=20260827-whip').then(r => r.json());
 
 // A portable single-file build has no site root to return to.
 if (location.protocol === 'file:') {
@@ -48,7 +48,8 @@ if (location.protocol === 'file:') {
 }
 
 const leaderLabels = [
-  ['bWAR', 'war_leader'],
+  ['WAR', 'war_leader'],
+  ['WHIP', 'whip'],
   ['HR', 'hr'],
   ['AVG', 'avg'],
   ['OPS', 'ops'],
@@ -59,6 +60,9 @@ function leaderEntries(season, key) {
   if (key === 'war_leader') {
     const leaders = season.war_leaders || (season.war_leader ? [season.war_leader] : []);
     return leaders.map(leader => ({ name: leader.name, value: leader.war.toFixed(1) }));
+  }
+  if (key === 'whip') {
+    return season.pitching_leaders?.whip?.top || [];
   }
   const category = season.batting_leaders?.[key];
   if (!category) return [];

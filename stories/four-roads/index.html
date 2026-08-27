@@ -7,7 +7,7 @@
 <meta name="description" content="Four straight Red Sox seasons hit 57-51 after 108 games, then split toward four different fates.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../../src/site-shell.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../../src/styles.css?v=20260827-compactleaders">
+<link rel="stylesheet" href="../../src/styles.css?v=20260827-whipleaders">
 </head>
 <body>
 <header class="site-header">
@@ -75,7 +75,8 @@
         <thead>
           <tr>
             <th scope="col">Year</th>
-            <th scope="col">bWAR</th>
+            <th scope="col">WAR</th>
+            <th scope="col">WHIP</th>
             <th scope="col">HR</th>
             <th scope="col">AVG</th>
             <th scope="col">OPS</th>
@@ -85,12 +86,12 @@
         <tbody id="leadersBody"></tbody>
       </table>
       <p class="leaders-note" id="leadersNote">
-        AVG and OPS leaders are qualified hitters. bWAR via Baseball Reference;
-        batting statistics via MLB Stats API.
+        AVG and OPS leaders are qualified hitters. WHIP includes pitchers with at least
+        40 innings. WAR via Baseball Reference; batting and pitching statistics via MLB Stats API.
       </p>
     </div>
   </div>
 </section>
-<script type="module" src="./story.js?v=20260827-ytdheader"></script>
+<script type="module" src="./story.js?v=20260827-whipleaders"></script>
 </body>
 </html>

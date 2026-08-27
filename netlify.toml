@@ -5,6 +5,11 @@
   command = "bash scripts/build_site.sh"
   publish = "_site"
 
+[[redirects]]
+  from = "/"
+  to = "/news/"
+  status = 302
+
 [[headers]]
   for = "/assets/fonts/*"
   [headers.values]
