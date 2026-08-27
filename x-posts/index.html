@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-newspapers">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/x-posts.css?v=20260827-compact">
+<link rel="stylesheet" href="../src/x-posts.css?v=20260827-filtered">
 </head>
 <body>
 <header class="site-header">
@@ -33,18 +33,14 @@
     </a>
   </header>
 
-  <div class="x-posts-frame-shell">
-    <iframe
-      class="x-posts-frame"
-      src="https://syndication.twitter.com/srv/timeline-list/list-id/1431748439818346496?lang=en&amp;theme=light&amp;showHeader=false&amp;hideBorder=true"
-      title="Posts from the Red Sox X list curated by @safbiz234"
-      loading="eager">
-    </iframe>
-  </div>
+  <p class="x-posts-freshness" id="xPostsFreshness"></p>
+  <div class="x-posts-status" id="xPostsStatus" role="status">Filtering the latest Red Sox posts…</div>
+  <ol class="x-posts-list" id="xPostsList" hidden></ol>
   <p class="x-posts-note">
-    Live public posts are provided by X. If the feed does not load,
+    Posts are filtered for Red Sox terms, players, affiliates, and team-specific links. If the feed does not load,
     <a href="https://x.com/i/lists/1431748439818346496" target="_blank" rel="noreferrer noopener">open the list on X</a>.
   </p>
 </main>
+<script type="module" src="../src/x-posts.js?v=20260827-filtered"></script>
 </body>
 </html>

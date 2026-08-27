@@ -1,0 +1,44 @@
+name: Refresh filtered X posts
+
+on:
+  schedule:
+    - cron: '4-59/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch and filter Red Sox X posts
+        run: python3 scripts/fetch_x_posts.py
+
+      - name: Show what changed
+        run: git --no-pager diff --stat -- data/x-posts.json || true
+
+      - name: Commit if filtered posts changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/x-posts.json; then
+            echo "No filtered X post changes — nothing to commit."
+          else
+            git add data/x-posts.json
+            git commit -m "Refresh filtered X posts ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+            echo "Pushed refreshed filtered posts."
+          fi
