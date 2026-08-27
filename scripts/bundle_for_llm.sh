@@ -27,7 +27,9 @@ PRIORITY=(
   src/home.css
   src/news.css
   src/news.js
+  src/x-posts.css
   news/index.html
+  x-posts/index.html
   stories/four-roads/index.html
   stories/four-roads/story.js
   stories/war-room/index.html
