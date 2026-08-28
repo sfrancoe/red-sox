@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-schedule">
 <link rel="stylesheet" href="../src/home.css?v=20260827-schedule">
-<link rel="stylesheet" href="../src/schedule.css?v=20260827-schedule">
+<link rel="stylesheet" href="../src/schedule.css?v=20260828-streamlined">
 </head>
 <body>
 <header class="site-header">
@@ -28,20 +28,18 @@
   <h1 class="sr-only">Upcoming Red Sox schedule</h1>
 
   <div class="schedule-status" id="scheduleStatus" role="status">Loading the upcoming schedule…</div>
-  <section class="next-game" id="nextGame" aria-label="Next Red Sox game" hidden></section>
-
-  <section class="following-games" id="followingGames" hidden>
-    <header class="following-games-head">
-      <h2>Following Games</h2>
+  <section class="schedule-panel" id="schedulePanel" aria-label="Upcoming Red Sox games" hidden>
+    <header class="schedule-panel-head">
+      <h2>Upcoming Games</h2>
       <span>Times shown locally</span>
     </header>
-    <ol class="schedule-grid" id="scheduleGrid"></ol>
+    <ol class="schedule-list" id="scheduleGrid"></ol>
   </section>
 
   <p class="schedule-note">
     Records and probable pitchers come from MLB. Pitching plans can change before game time.
   </p>
 </main>
-<script type="module" src="../src/schedule.js?v=20260827-schedule"></script>
+<script type="module" src="../src/schedule.js?v=20260828-streamlined"></script>
 </body>
 </html>
