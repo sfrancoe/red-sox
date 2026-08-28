@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Recent Game | Red Sox Records</title>
-<meta name="description" content="The score from the most recent Boston Red Sox game.">
+<meta name="description" content="The score and complete box score from the most recent Boston Red Sox game.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-recentgame">
 <link rel="stylesheet" href="../src/home.css?v=20260827-recentgame">
-<link rel="stylesheet" href="../src/recent-game.css?v=20260828-score-only">
+<link rel="stylesheet" href="../src/recent-game.css?v=20260828-mobile-tables">
 </head>
 <body>
 <header class="site-header">
@@ -26,8 +26,34 @@
 
 <main class="recent-game-home">
   <h1 class="sr-only">Most recent Red Sox game</h1>
-  <p class="recent-game-score" id="recentGameScore" role="status">Loading the latest score…</p>
+  <p class="recent-game-status" id="recentGameStatus" role="status">Loading the latest score…</p>
+
+  <section class="game-detail-grid scoring-only" id="gameDetails" hidden>
+    <article class="scoring-panel">
+      <header><span>How it happened</span><h2>Scoring Summary</h2></header>
+      <ol id="scoringPlays"></ol>
+    </article>
+  </section>
+
+  <section class="line-score-section" id="lineScoreSection" hidden>
+    <header class="section-head"><h2>Line Score</h2><a id="gamedayLink" target="_blank" rel="noreferrer noopener">MLB Gameday ↗</a></header>
+    <div class="table-scroll"><table class="line-score" id="lineScore"></table></div>
+  </section>
+
+  <section class="boxscore-section" id="boxscoreSection" hidden>
+    <header class="section-head"><h2>Box Score</h2><span>Batting and pitching</span></header>
+    <div class="boxscore-mobile-tabs" role="tablist" aria-label="Choose a team box score">
+      <button class="boxscore-mobile-tab active" id="awayBoxTab" type="button" role="tab" aria-selected="true" data-target="awayBox"></button>
+      <button class="boxscore-mobile-tab" id="homeBoxTab" type="button" role="tab" aria-selected="false" data-target="homeBox"></button>
+    </div>
+    <div class="boxscore-columns">
+      <section class="boxscore-team mobile-active" id="awayBox"></section>
+      <section class="boxscore-team" id="homeBox"></section>
+    </div>
+  </section>
+
+  <p class="recent-game-note">Game data and decisions are supplied by MLB and refresh after each final.</p>
 </main>
-<script type="module" src="../src/recent-game.js?v=20260828-score-only"></script>
+<script type="module" src="../src/recent-game.js?v=20260828-score-and-tables"></script>
 </body>
 </html>
