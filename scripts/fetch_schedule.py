@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import json
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -18,12 +18,11 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "data" / "schedule.json"
 API = (
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId={team}"
-    "&startDate={start}&endDate={end}&hydrate=probablePitcher,team"
+    "&startDate={start}&endDate={end}&gameType=R&hydrate=probablePitcher,team"
 )
+SEASON_API = "https://statsapi.mlb.com/api/v1/seasons/{season}?sportId=1"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 EASTERN = ZoneInfo("America/New_York")
-LOOKAHEAD_DAYS = 18
-MAX_GAMES = 12
 
 
 def fetch_json(url: str) -> dict[str, Any]:
@@ -53,6 +52,17 @@ def record(team_entry: dict[str, Any]) -> str:
 
 def pitcher(team_entry: dict[str, Any]) -> str:
     return str((team_entry.get("probablePitcher") or {}).get("fullName") or "").strip()
+
+
+def regular_season_end(payload: dict[str, Any]) -> date:
+    seasons = payload.get("seasons") or []
+    value = seasons[0].get("regularSeasonEndDate") if seasons else None
+    if not value:
+        raise RuntimeError("MLB did not return the regular-season end date")
+    try:
+        return date.fromisoformat(str(value))
+    except ValueError as exc:
+        raise RuntimeError("MLB returned an invalid regular-season end date") from exc
 
 
 def game_row(game: dict[str, Any], today) -> dict[str, Any] | None:
@@ -94,7 +104,7 @@ def game_row(game: dict[str, Any], today) -> dict[str, Any] | None:
     }
 
 
-def build_feed(payload: dict[str, Any], today) -> dict[str, Any]:
+def build_feed(payload: dict[str, Any], today, season_end: date) -> dict[str, Any]:
     games = []
     for date_entry in payload.get("dates", []):
         for game in date_entry.get("games", []):
@@ -105,13 +115,11 @@ def build_feed(payload: dict[str, Any], today) -> dict[str, Any]:
             if row:
                 games.append(row)
     games.sort(key=lambda game: (game["game_date"], game["game_pk"] or 0))
-    games = games[:MAX_GAMES]
-    if not games:
-        raise RuntimeError("MLB returned no upcoming Red Sox games")
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "MLB Stats API",
         "team": "Boston Red Sox",
+        "regular_season_end": season_end.isoformat(),
         "games": games,
     }
 
@@ -121,14 +129,16 @@ def feed_changed(feed: dict[str, Any]) -> bool:
         current = json.loads(OUTPUT_PATH.read_text())
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return True
-    return current.get("games") != feed.get("games")
+    keys = ("regular_season_end", "games")
+    return any(current.get(key) != feed.get(key) for key in keys)
 
 
 def main() -> None:
     today = datetime.now(EASTERN).date()
-    end = today + timedelta(days=LOOKAHEAD_DAYS)
+    season_payload = fetch_json(SEASON_API.format(season=today.year))
+    end = regular_season_end(season_payload)
     url = API.format(team=BOS, start=today.isoformat(), end=end.isoformat())
-    feed = build_feed(fetch_json(url), today)
+    feed = build_feed(fetch_json(url), today, end)
     if not feed_changed(feed):
         print(f"No upcoming schedule changes; kept {OUTPUT_PATH}")
         return

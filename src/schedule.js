@@ -56,17 +56,20 @@ function makeGameRow(game, index) {
   addText(matchup, 'span', 'schedule-row-record', game.opponent_record);
   if (game.doubleheader) addText(matchup, 'span', 'schedule-row-dh', `DH Game ${game.game_number}`);
 
-  const pitchers = document.createElement('div');
-  pitchers.className = 'schedule-row-pitchers';
-  addText(pitchers, 'span', 'pitching-label', 'Projected starters');
-  addText(
-    pitchers,
-    'span',
-    '',
-    `${game.red_sox_pitcher || 'TBD'} vs. ${game.opponent_pitcher || 'TBD'}`,
-  );
-  addText(pitchers, 'span', 'schedule-row-venue', game.venue);
-  details.append(matchup, pitchers);
+  details.appendChild(matchup);
+  if (game.show_probables || game.red_sox_pitcher || game.opponent_pitcher) {
+    const pitchers = document.createElement('div');
+    pitchers.className = 'schedule-row-pitchers';
+    addText(pitchers, 'span', 'pitching-label', 'Projected starters');
+    addText(
+      pitchers,
+      'span',
+      '',
+      `${game.red_sox_pitcher || 'TBD'} vs. ${game.opponent_pitcher || 'TBD'}`,
+    );
+    addText(pitchers, 'span', 'schedule-row-venue', game.venue);
+    details.appendChild(pitchers);
+  }
 
   link.append(date, details);
   addText(link, 'span', 'schedule-row-arrow', '↗').setAttribute('aria-hidden', 'true');
@@ -79,7 +82,12 @@ async function loadSchedule() {
     const response = await fetch('../data/schedule.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`Schedule request returned ${response.status}`);
     const feed = await response.json();
-    if (!Array.isArray(feed.games) || !feed.games.length) throw new Error('Upcoming schedule was empty');
+    if (!Array.isArray(feed.games)) throw new Error('Upcoming schedule was invalid');
+    if (!feed.games.length) {
+      const year = String(feed.regular_season_end || '').slice(0, 4);
+      status.textContent = `The ${year ? `${year} ` : ''}regular season schedule is complete.`;
+      return;
+    }
     const fragment = document.createDocumentFragment();
     feed.games.forEach((game, index) => fragment.appendChild(makeGameRow(game, index)));
     scheduleGrid.replaceChildren(fragment);
