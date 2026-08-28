@@ -30,7 +30,7 @@
     <button class="x-posts-mobile-tab active" type="button" role="tab" aria-selected="true"
       aria-controls="recentPostsColumn" data-target="recent">Most Recent</button>
     <button class="x-posts-mobile-tab" type="button" role="tab" aria-selected="false"
-      aria-controls="popularPostsColumn" data-target="popular">Most Popular</button>
+      aria-controls="popularPostsColumn" data-target="popular">Most Liked (24 Hours)</button>
   </div>
   <div class="x-posts-columns">
     <section class="x-posts-column mobile-active" id="recentPostsColumn" aria-labelledby="recentPostsHeading">
@@ -42,11 +42,10 @@
     </section>
     <section class="x-posts-column" id="popularPostsColumn" aria-labelledby="popularPostsHeading">
       <header class="x-posts-column-head">
-        <h2 id="popularPostsHeading">Most Popular</h2>
-        <span>Past 24 hours</span>
+        <h2 id="popularPostsHeading">Most Liked (24 Hours)</h2>
       </header>
       <div class="x-posts-status" id="popularPostsStatus" role="status">Ranking posts by likes…</div>
-      <ol class="x-posts-list" id="popularPostsList" aria-label="Most popular X posts" tabindex="0" hidden></ol>
+      <ol class="x-posts-list" id="popularPostsList" aria-label="Most liked X posts from the last 24 hours" tabindex="0" hidden></ol>
     </section>
   </div>
   <p class="x-posts-note">
