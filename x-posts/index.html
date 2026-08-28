@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-schedule">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/x-posts.css?v=20260827-mobiletabs">
+<link rel="stylesheet" href="../src/x-posts.css?v=20260827-independent-scroll">
 </head>
 <body>
 <header class="site-header">
@@ -38,7 +38,7 @@
         <h2 id="recentPostsHeading">Most Recent</h2>
       </header>
       <div class="x-posts-status" id="recentPostsStatus" role="status">Loading recent Red Sox posts…</div>
-      <ol class="x-posts-list" id="recentPostsList" hidden></ol>
+      <ol class="x-posts-list" id="recentPostsList" aria-label="Most recent X posts" tabindex="0" hidden></ol>
     </section>
     <section class="x-posts-column" id="popularPostsColumn" aria-labelledby="popularPostsHeading">
       <header class="x-posts-column-head">
@@ -46,7 +46,7 @@
         <span>Past 24 hours</span>
       </header>
       <div class="x-posts-status" id="popularPostsStatus" role="status">Ranking posts by likes…</div>
-      <ol class="x-posts-list" id="popularPostsList" hidden></ol>
+      <ol class="x-posts-list" id="popularPostsList" aria-label="Most popular X posts" tabindex="0" hidden></ol>
     </section>
   </div>
   <p class="x-posts-note">
