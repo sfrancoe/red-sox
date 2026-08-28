@@ -137,31 +137,38 @@ function drawMap() {
   const pad = { left: mobile ? 42 : 58, right: mobile ? 15 : 34, top: 24, bottom: 43 };
   const plotWidth = width - pad.left - pad.right;
   const plotHeight = height - pad.top - pad.bottom;
-  const allValues = feed.pitchers.flatMap(pitcher => [pitcher.actual.war, pitcher.forecast_to_date.war]);
-  const min = Math.min(-.2, ...allValues);
-  const max = Math.max(3.5, ...allValues) * 1.08;
-  const x = value => pad.left + (value - min) / (max - min) * plotWidth;
-  const y = value => pad.top + plotHeight - (value - min) / (max - min) * plotHeight;
+  const forecastValues = feed.pitchers.map(pitcher => pitcher.forecast_to_date.war);
+  const actualValues = feed.pitchers.map(pitcher => pitcher.actual.war);
+  const min = Math.min(-.2, ...forecastValues, ...actualValues);
+  const xMax = Math.max(4.8, ...forecastValues) * 1.08;
+  const yMax = Math.max(3.5, ...actualValues) * 1.08;
+  const x = value => pad.left + (value - min) / (xMax - min) * plotWidth;
+  const y = value => pad.top + plotHeight - (value - min) / (yMax - min) * plotHeight;
 
   context.font = `600 ${mobile ? 9 : 10}px OswaldX, sans-serif`;
   context.fillStyle = '#718079';
   context.strokeStyle = '#ded8ca';
   context.lineWidth = 1;
-  const tickStep = max > 5 ? 2 : 1;
-  for (let tick = 0; tick <= max; tick += tickStep) {
+  for (let tick = 0; tick <= yMax; tick += 1) {
     context.beginPath();context.moveTo(pad.left, y(tick));context.lineTo(width - pad.right, y(tick));context.stroke();
     context.fillText(String(tick), pad.left - 18, y(tick) + 3);
+  }
+  for (let tick = 0; tick <= xMax; tick += 1) {
     context.fillText(String(tick), x(tick) - 3, height - pad.bottom + 18);
   }
   context.setLineDash([6, 6]);context.strokeStyle = '#76877e';context.lineWidth = 1.5;
-  context.beginPath();context.moveTo(x(min), y(min));context.lineTo(x(max), y(max));context.stroke();context.setLineDash([]);
+  const parityMax = Math.min(xMax, yMax);
+  context.beginPath();context.moveTo(x(min), y(min));context.lineTo(x(parityMax), y(parityMax));context.stroke();context.setLineDash([]);
   context.fillStyle = '#5f7068';context.font = `700 ${mobile ? 9 : 10}px OswaldX, sans-serif`;
   context.fillText('FORECAST fWAR BY NOW →', pad.left, height - 7);
   context.save();context.translate(11, height - pad.bottom);context.rotate(-Math.PI / 2);context.fillText('ACTUAL fWAR →', 0, 0);context.restore();
 
   const labelIds = new Set([...feed.pitchers]
-    .sort((a, b) => Math.max(b.actual.war, b.war_gap) - Math.max(a.actual.war, a.war_gap))
-    .slice(0, mobile ? 6 : 10).map(pitcher => pitcher.id));
+    .sort((a, b) => {
+      const score = pitcher => pitcher.actual.war + Math.abs(pitcher.war_gap) * .9 + pitcher.actual.ip_value / 220;
+      return score(b) - score(a);
+    })
+    .slice(0, mobile ? 11 : 16).map(pitcher => pitcher.id));
   plotPoints = [];
   const labelRects = [];
   [...feed.pitchers].sort((a, b) => b.actual.ip_value - a.actual.ip_value).forEach(pitcher => {
@@ -219,11 +226,10 @@ async function loadPitching() {
     feed = await response.json();
     if (!Array.isArray(feed.pitchers) || !feed.team_summary) throw new Error('Pitching data was incomplete');
     const summary = feed.team_summary;
-    document.getElementById('pitchingKicker').textContent = `${feed.season} staff report · ${feed.games_played} games`;
     document.getElementById('actualWar').textContent = summary.actual_war.toFixed(1);
     document.getElementById('forecastWar').textContent = summary.forecast_war_to_date.toFixed(1);
     document.getElementById('teamGap').textContent = `${signed(summary.war_gap)} fWAR`;
-    document.getElementById('teamStory').textContent = `Boston’s pitchers have produced ${summary.actual_war.toFixed(1)} fWAR. The same group’s preseason forecasts called for ${summary.forecast_war_to_date.toFixed(1)} by game ${feed.games_played}—a gap created by breakthroughs, reinvention, and unexpected innings.`;
+    document.getElementById('teamStory').textContent = `Through ${feed.games_played} games, Boston’s staff is ${signed(summary.war_gap)} fWAR ahead of its prorated preseason forecast.`;
     document.getElementById('teamEra').textContent = summary.era.toFixed(2);
     document.getElementById('teamInnings').textContent = summary.innings.toFixed(1);
     document.getElementById('teamGames').textContent = feed.games_played;
