@@ -63,7 +63,6 @@
   }
   .site-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:2px;padding:3px;}
   .site-nav__link{min-width:0;min-height:42px;padding:8px 5px;font-size:12px;letter-spacing:.035em;}
-  .site-nav__link--wide{grid-column:1/-1;}
 }
 
 @media (prefers-reduced-motion:reduce){

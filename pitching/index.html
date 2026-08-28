@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Above the Forecast | Red Sox Pitching</title>
+<meta name="description" content="How every Red Sox pitcher has performed against his preseason Steamer forecast in 2026.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
+<link rel="stylesheet" href="../src/site-shell.css?v=20260828-pitching">
+<link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
+<link rel="stylesheet" href="../src/pitching.css?v=20260828-first">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <nav class="site-nav" aria-label="Red Sox Records sections">
+      <a class="site-nav__link" href="../recent-game/">Recent game</a>
+      <a class="site-nav__link" href="../schedule/">Schedule</a>
+      <a class="site-nav__link" href="../standings/">Standings</a>
+      <a class="site-nav__link active" href="./" aria-current="page">Pitching</a>
+      <a class="site-nav__link" href="../news/">Newspaper headlines</a>
+      <a class="site-nav__link" href="../x-posts/">X Posts</a>
+      <a class="site-nav__link" href="../stories/four-roads/?view=leaders">Season leaders</a>
+      <a class="site-nav__link" href="../stories/four-roads/?view=story">Game 108 graph</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pitching-home">
+  <header class="pitching-intro">
+    <p class="pitching-kicker" id="pitchingKicker">2026 staff report</p>
+    <h1>Above the<br><em>Forecast</em></h1>
+    <p>What Boston expected from every arm—and what each pitcher has actually meant to a season that outran the prediction.</p>
+  </header>
+
+  <div class="pitching-status" id="pitchingStatus" role="status">Loading the forecast…</div>
+
+  <section class="forecast-board" id="forecastBoard" aria-labelledby="forecastHeading" hidden>
+    <div class="forecast-board__lead">
+      <p class="section-kicker">The staff-wide answer</p>
+      <h2 id="forecastHeading">More value than expected</h2>
+      <p id="teamStory"></p>
+    </div>
+    <div class="forecast-score" aria-label="Actual pitching WAR compared with forecast WAR through this point">
+      <div class="forecast-score__number">
+        <span>Actual fWAR</span>
+        <strong id="actualWar">—</strong>
+      </div>
+      <div class="forecast-score__versus">vs.</div>
+      <div class="forecast-score__number forecast-score__number--muted">
+        <span>Forecast by now</span>
+        <strong id="forecastWar">—</strong>
+      </div>
+      <div class="forecast-gap" id="teamGap">—</div>
+    </div>
+    <div class="forecast-track" aria-hidden="true">
+      <div class="forecast-track__fill" id="teamTrackFill"></div>
+      <div class="forecast-track__mark" id="teamTrackMark"><span>forecast</span></div>
+    </div>
+    <div class="team-facts" aria-label="Team pitching facts">
+      <div><span>Team ERA</span><strong id="teamEra">—</strong></div>
+      <div><span>Innings covered</span><strong id="teamInnings">—</strong></div>
+      <div><span>Games played</span><strong id="teamGames">—</strong></div>
+    </div>
+  </section>
+
+  <section class="impact-map" id="impactMapSection" aria-labelledby="impactMapHeading" hidden>
+    <div class="section-head">
+      <div><p class="section-kicker">The shape of the surprise</p><h2 id="impactMapHeading">Who moved the season?</h2></div>
+      <p>Every mark is a pitcher. Above the diagonal means more fWAR than Steamer expected by this point; larger marks mean more innings.</p>
+    </div>
+    <div class="impact-map__frame">
+      <canvas id="impactCanvas" role="img" aria-describedby="impactMapDescription"></canvas>
+      <p class="sr-only" id="impactMapDescription"></p>
+    </div>
+    <div class="impact-legend" aria-hidden="true">
+      <span><i class="legend-dot legend-dot--above"></i>Above forecast</span>
+      <span><i class="legend-dot legend-dot--below"></i>Below forecast</span>
+      <span>Tap a pitcher to open his report</span>
+    </div>
+  </section>
+
+  <section class="pitcher-reports" id="pitcherReports" aria-labelledby="reportsHeading" hidden>
+    <div class="section-head section-head--reports">
+      <div><p class="section-kicker">Every arm, in context</p><h2 id="reportsHeading">Pitcher reports</h2></div>
+      <div class="report-sort" role="group" aria-label="Order pitcher reports">
+        <button class="active" type="button" data-sort="impact" aria-pressed="true">Impact</button>
+        <button type="button" data-sort="surprise" aria-pressed="false">Surprise</button>
+        <button type="button" data-sort="workload" aria-pressed="false">Workload</button>
+      </div>
+    </div>
+    <div class="pitcher-grid" id="pitcherGrid"></div>
+  </section>
+
+  <footer class="pitching-note" id="pitchingNote" hidden>
+    <p><strong>How to read this:</strong> “Forecast by now” prorates each pitcher’s full-season preseason Steamer projection to Boston’s games played. Actual value is FanGraphs WAR (fWAR). ERA, FIP, and K−BB% compare current performance with the original full-season rate forecast.</p>
+    <p>Data: <a href="https://www.fangraphs.com/projections" rel="noreferrer noopener">FanGraphs Steamer projections</a>, <a href="https://www.fangraphs.com/leaders/major-league" rel="noreferrer noopener">FanGraphs leaderboards</a>, and MLB. <span id="pitchingUpdated"></span></p>
+  </footer>
+</main>
+<script type="module" src="../src/pitching.js?v=20260828-first"></script>
+</body>
+</html>
