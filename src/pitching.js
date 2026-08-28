@@ -5,6 +5,7 @@ const context = canvas.getContext('2d');
 let feed;
 let plotPoints = [];
 let chartFilter = 'starters';
+let reportSort = 'impact';
 
 function signed(value, places = 1) {
   const rounded = Number(value).toFixed(places);
@@ -105,22 +106,24 @@ function pitcherCard(pitcher, rank, sort) {
   return card;
 }
 
-function renderCards(sort = 'impact') {
-  const pitchers = [...feed.pitchers];
-  if (sort === 'surprise') pitchers.sort((a, b) => b.war_gap - a.war_gap);
-  if (sort === 'workload') pitchers.sort((a, b) => b.actual.ip_value - a.actual.ip_value);
-  if (sort === 'impact') pitchers.sort((a, b) => b.actual.war - a.actual.war);
-  pitcherGrid.replaceChildren(...pitchers.map((pitcher, index) => pitcherCard(pitcher, index + 1, sort)));
+function renderCards() {
+  const pitchers = [...chartPitchers()];
+  if (reportSort === 'surprise') pitchers.sort((a, b) => b.war_gap - a.war_gap);
+  if (reportSort === 'workload') pitchers.sort((a, b) => b.actual.ip_value - a.actual.ip_value);
+  if (reportSort === 'impact') pitchers.sort((a, b) => b.actual.war - a.actual.war);
+  pitcherGrid.replaceChildren(...pitchers.map((pitcher, index) => pitcherCard(pitcher, index + 1, reportSort)));
+  document.getElementById('reportsHeading').textContent = chartFilter === 'starters' ? 'Starter reports' : 'Reliever reports';
 }
 
 document.querySelectorAll('.report-sort button').forEach(button => {
   button.addEventListener('click', () => {
+    reportSort = button.dataset.sort;
     document.querySelectorAll('.report-sort button').forEach(item => {
       const active = item === button;
       item.classList.toggle('active', active);
       item.setAttribute('aria-pressed', String(active));
     });
-    renderCards(button.dataset.sort);
+    renderCards();
   });
 });
 
@@ -142,6 +145,7 @@ document.querySelectorAll('[data-chart-filter]').forEach(button => {
     });
     drawMap();
     updateMapDescription();
+    renderCards();
   });
 });
 
