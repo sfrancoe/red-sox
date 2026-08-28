@@ -1,0 +1,46 @@
+name: Refresh Athletic and MassLive headlines
+
+# Polls both RSS feeds frequently. The fetcher leaves the JSON files untouched
+# unless article content changes, avoiding timestamp-only commits and deploys.
+on:
+  schedule:
+    - cron: '1-56/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Red Sox headlines from The Athletic and MassLive
+        run: python3 scripts/fetch_rss_news.py athletic masslive
+
+      - name: Show what changed
+        run: git --no-pager diff --stat -- data/athletic.json data/masslive.json || true
+
+      - name: Commit if headlines changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/athletic.json data/masslive.json; then
+            echo "No headline changes — nothing to commit."
+          else
+            git add data/athletic.json data/masslive.json
+            git commit -m "Refresh Athletic and MassLive headlines ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+            echo "Pushed refreshed headlines."
+          fi

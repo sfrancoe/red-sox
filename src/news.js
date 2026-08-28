@@ -27,7 +27,7 @@ function selectMobileColumn(targetId, updateUrl = true) {
 
   if (updateUrl) {
     const url = new URL(location.href);
-    url.hash = selectedTab.dataset.target === 'boston-herald' ? 'boston-herald' : '';
+    url.hash = selectedTab === mobileTabs[0] ? '' : selectedTab.dataset.target;
     history.replaceState(null, '', url);
   }
 }
@@ -35,18 +35,29 @@ function selectMobileColumn(targetId, updateUrl = true) {
 mobileTabs.forEach((tab, index) => {
   tab.addEventListener('click', () => selectMobileColumn(tab.dataset.target));
   tab.addEventListener('keydown', event => {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    const direction = event.key === 'ArrowRight' ? 1 : -1;
-    const nextTab = mobileTabs[(index + direction + mobileTabs.length) % mobileTabs.length];
+    let nextIndex = index;
+    if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = mobileTabs.length - 1;
+    else if (event.key === 'ArrowRight') nextIndex = (index + 1) % mobileTabs.length;
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + mobileTabs.length) % mobileTabs.length;
+    else if (event.key === 'ArrowDown') nextIndex = (index + 2) % mobileTabs.length;
+    else if (event.key === 'ArrowUp') nextIndex = (index - 2 + mobileTabs.length) % mobileTabs.length;
+    const nextTab = mobileTabs[nextIndex];
     nextTab.focus();
     selectMobileColumn(nextTab.dataset.target);
   });
 });
 
-selectMobileColumn(location.hash === '#boston-herald' ? 'boston-herald' : 'boston-globe', false);
+function selectedColumnFromHash() {
+  const targetId = location.hash.slice(1);
+  return mobileTabs.some(tab => tab.dataset.target === targetId) ? targetId : mobileTabs[0]?.dataset.target;
+}
+
+selectMobileColumn(selectedColumnFromHash(), false);
 window.addEventListener('hashchange', () => {
-  selectMobileColumn(location.hash === '#boston-herald' ? 'boston-herald' : 'boston-globe', false);
+  selectMobileColumn(selectedColumnFromHash(), false);
 });
 
 function formatDate(value, options) {

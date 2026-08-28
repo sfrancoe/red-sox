@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Newspaper Headlines | Red Sox Records</title>
-<meta name="description" content="The latest Boston Globe and Boston Herald headlines and summaries about the Red Sox.">
+<meta name="description" content="The latest Boston Globe, Boston Herald, Athletic, and MassLive headlines and summaries about the Red Sox.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-schedule">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/news.css?v=20260827-numberless">
+<link rel="stylesheet" href="../src/news.css?v=20260828-four-sources">
 </head>
 <body>
 <header class="site-header">
@@ -31,6 +31,10 @@
         aria-controls="boston-globe" data-target="boston-globe">Boston Globe</button>
       <button class="mobile-newspaper-tab" type="button" role="tab" aria-selected="false"
         aria-controls="boston-herald" data-target="boston-herald">Boston Herald</button>
+      <button class="mobile-newspaper-tab" type="button" role="tab" aria-selected="false"
+        aria-controls="the-athletic" data-target="the-athletic">The Athletic</button>
+      <button class="mobile-newspaper-tab" type="button" role="tab" aria-selected="false"
+        aria-controls="masslive" data-target="masslive">MassLive</button>
     </div>
     <div class="newspaper-columns">
       <section class="newspaper-column mobile-active" id="boston-globe"
@@ -54,6 +58,28 @@
         <div class="news-status" role="status">Loading Herald headlines…</div>
         <ol class="news-list" hidden></ol>
       </section>
+
+      <section class="newspaper-column" id="the-athletic"
+        data-feed="../data/athletic.json" data-source="The Athletic" data-default-category="Boston Red Sox"
+        aria-labelledby="athleticHeading">
+        <header class="newspaper-column-head">
+          <h2 id="athleticHeading">The Athletic</h2>
+          <p class="news-freshness"></p>
+        </header>
+        <div class="news-status" role="status">Loading Athletic headlines…</div>
+        <ol class="news-list" hidden></ol>
+      </section>
+
+      <section class="newspaper-column" id="masslive"
+        data-feed="../data/masslive.json" data-source="MassLive" data-default-category="Red Sox"
+        aria-labelledby="massliveHeading">
+        <header class="newspaper-column-head">
+          <h2 id="massliveHeading">MassLive</h2>
+          <p class="news-freshness"></p>
+        </header>
+        <div class="news-status" role="status">Loading MassLive headlines…</div>
+        <ol class="news-list" hidden></ol>
+      </section>
     </div>
     <noscript><p class="news-status">JavaScript is required to load the headline list.</p></noscript>
   </section>
@@ -64,6 +90,6 @@
   </footer>
 </main>
 
-<script type="module" src="../src/news.js?v=20260827-numberless"></script>
+<script type="module" src="../src/news.js?v=20260828-four-sources"></script>
 </body>
 </html>
