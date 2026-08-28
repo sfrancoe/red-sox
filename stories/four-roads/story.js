@@ -100,7 +100,7 @@ for (const year of leaderYears) {
   row.style.setProperty('--seasoncol', CONFIG[year].color);
   const yearCell = document.createElement('th');
   yearCell.scope = 'row';
-  yearCell.textContent = season.in_progress ? `${year} YTD` : year;
+  yearCell.textContent = year;
   row.appendChild(yearCell);
   for (const [label, key] of leaderLabels) {
     const cell = document.createElement('td');

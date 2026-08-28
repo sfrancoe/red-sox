@@ -78,6 +78,10 @@ html[data-view='leaders'] .stage:not([hidden]){visibility:hidden;}
   font-family:var(--cond);font-size:13px;font-weight:500;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted);
 }
+.leaders-table thead th:not(:first-child)::before{
+  content:'👑';margin-right:5px;font-family:'Apple Color Emoji','Segoe UI Emoji',sans-serif;
+  font-size:.82em;letter-spacing:0;
+}
 .leaders-table thead th:first-child{width:8%;}
 .leaders-table tbody th{
   font-family:var(--display);font-size:24px;font-weight:400;color:var(--seasoncol,var(--chalk));
@@ -185,7 +189,8 @@ canvas#chart{position:absolute;inset:0;width:100%;height:100%;display:block;}
     background:rgba(22,45,36,.035);
   }
   .leaders-table td::before{
-    content:attr(data-label);display:block;margin-bottom:3px;color:var(--muted);
+    content:'👑  ' attr(data-label);display:block;margin-bottom:3px;color:var(--muted);
+    font-family:'Apple Color Emoji','Segoe UI Emoji',var(--cond);
     font-size:11px;letter-spacing:.09em;text-transform:uppercase;
   }
   .leader-ranking{gap:4px;}
