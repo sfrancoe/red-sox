@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-schedule">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/news.css?v=20260828-four-sources">
+<link rel="stylesheet" href="../src/news.css?v=20260828-independent-scroll">
 </head>
 <body>
 <header class="site-header">
@@ -45,7 +45,7 @@
           <p class="news-freshness"></p>
         </header>
         <div class="news-status" role="status">Loading Globe headlines…</div>
-        <ol class="news-list" hidden></ol>
+        <ol class="news-list" tabindex="0" aria-label="Boston Globe headlines" hidden></ol>
       </section>
 
       <section class="newspaper-column" id="boston-herald"
@@ -56,7 +56,7 @@
           <p class="news-freshness"></p>
         </header>
         <div class="news-status" role="status">Loading Herald headlines…</div>
-        <ol class="news-list" hidden></ol>
+        <ol class="news-list" tabindex="0" aria-label="Boston Herald headlines" hidden></ol>
       </section>
 
       <section class="newspaper-column" id="the-athletic"
@@ -67,7 +67,7 @@
           <p class="news-freshness"></p>
         </header>
         <div class="news-status" role="status">Loading Athletic headlines…</div>
-        <ol class="news-list" hidden></ol>
+        <ol class="news-list" tabindex="0" aria-label="The Athletic headlines" hidden></ol>
       </section>
 
       <section class="newspaper-column" id="masslive"
@@ -78,7 +78,7 @@
           <p class="news-freshness"></p>
         </header>
         <div class="news-status" role="status">Loading MassLive headlines…</div>
-        <ol class="news-list" hidden></ol>
+        <ol class="news-list" tabindex="0" aria-label="MassLive headlines" hidden></ol>
       </section>
     </div>
     <noscript><p class="news-status">JavaScript is required to load the headline list.</p></noscript>
