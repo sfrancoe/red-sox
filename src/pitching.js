@@ -4,6 +4,7 @@ const canvas = document.getElementById('impactCanvas');
 const context = canvas.getContext('2d');
 let feed;
 let plotPoints = [];
+let chartFilter = 'starters';
 
 function signed(value, places = 1) {
   const rounded = Number(value).toFixed(places);
@@ -123,6 +124,27 @@ document.querySelectorAll('.report-sort button').forEach(button => {
   });
 });
 
+function isStarter(pitcher) {
+  return pitcher.role === 'Starter' || pitcher.role === 'Swingman' || pitcher.starts >= 5;
+}
+
+function chartPitchers() {
+  return feed.pitchers.filter(pitcher => chartFilter === 'starters' ? isStarter(pitcher) : !isStarter(pitcher));
+}
+
+document.querySelectorAll('[data-chart-filter]').forEach(button => {
+  button.addEventListener('click', () => {
+    chartFilter = button.dataset.chartFilter;
+    document.querySelectorAll('[data-chart-filter]').forEach(item => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    drawMap();
+    updateMapDescription();
+  });
+});
+
 function drawMap() {
   if (!feed || !canvas.clientWidth) return;
   const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -137,11 +159,13 @@ function drawMap() {
   const pad = { left: mobile ? 42 : 58, right: mobile ? 15 : 34, top: 24, bottom: 43 };
   const plotWidth = width - pad.left - pad.right;
   const plotHeight = height - pad.top - pad.bottom;
-  const forecastValues = feed.pitchers.map(pitcher => pitcher.forecast_to_date.war);
-  const actualValues = feed.pitchers.map(pitcher => pitcher.actual.war);
+  const visiblePitchers = chartPitchers();
+  const starterView = chartFilter === 'starters';
+  const forecastValues = visiblePitchers.map(pitcher => pitcher.forecast_to_date.war);
+  const actualValues = visiblePitchers.map(pitcher => pitcher.actual.war);
   const min = Math.min(-.2, ...forecastValues, ...actualValues);
-  const xMax = Math.max(4.8, ...forecastValues) * 1.08;
-  const yMax = Math.max(3.5, ...actualValues) * 1.08;
+  const xMax = Math.max(starterView ? 4.8 : 1, ...forecastValues) * 1.08;
+  const yMax = Math.max(starterView ? 3.5 : 1.6, ...actualValues) * 1.08;
   const x = value => pad.left + (value - min) / (xMax - min) * plotWidth;
   const y = value => pad.top + plotHeight - (value - min) / (yMax - min) * plotHeight;
 
@@ -149,12 +173,15 @@ function drawMap() {
   context.fillStyle = '#718079';
   context.strokeStyle = '#ded8ca';
   context.lineWidth = 1;
-  for (let tick = 0; tick <= yMax; tick += 1) {
+  const yStep = yMax <= 2 ? .5 : 1;
+  const xStep = xMax <= 2 ? .5 : 1;
+  const tickLabel = tick => Number.isInteger(tick) ? String(tick) : tick.toFixed(1);
+  for (let tick = 0; tick <= yMax; tick += yStep) {
     context.beginPath();context.moveTo(pad.left, y(tick));context.lineTo(width - pad.right, y(tick));context.stroke();
-    context.fillText(String(tick), pad.left - 18, y(tick) + 3);
+    context.fillText(tickLabel(tick), pad.left - 20, y(tick) + 3);
   }
-  for (let tick = 0; tick <= xMax; tick += 1) {
-    context.fillText(String(tick), x(tick) - 3, height - pad.bottom + 18);
+  for (let tick = 0; tick <= xMax; tick += xStep) {
+    context.fillText(tickLabel(tick), x(tick) - 3, height - pad.bottom + 18);
   }
   context.setLineDash([6, 6]);context.strokeStyle = '#76877e';context.lineWidth = 1.5;
   const parityMax = Math.min(xMax, yMax);
@@ -163,15 +190,16 @@ function drawMap() {
   context.fillText('FORECAST fWAR BY NOW →', pad.left, height - 7);
   context.save();context.translate(11, height - pad.bottom);context.rotate(-Math.PI / 2);context.fillText('ACTUAL fWAR →', 0, 0);context.restore();
 
-  const labelIds = new Set([...feed.pitchers]
+  const labelLimit = starterView ? visiblePitchers.length : (mobile ? 12 : 18);
+  const labelIds = new Set([...visiblePitchers]
     .sort((a, b) => {
       const score = pitcher => pitcher.actual.war + Math.abs(pitcher.war_gap) * .9 + pitcher.actual.ip_value / 220;
       return score(b) - score(a);
     })
-    .slice(0, mobile ? 11 : 16).map(pitcher => pitcher.id));
+    .slice(0, labelLimit).map(pitcher => pitcher.id));
   plotPoints = [];
   const labelRects = [];
-  [...feed.pitchers].sort((a, b) => b.actual.ip_value - a.actual.ip_value).forEach(pitcher => {
+  [...visiblePitchers].sort((a, b) => b.actual.ip_value - a.actual.ip_value).forEach(pitcher => {
     const px = x(pitcher.forecast_to_date.war);
     const py = y(pitcher.actual.war);
     const radius = Math.min(13, 4 + Math.sqrt(pitcher.actual.ip_value) * .55);
@@ -196,6 +224,16 @@ function drawMap() {
       context.fillText(name, labelX, labelY);
     }
   });
+}
+
+function updateMapDescription() {
+  if (!feed) return;
+  const group = chartFilter === 'starters' ? 'Starters' : 'Relievers';
+  const summary = chartPitchers()
+    .slice(0, 8)
+    .map(pitcher => `${pitcher.name}: ${pitcher.actual.war.toFixed(1)} actual fWAR, ${pitcher.forecast_to_date.war.toFixed(1)} forecast`)
+    .join('. ');
+  document.getElementById('impactMapDescription').textContent = `${group}. ${summary}`;
 }
 
 canvas.addEventListener('pointerup', event => {
@@ -236,8 +274,7 @@ async function loadPitching() {
     const scale = Math.max(summary.actual_war, summary.forecast_war_to_date) * 1.08;
     document.getElementById('teamTrackFill').style.width = `${summary.actual_war / scale * 100}%`;
     document.getElementById('teamTrackMark').style.left = `${summary.forecast_war_to_date / scale * 100}%`;
-    document.getElementById('impactMapDescription').textContent = feed.pitchers
-      .slice(0, 6).map(pitcher => `${pitcher.name}: ${pitcher.actual.war.toFixed(1)} actual fWAR, ${pitcher.forecast_to_date.war.toFixed(1)} forecast`).join('. ');
+    updateMapDescription();
     document.getElementById('pitchingUpdated').textContent = updatedLabel(feed.generated_at);
     renderCards();
     ['forecastBoard', 'impactMapSection', 'pitcherReports', 'pitchingNote'].forEach(id => { document.getElementById(id).hidden = false; });

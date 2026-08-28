@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260828-pitching">
 <link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
-<link rel="stylesheet" href="../src/pitching.css?v=20260828-compact">
+<link rel="stylesheet" href="../src/pitching.css?v=20260828-filters">
 </head>
 <body>
 <header class="site-header">
@@ -61,7 +61,13 @@
   <section class="impact-map" id="impactMapSection" aria-labelledby="impactMapHeading" hidden>
     <div class="section-head">
       <div><p class="section-kicker">The shape of the surprise</p><h2 id="impactMapHeading">Who moved the season?</h2></div>
-      <p>Every mark is a pitcher. Above the diagonal means more fWAR than Steamer expected by this point; larger marks mean more innings.</p>
+      <div class="impact-map__aside">
+        <p>Every mark is a pitcher. Above the diagonal means more fWAR than Steamer expected by this point; larger marks mean more innings.</p>
+        <div class="impact-filter" role="group" aria-label="Filter pitching chart">
+          <button class="active" type="button" data-chart-filter="starters" aria-pressed="true">Starters</button>
+          <button type="button" data-chart-filter="relievers" aria-pressed="false">Relievers</button>
+        </div>
+      </div>
     </div>
     <div class="impact-map__frame">
       <canvas id="impactCanvas" role="img" aria-describedby="impactMapDescription"></canvas>
@@ -91,6 +97,6 @@
     <p>Data: <a href="https://www.fangraphs.com/projections" rel="noreferrer noopener">FanGraphs Steamer projections</a>, <a href="https://www.fangraphs.com/leaders/major-league" rel="noreferrer noopener">FanGraphs leaderboards</a>, and MLB. <span id="pitchingUpdated"></span></p>
   </footer>
 </main>
-<script type="module" src="../src/pitching.js?v=20260828-compact"></script>
+<script type="module" src="../src/pitching.js?v=20260828-filters"></script>
 </body>
 </html>
