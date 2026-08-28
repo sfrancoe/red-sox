@@ -138,6 +138,7 @@ const leadersPanel = document.getElementById('leadersPanel');
 
 function selectView(view, focus = false) {
   const showLeaders = view === 'leaders';
+  document.documentElement.dataset.view = showLeaders ? 'leaders' : 'story';
   tabs[0].classList.toggle('active', !showLeaders);
   tabs[0].setAttribute('aria-pressed', String(!showLeaders));
   tabs[0].tabIndex = showLeaders ? -1 : 0;

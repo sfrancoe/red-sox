@@ -27,6 +27,11 @@ html,body{background:var(--bg0);margin:0;}
 *{box-sizing:border-box;}
 [hidden]{display:none !important;}
 
+/* The requested view is marked in the blocking head script. Keep the graph
+   invisible while season data loads so it cannot flash before the leaders
+   panel takes over. Visibility preserves its dimensions for canvas setup. */
+html[data-view='leaders'] .stage:not([hidden]){visibility:hidden;}
+
 .stage{
   position:relative;
   min-height:100vh;

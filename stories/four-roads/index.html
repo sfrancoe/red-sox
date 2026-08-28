@@ -6,13 +6,17 @@
 <title>Four Roads, One Record — Red Sox 57-51</title>
 <meta name="description" content="Four straight Red Sox seasons hit 57-51 after 108 games, then split toward four different fates.">
 <script>
-  if (location.protocol !== 'file:' && !new URLSearchParams(location.search).has('view')) {
+  const initialView = new URLSearchParams(location.search).get('view');
+  if (initialView === 'leaders') {
+    document.documentElement.dataset.view = 'leaders';
+  }
+  if (location.protocol !== 'file:' && !initialView) {
     location.replace('../../news/');
   }
 </script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../../src/site-shell.css?v=20260827-schedule">
-<link rel="stylesheet" href="../../src/styles.css?v=20260827-whipleaders">
+<link rel="stylesheet" href="../../src/styles.css?v=20260827-leaders-prepaint">
 </head>
 <body>
 <header class="site-header">
