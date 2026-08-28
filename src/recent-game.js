@@ -1,4 +1,5 @@
 const status = document.getElementById('recentGameStatus');
+const summary = document.getElementById('recentGameSummary');
 const gameDetails = document.getElementById('gameDetails');
 const lineScoreSection = document.getElementById('lineScoreSection');
 const boxscoreSection = document.getElementById('boxscoreSection');
@@ -132,6 +133,7 @@ async function loadGame() {
     const feed = await response.json();
     if (!feed.game_pk || !feed.away || !feed.home) throw new Error('Recent game data was incomplete');
     status.textContent = `${feed.away.name} ${feed.away.runs}, ${feed.home.name} ${feed.home.runs}`;
+    summary.textContent = feed.summary;
     renderDetails(feed);
     renderLineScore(feed);
     renderTeamBox(feed.away, 'awayBox', 'awayBoxTab');
@@ -141,6 +143,7 @@ async function loadGame() {
   } catch (error) {
     console.error(error);
     status.textContent = 'The most recent score could not be loaded right now.';
+    summary.textContent = '';
   }
 }
 

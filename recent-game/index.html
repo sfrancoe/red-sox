@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
 <link rel="stylesheet" href="../src/site-shell.css?v=20260827-recentgame">
 <link rel="stylesheet" href="../src/home.css?v=20260827-recentgame">
-<link rel="stylesheet" href="../src/recent-game.css?v=20260828-mobile-tables">
+<link rel="stylesheet" href="../src/recent-game.css?v=20260828-score-summary">
 </head>
 <body>
 <header class="site-header">
@@ -27,6 +27,7 @@
 <main class="recent-game-home">
   <h1 class="sr-only">Most recent Red Sox game</h1>
   <p class="recent-game-status" id="recentGameStatus" role="status">Loading the latest score…</p>
+  <p class="recent-game-summary" id="recentGameSummary"></p>
 
   <section class="game-detail-grid scoring-only" id="gameDetails" hidden>
     <article class="scoring-panel">
@@ -54,6 +55,6 @@
 
   <p class="recent-game-note">Game data and decisions are supplied by MLB and refresh after each final.</p>
 </main>
-<script type="module" src="../src/recent-game.js?v=20260828-score-and-tables"></script>
+<script type="module" src="../src/recent-game.js?v=20260828-score-summary"></script>
 </body>
 </html>
