@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>American League Standings | Red Sox Records</title>
+<meta name="description" content="Current American League division and Wild Card standings, with Boston highlighted.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
+<link rel="stylesheet" href="../src/site-shell.css?v=20260828-standings">
+<link rel="stylesheet" href="../src/home.css?v=20260827-newspapers">
+<link rel="stylesheet" href="../src/standings.css?v=20260828-first">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <nav class="site-nav" aria-label="Red Sox Records sections">
+      <a class="site-nav__link" href="../recent-game/">Recent game</a>
+      <a class="site-nav__link" href="../schedule/">Schedule</a>
+      <a class="site-nav__link active" href="./" aria-current="page">Standings</a>
+      <a class="site-nav__link" href="../news/">Newspaper headlines</a>
+      <a class="site-nav__link" href="../x-posts/">X Posts</a>
+      <a class="site-nav__link" href="../stories/four-roads/?view=leaders">Season leaders</a>
+      <a class="site-nav__link site-nav__link--wide" href="../stories/four-roads/?view=story">Game 108 graph</a>
+    </nav>
+  </div>
+</header>
+
+<main class="standings-home">
+  <header class="standings-intro">
+    <p class="standings-kicker" id="standingsKicker">American League</p>
+    <h1>Standings</h1>
+    <p>Every division race and the road to the three Wild Card berths, with Boston highlighted.</p>
+  </header>
+
+  <div class="standings-tabs" role="tablist" aria-label="Choose a standings view">
+    <button class="standings-tab active" id="divisionsTab" type="button" role="tab"
+      aria-selected="true" aria-controls="divisionsPanel" data-target="divisionsPanel">AL Divisions</button>
+    <button class="standings-tab" id="wildCardTab" type="button" role="tab"
+      aria-selected="false" aria-controls="wildCardPanel" data-target="wildCardPanel">Wild Card</button>
+  </div>
+
+  <div class="standings-status" id="standingsStatus" role="status">Loading the American League standings…</div>
+
+  <section class="standings-panel" id="divisionsPanel" role="tabpanel" aria-labelledby="divisionsTab" hidden>
+    <div class="division-grid" id="divisionGrid"></div>
+  </section>
+
+  <section class="standings-panel" id="wildCardPanel" role="tabpanel" aria-labelledby="wildCardTab" hidden>
+    <article class="standings-card wild-card-card">
+      <header class="standings-card-head">
+        <div><span>Three teams advance</span><h2>AL Wild Card</h2></div>
+        <strong>Top 3 qualify</strong>
+      </header>
+      <div id="wildCardTable"></div>
+    </article>
+  </section>
+
+  <p class="standings-note">
+    Standings supplied by MLB. WCGB shows distance from the final Wild Card position.
+    <span id="standingsUpdated"></span>
+  </p>
+</main>
+<script type="module" src="../src/standings.js?v=20260828-first"></script>
+</body>
+</html>

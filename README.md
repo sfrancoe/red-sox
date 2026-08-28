@@ -14,6 +14,9 @@ The **Newspaper Headlines** tab tracks Red Sox headlines and short descriptions
 from The Boston Globe and Boston Herald in parallel desktop columns and mobile
 tabs. Every item links to the original article.
 
+The **Standings** tab shows all three American League divisions and the Wild
+Card race, with Boston highlighted throughout.
+
 ## Run it locally
 
 ES modules and `fetch()` both need a real HTTP origin, so `file://` will not work:
@@ -29,6 +32,7 @@ cd _site && python3 -m http.server 8765
 ```bash
 python3 scripts/fetch_seasons.py          # all seasons
 python3 scripts/fetch_seasons.py 2026     # one season
+python3 scripts/fetch_standings.py        # AL divisions and Wild Card
 python3 scripts/fetch_globe_news.py       # Globe headline metadata
 python3 scripts/fetch_herald_news.py      # Herald headline metadata
 ```
