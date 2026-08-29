@@ -86,13 +86,19 @@ def game_row(game: dict[str, Any], today) -> dict[str, Any] | None:
         days_away = 99
 
     status = game.get("status") or {}
+    opponent_team = opponent.get("team") or {}
     return {
         "game_pk": game.get("gamePk"),
         "game_date": game_date,
         "status": status.get("detailedState") or "Scheduled",
         "venue": (game.get("venue") or {}).get("name") or "",
         "location": location,
-        "opponent": (opponent.get("team") or {}).get("name") or "Opponent",
+        "opponent": (
+            opponent_team.get("teamName")
+            or opponent_team.get("clubName")
+            or opponent_team.get("name")
+            or "Opponent"
+        ),
         "opponent_record": record(opponent),
         "red_sox_record": record(red_sox),
         "red_sox_pitcher": pitcher(red_sox),
@@ -118,7 +124,7 @@ def build_feed(payload: dict[str, Any], today, season_end: date) -> dict[str, An
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "MLB Stats API",
-        "team": "Boston Red Sox",
+        "team": "Red Sox",
         "regular_season_end": season_end.isoformat(),
         "games": games,
     }
