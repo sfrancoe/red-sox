@@ -106,7 +106,7 @@ function renderTeamBox(team, targetId, tabId) {
   document.getElementById(tabId).textContent = team.abbreviation;
   const panel = document.getElementById(targetId);
   const header = document.createElement('header');
-  addText(header, 'h3', '', team.name);
+  addText(header, 'h3', '', team.club_name || team.name);
   addText(header, 'span', '', `${team.record} · ${team.runs} R · ${team.hits} H · ${team.errors} E`);
 
   const battingTitle = addText(panel, 'h4', '', 'Batting');
@@ -132,7 +132,7 @@ async function loadGame() {
     if (!response.ok) throw new Error(`Recent game request returned ${response.status}`);
     const feed = await response.json();
     if (!feed.game_pk || !feed.away || !feed.home) throw new Error('Recent game data was incomplete');
-    status.textContent = `${feed.away.name} ${feed.away.runs}, ${feed.home.name} ${feed.home.runs}`;
+    status.textContent = `${feed.away.club_name || feed.away.name} ${feed.away.runs}, ${feed.home.club_name || feed.home.name} ${feed.home.runs}`;
     summary.textContent = feed.summary;
     renderDetails(feed);
     renderLineScore(feed);

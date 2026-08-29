@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-29T11:05:30.964676+00:00",
+  "generated_at": "2026-08-29T15:06:57.339635+00:00",
   "source": "MLB Stats API",
   "game_pk": 823504,
   "game_date": "2026-08-28T23:15:00Z",
   "venue": "Yankee Stadium",
   "innings_count": 9,
   "result": "Loss",
-  "summary": "Boston was shut out by the New York Yankees, 1–0, at Yankee Stadium. New York Yankees scored in the 3rd innings; Boston finished with 5 hits and 0 errors.",
+  "summary": "The Red Sox were shut out by the Yankees, 1–0, at Yankee Stadium. The Yankees scored in the 3rd inning; the Red Sox finished with 5 hits and 0 errors.",
   "facts": [
-    "Boston was held scoreless despite putting 5 hits on the board.",
-    "Ceddanne Rafaela collected 2 of Boston’s 5 hits.",
-    "Patrick Sandoval worked 5.1 innings, allowed 1 earned runs, and struck out 7."
+    "The Red Sox were held scoreless despite putting 5 hits on the board.",
+    "Ceddanne Rafaela collected 2 of the Red Sox’s 5 hits.",
+    "Patrick Sandoval worked 5.1 innings, allowed 1 earned run, and struck out 7."
   ],
   "decisions": {
     "winner": "Cam Schlittler",
@@ -21,6 +21,7 @@
     "side": "away",
     "id": 111,
     "name": "Boston Red Sox",
+    "club_name": "Red Sox",
     "abbreviation": "BOS",
     "record": "73-61",
     "runs": 0,
@@ -295,6 +296,7 @@
     "side": "home",
     "id": 147,
     "name": "New York Yankees",
+    "club_name": "Yankees",
     "abbreviation": "NYY",
     "record": "76-58",
     "runs": 1,

@@ -114,6 +114,7 @@ def team_payload(side: str, game_data: dict[str, Any], live_data: dict[str, Any]
         "side": side,
         "id": team.get("id"),
         "name": team.get("name"),
+        "club_name": team.get("teamName") or team.get("clubName") or team.get("name"),
         "abbreviation": team.get("abbreviation"),
         "record": record(team),
         "runs": totals.get("runs", 0),
@@ -134,14 +135,15 @@ def build_summary(boston: dict[str, Any], opponent: dict[str, Any], venue: str,
                   innings: list[dict[str, Any]]) -> str:
     br, oruns = boston["runs"], opponent["runs"]
     score = f"{max(br, oruns)}–{min(br, oruns)}"
+    opponent_name = opponent["club_name"]
     if br > oruns and oruns == 0:
-        first = f"Boston shut out the {opponent['name']}, {score}, at {venue}."
+        first = f"The Red Sox shut out the {opponent_name}, {score}, at {venue}."
     elif br > oruns:
-        first = f"Boston beat the {opponent['name']}, {score}, at {venue}."
+        first = f"The Red Sox beat the {opponent_name}, {score}, at {venue}."
     elif br == 0:
-        first = f"Boston was shut out by the {opponent['name']}, {score}, at {venue}."
+        first = f"The Red Sox were shut out by the {opponent_name}, {score}, at {venue}."
     else:
-        first = f"Boston fell to the {opponent['name']}, {score}, at {venue}."
+        first = f"The Red Sox fell to the {opponent_name}, {score}, at {venue}."
 
     scoring_side = "away" if opponent["side"] == "away" else "home"
     scoring_innings = [inning["num"] for inning in innings if (inning.get(scoring_side) or {}).get("runs", 0)]
@@ -151,12 +153,13 @@ def build_summary(boston: dict[str, Any], opponent: dict[str, Any], venue: str,
             " and ".join(inning_labels) if len(inning_labels) == 2
             else ", ".join(inning_labels[:-1]) + f", and {inning_labels[-1]}"
         )
+        inning_word = "inning" if len(scoring_innings) == 1 else "innings"
         second = (
-            f"{opponent['name']} scored in the {labels} innings; Boston finished with "
+            f"The {opponent_name} scored in the {labels} {inning_word}; the Red Sox finished with "
             f"{boston['hits']} hits and {boston['errors']} errors."
         )
     else:
-        second = f"Boston finished with {boston['hits']} hits and {boston['errors']} errors."
+        second = f"The Red Sox finished with {boston['hits']} hits and {boston['errors']} errors."
     return f"{first} {second}"
 
 
@@ -165,9 +168,9 @@ def interesting_facts(boston: dict[str, Any], opponent: dict[str, Any], innings_
     if innings_count > 9:
         facts.append(f"The game went {innings_count} innings.")
     if boston["runs"] == 0:
-        facts.append(f"Boston was held scoreless despite putting {boston['hits']} hits on the board.")
+        facts.append(f"The Red Sox were held scoreless despite putting {boston['hits']} hits on the board.")
     elif opponent["runs"] == 0:
-        facts.append(f"Boston’s pitchers combined for a {innings_count}-inning shutout.")
+        facts.append(f"Red Sox pitchers combined for a {innings_count}-inning shutout.")
 
     earned = sum(int(row.get("earnedRuns") or 0) for row in boston["pitching"])
     unearned = max(0, opponent["runs"] - earned)
@@ -179,25 +182,26 @@ def interesting_facts(boston: dict[str, Any], opponent: dict[str, Any], innings_
     steals = int(opponent_batting.get("stolenBases") or 0)
     caught = int(opponent_batting.get("caughtStealing") or 0)
     if steals >= 3:
-        facts.append(f"{opponent['name']} went {steals}-for-{steals + caught} on stolen-base attempts.")
+        facts.append(f"The {opponent['club_name']} went {steals}-for-{steals + caught} on stolen-base attempts.")
 
     top_hitter = max(boston["batting"], key=lambda row: int(row.get("hits") or 0), default=None)
     if top_hitter and int(top_hitter.get("hits") or 0) >= 2:
         facts.append(
-            f"{top_hitter['name']} collected {top_hitter['hits']} of Boston’s {boston['hits']} hits."
+            f"{top_hitter['name']} collected {top_hitter['hits']} of the Red Sox’s {boston['hits']} hits."
         )
 
     homers = [row for row in boston["batting"] if int(row.get("homeRuns") or 0)]
     if homers:
         names = ", ".join(row["name"] for row in homers)
         total = sum(int(row["homeRuns"]) for row in homers)
-        facts.append(f"Boston hit {total} home run{'s' if total != 1 else ''}: {names}.")
+        facts.append(f"The Red Sox hit {total} home run{'s' if total != 1 else ''}: {names}.")
 
     starter = boston["pitching"][0] if boston["pitching"] else None
     if starter:
+        earned_runs = int(starter["earnedRuns"] or 0)
         facts.append(
             f"{starter['name']} worked {starter['inningsPitched']} innings, allowed "
-            f"{starter['earnedRuns']} earned runs, and struck out {starter['strikeOuts']}."
+            f"{earned_runs} earned run{'s' if earned_runs != 1 else ''}, and struck out {starter['strikeOuts']}."
         )
     return facts[:5]
 
