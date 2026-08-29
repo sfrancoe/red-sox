@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T02:49:03.245727+00:00",
+  "generated_at": "2026-08-29T11:05:31.762217+00:00",
   "season": 2026,
   "team": "Boston Red Sox",
   "games_played": 134,
@@ -15,9 +15,9 @@
   "team_summary": {
     "actual_war": 19.2,
     "forecast_war_to_date": 18.2,
-    "war_gap": 0.9,
-    "innings": 1184.3,
-    "era": 3.47
+    "war_gap": 1.0,
+    "innings": 1192.3,
+    "era": 3.46
   },
   "pitchers": [
     {
@@ -34,7 +34,7 @@
         "ip_value": 118.333,
         "war": 3.33,
         "era": 3.35,
-        "fip": 2.97,
+        "fip": 2.96,
         "k_minus_bb_pct": 16.3
       },
       "forecast": {
@@ -49,8 +49,8 @@
         "ip": 141.9,
         "war": 2.69
       },
-      "war_gap": 0.64,
-      "innings_share_pct": 10.0
+      "war_gap": 0.63,
+      "innings_share_pct": 9.9
     },
     {
       "id": 801139,
@@ -66,7 +66,7 @@
         "ip_value": 125.333,
         "war": 3.31,
         "era": 3.09,
-        "fip": 3.2,
+        "fip": 3.19,
         "k_minus_bb_pct": 21.0
       },
       "forecast": {
@@ -81,8 +81,8 @@
         "ip": 28.9,
         "war": 0.34
       },
-      "war_gap": 2.97,
-      "innings_share_pct": 10.6
+      "war_gap": 2.96,
+      "innings_share_pct": 10.5
     },
     {
       "id": 543243,
@@ -113,8 +113,8 @@
         "ip": 150.0,
         "war": 3.21
       },
-      "war_gap": -0.45,
-      "innings_share_pct": 12.1
+      "war_gap": -0.46,
+      "innings_share_pct": 12.0
     },
     {
       "id": 687562,
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "87.2",
         "ip_value": 87.667,
-        "war": 2.04,
+        "war": 2.03,
         "era": 3.49,
         "fip": 3.31,
         "k_minus_bb_pct": 13.9
@@ -210,24 +210,24 @@
         "war": 0.83
       },
       "war_gap": 0.61,
-      "innings_share_pct": 3.8
+      "innings_share_pct": 3.7
     },
     {
       "id": 594027,
       "name": "Tyron Guerrero",
       "throws": "R",
       "role": "Setup",
-      "games": 35,
+      "games": 36,
       "starts": 0,
       "saves": 0,
       "holds": 16,
       "actual": {
-        "ip": "36.1",
-        "ip_value": 36.333,
-        "war": 0.88,
-        "era": 2.72,
-        "fip": 2.53,
-        "k_minus_bb_pct": 19.7
+        "ip": "37.1",
+        "ip_value": 37.333,
+        "war": 0.92,
+        "era": 2.65,
+        "fip": 2.49,
+        "k_minus_bb_pct": 20.0
       },
       "forecast": {
         "ip": 28.0,
@@ -241,7 +241,7 @@
         "ip": 23.2,
         "war": -0.09
       },
-      "war_gap": 0.98,
+      "war_gap": 1.01,
       "innings_share_pct": 3.1
     },
     {
@@ -249,17 +249,17 @@
       "name": "Patrick Sandoval",
       "throws": "L",
       "role": "Starter",
-      "games": 8,
-      "starts": 8,
+      "games": 9,
+      "starts": 9,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "39.2",
-        "ip_value": 39.667,
-        "war": 0.69,
-        "era": 4.54,
-        "fip": 4.09,
-        "k_minus_bb_pct": 12.5
+        "ip": "45.0",
+        "ip_value": 45.0,
+        "war": 0.68,
+        "era": 4.2,
+        "fip": 4.22,
+        "k_minus_bb_pct": 12.6
       },
       "forecast": {
         "ip": 85.7,
@@ -273,8 +273,8 @@
         "ip": 70.9,
         "war": 0.93
       },
-      "war_gap": -0.24,
-      "innings_share_pct": 3.3
+      "war_gap": -0.25,
+      "innings_share_pct": 3.8
     },
     {
       "id": 813349,
@@ -337,7 +337,7 @@
         "ip": 50.5,
         "war": 0.35
       },
-      "war_gap": 0.24,
+      "war_gap": 0.23,
       "innings_share_pct": 2.6
     },
     {
@@ -352,7 +352,7 @@
       "actual": {
         "ip": "90.1",
         "ip_value": 90.333,
-        "war": 0.54,
+        "war": 0.53,
         "era": 4.68,
         "fip": 4.29,
         "k_minus_bb_pct": 9.6
@@ -369,7 +369,7 @@
         "ip": 129.1,
         "war": 1.52
       },
-      "war_gap": -0.98,
+      "war_gap": -0.99,
       "innings_share_pct": 7.6
     },
     {
@@ -448,7 +448,7 @@
       "actual": {
         "ip": "20.2",
         "ip_value": 20.667,
-        "war": 0.27,
+        "war": 0.26,
         "era": 1.31,
         "fip": 3.23,
         "k_minus_bb_pct": 10.0
@@ -533,6 +533,38 @@
       "innings_share_pct": 1.7
     },
     {
+      "id": 681544,
+      "name": "Wyatt Olds",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 6,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "6.0",
+        "ip_value": 6.0,
+        "war": 0.16,
+        "era": 0.0,
+        "fip": 1.92,
+        "k_minus_bb_pct": 18.5
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.01,
+        "era": 5.18,
+        "fip": 5.22,
+        "k_minus_bb_pct": 5.6,
+        "team_at_fetch": "BOS"
+      },
+      "forecast_to_date": {
+        "ip": 0.8,
+        "war": -0.01
+      },
+      "war_gap": 0.17,
+      "innings_share_pct": 0.5
+    },
+    {
       "id": 677161,
       "name": "Zack Kelly",
       "throws": "R",
@@ -546,7 +578,7 @@
         "ip_value": 16.333,
         "war": 0.15,
         "era": 3.31,
-        "fip": 3.64,
+        "fip": 3.63,
         "k_minus_bb_pct": 9.9
       },
       "forecast": {
@@ -565,36 +597,36 @@
       "innings_share_pct": 1.4
     },
     {
-      "id": 681544,
-      "name": "Wyatt Olds",
+      "id": 669711,
+      "name": "Greg Weissert",
       "throws": "R",
       "role": "Reliever",
-      "games": 5,
+      "games": 54,
       "starts": 0,
-      "saves": 0,
-      "holds": 0,
+      "saves": 1,
+      "holds": 6,
       "actual": {
-        "ip": "5.0",
-        "ip_value": 5.0,
-        "war": 0.11,
-        "era": 0.0,
-        "fip": 2.48,
-        "k_minus_bb_pct": 12.5
+        "ip": "51.0",
+        "ip_value": 51.0,
+        "war": 0.09,
+        "era": 3.88,
+        "fip": 4.18,
+        "k_minus_bb_pct": 16.4
       },
       "forecast": {
-        "ip": 1.0,
-        "war": -0.01,
-        "era": 5.18,
-        "fip": 5.22,
-        "k_minus_bb_pct": 5.6,
+        "ip": 65.0,
+        "war": 0.17,
+        "era": 4.31,
+        "fip": 4.22,
+        "k_minus_bb_pct": 12.4,
         "team_at_fetch": "BOS"
       },
       "forecast_to_date": {
-        "ip": 0.8,
-        "war": -0.01
+        "ip": 53.8,
+        "war": 0.14
       },
-      "war_gap": 0.11,
-      "innings_share_pct": 0.4
+      "war_gap": -0.05,
+      "innings_share_pct": 4.3
     },
     {
       "id": 700842,
@@ -627,38 +659,6 @@
       },
       "war_gap": 0.07,
       "innings_share_pct": 0.8
-    },
-    {
-      "id": 669711,
-      "name": "Greg Weissert",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 53,
-      "starts": 0,
-      "saves": 1,
-      "holds": 6,
-      "actual": {
-        "ip": "50.1",
-        "ip_value": 50.333,
-        "war": 0.06,
-        "era": 3.93,
-        "fip": 4.24,
-        "k_minus_bb_pct": 16.0
-      },
-      "forecast": {
-        "ip": 65.0,
-        "war": 0.17,
-        "era": 4.31,
-        "fip": 4.22,
-        "k_minus_bb_pct": 12.4,
-        "team_at_fetch": "BOS"
-      },
-      "forecast_to_date": {
-        "ip": 53.8,
-        "war": 0.14
-      },
-      "war_gap": -0.08,
-      "innings_share_pct": 4.2
     },
     {
       "id": 681252,
@@ -898,7 +898,7 @@
         "ip_value": 3.667,
         "war": -0.12,
         "era": 9.82,
-        "fip": 10.18,
+        "fip": 10.17,
         "k_minus_bb_pct": 11.1
       },
       "forecast": {
@@ -946,7 +946,7 @@
         "war": 0.31
       },
       "war_gap": -0.44,
-      "innings_share_pct": 1.9
+      "innings_share_pct": 1.8
     }
   ]
 }
