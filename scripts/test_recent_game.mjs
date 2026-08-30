@@ -108,8 +108,11 @@ const page = await pageHarness({ liveFeed: newGame, delayedSaved: true });
 assert.equal(page.get('recentGameSummary').textContent, 'New final', 'late saved response cannot roll back new game');
 page.tabs[1].events.click();
 page.changeLive({ ...newGame, summary: 'Official correction' });
+const beforeCorrection = page.calls();
+page.interval();
 page.interval();
 await flush();
+assert.equal(page.calls(), beforeCorrection + 1, 'prevent overlapping refresh requests');
 assert.equal(page.get('recentGameSummary').textContent, 'Official correction');
 assert.equal(page.tabs[1]['aria-selected'], 'true', 'keep selected box score on correction');
 page.failLive();
@@ -133,6 +136,12 @@ const liveOnly = await pageHarness({ savedFails: true });
 assert.equal(liveOnly.get('recentGameSummary').textContent, saved.summary);
 const failed = await pageHarness({ liveFails: true, savedFails: true });
 assert.match(failed.get('recentGameStatus').textContent, /could not be loaded/);
+const partial = await pageHarness({ liveFeed: { ...saved, innings: [] } });
+assert.equal(partial.get('recentGameSummary').textContent, saved.summary, 'keep saved box score when final is incomplete');
+const correctionRace = await pageHarness({
+  liveFeed: { ...saved, summary: 'Corrected same game' }, delayedSaved: true,
+});
+assert.equal(correctionRace.get('recentGameSummary').textContent, 'Corrected same game');
 
 if (process.env.TEST_LIVE_MLB === '1') {
   const live = await adapter.fetchLatestGame();
