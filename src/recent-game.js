@@ -1,3 +1,5 @@
+import { fetchJSON, fetchLatestGame, isOlderGame, validateFeed } from './recent-game-feed.js';
+
 const status = document.getElementById('recentGameStatus');
 const summary = document.getElementById('recentGameSummary');
 const gameDetails = document.getElementById('gameDetails');
@@ -126,28 +128,65 @@ function renderTeamBox(team, targetId, tabId) {
   panel.replaceChildren(header, battingTitle, batting, pitchingTitle, pitching);
 }
 
-async function loadGame() {
+let currentFeed = null;
+let currentSource = null;
+let refreshing = false;
+let renderedContent = '';
+
+function showGame(feed, source) {
+  validateFeed(feed);
+  if (isOlderGame(feed, currentFeed)) return;
+  // A delayed saved response must not overwrite fresher MLB stats for this game.
+  if (source === 'saved' && currentSource === 'mlb' && currentFeed?.game_pk === feed.game_pk) return;
+  const sameGame = currentFeed?.game_pk === feed.game_pk;
+  const selected = sameGame && boxTabs.find(tab => tab.classList.contains('active'))?.dataset.target;
+  const content = JSON.stringify([feed.game_pk, feed.summary, feed.away, feed.home, feed.innings, feed.scoring_plays]);
+  currentFeed = feed;
+  currentSource = source;
+  if (content === renderedContent) return;
+  status.textContent = `${feed.away.club_name || feed.away.name} ${feed.away.runs}, ${feed.home.club_name || feed.home.name} ${feed.home.runs}`;
+  summary.textContent = feed.summary;
+  renderDetails(feed);
+  renderLineScore(feed);
+  renderTeamBox(feed.away, 'awayBox', 'awayBoxTab');
+  renderTeamBox(feed.home, 'homeBox', 'homeBoxTab');
+  selectBox(selected || (feed.away.id === 111 ? 'awayBox' : 'homeBox'));
+  boxscoreSection.hidden = false;
+  renderedContent = content;
+}
+
+async function loadSavedGame() {
   try {
-    const response = await fetch('../data/recent-game.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Recent game request returned ${response.status}`);
-    const feed = await response.json();
-    if (!feed.game_pk || !feed.away || !feed.home) throw new Error('Recent game data was incomplete');
-    status.textContent = `${feed.away.club_name || feed.away.name} ${feed.away.runs}, ${feed.home.club_name || feed.home.name} ${feed.home.runs}`;
-    summary.textContent = feed.summary;
-    renderDetails(feed);
-    renderLineScore(feed);
-    renderTeamBox(feed.away, 'awayBox', 'awayBoxTab');
-    renderTeamBox(feed.home, 'homeBox', 'homeBoxTab');
-    selectBox(feed.away.id === 111 ? 'awayBox' : 'homeBox');
-    boxscoreSection.hidden = false;
+    showGame(await fetchJSON('../data/recent-game.json'), 'saved');
   } catch (error) {
-    console.error(error);
-    status.textContent = 'The most recent score could not be loaded right now.';
-    summary.textContent = '';
+    console.warn('Saved recent game unavailable', error);
   }
 }
 
-await loadGame();
+async function refreshGame() {
+  if (refreshing) return;
+  refreshing = true;
+  try {
+    showGame(await fetchLatestGame(), 'mlb');
+  } catch (error) {
+    console.warn('MLB refresh unavailable; keeping the last complete game', error);
+    await loadSavedGame();
+  } finally {
+    refreshing = false;
+  }
+}
+
+// Show the saved game promptly, without letting it delay the direct MLB check.
+await Promise.all([loadSavedGame(), refreshGame()]);
+if (!currentFeed) {
+  status.textContent = 'The most recent score could not be loaded right now.';
+}
 setInterval(() => {
-  if (document.visibilityState === 'visible') loadGame();
-}, 300_000);
+  if (document.visibilityState === 'visible') refreshGame();
+}, 60_000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') refreshGame();
+});
+window.addEventListener('online', () => {
+  if (document.visibilityState === 'visible') refreshGame();
+});

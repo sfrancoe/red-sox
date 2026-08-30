@@ -1,20 +1,19 @@
 {
-  "generated_at": "2026-08-30T08:18:52.066024+00:00",
+  "generated_at": "2026-08-30T21:22:43.295461+00:00",
   "source": "MLB Stats API",
-  "game_pk": 823501,
-  "game_date": "2026-08-29T23:15:00Z",
+  "game_pk": 823502,
+  "game_date": "2026-08-30T17:35:00Z",
   "venue": "Yankee Stadium",
   "innings_count": 9,
   "result": "Loss",
-  "summary": "The Red Sox fell to the Yankees, 9–2, at Yankee Stadium. The Yankees scored in the 3rd, 6th, and 8th innings; the Red Sox finished with 6 hits and 1 errors.",
+  "summary": "The Red Sox fell to the Yankees, 16–1, at Yankee Stadium. The Yankees scored in the 5th, 6th, 7th, and 8th innings; the Red Sox finished with 7 hits and 0 errors.",
   "facts": [
-    "The Yankees went 3-for-3 on stolen-base attempts.",
-    "The Red Sox hit 1 home run: Nick Sogard.",
-    "Alec Gamboa worked 1.1 innings, allowed 0 earned runs, and struck out 1."
+    "Roman Anthony collected 2 of the Red Sox’s 7 hits.",
+    "Ranger Suarez worked 5.1 innings, allowed 6 earned runs, and struck out 2."
   ],
   "decisions": {
-    "winner": "Paul Blackburn",
-    "loser": "Brayan Bello",
+    "winner": "Will Warren",
+    "loser": "Ranger Suarez",
     "save": ""
   },
   "away": {
@@ -23,38 +22,24 @@
     "name": "Boston Red Sox",
     "club_name": "Red Sox",
     "abbreviation": "BOS",
-    "record": "74-62",
-    "runs": 2,
-    "hits": 6,
-    "errors": 1,
-    "left_on_base": 7,
+    "record": "74-63",
+    "runs": 1,
+    "hits": 7,
+    "errors": 0,
+    "left_on_base": 4,
     "batting": [
       {
-        "name": "Jahmai Jones",
+        "name": "Roman Anthony",
         "position": "DH",
         "note": "",
         "order": 0,
-        "atBats": 2,
+        "atBats": 4,
         "runs": 0,
-        "hits": 1,
+        "hits": 2,
         "rbi": 0,
         "baseOnBalls": 0,
         "strikeOuts": 0,
-        "leftOnBase": 0,
-        "homeRuns": 0
-      },
-      {
-        "name": "Mickey Gasper",
-        "position": "DH",
-        "note": "b-",
-        "order": 1,
-        "atBats": 2,
-        "runs": 0,
-        "hits": 1,
-        "rbi": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 0,
-        "leftOnBase": 0,
+        "leftOnBase": 1,
         "homeRuns": 0
       },
       {
@@ -67,8 +52,8 @@
         "hits": 0,
         "rbi": 0,
         "baseOnBalls": 0,
-        "strikeOuts": 0,
-        "leftOnBase": 3,
+        "strikeOuts": 1,
+        "leftOnBase": 2,
         "homeRuns": 0
       },
       {
@@ -77,12 +62,12 @@
         "note": "",
         "order": 3,
         "atBats": 3,
-        "runs": 1,
-        "hits": 1,
+        "runs": 0,
+        "hits": 2,
         "rbi": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 1,
-        "leftOnBase": 2,
+        "baseOnBalls": 1,
+        "strikeOuts": 0,
+        "leftOnBase": 0,
         "homeRuns": 0
       },
       {
@@ -90,76 +75,20 @@
         "position": "1B",
         "note": "",
         "order": 4,
-        "atBats": 2,
-        "runs": 0,
-        "hits": 1,
-        "rbi": 1,
-        "baseOnBalls": 2,
-        "strikeOuts": 1,
-        "leftOnBase": 0,
-        "homeRuns": 0
-      },
-      {
-        "name": "Caleb Durbin",
-        "position": "3B",
-        "note": "",
-        "order": 5,
-        "atBats": 4,
+        "atBats": 3,
         "runs": 0,
         "hits": 0,
         "rbi": 0,
         "baseOnBalls": 0,
-        "strikeOuts": 3,
+        "strikeOuts": 1,
         "leftOnBase": 4,
         "homeRuns": 0
       },
       {
         "name": "Andruw Monasterio",
-        "position": "SS",
+        "position": "P",
         "note": "",
-        "order": 6,
-        "atBats": 4,
-        "runs": 0,
-        "hits": 0,
-        "rbi": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 2,
-        "leftOnBase": 4,
-        "homeRuns": 0
-      },
-      {
-        "name": "Nick Sogard",
-        "position": "2B",
-        "note": "",
-        "order": 7,
-        "atBats": 4,
-        "runs": 1,
-        "hits": 1,
-        "rbi": 1,
-        "baseOnBalls": 0,
-        "strikeOuts": 1,
-        "leftOnBase": 3,
-        "homeRuns": 1
-      },
-      {
-        "name": "Connor Wong",
-        "position": "C",
-        "note": "",
-        "order": 8,
-        "atBats": 4,
-        "runs": 0,
-        "hits": 1,
-        "rbi": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 2,
-        "leftOnBase": 0,
-        "homeRuns": 0
-      },
-      {
-        "name": "Eli White",
-        "position": "LF",
-        "note": "",
-        "order": 9,
+        "order": 5,
         "atBats": 1,
         "runs": 0,
         "hits": 0,
@@ -170,10 +99,38 @@
         "homeRuns": 0
       },
       {
+        "name": "Adley Rutschman",
+        "position": "C",
+        "note": "",
+        "order": 6,
+        "atBats": 4,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 2,
+        "homeRuns": 0
+      },
+      {
+        "name": "Caleb Durbin",
+        "position": "3B",
+        "note": "",
+        "order": 7,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 0,
+        "homeRuns": 0
+      },
+      {
         "name": "Jarren Duran",
         "position": "LF",
-        "note": "a-",
-        "order": 10,
+        "note": "",
+        "order": 8,
         "atBats": 3,
         "runs": 0,
         "hits": 0,
@@ -182,86 +139,128 @@
         "strikeOuts": 0,
         "leftOnBase": 0,
         "homeRuns": 0
+      },
+      {
+        "name": "Trevor Story",
+        "position": "SS",
+        "note": "",
+        "order": 9,
+        "atBats": 3,
+        "runs": 1,
+        "hits": 2,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 0,
+        "homeRuns": 0
+      },
+      {
+        "name": "Nick Sogard",
+        "position": "1B",
+        "note": "",
+        "order": 10,
+        "atBats": 3,
+        "runs": 0,
+        "hits": 1,
+        "rbi": 1,
+        "baseOnBalls": 0,
+        "strikeOuts": 2,
+        "leftOnBase": 1,
+        "homeRuns": 0
       }
     ],
     "pitching": [
       {
-        "name": "Alec Gamboa",
+        "name": "Ranger Suarez",
+        "position": "P",
+        "note": "(L, 5-4)",
+        "order": 0,
+        "inningsPitched": "5.1",
+        "hits": 9,
+        "runs": 6,
+        "earnedRuns": 6,
+        "baseOnBalls": 2,
+        "strikeOuts": 2,
+        "homeRuns": 1,
+        "numberOfPitches": 101
+      },
+      {
+        "name": "Greg Weissert",
         "position": "P",
         "note": "",
-        "order": 0,
-        "inningsPitched": "1.1",
+        "order": 1,
+        "inningsPitched": "0.2",
         "hits": 1,
         "runs": 0,
         "earnedRuns": 0,
         "baseOnBalls": 0,
         "strikeOuts": 1,
         "homeRuns": 0,
-        "numberOfPitches": 18
+        "numberOfPitches": 15
       },
       {
-        "name": "Brayan Bello",
-        "position": "P",
-        "note": "(L, 5-7)",
-        "order": 1,
-        "inningsPitched": "4.1",
-        "hits": 5,
-        "runs": 4,
-        "earnedRuns": 4,
-        "baseOnBalls": 1,
-        "strikeOuts": 2,
-        "homeRuns": 0,
-        "numberOfPitches": 94
-      },
-      {
-        "name": "Raymond Burgos",
+        "name": "Jovani Morán",
         "position": "P",
         "note": "",
         "order": 2,
-        "inningsPitched": "2.1",
-        "hits": 7,
+        "inningsPitched": "1.1",
+        "hits": 5,
         "runs": 5,
         "earnedRuns": 5,
-        "baseOnBalls": 0,
-        "strikeOuts": 2,
-        "homeRuns": 0,
-        "numberOfPitches": 42
+        "baseOnBalls": 2,
+        "strikeOuts": 1,
+        "homeRuns": 2,
+        "numberOfPitches": 40
+      },
+      {
+        "name": "Andruw Monasterio",
+        "position": "P",
+        "note": "",
+        "order": 3,
+        "inningsPitched": "0.2",
+        "hits": 3,
+        "runs": 5,
+        "earnedRuns": 5,
+        "baseOnBalls": 3,
+        "strikeOuts": 0,
+        "homeRuns": 2,
+        "numberOfPitches": 28
       }
     ],
     "team_batting": {
-      "flyOuts": 8,
-      "groundOuts": 7,
-      "airOuts": 10,
-      "runs": 2,
-      "doubles": 1,
-      "triples": 1,
-      "homeRuns": 1,
-      "strikeOuts": 10,
-      "baseOnBalls": 2,
+      "flyOuts": 3,
+      "groundOuts": 10,
+      "airOuts": 7,
+      "runs": 1,
+      "doubles": 2,
+      "triples": 0,
+      "homeRuns": 0,
+      "strikeOuts": 7,
+      "baseOnBalls": 1,
       "intentionalWalks": 0,
-      "hits": 6,
-      "hitByPitch": 1,
+      "hits": 7,
+      "hitByPitch": 0,
       "avg": ".249",
-      "atBats": 33,
+      "atBats": 31,
       "obp": ".323",
-      "slg": ".404",
-      "ops": ".727",
+      "slg": ".403",
+      "ops": ".726",
       "caughtStealing": 0,
       "stolenBases": 0,
       "stolenBasePercentage": ".---",
-      "groundIntoDoublePlay": 0,
+      "groundIntoDoublePlay": 3,
       "groundIntoTriplePlay": 0,
-      "plateAppearances": 36,
-      "totalBases": 12,
-      "rbi": 2,
-      "leftOnBase": 17,
+      "plateAppearances": 32,
+      "totalBases": 9,
+      "rbi": 1,
+      "leftOnBase": 11,
       "sacBunts": 0,
       "sacFlies": 0,
       "catchersInterference": 0,
       "pickoffs": 0,
-      "atBatsPerHomeRun": "33.00",
+      "atBatsPerHomeRun": "-.--",
       "popOuts": 1,
-      "lineOuts": 1
+      "lineOuts": 3
     }
   },
   "home": {
@@ -270,38 +269,38 @@
     "name": "New York Yankees",
     "club_name": "Yankees",
     "abbreviation": "NYY",
-    "record": "77-59",
-    "runs": 9,
-    "hits": 13,
+    "record": "78-59",
+    "runs": 16,
+    "hits": 18,
     "errors": 0,
-    "left_on_base": 6,
+    "left_on_base": 7,
     "batting": [
       {
-        "name": "Trent Grisham",
-        "position": "CF",
+        "name": "Paul Goldschmidt",
+        "position": "1B",
         "note": "",
         "order": 0,
-        "atBats": 4,
-        "runs": 1,
-        "hits": 0,
-        "rbi": 0,
-        "baseOnBalls": 1,
-        "strikeOuts": 1,
-        "leftOnBase": 3,
-        "homeRuns": 0
-      },
-      {
-        "name": "Ben Rice",
-        "position": "DH",
-        "note": "",
-        "order": 1,
-        "atBats": 5,
-        "runs": 1,
-        "hits": 2,
+        "atBats": 6,
+        "runs": 2,
+        "hits": 3,
         "rbi": 3,
         "baseOnBalls": 0,
         "strikeOuts": 1,
-        "leftOnBase": 0,
+        "leftOnBase": 1,
+        "homeRuns": 1
+      },
+      {
+        "name": "Cody Bellinger",
+        "position": "LF",
+        "note": "",
+        "order": 1,
+        "atBats": 6,
+        "runs": 1,
+        "hits": 2,
+        "rbi": 0,
+        "baseOnBalls": 0,
+        "strikeOuts": 1,
+        "leftOnBase": 1,
         "homeRuns": 0
       },
       {
@@ -310,109 +309,67 @@
         "note": "",
         "order": 2,
         "atBats": 2,
-        "runs": 0,
-        "hits": 0,
+        "runs": 1,
+        "hits": 2,
+        "rbi": 3,
+        "baseOnBalls": 2,
+        "strikeOuts": 0,
+        "leftOnBase": 0,
+        "homeRuns": 1
+      },
+      {
+        "name": "Spencer Jones",
+        "position": "RF",
+        "note": "1-",
+        "order": 3,
+        "atBats": 1,
+        "runs": 2,
+        "hits": 1,
         "rbi": 0,
         "baseOnBalls": 0,
-        "strikeOuts": 1,
+        "strikeOuts": 0,
         "leftOnBase": 0,
         "homeRuns": 0
       },
       {
-        "name": "Cody Bellinger",
-        "position": "LF",
-        "note": "",
-        "order": 3,
-        "atBats": 2,
-        "runs": 1,
-        "hits": 1,
-        "rbi": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 0,
-        "leftOnBase": 2,
-        "homeRuns": 0
-      },
-      {
         "name": "Luis García Jr.",
-        "position": "1B",
+        "position": "DH",
         "note": "",
         "order": 4,
         "atBats": 4,
         "runs": 1,
-        "hits": 3,
-        "rbi": 1,
-        "baseOnBalls": 0,
-        "strikeOuts": 0,
-        "leftOnBase": 2,
-        "homeRuns": 0
-      },
-      {
-        "name": "Jazz Chisholm Jr.",
-        "position": "2B",
-        "note": "",
-        "order": 5,
-        "atBats": 3,
-        "runs": 1,
-        "hits": 0,
-        "rbi": 1,
-        "baseOnBalls": 0,
-        "strikeOuts": 1,
-        "leftOnBase": 4,
-        "homeRuns": 0
-      },
-      {
-        "name": "George Lombard Jr.",
-        "position": "SS",
-        "note": "",
-        "order": 6,
-        "atBats": 2,
-        "runs": 0,
         "hits": 1,
         "rbi": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 0,
-        "leftOnBase": 1,
+        "baseOnBalls": 1,
+        "strikeOuts": 1,
+        "leftOnBase": 3,
         "homeRuns": 0
       },
       {
         "name": "Amed Rosario",
         "position": "3B",
         "note": "",
-        "order": 7,
-        "atBats": 2,
+        "order": 5,
+        "atBats": 4,
         "runs": 1,
         "hits": 2,
         "rbi": 1,
-        "baseOnBalls": 0,
+        "baseOnBalls": 1,
         "strikeOuts": 0,
-        "leftOnBase": 0,
+        "leftOnBase": 1,
         "homeRuns": 0
       },
       {
-        "name": "Spencer Jones",
-        "position": "RF",
+        "name": "Trent Grisham",
+        "position": "CF",
         "note": "",
-        "order": 8,
+        "order": 6,
         "atBats": 3,
-        "runs": 1,
-        "hits": 1,
+        "runs": 0,
+        "hits": 0,
         "rbi": 1,
-        "baseOnBalls": 0,
-        "strikeOuts": 0,
-        "leftOnBase": 2,
-        "homeRuns": 0
-      },
-      {
-        "name": "Austin Wells",
-        "position": "C",
-        "note": "",
-        "order": 9,
-        "atBats": 4,
-        "runs": 1,
-        "hits": 1,
-        "rbi": 2,
-        "baseOnBalls": 0,
-        "strikeOuts": 0,
+        "baseOnBalls": 1,
+        "strikeOuts": 1,
         "leftOnBase": 3,
         "homeRuns": 0
       },
@@ -420,151 +377,123 @@
         "name": "José Caballero",
         "position": "SS",
         "note": "",
-        "order": 10,
-        "atBats": 4,
-        "runs": 1,
+        "order": 7,
+        "atBats": 5,
+        "runs": 3,
+        "hits": 3,
+        "rbi": 3,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 3,
+        "homeRuns": 1
+      },
+      {
+        "name": "Jazz Chisholm Jr.",
+        "position": "2B",
+        "note": "",
+        "order": 8,
+        "atBats": 3,
+        "runs": 3,
         "hits": 2,
         "rbi": 0,
+        "baseOnBalls": 2,
+        "strikeOuts": 0,
+        "leftOnBase": 1,
+        "homeRuns": 0
+      },
+      {
+        "name": "Ali Sánchez",
+        "position": "C",
+        "note": "",
+        "order": 9,
+        "atBats": 1,
+        "runs": 0,
+        "hits": 0,
+        "rbi": 0,
         "baseOnBalls": 0,
-        "strikeOuts": 1,
+        "strikeOuts": 0,
         "leftOnBase": 0,
         "homeRuns": 0
+      },
+      {
+        "name": "Austin Wells",
+        "position": "C",
+        "note": "a-",
+        "order": 10,
+        "atBats": 2,
+        "runs": 2,
+        "hits": 2,
+        "rbi": 5,
+        "baseOnBalls": 0,
+        "strikeOuts": 0,
+        "leftOnBase": 0,
+        "homeRuns": 2
       }
     ],
     "pitching": [
       {
-        "name": "Max Fried",
+        "name": "Will Warren",
         "position": "P",
-        "note": "",
+        "note": "(W, 9-6)",
         "order": 0,
-        "inningsPitched": "3.2",
-        "hits": 3,
+        "inningsPitched": "7.0",
+        "hits": 6,
         "runs": 1,
         "earnedRuns": 1,
         "baseOnBalls": 1,
-        "strikeOuts": 4,
-        "homeRuns": 1,
-        "numberOfPitches": 63
-      },
-      {
-        "name": "Yerry De los Santos",
-        "position": "P",
-        "note": "",
-        "order": 1,
-        "inningsPitched": "1.0",
-        "hits": 1,
-        "runs": 0,
-        "earnedRuns": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 2,
+        "strikeOuts": 7,
         "homeRuns": 0,
-        "numberOfPitches": 18
-      },
-      {
-        "name": "Michael Fulmer",
-        "position": "P",
-        "note": "(H, 2)",
-        "order": 2,
-        "inningsPitched": "0.1",
-        "hits": 0,
-        "runs": 0,
-        "earnedRuns": 0,
-        "baseOnBalls": 1,
-        "strikeOuts": 0,
-        "homeRuns": 0,
-        "numberOfPitches": 13
-      },
-      {
-        "name": "Paul Blackburn",
-        "position": "P",
-        "note": "(W, 7-2)",
-        "order": 3,
-        "inningsPitched": "1.0",
-        "hits": 0,
-        "runs": 0,
-        "earnedRuns": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 2,
-        "homeRuns": 0,
-        "numberOfPitches": 13
+        "numberOfPitches": 98
       },
       {
         "name": "Tim Hill",
         "position": "P",
-        "note": "(H, 10)",
-        "order": 4,
-        "inningsPitched": "1.0",
-        "hits": 0,
+        "note": "",
+        "order": 1,
+        "inningsPitched": "2.0",
+        "hits": 1,
         "runs": 0,
         "earnedRuns": 0,
         "baseOnBalls": 0,
         "strikeOuts": 0,
         "homeRuns": 0,
-        "numberOfPitches": 10
-      },
-      {
-        "name": "Brent Headrick",
-        "position": "P",
-        "note": "(H, 23)",
-        "order": 5,
-        "inningsPitched": "1.0",
-        "hits": 2,
-        "runs": 1,
-        "earnedRuns": 1,
-        "baseOnBalls": 0,
-        "strikeOuts": 1,
-        "homeRuns": 0,
-        "numberOfPitches": 22
-      },
-      {
-        "name": "Brendan Beck",
-        "position": "P",
-        "note": "",
-        "order": 6,
-        "inningsPitched": "1.0",
-        "hits": 0,
-        "runs": 0,
-        "earnedRuns": 0,
-        "baseOnBalls": 0,
-        "strikeOuts": 1,
-        "homeRuns": 0,
-        "numberOfPitches": 10
+        "numberOfPitches": 17
       }
     ],
     "team_batting": {
       "flyOuts": 8,
-      "groundOuts": 7,
-      "airOuts": 12,
-      "runs": 9,
+      "groundOuts": 5,
+      "airOuts": 13,
+      "runs": 16,
       "doubles": 0,
       "triples": 0,
-      "homeRuns": 0,
-      "strikeOuts": 5,
-      "baseOnBalls": 1,
+      "homeRuns": 5,
+      "strikeOuts": 4,
+      "baseOnBalls": 7,
       "intentionalWalks": 0,
-      "hits": 13,
-      "hitByPitch": 1,
-      "avg": ".230",
-      "atBats": 35,
-      "obp": ".309",
-      "slg": ".405",
-      "ops": ".714",
-      "caughtStealing": 0,
-      "stolenBases": 3,
-      "stolenBasePercentage": "1.000",
-      "groundIntoDoublePlay": 0,
+      "hits": 18,
+      "hitByPitch": 0,
+      "avg": ".232",
+      "atBats": 37,
+      "obp": ".311",
+      "slg": ".409",
+      "ops": ".720",
+      "caughtStealing": 1,
+      "stolenBases": 2,
+      "stolenBasePercentage": ".667",
+      "groundIntoDoublePlay": 1,
       "groundIntoTriplePlay": 0,
-      "plateAppearances": 39,
-      "totalBases": 13,
-      "rbi": 9,
-      "leftOnBase": 17,
-      "sacBunts": 0,
+      "plateAppearances": 47,
+      "totalBases": 33,
+      "rbi": 16,
+      "leftOnBase": 13,
+      "sacBunts": 1,
       "sacFlies": 2,
       "catchersInterference": 0,
       "pickoffs": 0,
-      "atBatsPerHomeRun": "-.--",
-      "popOuts": 0,
-      "lineOuts": 4
+      "atBatsPerHomeRun": "7.40",
+      "popOuts": 3,
+      "lineOuts": 2
     }
   },
   "innings": [
@@ -573,15 +502,15 @@
       "ordinalNum": "1st",
       "home": {
         "runs": 0,
-        "hits": 0,
+        "hits": 1,
         "errors": 0,
-        "leftOnBase": 0
+        "leftOnBase": 1
       },
       "away": {
         "runs": 0,
-        "hits": 0,
+        "hits": 1,
         "errors": 0,
-        "leftOnBase": 0
+        "leftOnBase": 2
       }
     },
     {
@@ -589,9 +518,9 @@
       "ordinalNum": "2nd",
       "home": {
         "runs": 0,
-        "hits": 2,
+        "hits": 0,
         "errors": 0,
-        "leftOnBase": 2
+        "leftOnBase": 1
       },
       "away": {
         "runs": 0,
@@ -604,22 +533,6 @@
       "num": 3,
       "ordinalNum": "3rd",
       "home": {
-        "runs": 3,
-        "hits": 2,
-        "errors": 0,
-        "leftOnBase": 1
-      },
-      "away": {
-        "runs": 1,
-        "hits": 3,
-        "errors": 1,
-        "leftOnBase": 2
-      }
-    },
-    {
-      "num": 4,
-      "ordinalNum": "4th",
-      "home": {
         "runs": 0,
         "hits": 0,
         "errors": 0,
@@ -629,15 +542,31 @@
         "runs": 0,
         "hits": 0,
         "errors": 0,
+        "leftOnBase": 0
+      }
+    },
+    {
+      "num": 4,
+      "ordinalNum": "4th",
+      "home": {
+        "runs": 0,
+        "hits": 1,
+        "errors": 0,
         "leftOnBase": 1
+      },
+      "away": {
+        "runs": 0,
+        "hits": 0,
+        "errors": 0,
+        "leftOnBase": 0
       }
     },
     {
       "num": 5,
       "ordinalNum": "5th",
       "home": {
-        "runs": 0,
-        "hits": 0,
+        "runs": 5,
+        "hits": 6,
         "errors": 0,
         "leftOnBase": 0
       },
@@ -659,19 +588,19 @@
       },
       "away": {
         "runs": 0,
-        "hits": 0,
+        "hits": 2,
         "errors": 0,
-        "leftOnBase": 2
+        "leftOnBase": 1
       }
     },
     {
       "num": 7,
       "ordinalNum": "7th",
       "home": {
-        "runs": 0,
-        "hits": 0,
+        "runs": 1,
+        "hits": 2,
         "errors": 0,
-        "leftOnBase": 0
+        "leftOnBase": 2
       },
       "away": {
         "runs": 0,
@@ -684,16 +613,16 @@
       "num": 8,
       "ordinalNum": "8th",
       "home": {
-        "runs": 5,
-        "hits": 7,
+        "runs": 9,
+        "hits": 6,
         "errors": 0,
-        "leftOnBase": 2
+        "leftOnBase": 1
       },
       "away": {
         "runs": 1,
         "hits": 2,
         "errors": 0,
-        "leftOnBase": 1
+        "leftOnBase": 0
       }
     },
     {
@@ -706,7 +635,7 @@
       },
       "away": {
         "runs": 0,
-        "hits": 0,
+        "hits": 1,
         "errors": 0,
         "leftOnBase": 0
       }
@@ -714,63 +643,69 @@
   ],
   "scoring_plays": [
     {
-      "inning": "Top 3",
-      "description": "Nick Sogard homers (3) on a fly ball to right field.",
-      "away_score": 1,
-      "home_score": 0
-    },
-    {
-      "inning": "Bottom 3",
-      "description": "Ben Rice singles on a line drive to right fielder Wilyer Abreu. José Caballero scores. Trent Grisham to 3rd. Fielding error by right fielder Wilyer Abreu.",
-      "away_score": 1,
-      "home_score": 1
-    },
-    {
-      "inning": "Bottom 3",
-      "description": "Luis García Jr. grounds into a force out, second baseman Nick Sogard to shortstop Andruw Monasterio. Trent Grisham scores. Ben Rice to 3rd. Heliot Ramos out at 2nd. Luis García Jr. to 1st.",
-      "away_score": 1,
+      "inning": "Bottom 5",
+      "description": "Paul Goldschmidt singles on a ground ball to center fielder Ceddanne Rafaela. José Caballero scores. Jazz Chisholm Jr. scores.",
+      "away_score": 0,
       "home_score": 2
     },
     {
-      "inning": "Bottom 3",
-      "description": "Jazz Chisholm Jr. out on a sacrifice fly to center fielder Ceddanne Rafaela. Ben Rice scores.",
-      "away_score": 1,
-      "home_score": 3
-    },
-    {
-      "inning": "Bottom 6",
-      "description": "Spencer Jones out on a sacrifice fly to left fielder Jarren Duran. Luis García Jr. scores.",
-      "away_score": 1,
-      "home_score": 4
-    },
-    {
-      "inning": "Top 8",
-      "description": "Willson Contreras triples (3) on a line drive to right fielder Spencer Jones. Wilyer Abreu scores.",
-      "away_score": 2,
-      "home_score": 4
-    },
-    {
-      "inning": "Bottom 8",
-      "description": "Amed Rosario singles on a fly ball to right fielder Wilyer Abreu. Cody Bellinger scores. Jazz Chisholm Jr. to 2nd.",
-      "away_score": 2,
+      "inning": "Bottom 5",
+      "description": "Heliot Ramos homers (10) on a fly ball to left field. Paul Goldschmidt scores. Cody Bellinger scores.",
+      "away_score": 0,
       "home_score": 5
     },
     {
-      "inning": "Bottom 8",
-      "description": "Austin Wells singles on a soft pop up to shortstop Andruw Monasterio. Jazz Chisholm Jr. scores. Amed Rosario scores. Spencer Jones to 2nd.",
-      "away_score": 2,
+      "inning": "Bottom 6",
+      "description": "Austin Wells out on a sacrifice fly to center fielder Ceddanne Rafaela. José Caballero scores.",
+      "away_score": 0,
+      "home_score": 6
+    },
+    {
+      "inning": "Bottom 7",
+      "description": "Amed Rosario singles on a ground ball to center fielder Ceddanne Rafaela. Spencer Jones scores. Luis García Jr. to 2nd.",
+      "away_score": 0,
+      "home_score": 7
+    },
+    {
+      "inning": "Top 8",
+      "description": "Nick Sogard singles on a line drive to right fielder Spencer Jones. Trevor Story scores.",
+      "away_score": 1,
       "home_score": 7
     },
     {
       "inning": "Bottom 8",
-      "description": "Ben Rice singles on a ground ball to center fielder Ceddanne Rafaela. Spencer Jones scores. Austin Wells scores. José Caballero to 3rd.",
-      "away_score": 2,
+      "description": "Austin Wells homers (9) on a line drive to right field. Jazz Chisholm Jr. scores.",
+      "away_score": 1,
       "home_score": 9
+    },
+    {
+      "inning": "Bottom 8",
+      "description": "Paul Goldschmidt homers (18) on a fly ball to right field.",
+      "away_score": 1,
+      "home_score": 10
+    },
+    {
+      "inning": "Bottom 8",
+      "description": "Trent Grisham out on a sacrifice fly to right fielder Wilyer Abreu. Spencer Jones scores.",
+      "away_score": 1,
+      "home_score": 11
+    },
+    {
+      "inning": "Bottom 8",
+      "description": "José Caballero homers (13) on a fly ball to left field. Luis García Jr. scores. Amed Rosario scores.",
+      "away_score": 1,
+      "home_score": 14
+    },
+    {
+      "inning": "Bottom 8",
+      "description": "Austin Wells homers (10) on a fly ball to right center field. Jazz Chisholm Jr. scores.",
+      "away_score": 1,
+      "home_score": 16
     }
   ],
   "official_recap": {
-    "headline": "Yanks back Fried's solid return with 13 singles to split DH vs. Red Sox",
-    "url": "https://www.mlb.com/news/max-fried-returns-in-yankees-win-over-red-sox"
+    "headline": "Ramos' first HR as a Yankee helps Bombers win season series vs. Red Sox",
+    "url": "https://www.mlb.com/news/heliot-ramos-hits-first-homer-as-yankee"
   },
-  "gameday_url": "https://www.mlb.com/gameday/823501"
+  "gameday_url": "https://www.mlb.com/gameday/823502"
 }
