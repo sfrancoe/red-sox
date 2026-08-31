@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T22:44:12.844747+00:00",
+  "generated_at": "2026-08-31T05:35:32.125919+00:00",
   "source": "MLB Stats API",
   "season": 2026,
   "league": "American League",
@@ -54,11 +54,26 @@
           "is_red_sox": true
         },
         {
+          "id": 110,
+          "name": "Baltimore Orioles",
+          "short_name": "Baltimore",
+          "abbreviation": "BAL",
+          "rank": "4",
+          "wins": 68,
+          "losses": 69,
+          "pct": ".496",
+          "games_back": "14.5",
+          "wild_card_games_back": "1.0",
+          "last_ten": "7-3",
+          "streak": "W3",
+          "is_red_sox": false
+        },
+        {
           "id": 141,
           "name": "Toronto Blue Jays",
           "short_name": "Toronto",
           "abbreviation": "TOR",
-          "rank": "4",
+          "rank": "5",
           "wins": 68,
           "losses": 70,
           "pct": ".493",
@@ -66,21 +81,6 @@
           "wild_card_games_back": "1.5",
           "last_ten": "6-4",
           "streak": "W3",
-          "is_red_sox": false
-        },
-        {
-          "id": 110,
-          "name": "Baltimore Orioles",
-          "short_name": "Baltimore",
-          "abbreviation": "BAL",
-          "rank": "5",
-          "wins": 67,
-          "losses": 69,
-          "pct": ".493",
-          "games_back": "15.0",
-          "wild_card_games_back": "1.5",
-          "last_ten": "6-4",
-          "streak": "W2",
           "is_red_sox": false
         }
       ]
@@ -222,12 +222,12 @@
           "abbreviation": "ATH",
           "rank": "4",
           "wins": 53,
-          "losses": 83,
-          "pct": ".390",
-          "games_back": "15.5",
-          "wild_card_games_back": "15.5",
+          "losses": 84,
+          "pct": ".387",
+          "games_back": "16.0",
+          "wild_card_games_back": "16.0",
           "last_ten": "4-6",
-          "streak": "L2",
+          "streak": "L3",
           "is_red_sox": false
         },
         {
@@ -237,12 +237,12 @@
           "abbreviation": "LAA",
           "rank": "5",
           "wins": 52,
-          "losses": 84,
-          "pct": ".382",
-          "games_back": "16.5",
-          "wild_card_games_back": "16.5",
+          "losses": 85,
+          "pct": ".380",
+          "games_back": "17.0",
+          "wild_card_games_back": "17.0",
           "last_ten": "2-8",
-          "streak": "L6",
+          "streak": "L7",
           "is_red_sox": false
         }
       ]
@@ -295,11 +295,26 @@
       "is_red_sox": false
     },
     {
+      "id": 110,
+      "name": "Baltimore Orioles",
+      "short_name": "Baltimore",
+      "abbreviation": "BAL",
+      "rank": "4",
+      "wins": 68,
+      "losses": 69,
+      "pct": ".496",
+      "games_back": "14.5",
+      "wild_card_games_back": "1.0",
+      "last_ten": "7-3",
+      "streak": "W3",
+      "is_red_sox": false
+    },
+    {
       "id": 141,
       "name": "Toronto Blue Jays",
       "short_name": "Toronto",
       "abbreviation": "TOR",
-      "rank": "4",
+      "rank": "5",
       "wins": 68,
       "losses": 70,
       "pct": ".493",
@@ -307,21 +322,6 @@
       "wild_card_games_back": "1.5",
       "last_ten": "6-4",
       "streak": "W3",
-      "is_red_sox": false
-    },
-    {
-      "id": 110,
-      "name": "Baltimore Orioles",
-      "short_name": "Baltimore",
-      "abbreviation": "BAL",
-      "rank": "5",
-      "wins": 67,
-      "losses": 69,
-      "pct": ".493",
-      "games_back": "15.0",
-      "wild_card_games_back": "1.5",
-      "last_ten": "6-4",
-      "streak": "W2",
       "is_red_sox": false
     },
     {
@@ -406,12 +406,12 @@
       "abbreviation": "ATH",
       "rank": "11",
       "wins": 53,
-      "losses": 83,
-      "pct": ".390",
-      "games_back": "15.5",
-      "wild_card_games_back": "15.5",
+      "losses": 84,
+      "pct": ".387",
+      "games_back": "16.0",
+      "wild_card_games_back": "16.0",
       "last_ten": "4-6",
-      "streak": "L2",
+      "streak": "L3",
       "is_red_sox": false
     },
     {
@@ -421,12 +421,12 @@
       "abbreviation": "LAA",
       "rank": "12",
       "wins": 52,
-      "losses": 84,
-      "pct": ".382",
-      "games_back": "16.5",
-      "wild_card_games_back": "16.5",
+      "losses": 85,
+      "pct": ".380",
+      "games_back": "17.0",
+      "wild_card_games_back": "17.0",
       "last_ten": "2-8",
-      "streak": "L6",
+      "streak": "L7",
       "is_red_sox": false
     }
   ]
