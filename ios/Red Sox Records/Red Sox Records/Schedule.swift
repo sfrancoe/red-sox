@@ -19,6 +19,8 @@ struct ScheduledGame: Codable, Identifiable, Sendable {
     let redSoxRecord: String
     let redSoxPitcher: String
     let opponentPitcher: String
+    let redSoxPitcherRecord: String?
+    let opponentPitcherRecord: String?
     let showProbables: Bool
     let seriesDescription: String
     let doubleheader: Bool

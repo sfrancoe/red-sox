@@ -21,6 +21,10 @@ API = (
     "&startDate={start}&endDate={end}&gameType=R&hydrate=probablePitcher,team"
 )
 SEASON_API = "https://statsapi.mlb.com/api/v1/seasons/{season}?sportId=1"
+PITCHER_STATS_API = (
+    "https://statsapi.mlb.com/api/v1/people/{player_id}/stats"
+    "?stats=season&group=pitching&season={season}"
+)
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 EASTERN = ZoneInfo("America/New_York")
 
@@ -54,6 +58,22 @@ def pitcher(team_entry: dict[str, Any]) -> str:
     return str((team_entry.get("probablePitcher") or {}).get("fullName") or "").strip()
 
 
+def pitcher_id(team_entry: dict[str, Any]) -> int | None:
+    value = (team_entry.get("probablePitcher") or {}).get("id")
+    return int(value) if value is not None else None
+
+
+def pitcher_record(player_id: int, season: int) -> str:
+    try:
+        payload = fetch_json(PITCHER_STATS_API.format(player_id=player_id, season=season))
+        splits = ((payload.get("stats") or [{}])[0].get("splits") or [])
+        stats = (splits[0].get("stat") or {}) if splits else {}
+        wins, losses = stats.get("wins"), stats.get("losses")
+        return f"{wins}-{losses}" if wins is not None and losses is not None else "—"
+    except (RuntimeError, IndexError, TypeError, ValueError):
+        return "—"
+
+
 def regular_season_end(payload: dict[str, Any]) -> date:
     seasons = payload.get("seasons") or []
     value = seasons[0].get("regularSeasonEndDate") if seasons else None
@@ -65,7 +85,7 @@ def regular_season_end(payload: dict[str, Any]) -> date:
         raise RuntimeError("MLB returned an invalid regular-season end date") from exc
 
 
-def game_row(game: dict[str, Any], today) -> dict[str, Any] | None:
+def game_row(game: dict[str, Any], today, pitcher_records: dict[int, str]) -> dict[str, Any] | None:
     teams = game.get("teams") or {}
     away = teams.get("away") or {}
     home = teams.get("home") or {}
@@ -103,6 +123,8 @@ def game_row(game: dict[str, Any], today) -> dict[str, Any] | None:
         "red_sox_record": record(red_sox),
         "red_sox_pitcher": pitcher(red_sox),
         "opponent_pitcher": pitcher(opponent),
+        "red_sox_pitcher_record": pitcher_records.get(pitcher_id(red_sox) or 0, "—"),
+        "opponent_pitcher_record": pitcher_records.get(pitcher_id(opponent) or 0, "—"),
         "show_probables": days_away <= 4,
         "series_description": game.get("seriesDescription") or "Regular Season",
         "doubleheader": game.get("doubleHeader") not in (None, "N"),
@@ -110,14 +132,15 @@ def game_row(game: dict[str, Any], today) -> dict[str, Any] | None:
     }
 
 
-def build_feed(payload: dict[str, Any], today, season_end: date) -> dict[str, Any]:
+def build_feed(payload: dict[str, Any], today, season_end: date,
+               pitcher_records: dict[int, str]) -> dict[str, Any]:
     games = []
     for date_entry in payload.get("dates", []):
         for game in date_entry.get("games", []):
             status = game.get("status") or {}
             if status.get("abstractGameState") == "Final":
                 continue
-            row = game_row(game, today)
+            row = game_row(game, today, pitcher_records)
             if row:
                 games.append(row)
     games.sort(key=lambda game: (game["game_date"], game["game_pk"] or 0))
@@ -144,7 +167,19 @@ def main() -> None:
     season_payload = fetch_json(SEASON_API.format(season=today.year))
     end = regular_season_end(season_payload)
     url = API.format(team=BOS, start=today.isoformat(), end=end.isoformat())
-    feed = build_feed(fetch_json(url), today, end)
+    schedule_payload = fetch_json(url)
+    probable_ids = {
+        player_id
+        for date_entry in schedule_payload.get("dates", [])
+        for game in date_entry.get("games", [])
+        for side in ("away", "home")
+        if (player_id := pitcher_id(((game.get("teams") or {}).get(side) or {}))) is not None
+    }
+    pitcher_records = {
+        player_id: pitcher_record(player_id, today.year)
+        for player_id in sorted(probable_ids)
+    }
+    feed = build_feed(schedule_payload, today, end, pitcher_records)
     if not feed_changed(feed):
         print(f"No upcoming schedule changes; kept {OUTPUT_PATH}")
         return

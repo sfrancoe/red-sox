@@ -180,21 +180,26 @@ struct ScheduleView: View {
                         .foregroundStyle(AppColor.red)
 
                     HStack(alignment: .top) {
-                        detailItem("BOSTON", pitcherName(game.redSoxPitcher))
+                        starterDetail(
+                            "BOSTON",
+                            pitcherName(game.redSoxPitcher),
+                            game.redSoxPitcherRecord
+                        )
                         Spacer()
                         Text("VS.")
                             .font(.system(size: 9, weight: .black))
                             .foregroundStyle(AppColor.border)
                             .padding(.top, 13)
                         Spacer()
-                        detailItem(
+                        starterDetail(
                             game.opponent.uppercased(),
                             pitcherName(game.opponentPitcher),
+                            game.opponentPitcherRecord,
                             alignment: .trailing
                         )
                     }
                 }
-                .padding(10)
+                .padding(12)
                 .background(AppColor.paleBlue.opacity(0.5))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
@@ -223,6 +228,36 @@ struct ScheduleView: View {
                 .foregroundStyle(AppColor.ink)
                 .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
         }
+    }
+
+    private func starterDetail(
+        _ label: String,
+        _ name: String,
+        _ record: String?,
+        alignment: HorizontalAlignment = .leading
+    ) -> some View {
+        VStack(alignment: alignment, spacing: 3) {
+            Text(label)
+                .font(.system(size: 8, weight: .black))
+                .tracking(0.35)
+                .foregroundStyle(AppColor.hunterGreen)
+            Text(name)
+                .font(.system(size: 14, weight: .black))
+                .foregroundStyle(AppColor.navy)
+                .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
+            if !name.isEmpty, name != "To be announced" {
+                Text(recordLabel(record))
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(AppColor.hunterGreen)
+            }
+        }
+    }
+
+    private func recordLabel(_ value: String?) -> String {
+        guard let value, !value.isEmpty, value != "—" else {
+            return "Record unavailable"
+        }
+        return value.replacingOccurrences(of: "-", with: "–")
     }
 
     private func loadSchedule() async {
