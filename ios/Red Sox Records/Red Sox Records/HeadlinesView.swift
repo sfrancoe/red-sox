@@ -6,7 +6,7 @@ struct HeadlinesView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                AppColor.cream.ignoresSafeArea()
+                AppColor.paleRed.ignoresSafeArea()
 
                 Group {
                     if let feed = store.selectedFeed {
@@ -31,7 +31,7 @@ struct HeadlinesView: View {
             sourcePicker
 
             ScrollView {
-                LazyVStack(spacing: 12) {
+                LazyVStack(spacing: 8) {
                     feedHeader(feed)
 
                     ForEach(feed.articles) { article in
@@ -39,10 +39,11 @@ struct HeadlinesView: View {
                     }
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 12)
-                .padding(.bottom, 24)
+                .padding(.top, 8)
+                .padding(.bottom, 16)
                 .foregroundStyle(AppColor.ink)
             }
+            .dynamicTypeSize(.xSmall)
             .id(store.selectedSource)
             .refreshable {
                 await store.load()
@@ -51,28 +52,49 @@ struct HeadlinesView: View {
     }
 
     private var sourcePicker: some View {
-        Picker("News source", selection: $store.selectedSource) {
+        HStack(spacing: 4) {
             ForEach(NewsSource.allCases) { source in
-                Text(source.shortName).tag(source)
+                Button {
+                    store.selectedSource = source
+                } label: {
+                    Text(source.shortName)
+                        .font(.system(size: 12, weight: .black))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.72)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 9)
+                        .foregroundStyle(
+                            store.selectedSource == source ? AppColor.hunterGreen : Color.white
+                        )
+                        .background(
+                            store.selectedSource == source ? Color.white : Color.clear
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                }
+                .buttonStyle(.plain)
             }
         }
-        .pickerStyle(.segmented)
+        .padding(5)
+        .background(AppColor.hunterGreen)
+        .overlay {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(Color.white.opacity(0.45), lineWidth: 1)
+        }
         .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(AppColor.paper)
+        .padding(.vertical, 10)
     }
 
     private func feedHeader(_ feed: NewsFeed) -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text(feed.source)
                 .font(.title2.weight(.black))
-                .foregroundStyle(AppColor.navy)
+                .foregroundStyle(.white)
 
             Spacer()
 
             Text("Updated \(feed.refreshedText)")
                 .font(.caption2)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.white.opacity(0.78))
                 .multilineTextAlignment(.trailing)
         }
     }
@@ -88,42 +110,43 @@ struct HeadlinesView: View {
                 articleContent(article)
             }
         }
-        .cardStyle()
+        .cardStyle(padding: 12)
     }
 
     private func articleContent(_ article: NewsArticle) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
                 Text(article.category.uppercased())
-                    .font(.caption2.weight(.black))
+                    .font(.system(size: 10, weight: .black))
                     .foregroundStyle(AppColor.red)
                     .lineLimit(1)
 
                 Text("·")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppColor.ink.opacity(0.55))
 
                 Text(article.publishedText)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 10))
+                    .foregroundStyle(AppColor.ink)
 
                 Spacer(minLength: 4)
 
                 Image(systemName: "arrow.up.right")
-                    .font(.caption.weight(.bold))
+                    .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(AppColor.red)
             }
 
             Text(article.title)
-                .font(.headline)
+                .font(.system(size: 15, weight: .bold))
                 .foregroundStyle(AppColor.navy)
+                .lineLimit(2)
                 .fixedSize(horizontal: false, vertical: true)
 
             if !article.description.isEmpty {
                 Text(article.description)
-                    .font(.subheadline)
+                    .font(.system(size: 13))
                     .foregroundStyle(AppColor.ink.opacity(0.82))
-                    .lineSpacing(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineSpacing(1)
+                    .lineLimit(2)
             }
         }
     }

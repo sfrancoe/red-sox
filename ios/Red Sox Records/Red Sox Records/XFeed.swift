@@ -43,8 +43,12 @@ struct XPost: Codable, Identifiable, Sendable {
     let quotedAuthor: String
     let quotedHandle: String
 
+    var publishedDate: Date? {
+        XDateParser.date(from: published)
+    }
+
     var publishedText: String {
-        guard let date = XDateParser.date(from: published) else {
+        guard let date = publishedDate else {
             return published
         }
         return date.formatted(date: .abbreviated, time: .shortened)

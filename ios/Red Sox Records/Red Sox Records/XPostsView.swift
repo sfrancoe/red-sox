@@ -42,15 +42,36 @@ struct XPostsView: View {
     }
 
     private var modePicker: some View {
-        Picker("X post order", selection: $store.selectedMode) {
+        HStack(spacing: 4) {
             ForEach(XFeedMode.allCases) { mode in
-                Text(mode.title).tag(mode)
+                Button {
+                    store.selectedMode = mode
+                } label: {
+                    Text(mode.title)
+                        .font(.system(size: 12, weight: .black))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.78)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 9)
+                        .foregroundStyle(
+                            store.selectedMode == mode ? AppColor.hunterGreen : Color.white
+                        )
+                        .background(
+                            store.selectedMode == mode ? Color.white : Color.clear
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                }
+                .buttonStyle(.plain)
             }
         }
-        .pickerStyle(.segmented)
+        .padding(5)
+        .background(AppColor.hunterGreen)
+        .overlay {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(Color.white.opacity(0.45), lineWidth: 1)
+        }
         .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(AppColor.paper)
+        .padding(.vertical, 10)
     }
 
     private func postsPage(
@@ -59,7 +80,7 @@ struct XPostsView: View {
         mode: XFeedMode
     ) -> some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
+            LazyVStack(spacing: 0) {
                 feedHeader(feed, mode: mode)
 
                 ForEach(posts) { post in
@@ -67,10 +88,11 @@ struct XPostsView: View {
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.top, 12)
-            .padding(.bottom, 24)
+            .padding(.top, 8)
+            .padding(.bottom, 16)
             .foregroundStyle(AppColor.ink)
         }
+        .dynamicTypeSize(.xSmall)
         .refreshable {
             await store.load()
         }
@@ -79,113 +101,128 @@ struct XPostsView: View {
     private func feedHeader(_ feed: XFeed, mode: XFeedMode) -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text(mode.title)
-                .font(.title2.weight(.black))
+                .font(.system(size: 16, weight: .black))
                 .foregroundStyle(AppColor.navy)
 
             Spacer()
 
             Text("Checked \(feed.checkedText)")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+                .font(.system(size: 9))
+                .foregroundStyle(AppColor.ink.opacity(0.65))
                 .multilineTextAlignment(.trailing)
         }
+        .padding(.bottom, 8)
     }
 
     private func postCard(_ post: XPost) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            authorRow(post)
+        HStack(alignment: .top, spacing: 8) {
+            authorAvatar(post)
 
-            Text(post.text)
-                .font(.body)
-                .lineSpacing(3)
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: 5) {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text(post.author)
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundStyle(AppColor.navy)
+                        .lineLimit(1)
 
-            if !post.quotedText.isEmpty {
-                quotedPost(post)
-            }
+                    Text("@\(post.handle)")
+                        .font(.system(size: 10))
+                        .foregroundStyle(AppColor.ink.opacity(0.58))
+                        .lineLimit(1)
 
-            if let mediaURL = URL(string: post.media), !post.media.isEmpty {
-                AsyncImage(url: mediaURL) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    ZStack {
-                        AppColor.paleBlue
-                        ProgressView()
-                            .tint(AppColor.red)
-                    }
+                    Spacer(minLength: 2)
+
+                    Text(post.publishedText)
+                        .font(.system(size: 9))
+                        .foregroundStyle(AppColor.ink.opacity(0.58))
+                        .lineLimit(1)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 180)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                .clipped()
-            }
 
-            HStack {
-                Label("\(post.likes.formatted())", systemImage: "heart.fill")
-                    .font(.caption.weight(.bold))
-                    .foregroundStyle(AppColor.red)
+                Text(post.text)
+                    .font(.system(size: 13))
+                    .lineSpacing(1)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                Spacer()
+                if !post.quotedText.isEmpty {
+                    quotedPost(post)
+                }
 
-                if let url = URL(string: post.url) {
-                    Link(destination: url) {
-                        Label("Open on X", systemImage: "arrow.up.right")
-                            .font(.caption.weight(.bold))
-                            .foregroundStyle(AppColor.navy)
+                if let mediaURL = URL(string: post.media), !post.media.isEmpty {
+                    AsyncImage(url: mediaURL) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        ZStack {
+                            AppColor.paleBlue
+                            ProgressView()
+                                .tint(AppColor.red)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 125)
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .clipped()
+                }
+
+                HStack {
+                    Label("\(post.likes.formatted())", systemImage: "heart.fill")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(AppColor.red)
+
+                    Spacer()
+
+                    if let url = URL(string: post.url) {
+                        Link(destination: url) {
+                            Label("Open on X", systemImage: "arrow.up.right")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundStyle(AppColor.navy)
+                        }
                     }
                 }
             }
         }
-        .cardStyle()
+        .padding(10)
+        .background(AppColor.paper)
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(AppColor.border.opacity(0.8))
+                .frame(height: 1)
+        }
     }
 
-    private func authorRow(_ post: XPost) -> some View {
-        HStack(spacing: 10) {
-            AsyncImage(url: URL(string: post.avatar)) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-            } placeholder: {
-                ZStack {
-                    AppColor.paleBlue
-                    Image(systemName: "person.fill")
-                        .foregroundStyle(AppColor.navy.opacity(0.55))
-                }
-            }
-            .frame(width: 42, height: 42)
-            .clipShape(Circle())
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(post.author)
-                    .font(.subheadline.weight(.bold))
-                    .foregroundStyle(AppColor.navy)
-                Text("@\(post.handle) · \(post.publishedText)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+    private func authorAvatar(_ post: XPost) -> some View {
+        AsyncImage(url: URL(string: post.avatar)) { image in
+            image
+                .resizable()
+                .scaledToFill()
+        } placeholder: {
+            ZStack {
+                AppColor.paleBlue
+                Image(systemName: "person.fill")
+                    .foregroundStyle(AppColor.navy.opacity(0.55))
             }
         }
+        .frame(width: 34, height: 34)
+        .clipShape(Circle())
     }
 
     private func quotedPost(_ post: XPost) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 4) {
             if !post.quotedAuthor.isEmpty {
                 Text("\(post.quotedAuthor)  @\(post.quotedHandle)")
-                    .font(.caption.weight(.bold))
+                    .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(AppColor.navy)
             }
 
             Text(post.quotedText)
-                .font(.subheadline)
-                .lineSpacing(2)
+                .font(.system(size: 11))
+                .lineSpacing(1)
         }
-        .padding(12)
+        .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColor.paleBlue.opacity(0.7))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
     }
 
     private var errorView: some View {

@@ -1,12 +1,18 @@
 import SwiftUI
 
+private enum BoxScoreTeamSelection {
+    case boston
+    case opponent
+}
+
 struct RecentGameView: View {
     @State private var store = RecentGameStore()
+    @State private var selectedStatsTeam: BoxScoreTeamSelection = .boston
 
     var body: some View {
         NavigationStack {
             ZStack {
-                AppColor.cream.ignoresSafeArea()
+                AppColor.paleRed.ignoresSafeArea()
 
                 Group {
                     if let game = store.game {
@@ -27,16 +33,18 @@ struct RecentGameView: View {
     }
 
     private func gameContent(_ game: RecentGame) -> some View {
-        ScrollView {
-            LazyVStack(spacing: 18) {
-                masthead
+        let redSox = game.away.id == 111 ? game.away : game.home
+        let opponent = game.away.id == 111 ? game.home : game.away
+
+        return ScrollView {
+            LazyVStack(spacing: 6) {
                 scoreCard(game)
                 summaryCard(game)
                 lineScoreCard(game)
                 gameNotesCard(game)
                 decisionsCard(game)
-                battingCard(game.away)
-                pitchingCard(game.away)
+                battingCard(redSox: redSox, opponent: opponent)
+                pitchingCard(redSox: redSox, opponent: opponent)
                 scoringPlaysCard(game)
                 linksCard(game)
             }
@@ -47,26 +55,16 @@ struct RecentGameView: View {
         .refreshable {
             await store.load()
         }
-    }
-
-    private var masthead: some View {
-        HStack {
-            Spacer()
-
-            Image(systemName: "baseball.fill")
-                .font(.title)
-                .foregroundStyle(AppColor.red)
-        }
-        .padding(.bottom, -8)
+        .dynamicTypeSize(.xSmall)
     }
 
     private func scoreCard(_ game: RecentGame) -> some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 9) {
             HStack {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(game.formattedDate.uppercased())
-                        .font(.caption.weight(.bold))
-                        .tracking(0.8)
+                        .font(.title3.weight(.black))
+                        .tracking(0.4)
                     Text(game.venue)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -76,8 +74,8 @@ struct RecentGameView: View {
 
                 Text("FINAL")
                     .font(.caption.weight(.black))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 6)
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 4)
                     .background(AppColor.green)
                     .foregroundStyle(.white)
                     .clipShape(Capsule())
@@ -96,7 +94,7 @@ struct RecentGameView: View {
             teamScoreRow(game.away)
             teamScoreRow(game.home)
         }
-        .cardStyle()
+        .cardStyle(padding: 12)
     }
 
     private func teamScoreRow(_ team: TeamBoxScore) -> some View {
@@ -105,6 +103,7 @@ struct RecentGameView: View {
                 .font(.title3.weight(.black))
                 .foregroundStyle(AppColor.navy)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .lineLimit(1)
 
             HStack(spacing: 8) {
                 scoreNumber(team.runs, emphasized: true)
@@ -120,7 +119,8 @@ struct RecentGameView: View {
             .font(emphasized ? .title2.weight(.black) : .headline)
             .monospacedDigit()
             .frame(width: 36, alignment: .trailing)
-            .foregroundStyle(emphasized ? AppColor.red : .primary)
+            .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
+            .lineLimit(1)
     }
 
     private func scoreLegend(_ title: String) -> some View {
@@ -132,9 +132,9 @@ struct RecentGameView: View {
 
     private func summaryCard(_ game: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            sectionTitle("Game Summary", icon: "newspaper.fill")
+            primarySectionTitle("Game Summary")
             Text(game.summary)
-                .font(.body)
+                .font(.system(size: 15))
                 .lineSpacing(4)
         }
         .cardStyle()
@@ -142,29 +142,28 @@ struct RecentGameView: View {
 
     private func lineScoreCard(_ game: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionTitle("Line Score", icon: "tablecells")
+            primarySectionTitle("Line Score")
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                Grid(horizontalSpacing: 14, verticalSpacing: 10) {
-                    GridRow {
-                        Text("")
-                            .frame(width: 42, alignment: .leading)
-                        ForEach(game.innings) { inning in
-                            Text("\(inning.num)")
-                                .frame(width: 12)
-                        }
-                        Text("R")
-                            .fontWeight(.black)
-                            .frame(width: 28, alignment: .trailing)
+            VStack(spacing: 10) {
+                HStack(spacing: 0) {
+                    Text("")
+                        .frame(width: 42, alignment: .leading)
+                    ForEach(game.innings) { inning in
+                        Text("\(inning.num)")
+                            .frame(maxWidth: .infinity)
                     }
-                    .font(.caption.weight(.bold))
-                    .foregroundStyle(.secondary)
-
-                    lineScoreRow(game.away, innings: game.innings, isAway: true)
-                    lineScoreRow(game.home, innings: game.innings, isAway: false)
+                    Text("R")
+                        .fontWeight(.black)
+                        .frame(width: 28, alignment: .trailing)
                 }
-                .monospacedDigit()
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.secondary)
+
+                lineScoreRow(game.away, innings: game.innings, isAway: true)
+                lineScoreRow(game.home, innings: game.innings, isAway: false)
             }
+            .monospacedDigit()
+            .frame(maxWidth: .infinity)
         }
         .cardStyle()
     }
@@ -174,13 +173,13 @@ struct RecentGameView: View {
         innings: [Inning],
         isAway: Bool
     ) -> some View {
-        GridRow {
+        HStack(spacing: 0) {
             Text(team.abbreviation)
                 .fontWeight(.black)
                 .frame(width: 42, alignment: .leading)
             ForEach(innings) { inning in
                 Text("\((isAway ? inning.away : inning.home).runs ?? 0)")
-                    .frame(width: 12)
+                    .frame(maxWidth: .infinity)
             }
             Text("\(team.runs)")
                 .fontWeight(.black)
@@ -192,7 +191,7 @@ struct RecentGameView: View {
 
     private func gameNotesCard(_ game: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionTitle("Game Notes", icon: "sparkles")
+            primarySectionTitle("Game Notes")
 
             ForEach(game.facts, id: \.self) { fact in
                 HStack(alignment: .top, spacing: 10) {
@@ -201,7 +200,7 @@ struct RecentGameView: View {
                         .frame(width: 6, height: 6)
                         .padding(.top, 7)
                     Text(fact)
-                        .font(.subheadline)
+                        .font(.system(size: 14))
                         .lineSpacing(3)
                 }
             }
@@ -211,7 +210,7 @@ struct RecentGameView: View {
 
     private func decisionsCard(_ game: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionTitle("Decisions", icon: "person.2.fill")
+            primarySectionTitle("Decisions")
             decisionRow("Winning pitcher", game.decisions.winner)
             decisionRow("Losing pitcher", game.decisions.loser)
             if !game.decisions.save.isEmpty {
@@ -224,7 +223,7 @@ struct RecentGameView: View {
     private func decisionRow(_ label: String, _ name: String) -> some View {
         HStack {
             Text(label)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppColor.navy)
             Spacer()
             Text(name)
                 .fontWeight(.semibold)
@@ -232,9 +231,15 @@ struct RecentGameView: View {
         .font(.subheadline)
     }
 
-    private func battingCard(_ team: TeamBoxScore) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            sectionTitle("Boston Batting", icon: "figure.baseball")
+    private func battingCard(redSox: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let team = selectedBoxScoreTeam(redSox: redSox, opponent: opponent)
+
+        return VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                sectionTitle("Batting", icon: "figure.baseball")
+                Spacer(minLength: 0)
+                statsTeamPicker(redSox: redSox, opponent: opponent)
+            }
             statHeader(labels: ["AB", "R", "H", "RBI"])
 
             VStack(spacing: 0) {
@@ -251,9 +256,15 @@ struct RecentGameView: View {
         .cardStyle()
     }
 
-    private func pitchingCard(_ team: TeamBoxScore) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            sectionTitle("Boston Pitching", icon: "baseball.diamond.bases")
+    private func pitchingCard(redSox: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let team = selectedBoxScoreTeam(redSox: redSox, opponent: opponent)
+
+        return VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                sectionTitle("Pitching", icon: "baseball.diamond.bases")
+                Spacer(minLength: 0)
+                statsTeamPicker(redSox: redSox, opponent: opponent)
+            }
             statHeader(labels: ["IP", "H", "ER", "K"])
 
             VStack(spacing: 0) {
@@ -273,6 +284,47 @@ struct RecentGameView: View {
             }
         }
         .cardStyle()
+    }
+
+    private func selectedBoxScoreTeam(
+        redSox: TeamBoxScore,
+        opponent: TeamBoxScore
+    ) -> TeamBoxScore {
+        selectedStatsTeam == .boston ? redSox : opponent
+    }
+
+    private func statsTeamPicker(
+        redSox: TeamBoxScore,
+        opponent: TeamBoxScore
+    ) -> some View {
+        HStack(spacing: 2) {
+            statsTeamButton("Boston", selection: .boston)
+            statsTeamButton(opponent.cityName, selection: .opponent)
+        }
+        .padding(2)
+        .background(AppColor.paleBlue)
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .frame(width: 166)
+    }
+
+    private func statsTeamButton(
+        _ title: String,
+        selection: BoxScoreTeamSelection
+    ) -> some View {
+        Button {
+            selectedStatsTeam = selection
+        } label: {
+            Text(title)
+                .font(.system(size: 10, weight: .black))
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 6)
+                .foregroundStyle(selectedStatsTeam == selection ? Color.white : AppColor.navy)
+                .background(selectedStatsTeam == selection ? AppColor.navy : Color.clear)
+                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+        }
+        .buttonStyle(.plain)
     }
 
     private func statHeader(labels: [String]) -> some View {
@@ -383,7 +435,14 @@ struct RecentGameView: View {
         Label(title.uppercased(), systemImage: icon)
             .font(.caption.weight(.black))
             .tracking(1.1)
-            .foregroundStyle(AppColor.green)
+            .foregroundStyle(AppColor.navy)
+    }
+
+    private func primarySectionTitle(_ title: String) -> some View {
+        Text(title.uppercased())
+            .font(.system(size: 13, weight: .black))
+            .tracking(1.1)
+            .foregroundStyle(AppColor.navy)
     }
 
     private var errorView: some View {
