@@ -40,7 +40,6 @@ struct RecentGameView: View {
             LazyVStack(spacing: 6) {
                 scoreCard(game)
                 summaryCard(game)
-                lineScoreCard(game)
                 gameNotesCard(game)
                 decisionsCard(game)
                 battingCard(redSox: redSox, opponent: opponent)
@@ -85,51 +84,75 @@ struct RecentGameView: View {
 
             Divider()
 
-            HStack(spacing: 8) {
-                scoreLegend("R")
-                scoreLegend("H")
-                scoreLegend("E")
-                scoreLegend("LOB")
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-
-            teamScoreRow(game.away)
-            teamScoreRow(game.home)
+            combinedLineScore(game)
         }
         .cardStyle(padding: 12)
     }
 
-    private func teamScoreRow(_ team: TeamBoxScore) -> some View {
-        HStack(spacing: 10) {
-            Text(team.cityName)
-                .font(.title3.weight(.black))
-                .foregroundStyle(AppColor.navy)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .lineLimit(1)
-
-            HStack(spacing: 8) {
-                scoreNumber(team.runs, emphasized: true)
-                scoreNumber(team.hits)
-                scoreNumber(team.errors)
-                scoreNumber(team.leftOnBase)
+    private func combinedLineScore(_ game: RecentGame) -> some View {
+        VStack(spacing: 7) {
+            HStack(spacing: 0) {
+                Text("")
+                    .frame(width: 50, alignment: .leading)
+                ForEach(game.innings) { inning in
+                    Text("\(inning.num)")
+                        .frame(maxWidth: .infinity)
+                }
+                lineScoreLegend("R", width: 21)
+                lineScoreLegend("H", width: 21)
+                lineScoreLegend("E", width: 21)
+                lineScoreLegend("LOB", width: 27)
             }
-        }
-    }
-
-    private func scoreNumber(_ number: Int, emphasized: Bool = false) -> some View {
-        Text("\(number)")
-            .font(emphasized ? .title2.weight(.black) : .headline)
-            .monospacedDigit()
-            .frame(width: 36, alignment: .trailing)
-            .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
-            .lineLimit(1)
-    }
-
-    private func scoreLegend(_ title: String) -> some View {
-        Text(title)
-            .font(.caption2.weight(.bold))
+            .font(.system(size: 8, weight: .bold))
             .foregroundStyle(.secondary)
-            .frame(width: 36, alignment: .trailing)
+
+            combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
+            combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
+        }
+        .monospacedDigit()
+        .frame(maxWidth: .infinity)
+    }
+
+    private func combinedLineScoreRow(
+        _ team: TeamBoxScore,
+        innings: [Inning],
+        isAway: Bool
+    ) -> some View {
+        HStack(spacing: 0) {
+            Text(team.cityName)
+                .font(.system(size: 9, weight: .black))
+                .foregroundStyle(AppColor.navy)
+                .frame(width: 50, alignment: .leading)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+
+            ForEach(innings) { inning in
+                Text("\((isAway ? inning.away : inning.home).runs ?? 0)")
+                    .frame(maxWidth: .infinity)
+            }
+
+            lineScoreTotal(team.runs, width: 21, emphasized: true)
+            lineScoreTotal(team.hits, width: 21)
+            lineScoreTotal(team.errors, width: 21)
+            lineScoreTotal(team.leftOnBase, width: 27)
+        }
+        .font(.system(size: 9, weight: .semibold))
+    }
+
+    private func lineScoreLegend(_ title: String, width: CGFloat) -> some View {
+        Text(title)
+            .frame(width: width, alignment: .trailing)
+    }
+
+    private func lineScoreTotal(
+        _ value: Int,
+        width: CGFloat,
+        emphasized: Bool = false
+    ) -> some View {
+        Text("\(value)")
+            .fontWeight(emphasized ? .black : .semibold)
+            .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
+            .frame(width: width, alignment: .trailing)
     }
 
     private func summaryCard(_ game: RecentGame) -> some View {
@@ -140,55 +163,6 @@ struct RecentGameView: View {
                 .lineSpacing(4)
         }
         .cardStyle()
-    }
-
-    private func lineScoreCard(_ game: RecentGame) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            primarySectionTitle("Line Score")
-
-            VStack(spacing: 10) {
-                HStack(spacing: 0) {
-                    Text("")
-                        .frame(width: 42, alignment: .leading)
-                    ForEach(game.innings) { inning in
-                        Text("\(inning.num)")
-                            .frame(maxWidth: .infinity)
-                    }
-                    Text("R")
-                        .fontWeight(.black)
-                        .frame(width: 28, alignment: .trailing)
-                }
-                .font(.caption.weight(.bold))
-                .foregroundStyle(.secondary)
-
-                lineScoreRow(game.away, innings: game.innings, isAway: true)
-                lineScoreRow(game.home, innings: game.innings, isAway: false)
-            }
-            .monospacedDigit()
-            .frame(maxWidth: .infinity)
-        }
-        .cardStyle()
-    }
-
-    private func lineScoreRow(
-        _ team: TeamBoxScore,
-        innings: [Inning],
-        isAway: Bool
-    ) -> some View {
-        HStack(spacing: 0) {
-            Text(team.abbreviation)
-                .fontWeight(.black)
-                .frame(width: 42, alignment: .leading)
-            ForEach(innings) { inning in
-                Text("\((isAway ? inning.away : inning.home).runs ?? 0)")
-                    .frame(maxWidth: .infinity)
-            }
-            Text("\(team.runs)")
-                .fontWeight(.black)
-                .foregroundStyle(AppColor.red)
-                .frame(width: 28, alignment: .trailing)
-        }
-        .font(.subheadline)
     }
 
     private func gameNotesCard(_ game: RecentGame) -> some View {
