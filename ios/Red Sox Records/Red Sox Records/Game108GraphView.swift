@@ -40,8 +40,6 @@ struct Game108GraphView: View {
             let chartHeight = max(260, min(430, proxy.size.height - 150))
 
             VStack(spacing: 10) {
-                storyHeader
-
                 ZStack {
                     Game108Canvas(
                         series: store.series,
@@ -81,6 +79,7 @@ struct Game108GraphView: View {
                 }
 
                 controls
+                storyHeader
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
@@ -89,7 +88,7 @@ struct Game108GraphView: View {
     }
 
     private var storyHeader: some View {
-        Text("Four straight seasons. The same record after 108 games: 57–51. Where will 2026 go from here?")
+        Text("Four straight seasons with the same record after 108 games: 57–51. Where will 2026 go from here?")
             .font(.subheadline.weight(.bold))
             .foregroundStyle(.white)
             .lineSpacing(1)
