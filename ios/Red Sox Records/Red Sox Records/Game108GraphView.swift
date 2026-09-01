@@ -6,11 +6,13 @@ struct Game108GraphView: View {
     @State private var gameProgress = 0.0
     @State private var isPlaying = false
     @State private var speed = 2.0
+    @State private var isMusicOn = true
+    @State private var musicPlayer = GraphMusicPlayer()
     @State private var animationTask: Task<Void, Never>?
 
     var body: some View {
         ZStack {
-            AppColor.cream.ignoresSafeArea()
+            AppColor.paleRed.ignoresSafeArea()
 
             Group {
                 if !store.series.isEmpty {
@@ -86,8 +88,8 @@ struct Game108GraphView: View {
 
     private var storyHeader: some View {
         Text("Four consecutive seasons reached 57–51 after 108 games—then split toward four different endings.")
-            .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .font(.subheadline.weight(.bold))
+            .foregroundStyle(AppColor.hunterGreen)
             .lineSpacing(2)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -127,27 +129,82 @@ struct Game108GraphView: View {
                     isPlaying ? pauseAnimation() : startAnimation()
                 } label: {
                     Label(isPlaying ? "Pause" : "Play", systemImage: isPlaying ? "pause.fill" : "play.fill")
+                        .font(.system(size: 11, weight: .black))
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
+                        .padding(.vertical, 9)
+                        .background(AppColor.hunterGreen)
+                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(AppColor.red)
+                .buttonStyle(.plain)
 
                 Button {
                     restartAnimation()
                 } label: {
                     Label("Restart", systemImage: "arrow.counterclockwise")
+                        .font(.system(size: 11, weight: .black))
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
+                        .padding(.vertical, 9)
+                        .background(AppColor.hunterGreen)
+                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                 }
-                .buttonStyle(.bordered)
-                .tint(AppColor.navy)
+                .buttonStyle(.plain)
+
+                Button {
+                    isMusicOn.toggle()
+                    musicPlayer.setEnabled(isMusicOn)
+                    if isMusicOn, isPlaying {
+                        musicPlayer.play()
+                    }
+                } label: {
+                    Label(
+                        isMusicOn ? "Music On" : "Music Off",
+                        systemImage: isMusicOn ? "speaker.wave.2.fill" : "speaker.slash.fill"
+                    )
+                    .font(.system(size: 10, weight: .black))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 9)
+                    .background(AppColor.hunterGreen)
+                    .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                }
+                .buttonStyle(.plain)
             }
 
-            Picker("Animation speed", selection: $speed) {
-                Text("1×").tag(1.0)
-                Text("2×").tag(2.0)
-                Text("4×").tag(4.0)
+            HStack(spacing: 5) {
+                Text("SPEED")
+                    .font(.system(size: 11, weight: .black))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 8)
+
+                ForEach([1.0, 2.0, 4.0], id: \.self) { option in
+                    Button {
+                        speed = option
+                    } label: {
+                        Text("\(Int(option))×")
+                            .font(.system(size: 12, weight: .black))
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                            .background(speed == option ? AppColor.green : AppColor.hunterGreen)
+                            .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                    .stroke(
+                                        speed == option ? Color.white : Color.white.opacity(0.18),
+                                        lineWidth: speed == option ? 2 : 0.8
+                                    )
+                            }
+                    }
+                    .buttonStyle(.plain)
+                }
             }
-            .pickerStyle(.segmented)
+            .padding(5)
+            .background(AppColor.hunterGreen)
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
 
@@ -181,6 +238,9 @@ struct Game108GraphView: View {
         }
 
         isPlaying = true
+        if isMusicOn {
+            musicPlayer.play()
+        }
         animationTask?.cancel()
         animationTask = Task { @MainActor in
             var previous = ContinuousClock.now
@@ -209,6 +269,7 @@ struct Game108GraphView: View {
 
             if activeSeasonIndex >= store.series.count {
                 isPlaying = false
+                musicPlayer.pause()
             }
         }
     }
@@ -216,6 +277,7 @@ struct Game108GraphView: View {
     @MainActor
     private func pauseAnimation() {
         isPlaying = false
+        musicPlayer.pause()
         animationTask?.cancel()
         animationTask = nil
     }
@@ -231,6 +293,7 @@ struct Game108GraphView: View {
     @MainActor
     private func stopAnimation() {
         isPlaying = false
+        musicPlayer.stop()
         animationTask?.cancel()
         animationTask = nil
     }
