@@ -504,7 +504,7 @@ private struct Game108Canvas: View {
         context: inout GraphicsContext,
         plot: CGRect
     ) {
-        let annotationColor = Color(red: 0.55, green: 0.39, blue: 0.04)
+        let annotationColor = Color.black
         let point = CGPoint(
             x: xPosition(108, plot: plot),
             y: yPosition(6, plot: plot)
@@ -512,29 +512,23 @@ private struct Game108Canvas: View {
 
         context.draw(
             Text("G108 · 57–51!")
-                .font(.system(size: 14, weight: .black))
+                .font(.system(size: 18, weight: .black))
                 .foregroundStyle(annotationColor),
             at: CGPoint(x: point.x - 17, y: point.y - 43),
             anchor: .bottomTrailing
         )
 
         var arrow = Path()
-        arrow.move(to: CGPoint(x: point.x - 15, y: point.y - 38))
-        arrow.addLine(to: CGPoint(x: point.x - 3, y: point.y - 5))
-        arrow.move(to: CGPoint(x: point.x - 3, y: point.y - 5))
-        arrow.addLine(to: CGPoint(x: point.x - 10, y: point.y - 10))
-        arrow.move(to: CGPoint(x: point.x - 3, y: point.y - 5))
-        arrow.addLine(to: CGPoint(x: point.x - 4, y: point.y - 14))
+        arrow.move(to: CGPoint(x: point.x - 18, y: point.y - 40))
+        arrow.addLine(to: CGPoint(x: point.x - 9, y: point.y - 14))
+        arrow.move(to: CGPoint(x: point.x - 9, y: point.y - 14))
+        arrow.addLine(to: CGPoint(x: point.x - 16, y: point.y - 20))
+        arrow.move(to: CGPoint(x: point.x - 9, y: point.y - 14))
+        arrow.addLine(to: CGPoint(x: point.x - 9, y: point.y - 24))
         context.stroke(
             arrow,
             with: .color(annotationColor),
-            style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round)
-        )
-
-        context.stroke(
-            Path(ellipseIn: CGRect(x: point.x - 6, y: point.y - 6, width: 12, height: 12)),
-            with: .color(annotationColor),
-            lineWidth: 1.8
+            style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
         )
     }
 
