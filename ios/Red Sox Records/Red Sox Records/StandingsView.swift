@@ -34,8 +34,6 @@ struct StandingsView: View {
 
             ScrollView {
                 LazyVStack(spacing: 7) {
-                    statusCard(feed)
-
                     if store.mode == .divisions {
                         ForEach(feed.divisions) { division in
                             standingsCard(
@@ -102,27 +100,6 @@ struct StandingsView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
-    }
-
-    private func statusCard(_ feed: StandingsFeed) -> some View {
-        let redSox = feed.wildCard.first(where: \.isRedSox)
-        return HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Text("BOSTON PLAYOFF POSITION")
-                .font(.system(size: 11, weight: .black))
-                .tracking(0.55)
-                .foregroundStyle(AppColor.navy)
-
-            Spacer(minLength: 4)
-
-            if let redSox {
-                Text("\(redSox.wins)–\(redSox.losses) · WC #\(redSox.rank) · \(redSox.wildCardGamesBack) WCGB")
-                    .font(.system(size: 12, weight: .bold, design: .monospaced))
-                    .foregroundStyle(AppColor.red)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.72)
-            }
-        }
-        .cardStyle(padding: 10)
     }
 
     private func standingsCard(
