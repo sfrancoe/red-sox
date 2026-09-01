@@ -54,7 +54,10 @@ function playerRows(box, role) {
       note: stats.note || '',
       ...Object.fromEntries(keys.map(key => [key, stats[key] ?? 0])),
     };
-    if (role === 'batting') row.average = player.seasonStats?.batting?.avg || '.---';
+    if (role === 'batting') {
+      row.average = player.seasonStats?.batting?.avg || '.---';
+      row.season_home_runs = player.seasonStats?.batting?.homeRuns || 0;
+    }
     return [row];
   });
 }

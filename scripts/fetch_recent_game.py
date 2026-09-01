@@ -99,6 +99,7 @@ def player_rows(team_box: dict[str, Any], role: str) -> list[dict[str, Any]]:
             )})
             season_batting = (player.get("seasonStats") or {}).get("batting") or {}
             base["average"] = season_batting.get("avg") or ".---"
+            base["season_home_runs"] = int(season_batting.get("homeRuns") or 0)
         else:
             base.update({key: stats.get(key, 0) for key in (
                 "inningsPitched", "hits", "runs", "earnedRuns", "baseOnBalls",
@@ -296,7 +297,9 @@ def interesting_facts(boston: dict[str, Any], opponent: dict[str, Any], innings_
 
     homers = [row for row in boston["batting"] if int(row.get("homeRuns") or 0)]
     if homers:
-        names = ", ".join(row["name"] for row in homers)
+        names = ", ".join(
+            f"{row['name']} ({row['season_home_runs']})" for row in homers
+        )
         total = sum(int(row["homeRuns"]) for row in homers)
         facts.append(f"The Red Sox hit {total} home run{'s' if total != 1 else ''}: {names}.")
 

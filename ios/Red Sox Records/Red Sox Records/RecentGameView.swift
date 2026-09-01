@@ -227,21 +227,23 @@ struct RecentGameView: View {
                 Spacer(minLength: 0)
                 statsTeamPicker(redSox: redSox, opponent: opponent)
             }
-            statHeader(labels: ["IP", "H", "ER", "K"])
+            VStack(spacing: 4) {
+                statHeader(labels: ["IP", "H", "ER", "K"])
 
-            VStack(spacing: 0) {
-                ForEach(team.pitching) { pitcher in
-                    statRow(
-                        name: pitcher.name,
-                        detail: pitcher.note,
-                        textValues: [
-                            pitcher.inningsPitched,
-                            "\(pitcher.hits)",
-                            "\(pitcher.earnedRuns)",
-                            "\(pitcher.strikeOuts)"
-                        ],
-                        detailInline: true
-                    )
+                VStack(spacing: 0) {
+                    ForEach(team.pitching) { pitcher in
+                        statRow(
+                            name: pitcher.name,
+                            detail: pitcher.note,
+                            textValues: [
+                                pitcher.inningsPitched,
+                                "\(pitcher.hits)",
+                                "\(pitcher.earnedRuns)",
+                                "\(pitcher.strikeOuts)"
+                            ],
+                            detailInline: true
+                        )
+                    }
                 }
             }
         }
