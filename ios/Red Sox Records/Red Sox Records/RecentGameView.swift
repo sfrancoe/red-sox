@@ -98,10 +98,10 @@ struct RecentGameView: View {
                     Text("\(inning.num)")
                         .frame(maxWidth: .infinity)
                 }
-                lineScoreLegend("R", width: 21)
-                lineScoreLegend("H", width: 21)
-                lineScoreLegend("E", width: 21)
-                lineScoreLegend("LOB", width: 27)
+                lineScoreLegend("R", width: 24)
+                lineScoreLegend("H", width: 24)
+                lineScoreLegend("E", width: 24)
+                lineScoreLegend("LOB", width: 24)
             }
             .font(.system(size: 9, weight: .bold))
             .foregroundStyle(.secondary)
@@ -131,17 +131,17 @@ struct RecentGameView: View {
                     .frame(maxWidth: .infinity)
             }
 
-            lineScoreTotal(team.runs, width: 21, emphasized: true)
-            lineScoreTotal(team.hits, width: 21)
-            lineScoreTotal(team.errors, width: 21)
-            lineScoreTotal(team.leftOnBase, width: 27)
+            lineScoreTotal(team.runs, width: 24, emphasized: true)
+            lineScoreTotal(team.hits, width: 24)
+            lineScoreTotal(team.errors, width: 24)
+            lineScoreTotal(team.leftOnBase, width: 24)
         }
         .font(.system(size: 11, weight: .semibold))
     }
 
     private func lineScoreLegend(_ title: String, width: CGFloat) -> some View {
         Text(title)
-            .frame(width: width, alignment: .trailing)
+            .frame(width: width, alignment: .center)
     }
 
     private func lineScoreTotal(
@@ -156,7 +156,7 @@ struct RecentGameView: View {
                     : .system(size: 11, weight: .semibold, design: .monospaced)
             )
             .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
-            .frame(width: width, alignment: .trailing)
+            .frame(width: width, alignment: .center)
     }
 
     private func summaryCard(_ game: RecentGame) -> some View {
