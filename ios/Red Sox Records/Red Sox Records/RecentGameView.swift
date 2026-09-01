@@ -62,28 +62,24 @@ struct RecentGameView: View {
                     selectedStatsTeam = .boston
                 } label: {
                     Text(gameTabTitle(game, index: index))
-                        .font(.system(size: 13, weight: .black))
+                        .font(
+                            .system(
+                                size: 13,
+                                weight: selectedGame?.gamePk == game.gamePk ? .black : .regular
+                            )
+                        )
                         .lineLimit(1)
                         .minimumScaleFactor(0.78)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .foregroundStyle(Color.white)
-                        .overlay(alignment: .bottom) {
-                            Rectangle()
-                                .fill(
-                                    selectedGame?.gamePk == game.gamePk
-                                        ? AppColor.red
-                                        : Color.clear
-                                )
-                                .frame(height: 3)
-                        }
+                        .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
             }
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(AppColor.navy)
+        .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(.horizontal, 16)
         .padding(.top, 10)
