@@ -370,7 +370,7 @@ struct RecentGameView: View {
             selectedStatsTeam = selection
         } label: {
             Text(title)
-                .font(.system(size: 10, weight: .black))
+                .font(.system(size: 13, weight: .black))
                 .lineLimit(1)
                 .minimumScaleFactor(0.72)
                 .frame(maxWidth: .infinity)
@@ -494,7 +494,7 @@ struct RecentGameView: View {
 
     private func sectionTitle(_ title: String, icon: String) -> some View {
         Label(title.uppercased(), systemImage: icon)
-            .font(.caption.weight(.black))
+            .font(.system(size: 13, weight: .black))
             .tracking(1.1)
             .foregroundStyle(AppColor.navy)
     }
