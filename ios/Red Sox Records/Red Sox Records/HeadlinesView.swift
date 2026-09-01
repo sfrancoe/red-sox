@@ -63,19 +63,24 @@ struct HeadlinesView: View {
                         .minimumScaleFactor(0.72)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .foregroundStyle(
-                            store.selectedSource == source ? AppColor.hunterGreen : Color.white
-                        )
-                        .background(
-                            store.selectedSource == source ? Color.white : Color.clear
-                        )
+                        .foregroundStyle(Color.white)
+                        .background(AppColor.navy)
                         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 9, style: .continuous)
+                                .stroke(
+                                    store.selectedSource == source
+                                        ? AppColor.red
+                                        : Color.white.opacity(0.18),
+                                    lineWidth: store.selectedSource == source ? 2.5 : 0.8
+                                )
+                        }
                 }
                 .buttonStyle(.plain)
             }
         }
         .padding(5)
-        .background(AppColor.hunterGreen)
+        .background(AppColor.navy)
         .overlay {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .stroke(Color.white.opacity(0.45), lineWidth: 1)

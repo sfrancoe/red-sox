@@ -76,13 +76,13 @@ struct PitchingView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
                         .foregroundStyle(.white)
-                        .background(store.filter == filter ? AppColor.green : AppColor.hunterGreen)
+                        .background(AppColor.navy)
                         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                         .overlay {
                             RoundedRectangle(cornerRadius: 9, style: .continuous)
                                 .stroke(
-                                    store.filter == filter ? Color.white : Color.white.opacity(0.2),
-                                    lineWidth: store.filter == filter ? 2 : 0.8
+                                    store.filter == filter ? AppColor.red : Color.white.opacity(0.18),
+                                    lineWidth: store.filter == filter ? 2.5 : 0.8
                                 )
                         }
                 }
@@ -90,7 +90,7 @@ struct PitchingView: View {
             }
         }
         .padding(5)
-        .background(AppColor.hunterGreen)
+        .background(AppColor.navy)
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 

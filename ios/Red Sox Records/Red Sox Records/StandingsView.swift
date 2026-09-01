@@ -85,15 +85,24 @@ struct StandingsView: View {
                         .font(.system(size: 14, weight: .black))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
-                        .foregroundStyle(store.mode == mode ? AppColor.hunterGreen : Color.white)
-                        .background(store.mode == mode ? Color.white : Color.clear)
+                        .foregroundStyle(Color.white)
+                        .background(AppColor.navy)
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .stroke(
+                                    store.mode == mode
+                                        ? AppColor.red
+                                        : Color.white.opacity(0.18),
+                                    lineWidth: store.mode == mode ? 2.5 : 0.8
+                                )
+                        }
                 }
                 .buttonStyle(.plain)
             }
         }
         .padding(4)
-        .background(AppColor.hunterGreen)
+        .background(AppColor.navy)
         .overlay {
             RoundedRectangle(cornerRadius: 11, style: .continuous)
                 .stroke(Color.white.opacity(0.45), lineWidth: 1)

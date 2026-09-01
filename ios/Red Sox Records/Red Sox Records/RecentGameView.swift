@@ -67,13 +67,18 @@ struct RecentGameView: View {
                         .minimumScaleFactor(0.7)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 8)
-                        .foregroundStyle(selectedGame?.gamePk == game.gamePk ? Color.white : AppColor.navy)
-                        .background(
-                            selectedGame?.gamePk == game.gamePk
-                                ? (game.isLive ? AppColor.red : AppColor.hunterGreen)
-                                : Color.white.opacity(0.7)
-                        )
+                        .foregroundStyle(Color.white)
+                        .background(AppColor.navy)
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .stroke(
+                                    selectedGame?.gamePk == game.gamePk
+                                        ? AppColor.red
+                                        : Color.white.opacity(0.18),
+                                    lineWidth: selectedGame?.gamePk == game.gamePk ? 2.5 : 0.8
+                                )
+                        }
                 }
                 .buttonStyle(.plain)
             }
@@ -348,7 +353,7 @@ struct RecentGameView: View {
             statsTeamButton(opponent.cityName, selection: .opponent)
         }
         .padding(2)
-        .background(AppColor.paleBlue)
+        .background(AppColor.navy)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .frame(width: 166)
     }
@@ -366,9 +371,18 @@ struct RecentGameView: View {
                 .minimumScaleFactor(0.72)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)
-                .foregroundStyle(selectedStatsTeam == selection ? Color.white : AppColor.navy)
-                .background(selectedStatsTeam == selection ? AppColor.navy : Color.clear)
+                .foregroundStyle(Color.white)
+                .background(AppColor.navy)
                 .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        .stroke(
+                            selectedStatsTeam == selection
+                                ? AppColor.red
+                                : Color.white.opacity(0.18),
+                            lineWidth: selectedStatsTeam == selection ? 2 : 0.8
+                        )
+                }
         }
         .buttonStyle(.plain)
     }
