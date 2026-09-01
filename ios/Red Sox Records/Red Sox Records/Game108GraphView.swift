@@ -90,6 +90,7 @@ struct Game108GraphView: View {
     private var storyHeader: some View {
         Text("Four straight seasons with the same record after 108 games: 57–51. Where will 2026 go from here?")
             .font(.subheadline.weight(.bold))
+            .italic()
             .foregroundStyle(.white)
             .lineSpacing(1)
             .frame(maxWidth: .infinity, alignment: .leading)
