@@ -333,6 +333,8 @@ private struct Game108Canvas: View {
                     )
                 }
             }
+
+            drawCheckpointAnnotation(context: &context, plot: plot)
         }
         .accessibilityLabel("Four Red Sox seasons showing games above or below .500")
     }
@@ -496,12 +498,43 @@ private struct Game108Canvas: View {
             with: .color(Color(red: 0.69, green: 0.51, blue: 0.08)),
             style: StrokeStyle(lineWidth: 1.4, dash: [3, 4])
         )
+    }
+
+    private func drawCheckpointAnnotation(
+        context: inout GraphicsContext,
+        plot: CGRect
+    ) {
+        let annotationColor = Color(red: 0.55, green: 0.39, blue: 0.04)
+        let point = CGPoint(
+            x: xPosition(108, plot: plot),
+            y: yPosition(6, plot: plot)
+        )
+
         context.draw(
-            Text("G108 · 57–51")
-                .font(.system(size: 8, weight: .black))
-                .foregroundStyle(Color(red: 0.55, green: 0.39, blue: 0.04)),
-            at: CGPoint(x: checkpointX - 3, y: plot.minY - 10),
+            Text("G108 · 57–51!")
+                .font(.system(size: 14, weight: .black))
+                .foregroundStyle(annotationColor),
+            at: CGPoint(x: point.x - 17, y: point.y - 43),
             anchor: .bottomTrailing
+        )
+
+        var arrow = Path()
+        arrow.move(to: CGPoint(x: point.x - 15, y: point.y - 38))
+        arrow.addLine(to: CGPoint(x: point.x - 3, y: point.y - 5))
+        arrow.move(to: CGPoint(x: point.x - 3, y: point.y - 5))
+        arrow.addLine(to: CGPoint(x: point.x - 10, y: point.y - 10))
+        arrow.move(to: CGPoint(x: point.x - 3, y: point.y - 5))
+        arrow.addLine(to: CGPoint(x: point.x - 4, y: point.y - 14))
+        context.stroke(
+            arrow,
+            with: .color(annotationColor),
+            style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round)
+        )
+
+        context.stroke(
+            Path(ellipseIn: CGRect(x: point.x - 6, y: point.y - 6, width: 12, height: 12)),
+            with: .color(annotationColor),
+            lineWidth: 1.8
         )
     }
 
