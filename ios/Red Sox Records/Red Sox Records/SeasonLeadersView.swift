@@ -9,7 +9,7 @@ struct SeasonLeadersView: View {
 
     var body: some View {
         ZStack {
-            AppColor.cream.ignoresSafeArea()
+            AppColor.paleRed.ignoresSafeArea()
 
             Group {
                 if !store.seasons.isEmpty {
@@ -32,16 +32,6 @@ struct SeasonLeadersView: View {
     private var leadersContent: some View {
         ScrollView {
             LazyVStack(spacing: 14) {
-                if let metadata = store.metadata {
-                    HStack {
-                        Text("Updated \(metadata.updatedText)")
-                        Spacer()
-                        Text("MLB + Baseball Reference")
-                    }
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                }
-
                 ForEach(store.sortedYears, id: \.self) { year in
                     if let season = store.seasons[year] {
                         yearCard(year: year, season: season)
@@ -50,9 +40,18 @@ struct SeasonLeadersView: View {
 
                 Text("AVG and OPS use qualified hitters. WHIP requires at least 40 innings.")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.white.opacity(0.84))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical, 8)
+
+                if let metadata = store.metadata {
+                    Text("Updated \(metadata.updatedText) · MLB + Baseball Reference")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(Color.white.opacity(0.84))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.72)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 8)
+                }
             }
             .padding(16)
             .foregroundStyle(AppColor.ink)
