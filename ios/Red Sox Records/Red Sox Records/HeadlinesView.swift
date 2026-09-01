@@ -91,13 +91,13 @@ struct HeadlinesView: View {
     private func feedHeader(_ feed: NewsFeed) -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text(feed.source)
-                .font(.title2.weight(.black))
+                .font(.system(size: 14, weight: .black))
                 .foregroundStyle(.white)
 
             Spacer()
 
             Text("Updated \(feed.refreshedText)")
-                .font(.caption2)
+                .font(.system(size: 9, weight: .medium))
                 .foregroundStyle(Color.white.opacity(0.78))
                 .multilineTextAlignment(.trailing)
         }
