@@ -144,23 +144,23 @@ struct ScheduleView: View {
     }
 
     private func gameDetailCard(_ game: ScheduledGame) -> some View {
-        VStack(alignment: .leading, spacing: 11) {
+        VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(game.fullFormattedDay.uppercased())
-                        .font(.system(size: 10, weight: .black))
+                        .font(.system(size: 14, weight: .black))
                         .tracking(0.45)
                         .foregroundStyle(AppColor.red)
 
                     Text("\(game.locationWord) \(game.opponent)")
-                        .font(.system(size: 20, weight: .black))
+                        .font(.system(size: 24, weight: .black))
                         .foregroundStyle(AppColor.navy)
                 }
 
                 Spacer()
 
                 Text(game.formattedTime)
-                    .font(.system(size: 15, weight: .black))
+                    .font(.system(size: 20, weight: .black))
                     .foregroundStyle(AppColor.hunterGreen)
             }
 
@@ -175,7 +175,7 @@ struct ScheduleView: View {
             if game.showProbables {
                 VStack(alignment: .leading, spacing: 7) {
                     Text("PROJECTED STARTERS")
-                        .font(.system(size: 9, weight: .black))
+                        .font(.system(size: 13, weight: .black))
                         .tracking(0.45)
                         .foregroundStyle(AppColor.red)
 
@@ -187,7 +187,7 @@ struct ScheduleView: View {
                         )
                         Spacer()
                         Text("VS.")
-                            .font(.system(size: 9, weight: .black))
+                            .font(.system(size: 12, weight: .black))
                             .foregroundStyle(AppColor.border)
                             .padding(.top, 13)
                         Spacer()
@@ -199,7 +199,7 @@ struct ScheduleView: View {
                         )
                     }
                 }
-                .padding(12)
+                .padding(14)
                 .background(AppColor.paleBlue.opacity(0.5))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
@@ -210,7 +210,7 @@ struct ScheduleView: View {
                     .foregroundStyle(AppColor.red)
             }
         }
-        .cardStyle(padding: 14)
+        .cardStyle(padding: 16)
     }
 
     private func detailItem(
@@ -220,11 +220,11 @@ struct ScheduleView: View {
     ) -> some View {
         VStack(alignment: alignment, spacing: 2) {
             Text(label)
-                .font(.system(size: 8, weight: .black))
+                .font(.system(size: 11, weight: .black))
                 .tracking(0.35)
                 .foregroundStyle(AppColor.hunterGreen)
             Text(value.isEmpty ? "To be announced" : value)
-                .font(.system(size: 11, weight: .bold))
+                .font(.system(size: 17, weight: .bold))
                 .foregroundStyle(AppColor.ink)
                 .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
         }
@@ -238,16 +238,16 @@ struct ScheduleView: View {
     ) -> some View {
         VStack(alignment: alignment, spacing: 3) {
             Text(label)
-                .font(.system(size: 8, weight: .black))
+                .font(.system(size: 10, weight: .black))
                 .tracking(0.35)
                 .foregroundStyle(AppColor.hunterGreen)
             Text(name)
-                .font(.system(size: 14, weight: .black))
+                .font(.system(size: 18, weight: .black))
                 .foregroundStyle(AppColor.navy)
                 .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
             if !name.isEmpty, name != "To be announced" {
                 Text(recordLabel(record))
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 14, weight: .bold))
                     .foregroundStyle(AppColor.hunterGreen)
             }
         }
