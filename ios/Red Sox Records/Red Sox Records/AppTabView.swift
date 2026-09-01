@@ -1,117 +1,138 @@
 import SwiftUI
-import UIKit
 
 private enum MainTab: Int, CaseIterable {
     case recent
     case schedule
     case headlines
     case xPosts
-    case more
+    case standings
+    case pitching
+    case leaders
+    case game108
+
+    var title: String {
+        switch self {
+        case .recent: "Recent"
+        case .schedule: "Schedule"
+        case .headlines: "Headlines"
+        case .xPosts: "X Posts"
+        case .standings: "Standings"
+        case .pitching: "Pitching"
+        case .leaders: "Leaders"
+        case .game108: "Game 108"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .recent: "baseball.fill"
+        case .schedule: "calendar"
+        case .headlines: "newspaper.fill"
+        case .xPosts: "bubble.left.and.bubble.right.fill"
+        case .standings: "list.number"
+        case .pitching: "figure.baseball"
+        case .leaders: "crown.fill"
+        case .game108: "chart.xyaxis.line"
+        }
+    }
 }
 
 struct AppTabView: View {
     @State private var selectedTab: MainTab = .recent
 
-    init() {
-        let appearance = UITabBarAppearance()
-        appearance.configureWithDefaultBackground()
-        appearance.backgroundColor = UIColor(AppColor.paper).withAlphaComponent(0.96)
-
-        let inactiveColor = UIColor(AppColor.navy).withAlphaComponent(0.68)
-        let itemAppearances = [
-            appearance.stackedLayoutAppearance,
-            appearance.inlineLayoutAppearance,
-            appearance.compactInlineLayoutAppearance
-        ]
-
-        for itemAppearance in itemAppearances {
-            itemAppearance.normal.iconColor = inactiveColor
-            itemAppearance.normal.titleTextAttributes = [
-                .foregroundColor: inactiveColor
-            ]
-        }
-
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-    }
+    private let navigationColumns = Array(
+        repeating: GridItem(.flexible(), spacing: 5),
+        count: 4
+    )
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            RecentGameView()
-                .tabItem {
-                    Label("Recent", systemImage: "baseball.fill")
-                }
-                .tag(MainTab.recent)
-                .mainTabSwipe(selection: $selectedTab, current: .recent)
+        VStack(spacing: 0) {
+            topNavigation
 
-            ScheduleView()
-                .tabItem {
-                    Label("Schedule", systemImage: "calendar")
-                }
-                .tag(MainTab.schedule)
-                .mainTabSwipe(selection: $selectedTab, current: .schedule)
-
-            HeadlinesView()
-                .tabItem {
-                    Label("Headlines", systemImage: "newspaper.fill")
-                }
-                .tag(MainTab.headlines)
-                .mainTabSwipe(selection: $selectedTab, current: .headlines)
-
-            XPostsView()
-                .tabItem {
-                    Label("X Posts", systemImage: "bubble.left.and.bubble.right.fill")
-                }
-                .tag(MainTab.xPosts)
-                .mainTabSwipe(selection: $selectedTab, current: .xPosts, edgeOnly: true)
-
-            MoreView(selectedTab: $selectedTab)
-                .tabItem {
-                    Label("More", systemImage: "ellipsis.circle.fill")
-                }
-                .tag(MainTab.more)
+            selectedContent
         }
-        .tint(AppColor.red)
-        .toolbarBackground(AppColor.paper, for: .tabBar)
-        .toolbarBackground(.visible, for: .tabBar)
+        .background(AppColor.paper)
     }
-}
 
-private struct MoreView: View {
-    @Binding var selectedTab: MainTab
+    @ViewBuilder
+    private var selectedContent: some View {
+        switch selectedTab {
+        case .recent:
+                RecentGameView()
+                    .mainTabSwipe(selection: $selectedTab, current: .recent)
+        case .schedule:
+                ScheduleView()
+                    .mainTabSwipe(selection: $selectedTab, current: .schedule)
+        case .headlines:
+                HeadlinesView()
+                    .mainTabSwipe(selection: $selectedTab, current: .headlines)
+        case .xPosts:
+                XPostsView()
+                    .mainTabSwipe(selection: $selectedTab, current: .xPosts, edgeOnly: true)
+        case .standings:
+                StandingsView()
+                    .mainTabSwipe(selection: $selectedTab, current: .standings)
+        case .pitching:
+                PitchingView()
+                    .mainTabSwipe(selection: $selectedTab, current: .pitching)
+        case .leaders:
+                SeasonLeadersView()
+                    .mainTabSwipe(selection: $selectedTab, current: .leaders)
+        case .game108:
+                Game108GraphView()
+                    .mainTabSwipe(selection: $selectedTab, current: .game108)
+        }
+    }
 
-    var body: some View {
-        NavigationStack {
-            List {
-                NavigationLink {
-                    StandingsView()
+    private var topNavigation: some View {
+        LazyVGrid(columns: navigationColumns, spacing: 5) {
+            ForEach(MainTab.allCases, id: \.self) { tab in
+                Button {
+                    withAnimation(.easeOut(duration: 0.18)) {
+                        selectedTab = tab
+                    }
                 } label: {
-                    Label("Standings", systemImage: "list.number")
+                    VStack(spacing: 3) {
+                        Image(systemName: tab.icon)
+                            .font(.system(size: 13, weight: .bold))
+                        Text(tab.title.uppercased())
+                            .font(.system(size: 8, weight: .black))
+                            .tracking(0.2)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                    }
+                    .foregroundStyle(selectedTab == tab ? Color.white : AppColor.navy)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 39)
+                    .background(
+                        selectedTab == tab
+                            ? AppColor.red
+                            : AppColor.paleBlue.opacity(0.58)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 9, style: .continuous)
+                            .stroke(
+                                selectedTab == tab ? AppColor.red : AppColor.border.opacity(0.8),
+                                lineWidth: 0.8
+                            )
+                    }
                 }
-
-                NavigationLink {
-                    PitchingView()
-                } label: {
-                    Label("Pitching", systemImage: "figure.baseball")
-                }
-
-                NavigationLink {
-                    SeasonLeadersView()
-                } label: {
-                    Label("Season Leaders", systemImage: "crown.fill")
-                }
-
-                NavigationLink {
-                    Game108GraphView()
-                } label: {
-                    Label("Game 108 Graph", systemImage: "chart.xyaxis.line")
-                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(tab.title)
+                .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
             }
-            .scrollContentBackground(.hidden)
-            .background(AppColor.cream)
-            .navigationTitle("More")
-            .mainTabSwipe(selection: $selectedTab, current: .more)
         }
+        .padding(.horizontal, 10)
+        .padding(.top, 7)
+        .padding(.bottom, 8)
+        .background(AppColor.paper)
+        .overlay(alignment: .bottom) {
+            Divider()
+                .overlay(AppColor.border)
+        }
+        .shadow(color: AppColor.navy.opacity(0.08), radius: 7, y: 3)
+        .zIndex(1)
     }
 }
 
@@ -169,26 +190,6 @@ private extension View {
                 edgeOnly: edgeOnly
             )
         )
-    }
-}
-
-private struct ComingSoonView: View {
-    let title: String
-    let message: String
-    let icon: String
-
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                AppColor.cream.ignoresSafeArea()
-                ContentUnavailableView {
-                    Label(title, systemImage: icon)
-                } description: {
-                    Text(message)
-                }
-            }
-            .navigationTitle(title)
-        }
     }
 }
 
