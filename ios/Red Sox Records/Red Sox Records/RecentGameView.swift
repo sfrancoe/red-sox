@@ -196,20 +196,22 @@ struct RecentGameView: View {
                 statsTeamPicker(redSox: redSox, opponent: opponent)
             }
             let widths: [CGFloat] = [28, 28, 28, 32, 38]
-            statHeader(labels: ["AB", "R", "H", "RBI", "AVG"], widths: widths)
+            VStack(spacing: 4) {
+                statHeader(labels: ["AB", "R", "H", "RBI", "AVG"], widths: widths)
 
-            VStack(spacing: 0) {
-                ForEach(team.batting) { batter in
-                    statRow(
-                        name: batter.name,
-                        detail: batter.position,
-                        textValues: [
-                            "\(batter.atBats)", "\(batter.runs)", "\(batter.hits)",
-                            "\(batter.rbi)", batter.average ?? ".---"
-                        ],
-                        detailInline: true,
-                        columnWidths: widths
-                    )
+                VStack(spacing: 0) {
+                    ForEach(team.batting) { batter in
+                        statRow(
+                            name: batter.name,
+                            detail: batter.position,
+                            textValues: [
+                                "\(batter.atBats)", "\(batter.runs)", "\(batter.hits)",
+                                "\(batter.rbi)", batter.average ?? ".---"
+                            ],
+                            detailInline: true,
+                            columnWidths: widths
+                        )
+                    }
                 }
             }
         }
