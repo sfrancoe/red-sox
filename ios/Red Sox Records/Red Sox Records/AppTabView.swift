@@ -101,20 +101,16 @@ struct AppTabView: View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.8)
                     }
-                    .foregroundStyle(selectedTab == tab ? Color.white : AppColor.navy)
+                    .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 39)
-                    .background(
-                        selectedTab == tab
-                            ? AppColor.red
-                            : AppColor.paleBlue.opacity(0.58)
-                    )
+                    .background(AppColor.navy)
                     .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                     .overlay {
                         RoundedRectangle(cornerRadius: 9, style: .continuous)
                             .stroke(
-                                selectedTab == tab ? AppColor.red : AppColor.border.opacity(0.8),
-                                lineWidth: 0.8
+                                selectedTab == tab ? AppColor.red : Color.white.opacity(0.16),
+                                lineWidth: selectedTab == tab ? 2.5 : 0.8
                             )
                     }
                 }
