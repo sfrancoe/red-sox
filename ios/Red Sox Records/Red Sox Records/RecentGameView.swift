@@ -55,18 +55,18 @@ struct RecentGameView: View {
     }
 
     private var gameSelector: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 0) {
             ForEach(Array(store.games.enumerated()), id: \.element.gamePk) { index, game in
                 Button {
                     selectedGameID = game.gamePk
                     selectedStatsTeam = .boston
                 } label: {
                     Text(gameTabTitle(game, index: index))
-                        .font(.system(size: 10, weight: .black))
+                        .font(.system(size: 13, weight: .black))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.7)
+                        .minimumScaleFactor(0.78)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 10)
                         .foregroundStyle(Color.white)
                         .background(AppColor.navy)
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
@@ -82,6 +82,13 @@ struct RecentGameView: View {
                 }
                 .buttonStyle(.plain)
             }
+        }
+        .padding(4)
+        .background(AppColor.navy)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(Color.white.opacity(0.45), lineWidth: 1)
         }
         .padding(.horizontal, 16)
         .padding(.top, 10)
