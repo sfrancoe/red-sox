@@ -12,6 +12,7 @@ const LIVE_FIELDS = [
   'baseOnBalls', 'strikeOuts', 'leftOnBase', 'inningsPitched', 'earnedRuns',
   'homeRuns', 'numberOfPitches', 'plays', 'allPlays', 'scoringPlays', 'about',
   'halfInning', 'inning', 'result', 'description', 'event', 'awayScore', 'homeScore',
+  'matchup', 'batter',
 ].join(',');
 
 export async function fetchJSON(url) {
@@ -61,19 +62,85 @@ function ordinal(value) {
   return `${value}${suffix}`;
 }
 
-function gameSummary(boston, opponent, venue, innings) {
-  const score = `${Math.max(boston.runs, opponent.runs)}–${Math.min(boston.runs, opponent.runs)}`;
-  const outcome = boston.runs > opponent.runs
-    ? (opponent.runs === 0 ? 'shut out' : 'beat')
-    : (boston.runs === 0 ? 'were shut out by' : 'fell to');
-  const first = `The Red Sox ${outcome} the ${opponent.club_name}, ${score}, at ${venue}.`;
-  const labels = innings.filter(inning => inning[opponent.side]?.runs > 0).map(inning => ordinal(inning.num));
-  const joined = labels.length < 3 ? labels.join(' and ') : `${labels.slice(0, -1).join(', ')}, and ${labels.at(-1)}`;
-  const totals = `${boston.hits} hit${boston.hits === 1 ? '' : 's'} and ${boston.errors} error${boston.errors === 1 ? '' : 's'}.`;
-  const second = labels.length
-    ? `The ${opponent.club_name} scored in the ${joined} ${labels.length === 1 ? 'inning' : 'innings'}; the Red Sox finished with ${totals}`
-    : `The Red Sox finished with ${totals}`;
-  return `${first} ${second}`;
+function possessive(name) {
+  return name.endsWith('s') ? `${name}’` : `${name}’s`;
+}
+
+function scoringAction(play) {
+  const batter = play.batter || 'Boston';
+  let event = (play.event || 'scoring play').toLowerCase();
+  event = ({ 'sac fly': 'sacrifice fly', 'field error': 'error' })[event] || event;
+  const runLabel = ({ 2: 'two-run ', 3: 'three-run ', 4: 'grand slam ' })[play.rbi] || '';
+  if (play.rbi === 4 && event === 'home run') event = '';
+  return `${possessive(batter)} ${runLabel}${event}`.trim();
+}
+
+function gameSummary(boston, opponent, venue, scoring) {
+  let awayScore = 0;
+  let homeScore = 0;
+  const annotated = scoring.map(play => {
+    const beforeBoston = boston.side === 'away' ? awayScore : homeScore;
+    const beforeOpponent = boston.side === 'away' ? homeScore : awayScore;
+    awayScore = play.away_score || 0;
+    homeScore = play.home_score || 0;
+    return {
+      ...play,
+      beforeBoston,
+      beforeOpponent,
+      afterBoston: boston.side === 'away' ? awayScore : homeScore,
+      afterOpponent: boston.side === 'away' ? homeScore : awayScore,
+    };
+  });
+
+  if (boston.runs > opponent.runs) {
+    const deficits = annotated.map(play => play.afterOpponent - play.afterBoston);
+    const largestDeficit = Math.max(0, ...deficits);
+    const deficitIndex = deficits.lastIndexOf(largestDeficit);
+    const goAhead = annotated.filter(play => play.afterBoston > play.beforeBoston
+      && play.beforeBoston <= play.beforeOpponent && play.afterBoston > play.afterOpponent);
+    const winningPlay = goAhead.at(-1);
+    const walkoff = winningPlay && boston.side === 'home' && winningPlay.inning_num >= 9
+      && winningPlay === annotated.at(-1);
+    let first;
+    if (walkoff) {
+      first = `${winningPlay.batter || 'Boston'} delivered a walk-off ${(winningPlay.event || 'hit').toLowerCase()} in the ${ordinal(winningPlay.inning_num)} inning as the Red Sox rallied past the ${opponent.club_name}, ${boston.runs}–${opponent.runs}, at ${venue}.`;
+    } else if (largestDeficit >= 2) {
+      first = `The Red Sox erased a ${largestDeficit}-run deficit to beat the ${opponent.club_name}, ${boston.runs}–${opponent.runs}, at ${venue}.`;
+    } else if (opponent.runs === 0) {
+      first = `The Red Sox shut out the ${opponent.club_name}, ${boston.runs}–${opponent.runs}, at ${venue}.`;
+    } else {
+      first = `The Red Sox beat the ${opponent.club_name}, ${boston.runs}–${opponent.runs}, at ${venue}.`;
+    }
+
+    const details = [];
+    if (largestDeficit >= 2) {
+      const lowPoint = annotated[deficitIndex];
+      const rallyPlay = annotated.slice(deficitIndex + 1).find(play => play.afterBoston > play.beforeBoston);
+      if (rallyPlay) {
+        const remaining = rallyPlay.afterOpponent - rallyPlay.afterBoston;
+        const effect = remaining === 0 ? 'tied the game'
+          : remaining < 0 ? 'put Boston ahead'
+            : `cut the deficit to ${remaining === 1 ? 'one' : remaining}`;
+        details.push(`Boston trailed ${lowPoint.afterOpponent}–${lowPoint.afterBoston} before ${scoringAction(rallyPlay)} in the ${ordinal(rallyPlay.inning_num)} ${effect}.`);
+      }
+    }
+    const tyingPlay = annotated.slice(deficitIndex + 1).find(play => play.afterBoston > play.beforeBoston
+      && play.beforeBoston < play.beforeOpponent && play.afterBoston === play.afterOpponent);
+    if (walkoff && tyingPlay && tyingPlay !== winningPlay) {
+      const timing = winningPlay.inning_num - tyingPlay.inning_num === 1 ? 'one inning later' : 'later';
+      details.push(`${scoringAction(tyingPlay)} tied it in the ${ordinal(tyingPlay.inning_num)}, and ${winningPlay.batter || 'Boston'} completed the comeback ${timing}.`);
+    }
+    return [first, ...details].join(' ');
+  }
+
+  const largestLead = Math.max(0, ...annotated.map(play => play.afterBoston - play.afterOpponent));
+  if (boston.runs === 0) {
+    return `The Red Sox were shut out by the ${opponent.club_name}, ${opponent.runs}–${boston.runs}, at ${venue}.`;
+  }
+  if (largestLead >= 2) {
+    return `The Red Sox couldn’t hold a ${largestLead}-run lead and fell to the ${opponent.club_name}, ${opponent.runs}–${boston.runs}, at ${venue}.`;
+  }
+  return `The Red Sox fell to the ${opponent.club_name}, ${opponent.runs}–${boston.runs}, at ${venue}.`;
 }
 
 export function validateFeed(feed) {
@@ -116,10 +183,12 @@ export function buildLiveFeed(payload) {
   // Do not replace a complete saved game with a partially populated final.
   if (!Array.isArray(plays?.scoringPlays) || !Array.isArray(plays?.allPlays)) throw new Error('Scoring plays unavailable');
   const scoring = plays.scoringPlays.map(index => {
-    const { about, result } = plays.allPlays[index];
+    const { about, result, matchup } = plays.allPlays[index];
     const half = about.halfInning;
     return {
       inning: `${half[0].toUpperCase()}${half.slice(1)} ${about.inning}`,
+      inning_num: about.inning, half,
+      batter: matchup?.batter?.fullName || '', event: result.event || '', rbi: result.rbi || 0,
       description: result.description || result.event || 'Scoring play',
       away_score: result.awayScore, home_score: result.homeScore,
     };
@@ -128,7 +197,7 @@ export function buildLiveFeed(payload) {
     game_pk: payload.gamePk,
     game_date: game.datetime.dateTime,
     ...teams, innings, scoring_plays: scoring,
-    summary: gameSummary(boston, opponent, game.venue?.name || 'the ballpark', innings),
+    summary: gameSummary(boston, opponent, game.venue?.name || 'the ballpark', scoring),
     gameday_url: `https://www.mlb.com/gameday/${payload.gamePk}`,
   });
 }

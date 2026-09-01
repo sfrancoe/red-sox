@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T11:43:42.560546+00:00",
+  "generated_at": "2026-09-01T21:12:45.611971+00:00",
   "source": "MLB Stats API",
   "game_pk": 824719,
   "game_date": "2026-08-31T22:45:00Z",
@@ -8,7 +8,7 @@
   "attendance": 37487,
   "innings_count": 10,
   "result": "Win",
-  "summary": "The Red Sox beat the Mariners, 9–8, at Fenway Park. The Mariners scored in the 1st, 3rd, 5th, 6th, and 7th innings; the Red Sox finished with 12 hits and 0 errors.",
+  "summary": "Trevor Story delivered a walk-off single in the 10th inning as the Red Sox rallied past the Mariners, 9–8, at Fenway Park. Boston trailed 8–5 before Trevor Story’s two-run double in the 8th cut the deficit to one. Ceddanne Rafaela’s sacrifice fly tied it in the 9th, and Trevor Story completed the comeback one inning later.",
   "facts": [
     "The game went 10 innings.",
     "Roman Anthony collected 2 of the Red Sox’s 12 hits.",
@@ -707,72 +707,132 @@
   "scoring_plays": [
     {
       "inning": "Top 1",
+      "inning_num": 1,
+      "half": "top",
+      "batter": "Julio Rodríguez",
+      "event": "Double",
+      "rbi": 1,
       "description": "Julio Rodríguez doubles (19) on a sharp line drive to left fielder Jarren Duran. Randy Arozarena scores.",
       "away_score": 1,
       "home_score": 0
     },
     {
       "inning": "Bottom 1",
+      "inning_num": 1,
+      "half": "bottom",
+      "batter": "Mickey Gasper",
+      "event": "Home Run",
+      "rbi": 1,
       "description": "Mickey Gasper homers (6) on a fly ball to right center field.",
       "away_score": 1,
       "home_score": 1
     },
     {
       "inning": "Bottom 2",
+      "inning_num": 2,
+      "half": "bottom",
+      "batter": "Jarren Duran",
+      "event": "Home Run",
+      "rbi": 2,
       "description": "Jarren Duran homers (19) on a fly ball to right field. Nick Sogard scores.",
       "away_score": 1,
       "home_score": 3
     },
     {
       "inning": "Top 3",
+      "inning_num": 3,
+      "half": "top",
+      "batter": "Randy Arozarena",
+      "event": "Home Run",
+      "rbi": 1,
       "description": "Randy Arozarena homers (21) on a fly ball to left field.",
       "away_score": 2,
       "home_score": 3
     },
     {
       "inning": "Top 5",
+      "inning_num": 5,
+      "half": "top",
+      "batter": "Randy Arozarena",
+      "event": "Single",
+      "rbi": 1,
       "description": "Randy Arozarena singles on a sharp line drive to left fielder Jarren Duran. Cole Young scores. Weston Wilson to 3rd. J.P. Crawford to 2nd.",
       "away_score": 3,
       "home_score": 3
     },
     {
       "inning": "Bottom 5",
+      "inning_num": 5,
+      "half": "bottom",
+      "batter": "Ceddanne Rafaela",
+      "event": "Single",
+      "rbi": 2,
       "description": "Ceddanne Rafaela singles on a sharp ground ball to center fielder Julio Rodríguez. Connor Wong scores. Roman Anthony scores.",
       "away_score": 3,
       "home_score": 5
     },
     {
       "inning": "Top 6",
+      "inning_num": 6,
+      "half": "top",
+      "batter": "Randy Arozarena",
+      "event": "Single",
+      "rbi": 2,
       "description": "Randy Arozarena singles on a ground ball to right fielder Wilyer Abreu. Cole Young scores. Weston Wilson scores. J.P. Crawford to 3rd.",
       "away_score": 5,
       "home_score": 5
     },
     {
       "inning": "Top 6",
+      "inning_num": 6,
+      "half": "top",
+      "batter": "Dominic Canzone",
+      "event": "Double",
+      "rbi": 2,
       "description": "Dominic Canzone doubles (22) on a sharp fly ball to left fielder Jarren Duran. J.P. Crawford scores. Randy Arozarena scores.",
       "away_score": 7,
       "home_score": 5
     },
     {
       "inning": "Top 7",
+      "inning_num": 7,
+      "half": "top",
+      "batter": "Cal Raleigh",
+      "event": "Home Run",
+      "rbi": 1,
       "description": "Cal Raleigh homers (20) on a fly ball to left field.",
       "away_score": 8,
       "home_score": 5
     },
     {
       "inning": "Bottom 8",
+      "inning_num": 8,
+      "half": "bottom",
+      "batter": "Trevor Story",
+      "event": "Double",
+      "rbi": 2,
       "description": "Trevor Story doubles (9) on a fly ball to left fielder Randy Arozarena. Nick Sogard scores. Caleb Durbin scores.",
       "away_score": 8,
       "home_score": 7
     },
     {
       "inning": "Bottom 9",
+      "inning_num": 9,
+      "half": "bottom",
+      "batter": "Ceddanne Rafaela",
+      "event": "Sac Fly",
+      "rbi": 1,
       "description": "Ceddanne Rafaela out on a sacrifice fly to left fielder Randy Arozarena. Roman Anthony scores.",
       "away_score": 8,
       "home_score": 8
     },
     {
       "inning": "Bottom 10",
+      "inning_num": 10,
+      "half": "bottom",
+      "batter": "Trevor Story",
+      "event": "Single",
+      "rbi": 1,
       "description": "Trevor Story singles on a sharp line drive to center fielder Julio Rodríguez. Eli White scores. Caleb Durbin to 3rd. Jarren Duran to 2nd.",
       "away_score": 8,
       "home_score": 9

@@ -131,36 +131,138 @@ def decision(live_data: dict[str, Any], key: str) -> str:
     return ((live_data.get("decisions") or {}).get(key) or {}).get("fullName") or ""
 
 
-def build_summary(boston: dict[str, Any], opponent: dict[str, Any], venue: str,
-                  innings: list[dict[str, Any]]) -> str:
-    br, oruns = boston["runs"], opponent["runs"]
-    score = f"{max(br, oruns)}–{min(br, oruns)}"
-    opponent_name = opponent["club_name"]
-    if br > oruns and oruns == 0:
-        first = f"The Red Sox shut out the {opponent_name}, {score}, at {venue}."
-    elif br > oruns:
-        first = f"The Red Sox beat the {opponent_name}, {score}, at {venue}."
-    elif br == 0:
-        first = f"The Red Sox were shut out by the {opponent_name}, {score}, at {venue}."
-    else:
-        first = f"The Red Sox fell to the {opponent_name}, {score}, at {venue}."
+def possessive(name: str) -> str:
+    return f"{name}’" if name.endswith("s") else f"{name}’s"
 
-    scoring_side = "away" if opponent["side"] == "away" else "home"
-    scoring_innings = [inning["num"] for inning in innings if (inning.get(scoring_side) or {}).get("runs", 0)]
-    if scoring_innings:
-        inning_labels = [ordinal(value) for value in scoring_innings]
-        labels = inning_labels[0] if len(inning_labels) == 1 else (
-            " and ".join(inning_labels) if len(inning_labels) == 2
-            else ", ".join(inning_labels[:-1]) + f", and {inning_labels[-1]}"
+
+def scoring_action(play: dict[str, Any]) -> str:
+    batter = play.get("batter") or "Boston"
+    event = str(play.get("event") or "scoring play").lower()
+    event = {
+        "sac fly": "sacrifice fly",
+        "field error": "error",
+    }.get(event, event)
+    runs = int(play.get("rbi") or 0)
+    run_label = {2: "two-run ", 3: "three-run ", 4: "grand slam "}.get(runs, "")
+    if runs == 4 and event == "home run":
+        event = ""
+    return f"{possessive(batter)} {run_label}{event}".strip()
+
+
+def build_summary(boston: dict[str, Any], opponent: dict[str, Any], venue: str,
+                  scoring: list[dict[str, Any]]) -> str:
+    br, oruns = boston["runs"], opponent["runs"]
+    score = f"{br}–{oruns}"
+    opponent_name = opponent["club_name"]
+    annotated = []
+    away_score = home_score = 0
+    for play in scoring:
+        before_boston = away_score if boston["side"] == "away" else home_score
+        before_opponent = home_score if boston["side"] == "away" else away_score
+        away_score = int(play.get("away_score") or 0)
+        home_score = int(play.get("home_score") or 0)
+        after_boston = away_score if boston["side"] == "away" else home_score
+        after_opponent = home_score if boston["side"] == "away" else away_score
+        annotated.append({
+            **play,
+            "before_boston": before_boston,
+            "before_opponent": before_opponent,
+            "after_boston": after_boston,
+            "after_opponent": after_opponent,
+        })
+
+    if br > oruns:
+        largest_deficit = max(
+            (play["after_opponent"] - play["after_boston"] for play in annotated),
+            default=0,
         )
-        inning_word = "inning" if len(scoring_innings) == 1 else "innings"
-        second = (
-            f"The {opponent_name} scored in the {labels} {inning_word}; the Red Sox finished with "
-            f"{boston['hits']} hits and {boston['errors']} errors."
+        deficit_index = max(
+            range(len(annotated)),
+            key=lambda index: annotated[index]["after_opponent"] - annotated[index]["after_boston"],
+            default=0,
+        )
+        go_ahead = [
+            play for play in annotated
+            if play["after_boston"] > play["before_boston"]
+            and play["before_boston"] <= play["before_opponent"]
+            and play["after_boston"] > play["after_opponent"]
+        ]
+        winning_play = go_ahead[-1] if go_ahead else None
+        walkoff = (
+            winning_play is not None
+            and boston["side"] == "home"
+            and int(winning_play.get("inning_num") or 0) >= 9
+            and winning_play is annotated[-1]
+        )
+
+        if walkoff:
+            first = (
+                f"{winning_play.get('batter') or 'Boston'} delivered a walk-off "
+                f"{str(winning_play.get('event') or 'hit').lower()} in the "
+                f"{ordinal(int(winning_play['inning_num']))} inning as the Red Sox rallied past "
+                f"the {opponent_name}, {score}, at {venue}."
+            )
+        elif largest_deficit >= 2:
+            first = (
+                f"The Red Sox erased a {largest_deficit}-run deficit to beat the "
+                f"{opponent_name}, {score}, at {venue}."
+            )
+        elif oruns == 0:
+            first = f"The Red Sox shut out the {opponent_name}, {score}, at {venue}."
+        else:
+            first = f"The Red Sox beat the {opponent_name}, {score}, at {venue}."
+
+        details = []
+        if largest_deficit >= 2 and annotated:
+            low_point = annotated[deficit_index]
+            rally_play = next((
+                play for play in annotated[deficit_index + 1:]
+                if play["after_boston"] > play["before_boston"]
+            ), None)
+            if rally_play:
+                remaining = rally_play["after_opponent"] - rally_play["after_boston"]
+                effect = (
+                    "tied the game" if remaining == 0
+                    else "put Boston ahead" if remaining < 0
+                    else f"cut the deficit to {'one' if remaining == 1 else remaining}"
+                )
+                details.append(
+                    f"Boston trailed {low_point['after_opponent']}–{low_point['after_boston']} before "
+                    f"{scoring_action(rally_play)} in the {ordinal(int(rally_play['inning_num']))} "
+                    f"{effect}."
+                )
+
+        tying_play = next((
+            play for play in annotated[deficit_index + 1:]
+            if play["after_boston"] > play["before_boston"]
+            and play["before_boston"] < play["before_opponent"]
+            and play["after_boston"] == play["after_opponent"]
+        ), None)
+        if walkoff and tying_play and tying_play is not winning_play:
+            innings_later = int(winning_play["inning_num"]) - int(tying_play["inning_num"])
+            timing = "one inning later" if innings_later == 1 else "later"
+            details.append(
+                f"{scoring_action(tying_play)} tied it in the "
+                f"{ordinal(int(tying_play['inning_num']))}, and "
+                f"{winning_play.get('batter') or 'Boston'} completed the comeback "
+                f"{timing}."
+            )
+        return " ".join([first, *details])
+
+    largest_lead = max(
+        (play["after_boston"] - play["after_opponent"] for play in annotated),
+        default=0,
+    )
+    if br == 0:
+        first = f"The Red Sox were shut out by the {opponent_name}, {oruns}–{br}, at {venue}."
+    elif largest_lead >= 2:
+        first = (
+            f"The Red Sox couldn’t hold a {largest_lead}-run lead and fell to the "
+            f"{opponent_name}, {oruns}–{br}, at {venue}."
         )
     else:
-        second = f"The Red Sox finished with {boston['hits']} hits and {boston['errors']} errors."
-    return f"{first} {second}"
+        first = f"The Red Sox fell to the {opponent_name}, {oruns}–{br}, at {venue}."
+    return first
 
 
 def interesting_facts(boston: dict[str, Any], opponent: dict[str, Any], innings_count: int) -> list[str]:
@@ -231,8 +333,14 @@ def build_feed(live: dict[str, Any], content: dict[str, Any]) -> dict[str, Any]:
     for index in (live_data.get("plays") or {}).get("scoringPlays") or []:
         play = all_plays[index]
         about, result = play.get("about") or {}, play.get("result") or {}
+        matchup = play.get("matchup") or {}
         scoring.append({
             "inning": f"{about.get('halfInning', '').title()} {about.get('inning', '')}",
+            "inning_num": about.get("inning", 0),
+            "half": about.get("halfInning", ""),
+            "batter": (matchup.get("batter") or {}).get("fullName") or "",
+            "event": result.get("event") or "",
+            "rbi": result.get("rbi", 0),
             "description": result.get("description") or result.get("event") or "Scoring play",
             "away_score": result.get("awayScore", 0),
             "home_score": result.get("homeScore", 0),
@@ -248,7 +356,7 @@ def build_feed(live: dict[str, Any], content: dict[str, Any]) -> dict[str, Any]:
         "attendance": game_info.get("attendance"),
         "innings_count": len(innings),
         "result": "Win" if boston["runs"] > opponent["runs"] else "Loss",
-        "summary": build_summary(boston, opponent, venue, innings),
+        "summary": build_summary(boston, opponent, venue, scoring),
         "facts": interesting_facts(boston, opponent, len(innings)),
         "decisions": {
             "winner": decision(live_data, "winner"),
