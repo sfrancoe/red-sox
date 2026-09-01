@@ -109,9 +109,9 @@ struct PitchingView: View {
 
             HStack(spacing: 14) {
                 Label("Above forecast", systemImage: "circle.fill")
-                    .foregroundStyle(AppColor.red)
+                    .foregroundStyle(AppColor.green)
                 Label("Below forecast", systemImage: "circle.fill")
-                    .foregroundStyle(AppColor.green.opacity(0.75))
+                    .foregroundStyle(AppColor.red)
             }
             .font(.caption2.weight(.bold))
         }
@@ -275,7 +275,7 @@ private struct PitchingImpactChart: View {
             for pitcher in pitchers.sorted(by: { $0.actual.ipValue > $1.actual.ipValue }) {
                 let point = CGPoint(x: x(pitcher.forecastToDate.war), y: y(pitcher.actual.war))
                 let radius = min(10, 3.5 + sqrt(pitcher.actual.ipValue) * 0.42)
-                let pointColor = pitcher.warGap >= 0 ? AppColor.red : AppColor.green.opacity(0.75)
+                let pointColor = pitcher.warGap >= 0 ? AppColor.green : AppColor.red
                 context.fill(
                     Path(ellipseIn: CGRect(x: point.x - radius, y: point.y - radius, width: radius * 2, height: radius * 2)),
                     with: .color(pointColor)
