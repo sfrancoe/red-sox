@@ -36,8 +36,10 @@ struct Game108GraphView: View {
     }
 
     private var graphContent: some View {
-        ScrollView {
-            VStack(spacing: 16) {
+        GeometryReader { proxy in
+            let chartHeight = max(260, min(430, proxy.size.height - 150))
+
+            VStack(spacing: 10) {
                 storyHeader
 
                 ZStack {
@@ -69,8 +71,8 @@ struct Game108GraphView: View {
                         }
                     }
                 }
-                .frame(height: 450)
-                .padding(12)
+                .frame(height: chartHeight)
+                .padding(10)
                 .background(AppColor.paper)
                 .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                 .overlay {
@@ -78,48 +80,20 @@ struct Game108GraphView: View {
                         .stroke(AppColor.border, lineWidth: 1)
                 }
 
-                narrationCard
                 controls
             }
-            .padding(16)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
             .foregroundStyle(AppColor.ink)
         }
     }
 
     private var storyHeader: some View {
-        Text("In each of the last four seasons, the Boston Red Sox had the exact same record after 108 games: 57–51. The first three ended dramatically differently. Where will 2026 end up?")
+        Text("Four straight seasons. The same record after 108 games: 57–51. Where will 2026 go from here?")
             .font(.subheadline.weight(.bold))
             .foregroundStyle(.white)
-            .lineSpacing(2)
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private var narrationCard: some View {
-        VStack(alignment: .leading, spacing: 7) {
-            if let currentSeries, let currentStory {
-                HStack {
-                    Text("\(currentSeries.year) · \(currentStory.label)")
-                        .font(.caption.weight(.black))
-                        .foregroundStyle(color(for: currentSeries.year))
-
-                    Spacer()
-
-                    Text("G\(currentGame) · \(currentSeries.record(through: currentGame))")
-                        .font(.caption.monospacedDigit().weight(.bold))
-                        .foregroundStyle(.secondary)
-                }
-
-                Text(currentBeatText)
-                    .font(.headline)
-                    .foregroundStyle(AppColor.navy)
-                    .fixedSize(horizontal: false, vertical: true)
-            } else {
-                Text("Four roads met at 57–51 after 108 games—then split.")
-                    .font(.headline)
-                    .foregroundStyle(AppColor.navy)
-            }
-        }
-        .cardStyle()
+            .lineSpacing(1)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var controls: some View {
@@ -206,28 +180,6 @@ struct Game108GraphView: View {
             .background(AppColor.hunterGreen)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
-    }
-
-    private var currentSeries: GraphSeries? {
-        guard activeSeasonIndex < store.series.count else { return nil }
-        return store.series[activeSeasonIndex]
-    }
-
-    private var currentStory: GraphStory? {
-        guard let currentSeries else { return nil }
-        return Game108Story.stories.first { $0.year == currentSeries.year }
-    }
-
-    private var currentGame: Int {
-        guard let currentSeries else { return 162 }
-        return min(Int(gameProgress.rounded(.down)), currentSeries.endGame)
-    }
-
-    private var currentBeatText: String {
-        guard let currentStory else { return "" }
-        return currentStory.beats.last { $0.game <= currentGame }?.text
-            ?? currentStory.beats.first?.text
-            ?? ""
     }
 
     @MainActor
