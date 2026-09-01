@@ -43,7 +43,6 @@ struct HeadlinesView: View {
                 .padding(.bottom, 16)
                 .foregroundStyle(AppColor.ink)
             }
-            .dynamicTypeSize(.xSmall)
             .id(store.selectedSource)
             .refreshable {
                 await store.load()
@@ -115,11 +114,12 @@ struct HeadlinesView: View {
                 articleContent(article)
             }
         }
-        .cardStyle(padding: 12)
+        .frame(minHeight: 142, alignment: .topLeading)
+        .cardStyle(padding: 14)
     }
 
     private func articleContent(_ article: NewsArticle) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
                 Text(article.category.uppercased())
                     .font(.system(size: 10, weight: .black))
@@ -127,11 +127,11 @@ struct HeadlinesView: View {
                     .lineLimit(1)
 
                 Text("·")
-                    .foregroundStyle(AppColor.ink.opacity(0.55))
+                    .foregroundStyle(Color.black)
 
                 Text(article.publishedText)
-                    .font(.system(size: 10))
-                    .foregroundStyle(AppColor.ink)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(Color.black)
 
                 Spacer(minLength: 4)
 
@@ -141,17 +141,17 @@ struct HeadlinesView: View {
             }
 
             Text(article.title)
-                .font(.system(size: 15, weight: .bold))
-                .foregroundStyle(AppColor.navy)
-                .lineLimit(2)
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(Color.black)
+                .lineLimit(3)
                 .fixedSize(horizontal: false, vertical: true)
 
             if !article.description.isEmpty {
                 Text(article.description)
-                    .font(.system(size: 13))
-                    .foregroundStyle(AppColor.ink.opacity(0.82))
-                    .lineSpacing(1)
-                    .lineLimit(2)
+                    .font(.system(size: 14))
+                    .foregroundStyle(Color.black)
+                    .lineSpacing(2)
+                    .lineLimit(4)
             }
         }
     }
