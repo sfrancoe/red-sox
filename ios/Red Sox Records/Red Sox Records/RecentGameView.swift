@@ -310,14 +310,14 @@ struct RecentGameView: View {
                     if detailInline, !detail.isEmpty {
                         Text("· \(detail)")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(AppColor.hunterGreen)
                             .fixedSize()
                     }
                 }
                 if !detailInline, !detail.isEmpty {
                     Text(detail)
                         .font(.caption2)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppColor.hunterGreen)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
