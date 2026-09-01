@@ -65,12 +65,14 @@ final class XPostsStore {
         }
 
         let cutoff = Date().addingTimeInterval(-24 * 60 * 60)
-        let popular = uniquePosts.values
+        let leaderboardSize = curated.popular.count
+        let rankedPosts = uniquePosts.values
             .filter { $0.publishedDate.map { $0 >= cutoff } ?? false }
             .sorted {
                 if $0.likes != $1.likes { return $0.likes > $1.likes }
                 return $0.published > $1.published
             }
+        let popular = Array(rankedPosts.prefix(leaderboardSize))
 
         return XFeed(
             generatedAt: max(curated.generatedAt, discovery.generatedAt),
