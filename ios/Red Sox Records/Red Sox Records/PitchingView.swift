@@ -267,13 +267,27 @@ private struct PitchingImpactChart: View {
             )
 
             var occupiedLabelFrames: [CGRect] = []
+            let maximumGap = max(pitchers.map { abs($0.warGap) }.max() ?? 0, 0.25)
             for pitcher in pitchers.sorted(by: { $0.actual.ipValue > $1.actual.ipValue }) {
                 let point = CGPoint(x: x(pitcher.forecastToDate.war), y: y(pitcher.actual.war))
                 let radius = min(10, 3.5 + sqrt(pitcher.actual.ipValue) * 0.42)
-                let pointColor = pitcher.warGap >= 0 ? AppColor.green : AppColor.red
-                context.fill(
-                    Path(ellipseIn: CGRect(x: point.x - radius, y: point.y - radius, width: radius * 2, height: radius * 2)),
-                    with: .color(pointColor)
+                let gapStrength = min(abs(pitcher.warGap) / maximumGap, 1)
+                let pointColor = performanceColor(gap: pitcher.warGap, strength: gapStrength)
+                let pointPath = Path(
+                    ellipseIn: CGRect(
+                        x: point.x - radius,
+                        y: point.y - radius,
+                        width: radius * 2,
+                        height: radius * 2
+                    )
+                )
+                context.fill(pointPath, with: .color(pointColor))
+                context.stroke(
+                    pointPath,
+                    with: .color(
+                        (pitcher.warGap >= 0 ? AppColor.hunterGreen : AppColor.red).opacity(0.42)
+                    ),
+                    lineWidth: 0.8
                 )
 
                 if labels.contains(pitcher.id) {
@@ -331,6 +345,26 @@ private struct PitchingImpactChart: View {
         }
         .accessibilityLabel("Actual pitching fWAR compared with forecast fWAR")
     }
+}
+
+private func performanceColor(gap: Double, strength: Double) -> Color {
+    let amount = min(max(strength, 0), 1)
+    let light: (red: Double, green: Double, blue: Double)
+    let dark: (red: Double, green: Double, blue: Double)
+
+    if gap >= 0 {
+        light = (0.76, 0.89, 0.80)
+        dark = (0.05, 0.29, 0.17)
+    } else {
+        light = (0.96, 0.79, 0.80)
+        dark = (0.56, 0.06, 0.11)
+    }
+
+    return Color(
+        red: light.red + (dark.red - light.red) * amount,
+        green: light.green + (dark.green - light.green) * amount,
+        blue: light.blue + (dark.blue - light.blue) * amount
+    )
 }
 
 private extension Double {
