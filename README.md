@@ -4,6 +4,11 @@ Visual stories built from Boston Red Sox box scores. No framework, no bundler, n
 backend — plain ES modules and `<canvas>`, with game logs pulled from the free
 [MLB Stats API](https://statsapi.mlb.com/).
 
+The native iOS app includes an App Store readiness check. Run
+`python3 scripts/app_store_preflight.py` before TestFlight; add `--network` to
+verify live non-metered feeds. See `app-store/README.md` for the remaining human
+review items.
+
 ## Stories
 
 | Story | What it shows |
