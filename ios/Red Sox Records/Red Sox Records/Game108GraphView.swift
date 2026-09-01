@@ -37,7 +37,6 @@ struct Game108GraphView: View {
         ScrollView {
             VStack(spacing: 16) {
                 storyHeader
-                legend
 
                 ZStack {
                     Game108Canvas(
@@ -68,7 +67,7 @@ struct Game108GraphView: View {
                         }
                     }
                 }
-                .frame(height: 390)
+                .frame(height: 450)
                 .padding(12)
                 .background(AppColor.paper)
                 .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
@@ -86,38 +85,11 @@ struct Game108GraphView: View {
     }
 
     private var storyHeader: some View {
-        VStack(alignment: .leading, spacing: 7) {
-            Text("FOUR ROADS, ONE RECORD")
-                .font(.system(size: 30, weight: .black, design: .rounded))
-                .foregroundStyle(AppColor.navy)
-            Text("Four consecutive seasons reached 57–51 after 108 games—then split toward four different endings.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .lineSpacing(2)
-        }
+        Text("Four consecutive seasons reached 57–51 after 108 games—then split toward four different endings.")
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+            .lineSpacing(2)
         .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private var legend: some View {
-        LazyVGrid(
-            columns: [GridItem(.flexible()), GridItem(.flexible())],
-            alignment: .leading,
-            spacing: 8
-        ) {
-            ForEach(Array(store.series.enumerated()), id: \.element.id) { index, series in
-                HStack(spacing: 7) {
-                    Circle()
-                        .fill(color(for: series.year))
-                        .frame(width: 9, height: 9)
-                    Text("\(series.year)")
-                        .font(.caption.weight(.black))
-                    Text(series.record.replacingOccurrences(of: "-", with: "–"))
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
-                .opacity(index <= activeSeasonIndex ? 1 : 0.45)
-            }
-        }
     }
 
     private var narrationCard: some View {
