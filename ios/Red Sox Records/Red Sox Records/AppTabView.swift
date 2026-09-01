@@ -14,7 +14,7 @@ private enum MainTab: Int, CaseIterable {
         switch self {
         case .recent: "Game"
         case .schedule: "Schedule"
-        case .headlines: "Headlines"
+        case .headlines: "Newspapers"
         case .xPosts: "X Posts"
         case .standings: "Standings"
         case .pitching: "Pitching"
