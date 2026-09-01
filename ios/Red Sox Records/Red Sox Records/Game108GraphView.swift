@@ -529,12 +529,12 @@ private struct Game108Canvas: View {
         )
 
         var arrow = Path()
-        arrow.move(to: CGPoint(x: point.x - 42, y: point.y - 66))
-        arrow.addLine(to: CGPoint(x: point.x - 20, y: point.y - 29))
-        arrow.move(to: CGPoint(x: point.x - 20, y: point.y - 29))
-        arrow.addLine(to: CGPoint(x: point.x - 32, y: point.y - 35))
-        arrow.move(to: CGPoint(x: point.x - 20, y: point.y - 29))
-        arrow.addLine(to: CGPoint(x: point.x - 21, y: point.y - 43))
+        arrow.move(to: CGPoint(x: point.x - 34, y: point.y - 74))
+        arrow.addLine(to: CGPoint(x: point.x - 12, y: point.y - 37))
+        arrow.move(to: CGPoint(x: point.x - 12, y: point.y - 37))
+        arrow.addLine(to: CGPoint(x: point.x - 24, y: point.y - 43))
+        arrow.move(to: CGPoint(x: point.x - 12, y: point.y - 37))
+        arrow.addLine(to: CGPoint(x: point.x - 13, y: point.y - 51))
         context.stroke(
             arrow,
             with: .color(AppColor.paper),
@@ -553,13 +553,16 @@ private struct Game108Canvas: View {
         at point: CGPoint,
         color: Color
     ) {
-        let label = season.year == 2026 ? "’26 YTD" : "’\(String(season.year).suffix(2))"
+        let label = season.year == 2026 ? "YTD" : "’\(String(season.year).suffix(2))"
+        let labelPoint = season.year == 2026
+            ? CGPoint(x: point.x + 17, y: point.y)
+            : CGPoint(x: point.x - 6, y: point.y - 13)
         context.draw(
             Text(label)
                 .font(.system(size: 12, weight: .black))
                 .foregroundStyle(color),
-            at: CGPoint(x: point.x - 6, y: point.y - 13),
-            anchor: .bottomTrailing
+            at: labelPoint,
+            anchor: season.year == 2026 ? .leading : .bottomTrailing
         )
     }
 
