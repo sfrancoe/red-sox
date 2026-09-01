@@ -54,14 +54,14 @@ struct StandingsView: View {
                         )
 
                         Text("Top three teams hold the wild-card positions.")
-                            .font(.system(size: 9, weight: .semibold))
+                            .font(.system(size: 11, weight: .bold))
                             .foregroundStyle(Color.white.opacity(0.82))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 4)
                     }
 
                     Text("Updated \(feed.updatedText) · \(feed.source)")
-                        .font(.system(size: 8))
+                        .font(.system(size: 10, weight: .semibold))
                         .foregroundStyle(Color.white.opacity(0.72))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 5)
@@ -84,7 +84,7 @@ struct StandingsView: View {
                     store.mode = mode
                 } label: {
                     Text(mode.title)
-                        .font(.system(size: 11, weight: .black))
+                        .font(.system(size: 13, weight: .black))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 7)
                         .foregroundStyle(store.mode == mode ? AppColor.hunterGreen : Color.white)
@@ -108,7 +108,7 @@ struct StandingsView: View {
         let redSox = feed.wildCard.first(where: \.isRedSox)
         return HStack(alignment: .firstTextBaseline, spacing: 8) {
             Text("BOSTON PLAYOFF POSITION")
-                .font(.system(size: 9, weight: .black))
+                .font(.system(size: 11, weight: .black))
                 .tracking(0.55)
                 .foregroundStyle(AppColor.navy)
 
@@ -116,7 +116,7 @@ struct StandingsView: View {
 
             if let redSox {
                 Text("\(redSox.wins)–\(redSox.losses) · WC #\(redSox.rank) · \(redSox.wildCardGamesBack) WCGB")
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                    .font(.system(size: 12, weight: .bold, design: .monospaced))
                     .foregroundStyle(AppColor.red)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
@@ -134,12 +134,12 @@ struct StandingsView: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text(title.uppercased())
-                    .font(.system(size: 12, weight: .black))
+                    .font(.system(size: 15, weight: .black))
                     .foregroundStyle(AppColor.navy)
                 Spacer()
                 if let redSox = teams.first(where: \.isRedSox) {
                     Text("BOSTON: \(ordinalRank(redSox.rank))")
-                        .font(.system(size: 8, weight: .black))
+                        .font(.system(size: 10, weight: .black))
                         .foregroundStyle(AppColor.red)
                 }
             }
@@ -167,8 +167,8 @@ struct StandingsView: View {
             Text("L10").frame(width: 42)
             Text("STRK").frame(width: 38)
         }
-        .font(.system(size: 7, weight: .black))
-        .foregroundStyle(.secondary)
+        .font(.system(size: 10, weight: .black))
+        .foregroundStyle(AppColor.hunterGreen)
         .padding(.horizontal, 5)
         .padding(.bottom, 3)
     }
@@ -178,9 +178,9 @@ struct StandingsView: View {
         return HStack(spacing: 0) {
             HStack(spacing: 5) {
                 Text(team.rank)
-                    .font(.system(size: 8, design: .monospaced))
-                    .foregroundStyle(.secondary)
-                    .frame(width: 12)
+                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                    .foregroundStyle(AppColor.hunterGreen)
+                    .frame(width: 15)
                 Text(team.abbreviation)
                     .fontWeight(team.isRedSox ? .black : .bold)
             }
@@ -192,12 +192,12 @@ struct StandingsView: View {
             tableValue(gamesBack, width: gamesBackTitle == "WCGB" ? 48 : 38)
             tableValue(team.lastTen, width: 42)
             Text(team.streak)
-                .font(.system(size: 8, weight: .bold, design: .monospaced))
+                .font(.system(size: 11, weight: .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                 .frame(width: 38)
         }
-        .font(.system(size: 9, design: .monospaced))
-        .foregroundStyle(team.isRedSox ? AppColor.navy : AppColor.ink)
+        .font(.system(size: 12, weight: .semibold, design: .monospaced))
+        .foregroundStyle(team.isRedSox ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, 5)
         .padding(.vertical, 5)
         .background(team.isRedSox ? AppColor.paleBlue : Color.clear)
@@ -214,7 +214,8 @@ struct StandingsView: View {
 
     private func tableValue(_ value: String, width: CGFloat) -> some View {
         Text(value)
-            .font(.system(size: 8, design: .monospaced))
+            .font(.system(size: 11, weight: .semibold, design: .monospaced))
+            .foregroundStyle(AppColor.hunterGreen)
             .frame(width: width)
     }
 
@@ -231,7 +232,7 @@ struct StandingsView: View {
         HStack(spacing: 8) {
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
             Text("PLAYOFF CUT")
-                .font(.system(size: 8, weight: .black))
+                .font(.system(size: 10, weight: .black))
                 .tracking(0.5)
                 .foregroundStyle(AppColor.red)
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
