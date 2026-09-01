@@ -33,7 +33,7 @@ struct StandingsView: View {
             modePicker
 
             ScrollView {
-                LazyVStack(spacing: 7) {
+                LazyVStack(spacing: 5) {
                     if store.mode == .divisions {
                         ForEach(feed.divisions) { division in
                             standingsCard(
@@ -82,9 +82,9 @@ struct StandingsView: View {
                     store.mode = mode
                 } label: {
                     Text(mode.title)
-                        .font(.system(size: 13, weight: .black))
+                        .font(.system(size: 14, weight: .black))
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 7)
+                        .padding(.vertical, 6)
                         .foregroundStyle(store.mode == mode ? AppColor.hunterGreen : Color.white)
                         .background(store.mode == mode ? Color.white : Color.clear)
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
@@ -111,16 +111,16 @@ struct StandingsView: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text(title.uppercased())
-                    .font(.system(size: 15, weight: .black))
+                    .font(.system(size: 16, weight: .black))
                     .foregroundStyle(AppColor.navy)
                 Spacer()
                 if let redSox = teams.first(where: \.isRedSox) {
                     Text("BOSTON: \(ordinalRank(redSox.rank))")
-                        .font(.system(size: 10, weight: .black))
+                        .font(.system(size: 12, weight: .black))
                         .foregroundStyle(AppColor.red)
                 }
             }
-            .padding(.bottom, 7)
+            .padding(.bottom, 5)
 
             standingsHeader(gamesBackTitle)
 
@@ -131,7 +131,7 @@ struct StandingsView: View {
                 standingsRow(team, gamesBackTitle: gamesBackTitle)
             }
         }
-        .cardStyle(padding: 10)
+        .cardStyle(padding: 8)
     }
 
     private func standingsHeader(_ gamesBackTitle: String) -> some View {
@@ -144,10 +144,10 @@ struct StandingsView: View {
             Text("L10").frame(width: 42)
             Text("STRK").frame(width: 38)
         }
-        .font(.system(size: 10, weight: .black))
+        .font(.system(size: 11, weight: .black))
         .foregroundStyle(AppColor.hunterGreen)
         .padding(.horizontal, 5)
-        .padding(.bottom, 3)
+        .padding(.bottom, 2)
     }
 
     private func standingsRow(_ team: StandingsTeam, gamesBackTitle: String) -> some View {
@@ -155,7 +155,7 @@ struct StandingsView: View {
         return HStack(spacing: 0) {
             HStack(spacing: 5) {
                 Text(team.rank)
-                    .font(.system(size: 10, weight: team.isRedSox ? .black : .bold, design: .monospaced))
+                    .font(.system(size: 12, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: 15)
                 Text(team.abbreviation)
@@ -173,14 +173,14 @@ struct StandingsView: View {
             )
             tableValue(team.lastTen, width: 42, emphasized: team.isRedSox)
             Text(team.streak)
-                .font(.system(size: 11, weight: team.isRedSox ? .black : .bold, design: .monospaced))
+                .font(.system(size: 14, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                 .frame(width: 38)
         }
-        .font(.system(size: 12, weight: .semibold, design: .monospaced))
+        .font(.system(size: 14, weight: .semibold, design: .monospaced))
         .foregroundStyle(team.isRedSox ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, 5)
-        .padding(.vertical, 5)
+        .padding(.vertical, 3)
         .background(team.isRedSox ? AppColor.paleBlue : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
         .overlay(alignment: .leading) {
@@ -199,7 +199,7 @@ struct StandingsView: View {
         emphasized: Bool = false
     ) -> some View {
         Text(value)
-            .font(.system(size: 11, weight: emphasized ? .black : .semibold, design: .monospaced))
+            .font(.system(size: 14, weight: emphasized ? .black : .semibold, design: .monospaced))
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
             .frame(width: width)
     }
@@ -217,12 +217,12 @@ struct StandingsView: View {
         HStack(spacing: 8) {
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
             Text("PLAYOFF CUT")
-                .font(.system(size: 10, weight: .black))
+                .font(.system(size: 11, weight: .black))
                 .tracking(0.5)
                 .foregroundStyle(AppColor.red)
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, 1)
     }
 
     private var errorView: some View {
