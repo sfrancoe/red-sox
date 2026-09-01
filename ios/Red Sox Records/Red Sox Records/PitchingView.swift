@@ -96,10 +96,6 @@ struct PitchingView: View {
 
     private var impactCard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("WHO MOVED THE SEASON?")
-                .font(.caption.weight(.black))
-                .tracking(0.8)
-                .foregroundStyle(AppColor.green)
             Text("Actual fWAR ↑  ·  Forecast by now →")
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -113,7 +109,7 @@ struct PitchingView: View {
                 Label("Below forecast", systemImage: "circle.fill")
                     .foregroundStyle(AppColor.red)
             }
-            .font(.caption2.weight(.bold))
+            .font(.system(size: 8, weight: .bold))
         }
         .cardStyle()
     }
@@ -284,7 +280,7 @@ private struct PitchingImpactChart: View {
                 if labels.contains(pitcher.id) {
                     context.draw(
                         Text(pitcher.name.split(separator: " ").last.map(String.init) ?? pitcher.name)
-                            .font(.system(size: 8, weight: .bold))
+                            .font(.system(size: 10, weight: .bold))
                             .foregroundStyle(AppColor.navy),
                         at: CGPoint(x: point.x + radius + 3, y: point.y),
                         anchor: .leading
