@@ -6,7 +6,7 @@ struct ScheduleView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                AppColor.cream.ignoresSafeArea()
+                AppColor.paleRed.ignoresSafeArea()
 
                 Group {
                     if let schedule = store.schedule {
@@ -28,17 +28,15 @@ struct ScheduleView: View {
 
     private func scheduleContent(_ schedule: Schedule) -> some View {
         ScrollView {
-            LazyVStack(spacing: 10) {
-                masthead(gameCount: schedule.games.count)
-
+            LazyVStack(spacing: 6) {
                 ForEach(schedule.games) { game in
                     scheduleRow(game)
                 }
 
-                Text("Schedule through \(formattedSeasonEnd(schedule.regularSeasonEnd)) · \(schedule.source)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .padding(.vertical, 12)
+                Text("\(schedule.games.count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(Color.white.opacity(0.82))
+                    .padding(.vertical, 8)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 18)
@@ -49,74 +47,61 @@ struct ScheduleView: View {
         }
     }
 
-    private func masthead(gameCount: Int) -> some View {
-        HStack(alignment: .firstTextBaseline) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text("THE STRETCH RUN")
-                    .font(.caption.weight(.bold))
-                    .tracking(1.5)
-                    .foregroundStyle(AppColor.red)
-                Text("Schedule")
-                    .font(.system(size: 38, weight: .black, design: .rounded))
-                    .foregroundStyle(AppColor.navy)
-                Text("\(gameCount) games remaining")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            Image(systemName: "calendar")
-                .font(.title)
-                .foregroundStyle(AppColor.red)
-        }
-        .padding(.bottom, 6)
-    }
-
     private func scheduleRow(_ game: ScheduledGame) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
-            HStack {
+        VStack(alignment: .leading, spacing: 5) {
+            HStack(spacing: 6) {
                 Text(game.formattedDay.uppercased())
-                    .font(.caption.weight(.black))
+                    .font(.system(size: 12, weight: .black))
                     .tracking(0.5)
+                    .foregroundStyle(AppColor.navy)
 
                 Text("·")
                     .foregroundStyle(.secondary)
 
                 Text(game.formattedTime)
-                    .font(.caption.weight(.bold))
+                    .font(.system(size: 11, weight: .bold))
 
                 Spacer()
 
+                if game.doubleheader {
+                    Text("G\(game.gameNumber)")
+                        .font(.system(size: 9, weight: .black))
+                        .foregroundStyle(AppColor.navy)
+                }
+
                 Text(game.location == "home" ? "HOME" : "AWAY")
-                    .font(.caption2.weight(.black))
+                    .font(.system(size: 9, weight: .black))
                     .foregroundStyle(AppColor.red)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
+                    .padding(.horizontal, 7)
+                    .padding(.vertical, 3)
                     .background(AppColor.paleBlue)
                     .clipShape(Capsule())
             }
 
-            HStack(spacing: 5) {
+            HStack(spacing: 4) {
                 Text(game.locationWord)
                     .foregroundStyle(.secondary)
                 Text(game.opponent)
-                    .fontWeight(.bold)
+                    .font(.system(size: 13, weight: .bold))
+                    .foregroundStyle(AppColor.navy)
                 Text("(\(game.opponentRecord))")
+                    .font(.system(size: 11))
                     .foregroundStyle(.secondary)
 
                 if let matchup = game.probableMatchup {
                     Text("·")
                         .foregroundStyle(.secondary)
                     Text(matchup)
+                        .font(.system(size: 11, weight: .semibold))
                         .foregroundStyle(AppColor.green)
                 }
             }
-            .font(.subheadline)
+            .font(.system(size: 12))
             .lineLimit(1)
-            .minimumScaleFactor(0.72)
+            .minimumScaleFactor(0.65)
         }
-        .cardStyle()
+        .cardStyle(padding: 12)
+        .dynamicTypeSize(.xSmall)
     }
 
     private func formattedSeasonEnd(_ value: String) -> String {
