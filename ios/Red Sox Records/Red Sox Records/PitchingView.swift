@@ -96,20 +96,16 @@ struct PitchingView: View {
 
     private var impactCard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Actual fWAR ↑  ·  Forecast by now →")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
-            PitchingImpactChart(pitchers: store.visiblePitchers)
-                .frame(height: 270)
-
             HStack(spacing: 14) {
                 Label("Above forecast", systemImage: "circle.fill")
                     .foregroundStyle(AppColor.green)
                 Label("Below forecast", systemImage: "circle.fill")
                     .foregroundStyle(AppColor.red)
             }
-            .font(.system(size: 8, weight: .bold))
+            .font(.system(size: 10, weight: .black))
+
+            PitchingImpactChart(pitchers: store.visiblePitchers)
+                .frame(height: 270)
         }
         .cardStyle()
     }
@@ -225,7 +221,7 @@ private struct PitchingImpactChart: View {
 
     var body: some View {
         Canvas { context, size in
-            let plot = CGRect(x: 28, y: 16, width: max(size.width - 38, 1), height: max(size.height - 40, 1))
+            let plot = CGRect(x: 40, y: 12, width: max(size.width - 50, 1), height: max(size.height - 42, 1))
             let minimum = -0.2
             let xMaximum = max(1, pitchers.map(\.forecastToDate.war).max() ?? 1) * 1.1
             let yMaximum = max(1, pitchers.map(\.actual.war).max() ?? 1) * 1.1
@@ -268,6 +264,7 @@ private struct PitchingImpactChart: View {
                 }.prefix(8).map(\.id)
             )
 
+            var occupiedLabelFrames: [CGRect] = []
             for pitcher in pitchers.sorted(by: { $0.actual.ipValue > $1.actual.ipValue }) {
                 let point = CGPoint(x: x(pitcher.forecastToDate.war), y: y(pitcher.actual.war))
                 let radius = min(10, 3.5 + sqrt(pitcher.actual.ipValue) * 0.42)
@@ -278,15 +275,57 @@ private struct PitchingImpactChart: View {
                 )
 
                 if labels.contains(pitcher.id) {
+                    let label = pitcher.name.split(separator: " ").last.map(String.init) ?? pitcher.name
+                    let estimatedWidth = max(30, CGFloat(label.count) * 6.2)
+                    let drawsLeft = point.x + radius + 3 + estimatedWidth > plot.maxX
+                    let labelX = drawsLeft ? point.x - radius - 3 : point.x + radius + 3
+                    var labelY = point.y
+                    var labelFrame = CGRect.zero
+
+                    for attempt in 0..<8 {
+                        let offsetStep = CGFloat((attempt + 1) / 2) * 12
+                        let offset = attempt == 0 ? 0 : (attempt.isMultiple(of: 2) ? -offsetStep : offsetStep)
+                        labelY = min(max(point.y + offset, plot.minY + 6), plot.maxY - 6)
+                        labelFrame = CGRect(
+                            x: drawsLeft ? labelX - estimatedWidth : labelX,
+                            y: labelY - 6,
+                            width: estimatedWidth,
+                            height: 12
+                        )
+                        if !occupiedLabelFrames.contains(where: { $0.intersects(labelFrame.insetBy(dx: -2, dy: -1)) }) {
+                            break
+                        }
+                    }
+                    occupiedLabelFrames.append(labelFrame)
                     context.draw(
-                        Text(pitcher.name.split(separator: " ").last.map(String.init) ?? pitcher.name)
+                        Text(label)
                             .font(.system(size: 10, weight: .bold))
                             .foregroundStyle(AppColor.navy),
-                        at: CGPoint(x: point.x + radius + 3, y: point.y),
-                        anchor: .leading
+                        at: CGPoint(x: labelX, y: labelY),
+                        anchor: drawsLeft ? .trailing : .leading
                     )
                 }
             }
+
+            context.drawLayer { axisContext in
+                axisContext.translateBy(x: 9, y: plot.midY)
+                axisContext.rotate(by: .degrees(-90))
+                axisContext.draw(
+                    Text("ACTUAL fWAR")
+                        .font(.system(size: 10, weight: .black))
+                        .foregroundStyle(AppColor.navy),
+                    at: .zero,
+                    anchor: .center
+                )
+            }
+
+            context.draw(
+                Text("FORECAST BY NOW")
+                    .font(.system(size: 10, weight: .black))
+                    .foregroundStyle(AppColor.navy),
+                at: CGPoint(x: plot.midX, y: size.height - 3),
+                anchor: .bottom
+            )
         }
         .accessibilityLabel("Actual pitching fWAR compared with forecast fWAR")
     }
