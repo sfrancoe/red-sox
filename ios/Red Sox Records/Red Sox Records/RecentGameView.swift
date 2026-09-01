@@ -61,14 +61,9 @@ struct RecentGameView: View {
     private func scoreCard(_ game: RecentGame) -> some View {
         VStack(spacing: 9) {
             HStack {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(game.formattedDate.uppercased())
-                        .font(.title3.weight(.black))
-                        .tracking(0.4)
-                    Text(game.venue)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
+                Text(game.formattedDate.uppercased())
+                    .font(.title3.weight(.black))
+                    .tracking(0.4)
 
                 Spacer()
 
@@ -80,6 +75,13 @@ struct RecentGameView: View {
                     .foregroundStyle(.white)
                     .clipShape(Capsule())
             }
+
+            Text(game.gameDetails)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
 
             Divider()
 

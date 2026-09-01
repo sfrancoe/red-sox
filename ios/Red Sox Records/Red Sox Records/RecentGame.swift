@@ -6,6 +6,8 @@ struct RecentGame: Codable, Sendable {
     let gamePk: Int
     let gameDate: String
     let venue: String
+    let gameDurationMinutes: Int?
+    let attendance: Int?
     let inningsCount: Int
     let result: String
     let summary: String
@@ -28,6 +30,22 @@ struct RecentGame: Codable, Sendable {
                 .day()
                 .year()
         )
+    }
+
+    var gameDetails: String {
+        var details = [venue]
+        if let gameDurationMinutes, gameDurationMinutes > 0 {
+            let hours = gameDurationMinutes / 60
+            let minutes = gameDurationMinutes % 60
+            let duration = hours > 0
+                ? "\(hours):\(String(format: "%02d", minutes))"
+                : "\(minutes) min"
+            details.append("Time \(duration)")
+        }
+        if let attendance, attendance > 0 {
+            details.append("Attendance \(attendance.formatted())")
+        }
+        return details.joined(separator: " · ")
     }
 }
 

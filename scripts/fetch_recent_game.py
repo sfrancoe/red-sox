@@ -218,6 +218,7 @@ def recap_metadata(content: dict[str, Any]) -> dict[str, str]:
 def build_feed(live: dict[str, Any], content: dict[str, Any]) -> dict[str, Any]:
     game_data = live["gameData"]
     live_data = live["liveData"]
+    game_info = game_data.get("gameInfo") or {}
     away = team_payload("away", game_data, live_data)
     home = team_payload("home", game_data, live_data)
     boston = away if away["id"] == BOS else home
@@ -243,6 +244,8 @@ def build_feed(live: dict[str, Any], content: dict[str, Any]) -> dict[str, Any]:
         "game_pk": live.get("gamePk"),
         "game_date": (game_data.get("datetime") or {}).get("dateTime") or "",
         "venue": venue,
+        "game_duration_minutes": game_info.get("gameDurationMinutes"),
+        "attendance": game_info.get("attendance"),
         "innings_count": len(innings),
         "result": "Win" if boston["runs"] > opponent["runs"] else "Loss",
         "summary": build_summary(boston, opponent, venue, innings),
