@@ -131,7 +131,7 @@ struct StandingsView: View {
                 standingsRow(team, gamesBackTitle: gamesBackTitle)
             }
         }
-        .cardStyle(padding: 8)
+        .cardStyle(padding: 10)
     }
 
     private func standingsHeader(_ gamesBackTitle: String) -> some View {
@@ -180,7 +180,7 @@ struct StandingsView: View {
         .font(.system(size: 14, weight: .semibold, design: .monospaced))
         .foregroundStyle(team.isRedSox ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, 5)
-        .padding(.vertical, 3)
+        .padding(.vertical, 5)
         .background(team.isRedSox ? AppColor.paleBlue : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
         .overlay(alignment: .leading) {
