@@ -28,10 +28,29 @@ struct ScheduleView: View {
 
     private func scheduleContent(_ schedule: Schedule) -> some View {
         ScrollView {
-            LazyVStack(spacing: 6) {
-                ForEach(schedule.games) { game in
-                    scheduleRow(game)
+            VStack(spacing: 0) {
+                LazyVStack(spacing: 0) {
+                    scheduleHeader
+
+                    Divider()
+                        .overlay(AppColor.navy.opacity(0.22))
+
+                    ForEach(Array(schedule.games.enumerated()), id: \.element.id) { index, game in
+                        scheduleRow(game)
+
+                        if index < schedule.games.count - 1 {
+                            Divider()
+                                .overlay(AppColor.border.opacity(0.9))
+                        }
+                    }
                 }
+                .background(AppColor.paper)
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(AppColor.border.opacity(0.85), lineWidth: 1)
+                }
+                .shadow(color: AppColor.navy.opacity(0.08), radius: 12, y: 4)
 
                 Text("\(schedule.games.count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
                     .font(.system(size: 10, weight: .semibold))
@@ -47,51 +66,67 @@ struct ScheduleView: View {
         }
     }
 
-    private func scheduleRow(_ game: ScheduledGame) -> some View {
-        HStack(spacing: 4) {
-            Text(game.formattedDay.uppercased())
-                .font(.system(size: 11, weight: .black))
-                .tracking(0.35)
-                .foregroundStyle(AppColor.navy)
+    private var scheduleHeader: some View {
+        HStack(spacing: 8) {
+            Text("DATE")
+                .frame(width: 76, alignment: .leading)
+            Text("TIME")
+                .frame(width: 54, alignment: .leading)
+            Text("MATCHUP")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text("REC")
+                .frame(width: 44, alignment: .trailing)
+        }
+        .font(.system(size: 9, weight: .black))
+        .tracking(0.55)
+        .foregroundStyle(AppColor.red)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 9)
+    }
 
-            Text("·")
-                .foregroundStyle(.secondary)
+    private func scheduleRow(_ game: ScheduledGame) -> some View {
+        HStack(spacing: 8) {
+            Text(game.formattedDay.uppercased())
+                .font(.system(size: 10, weight: .black))
+                .tracking(0.2)
+                .foregroundStyle(AppColor.navy)
+                .frame(width: 76, alignment: .leading)
 
             Text(game.formattedTime)
                 .font(.system(size: 10, weight: .bold))
+                .frame(width: 54, alignment: .leading)
 
-            if game.doubleheader {
-                Text("G\(game.gameNumber)")
-                    .font(.system(size: 9, weight: .black))
-                    .foregroundStyle(AppColor.red)
-            }
-
-            Text("·")
-                .foregroundStyle(.secondary)
-
-            Text(game.locationWord)
-                .font(.system(size: 10, weight: .semibold))
-                .foregroundStyle(.secondary)
-
-            Text(game.opponent)
-                .font(.system(size: 11, weight: .bold))
-                .foregroundStyle(AppColor.navy)
-
-            Text("(\(game.opponentRecord))")
-                .font(.system(size: 10))
-                .foregroundStyle(.secondary)
-
-            if let matchup = game.probableMatchup {
-                Text("·")
+            HStack(spacing: 3) {
+                Text(game.locationWord)
                     .foregroundStyle(.secondary)
-                Text(matchup)
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(AppColor.green)
+
+                Text(game.opponent)
+                    .fontWeight(.bold)
+                    .foregroundStyle(AppColor.navy)
+
+                if game.doubleheader {
+                    Text("G\(game.gameNumber)")
+                        .font(.system(size: 8, weight: .black))
+                        .foregroundStyle(AppColor.red)
+                }
+
+                if let matchup = game.probableMatchup {
+                    Text("· \(matchup)")
+                        .foregroundStyle(AppColor.green)
+                }
             }
+            .font(.system(size: 10, weight: .semibold))
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Text(game.opponentRecord)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundStyle(.secondary)
+                .frame(width: 44, alignment: .trailing)
         }
         .lineLimit(1)
         .minimumScaleFactor(0.55)
-        .cardStyle(padding: 10)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 9)
         .dynamicTypeSize(.xSmall)
     }
 
