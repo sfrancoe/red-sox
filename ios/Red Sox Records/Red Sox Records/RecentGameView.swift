@@ -120,7 +120,7 @@ struct RecentGameView: View {
     ) -> some View {
         HStack(spacing: 0) {
             Text(team.cityName)
-                .font(.system(size: 10, weight: .black))
+                .font(.system(size: 12, weight: .black))
                 .foregroundStyle(AppColor.navy)
                 .frame(width: 50, alignment: .leading)
                 .lineLimit(1)
