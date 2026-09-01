@@ -64,8 +64,8 @@ struct RecentGameView: View {
                     Text(gameTabTitle(game, index: index))
                         .font(
                             .system(
-                                size: 13,
-                                weight: selectedGame?.gamePk == game.gamePk ? .black : .regular
+                                size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
+                                weight: selectedGame?.gamePk == game.gamePk ? .black : .semibold
                             )
                         )
                         .lineLimit(1)
