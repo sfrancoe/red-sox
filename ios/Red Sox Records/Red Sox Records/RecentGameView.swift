@@ -81,6 +81,10 @@ struct RecentGameView: View {
         .padding(.vertical, 2)
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+        }
         .padding(.horizontal, 16)
         .padding(.top, 10)
         .padding(.bottom, 4)

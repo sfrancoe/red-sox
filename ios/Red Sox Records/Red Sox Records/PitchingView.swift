@@ -64,7 +64,7 @@ struct PitchingView: View {
     }
 
     private var rolePicker: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: 0) {
             ForEach(PitcherFilter.allCases) { filter in
                 Button {
                     withAnimation(.easeOut(duration: 0.18)) {
@@ -72,26 +72,27 @@ struct PitchingView: View {
                     }
                 } label: {
                     Text(filter.title.uppercased())
-                        .font(.system(size: 13, weight: .black))
+                        .font(
+                            .system(
+                                size: store.filter == filter ? 16 : 13,
+                                weight: store.filter == filter ? .black : .semibold
+                            )
+                        )
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .foregroundStyle(.white)
-                        .background(AppColor.navy)
-                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 9, style: .continuous)
-                                .stroke(
-                                    store.filter == filter ? AppColor.red : Color.white.opacity(0.18),
-                                    lineWidth: store.filter == filter ? 2.5 : 0.8
-                                )
-                        }
+                        .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(5)
-        .background(AppColor.navy)
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .padding(.horizontal, 5)
+        .padding(.vertical, 2)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+        }
     }
 
     private var impactCard: some View {

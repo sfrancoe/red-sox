@@ -76,36 +76,32 @@ struct StandingsView: View {
     }
 
     private var modePicker: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 0) {
             ForEach(StandingsMode.allCases) { mode in
                 Button {
                     store.mode = mode
                 } label: {
                     Text(mode.title)
-                        .font(.system(size: 14, weight: .black))
+                        .font(
+                            .system(
+                                size: store.mode == mode ? 16 : 13,
+                                weight: store.mode == mode ? .black : .semibold
+                            )
+                        )
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
-                        .foregroundStyle(Color.white)
-                        .background(AppColor.navy)
-                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .stroke(
-                                    store.mode == mode
-                                        ? AppColor.red
-                                        : Color.white.opacity(0.18),
-                                    lineWidth: store.mode == mode ? 2.5 : 0.8
-                                )
-                        }
+                        .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(4)
-        .background(AppColor.navy)
+        .padding(.horizontal, 5)
+        .padding(.vertical, 2)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .overlay {
-            RoundedRectangle(cornerRadius: 11, style: .continuous)
-                .stroke(Color.white.opacity(0.45), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
