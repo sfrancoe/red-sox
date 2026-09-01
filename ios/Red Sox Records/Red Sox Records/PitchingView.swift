@@ -5,7 +5,7 @@ struct PitchingView: View {
 
     var body: some View {
         ZStack {
-            AppColor.cream.ignoresSafeArea()
+            AppColor.paleRed.ignoresSafeArea()
 
             Group {
                 if let feed = store.feed {
@@ -28,21 +28,14 @@ struct PitchingView: View {
     private func pitchingContent(_ feed: PitchingFeed) -> some View {
         ScrollView {
             LazyVStack(spacing: 14) {
-                summaryCard(feed)
-
-                Picker("Pitcher role", selection: $store.filter) {
-                    ForEach(PitcherFilter.allCases) { filter in
-                        Text(filter.title).tag(filter)
-                    }
-                }
-                .pickerStyle(.segmented)
+                rolePicker
 
                 impactCard
 
                 HStack(alignment: .center) {
                     Text("\(store.filter == .starters ? "Starter" : "Reliever") Reports")
                         .font(.title3.weight(.black))
-                        .foregroundStyle(AppColor.navy)
+                        .foregroundStyle(.white)
 
                     Spacer()
 
@@ -53,7 +46,7 @@ struct PitchingView: View {
                     }
                     .labelsHidden()
                     .pickerStyle(.menu)
-                    .tint(AppColor.red)
+                    .tint(.white)
                 }
 
                 ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
@@ -70,68 +63,35 @@ struct PitchingView: View {
         }
     }
 
-    private func summaryCard(_ feed: PitchingFeed) -> some View {
-        let summary = feed.teamSummary
-        return VStack(alignment: .leading, spacing: 14) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("THE STAFF-WIDE ANSWER")
-                    .font(.caption.weight(.black))
-                    .tracking(1)
-                    .foregroundStyle(AppColor.red)
-                Text(summary.warGap >= 0 ? "More value than expected" : "Behind the forecast")
-                    .font(.title2.weight(.black))
-                    .foregroundStyle(AppColor.navy)
-                Text("Through \(feed.gamesPlayed) games, Boston’s staff is \(summary.warGap.signedText) fWAR versus its prorated preseason forecast.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-
-            HStack(spacing: 14) {
-                forecastNumber("ACTUAL fWAR", summary.actualWar, color: AppColor.red)
-                Text("vs.")
-                    .font(.caption.weight(.bold))
-                    .foregroundStyle(.secondary)
-                forecastNumber("FORECAST BY NOW", summary.forecastWarToDate, color: AppColor.navy)
-                Spacer(minLength: 0)
-                Text("\(summary.warGap.signedText)")
-                    .font(.headline.monospacedDigit())
-                    .foregroundStyle(summary.warGap >= 0 ? AppColor.green : AppColor.red)
-            }
-
-            forecastTrack(actual: summary.actualWar, forecast: summary.forecastWarToDate)
-
-            HStack {
-                summaryFact("ERA", summary.era.formatted(.number.precision(.fractionLength(2))))
-                Divider().frame(height: 34)
-                summaryFact("INNINGS", summary.innings.formatted(.number.precision(.fractionLength(1))))
-                Divider().frame(height: 34)
-                summaryFact("GAMES", "\(feed.gamesPlayed)")
+    private var rolePicker: some View {
+        HStack(spacing: 5) {
+            ForEach(PitcherFilter.allCases) { filter in
+                Button {
+                    withAnimation(.easeOut(duration: 0.18)) {
+                        store.filter = filter
+                    }
+                } label: {
+                    Text(filter.title.uppercased())
+                        .font(.system(size: 13, weight: .black))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .foregroundStyle(.white)
+                        .background(store.filter == filter ? AppColor.green : AppColor.hunterGreen)
+                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 9, style: .continuous)
+                                .stroke(
+                                    store.filter == filter ? Color.white : Color.white.opacity(0.2),
+                                    lineWidth: store.filter == filter ? 2 : 0.8
+                                )
+                        }
+                }
+                .buttonStyle(.plain)
             }
         }
-        .cardStyle()
-    }
-
-    private func forecastNumber(_ label: String, _ value: Double, color: Color) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(label)
-                .font(.caption2.weight(.bold))
-                .foregroundStyle(.secondary)
-            Text(value.formatted(.number.precision(.fractionLength(1))))
-                .font(.title2.monospacedDigit().weight(.black))
-                .foregroundStyle(color)
-        }
-    }
-
-    private func summaryFact(_ label: String, _ value: String) -> some View {
-        VStack(spacing: 3) {
-            Text(label)
-                .font(.caption2.weight(.bold))
-                .foregroundStyle(.secondary)
-            Text(value)
-                .font(.subheadline.monospacedDigit().weight(.bold))
-                .foregroundStyle(AppColor.navy)
-        }
-        .frame(maxWidth: .infinity)
+        .padding(5)
+        .background(AppColor.hunterGreen)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
     private var impactCard: some View {
@@ -245,7 +205,7 @@ struct PitchingView: View {
             Text("Updated \(feed.updatedText) · FanGraphs + MLB")
         }
         .font(.caption)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Color.white.opacity(0.82))
         .padding(.vertical, 8)
     }
 
