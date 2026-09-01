@@ -26,7 +26,7 @@ struct ScheduledGame: Codable, Identifiable, Sendable {
 
     var id: Int { gamePk }
 
-    private var date: Date? {
+    var date: Date? {
         ISO8601DateFormatter().date(from: gameDate)
     }
 
@@ -43,6 +43,16 @@ struct ScheduledGame: Codable, Identifiable, Sendable {
     var formattedTime: String {
         guard let date else { return "" }
         return date.formatted(date: .omitted, time: .shortened)
+    }
+
+    var fullFormattedDay: String {
+        guard let date else { return gameDate }
+        return date.formatted(
+            .dateTime
+                .weekday(.wide)
+                .month(.wide)
+                .day()
+        )
     }
 
     var locationWord: String {

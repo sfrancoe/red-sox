@@ -2,6 +2,10 @@ import SwiftUI
 
 struct ScheduleView: View {
     @State private var store = ScheduleStore()
+    @State private var selectedGameID: Int?
+
+    private let weekdayLabels = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+    private let calendarColumns = Array(repeating: GridItem(.flexible(), spacing: 3), count: 7)
 
     var body: some View {
         NavigationStack {
@@ -22,118 +26,307 @@ struct ScheduleView: View {
             .toolbar(.hidden, for: .navigationBar)
         }
         .task {
-            await store.load()
+            await loadSchedule()
         }
     }
 
     private func scheduleContent(_ schedule: Schedule) -> some View {
         ScrollView {
-            VStack(spacing: 0) {
-                LazyVStack(spacing: 0) {
-                    scheduleHeader
-
-                    Divider()
-                        .overlay(AppColor.navy.opacity(0.22))
-
-                    ForEach(Array(schedule.games.enumerated()), id: \.element.id) { index, game in
-                        scheduleRow(game)
-
-                        if index < schedule.games.count - 1 {
-                            Divider()
-                                .overlay(AppColor.border.opacity(0.9))
-                        }
-                    }
+            LazyVStack(spacing: 12) {
+                ForEach(calendarMonths(for: schedule)) { month in
+                    monthCard(month, schedule: schedule)
                 }
-                .background(AppColor.paper)
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(AppColor.border.opacity(0.85), lineWidth: 1)
+
+                if let game = selectedGame(in: schedule) {
+                    gameDetailCard(game)
                 }
-                .shadow(color: AppColor.navy.opacity(0.08), radius: 12, y: 4)
 
                 Text("\(schedule.games.count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
                     .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(Color.white.opacity(0.82))
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 2)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 18)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 14)
             .foregroundStyle(AppColor.ink)
         }
         .refreshable {
-            await store.load()
+            await loadSchedule()
         }
     }
 
-    private var scheduleHeader: some View {
-        HStack(spacing: 8) {
-            Text("DATE")
-                .frame(width: 76, alignment: .leading)
-            Text("TIME")
-                .frame(width: 54, alignment: .leading)
-            Text("MATCHUP")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("REC")
-                .frame(width: 44, alignment: .trailing)
-        }
-        .font(.system(size: 9, weight: .black))
-        .tracking(0.55)
-        .foregroundStyle(AppColor.red)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 9)
-    }
-
-    private func scheduleRow(_ game: ScheduledGame) -> some View {
-        HStack(spacing: 8) {
-            Text(game.formattedDay.uppercased())
-                .font(.system(size: 10, weight: .black))
-                .tracking(0.2)
+    private func monthCard(_ month: CalendarMonth, schedule: Schedule) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(month.title.uppercased())
+                .font(.system(size: 17, weight: .black))
+                .tracking(0.8)
                 .foregroundStyle(AppColor.navy)
-                .frame(width: 76, alignment: .leading)
 
-            Text(game.formattedTime)
-                .font(.system(size: 10, weight: .bold))
-                .frame(width: 54, alignment: .leading)
-
-            HStack(spacing: 3) {
-                Text(game.locationWord)
-                    .foregroundStyle(.secondary)
-
-                Text(game.opponent)
-                    .fontWeight(.bold)
-                    .foregroundStyle(AppColor.navy)
-
-                if game.doubleheader {
-                    Text("G\(game.gameNumber)")
+            LazyVGrid(columns: calendarColumns, spacing: 3) {
+                ForEach(weekdayLabels, id: \.self) { label in
+                    Text(label)
                         .font(.system(size: 8, weight: .black))
-                        .foregroundStyle(AppColor.red)
+                        .tracking(0.25)
+                        .foregroundStyle(AppColor.hunterGreen)
+                        .frame(maxWidth: .infinity)
                 }
 
-                if let matchup = game.probableMatchup {
-                    Text("· \(matchup)")
-                        .foregroundStyle(AppColor.green)
+                ForEach(Array(month.days.enumerated()), id: \.offset) { _, date in
+                    if let date {
+                        dayCell(date, games: games(on: date, in: schedule))
+                    } else {
+                        Color.clear
+                            .frame(height: 67)
+                    }
                 }
             }
-            .font(.system(size: 10, weight: .semibold))
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            Text(game.opponentRecord)
-                .font(.system(size: 10, weight: .medium))
-                .foregroundStyle(.secondary)
-                .frame(width: 44, alignment: .trailing)
         }
-        .lineLimit(1)
-        .minimumScaleFactor(0.55)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 9)
-        .dynamicTypeSize(.xSmall)
+        .cardStyle(padding: 12)
+    }
+
+    private func dayCell(_ date: Date, games: [ScheduledGame]) -> some View {
+        let game = games.first
+        let selected = games.contains { $0.id == selectedGameID }
+        let accent = game?.location == "home" ? AppColor.red : AppColor.hunterGreen
+
+        return VStack(spacing: 3) {
+            Text(date.formatted(.dateTime.day()))
+                .font(.system(size: 14, weight: .black))
+                .foregroundStyle(selected ? Color.white : AppColor.navy)
+
+            if let game {
+                Text("\(game.locationWord) \(opponentCode(game.opponent))")
+                    .font(.system(size: 8, weight: .black))
+                    .foregroundStyle(selected ? Color.white : accent)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+
+                Text(game.formattedTime)
+                    .font(.system(size: 7, weight: .semibold))
+                    .foregroundStyle(selected ? Color.white.opacity(0.88) : AppColor.ink.opacity(0.72))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+
+                if games.count > 1 || game.doubleheader {
+                    Text("DH")
+                        .font(.system(size: 7, weight: .black))
+                        .foregroundStyle(selected ? Color.white : AppColor.red)
+                }
+            } else {
+                Text("—")
+                    .font(.system(size: 8, weight: .medium))
+                    .foregroundStyle(AppColor.border)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 67)
+        .background {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(selected ? accent : game == nil ? AppColor.paleBlue.opacity(0.36) : accent.opacity(0.09))
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .stroke(
+                    selected ? accent : isToday(date) ? AppColor.navy : AppColor.border.opacity(0.75),
+                    lineWidth: selected || isToday(date) ? 1.5 : 0.7
+                )
+        }
+        .contentShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .onTapGesture {
+            if let game {
+                withAnimation(.easeOut(duration: 0.18)) {
+                    selectedGameID = game.id
+                }
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(game == nil ? [] : .isButton)
+    }
+
+    private func gameDetailCard(_ game: ScheduledGame) -> some View {
+        VStack(alignment: .leading, spacing: 11) {
+            HStack(alignment: .firstTextBaseline) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(game.fullFormattedDay.uppercased())
+                        .font(.system(size: 10, weight: .black))
+                        .tracking(0.45)
+                        .foregroundStyle(AppColor.red)
+
+                    Text("\(game.locationWord) \(game.opponent)")
+                        .font(.system(size: 20, weight: .black))
+                        .foregroundStyle(AppColor.navy)
+                }
+
+                Spacer()
+
+                Text(game.formattedTime)
+                    .font(.system(size: 15, weight: .black))
+                    .foregroundStyle(AppColor.hunterGreen)
+            }
+
+            Divider()
+
+            HStack {
+                detailItem("VENUE", game.venue)
+                Spacer()
+                detailItem("OPPONENT", game.opponentRecord, alignment: .trailing)
+            }
+
+            if game.showProbables {
+                VStack(alignment: .leading, spacing: 7) {
+                    Text("PROJECTED STARTERS")
+                        .font(.system(size: 9, weight: .black))
+                        .tracking(0.45)
+                        .foregroundStyle(AppColor.red)
+
+                    HStack(alignment: .top) {
+                        detailItem("BOSTON", pitcherName(game.redSoxPitcher))
+                        Spacer()
+                        Text("VS.")
+                            .font(.system(size: 9, weight: .black))
+                            .foregroundStyle(AppColor.border)
+                            .padding(.top, 13)
+                        Spacer()
+                        detailItem(
+                            game.opponent.uppercased(),
+                            pitcherName(game.opponentPitcher),
+                            alignment: .trailing
+                        )
+                    }
+                }
+                .padding(10)
+                .background(AppColor.paleBlue.opacity(0.5))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            }
+
+            if game.doubleheader {
+                Text("DOUBLEHEADER · GAME \(game.gameNumber)")
+                    .font(.system(size: 9, weight: .black))
+                    .foregroundStyle(AppColor.red)
+            }
+        }
+        .cardStyle(padding: 14)
+    }
+
+    private func detailItem(
+        _ label: String,
+        _ value: String,
+        alignment: HorizontalAlignment = .leading
+    ) -> some View {
+        VStack(alignment: alignment, spacing: 2) {
+            Text(label)
+                .font(.system(size: 8, weight: .black))
+                .tracking(0.35)
+                .foregroundStyle(AppColor.hunterGreen)
+            Text(value.isEmpty ? "To be announced" : value)
+                .font(.system(size: 11, weight: .bold))
+                .foregroundStyle(AppColor.ink)
+                .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
+        }
+    }
+
+    private func loadSchedule() async {
+        await store.load()
+        guard let schedule = store.schedule else { return }
+        if selectedGameID == nil || !schedule.games.contains(where: { $0.id == selectedGameID }) {
+            selectedGameID = schedule.games.first?.id
+        }
+    }
+
+    private func selectedGame(in schedule: Schedule) -> ScheduledGame? {
+        schedule.games.first { $0.id == selectedGameID } ?? schedule.games.first
+    }
+
+    private func games(on date: Date, in schedule: Schedule) -> [ScheduledGame] {
+        schedule.games.filter { game in
+            guard let gameDate = game.date else { return false }
+            return easternCalendar.isDate(gameDate, inSameDayAs: date)
+        }
+    }
+
+    private func calendarMonths(for schedule: Schedule) -> [CalendarMonth] {
+        guard let firstGameDate = schedule.games.first?.date,
+              let seasonEnd = seasonEndDate(schedule.regularSeasonEnd) else {
+            return []
+        }
+
+        var cursor = firstDayOfMonth(firstGameDate)
+        let finalMonth = firstDayOfMonth(seasonEnd)
+        var months: [CalendarMonth] = []
+
+        while cursor <= finalMonth {
+            let dayRange = easternCalendar.range(of: .day, in: .month, for: cursor) ?? 1..<2
+            let leadingBlanks = easternCalendar.component(.weekday, from: cursor) - 1
+            var days = Array<Date?>(repeating: nil, count: leadingBlanks)
+            days.append(contentsOf: dayRange.compactMap { day in
+                easternCalendar.date(byAdding: .day, value: day - 1, to: cursor)
+            }.map(Optional.some))
+            while days.count % 7 != 0 {
+                days.append(nil)
+            }
+
+            months.append(
+                CalendarMonth(
+                    id: monthID(cursor),
+                    title: cursor.formatted(.dateTime.month(.wide).year()),
+                    days: days
+                )
+            )
+            guard let next = easternCalendar.date(byAdding: .month, value: 1, to: cursor) else {
+                break
+            }
+            cursor = next
+        }
+        return months
+    }
+
+    private var easternCalendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "America/New_York")!
+        return calendar
+    }
+
+    private func firstDayOfMonth(_ date: Date) -> Date {
+        let components = easternCalendar.dateComponents([.year, .month], from: date)
+        return easternCalendar.date(from: components) ?? date
+    }
+
+    private func seasonEndDate(_ value: String) -> Date? {
+        let parts = value.split(separator: "-").compactMap { Int($0) }
+        guard parts.count == 3 else { return nil }
+        return easternCalendar.date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2]))
+    }
+
+    private func monthID(_ date: Date) -> String {
+        let parts = easternCalendar.dateComponents([.year, .month], from: date)
+        return "\(parts.year ?? 0)-\(parts.month ?? 0)"
+    }
+
+    private func isToday(_ date: Date) -> Bool {
+        easternCalendar.isDateInToday(date)
+    }
+
+    private func pitcherName(_ value: String) -> String {
+        value.isEmpty ? "To be announced" : value
+    }
+
+    private func opponentCode(_ opponent: String) -> String {
+        [
+            "Angels": "LAA", "Astros": "HOU", "Athletics": "ATH",
+            "Blue Jays": "TOR", "Braves": "ATL", "Brewers": "MIL",
+            "Cardinals": "STL", "Cubs": "CHC", "Diamondbacks": "ARI",
+            "Dodgers": "LAD", "Giants": "SF", "Guardians": "CLE",
+            "Mariners": "SEA", "Marlins": "MIA", "Mets": "NYM",
+            "Nationals": "WSH", "Orioles": "BAL", "Padres": "SD",
+            "Phillies": "PHI", "Pirates": "PIT", "Rangers": "TEX",
+            "Rays": "TB", "Reds": "CIN", "Rockies": "COL",
+            "Royals": "KC", "Tigers": "DET", "Twins": "MIN",
+            "White Sox": "CWS", "Yankees": "NYY"
+        ][opponent] ?? String(opponent.prefix(3)).uppercased()
     }
 
     private func formattedSeasonEnd(_ value: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        guard let date = formatter.date(from: value) else { return value }
+        guard let date = seasonEndDate(value) else { return value }
         return date.formatted(.dateTime.month(.wide).day().year())
     }
 
@@ -144,12 +337,18 @@ struct ScheduleView: View {
             Text(store.errorMessage ?? "The schedule could not be loaded.")
         } actions: {
             Button("Try Again") {
-                Task { await store.load() }
+                Task { await loadSchedule() }
             }
             .buttonStyle(.borderedProminent)
             .tint(AppColor.red)
         }
     }
+}
+
+private struct CalendarMonth: Identifiable {
+    let id: String
+    let title: String
+    let days: [Date?]
 }
 
 #Preview {
