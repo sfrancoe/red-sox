@@ -87,9 +87,9 @@ struct Game108GraphView: View {
     }
 
     private var storyHeader: some View {
-        Text("Four consecutive seasons reached 57–51 after 108 games—then split toward four different endings.")
+        Text("In each of the last four seasons, the Boston Red Sox had the exact same record after 108 games: 57–51. The first three ended dramatically differently. Where will 2026 end up?")
             .font(.subheadline.weight(.bold))
-            .foregroundStyle(AppColor.hunterGreen)
+            .foregroundStyle(.white)
             .lineSpacing(2)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
