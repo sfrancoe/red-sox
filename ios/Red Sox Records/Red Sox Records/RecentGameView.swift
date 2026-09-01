@@ -39,8 +39,7 @@ struct RecentGameView: View {
         return ScrollView {
             LazyVStack(spacing: 6) {
                 scoreCard(game)
-                summaryCard(game)
-                gameNotesCard(game)
+                recapCard(game)
                 decisionsCard(game)
                 battingCard(redSox: redSox, opponent: opponent)
                 pitchingCard(redSox: redSox, opponent: opponent)
@@ -159,29 +158,29 @@ struct RecentGameView: View {
             .frame(width: width, alignment: .center)
     }
 
-    private func summaryCard(_ game: RecentGame) -> some View {
+    private func recapCard(_ game: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            primarySectionTitle("Game Summary")
+            primarySectionTitle("Game Recap")
+
             Text(game.summary)
                 .font(.system(size: 15))
                 .lineSpacing(4)
-        }
-        .cardStyle()
-    }
 
-    private func gameNotesCard(_ game: RecentGame) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            primarySectionTitle("Game Notes")
+            if !game.facts.isEmpty {
+                Divider()
 
-            ForEach(game.facts, id: \.self) { fact in
-                HStack(alignment: .top, spacing: 10) {
-                    Circle()
-                        .fill(AppColor.red)
-                        .frame(width: 6, height: 6)
-                        .padding(.top, 7)
-                    Text(fact)
-                        .font(.system(size: 14))
-                        .lineSpacing(3)
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(game.facts, id: \.self) { fact in
+                        HStack(alignment: .top, spacing: 9) {
+                            Circle()
+                                .fill(AppColor.red)
+                                .frame(width: 5, height: 5)
+                                .padding(.top, 7)
+                            Text(fact)
+                                .font(.system(size: 14))
+                                .lineSpacing(2)
+                        }
+                    }
                 }
             }
         }
