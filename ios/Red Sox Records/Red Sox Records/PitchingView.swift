@@ -102,7 +102,8 @@ struct PitchingView: View {
                 Label("Below forecast", systemImage: "circle.fill")
                     .foregroundStyle(AppColor.red)
             }
-            .font(.system(size: 10, weight: .black))
+            .font(.system(size: 12, weight: .black))
+            .frame(maxWidth: .infinity, alignment: .center)
 
             PitchingImpactChart(pitchers: store.visiblePitchers)
                 .frame(height: 270)
