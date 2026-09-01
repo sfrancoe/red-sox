@@ -195,15 +195,20 @@ struct RecentGameView: View {
                 Spacer(minLength: 0)
                 statsTeamPicker(redSox: redSox, opponent: opponent)
             }
-            statHeader(labels: ["AB", "R", "H", "RBI"])
+            let widths: [CGFloat] = [28, 28, 28, 32, 38]
+            statHeader(labels: ["AB", "R", "H", "RBI", "AVG"], widths: widths)
 
             VStack(spacing: 0) {
                 ForEach(team.batting) { batter in
                     statRow(
                         name: batter.name,
                         detail: batter.position,
-                        values: [batter.atBats, batter.runs, batter.hits, batter.rbi],
-                        detailInline: true
+                        textValues: [
+                            "\(batter.atBats)", "\(batter.runs)", "\(batter.hits)",
+                            "\(batter.rbi)", batter.average ?? ".---"
+                        ],
+                        detailInline: true,
+                        columnWidths: widths
                     )
                 }
             }
@@ -282,12 +287,12 @@ struct RecentGameView: View {
         .buttonStyle(.plain)
     }
 
-    private func statHeader(labels: [String]) -> some View {
+    private func statHeader(labels: [String], widths: [CGFloat] = []) -> some View {
         HStack {
             Text("PLAYER")
                 .frame(maxWidth: .infinity, alignment: .leading)
-            ForEach(labels, id: \.self) { label in
-                Text(label).frame(width: 32)
+            ForEach(Array(labels.enumerated()), id: \.offset) { index, label in
+                Text(label).frame(width: widths.indices.contains(index) ? widths[index] : 32)
             }
         }
         .font(.caption2.weight(.bold))
@@ -299,7 +304,8 @@ struct RecentGameView: View {
         detail: String,
         values: [Int] = [],
         textValues: [String] = [],
-        detailInline: Bool = false
+        detailInline: Bool = false,
+        columnWidths: [CGFloat] = []
     ) -> some View {
         HStack(spacing: 6) {
             VStack(alignment: .leading, spacing: 1) {
@@ -322,11 +328,13 @@ struct RecentGameView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            ForEach(Array((textValues.isEmpty ? values.map(String.init) : textValues).enumerated()), id: \.offset) { _, value in
+            ForEach(Array((textValues.isEmpty ? values.map(String.init) : textValues).enumerated()), id: \.offset) { index, value in
                 Text(value)
                     .font(.subheadline)
                     .monospacedDigit()
-                    .frame(width: 32)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .frame(width: columnWidths.indices.contains(index) ? columnWidths[index] : 32)
             }
         }
         .padding(.vertical, 3)

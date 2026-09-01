@@ -96,6 +96,7 @@ struct Batter: Codable, Identifiable, Sendable {
     let strikeOuts: Int
     let leftOnBase: Int
     let homeRuns: Int
+    let average: String?
 
     var id: String { "\(order)-\(name)" }
 }

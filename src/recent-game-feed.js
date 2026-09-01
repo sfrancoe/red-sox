@@ -8,7 +8,7 @@ const LIVE_FIELDS = [
   'abbreviation', 'record', 'leagueRecord', 'wins', 'losses', 'venue', 'liveData',
   'linescore', 'innings', 'num', 'runs', 'hits', 'errors', 'boxscore', 'players',
   'batters', 'pitchers', 'person', 'fullName', 'position', 'stats', 'batting',
-  'pitching', 'plateAppearances', 'gamesPitched', 'note', 'atBats', 'rbi',
+  'pitching', 'seasonStats', 'plateAppearances', 'gamesPitched', 'note', 'atBats', 'rbi', 'avg',
   'baseOnBalls', 'strikeOuts', 'leftOnBase', 'inningsPitched', 'earnedRuns',
   'homeRuns', 'numberOfPitches', 'plays', 'allPlays', 'scoringPlays', 'about',
   'halfInning', 'inning', 'result', 'description', 'event', 'awayScore', 'homeScore',
@@ -48,12 +48,14 @@ function playerRows(box, role) {
     const keys = role === 'batting'
       ? ['atBats', 'runs', 'hits', 'rbi', 'baseOnBalls', 'strikeOuts', 'leftOnBase']
       : ['inningsPitched', 'hits', 'runs', 'earnedRuns', 'baseOnBalls', 'strikeOuts', 'homeRuns', 'numberOfPitches'];
-    return [{
+    const row = {
       name: player.person?.fullName || 'Player',
       position: player.position?.abbreviation || '',
       note: stats.note || '',
       ...Object.fromEntries(keys.map(key => [key, stats[key] ?? 0])),
-    }];
+    };
+    if (role === 'batting') row.average = player.seasonStats?.batting?.avg || '.---';
+    return [row];
   });
 }
 

@@ -97,6 +97,8 @@ def player_rows(team_box: dict[str, Any], role: str) -> list[dict[str, Any]]:
                 "atBats", "runs", "hits", "rbi", "baseOnBalls", "strikeOuts",
                 "leftOnBase", "homeRuns"
             )})
+            season_batting = (player.get("seasonStats") or {}).get("batting") or {}
+            base["average"] = season_batting.get("avg") or ".---"
         else:
             base.update({key: stats.get(key, 0) for key in (
                 "inningsPitched", "hits", "runs", "earnedRuns", "baseOnBalls",
