@@ -359,9 +359,6 @@ struct RecentGameView: View {
             statsTeamButton("Boston", selection: .boston)
             statsTeamButton(opponent.cityName, selection: .opponent)
         }
-        .padding(2)
-        .background(AppColor.navy)
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .frame(width: 166)
     }
 
@@ -378,17 +375,11 @@ struct RecentGameView: View {
                 .minimumScaleFactor(0.72)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)
-                .foregroundStyle(Color.white)
-                .background(AppColor.navy)
-                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .stroke(
-                            selectedStatsTeam == selection
-                                ? AppColor.red
-                                : Color.white.opacity(0.18),
-                            lineWidth: selectedStatsTeam == selection ? 2 : 0.8
-                        )
+                .foregroundStyle(Color.black)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .fill(selectedStatsTeam == selection ? AppColor.red : Color.clear)
+                        .frame(height: 2)
                 }
         }
         .buttonStyle(.plain)
