@@ -285,7 +285,7 @@ struct RecentGameView: View {
 
         return VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 10) {
-                sectionTitle("Batting", icon: "figure.baseball")
+                sectionTitle("Batting")
                 Spacer(minLength: 0)
                 statsTeamPicker(redSox: redSox, opponent: opponent)
             }
@@ -317,7 +317,7 @@ struct RecentGameView: View {
 
         return VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 10) {
-                sectionTitle("Pitching", icon: "baseball.diamond.bases")
+                sectionTitle("Pitching")
                 Spacer(minLength: 0)
                 statsTeamPicker(redSox: redSox, opponent: opponent)
             }
@@ -440,7 +440,7 @@ struct RecentGameView: View {
 
     private func scoringPlaysCard(_ game: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            sectionTitle("Scoring Plays", icon: "list.bullet.rectangle")
+            sectionTitle("Scoring Plays")
 
             ForEach(game.scoringPlays) { play in
                 VStack(alignment: .leading, spacing: 4) {
@@ -492,8 +492,8 @@ struct RecentGameView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func sectionTitle(_ title: String, icon: String) -> some View {
-        Label(title.uppercased(), systemImage: icon)
+    private func sectionTitle(_ title: String) -> some View {
+        Text(title.uppercased())
             .font(.system(size: 13, weight: .black))
             .tracking(1.1)
             .foregroundStyle(AppColor.navy)

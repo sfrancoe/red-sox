@@ -41,7 +41,7 @@ struct AppTabView: View {
     @State private var selectedTab: MainTab = .recent
 
     private let navigationColumns = Array(
-        repeating: GridItem(.flexible(), spacing: 5),
+        repeating: GridItem(.flexible(), spacing: 2),
         count: 4
     )
 
@@ -85,7 +85,7 @@ struct AppTabView: View {
     }
 
     private var topNavigation: some View {
-        LazyVGrid(columns: navigationColumns, spacing: 5) {
+        LazyVGrid(columns: navigationColumns, spacing: 2) {
             ForEach(MainTab.allCases, id: \.self) { tab in
                 Button {
                     withAnimation(.easeOut(duration: 0.18)) {
@@ -94,16 +94,16 @@ struct AppTabView: View {
                 } label: {
                     VStack(spacing: 3) {
                         Image(systemName: tab.icon)
-                            .font(.system(size: 13, weight: .bold))
+                            .font(.system(size: 14, weight: .bold))
                         Text(tab.title.uppercased())
-                            .font(.system(size: 8, weight: .black))
+                            .font(.system(size: 10, weight: .black))
                             .tracking(0.2)
                             .lineLimit(1)
-                            .minimumScaleFactor(0.8)
+                            .minimumScaleFactor(0.72)
                     }
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 39)
+                    .frame(height: 42)
                     .background(selectedTab == tab ? AppColor.green : AppColor.hunterGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                     .overlay {
@@ -119,7 +119,7 @@ struct AppTabView: View {
                 .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
             }
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 8)
         .padding(.top, 7)
         .padding(.bottom, 8)
         .background(AppColor.paper)
