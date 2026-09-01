@@ -68,28 +68,23 @@ struct RecentGameView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
                         .foregroundStyle(Color.white)
-                        .background(AppColor.navy)
-                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .stroke(
+                        .overlay(alignment: .bottom) {
+                            Rectangle()
+                                .fill(
                                     selectedGame?.gamePk == game.gamePk
                                         ? AppColor.red
-                                        : Color.white.opacity(0.18),
-                                    lineWidth: selectedGame?.gamePk == game.gamePk ? 2.5 : 0.8
+                                        : Color.clear
                                 )
+                                .frame(height: 3)
                         }
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(4)
+        .padding(.horizontal, 5)
+        .padding(.vertical, 2)
         .background(AppColor.navy)
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(Color.white.opacity(0.45), lineWidth: 1)
-        }
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(.horizontal, 16)
         .padding(.top, 10)
         .padding(.bottom, 4)
