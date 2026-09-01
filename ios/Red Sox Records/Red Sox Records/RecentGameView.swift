@@ -150,7 +150,11 @@ struct RecentGameView: View {
         emphasized: Bool = false
     ) -> some View {
         Text("\(value)")
-            .fontWeight(emphasized ? .black : .semibold)
+            .font(
+                emphasized
+                    ? .system(size: 15, weight: .black, design: .monospaced)
+                    : .system(size: 11, weight: .semibold, design: .monospaced)
+            )
             .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
             .frame(width: width, alignment: .trailing)
     }
