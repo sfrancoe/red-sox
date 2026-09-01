@@ -48,59 +48,50 @@ struct ScheduleView: View {
     }
 
     private func scheduleRow(_ game: ScheduledGame) -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            HStack(spacing: 6) {
-                Text(game.formattedDay.uppercased())
-                    .font(.system(size: 12, weight: .black))
-                    .tracking(0.5)
-                    .foregroundStyle(AppColor.navy)
+        HStack(spacing: 4) {
+            Text(game.formattedDay.uppercased())
+                .font(.system(size: 11, weight: .black))
+                .tracking(0.35)
+                .foregroundStyle(AppColor.navy)
 
-                Text("·")
-                    .foregroundStyle(.secondary)
+            Text("·")
+                .foregroundStyle(.secondary)
 
-                Text(game.formattedTime)
-                    .font(.system(size: 11, weight: .bold))
+            Text(game.formattedTime)
+                .font(.system(size: 10, weight: .bold))
 
-                Spacer()
-
-                if game.doubleheader {
-                    Text("G\(game.gameNumber)")
-                        .font(.system(size: 9, weight: .black))
-                        .foregroundStyle(AppColor.navy)
-                }
-
-                Text(game.location == "home" ? "HOME" : "AWAY")
+            if game.doubleheader {
+                Text("G\(game.gameNumber)")
                     .font(.system(size: 9, weight: .black))
                     .foregroundStyle(AppColor.red)
-                    .padding(.horizontal, 7)
-                    .padding(.vertical, 3)
-                    .background(AppColor.paleBlue)
-                    .clipShape(Capsule())
             }
 
-            HStack(spacing: 4) {
-                Text(game.locationWord)
-                    .foregroundStyle(.secondary)
-                Text(game.opponent)
-                    .font(.system(size: 13, weight: .bold))
-                    .foregroundStyle(AppColor.navy)
-                Text("(\(game.opponentRecord))")
-                    .font(.system(size: 11))
-                    .foregroundStyle(.secondary)
+            Text("·")
+                .foregroundStyle(.secondary)
 
-                if let matchup = game.probableMatchup {
-                    Text("·")
-                        .foregroundStyle(.secondary)
-                    Text(matchup)
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(AppColor.green)
-                }
+            Text(game.locationWord)
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(.secondary)
+
+            Text(game.opponent)
+                .font(.system(size: 11, weight: .bold))
+                .foregroundStyle(AppColor.navy)
+
+            Text("(\(game.opponentRecord))")
+                .font(.system(size: 10))
+                .foregroundStyle(.secondary)
+
+            if let matchup = game.probableMatchup {
+                Text("·")
+                    .foregroundStyle(.secondary)
+                Text(matchup)
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(AppColor.green)
             }
-            .font(.system(size: 12))
-            .lineLimit(1)
-            .minimumScaleFactor(0.65)
         }
-        .cardStyle(padding: 12)
+        .lineLimit(1)
+        .minimumScaleFactor(0.55)
+        .cardStyle(padding: 10)
         .dynamicTypeSize(.xSmall)
     }
 

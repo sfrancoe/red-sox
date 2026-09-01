@@ -46,7 +46,7 @@ struct ScheduledGame: Codable, Identifiable, Sendable {
     }
 
     var locationWord: String {
-        location == "home" ? "vs" : "at"
+        location == "home" ? "vs" : "@"
     }
 
     var probableMatchup: String? {
