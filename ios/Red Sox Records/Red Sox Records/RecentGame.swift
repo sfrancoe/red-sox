@@ -10,6 +10,7 @@ struct RecentGame: Codable, Sendable {
     let attendance: Int?
     let inningsCount: Int
     let result: String
+    let gameState: String?
     let summary: String
     let facts: [String]
     let decisions: Decisions
@@ -46,6 +47,10 @@ struct RecentGame: Codable, Sendable {
             details.append("Attendance \(attendance.formatted())")
         }
         return details.joined(separator: " · ")
+    }
+
+    var isLive: Bool {
+        gameState == "Live"
     }
 }
 
@@ -97,6 +102,7 @@ struct Batter: Codable, Identifiable, Sendable {
     let leftOnBase: Int
     let homeRuns: Int
     let average: String?
+    let seasonHomeRuns: Int?
 
     var id: String { "\(order)-\(name)" }
 }

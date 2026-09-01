@@ -8,6 +8,7 @@ private enum BoxScoreTeamSelection {
 struct RecentGameView: View {
     @State private var store = RecentGameStore()
     @State private var selectedStatsTeam: BoxScoreTeamSelection = .boston
+    @State private var selectedGameID: Int?
 
     var body: some View {
         NavigationStack {
@@ -15,10 +16,13 @@ struct RecentGameView: View {
                 AppColor.paleRed.ignoresSafeArea()
 
                 Group {
-                    if let game = store.game {
-                        gameContent(game)
+                    if let game = selectedGame {
+                        VStack(spacing: 0) {
+                            gameSelector
+                            gameContent(game)
+                        }
                     } else if store.isLoading {
-                        ProgressView("Loading the latest game…")
+                        ProgressView("Loading Game Center…")
                             .tint(AppColor.red)
                     } else {
                         errorView
@@ -29,6 +33,82 @@ struct RecentGameView: View {
         }
         .task {
             await store.load()
+            synchronizeSelection()
+
+            while !Task.isCancelled {
+                let delay: UInt64 = store.hasLiveGame ? 20 : 60
+                try? await Task.sleep(nanoseconds: delay * 1_000_000_000)
+                guard !Task.isCancelled else { return }
+                let hadLiveGame = store.hasLiveGame
+                await store.refresh()
+                synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
+            }
+        }
+    }
+
+    private var selectedGame: RecentGame? {
+        if let selectedGameID,
+           let game = store.games.first(where: { $0.gamePk == selectedGameID }) {
+            return game
+        }
+        return store.games.first
+    }
+
+    private var gameSelector: some View {
+        HStack(spacing: 4) {
+            ForEach(Array(store.games.enumerated()), id: \.element.gamePk) { index, game in
+                Button {
+                    selectedGameID = game.gamePk
+                    selectedStatsTeam = .boston
+                } label: {
+                    Text(gameTabTitle(game, index: index))
+                        .font(.system(size: 10, weight: .black))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .foregroundStyle(selectedGame?.gamePk == game.gamePk ? Color.white : AppColor.navy)
+                        .background(
+                            selectedGame?.gamePk == game.gamePk
+                                ? (game.isLive ? AppColor.red : AppColor.hunterGreen)
+                                : Color.white.opacity(0.7)
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 10)
+        .padding(.bottom, 4)
+        .background(AppColor.paleRed)
+    }
+
+    private func gameTabTitle(_ game: RecentGame, index: Int) -> String {
+        if game.isLive { return "LIVE" }
+        if index == 0, !store.hasLiveGame { return "LAST GAME" }
+
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
+        var title = date.formatted(.dateTime.month(.abbreviated).day()).uppercased()
+        let gamesOnDate = store.games
+            .filter { candidate in
+                guard let candidateDate = formatter.date(from: candidate.gameDate) else { return false }
+                return Calendar.current.isDate(candidateDate, inSameDayAs: date)
+            }
+            .sorted { $0.gameDate < $1.gameDate }
+        if gamesOnDate.count > 1,
+           let gameNumber = gamesOnDate.firstIndex(where: { $0.gamePk == game.gamePk }) {
+            title += " G\(gameNumber + 1)"
+        }
+        return title
+    }
+
+    private func synchronizeSelection(preferNewLiveGame: Bool = false) {
+        let currentStillExists = store.games.contains { $0.gamePk == selectedGameID }
+        if preferNewLiveGame || !currentStillExists {
+            selectedGameID = store.games.first?.gamePk
+            selectedStatsTeam = .boston
         }
     }
 
@@ -50,7 +130,9 @@ struct RecentGameView: View {
             .foregroundStyle(AppColor.ink)
         }
         .refreshable {
-            await store.load()
+            let hadLiveGame = store.hasLiveGame
+            await store.refresh()
+            synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
         }
         .dynamicTypeSize(.xSmall)
     }
@@ -64,11 +146,11 @@ struct RecentGameView: View {
 
                 Spacer()
 
-                Text("FINAL")
+                Text(game.isLive ? "LIVE" : "FINAL")
                     .font(.caption.weight(.black))
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
-                    .background(AppColor.green)
+                    .background(game.isLive ? AppColor.red : AppColor.green)
                     .foregroundStyle(.white)
                     .clipShape(Capsule())
             }
@@ -159,7 +241,7 @@ struct RecentGameView: View {
 
     private func recapCard(_ game: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            primarySectionTitle("Game Recap")
+            primarySectionTitle(game.isLive ? "Game So Far" : "Game Recap")
 
             Text(game.summary)
                 .font(.system(size: 15))
@@ -416,7 +498,7 @@ struct RecentGameView: View {
         ContentUnavailableView {
             Label("Game Unavailable", systemImage: "wifi.exclamationmark")
         } description: {
-            Text(store.errorMessage ?? "The latest game could not be loaded.")
+            Text(store.errorMessage ?? "Game Center could not be loaded.")
         } actions: {
             Button("Try Again") {
                 Task { await store.load() }
