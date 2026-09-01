@@ -12,7 +12,7 @@ private enum MainTab: Int, CaseIterable {
 
     var title: String {
         switch self {
-        case .recent: "Game"
+        case .recent: "Games"
         case .schedule: "Schedule"
         case .headlines: "Newspapers"
         case .xPosts: "X Posts"

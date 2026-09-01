@@ -129,13 +129,26 @@ struct RecentGameView: View {
         let opponent = game.away.id == 111 ? game.home : game.away
 
         return ScrollView {
-            LazyVStack(spacing: 6) {
+            LazyVStack(spacing: 10) {
                 scoreCard(game)
-                recapCard(game)
-                battingCard(redSox: redSox, opponent: opponent)
-                pitchingCard(redSox: redSox, opponent: opponent)
-                scoringPlaysCard(game)
-                linksCard(game)
+
+                VStack(spacing: 0) {
+                    recapCard(game)
+                    reportDivider
+                    battingCard(redSox: redSox, opponent: opponent)
+                    reportDivider
+                    pitchingCard(redSox: redSox, opponent: opponent)
+                    reportDivider
+                    scoringPlaysCard(game)
+                    reportDivider
+                    linksCard(game)
+                }
+                .background(AppColor.paper)
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 18)
@@ -147,6 +160,12 @@ struct RecentGameView: View {
             synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
         }
         .dynamicTypeSize(.xSmall)
+    }
+
+    private var reportDivider: some View {
+        Divider()
+            .overlay(AppColor.border)
+            .padding(.horizontal, 16)
     }
 
     private func scoreCard(_ game: RecentGame) -> some View {
@@ -277,7 +296,7 @@ struct RecentGameView: View {
                 }
             }
         }
-        .cardStyle()
+        .padding(16)
     }
 
     private func battingCard(redSox: TeamBoxScore, opponent: TeamBoxScore) -> some View {
@@ -309,7 +328,7 @@ struct RecentGameView: View {
                 }
             }
         }
-        .cardStyle()
+        .padding(16)
     }
 
     private func pitchingCard(redSox: TeamBoxScore, opponent: TeamBoxScore) -> some View {
@@ -341,7 +360,7 @@ struct RecentGameView: View {
                 }
             }
         }
-        .cardStyle()
+        .padding(16)
     }
 
     private func selectedBoxScoreTeam(
@@ -459,7 +478,7 @@ struct RecentGameView: View {
                 }
             }
         }
-        .cardStyle()
+        .padding(16)
     }
 
     private func linksCard(_ game: RecentGame) -> some View {
@@ -477,7 +496,7 @@ struct RecentGameView: View {
                 }
             }
         }
-        .cardStyle()
+        .padding(16)
     }
 
     private func linkRow(_ text: String, icon: String) -> some View {
