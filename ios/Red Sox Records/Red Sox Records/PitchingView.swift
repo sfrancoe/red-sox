@@ -1,0 +1,358 @@
+import SwiftUI
+
+struct PitchingView: View {
+    @State private var store = PitchingStore()
+
+    var body: some View {
+        ZStack {
+            AppColor.cream.ignoresSafeArea()
+
+            Group {
+                if let feed = store.feed {
+                    pitchingContent(feed)
+                } else if store.isLoading {
+                    ProgressView("Loading pitching…")
+                        .tint(AppColor.red)
+                } else {
+                    errorView
+                }
+            }
+        }
+        .navigationTitle("Pitching")
+        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await store.load()
+        }
+    }
+
+    private func pitchingContent(_ feed: PitchingFeed) -> some View {
+        ScrollView {
+            LazyVStack(spacing: 14) {
+                summaryCard(feed)
+
+                Picker("Pitcher role", selection: $store.filter) {
+                    ForEach(PitcherFilter.allCases) { filter in
+                        Text(filter.title).tag(filter)
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                impactCard
+
+                HStack(alignment: .center) {
+                    Text("\(store.filter == .starters ? "Starter" : "Reliever") Reports")
+                        .font(.title3.weight(.black))
+                        .foregroundStyle(AppColor.navy)
+
+                    Spacer()
+
+                    Picker("Report order", selection: $store.sort) {
+                        ForEach(PitcherSort.allCases) { sort in
+                            Text(sort.title).tag(sort)
+                        }
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .tint(AppColor.red)
+                }
+
+                ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
+                    pitcherCard(pitcher, rank: index + 1)
+                }
+
+                sourcesNote(feed)
+            }
+            .padding(16)
+            .foregroundStyle(AppColor.ink)
+        }
+        .refreshable {
+            await store.load()
+        }
+    }
+
+    private func summaryCard(_ feed: PitchingFeed) -> some View {
+        let summary = feed.teamSummary
+        return VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("THE STAFF-WIDE ANSWER")
+                    .font(.caption.weight(.black))
+                    .tracking(1)
+                    .foregroundStyle(AppColor.red)
+                Text(summary.warGap >= 0 ? "More value than expected" : "Behind the forecast")
+                    .font(.title2.weight(.black))
+                    .foregroundStyle(AppColor.navy)
+                Text("Through \(feed.gamesPlayed) games, Boston’s staff is \(summary.warGap.signedText) fWAR versus its prorated preseason forecast.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            HStack(spacing: 14) {
+                forecastNumber("ACTUAL fWAR", summary.actualWar, color: AppColor.red)
+                Text("vs.")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(.secondary)
+                forecastNumber("FORECAST BY NOW", summary.forecastWarToDate, color: AppColor.navy)
+                Spacer(minLength: 0)
+                Text("\(summary.warGap.signedText)")
+                    .font(.headline.monospacedDigit())
+                    .foregroundStyle(summary.warGap >= 0 ? AppColor.green : AppColor.red)
+            }
+
+            forecastTrack(actual: summary.actualWar, forecast: summary.forecastWarToDate)
+
+            HStack {
+                summaryFact("ERA", summary.era.formatted(.number.precision(.fractionLength(2))))
+                Divider().frame(height: 34)
+                summaryFact("INNINGS", summary.innings.formatted(.number.precision(.fractionLength(1))))
+                Divider().frame(height: 34)
+                summaryFact("GAMES", "\(feed.gamesPlayed)")
+            }
+        }
+        .cardStyle()
+    }
+
+    private func forecastNumber(_ label: String, _ value: Double, color: Color) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(label)
+                .font(.caption2.weight(.bold))
+                .foregroundStyle(.secondary)
+            Text(value.formatted(.number.precision(.fractionLength(1))))
+                .font(.title2.monospacedDigit().weight(.black))
+                .foregroundStyle(color)
+        }
+    }
+
+    private func summaryFact(_ label: String, _ value: String) -> some View {
+        VStack(spacing: 3) {
+            Text(label)
+                .font(.caption2.weight(.bold))
+                .foregroundStyle(.secondary)
+            Text(value)
+                .font(.subheadline.monospacedDigit().weight(.bold))
+                .foregroundStyle(AppColor.navy)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var impactCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("WHO MOVED THE SEASON?")
+                .font(.caption.weight(.black))
+                .tracking(0.8)
+                .foregroundStyle(AppColor.green)
+            Text("Actual fWAR ↑  ·  Forecast by now →")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            PitchingImpactChart(pitchers: store.visiblePitchers)
+                .frame(height: 270)
+
+            HStack(spacing: 14) {
+                Label("Above forecast", systemImage: "circle.fill")
+                    .foregroundStyle(AppColor.red)
+                Label("Below forecast", systemImage: "circle.fill")
+                    .foregroundStyle(AppColor.green.opacity(0.75))
+            }
+            .font(.caption2.weight(.bold))
+        }
+        .cardStyle()
+    }
+
+    private func pitcherCard(_ pitcher: PitcherReport, rank: Int) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("\(store.sort.title.uppercased()) RANK \(rank)")
+                        .font(.caption2.weight(.black))
+                        .foregroundStyle(AppColor.red)
+                    Text(pitcher.name)
+                        .font(.headline)
+                        .foregroundStyle(AppColor.navy)
+                    Text("\(pitcher.handedness) · \(pitcher.role) · \(pitcher.games) G\(pitcher.starts > 0 ? " · \(pitcher.starts) GS" : "")")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Text("\(pitcher.warGap.signedText) fWAR")
+                    .font(.subheadline.monospacedDigit().weight(.black))
+                    .foregroundStyle(pitcher.warGap >= 0 ? AppColor.green : AppColor.red)
+            }
+
+            Text(pitcher.story)
+                .font(.subheadline)
+                .lineSpacing(2)
+
+            forecastTrack(actual: pitcher.actual.war, forecast: pitcher.forecastToDate.war)
+
+            comparisonTable(pitcher)
+        }
+        .cardStyle()
+    }
+
+    private func forecastTrack(actual: Double, forecast: Double) -> some View {
+        GeometryReader { geometry in
+            let maximum = max(actual, forecast, 0.35) * 1.12
+            ZStack(alignment: .leading) {
+                Capsule().fill(AppColor.paleBlue)
+                Capsule()
+                    .fill(AppColor.red)
+                    .frame(width: geometry.size.width * max(actual, 0) / maximum)
+                Rectangle()
+                    .fill(AppColor.navy)
+                    .frame(width: 2, height: 15)
+                    .offset(x: geometry.size.width * max(forecast, 0) / maximum)
+            }
+        }
+        .frame(height: 10)
+        .clipShape(Capsule())
+    }
+
+    private func comparisonTable(_ pitcher: PitcherReport) -> some View {
+        Grid(horizontalSpacing: 14, verticalSpacing: 6) {
+            GridRow {
+                Text("")
+                Text("ACTUAL")
+                Text("FORECAST")
+            }
+            .font(.caption2.weight(.black))
+            .foregroundStyle(.secondary)
+
+            comparisonRow("fWAR", pitcher.actual.war.twoPlaces, pitcher.forecastToDate.war.twoPlaces)
+            comparisonRow("Innings", pitcher.actual.ip, pitcher.forecastToDate.ip.onePlace)
+            comparisonRow("ERA", pitcher.actual.era.twoPlaces, pitcher.forecast?.era.twoPlaces ?? "—")
+            comparisonRow("FIP", pitcher.actual.fip.twoPlaces, pitcher.forecast?.fip.twoPlaces ?? "—")
+            comparisonRow("K−BB%", "\(pitcher.actual.kMinusBbPct.onePlace)%", pitcher.forecast.map { "\($0.kMinusBbPct.onePlace)%" } ?? "—")
+        }
+        .font(.caption.monospacedDigit())
+    }
+
+    private func comparisonRow(_ label: String, _ actual: String, _ forecast: String) -> some View {
+        GridRow {
+            Text(label)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(actual)
+            Text(forecast)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private func sourcesNote(_ feed: PitchingFeed) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Forecast by now prorates each pitcher’s preseason Steamer projection to Boston’s games played. Actual value is FanGraphs fWAR.")
+            Text("Updated \(feed.updatedText) · FanGraphs + MLB")
+        }
+        .font(.caption)
+        .foregroundStyle(.secondary)
+        .padding(.vertical, 8)
+    }
+
+    private var errorView: some View {
+        ContentUnavailableView {
+            Label("Pitching Unavailable", systemImage: "wifi.exclamationmark")
+        } description: {
+            Text(store.errorMessage ?? "The pitching outlook could not be loaded.")
+        } actions: {
+            Button("Try Again") {
+                Task { await store.load() }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(AppColor.red)
+        }
+    }
+}
+
+private struct PitchingImpactChart: View {
+    let pitchers: [PitcherReport]
+
+    var body: some View {
+        Canvas { context, size in
+            let plot = CGRect(x: 28, y: 16, width: max(size.width - 38, 1), height: max(size.height - 40, 1))
+            let minimum = -0.2
+            let xMaximum = max(1, pitchers.map(\.forecastToDate.war).max() ?? 1) * 1.1
+            let yMaximum = max(1, pitchers.map(\.actual.war).max() ?? 1) * 1.1
+
+            func x(_ value: Double) -> CGFloat {
+                plot.minX + CGFloat((value - minimum) / (xMaximum - minimum)) * plot.width
+            }
+            func y(_ value: Double) -> CGFloat {
+                plot.maxY - CGFloat((value - minimum) / (yMaximum - minimum)) * plot.height
+            }
+
+            for tick in 0...Int(ceil(max(xMaximum, yMaximum))) {
+                let value = Double(tick)
+                if value <= yMaximum {
+                    var horizontal = Path()
+                    horizontal.move(to: CGPoint(x: plot.minX, y: y(value)))
+                    horizontal.addLine(to: CGPoint(x: plot.maxX, y: y(value)))
+                    context.stroke(horizontal, with: .color(AppColor.border), lineWidth: 0.8)
+                    context.draw(
+                        Text("\(tick)").font(.system(size: 8)).foregroundStyle(.secondary),
+                        at: CGPoint(x: plot.minX - 7, y: y(value)),
+                        anchor: .trailing
+                    )
+                }
+            }
+
+            var parity = Path()
+            parity.move(to: CGPoint(x: x(minimum), y: y(minimum)))
+            let parityMax = min(xMaximum, yMaximum)
+            parity.addLine(to: CGPoint(x: x(parityMax), y: y(parityMax)))
+            context.stroke(
+                parity,
+                with: .color(AppColor.navy.opacity(0.5)),
+                style: StrokeStyle(lineWidth: 1.2, dash: [5, 5])
+            )
+
+            let labels = Set(
+                pitchers.sorted {
+                    ($0.actual.war + abs($0.warGap)) > ($1.actual.war + abs($1.warGap))
+                }.prefix(8).map(\.id)
+            )
+
+            for pitcher in pitchers.sorted(by: { $0.actual.ipValue > $1.actual.ipValue }) {
+                let point = CGPoint(x: x(pitcher.forecastToDate.war), y: y(pitcher.actual.war))
+                let radius = min(10, 3.5 + sqrt(pitcher.actual.ipValue) * 0.42)
+                let pointColor = pitcher.warGap >= 0 ? AppColor.red : AppColor.green.opacity(0.75)
+                context.fill(
+                    Path(ellipseIn: CGRect(x: point.x - radius, y: point.y - radius, width: radius * 2, height: radius * 2)),
+                    with: .color(pointColor)
+                )
+
+                if labels.contains(pitcher.id) {
+                    context.draw(
+                        Text(pitcher.name.split(separator: " ").last.map(String.init) ?? pitcher.name)
+                            .font(.system(size: 8, weight: .bold))
+                            .foregroundStyle(AppColor.navy),
+                        at: CGPoint(x: point.x + radius + 3, y: point.y),
+                        anchor: .leading
+                    )
+                }
+            }
+        }
+        .accessibilityLabel("Actual pitching fWAR compared with forecast fWAR")
+    }
+}
+
+private extension Double {
+    var signedText: String {
+        let value = onePlace
+        return self >= 0 ? "+\(value)" : value
+    }
+
+    var onePlace: String {
+        formatted(.number.precision(.fractionLength(1)))
+    }
+
+    var twoPlaces: String {
+        formatted(.number.precision(.fractionLength(2)))
+    }
+}
+
+#Preview {
+    NavigationStack {
+        PitchingView()
+    }
+}
