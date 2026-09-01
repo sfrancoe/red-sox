@@ -77,7 +77,7 @@ struct RecentGameView: View {
 
             Text(game.gameDetails)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppColor.hunterGreen)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
