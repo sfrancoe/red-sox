@@ -332,6 +332,15 @@ private struct Game108Canvas: View {
                         seasonColor: lineColor
                     )
                 }
+
+                if fraction >= 0.999, let lineTip = path.currentPoint {
+                    drawSeasonEndLabel(
+                        context: &context,
+                        season: season,
+                        at: lineTip,
+                        color: lineColor
+                    )
+                }
             }
 
             drawCheckpointAnnotation(context: &context, plot: plot)
@@ -511,24 +520,45 @@ private struct Game108Canvas: View {
         )
 
         context.draw(
-            Text("G108 · 57–51!")
+            Text("GAME 108 = 57–51!")
                 .font(.system(size: 18, weight: .black))
                 .foregroundStyle(annotationColor),
-            at: CGPoint(x: point.x - 17, y: point.y - 43),
+            at: CGPoint(x: point.x - 8, y: point.y - 73),
             anchor: .bottomTrailing
         )
 
         var arrow = Path()
-        arrow.move(to: CGPoint(x: point.x - 18, y: point.y - 40))
-        arrow.addLine(to: CGPoint(x: point.x - 9, y: point.y - 14))
-        arrow.move(to: CGPoint(x: point.x - 9, y: point.y - 14))
-        arrow.addLine(to: CGPoint(x: point.x - 16, y: point.y - 20))
-        arrow.move(to: CGPoint(x: point.x - 9, y: point.y - 14))
-        arrow.addLine(to: CGPoint(x: point.x - 9, y: point.y - 24))
+        arrow.move(to: CGPoint(x: point.x - 42, y: point.y - 66))
+        arrow.addLine(to: CGPoint(x: point.x - 20, y: point.y - 29))
+        arrow.move(to: CGPoint(x: point.x - 20, y: point.y - 29))
+        arrow.addLine(to: CGPoint(x: point.x - 32, y: point.y - 35))
+        arrow.move(to: CGPoint(x: point.x - 20, y: point.y - 29))
+        arrow.addLine(to: CGPoint(x: point.x - 21, y: point.y - 43))
+        context.stroke(
+            arrow,
+            with: .color(AppColor.paper),
+            style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round)
+        )
         context.stroke(
             arrow,
             with: .color(annotationColor),
-            style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
+            style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round)
+        )
+    }
+
+    private func drawSeasonEndLabel(
+        context: inout GraphicsContext,
+        season: GraphSeries,
+        at point: CGPoint,
+        color: Color
+    ) {
+        let label = season.year == 2026 ? "’26 YTD" : "’\(String(season.year).suffix(2))"
+        context.draw(
+            Text(label)
+                .font(.system(size: 12, weight: .black))
+                .foregroundStyle(color),
+            at: CGPoint(x: point.x - 6, y: point.y - 13),
+            anchor: .bottomTrailing
         )
     }
 
