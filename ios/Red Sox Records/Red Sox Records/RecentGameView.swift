@@ -103,7 +103,7 @@ struct RecentGameView: View {
                 lineScoreLegend("E", width: 21)
                 lineScoreLegend("LOB", width: 27)
             }
-            .font(.system(size: 8, weight: .bold))
+            .font(.system(size: 9, weight: .bold))
             .foregroundStyle(.secondary)
 
             combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
@@ -120,7 +120,7 @@ struct RecentGameView: View {
     ) -> some View {
         HStack(spacing: 0) {
             Text(team.cityName)
-                .font(.system(size: 9, weight: .black))
+                .font(.system(size: 10, weight: .black))
                 .foregroundStyle(AppColor.navy)
                 .frame(width: 50, alignment: .leading)
                 .lineLimit(1)
@@ -136,7 +136,7 @@ struct RecentGameView: View {
             lineScoreTotal(team.errors, width: 21)
             lineScoreTotal(team.leftOnBase, width: 27)
         }
-        .font(.system(size: 9, weight: .semibold))
+        .font(.system(size: 11, weight: .semibold))
     }
 
     private func lineScoreLegend(_ title: String, width: CGFloat) -> some View {
