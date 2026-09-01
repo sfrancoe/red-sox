@@ -51,39 +51,31 @@ struct HeadlinesView: View {
     }
 
     private var sourcePicker: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 0) {
             ForEach(NewsSource.allCases) { source in
                 Button {
                     store.selectedSource = source
                 } label: {
                     Text(source.shortName)
-                        .font(.system(size: 12, weight: .black))
+                        .font(
+                            .system(
+                                size: store.selectedSource == source ? 16 : 13,
+                                weight: store.selectedSource == source ? .black : .semibold
+                            )
+                        )
                         .lineLimit(1)
                         .minimumScaleFactor(0.72)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .foregroundStyle(Color.white)
-                        .background(AppColor.navy)
-                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 9, style: .continuous)
-                                .stroke(
-                                    store.selectedSource == source
-                                        ? AppColor.red
-                                        : Color.white.opacity(0.18),
-                                    lineWidth: store.selectedSource == source ? 2.5 : 0.8
-                                )
-                        }
+                        .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(5)
-        .background(AppColor.navy)
-        .overlay {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(Color.white.opacity(0.45), lineWidth: 1)
-        }
+        .padding(.horizontal, 5)
+        .padding(.vertical, 2)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }
