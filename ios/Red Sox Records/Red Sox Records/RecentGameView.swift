@@ -345,7 +345,7 @@ struct RecentGameView: View {
                         Spacer()
                         Text("\(game.away.abbreviation) \(play.awayScore) · \(game.home.abbreviation) \(play.homeScore)")
                             .font(.caption.monospacedDigit())
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(AppColor.hunterGreen)
                     }
                     Text(play.description)
                         .font(.subheadline)
