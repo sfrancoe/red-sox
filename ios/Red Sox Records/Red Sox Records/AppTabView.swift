@@ -1,7 +1,17 @@
 import SwiftUI
 import UIKit
 
+private enum MainTab: Int, CaseIterable {
+    case recent
+    case schedule
+    case headlines
+    case xPosts
+    case more
+}
+
 struct AppTabView: View {
+    @State private var selectedTab: MainTab = .recent
+
     init() {
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
@@ -26,31 +36,40 @@ struct AppTabView: View {
     }
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             RecentGameView()
                 .tabItem {
                     Label("Recent", systemImage: "baseball.fill")
                 }
+                .tag(MainTab.recent)
+                .mainTabSwipe(selection: $selectedTab, current: .recent)
 
             ScheduleView()
                 .tabItem {
                     Label("Schedule", systemImage: "calendar")
                 }
+                .tag(MainTab.schedule)
+                .mainTabSwipe(selection: $selectedTab, current: .schedule)
 
             HeadlinesView()
                 .tabItem {
                     Label("Headlines", systemImage: "newspaper.fill")
                 }
+                .tag(MainTab.headlines)
+                .mainTabSwipe(selection: $selectedTab, current: .headlines)
 
             XPostsView()
                 .tabItem {
                     Label("X Posts", systemImage: "bubble.left.and.bubble.right.fill")
                 }
+                .tag(MainTab.xPosts)
+                .mainTabSwipe(selection: $selectedTab, current: .xPosts, edgeOnly: true)
 
-            MoreView()
+            MoreView(selectedTab: $selectedTab)
                 .tabItem {
                     Label("More", systemImage: "ellipsis.circle.fill")
                 }
+                .tag(MainTab.more)
         }
         .tint(AppColor.red)
         .toolbarBackground(AppColor.paper, for: .tabBar)
@@ -59,6 +78,8 @@ struct AppTabView: View {
 }
 
 private struct MoreView: View {
+    @Binding var selectedTab: MainTab
+
     var body: some View {
         NavigationStack {
             List {
@@ -89,7 +110,65 @@ private struct MoreView: View {
             .scrollContentBackground(.hidden)
             .background(AppColor.cream)
             .navigationTitle("More")
+            .mainTabSwipe(selection: $selectedTab, current: .more)
         }
+    }
+}
+
+private struct MainTabSwipeModifier: ViewModifier {
+    @Binding var selection: MainTab
+    let current: MainTab
+    let edgeOnly: Bool
+
+    private let minimumDistance: CGFloat = 64
+    private let edgeWidth: CGFloat = 44
+
+    func body(content: Content) -> some View {
+        content.simultaneousGesture(
+            DragGesture(minimumDistance: 20, coordinateSpace: .global)
+                .onEnded(handleSwipe)
+        )
+    }
+
+    private func handleSwipe(_ value: DragGesture.Value) {
+        let horizontalDistance = value.translation.width
+        let verticalDistance = value.translation.height
+
+        guard abs(horizontalDistance) >= minimumDistance,
+              abs(horizontalDistance) > abs(verticalDistance) * 1.35 else {
+            return
+        }
+
+        if edgeOnly {
+            let screenWidth = UIScreen.main.bounds.width
+            let beganAtRequiredEdge = horizontalDistance < 0
+                ? value.startLocation.x >= screenWidth - edgeWidth
+                : value.startLocation.x <= edgeWidth
+            guard beganAtRequiredEdge else { return }
+        }
+
+        let direction = horizontalDistance < 0 ? 1 : -1
+        guard let destination = MainTab(rawValue: current.rawValue + direction) else { return }
+
+        withAnimation(.easeOut(duration: 0.2)) {
+            selection = destination
+        }
+    }
+}
+
+private extension View {
+    func mainTabSwipe(
+        selection: Binding<MainTab>,
+        current: MainTab,
+        edgeOnly: Bool = false
+    ) -> some View {
+        modifier(
+            MainTabSwipeModifier(
+                selection: selection,
+                current: current,
+                edgeOnly: edgeOnly
+            )
+        )
     }
 }
 
