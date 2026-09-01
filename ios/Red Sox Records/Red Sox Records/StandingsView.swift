@@ -136,7 +136,7 @@ struct StandingsView: View {
 
     private func standingsHeader(_ gamesBackTitle: String) -> some View {
         HStack(spacing: 0) {
-            Text("TEAM").frame(maxWidth: .infinity, alignment: .leading)
+            Text("").frame(maxWidth: .infinity, alignment: .leading)
             Text("W").frame(width: 28)
             Text("L").frame(width: 28)
             Text("PCT").frame(width: 46)
@@ -158,8 +158,11 @@ struct StandingsView: View {
                     .font(.system(size: 12, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: 15)
-                Text(team.abbreviation)
-                    .fontWeight(team.isRedSox ? .black : .bold)
+                Text(team.name)
+                    .font(.system(size: 13, weight: team.isRedSox ? .black : .bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .allowsTightening(true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
