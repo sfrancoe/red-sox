@@ -45,6 +45,9 @@ KNOWN_ENDPOINTS = {
     "https://red-sox.netlify.app/data/seasons.json",
     "https://red-sox.netlify.app/data/standings.json",
 }
+JSON_PROBE_OVERRIDES = {
+    "https://statsapi.mlb.com": "https://statsapi.mlb.com/api/v1/teams/111",
+}
 
 
 @dataclass(frozen=True)
@@ -210,12 +213,13 @@ def check_live_endpoints() -> list[Check]:
         if url in PAID_OR_METERED_ENDPOINTS:
             checks.append(result("SKIP", "Live endpoint", f"Skipped metered endpoint: {url}"))
             continue
+        probe_url = JSON_PROBE_OVERRIDES.get(url, url)
         try:
-            status, payload = fetch_url(url)
+            status, payload = fetch_url(probe_url)
         except urllib.error.HTTPError as exc:
             if exc.code in {403, 429, 503}:
                 try:
-                    status, payload = fetch_url(url, fallback=True)
+                    status, payload = fetch_url(probe_url, fallback=True)
                 except Exception as fallback_exc:  # noqa: BLE001
                     checks.append(result("FAIL", "Live endpoint", f"{url}: {fallback_exc}"))
                     continue
