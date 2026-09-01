@@ -336,9 +336,128 @@ private struct Game108Canvas: View {
                         )
                     )
                 }
+
+                if index == activeSeasonIndex,
+                   let lineTip = path.currentPoint {
+                    drawWally(
+                        context: &context,
+                        at: lineTip,
+                        size: 24,
+                        seasonColor: lineColor
+                    )
+                }
             }
         }
         .accessibilityLabel("Four Red Sox seasons showing games above or below .500")
+    }
+
+    private func drawWally(
+        context: inout GraphicsContext,
+        at point: CGPoint,
+        size: CGFloat,
+        seasonColor: Color
+    ) {
+        let scale = size / 24
+        func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+            CGRect(
+                x: point.x + x * scale,
+                y: point.y + y * scale,
+                width: width * scale,
+                height: height * scale
+            )
+        }
+
+        context.drawLayer { layer in
+            layer.addFilter(.shadow(color: seasonColor.opacity(0.65), radius: 7))
+            layer.fill(
+                Path(ellipseIn: rect(-13, -13, 26, 26)),
+                with: .color(seasonColor.opacity(0.24))
+            )
+
+            let furGreen = Color(red: 0.12, green: 0.58, blue: 0.24)
+            let darkGreen = Color(red: 0.04, green: 0.34, blue: 0.13)
+
+            for index in 0..<20 {
+                let angle = Double(index) / 20 * Double.pi * 2
+                let radius: CGFloat = index.isMultiple(of: 2) ? 9.8 : 10.8
+                let x = cos(angle) * radius - 1.45
+                let y = sin(angle) * radius * 0.9 - 1.45
+                layer.fill(
+                    Path(ellipseIn: rect(x, y, 2.9, 2.9)),
+                    with: .color(index.isMultiple(of: 3) ? darkGreen : furGreen)
+                )
+            }
+
+            layer.fill(
+                Path(ellipseIn: rect(-10.2, -9.7, 20.4, 19.4)),
+                with: .radialGradient(
+                    Gradient(colors: [Color(red: 0.39, green: 0.84, blue: 0.43), furGreen, darkGreen]),
+                    center: CGPoint(x: point.x - 3 * scale, y: point.y - 4 * scale),
+                    startRadius: 1,
+                    endRadius: 13 * scale
+                )
+            )
+
+            var cap = Path()
+            cap.move(to: CGPoint(x: point.x - 7 * scale, y: point.y - 7 * scale))
+            cap.addCurve(
+                to: CGPoint(x: point.x + 7 * scale, y: point.y - 7 * scale),
+                control1: CGPoint(x: point.x - 6 * scale, y: point.y - 14 * scale),
+                control2: CGPoint(x: point.x + 6 * scale, y: point.y - 14 * scale)
+            )
+            cap.addLine(to: CGPoint(x: point.x + 7 * scale, y: point.y - 5.5 * scale))
+            cap.addLine(to: CGPoint(x: point.x - 7 * scale, y: point.y - 5.5 * scale))
+            cap.closeSubpath()
+            layer.fill(cap, with: .color(AppColor.navy))
+
+            var brim = Path()
+            brim.move(to: CGPoint(x: point.x - 5.5 * scale, y: point.y - 6 * scale))
+            brim.addCurve(
+                to: CGPoint(x: point.x - 11 * scale, y: point.y - 4.5 * scale),
+                control1: CGPoint(x: point.x - 8 * scale, y: point.y - 7 * scale),
+                control2: CGPoint(x: point.x - 11.5 * scale, y: point.y - 6.2 * scale)
+            )
+            brim.addCurve(
+                to: CGPoint(x: point.x - 5 * scale, y: point.y - 4.5 * scale),
+                control1: CGPoint(x: point.x - 9 * scale, y: point.y - 3.4 * scale),
+                control2: CGPoint(x: point.x - 6.5 * scale, y: point.y - 3.7 * scale)
+            )
+            brim.closeSubpath()
+            layer.fill(brim, with: .color(AppColor.navy.opacity(0.92)))
+
+            layer.draw(
+                Text("B")
+                    .font(.system(size: 5 * scale, weight: .black, design: .serif))
+                    .foregroundStyle(AppColor.red),
+                at: CGPoint(x: point.x + 0.5 * scale, y: point.y - 8.4 * scale),
+                anchor: .center
+            )
+
+            layer.fill(Path(ellipseIn: rect(-3.2, -5.5, 6, 7)), with: .color(.white))
+            layer.fill(Path(ellipseIn: rect(2.1, -5, 5.2, 6.2)), with: .color(.white))
+            layer.fill(Path(ellipseIn: rect(-0.7, -3.6, 2.3, 3.1)), with: .color(AppColor.ink))
+            layer.fill(Path(ellipseIn: rect(4, -3.3, 2.1, 2.8)), with: .color(AppColor.ink))
+
+            var mouth = Path()
+            mouth.move(to: CGPoint(x: point.x - 1 * scale, y: point.y + 3.2 * scale))
+            mouth.addCurve(
+                to: CGPoint(x: point.x + 7.4 * scale, y: point.y + 4.2 * scale),
+                control1: CGPoint(x: point.x + 2 * scale, y: point.y + 2.5 * scale),
+                control2: CGPoint(x: point.x + 6.5 * scale, y: point.y + 3 * scale)
+            )
+            mouth.addCurve(
+                to: CGPoint(x: point.x + 0.5 * scale, y: point.y + 6.2 * scale),
+                control1: CGPoint(x: point.x + 6.3 * scale, y: point.y + 7.4 * scale),
+                control2: CGPoint(x: point.x + 2.6 * scale, y: point.y + 8 * scale)
+            )
+            mouth.closeSubpath()
+            layer.fill(mouth, with: .color(Color.black.opacity(0.88)))
+
+            layer.fill(
+                Path(ellipseIn: rect(-0.8, -0.5, 6.7, 5.6)),
+                with: .color(Color(red: 1, green: 0.58, blue: 0.08))
+            )
+        }
     }
 
     private func drawGrid(context: inout GraphicsContext, plot: CGRect) {
