@@ -91,12 +91,12 @@ struct ScheduleView: View {
 
         return VStack(spacing: 3) {
             Text(date.formatted(.dateTime.day()))
-                .font(.system(size: 14, weight: .black))
+                .font(.system(size: 11, weight: .bold))
                 .foregroundStyle(selected ? Color.white : AppColor.navy)
 
             if let game {
                 Text("\(game.locationWord) \(opponentCode(game.opponent))")
-                    .font(.system(size: 8, weight: .black))
+                    .font(.system(size: 10, weight: .black))
                     .foregroundStyle(selected ? Color.white : accent)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
