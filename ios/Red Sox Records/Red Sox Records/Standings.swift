@@ -38,6 +38,20 @@ struct StandingsTeam: Decodable, Identifiable {
     let lastTen: String
     let streak: String
     let isRedSox: Bool
+
+    var cityName: String {
+        let citiesByTeamID = [
+            108: "Los Angeles", 109: "Arizona", 110: "Baltimore", 111: "Boston",
+            112: "Chicago", 113: "Cincinnati", 114: "Cleveland", 115: "Colorado",
+            116: "Detroit", 117: "Houston", 118: "Kansas City", 119: "Los Angeles",
+            120: "Washington", 121: "New York", 133: "Athletics", 134: "Pittsburgh",
+            135: "San Diego", 136: "Seattle", 137: "San Francisco", 138: "St. Louis",
+            139: "Tampa Bay", 140: "Texas", 141: "Toronto", 142: "Minnesota",
+            143: "Philadelphia", 144: "Atlanta", 145: "Chicago", 146: "Miami",
+            147: "New York", 158: "Milwaukee"
+        ]
+        return citiesByTeamID[id] ?? shortName
+    }
 }
 
 enum StandingsMode: String, CaseIterable, Identifiable {

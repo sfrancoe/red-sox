@@ -109,20 +109,7 @@ struct StandingsView: View {
         showsCutoff: Bool
     ) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Text(title.uppercased())
-                    .font(.system(size: 16, weight: .black))
-                    .foregroundStyle(AppColor.navy)
-                Spacer()
-                if let redSox = teams.first(where: \.isRedSox) {
-                    Text("BOSTON: \(ordinalRank(redSox.rank))")
-                        .font(.system(size: 12, weight: .black))
-                        .foregroundStyle(AppColor.red)
-                }
-            }
-            .padding(.bottom, 5)
-
-            standingsHeader(gamesBackTitle)
+            standingsHeader(title: title, gamesBackTitle: gamesBackTitle)
 
             ForEach(Array(teams.enumerated()), id: \.element.id) { index, team in
                 if showsCutoff && index == 3 {
@@ -134,9 +121,12 @@ struct StandingsView: View {
         .cardStyle(padding: 10)
     }
 
-    private func standingsHeader(_ gamesBackTitle: String) -> some View {
+    private func standingsHeader(title: String, gamesBackTitle: String) -> some View {
         HStack(spacing: 0) {
-            Text("").frame(maxWidth: .infinity, alignment: .leading)
+            Text(title.uppercased())
+                .font(.system(size: 16, weight: .black))
+                .foregroundStyle(AppColor.navy)
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text("W").frame(width: 28)
             Text("L").frame(width: 28)
             Text("PCT").frame(width: 46)
@@ -158,11 +148,9 @@ struct StandingsView: View {
                     .font(.system(size: 12, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: 15)
-                Text(team.name)
-                    .font(.system(size: 13, weight: team.isRedSox ? .black : .bold))
+                Text(team.cityName)
+                    .font(.system(size: 14, weight: team.isRedSox ? .black : .semibold))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                    .allowsTightening(true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -183,7 +171,7 @@ struct StandingsView: View {
         .font(.system(size: 14, weight: .semibold, design: .monospaced))
         .foregroundStyle(team.isRedSox ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, 5)
-        .padding(.vertical, 5)
+        .padding(.vertical, 7)
         .background(team.isRedSox ? AppColor.paleBlue : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
         .overlay(alignment: .leading) {
@@ -205,15 +193,6 @@ struct StandingsView: View {
             .font(.system(size: 14, weight: emphasized ? .black : .semibold, design: .monospaced))
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
             .frame(width: width)
-    }
-
-    private func ordinalRank(_ rank: String) -> String {
-        switch rank {
-        case "1": "1ST"
-        case "2": "2ND"
-        case "3": "3RD"
-        default: "\(rank)TH"
-        }
     }
 
     private var cutoffLine: some View {
