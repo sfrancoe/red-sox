@@ -178,7 +178,7 @@ struct StandingsView: View {
         return HStack(spacing: 0) {
             HStack(spacing: 5) {
                 Text(team.rank)
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                    .font(.system(size: 10, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: 15)
                 Text(team.abbreviation)
@@ -186,13 +186,17 @@ struct StandingsView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            tableValue("\(team.wins)", width: 28)
-            tableValue("\(team.losses)", width: 28)
-            tableValue(team.pct, width: 46)
-            tableValue(gamesBack, width: gamesBackTitle == "WCGB" ? 48 : 38)
-            tableValue(team.lastTen, width: 42)
+            tableValue("\(team.wins)", width: 28, emphasized: team.isRedSox)
+            tableValue("\(team.losses)", width: 28, emphasized: team.isRedSox)
+            tableValue(team.pct, width: 46, emphasized: team.isRedSox)
+            tableValue(
+                gamesBack,
+                width: gamesBackTitle == "WCGB" ? 48 : 38,
+                emphasized: team.isRedSox
+            )
+            tableValue(team.lastTen, width: 42, emphasized: team.isRedSox)
             Text(team.streak)
-                .font(.system(size: 11, weight: .bold, design: .monospaced))
+                .font(.system(size: 11, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                 .frame(width: 38)
         }
@@ -212,10 +216,14 @@ struct StandingsView: View {
         }
     }
 
-    private func tableValue(_ value: String, width: CGFloat) -> some View {
+    private func tableValue(
+        _ value: String,
+        width: CGFloat,
+        emphasized: Bool = false
+    ) -> some View {
         Text(value)
-            .font(.system(size: 11, weight: .semibold, design: .monospaced))
-            .foregroundStyle(AppColor.hunterGreen)
+            .font(.system(size: 11, weight: emphasized ? .black : .semibold, design: .monospaced))
+            .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
             .frame(width: width)
     }
 
