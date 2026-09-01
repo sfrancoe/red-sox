@@ -6,7 +6,7 @@ struct XPostsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                AppColor.cream.ignoresSafeArea()
+                AppColor.paleRed.ignoresSafeArea()
 
                 Group {
                     if let feed = store.feed {
@@ -102,13 +102,13 @@ struct XPostsView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(mode.title)
                 .font(.system(size: 16, weight: .black))
-                .foregroundStyle(AppColor.navy)
+                .foregroundStyle(.white)
 
             Spacer()
 
             Text("Checked \(feed.checkedText)")
                 .font(.system(size: 9))
-                .foregroundStyle(AppColor.ink.opacity(0.65))
+                .foregroundStyle(Color.white.opacity(0.8))
                 .multilineTextAlignment(.trailing)
         }
         .padding(.bottom, 8)
