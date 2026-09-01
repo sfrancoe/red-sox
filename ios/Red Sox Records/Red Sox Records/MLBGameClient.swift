@@ -80,10 +80,10 @@ struct MLBGameClient: Sendable {
         }
         let boston = away.id == Self.redSoxID ? away : home
         let opponent = away.id == Self.redSoxID ? home : away
-        let innings = buildInnings(linescore)
-        let narrativePlays = buildScoringPlays(liveData)
         let status = dictionary(gameData["status"])
         let isLive = (status["abstractGameState"] as? String) == "Live"
+        let innings = buildInnings(linescore, minimumCount: isLive ? 9 : 0)
+        let narrativePlays = buildScoringPlays(liveData)
         let venue = dictionary(gameData["venue"])["name"] as? String ?? "the ballpark"
         let summary = isLive
             ? liveSummary(boston: boston, opponent: opponent, venue: venue, linescore: linescore)
@@ -151,10 +151,16 @@ struct MLBGameClient: Sendable {
 
     private func battingRows(_ box: JSON) -> [Batter] {
         let players = dictionary(box["players"])
-        return integerArray(box["batters"]).enumerated().compactMap { order, playerID in
+        let lineup = integerArray(box["battingOrder"])
+        let participants = integerArray(box["batters"])
+        var playerIDs: [Int] = []
+        for playerID in lineup + participants where !playerIDs.contains(playerID) {
+            playerIDs.append(playerID)
+        }
+
+        return playerIDs.enumerated().compactMap { order, playerID in
             let player = dictionary(players["ID\(playerID)"])
             let stats = dictionary(dictionary(player["stats"])["batting"])
-            guard (integer(stats["plateAppearances"]) ?? 0) > 0 else { return nil }
             let season = dictionary(dictionary(player["seasonStats"])["batting"])
             return Batter(
                 name: personName(player["person"]),
@@ -180,7 +186,6 @@ struct MLBGameClient: Sendable {
         return integerArray(box["pitchers"]).enumerated().compactMap { order, playerID in
             let player = dictionary(players["ID\(playerID)"])
             let stats = dictionary(dictionary(player["stats"])["pitching"])
-            guard (integer(stats["gamesPitched"]) ?? 0) > 0 else { return nil }
             return Pitcher(
                 name: personName(player["person"]),
                 position: dictionary(player["position"])["abbreviation"] as? String ?? "",
@@ -198,8 +203,8 @@ struct MLBGameClient: Sendable {
         }
     }
 
-    private func buildInnings(_ linescore: JSON) -> [Inning] {
-        (linescore["innings"] as? [JSON] ?? []).compactMap { inning in
+    private func buildInnings(_ linescore: JSON, minimumCount: Int) -> [Inning] {
+        let reported = (linescore["innings"] as? [JSON] ?? []).compactMap { inning -> Inning? in
             guard let number = integer(inning["num"]) else { return nil }
             return Inning(
                 num: number,
@@ -208,6 +213,23 @@ struct MLBGameClient: Sendable {
                 away: inningSide(dictionary(inning["away"]))
             )
         }
+
+        let inningsByNumber = Dictionary(uniqueKeysWithValues: reported.map { ($0.num, $0) })
+        let lastInning = max(minimumCount, reported.map(\.num).max() ?? 0)
+        guard lastInning > 0 else { return [] }
+
+        return (1...lastInning).map { number in
+            inningsByNumber[number] ?? Inning(
+                num: number,
+                ordinalNum: ordinal(number),
+                home: emptyInningSide,
+                away: emptyInningSide
+            )
+        }
+    }
+
+    private var emptyInningSide: InningSide {
+        InningSide(runs: 0, hits: 0, errors: 0, leftOnBase: 0)
     }
 
     private func inningSide(_ side: JSON) -> InningSide {
