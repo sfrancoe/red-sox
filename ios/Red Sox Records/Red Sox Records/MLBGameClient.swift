@@ -332,18 +332,56 @@ struct MLBGameClient: Sendable {
                     "\(scoringAction(tying.play)) tied it in the \(ordinal(tying.play.inningNum)), and "
                         + "\(winningPlay.play.batter) completed the comeback \(timing)."
                 )
+            } else if largestDeficit < 2, let winningPlay {
+                sentences.append(
+                    "\(scoringAction(winningPlay.play)) in the \(ordinal(winningPlay.play.inningNum)) "
+                        + "put Boston ahead for good."
+                )
             }
             return sentences.joined(separator: " ")
         }
 
         let largestLead = annotated.map { $0.afterBoston - $0.afterOpponent }.max() ?? 0
+        let opponentGoAhead = annotated.last(where: {
+            $0.afterOpponent > $0.afterBoston
+                && $0.beforeOpponent <= $0.beforeBoston
+                && $0.afterOpponent > $0.beforeOpponent
+        })
+        let bostonHighlight = annotated
+            .filter { $0.afterBoston > $0.beforeBoston }
+            .max {
+                let leftRuns = $0.afterBoston - $0.beforeBoston
+                let rightRuns = $1.afterBoston - $1.beforeBoston
+                return (leftRuns, $0.play.inningNum) < (rightRuns, $1.play.inningNum)
+            }
+        var sentences: [String] = []
         if boston.runs == 0 {
             return "The Red Sox were shut out by the \(clubName(opponent)), \(opponent.runs)–\(boston.runs), at \(venue)."
         }
         if largestLead >= 2 {
-            return "The Red Sox couldn’t hold a \(largestLead)-run lead and fell to the \(clubName(opponent)), \(opponent.runs)–\(boston.runs), at \(venue)."
+            sentences.append(
+                "The Red Sox couldn’t hold a \(largestLead)-run lead and fell to the \(clubName(opponent)), "
+                    + "\(opponent.runs)–\(boston.runs), at \(venue)."
+            )
+        } else {
+            sentences.append(
+                "The Red Sox fell to the \(clubName(opponent)), \(opponent.runs)–\(boston.runs), at \(venue)."
+            )
         }
-        return "The Red Sox fell to the \(clubName(opponent)), \(opponent.runs)–\(boston.runs), at \(venue)."
+        if let opponentGoAhead {
+            sentences.append(
+                "\(scoringAction(opponentGoAhead.play)) in the \(ordinal(opponentGoAhead.play.inningNum)) "
+                    + "put the \(clubName(opponent)) ahead for good."
+            )
+        }
+        if let bostonHighlight,
+           bostonHighlight.play.id != opponentGoAhead?.play.id {
+            sentences.append(
+                "Boston’s biggest swing came on \(scoringAction(bostonHighlight.play)) "
+                    + "in the \(ordinal(bostonHighlight.play.inningNum))."
+            )
+        }
+        return sentences.joined(separator: " ")
     }
 
     private func interestingFacts(
