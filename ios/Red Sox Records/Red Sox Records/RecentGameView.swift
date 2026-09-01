@@ -40,7 +40,6 @@ struct RecentGameView: View {
             LazyVStack(spacing: 6) {
                 scoreCard(game)
                 recapCard(game)
-                decisionsCard(game)
                 battingCard(redSox: redSox, opponent: opponent)
                 pitchingCard(redSox: redSox, opponent: opponent)
                 scoringPlaysCard(game)
@@ -185,29 +184,6 @@ struct RecentGameView: View {
             }
         }
         .cardStyle()
-    }
-
-    private func decisionsCard(_ game: RecentGame) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            primarySectionTitle("Decisions")
-            decisionRow("Winning pitcher", game.decisions.winner)
-            decisionRow("Losing pitcher", game.decisions.loser)
-            if !game.decisions.save.isEmpty {
-                decisionRow("Save", game.decisions.save)
-            }
-        }
-        .cardStyle()
-    }
-
-    private func decisionRow(_ label: String, _ name: String) -> some View {
-        HStack {
-            Text(label)
-                .foregroundStyle(AppColor.navy)
-            Spacer()
-            Text(name)
-                .fontWeight(.semibold)
-        }
-        .font(.subheadline)
     }
 
     private func battingCard(redSox: TeamBoxScore, opponent: TeamBoxScore) -> some View {
