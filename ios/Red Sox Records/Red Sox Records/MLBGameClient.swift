@@ -107,6 +107,7 @@ struct MLBGameClient: Sendable {
             inningsCount: innings.count,
             result: isLive ? "Live" : boston.runs > opponent.runs ? "Win" : "Loss",
             gameState: isLive ? "Live" : "Final",
+            liveStatus: isLive ? liveStatus(linescore) : nil,
             summary: summary,
             facts: facts,
             decisions: Decisions(
@@ -229,7 +230,7 @@ struct MLBGameClient: Sendable {
     }
 
     private var emptyInningSide: InningSide {
-        InningSide(runs: 0, hits: 0, errors: 0, leftOnBase: 0)
+        InningSide(runs: nil, hits: 0, errors: 0, leftOnBase: 0)
     }
 
     private func inningSide(_ side: JSON) -> InningSide {
@@ -289,6 +290,19 @@ struct MLBGameClient: Sendable {
         if state == "middle" { return "after the top of the \(ordinalInning)" }
         if state == "end" { return "after the \(ordinalInning)" }
         return "in the \(half) of the \(ordinalInning)"
+    }
+
+    private func liveStatus(_ linescore: JSON) -> String {
+        let ordinalInning = linescore["currentInningOrdinal"] as? String
+            ?? ordinal(integer(linescore["currentInning"]) ?? 1)
+        let half = (linescore["inningHalf"] as? String ?? "").lowercased()
+        let state = (linescore["inningState"] as? String ?? "").lowercased()
+
+        if state == "middle" { return "Middle of the \(ordinalInning)" }
+        if state == "end" { return "End of the \(ordinalInning)" }
+        if half == "top" { return "Top of the \(ordinalInning)" }
+        if half == "bottom" { return "Bottom of the \(ordinalInning)" }
+        return "In progress"
     }
 
     private func finalSummary(

@@ -181,12 +181,20 @@ struct RecentGameView: View {
                     .clipShape(Capsule())
             }
 
-            Text(game.gameDetails)
-                .font(.subheadline)
-                .foregroundStyle(AppColor.hunterGreen)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(game.gameDetails)
+                    .font(.subheadline)
+                    .foregroundStyle(AppColor.hunterGreen)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+
+                if game.isLive, let liveStatus = game.liveStatus {
+                    Text(liveStatus)
+                        .font(.subheadline.weight(.black))
+                        .foregroundStyle(AppColor.hunterGreen)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             Divider()
 
@@ -233,7 +241,8 @@ struct RecentGameView: View {
                 .minimumScaleFactor(0.7)
 
             ForEach(innings) { inning in
-                Text("\((isAway ? inning.away : inning.home).runs ?? 0)")
+                let runs = (isAway ? inning.away : inning.home).runs
+                Text(runs.map(String.init) ?? " ")
                     .frame(maxWidth: .infinity)
             }
 

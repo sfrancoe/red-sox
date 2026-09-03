@@ -11,6 +11,7 @@ struct RecentGame: Codable, Sendable {
     let inningsCount: Int
     let result: String
     let gameState: String?
+    var liveStatus: String? = nil
     let summary: String
     let facts: [String]
     let decisions: Decisions

@@ -38,7 +38,12 @@ private enum MainTab: Int, CaseIterable {
 }
 
 struct AppTabView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var selectedTab: MainTab = .recent
+    @State private var hasAppeared = false
+    @State private var backgroundedAt: Date?
+
+    private let newSessionInterval: TimeInterval = 15 * 60
 
     private let navigationColumns = Array(
         repeating: GridItem(.flexible(), spacing: 2),
@@ -52,6 +57,25 @@ struct AppTabView: View {
             selectedContent
         }
         .background(AppColor.paper)
+        .onAppear {
+            guard !hasAppeared else { return }
+            selectedTab = .recent
+            hasAppeared = true
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            switch newPhase {
+            case .background:
+                backgroundedAt = Date()
+            case .active:
+                if let backgroundedAt,
+                   Date().timeIntervalSince(backgroundedAt) >= newSessionInterval {
+                    selectedTab = .recent
+                }
+                backgroundedAt = nil
+            default:
+                break
+            }
+        }
     }
 
     @ViewBuilder
