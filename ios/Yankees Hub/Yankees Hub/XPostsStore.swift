@@ -4,12 +4,13 @@ import Observation
 @MainActor
 @Observable
 final class XPostsStore {
-    private static let endpoint = TeamConfig.apiURL(
+    private static let curatedEndpoint = TeamConfig.apiURL(
+        "x-posts",
+        queryItems: [URLQueryItem(name: "team", value: "yankees")]
+    )
+    private static let discoveryEndpoint = TeamConfig.apiURL(
         "x-discovery",
-        queryItems: [
-            URLQueryItem(name: "team", value: "yankees"),
-            URLQueryItem(name: "feed", value: "curated-v1")
-        ]
+        queryItems: [URLQueryItem(name: "team", value: "yankees")]
     )
 
     var feed: XFeed?
@@ -25,14 +26,17 @@ final class XPostsStore {
         defer { isLoading = false }
 
         do {
-            let loadedFeed = try await fetchFeed(from: Self.endpoint)
-            guard loadedFeed.sourceUrl.localizedCaseInsensitiveContains("Yankees") else {
-                throw XPostsError.wrongTeam
-            }
-            feed = loadedFeed
+            async let curatedRequest = fetchFeed(from: Self.curatedEndpoint)
+            async let discoveryRequest = optionalFeed(from: Self.discoveryEndpoint)
+            let (curated, discovery) = try await (curatedRequest, discoveryRequest)
+            feed = mergedFeed(curated: curated, discovery: discovery)
         } catch {
             errorMessage = "We couldn't load the X posts. Check your connection and try again."
         }
+    }
+
+    private func optionalFeed(from endpoint: URL) async -> XFeed? {
+        try? await fetchFeed(from: endpoint)
     }
 
     private func fetchFeed(from endpoint: URL) async throws -> XFeed {
@@ -51,9 +55,37 @@ final class XPostsStore {
         return try decoder.decode(XFeed.self, from: data)
     }
 
+    private func mergedFeed(curated: XFeed, discovery: XFeed?) -> XFeed {
+        guard let discovery else { return curated }
+
+        var uniquePosts = Dictionary(uniqueKeysWithValues: curated.popular.map { ($0.id, $0) })
+        for post in discovery.popular {
+            if let existing = uniquePosts[post.id], existing.likes > post.likes {
+                continue
+            }
+            uniquePosts[post.id] = post
+        }
+
+        let cutoff = Date().addingTimeInterval(-24 * 60 * 60)
+        let leaderboardSize = curated.popular.count
+        let rankedPosts = uniquePosts.values
+            .filter { $0.publishedDate.map { $0 >= cutoff } ?? false }
+            .sorted {
+                if $0.likes != $1.likes { return $0.likes > $1.likes }
+                return $0.published > $1.published
+            }
+        let popular = Array(rankedPosts.prefix(leaderboardSize))
+
+        return XFeed(
+            generatedAt: max(curated.generatedAt, discovery.generatedAt),
+            source: curated.source,
+            sourceUrl: curated.sourceUrl,
+            recent: curated.recent,
+            popular: popular
+        )
+    }
 }
 
 private enum XPostsError: Error {
     case badResponse
-    case wrongTeam
 }

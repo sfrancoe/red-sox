@@ -1,25 +1,60 @@
-const LIST_ID = '1431748439818346496';
-const LIST_URL = `https://syndication.twitter.com/srv/timeline-list/list-id/${LIST_ID}?lang=en&theme=light&showHeader=false&hideBorder=true`;
-const ROSTER_URL = `https://statsapi.mlb.com/api/v1/teams/111/roster?rosterType=fullSeason&season=${new Date().getUTCFullYear()}&hydrate=person`;
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
-const TEAM_TERMS = [
-  'red sox', 'redsox', '#redsox', '@redsox', 'bosox', 'fenway', 'woo sox', 'woosox',
-  'worcester red sox', 'portland sea dogs', 'portland seadogs', 'red stockings',
-  'sox prospects', 'soxprospects',
-];
-const RED_SOX_LINK_TERMS = [
-  'redsox.com', 'mlb.com/redsox', 'bostonglobe.com/sports/baseball/redsox',
-  'bostonherald.com/sports/mlb/boston-red-sox', 'masslive.com/redsox', 'beyondthemonster',
-  'overthemonster', 'bosoxinjection', 'soxprospects', 'thepeskyreport', 'sawxstack',
-];
-const NON_REDSOX_TERMS = [
-  'white sox', 'chicago sox', 'patriots', '#patriots', '#nfl', 'football', 'celtics',
-  '#nba', 'basketball', 'bruins', '#nhl', 'hockey',
-];
 const COMMON_SURNAMES = new Set([
   'anderson', 'anthony', 'campbell', 'gray', 'harris', 'hill', 'miller', 'scott', 'short',
-  'story', 'walker', 'west', 'white', 'young',
+  'story', 'walker', 'wells', 'west', 'white', 'young',
 ]);
+
+export const TEAM_CONFIG = {
+  redsox: {
+    label: 'Red Sox',
+    listId: '1431748439818346496',
+    teamId: 111,
+    teamTerms: [
+      'red sox', 'redsox', '#redsox', '@redsox', 'bosox', 'fenway', 'woo sox', 'woosox',
+      'worcester red sox', 'portland sea dogs', 'portland seadogs', 'red stockings',
+      'sox prospects', 'soxprospects',
+    ],
+    linkTerms: [
+      'redsox.com', 'mlb.com/redsox', 'bostonglobe.com/sports/baseball/redsox',
+      'bostonherald.com/sports/mlb/boston-red-sox', 'masslive.com/redsox',
+      'beyondthemonster', 'overthemonster', 'bosoxinjection', 'soxprospects',
+      'thepeskyreport', 'sawxstack',
+    ],
+    excludedTerms: [
+      'white sox', 'chicago sox', 'patriots', '#patriots', '#nfl', 'football', 'celtics',
+      '#nba', 'basketball', 'bruins', '#nhl', 'hockey',
+    ],
+  },
+  yankees: {
+    label: 'Yankees',
+    listId: '2095986539037647187',
+    teamId: 147,
+    teamTerms: [
+      'new york yankees', 'yankees', '#yankees', '@yankees', '#nyy', '#repbx', 'rep bx',
+      'bronx bombers', 'yankee stadium', 'scranton/wilkes-barre railriders',
+      'swb railriders', 'somerset patriots', 'hudson valley renegades',
+    ],
+    linkTerms: [
+      'yankees.com', 'mlb.com/yankees', 'yesnetwork.com/yankees', 'nypost.com/sports/yankees',
+      'nydailynews.com/sports/mlb/new-york-yankees', 'theathletic.com/mlb/team/yankees',
+      'pinstripealley', 'riveraveblues', 'yanksgoyard',
+    ],
+    excludedTerms: [
+      'new york mets', '#mets', '@mets', 'ny mets', 'new york jets', '#jets', '@nyjets',
+      'new york giants', '#giants', '@giants', 'new york knicks', '#knicks', '@nyknicks',
+      'brooklyn nets', '#nets', '@brooklynnets', 'new york rangers', '#nyr', '@nyrangers',
+      'new york islanders', '#isles', '@nyislanders', '#nfl', '#nba', '#nhl',
+    ],
+  },
+};
+
+function listURL(team) {
+  return `https://syndication.twitter.com/srv/timeline-list/list-id/${team.listId}?lang=en&theme=light&showHeader=false&hideBorder=true`;
+}
+
+function rosterURL(team) {
+  return `https://statsapi.mlb.com/api/v1/teams/${team.teamId}/roster?rosterType=fullSeason&season=${new Date().getUTCFullYear()}&hydrate=person`;
+}
 
 function cleanText(value) {
   if (typeof value !== 'string') return '';
@@ -71,10 +106,10 @@ function tweetContext(tweet) {
   return cleanText(parts.filter(part => typeof part === 'string').join(' ')).toLowerCase();
 }
 
-function relevant(tweet, players) {
+function relevant(tweet, players, team) {
   const context = tweetContext(tweet);
-  if ([...TEAM_TERMS, ...RED_SOX_LINK_TERMS].some(term => context.includes(term))) return true;
-  if (NON_REDSOX_TERMS.some(term => context.includes(term))) return false;
+  if ([...team.teamTerms, ...team.linkTerms].some(term => context.includes(term))) return true;
+  if (team.excludedTerms.some(term => context.includes(term))) return false;
   for (const term of players) {
     const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     if (new RegExp(`(^|[^\\w])${escaped}([^\\w]|$)`).test(context)) return true;
@@ -102,39 +137,45 @@ function postFromTweet(tweet) {
   };
 }
 
-function buildFeed(entries, players) {
+export function buildFeed(entries, players, team = TEAM_CONFIG.redsox, generatedAt = new Date()) {
   const seen = new Set();
   const posts = [];
   for (const entry of entries) {
     const tweet = entry.content?.tweet || {};
-    if (!tweet.id_str || !relevant(tweet, players)) continue;
+    if (!tweet.id_str || !relevant(tweet, players, team)) continue;
     const post = postFromTweet(tweet);
     if (!post || seen.has(post.id)) continue;
     seen.add(post.id);
     posts.push(post);
   }
-  if (!posts.length) throw new Error('The Red Sox relevance filter removed every X post');
+  if (!posts.length) throw new Error(`The ${team.label} relevance filter removed every X post`);
   posts.sort((a, b) => b.published.localeCompare(a.published));
-  const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+  const cutoff = generatedAt.valueOf() - 24 * 60 * 60 * 1000;
   const popular = posts
     .filter(post => new Date(post.published).valueOf() >= cutoff)
     .sort((a, b) => b.likes - a.likes || b.published.localeCompare(a.published));
   return {
-    generated_at: new Date().toISOString(), source: 'X', source_url: `https://x.com/i/lists/${LIST_ID}`,
+    generated_at: generatedAt.toISOString(), source: 'X', source_url: `https://x.com/i/lists/${team.listId}`,
     recent: posts.slice(0, 24), popular: popular.slice(0, 12),
   };
 }
 
-export default async () => {
+export default async request => {
+  const requestedTeam = new URL(request.url).searchParams.get('team')?.toLowerCase() || 'redsox';
+  const team = TEAM_CONFIG[requestedTeam];
+  if (!team) {
+    return Response.json({ error: 'Unknown team.' }, { status: 400 });
+  }
+
   try {
     const [listHtml, rosterJson] = await Promise.all([
-      fetchText(LIST_URL, '__NEXT_DATA__'), fetchText(ROSTER_URL, '"roster"'),
+      fetchText(listURL(team), '__NEXT_DATA__'), fetchText(rosterURL(team), '"roster"'),
     ]);
     const match = listHtml.match(/<script[^>]*id=["']__NEXT_DATA__["'][^>]*>([\s\S]*?)<\/script>/i);
     if (!match) throw new Error('X list response did not contain timeline data');
     const listPayload = JSON.parse(match[1]);
     const entries = listPayload.props?.pageProps?.timeline?.entries || [];
-    const feed = buildFeed(entries, rosterTerms(JSON.parse(rosterJson)));
+    const feed = buildFeed(entries, rosterTerms(JSON.parse(rosterJson)), team);
     return Response.json(feed, { headers: {
       'Cache-Control': 'public, max-age=60, stale-while-revalidate=60',
       'Netlify-CDN-Cache-Control': 'public, durable, max-age=300, stale-while-revalidate=60',
