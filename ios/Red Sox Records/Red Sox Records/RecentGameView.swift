@@ -6,6 +6,7 @@ private enum BoxScoreTeamSelection {
 }
 
 struct RecentGameView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store = RecentGameStore()
     @State private var selectedStatsTeam: BoxScoreTeamSelection = .boston
     @State private var selectedGameID: Int?
@@ -23,7 +24,8 @@ struct RecentGameView: View {
                         }
                     } else if store.isLoading {
                         ProgressView("Loading Game Center…")
-                            .tint(AppColor.red)
+                            .tint(.white)
+                            .foregroundStyle(.white)
                     } else {
                         errorView
                     }
@@ -127,22 +129,40 @@ struct RecentGameView: View {
             LazyVStack(spacing: 10) {
                 scoreCard(game)
 
-                VStack(spacing: 0) {
-                    recapCard(game)
-                    reportDivider
-                    battingCard(redSox: redSox, opponent: opponent)
-                    reportDivider
-                    pitchingCard(redSox: redSox, opponent: opponent)
-                    reportDivider
-                    scoringPlaysCard(game)
-                    reportDivider
-                    linksCard(game)
-                }
-                .background(AppColor.paper)
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
+                if contentWidth >= 720 {
+                    VStack(spacing: 0) {
+                        recapCard(game)
+                        reportDivider
+                        HStack(alignment: .top, spacing: 0) {
+                            battingCard(redSox: redSox, opponent: opponent)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                            pitchingCard(redSox: redSox, opponent: opponent)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                        }
+                        reportDivider
+                        scoringPlaysCard(game)
+                        reportDivider
+                        linksCard(game)
+                    }
+                    .cardStyle(padding: 0)
+                } else {
+                    VStack(spacing: 0) {
+                        recapCard(game)
+                        reportDivider
+                        battingCard(redSox: redSox, opponent: opponent)
+                        reportDivider
+                        pitchingCard(redSox: redSox, opponent: opponent)
+                        reportDivider
+                        scoringPlaysCard(game)
+                        reportDivider
+                        linksCard(game)
+                    }
+                    .background(AppColor.paper)
+                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
+                    }
                 }
             }
             .padding(.horizontal, 16)
@@ -154,7 +174,7 @@ struct RecentGameView: View {
             await store.refresh()
             synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
         }
-        .dynamicTypeSize(.xSmall)
+        .dynamicTypeSize(contentWidth >= 650 ? .large : .xSmall)
     }
 
     private var reportDivider: some View {
@@ -207,24 +227,24 @@ struct RecentGameView: View {
         VStack(spacing: 7) {
             HStack(spacing: 0) {
                 Text("")
-                    .frame(width: 50, alignment: .leading)
+                    .frame(width: contentWidth >= 650 ? 90 : 50, alignment: .leading)
                 ForEach(game.innings) { inning in
                     Text("\(inning.num)")
-                        .frame(maxWidth: .infinity)
+                        .frame(minWidth: 0, maxWidth: .infinity)
                 }
-                lineScoreLegend("R", width: 24)
-                lineScoreLegend("H", width: 24)
-                lineScoreLegend("E", width: 24)
-                lineScoreLegend("LOB", width: 24)
+                lineScoreLegend("R")
+                lineScoreLegend("H")
+                lineScoreLegend("E")
+                lineScoreLegend("LOB")
             }
-            .font(.system(size: 9, weight: .bold))
+            .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
             .foregroundStyle(.secondary)
 
             combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
             combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
         }
         .monospacedDigit()
-        .frame(maxWidth: .infinity)
+        .frame(minWidth: 0, maxWidth: .infinity)
     }
 
     private func combinedLineScoreRow(
@@ -234,44 +254,45 @@ struct RecentGameView: View {
     ) -> some View {
         HStack(spacing: 0) {
             Text(team.cityName)
-                .font(.system(size: 12, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: .black))
                 .foregroundStyle(AppColor.navy)
-                .frame(width: 50, alignment: .leading)
+                .frame(width: contentWidth >= 650 ? 90 : 50, alignment: .leading)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
 
             ForEach(innings) { inning in
                 let runs = (isAway ? inning.away : inning.home).runs
                 Text(runs.map(String.init) ?? " ")
-                    .frame(maxWidth: .infinity)
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
 
-            lineScoreTotal(team.runs, width: 24, emphasized: true)
-            lineScoreTotal(team.hits, width: 24)
-            lineScoreTotal(team.errors, width: 24)
-            lineScoreTotal(team.leftOnBase, width: 24)
+            lineScoreTotal(team.runs, emphasized: true)
+            lineScoreTotal(team.hits)
+            lineScoreTotal(team.errors)
+            lineScoreTotal(team.leftOnBase)
         }
-        .font(.system(size: 11, weight: .semibold))
+        .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .semibold))
     }
 
-    private func lineScoreLegend(_ title: String, width: CGFloat) -> some View {
+    private func lineScoreLegend(_ title: String) -> some View {
         Text(title)
-            .frame(width: width, alignment: .center)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
     }
 
     private func lineScoreTotal(
         _ value: Int,
-        width: CGFloat,
         emphasized: Bool = false
     ) -> some View {
         Text("\(value)")
             .font(
                 emphasized
-                    ? .system(size: 15, weight: .black, design: .monospaced)
-                    : .system(size: 11, weight: .semibold, design: .monospaced)
+                    ? .system(size: contentWidth >= 650 ? 17 : 15, weight: .black, design: .monospaced)
+                    : .system(size: contentWidth >= 650 ? 13 : 11, weight: .semibold, design: .monospaced)
             )
             .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
-            .frame(width: width, alignment: .center)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
     }
 
     private func recapCard(_ game: RecentGame) -> some View {
@@ -279,7 +300,7 @@ struct RecentGameView: View {
             primarySectionTitle(game.isLive ? "Game So Far" : "Game Recap")
 
             Text(game.summary)
-                .font(.system(size: 15))
+                .font(.system(size: contentWidth >= 650 ? 17 : 15))
                 .lineSpacing(4)
 
             if !game.facts.isEmpty {
@@ -293,7 +314,7 @@ struct RecentGameView: View {
                                 .frame(width: 5, height: 5)
                                 .padding(.top, 7)
                             Text(fact)
-                                .font(.system(size: 14))
+                                .font(.system(size: contentWidth >= 650 ? 16 : 14))
                                 .lineSpacing(2)
                         }
                     }
@@ -317,7 +338,7 @@ struct RecentGameView: View {
                 statHeader(labels: ["AB", "R", "H", "RBI", "AVG"], widths: widths)
 
                 VStack(spacing: 0) {
-                    ForEach(team.batting) { batter in
+                    ForEach(team.batting.filter { !["P", "SP", "RP"].contains($0.position.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()) }) { batter in
                         statRow(
                             name: batter.name,
                             detail: batter.position,
@@ -393,7 +414,7 @@ struct RecentGameView: View {
             selectedStatsTeam = selection
         } label: {
             Text(title)
-                .font(.system(size: 13, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
                 .lineLimit(1)
                 .minimumScaleFactor(0.72)
                 .frame(maxWidth: .infinity)
@@ -458,7 +479,7 @@ struct RecentGameView: View {
                     .frame(width: columnWidths.indices.contains(index) ? columnWidths[index] : 32)
             }
         }
-        .padding(.vertical, 3)
+        .padding(.vertical, contentWidth >= 650 ? 6 : 3)
     }
 
     private func scoringPlaysCard(_ game: RecentGame) -> some View {
@@ -517,14 +538,14 @@ struct RecentGameView: View {
 
     private func sectionTitle(_ title: String) -> some View {
         Text(title.uppercased())
-            .font(.system(size: 13, weight: .black))
+            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
             .tracking(1.1)
             .foregroundStyle(AppColor.navy)
     }
 
     private func primarySectionTitle(_ title: String) -> some View {
         Text(title.uppercased())
-            .font(.system(size: 13, weight: .black))
+            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
             .tracking(1.1)
             .foregroundStyle(AppColor.navy)
     }

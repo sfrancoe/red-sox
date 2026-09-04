@@ -1,11 +1,20 @@
 import Foundation
 
 enum PitcherFilter: String, CaseIterable, Identifiable, Sendable {
+    case both
     case starters
     case relievers
 
     var id: String { rawValue }
     var title: String { rawValue.capitalized }
+
+    var reportsTitle: String {
+        switch self {
+        case .both: "Pitcher Reports"
+        case .starters: "Starter Reports"
+        case .relievers: "Reliever Reports"
+        }
+    }
 }
 
 enum PitcherSort: String, CaseIterable, Identifiable, Sendable {

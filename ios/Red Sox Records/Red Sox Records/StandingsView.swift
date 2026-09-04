@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct StandingsView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store = StandingsStore()
 
     var body: some View {
@@ -12,7 +13,8 @@ struct StandingsView: View {
                     standingsContent(feed)
                 } else if store.isLoading {
                     ProgressView("Loading standings…")
-                        .tint(AppColor.red)
+                        .tint(.white)
+                        .foregroundStyle(.white)
                 } else {
                     errorView
                 }
@@ -35,13 +37,15 @@ struct StandingsView: View {
             ScrollView {
                 LazyVStack(spacing: 5) {
                     if store.mode == .divisions {
-                        ForEach(feed.divisions) { division in
-                            standingsCard(
-                                title: division.name,
-                                teams: division.teams,
-                                gamesBackTitle: "GB",
-                                showsCutoff: false
-                            )
+                        HubCardGrid(minimumWidth: 440, compactSpacing: 5) {
+                            ForEach(feed.divisions) { division in
+                                standingsCard(
+                                    title: division.name,
+                                    teams: division.teams,
+                                    gamesBackTitle: "GB",
+                                    showsCutoff: false
+                                )
+                            }
                         }
                     } else {
                         standingsCard(
@@ -52,14 +56,14 @@ struct StandingsView: View {
                         )
 
                         Text("Top three teams hold the wild-card positions.")
-                            .font(.system(size: 11, weight: .bold))
+                            .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
                             .foregroundStyle(Color.white.opacity(0.82))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 4)
                     }
 
                     Text("Updated \(feed.updatedText) · \(feed.source)")
-                        .font(.system(size: 10, weight: .semibold))
+                        .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
                         .foregroundStyle(Color.white.opacity(0.72))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 5)
@@ -68,7 +72,7 @@ struct StandingsView: View {
                 .padding(.bottom, 12)
                 .foregroundStyle(AppColor.ink)
             }
-            .dynamicTypeSize(.xSmall)
+            .dynamicTypeSize(contentWidth >= 650 ? .large : .xSmall)
             .refreshable {
                 await store.load()
             }
@@ -129,17 +133,18 @@ struct StandingsView: View {
     private func standingsHeader(title: String, gamesBackTitle: String) -> some View {
         HStack(spacing: 0) {
             Text(title.uppercased())
-                .font(.system(size: 16, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
                 .foregroundStyle(AppColor.navy)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("W").frame(width: 28)
-            Text("L").frame(width: 28)
-            Text("PCT").frame(width: 46)
-            Text(gamesBackTitle).frame(width: gamesBackTitle == "WCGB" ? 48 : 38)
-            Text("L10").frame(width: 42)
-            Text("STRK").frame(width: 38)
+                .frame(width: contentWidth >= 650 ? 160 : nil, alignment: .leading)
+                .frame(maxWidth: contentWidth >= 650 ? nil : .infinity, alignment: .leading)
+            Text("W").frame(minWidth: 28, maxWidth: contentWidth >= 650 ? .infinity : (28))
+            Text("L").frame(minWidth: 28, maxWidth: contentWidth >= 650 ? .infinity : (28))
+            Text("PCT").frame(minWidth: 46, maxWidth: contentWidth >= 650 ? .infinity : (46))
+            Text(gamesBackTitle).frame(minWidth: gamesBackTitle == "WCGB" ? 48 : 38, maxWidth: contentWidth >= 650 ? .infinity : (gamesBackTitle == "WCGB" ? 48 : 38))
+            Text("L10").frame(minWidth: 42, maxWidth: contentWidth >= 650 ? .infinity : (42))
+            Text("STRK").frame(minWidth: 38, maxWidth: contentWidth >= 650 ? .infinity : (38))
         }
-        .font(.system(size: 11, weight: .black))
+        .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
         .foregroundStyle(AppColor.hunterGreen)
         .padding(.horizontal, 5)
         .padding(.bottom, 2)
@@ -150,14 +155,15 @@ struct StandingsView: View {
         return HStack(spacing: 0) {
             HStack(spacing: 5) {
                 Text(team.rank)
-                    .font(.system(size: 12, weight: team.isRedSox ? .black : .bold, design: .monospaced))
+                    .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: 15)
                 Text(team.cityName)
-                    .font(.system(size: 14, weight: team.isRedSox ? .black : .semibold))
+                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isRedSox ? .black : .semibold))
                     .lineLimit(1)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(width: contentWidth >= 650 ? 160 : nil, alignment: .leading)
+                .frame(maxWidth: contentWidth >= 650 ? nil : .infinity, alignment: .leading)
 
             tableValue("\(team.wins)", width: 28, emphasized: team.isRedSox)
             tableValue("\(team.losses)", width: 28, emphasized: team.isRedSox)
@@ -169,24 +175,16 @@ struct StandingsView: View {
             )
             tableValue(team.lastTen, width: 42, emphasized: team.isRedSox)
             Text(team.streak)
-                .font(.system(size: 14, weight: team.isRedSox ? .black : .bold, design: .monospaced))
+                .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isRedSox ? .black : .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
-                .frame(width: 38)
+                .frame(minWidth: 38, maxWidth: contentWidth >= 650 ? .infinity : (38))
         }
-        .font(.system(size: 14, weight: .semibold, design: .monospaced))
+        .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .semibold, design: .monospaced))
         .foregroundStyle(team.isRedSox ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, 5)
-        .padding(.vertical, 7)
+        .padding(.vertical, contentWidth >= 650 ? 13 : 7)
         .background(team.isRedSox ? AppColor.paleBlue : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
-        .overlay(alignment: .leading) {
-            if team.isRedSox {
-                Capsule()
-                    .fill(AppColor.red)
-                    .frame(width: 3)
-                    .padding(.vertical, 5)
-            }
-        }
     }
 
     private func tableValue(
@@ -195,16 +193,16 @@ struct StandingsView: View {
         emphasized: Bool = false
     ) -> some View {
         Text(value)
-            .font(.system(size: 14, weight: emphasized ? .black : .semibold, design: .monospaced))
+            .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .semibold, design: .monospaced))
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
-            .frame(width: width)
+            .frame(minWidth: width, maxWidth: contentWidth >= 650 ? .infinity : (width))
     }
 
     private var cutoffLine: some View {
         HStack(spacing: 8) {
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
             Text("PLAYOFF CUT")
-                .font(.system(size: 11, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
                 .tracking(0.5)
                 .foregroundStyle(AppColor.red)
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)

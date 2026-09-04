@@ -12,7 +12,7 @@ final class XPostsStore {
     )!
 
     var feed: XFeed?
-    var selectedMode: XFeedMode = .recent
+    var selectedMode: XFeedMode = .liked
     var isLoading = false
     var errorMessage: String?
 

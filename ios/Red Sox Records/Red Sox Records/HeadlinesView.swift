@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct HeadlinesView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store = HeadlinesStore()
+    @State private var secondarySource: NewsSource = .herald
 
     var body: some View {
         NavigationStack {
@@ -9,11 +11,36 @@ struct HeadlinesView: View {
                 AppColor.paleRed.ignoresSafeArea()
 
                 Group {
-                    if let feed = store.selectedFeed {
-                        feedContent(feed)
+                    if !store.feeds.isEmpty {
+                        GeometryReader { space in
+                            if contentWidth >= 720 && space.size.height > space.size.width {
+                                VStack(spacing: 12) {
+                                    HStack(spacing: 12) {
+                                        newspaperQuadrant(.globe)
+                                        newspaperQuadrant(.herald)
+                                    }
+                                    .frame(height: max(1, (space.size.height - 36) / 2))
+                                    HStack(spacing: 12) {
+                                        newspaperQuadrant(.athletic)
+                                        newspaperQuadrant(.massLive)
+                                    }
+                                    .frame(height: max(1, (space.size.height - 36) / 2))
+                                }
+                                .padding(12)
+                            } else {
+                                HStack(spacing: 0) {
+                                    newspaperColumn(selection: $store.selectedSource)
+                                    if contentWidth >= 720 {
+                                        Divider().overlay(Color.white.opacity(0.3))
+                                        newspaperColumn(selection: $secondarySource)
+                                    }
+                                }
+                            }
+                        }
                     } else if store.isLoading {
                         ProgressView("Loading headlines…")
-                            .tint(AppColor.red)
+                            .tint(.white)
+                            .foregroundStyle(.white)
                     } else {
                         errorView
                     }
@@ -26,16 +53,90 @@ struct HeadlinesView: View {
         }
     }
 
-    private func feedContent(_ feed: NewsFeed) -> some View {
+    private func newspaperQuadrant(_ source: NewsSource) -> some View {
         VStack(spacing: 0) {
-            sourcePicker
+            Text(store.feeds[source]?.source ?? source.shortName)
+                .font(.system(size: 20, weight: .black))
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 12)
+                .background(AppColor.hunterGreen)
+                .accessibilityAddTraits(.isHeader)
+
+            Divider().overlay(AppColor.border)
+
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    if let feed = store.feeds[source] {
+                        ForEach(Array(feed.articles.enumerated()), id: \.element.id) { index, article in
+                            newspaperStory(article)
+                            if index < feed.articles.count - 1 {
+                                Divider().overlay(AppColor.border)
+                            }
+                        }
+                    } else {
+                        errorView
+                    }
+                }
+                .padding(.horizontal, 14)
+            }
+            .refreshable { await store.load() }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppColor.paper)
+        .clipped()
+    }
+
+    private func newspaperStory(_ article: NewsArticle) -> some View {
+        Group {
+            if let url = URL(string: article.url) {
+                Link(destination: url) {
+                    newspaperStoryText(article)
+                }
+                .buttonStyle(.plain)
+            } else {
+                newspaperStoryText(article)
+            }
+        }
+    }
+
+    private func newspaperStoryText(_ article: NewsArticle) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            articleHeadline(article, fontSize: 17)
+
+            if !article.description.isEmpty {
+                Text(article.description)
+                    .font(.system(size: 13))
+                    .foregroundStyle(AppColor.ink.opacity(0.8))
+                    .lineSpacing(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Text(article.publishedText)
+                .font(.system(size: 10))
+                .foregroundStyle(AppColor.hunterGreen)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 12)
+        .contentShape(Rectangle())
+    }
+
+    private func newspaperColumn(selection: Binding<NewsSource>) -> some View {
+        VStack(spacing: 0) {
+            sourcePicker(selection: selection)
 
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    feedHeader(feed)
+                    if let feed = store.feeds[selection.wrappedValue] {
+                        feedHeader(feed)
 
-                    ForEach(feed.articles) { article in
-                        articleCard(article)
+                        ForEach(feed.articles) { article in
+                            articleCard(article)
+                        }
+                    } else {
+                        errorView
                     }
                 }
                 .padding(.horizontal, 16)
@@ -43,24 +144,25 @@ struct HeadlinesView: View {
                 .padding(.bottom, 16)
                 .foregroundStyle(AppColor.ink)
             }
-            .id(store.selectedSource)
+            .id(selection.wrappedValue)
             .refreshable {
                 await store.load()
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private var sourcePicker: some View {
+    private func sourcePicker(selection: Binding<NewsSource>) -> some View {
         HStack(spacing: 0) {
             ForEach(NewsSource.allCases) { source in
                 Button {
-                    store.selectedSource = source
+                    selection.wrappedValue = source
                 } label: {
                     Text(source.shortName)
                         .font(
                             .system(
-                                size: store.selectedSource == source ? 16 : 13,
-                                weight: store.selectedSource == source ? .black : .semibold
+                                size: selection.wrappedValue == source ? 16 : 13,
+                                weight: selection.wrappedValue == source ? .black : .semibold
                             )
                         )
                         .lineLimit(1)
@@ -70,6 +172,7 @@ struct HeadlinesView: View {
                         .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
+                .accessibilityAddTraits(selection.wrappedValue == source ? .isSelected : [])
             }
         }
         .padding(.horizontal, 5)
@@ -136,11 +239,8 @@ struct HeadlinesView: View {
                     .foregroundStyle(AppColor.red)
             }
 
-            Text(article.title)
-                .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(Color.black)
-                .lineLimit(3)
-                .fixedSize(horizontal: false, vertical: true)
+            articleHeadline(article, fontSize: contentWidth >= 650 ? 21 : 16,
+                            lineLimit: contentWidth >= 650 ? 5 : 3)
 
             if !article.description.isEmpty {
                 Text(article.description)
@@ -149,6 +249,21 @@ struct HeadlinesView: View {
                     .lineSpacing(2)
                     .lineLimit(4)
             }
+        }
+    }
+
+    private func articleHeadline(_ article: NewsArticle, fontSize: CGFloat, lineLimit: Int? = nil) -> some View {
+        TimelineView(.periodic(from: .now, by: 60)) { timeline in
+            let isNew = article.isNew(asOf: timeline.date)
+            let badge = Text(isNew ? "  ⚡ NEW" : "")
+                .font(.system(size: 11, weight: .black))
+                .foregroundColor(AppColor.red)
+            Text("\(Text(article.title))\(badge)")
+                .font(.system(size: fontSize, weight: .bold))
+                .foregroundStyle(AppColor.ink)
+                .lineLimit(lineLimit)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityLabel(isNew ? "New in the last six hours. \(article.title)" : article.title)
         }
     }
 

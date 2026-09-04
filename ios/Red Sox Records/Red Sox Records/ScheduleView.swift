@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ScheduleView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store = ScheduleStore()
     @State private var selectedGameID: Int?
 
@@ -17,7 +18,8 @@ struct ScheduleView: View {
                         scheduleContent(schedule)
                     } else if store.isLoading {
                         ProgressView("Loading the schedule…")
-                            .tint(AppColor.red)
+                            .tint(.white)
+                            .foregroundStyle(.white)
                     } else {
                         errorView
                     }
@@ -33,16 +35,30 @@ struct ScheduleView: View {
     private func scheduleContent(_ schedule: Schedule) -> some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                ForEach(calendarMonths(for: schedule)) { month in
-                    monthCard(month, schedule: schedule)
-                }
-
-                if let game = selectedGame(in: schedule) {
-                    gameDetailCard(game)
+                if contentWidth >= 850 {
+                    HStack(alignment: .top, spacing: 20) {
+                        VStack(spacing: 16) {
+                            ForEach(calendarMonths(for: schedule)) { month in
+                                monthCard(month, schedule: schedule)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        if let game = selectedGame(in: schedule) {
+                            gameDetailCard(game)
+                                .frame(width: 340)
+                        }
+                    }
+                } else {
+                    ForEach(calendarMonths(for: schedule)) { month in
+                        monthCard(month, schedule: schedule)
+                    }
+                    if let game = selectedGame(in: schedule) {
+                        gameDetailCard(game)
+                    }
                 }
 
                 Text("\(schedule.games.count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
-                    .font(.system(size: 10, weight: .semibold))
+                    .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
                     .foregroundStyle(Color.white.opacity(0.82))
                     .padding(.vertical, 2)
             }
@@ -58,14 +74,14 @@ struct ScheduleView: View {
     private func monthCard(_ month: CalendarMonth, schedule: Schedule) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(month.title.uppercased())
-                .font(.system(size: 17, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 19 : 17, weight: .black))
                 .tracking(0.8)
                 .foregroundStyle(AppColor.navy)
 
             LazyVGrid(columns: calendarColumns, spacing: 3) {
                 ForEach(weekdayLabels, id: \.self) { label in
                     Text(label)
-                        .font(.system(size: 8, weight: .black))
+                        .font(.system(size: contentWidth >= 650 ? 12 : 8, weight: .black))
                         .tracking(0.25)
                         .foregroundStyle(AppColor.hunterGreen)
                         .frame(maxWidth: .infinity)
@@ -76,7 +92,7 @@ struct ScheduleView: View {
                         dayCell(date, games: games(on: date, in: schedule))
                     } else {
                         Color.clear
-                            .frame(height: 67)
+                            .frame(height: contentWidth >= 650 ? 92 : 67)
                     }
                 }
             }
@@ -91,35 +107,35 @@ struct ScheduleView: View {
 
         return VStack(spacing: 3) {
             Text(date.formatted(.dateTime.day()))
-                .font(.system(size: 11, weight: .bold))
+                .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
                 .foregroundStyle(selected ? Color.white : AppColor.navy)
 
             if let game {
                 Text("\(game.locationWord) \(opponentCode(game.opponent))")
-                    .font(.system(size: 10, weight: .black))
+                    .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .black))
                     .foregroundStyle(selected ? Color.white : accent)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
 
                 Text(game.formattedTime)
-                    .font(.system(size: 7, weight: .semibold))
+                    .font(.system(size: contentWidth >= 650 ? 12 : 7, weight: .semibold))
                     .foregroundStyle(selected ? Color.white.opacity(0.88) : AppColor.ink.opacity(0.72))
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
 
                 if games.count > 1 || game.doubleheader {
                     Text("DH")
-                        .font(.system(size: 7, weight: .black))
+                        .font(.system(size: contentWidth >= 650 ? 12 : 7, weight: .black))
                         .foregroundStyle(selected ? Color.white : AppColor.red)
                 }
             } else {
                 Text("—")
-                    .font(.system(size: 8, weight: .medium))
+                    .font(.system(size: contentWidth >= 650 ? 12 : 8, weight: .medium))
                     .foregroundStyle(AppColor.border)
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 67)
+        .frame(height: contentWidth >= 650 ? 92 : 67)
         .background {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .fill(selected ? accent : game == nil ? AppColor.paleBlue.opacity(0.36) : accent.opacity(0.09))
@@ -148,19 +164,19 @@ struct ScheduleView: View {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(game.fullFormattedDay.uppercased())
-                        .font(.system(size: 14, weight: .black))
+                        .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .black))
                         .tracking(0.45)
                         .foregroundStyle(AppColor.red)
 
                     Text("\(game.locationWord) \(game.opponent)")
-                        .font(.system(size: 24, weight: .black))
+                        .font(.system(size: contentWidth >= 650 ? 26 : 24, weight: .black))
                         .foregroundStyle(AppColor.navy)
                 }
 
                 Spacer()
 
                 Text(game.formattedTime)
-                    .font(.system(size: 20, weight: .black))
+                    .font(.system(size: contentWidth >= 650 ? 22 : 20, weight: .black))
                     .foregroundStyle(AppColor.hunterGreen)
             }
 
@@ -175,7 +191,7 @@ struct ScheduleView: View {
             if game.showProbables {
                 VStack(alignment: .leading, spacing: 7) {
                     Text("PROJECTED STARTERS")
-                        .font(.system(size: 13, weight: .black))
+                        .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
                         .tracking(0.45)
                         .foregroundStyle(AppColor.red)
 
@@ -187,7 +203,7 @@ struct ScheduleView: View {
                         )
                         Spacer()
                         Text("VS.")
-                            .font(.system(size: 12, weight: .black))
+                            .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: .black))
                             .foregroundStyle(AppColor.border)
                             .padding(.top, 13)
                         Spacer()
@@ -206,7 +222,7 @@ struct ScheduleView: View {
 
             if game.doubleheader {
                 Text("DOUBLEHEADER · GAME \(game.gameNumber)")
-                    .font(.system(size: 9, weight: .black))
+                    .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .black))
                     .foregroundStyle(AppColor.red)
             }
         }
@@ -220,11 +236,11 @@ struct ScheduleView: View {
     ) -> some View {
         VStack(alignment: alignment, spacing: 2) {
             Text(label)
-                .font(.system(size: 11, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
                 .tracking(0.35)
                 .foregroundStyle(AppColor.hunterGreen)
             Text(value.isEmpty ? "To be announced" : value)
-                .font(.system(size: 17, weight: .bold))
+                .font(.system(size: contentWidth >= 650 ? 19 : 17, weight: .bold))
                 .foregroundStyle(AppColor.ink)
                 .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
         }
@@ -238,16 +254,16 @@ struct ScheduleView: View {
     ) -> some View {
         VStack(alignment: alignment, spacing: 3) {
             Text(label)
-                .font(.system(size: 10, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .black))
                 .tracking(0.35)
                 .foregroundStyle(AppColor.hunterGreen)
             Text(name)
-                .font(.system(size: 18, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 20 : 18, weight: .black))
                 .foregroundStyle(AppColor.navy)
                 .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
             if !name.isEmpty, name != "To be announced" {
                 Text(recordLabel(record))
-                    .font(.system(size: 14, weight: .bold))
+                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .bold))
                     .foregroundStyle(AppColor.hunterGreen)
             }
         }

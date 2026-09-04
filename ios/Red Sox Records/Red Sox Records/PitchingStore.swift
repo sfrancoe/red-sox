@@ -9,7 +9,7 @@ final class PitchingStore {
     )!
 
     var feed: PitchingFeed?
-    var filter: PitcherFilter = .starters
+    var filter: PitcherFilter = .both
     var sort: PitcherSort = .impact
     var isLoading = false
     var errorMessage: String?
@@ -17,7 +17,11 @@ final class PitchingStore {
     var visiblePitchers: [PitcherReport] {
         guard let feed else { return [] }
         let filtered = feed.pitchers.filter { pitcher in
-            filter == .starters ? pitcher.isStarter : !pitcher.isStarter
+            switch filter {
+            case .both: true
+            case .starters: pitcher.isStarter
+            case .relievers: !pitcher.isStarter
+            }
         }
         return filtered.sorted { first, second in
             switch sort {

@@ -43,6 +43,12 @@ struct NewsArticle: Codable, Identifiable, Sendable {
 
     var id: String { url }
 
+    func isNew(asOf now: Date) -> Bool {
+        guard let date = NewsDateParser.date(from: published) else { return false }
+        let age = now.timeIntervalSince(date)
+        return age >= 0 && age < 6 * 60 * 60
+    }
+
     var publishedText: String {
         guard let date = NewsDateParser.date(from: published) else {
             return published

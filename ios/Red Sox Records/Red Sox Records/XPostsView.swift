@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct XPostsView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store = XPostsStore()
 
     var body: some View {
@@ -13,7 +14,8 @@ struct XPostsView: View {
                         feedContent(feed)
                     } else if store.isLoading {
                         ProgressView("Loading X posts…")
-                            .tint(AppColor.red)
+                            .tint(.white)
+                            .foregroundStyle(.white)
                     } else {
                         errorView
                     }
@@ -26,18 +28,27 @@ struct XPostsView: View {
         }
     }
 
+    @ViewBuilder
     private func feedContent(_ feed: XFeed) -> some View {
-        VStack(spacing: 0) {
-            modePicker
-
-            TabView(selection: $store.selectedMode) {
-                postsPage(feed.recent, feed: feed, mode: .recent)
-                    .tag(XFeedMode.recent)
-
-                postsPage(feed.popular, feed: feed, mode: .liked)
-                    .tag(XFeedMode.liked)
+        if contentWidth >= 720 {
+            HStack(spacing: 0) {
+                postsPage(feed.popular, feed: feed, mode: .liked, pinnedHeader: true)
+                Divider().overlay(Color.white.opacity(0.3))
+                postsPage(feed.recent, feed: feed, mode: .recent, pinnedHeader: true)
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
+        } else {
+            VStack(spacing: 0) {
+                modePicker
+
+                TabView(selection: $store.selectedMode) {
+                    postsPage(feed.popular, feed: feed, mode: .liked)
+                        .tag(XFeedMode.liked)
+
+                    postsPage(feed.recent, feed: feed, mode: .recent)
+                        .tag(XFeedMode.recent)
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+            }
         }
     }
 
@@ -78,37 +89,56 @@ struct XPostsView: View {
     private func postsPage(
         _ posts: [XPost],
         feed: XFeed,
-        mode: XFeedMode
+        mode: XFeedMode,
+        pinnedHeader: Bool = false
     ) -> some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                feedHeader(feed, mode: mode)
-
-                ForEach(posts) { post in
-                    postCard(post)
+        VStack(spacing: 0) {
+            if pinnedHeader {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(mode.title)
+                        .font(.headline.weight(.black))
+                    Text("Checked \(feed.checkedText)")
+                        .font(.caption)
+                        .foregroundStyle(Color.white.opacity(0.8))
                 }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 8)
-            .padding(.bottom, 16)
-            .foregroundStyle(AppColor.ink)
+
+            ScrollView {
+                LazyVStack(spacing: contentWidth >= 650 ? 12 : 0) {
+                    if !pinnedHeader {
+                        feedHeader(feed, mode: mode)
+                    }
+                    ForEach(posts) { post in
+                        postCard(post)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
+                .padding(.bottom, 16)
+                .foregroundStyle(AppColor.ink)
+            }
+            .refreshable {
+                await store.load()
+            }
         }
-        .dynamicTypeSize(.xSmall)
-        .refreshable {
-            await store.load()
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .dynamicTypeSize(contentWidth >= 650 ? .large : .xSmall)
     }
 
     private func feedHeader(_ feed: XFeed, mode: XFeedMode) -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text(mode.title)
-                .font(.system(size: 16, weight: .black))
+                .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
                 .foregroundStyle(.white)
 
             Spacer()
 
             Text("Checked \(feed.checkedText)")
-                .font(.system(size: 9))
+                .font(.system(size: contentWidth >= 650 ? 12 : 9))
                 .foregroundStyle(Color.white.opacity(0.8))
                 .multilineTextAlignment(.trailing)
         }
@@ -122,25 +152,33 @@ struct XPostsView: View {
             VStack(alignment: .leading, spacing: 5) {
                 HStack(alignment: .firstTextBaseline, spacing: 4) {
                     Text(post.author)
-                        .font(.system(size: 13, weight: .bold))
+                        .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .bold))
                         .foregroundStyle(AppColor.navy)
                         .lineLimit(1)
 
                     Text("@\(post.handle)")
-                        .font(.system(size: 10))
+                        .font(.system(size: contentWidth >= 650 ? 12 : 10))
                         .foregroundStyle(AppColor.ink.opacity(0.58))
                         .lineLimit(1)
 
                     Spacer(minLength: 2)
 
+                    if contentWidth < 650 {
+                        Text(post.publishedText)
+                            .font(.system(size: 9))
+                            .foregroundStyle(AppColor.ink.opacity(0.58))
+                            .lineLimit(1)
+                    }
+                }
+
+                if contentWidth >= 650 {
                     Text(post.publishedText)
-                        .font(.system(size: 9))
+                        .font(.system(size: 12))
                         .foregroundStyle(AppColor.ink.opacity(0.58))
-                        .lineLimit(1)
                 }
 
                 Text(post.text)
-                    .font(.system(size: 13))
+                    .font(.system(size: contentWidth >= 650 ? 15 : 13))
                     .lineSpacing(1)
                     .fixedSize(horizontal: false, vertical: true)
 
@@ -149,26 +187,25 @@ struct XPostsView: View {
                 }
 
                 if let mediaURL = URL(string: post.media), !post.media.isEmpty {
-                    AsyncImage(url: mediaURL) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    } placeholder: {
-                        ZStack {
-                            AppColor.paleBlue
-                            ProgressView()
-                                .tint(AppColor.red)
+                    GeometryReader { media in
+                        AsyncImage(url: mediaURL) { image in
+                            image.resizable().scaledToFill()
+                        } placeholder: {
+                            ZStack {
+                                AppColor.paleBlue
+                                ProgressView().tint(AppColor.red)
+                            }
                         }
+                        .frame(width: media.size.width, height: media.size.height)
+                        .clipped()
                     }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 125)
+                    .frame(height: contentWidth >= 650 ? 210 : 125)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .clipped()
                 }
 
                 HStack {
                     Label("\(post.likes.formatted())", systemImage: "heart.fill")
-                        .font(.system(size: 10, weight: .bold))
+                        .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .bold))
                         .foregroundStyle(AppColor.red)
 
                     Spacer()
@@ -176,7 +213,7 @@ struct XPostsView: View {
                     if let url = URL(string: post.url) {
                         Link(destination: url) {
                             Label("Open on X", systemImage: "arrow.up.right")
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .bold))
                                 .foregroundStyle(AppColor.navy)
                         }
                     }
@@ -185,10 +222,13 @@ struct XPostsView: View {
         }
         .padding(10)
         .background(AppColor.paper)
+        .clipShape(RoundedRectangle(cornerRadius: contentWidth >= 650 ? 16 : 0))
         .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(AppColor.border.opacity(0.8))
-                .frame(height: 1)
+            if contentWidth < 650 {
+                Rectangle()
+                    .fill(AppColor.border.opacity(0.8))
+                    .frame(height: 1)
+            }
         }
     }
 
@@ -212,12 +252,12 @@ struct XPostsView: View {
         VStack(alignment: .leading, spacing: 4) {
             if !post.quotedAuthor.isEmpty {
                 Text("\(post.quotedAuthor)  @\(post.quotedHandle)")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .bold))
                     .foregroundStyle(AppColor.navy)
             }
 
             Text(post.quotedText)
-                .font(.system(size: 11))
+                .font(.system(size: contentWidth >= 650 ? 13 : 11))
                 .lineSpacing(1)
         }
         .padding(8)

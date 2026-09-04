@@ -1,8 +1,8 @@
 import Foundation
 
 enum XFeedMode: String, CaseIterable, Identifiable, Sendable {
-    case recent
     case liked
+    case recent
 
     var id: String { rawValue }
 

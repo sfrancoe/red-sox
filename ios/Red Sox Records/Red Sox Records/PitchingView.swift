@@ -1,20 +1,24 @@
 import SwiftUI
 
 struct PitchingView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store = PitchingStore()
 
     var body: some View {
-        ZStack {
-            AppColor.paleRed.ignoresSafeArea()
+        GeometryReader { geometry in
+            ZStack {
+                AppColor.paleRed.ignoresSafeArea()
 
-            Group {
-                if let feed = store.feed {
-                    pitchingContent(feed)
-                } else if store.isLoading {
-                    ProgressView("Loading pitching…")
-                        .tint(AppColor.red)
-                } else {
-                    errorView
+                Group {
+                    if let feed = store.feed {
+                        pitchingContent(feed, chartHeight: contentWidth >= 650 ? max(380, geometry.size.height * 0.55) : 270)
+                    } else if store.isLoading {
+                        ProgressView("Loading pitching…")
+                            .tint(.white)
+                            .foregroundStyle(.white)
+                    } else {
+                        errorView
+                    }
                 }
             }
         }
@@ -25,15 +29,15 @@ struct PitchingView: View {
         }
     }
 
-    private func pitchingContent(_ feed: PitchingFeed) -> some View {
+    private func pitchingContent(_ feed: PitchingFeed, chartHeight: CGFloat) -> some View {
         ScrollView {
             LazyVStack(spacing: 14) {
                 rolePicker
 
-                impactCard
+                impactCard(chartHeight: chartHeight)
 
                 HStack(alignment: .center) {
-                    Text("\(store.filter == .starters ? "Starter" : "Reliever") Reports")
+                    Text(store.filter.reportsTitle)
                         .font(.title3.weight(.black))
                         .foregroundStyle(.white)
 
@@ -49,8 +53,10 @@ struct PitchingView: View {
                     .tint(.white)
                 }
 
-                ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
-                    pitcherCard(pitcher, rank: index + 1)
+                HubCardGrid {
+                    ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
+                        pitcherCard(pitcher, rank: index + 1)
+                    }
                 }
 
                 sourcesNote(feed)
@@ -83,6 +89,7 @@ struct PitchingView: View {
                         .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
+                .accessibilityAddTraits(store.filter == filter ? .isSelected : [])
             }
         }
         .padding(.horizontal, 5)
@@ -95,7 +102,7 @@ struct PitchingView: View {
         }
     }
 
-    private var impactCard: some View {
+    private func impactCard(chartHeight: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 14) {
                 Label("Above forecast", systemImage: "circle.fill")
@@ -107,7 +114,7 @@ struct PitchingView: View {
             .frame(maxWidth: .infinity, alignment: .center)
 
             PitchingImpactChart(pitchers: store.visiblePitchers)
-                .frame(height: 270)
+                .frame(height: chartHeight)
         }
         .cardStyle()
     }
@@ -219,6 +226,7 @@ struct PitchingView: View {
 }
 
 private struct PitchingImpactChart: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     let pitchers: [PitcherReport]
 
     var body: some View {
@@ -263,9 +271,15 @@ private struct PitchingImpactChart: View {
             let labels = Set(
                 pitchers.sorted {
                     ($0.actual.war + abs($0.warGap)) > ($1.actual.war + abs($1.warGap))
-                }.prefix(8).map(\.id)
+                }.prefix(contentWidth >= 650 ? 10 : 8).map(\.id)
             )
 
+            let dotFrames = pitchers.map { pitcher in
+                let radius = min(10, 3.5 + sqrt(pitcher.actual.ipValue) * 0.42)
+                return CGRect(x: x(pitcher.forecastToDate.war) - radius - 2,
+                              y: y(pitcher.actual.war) - radius - 2,
+                              width: radius * 2 + 4, height: radius * 2 + 4)
+            }
             var occupiedLabelFrames: [CGRect] = []
             let maximumGap = max(pitchers.map { abs($0.warGap) }.max() ?? 0, 0.25)
             for pitcher in pitchers.sorted(by: { $0.actual.ipValue > $1.actual.ipValue }) {
@@ -293,26 +307,27 @@ private struct PitchingImpactChart: View {
                 if labels.contains(pitcher.id) {
                     let label = pitcher.name.split(separator: " ").last.map(String.init) ?? pitcher.name
                     let estimatedWidth = max(30, CGFloat(label.count) * 6.2)
-                    let drawsLeft = point.x + radius + 3 + estimatedWidth > plot.maxX
-                    let labelX = drawsLeft ? point.x - radius - 3 : point.x + radius + 3
-                    var labelY = point.y
-                    var labelFrame = CGRect.zero
-
-                    for attempt in 0..<8 {
-                        let offsetStep = CGFloat((attempt + 1) / 2) * 12
-                        let offset = attempt == 0 ? 0 : (attempt.isMultiple(of: 2) ? -offsetStep : offsetStep)
-                        labelY = min(max(point.y + offset, plot.minY + 6), plot.maxY - 6)
-                        labelFrame = CGRect(
-                            x: drawsLeft ? labelX - estimatedWidth : labelX,
-                            y: labelY - 6,
-                            width: estimatedWidth,
-                            height: 12
-                        )
-                        if !occupiedLabelFrames.contains(where: { $0.intersects(labelFrame.insetBy(dx: -2, dy: -1)) }) {
+                    var placement: (frame: CGRect, drawsLeft: Bool)?
+                    for drawsLeft in [false, true] {
+                        for offset: CGFloat in [0, -10, 10] {
+                            let frame = CGRect(
+                                x: drawsLeft ? point.x - radius - 5 - estimatedWidth : point.x + radius + 5,
+                                y: point.y + offset - 6,
+                                width: estimatedWidth, height: 12
+                            )
+                            guard plot.contains(frame),
+                                  !dotFrames.contains(where: { $0.intersects(frame) }),
+                                  !occupiedLabelFrames.contains(where: { $0.intersects(frame.insetBy(dx: -3, dy: -2)) }) else { continue }
+                            placement = (frame, drawsLeft)
                             break
                         }
+                        if placement != nil { break }
                     }
-                    occupiedLabelFrames.append(labelFrame)
+                    guard let placement else { continue }
+                    occupiedLabelFrames.append(placement.frame)
+                    let drawsLeft = placement.drawsLeft
+                    let labelX = drawsLeft ? placement.frame.maxX : placement.frame.minX
+                    let labelY = placement.frame.midY
                     context.draw(
                         Text(label)
                             .font(.system(size: 10, weight: .bold))

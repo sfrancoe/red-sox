@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct Game108GraphView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store = Game108GraphStore()
     @State private var activeSeasonIndex = 0
     @State private var gameProgress = 0.0
@@ -19,7 +20,8 @@ struct Game108GraphView: View {
                     graphContent
                 } else if store.isLoading {
                     ProgressView("Loading Game 108…")
-                        .tint(AppColor.red)
+                        .tint(.white)
+                        .foregroundStyle(.white)
                 } else {
                     errorView
                 }
@@ -37,53 +39,55 @@ struct Game108GraphView: View {
 
     private var graphContent: some View {
         GeometryReader { proxy in
-            let chartHeight = max(260, min(430, proxy.size.height - 150))
+            let chartHeight = max(260, min(contentWidth >= 650 ? 900 : 430, proxy.size.height - 220))
 
-            VStack(spacing: 10) {
-                ZStack {
-                    Game108Canvas(
-                        series: store.series,
-                        activeSeasonIndex: activeSeasonIndex,
-                        gameProgress: gameProgress
-                    )
+            ScrollView {
+                VStack(spacing: 10) {
+                    ZStack {
+                        Game108Canvas(
+                            series: store.series,
+                            activeSeasonIndex: activeSeasonIndex,
+                            gameProgress: gameProgress
+                        )
 
-                    if !isPlaying,
-                       activeSeasonIndex == 0,
-                       gameProgress == 0 {
-                        Button {
-                            startAnimation()
-                        } label: {
-                            VStack(spacing: 8) {
-                                Image(systemName: "play.fill")
-                                    .font(.title2)
-                                Text("PLAY THE STORY")
-                                    .font(.caption.weight(.black))
-                                    .tracking(0.8)
+                        if !isPlaying,
+                           activeSeasonIndex == 0,
+                           gameProgress == 0 {
+                            Button {
+                                startAnimation()
+                            } label: {
+                                VStack(spacing: 8) {
+                                    Image(systemName: "play.fill")
+                                        .font(.title2)
+                                    Text("PLAY THE STORY")
+                                        .font(.caption.weight(.black))
+                                        .tracking(0.8)
+                                }
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 22)
+                                .padding(.vertical, 16)
+                                .background(AppColor.red)
+                                .clipShape(Capsule())
+                                .shadow(color: AppColor.navy.opacity(0.22), radius: 12, y: 5)
                             }
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 22)
-                            .padding(.vertical, 16)
-                            .background(AppColor.red)
-                            .clipShape(Capsule())
-                            .shadow(color: AppColor.navy.opacity(0.22), radius: 12, y: 5)
                         }
                     }
-                }
-                .frame(height: chartHeight)
-                .padding(10)
-                .background(AppColor.paper)
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .stroke(AppColor.border, lineWidth: 1)
-                }
+                    .frame(height: chartHeight)
+                    .padding(10)
+                    .background(AppColor.paper)
+                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .stroke(AppColor.border, lineWidth: 1)
+                    }
 
-                controls
-                storyHeader
+                    controls
+                    storyHeader
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .foregroundStyle(AppColor.ink)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .foregroundStyle(AppColor.ink)
         }
     }
 

@@ -39,22 +39,33 @@ private enum MainTab: Int, CaseIterable {
 
 struct AppTabView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @AppStorage("hubSidebarCollapsed") private var sidebarCollapsed = false
     @State private var selectedTab: MainTab = .recent
     @State private var hasAppeared = false
     @State private var backgroundedAt: Date?
 
     private let newSessionInterval: TimeInterval = 15 * 60
 
-    private let navigationColumns = Array(
-        repeating: GridItem(.flexible(), spacing: 2),
-        count: 4
-    )
-
     var body: some View {
-        VStack(spacing: 0) {
-            topNavigation
-
-            selectedContent
+        GeometryReader { window in
+            let usesSidebar = window.size.width >= 1000
+            let showsSidebar = usesSidebar && !sidebarCollapsed
+            HStack(spacing: 0) {
+                if showsSidebar {
+                    sidebar
+                        .frame(width: 210)
+                }
+                VStack(spacing: 0) {
+                    if usesSidebar {
+                        sidebarControls
+                    } else {
+                        topNavigation(columns: window.size.width >= 650 ? 8 : 4)
+                    }
+                    selectedContent
+                        .environment(\.hubContentWidth, window.size.width - (showsSidebar ? 210 : 0))
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
         .background(AppColor.paper)
         .onAppear {
@@ -108,8 +119,63 @@ struct AppTabView: View {
         }
     }
 
-    private var topNavigation: some View {
-        LazyVGrid(columns: navigationColumns, spacing: 2) {
+    private var sidebarControls: some View {
+        HStack(spacing: 12) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    sidebarCollapsed.toggle()
+                }
+            } label: {
+                Image(systemName: "sidebar.left")
+                    .font(.system(size: 20, weight: .semibold))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(sidebarCollapsed ? "Show sidebar" : "Hide sidebar")
+            .accessibilityHint("Toggle the Hub Ball navigation menu")
+
+            Text(selectedTab.title)
+                .font(.headline)
+            Spacer()
+        }
+        .foregroundStyle(AppColor.hunterGreen)
+        .padding(.horizontal, 8)
+        .background(AppColor.paper)
+        .overlay(alignment: .bottom) {
+            Divider().overlay(AppColor.border)
+        }
+    }
+
+    private var sidebar: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Label("HUB BALL", systemImage: "baseball.fill")
+                .font(.title2.weight(.black))
+                .foregroundStyle(AppColor.hunterGreen)
+                .padding(.horizontal, 20)
+                .padding(.top, 24)
+            List(MainTab.allCases, id: \.self) { tab in
+                Button {
+                    selectedTab = tab
+                } label: {
+                    Label(tab.title, systemImage: tab.icon)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, minHeight: 34, alignment: .leading)
+                        .foregroundStyle(selectedTab == tab ? Color.white : AppColor.hunterGreen)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .listRowBackground(selectedTab == tab ? AppColor.hunterGreen : Color.clear)
+                .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
+            }
+            .listStyle(.sidebar)
+            .scrollContentBackground(.hidden)
+        }
+        .background(AppColor.cream)
+    }
+
+    private func topNavigation(columns: Int) -> some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 2), count: columns), spacing: 2) {
             ForEach(MainTab.allCases, id: \.self) { tab in
                 Button {
                     withAnimation(.easeOut(duration: 0.18)) {
@@ -118,16 +184,16 @@ struct AppTabView: View {
                 } label: {
                     VStack(spacing: 3) {
                         Image(systemName: tab.icon)
-                            .font(.system(size: 14, weight: .bold))
+                            .font(.system(size: columns == 8 ? 17 : 14, weight: .bold))
                         Text(tab.title.uppercased())
-                            .font(.system(size: 10, weight: .black))
+                            .font(.system(size: columns == 8 ? 12 : 10, weight: .black))
                             .tracking(0.2)
                             .lineLimit(1)
                             .minimumScaleFactor(0.72)
                     }
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 42)
+                    .frame(height: columns == 8 ? 54 : 42)
                     .background(selectedTab == tab ? AppColor.green : AppColor.hunterGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                     .overlay {
@@ -161,17 +227,21 @@ private struct MainTabSwipeModifier: ViewModifier {
     let current: MainTab
     let edgeOnly: Bool
 
+    @Environment(\.hubContentWidth) private var contentWidth
+
     private let minimumDistance: CGFloat = 64
     private let edgeWidth: CGFloat = 44
 
     func body(content: Content) -> some View {
         content.simultaneousGesture(
-            DragGesture(minimumDistance: 20, coordinateSpace: .global)
+            DragGesture(minimumDistance: 20, coordinateSpace: .local)
                 .onEnded(handleSwipe)
         )
     }
 
     private func handleSwipe(_ value: DragGesture.Value) {
+        // Wide layouts use explicit navigation; horizontal drags belong to charts/pages.
+        guard contentWidth < 650 else { return }
         let horizontalDistance = value.translation.width
         let verticalDistance = value.translation.height
 
@@ -181,7 +251,7 @@ private struct MainTabSwipeModifier: ViewModifier {
         }
 
         if edgeOnly {
-            let screenWidth = UIScreen.main.bounds.width
+            let screenWidth = contentWidth
             let beganAtRequiredEdge = horizontalDistance < 0
                 ? value.startLocation.x >= screenWidth - edgeWidth
                 : value.startLocation.x <= edgeWidth

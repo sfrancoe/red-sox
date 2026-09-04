@@ -34,3 +34,32 @@ extension View {
             .shadow(color: AppColor.navy.opacity(0.08), radius: 12, y: 4)
     }
 }
+
+// Use the available content width, not the physical screen: iPad windows can resize.
+private struct ContentWidthKey: EnvironmentKey {
+    static let defaultValue: CGFloat = 390
+}
+
+extension EnvironmentValues {
+    var hubContentWidth: CGFloat {
+        get { self[ContentWidthKey.self] }
+        set { self[ContentWidthKey.self] = newValue }
+    }
+}
+
+struct HubCardGrid<Content: View>: View {
+    @Environment(\.hubContentWidth) private var width
+    var minimumWidth: CGFloat = 340
+    var compactSpacing: CGFloat = 14
+    @ViewBuilder var content: () -> Content
+
+    var body: some View {
+        let columns = width - 32 >= minimumWidth * 2 + 16 ? 2 : 1
+        LazyVGrid(
+            columns: Array(repeating: GridItem(.flexible(), spacing: 16, alignment: .top), count: columns),
+            alignment: .leading,
+            spacing: width >= 650 ? 16 : compactSpacing,
+            content: content
+        )
+    }
+}
