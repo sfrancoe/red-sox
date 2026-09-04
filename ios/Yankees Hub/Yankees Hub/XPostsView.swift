@@ -177,7 +177,7 @@ struct XPostsView: View {
                         .foregroundStyle(AppColor.ink.opacity(0.58))
                 }
 
-                Text(post.text)
+                Text(post.displayText)
                     .font(.system(size: contentWidth >= 650 ? 15 : 13))
                     .lineSpacing(1)
                     .fixedSize(horizontal: false, vertical: true)
@@ -256,7 +256,7 @@ struct XPostsView: View {
                     .foregroundStyle(AppColor.navy)
             }
 
-            Text(post.quotedText)
+            Text(post.displayQuotedText)
                 .font(.system(size: contentWidth >= 650 ? 13 : 11))
                 .lineSpacing(1)
         }

@@ -47,11 +47,30 @@ struct XPost: Codable, Identifiable, Sendable {
         XDateParser.date(from: published)
     }
 
+    var displayText: String {
+        text.decodingBasicHTMLEntities
+    }
+
+    var displayQuotedText: String {
+        quotedText.decodingBasicHTMLEntities
+    }
+
     var publishedText: String {
         guard let date = publishedDate else {
             return published
         }
         return date.formatted(date: .abbreviated, time: .shortened)
+    }
+}
+
+private extension String {
+    var decodingBasicHTMLEntities: String {
+        replacingOccurrences(of: "&quot;", with: "\"")
+            .replacingOccurrences(of: "&#39;", with: "'")
+            .replacingOccurrences(of: "&apos;", with: "'")
+            .replacingOccurrences(of: "&lt;", with: "<")
+            .replacingOccurrences(of: "&gt;", with: ">")
+            .replacingOccurrences(of: "&amp;", with: "&")
     }
 }
 
