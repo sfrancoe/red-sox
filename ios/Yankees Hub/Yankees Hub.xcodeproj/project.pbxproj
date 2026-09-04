@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		8128DAE330464115004B3947 /* Yankees Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yankees Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8128DAE330464115004B3947 /* NY Baseball Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NY Baseball Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		8128DAE430464115004B3947 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8128DAE330464115004B3947 /* Yankees Hub.app */,
+				8128DAE330464115004B3947 /* NY Baseball Hub.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8128DAE230464115004B3947 /* Yankees Hub */ = {
+		8128DAE230464115004B3947 /* NY Baseball Hub */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8128DAEE30464116004B3947 /* Build configuration list for PBXNativeTarget "Yankees Hub" */;
+			buildConfigurationList = 8128DAEE30464116004B3947 /* Build configuration list for PBXNativeTarget "NY Baseball Hub" */;
 			buildPhases = (
 				8128DADF30464115004B3947 /* Sources */,
 				8128DAE030464115004B3947 /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				8128DAE530464115004B3947 /* Yankees Hub */,
 			);
-			name = "Yankees Hub";
+			name = "NY Baseball Hub";
 			packageProductDependencies = (
 			);
-			productName = "Yankees Hub";
-			productReference = 8128DAE330464115004B3947 /* Yankees Hub.app */;
+			productName = "NY Baseball Hub";
+			productReference = 8128DAE330464115004B3947 /* NY Baseball Hub.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8128DAE230464115004B3947 /* Yankees Hub */,
+				8128DAE230464115004B3947 /* NY Baseball Hub */,
 			);
 		};
 /* End PBXProject section */
@@ -250,7 +250,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = NTY8T25W6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -267,7 +267,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sfrancoe.Yankees-Hub";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "NY Baseball Hub";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -284,7 +284,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = NTY8T25W6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -301,7 +301,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sfrancoe.Yankees-Hub";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "NY Baseball Hub";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -324,7 +324,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8128DAEE30464116004B3947 /* Build configuration list for PBXNativeTarget "Yankees Hub" */ = {
+		8128DAEE30464116004B3947 /* Build configuration list for PBXNativeTarget "NY Baseball Hub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8128DAEF30464116004B3947 /* Debug */,
