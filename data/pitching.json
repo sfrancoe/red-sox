@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T04:33:50.439921+00:00",
+  "generated_at": "2026-09-04T11:18:18.917205+00:00",
   "season": 2026,
   "team": "Boston Red Sox",
   "games_played": 141,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 19.1,
+    "actual_war": 19.0,
     "forecast_war_to_date": 19.2,
-    "war_gap": -0.1,
-    "innings": 1245.3,
-    "era": 3.66
+    "war_gap": -0.2,
+    "innings": 1254.3,
+    "era": 3.67
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 0.36
       },
       "war_gap": 2.94,
-      "innings_share_pct": 10.5
+      "innings_share_pct": 10.4
     },
     {
       "id": 624133,
@@ -121,17 +121,17 @@
       "name": "Jake Bennett",
       "throws": "L",
       "role": "Starter",
-      "games": 16,
-      "starts": 16,
+      "games": 17,
+      "starts": 17,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "93.2",
-        "ip_value": 93.667,
-        "war": 2.41,
-        "era": 3.27,
-        "fip": 3.16,
-        "k_minus_bb_pct": 15.0
+        "ip": "99.2",
+        "ip_value": 99.667,
+        "war": 2.39,
+        "era": 3.34,
+        "fip": 3.28,
+        "k_minus_bb_pct": 15.9
       },
       "forecast": {
         "ip": 18.0,
@@ -145,25 +145,25 @@
         "ip": 15.7,
         "war": 0.04
       },
-      "war_gap": 2.37,
-      "innings_share_pct": 7.5
+      "war_gap": 2.35,
+      "innings_share_pct": 7.9
     },
     {
       "id": 676477,
       "name": "Garrett Whitlock",
       "throws": "R",
       "role": "Setup",
-      "games": 46,
+      "games": 47,
       "starts": 0,
       "saves": 2,
-      "holds": 22,
+      "holds": 23,
       "actual": {
-        "ip": "45.0",
-        "ip_value": 45.0,
-        "war": 1.58,
-        "era": 2.0,
-        "fip": 2.21,
-        "k_minus_bb_pct": 25.1
+        "ip": "46.0",
+        "ip_value": 46.0,
+        "war": 1.66,
+        "era": 1.96,
+        "fip": 2.14,
+        "k_minus_bb_pct": 25.9
       },
       "forecast": {
         "ip": 70.0,
@@ -177,25 +177,25 @@
         "ip": 60.9,
         "war": 0.7
       },
-      "war_gap": 0.88,
-      "innings_share_pct": 3.6
+      "war_gap": 0.96,
+      "innings_share_pct": 3.7
     },
     {
       "id": 547973,
       "name": "Aroldis Chapman",
       "throws": "L",
       "role": "Closer",
-      "games": 47,
+      "games": 48,
       "starts": 0,
-      "saves": 30,
+      "saves": 31,
       "holds": 0,
       "actual": {
-        "ip": "45.2",
-        "ip_value": 45.667,
-        "war": 1.52,
-        "era": 1.77,
-        "fip": 2.42,
-        "k_minus_bb_pct": 21.2
+        "ip": "46.2",
+        "ip_value": 46.667,
+        "war": 1.37,
+        "era": 2.12,
+        "fip": 2.62,
+        "k_minus_bb_pct": 21.6
       },
       "forecast": {
         "ip": 62.0,
@@ -209,7 +209,7 @@
         "ip": 54.0,
         "war": 0.87
       },
-      "war_gap": 0.65,
+      "war_gap": 0.5,
       "innings_share_pct": 3.7
     },
     {
@@ -273,7 +273,7 @@
         "ip": 74.6,
         "war": 0.98
       },
-      "war_gap": -0.25,
+      "war_gap": -0.24,
       "innings_share_pct": 3.9
     },
     {
@@ -306,7 +306,7 @@
         "war": 1.1
       },
       "war_gap": -0.44,
-      "innings_share_pct": 7.4
+      "innings_share_pct": 7.3
     },
     {
       "id": 686580,
@@ -352,7 +352,7 @@
       "actual": {
         "ip": "97.2",
         "ip_value": 97.667,
-        "war": 0.48,
+        "war": 0.49,
         "era": 5.07,
         "fip": 4.32,
         "k_minus_bb_pct": 8.6
@@ -369,40 +369,8 @@
         "ip": 135.9,
         "war": 1.6
       },
-      "war_gap": -1.12,
+      "war_gap": -1.11,
       "innings_share_pct": 7.8
-    },
-    {
-      "id": 669062,
-      "name": "Erik Miller",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 11,
-      "starts": 1,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "11.1",
-        "ip_value": 11.333,
-        "war": 0.38,
-        "era": 0.79,
-        "fip": 1.77,
-        "k_minus_bb_pct": 37.0
-      },
-      "forecast": {
-        "ip": 62.0,
-        "war": 0.29,
-        "era": 3.45,
-        "fip": 3.7,
-        "k_minus_bb_pct": 14.7,
-        "team_at_fetch": "BOS"
-      },
-      "forecast_to_date": {
-        "ip": 54.0,
-        "war": 0.25
-      },
-      "war_gap": 0.12,
-      "innings_share_pct": 0.9
     },
     {
       "id": 687941,
@@ -435,6 +403,38 @@
       },
       "war_gap": 0.37,
       "innings_share_pct": 2.1
+    },
+    {
+      "id": 669062,
+      "name": "Erik Miller",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 12,
+      "starts": 1,
+      "saves": 0,
+      "holds": 2,
+      "actual": {
+        "ip": "12.1",
+        "ip_value": 12.333,
+        "war": 0.37,
+        "era": 0.73,
+        "fip": 2.04,
+        "k_minus_bb_pct": 33.3
+      },
+      "forecast": {
+        "ip": 62.0,
+        "war": 0.29,
+        "era": 3.45,
+        "fip": 3.7,
+        "k_minus_bb_pct": 14.7,
+        "team_at_fetch": "BOS"
+      },
+      "forecast_to_date": {
+        "ip": 54.0,
+        "war": 0.25
+      },
+      "war_gap": 0.11,
+      "innings_share_pct": 1.0
     },
     {
       "id": 676979,
@@ -658,7 +658,7 @@
         "war": 0.0
       },
       "war_gap": 0.07,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 1.1
     },
     {
       "id": 681252,
@@ -722,7 +722,7 @@
         "war": 0.05
       },
       "war_gap": -0.04,
-      "innings_share_pct": 4.5
+      "innings_share_pct": 4.4
     },
     {
       "id": 661527,
