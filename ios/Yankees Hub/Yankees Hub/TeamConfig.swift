@@ -5,8 +5,8 @@ enum TeamConfig {
     static let teamName = "New York Yankees"
     static let shortName = "Yankees"
     static let cityName = "New York"
-    static let appName = "Yankees Hub"
-    static let navigationTitle = "YANKEES HUB"
+    static let appName = "NY Baseball Hub"
+    static let navigationTitle = "NY BASEBALL HUB"
 
     private static let dataRoot = URL(string: "https://red-sox.netlify.app/data/yankees/")!
     private static let apiRoot = URL(string: "https://red-sox.netlify.app/api/")!
