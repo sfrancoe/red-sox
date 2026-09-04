@@ -1,0 +1,570 @@
+import SwiftUI
+
+private enum BoxScoreTeamSelection {
+    case favorite
+    case opponent
+}
+
+struct RecentGameView: View {
+    @Environment(\.hubContentWidth) private var contentWidth
+    @State private var store = RecentGameStore()
+    @State private var selectedStatsTeam: BoxScoreTeamSelection = .favorite
+    @State private var selectedGameID: Int?
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                AppColor.paleRed.ignoresSafeArea()
+
+                Group {
+                    if let game = selectedGame {
+                        VStack(spacing: 0) {
+                            gameSelector
+                            gameContent(game)
+                        }
+                    } else if store.isLoading {
+                        ProgressView("Loading Game Center…")
+                            .tint(.white)
+                            .foregroundStyle(.white)
+                    } else {
+                        errorView
+                    }
+                }
+            }
+            .toolbar(.hidden, for: .navigationBar)
+        }
+        .task {
+            await store.load()
+            synchronizeSelection()
+
+            while !Task.isCancelled {
+                let delay: UInt64 = store.hasLiveGame ? 20 : 60
+                try? await Task.sleep(nanoseconds: delay * 1_000_000_000)
+                guard !Task.isCancelled else { return }
+                let hadLiveGame = store.hasLiveGame
+                await store.refresh()
+                synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
+            }
+        }
+    }
+
+    private var selectedGame: RecentGame? {
+        if let selectedGameID,
+           let game = store.games.first(where: { $0.gamePk == selectedGameID }) {
+            return game
+        }
+        return store.games.first
+    }
+
+    private var gameSelector: some View {
+        HStack(spacing: 0) {
+            ForEach(Array(store.games.enumerated()), id: \.element.gamePk) { index, game in
+                Button {
+                    selectedGameID = game.gamePk
+                    selectedStatsTeam = .favorite
+                } label: {
+                    Text(gameTabTitle(game, index: index))
+                        .font(
+                            .system(
+                                size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
+                                weight: selectedGame?.gamePk == game.gamePk ? .black : .semibold
+                            )
+                        )
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.78)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .foregroundStyle(Color.black)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 5)
+        .padding(.vertical, 2)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 10)
+        .padding(.bottom, 4)
+        .background(AppColor.paleRed)
+    }
+
+    private func gameTabTitle(_ game: RecentGame, index: Int) -> String {
+        if game.isLive { return "LIVE" }
+        if index == 0, !store.hasLiveGame { return "LAST GAME" }
+
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
+        var title = date.formatted(.dateTime.month(.abbreviated).day()).uppercased()
+        let gamesOnDate = store.games
+            .filter { candidate in
+                guard let candidateDate = formatter.date(from: candidate.gameDate) else { return false }
+                return Calendar.current.isDate(candidateDate, inSameDayAs: date)
+            }
+            .sorted { $0.gameDate < $1.gameDate }
+        if gamesOnDate.count > 1,
+           let gameNumber = gamesOnDate.firstIndex(where: { $0.gamePk == game.gamePk }) {
+            title += " G\(gameNumber + 1)"
+        }
+        return title
+    }
+
+    private func synchronizeSelection(preferNewLiveGame: Bool = false) {
+        let currentStillExists = store.games.contains { $0.gamePk == selectedGameID }
+        if preferNewLiveGame || !currentStillExists {
+            selectedGameID = store.games.first?.gamePk
+            selectedStatsTeam = .favorite
+        }
+    }
+
+    private func gameContent(_ game: RecentGame) -> some View {
+        let favorite = game.away.id == TeamConfig.teamID ? game.away : game.home
+        let opponent = game.away.id == TeamConfig.teamID ? game.home : game.away
+
+        return ScrollView {
+            LazyVStack(spacing: 10) {
+                scoreCard(game)
+
+                if contentWidth >= 720 {
+                    VStack(spacing: 0) {
+                        recapCard(game)
+                        reportDivider
+                        HStack(alignment: .top, spacing: 0) {
+                            battingCard(favorite: favorite, opponent: opponent)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                            pitchingCard(favorite: favorite, opponent: opponent)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                        }
+                        reportDivider
+                        scoringPlaysCard(game)
+                        reportDivider
+                        linksCard(game)
+                    }
+                    .cardStyle(padding: 0)
+                } else {
+                    VStack(spacing: 0) {
+                        recapCard(game)
+                        reportDivider
+                        battingCard(favorite: favorite, opponent: opponent)
+                        reportDivider
+                        pitchingCard(favorite: favorite, opponent: opponent)
+                        reportDivider
+                        scoringPlaysCard(game)
+                        reportDivider
+                        linksCard(game)
+                    }
+                    .background(AppColor.paper)
+                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 18)
+            .foregroundStyle(AppColor.ink)
+        }
+        .refreshable {
+            let hadLiveGame = store.hasLiveGame
+            await store.refresh()
+            synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
+        }
+        .dynamicTypeSize(contentWidth >= 650 ? .large : .xSmall)
+    }
+
+    private var reportDivider: some View {
+        Divider()
+            .overlay(AppColor.border)
+            .padding(.horizontal, 16)
+    }
+
+    private func scoreCard(_ game: RecentGame) -> some View {
+        VStack(spacing: 9) {
+            HStack {
+                Text(game.formattedDate.uppercased())
+                    .font(.title3.weight(.black))
+                    .tracking(0.4)
+
+                Spacer()
+
+                Text(game.isLive ? "LIVE" : "FINAL")
+                    .font(.caption.weight(.black))
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 4)
+                    .background(game.isLive ? AppColor.red : AppColor.green)
+                    .foregroundStyle(.white)
+                    .clipShape(Capsule())
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(game.gameDetails)
+                    .font(.subheadline)
+                    .foregroundStyle(AppColor.hunterGreen)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+
+                if game.isLive, let liveStatus = game.liveStatus {
+                    Text(liveStatus)
+                        .font(.subheadline.weight(.black))
+                        .foregroundStyle(AppColor.hunterGreen)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Divider()
+
+            combinedLineScore(game)
+        }
+        .cardStyle(padding: 12)
+    }
+
+    private func combinedLineScore(_ game: RecentGame) -> some View {
+        VStack(spacing: 7) {
+            HStack(spacing: 0) {
+                Text("")
+                    .frame(width: contentWidth >= 650 ? 90 : 50, alignment: .leading)
+                ForEach(game.innings) { inning in
+                    Text("\(inning.num)")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                }
+                lineScoreLegend("R")
+                lineScoreLegend("H")
+                lineScoreLegend("E")
+                lineScoreLegend("LOB")
+            }
+            .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
+            .foregroundStyle(.secondary)
+
+            combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
+            combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
+        }
+        .monospacedDigit()
+        .frame(minWidth: 0, maxWidth: .infinity)
+    }
+
+    private func combinedLineScoreRow(
+        _ team: TeamBoxScore,
+        innings: [Inning],
+        isAway: Bool
+    ) -> some View {
+        HStack(spacing: 0) {
+            Text(team.cityName)
+                .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: .black))
+                .foregroundStyle(AppColor.navy)
+                .frame(width: contentWidth >= 650 ? 90 : 50, alignment: .leading)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+
+            ForEach(innings) { inning in
+                let runs = (isAway ? inning.away : inning.home).runs
+                Text(runs.map(String.init) ?? " ")
+                    .frame(minWidth: 0, maxWidth: .infinity)
+            }
+
+            lineScoreTotal(team.runs, emphasized: true)
+            lineScoreTotal(team.hits)
+            lineScoreTotal(team.errors)
+            lineScoreTotal(team.leftOnBase)
+        }
+        .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .semibold))
+    }
+
+    private func lineScoreLegend(_ title: String) -> some View {
+        Text(title)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+    }
+
+    private func lineScoreTotal(
+        _ value: Int,
+        emphasized: Bool = false
+    ) -> some View {
+        Text("\(value)")
+            .font(
+                emphasized
+                    ? .system(size: contentWidth >= 650 ? 17 : 15, weight: .black, design: .monospaced)
+                    : .system(size: contentWidth >= 650 ? 13 : 11, weight: .semibold, design: .monospaced)
+            )
+            .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+    }
+
+    private func recapCard(_ game: RecentGame) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            primarySectionTitle(game.isLive ? "Game So Far" : "Game Recap")
+
+            Text(game.summary)
+                .font(.system(size: contentWidth >= 650 ? 17 : 15))
+                .lineSpacing(4)
+
+            if !game.facts.isEmpty {
+                Divider()
+
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(game.facts, id: \.self) { fact in
+                        HStack(alignment: .top, spacing: 9) {
+                            Circle()
+                                .fill(AppColor.red)
+                                .frame(width: 5, height: 5)
+                                .padding(.top, 7)
+                            Text(fact)
+                                .font(.system(size: contentWidth >= 650 ? 16 : 14))
+                                .lineSpacing(2)
+                        }
+                    }
+                }
+            }
+        }
+        .padding(16)
+    }
+
+    private func battingCard(favorite: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let team = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
+
+        return VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                sectionTitle("Batting")
+                Spacer(minLength: 0)
+                statsTeamPicker(favorite: favorite, opponent: opponent)
+            }
+            let widths: [CGFloat] = [28, 28, 28, 32, 38]
+            VStack(spacing: 4) {
+                statHeader(labels: ["AB", "R", "H", "RBI", "AVG"], widths: widths)
+
+                VStack(spacing: 0) {
+                    ForEach(team.batting.filter { !["P", "SP", "RP"].contains($0.position.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()) }) { batter in
+                        statRow(
+                            name: batter.name,
+                            detail: batter.position,
+                            textValues: [
+                                "\(batter.atBats)", "\(batter.runs)", "\(batter.hits)",
+                                "\(batter.rbi)", batter.average ?? ".---"
+                            ],
+                            detailInline: true,
+                            columnWidths: widths
+                        )
+                    }
+                }
+            }
+        }
+        .padding(16)
+    }
+
+    private func pitchingCard(favorite: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let team = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
+
+        return VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                sectionTitle("Pitching")
+                Spacer(minLength: 0)
+                statsTeamPicker(favorite: favorite, opponent: opponent)
+            }
+            VStack(spacing: 4) {
+                statHeader(labels: ["IP", "H", "ER", "K"])
+
+                VStack(spacing: 0) {
+                    ForEach(team.pitching) { pitcher in
+                        statRow(
+                            name: pitcher.name,
+                            detail: pitcher.note,
+                            textValues: [
+                                pitcher.inningsPitched,
+                                "\(pitcher.hits)",
+                                "\(pitcher.earnedRuns)",
+                                "\(pitcher.strikeOuts)"
+                            ],
+                            detailInline: true
+                        )
+                    }
+                }
+            }
+        }
+        .padding(16)
+    }
+
+    private func selectedBoxScoreTeam(
+        favorite: TeamBoxScore,
+        opponent: TeamBoxScore
+    ) -> TeamBoxScore {
+        selectedStatsTeam == .favorite ? favorite : opponent
+    }
+
+    private func statsTeamPicker(
+        favorite: TeamBoxScore,
+        opponent: TeamBoxScore
+    ) -> some View {
+        HStack(spacing: 2) {
+            statsTeamButton(TeamConfig.shortName, selection: .favorite)
+            statsTeamButton(opponent.cityName, selection: .opponent)
+        }
+        .frame(width: 166)
+    }
+
+    private func statsTeamButton(
+        _ title: String,
+        selection: BoxScoreTeamSelection
+    ) -> some View {
+        Button {
+            selectedStatsTeam = selection
+        } label: {
+            Text(title)
+                .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 6)
+                .foregroundStyle(Color.black)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .fill(selectedStatsTeam == selection ? AppColor.red : Color.clear)
+                        .frame(height: 2)
+                }
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func statHeader(labels: [String], widths: [CGFloat] = []) -> some View {
+        HStack {
+            Text("PLAYER")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            ForEach(Array(labels.enumerated()), id: \.offset) { index, label in
+                Text(label).frame(width: widths.indices.contains(index) ? widths[index] : 32)
+            }
+        }
+        .font(.caption2.weight(.bold))
+        .foregroundStyle(.secondary)
+    }
+
+    private func statRow(
+        name: String,
+        detail: String,
+        values: [Int] = [],
+        textValues: [String] = [],
+        detailInline: Bool = false,
+        columnWidths: [CGFloat] = []
+    ) -> some View {
+        HStack(spacing: 6) {
+            VStack(alignment: .leading, spacing: 1) {
+                HStack(spacing: 4) {
+                    Text(name)
+                        .font(.subheadline.weight(.semibold))
+                        .lineLimit(1)
+                    if detailInline, !detail.isEmpty {
+                        Text("· \(detail)")
+                            .font(.caption)
+                            .foregroundStyle(AppColor.hunterGreen)
+                            .fixedSize()
+                    }
+                }
+                if !detailInline, !detail.isEmpty {
+                    Text(detail)
+                        .font(.caption2)
+                        .foregroundStyle(AppColor.hunterGreen)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            ForEach(Array((textValues.isEmpty ? values.map(String.init) : textValues).enumerated()), id: \.offset) { index, value in
+                Text(value)
+                    .font(.subheadline)
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .frame(width: columnWidths.indices.contains(index) ? columnWidths[index] : 32)
+            }
+        }
+        .padding(.vertical, contentWidth >= 650 ? 6 : 3)
+    }
+
+    private func scoringPlaysCard(_ game: RecentGame) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            sectionTitle("Scoring Plays")
+
+            ForEach(game.scoringPlays) { play in
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(play.inning.uppercased())
+                            .font(.caption.weight(.black))
+                            .foregroundStyle(AppColor.red)
+                        Spacer()
+                        Text("\(game.away.abbreviation) \(play.awayScore) · \(game.home.abbreviation) \(play.homeScore)")
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(AppColor.hunterGreen)
+                    }
+                    Text(play.description)
+                        .font(.subheadline)
+                        .lineSpacing(2)
+                }
+            }
+        }
+        .padding(16)
+    }
+
+    private func linksCard(_ game: RecentGame) -> some View {
+        VStack(spacing: 10) {
+            if let recap = game.officialRecap,
+               let recapURL = URL(string: recap.url) {
+                Link(destination: recapURL) {
+                    linkRow(recap.headline, icon: "newspaper")
+                }
+            }
+
+            if let gamedayURL = URL(string: game.gamedayUrl) {
+                Link(destination: gamedayURL) {
+                    linkRow("Open MLB Gameday", icon: "arrow.up.right.square")
+                }
+            }
+        }
+        .padding(16)
+    }
+
+    private func linkRow(_ text: String, icon: String) -> some View {
+        HStack {
+            Text(text)
+                .font(.subheadline.weight(.semibold))
+                .multilineTextAlignment(.leading)
+            Spacer()
+            Image(systemName: icon)
+        }
+        .foregroundStyle(AppColor.red)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func sectionTitle(_ title: String) -> some View {
+        Text(title.uppercased())
+            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
+            .tracking(1.1)
+            .foregroundStyle(AppColor.navy)
+    }
+
+    private func primarySectionTitle(_ title: String) -> some View {
+        Text(title.uppercased())
+            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
+            .tracking(1.1)
+            .foregroundStyle(AppColor.navy)
+    }
+
+    private var errorView: some View {
+        ContentUnavailableView {
+            Label("Game Unavailable", systemImage: "wifi.exclamationmark")
+        } description: {
+            Text(store.errorMessage ?? "Game Center could not be loaded.")
+        } actions: {
+            Button("Try Again") {
+                Task { await store.load() }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(AppColor.red)
+        }
+    }
+}
+
+#Preview {
+    RecentGameView()
+}

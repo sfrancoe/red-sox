@@ -1,0 +1,44 @@
+name: Refresh Yankees app data
+
+on:
+  schedule:
+    - cron: '37 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Yankees game data
+        run: |
+          python3 scripts/fetch_yankees_schedule.py
+          python3 scripts/fetch_yankees_recent_game.py
+          python3 scripts/fetch_yankees_standings.py
+          python3 scripts/fetch_yankees_pitching.py
+
+      - name: Commit if game data changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/yankees; then
+            echo "No Yankees game data changes."
+          else
+            git add data/yankees
+            git commit -m "Refresh Yankees app data ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+          fi

@@ -4,7 +4,18 @@ const X_RECENT_SEARCH_URL = 'https://api.x.com/2/tweets/search/recent';
 // rates. Media expansions are intentionally omitted from this paid feed.
 const MAX_DAILY_POSTS = 16;
 const DAY_MS = 24 * 60 * 60 * 1000;
-const SEARCH_QUERY = '(("Red Sox" OR RedSox OR #RedSox OR @RedSox OR Fenway) lang:en) -is:retweet -is:reply';
+export const TEAM_CONFIG = {
+  redsox: {
+    label: 'Red Sox',
+    query: '(("Red Sox" OR RedSox OR #RedSox OR @RedSox OR Fenway) lang:en) -is:retweet -is:reply',
+    includeRecent: false,
+  },
+  yankees: {
+    label: 'Yankees',
+    query: '((Yankees OR #Yankees OR @Yankees OR "New York Yankees") lang:en) -is:retweet -is:reply',
+    includeRecent: true,
+  },
+};
 
 function cleanText(value) {
   return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';
@@ -40,7 +51,7 @@ function postFromResult(post, users) {
   };
 }
 
-export function buildDiscoveryFeed(payload, generatedAt = new Date()) {
+export function buildDiscoveryFeed(payload, generatedAt = new Date(), team = TEAM_CONFIG.redsox) {
   const users = new Map((payload.includes?.users || []).map(user => [user.id, user]));
   const cutoff = generatedAt.valueOf() - DAY_MS;
   const popular = (payload.data || [])
@@ -51,15 +62,17 @@ export function buildDiscoveryFeed(payload, generatedAt = new Date()) {
   return {
     generated_at: generatedAt.toISOString(),
     source: 'X recent search',
-    source_url: `https://x.com/search?q=${encodeURIComponent('Red Sox')}`,
-    recent: [],
+    source_url: `https://x.com/search?q=${encodeURIComponent(team.label)}`,
+    recent: team.includeRecent
+      ? [...popular].sort((a, b) => b.published.localeCompare(a.published))
+      : [],
     popular,
   };
 }
 
-function searchURL(now = new Date()) {
+function searchURL(team, now = new Date()) {
   const url = new URL(X_RECENT_SEARCH_URL);
-  url.searchParams.set('query', SEARCH_QUERY);
+  url.searchParams.set('query', team.query);
   url.searchParams.set('start_time', new Date(now.valueOf() - DAY_MS).toISOString());
   url.searchParams.set('max_results', String(MAX_DAILY_POSTS));
   url.searchParams.set('sort_order', 'relevancy');
@@ -69,7 +82,12 @@ function searchURL(now = new Date()) {
   return url;
 }
 
-export default async () => {
+export default async request => {
+  const requestedTeam = new URL(request.url).searchParams.get('team')?.toLowerCase() || 'redsox';
+  const team = TEAM_CONFIG[requestedTeam];
+  if (!team) {
+    return Response.json({ error: 'Unknown team.' }, { status: 400 });
+  }
   const bearerToken = process.env.X_BEARER_TOKEN;
   if (!bearerToken) {
     return Response.json({ error: 'X discovery is not configured.' }, {
@@ -79,13 +97,13 @@ export default async () => {
   }
 
   try {
-    const response = await fetch(searchURL(), {
+    const response = await fetch(searchURL(team), {
       headers: { Authorization: `Bearer ${bearerToken}` },
       signal: AbortSignal.timeout(15_000),
     });
     if (!response.ok) throw new Error(`X recent search returned ${response.status}`);
 
-    const feed = buildDiscoveryFeed(await response.json());
+    const feed = buildDiscoveryFeed(await response.json(), new Date(), team);
     return Response.json(feed, { headers: {
       'Cache-Control': 'public, max-age=300, stale-while-revalidate=300',
       'Netlify-CDN-Cache-Control': 'public, durable, max-age=86400, stale-while-revalidate=3600',
