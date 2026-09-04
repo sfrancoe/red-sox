@@ -13,7 +13,9 @@ export const TEAM_CONFIG = {
   yankees: {
     label: 'Yankees',
     query: '(("New York Yankees" OR Yankees OR #Yankees OR @Yankees OR #RepBX) lang:en) -is:retweet -is:reply',
-    includeRecent: false,
+    // Keep Recent populated for build 2, which reads only this endpoint. Build 3 uses
+    // the filtered Yankees list for Recent and ignores discovery.recent.
+    includeRecent: true,
   },
 };
 
