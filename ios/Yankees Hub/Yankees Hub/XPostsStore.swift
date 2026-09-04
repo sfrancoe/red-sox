@@ -6,7 +6,10 @@ import Observation
 final class XPostsStore {
     private static let endpoint = TeamConfig.apiURL(
         "x-discovery",
-        queryItems: [URLQueryItem(name: "team", value: "yankees")]
+        queryItems: [
+            URLQueryItem(name: "team", value: "yankees"),
+            URLQueryItem(name: "feed", value: "curated-v1")
+        ]
     )
 
     var feed: XFeed?
