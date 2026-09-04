@@ -9,6 +9,7 @@ private enum MainTab: Int, CaseIterable {
     case pitching
     case leaders
     case game108
+    case markets
 
     var title: String {
         switch self {
@@ -19,6 +20,7 @@ private enum MainTab: Int, CaseIterable {
         case .standings: "Standings"
         case .pitching: "Pitching"
         case .leaders: "Leaders"
+        case .markets: "Markets"
         case .game108: "Game 108"
         }
     }
@@ -32,6 +34,7 @@ private enum MainTab: Int, CaseIterable {
         case .standings: "list.number"
         case .pitching: "figure.baseball"
         case .leaders: "crown.fill"
+        case .markets: "chart.line.uptrend.xyaxis"
         case .game108: "chart.xyaxis.line"
         }
     }
@@ -59,7 +62,7 @@ struct AppTabView: View {
                     if usesSidebar {
                         sidebarControls
                     } else {
-                        topNavigation(columns: window.size.width >= 650 ? 8 : 4)
+                        topNavigation(columns: window.size.width >= 650 ? 9 : 3)
                     }
                     selectedContent
                         .environment(\.hubContentWidth, window.size.width - (showsSidebar ? 210 : 0))
@@ -70,7 +73,11 @@ struct AppTabView: View {
         .background(AppColor.paper)
         .onAppear {
             guard !hasAppeared else { return }
+            #if DEBUG
+            selectedTab = ProcessInfo.processInfo.arguments.contains("-show-markets") ? .markets : .recent
+            #else
             selectedTab = .recent
+            #endif
             hasAppeared = true
         }
         .onChange(of: scenePhase) { _, newPhase in
@@ -113,6 +120,9 @@ struct AppTabView: View {
         case .leaders:
                 SeasonLeadersView()
                     .mainTabSwipe(selection: $selectedTab, current: .leaders)
+        case .markets:
+                MarketsView()
+                    .mainTabSwipe(selection: $selectedTab, current: .markets, edgeOnly: true)
         case .game108:
                 Game108GraphView()
                     .mainTabSwipe(selection: $selectedTab, current: .game108)
@@ -184,16 +194,16 @@ struct AppTabView: View {
                 } label: {
                     VStack(spacing: 3) {
                         Image(systemName: tab.icon)
-                            .font(.system(size: columns == 8 ? 17 : 14, weight: .bold))
+                            .font(.system(size: columns == 9 ? 17 : 14, weight: .bold))
                         Text(tab.title.uppercased())
-                            .font(.system(size: columns == 8 ? 12 : 10, weight: .black))
+                            .font(.system(size: columns == 9 ? 12 : 10, weight: .black))
                             .tracking(0.2)
                             .lineLimit(1)
                             .minimumScaleFactor(0.72)
                     }
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
-                    .frame(height: columns == 8 ? 54 : 42)
+                    .frame(height: columns == 9 ? 54 : 42)
                     .background(selectedTab == tab ? AppColor.green : AppColor.hunterGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                     .overlay {
