@@ -12,7 +12,7 @@ export const TEAM_CONFIG = {
   },
   yankees: {
     label: 'Yankees',
-    query: '((Yankees OR #Yankees OR @Yankees OR "New York Yankees") lang:en) -is:retweet -is:reply',
+    query: '(from:Yankees OR ((Yankees OR NYY OR Bronx OR @Yankees) (from:BryanHoch OR from:GJoyce9 OR from:ChrisKirschner OR from:BrendanKutyNJ OR from:RandyJMiller OR from:GarryHPhillips OR from:eboland11 OR from:DanMartin_Post OR from:martinonyc OR from:MarkWSanchez OR from:petersblendorio OR from:JackCurryYES))) lang:en -is:retweet -is:reply',
     includeRecent: true,
   },
 };

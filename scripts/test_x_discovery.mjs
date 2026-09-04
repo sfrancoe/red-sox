@@ -32,6 +32,8 @@ assert.deepEqual(feed.popular.map(post => post.id), ['liked', 'newer']);
 assert.ok(feed.recent.every(post => post.url.startsWith('https://x.com/')));
 assert.match(TEAM_CONFIG.redsox.query, /Red Sox/);
 assert.match(TEAM_CONFIG.yankees.query, /Yankees/);
+assert.match(TEAM_CONFIG.yankees.query, /from:Yankees/);
+assert.match(TEAM_CONFIG.yankees.query, /from:BryanHoch/);
 assert.notEqual(TEAM_CONFIG.redsox.query, TEAM_CONFIG.yankees.query);
 const redSoxFeed = buildDiscoveryFeed(payload, generatedAt);
 assert.deepEqual(redSoxFeed.recent, []);
