@@ -4,9 +4,8 @@ The Boston app’s Markets tab combines public Kalshi and Polymarket data. It is
 
 ## Experience
 
-- Game spotlight: select an upcoming Red Sox game, compare provider probabilities, and inspect hourly history over 24 hours or seven days.
-- Eyes on October: Polymarket’s postseason, AL East, and World Series probabilities.
-- Market board: provider and category filters for winners, totals, spreads, game props, and season markets.
+- Eyes on October opens the tab with Polymarket’s postseason, AL East, and World Series probabilities.
+- Market board: compact spreadsheet rows with market, chance, source, type, game, date, time, and volume columns. Provider and category filters narrow the table; horizontal scrolling reveals more columns on phones. Tap a row for details.
 - Market detail: history, bid/ask quotes, source rules, and original market link.
 - Freshness: retrieval timestamp, two-minute refresh while active, partial-provider notices, and a labeled saved snapshot when refresh fails.
 
@@ -18,7 +17,7 @@ Kalshi prices are midpoints of valid two-sided yes bids/asks. Missing, inverted,
 
 Polymarket uses the published outcome price and the matching outcome token’s history. When Boston is the second outcome, both token selection and bid/ask inversion follow that outcome. Do not assume outcome zero means Boston.
 
-Only Red Sox game events and Red Sox-specific season questions appear. Closed markets and prior-date games are excluded. Manager speculation is excluded so it does not overwhelm the team outlook. The game comparison joins the same date/opponent and refuses ambiguous multiple markets from one provider. Settlement rules can differ even when both providers describe the same game.
+Only Red Sox game events and Red Sox-specific season questions appear. Closed markets and prior-date games are excluded. Manager speculation is excluded so it does not overwhelm the team outlook. Settlement rules can differ even when both providers describe the same game.
 
 Probability changes use percentage points across the available historical observations. No synthetic history is generated; charts with fewer than two points show an empty state. The vertical scale adjusts to observed prices and displays explicit percentage labels. Kalshi contract volume and Polymarket dollar volume retain separate units.
 
@@ -28,7 +27,7 @@ Probability changes use percentage points across the available historical observ
 
 Live checks successfully fetched both providers, upcoming Boston game quotes, and both historical sources. Native simulator launch checks cover iPhone 17, iPad Pro, and iPad mini. Debug-only launch arguments `-show-markets`, `-local-markets` (localhost:8768), and `-market-detail` support direct inspection. Release builds always use the production HTTPS endpoint and normal launch behavior.
 
-Interactive Simulator clicks were unavailable while the host Mac was locked; screenshots and native builds were verified. This feature is prepared for Boston build 3. TestFlight upload is a separate step.
+Interactive Simulator clicks were unavailable while the host Mac was locked; screenshots and native builds were verified. Boston build 4 includes the compact Eyes on October table, spreadsheet market board, and red background matching the other tabs.
 
 ## Primary API references
 

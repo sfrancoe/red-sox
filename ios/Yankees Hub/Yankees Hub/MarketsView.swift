@@ -2,7 +2,7 @@ import SwiftUI
 import Charts
 import Observation
 
-private struct SoxMarket: Decodable, Identifiable {
+private struct YankeesMarket: Decodable, Identifiable {
     let id: String
     let provider: String
     let title: String
@@ -33,7 +33,7 @@ private struct SoxMarket: Decodable, Identifiable {
 private struct MarketSnapshot: Decodable {
     struct Source: Decodable { let name: String; let available: Bool }
     let generatedAt: String
-    let markets: [SoxMarket]
+    let markets: [YankeesMarket]
     let sources: [Source]
     var date: Date? {
         let f = ISO8601DateFormatter()
@@ -60,12 +60,12 @@ private final class MarketsStore {
     private var base: URL {
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-local-markets") {
-            return URL(string: "http://localhost:8768/api/redsox-markets")!
+            return URL(string: "http://localhost:8768/api/yankees-markets")!
         }
         #endif
-        return URL(string: "https://red-sox.netlify.app/api/redsox-markets")!
+        return URL(string: "https://red-sox.netlify.app/api/yankees-markets")!
     }
-    private let cacheKey = "redsox.marketSnapshot.v1"
+    private let cacheKey = "yankees.marketSnapshot.v1"
     init() {
         if let data = UserDefaults.standard.data(forKey: cacheKey) {
             snapshot = try? JSONDecoder().decode(MarketSnapshot.self, from: data)
@@ -84,8 +84,8 @@ private final class MarketsStore {
             self.error = snapshot == nil ? "The market feeds are unavailable. Please try again." : "Refresh unavailable. Showing the last saved snapshot."
         }
     }
-    func historyKey(_ market: SoxMarket, days: Int) -> String { "\(market.key):\(days)" }
-    func loadHistory(_ market: SoxMarket, days: Int) async {
+    func historyKey(_ market: YankeesMarket, days: Int) -> String { "\(market.key):\(days)" }
+    func loadHistory(_ market: YankeesMarket, days: Int) async {
         let key = historyKey(market, days: days)
         guard histories[key] == nil, !pending.contains(key) else { return }
         pending.insert(key); historyErrors.remove(key)
@@ -110,9 +110,9 @@ struct MarketsView: View {
     @State private var store = MarketsStore()
     @State private var provider = "Both"
     @State private var category = "All"
-    @State private var detail: SoxMarket?
-    private var markets: [SoxMarket] { store.snapshot?.markets ?? [] }
-    private var filtered: [SoxMarket] {
+    @State private var detail: YankeesMarket?
+    private var markets: [YankeesMarket] { store.snapshot?.markets ?? [] }
+    private var filtered: [YankeesMarket] {
         markets.filter { (provider == "Both" || $0.provider == provider) && (category == "All" || $0.category == category) }
     }
     var body: some View {
@@ -123,7 +123,7 @@ struct MarketsView: View {
                     freshness(snapshot)
                     marketBoard
                 } else if store.loading {
-                    ProgressView("Finding Red Sox markets…").tint(.white).foregroundStyle(.white).frame(maxWidth: .infinity, minHeight: 220)
+                    ProgressView("Finding Yankees markets…").tint(.white).foregroundStyle(.white).frame(maxWidth: .infinity, minHeight: 220)
                 } else {
                     ContentUnavailableView("Markets unavailable", systemImage: "chart.line.downtrend.xyaxis", description: Text(store.error ?? "Refresh to load the latest markets.")).foregroundStyle(.white)
                 }
@@ -322,7 +322,7 @@ struct MarketsView: View {
 }
 
 private struct MarketTrend: View {
-    let markets: [SoxMarket]
+    let markets: [YankeesMarket]
     let store: MarketsStore
     @State private var days = 1
     @State private var selectedDate: Date?
@@ -333,7 +333,7 @@ private struct MarketTrend: View {
         return lower...max(lower + 1, upper)
     }
     private var identity: String { markets.map(\.key).joined() + String(days) + (store.snapshot?.generatedAt ?? "") }
-    private func points(_ m: SoxMarket) -> [MarketPoint] { store.histories[store.historyKey(m, days: days)] ?? [] }
+    private func points(_ m: YankeesMarket) -> [MarketPoint] { store.histories[store.historyKey(m, days: days)] ?? [] }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -396,7 +396,7 @@ private struct MarketTrend: View {
     }
 }
 private struct MarketDetail: View {
-    let market: SoxMarket
+    let market: YankeesMarket
     let store: MarketsStore
     @Environment(\.dismiss) private var dismiss
     var body: some View {
