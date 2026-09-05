@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T04:29:29.422330+00:00",
+  "generated_at": "2026-09-05T15:14:22.374235+00:00",
   "season": 2026,
   "team": "Boston Red Sox",
   "games_played": 142,
@@ -13,13 +13,45 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 19.0,
+    "actual_war": 19.3,
     "forecast_war_to_date": 19.3,
-    "war_gap": -0.4,
-    "innings": 1254.3,
-    "era": 3.67
+    "war_gap": -0.1,
+    "innings": 1263.3,
+    "era": 3.65
   },
   "pitchers": [
+    {
+      "id": 624133,
+      "name": "Ranger Suarez",
+      "throws": "L",
+      "role": "Starter",
+      "games": 25,
+      "starts": 25,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "130.2",
+        "ip_value": 130.667,
+        "war": 3.43,
+        "era": 3.44,
+        "fip": 3.1,
+        "k_minus_bb_pct": 15.1
+      },
+      "forecast": {
+        "ip": 171.5,
+        "war": 3.26,
+        "era": 3.74,
+        "fip": 3.69,
+        "k_minus_bb_pct": 14.4,
+        "team_at_fetch": "BOS"
+      },
+      "forecast_to_date": {
+        "ip": 150.3,
+        "war": 2.85
+      },
+      "war_gap": 0.57,
+      "innings_share_pct": 10.3
+    },
     {
       "id": 801139,
       "name": "Payton Tolle",
@@ -32,7 +64,7 @@
       "actual": {
         "ip": "131.0",
         "ip_value": 131.0,
-        "war": 3.3,
+        "war": 3.31,
         "era": 3.23,
         "fip": 3.28,
         "k_minus_bb_pct": 20.8
@@ -51,38 +83,6 @@
       },
       "war_gap": 2.94,
       "innings_share_pct": 10.4
-    },
-    {
-      "id": 624133,
-      "name": "Ranger Suarez",
-      "throws": "L",
-      "role": "Starter",
-      "games": 24,
-      "starts": 24,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "123.2",
-        "ip_value": 123.667,
-        "war": 3.26,
-        "era": 3.64,
-        "fip": 3.1,
-        "k_minus_bb_pct": 15.5
-      },
-      "forecast": {
-        "ip": 171.5,
-        "war": 3.26,
-        "era": 3.74,
-        "fip": 3.69,
-        "k_minus_bb_pct": 14.4,
-        "team_at_fetch": "BOS"
-      },
-      "forecast_to_date": {
-        "ip": 150.3,
-        "war": 2.85
-      },
-      "war_gap": 0.41,
-      "innings_share_pct": 9.9
     },
     {
       "id": 543243,
@@ -113,8 +113,8 @@
         "ip": 159.0,
         "war": 3.4
       },
-      "war_gap": -0.67,
-      "innings_share_pct": 11.5
+      "war_gap": -0.66,
+      "innings_share_pct": 11.4
     },
     {
       "id": 687562,
@@ -145,7 +145,7 @@
         "ip": 15.8,
         "war": 0.04
       },
-      "war_gap": 2.35,
+      "war_gap": 2.36,
       "innings_share_pct": 7.9
     },
     {
@@ -153,17 +153,17 @@
       "name": "Garrett Whitlock",
       "throws": "R",
       "role": "Setup",
-      "games": 47,
+      "games": 48,
       "starts": 0,
       "saves": 2,
-      "holds": 23,
+      "holds": 24,
       "actual": {
-        "ip": "46.0",
-        "ip_value": 46.0,
-        "war": 1.66,
-        "era": 1.96,
-        "fip": 2.14,
-        "k_minus_bb_pct": 25.9
+        "ip": "47.0",
+        "ip_value": 47.0,
+        "war": 1.69,
+        "era": 1.91,
+        "fip": 2.16,
+        "k_minus_bb_pct": 25.4
       },
       "forecast": {
         "ip": 70.0,
@@ -177,7 +177,7 @@
         "ip": 61.4,
         "war": 0.71
       },
-      "war_gap": 0.95,
+      "war_gap": 0.98,
       "innings_share_pct": 3.7
     },
     {
@@ -185,17 +185,17 @@
       "name": "Aroldis Chapman",
       "throws": "L",
       "role": "Closer",
-      "games": 48,
+      "games": 49,
       "starts": 0,
-      "saves": 31,
+      "saves": 32,
       "holds": 0,
       "actual": {
-        "ip": "46.2",
-        "ip_value": 46.667,
-        "war": 1.37,
-        "era": 2.12,
-        "fip": 2.62,
-        "k_minus_bb_pct": 21.6
+        "ip": "47.2",
+        "ip_value": 47.667,
+        "war": 1.44,
+        "era": 2.08,
+        "fip": 2.59,
+        "k_minus_bb_pct": 21.8
       },
       "forecast": {
         "ip": 62.0,
@@ -209,8 +209,8 @@
         "ip": 54.3,
         "war": 0.88
       },
-      "war_gap": 0.5,
-      "innings_share_pct": 3.7
+      "war_gap": 0.57,
+      "innings_share_pct": 3.8
     },
     {
       "id": 594027,
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "49.0",
         "ip_value": 49.0,
-        "war": 0.73,
+        "war": 0.74,
         "era": 4.41,
         "fip": 4.24,
         "k_minus_bb_pct": 11.0
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "31.1",
         "ip_value": 31.333,
-        "war": 0.57,
+        "war": 0.58,
         "era": 4.6,
         "fip": 3.03,
         "k_minus_bb_pct": 22.6
@@ -370,7 +370,7 @@
         "war": 1.61
       },
       "war_gap": -1.12,
-      "innings_share_pct": 7.8
+      "innings_share_pct": 7.7
     },
     {
       "id": 687941,
@@ -416,7 +416,7 @@
       "actual": {
         "ip": "12.1",
         "ip_value": 12.333,
-        "war": 0.37,
+        "war": 0.36,
         "era": 0.73,
         "fip": 2.04,
         "k_minus_bb_pct": 33.3
@@ -450,7 +450,7 @@
         "ip_value": 30.0,
         "war": 0.33,
         "era": 6.3,
-        "fip": 4.3,
+        "fip": 4.29,
         "k_minus_bb_pct": 18.8
       },
       "forecast": {
@@ -578,7 +578,7 @@
         "ip_value": 8.333,
         "war": 0.09,
         "era": 1.08,
-        "fip": 3.7,
+        "fip": 3.69,
         "k_minus_bb_pct": 16.2
       },
       "forecast": {
@@ -610,7 +610,7 @@
         "ip_value": 10.0,
         "war": 0.07,
         "era": 6.3,
-        "fip": 4.2,
+        "fip": 4.19,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -721,7 +721,7 @@
         "ip": 36.8,
         "war": 0.05
       },
-      "war_gap": -0.04,
+      "war_gap": -0.03,
       "innings_share_pct": 4.4
     },
     {
@@ -738,7 +738,7 @@
         "ip_value": 1.0,
         "war": -0.0,
         "era": 9.0,
-        "fip": 4.1,
+        "fip": 4.09,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -770,7 +770,7 @@
         "ip_value": 58.333,
         "war": -0.03,
         "era": 3.55,
-        "fip": 4.54,
+        "fip": 4.53,
         "k_minus_bb_pct": 14.0
       },
       "forecast": {
@@ -786,7 +786,7 @@
         "war": 0.29
       },
       "war_gap": -0.32,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     },
     {
       "id": 686747,
@@ -802,7 +802,7 @@
         "ip_value": 0.333,
         "war": -0.08,
         "era": 27.0,
-        "fip": 36.1,
+        "fip": 36.09,
         "k_minus_bb_pct": 50.0
       },
       "forecast": {
@@ -834,7 +834,7 @@
         "ip_value": 2.667,
         "war": -0.08,
         "era": 3.38,
-        "fip": 7.6,
+        "fip": 7.59,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -849,7 +849,7 @@
         "ip": 8.1,
         "war": 0.05
       },
-      "war_gap": -0.14,
+      "war_gap": -0.13,
       "innings_share_pct": 0.2
     },
     {
@@ -946,7 +946,7 @@
         "war": 0.33
       },
       "war_gap": -0.46,
-      "innings_share_pct": 1.8
+      "innings_share_pct": 1.7
     },
     {
       "id": 655316,
@@ -962,7 +962,7 @@
         "ip_value": 0.667,
         "war": -0.15,
         "era": 67.5,
-        "fip": 55.6,
+        "fip": 55.59,
         "k_minus_bb_pct": -37.5
       },
       "forecast": null,
