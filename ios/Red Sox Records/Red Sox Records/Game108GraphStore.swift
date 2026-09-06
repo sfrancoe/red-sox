@@ -4,9 +4,7 @@ import Observation
 @MainActor
 @Observable
 final class Game108GraphStore {
-    private static let endpoint = URL(
-        string: "https://red-sox.netlify.app/data/seasons.json"
-    )!
+    private static let endpoint = AppBackend.dataURL("seasons.json")
 
     var series: [GraphSeries] = []
     var isLoading = false

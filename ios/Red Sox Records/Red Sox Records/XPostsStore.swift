@@ -4,17 +4,18 @@ import Observation
 @MainActor
 @Observable
 final class XPostsStore {
-    private static let curatedEndpoint = URL(
-        string: "https://red-sox.netlify.app/api/x-posts"
-    )!
-    private static let discoveryEndpoint = URL(
-        string: "https://red-sox.netlify.app/api/x-discovery"
-    )!
+    private let curatedEndpoint: URL
+    private let discoveryEndpoint: URL
 
     var feed: XFeed?
-    var selectedMode: XFeedMode = .liked
+    var selectedMode: XFeedMode = .recent
     var isLoading = false
     var errorMessage: String?
+
+    init(team: HubTeam = .boston) {
+        curatedEndpoint = AppBackend.apiURL("x-posts", team: team)
+        discoveryEndpoint = AppBackend.apiURL("x-discovery", team: team)
+    }
 
     func load() async {
         guard !isLoading else { return }
@@ -24,8 +25,8 @@ final class XPostsStore {
         defer { isLoading = false }
 
         do {
-            async let curatedRequest = fetchFeed(from: Self.curatedEndpoint)
-            async let discoveryRequest = optionalFeed(from: Self.discoveryEndpoint)
+            async let curatedRequest = fetchFeed(from: curatedEndpoint)
+            async let discoveryRequest = optionalFeed(from: discoveryEndpoint)
             let (curated, discovery) = try await (curatedRequest, discoveryRequest)
             feed = mergedFeed(curated: curated, discovery: discovery)
         } catch {

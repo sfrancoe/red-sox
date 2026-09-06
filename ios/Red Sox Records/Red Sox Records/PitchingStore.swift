@@ -4,15 +4,17 @@ import Observation
 @MainActor
 @Observable
 final class PitchingStore {
-    private static let endpoint = URL(
-        string: "https://red-sox.netlify.app/data/pitching.json"
-    )!
+    private let endpoint: URL
 
     var feed: PitchingFeed?
     var filter: PitcherFilter = .both
     var sort: PitcherSort = .impact
     var isLoading = false
     var errorMessage: String?
+
+    init(team: HubTeam = .boston) {
+        endpoint = AppBackend.dataURL("pitching.json", team: team)
+    }
 
     var visiblePitchers: [PitcherReport] {
         guard let feed else { return [] }
@@ -43,7 +45,7 @@ final class PitchingStore {
         defer { isLoading = false }
 
         do {
-            var request = URLRequest(url: Self.endpoint)
+            var request = URLRequest(url: endpoint)
             request.cachePolicy = .reloadRevalidatingCacheData
             request.timeoutInterval = 20
 

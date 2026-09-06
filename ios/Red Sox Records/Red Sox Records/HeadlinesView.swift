@@ -2,8 +2,15 @@ import SwiftUI
 
 struct HeadlinesView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = HeadlinesStore()
-    @State private var secondarySource: NewsSource = .herald
+    @State private var store: HeadlinesStore
+    @State private var secondarySource: NewsSource
+    let team: HubTeam
+
+    init(team: HubTeam = .boston) {
+        self.team = team
+        _store = State(initialValue: HeadlinesStore(team: team))
+        _secondarySource = State(initialValue: team.newsSources.dropFirst().first ?? team.newsSources[0])
+    }
 
     var body: some View {
         NavigationStack {
@@ -16,13 +23,13 @@ struct HeadlinesView: View {
                             if contentWidth >= 720 && space.size.height > space.size.width {
                                 VStack(spacing: 12) {
                                     HStack(spacing: 12) {
-                                        newspaperQuadrant(.globe)
-                                        newspaperQuadrant(.herald)
+                                        newspaperQuadrant(team.newsSources[0])
+                                        newspaperQuadrant(team.newsSources[1])
                                     }
                                     .frame(height: max(1, (space.size.height - 36) / 2))
                                     HStack(spacing: 12) {
-                                        newspaperQuadrant(.athletic)
-                                        newspaperQuadrant(.massLive)
+                                        newspaperQuadrant(team.newsSources[2])
+                                        newspaperQuadrant(team.newsSources[3])
                                     }
                                     .frame(height: max(1, (space.size.height - 36) / 2))
                                 }
@@ -154,7 +161,7 @@ struct HeadlinesView: View {
 
     private func sourcePicker(selection: Binding<NewsSource>) -> some View {
         HStack(spacing: 0) {
-            ForEach(NewsSource.allCases) { source in
+            ForEach(team.newsSources) { source in
                 Button {
                     selection.wrappedValue = source
                 } label: {

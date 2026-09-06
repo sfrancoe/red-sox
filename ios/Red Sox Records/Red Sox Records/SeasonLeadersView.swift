@@ -2,7 +2,11 @@ import SwiftUI
 
 struct SeasonLeadersView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = SeasonLeadersStore()
+    @State private var store: SeasonLeadersStore
+
+    init(team: HubTeam = .boston) {
+        _store = State(initialValue: SeasonLeadersStore(team: team))
+    }
 
     var body: some View {
         ZStack {
@@ -123,7 +127,7 @@ struct SeasonLeadersView: View {
 
                     if index < season.categories.count - 1 {
                         Divider()
-                            .overlay(AppColor.border)
+                            .overlay(AppColor.navy.opacity(0.5))
                     }
                 }
             }
@@ -157,7 +161,7 @@ struct SeasonLeadersView: View {
                 .font(.system(size: 14, weight: .black))
                 .foregroundStyle(AppColor.green)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Divider().overlay(AppColor.border)
+            Divider().overlay(AppColor.navy.opacity(0.5))
             VStack(alignment: .leading, spacing: 2) {
                 ForEach(Array(category.leaders.prefix(3).enumerated()), id: \.element.id) { index, leader in
                     HStack(spacing: 6) {

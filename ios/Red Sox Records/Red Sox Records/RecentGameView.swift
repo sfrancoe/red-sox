@@ -1,15 +1,23 @@
 import SwiftUI
 
 private enum BoxScoreTeamSelection {
-    case boston
+    case favorite
     case opponent
 }
 
 struct RecentGameView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = RecentGameStore()
-    @State private var selectedStatsTeam: BoxScoreTeamSelection = .boston
+    @State private var store: RecentGameStore
+    @State private var selectedStatsTeam: BoxScoreTeamSelection = .favorite
     @State private var selectedGameID: Int?
+    let team: HubTeam
+    let onSelectPlayer: (Int) -> Void
+
+    init(team: HubTeam = .boston, onSelectPlayer: @escaping (Int) -> Void = { _ in }) {
+        self.team = team
+        self.onSelectPlayer = onSelectPlayer
+        _store = State(initialValue: RecentGameStore(team: team))
+    }
 
     var body: some View {
         NavigationStack {
@@ -61,7 +69,7 @@ struct RecentGameView: View {
             ForEach(Array(store.games.enumerated()), id: \.element.gamePk) { index, game in
                 Button {
                     selectedGameID = game.gamePk
-                    selectedStatsTeam = .boston
+                    selectedStatsTeam = .favorite
                 } label: {
                     Text(gameTabTitle(game, index: index))
                         .font(
@@ -117,13 +125,13 @@ struct RecentGameView: View {
         let currentStillExists = store.games.contains { $0.gamePk == selectedGameID }
         if preferNewLiveGame || !currentStillExists {
             selectedGameID = store.games.first?.gamePk
-            selectedStatsTeam = .boston
+            selectedStatsTeam = .favorite
         }
     }
 
     private func gameContent(_ game: RecentGame) -> some View {
-        let redSox = game.away.id == 111 ? game.away : game.home
-        let opponent = game.away.id == 111 ? game.home : game.away
+        let favorite = game.away.id == team.mlbID ? game.away : game.home
+        let opponent = game.away.id == team.mlbID ? game.home : game.away
 
         return ScrollView {
             LazyVStack(spacing: 10) {
@@ -134,9 +142,9 @@ struct RecentGameView: View {
                         recapCard(game)
                         reportDivider
                         HStack(alignment: .top, spacing: 0) {
-                            battingCard(redSox: redSox, opponent: opponent)
+                            battingCard(favorite: favorite, opponent: opponent)
                                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                            pitchingCard(redSox: redSox, opponent: opponent)
+                            pitchingCard(favorite: favorite, opponent: opponent)
                                 .frame(maxWidth: .infinity, alignment: .topLeading)
                         }
                         reportDivider
@@ -149,9 +157,9 @@ struct RecentGameView: View {
                     VStack(spacing: 0) {
                         recapCard(game)
                         reportDivider
-                        battingCard(redSox: redSox, opponent: opponent)
+                        battingCard(favorite: favorite, opponent: opponent)
                         reportDivider
-                        pitchingCard(redSox: redSox, opponent: opponent)
+                        pitchingCard(favorite: favorite, opponent: opponent)
                         reportDivider
                         scoringPlaysCard(game)
                         reportDivider
@@ -324,23 +332,24 @@ struct RecentGameView: View {
         .padding(16)
     }
 
-    private func battingCard(redSox: TeamBoxScore, opponent: TeamBoxScore) -> some View {
-        let team = selectedBoxScoreTeam(redSox: redSox, opponent: opponent)
+    private func battingCard(favorite: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let boxScoreTeam = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
 
         return VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 10) {
                 sectionTitle("Batting")
                 Spacer(minLength: 0)
-                statsTeamPicker(redSox: redSox, opponent: opponent)
+                statsTeamPicker(favorite: favorite, opponent: opponent)
             }
             let widths: [CGFloat] = [28, 28, 28, 32, 38]
             VStack(spacing: 4) {
                 statHeader(labels: ["AB", "R", "H", "RBI", "AVG"], widths: widths)
 
                 VStack(spacing: 0) {
-                    ForEach(team.batting.filter { !["P", "SP", "RP"].contains($0.position.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()) }) { batter in
+                    ForEach(boxScoreTeam.batting.filter { !["P", "SP", "RP"].contains($0.position.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()) }) { batter in
                         statRow(
                             name: batter.name,
+                            playerID: self.team.supportsPlayers && selectedStatsTeam == .favorite ? batter.mlbId : nil,
                             detail: batter.position,
                             textValues: [
                                 "\(batter.atBats)", "\(batter.runs)", "\(batter.hits)",
@@ -356,22 +365,23 @@ struct RecentGameView: View {
         .padding(16)
     }
 
-    private func pitchingCard(redSox: TeamBoxScore, opponent: TeamBoxScore) -> some View {
-        let team = selectedBoxScoreTeam(redSox: redSox, opponent: opponent)
+    private func pitchingCard(favorite: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let boxScoreTeam = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
 
         return VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 10) {
                 sectionTitle("Pitching")
                 Spacer(minLength: 0)
-                statsTeamPicker(redSox: redSox, opponent: opponent)
+                statsTeamPicker(favorite: favorite, opponent: opponent)
             }
             VStack(spacing: 4) {
                 statHeader(labels: ["IP", "H", "ER", "K"])
 
                 VStack(spacing: 0) {
-                    ForEach(team.pitching) { pitcher in
+                    ForEach(boxScoreTeam.pitching) { pitcher in
                         statRow(
                             name: pitcher.name,
+                            playerID: self.team.supportsPlayers && selectedStatsTeam == .favorite ? pitcher.mlbId : nil,
                             detail: pitcher.note,
                             textValues: [
                                 pitcher.inningsPitched,
@@ -389,18 +399,18 @@ struct RecentGameView: View {
     }
 
     private func selectedBoxScoreTeam(
-        redSox: TeamBoxScore,
+        favorite: TeamBoxScore,
         opponent: TeamBoxScore
     ) -> TeamBoxScore {
-        selectedStatsTeam == .boston ? redSox : opponent
+        selectedStatsTeam == .favorite ? favorite : opponent
     }
 
     private func statsTeamPicker(
-        redSox: TeamBoxScore,
+        favorite: TeamBoxScore,
         opponent: TeamBoxScore
     ) -> some View {
         HStack(spacing: 2) {
-            statsTeamButton("Boston", selection: .boston)
+            statsTeamButton(team.cityName, selection: .favorite)
             statsTeamButton(opponent.cityName, selection: .opponent)
         }
         .frame(width: 166)
@@ -443,6 +453,7 @@ struct RecentGameView: View {
 
     private func statRow(
         name: String,
+        playerID: Int? = nil,
         detail: String,
         values: [Int] = [],
         textValues: [String] = [],
@@ -452,9 +463,26 @@ struct RecentGameView: View {
         HStack(spacing: 6) {
             VStack(alignment: .leading, spacing: 1) {
                 HStack(spacing: 4) {
-                    Text(name)
-                        .font(.subheadline.weight(.semibold))
-                        .lineLimit(1)
+                    if let playerID {
+                        Button {
+                            onSelectPlayer(playerID)
+                        } label: {
+                            HStack(spacing: 3) {
+                                Text(name)
+                                Image(systemName: "person.crop.circle")
+                                    .font(.caption2)
+                            }
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(AppColor.navy)
+                            .lineLimit(1)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityHint("Open player biography")
+                    } else {
+                        Text(name)
+                            .font(.subheadline.weight(.semibold))
+                            .lineLimit(1)
+                    }
                     if detailInline, !detail.isEmpty {
                         Text("· \(detail)")
                             .font(.caption)

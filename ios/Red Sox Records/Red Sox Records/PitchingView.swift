@@ -2,7 +2,15 @@ import SwiftUI
 
 struct PitchingView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = PitchingStore()
+    @State private var store: PitchingStore
+    let team: HubTeam
+    let onSelectPlayer: (Int) -> Void
+
+    init(team: HubTeam = .boston, onSelectPlayer: @escaping (Int) -> Void = { _ in }) {
+        self.team = team
+        self.onSelectPlayer = onSelectPlayer
+        _store = State(initialValue: PitchingStore(team: team))
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -126,9 +134,25 @@ struct PitchingView: View {
                     Text("\(store.sort.title.uppercased()) RANK \(rank)")
                         .font(.caption2.weight(.black))
                         .foregroundStyle(AppColor.red)
-                    Text(pitcher.name)
+                    if team.supportsPlayers {
+                        Button {
+                            onSelectPlayer(pitcher.id)
+                        } label: {
+                            HStack(spacing: 5) {
+                                Text(pitcher.name)
+                                Image(systemName: "person.crop.circle")
+                                    .font(.caption)
+                            }
+                            .font(.headline)
+                            .foregroundStyle(AppColor.navy)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityHint("Open player biography")
+                    } else {
+                        Text(pitcher.name)
                         .font(.headline)
                         .foregroundStyle(AppColor.navy)
+                    }
                     Text("\(pitcher.handedness) · \(pitcher.role) · \(pitcher.games) G\(pitcher.starts > 0 ? " · \(pitcher.starts) GS" : "")")
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -202,7 +226,7 @@ struct PitchingView: View {
 
     private func sourcesNote(_ feed: PitchingFeed) -> some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text("Forecast by now prorates each pitcher’s preseason Steamer projection to Boston’s games played. Actual value is FanGraphs fWAR.")
+            Text("Forecast by now prorates each pitcher’s preseason Steamer projection to \(team.cityName)’s games played. Actual value is FanGraphs fWAR.")
             Text("Updated \(feed.updatedText) · FanGraphs + MLB")
         }
         .font(.caption)

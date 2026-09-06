@@ -2,7 +2,11 @@ import SwiftUI
 
 struct StandingsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = StandingsStore()
+    @State private var store: StandingsStore
+
+    init(team: HubTeam = .boston) {
+        _store = State(initialValue: StandingsStore(team: team))
+    }
 
     var body: some View {
         ZStack {
@@ -77,6 +81,7 @@ struct StandingsView: View {
                 await store.load()
             }
         }
+        .padding(.top, contentWidth >= 650 ? 16 : 12)
     }
 
     private var modePicker: some View {
@@ -155,35 +160,35 @@ struct StandingsView: View {
         return HStack(spacing: 0) {
             HStack(spacing: 5) {
                 Text(team.rank)
-                    .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: team.isRedSox ? .black : .bold, design: .monospaced))
+                    .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: team.isFavorite ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: 15)
                 Text(team.cityName)
-                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isRedSox ? .black : .semibold))
+                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isFavorite ? .black : .semibold))
                     .lineLimit(1)
             }
             .frame(width: contentWidth >= 650 ? 160 : nil, alignment: .leading)
                 .frame(maxWidth: contentWidth >= 650 ? nil : .infinity, alignment: .leading)
 
-            tableValue("\(team.wins)", width: 28, emphasized: team.isRedSox)
-            tableValue("\(team.losses)", width: 28, emphasized: team.isRedSox)
-            tableValue(team.pct, width: 46, emphasized: team.isRedSox)
+            tableValue("\(team.wins)", width: 28, emphasized: team.isFavorite)
+            tableValue("\(team.losses)", width: 28, emphasized: team.isFavorite)
+            tableValue(team.pct, width: 46, emphasized: team.isFavorite)
             tableValue(
                 gamesBack,
                 width: gamesBackTitle == "WCGB" ? 48 : 38,
-                emphasized: team.isRedSox
+                emphasized: team.isFavorite
             )
-            tableValue(team.lastTen, width: 42, emphasized: team.isRedSox)
+            tableValue(team.lastTen, width: 42, emphasized: team.isFavorite)
             Text(team.streak)
-                .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isRedSox ? .black : .bold, design: .monospaced))
+                .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isFavorite ? .black : .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                 .frame(minWidth: 38, maxWidth: contentWidth >= 650 ? .infinity : (38))
         }
         .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .semibold, design: .monospaced))
-        .foregroundStyle(team.isRedSox ? AppColor.navy : AppColor.hunterGreen)
+        .foregroundStyle(team.isFavorite ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, 5)
         .padding(.vertical, contentWidth >= 650 ? 13 : 7)
-        .background(team.isRedSox ? AppColor.paleBlue : Color.clear)
+        .background(team.isFavorite ? AppColor.paleBlue : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
     }
 

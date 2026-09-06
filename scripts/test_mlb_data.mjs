@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import handler from '../netlify/functions/mlb-data.mjs';
+
+const originalFetch = globalThis.fetch;
+const requests = [];
+globalThis.fetch = async url => {
+  requests.push(String(url));
+  if (String(url).includes('/schedule')) {
+    return new Response(JSON.stringify({ dates: [] }));
+  }
+  return new Response(JSON.stringify({
+    gamePk: 123,
+    gameData: { teams: { away: { id: 111 }, home: { id: 147 } } },
+  }));
+};
+
+let response = await handler(new Request(
+  'https://example.test/api/mlb/schedule?team=red-sox&startDate=2026-09-01&endDate=2026-09-06',
+));
+assert.equal(response.status, 200);
+assert.match(requests[0], /teamId=111/);
+assert.match(requests[0], /startDate=2026-09-01/);
+
+response = await handler(new Request('https://example.test/api/mlb/game?team=red-sox&gamePk=123'));
+assert.equal(response.status, 200);
+assert.match(requests[1], /game\/123\/feed\/live/);
+
+response = await handler(new Request('https://example.test/api/mlb/game?team=red-sox&gamePk=nope'));
+assert.equal(response.status, 404);
+
+response = await handler(new Request('https://example.test/api/mlb/schedule?team=unknown'));
+assert.equal(response.status, 404);
+
+globalThis.fetch = originalFetch;
+console.log('MLB live-data gateway tests passed');
