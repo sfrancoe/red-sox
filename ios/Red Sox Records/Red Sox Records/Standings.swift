@@ -37,7 +37,32 @@ struct StandingsTeam: Decodable, Identifiable {
     let wildCardGamesBack: String
     let lastTen: String
     let streak: String
-    let isRedSox: Bool
+    let isFavorite: Bool
+
+    private enum CodingKeys: String, CodingKey {
+        case id, name, shortName, abbreviation, rank, wins, losses, pct
+        case gamesBack, wildCardGamesBack, lastTen, streak
+        case isFavorite, isRedSox
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(Int.self, forKey: .id)
+        name = try values.decode(String.self, forKey: .name)
+        shortName = try values.decode(String.self, forKey: .shortName)
+        abbreviation = try values.decode(String.self, forKey: .abbreviation)
+        rank = try values.decode(String.self, forKey: .rank)
+        wins = try values.decode(Int.self, forKey: .wins)
+        losses = try values.decode(Int.self, forKey: .losses)
+        pct = try values.decode(String.self, forKey: .pct)
+        gamesBack = try values.decode(String.self, forKey: .gamesBack)
+        wildCardGamesBack = try values.decode(String.self, forKey: .wildCardGamesBack)
+        lastTen = try values.decode(String.self, forKey: .lastTen)
+        streak = try values.decode(String.self, forKey: .streak)
+        isFavorite = try values.decodeIfPresent(Bool.self, forKey: .isFavorite)
+            ?? values.decodeIfPresent(Bool.self, forKey: .isRedSox)
+            ?? false
+    }
 
     var cityName: String {
         let citiesByTeamID = [

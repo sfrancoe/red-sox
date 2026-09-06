@@ -2,8 +2,14 @@ import SwiftUI
 
 struct ScheduleView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = ScheduleStore()
+    @State private var store: ScheduleStore
     @State private var selectedGameID: Int?
+    let team: HubTeam
+
+    init(team: HubTeam = .boston) {
+        self.team = team
+        _store = State(initialValue: ScheduleStore(team: team))
+    }
 
     private let weekdayLabels = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
     private let calendarColumns = Array(repeating: GridItem(.flexible(), spacing: 3), count: 7)
@@ -103,30 +109,32 @@ struct ScheduleView: View {
     private func dayCell(_ date: Date, games: [ScheduledGame]) -> some View {
         let game = games.first
         let selected = games.contains { $0.id == selectedGameID }
-        let accent = game?.location == "home" ? AppColor.red : AppColor.hunterGreen
+        let isHome = game?.location == "home"
+        let accent = isHome ? AppColor.red : AppColor.hunterGreen
+        let usesDarkBackground = selected || isHome
 
         return VStack(spacing: 3) {
             Text(date.formatted(.dateTime.day()))
                 .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
-                .foregroundStyle(selected ? Color.white : AppColor.navy)
+                .foregroundStyle(usesDarkBackground ? Color.white : AppColor.navy)
 
             if let game {
                 Text("\(game.locationWord) \(opponentCode(game.opponent))")
                     .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .black))
-                    .foregroundStyle(selected ? Color.white : accent)
+                    .foregroundStyle(usesDarkBackground ? Color.white : accent)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
 
                 Text(game.formattedTime)
                     .font(.system(size: contentWidth >= 650 ? 12 : 7, weight: .semibold))
-                    .foregroundStyle(selected ? Color.white.opacity(0.88) : AppColor.ink.opacity(0.72))
+                    .foregroundStyle(usesDarkBackground ? Color.white.opacity(0.88) : AppColor.ink.opacity(0.72))
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
 
                 if games.count > 1 || game.doubleheader {
                     Text("DH")
                         .font(.system(size: contentWidth >= 650 ? 12 : 7, weight: .black))
-                        .foregroundStyle(selected ? Color.white : AppColor.red)
+                        .foregroundStyle(usesDarkBackground ? Color.white : AppColor.red)
                 }
             } else {
                 Text("—")
@@ -138,7 +146,7 @@ struct ScheduleView: View {
         .frame(height: contentWidth >= 650 ? 92 : 67)
         .background {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(selected ? accent : game == nil ? AppColor.paleBlue.opacity(0.36) : accent.opacity(0.09))
+                .fill(selected || isHome ? accent : game == nil ? AppColor.paleBlue.opacity(0.36) : accent.opacity(0.09))
         }
         .overlay {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -197,9 +205,9 @@ struct ScheduleView: View {
 
                     HStack(alignment: .top) {
                         starterDetail(
-                            "BOSTON",
-                            pitcherName(game.redSoxPitcher),
-                            game.redSoxPitcherRecord
+                            team.cityName.uppercased(),
+                            pitcherName(game.favoriteTeamPitcher),
+                            game.favoriteTeamPitcherRecord
                         )
                         Spacer()
                         Text("VS.")

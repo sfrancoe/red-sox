@@ -91,13 +91,13 @@ struct PitcherReport: Codable, Identifiable, Sendable {
             return "A season-changing surprise: \(warGap.signed(places: 1)) fWAR beyond the forecast, with \(actual.ip) innings instead of the \(forecastToDate.ip.formatted(.number.precision(.fractionLength(1)))) expected by now."
         }
         if warGap >= 0.5 {
-            return "\(warGap.signed(places: 1)) fWAR ahead of forecast while covering \(inningsSharePct.formatted(.number.precision(.fractionLength(1))))% of Boston’s innings."
+            return "\(warGap.signed(places: 1)) fWAR ahead of forecast while covering \(inningsSharePct.formatted(.number.precision(.fractionLength(1))))% of the team’s innings."
         }
         if warGap >= 0.15 {
             return "Quietly ahead of plan: \(warGap.signed(places: 1)) fWAR, plus \(actual.ip) innings that helped hold the staff together."
         }
         if warGap > -0.15 {
-            return "Almost exactly on the value forecast so far, accounting for \(inningsSharePct.formatted(.number.precision(.fractionLength(1))))% of Boston’s innings."
+            return "Almost exactly on the value forecast so far, accounting for \(inningsSharePct.formatted(.number.precision(.fractionLength(1))))% of the team’s innings."
         }
         return "\(abs(warGap).formatted(.number.precision(.fractionLength(1)))) fWAR behind forecast, while still covering \(actual.ip) innings."
     }

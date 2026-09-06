@@ -31,17 +31,25 @@ jobs:
           python3 scripts/fetch_standings.py
           python3 scripts/fetch_pitching.py
 
+      - name: Fetch open player data
+        run: python3 scripts/fetch_players.py
+
+      - name: Check player data
+        run: |
+          python3 scripts/test_open_players.py
+          python3 scripts/test_players.py
+
       - name: Show what changed
-        run: git --no-pager diff --stat -- data/schedule.json data/recent-game.json data/standings.json data/pitching.json || true
+        run: git --no-pager diff --stat -- data/schedule.json data/recent-game.json data/standings.json data/players.json data/pitching.json "ios/Red Sox Records/Red Sox Records/players.json" || true
 
       - name: Commit if game data changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/schedule.json data/recent-game.json data/standings.json data/pitching.json; then
+          if git diff --quiet -- data/schedule.json data/recent-game.json data/standings.json data/players.json data/pitching.json "ios/Red Sox Records/Red Sox Records/players.json"; then
             echo "No game data changes — nothing to commit."
           else
-            git add data/schedule.json data/recent-game.json data/standings.json data/pitching.json
+            git add data/schedule.json data/recent-game.json data/standings.json data/players.json data/pitching.json "ios/Red Sox Records/Red Sox Records/players.json"
             git commit -m "Refresh game, standings, and pitching pages ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase origin main
             git push

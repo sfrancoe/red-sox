@@ -4,12 +4,16 @@ import Observation
 @MainActor
 @Observable
 final class RecentGameStore {
-    private let client = MLBGameClient()
+    private let client: MLBGameClient
     private var cache: [Int: RecentGame] = [:]
 
     var games: [RecentGame] = []
     var isLoading = false
     var errorMessage: String?
+
+    init(team: HubTeam = .boston) {
+        client = MLBGameClient(team: team)
+    }
 
     var hasLiveGame: Bool {
         games.contains(where: \.isLive)

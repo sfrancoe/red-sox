@@ -34,20 +34,24 @@ FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 KNOWN_ENDPOINTS = {
     "https://red-sox.netlify.app/api/x-discovery",
     "https://red-sox.netlify.app/api/x-posts",
-    "https://red-sox.netlify.app/data/athletic.json",
-    "https://red-sox.netlify.app/data/globe.json",
-    "https://red-sox.netlify.app/data/herald.json",
-    "https://red-sox.netlify.app/data/masslive.json",
-    "https://red-sox.netlify.app/data/meta.json",
-    "https://red-sox.netlify.app/data/pitching.json",
-    "https://red-sox.netlify.app/data/recent-game.json",
-    "https://red-sox.netlify.app/data/schedule.json",
-    "https://red-sox.netlify.app/data/seasons.json",
-    "https://red-sox.netlify.app/data/standings.json",
+    "https://red-sox.netlify.app/api/mlb/schedule?team=red-sox",
+    "https://red-sox.netlify.app/api/data/athletic.json",
+    "https://red-sox.netlify.app/api/data/globe.json",
+    "https://red-sox.netlify.app/api/data/herald.json",
+    "https://red-sox.netlify.app/api/data/masslive.json",
+    "https://red-sox.netlify.app/api/data/meta.json",
+    "https://red-sox.netlify.app/api/data/pitching.json",
+    "https://red-sox.netlify.app/api/data/players.json",
+    "https://red-sox.netlify.app/api/data/recent-game.json",
+    "https://red-sox.netlify.app/api/data/schedule.json",
+    "https://red-sox.netlify.app/api/data/seasons.json",
+    "https://red-sox.netlify.app/api/data/standings.json",
 }
 JSON_PROBE_OVERRIDES = {
+    "https://red-sox.netlify.app": "https://red-sox.netlify.app/api/data/meta.json",
     "https://statsapi.mlb.com": "https://statsapi.mlb.com/api/v1/teams/111",
 }
+UNLICENSED_RUNTIME_HOSTS = {"statsapi.mlb.com", "img.mlbstatic.com"}
 
 
 @dataclass(frozen=True)
@@ -167,15 +171,39 @@ def check_metadata() -> list[Check]:
     return checks
 
 
+def check_unlicensed_runtime_sources() -> Check:
+    findings: list[str] = []
+    paths = swift_sources() + [SOURCE_ROOT / "players.json"]
+    for path in paths:
+        if not path.exists():
+            continue
+        contents = read_text(path)
+        for host in UNLICENSED_RUNTIME_HOSTS:
+            if host in contents:
+                findings.append(f"{path.name}: {host}")
+    if findings:
+        return result(
+            "FAIL",
+            "Production data sources",
+            "Prototype-only MLB endpoints remain in the app: " + ", ".join(findings),
+        )
+    return result("PASS", "Production data sources", "No prototype-only MLB endpoints are bundled.")
+
+
 def swift_sources() -> list[Path]:
     return sorted(SOURCE_ROOT.glob("*.swift"))
+
+
+def release_source(path: Path) -> str:
+    """Return Swift source with DEBUG-only compilation blocks removed."""
+    return re.sub(r"^\s*#if DEBUG\b.*?^\s*#endif\b", "", read_text(path), flags=re.MULTILINE | re.DOTALL)
 
 
 def check_placeholders() -> Check:
     findings: list[str] = []
     patterns = re.compile(r"\b(TODO|FIXME|Lorem ipsum)\b|example\.com|localhost|127\.0\.0\.1", re.IGNORECASE)
     for path in swift_sources():
-        for number, line in enumerate(read_text(path).splitlines(), start=1):
+        for number, line in enumerate(release_source(path).splitlines(), start=1):
             if patterns.search(line):
                 findings.append(f"{path.name}:{number}")
     if findings:
@@ -192,7 +220,7 @@ def discovered_urls() -> list[str]:
 
 
 def check_transport_security() -> Check:
-    insecure = [path.name for path in swift_sources() if "http://" in read_text(path)]
+    insecure = [path.name for path in swift_sources() if "http://" in release_source(path)]
     if insecure:
         return result("FAIL", "Network security", "Insecure HTTP URLs found in " + ", ".join(insecure))
     return result("PASS", "Network security", "All hard-coded app endpoints use HTTPS.")
@@ -340,6 +368,7 @@ def main() -> int:
     checks.extend(check_metadata())
     checks.append(check_placeholders())
     checks.append(check_transport_security())
+    checks.append(check_unlicensed_runtime_sources())
     if args.network:
         checks.extend(check_live_endpoints())
     else:

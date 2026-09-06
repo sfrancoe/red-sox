@@ -49,6 +49,25 @@ private struct MarketPoint: Decodable, Identifiable {
 }
 private struct MarketHistory: Decodable { let points: [MarketPoint] }
 
+private enum ResolveWindow: String, CaseIterable, Identifiable {
+    case all
+    case today
+    case week
+    case month
+    case seasonEnd
+
+    var id: Self { self }
+    var title: String {
+        switch self {
+        case .all: "Any time"
+        case .today: "Today"
+        case .week: "This week"
+        case .month: "This month"
+        case .seasonEnd: "By season end"
+        }
+    }
+}
+
 @MainActor @Observable
 private final class MarketsStore {
     var snapshot: MarketSnapshot?
@@ -63,7 +82,7 @@ private final class MarketsStore {
             return URL(string: "http://localhost:8768/api/redsox-markets")!
         }
         #endif
-        return URL(string: "https://red-sox.netlify.app/api/redsox-markets")!
+        return AppBackend.apiURL("redsox-markets")
     }
     private let cacheKey = "redsox.marketSnapshot.v1"
     init() {
@@ -108,19 +127,22 @@ struct MarketsView: View {
     @Environment(\.hubContentWidth) private var width
     @Environment(\.scenePhase) private var scenePhase
     @State private var store = MarketsStore()
-    @State private var provider = "Both"
-    @State private var category = "All"
+    @State private var resolveWindow: ResolveWindow = .today
+    @State private var volumeOnly = true
     @State private var detail: SoxMarket?
     private var markets: [SoxMarket] { store.snapshot?.markets ?? [] }
     private var filtered: [SoxMarket] {
-        markets.filter { (provider == "Both" || $0.provider == provider) && (category == "All" || $0.category == category) }
+        markets.filter { market in
+            matchesResolveWindow(market) && (!volumeOnly || (market.volume ?? 0) > 10_000)
+        }
     }
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 if let snapshot = store.snapshot {
+                    sourceWarnings(snapshot)
                     octoberWatch
-                    freshness(snapshot)
+                        .padding(.top, width >= 650 ? 28 : 20)
                     marketBoard
                 } else if store.loading {
                     ProgressView("Finding Red Sox markets…").tint(.white).foregroundStyle(.white).frame(maxWidth: .infinity, minHeight: 220)
@@ -143,7 +165,7 @@ struct MarketsView: View {
             await store.refresh()
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("-market-detail") { detail = markets.first(where: { $0.provider == "Kalshi" && $0.category == "Winner" }) }
-            if ProcessInfo.processInfo.arguments.contains("-market-season") { category = "Season" }
+            if ProcessInfo.processInfo.arguments.contains("-market-season") { resolveWindow = .seasonEnd }
             #endif
         }
         .task {
@@ -154,29 +176,30 @@ struct MarketsView: View {
         }
         .sheet(item: $detail) { market in MarketDetail(market: market, store: store) }
     }
-    private func freshness(_ snapshot: MarketSnapshot) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+
+    private func sourceWarnings(_ snapshot: MarketSnapshot) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
             ForEach(snapshot.sources.filter { !$0.available }, id: \.name) { source in
                 Label("\(source.name) unavailable", systemImage: "exclamationmark.circle")
-                    .font(.caption).foregroundStyle(.white)
-            }
-            if let date = snapshot.date {
-                HStack(spacing: 4) {
-                    Text("Snapshot"); Text(date, style: .relative); Text("ago")
-                    if Date().timeIntervalSince(date) > 600 { Text("• Older prices").foregroundStyle(.white) }
-                }.font(.caption).foregroundStyle(.white.opacity(0.85))
+                    .font(.caption)
+                    .foregroundStyle(.white)
             }
         }
     }
+
     private var octoberWatch: some View {
         let picks = markets.filter { $0.provider == "Polymarket" && $0.category == "Season" && ($0.question.contains("World Series") || $0.question.contains("clinch a spot") || $0.question.contains("AL East title")) }
         return VStack(spacing: 0) {
             if !picks.isEmpty {
-                HStack {
-                    Text("EYES ON OCTOBER").font(.caption2.bold())
+                HStack(spacing: 0) {
+                    Text("MARKET")
                     Spacer()
-                    Text("POLYMARKET").font(.caption2.weight(.medium))
+                    Text("CHANCE")
+                        .frame(width: 72, alignment: .trailing)
+                    Text("7D Chg")
+                        .frame(width: 96, alignment: .trailing)
                 }
+                .font(.caption2.bold())
                 .foregroundStyle(.white)
                 .padding(.horizontal, 8)
                 .frame(minHeight: 30)
@@ -190,8 +213,15 @@ struct MarketsView: View {
                                 .padding(.horizontal, 8).padding(.vertical, 6)
                             Text(market.percent).monospacedDigit()
                                 .foregroundStyle(AppColor.hunterGreen)
-                                .frame(width: 72, alignment: .trailing)
                                 .padding(.horizontal, 8)
+                                .frame(width: 72, alignment: .trailing)
+                                .frame(maxHeight: .infinity)
+                                .overlay(alignment: .leading) {
+                                    Rectangle().fill(AppColor.border).frame(width: 0.5)
+                                }
+                            sevenDayChange(for: market)
+                                .padding(.horizontal, 8)
+                                .frame(width: 96, alignment: .trailing)
                                 .frame(maxHeight: .infinity)
                                 .overlay(alignment: .leading) {
                                     Rectangle().fill(AppColor.border).frame(width: 0.5)
@@ -205,53 +235,91 @@ struct MarketsView: View {
                             Rectangle().fill(AppColor.border).frame(height: 0.5)
                         }
                         .contentShape(Rectangle())
-                    }.buttonStyle(.plain)
-                        .accessibilityElement(children: .combine)
-                        .accessibilityHint("Opens price history and market rules")
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityHint("Opens price history and market rules")
                 }
             }
         }
         .overlay {
             if !picks.isEmpty { Rectangle().stroke(AppColor.border, lineWidth: 1) }
         }
+        .task(id: store.snapshot?.generatedAt) {
+            for market in picks { await store.loadHistory(market, days: 7) }
+        }
     }
+
+    @ViewBuilder
+    private func sevenDayChange(for market: SoxMarket) -> some View {
+        let key = store.historyKey(market, days: 7)
+        let history = store.histories[key] ?? []
+        if let first = history.first, let last = history.last, history.count >= 2 {
+            let change = (last.p - first.p) * 100
+            let symbol = change > 0 ? "arrow.up" : change < 0 ? "arrow.down" : "minus"
+            let color: Color = change > 0 ? .green : change < 0 ? .red : .secondary
+            HStack(spacing: 3) {
+                Image(systemName: symbol)
+                Text(String(format: "%.1f", abs(change))).monospacedDigit()
+            }
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(color)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(String(format: "7-day change %@ %.1f percentage points", change > 0 ? "up" : change < 0 ? "down" : "unchanged at", abs(change)))
+        } else if store.pending.contains(key) {
+            ProgressView().controlSize(.mini)
+                .accessibilityLabel("Loading 7-day change")
+        } else {
+            Text("—").foregroundStyle(.secondary)
+                .accessibilityLabel("7-day change unavailable")
+        }
+    }
+
     private var marketBoard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("The market board").font(.system(.title2, design: .serif, weight: .bold)).foregroundStyle(.white)
+            HStack(spacing: 12) {
+                Text("Resolves")
+                    .font(.subheadline.weight(.bold))
+                    .foregroundStyle(AppColor.navy)
                 Spacer()
-                Text("\(filtered.count) markets").font(.caption.weight(.semibold)).foregroundStyle(AppColor.hunterGreen)
-                    .padding(.horizontal, 10).padding(.vertical, 6)
-                    .background(AppColor.paper).clipShape(Capsule())
-            }
-            Picker("Provider", selection: $provider) {
-                ForEach(["Both", "Kalshi", "Polymarket"], id: \.self) { Text($0).tag($0) }
-            }.pickerStyle(.segmented)
-                .background(AppColor.paper, in: RoundedRectangle(cornerRadius: 8))
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(["All", "Winner", "Totals", "Spread", "Game props", "Season"], id: \.self) { name in
-                        Button { category = name } label: {
-                            Text(name).font(.caption.weight(.semibold)).padding(.horizontal, 10).padding(.vertical, 7)
-                                .foregroundStyle(category == name ? .white : AppColor.hunterGreen)
-                                .background(category == name ? AppColor.hunterGreen : .white).clipShape(Capsule())
-                        }.buttonStyle(.plain)
+                Picker("Resolves", selection: $resolveWindow) {
+                    ForEach(ResolveWindow.allCases) { window in
+                        Text(window.title).tag(window)
                     }
                 }
+                .pickerStyle(.menu)
+                .tint(AppColor.hunterGreen)
             }
+            .padding(.horizontal, 14)
+            .frame(minHeight: 44)
+            .background(AppColor.paper)
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+            Toggle("Volume over 10K", isOn: $volumeOnly)
+                .font(.subheadline.weight(.bold))
+                .foregroundStyle(AppColor.navy)
+                .tint(AppColor.hunterGreen)
+                .padding(.horizontal, 14)
+                .frame(minHeight: 44)
+                .background(AppColor.paper)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
             if filtered.isEmpty {
-                ContentUnavailableView("No open markets here", systemImage: "baseball", description: Text("Try another category or provider. New markets appear as they are listed.")).foregroundStyle(.white)
+                ContentUnavailableView("No markets resolve then", systemImage: "calendar", description: Text("Try another resolve window. New markets appear as they are listed.")).foregroundStyle(.white)
             }
             if !filtered.isEmpty {
-                Text("Tap a row for details · Swipe sideways for more columns")
-                    .font(.caption2).foregroundStyle(.white.opacity(0.85))
+                Text("Tap for details · Swipe for more")
+                    .font(.caption2)
+                    .foregroundStyle(.white.opacity(0.85))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
                 marketTable
             }
         }
     }
     // One shared column layout keeps headers and values aligned at every width.
     private var marketColumnWidths: [CGFloat] {
-        [190, 72, 100, 90, 150, 120, 100, 130]
+        [190, 72, 100, 150, 120, 100, 130]
     }
     private func tableCell(_ text: String, column: Int, header: Bool = false,
                            color: Color = AppColor.ink) -> some View {
@@ -261,7 +329,7 @@ struct MarketsView: View {
             .foregroundStyle(header ? .white : color)
             .lineLimit(column == 0 && !header ? 2 : 1)
             .frame(width: marketColumnWidths[column] - 16,
-                   alignment: column == 1 || column == 7 ? .trailing : .leading)
+                   alignment: column == 1 || column == 6 ? .trailing : .leading)
             .padding(.horizontal, 8)
             .padding(.vertical, header ? 0 : 6)
             .frame(minHeight: header ? 30 : 48)
@@ -275,7 +343,7 @@ struct MarketsView: View {
         ScrollView(.horizontal) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    ForEach(Array(["MARKET", "CHANCE", "SOURCE", "TYPE", "GAME", "DATE", "TIME (ET)", "VOLUME"].enumerated()), id: \.offset) { column, title in
+                    ForEach(Array(["MARKET", "CHANCE", "SOURCE", "GAME", "DATE", "TIME (ET)", "VOLUME"].enumerated()), id: \.offset) { column, title in
                         tableCell(title, column: column, header: true)
                     }
                 }.fixedSize(horizontal: false, vertical: true)
@@ -287,13 +355,12 @@ struct MarketsView: View {
                                 tableCell(market.question, column: 0)
                                 tableCell(market.percent, column: 1, color: AppColor.hunterGreen)
                                 tableCell(market.provider, column: 2, color: market.tint)
-                                tableCell(market.category, column: 3)
-                                tableCell(market.category == "Season" ? "—" : market.title, column: 4)
-                                tableCell(market.date == nil ? "Season" : market.dayLabel, column: 5)
-                                tableCell(market.date == nil ? "—" : market.timeLabel.replacingOccurrences(of: " ET", with: ""), column: 6)
+                                tableCell(market.category == "Season" ? "—" : market.title, column: 3)
+                                tableCell(market.date == nil ? "Season" : market.dayLabel, column: 4)
+                                tableCell(market.date == nil ? "—" : market.timeLabel.replacingOccurrences(of: " ET", with: ""), column: 5)
                                 tableCell(market.volume.map {
                                     $0.formatted(.number.notation(.compactName).precision(.fractionLength(0...1))) + " " + market.volumeUnit
-                                } ?? "—", column: 7)
+                                } ?? "—", column: 6)
                             }.fixedSize(horizontal: false, vertical: true)
                                 .background(index.isMultiple(of: 2) ? AppColor.paper : AppColor.cream)
                                 .overlay(alignment: .bottom) {
@@ -310,6 +377,46 @@ struct MarketsView: View {
         }
         .background(AppColor.paper)
         .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+    }
+
+    private func matchesResolveWindow(_ market: SoxMarket) -> Bool {
+        guard resolveWindow != .all else { return true }
+        guard let date = market.date.flatMap(marketDate) else {
+            return resolveWindow == .seasonEnd
+        }
+
+        let calendar = marketCalendar
+        let now = Date()
+        switch resolveWindow {
+        case .all:
+            return true
+        case .today:
+            return calendar.isDate(date, inSameDayAs: now)
+        case .week:
+            guard let interval = calendar.dateInterval(of: .weekOfYear, for: now) else { return false }
+            return interval.contains(date)
+        case .month:
+            return calendar.isDate(date, equalTo: now, toGranularity: .month)
+        case .seasonEnd:
+            let year = calendar.component(.year, from: now)
+            let seasonEnd = calendar.date(from: DateComponents(year: year, month: 10, day: 31)) ?? .distantFuture
+            return date <= seasonEnd
+        }
+    }
+
+    private func marketDate(_ value: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.calendar = marketCalendar
+        formatter.timeZone = marketCalendar.timeZone
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: value)
+    }
+
+    private var marketCalendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "America/New_York")!
+        return calendar
     }
     private var methodology: some View {
         DisclosureGroup("How to read these markets") {

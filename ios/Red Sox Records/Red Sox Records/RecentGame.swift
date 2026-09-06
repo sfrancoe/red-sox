@@ -90,6 +90,7 @@ struct TeamBoxScore: Codable, Sendable {
 }
 
 struct Batter: Codable, Identifiable, Sendable {
+    let mlbId: Int?
     let name: String
     let position: String
     let note: String
@@ -102,6 +103,7 @@ struct Batter: Codable, Identifiable, Sendable {
     let strikeOuts: Int
     let leftOnBase: Int
     let homeRuns: Int
+    let stolenBases: Int?
     let average: String?
     let seasonHomeRuns: Int?
 
@@ -109,6 +111,7 @@ struct Batter: Codable, Identifiable, Sendable {
 }
 
 struct Pitcher: Codable, Identifiable, Sendable {
+    let mlbId: Int?
     let name: String
     let position: String
     let note: String

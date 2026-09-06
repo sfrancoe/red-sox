@@ -4,17 +4,18 @@ import Observation
 @MainActor
 @Observable
 final class SeasonLeadersStore {
-    private static let seasonsURL = URL(
-        string: "https://red-sox.netlify.app/data/seasons.json"
-    )!
-    private static let metadataURL = URL(
-        string: "https://red-sox.netlify.app/data/meta.json"
-    )!
+    private let seasonsURL: URL
+    private let metadataURL: URL
 
     var seasons: [String: SeasonLeaders] = [:]
     var metadata: LeadersMetadata?
     var isLoading = false
     var errorMessage: String?
+
+    init(team: HubTeam = .boston) {
+        seasonsURL = AppBackend.dataURL("seasons.json", team: team)
+        metadataURL = AppBackend.dataURL("meta.json", team: team)
+    }
 
     var sortedYears: [String] {
         seasons.keys.sorted(by: >)
@@ -28,8 +29,8 @@ final class SeasonLeadersStore {
         defer { isLoading = false }
 
         do {
-            async let seasonsData = Self.fetch(Self.seasonsURL)
-            async let metadataData = Self.fetch(Self.metadataURL)
+            async let seasonsData = Self.fetch(seasonsURL)
+            async let metadataData = Self.fetch(metadataURL)
             let (loadedSeasonsData, loadedMetadataData) = try await (
                 seasonsData,
                 metadataData

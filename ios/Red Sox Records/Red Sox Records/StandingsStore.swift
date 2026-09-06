@@ -4,14 +4,16 @@ import Observation
 @MainActor
 @Observable
 final class StandingsStore {
-    private static let endpoint = URL(
-        string: "https://red-sox.netlify.app/data/standings.json"
-    )!
+    private let endpoint: URL
 
     var feed: StandingsFeed?
     var mode: StandingsMode = .divisions
     var isLoading = false
     var errorMessage: String?
+
+    init(team: HubTeam = .boston) {
+        endpoint = AppBackend.dataURL("standings.json", team: team)
+    }
 
     func load() async {
         guard !isLoading else { return }
@@ -21,7 +23,7 @@ final class StandingsStore {
         defer { isLoading = false }
 
         do {
-            var request = URLRequest(url: Self.endpoint)
+            var request = URLRequest(url: endpoint)
             request.cachePolicy = .reloadRevalidatingCacheData
             request.timeoutInterval = 20
 

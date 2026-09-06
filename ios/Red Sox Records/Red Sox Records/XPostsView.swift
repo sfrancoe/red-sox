@@ -2,7 +2,11 @@ import SwiftUI
 
 struct XPostsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = XPostsStore()
+    @State private var store: XPostsStore
+
+    init(team: HubTeam = .boston) {
+        _store = State(initialValue: XPostsStore(team: team))
+    }
 
     var body: some View {
         NavigationStack {
@@ -32,20 +36,20 @@ struct XPostsView: View {
     private func feedContent(_ feed: XFeed) -> some View {
         if contentWidth >= 720 {
             HStack(spacing: 0) {
-                postsPage(feed.popular, feed: feed, mode: .liked, pinnedHeader: true)
-                Divider().overlay(Color.white.opacity(0.3))
                 postsPage(feed.recent, feed: feed, mode: .recent, pinnedHeader: true)
+                Divider().overlay(Color.white.opacity(0.3))
+                postsPage(feed.popular, feed: feed, mode: .liked, pinnedHeader: true)
             }
         } else {
             VStack(spacing: 0) {
                 modePicker
 
                 TabView(selection: $store.selectedMode) {
-                    postsPage(feed.popular, feed: feed, mode: .liked)
-                        .tag(XFeedMode.liked)
-
                     postsPage(feed.recent, feed: feed, mode: .recent)
                         .tag(XFeedMode.recent)
+
+                    postsPage(feed.popular, feed: feed, mode: .liked)
+                        .tag(XFeedMode.liked)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }

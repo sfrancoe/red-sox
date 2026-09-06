@@ -4,13 +4,19 @@ import Observation
 @MainActor
 @Observable
 final class HeadlinesStore {
-    var selectedSource: NewsSource = .globe
+    private let team: HubTeam
+    var selectedSource: NewsSource
     var feeds: [NewsSource: NewsFeed] = [:]
     var isLoading = false
     var errorMessage: String?
 
     var selectedFeed: NewsFeed? {
         feeds[selectedSource]
+    }
+
+    init(team: HubTeam = .boston) {
+        self.team = team
+        selectedSource = team.newsSources[0]
     }
 
     func load() async {
@@ -21,12 +27,21 @@ final class HeadlinesStore {
         defer { isLoading = false }
 
         do {
-            async let globe = Self.fetch(.globe)
-            async let herald = Self.fetch(.herald)
-            async let athletic = Self.fetch(.athletic)
-            async let massLive = Self.fetch(.massLive)
+            let loadedFeeds = try await withThrowingTaskGroup(
+                of: (source: NewsSource, feed: NewsFeed).self
+            ) { group in
+                for source in team.newsSources {
+                    group.addTask { [team] in
+                        try await Self.fetch(source, team: team)
+                    }
+                }
 
-            let loadedFeeds = try await [globe, herald, athletic, massLive]
+                var results: [(source: NewsSource, feed: NewsFeed)] = []
+                for try await result in group {
+                    results.append(result)
+                }
+                return results
+            }
             feeds = Dictionary(
                 uniqueKeysWithValues: loadedFeeds.map { ($0.source, $0.feed) }
             )
@@ -36,11 +51,10 @@ final class HeadlinesStore {
     }
 
     private static func fetch(
-        _ source: NewsSource
+        _ source: NewsSource,
+        team: HubTeam
     ) async throws -> (source: NewsSource, feed: NewsFeed) {
-        let url = URL(
-            string: "https://red-sox.netlify.app/data/\(source.fileName).json"
-        )!
+        let url = AppBackend.dataURL("\(source.fileName).json", team: team)
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadRevalidatingCacheData
         request.timeoutInterval = 20
