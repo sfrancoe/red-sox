@@ -26,10 +26,16 @@ assert.equal(response.status, 200);
 assert.match(requests[0], /teamId=111/);
 assert.match(requests[0], /startDate=2026-09-01/);
 
+response = await handler(new Request(
+  'https://example.test/api/mlb/schedule?team=redsox&startDate=2026-09-01&endDate=2026-09-06',
+));
+assert.equal(response.status, 200);
+assert.match(requests[1], /teamId=111/);
+
 response = await handler(new Request('https://example.test/api/mlb/game?team=red-sox&gamePk=123'));
 assert.equal(response.status, 200);
-assert.match(requests[1], /game\/123\/feed\/live/);
-assert.match(requests[2], /game\/123\/content/);
+assert.match(requests[2], /game\/123\/feed\/live/);
+assert.match(requests[3], /game\/123\/content/);
 assert.deepEqual((await response.json()).officialRecap, {
   headline: 'Boston wins',
   url: 'https://www.mlb.com/news/boston-wins',

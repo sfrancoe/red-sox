@@ -2,6 +2,7 @@ const MLB_ORIGIN = 'https://statsapi.mlb.com';
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
 const TEAMS = new Map([
   ['red-sox', 111],
+  ['redsox', 111],
   ['yankees', 147],
 ]);
 
