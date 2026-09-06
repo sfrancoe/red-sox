@@ -236,12 +236,14 @@ def season_games(year: int) -> list[dict]:
                     continue
                 rows.append({
                     "date": g.get("officialDate", ""),
-                    # gamePk keeps doubleheaders in the order they were played
+                    # gamePk is not chronological for every makeup doubleheader.
+                    "game_date": g.get("gameDate", ""),
+                    "game_number": g.get("gameNumber", 1),
                     "pk": g.get("gamePk", 0),
                     "wins": rec["wins"],
                     "losses": rec["losses"],
                 })
-    rows.sort(key=lambda r: (r["date"], r["pk"]))
+    rows.sort(key=lambda r: (r["date"], r["game_number"], r["game_date"], r["pk"]))
     if skipped:
         detail = ", ".join(f"{k}×{v}" for k, v in sorted(skipped.items()))
         print(f"    skipped {sum(skipped.values())} non-played entries ({detail})")

@@ -3,6 +3,7 @@ import Foundation
 enum HubTeam: String, CaseIterable, Identifiable, Sendable {
     case boston
     case newYork = "new-york"
+    case newYorkMets = "new-york-mets"
 
     nonisolated var id: String { rawValue }
 
@@ -10,6 +11,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: 111
         case .newYork: 147
+        case .newYorkMets: 121
         }
     }
 
@@ -17,6 +19,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: "Boston Red Sox"
         case .newYork: "New York Yankees"
+        case .newYorkMets: "New York Mets"
         }
     }
 
@@ -24,6 +27,15 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: "Boston"
         case .newYork: "New York"
+        case .newYorkMets: "New York"
+        }
+    }
+
+    nonisolated var cityAbbreviation: String {
+        switch self {
+        case .boston: "BOS"
+        case .newYork: "NY"
+        case .newYorkMets: "NY"
         }
     }
 
@@ -31,6 +43,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: "Red Sox"
         case .newYork: "Yankees"
+        case .newYorkMets: "Mets"
         }
     }
 
@@ -38,6 +51,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: "Boston Red Sox"
         case .newYork: "New York Yankees"
+        case .newYorkMets: "New York Mets"
         }
     }
 
@@ -45,6 +59,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: "redsox"
         case .newYork: "yankees"
+        case .newYorkMets: "mets"
         }
     }
 
@@ -52,6 +67,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: nil
         case .newYork: "yankees"
+        case .newYorkMets: "mets"
         }
     }
 
@@ -59,6 +75,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .boston: [.globe, .herald, .athletic, .massLive]
         case .newYork: [.nyTimes, .nyPost, .dailyNews, .athletic]
+        case .newYorkMets: [.nyTimes, .nyPost, .dailyNews, .athletic]
         }
     }
 

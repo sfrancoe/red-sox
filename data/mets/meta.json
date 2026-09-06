@@ -1,0 +1,500 @@
+{
+ "generated_at": "2026-09-06T22:12:12+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 121,
+ "seasons": {
+  "2023": {
+   "record": "75-87",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Francisco Lindor",
+    "war": 6.1
+   },
+   "war_leaders": [
+    {
+     "name": "Francisco Lindor",
+     "war": 6.1
+    },
+    {
+     "name": "Kodai Senga",
+     "war": 4.5
+    },
+    {
+     "name": "Brandon Nimmo",
+     "war": 4.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "David Robertson",
+       "value": "1.00"
+      },
+      {
+       "name": "Justin Verlander",
+       "value": "1.14"
+      },
+      {
+       "name": "Max Scherzer",
+       "value": "1.19"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": 46,
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": 46
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": 31
+      },
+      {
+       "name": "Francisco Alvarez",
+       "value": 25
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": 118,
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": 118
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": 98
+      },
+      {
+       "name": "Brandon Nimmo",
+       "value": 68
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Brandon Nimmo"
+     ],
+     "value": ".274",
+     "top": [
+      {
+       "name": "Brandon Nimmo",
+       "value": ".274"
+      },
+      {
+       "name": "Jeff McNeil",
+       "value": ".270"
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": ".254"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Brandon Nimmo"
+     ],
+     "value": ".829",
+     "top": [
+      {
+       "name": "Brandon Nimmo",
+       "value": ".829"
+      },
+      {
+       "name": "Pete Alonso",
+       "value": ".822"
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": ".806"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "89-73",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Francisco Lindor",
+    "war": 6.8
+   },
+   "war_leaders": [
+    {
+     "name": "Francisco Lindor",
+     "war": 6.8
+    },
+    {
+     "name": "Mark Vientos",
+     "war": 3.1
+    },
+    {
+     "name": "Jose Iglesias",
+     "war": 3.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Edwin D\u00edaz",
+       "value": "1.04"
+      },
+      {
+       "name": "Jos\u00e9 Butt\u00f3",
+       "value": "1.07"
+      },
+      {
+       "name": "Sean Manaea",
+       "value": "1.08"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": 34,
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": 34
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": 33
+      },
+      {
+       "name": "Mark Vientos",
+       "value": 27
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Francisco Lindor"
+     ],
+     "value": 91,
+     "top": [
+      {
+       "name": "Francisco Lindor",
+       "value": 91
+      },
+      {
+       "name": "Brandon Nimmo",
+       "value": 90
+      },
+      {
+       "name": "Pete Alonso",
+       "value": 88
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Francisco Lindor"
+     ],
+     "value": ".273",
+     "top": [
+      {
+       "name": "Francisco Lindor",
+       "value": ".273"
+      },
+      {
+       "name": "Pete Alonso",
+       "value": ".240"
+      },
+      {
+       "name": "Brandon Nimmo",
+       "value": ".224"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Francisco Lindor"
+     ],
+     "value": ".844",
+     "top": [
+      {
+       "name": "Francisco Lindor",
+       "value": ".844"
+      },
+      {
+       "name": "Pete Alonso",
+       "value": ".788"
+      },
+      {
+       "name": "Brandon Nimmo",
+       "value": ".726"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "83-79",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Juan Soto",
+    "war": 6.1
+   },
+   "war_leaders": [
+    {
+     "name": "Juan Soto",
+     "war": 6.1
+    },
+    {
+     "name": "Francisco Lindor",
+     "war": 5.8
+    },
+    {
+     "name": "Pete Alonso",
+     "war": 3.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Edwin D\u00edaz",
+       "value": "0.87"
+      },
+      {
+       "name": "Nolan McLean",
+       "value": "1.04"
+      },
+      {
+       "name": "Sean Manaea",
+       "value": "1.22"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Juan Soto"
+     ],
+     "value": 43,
+     "top": [
+      {
+       "name": "Juan Soto",
+       "value": 43
+      },
+      {
+       "name": "Pete Alonso",
+       "value": 38
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": 31
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": 126,
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": 126
+      },
+      {
+       "name": "Juan Soto",
+       "value": 105
+      },
+      {
+       "name": "Brandon Nimmo",
+       "value": 92
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": ".272",
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": ".272"
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": ".267"
+      },
+      {
+       "name": "Juan Soto",
+       "value": ".263"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Juan Soto"
+     ],
+     "value": ".921",
+     "top": [
+      {
+       "name": "Juan Soto",
+       "value": ".921"
+      },
+      {
+       "name": "Pete Alonso",
+       "value": ".871"
+      },
+      {
+       "name": "Francisco Lindor",
+       "value": ".812"
+      }
+     ]
+    }
+   }
+  },
+  "2026": {
+   "record": "65-78",
+   "games": 143,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Nolan McLean",
+    "war": 3.1
+   },
+   "war_leaders": [
+    {
+     "name": "Nolan McLean",
+     "war": 3.1
+    },
+    {
+     "name": "Carson Benge",
+     "war": 2.8
+    },
+    {
+     "name": "Juan Soto",
+     "war": 2.6
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Luke Weaver",
+       "value": "0.82"
+      },
+      {
+       "name": "Huascar Brazob\u00e1n",
+       "value": "1.01"
+      },
+      {
+       "name": "Brooks Raley",
+       "value": "1.09"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Juan Soto"
+     ],
+     "value": 23,
+     "top": [
+      {
+       "name": "Juan Soto",
+       "value": 23
+      },
+      {
+       "name": "Bo Bichette",
+       "value": 16
+      },
+      {
+       "name": "Carson Benge",
+       "value": 16
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Bo Bichette"
+     ],
+     "value": 71,
+     "top": [
+      {
+       "name": "Bo Bichette",
+       "value": 71
+      },
+      {
+       "name": "Juan Soto",
+       "value": 56
+      },
+      {
+       "name": "Carson Benge",
+       "value": 54
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Carson Benge"
+     ],
+     "value": ".276",
+     "top": [
+      {
+       "name": "Carson Benge",
+       "value": ".276"
+      },
+      {
+       "name": "Bo Bichette",
+       "value": ".264"
+      },
+      {
+       "name": "Marcus Semien",
+       "value": ".218"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Carson Benge"
+     ],
+     "value": ".750",
+     "top": [
+      {
+       "name": "Carson Benge",
+       "value": ".750"
+      },
+      {
+       "name": "Bo Bichette",
+       "value": ".713"
+      },
+      {
+       "name": "Marcus Semien",
+       "value": ".628"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

@@ -1,65 +1,84 @@
 import SwiftUI
 
 enum AppColor {
-    private static var usesYankeesPalette: Bool {
-        UserDefaults.standard.string(forKey: HubPreferences.selectedTeamKey) == HubTeam.newYork.id
+    private static var selectedTeam: HubTeam {
+        let stored = UserDefaults.standard.string(forKey: HubPreferences.selectedTeamKey)
+        return HubTeam(rawValue: stored ?? "") ?? .boston
     }
 
     static let cream = Color(red: 0.957, green: 0.969, blue: 0.980)
     static let paper = Color.white
 
     static var paleBlue: Color {
-        usesYankeesPalette
-            ? Color(red: 0.910, green: 0.933, blue: 0.957)
-            : Color(red: 0.918, green: 0.945, blue: 0.965)
+        switch selectedTeam {
+        case .boston: Color(red: 0.918, green: 0.945, blue: 0.965)
+        case .newYork: Color(red: 0.910, green: 0.933, blue: 0.957)
+        case .newYorkMets: Color(red: 0.918, green: 0.945, blue: 0.980)
+        }
     }
 
     static var paleRed: Color {
-        usesYankeesPalette
-            ? Color(red: 0.047, green: 0.137, blue: 0.251)
-            : Color(red: 0.720, green: 0.200, blue: 0.240)
+        switch selectedTeam {
+        case .boston: Color(red: 0.720, green: 0.200, blue: 0.240)
+        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
+        case .newYorkMets: Color(red: 1.000, green: 0.349, blue: 0.063)
+        }
     }
 
     static var navy: Color {
-        usesYankeesPalette
-            ? Color(red: 0.047, green: 0.137, blue: 0.251)
-            : Color(red: 0.082, green: 0.196, blue: 0.294)
+        switch selectedTeam {
+        case .boston: Color(red: 0.082, green: 0.196, blue: 0.294)
+        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
+        case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
+        }
     }
 
     static var red: Color {
-        usesYankeesPalette
-            ? Color(red: 0.047, green: 0.137, blue: 0.251)
-            : Color(red: 0.741, green: 0.188, blue: 0.224)
+        switch selectedTeam {
+        case .boston: Color(red: 0.741, green: 0.188, blue: 0.224)
+        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
+        case .newYorkMets: Color(red: 1.000, green: 0.349, blue: 0.063)
+        }
     }
 
     static var darkRed: Color {
-        usesYankeesPalette
-            ? Color(red: 0.025, green: 0.082, blue: 0.153)
-            : Color(red: 0.545, green: 0.047, blue: 0.075)
+        switch selectedTeam {
+        case .boston: Color(red: 0.545, green: 0.047, blue: 0.075)
+        case .newYork: Color(red: 0.025, green: 0.082, blue: 0.153)
+        case .newYorkMets: Color(red: 0.765, green: 0.227, blue: 0.000)
+        }
     }
 
     static var green: Color {
-        usesYankeesPalette
-            ? Color(red: 0.106, green: 0.247, blue: 0.396)
-            : Color(red: 0.157, green: 0.439, blue: 0.322)
+        switch selectedTeam {
+        case .boston: Color(red: 0.157, green: 0.439, blue: 0.322)
+        case .newYork: Color(red: 0.106, green: 0.247, blue: 0.396)
+        case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
+        }
     }
 
     static var hunterGreen: Color {
-        usesYankeesPalette
-            ? Color(red: 0.047, green: 0.137, blue: 0.251)
-            : Color(red: 0.075, green: 0.245, blue: 0.175)
+        switch selectedTeam {
+        case .boston: Color(red: 0.075, green: 0.245, blue: 0.175)
+        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
+        case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
+        }
     }
 
     static var ink: Color {
-        usesYankeesPalette
-            ? Color(red: 0.025, green: 0.082, blue: 0.153)
-            : Color(red: 0.090, green: 0.129, blue: 0.169)
+        switch selectedTeam {
+        case .boston: Color(red: 0.090, green: 0.129, blue: 0.169)
+        case .newYork: Color(red: 0.025, green: 0.082, blue: 0.153)
+        case .newYorkMets: Color(red: 0.025, green: 0.102, blue: 0.208)
+        }
     }
 
     static var border: Color {
-        usesYankeesPalette
-            ? Color(red: 0.776, green: 0.824, blue: 0.871)
-            : Color(red: 0.847, green: 0.882, blue: 0.910)
+        switch selectedTeam {
+        case .boston: Color(red: 0.847, green: 0.882, blue: 0.910)
+        case .newYork: Color(red: 0.776, green: 0.824, blue: 0.871)
+        case .newYorkMets: Color(red: 0.776, green: 0.831, blue: 0.902)
+        }
     }
 }
 

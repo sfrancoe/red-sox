@@ -2,7 +2,9 @@ const MLB_ORIGIN = 'https://statsapi.mlb.com';
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
 const TEAMS = new Map([
   ['red-sox', 111],
+  ['redsox', 111],
   ['yankees', 147],
+  ['mets', 121],
 ]);
 
 function validDate(value) {
@@ -74,6 +76,14 @@ function gameIncludesTeam(payload, teamID) {
   return teams?.away?.id === teamID || teams?.home?.id === teamID;
 }
 
+function officialRecap(content) {
+  const recap = content?.editorial?.recap?.mlb;
+  const headline = String(recap?.headline || '').trim();
+  const slug = String(recap?.slug || '').trim();
+  if (!headline || !slug) return null;
+  return { headline, url: `https://www.mlb.com/news/${slug}` };
+}
+
 export default async request => {
   const requestURL = new URL(request.url);
   const teamID = TEAMS.get(requestURL.searchParams.get('team'));
@@ -83,9 +93,24 @@ export default async request => {
   }
 
   try {
-    const { body, payload } = await fetchSource(upstream.url);
+    let { body, payload } = await fetchSource(upstream.url);
     if (upstream.route === 'game' && !gameIncludesTeam(payload, teamID)) {
       return Response.json({ error: 'Game does not belong to the requested team.' }, { status: 404 });
+    }
+    if (upstream.route === 'game') {
+      const gamePk = requestURL.searchParams.get('gamePk');
+      try {
+        const contentURL = new URL(`/api/v1/game/${gamePk}/content`, MLB_ORIGIN);
+        const { payload: content } = await fetchSource(contentURL);
+        const recap = officialRecap(content);
+        if (recap) {
+          payload = { ...payload, officialRecap: recap };
+          body = JSON.stringify(payload);
+        }
+      } catch (error) {
+        // A box score is still useful while MLB's delayed editorial feed catches up.
+        console.warn(`Official recap unavailable for game ${gamePk}`, error);
+      }
     }
     return new Response(body, {
       headers: {

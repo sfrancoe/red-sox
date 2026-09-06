@@ -74,4 +74,22 @@ const redSoxFeed = buildFeed([
 ], new Set(), TEAM_CONFIG.redsox, generatedAt);
 assert.equal(redSoxFeed.source_url, 'https://x.com/i/lists/1431748439818346496');
 
-console.log('Team-specific X list filtering and Yankees feed ordering: OK');
+const metsFeed = buildFeed([
+  entry({
+    id: 'mets',
+    text: 'The Mets return to Citi Field tonight.',
+    createdAt: 'Fri Sep 04 19:15:00 +0000 2026',
+    likes: 30,
+  }),
+  entry({
+    id: 'not-mets',
+    text: 'The Yankees are back in the Bronx.',
+    createdAt: 'Fri Sep 04 19:10:00 +0000 2026',
+    likes: 90,
+  }),
+], new Set(), TEAM_CONFIG.mets, generatedAt);
+assert.equal(TEAM_CONFIG.mets.listId, '2096714864223748361');
+assert.equal(metsFeed.source_url, 'https://x.com/i/lists/2096714864223748361');
+assert.deepEqual(metsFeed.recent.map(post => post.id), ['mets']);
+
+console.log('Team-specific X list filtering and ordering: OK');

@@ -17,6 +17,11 @@ export const TEAM_CONFIG = {
     // the filtered Yankees list for Recent and ignores discovery.recent.
     includeRecent: true,
   },
+  mets: {
+    label: 'Mets',
+    query: '(("New York Mets" OR Mets OR #Mets OR @Mets OR #LGM OR #LFGM) lang:en) -is:retweet -is:reply',
+    includeRecent: true,
+  },
 };
 
 function cleanText(value) {
