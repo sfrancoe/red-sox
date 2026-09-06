@@ -5,6 +5,7 @@ const TEAMS = new Map([
   ['redsox', 111],
   ['yankees', 147],
   ['mets', 121],
+  ['rays', 139],
 ]);
 
 function validDate(value) {

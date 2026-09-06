@@ -21,17 +21,19 @@ struct HeadlinesView: View {
                     if !store.feeds.isEmpty {
                         GeometryReader { space in
                             if contentWidth >= 720 && space.size.height > space.size.width {
+                                let rows = team.newsSources.chunked(into: 2)
                                 VStack(spacing: 12) {
-                                    HStack(spacing: 12) {
-                                        newspaperQuadrant(team.newsSources[0])
-                                        newspaperQuadrant(team.newsSources[1])
+                                    ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                                        HStack(spacing: 12) {
+                                            ForEach(row) { source in
+                                                newspaperQuadrant(source)
+                                            }
+                                            if row.count == 1 {
+                                                Color.clear.frame(maxWidth: .infinity)
+                                            }
+                                        }
+                                        .frame(height: max(1, (space.size.height - 12 * CGFloat(rows.count + 1)) / CGFloat(rows.count)))
                                     }
-                                    .frame(height: max(1, (space.size.height - 36) / 2))
-                                    HStack(spacing: 12) {
-                                        newspaperQuadrant(team.newsSources[2])
-                                        newspaperQuadrant(team.newsSources[3])
-                                    }
-                                    .frame(height: max(1, (space.size.height - 36) / 2))
                                 }
                                 .padding(12)
                             } else {
@@ -285,6 +287,15 @@ struct HeadlinesView: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(AppColor.red)
+        }
+    }
+}
+
+private extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        guard size > 0 else { return [] }
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0..<Swift.min($0 + size, count)])
         }
     }
 }

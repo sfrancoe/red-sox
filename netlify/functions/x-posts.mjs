@@ -68,6 +68,25 @@ export const TEAM_CONFIG = {
       '@nyislanders', '#nfl', '#nba', '#nhl',
     ],
   },
+  rays: {
+    label: 'Rays',
+    listId: '2096730568285200550',
+    teamId: 139,
+    teamTerms: [
+      'tampa bay rays', 'tb rays', '#rays', '@raysbaseball', '#raysup', 'rays up',
+      'tropicana field', 'steinbrenner field', 'durham bulls', 'montgomery biscuits',
+      'bowling green hot rods', 'charleston riverdogs',
+    ],
+    linkTerms: [
+      'raysbaseball.com', 'mlb.com/rays', 'tampabay.com/sports/rays',
+      'theathletic.com/mlb/team/rays', 'draysbay', 'rayscoloredglasses',
+    ],
+    excludedTerms: [
+      'manta ray', 'manta rays', 'stingray', 'stingrays', 'sun rays', 'cosmic rays',
+      'toronto blue jays', '#bluejays', '@bluejays', 'tampa bay buccaneers', '#bucs',
+      'tampa bay lightning', '#gobolts', '#nfl', '#nhl',
+    ],
+  },
 };
 
 function listURL(team) {

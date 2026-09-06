@@ -14,6 +14,7 @@ enum AppColor {
         case .boston: Color(red: 0.918, green: 0.945, blue: 0.965)
         case .newYork: Color(red: 0.910, green: 0.933, blue: 0.957)
         case .newYorkMets: Color(red: 0.918, green: 0.945, blue: 0.980)
+        case .tampaBay: Color(red: 0.906, green: 0.953, blue: 0.980)
         }
     }
 
@@ -22,6 +23,7 @@ enum AppColor {
         case .boston: Color(red: 0.720, green: 0.200, blue: 0.240)
         case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
         case .newYorkMets: Color(red: 1.000, green: 0.349, blue: 0.063)
+        case .tampaBay: Color(red: 0.400, green: 0.620, blue: 0.160)
         }
     }
 
@@ -30,6 +32,7 @@ enum AppColor {
         case .boston: Color(red: 0.082, green: 0.196, blue: 0.294)
         case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
         case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
+        case .tampaBay: Color(red: 0.035, green: 0.149, blue: 0.278)
         }
     }
 
@@ -38,6 +41,7 @@ enum AppColor {
         case .boston: Color(red: 0.741, green: 0.188, blue: 0.224)
         case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
         case .newYorkMets: Color(red: 1.000, green: 0.349, blue: 0.063)
+        case .tampaBay: Color(red: 0.000, green: 0.478, blue: 0.698)
         }
     }
 
@@ -46,6 +50,7 @@ enum AppColor {
         case .boston: Color(red: 0.545, green: 0.047, blue: 0.075)
         case .newYork: Color(red: 0.025, green: 0.082, blue: 0.153)
         case .newYorkMets: Color(red: 0.765, green: 0.227, blue: 0.000)
+        case .tampaBay: Color(red: 0.000, green: 0.310, blue: 0.502)
         }
     }
 
@@ -54,6 +59,7 @@ enum AppColor {
         case .boston: Color(red: 0.157, green: 0.439, blue: 0.322)
         case .newYork: Color(red: 0.106, green: 0.247, blue: 0.396)
         case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
+        case .tampaBay: Color(red: 0.400, green: 0.620, blue: 0.160)
         }
     }
 
@@ -62,6 +68,7 @@ enum AppColor {
         case .boston: Color(red: 0.075, green: 0.245, blue: 0.175)
         case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
         case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
+        case .tampaBay: Color(red: 0.035, green: 0.149, blue: 0.278)
         }
     }
 
@@ -70,6 +77,7 @@ enum AppColor {
         case .boston: Color(red: 0.090, green: 0.129, blue: 0.169)
         case .newYork: Color(red: 0.025, green: 0.082, blue: 0.153)
         case .newYorkMets: Color(red: 0.025, green: 0.102, blue: 0.208)
+        case .tampaBay: Color(red: 0.020, green: 0.106, blue: 0.196)
         }
     }
 
@@ -78,6 +86,7 @@ enum AppColor {
         case .boston: Color(red: 0.847, green: 0.882, blue: 0.910)
         case .newYork: Color(red: 0.776, green: 0.824, blue: 0.871)
         case .newYorkMets: Color(red: 0.776, green: 0.831, blue: 0.902)
+        case .tampaBay: Color(red: 0.710, green: 0.824, blue: 0.882)
         }
     }
 }

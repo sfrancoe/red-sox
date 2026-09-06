@@ -22,6 +22,11 @@ export const TEAM_CONFIG = {
     query: '(("New York Mets" OR Mets OR #Mets OR @Mets OR #LGM OR #LFGM) lang:en) -is:retweet -is:reply',
     includeRecent: true,
   },
+  rays: {
+    label: 'Rays',
+    query: '(("Tampa Bay Rays" OR "TB Rays" OR #Rays OR @RaysBaseball OR #RaysUp) lang:en) -is:retweet -is:reply',
+    includeRecent: true,
+  },
 };
 
 function cleanText(value) {

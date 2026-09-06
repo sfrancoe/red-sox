@@ -111,7 +111,7 @@ struct TeamOnboardingView: View {
                     }
                     .buttonStyle(.plain)
 
-                    Text("Boston, the Yankees, and the Mets are available. More teams are coming.")
+                    Text("Boston, the Yankees, the Mets, and the Rays are available. More teams are coming.")
                         .font(.caption)
                         .foregroundStyle(Color.white.opacity(0.78))
                         .multilineTextAlignment(.center)

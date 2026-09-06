@@ -92,4 +92,22 @@ assert.equal(TEAM_CONFIG.mets.listId, '2096714864223748361');
 assert.equal(metsFeed.source_url, 'https://x.com/i/lists/2096714864223748361');
 assert.deepEqual(metsFeed.recent.map(post => post.id), ['mets']);
 
+const raysFeed = buildFeed([
+  entry({
+    id: 'rays',
+    text: 'The Rays are back at Steinbrenner Field tonight.',
+    createdAt: 'Fri Sep 04 19:20:00 +0000 2026',
+    likes: 35,
+  }),
+  entry({
+    id: 'not-rays',
+    text: 'The Tampa Bay Lightning begin training camp.',
+    createdAt: 'Fri Sep 04 19:18:00 +0000 2026',
+    likes: 100,
+  }),
+], new Set(), TEAM_CONFIG.rays, generatedAt);
+assert.equal(TEAM_CONFIG.rays.listId, '2096730568285200550');
+assert.equal(raysFeed.source_url, 'https://x.com/i/lists/2096730568285200550');
+assert.deepEqual(raysFeed.recent.map(post => post.id), ['rays']);
+
 console.log('Team-specific X list filtering and ordering: OK');

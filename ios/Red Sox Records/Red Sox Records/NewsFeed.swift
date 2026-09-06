@@ -8,6 +8,7 @@ enum NewsSource: String, CaseIterable, Identifiable, Sendable {
     case nyTimes = "nytimes"
     case nyPost = "nypost"
     case dailyNews = "dailynews"
+    case tampaBayTimes = "tampabay"
 
     var id: String { rawValue }
 
@@ -20,6 +21,7 @@ enum NewsSource: String, CaseIterable, Identifiable, Sendable {
         case .nyTimes: "NY Times"
         case .nyPost: "NY Post"
         case .dailyNews: "Daily News"
+        case .tampaBayTimes: "Tampa Bay Times"
         }
     }
 
