@@ -8,6 +8,11 @@ globalThis.fetch = async url => {
   if (String(url).includes('/schedule')) {
     return new Response(JSON.stringify({ dates: [] }));
   }
+  if (String(url).includes('/content')) {
+    return new Response(JSON.stringify({
+      editorial: { recap: { mlb: { headline: 'Boston wins', slug: 'boston-wins' } } },
+    }));
+  }
   return new Response(JSON.stringify({
     gamePk: 123,
     gameData: { teams: { away: { id: 111 }, home: { id: 147 } } },
@@ -24,6 +29,11 @@ assert.match(requests[0], /startDate=2026-09-01/);
 response = await handler(new Request('https://example.test/api/mlb/game?team=red-sox&gamePk=123'));
 assert.equal(response.status, 200);
 assert.match(requests[1], /game\/123\/feed\/live/);
+assert.match(requests[2], /game\/123\/content/);
+assert.deepEqual((await response.json()).officialRecap, {
+  headline: 'Boston wins',
+  url: 'https://www.mlb.com/news/boston-wins',
+});
 
 response = await handler(new Request('https://example.test/api/mlb/game?team=red-sox&gamePk=nope'));
 assert.equal(response.status, 404);
