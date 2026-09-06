@@ -46,6 +46,28 @@ export const TEAM_CONFIG = {
       'new york islanders', '#isles', '@nyislanders', '#nfl', '#nba', '#nhl',
     ],
   },
+  mets: {
+    label: 'Mets',
+    listId: '2096714864223748361',
+    teamId: 121,
+    teamTerms: [
+      'new york mets', 'ny mets', '#mets', '@mets', '#lgm', '#lfgm', 'lfgm',
+      'queens', 'citi field', 'syracuse mets', 'binghamton rumble ponies',
+      'brooklyn cyclones', 'st. lucie mets', 'st lucie mets',
+    ],
+    linkTerms: [
+      'mets.com', 'mlb.com/mets', 'sny.tv/mets', 'nypost.com/sports/mets',
+      'nydailynews.com/sports/mlb/new-york-mets', 'theathletic.com/mlb/team/mets',
+      'amazinavenue', 'metsmerizedonline', 'risingapple',
+    ],
+    excludedTerms: [
+      'new york yankees', '#yankees', '@yankees', '#nyy', '#repbx',
+      'new york jets', '#jets', '@nyjets', 'new york giants', '#giants', '@giants',
+      'new york knicks', '#knicks', '@nyknicks', 'brooklyn nets', '#nets', '@brooklynnets',
+      'new york rangers', '#nyr', '@nyrangers', 'new york islanders', '#isles',
+      '@nyislanders', '#nfl', '#nba', '#nhl',
+    ],
+  },
 };
 
 function listURL(team) {

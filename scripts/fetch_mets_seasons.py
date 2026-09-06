@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch real Yankees game-by-game results from the MLB Stats API.
+"""Fetch real Mets game-by-game results from the MLB Stats API.
 
 Writes data/seasons.json (the shape the chart engine expects) and data/meta.json.
 
@@ -24,7 +24,7 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
-NYY = 147  # MLB team id, New York Yankees
+NYM = 121  # MLB team id, New York Mets
 SEASONS = [2023, 2024, 2025, 2026]
 API = ("https://statsapi.mlb.com/api/v1/schedule"
        "?sportId=1&teamId={team}&season={season}&gameType=R")
@@ -41,8 +41,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 # leader stays current. Free, no key, stdlib-parseable.
 WAR_BAT_URL = "https://www.baseball-reference.com/data/war_daily_bat.txt"
 WAR_PITCH_URL = "https://www.baseball-reference.com/data/war_daily_pitch.txt"
-BBREF_TEAM = "NYY"
-UA = "yankees-hub/1.0"
+BBREF_TEAM = "NYM"
+UA = "mets-hub/1.0"
 
 def fetch_json(url: str, attempts: int = 4) -> dict:
     """GET with retry + backoff. Raises on final failure."""
@@ -83,7 +83,7 @@ def fetch_text(url: str, attempts: int = 4) -> str:
 
 
 def war_leaders(years: list[int]) -> dict[str, list[dict]]:
-    """Top three Yankees players by bWAR, batters and pitchers together."""
+    """Top three Mets players by bWAR, batters and pitchers together."""
     wanted = set(years)
     totals: dict[int, dict[str, float]] = {y: {} for y in wanted}
 
@@ -126,10 +126,10 @@ def war_leaders(years: list[int]) -> dict[str, list[dict]]:
 
 
 def batting_leaders(year: int) -> dict[str, dict]:
-    """Top three Yankees in HR/RBI and qualified-hitter AVG/OPS."""
+    """Top three Mets in HR/RBI and qualified-hitter AVG/OPS."""
     pools: dict[str, list[dict]] = {}
     for pool in ("ALL", "QUALIFIED"):
-        payload = fetch_json(HITTING_API.format(team=NYY, season=year, pool=pool))
+        payload = fetch_json(HITTING_API.format(team=NYM, season=year, pool=pool))
         stats = payload.get("stats", [])
         pools[pool] = stats[0].get("splits", []) if stats else []
 
@@ -170,8 +170,8 @@ def batting_leaders(year: int) -> dict[str, dict]:
 
 
 def pitching_leaders(year: int) -> dict[str, dict]:
-    """Top three Yankees pitchers by WHIP, with a 40-inning minimum."""
-    payload = fetch_json(PITCHING_API.format(team=NYY, season=year))
+    """Top three Mets pitchers by WHIP, with a 40-inning minimum."""
+    payload = fetch_json(PITCHING_API.format(team=NYM, season=year))
     stats = payload.get("stats", [])
     splits = stats[0].get("splits", []) if stats else []
     candidates = []
@@ -210,8 +210,8 @@ PLAYED_STATES = {"Final", "Completed Early", "Game Over"}
 
 
 def season_games(year: int) -> list[dict]:
-    """Return completed regular-season games in order, each with the NYY view."""
-    payload = fetch_json(API.format(team=NYY, season=year))
+    """Return completed regular-season games in order, each with the NYM view."""
+    payload = fetch_json(API.format(team=NYM, season=year))
     rows, skipped = [], {}
     for date in payload.get("dates", []):
         for g in date.get("games", []):
@@ -223,7 +223,7 @@ def season_games(year: int) -> list[dict]:
             teams = g.get("teams", {})
             for side in ("home", "away"):
                 t = teams.get(side, {})
-                if t.get("team", {}).get("id") != NYY:
+                if t.get("team", {}).get("id") != NYM:
                     continue
                 rec = t.get("leagueRecord", {})
                 if rec.get("wins") is None or rec.get("losses") is None:
@@ -290,7 +290,7 @@ def build_season(year: int) -> dict:
 
 def main() -> int:
     years = [int(a) for a in sys.argv[1:]] or SEASONS
-    print(f"Fetching Yankees seasons {years} from MLB Stats API")
+    print(f"Fetching Mets seasons {years} from MLB Stats API")
 
     seasons = {}
     for y in years:
@@ -326,14 +326,14 @@ def main() -> int:
             seasons[year]["war_leaders"] = leaders
             seasons[year]["war_leader"] = leaders[0]
 
-    (ROOT / "data" / "yankees").mkdir(parents=True, exist_ok=True)
-    (ROOT / "data/yankees/seasons.json").write_text(json.dumps(seasons, indent=1) + "\n")
+    (ROOT / "data" / "mets").mkdir(parents=True, exist_ok=True)
+    (ROOT / "data/mets/seasons.json").write_text(json.dumps(seasons, indent=1) + "\n")
 
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": "MLB Stats API (statsapi.mlb.com)",
         "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
-        "team_id": NYY,
+        "team_id": NYM,
         "seasons": {y: {"record": s["record"], "games": s["end_game"],
                         "in_progress": s["in_progress"],
                         "war_leader": s.get("war_leader"),
@@ -342,8 +342,8 @@ def main() -> int:
                         "batting_leaders": s.get("batting_leaders")}
                     for y, s in seasons.items()},
     }
-    (ROOT / "data/yankees/meta.json").write_text(json.dumps(meta, indent=1) + "\n")
-    print("Wrote data/yankees/seasons.json and data/yankees/meta.json")
+    (ROOT / "data/mets/meta.json").write_text(json.dumps(meta, indent=1) + "\n")
+    print("Wrote data/mets/seasons.json and data/mets/meta.json")
     return 0
 
 

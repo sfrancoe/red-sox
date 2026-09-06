@@ -24,6 +24,16 @@ const ALLOWED_PATHS = new Set([
   'yankees/schedule.json',
   'yankees/seasons.json',
   'yankees/standings.json',
+  'mets/athletic.json',
+  'mets/dailynews.json',
+  'mets/meta.json',
+  'mets/nypost.json',
+  'mets/nytimes.json',
+  'mets/pitching.json',
+  'mets/recent-game.json',
+  'mets/schedule.json',
+  'mets/seasons.json',
+  'mets/standings.json',
 ]);
 
 function requestedPath(request) {
