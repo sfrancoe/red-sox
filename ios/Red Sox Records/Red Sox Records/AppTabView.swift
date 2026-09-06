@@ -84,7 +84,7 @@ struct AppTabView: View {
                     }
                     VStack(spacing: 0) {
                         sidebarControls
-                        selectedContent
+                        selectedContent(usesPersistentSidebar: usesPersistentSidebar)
                             .id(team.id)
                             .environment(
                                 \.hubContentWidth,
@@ -172,7 +172,7 @@ struct AppTabView: View {
     }
 
     @ViewBuilder
-    private var selectedContent: some View {
+    private func selectedContent(usesPersistentSidebar: Bool) -> some View {
         switch selectedTab {
         case .home:
                 HomeView(team: team) { destination in
@@ -216,7 +216,7 @@ struct AppTabView: View {
                 TeamSettingsView(selectedTeamID: $selectedTeamID) { selectedTeam in
                     selectedPlayerID = nil
                     selectedTab = selectedTeam.supportsHome ? .home : .recent
-                    sidebarCollapsed = true
+                    sidebarCollapsed = !usesPersistentSidebar
                 }
         }
     }

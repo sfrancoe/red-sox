@@ -74,8 +74,8 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
     var newsSources: [NewsSource] {
         switch self {
         case .boston: [.globe, .herald, .athletic, .massLive]
-        case .newYork: [.nyTimes, .nyPost, .dailyNews, .athletic]
-        case .newYorkMets: [.nyTimes, .nyPost, .dailyNews, .athletic]
+        case .newYork: [.dailyNews, .nyPost, .athletic, .nyTimes]
+        case .newYorkMets: [.dailyNews, .nyPost, .athletic, .nyTimes]
         }
     }
 
