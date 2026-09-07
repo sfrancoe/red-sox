@@ -43,6 +43,7 @@ def validate(team: dict) -> None:
     assert all(row["id"] and row["name"] for row in pitching["pitchers"])
 
     seasons = load(root, "seasons.json")
+    assert {"2023", "2024", "2025"}.issubset(seasons)
     current = seasons[max(seasons)]
     assert current["war_leaders"] and current["batting_leaders"] and current["pitching_leaders"]
     assert len(current["diff"]) == len(current["seq"]) == current["end_game"]

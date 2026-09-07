@@ -725,6 +725,9 @@ export const MLB_TEAMS = Object.freeze([
     "division": "West",
     "fangraphs_id": 10,
     "baseball_reference_id": "ATH",
+    "baseball_reference_aliases": [
+      "OAK"
+    ],
     "colors": {
       "primary": "#003831",
       "secondary": "#EFB21E",
