@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:29:49+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 138,
+ "seasons": {
+  "2026": {
+   "record": "72-72",
+   "games": 144,
+   "in_progress": true,
+   "war_leader": {
+    "name": "JJ Wetherholt",
+    "war": 4.7
+   },
+   "war_leaders": [
+    {
+     "name": "JJ Wetherholt",
+     "war": 4.7
+    },
+    {
+     "name": "Jordan Walker",
+     "war": 4.0
+    },
+    {
+     "name": "Iv\u00e1n Herrera",
+     "war": 2.9
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Gordon Graceffo",
+       "value": "1.07"
+      },
+      {
+       "name": "Andre Pallante",
+       "value": "1.24"
+      },
+      {
+       "name": "Riley O'Brien",
+       "value": "1.25"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Jordan Walker"
+     ],
+     "value": 28,
+     "top": [
+      {
+       "name": "Jordan Walker",
+       "value": 28
+      },
+      {
+       "name": "Alec Burleson",
+       "value": 21
+      },
+      {
+       "name": "JJ Wetherholt",
+       "value": 17
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Alec Burleson"
+     ],
+     "value": 103,
+     "top": [
+      {
+       "name": "Alec Burleson",
+       "value": 103
+      },
+      {
+       "name": "Jordan Walker",
+       "value": 100
+      },
+      {
+       "name": "Iv\u00e1n Herrera",
+       "value": 64
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Jordan Walker"
+     ],
+     "value": ".284",
+     "top": [
+      {
+       "name": "Jordan Walker",
+       "value": ".284"
+      },
+      {
+       "name": "Alec Burleson",
+       "value": ".283"
+      },
+      {
+       "name": "Iv\u00e1n Herrera",
+       "value": ".251"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Jordan Walker"
+     ],
+     "value": ".834",
+     "top": [
+      {
+       "name": "Jordan Walker",
+       "value": ".834"
+      },
+      {
+       "name": "Alec Burleson",
+       "value": ".809"
+      },
+      {
+       "name": "Iv\u00e1n Herrera",
+       "value": ".750"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

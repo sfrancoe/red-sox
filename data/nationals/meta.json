@@ -1,0 +1,132 @@
+{
+ "generated_at": "2026-09-07T21:29:46+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 120,
+ "seasons": {
+  "2026": {
+   "record": "67-78",
+   "games": 145,
+   "in_progress": true,
+   "war_leader": {
+    "name": "CJ Abrams",
+    "war": 4.6
+   },
+   "war_leaders": [
+    {
+     "name": "CJ Abrams",
+     "war": 4.6
+    },
+    {
+     "name": "James Wood",
+     "war": 3.9
+    },
+    {
+     "name": "Foster Griffin",
+     "war": 3.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Foster Griffin",
+       "value": "1.07"
+      },
+      {
+       "name": "Cade Cavalli",
+       "value": "1.18"
+      },
+      {
+       "name": "Orlando Ribalta",
+       "value": "1.21"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "CJ Abrams",
+      "James Wood"
+     ],
+     "value": 30,
+     "top": [
+      {
+       "name": "CJ Abrams",
+       "value": 30
+      },
+      {
+       "name": "James Wood",
+       "value": 30
+      },
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": 23
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "CJ Abrams"
+     ],
+     "value": 95,
+     "top": [
+      {
+       "name": "CJ Abrams",
+       "value": 95
+      },
+      {
+       "name": "Daylen Lile",
+       "value": 82
+      },
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": 76
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "James Wood"
+     ],
+     "value": ".267",
+     "top": [
+      {
+       "name": "James Wood",
+       "value": ".267"
+      },
+      {
+       "name": "CJ Abrams",
+       "value": ".264"
+      },
+      {
+       "name": "Daylen Lile",
+       "value": ".256"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "James Wood"
+     ],
+     "value": ".927",
+     "top": [
+      {
+       "name": "James Wood",
+       "value": ".927"
+      },
+      {
+       "name": "CJ Abrams",
+       "value": ".842"
+      },
+      {
+       "name": "Daylen Lile",
+       "value": ".751"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

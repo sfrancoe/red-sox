@@ -1,0 +1,132 @@
+{
+ "generated_at": "2026-09-07T21:29:44+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 146,
+ "seasons": {
+  "2026": {
+   "record": "72-73",
+   "games": 145,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Otto Lopez",
+    "war": 5.5
+   },
+   "war_leaders": [
+    {
+     "name": "Otto Lopez",
+     "war": 5.5
+    },
+    {
+     "name": "Sandy Alcantara",
+     "war": 3.4
+    },
+    {
+     "name": "Xavier Edwards",
+     "war": 2.9
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "John King",
+       "value": "1.01"
+      },
+      {
+       "name": "Lake Bachar",
+       "value": "1.09"
+      },
+      {
+       "name": "Michael Petersen",
+       "value": "1.13"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Heriberto Hern\u00e1ndez"
+     ],
+     "value": 24,
+     "top": [
+      {
+       "name": "Heriberto Hern\u00e1ndez",
+       "value": 24
+      },
+      {
+       "name": "Kyle Stowers",
+       "value": 19
+      },
+      {
+       "name": "Griffin Conine",
+       "value": 15
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Heriberto Hern\u00e1ndez",
+      "Otto Lopez"
+     ],
+     "value": 63,
+     "top": [
+      {
+       "name": "Heriberto Hern\u00e1ndez",
+       "value": 63
+      },
+      {
+       "name": "Otto Lopez",
+       "value": 63
+      },
+      {
+       "name": "Liam Hicks",
+       "value": 62
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Otto Lopez"
+     ],
+     "value": ".301",
+     "top": [
+      {
+       "name": "Otto Lopez",
+       "value": ".301"
+      },
+      {
+       "name": "Xavier Edwards",
+       "value": ".282"
+      },
+      {
+       "name": "Kyle Stowers",
+       "value": ".246"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Kyle Stowers"
+     ],
+     "value": ".808",
+     "top": [
+      {
+       "name": "Kyle Stowers",
+       "value": ".808"
+      },
+      {
+       "name": "Otto Lopez",
+       "value": ".776"
+      },
+      {
+       "name": "Xavier Edwards",
+       "value": ".737"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

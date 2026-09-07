@@ -1,0 +1,132 @@
+{
+ "generated_at": "2026-09-07T21:29:51+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 119,
+ "seasons": {
+  "2026": {
+   "record": "86-57",
+   "games": 143,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Shohei Ohtani",
+    "war": 6.5
+   },
+   "war_leaders": [
+    {
+     "name": "Shohei Ohtani",
+     "war": 6.5
+    },
+    {
+     "name": "Andy Pages",
+     "war": 5.5
+    },
+    {
+     "name": "Yoshinobu Yamamoto",
+     "war": 4.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tyler Glasnow",
+       "value": "0.88"
+      },
+      {
+       "name": "Yoshinobu Yamamoto",
+       "value": "0.90"
+      },
+      {
+       "name": "Edgardo Henriquez",
+       "value": "0.95"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": 30,
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": 30
+      },
+      {
+       "name": "Max Muncy",
+       "value": 26
+      },
+      {
+       "name": "Andy Pages",
+       "value": 21
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Andy Pages",
+      "Shohei Ohtani"
+     ],
+     "value": 80,
+     "top": [
+      {
+       "name": "Andy Pages",
+       "value": 80
+      },
+      {
+       "name": "Shohei Ohtani",
+       "value": 80
+      },
+      {
+       "name": "Max Muncy",
+       "value": 68
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Freddie Freeman"
+     ],
+     "value": ".301",
+     "top": [
+      {
+       "name": "Freddie Freeman",
+       "value": ".301"
+      },
+      {
+       "name": "Shohei Ohtani",
+       "value": ".279"
+      },
+      {
+       "name": "Andy Pages",
+       "value": ".272"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": ".906",
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": ".906"
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": ".837"
+      },
+      {
+       "name": "Max Muncy",
+       "value": ".834"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

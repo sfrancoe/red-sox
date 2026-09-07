@@ -1,0 +1,1066 @@
+{
+  "generated_at": "2026-09-07T21:29:21.653939+00:00",
+  "season": 2026,
+  "team": "Milwaukee Brewers",
+  "games_played": 145,
+  "season_fraction": 0.8951,
+  "method": "Actual FanGraphs pitching WAR is compared with preseason Steamer WAR prorated to Milwaukee's games played.",
+  "sources": {
+    "actual": "FanGraphs Major League Leaderboards",
+    "forecast": "FanGraphs Steamer preseason projections",
+    "games_played": "MLB Stats API",
+    "actual_url": "https://www.fangraphs.com/leaders/major-league",
+    "forecast_url": "https://www.fangraphs.com/projections"
+  },
+  "team_summary": {
+    "actual_war": 19.5,
+    "forecast_war_to_date": 15.3,
+    "war_gap": 4.2,
+    "innings": 1284.7,
+    "era": 3.54
+  },
+  "pitchers": [
+    {
+      "id": 694819,
+      "name": "Jacob Misiorowski",
+      "throws": "R",
+      "role": "Starter",
+      "games": 26,
+      "starts": 26,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "155.0",
+        "ip_value": 155.0,
+        "war": 5.6,
+        "era": 1.97,
+        "fip": 2.27,
+        "k_minus_bb_pct": 31.8
+      },
+      "forecast": {
+        "ip": 142.9,
+        "war": 1.53,
+        "era": 4.11,
+        "fip": 4.27,
+        "k_minus_bb_pct": 14.3,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 127.9,
+        "war": 1.37
+      },
+      "war_gap": 4.23,
+      "innings_share_pct": 12.1
+    },
+    {
+      "id": 656730,
+      "name": "Trevor Megill",
+      "throws": "R",
+      "role": "Closer",
+      "games": 55,
+      "starts": 0,
+      "saves": 26,
+      "holds": 7,
+      "actual": {
+        "ip": "54.1",
+        "ip_value": 54.333,
+        "war": 2.39,
+        "era": 2.15,
+        "fip": 1.64,
+        "k_minus_bb_pct": 22.9
+      },
+      "forecast": {
+        "ip": 66.0,
+        "war": 0.77,
+        "era": 3.43,
+        "fip": 3.35,
+        "k_minus_bb_pct": 21.1,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 59.1,
+        "war": 0.69
+      },
+      "war_gap": 1.7,
+      "innings_share_pct": 4.2
+    },
+    {
+      "id": 701656,
+      "name": "Logan Henderson",
+      "throws": "R",
+      "role": "Starter",
+      "games": 15,
+      "starts": 15,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "83.1",
+        "ip_value": 83.333,
+        "war": 2.08,
+        "era": 2.48,
+        "fip": 3.28,
+        "k_minus_bb_pct": 25.5
+      },
+      "forecast": {
+        "ip": 98.1,
+        "war": 1.19,
+        "era": 4.17,
+        "fip": 4.25,
+        "k_minus_bb_pct": 16.2,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 87.8,
+        "war": 1.07
+      },
+      "war_gap": 1.01,
+      "innings_share_pct": 6.5
+    },
+    {
+      "id": 675660,
+      "name": "Shane Drohan",
+      "throws": "L",
+      "role": "Swingman",
+      "games": 28,
+      "starts": 17,
+      "saves": 1,
+      "holds": 2,
+      "actual": {
+        "ip": "114.1",
+        "ip_value": 114.333,
+        "war": 1.87,
+        "era": 4.09,
+        "fip": 3.6,
+        "k_minus_bb_pct": 15.7
+      },
+      "forecast": {
+        "ip": 58.5,
+        "war": 0.27,
+        "era": 3.99,
+        "fip": 4.22,
+        "k_minus_bb_pct": 14.0,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 52.3,
+        "war": 0.25
+      },
+      "war_gap": 1.62,
+      "innings_share_pct": 8.9
+    },
+    {
+      "id": 690986,
+      "name": "Kyle Harrison",
+      "throws": "L",
+      "role": "Starter",
+      "games": 23,
+      "starts": 23,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "110.2",
+        "ip_value": 110.667,
+        "war": 1.59,
+        "era": 3.66,
+        "fip": 4.03,
+        "k_minus_bb_pct": 21.4
+      },
+      "forecast": {
+        "ip": 111.3,
+        "war": 0.99,
+        "era": 4.22,
+        "fip": 4.35,
+        "k_minus_bb_pct": 14.4,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 99.6,
+        "war": 0.89
+      },
+      "war_gap": 0.7,
+      "innings_share_pct": 8.6
+    },
+    {
+      "id": 676879,
+      "name": "Aaron Ashby",
+      "throws": "L",
+      "role": "Setup",
+      "games": 67,
+      "starts": 1,
+      "saves": 2,
+      "holds": 15,
+      "actual": {
+        "ip": "79.0",
+        "ip_value": 79.0,
+        "war": 1.43,
+        "era": 3.19,
+        "fip": 3.01,
+        "k_minus_bb_pct": 20.8
+      },
+      "forecast": {
+        "ip": 76.0,
+        "war": 0.56,
+        "era": 3.57,
+        "fip": 3.76,
+        "k_minus_bb_pct": 13.2,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 68.1,
+        "war": 0.51
+      },
+      "war_gap": 0.92,
+      "innings_share_pct": 6.1
+    },
+    {
+      "id": 605540,
+      "name": "Brandon Woodruff",
+      "throws": "R",
+      "role": "Starter",
+      "games": 9,
+      "starts": 9,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "45.1",
+        "ip_value": 45.333,
+        "war": 1.2,
+        "era": 2.98,
+        "fip": 3.18,
+        "k_minus_bb_pct": 21.3
+      },
+      "forecast": {
+        "ip": 167.7,
+        "war": 3.09,
+        "era": 3.86,
+        "fip": 3.87,
+        "k_minus_bb_pct": 18.7,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 150.1,
+        "war": 2.77
+      },
+      "war_gap": -1.57,
+      "innings_share_pct": 3.5
+    },
+    {
+      "id": 682842,
+      "name": "Abner Uribe",
+      "throws": "R",
+      "role": "Setup",
+      "games": 52,
+      "starts": 0,
+      "saves": 6,
+      "holds": 20,
+      "actual": {
+        "ip": "50.2",
+        "ip_value": 50.667,
+        "war": 1.16,
+        "era": 1.95,
+        "fip": 2.94,
+        "k_minus_bb_pct": 17.2
+      },
+      "forecast": {
+        "ip": 72.0,
+        "war": 0.86,
+        "era": 3.16,
+        "fip": 3.34,
+        "k_minus_bb_pct": 17.8,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 64.4,
+        "war": 0.77
+      },
+      "war_gap": 0.39,
+      "innings_share_pct": 3.9
+    },
+    {
+      "id": 688107,
+      "name": "Robert Gasser",
+      "throws": "L",
+      "role": "Starter",
+      "games": 17,
+      "starts": 16,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "86.2",
+        "ip_value": 86.667,
+        "war": 0.99,
+        "era": 4.57,
+        "fip": 4.37,
+        "k_minus_bb_pct": 14.6
+      },
+      "forecast": {
+        "ip": 80.1,
+        "war": 0.79,
+        "era": 4.13,
+        "fip": 4.31,
+        "k_minus_bb_pct": 13.9,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 71.7,
+        "war": 0.71
+      },
+      "war_gap": 0.28,
+      "innings_share_pct": 6.7
+    },
+    {
+      "id": 694477,
+      "name": "Chad Patrick",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 49,
+      "starts": 6,
+      "saves": 5,
+      "holds": 10,
+      "actual": {
+        "ip": "98.1",
+        "ip_value": 98.333,
+        "war": 0.88,
+        "era": 3.29,
+        "fip": 3.99,
+        "k_minus_bb_pct": 10.9
+      },
+      "forecast": {
+        "ip": 148.0,
+        "war": 1.34,
+        "era": 4.47,
+        "fip": 4.61,
+        "k_minus_bb_pct": 13.4,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 132.4,
+        "war": 1.2
+      },
+      "war_gap": -0.32,
+      "innings_share_pct": 7.7
+    },
+    {
+      "id": 669060,
+      "name": "Bryse Wilson",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 12,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "24.2",
+        "ip_value": 24.667,
+        "war": 0.43,
+        "era": 2.55,
+        "fip": 1.96,
+        "k_minus_bb_pct": 21.0
+      },
+      "forecast": {
+        "ip": 19.9,
+        "war": -0.03,
+        "era": 4.97,
+        "fip": 5.05,
+        "k_minus_bb_pct": 8.9,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 17.8,
+        "war": -0.03
+      },
+      "war_gap": 0.45,
+      "innings_share_pct": 1.9
+    },
+    {
+      "id": 669084,
+      "name": "DL Hall",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 39,
+      "starts": 1,
+      "saves": 0,
+      "holds": 5,
+      "actual": {
+        "ip": "49.1",
+        "ip_value": 49.333,
+        "war": 0.26,
+        "era": 2.19,
+        "fip": 3.85,
+        "k_minus_bb_pct": 12.4
+      },
+      "forecast": {
+        "ip": 52.0,
+        "war": 0.13,
+        "era": 3.9,
+        "fip": 4.13,
+        "k_minus_bb_pct": 13.4,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 46.5,
+        "war": 0.12
+      },
+      "war_gap": 0.14,
+      "innings_share_pct": 3.8
+    },
+    {
+      "id": 687075,
+      "name": "Brandon Sproat",
+      "throws": "R",
+      "role": "Starter",
+      "games": 21,
+      "starts": 19,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "95.2",
+        "ip_value": 95.667,
+        "war": 0.19,
+        "era": 5.27,
+        "fip": 5.1,
+        "k_minus_bb_pct": 12.6
+      },
+      "forecast": {
+        "ip": 100.4,
+        "war": 0.94,
+        "era": 4.24,
+        "fip": 4.38,
+        "k_minus_bb_pct": 10.4,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 89.9,
+        "war": 0.84
+      },
+      "war_gap": -0.65,
+      "innings_share_pct": 7.4
+    },
+    {
+      "id": 689441,
+      "name": "Coleman Crow",
+      "throws": "R",
+      "role": "Starter",
+      "games": 5,
+      "starts": 4,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "18.2",
+        "ip_value": 18.667,
+        "war": 0.19,
+        "era": 5.3,
+        "fip": 4.54,
+        "k_minus_bb_pct": 4.7
+      },
+      "forecast": {
+        "ip": 22.0,
+        "war": 0.21,
+        "era": 3.56,
+        "fip": 3.58,
+        "k_minus_bb_pct": 17.9,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 19.7,
+        "war": 0.18
+      },
+      "war_gap": 0.0,
+      "innings_share_pct": 1.5
+    },
+    {
+      "id": 681982,
+      "name": "Grant Anderson",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 52,
+      "starts": 0,
+      "saves": 0,
+      "holds": 5,
+      "actual": {
+        "ip": "59.0",
+        "ip_value": 59.0,
+        "war": 0.17,
+        "era": 3.36,
+        "fip": 4.32,
+        "k_minus_bb_pct": 12.3
+      },
+      "forecast": {
+        "ip": 56.0,
+        "war": 0.08,
+        "era": 4.13,
+        "fip": 4.25,
+        "k_minus_bb_pct": 13.6,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 50.1,
+        "war": 0.07
+      },
+      "war_gap": 0.1,
+      "innings_share_pct": 4.6
+    },
+    {
+      "id": 668831,
+      "name": "Garrett Stallings",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "8.0",
+        "ip_value": 8.0,
+        "war": 0.13,
+        "era": 0.0,
+        "fip": 1.97,
+        "k_minus_bb_pct": 20.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.89,
+        "fip": 5.02,
+        "k_minus_bb_pct": 8.0,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": 0.13,
+      "innings_share_pct": 0.6
+    },
+    {
+      "id": 702153,
+      "name": "Brian Fitzpatrick",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 5,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "6.2",
+        "ip_value": 6.667,
+        "war": 0.11,
+        "era": 1.35,
+        "fip": 2.95,
+        "k_minus_bb_pct": 6.7
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.41,
+        "fip": 4.69,
+        "k_minus_bb_pct": 9.6,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": 0.11,
+      "innings_share_pct": 0.5
+    },
+    {
+      "id": 663765,
+      "name": "Jake Woodford",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 16,
+      "starts": 0,
+      "saves": 1,
+      "holds": 0,
+      "actual": {
+        "ip": "23.1",
+        "ip_value": 23.333,
+        "war": 0.08,
+        "era": 6.94,
+        "fip": 3.95,
+        "k_minus_bb_pct": 11.6
+      },
+      "forecast": {
+        "ip": 24.0,
+        "war": 0.04,
+        "era": 4.22,
+        "fip": 4.28,
+        "k_minus_bb_pct": 12.3,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 21.5,
+        "war": 0.04
+      },
+      "war_gap": 0.04,
+      "innings_share_pct": 1.8
+    },
+    {
+      "id": 692230,
+      "name": "Carlos Rodriguez",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "9.1",
+        "ip_value": 9.333,
+        "war": 0.07,
+        "era": 3.86,
+        "fip": 4.06,
+        "k_minus_bb_pct": 9.5
+      },
+      "forecast": {
+        "ip": 39.1,
+        "war": 0.11,
+        "era": 4.34,
+        "fip": 4.57,
+        "k_minus_bb_pct": 12.6,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 35.0,
+        "war": 0.1
+      },
+      "war_gap": -0.03,
+      "innings_share_pct": 0.7
+    },
+    {
+      "id": 680723,
+      "name": "Drew Rom",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 5,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "5.2",
+        "ip_value": 5.667,
+        "war": 0.05,
+        "era": 3.18,
+        "fip": 3.63,
+        "k_minus_bb_pct": 25.9
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.37,
+        "fip": 4.52,
+        "k_minus_bb_pct": 11.0,
+        "team_at_fetch": "ATH"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": 0.05,
+      "innings_share_pct": 0.4
+    },
+    {
+      "id": 669160,
+      "name": "Dustin May",
+      "throws": "R",
+      "role": "Starter",
+      "games": 6,
+      "starts": 6,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "23.1",
+        "ip_value": 23.333,
+        "war": 0.04,
+        "era": 6.17,
+        "fip": 5.2,
+        "k_minus_bb_pct": 10.7
+      },
+      "forecast": {
+        "ip": 161.2,
+        "war": 1.58,
+        "era": 4.22,
+        "fip": 4.22,
+        "k_minus_bb_pct": 12.7,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 144.3,
+        "war": 1.42
+      },
+      "war_gap": -1.38,
+      "innings_share_pct": 1.8
+    },
+    {
+      "id": 621121,
+      "name": "Lance McCullers Jr.",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "4.2",
+        "ip_value": 4.667,
+        "war": 0.03,
+        "era": 3.86,
+        "fip": 4.17,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 120.5,
+        "war": 1.21,
+        "era": 4.35,
+        "fip": 4.39,
+        "k_minus_bb_pct": 11.4,
+        "team_at_fetch": null
+      },
+      "forecast_to_date": {
+        "ip": 107.8,
+        "war": 1.08
+      },
+      "war_gap": -1.05,
+      "innings_share_pct": 0.4
+    },
+    {
+      "id": 596142,
+      "name": "Gary Sánchez",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "2.0",
+        "ip_value": 2.0,
+        "war": 0.01,
+        "era": 0.0,
+        "fip": 3.1,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": null,
+      "forecast_to_date": {
+        "ip": 0.0,
+        "war": 0.0
+      },
+      "war_gap": 0.01,
+      "innings_share_pct": 0.2
+    },
+    {
+      "id": 680689,
+      "name": "Lyon Richardson",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "1.2",
+        "ip_value": 1.667,
+        "war": 0.01,
+        "era": 0.0,
+        "fip": 3.7,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": 0.0,
+        "era": 4.3,
+        "fip": 4.46,
+        "k_minus_bb_pct": 10.4,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": 0.0
+      },
+      "war_gap": 0.01,
+      "innings_share_pct": 0.1
+    },
+    {
+      "id": 668834,
+      "name": "Easton McGee",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "2.0",
+        "ip_value": 2.0,
+        "war": 0.01,
+        "era": 0.0,
+        "fip": 3.6,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 34.0,
+        "war": 0.0,
+        "era": 4.19,
+        "fip": 4.3,
+        "k_minus_bb_pct": 11.2,
+        "team_at_fetch": "KCR"
+      },
+      "forecast_to_date": {
+        "ip": 30.4,
+        "war": 0.0
+      },
+      "war_gap": 0.01,
+      "innings_share_pct": 0.2
+    },
+    {
+      "id": 622608,
+      "name": "Antonio Senzatela",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 15,
+      "starts": 0,
+      "saves": 0,
+      "holds": 6,
+      "actual": {
+        "ip": "14.1",
+        "ip_value": 14.333,
+        "war": 0.0,
+        "era": 6.28,
+        "fip": 4.63,
+        "k_minus_bb_pct": 1.5
+      },
+      "forecast": {
+        "ip": 94.9,
+        "war": 0.0,
+        "era": 5.37,
+        "fip": 4.98,
+        "k_minus_bb_pct": 7.3,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 84.9,
+        "war": 0.0
+      },
+      "war_gap": 0.0,
+      "innings_share_pct": 1.1
+    },
+    {
+      "id": 684974,
+      "name": "Craig Yoho",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 15,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "20.0",
+        "ip_value": 20.0,
+        "war": -0.07,
+        "era": 3.15,
+        "fip": 4.75,
+        "k_minus_bb_pct": 12.8
+      },
+      "forecast": {
+        "ip": 42.0,
+        "war": 0.08,
+        "era": 3.97,
+        "fip": 4.13,
+        "k_minus_bb_pct": 12.8,
+        "team_at_fetch": "CLE"
+      },
+      "forecast_to_date": {
+        "ip": 37.6,
+        "war": 0.07
+      },
+      "war_gap": -0.15,
+      "innings_share_pct": 1.6
+    },
+    {
+      "id": 623381,
+      "name": "Thomas Pannone",
+      "throws": "L",
+      "role": "Starter",
+      "games": 1,
+      "starts": 1,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "3.0",
+        "ip_value": 3.0,
+        "war": -0.09,
+        "era": 6.0,
+        "fip": 8.1,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": 0.0,
+        "era": 4.07,
+        "fip": 4.25,
+        "k_minus_bb_pct": 12.6,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": 0.0
+      },
+      "war_gap": -0.09,
+      "innings_share_pct": 0.2
+    },
+    {
+      "id": 657649,
+      "name": "Jared Koenig",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 9,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "7.0",
+        "ip_value": 7.0,
+        "war": -0.13,
+        "era": 9.0,
+        "fip": 6.38,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 65.0,
+        "war": 0.52,
+        "era": 3.5,
+        "fip": 3.68,
+        "k_minus_bb_pct": 16.5,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 58.2,
+        "war": 0.46
+      },
+      "war_gap": -0.59,
+      "innings_share_pct": 0.5
+    },
+    {
+      "id": 668941,
+      "name": "JoJo Romero",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "3.1",
+        "ip_value": 3.333,
+        "war": -0.14,
+        "era": 5.4,
+        "fip": 7.6,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 64.0,
+        "war": 0.29,
+        "era": 3.57,
+        "fip": 3.84,
+        "k_minus_bb_pct": 12.9,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 57.3,
+        "war": 0.26
+      },
+      "war_gap": -0.4,
+      "innings_share_pct": 0.3
+    },
+    {
+      "id": 672582,
+      "name": "Angel Zerpa",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 12,
+      "starts": 0,
+      "saves": 2,
+      "holds": 2,
+      "actual": {
+        "ip": "12.2",
+        "ip_value": 12.667,
+        "war": -0.17,
+        "era": 6.39,
+        "fip": 5.31,
+        "k_minus_bb_pct": 3.6
+      },
+      "forecast": {
+        "ip": 60.0,
+        "war": 0.45,
+        "era": 3.46,
+        "fip": 3.64,
+        "k_minus_bb_pct": 15.1,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 53.7,
+        "war": 0.4
+      },
+      "war_gap": -0.57,
+      "innings_share_pct": 1.0
+    },
+    {
+      "id": 683734,
+      "name": "Andrew Vaughn",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "3.0",
+        "ip_value": 3.0,
+        "war": -0.29,
+        "era": 30.0,
+        "fip": 25.76,
+        "k_minus_bb_pct": -15.4
+      },
+      "forecast": null,
+      "forecast_to_date": {
+        "ip": 0.0,
+        "war": 0.0
+      },
+      "war_gap": -0.29,
+      "innings_share_pct": 0.2
+    },
+    {
+      "id": 669270,
+      "name": "Joel Kuhnel",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 10,
+      "starts": 0,
+      "saves": 2,
+      "holds": 1,
+      "actual": {
+        "ip": "9.2",
+        "ip_value": 9.667,
+        "war": -0.57,
+        "era": 6.52,
+        "fip": 9.3,
+        "k_minus_bb_pct": 4.1
+      },
+      "forecast": {
+        "ip": 11.0,
+        "war": 0.04,
+        "era": 4.08,
+        "fip": 4.17,
+        "k_minus_bb_pct": 9.3,
+        "team_at_fetch": "SFG"
+      },
+      "forecast_to_date": {
+        "ip": 9.8,
+        "war": 0.04
+      },
+      "war_gap": -0.61,
+      "innings_share_pct": 0.8
+    }
+  ]
+}

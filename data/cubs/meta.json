@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:29:47+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 112,
+ "seasons": {
+  "2026": {
+   "record": "81-64",
+   "games": 145,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Pete Crow-Armstrong",
+    "war": 8.7
+   },
+   "war_leaders": [
+    {
+     "name": "Pete Crow-Armstrong",
+     "war": 8.7
+    },
+    {
+     "name": "Alex Bregman",
+     "war": 4.8
+    },
+    {
+     "name": "Seiya Suzuki",
+     "war": 4.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Ben Brown",
+       "value": "0.94"
+      },
+      {
+       "name": "Shota Imanaga",
+       "value": "1.12"
+      },
+      {
+       "name": "Javier Assad",
+       "value": "1.14"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Pete Crow-Armstrong"
+     ],
+     "value": 41,
+     "top": [
+      {
+       "name": "Pete Crow-Armstrong",
+       "value": 41
+      },
+      {
+       "name": "Alex Bregman",
+       "value": 24
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": 24
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Pete Crow-Armstrong"
+     ],
+     "value": 97,
+     "top": [
+      {
+       "name": "Pete Crow-Armstrong",
+       "value": 97
+      },
+      {
+       "name": "Alex Bregman",
+       "value": 82
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": 80
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Pete Crow-Armstrong"
+     ],
+     "value": ".281",
+     "top": [
+      {
+       "name": "Pete Crow-Armstrong",
+       "value": ".281"
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": ".269"
+      },
+      {
+       "name": "Nico Hoerner",
+       "value": ".265"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Pete Crow-Armstrong"
+     ],
+     "value": ".953",
+     "top": [
+      {
+       "name": "Pete Crow-Armstrong",
+       "value": ".953"
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": ".847"
+      },
+      {
+       "name": "Alex Bregman",
+       "value": ".793"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

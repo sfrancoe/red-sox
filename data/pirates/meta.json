@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:29:49+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 134,
+ "seasons": {
+  "2026": {
+   "record": "71-73",
+   "games": 144,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Brandon Lowe",
+    "war": 4.4
+   },
+   "war_leaders": [
+    {
+     "name": "Brandon Lowe",
+     "war": 4.4
+    },
+    {
+     "name": "Braxton Ashcraft",
+     "war": 3.7
+    },
+    {
+     "name": "Bryan Reynolds",
+     "war": 3.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Mason Montgomery",
+       "value": "1.06"
+      },
+      {
+       "name": "Gregory Soto",
+       "value": "1.08"
+      },
+      {
+       "name": "Braxton Ashcraft",
+       "value": "1.09"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Brandon Lowe"
+     ],
+     "value": 29,
+     "top": [
+      {
+       "name": "Brandon Lowe",
+       "value": 29
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": 17
+      },
+      {
+       "name": "Ryan O'Hearn",
+       "value": 17
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Brandon Lowe"
+     ],
+     "value": 83,
+     "top": [
+      {
+       "name": "Brandon Lowe",
+       "value": 83
+      },
+      {
+       "name": "Ryan O'Hearn",
+       "value": 69
+      },
+      {
+       "name": "Bryan Reynolds",
+       "value": 67
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Nick Gonzales"
+     ],
+     "value": ".306",
+     "top": [
+      {
+       "name": "Nick Gonzales",
+       "value": ".306"
+      },
+      {
+       "name": "Bryan Reynolds",
+       "value": ".266"
+      },
+      {
+       "name": "Brandon Lowe",
+       "value": ".256"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Brandon Lowe"
+     ],
+     "value": ".803",
+     "top": [
+      {
+       "name": "Brandon Lowe",
+       "value": ".803"
+      },
+      {
+       "name": "Bryan Reynolds",
+       "value": ".801"
+      },
+      {
+       "name": "Nick Gonzales",
+       "value": ".762"
+      }
+     ]
+    }
+   }
+  }
+ }
+}
