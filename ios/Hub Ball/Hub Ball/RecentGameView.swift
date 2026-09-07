@@ -125,7 +125,7 @@ struct RecentGameView: View {
     }
 
     private func gameResultLabel(_ result: String, game: RecentGame) -> some View {
-        Text(result.uppercased())
+        Text(result.lowercased() == "win" ? "(W)" : "(L)")
             .font(
                 .system(
                     size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
