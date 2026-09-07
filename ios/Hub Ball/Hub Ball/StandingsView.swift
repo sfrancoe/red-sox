@@ -236,7 +236,7 @@ struct StandingsView: View {
             Text("L10").frame(width: widths.lastTen)
             Text("STRK").frame(width: widths.streak)
         }
-        .font(.system(size: compact ? 9 : (contentWidth >= 650 ? 13 : 11), weight: .black))
+        .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 13 : 11), weight: .black))
         .foregroundStyle(AppColor.hunterGreen)
         .padding(.horizontal, compact ? 2 : 5)
         .padding(.bottom, compact ? 0 : 2)
@@ -255,11 +255,11 @@ struct StandingsView: View {
         return HStack(spacing: 0) {
             HStack(spacing: compact ? 2 : 5) {
                 Text(team.rank)
-                    .font(.system(size: compact ? 10 : (contentWidth >= 650 ? 14 : 12), weight: emphasized ? .black : .bold, design: .monospaced))
+                    .font(.system(size: compact ? 12 : (contentWidth >= 650 ? 14 : 12), weight: emphasized ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: compact ? 11 : 15)
                 Text(team.cityName)
-                    .font(.system(size: compact ? 12 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold))
+                    .font(.system(size: compact ? 15 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold))
                     .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -275,11 +275,11 @@ struct StandingsView: View {
             )
             tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
-                .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .bold, design: .monospaced))
+                .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                 .frame(width: widths.streak)
         }
-        .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 16 : 14), weight: .semibold, design: .monospaced))
+        .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: .semibold, design: .monospaced))
         .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, compact ? 2 : 5)
         .padding(.vertical, compact ? compactRowPadding : (contentWidth >= 650 ? 13 : 7))
@@ -294,13 +294,13 @@ struct StandingsView: View {
         compact: Bool = false
     ) -> some View {
         Text(value)
-            .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold, design: .monospaced))
+            .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold, design: .monospaced))
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
             .frame(width: width)
     }
 
     private func tabletRowPadding(for availableHeight: CGFloat) -> CGFloat {
-        min(10, max(3, (availableHeight - 650) / 60))
+        min(9, max(2, (availableHeight - 740) / 60))
     }
 
     private func columnWidths(compact: Bool, gamesBackTitle: String) -> (
