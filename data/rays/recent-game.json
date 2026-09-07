@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T22:57:35.654812+00:00",
+  "generated_at": "2026-09-07T05:08:25.285340+00:00",
   "source": "MLB Stats API",
   "game_pk": 822848,
   "game_date": "2026-09-06T18:35:00Z",
@@ -11,7 +11,7 @@
   "summary": "The Rays couldn’t hold a 4-run lead and fell to the Rangers, 8–6, at Globe Life Field.",
   "facts": [
     "The Rays committed 2 errors; 2 opponent runs were unearned.",
-    "Yandy Díaz collected 2 of the Rays’ 9 hits.",
+    "Yandy Díaz collected 2 of the Rays’ 10 hits.",
     "Ian Seymour worked 3.0 innings, allowed 3 earned runs, and struck out 2."
   ],
   "decisions": {
@@ -27,7 +27,7 @@
     "abbreviation": "TB",
     "record": "85-58",
     "runs": 6,
-    "hits": 9,
+    "hits": 10,
     "errors": 2,
     "left_on_base": 9,
     "batting": [
@@ -180,15 +180,15 @@
         "position": "C",
         "note": "",
         "order": 10,
-        "atBats": 3,
+        "atBats": 4,
         "runs": 1,
-        "hits": 0,
+        "hits": 1,
         "rbi": 1,
         "baseOnBalls": 0,
         "strikeOuts": 1,
         "leftOnBase": 1,
         "homeRuns": 0,
-        "average": ".262",
+        "average": ".265",
         "season_home_runs": 4
       }
     ],
@@ -280,7 +280,7 @@
     ],
     "team_batting": {
       "flyOuts": 10,
-      "groundOuts": 11,
+      "groundOuts": 10,
       "airOuts": 14,
       "runs": 6,
       "doubles": 1,
@@ -289,10 +289,10 @@
       "strikeOuts": 4,
       "baseOnBalls": 4,
       "intentionalWalks": 1,
-      "hits": 9,
+      "hits": 10,
       "hitByPitch": 0,
       "avg": ".260",
-      "atBats": 35,
+      "atBats": 36,
       "obp": ".328",
       "slg": ".403",
       "ops": ".731",
@@ -302,10 +302,10 @@
       "groundIntoDoublePlay": 1,
       "groundIntoTriplePlay": 0,
       "plateAppearances": 42,
-      "totalBases": 10,
+      "totalBases": 11,
       "rbi": 6,
       "leftOnBase": 15,
-      "sacBunts": 1,
+      "sacBunts": 0,
       "sacFlies": 2,
       "catchersInterference": 0,
       "pickoffs": 0,
@@ -542,7 +542,7 @@
         "note": "",
         "order": 0,
         "inningsPitched": "3.0",
-        "hits": 6,
+        "hits": 7,
         "runs": 5,
         "earnedRuns": 5,
         "baseOnBalls": 3,
@@ -685,7 +685,7 @@
       },
       "away": {
         "runs": 4,
-        "hits": 4,
+        "hits": 5,
         "errors": 1,
         "leftOnBase": 3
       }
@@ -819,9 +819,9 @@
       "inning_num": 2,
       "half": "top",
       "batter": "Nick Fortes",
-      "event": "Sac Bunt",
+      "event": "Single",
       "rbi": 1,
-      "description": "Nick Fortes hits a sacrifice bunt. Jorge Mateo scores. Victor Mesa Jr. to 2nd. Nick Fortes to 1st.",
+      "description": "Nick Fortes singles on a bunt ground ball to pitcher MacKenzie Gore. Jorge Mateo scores. Victor Mesa Jr. to 2nd.",
       "away_score": 2,
       "home_score": 0
     },
