@@ -71,20 +71,31 @@ struct RecentGameView: View {
                     selectedGameID = game.gamePk
                     selectedStatsTeam = .favorite
                 } label: {
-                    Text(gameTabTitle(game, index: index))
-                        .font(
-                            .system(
-                                size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
-                                weight: selectedGame?.gamePk == game.gamePk ? .black : .semibold
-                            )
-                        )
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.78)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .foregroundStyle(Color.black)
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 7) {
+                            gameTabLabel(game, index: index)
+                            if !game.isLive {
+                                gameResultBadge(game.result)
+                            }
+                        }
+
+                        VStack(spacing: 4) {
+                            gameTabLabel(game, index: index)
+                            if !game.isLive {
+                                gameResultBadge(game.result)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 7)
+                    .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(
+                    game.isLive
+                        ? gameTabTitle(game, index: index)
+                        : "\(gameTabTitle(game, index: index)), \(game.result)"
+                )
             }
         }
         .padding(.horizontal, 5)
@@ -99,6 +110,29 @@ struct RecentGameView: View {
         .padding(.top, 10)
         .padding(.bottom, 4)
         .background(AppColor.paleRed)
+    }
+
+    private func gameTabLabel(_ game: RecentGame, index: Int) -> some View {
+        Text(gameTabTitle(game, index: index))
+            .font(
+                .system(
+                    size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
+                    weight: selectedGame?.gamePk == game.gamePk ? .black : .semibold
+                )
+            )
+            .lineLimit(1)
+            .minimumScaleFactor(0.72)
+    }
+
+    private func gameResultBadge(_ result: String) -> some View {
+        Text(result.uppercased())
+            .font(.system(size: 9, weight: .black))
+            .tracking(0.5)
+            .padding(.horizontal, 6)
+            .frame(height: 20)
+            .background(result.lowercased() == "win" ? AppColor.green : AppColor.red)
+            .foregroundStyle(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
     }
 
     private func gameTabTitle(_ game: RecentGame, index: Int) -> String {
