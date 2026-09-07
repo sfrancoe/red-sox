@@ -27,7 +27,7 @@ Required attribution is displayed in the app, and no player photography is inclu
 - Final 1024×1024 app icon
 - iPhone-only launch or fully tested iPad support
 - Privacy policy and support URLs
-- Independent product name and visual identity, or written MLB trademark authorization
+- Final review of the Hub Ball name and visual identity
 - Attribution and source-link review for Wikimedia, Chadwick, and Retrosheet player data
 - Permission and attribution for newspaper and X content
 - App Store name, subtitle, description, category, age rating, and screenshots
@@ -37,6 +37,9 @@ When those decisions are made, add `metadata.json` in this folder:
 
 ```json
 {
+  "app_name": "TODO",
+  "subtitle": "TODO",
+  "description": "TODO",
   "privacy_policy_url": "TODO",
   "support_url": "TODO",
   "review_notes": "TODO"

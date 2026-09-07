@@ -1,4 +1,4 @@
-# CLAUDE.md — Red Sox Records
+# CLAUDE.md — Hub Ball
 
 ## Project Overview
 
@@ -33,7 +33,7 @@ Deliberately dependency-free. If a change wants npm, question it first.
 ## Project Structure
 
 ```
-red-sox-records/
+hub-ball/
 ├── index.html                  # landing page — one card per story
 ├── src/
 │   ├── chart.js                # SHARED engine: canvas, animation, scrub, controls

@@ -1,13 +1,24 @@
-# Red Sox Records
+# Hub Ball
 
-Visual stories built from Boston Red Sox box scores. No framework, no bundler, no
-backend — plain ES modules and `<canvas>`, with game logs pulled from the free
+Hub Ball is a multi-team iOS baseball companion backed by this dependency-free static
+site and its visual stories. The current site remains centered on Boston Red Sox box
+scores and uses plain ES modules and `<canvas>`, with game logs pulled from the free
 [MLB Stats API](https://statsapi.mlb.com/).
 
 The native iOS app includes an App Store readiness check. Run
 `python3 scripts/app_store_preflight.py` before TestFlight; add `--network` to
 verify live non-metered feeds. See `app-store/README.md` for the remaining human
 review items.
+
+Open `ios/Hub Ball/Hub Ball.xcodeproj` in Xcode, or run an unsigned simulator build:
+
+```bash
+xcodebuild -project "ios/Hub Ball/Hub Ball.xcodeproj" -scheme "Hub Ball" \
+  -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO build
+```
+
+The separate `ios/Yankees Hub/` project remains independently buildable as
+`NY Baseball Hub`.
 
 ## Stories
 

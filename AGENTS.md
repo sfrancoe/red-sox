@@ -1,4 +1,4 @@
-# AGENTS.md — Red Sox Records
+# AGENTS.md — Hub Ball
 
 Instructions for AI coding agents working in this repo. Read this before changing
 anything. If you are Claude Code, `CLAUDE.md` covers the same ground in more detail.
