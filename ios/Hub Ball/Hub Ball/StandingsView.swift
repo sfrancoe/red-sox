@@ -89,7 +89,7 @@ struct StandingsView: View {
 
     private var tabletStandingsContent: some View {
         ScrollView {
-            LazyVStack(spacing: 16) {
+            LazyVStack(spacing: 5) {
                 ForEach(StandingsLeague.allCases) { league in
                     if let feed = store.feeds[league] {
                         leagueSection(feed, league: league)
@@ -97,46 +97,45 @@ struct StandingsView: View {
                 }
                 standingsFooter
             }
-            .padding(12)
+            .padding(.horizontal, 7)
+            .padding(.vertical, 4)
             .foregroundStyle(AppColor.ink)
         }
+        .dynamicTypeSize(.xSmall)
         .refreshable { await store.load() }
     }
 
     private func leagueSection(_ feed: StandingsFeed, league: StandingsLeague) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 2) {
             Text(league.fullName.uppercased())
-                .font(.system(size: 18, weight: .black))
-                .tracking(0.7)
+                .font(.system(size: 13, weight: .black))
+                .tracking(0.4)
                 .foregroundStyle(.white)
 
-            HStack(alignment: .top, spacing: 10) {
-                VStack(spacing: 5) {
+            HStack(alignment: .top, spacing: 5) {
+                VStack(spacing: 2) {
                     ForEach(feed.divisions) { division in
                         standingsCard(
                             title: division.name,
                             teams: division.teams,
                             gamesBackTitle: "GB",
                             showsCutoff: false,
-                            highlightsFavorite: league == store.selectedLeague
+                            highlightsFavorite: league == store.selectedLeague,
+                            compact: true
                         )
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .top)
 
-                VStack(spacing: 5) {
+                VStack(spacing: 2) {
                     standingsCard(
                         title: "\(league.shortName) Wild Card",
                         teams: feed.wildCard,
                         gamesBackTitle: "WCGB",
                         showsCutoff: true,
-                        highlightsFavorite: league == store.selectedLeague
+                        highlightsFavorite: league == store.selectedLeague,
+                        compact: true
                     )
-                    Text("Top three teams hold the wild-card positions.")
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundStyle(Color.white.opacity(0.82))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 4)
                 }
                 .frame(maxWidth: .infinity, alignment: .top)
             }
@@ -190,106 +189,127 @@ struct StandingsView: View {
         teams: [StandingsTeam],
         gamesBackTitle: String,
         showsCutoff: Bool,
-        highlightsFavorite: Bool
+        highlightsFavorite: Bool,
+        compact: Bool = false
     ) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            standingsHeader(title: title, gamesBackTitle: gamesBackTitle)
+            standingsHeader(title: title, gamesBackTitle: gamesBackTitle, compact: compact)
 
             ForEach(Array(teams.enumerated()), id: \.element.id) { index, team in
                 if showsCutoff && index == 3 {
-                    cutoffLine
+                    cutoffLine(compact: compact)
                 }
                 standingsRow(
                     team,
                     gamesBackTitle: gamesBackTitle,
-                    highlightsFavorite: highlightsFavorite
+                    highlightsFavorite: highlightsFavorite,
+                    compact: compact
                 )
             }
         }
-        .cardStyle(padding: 10)
+        .cardStyle(padding: compact ? 4 : 10)
     }
 
-    private func standingsHeader(title: String, gamesBackTitle: String) -> some View {
-        HStack(spacing: 0) {
+    private func standingsHeader(title: String, gamesBackTitle: String, compact: Bool) -> some View {
+        let widths = columnWidths(compact: compact, gamesBackTitle: gamesBackTitle)
+        return HStack(spacing: 0) {
             Text(title.uppercased())
-                .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
+                .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 18 : 16), weight: .black))
                 .foregroundStyle(AppColor.navy)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("W").frame(width: 28)
-            Text("L").frame(width: 28)
-            Text("PCT").frame(width: 46)
-            Text(gamesBackTitle).frame(width: gamesBackTitle == "WCGB" ? 48 : 38)
-            Text("L10").frame(width: 42)
-            Text("STRK").frame(width: 38)
+            Text("W").frame(width: widths.wins)
+            Text("L").frame(width: widths.losses)
+            Text("PCT").frame(width: widths.pct)
+            Text(gamesBackTitle).frame(width: widths.gamesBack)
+            Text("L10").frame(width: widths.lastTen)
+            Text("STRK").frame(width: widths.streak)
         }
-        .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
+        .font(.system(size: compact ? 8 : (contentWidth >= 650 ? 13 : 11), weight: .black))
         .foregroundStyle(AppColor.hunterGreen)
-        .padding(.horizontal, 5)
-        .padding(.bottom, 2)
+        .padding(.horizontal, compact ? 2 : 5)
+        .padding(.bottom, compact ? 0 : 2)
     }
 
     private func standingsRow(
         _ team: StandingsTeam,
         gamesBackTitle: String,
-        highlightsFavorite: Bool
+        highlightsFavorite: Bool,
+        compact: Bool
     ) -> some View {
         let gamesBack = gamesBackTitle == "WCGB" ? team.wildCardGamesBack : team.gamesBack
         let emphasized = highlightsFavorite && team.isFavorite
+        let widths = columnWidths(compact: compact, gamesBackTitle: gamesBackTitle)
         return HStack(spacing: 0) {
-            HStack(spacing: 5) {
+            HStack(spacing: compact ? 2 : 5) {
                 Text(team.rank)
-                    .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: emphasized ? .black : .bold, design: .monospaced))
+                    .font(.system(size: compact ? 9 : (contentWidth >= 650 ? 14 : 12), weight: emphasized ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
-                    .frame(width: 15)
+                    .frame(width: compact ? 11 : 15)
                 Text(team.cityName)
-                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .semibold))
+                    .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold))
                     .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            tableValue("\(team.wins)", width: 28, emphasized: emphasized)
-            tableValue("\(team.losses)", width: 28, emphasized: emphasized)
-            tableValue(team.pct, width: 46, emphasized: emphasized)
+            tableValue("\(team.wins)", width: widths.wins, emphasized: emphasized, compact: compact)
+            tableValue("\(team.losses)", width: widths.losses, emphasized: emphasized, compact: compact)
+            tableValue(team.pct, width: widths.pct, emphasized: emphasized, compact: compact)
             tableValue(
                 gamesBack,
-                width: gamesBackTitle == "WCGB" ? 48 : 38,
-                emphasized: emphasized
+                width: widths.gamesBack,
+                emphasized: emphasized,
+                compact: compact
             )
-            tableValue(team.lastTen, width: 42, emphasized: emphasized)
+            tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
-                .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .bold, design: .monospaced))
+                .font(.system(size: compact ? 10 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
-                .frame(width: 38)
+                .frame(width: widths.streak)
         }
-        .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .semibold, design: .monospaced))
+        .font(.system(size: compact ? 10 : (contentWidth >= 650 ? 16 : 14), weight: .semibold, design: .monospaced))
         .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
-        .padding(.horizontal, 5)
-        .padding(.vertical, contentWidth >= 650 ? 13 : 7)
+        .padding(.horizontal, compact ? 2 : 5)
+        .padding(.vertical, compact ? 1 : (contentWidth >= 650 ? 13 : 7))
         .background(emphasized ? AppColor.paleBlue : Color.clear)
-        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: compact ? 4 : 9, style: .continuous))
     }
 
     private func tableValue(
         _ value: String,
         width: CGFloat,
-        emphasized: Bool = false
+        emphasized: Bool = false,
+        compact: Bool = false
     ) -> some View {
         Text(value)
-            .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .semibold, design: .monospaced))
+            .font(.system(size: compact ? 10 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold, design: .monospaced))
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
             .frame(width: width)
     }
 
-    private var cutoffLine: some View {
+    private func columnWidths(compact: Bool, gamesBackTitle: String) -> (
+        wins: CGFloat,
+        losses: CGFloat,
+        pct: CGFloat,
+        gamesBack: CGFloat,
+        lastTen: CGFloat,
+        streak: CGFloat
+    ) {
+        if compact {
+            return (21, 21, 36, gamesBackTitle == "WCGB" ? 37 : 29, 32, 31)
+        }
+        return (28, 28, 46, gamesBackTitle == "WCGB" ? 48 : 38, 42, 38)
+    }
+
+    private func cutoffLine(compact: Bool) -> some View {
         HStack(spacing: 8) {
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
             Text("PLAYOFF CUT")
-                .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
+                .font(.system(size: compact ? 8 : (contentWidth >= 650 ? 13 : 11), weight: .black))
                 .tracking(0.5)
                 .foregroundStyle(AppColor.red)
             Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
         }
-        .padding(.vertical, 1)
+        .padding(.vertical, compact ? 0 : 1)
     }
 
     private var errorView: some View {
