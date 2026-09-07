@@ -237,6 +237,8 @@ struct StandingsView: View {
             Text("STRK").frame(width: widths.streak)
         }
         .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 13 : 11), weight: .black))
+        .lineLimit(1)
+        .minimumScaleFactor(0.75)
         .foregroundStyle(AppColor.hunterGreen)
         .padding(.horizontal, compact ? 2 : 5)
         .padding(.bottom, compact ? 0 : 2)
@@ -276,6 +278,8 @@ struct StandingsView: View {
             tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
                 .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .bold, design: .monospaced))
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                 .frame(width: widths.streak)
         }
@@ -295,12 +299,14 @@ struct StandingsView: View {
     ) -> some View {
         Text(value)
             .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold, design: .monospaced))
+            .lineLimit(1)
+            .minimumScaleFactor(0.85)
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
             .frame(width: width)
     }
 
     private func tabletRowPadding(for availableHeight: CGFloat) -> CGFloat {
-        min(9, max(2, (availableHeight - 740) / 60))
+        min(5, max(1.5, (availableHeight - 800) / 90))
     }
 
     private func columnWidths(compact: Bool, gamesBackTitle: String) -> (
@@ -312,7 +318,7 @@ struct StandingsView: View {
         streak: CGFloat
     ) {
         if compact {
-            return (21, 21, 36, gamesBackTitle == "WCGB" ? 37 : 29, 32, 31)
+            return (28, 28, 48, gamesBackTitle == "WCGB" ? 55 : 48, 44, 43)
         }
         return (28, 28, 46, gamesBackTitle == "WCGB" ? 48 : 38, 42, 38)
     }
