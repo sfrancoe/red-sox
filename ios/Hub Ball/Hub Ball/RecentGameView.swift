@@ -66,21 +66,21 @@ struct RecentGameView: View {
 
     private var gameSelector: some View {
         HStack(spacing: 0) {
-            ForEach(Array(store.games.enumerated()), id: \.element.gamePk) { index, game in
+            ForEach(store.games, id: \.gamePk) { game in
                 Button {
                     selectedGameID = game.gamePk
                     selectedStatsTeam = .favorite
                 } label: {
                     ViewThatFits(in: .horizontal) {
                         HStack(spacing: 7) {
-                            gameTabLabel(game, index: index)
+                            gameTabLabel(game)
                             if !game.isLive {
                                 gameResultLabel(game.result, game: game)
                             }
                         }
 
                         VStack(spacing: 4) {
-                            gameTabLabel(game, index: index)
+                            gameTabLabel(game)
                             if !game.isLive {
                                 gameResultLabel(game.result, game: game)
                             }
@@ -93,8 +93,8 @@ struct RecentGameView: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel(
                     game.isLive
-                        ? gameTabTitle(game, index: index)
-                        : "\(gameTabTitle(game, index: index)), \(game.result)"
+                        ? gameTabTitle(game)
+                        : "\(gameTabTitle(game)), \(game.result)"
                 )
             }
         }
@@ -112,8 +112,8 @@ struct RecentGameView: View {
         .background(AppColor.paleRed)
     }
 
-    private func gameTabLabel(_ game: RecentGame, index: Int) -> some View {
-        Text(gameTabTitle(game, index: index))
+    private func gameTabLabel(_ game: RecentGame) -> some View {
+        Text(gameTabTitle(game))
             .font(
                 .system(
                     size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
@@ -136,13 +136,14 @@ struct RecentGameView: View {
             .foregroundStyle(result.lowercased() == "win" ? AppColor.green : AppColor.red)
     }
 
-    private func gameTabTitle(_ game: RecentGame, index: Int) -> String {
+    private func gameTabTitle(_ game: RecentGame) -> String {
         if game.isLive { return "LIVE" }
-        if index == 0, !store.hasLiveGame { return "LAST GAME" }
 
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
-        var title = date.formatted(.dateTime.month(.abbreviated).day()).uppercased()
+        var title = Calendar.current.isDateInToday(date)
+            ? "TODAY"
+            : date.formatted(.dateTime.month(.abbreviated).day()).uppercased()
         let gamesOnDate = store.games
             .filter { candidate in
                 guard let candidateDate = formatter.date(from: candidate.gameDate) else { return false }
