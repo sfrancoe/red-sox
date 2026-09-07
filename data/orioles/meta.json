@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:23:44+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 110,
+ "seasons": {
+  "2026": {
+   "record": "70-75",
+   "games": 145,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Pete Alonso",
+    "war": 3.9
+   },
+   "war_leaders": [
+    {
+     "name": "Pete Alonso",
+     "war": 3.9
+    },
+    {
+     "name": "Taylor Ward",
+     "war": 2.7
+    },
+    {
+     "name": "Gunnar Henderson",
+     "war": 2.4
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Rico Garcia",
+       "value": "0.96"
+      },
+      {
+       "name": "Tyler Wells",
+       "value": "0.96"
+      },
+      {
+       "name": "Yennier Cano",
+       "value": "1.05"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": 33,
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": 33
+      },
+      {
+       "name": "Gunnar Henderson",
+       "value": 22
+      },
+      {
+       "name": "Coby Mayo",
+       "value": 21
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": 95,
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": 95
+      },
+      {
+       "name": "Coby Mayo",
+       "value": 58
+      },
+      {
+       "name": "Gunnar Henderson",
+       "value": 57
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": ".266",
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": ".266"
+      },
+      {
+       "name": "Taylor Ward",
+       "value": ".246"
+      },
+      {
+       "name": "Gunnar Henderson",
+       "value": ".220"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Pete Alonso"
+     ],
+     "value": ".854",
+     "top": [
+      {
+       "name": "Pete Alonso",
+       "value": ".854"
+      },
+      {
+       "name": "Taylor Ward",
+       "value": ".729"
+      },
+      {
+       "name": "Gunnar Henderson",
+       "value": ".700"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

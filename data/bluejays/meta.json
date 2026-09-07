@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:26:52+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 141,
+ "seasons": {
+  "2026": {
+   "record": "72-72",
+   "games": 144,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Dylan Cease",
+    "war": 6.1
+   },
+   "war_leaders": [
+    {
+     "name": "Dylan Cease",
+     "war": 6.1
+    },
+    {
+     "name": "Louis Varland",
+     "war": 3.4
+    },
+    {
+     "name": "Spencer Miles",
+     "war": 2.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Louis Varland",
+       "value": "0.98"
+      },
+      {
+       "name": "Dylan Cease",
+       "value": "1.04"
+      },
+      {
+       "name": "Spencer Miles",
+       "value": "1.07"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Kazuma Okamoto"
+     ],
+     "value": 28,
+     "top": [
+      {
+       "name": "Kazuma Okamoto",
+       "value": 28
+      },
+      {
+       "name": "George Springer",
+       "value": 14
+      },
+      {
+       "name": "Nathan Lukes",
+       "value": 10
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Kazuma Okamoto"
+     ],
+     "value": 81,
+     "top": [
+      {
+       "name": "Kazuma Okamoto",
+       "value": 81
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": 54
+      },
+      {
+       "name": "Andr\u00e9s Gim\u00e9nez",
+       "value": 52
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Ernie Clement"
+     ],
+     "value": ".275",
+     "top": [
+      {
+       "name": "Ernie Clement",
+       "value": ".275"
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": ".259"
+      },
+      {
+       "name": "George Springer",
+       "value": ".250"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Kazuma Okamoto"
+     ],
+     "value": ".745",
+     "top": [
+      {
+       "name": "Kazuma Okamoto",
+       "value": ".745"
+      },
+      {
+       "name": "George Springer",
+       "value": ".739"
+      },
+      {
+       "name": "Ernie Clement",
+       "value": ".687"
+      }
+     ]
+    }
+   }
+  }
+ }
+}
