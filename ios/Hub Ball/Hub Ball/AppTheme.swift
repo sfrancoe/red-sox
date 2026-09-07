@@ -9,85 +9,25 @@ enum AppColor {
     static let cream = Color(red: 0.957, green: 0.969, blue: 0.980)
     static let paper = Color.white
 
-    static var paleBlue: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.918, green: 0.945, blue: 0.965)
-        case .newYork: Color(red: 0.910, green: 0.933, blue: 0.957)
-        case .newYorkMets: Color(red: 0.918, green: 0.945, blue: 0.980)
-        case .tampaBay: Color(red: 0.906, green: 0.953, blue: 0.980)
-        }
-    }
+    static var paleBlue: Color { Color(hubHex: selectedTeam.colors.background) }
+    static var paleRed: Color { Color(hubHex: selectedTeam.colors.banner) }
+    static var navy: Color { Color(hubHex: selectedTeam.colors.secondary) }
+    static var red: Color { Color(hubHex: selectedTeam.colors.primary) }
+    static var darkRed: Color { Color(hubHex: selectedTeam.colors.accentDark) }
+    static var green: Color { Color(hubHex: selectedTeam.colors.positive) }
+    static var hunterGreen: Color { Color(hubHex: selectedTeam.colors.navigation) }
+    static var ink: Color { Color(hubHex: selectedTeam.colors.ink) }
+    static var border: Color { Color(hubHex: selectedTeam.colors.border) }
+}
 
-    static var paleRed: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.720, green: 0.200, blue: 0.240)
-        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
-        case .newYorkMets: Color(red: 1.000, green: 0.349, blue: 0.063)
-        case .tampaBay: Color(red: 0.400, green: 0.620, blue: 0.160)
-        }
-    }
-
-    static var navy: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.082, green: 0.196, blue: 0.294)
-        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
-        case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
-        case .tampaBay: Color(red: 0.035, green: 0.149, blue: 0.278)
-        }
-    }
-
-    static var red: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.741, green: 0.188, blue: 0.224)
-        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
-        case .newYorkMets: Color(red: 1.000, green: 0.349, blue: 0.063)
-        case .tampaBay: Color(red: 0.000, green: 0.478, blue: 0.698)
-        }
-    }
-
-    static var darkRed: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.545, green: 0.047, blue: 0.075)
-        case .newYork: Color(red: 0.025, green: 0.082, blue: 0.153)
-        case .newYorkMets: Color(red: 0.765, green: 0.227, blue: 0.000)
-        case .tampaBay: Color(red: 0.000, green: 0.310, blue: 0.502)
-        }
-    }
-
-    static var green: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.157, green: 0.439, blue: 0.322)
-        case .newYork: Color(red: 0.106, green: 0.247, blue: 0.396)
-        case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
-        case .tampaBay: Color(red: 0.400, green: 0.620, blue: 0.160)
-        }
-    }
-
-    static var hunterGreen: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.075, green: 0.245, blue: 0.175)
-        case .newYork: Color(red: 0.047, green: 0.137, blue: 0.251)
-        case .newYorkMets: Color(red: 0.000, green: 0.176, blue: 0.447)
-        case .tampaBay: Color(red: 0.035, green: 0.149, blue: 0.278)
-        }
-    }
-
-    static var ink: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.090, green: 0.129, blue: 0.169)
-        case .newYork: Color(red: 0.025, green: 0.082, blue: 0.153)
-        case .newYorkMets: Color(red: 0.025, green: 0.102, blue: 0.208)
-        case .tampaBay: Color(red: 0.020, green: 0.106, blue: 0.196)
-        }
-    }
-
-    static var border: Color {
-        switch selectedTeam {
-        case .boston: Color(red: 0.847, green: 0.882, blue: 0.910)
-        case .newYork: Color(red: 0.776, green: 0.824, blue: 0.871)
-        case .newYorkMets: Color(red: 0.776, green: 0.831, blue: 0.902)
-        case .tampaBay: Color(red: 0.710, green: 0.824, blue: 0.882)
-        }
+private extension Color {
+    init(hubHex: String) {
+        let value = UInt64(hubHex.dropFirst(), radix: 16) ?? 0
+        self.init(
+            red: Double((value >> 16) & 0xff) / 255,
+            green: Double((value >> 8) & 0xff) / 255,
+            blue: Double(value & 0xff) / 255
+        )
     }
 }
 

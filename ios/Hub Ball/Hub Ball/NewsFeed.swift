@@ -1,33 +1,5 @@
 import Foundation
 
-enum NewsSource: String, CaseIterable, Identifiable, Sendable {
-    case globe
-    case herald
-    case athletic
-    case massLive = "masslive"
-    case nyTimes = "nytimes"
-    case nyPost = "nypost"
-    case dailyNews = "dailynews"
-    case tampaBayTimes = "tampabay"
-
-    var id: String { rawValue }
-
-    var shortName: String {
-        switch self {
-        case .globe: "Globe"
-        case .herald: "Herald"
-        case .athletic: "Athletic"
-        case .massLive: "MassLive"
-        case .nyTimes: "NY Times"
-        case .nyPost: "NY Post"
-        case .dailyNews: "Daily News"
-        case .tampaBayTimes: "Tampa Bay Times"
-        }
-    }
-
-    var fileName: String { rawValue }
-}
-
 struct NewsFeed: Codable, Sendable {
     let generatedAt: String
     let source: String

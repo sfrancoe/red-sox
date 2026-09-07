@@ -11,9 +11,9 @@ struct TeamSettingsView: View {
 
                 ScrollView {
                     VStack(spacing: 0) {
-                        ForEach(HubTeam.allCases) { team in
+                        ForEach(HubTeam.availableTeams) { team in
                             teamButton(team)
-                            if team.id != HubTeam.allCases.last?.id {
+                            if team.id != HubTeam.availableTeams.last?.id {
                                 Divider().overlay(AppColor.border)
                             }
                         }
@@ -74,7 +74,7 @@ struct TeamOnboardingView: View {
                     .foregroundStyle(.white)
 
                     VStack(spacing: usesAccessibilityLayout ? 8 : 12) {
-                        ForEach(HubTeam.allCases) { team in
+                        ForEach(HubTeam.availableTeams) { team in
                             Button {
                                 selectedTeamID = team.id
                             } label: {
