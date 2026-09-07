@@ -286,7 +286,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -337,7 +337,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -388,7 +388,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -439,7 +439,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -490,7 +490,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -541,7 +541,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -592,7 +592,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -644,7 +644,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -695,7 +695,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -746,7 +746,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -797,7 +797,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -849,7 +849,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -900,7 +900,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -951,7 +951,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1002,7 +1002,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1053,7 +1053,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1104,7 +1104,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1155,7 +1155,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1206,7 +1206,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1257,7 +1257,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1308,7 +1308,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1359,7 +1359,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1410,7 +1410,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1462,7 +1462,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1513,7 +1513,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,
@@ -1564,7 +1564,7 @@ export const MLB_TEAMS = Object.freeze([
       }
     ],
     "features": {
-      "native_picker": false,
+      "native_picker": true,
       "home": true,
       "recent_game": true,
       "schedule": true,

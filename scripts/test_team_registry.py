@@ -37,7 +37,7 @@ def main() -> None:
 
     by_id = {team["id"]: team for team in teams}
     assert set(EXPECTED_EXISTING) <= set(by_id)
-    assert sum(team["features"]["native_picker"] for team in teams) == 4
+    assert sum(team["features"]["native_picker"] for team in teams) == 30
     for team_id, expected in EXPECTED_EXISTING.items():
         team = by_id[team_id]
         actual = (
