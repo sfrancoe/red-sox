@@ -75,14 +75,14 @@ struct RecentGameView: View {
                         HStack(spacing: 7) {
                             gameTabLabel(game, index: index)
                             if !game.isLive {
-                                gameResultLabel(game.result)
+                                gameResultLabel(game.result, game: game)
                             }
                         }
 
                         VStack(spacing: 4) {
                             gameTabLabel(game, index: index)
                             if !game.isLive {
-                                gameResultLabel(game.result)
+                                gameResultLabel(game.result, game: game)
                             }
                         }
                     }
@@ -124,9 +124,14 @@ struct RecentGameView: View {
             .minimumScaleFactor(0.72)
     }
 
-    private func gameResultLabel(_ result: String) -> some View {
+    private func gameResultLabel(_ result: String, game: RecentGame) -> some View {
         Text(result.uppercased())
-            .font(.system(size: 9, weight: .black))
+            .font(
+                .system(
+                    size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
+                    weight: .black
+                )
+            )
             .tracking(0.5)
             .foregroundStyle(result.lowercased() == "win" ? AppColor.green : AppColor.red)
     }

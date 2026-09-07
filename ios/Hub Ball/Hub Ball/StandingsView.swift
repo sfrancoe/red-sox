@@ -13,8 +13,12 @@ struct StandingsView: View {
             AppColor.paleRed.ignoresSafeArea()
 
             Group {
-                if let feed = store.feed {
-                    standingsContent(feed)
+                if store.feeds.count == StandingsLeague.allCases.count {
+                    if contentWidth >= 650 {
+                        tabletStandingsContent
+                    } else {
+                        phoneStandingsContent
+                    }
                 } else if store.isLoading {
                     ProgressView("Loading standings…")
                         .tint(.white)
@@ -34,29 +38,32 @@ struct StandingsView: View {
         }
     }
 
-    private func standingsContent(_ feed: StandingsFeed) -> some View {
+    private var phoneStandingsContent: some View {
         VStack(spacing: 0) {
             modePicker
 
             ScrollView {
                 LazyVStack(spacing: 5) {
-                    if store.mode == .divisions {
+                    if let league = store.mode.league,
+                       let feed = store.feeds[league] {
                         HubCardGrid(minimumWidth: 440, compactSpacing: 5) {
                             ForEach(feed.divisions) { division in
                                 standingsCard(
                                     title: division.name,
                                     teams: division.teams,
                                     gamesBackTitle: "GB",
-                                    showsCutoff: false
+                                    showsCutoff: false,
+                                    highlightsFavorite: league == store.selectedLeague
                                 )
                             }
                         }
-                    } else {
+                    } else if let feed = store.feeds[store.selectedLeague] {
                         standingsCard(
-                            title: "AL Wild Card",
+                            title: "\(store.selectedLeague.shortName) Wild Card",
                             teams: feed.wildCard,
                             gamesBackTitle: "WCGB",
-                            showsCutoff: true
+                            showsCutoff: true,
+                            highlightsFavorite: true
                         )
 
                         Text("Top three teams hold the wild-card positions.")
@@ -66,11 +73,7 @@ struct StandingsView: View {
                             .padding(.horizontal, 4)
                     }
 
-                    Text("Updated \(feed.updatedText) · \(feed.source)")
-                        .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
-                        .foregroundStyle(Color.white.opacity(0.72))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.vertical, 5)
+                    standingsFooter
                 }
                 .padding(.horizontal, 12)
                 .padding(.bottom, 12)
@@ -82,6 +85,72 @@ struct StandingsView: View {
             }
         }
         .padding(.top, contentWidth >= 650 ? 16 : 12)
+    }
+
+    private var tabletStandingsContent: some View {
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                ForEach(StandingsLeague.allCases) { league in
+                    if let feed = store.feeds[league] {
+                        leagueSection(feed, league: league)
+                    }
+                }
+                standingsFooter
+            }
+            .padding(12)
+            .foregroundStyle(AppColor.ink)
+        }
+        .refreshable { await store.load() }
+    }
+
+    private func leagueSection(_ feed: StandingsFeed, league: StandingsLeague) -> some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text(league.fullName.uppercased())
+                .font(.system(size: 18, weight: .black))
+                .tracking(0.7)
+                .foregroundStyle(.white)
+
+            HStack(alignment: .top, spacing: 10) {
+                VStack(spacing: 5) {
+                    ForEach(feed.divisions) { division in
+                        standingsCard(
+                            title: division.name,
+                            teams: division.teams,
+                            gamesBackTitle: "GB",
+                            showsCutoff: false,
+                            highlightsFavorite: league == store.selectedLeague
+                        )
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .top)
+
+                VStack(spacing: 5) {
+                    standingsCard(
+                        title: "\(league.shortName) Wild Card",
+                        teams: feed.wildCard,
+                        gamesBackTitle: "WCGB",
+                        showsCutoff: true,
+                        highlightsFavorite: league == store.selectedLeague
+                    )
+                    Text("Top three teams hold the wild-card positions.")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(Color.white.opacity(0.82))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 4)
+                }
+                .frame(maxWidth: .infinity, alignment: .top)
+            }
+        }
+    }
+
+    private var standingsFooter: some View {
+        let updates = StandingsLeague.allCases.compactMap { store.feeds[$0]?.updatedText }
+        let updated = updates.first ?? "—"
+        return Text("Updated \(updated) · MLB Stats API")
+            .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
+            .foregroundStyle(Color.white.opacity(0.72))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 5)
     }
 
     private var modePicker: some View {
@@ -120,7 +189,8 @@ struct StandingsView: View {
         title: String,
         teams: [StandingsTeam],
         gamesBackTitle: String,
-        showsCutoff: Bool
+        showsCutoff: Bool,
+        highlightsFavorite: Bool
     ) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             standingsHeader(title: title, gamesBackTitle: gamesBackTitle)
@@ -129,7 +199,11 @@ struct StandingsView: View {
                 if showsCutoff && index == 3 {
                     cutoffLine
                 }
-                standingsRow(team, gamesBackTitle: gamesBackTitle)
+                standingsRow(
+                    team,
+                    gamesBackTitle: gamesBackTitle,
+                    highlightsFavorite: highlightsFavorite
+                )
             }
         }
         .cardStyle(padding: 10)
@@ -140,14 +214,13 @@ struct StandingsView: View {
             Text(title.uppercased())
                 .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
                 .foregroundStyle(AppColor.navy)
-                .frame(width: contentWidth >= 650 ? 160 : nil, alignment: .leading)
-                .frame(maxWidth: contentWidth >= 650 ? nil : .infinity, alignment: .leading)
-            Text("W").frame(minWidth: 28, maxWidth: contentWidth >= 650 ? .infinity : (28))
-            Text("L").frame(minWidth: 28, maxWidth: contentWidth >= 650 ? .infinity : (28))
-            Text("PCT").frame(minWidth: 46, maxWidth: contentWidth >= 650 ? .infinity : (46))
-            Text(gamesBackTitle).frame(minWidth: gamesBackTitle == "WCGB" ? 48 : 38, maxWidth: contentWidth >= 650 ? .infinity : (gamesBackTitle == "WCGB" ? 48 : 38))
-            Text("L10").frame(minWidth: 42, maxWidth: contentWidth >= 650 ? .infinity : (42))
-            Text("STRK").frame(minWidth: 38, maxWidth: contentWidth >= 650 ? .infinity : (38))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text("W").frame(width: 28)
+            Text("L").frame(width: 28)
+            Text("PCT").frame(width: 46)
+            Text(gamesBackTitle).frame(width: gamesBackTitle == "WCGB" ? 48 : 38)
+            Text("L10").frame(width: 42)
+            Text("STRK").frame(width: 38)
         }
         .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
         .foregroundStyle(AppColor.hunterGreen)
@@ -155,40 +228,44 @@ struct StandingsView: View {
         .padding(.bottom, 2)
     }
 
-    private func standingsRow(_ team: StandingsTeam, gamesBackTitle: String) -> some View {
+    private func standingsRow(
+        _ team: StandingsTeam,
+        gamesBackTitle: String,
+        highlightsFavorite: Bool
+    ) -> some View {
         let gamesBack = gamesBackTitle == "WCGB" ? team.wildCardGamesBack : team.gamesBack
+        let emphasized = highlightsFavorite && team.isFavorite
         return HStack(spacing: 0) {
             HStack(spacing: 5) {
                 Text(team.rank)
-                    .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: team.isFavorite ? .black : .bold, design: .monospaced))
+                    .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: emphasized ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: 15)
                 Text(team.cityName)
-                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isFavorite ? .black : .semibold))
+                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .semibold))
                     .lineLimit(1)
             }
-            .frame(width: contentWidth >= 650 ? 160 : nil, alignment: .leading)
-                .frame(maxWidth: contentWidth >= 650 ? nil : .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
 
-            tableValue("\(team.wins)", width: 28, emphasized: team.isFavorite)
-            tableValue("\(team.losses)", width: 28, emphasized: team.isFavorite)
-            tableValue(team.pct, width: 46, emphasized: team.isFavorite)
+            tableValue("\(team.wins)", width: 28, emphasized: emphasized)
+            tableValue("\(team.losses)", width: 28, emphasized: emphasized)
+            tableValue(team.pct, width: 46, emphasized: emphasized)
             tableValue(
                 gamesBack,
                 width: gamesBackTitle == "WCGB" ? 48 : 38,
-                emphasized: team.isFavorite
+                emphasized: emphasized
             )
-            tableValue(team.lastTen, width: 42, emphasized: team.isFavorite)
+            tableValue(team.lastTen, width: 42, emphasized: emphasized)
             Text(team.streak)
-                .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isFavorite ? .black : .bold, design: .monospaced))
+                .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .bold, design: .monospaced))
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
-                .frame(minWidth: 38, maxWidth: contentWidth >= 650 ? .infinity : (38))
+                .frame(width: 38)
         }
         .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .semibold, design: .monospaced))
-        .foregroundStyle(team.isFavorite ? AppColor.navy : AppColor.hunterGreen)
+        .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, 5)
         .padding(.vertical, contentWidth >= 650 ? 13 : 7)
-        .background(team.isFavorite ? AppColor.paleBlue : Color.clear)
+        .background(emphasized ? AppColor.paleBlue : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
     }
 
@@ -200,7 +277,7 @@ struct StandingsView: View {
         Text(value)
             .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .semibold, design: .monospaced))
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
-            .frame(minWidth: width, maxWidth: contentWidth >= 650 ? .infinity : (width))
+            .frame(width: width)
     }
 
     private var cutoffLine: some View {
