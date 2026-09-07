@@ -244,8 +244,11 @@ export default async request => {
     const entries = listPayload.props?.pageProps?.timeline?.entries || [];
     const feed = buildFeed(entries, rosterTerms(JSON.parse(rosterJson)), team);
     return Response.json(feed, { headers: {
-      'Cache-Control': 'public, max-age=60, stale-while-revalidate=60',
-      'Netlify-CDN-Cache-Control': 'public, durable, max-age=300, stale-while-revalidate=60',
+      // X's public syndication endpoint throttles bursts across team profiles. Keep a
+      // verified response at the durable edge while Netlify refreshes it in the
+      // background so a temporary upstream throttle never empties the native feed.
+      'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
+      'Netlify-CDN-Cache-Control': 'public, durable, max-age=86400, stale-while-revalidate=604800',
     } });
   } catch (error) {
     console.error('X feed refresh failed', error);
