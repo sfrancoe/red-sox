@@ -61,6 +61,7 @@ def verify_team(origin: str, team: dict[str, Any]) -> list[str]:
     checked.append("pitching")
 
     seasons = fetch_json(data_url(origin, team, "seasons.json"))
+    assert {"2023", "2024", "2025"}.issubset(seasons)
     latest = seasons[max(seasons)]
     assert latest["war_leaders"] and latest["batting_leaders"] and latest["pitching_leaders"]
     checked.append("leaders")

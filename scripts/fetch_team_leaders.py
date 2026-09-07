@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch current-season paths and leaders for registry teams."""
+"""Fetch season paths and leaders for registry teams."""
 
 from __future__ import annotations
 
@@ -68,30 +68,48 @@ def fetch_text(url: str) -> str:
     raise RuntimeError(f"Could not fetch {url}: {last_error}")
 
 
-def war_by_team(teams: list[dict[str, Any]], season: int) -> dict[str, list[dict[str, Any]]]:
-    wanted = {team["baseball_reference_id"] for team in teams}
-    totals: dict[str, dict[str, float]] = {key: {} for key in wanted}
+def war_by_team(
+    teams: list[dict[str, Any]], seasons: list[int]
+) -> dict[int, dict[str, list[dict[str, Any]]]]:
+    team_by_reference_id = {
+        reference_id: team["api_key"]
+        for team in teams
+        for reference_id in [
+            team["baseball_reference_id"],
+            *team.get("baseball_reference_aliases", []),
+        ]
+    }
+    totals: dict[int, dict[str, dict[str, float]]] = {
+        season: {team["api_key"]: {} for team in teams} for season in seasons
+    }
     for url in WAR_URLS:
         for row in csv.DictReader(io.StringIO(fetch_text(url))):
             key = row.get("team_ID") or ""
-            if key not in wanted:
+            team_key = team_by_reference_id.get(key)
+            if team_key is None:
                 continue
             try:
                 year = int(row.get("year_ID") or "")
                 war = float(row.get("WAR") or "")
             except ValueError:
                 continue
-            if year != season:
+            if year not in totals:
                 continue
             name = (row.get("name_common") or "").strip()
             if name:
-                totals[key][name] = totals[key].get(name, 0.0) + war
+                players = totals[year][team_key]
+                players[name] = players.get(name, 0.0) + war
     return {
-        key: [
-            {"name": name, "war": round(war, 1)}
-            for name, war in sorted(players.items(), key=lambda item: (-item[1], item[0]))[:3]
-        ]
-        for key, players in totals.items()
+        season: {
+            key: [
+                {"name": name, "war": round(war, 1)}
+                for name, war in sorted(
+                    players.items(), key=lambda item: (-item[1], item[0])
+                )[:3]
+            ]
+            for key, players in teams_by_key.items()
+        }
+        for season, teams_by_key in totals.items()
     }
 
 
@@ -189,31 +207,44 @@ def season_path(team: dict[str, Any], season: int) -> dict[str, Any]:
     }
 
 
-def write_team(team: dict[str, Any], season: int, war: list[dict[str, Any]]) -> None:
-    print(f"{team['full_name']} leaders:")
-    result = season_path(team, season)
-    result["batting_leaders"] = batting_leaders(team, season)
-    result["pitching_leaders"] = pitching_leaders(team, season)
-    result["war_leaders"] = war
-    if not war:
-        raise RuntimeError(f"No Baseball Reference WAR leaders returned for {team['full_name']}")
-    result["war_leader"] = war[0]
-    seasons = {str(season): result}
+def write_team(
+    team: dict[str, Any],
+    requested_seasons: list[int],
+    war: dict[int, dict[str, list[dict[str, Any]]]],
+) -> None:
     output = data_directory(team)
     output.mkdir(parents=True, exist_ok=True)
-    (output / "seasons.json").write_text(json.dumps(seasons, indent=1) + "\n")
+    seasons_path = output / "seasons.json"
+    seasons = json.loads(seasons_path.read_text()) if seasons_path.exists() else {}
+
+    for season in requested_seasons:
+        print(f"{team['full_name']} {season} leaders:")
+        result = season_path(team, season)
+        result["batting_leaders"] = batting_leaders(team, season)
+        result["pitching_leaders"] = pitching_leaders(team, season)
+        season_war = war.get(season, {}).get(team["api_key"], [])
+        if not season_war:
+            raise RuntimeError(
+                f"No {season} Baseball Reference WAR leaders returned for {team['full_name']}"
+            )
+        result["war_leaders"] = season_war
+        result["war_leader"] = season_war[0]
+        seasons[str(season)] = result
+
+    ordered_seasons = dict(sorted(seasons.items(), reverse=True))
+    seasons_path.write_text(json.dumps(ordered_seasons, indent=1) + "\n")
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": "MLB Stats API (statsapi.mlb.com)",
         "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
         "team_id": team["mlb_id"],
-        "seasons": {str(season): {
+        "seasons": {year: {
             "record": result["record"], "games": result["end_game"],
             "in_progress": result["in_progress"], "war_leader": result["war_leader"],
             "war_leaders": result["war_leaders"],
             "pitching_leaders": result["pitching_leaders"],
             "batting_leaders": result["batting_leaders"],
-        }},
+        } for year, result in ordered_seasons.items()},
     }
     (output / "meta.json").write_text(json.dumps(meta, indent=1) + "\n")
     print(f"  wrote {output / 'seasons.json'} and {output / 'meta.json'}")
@@ -223,11 +254,19 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--team", action="append", default=[])
     parser.add_argument("--season", type=int, default=datetime.now(timezone.utc).year)
+    parser.add_argument(
+        "--include-history",
+        action="store_true",
+        help="also refresh the three seasons preceding --season",
+    )
     args = parser.parse_args()
     teams = [team_by_key(key) for key in args.team] if args.team else expansion_teams()
-    war = war_by_team(teams, args.season)
+    seasons = [args.season]
+    if args.include_history:
+        seasons.extend(args.season - offset for offset in range(1, 4))
+    war = war_by_team(teams, seasons)
     for team in teams:
-        write_team(team, args.season, war.get(team["baseball_reference_id"], []))
+        write_team(team, seasons, war)
     return 0
 
 
