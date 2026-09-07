@@ -1,6 +1,6 @@
 # NY Baseball Hub iOS app
 
-NY Baseball Hub is a separate iPhone and iPad app built from the Hub Ball foundation. It has its own Xcode project, bundle identifier (`com.sfrancoe.Yankees-Hub`), app icon, branding, and bundled offline data. Installing it does not replace or alter the Boston Baseball Hub app.
+NY Baseball Hub is a separate iPhone and iPad app built from the Hub Ball foundation. It has its own Xcode project, bundle identifier (`com.sfrancoe.Yankees-Hub`), app icon, branding, and bundled offline data. Installing it does not replace or alter the Hub Ball app.
 
 The app uses MLB team ID 147 and reads its generated data from `/data/yankees/`. Its eight sections are Games, Schedule, Newspapers, X Posts, Standings, Pitching, Leaders, and Markets. There is no Game 108 section.
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAYER_PATH = ROOT / "data" / "players.json"
-IOS_PLAYER_PATH = ROOT / "ios" / "Red Sox Records" / "Red Sox Records" / "players.json"
+IOS_PLAYER_PATH = ROOT / "ios" / "Hub Ball" / "Hub Ball" / "players.json"
 POSITION_GROUPS = {"Pitcher", "Catcher", "Infielder", "Outfielder", "Hitter"}
 BANNED_TEXT = ("statsapi.mlb.com", "mlbstatic.com", '"photo"', "SportsDataIO")
 

@@ -1,6 +1,6 @@
 //
-//  Red_Sox_RecordsApp.swift
-//  Red Sox Records
+//  HubBallApp.swift
+//  Hub Ball
 //
 //  Created by Scott Francoeur on 8/31/26.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Red_Sox_RecordsApp: App {
+struct HubBallApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

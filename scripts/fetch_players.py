@@ -27,7 +27,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "data" / "players.json"
-IOS_OUTPUT_PATH = ROOT / "ios" / "Red Sox Records" / "Red Sox Records" / "players.json"
+IOS_OUTPUT_PATH = ROOT / "ios" / "Hub Ball" / "Hub Ball" / "players.json"
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 ROSTER_TEMPLATE = "Template:Boston Red Sox roster"
