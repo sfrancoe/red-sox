@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:27:30+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 117,
+ "seasons": {
+  "2026": {
+   "record": "73-71",
+   "games": 144,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Yordan Alvarez",
+    "war": 6.0
+   },
+   "war_leaders": [
+    {
+     "name": "Yordan Alvarez",
+     "war": 6.0
+    },
+    {
+     "name": "Isaac Paredes",
+     "war": 3.5
+    },
+    {
+     "name": "Jeremy Pe\u00f1a",
+     "war": 3.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Steven Okert",
+       "value": "0.87"
+      },
+      {
+       "name": "AJ Blubaugh",
+       "value": "1.17"
+      },
+      {
+       "name": "Enyel De Los Santos",
+       "value": "1.19"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Yordan Alvarez"
+     ],
+     "value": 38,
+     "top": [
+      {
+       "name": "Yordan Alvarez",
+       "value": 38
+      },
+      {
+       "name": "Christian Walker",
+       "value": 24
+      },
+      {
+       "name": "Isaac Paredes",
+       "value": 18
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Yordan Alvarez"
+     ],
+     "value": 95,
+     "top": [
+      {
+       "name": "Yordan Alvarez",
+       "value": 95
+      },
+      {
+       "name": "Isaac Paredes",
+       "value": 79
+      },
+      {
+       "name": "Christian Walker",
+       "value": 77
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Yordan Alvarez"
+     ],
+     "value": ".314",
+     "top": [
+      {
+       "name": "Yordan Alvarez",
+       "value": ".314"
+      },
+      {
+       "name": "Isaac Paredes",
+       "value": ".258"
+      },
+      {
+       "name": "Jose Altuve",
+       "value": ".247"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Yordan Alvarez"
+     ],
+     "value": "1.031",
+     "top": [
+      {
+       "name": "Yordan Alvarez",
+       "value": "1.031"
+      },
+      {
+       "name": "Isaac Paredes",
+       "value": ".778"
+      },
+      {
+       "name": "Christian Walker",
+       "value": ".724"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

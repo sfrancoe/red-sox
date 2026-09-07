@@ -82,7 +82,7 @@
     {
       "id": "athletics", "swift_case": "athletics", "mlb_id": 133, "full_name": "Athletics", "city_name": "Sacramento", "short_name": "Athletics", "abbreviation": "ATH", "city_abbreviation": "SAC", "api_key": "athletics", "data_directory": "athletics", "x_handle": "Athletics", "legacy_root_data": false, "league": "AL", "division": "West", "fangraphs_id": 10, "baseball_reference_id": "ATH",
       "colors": {"primary": "#003831", "secondary": "#EFB21E", "background": "#EDF3F0", "ink": "#12312D", "border": "#C6D7D1", "positive": "#007A4D"},
-      "news_sources": [{"key": "san-francisco-chronicle", "name": "SF Chronicle", "url": "https://www.sfchronicle.com/sports/athletics/"}, {"key": "athletic", "name": "Athletic", "url": "https://www.nytimes.com/athletic/mlb/team/athletics/"}],
+      "news_sources": [{"key": "nbc-sports-bay-area", "name": "NBC Sports Bay Area", "url": "https://www.nbcsportsbayarea.com/mlb/oakland-athletics/"}, {"key": "athletic", "name": "Athletic", "url": "https://www.nytimes.com/athletic/mlb/team/athletics/"}],
       "features": {"native_picker": false, "home": true, "recent_game": true, "schedule": true, "standings": true, "pitching": true, "leaders": true, "news": true, "x_posts": true, "players": false, "stories": false}
     },
     {
@@ -178,7 +178,7 @@
     {
       "id": "san-francisco", "swift_case": "sanFrancisco", "mlb_id": 137, "full_name": "San Francisco Giants", "city_name": "San Francisco", "short_name": "Giants", "abbreviation": "SF", "city_abbreviation": "SF", "api_key": "giants", "data_directory": "giants", "x_handle": "SFGiants", "legacy_root_data": false, "league": "NL", "division": "West", "fangraphs_id": 30, "baseball_reference_id": "SFG",
       "colors": {"primary": "#FD5A1E", "secondary": "#27251F", "background": "#F7EEE9", "ink": "#2A231F", "border": "#DCCABE", "positive": "#47704E"},
-      "news_sources": [{"key": "san-francisco-chronicle", "name": "SF Chronicle", "url": "https://www.sfchronicle.com/sports/giants/"}, {"key": "athletic", "name": "Athletic", "url": "https://www.nytimes.com/athletic/mlb/team/giants/"}],
+      "news_sources": [{"key": "nbc-sports-bay-area", "name": "NBC Sports Bay Area", "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/"}, {"key": "athletic", "name": "Athletic", "url": "https://www.nytimes.com/athletic/mlb/team/giants/"}],
       "features": {"native_picker": false, "home": true, "recent_game": true, "schedule": true, "standings": true, "pitching": true, "leaders": true, "news": true, "x_posts": true, "players": false, "stories": false}
     }
   ]

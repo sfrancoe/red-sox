@@ -732,9 +732,9 @@ export const MLB_TEAMS = Object.freeze([
     },
     "news_sources": [
       {
-        "key": "san-francisco-chronicle",
-        "name": "SF Chronicle",
-        "url": "https://www.sfchronicle.com/sports/athletics/"
+        "key": "nbc-sports-bay-area",
+        "name": "NBC Sports Bay Area",
+        "url": "https://www.nbcsportsbayarea.com/mlb/oakland-athletics/"
       },
       {
         "key": "athletic",
@@ -1548,9 +1548,9 @@ export const MLB_TEAMS = Object.freeze([
     },
     "news_sources": [
       {
-        "key": "san-francisco-chronicle",
-        "name": "SF Chronicle",
-        "url": "https://www.sfchronicle.com/sports/giants/"
+        "key": "nbc-sports-bay-area",
+        "name": "NBC Sports Bay Area",
+        "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/"
       },
       {
         "key": "athletic",

@@ -1,0 +1,132 @@
+{
+ "generated_at": "2026-09-07T21:27:29+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 118,
+ "seasons": {
+  "2026": {
+   "record": "64-81",
+   "games": 145,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Bobby Witt Jr.",
+    "war": 6.4
+   },
+   "war_leaders": [
+    {
+     "name": "Bobby Witt Jr.",
+     "war": 6.4
+    },
+    {
+     "name": "Michael Wacha",
+     "war": 3.7
+    },
+    {
+     "name": "Jac Caglianone",
+     "war": 3.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Daniel Lynch IV",
+       "value": "1.10"
+      },
+      {
+       "name": "Michael Wacha",
+       "value": "1.10"
+      },
+      {
+       "name": "Noah Cameron",
+       "value": "1.20"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Jac Caglianone"
+     ],
+     "value": 23,
+     "top": [
+      {
+       "name": "Jac Caglianone",
+       "value": 23
+      },
+      {
+       "name": "Carter Jensen",
+       "value": 22
+      },
+      {
+       "name": "Salvador Perez",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Salvador Perez"
+     ],
+     "value": 71,
+     "top": [
+      {
+       "name": "Salvador Perez",
+       "value": 71
+      },
+      {
+       "name": "Jac Caglianone",
+       "value": 70
+      },
+      {
+       "name": "Carter Jensen",
+       "value": 68
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Bobby Witt Jr.",
+      "Jac Caglianone"
+     ],
+     "value": ".283",
+     "top": [
+      {
+       "name": "Bobby Witt Jr.",
+       "value": ".283"
+      },
+      {
+       "name": "Jac Caglianone",
+       "value": ".283"
+      },
+      {
+       "name": "Carter Jensen",
+       "value": ".230"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Jac Caglianone"
+     ],
+     "value": ".825",
+     "top": [
+      {
+       "name": "Jac Caglianone",
+       "value": ".825"
+      },
+      {
+       "name": "Bobby Witt Jr.",
+       "value": ".811"
+      },
+      {
+       "name": "Carter Jensen",
+       "value": ".756"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

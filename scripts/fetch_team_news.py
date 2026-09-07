@@ -64,11 +64,19 @@ def source_feed(team: dict[str, Any], source: dict[str, str]) -> dict[str, Any]:
     url = BING_NEWS + "?" + urlencode({"q": query, "format": "rss"})
     root = fetch_xml(url)
     articles, seen = [], set()
+    team_terms = {
+        team["full_name"].lower(), team["short_name"].lower(),
+        team["api_key"].lower(),
+    }
     for item in root.findall("./channel/item"):
         article_url = direct_url(item.findtext("link") or "")
         article_host = urlparse(article_url).netloc.removeprefix("www.")
         title = clean_text(item.findtext("title"))
-        if not title or source_host not in article_host or article_url in seen:
+        context = f"{title} {clean_text(item.findtext('description'))} {article_url}".lower()
+        if (
+            not title or source_host not in article_host or article_url in seen
+            or not any(term in context for term in team_terms)
+        ):
             continue
         seen.add(article_url)
         articles.append({

@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:27:31+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 108,
+ "seasons": {
+  "2026": {
+   "record": "54-90",
+   "games": 144,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Zach Neto",
+    "war": 3.9
+   },
+   "war_leaders": [
+    {
+     "name": "Zach Neto",
+     "war": 3.9
+    },
+    {
+     "name": "Mike Trout",
+     "war": 3.6
+    },
+    {
+     "name": "Walbert Ure\u00f1a",
+     "war": 3.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Reid Detmers",
+       "value": "1.06"
+      },
+      {
+       "name": "Ryan Zeferjahn",
+       "value": "1.20"
+      },
+      {
+       "name": "Walbert Ure\u00f1a",
+       "value": "1.21"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Zach Neto"
+     ],
+     "value": 23,
+     "top": [
+      {
+       "name": "Zach Neto",
+       "value": 23
+      },
+      {
+       "name": "Mike Trout",
+       "value": 20
+      },
+      {
+       "name": "Jo Adell",
+       "value": 16
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Zach Neto"
+     ],
+     "value": 67,
+     "top": [
+      {
+       "name": "Zach Neto",
+       "value": 67
+      },
+      {
+       "name": "Jo Adell",
+       "value": 62
+      },
+      {
+       "name": "Vaughn Grissom",
+       "value": 59
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Nolan Schanuel"
+     ],
+     "value": ".276",
+     "top": [
+      {
+       "name": "Nolan Schanuel",
+       "value": ".276"
+      },
+      {
+       "name": "Mike Trout",
+       "value": ".243"
+      },
+      {
+       "name": "Jo Adell",
+       "value": ".239"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Mike Trout"
+     ],
+     "value": ".799",
+     "top": [
+      {
+       "name": "Mike Trout",
+       "value": ".799"
+      },
+      {
+       "name": "Zach Neto",
+       "value": ".743"
+      },
+      {
+       "name": "Nolan Schanuel",
+       "value": ".736"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

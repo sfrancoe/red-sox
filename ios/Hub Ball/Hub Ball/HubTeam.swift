@@ -303,7 +303,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 10,
             baseballReferenceID: "ATH",
             colors: .init(primary: "#003831", secondary: "#EFB21E", background: "#EDF3F0", ink: "#12312D", border: "#C6D7D1", positive: "#007A4D", banner: "#003831", accent_dark: "#EFB21E", navigation: "#EFB21E"),
-            newsSources: [.init(key: "san-francisco-chronicle", name: "SF Chronicle", url: "https://www.sfchronicle.com/sports/athletics/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/athletics/")],
+            newsSources: [.init(key: "nbc-sports-bay-area", name: "NBC Sports Bay Area", url: "https://www.nbcsportsbayarea.com/mlb/oakland-athletics/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/athletics/")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .seattle: .init(
@@ -511,7 +511,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 30,
             baseballReferenceID: "SFG",
             colors: .init(primary: "#FD5A1E", secondary: "#27251F", background: "#F7EEE9", ink: "#2A231F", border: "#DCCABE", positive: "#47704E", banner: "#FD5A1E", accent_dark: "#27251F", navigation: "#27251F"),
-            newsSources: [.init(key: "san-francisco-chronicle", name: "SF Chronicle", url: "https://www.sfchronicle.com/sports/giants/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/giants/")],
+            newsSources: [.init(key: "nbc-sports-bay-area", name: "NBC Sports Bay Area", url: "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/giants/")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         )
     ]

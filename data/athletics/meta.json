@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:27:32+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 133,
+ "seasons": {
+  "2026": {
+   "record": "57-87",
+   "games": 144,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Nick Kurtz",
+    "war": 3.9
+   },
+   "war_leaders": [
+    {
+     "name": "Nick Kurtz",
+     "war": 3.9
+    },
+    {
+     "name": "Shea Langeliers",
+     "war": 3.7
+    },
+    {
+     "name": "J.T. Ginn",
+     "war": 3.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "J.T. Ginn",
+       "value": "1.24"
+      },
+      {
+       "name": "Elvis Alvarado",
+       "value": "1.26"
+      },
+      {
+       "name": "Justin Sterner",
+       "value": "1.38"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Shea Langeliers"
+     ],
+     "value": 23,
+     "top": [
+      {
+       "name": "Shea Langeliers",
+       "value": 23
+      },
+      {
+       "name": "Nick Kurtz",
+       "value": 21
+      },
+      {
+       "name": "Tyler Soderstrom",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Nick Kurtz"
+     ],
+     "value": 69,
+     "top": [
+      {
+       "name": "Nick Kurtz",
+       "value": 69
+      },
+      {
+       "name": "Tyler Soderstrom",
+       "value": 56
+      },
+      {
+       "name": "Jeff McNeil",
+       "value": 52
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Jeff McNeil"
+     ],
+     "value": ".269",
+     "top": [
+      {
+       "name": "Jeff McNeil",
+       "value": ".269"
+      },
+      {
+       "name": "Tyler Soderstrom",
+       "value": ".245"
+      },
+      {
+       "name": "Lawrence Butler",
+       "value": ".231"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Tyler Soderstrom"
+     ],
+     "value": ".810",
+     "top": [
+      {
+       "name": "Tyler Soderstrom",
+       "value": ".810"
+      },
+      {
+       "name": "Lawrence Butler",
+       "value": ".697"
+      },
+      {
+       "name": "Jeff McNeil",
+       "value": ".692"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

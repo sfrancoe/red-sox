@@ -1,0 +1,131 @@
+{
+ "generated_at": "2026-09-07T21:27:28+00:00",
+ "source": "MLB Stats API (statsapi.mlb.com)",
+ "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
+ "team_id": 116,
+ "seasons": {
+  "2026": {
+   "record": "65-78",
+   "games": 143,
+   "in_progress": true,
+   "war_leader": {
+    "name": "Kevin McGonigle",
+    "war": 6.0
+   },
+   "war_leaders": [
+    {
+     "name": "Kevin McGonigle",
+     "war": 6.0
+    },
+    {
+     "name": "Dillon Dingler",
+     "war": 3.9
+    },
+    {
+     "name": "Troy Melton",
+     "war": 3.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tarik Skubal",
+       "value": "0.91"
+      },
+      {
+       "name": "Casey Mize",
+       "value": "0.99"
+      },
+      {
+       "name": "Keider Montero",
+       "value": "1.03"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Dillon Dingler"
+     ],
+     "value": 26,
+     "top": [
+      {
+       "name": "Dillon Dingler",
+       "value": 26
+      },
+      {
+       "name": "Spencer Torkelson",
+       "value": 22
+      },
+      {
+       "name": "Riley Greene",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Dillon Dingler"
+     ],
+     "value": 83,
+     "top": [
+      {
+       "name": "Dillon Dingler",
+       "value": 83
+      },
+      {
+       "name": "Spencer Torkelson",
+       "value": 66
+      },
+      {
+       "name": "Riley Greene",
+       "value": 64
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": ".279",
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": ".279"
+      },
+      {
+       "name": "Kevin McGonigle",
+       "value": ".271"
+      },
+      {
+       "name": "Dillon Dingler",
+       "value": ".245"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": ".843",
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": ".843"
+      },
+      {
+       "name": "Kevin McGonigle",
+       "value": ".785"
+      },
+      {
+       "name": "Dillon Dingler",
+       "value": ".764"
+      }
+     ]
+    }
+   }
+  }
+ }
+}
