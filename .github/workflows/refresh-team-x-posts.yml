@@ -13,72 +13,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  fetch:
-    strategy:
-      fail-fast: false
-      max-parallel: 29
-      matrix:
-        team:
-          - yankees
-          - mets
-          - rays
-          - orioles
-          - bluejays
-          - whitesox
-          - guardians
-          - tigers
-          - royals
-          - twins
-          - astros
-          - angels
-          - athletics
-          - mariners
-          - rangers
-          - braves
-          - marlins
-          - phillies
-          - nationals
-          - cubs
-          - reds
-          - brewers
-          - pirates
-          - cardinals
-          - diamondbacks
-          - rockies
-          - dodgers
-          - padres
-          - giants
+  refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch official team profile
-        run: python3 scripts/fetch_team_x_posts.py --team '${{ matrix.team }}' --output 'artifacts/${{ matrix.team }}.json'
-      - uses: actions/upload-artifact@v4
-        with:
-          name: x-posts-${{ matrix.team }}
-          path: artifacts/${{ matrix.team }}.json
-          if-no-files-found: error
-
-  publish:
-    needs: fetch
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: x-posts-*
-          path: artifacts
-          merge-multiple: true
-      - name: Install verified snapshots
-        run: python3 scripts/fetch_team_x_posts.py --install-artifacts artifacts
+      - name: Fetch the official MLB clubs list once and generate team snapshots
+        run: python3 scripts/fetch_team_x_posts.py --all
       - name: Commit if snapshots changed
         run: |
           git config user.name "github-actions[bot]"

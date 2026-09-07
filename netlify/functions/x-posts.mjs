@@ -2,6 +2,7 @@ import { MLB_TEAMS } from './team-registry.mjs';
 
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
+const MLB_CLUBS_LIST_URL = 'https://syndication.twitter.com/srv/timeline-list/screen-name/MLB/slug/clubs?lang=en&theme=light&showHeader=false&hideBorder=true';
 const COMMON_SURNAMES = new Set([
   'anderson', 'anthony', 'campbell', 'gray', 'harris', 'hill', 'miller', 'scott', 'short',
   'story', 'walker', 'wells', 'west', 'white', 'young',
@@ -97,7 +98,7 @@ export const TEAM_CONFIG = Object.fromEntries(MLB_TEAMS.map(team => {
     label: team.short_name,
     xHandle: team.x_handle,
     teamId: team.mlb_id,
-    acceptAll: true,
+    officialHandleOnly: true,
     teamTerms: [
       team.full_name.toLowerCase(), team.short_name.toLowerCase(),
       `@${team.x_handle.toLowerCase()}`,
@@ -114,7 +115,7 @@ export const TEAM_CONFIG = Object.fromEntries(MLB_TEAMS.map(team => {
 
 function listURL(team) {
   if (!team.listId) {
-    return `https://syndication.twitter.com/srv/timeline-profile/screen-name/${team.xHandle}?lang=en&theme=light&showHeader=false&hideBorder=true`;
+    return MLB_CLUBS_LIST_URL;
   }
   return `https://syndication.twitter.com/srv/timeline-list/list-id/${team.listId}?lang=en&theme=light&showHeader=false&hideBorder=true`;
 }
@@ -204,7 +205,9 @@ function tweetContext(tweet) {
 }
 
 function relevant(tweet, players, team) {
-  if (team.acceptAll) return true;
+  if (team.officialHandleOnly) {
+    return cleanText(tweet.user?.screen_name).toLowerCase() === team.xHandle.toLowerCase();
+  }
   const context = tweetContext(tweet);
   if ([...team.teamTerms, ...team.linkTerms].some(term => context.includes(term))) return true;
   if (team.excludedTerms.some(term => context.includes(term))) return false;

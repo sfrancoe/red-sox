@@ -48,6 +48,15 @@ def validate(team: dict) -> None:
     assert len(current["diff"]) == len(current["seq"]) == current["end_game"]
     assert load(root, "meta.json")["team_id"] == team["mlb_id"]
 
+    x_feed = load(root, "x-posts.json")
+    assert x_feed["source"] == "X" and x_feed["recent"]
+    if team["api_key"] != "redsox":
+        assert x_feed["source_url"] == f"https://x.com/{team['x_handle']}"
+        assert all(
+            post["handle"].lower() == team["x_handle"].lower()
+            for post in x_feed["recent"]
+        )
+
     for source in team["news_sources"]:
         feed = load(root, f"{source['key']}.json")
         assert feed["articles"], source["key"]

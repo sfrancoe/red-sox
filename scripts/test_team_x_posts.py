@@ -20,7 +20,8 @@ entry = {
         }
     }
 }
-feed = build_feed(orioles, [entry, entry])
+off_team = {"content": {"tweet": {**entry["content"]["tweet"], "id_str": "456", "user": {"name": "Boston Red Sox", "screen_name": "RedSox"}}}}
+feed = build_feed(orioles, [entry, entry, off_team])
 assert source_url(orioles) == "https://x.com/Orioles"
 assert output_path(orioles).as_posix().endswith("/data/orioles/x-posts.json")
 assert feed["source"] == "X"

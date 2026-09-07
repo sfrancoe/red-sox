@@ -58,6 +58,8 @@ def main() -> None:
         assert color_keys <= set(team["colors"])
         assert team["news_sources"]
         assert all(source["url"].startswith("https://") for source in team["news_sources"])
+        if "x_seed_post_url" in team:
+            assert team["x_seed_post_url"].startswith(f"https://x.com/{team['x_handle']}/status/")
 
     subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "generate_team_registry.py"), "--check"],
