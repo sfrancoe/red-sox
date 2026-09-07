@@ -348,8 +348,6 @@ private struct MainTabSwipeModifier: ViewModifier {
     }
 
     private func handleSwipe(_ value: DragGesture.Value) {
-        // Wide layouts use explicit navigation; horizontal drags belong to charts/pages.
-        guard contentWidth < 650 else { return }
         let horizontalDistance = value.translation.width
         let verticalDistance = value.translation.height
 
