@@ -21,7 +21,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             AppColor.paleRed.ignoresSafeArea()
-            decorativeSportsMarks
+            homeMasthead
             Group {
                 if store.recentGame != nil, store.schedule != nil {
                     briefing
@@ -37,29 +37,35 @@ struct HomeView: View {
         .task { await store.load() }
     }
 
-    private var decorativeSportsMarks: some View {
+    private var homeMasthead: some View {
         VStack {
-            HStack {
+            HStack(spacing: 9) {
                 Image(systemName: "baseball.fill")
-                    .font(.system(size: 44, weight: .regular))
-                    .offset(x: -3)
+                    .font(.system(size: contentWidth >= 650 ? 42 : 36, weight: .regular))
+
+                Text(team.fullName)
+                    .font(.system(size: contentWidth >= 650 ? 25 : 18, weight: .black))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
+                    .layoutPriority(1)
 
                 Spacer()
 
                 Text(todayHeading)
-                    .font(.system(size: contentWidth >= 650 ? 36 : 28, weight: .black))
-                    .tracking(0.35)
+                    .font(.system(size: contentWidth >= 650 ? 18 : 14, weight: .bold))
+                    .tracking(0.2)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.82)
+                    .minimumScaleFactor(0.75)
             }
             .foregroundStyle(Color.white)
             .padding(.horizontal, 12)
             .padding(.top, 10)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(team.fullName), \(todayHeading)")
 
             Spacer()
         }
         .allowsHitTesting(false)
-        .accessibilityHidden(true)
     }
 
     private var briefing: some View {
