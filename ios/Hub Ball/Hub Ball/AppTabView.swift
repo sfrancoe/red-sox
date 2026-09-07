@@ -267,12 +267,13 @@ struct AppTabView: View {
     }
 
     private func sidebar(isCompact: Bool) -> some View {
-        VStack(alignment: .leading, spacing: isCompact ? 12 : 20) {
+        VStack(alignment: .leading, spacing: 0) {
             Label("HUB BALL", systemImage: "baseball.fill")
                 .font(isCompact ? .subheadline.weight(.black) : .title2.weight(.black))
                 .foregroundStyle(AppColor.hunterGreen)
                 .padding(.horizontal, isCompact ? 16 : 20)
                 .padding(.top, isCompact ? 18 : 24)
+                .padding(.bottom, isCompact ? 12 : 16)
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     selectedTab = .settings
@@ -295,6 +296,7 @@ struct AppTabView: View {
             }
             .buttonStyle(.plain)
             .padding(.horizontal, isCompact ? 16 : 20)
+            .padding(.bottom, 4)
             .accessibilityLabel("Switch team")
             .accessibilityValue(team.pickerTitle)
             .accessibilityHint("Opens the team picker")
@@ -322,6 +324,7 @@ struct AppTabView: View {
                 .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
             }
             .listStyle(.sidebar)
+            .contentMargins(.top, 0, for: .scrollContent)
             .scrollContentBackground(.hidden)
         }
         .background(AppColor.cream)
