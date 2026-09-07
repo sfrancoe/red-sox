@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:47+00:00",
+ "generated_at": "2026-09-07T23:54:13+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 112,
@@ -122,6 +122,376 @@
       {
        "name": "Alex Bregman",
        "value": ".793"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "92-70",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Nico Hoerner",
+    "war": 6.2
+   },
+   "war_leaders": [
+    {
+     "name": "Nico Hoerner",
+     "war": 6.2
+    },
+    {
+     "name": "Pete Crow-Armstrong",
+     "war": 5.9
+    },
+    {
+     "name": "Michael Busch",
+     "war": 4.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Caleb Thielbar",
+       "value": "0.88"
+      },
+      {
+       "name": "Brad Keller",
+       "value": "0.96"
+      },
+      {
+       "name": "Shota Imanaga",
+       "value": "0.99"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Michael Busch"
+     ],
+     "value": 34,
+     "top": [
+      {
+       "name": "Michael Busch",
+       "value": 34
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": 32
+      },
+      {
+       "name": "Pete Crow-Armstrong",
+       "value": 31
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Seiya Suzuki"
+     ],
+     "value": 103,
+     "top": [
+      {
+       "name": "Seiya Suzuki",
+       "value": 103
+      },
+      {
+       "name": "Pete Crow-Armstrong",
+       "value": 95
+      },
+      {
+       "name": "Michael Busch",
+       "value": 90
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Nico Hoerner"
+     ],
+     "value": ".297",
+     "top": [
+      {
+       "name": "Nico Hoerner",
+       "value": ".297"
+      },
+      {
+       "name": "Kyle Tucker",
+       "value": ".266"
+      },
+      {
+       "name": "Michael Busch",
+       "value": ".261"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Michael Busch"
+     ],
+     "value": ".866",
+     "top": [
+      {
+       "name": "Michael Busch",
+       "value": ".866"
+      },
+      {
+       "name": "Kyle Tucker",
+       "value": ".841"
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": ".804"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "83-79",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Dansby Swanson",
+    "war": 4.0
+   },
+   "war_leaders": [
+    {
+     "name": "Dansby Swanson",
+     "war": 4.0
+    },
+    {
+     "name": "Ian Happ",
+     "war": 3.9
+    },
+    {
+     "name": "Nico Hoerner",
+     "war": 3.7
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tyson Miller",
+       "value": "0.81"
+      },
+      {
+       "name": "Porter Hodge",
+       "value": "0.88"
+      },
+      {
+       "name": "Shota Imanaga",
+       "value": "1.02"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Ian Happ"
+     ],
+     "value": 25,
+     "top": [
+      {
+       "name": "Ian Happ",
+       "value": 25
+      },
+      {
+       "name": "Michael Busch",
+       "value": 21
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": 21
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Ian Happ"
+     ],
+     "value": 86,
+     "top": [
+      {
+       "name": "Ian Happ",
+       "value": 86
+      },
+      {
+       "name": "Cody Bellinger",
+       "value": 78
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": 73
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Seiya Suzuki"
+     ],
+     "value": ".283",
+     "top": [
+      {
+       "name": "Seiya Suzuki",
+       "value": ".283"
+      },
+      {
+       "name": "Nico Hoerner",
+       "value": ".273"
+      },
+      {
+       "name": "Cody Bellinger",
+       "value": ".266"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Seiya Suzuki"
+     ],
+     "value": ".848",
+     "top": [
+      {
+       "name": "Seiya Suzuki",
+       "value": ".848"
+      },
+      {
+       "name": "Ian Happ",
+       "value": ".782"
+      },
+      {
+       "name": "Michael Busch",
+       "value": ".775"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "83-79",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Nico Hoerner",
+    "war": 5.5
+   },
+   "war_leaders": [
+    {
+     "name": "Nico Hoerner",
+     "war": 5.5
+    },
+    {
+     "name": "Dansby Swanson",
+     "war": 5.2
+    },
+    {
+     "name": "Cody Bellinger",
+     "war": 4.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Adbert Alzolay",
+       "value": "1.02"
+      },
+      {
+       "name": "Mark Leiter Jr.",
+       "value": "1.12"
+      },
+      {
+       "name": "Justin Steele",
+       "value": "1.17"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Christopher Morel",
+      "Cody Bellinger"
+     ],
+     "value": 26,
+     "top": [
+      {
+       "name": "Christopher Morel",
+       "value": 26
+      },
+      {
+       "name": "Cody Bellinger",
+       "value": 26
+      },
+      {
+       "name": "Patrick Wisdom",
+       "value": 23
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Cody Bellinger"
+     ],
+     "value": 97,
+     "top": [
+      {
+       "name": "Cody Bellinger",
+       "value": 97
+      },
+      {
+       "name": "Ian Happ",
+       "value": 84
+      },
+      {
+       "name": "Dansby Swanson",
+       "value": 80
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Cody Bellinger"
+     ],
+     "value": ".307",
+     "top": [
+      {
+       "name": "Cody Bellinger",
+       "value": ".307"
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": ".285"
+      },
+      {
+       "name": "Nico Hoerner",
+       "value": ".283"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Cody Bellinger"
+     ],
+     "value": ".881",
+     "top": [
+      {
+       "name": "Cody Bellinger",
+       "value": ".881"
+      },
+      {
+       "name": "Seiya Suzuki",
+       "value": ".842"
+      },
+      {
+       "name": "Ian Happ",
+       "value": ".791"
       }
      ]
     }

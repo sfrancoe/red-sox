@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-07T21:29:46+00:00",
+ "generated_at": "2026-09-07T23:54:10+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 120,
  "seasons": {
   "2026": {
-   "record": "67-78",
-   "games": 145,
+   "record": "67-79",
+   "games": 146,
    "in_progress": true,
    "war_leader": {
     "name": "CJ Abrams",
@@ -90,19 +90,19 @@
      "names": [
       "James Wood"
      ],
-     "value": ".267",
+     "value": ".268",
      "top": [
       {
        "name": "James Wood",
-       "value": ".267"
+       "value": ".268"
       },
       {
        "name": "CJ Abrams",
-       "value": ".264"
+       "value": ".262"
       },
       {
        "name": "Daylen Lile",
-       "value": ".256"
+       "value": ".255"
       }
      ]
     },
@@ -118,11 +118,380 @@
       },
       {
        "name": "CJ Abrams",
-       "value": ".842"
+       "value": ".836"
       },
       {
        "name": "Daylen Lile",
-       "value": ".751"
+       "value": ".748"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "66-96",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "James Wood",
+    "war": 3.6
+   },
+   "war_leaders": [
+    {
+     "name": "James Wood",
+     "war": 3.6
+    },
+    {
+     "name": "CJ Abrams",
+     "war": 3.3
+    },
+    {
+     "name": "MacKenzie Gore",
+     "war": 3.1
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Michael Soroka",
+       "value": "1.13"
+      },
+      {
+       "name": "Jos\u00e9 A. Ferrer",
+       "value": "1.27"
+      },
+      {
+       "name": "Brad Lord",
+       "value": "1.29"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "James Wood"
+     ],
+     "value": 31,
+     "top": [
+      {
+       "name": "James Wood",
+       "value": 31
+      },
+      {
+       "name": "Josh Bell",
+       "value": 22
+      },
+      {
+       "name": "CJ Abrams",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "James Wood"
+     ],
+     "value": 94,
+     "top": [
+      {
+       "name": "James Wood",
+       "value": 94
+      },
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": 66
+      },
+      {
+       "name": "Josh Bell",
+       "value": 63
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "CJ Abrams"
+     ],
+     "value": ".257",
+     "top": [
+      {
+       "name": "CJ Abrams",
+       "value": ".257"
+      },
+      {
+       "name": "James Wood",
+       "value": ".256"
+      },
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": ".252"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "James Wood"
+     ],
+     "value": ".825",
+     "top": [
+      {
+       "name": "James Wood",
+       "value": ".825"
+      },
+      {
+       "name": "CJ Abrams",
+       "value": ".748"
+      },
+      {
+       "name": "Josh Bell",
+       "value": ".742"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "71-91",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "CJ Abrams",
+    "war": 3.3
+   },
+   "war_leaders": [
+    {
+     "name": "CJ Abrams",
+     "war": 3.3
+    },
+    {
+     "name": "Jacob Young",
+     "war": 2.7
+    },
+    {
+     "name": "Trevor Williams",
+     "war": 2.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Trevor Williams",
+       "value": "1.04"
+      },
+      {
+       "name": "Dylan Floro",
+       "value": "1.05"
+      },
+      {
+       "name": "Derek Law",
+       "value": "1.18"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "CJ Abrams"
+     ],
+     "value": 20,
+     "top": [
+      {
+       "name": "CJ Abrams",
+       "value": 20
+      },
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": 18
+      },
+      {
+       "name": "Keibert Ruiz",
+       "value": 13
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Luis Garc\u00eda Jr."
+     ],
+     "value": 70,
+     "top": [
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": 70
+      },
+      {
+       "name": "CJ Abrams",
+       "value": 65
+      },
+      {
+       "name": "Keibert Ruiz",
+       "value": 57
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Luis Garc\u00eda Jr."
+     ],
+     "value": ".282",
+     "top": [
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": ".282"
+      },
+      {
+       "name": "Jacob Young",
+       "value": ".256"
+      },
+      {
+       "name": "CJ Abrams",
+       "value": ".246"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Luis Garc\u00eda Jr."
+     ],
+     "value": ".762",
+     "top": [
+      {
+       "name": "Luis Garc\u00eda Jr.",
+       "value": ".762"
+      },
+      {
+       "name": "CJ Abrams",
+       "value": ".747"
+      },
+      {
+       "name": "Jacob Young",
+       "value": ".647"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "71-91",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "CJ Abrams",
+    "war": 3.5
+   },
+   "war_leaders": [
+    {
+     "name": "CJ Abrams",
+     "war": 3.5
+    },
+    {
+     "name": "Lane Thomas",
+     "war": 3.2
+    },
+    {
+     "name": "Jeimer Candelario",
+     "war": 3.1
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Hunter Harvey",
+       "value": "0.94"
+      },
+      {
+       "name": "Jordan Weems",
+       "value": "1.21"
+      },
+      {
+       "name": "Kyle Finnegan",
+       "value": "1.30"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Lane Thomas"
+     ],
+     "value": 28,
+     "top": [
+      {
+       "name": "Lane Thomas",
+       "value": 28
+      },
+      {
+       "name": "CJ Abrams",
+       "value": 18
+      },
+      {
+       "name": "Keibert Ruiz",
+       "value": 18
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Joey Meneses"
+     ],
+     "value": 89,
+     "top": [
+      {
+       "name": "Joey Meneses",
+       "value": 89
+      },
+      {
+       "name": "Lane Thomas",
+       "value": 86
+      },
+      {
+       "name": "Keibert Ruiz",
+       "value": 67
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Joey Meneses"
+     ],
+     "value": ".275",
+     "top": [
+      {
+       "name": "Joey Meneses",
+       "value": ".275"
+      },
+      {
+       "name": "Lane Thomas",
+       "value": ".268"
+      },
+      {
+       "name": "Keibert Ruiz",
+       "value": ".260"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Lane Thomas"
+     ],
+     "value": ".783",
+     "top": [
+      {
+       "name": "Lane Thomas",
+       "value": ".783"
+      },
+      {
+       "name": "Joey Meneses",
+       "value": ".722"
+      },
+      {
+       "name": "Keibert Ruiz",
+       "value": ".717"
       }
      ]
     }

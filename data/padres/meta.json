@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-07T21:29:52+00:00",
+ "generated_at": "2026-09-07T23:54:36+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 135,
  "seasons": {
   "2026": {
-   "record": "75-68",
-   "games": 143,
+   "record": "76-68",
+   "games": 144,
    "in_progress": true,
    "war_leader": {
     "name": "Michael King",
@@ -35,11 +35,11 @@
       },
       {
        "name": "Bradgley Rodriguez",
-       "value": "1.06"
+       "value": "1.04"
       },
       {
-       "name": "Kyle Hart",
-       "value": "1.10"
+       "name": "Adrian Morejon",
+       "value": "1.09"
       }
      ]
     }
@@ -69,18 +69,18 @@
      "names": [
       "Manny Machado"
      ],
-     "value": 77,
+     "value": 78,
      "top": [
       {
        "name": "Manny Machado",
-       "value": 77
-      },
-      {
-       "name": "Fernando Tatis Jr.",
-       "value": 71
+       "value": 78
       },
       {
        "name": "Jackson Merrill",
+       "value": 72
+      },
+      {
+       "name": "Fernando Tatis Jr.",
        "value": 71
       }
      ]
@@ -89,19 +89,19 @@
      "names": [
       "Fernando Tatis Jr."
      ],
-     "value": ".281",
+     "value": ".283",
      "top": [
       {
        "name": "Fernando Tatis Jr.",
-       "value": ".281"
+       "value": ".283"
       },
       {
        "name": "Jackson Merrill",
-       "value": ".238"
+       "value": ".241"
       },
       {
        "name": "Manny Machado",
-       "value": ".223"
+       "value": ".224"
       }
      ]
     },
@@ -109,11 +109,11 @@
      "names": [
       "Fernando Tatis Jr."
      ],
-     "value": ".797",
+     "value": ".799",
      "top": [
       {
        "name": "Fernando Tatis Jr.",
-       "value": ".797"
+       "value": ".799"
       },
       {
        "name": "Manny Machado",
@@ -121,7 +121,376 @@
       },
       {
        "name": "Jackson Merrill",
-       "value": ".703"
+       "value": ".708"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "90-72",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Fernando Tatis Jr.",
+    "war": 6.1
+   },
+   "war_leaders": [
+    {
+     "name": "Fernando Tatis Jr.",
+     "war": 6.1
+    },
+    {
+     "name": "Nick Pivetta",
+     "war": 5.0
+    },
+    {
+     "name": "Manny Machado",
+     "war": 4.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Adrian Morejon",
+       "value": "0.90"
+      },
+      {
+       "name": "Robert Suarez",
+       "value": "0.90"
+      },
+      {
+       "name": "Nick Pivetta",
+       "value": "0.99"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Manny Machado"
+     ],
+     "value": 27,
+     "top": [
+      {
+       "name": "Manny Machado",
+       "value": 27
+      },
+      {
+       "name": "Fernando Tatis Jr.",
+       "value": 25
+      },
+      {
+       "name": "Gavin Sheets",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Manny Machado"
+     ],
+     "value": 95,
+     "top": [
+      {
+       "name": "Manny Machado",
+       "value": 95
+      },
+      {
+       "name": "Fernando Tatis Jr.",
+       "value": 71
+      },
+      {
+       "name": "Gavin Sheets",
+       "value": 71
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Luis Arraez"
+     ],
+     "value": ".292",
+     "top": [
+      {
+       "name": "Luis Arraez",
+       "value": ".292"
+      },
+      {
+       "name": "Manny Machado",
+       "value": ".275"
+      },
+      {
+       "name": "Fernando Tatis Jr.",
+       "value": ".268"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Fernando Tatis Jr."
+     ],
+     "value": ".814",
+     "top": [
+      {
+       "name": "Fernando Tatis Jr.",
+       "value": ".814"
+      },
+      {
+       "name": "Manny Machado",
+       "value": ".795"
+      },
+      {
+       "name": "Gavin Sheets",
+       "value": ".746"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "93-69",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Jackson Merrill",
+    "war": 4.5
+   },
+   "war_leaders": [
+    {
+     "name": "Jackson Merrill",
+     "war": 4.5
+    },
+    {
+     "name": "Michael King",
+     "war": 4.1
+    },
+    {
+     "name": "Dylan Cease",
+     "war": 4.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Robert Suarez",
+       "value": "1.05"
+      },
+      {
+       "name": "Dylan Cease",
+       "value": "1.07"
+      },
+      {
+       "name": "Jeremiah Estrada",
+       "value": "1.07"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Manny Machado"
+     ],
+     "value": 29,
+     "top": [
+      {
+       "name": "Manny Machado",
+       "value": 29
+      },
+      {
+       "name": "Jackson Merrill",
+       "value": 24
+      },
+      {
+       "name": "Jurickson Profar",
+       "value": 24
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Manny Machado"
+     ],
+     "value": 105,
+     "top": [
+      {
+       "name": "Manny Machado",
+       "value": 105
+      },
+      {
+       "name": "Jackson Merrill",
+       "value": 90
+      },
+      {
+       "name": "Jurickson Profar",
+       "value": 85
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Luis Arraez"
+     ],
+     "value": ".318",
+     "top": [
+      {
+       "name": "Luis Arraez",
+       "value": ".318"
+      },
+      {
+       "name": "Jackson Merrill",
+       "value": ".292"
+      },
+      {
+       "name": "Jurickson Profar",
+       "value": ".280"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Jurickson Profar"
+     ],
+     "value": ".839",
+     "top": [
+      {
+       "name": "Jurickson Profar",
+       "value": ".839"
+      },
+      {
+       "name": "Jackson Merrill",
+       "value": ".826"
+      },
+      {
+       "name": "Manny Machado",
+       "value": ".797"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "82-80",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Blake Snell",
+    "war": 6.5
+   },
+   "war_leaders": [
+    {
+     "name": "Blake Snell",
+     "war": 6.5
+    },
+    {
+     "name": "Ha-Seong Kim",
+     "war": 5.4
+    },
+    {
+     "name": "Juan Soto",
+     "war": 5.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tom Cosgrove",
+       "value": "0.97"
+      },
+      {
+       "name": "Josh Hader",
+       "value": "1.10"
+      },
+      {
+       "name": "Joe Musgrove",
+       "value": "1.14"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Juan Soto"
+     ],
+     "value": 35,
+     "top": [
+      {
+       "name": "Juan Soto",
+       "value": 35
+      },
+      {
+       "name": "Manny Machado",
+       "value": 30
+      },
+      {
+       "name": "Fernando Tatis Jr.",
+       "value": 25
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Juan Soto"
+     ],
+     "value": 109,
+     "top": [
+      {
+       "name": "Juan Soto",
+       "value": 109
+      },
+      {
+       "name": "Manny Machado",
+       "value": 91
+      },
+      {
+       "name": "Fernando Tatis Jr.",
+       "value": 78
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Xander Bogaerts"
+     ],
+     "value": ".285",
+     "top": [
+      {
+       "name": "Xander Bogaerts",
+       "value": ".285"
+      },
+      {
+       "name": "Juan Soto",
+       "value": ".275"
+      },
+      {
+       "name": "Ha-Seong Kim",
+       "value": ".260"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Juan Soto"
+     ],
+     "value": ".929",
+     "top": [
+      {
+       "name": "Juan Soto",
+       "value": ".929"
+      },
+      {
+       "name": "Xander Bogaerts",
+       "value": ".790"
+      },
+      {
+       "name": "Manny Machado",
+       "value": ".781"
       }
      ]
     }

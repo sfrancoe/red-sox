@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:27:31+00:00",
+ "generated_at": "2026-09-07T23:53:51+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 108,
@@ -122,6 +122,375 @@
       {
        "name": "Nolan Schanuel",
        "value": ".736"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "72-90",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Zach Neto",
+    "war": 5.3
+   },
+   "war_leaders": [
+    {
+     "name": "Zach Neto",
+     "war": 5.3
+    },
+    {
+     "name": "Taylor Ward",
+     "war": 3.0
+    },
+    {
+     "name": "Yusei Kikuchi",
+     "war": 2.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Kenley Jansen",
+       "value": "0.95"
+      },
+      {
+       "name": "Brock Burke",
+       "value": "1.23"
+      },
+      {
+       "name": "Kyle Hendricks",
+       "value": "1.28"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Jo Adell"
+     ],
+     "value": 37,
+     "top": [
+      {
+       "name": "Jo Adell",
+       "value": 37
+      },
+      {
+       "name": "Taylor Ward",
+       "value": 36
+      },
+      {
+       "name": "Mike Trout",
+       "value": 26
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Taylor Ward"
+     ],
+     "value": 103,
+     "top": [
+      {
+       "name": "Taylor Ward",
+       "value": 103
+      },
+      {
+       "name": "Jo Adell",
+       "value": 98
+      },
+      {
+       "name": "Mike Trout",
+       "value": 64
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Nolan Schanuel"
+     ],
+     "value": ".264",
+     "top": [
+      {
+       "name": "Nolan Schanuel",
+       "value": ".264"
+      },
+      {
+       "name": "Zach Neto",
+       "value": ".257"
+      },
+      {
+       "name": "Luis Rengifo",
+       "value": ".238"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Mike Trout"
+     ],
+     "value": ".798",
+     "top": [
+      {
+       "name": "Mike Trout",
+       "value": ".798"
+      },
+      {
+       "name": "Zach Neto",
+       "value": ".793"
+      },
+      {
+       "name": "Taylor Ward",
+       "value": ".792"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "63-99",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Zach Neto",
+    "war": 5.1
+   },
+   "war_leaders": [
+    {
+     "name": "Zach Neto",
+     "war": 5.1
+    },
+    {
+     "name": "Tyler Anderson",
+     "war": 2.9
+    },
+    {
+     "name": "Logan O'Hoppe",
+     "war": 2.6
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Hunter Strickland",
+       "value": "1.09"
+      },
+      {
+       "name": "Jack Kochanowicz",
+       "value": "1.19"
+      },
+      {
+       "name": "Jos\u00e9 Soriano",
+       "value": "1.20"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Taylor Ward"
+     ],
+     "value": 25,
+     "top": [
+      {
+       "name": "Taylor Ward",
+       "value": 25
+      },
+      {
+       "name": "Zach Neto",
+       "value": 23
+      },
+      {
+       "name": "Jo Adell",
+       "value": 20
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Zach Neto"
+     ],
+     "value": 77,
+     "top": [
+      {
+       "name": "Zach Neto",
+       "value": 77
+      },
+      {
+       "name": "Taylor Ward",
+       "value": 75
+      },
+      {
+       "name": "Jo Adell",
+       "value": 62
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Nolan Schanuel"
+     ],
+     "value": ".250",
+     "top": [
+      {
+       "name": "Nolan Schanuel",
+       "value": ".250"
+      },
+      {
+       "name": "Zach Neto",
+       "value": ".249"
+      },
+      {
+       "name": "Taylor Ward",
+       "value": ".246"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Zach Neto"
+     ],
+     "value": ".761",
+     "top": [
+      {
+       "name": "Zach Neto",
+       "value": ".761"
+      },
+      {
+       "name": "Taylor Ward",
+       "value": ".749"
+      },
+      {
+       "name": "Logan O'Hoppe",
+       "value": ".712"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "73-89",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Shohei Ohtani",
+    "war": 9.9
+   },
+   "war_leaders": [
+    {
+     "name": "Shohei Ohtani",
+     "war": 9.9
+    },
+    {
+     "name": "Mike Trout",
+     "war": 2.9
+    },
+    {
+     "name": "Mickey Moniak",
+     "war": 2.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Matt Moore",
+       "value": "1.02"
+      },
+      {
+       "name": "Shohei Ohtani",
+       "value": "1.06"
+      },
+      {
+       "name": "Griffin Canning",
+       "value": "1.24"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": 44,
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": 44
+      },
+      {
+       "name": "Brandon Drury",
+       "value": 26
+      },
+      {
+       "name": "Hunter Renfroe",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": 95,
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": 95
+      },
+      {
+       "name": "Brandon Drury",
+       "value": 83
+      },
+      {
+       "name": "Hunter Renfroe",
+       "value": 56
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": ".304",
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": ".304"
+      },
+      {
+       "name": "Brandon Drury",
+       "value": ".262"
+      },
+      {
+       "name": "Hunter Renfroe",
+       "value": ".242"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": "1.066",
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": "1.066"
+      },
+      {
+       "name": "Brandon Drury",
+       "value": ".803"
+      },
+      {
+       "name": "Hunter Renfroe",
+       "value": ".738"
       }
      ]
     }

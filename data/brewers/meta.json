@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:48+00:00",
+ "generated_at": "2026-09-07T23:54:19+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 158,
@@ -122,6 +122,376 @@
       {
        "name": "Brice Turang",
        "value": ".775"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "97-65",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Brice Turang",
+    "war": 5.5
+   },
+   "war_leaders": [
+    {
+     "name": "Brice Turang",
+     "war": 5.5
+    },
+    {
+     "name": "Freddy Peralta",
+     "war": 5.5
+    },
+    {
+     "name": "William Contreras",
+     "war": 3.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Brandon Woodruff",
+       "value": "0.91"
+      },
+      {
+       "name": "Nick Mears",
+       "value": "0.97"
+      },
+      {
+       "name": "Abner Uribe",
+       "value": "1.04"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Christian Yelich"
+     ],
+     "value": 29,
+     "top": [
+      {
+       "name": "Christian Yelich",
+       "value": 29
+      },
+      {
+       "name": "Jackson Chourio",
+       "value": 21
+      },
+      {
+       "name": "Brice Turang",
+       "value": 18
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Christian Yelich"
+     ],
+     "value": 103,
+     "top": [
+      {
+       "name": "Christian Yelich",
+       "value": 103
+      },
+      {
+       "name": "Brice Turang",
+       "value": 81
+      },
+      {
+       "name": "Jackson Chourio",
+       "value": 78
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Brice Turang",
+      "Sal Frelick"
+     ],
+     "value": ".288",
+     "top": [
+      {
+       "name": "Brice Turang",
+       "value": ".288"
+      },
+      {
+       "name": "Sal Frelick",
+       "value": ".288"
+      },
+      {
+       "name": "Jackson Chourio",
+       "value": ".270"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Christian Yelich"
+     ],
+     "value": ".795",
+     "top": [
+      {
+       "name": "Christian Yelich",
+       "value": ".795"
+      },
+      {
+       "name": "Brice Turang",
+       "value": ".794"
+      },
+      {
+       "name": "Jackson Chourio",
+       "value": ".771"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "93-69",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "William Contreras",
+    "war": 5.0
+   },
+   "war_leaders": [
+    {
+     "name": "William Contreras",
+     "war": 5.0
+    },
+    {
+     "name": "Brice Turang",
+     "war": 4.8
+    },
+    {
+     "name": "Jackson Chourio",
+     "war": 3.9
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Bryan Hudson",
+       "value": "0.72"
+      },
+      {
+       "name": "Joel Payamps",
+       "value": "0.97"
+      },
+      {
+       "name": "Trevor Megill",
+       "value": "1.01"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Willy Adames"
+     ],
+     "value": 32,
+     "top": [
+      {
+       "name": "Willy Adames",
+       "value": 32
+      },
+      {
+       "name": "Rhys Hoskins",
+       "value": 26
+      },
+      {
+       "name": "William Contreras",
+       "value": 23
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Willy Adames"
+     ],
+     "value": 112,
+     "top": [
+      {
+       "name": "Willy Adames",
+       "value": 112
+      },
+      {
+       "name": "William Contreras",
+       "value": 92
+      },
+      {
+       "name": "Rhys Hoskins",
+       "value": 82
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "William Contreras"
+     ],
+     "value": ".281",
+     "top": [
+      {
+       "name": "William Contreras",
+       "value": ".281"
+      },
+      {
+       "name": "Jackson Chourio",
+       "value": ".275"
+      },
+      {
+       "name": "Sal Frelick",
+       "value": ".259"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "William Contreras"
+     ],
+     "value": ".831",
+     "top": [
+      {
+       "name": "William Contreras",
+       "value": ".831"
+      },
+      {
+       "name": "Willy Adames",
+       "value": ".793"
+      },
+      {
+       "name": "Jackson Chourio",
+       "value": ".791"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "92-70",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "William Contreras",
+    "war": 3.7
+   },
+   "war_leaders": [
+    {
+     "name": "William Contreras",
+     "war": 3.7
+    },
+    {
+     "name": "Christian Yelich",
+     "war": 3.5
+    },
+    {
+     "name": "Corbin Burnes",
+     "war": 3.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Brandon Woodruff",
+       "value": "0.82"
+      },
+      {
+       "name": "Devin Williams",
+       "value": "0.92"
+      },
+      {
+       "name": "Hoby Milner",
+       "value": "0.96"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Willy Adames"
+     ],
+     "value": 24,
+     "top": [
+      {
+       "name": "Willy Adames",
+       "value": 24
+      },
+      {
+       "name": "Christian Yelich",
+       "value": 19
+      },
+      {
+       "name": "William Contreras",
+       "value": 17
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Willy Adames"
+     ],
+     "value": 80,
+     "top": [
+      {
+       "name": "Willy Adames",
+       "value": 80
+      },
+      {
+       "name": "William Contreras",
+       "value": 78
+      },
+      {
+       "name": "Christian Yelich",
+       "value": 76
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "William Contreras"
+     ],
+     "value": ".289",
+     "top": [
+      {
+       "name": "William Contreras",
+       "value": ".289"
+      },
+      {
+       "name": "Christian Yelich",
+       "value": ".278"
+      },
+      {
+       "name": "Willy Adames",
+       "value": ".217"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "William Contreras"
+     ],
+     "value": ".824",
+     "top": [
+      {
+       "name": "William Contreras",
+       "value": ".824"
+      },
+      {
+       "name": "Christian Yelich",
+       "value": ".817"
+      },
+      {
+       "name": "Willy Adames",
+       "value": ".717"
       }
      ]
     }

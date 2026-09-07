@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:49+00:00",
+ "generated_at": "2026-09-07T23:54:22+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 134,
@@ -121,6 +121,375 @@
       },
       {
        "name": "Nick Gonzales",
+       "value": ".762"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "71-91",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Paul Skenes",
+    "war": 8.0
+   },
+   "war_leaders": [
+    {
+     "name": "Paul Skenes",
+     "war": 8.0
+    },
+    {
+     "name": "Dennis Santana",
+     "war": 2.7
+    },
+    {
+     "name": "Jared Triolo",
+     "war": 2.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Dennis Santana",
+       "value": "0.87"
+      },
+      {
+       "name": "Paul Skenes",
+       "value": "0.95"
+      },
+      {
+       "name": "Caleb Ferguson",
+       "value": "1.08"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Oneil Cruz"
+     ],
+     "value": 20,
+     "top": [
+      {
+       "name": "Oneil Cruz",
+       "value": 20
+      },
+      {
+       "name": "Bryan Reynolds",
+       "value": 16
+      },
+      {
+       "name": "Andrew McCutchen",
+       "value": 13
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": 73,
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": 73
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": 61
+      },
+      {
+       "name": "Andrew McCutchen",
+       "value": 57
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": ".245",
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": ".245"
+      },
+      {
+       "name": "Andrew McCutchen",
+       "value": ".239"
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": ".200"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": ".720",
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": ".720"
+      },
+      {
+       "name": "Andrew McCutchen",
+       "value": ".700"
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": ".676"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "76-86",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Paul Skenes",
+    "war": 5.8
+   },
+   "war_leaders": [
+    {
+     "name": "Paul Skenes",
+     "war": 5.8
+    },
+    {
+     "name": "Bryan Reynolds",
+     "war": 3.6
+    },
+    {
+     "name": "Luis Ortiz",
+     "war": 3.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Dennis Santana",
+       "value": "0.92"
+      },
+      {
+       "name": "Paul Skenes",
+       "value": "0.95"
+      },
+      {
+       "name": "Luis Ortiz",
+       "value": "1.11"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": 24,
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": 24
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": 21
+      },
+      {
+       "name": "Andrew McCutchen",
+       "value": 20
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": 88,
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": 88
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": 76
+      },
+      {
+       "name": "Rowdy Tellez",
+       "value": 56
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": ".275",
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": ".275"
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": ".259"
+      },
+      {
+       "name": "Andrew McCutchen",
+       "value": ".232"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": ".791",
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": ".791"
+      },
+      {
+       "name": "Oneil Cruz",
+       "value": ".773"
+      },
+      {
+       "name": "Andrew McCutchen",
+       "value": ".739"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "76-86",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Ke'Bryan Hayes",
+    "war": 3.9
+   },
+   "war_leaders": [
+    {
+     "name": "Ke'Bryan Hayes",
+     "war": 3.9
+    },
+    {
+     "name": "Mitch Keller",
+     "war": 3.0
+    },
+    {
+     "name": "David Bednar",
+     "war": 2.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Ryan Borucki",
+       "value": "0.74"
+      },
+      {
+       "name": "Dauri Moreta",
+       "value": "1.09"
+      },
+      {
+       "name": "David Bednar",
+       "value": "1.10"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Jack Suwinski"
+     ],
+     "value": 26,
+     "top": [
+      {
+       "name": "Jack Suwinski",
+       "value": 26
+      },
+      {
+       "name": "Bryan Reynolds",
+       "value": 24
+      },
+      {
+       "name": "Ke'Bryan Hayes",
+       "value": 15
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Bryan Reynolds"
+     ],
+     "value": 84,
+     "top": [
+      {
+       "name": "Bryan Reynolds",
+       "value": 84
+      },
+      {
+       "name": "Jack Suwinski",
+       "value": 74
+      },
+      {
+       "name": "Ke'Bryan Hayes",
+       "value": 61
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Ke'Bryan Hayes"
+     ],
+     "value": ".271",
+     "top": [
+      {
+       "name": "Ke'Bryan Hayes",
+       "value": ".271"
+      },
+      {
+       "name": "Bryan Reynolds",
+       "value": ".263"
+      },
+      {
+       "name": "Jack Suwinski",
+       "value": ".224"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Jack Suwinski"
+     ],
+     "value": ".793",
+     "top": [
+      {
+       "name": "Jack Suwinski",
+       "value": ".793"
+      },
+      {
+       "name": "Bryan Reynolds",
+       "value": ".790"
+      },
+      {
+       "name": "Ke'Bryan Hayes",
        "value": ".762"
       }
      ]

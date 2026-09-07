@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:51+00:00",
+ "generated_at": "2026-09-07T23:54:30+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 115,
@@ -122,6 +122,375 @@
       {
        "name": "Jake McCarthy",
        "value": ".821"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "43-119",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Hunter Goodman",
+    "war": 3.7
+   },
+   "war_leaders": [
+    {
+     "name": "Hunter Goodman",
+     "war": 3.7
+    },
+    {
+     "name": "Jimmy Herget",
+     "war": 3.0
+    },
+    {
+     "name": "Victor Vodnik",
+     "war": 1.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Jimmy Herget",
+       "value": "1.18"
+      },
+      {
+       "name": "Juan Mejia",
+       "value": "1.26"
+      },
+      {
+       "name": "Victor Vodnik",
+       "value": "1.40"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Hunter Goodman"
+     ],
+     "value": 31,
+     "top": [
+      {
+       "name": "Hunter Goodman",
+       "value": 31
+      },
+      {
+       "name": "Mickey Moniak",
+       "value": 24
+      },
+      {
+       "name": "Jordan Beck",
+       "value": 16
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Hunter Goodman"
+     ],
+     "value": 91,
+     "top": [
+      {
+       "name": "Hunter Goodman",
+       "value": 91
+      },
+      {
+       "name": "Mickey Moniak",
+       "value": 68
+      },
+      {
+       "name": "Brenton Doyle",
+       "value": 57
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Hunter Goodman"
+     ],
+     "value": ".278",
+     "top": [
+      {
+       "name": "Hunter Goodman",
+       "value": ".278"
+      },
+      {
+       "name": "Jordan Beck",
+       "value": ".258"
+      },
+      {
+       "name": "Brenton Doyle",
+       "value": ".233"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Hunter Goodman"
+     ],
+     "value": ".843",
+     "top": [
+      {
+       "name": "Hunter Goodman",
+       "value": ".843"
+      },
+      {
+       "name": "Jordan Beck",
+       "value": ".733"
+      },
+      {
+       "name": "Brenton Doyle",
+       "value": ".650"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "61-101",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Brenton Doyle",
+    "war": 3.9
+   },
+   "war_leaders": [
+    {
+     "name": "Brenton Doyle",
+     "war": 3.9
+    },
+    {
+     "name": "Ezequiel Tovar",
+     "war": 3.6
+    },
+    {
+     "name": "Austin Gomber",
+     "war": 2.4
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Austin Gomber",
+       "value": "1.31"
+      },
+      {
+       "name": "Ryan Feltner",
+       "value": "1.34"
+      },
+      {
+       "name": "Jalen Beeks",
+       "value": "1.36"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Ezequiel Tovar"
+     ],
+     "value": 26,
+     "top": [
+      {
+       "name": "Ezequiel Tovar",
+       "value": 26
+      },
+      {
+       "name": "Michael Toglia",
+       "value": 25
+      },
+      {
+       "name": "Brenton Doyle",
+       "value": 23
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Ezequiel Tovar"
+     ],
+     "value": 78,
+     "top": [
+      {
+       "name": "Ezequiel Tovar",
+       "value": 78
+      },
+      {
+       "name": "Brenton Doyle",
+       "value": 72
+      },
+      {
+       "name": "Ryan McMahon",
+       "value": 65
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Ezequiel Tovar"
+     ],
+     "value": ".269",
+     "top": [
+      {
+       "name": "Ezequiel Tovar",
+       "value": ".269"
+      },
+      {
+       "name": "Brendan Rodgers",
+       "value": ".267"
+      },
+      {
+       "name": "Brenton Doyle",
+       "value": ".260"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Ezequiel Tovar"
+     ],
+     "value": ".764",
+     "top": [
+      {
+       "name": "Ezequiel Tovar",
+       "value": ".764"
+      },
+      {
+       "name": "Brenton Doyle",
+       "value": ".763"
+      },
+      {
+       "name": "Ryan McMahon",
+       "value": ".722"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "59-103",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Nolan Jones",
+    "war": 4.3
+   },
+   "war_leaders": [
+    {
+     "name": "Nolan Jones",
+     "war": 4.3
+    },
+    {
+     "name": "Ryan McMahon",
+     "war": 2.9
+    },
+    {
+     "name": "Ezequiel Tovar",
+     "war": 2.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Brent Suter",
+       "value": "1.30"
+      },
+      {
+       "name": "Jake Bird",
+       "value": "1.35"
+      },
+      {
+       "name": "Justin Lawrence",
+       "value": "1.35"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Ryan McMahon"
+     ],
+     "value": 23,
+     "top": [
+      {
+       "name": "Ryan McMahon",
+       "value": 23
+      },
+      {
+       "name": "Nolan Jones",
+       "value": 20
+      },
+      {
+       "name": "Ezequiel Tovar",
+       "value": 15
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Ezequiel Tovar"
+     ],
+     "value": 73,
+     "top": [
+      {
+       "name": "Ezequiel Tovar",
+       "value": 73
+      },
+      {
+       "name": "Elias D\u00edaz",
+       "value": 72
+      },
+      {
+       "name": "Ryan McMahon",
+       "value": 70
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Elias D\u00edaz"
+     ],
+     "value": ".267",
+     "top": [
+      {
+       "name": "Elias D\u00edaz",
+       "value": ".267"
+      },
+      {
+       "name": "Ezequiel Tovar",
+       "value": ".253"
+      },
+      {
+       "name": "Ryan McMahon",
+       "value": ".240"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Ryan McMahon"
+     ],
+     "value": ".753",
+     "top": [
+      {
+       "name": "Ryan McMahon",
+       "value": ".753"
+      },
+      {
+       "name": "Elias D\u00edaz",
+       "value": ".725"
+      },
+      {
+       "name": "Ezequiel Tovar",
+       "value": ".695"
       }
      ]
     }
