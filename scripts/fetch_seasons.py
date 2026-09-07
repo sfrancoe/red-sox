@@ -43,7 +43,7 @@ CHECKPOINT = 108  # the game the whole story hangs on
 WAR_BAT_URL = "https://www.baseball-reference.com/data/war_daily_bat.txt"
 WAR_PITCH_URL = "https://www.baseball-reference.com/data/war_daily_pitch.txt"
 BBREF_TEAM = "BOS"
-UA = "red-sox-records/1.0"
+UA = "hub-ball/1.0"
 
 # The premise this project is built on. If real data ever disagrees, say so loudly
 # rather than quietly shipping a graphic that claims something untrue.

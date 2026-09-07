@@ -21,13 +21,14 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-IOS_ROOT = ROOT / "ios" / "Red Sox Records"
-SOURCE_ROOT = IOS_ROOT / "Red Sox Records"
-PROJECT = IOS_ROOT / "Red Sox Records.xcodeproj"
+IOS_ROOT = ROOT / "ios" / "Hub Ball"
+SOURCE_ROOT = IOS_ROOT / "Hub Ball"
+PROJECT = IOS_ROOT / "Hub Ball.xcodeproj"
 PBXPROJ = PROJECT / "project.pbxproj"
 APP_ICON = SOURCE_ROOT / "Assets.xcassets" / "AppIcon.appiconset"
 PRIVACY_MANIFEST = SOURCE_ROOT / "PrivacyInfo.xcprivacy"
 METADATA = ROOT / "app-store" / "metadata.json"
+EXPECTED_BUNDLE_ID = "com.sfrancoe.HubBall"
 
 PAID_OR_METERED_ENDPOINTS = {"https://red-sox.netlify.app/api/x-discovery"}
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
@@ -77,11 +78,18 @@ def setting_values(project_text: str, key: str) -> list[str]:
 def check_project_settings(project_text: str) -> list[Check]:
     checks: list[Check] = []
     bundle_ids = setting_values(project_text, "PRODUCT_BUNDLE_IDENTIFIER")
-    checks.append(
-        result("PASS", "Bundle identifier", ", ".join(bundle_ids))
-        if bundle_ids
-        else result("FAIL", "Bundle identifier", "PRODUCT_BUNDLE_IDENTIFIER is missing.")
-    )
+    if bundle_ids == [EXPECTED_BUNDLE_ID]:
+        checks.append(result("PASS", "Bundle identifier", EXPECTED_BUNDLE_ID))
+    elif bundle_ids:
+        checks.append(
+            result(
+                "FAIL",
+                "Bundle identifier",
+                f"Expected {EXPECTED_BUNDLE_ID}; found {', '.join(bundle_ids)}.",
+            )
+        )
+    else:
+        checks.append(result("FAIL", "Bundle identifier", "PRODUCT_BUNDLE_IDENTIFIER is missing."))
 
     versions = setting_values(project_text, "MARKETING_VERSION")
     builds = setting_values(project_text, "CURRENT_PROJECT_VERSION")
@@ -158,6 +166,9 @@ def check_metadata() -> list[Check]:
         return [result("FAIL", "App Store metadata", f"metadata.json cannot be read: {exc}")]
     checks: list[Check] = []
     for key, label in (
+        ("app_name", "App name"),
+        ("subtitle", "App subtitle"),
+        ("description", "App description"),
         ("privacy_policy_url", "Privacy policy URL"),
         ("support_url", "Support URL"),
         ("review_notes", "App Review notes"),
@@ -267,14 +278,14 @@ def check_live_endpoints() -> list[Check]:
 
 
 def run_release_build() -> Check:
-    with tempfile.TemporaryDirectory(prefix="red-sox-app-store-") as derived_data:
+    with tempfile.TemporaryDirectory(prefix="hub-ball-app-store-") as derived_data:
         command = [
             "xcodebuild",
             "-quiet",
             "-project",
             str(PROJECT),
             "-scheme",
-            "Red Sox Records",
+            "Hub Ball",
             "-configuration",
             "Release",
             "-destination",
@@ -309,7 +320,7 @@ def manual_review_checks() -> list[Check]:
         result(
             "WARN",
             "Trademark and affiliation",
-            "Confirm permission and presentation for the Red Sox name; add clear unofficial-app language.",
+            "Confirm permission and presentation for team names; keep clear unofficial-app language.",
         ),
         result(
             "WARN",
@@ -335,7 +346,7 @@ def render(checks: list[Check], json_output: bool) -> None:
         print(json.dumps({"summary": counts, "checks": [asdict(check) for check in checks]}, indent=2))
         return
     icons = {"PASS": "✓", "WARN": "!", "FAIL": "✗", "SKIP": "–"}
-    print("\nRed Sox Records — App Store preflight\n")
+    print("\nHub Ball — App Store preflight\n")
     for check in checks:
         print(f"{icons[check.status]} {check.status:<4}  {check.name}")
         print(f"        {check.detail}")

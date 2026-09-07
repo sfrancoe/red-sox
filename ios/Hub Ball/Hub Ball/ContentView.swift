@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Red Sox Records
+//  Hub Ball
 //
 //  Created by Scott Francoeur on 8/31/26.
 //
