@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:26:52+00:00",
+ "generated_at": "2026-09-07T23:02:34+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 141,
@@ -122,6 +122,375 @@
       {
        "name": "Ernie Clement",
        "value": ".687"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "94-68",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "George Springer",
+    "war": 4.8
+   },
+   "war_leaders": [
+    {
+     "name": "George Springer",
+     "war": 4.8
+    },
+    {
+     "name": "Vladimir Guerrero Jr.",
+     "war": 4.6
+    },
+    {
+     "name": "Ernie Clement",
+     "war": 4.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Braydon Fisher",
+       "value": "1.02"
+      },
+      {
+       "name": "Shane Bieber",
+       "value": "1.02"
+      },
+      {
+       "name": "Kevin Gausman",
+       "value": "1.06"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "George Springer"
+     ],
+     "value": 32,
+     "top": [
+      {
+       "name": "George Springer",
+       "value": 32
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": 23
+      },
+      {
+       "name": "Addison Barger",
+       "value": 21
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Bo Bichette"
+     ],
+     "value": 94,
+     "top": [
+      {
+       "name": "Bo Bichette",
+       "value": 94
+      },
+      {
+       "name": "George Springer",
+       "value": 84
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": 84
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Bo Bichette"
+     ],
+     "value": ".311",
+     "top": [
+      {
+       "name": "Bo Bichette",
+       "value": ".311"
+      },
+      {
+       "name": "George Springer",
+       "value": ".309"
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": ".292"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "George Springer"
+     ],
+     "value": ".959",
+     "top": [
+      {
+       "name": "George Springer",
+       "value": ".959"
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": ".848"
+      },
+      {
+       "name": "Bo Bichette",
+       "value": ".840"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "74-88",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Vladimir Guerrero Jr.",
+    "war": 6.0
+   },
+   "war_leaders": [
+    {
+     "name": "Vladimir Guerrero Jr.",
+     "war": 6.0
+    },
+    {
+     "name": "Daulton Varsho",
+     "war": 4.8
+    },
+    {
+     "name": "Ernie Clement",
+     "war": 3.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Bowden Francis",
+       "value": "0.93"
+      },
+      {
+       "name": "Chad Green",
+       "value": "1.03"
+      },
+      {
+       "name": "Jos\u00e9 Berr\u00edos",
+       "value": "1.15"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Vladimir Guerrero Jr."
+     ],
+     "value": 30,
+     "top": [
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": 30
+      },
+      {
+       "name": "George Springer",
+       "value": 19
+      },
+      {
+       "name": "Daulton Varsho",
+       "value": 18
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Vladimir Guerrero Jr."
+     ],
+     "value": 103,
+     "top": [
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": 103
+      },
+      {
+       "name": "Daulton Varsho",
+       "value": 58
+      },
+      {
+       "name": "George Springer",
+       "value": 56
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Vladimir Guerrero Jr."
+     ],
+     "value": ".323",
+     "top": [
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": ".323"
+      },
+      {
+       "name": "George Springer",
+       "value": ".220"
+      },
+      {
+       "name": "Daulton Varsho",
+       "value": ".214"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Vladimir Guerrero Jr."
+     ],
+     "value": ".940",
+     "top": [
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": ".940"
+      },
+      {
+       "name": "Daulton Varsho",
+       "value": ".700"
+      },
+      {
+       "name": "George Springer",
+       "value": ".674"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "89-73",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Bo Bichette",
+    "war": 4.8
+   },
+   "war_leaders": [
+    {
+     "name": "Bo Bichette",
+     "war": 4.8
+    },
+    {
+     "name": "Matt Chapman",
+     "war": 4.3
+    },
+    {
+     "name": "Kevin Kiermaier",
+     "war": 3.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Erik Swanson",
+       "value": "1.10"
+      },
+      {
+       "name": "Chris Bassitt",
+       "value": "1.18"
+      },
+      {
+       "name": "Kevin Gausman",
+       "value": "1.18"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Vladimir Guerrero Jr."
+     ],
+     "value": 26,
+     "top": [
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": 26
+      },
+      {
+       "name": "George Springer",
+       "value": 21
+      },
+      {
+       "name": "Bo Bichette",
+       "value": 20
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Vladimir Guerrero Jr."
+     ],
+     "value": 94,
+     "top": [
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": 94
+      },
+      {
+       "name": "Bo Bichette",
+       "value": 73
+      },
+      {
+       "name": "George Springer",
+       "value": 72
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Bo Bichette"
+     ],
+     "value": ".306",
+     "top": [
+      {
+       "name": "Bo Bichette",
+       "value": ".306"
+      },
+      {
+       "name": "Whit Merrifield",
+       "value": ".272"
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": ".264"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Bo Bichette"
+     ],
+     "value": ".814",
+     "top": [
+      {
+       "name": "Bo Bichette",
+       "value": ".814"
+      },
+      {
+       "name": "Vladimir Guerrero Jr.",
+       "value": ".789"
+      },
+      {
+       "name": "Matt Chapman",
+       "value": ".754"
       }
      ]
     }

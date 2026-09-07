@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:45+00:00",
+ "generated_at": "2026-09-07T23:03:50+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 143,
@@ -123,6 +123,375 @@
       {
        "name": "Brandon Marsh",
        "value": ".731"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "96-66",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Cristopher S\u00e1nchez",
+    "war": 8.1
+   },
+   "war_leaders": [
+    {
+     "name": "Cristopher S\u00e1nchez",
+     "war": 8.1
+    },
+    {
+     "name": "Trea Turner",
+     "war": 5.4
+    },
+    {
+     "name": "Zack Wheeler",
+     "war": 5.1
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Zack Wheeler",
+       "value": "0.94"
+      },
+      {
+       "name": "Tanner Banks",
+       "value": "1.01"
+      },
+      {
+       "name": "Cristopher S\u00e1nchez",
+       "value": "1.06"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Kyle Schwarber"
+     ],
+     "value": 56,
+     "top": [
+      {
+       "name": "Kyle Schwarber",
+       "value": 56
+      },
+      {
+       "name": "Bryce Harper",
+       "value": 27
+      },
+      {
+       "name": "Max Kepler",
+       "value": 18
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Kyle Schwarber"
+     ],
+     "value": 132,
+     "top": [
+      {
+       "name": "Kyle Schwarber",
+       "value": 132
+      },
+      {
+       "name": "Bryce Harper",
+       "value": 75
+      },
+      {
+       "name": "Nick Castellanos",
+       "value": 72
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Trea Turner"
+     ],
+     "value": ".304",
+     "top": [
+      {
+       "name": "Trea Turner",
+       "value": ".304"
+      },
+      {
+       "name": "Alec Bohm",
+       "value": ".287"
+      },
+      {
+       "name": "Bryce Harper",
+       "value": ".261"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Kyle Schwarber"
+     ],
+     "value": ".928",
+     "top": [
+      {
+       "name": "Kyle Schwarber",
+       "value": ".928"
+      },
+      {
+       "name": "Bryce Harper",
+       "value": ".844"
+      },
+      {
+       "name": "Trea Turner",
+       "value": ".812"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "95-67",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Zack Wheeler",
+    "war": 6.5
+   },
+   "war_leaders": [
+    {
+     "name": "Zack Wheeler",
+     "war": 6.5
+    },
+    {
+     "name": "Bryce Harper",
+     "war": 4.6
+    },
+    {
+     "name": "Aaron Nola",
+     "war": 4.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Matt Strahm",
+       "value": "0.75"
+      },
+      {
+       "name": "Jeff Hoffman",
+       "value": "0.96"
+      },
+      {
+       "name": "Zack Wheeler",
+       "value": "0.96"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Kyle Schwarber"
+     ],
+     "value": 38,
+     "top": [
+      {
+       "name": "Kyle Schwarber",
+       "value": 38
+      },
+      {
+       "name": "Bryce Harper",
+       "value": 30
+      },
+      {
+       "name": "Nick Castellanos",
+       "value": 23
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Kyle Schwarber"
+     ],
+     "value": 104,
+     "top": [
+      {
+       "name": "Kyle Schwarber",
+       "value": 104
+      },
+      {
+       "name": "Alec Bohm",
+       "value": 97
+      },
+      {
+       "name": "Bryce Harper",
+       "value": 87
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Trea Turner"
+     ],
+     "value": ".295",
+     "top": [
+      {
+       "name": "Trea Turner",
+       "value": ".295"
+      },
+      {
+       "name": "Bryce Harper",
+       "value": ".285"
+      },
+      {
+       "name": "Alec Bohm",
+       "value": ".280"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Bryce Harper"
+     ],
+     "value": ".898",
+     "top": [
+      {
+       "name": "Bryce Harper",
+       "value": ".898"
+      },
+      {
+       "name": "Kyle Schwarber",
+       "value": ".851"
+      },
+      {
+       "name": "Trea Turner",
+       "value": ".807"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "90-72",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Bryson Stott",
+    "war": 4.3
+   },
+   "war_leaders": [
+    {
+     "name": "Bryson Stott",
+     "war": 4.3
+    },
+    {
+     "name": "Zack Wheeler",
+     "war": 4.2
+    },
+    {
+     "name": "Bryce Harper",
+     "war": 3.6
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Jeff Hoffman",
+       "value": "0.92"
+      },
+      {
+       "name": "Matt Strahm",
+       "value": "1.02"
+      },
+      {
+       "name": "Craig Kimbrel",
+       "value": "1.04"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Kyle Schwarber"
+     ],
+     "value": 47,
+     "top": [
+      {
+       "name": "Kyle Schwarber",
+       "value": 47
+      },
+      {
+       "name": "Nick Castellanos",
+       "value": 29
+      },
+      {
+       "name": "Trea Turner",
+       "value": 26
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Nick Castellanos"
+     ],
+     "value": 106,
+     "top": [
+      {
+       "name": "Nick Castellanos",
+       "value": 106
+      },
+      {
+       "name": "Kyle Schwarber",
+       "value": 104
+      },
+      {
+       "name": "Alec Bohm",
+       "value": 97
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Bryce Harper"
+     ],
+     "value": ".293",
+     "top": [
+      {
+       "name": "Bryce Harper",
+       "value": ".293"
+      },
+      {
+       "name": "Bryson Stott",
+       "value": ".280"
+      },
+      {
+       "name": "Alec Bohm",
+       "value": ".274"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Bryce Harper"
+     ],
+     "value": ".900",
+     "top": [
+      {
+       "name": "Bryce Harper",
+       "value": ".900"
+      },
+      {
+       "name": "Kyle Schwarber",
+       "value": ".817"
+      },
+      {
+       "name": "Nick Castellanos",
+       "value": ".787"
       }
      ]
     }

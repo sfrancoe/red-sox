@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:53+00:00",
+ "generated_at": "2026-09-07T23:04:21+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 137,
@@ -122,6 +122,368 @@
       {
        "name": "Jung Hoo Lee",
        "value": ".730"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "81-81",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Logan Webb",
+    "war": 4.2
+   },
+   "war_leaders": [
+    {
+     "name": "Logan Webb",
+     "war": 4.2
+    },
+    {
+     "name": "Matt Chapman",
+     "war": 4.1
+    },
+    {
+     "name": "Willy Adames",
+     "war": 3.7
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tyler Rogers",
+       "value": "0.86"
+      },
+      {
+       "name": "Randy Rodr\u00edguez",
+       "value": "0.89"
+      },
+      {
+       "name": "Tristan Beck",
+       "value": "1.11"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Willy Adames"
+     ],
+     "value": 30,
+     "top": [
+      {
+       "name": "Willy Adames",
+       "value": 30
+      },
+      {
+       "name": "Heliot Ramos",
+       "value": 21
+      },
+      {
+       "name": "Matt Chapman",
+       "value": 21
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Willy Adames"
+     ],
+     "value": 87,
+     "top": [
+      {
+       "name": "Willy Adames",
+       "value": 87
+      },
+      {
+       "name": "Wilmer Flores",
+       "value": 71
+      },
+      {
+       "name": "Heliot Ramos",
+       "value": 69
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Jung Hoo Lee"
+     ],
+     "value": ".266",
+     "top": [
+      {
+       "name": "Jung Hoo Lee",
+       "value": ".266"
+      },
+      {
+       "name": "Heliot Ramos",
+       "value": ".256"
+      },
+      {
+       "name": "Matt Chapman",
+       "value": ".231"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Matt Chapman"
+     ],
+     "value": ".770",
+     "top": [
+      {
+       "name": "Matt Chapman",
+       "value": ".770"
+      },
+      {
+       "name": "Willy Adames",
+       "value": ".739"
+      },
+      {
+       "name": "Jung Hoo Lee",
+       "value": ".734"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "80-82",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Matt Chapman",
+    "war": 7.1
+   },
+   "war_leaders": [
+    {
+     "name": "Matt Chapman",
+     "war": 7.1
+    },
+    {
+     "name": "Logan Webb",
+     "war": 3.8
+    },
+    {
+     "name": "Ryan Walker",
+     "war": 2.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Ryan Walker",
+       "value": "0.85"
+      },
+      {
+       "name": "Tyler Rogers",
+       "value": "1.04"
+      },
+      {
+       "name": "Blake Snell",
+       "value": "1.05"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Matt Chapman"
+     ],
+     "value": 27,
+     "top": [
+      {
+       "name": "Matt Chapman",
+       "value": 27
+      },
+      {
+       "name": "Heliot Ramos",
+       "value": 22
+      },
+      {
+       "name": "Michael Conforto",
+       "value": 20
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Matt Chapman"
+     ],
+     "value": 78,
+     "top": [
+      {
+       "name": "Matt Chapman",
+       "value": 78
+      },
+      {
+       "name": "Heliot Ramos",
+       "value": 72
+      },
+      {
+       "name": "Michael Conforto",
+       "value": 66
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Heliot Ramos"
+     ],
+     "value": ".269",
+     "top": [
+      {
+       "name": "Heliot Ramos",
+       "value": ".269"
+      },
+      {
+       "name": "Matt Chapman",
+       "value": ".247"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Heliot Ramos",
+      "Matt Chapman"
+     ],
+     "value": ".791",
+     "top": [
+      {
+       "name": "Heliot Ramos",
+       "value": ".791"
+      },
+      {
+       "name": "Matt Chapman",
+       "value": ".791"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "79-83",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Logan Webb",
+    "war": 5.6
+   },
+   "war_leaders": [
+    {
+     "name": "Logan Webb",
+     "war": 5.6
+    },
+    {
+     "name": "LaMonte Wade Jr.",
+     "war": 2.8
+    },
+    {
+     "name": "Wilmer Flores",
+     "war": 2.7
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Keaton Winn",
+       "value": "1.04"
+      },
+      {
+       "name": "Logan Webb",
+       "value": "1.07"
+      },
+      {
+       "name": "Camilo Doval",
+       "value": "1.14"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Wilmer Flores"
+     ],
+     "value": 23,
+     "top": [
+      {
+       "name": "Wilmer Flores",
+       "value": 23
+      },
+      {
+       "name": "J.D. Davis",
+       "value": 18
+      },
+      {
+       "name": "LaMonte Wade Jr.",
+       "value": 17
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "J.D. Davis"
+     ],
+     "value": 69,
+     "top": [
+      {
+       "name": "J.D. Davis",
+       "value": 69
+      },
+      {
+       "name": "Wilmer Flores",
+       "value": 60
+      },
+      {
+       "name": "Michael Conforto",
+       "value": 58
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Thairo Estrada"
+     ],
+     "value": ".271",
+     "top": [
+      {
+       "name": "Thairo Estrada",
+       "value": ".271"
+      },
+      {
+       "name": "LaMonte Wade Jr.",
+       "value": ".256"
+      },
+      {
+       "name": "J.D. Davis",
+       "value": ".248"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "LaMonte Wade Jr."
+     ],
+     "value": ".790",
+     "top": [
+      {
+       "name": "LaMonte Wade Jr.",
+       "value": ".790"
+      },
+      {
+       "name": "J.D. Davis",
+       "value": ".738"
+      },
+      {
+       "name": "Thairo Estrada",
+       "value": ".731"
       }
      ]
     }

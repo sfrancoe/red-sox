@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:44+00:00",
+ "generated_at": "2026-09-07T23:03:44+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 144,
@@ -123,6 +123,375 @@
       {
        "name": "Drake Baldwin",
        "value": ".801"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "76-86",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Matt Olson",
+    "war": 6.2
+   },
+   "war_leaders": [
+    {
+     "name": "Matt Olson",
+     "war": 6.2
+    },
+    {
+     "name": "Chris Sale",
+     "war": 3.9
+    },
+    {
+     "name": "Drake Baldwin",
+     "war": 3.4
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Spencer Schwellenbach",
+       "value": "0.97"
+      },
+      {
+       "name": "Dylan Lee",
+       "value": "0.98"
+      },
+      {
+       "name": "Raisel Iglesias",
+       "value": "1.00"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Matt Olson"
+     ],
+     "value": 29,
+     "top": [
+      {
+       "name": "Matt Olson",
+       "value": 29
+      },
+      {
+       "name": "Marcell Ozuna",
+       "value": 21
+      },
+      {
+       "name": "Ronald Acu\u00f1a Jr.",
+       "value": 21
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Matt Olson"
+     ],
+     "value": 95,
+     "top": [
+      {
+       "name": "Matt Olson",
+       "value": 95
+      },
+      {
+       "name": "Michael Harris II",
+       "value": 86
+      },
+      {
+       "name": "Drake Baldwin",
+       "value": 80
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Matt Olson"
+     ],
+     "value": ".272",
+     "top": [
+      {
+       "name": "Matt Olson",
+       "value": ".272"
+      },
+      {
+       "name": "Michael Harris II",
+       "value": ".249"
+      },
+      {
+       "name": "Ozzie Albies",
+       "value": ".240"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Matt Olson"
+     ],
+     "value": ".850",
+     "top": [
+      {
+       "name": "Matt Olson",
+       "value": ".850"
+      },
+      {
+       "name": "Marcell Ozuna",
+       "value": ".755"
+      },
+      {
+       "name": "Michael Harris II",
+       "value": ".677"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "89-73",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Chris Sale",
+    "war": 6.2
+   },
+   "war_leaders": [
+    {
+     "name": "Chris Sale",
+     "war": 6.2
+    },
+    {
+     "name": "Reynaldo L\u00f3pez",
+     "war": 5.1
+    },
+    {
+     "name": "Marcell Ozuna",
+     "war": 4.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Raisel Iglesias",
+       "value": "0.74"
+      },
+      {
+       "name": "Joe Jim\u00e9nez",
+       "value": "0.99"
+      },
+      {
+       "name": "Chris Sale",
+       "value": "1.01"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Marcell Ozuna"
+     ],
+     "value": 39,
+     "top": [
+      {
+       "name": "Marcell Ozuna",
+       "value": 39
+      },
+      {
+       "name": "Matt Olson",
+       "value": 29
+      },
+      {
+       "name": "Austin Riley",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Marcell Ozuna"
+     ],
+     "value": 104,
+     "top": [
+      {
+       "name": "Marcell Ozuna",
+       "value": 104
+      },
+      {
+       "name": "Matt Olson",
+       "value": 98
+      },
+      {
+       "name": "Austin Riley",
+       "value": 56
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Marcell Ozuna"
+     ],
+     "value": ".302",
+     "top": [
+      {
+       "name": "Marcell Ozuna",
+       "value": ".302"
+      },
+      {
+       "name": "Matt Olson",
+       "value": ".247"
+      },
+      {
+       "name": "Orlando Arcia",
+       "value": ".218"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Marcell Ozuna"
+     ],
+     "value": ".924",
+     "top": [
+      {
+       "name": "Marcell Ozuna",
+       "value": ".924"
+      },
+      {
+       "name": "Matt Olson",
+       "value": ".790"
+      },
+      {
+       "name": "Orlando Arcia",
+       "value": ".625"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "104-58",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Ronald Acu\u00f1a Jr.",
+    "war": 8.4
+   },
+   "war_leaders": [
+    {
+     "name": "Ronald Acu\u00f1a Jr.",
+     "war": 8.4
+    },
+    {
+     "name": "Matt Olson",
+     "war": 7.5
+    },
+    {
+     "name": "Austin Riley",
+     "war": 6.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Michael Tonkin",
+       "value": "1.09"
+      },
+      {
+       "name": "Spencer Strider",
+       "value": "1.09"
+      },
+      {
+       "name": "Max Fried",
+       "value": "1.13"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Matt Olson"
+     ],
+     "value": 54,
+     "top": [
+      {
+       "name": "Matt Olson",
+       "value": 54
+      },
+      {
+       "name": "Ronald Acu\u00f1a Jr.",
+       "value": 41
+      },
+      {
+       "name": "Marcell Ozuna",
+       "value": 40
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Matt Olson"
+     ],
+     "value": 139,
+     "top": [
+      {
+       "name": "Matt Olson",
+       "value": 139
+      },
+      {
+       "name": "Ozzie Albies",
+       "value": 109
+      },
+      {
+       "name": "Ronald Acu\u00f1a Jr.",
+       "value": 106
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Ronald Acu\u00f1a Jr."
+     ],
+     "value": ".337",
+     "top": [
+      {
+       "name": "Ronald Acu\u00f1a Jr.",
+       "value": ".337"
+      },
+      {
+       "name": "Michael Harris II",
+       "value": ".293"
+      },
+      {
+       "name": "Matt Olson",
+       "value": ".283"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Ronald Acu\u00f1a Jr."
+     ],
+     "value": "1.012",
+     "top": [
+      {
+       "name": "Ronald Acu\u00f1a Jr.",
+       "value": "1.012"
+      },
+      {
+       "name": "Matt Olson",
+       "value": ".993"
+      },
+      {
+       "name": "Marcell Ozuna",
+       "value": ".904"
       }
      ]
     }

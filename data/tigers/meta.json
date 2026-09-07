@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-07T21:27:28+00:00",
+ "generated_at": "2026-09-07T23:02:43+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 116,
  "seasons": {
   "2026": {
-   "record": "65-78",
-   "games": 143,
+   "record": "66-78",
+   "games": 144,
    "in_progress": true,
    "war_leader": {
     "name": "Kevin McGonigle",
@@ -122,6 +122,375 @@
       {
        "name": "Dillon Dingler",
        "value": ".764"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "87-75",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Tarik Skubal",
+    "war": 6.4
+   },
+   "war_leaders": [
+    {
+     "name": "Tarik Skubal",
+     "war": 6.4
+    },
+    {
+     "name": "Dillon Dingler",
+     "war": 3.2
+    },
+    {
+     "name": "Gleyber Torres",
+     "war": 3.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tarik Skubal",
+       "value": "0.89"
+      },
+      {
+       "name": "Troy Melton",
+       "value": "1.01"
+      },
+      {
+       "name": "Tyler Holton",
+       "value": "1.04"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": 36,
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": 36
+      },
+      {
+       "name": "Spencer Torkelson",
+       "value": 31
+      },
+      {
+       "name": "Kerry Carpenter",
+       "value": 26
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": 111,
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": 111
+      },
+      {
+       "name": "Spencer Torkelson",
+       "value": 78
+      },
+      {
+       "name": "Gleyber Torres",
+       "value": 74
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Zach McKinstry"
+     ],
+     "value": ".259",
+     "top": [
+      {
+       "name": "Zach McKinstry",
+       "value": ".259"
+      },
+      {
+       "name": "Riley Greene",
+       "value": ".258"
+      },
+      {
+       "name": "Gleyber Torres",
+       "value": ".256"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": ".806",
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": ".806"
+      },
+      {
+       "name": "Spencer Torkelson",
+       "value": ".789"
+      },
+      {
+       "name": "Zach McKinstry",
+       "value": ".771"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "86-76",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Tarik Skubal",
+    "war": 6.7
+   },
+   "war_leaders": [
+    {
+     "name": "Tarik Skubal",
+     "war": 6.7
+    },
+    {
+     "name": "Riley Greene",
+     "war": 5.3
+    },
+    {
+     "name": "Tyler Holton",
+     "war": 3.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tyler Holton",
+       "value": "0.78"
+      },
+      {
+       "name": "Brant Hurter",
+       "value": "0.88"
+      },
+      {
+       "name": "Tarik Skubal",
+       "value": "0.92"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": 24,
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": 24
+      },
+      {
+       "name": "Kerry Carpenter",
+       "value": 18
+      },
+      {
+       "name": "Matt Vierling",
+       "value": 16
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": 74,
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": 74
+      },
+      {
+       "name": "Colt Keith",
+       "value": 61
+      },
+      {
+       "name": "Kerry Carpenter",
+       "value": 57
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": ".262",
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": ".262"
+      },
+      {
+       "name": "Colt Keith",
+       "value": ".260"
+      },
+      {
+       "name": "Matt Vierling",
+       "value": ".257"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Riley Greene"
+     ],
+     "value": ".827",
+     "top": [
+      {
+       "name": "Riley Greene",
+       "value": ".827"
+      },
+      {
+       "name": "Matt Vierling",
+       "value": ".735"
+      },
+      {
+       "name": "Colt Keith",
+       "value": ".689"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "78-84",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Eduardo Rodr\u00edguez",
+    "war": 3.2
+   },
+   "war_leaders": [
+    {
+     "name": "Eduardo Rodr\u00edguez",
+     "war": 3.2
+    },
+    {
+     "name": "Tyler Holton",
+     "war": 2.9
+    },
+    {
+     "name": "Kerry Carpenter",
+     "war": 2.0
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tyler Holton",
+       "value": "0.87"
+      },
+      {
+       "name": "Tarik Skubal",
+       "value": "0.90"
+      },
+      {
+       "name": "Matt Manning",
+       "value": "1.04"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Spencer Torkelson"
+     ],
+     "value": 31,
+     "top": [
+      {
+       "name": "Spencer Torkelson",
+       "value": 31
+      },
+      {
+       "name": "Jake Rogers",
+       "value": 21
+      },
+      {
+       "name": "Kerry Carpenter",
+       "value": 20
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Spencer Torkelson"
+     ],
+     "value": 94,
+     "top": [
+      {
+       "name": "Spencer Torkelson",
+       "value": 94
+      },
+      {
+       "name": "Kerry Carpenter",
+       "value": 64
+      },
+      {
+       "name": "Javier B\u00e1ez",
+       "value": 59
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Matt Vierling"
+     ],
+     "value": ".261",
+     "top": [
+      {
+       "name": "Matt Vierling",
+       "value": ".261"
+      },
+      {
+       "name": "Spencer Torkelson",
+       "value": ".233"
+      },
+      {
+       "name": "Zach McKinstry",
+       "value": ".231"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Spencer Torkelson"
+     ],
+     "value": ".759",
+     "top": [
+      {
+       "name": "Spencer Torkelson",
+       "value": ".759"
+      },
+      {
+       "name": "Matt Vierling",
+       "value": ".717"
+      },
+      {
+       "name": "Zach McKinstry",
+       "value": ".653"
       }
      ]
     }

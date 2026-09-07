@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:44+00:00",
+ "generated_at": "2026-09-07T23:03:47+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 146,
@@ -123,6 +123,367 @@
       {
        "name": "Xavier Edwards",
        "value": ".737"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "79-83",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Kyle Stowers",
+    "war": 3.7
+   },
+   "war_leaders": [
+    {
+     "name": "Kyle Stowers",
+     "war": 3.7
+    },
+    {
+     "name": "Otto Lopez",
+     "war": 3.6
+    },
+    {
+     "name": "Xavier Edwards",
+     "war": 3.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Eury P\u00e9rez",
+       "value": "1.05"
+      },
+      {
+       "name": "Anthony Bender",
+       "value": "1.06"
+      },
+      {
+       "name": "Ronny Henriquez",
+       "value": "1.10"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Kyle Stowers"
+     ],
+     "value": 25,
+     "top": [
+      {
+       "name": "Kyle Stowers",
+       "value": 25
+      },
+      {
+       "name": "Agust\u00edn Ram\u00edrez",
+       "value": 21
+      },
+      {
+       "name": "Otto Lopez",
+       "value": 15
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Otto Lopez"
+     ],
+     "value": 77,
+     "top": [
+      {
+       "name": "Otto Lopez",
+       "value": 77
+      },
+      {
+       "name": "Kyle Stowers",
+       "value": 73
+      },
+      {
+       "name": "Agust\u00edn Ram\u00edrez",
+       "value": 67
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Xavier Edwards"
+     ],
+     "value": ".283",
+     "top": [
+      {
+       "name": "Xavier Edwards",
+       "value": ".283"
+      },
+      {
+       "name": "Eric Wagaman",
+       "value": ".250"
+      },
+      {
+       "name": "Otto Lopez",
+       "value": ".246"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Agust\u00edn Ram\u00edrez"
+     ],
+     "value": ".700",
+     "top": [
+      {
+       "name": "Agust\u00edn Ram\u00edrez",
+       "value": ".700"
+      },
+      {
+       "name": "Xavier Edwards",
+       "value": ".696"
+      },
+      {
+       "name": "Eric Wagaman",
+       "value": ".674"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "62-100",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Tanner Scott",
+    "war": 3.0
+   },
+   "war_leaders": [
+    {
+     "name": "Tanner Scott",
+     "war": 3.0
+    },
+    {
+     "name": "Otto Lopez",
+     "war": 2.8
+    },
+    {
+     "name": "Xavier Edwards",
+     "war": 2.1
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tanner Scott",
+       "value": "1.01"
+      },
+      {
+       "name": "Ryan Weathers",
+       "value": "1.18"
+      },
+      {
+       "name": "Andrew Nardi",
+       "value": "1.25"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Jake Burger"
+     ],
+     "value": 29,
+     "top": [
+      {
+       "name": "Jake Burger",
+       "value": 29
+      },
+      {
+       "name": "Jes\u00fas S\u00e1nchez",
+       "value": 18
+      },
+      {
+       "name": "Josh Bell",
+       "value": 14
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Jake Burger"
+     ],
+     "value": 76,
+     "top": [
+      {
+       "name": "Jake Burger",
+       "value": 76
+      },
+      {
+       "name": "Jes\u00fas S\u00e1nchez",
+       "value": 64
+      },
+      {
+       "name": "Josh Bell",
+       "value": 49
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Jes\u00fas S\u00e1nchez"
+     ],
+     "value": ".252",
+     "top": [
+      {
+       "name": "Jes\u00fas S\u00e1nchez",
+       "value": ".252"
+      },
+      {
+       "name": "Jake Burger",
+       "value": ".250"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Jake Burger"
+     ],
+     "value": ".761",
+     "top": [
+      {
+       "name": "Jake Burger",
+       "value": ".761"
+      },
+      {
+       "name": "Jes\u00fas S\u00e1nchez",
+       "value": ".730"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "84-78",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Jes\u00fas Luzardo",
+    "war": 4.7
+   },
+   "war_leaders": [
+    {
+     "name": "Jes\u00fas Luzardo",
+     "war": 4.7
+    },
+    {
+     "name": "Luis Arraez",
+     "war": 4.5
+    },
+    {
+     "name": "Braxton Garrett",
+     "war": 4.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Tanner Scott",
+       "value": "0.99"
+      },
+      {
+       "name": "Eury P\u00e9rez",
+       "value": "1.13"
+      },
+      {
+       "name": "Andrew Nardi",
+       "value": "1.15"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Jorge Soler"
+     ],
+     "value": 36,
+     "top": [
+      {
+       "name": "Jorge Soler",
+       "value": 36
+      },
+      {
+       "name": "Bryan De La Cruz",
+       "value": 19
+      },
+      {
+       "name": "Jazz Chisholm Jr.",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Bryan De La Cruz"
+     ],
+     "value": 78,
+     "top": [
+      {
+       "name": "Bryan De La Cruz",
+       "value": 78
+      },
+      {
+       "name": "Jorge Soler",
+       "value": 75
+      },
+      {
+       "name": "Luis Arraez",
+       "value": 69
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Luis Arraez"
+     ],
+     "value": ".354",
+     "top": [
+      {
+       "name": "Luis Arraez",
+       "value": ".354"
+      },
+      {
+       "name": "Bryan De La Cruz",
+       "value": ".257"
+      },
+      {
+       "name": "Jorge Soler",
+       "value": ".250"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Luis Arraez"
+     ],
+     "value": ".862",
+     "top": [
+      {
+       "name": "Luis Arraez",
+       "value": ".862"
+      },
+      {
+       "name": "Jorge Soler",
+       "value": ".853"
+      },
+      {
+       "name": "Bryan De La Cruz",
+       "value": ".715"
       }
      ]
     }

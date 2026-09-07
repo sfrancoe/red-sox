@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:27:27+00:00",
+ "generated_at": "2026-09-07T23:02:38+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 145,
@@ -122,6 +122,368 @@
       {
        "name": "Sam Antonacci",
        "value": ".760"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "60-102",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Colson Montgomery",
+    "war": 3.3
+   },
+   "war_leaders": [
+    {
+     "name": "Colson Montgomery",
+     "war": 3.3
+    },
+    {
+     "name": "Mike Vasil",
+     "war": 2.9
+    },
+    {
+     "name": "Adrian Houser",
+     "war": 2.9
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Mart\u00edn P\u00e9rez",
+       "value": "1.11"
+      },
+      {
+       "name": "Shane Smith",
+       "value": "1.20"
+      },
+      {
+       "name": "Adrian Houser",
+       "value": "1.22"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Lenyn Sosa"
+     ],
+     "value": 22,
+     "top": [
+      {
+       "name": "Lenyn Sosa",
+       "value": 22
+      },
+      {
+       "name": "Colson Montgomery",
+       "value": 21
+      },
+      {
+       "name": "Andrew Benintendi",
+       "value": 20
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Lenyn Sosa"
+     ],
+     "value": 75,
+     "top": [
+      {
+       "name": "Lenyn Sosa",
+       "value": 75
+      },
+      {
+       "name": "Andrew Benintendi",
+       "value": 63
+      },
+      {
+       "name": "Miguel Vargas",
+       "value": 60
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Lenyn Sosa"
+     ],
+     "value": ".264",
+     "top": [
+      {
+       "name": "Lenyn Sosa",
+       "value": ".264"
+      },
+      {
+       "name": "Chase Meidroth",
+       "value": ".253"
+      },
+      {
+       "name": "Miguel Vargas",
+       "value": ".234"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Lenyn Sosa"
+     ],
+     "value": ".727",
+     "top": [
+      {
+       "name": "Lenyn Sosa",
+       "value": ".727"
+      },
+      {
+       "name": "Miguel Vargas",
+       "value": ".717"
+      },
+      {
+       "name": "Chase Meidroth",
+       "value": ".649"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "41-121",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Erick Fedde",
+    "war": 4.6
+   },
+   "war_leaders": [
+    {
+     "name": "Erick Fedde",
+     "war": 4.6
+    },
+    {
+     "name": "Garrett Crochet",
+     "war": 4.0
+    },
+    {
+     "name": "Jonathan Cannon",
+     "war": 1.9
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Garrett Crochet",
+       "value": "1.07"
+      },
+      {
+       "name": "Drew Thorpe",
+       "value": "1.26"
+      },
+      {
+       "name": "Tanner Banks",
+       "value": "1.29"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Andrew Benintendi"
+     ],
+     "value": 20,
+     "top": [
+      {
+       "name": "Andrew Benintendi",
+       "value": 20
+      },
+      {
+       "name": "Andrew Vaughn",
+       "value": 19
+      },
+      {
+       "name": "Luis Robert Jr.",
+       "value": 14
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Andrew Vaughn"
+     ],
+     "value": 70,
+     "top": [
+      {
+       "name": "Andrew Vaughn",
+       "value": 70
+      },
+      {
+       "name": "Andrew Benintendi",
+       "value": 64
+      },
+      {
+       "name": "Gavin Sheets",
+       "value": 45
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Andrew Vaughn"
+     ],
+     "value": ".246",
+     "top": [
+      {
+       "name": "Andrew Vaughn",
+       "value": ".246"
+      },
+      {
+       "name": "Andrew Benintendi",
+       "value": ".229"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Andrew Vaughn"
+     ],
+     "value": ".699",
+     "top": [
+      {
+       "name": "Andrew Vaughn",
+       "value": ".699"
+      },
+      {
+       "name": "Andrew Benintendi",
+       "value": ".685"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "61-101",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Luis Robert Jr.",
+    "war": 5.3
+   },
+   "war_leaders": [
+    {
+     "name": "Luis Robert Jr.",
+     "war": 5.3
+    },
+    {
+     "name": "Mike Clevinger",
+     "war": 3.2
+    },
+    {
+     "name": "Lucas Giolito",
+     "war": 2.7
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Kendall Graveman",
+       "value": "1.20"
+      },
+      {
+       "name": "Lucas Giolito",
+       "value": "1.22"
+      },
+      {
+       "name": "Bryan Shaw",
+       "value": "1.23"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Luis Robert Jr."
+     ],
+     "value": 38,
+     "top": [
+      {
+       "name": "Luis Robert Jr.",
+       "value": 38
+      },
+      {
+       "name": "Jake Burger",
+       "value": 25
+      },
+      {
+       "name": "Andrew Vaughn",
+       "value": 21
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Andrew Vaughn",
+      "Luis Robert Jr."
+     ],
+     "value": 80,
+     "top": [
+      {
+       "name": "Andrew Vaughn",
+       "value": 80
+      },
+      {
+       "name": "Luis Robert Jr.",
+       "value": 80
+      },
+      {
+       "name": "Eloy Jim\u00e9nez",
+       "value": 64
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Luis Robert Jr."
+     ],
+     "value": ".264",
+     "top": [
+      {
+       "name": "Luis Robert Jr.",
+       "value": ".264"
+      },
+      {
+       "name": "Andrew Benintendi",
+       "value": ".262"
+      },
+      {
+       "name": "Andrew Vaughn",
+       "value": ".258"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Luis Robert Jr."
+     ],
+     "value": ".857",
+     "top": [
+      {
+       "name": "Luis Robert Jr.",
+       "value": ".857"
+      },
+      {
+       "name": "Andrew Vaughn",
+       "value": ".743"
+      },
+      {
+       "name": "Andrew Benintendi",
+       "value": ".682"
       }
      ]
     }

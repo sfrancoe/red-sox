@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:51+00:00",
+ "generated_at": "2026-09-07T23:04:15+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 119,
@@ -123,6 +123,375 @@
       {
        "name": "Max Muncy",
        "value": ".834"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "93-69",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Shohei Ohtani",
+    "war": 7.7
+   },
+   "war_leaders": [
+    {
+     "name": "Shohei Ohtani",
+     "war": 7.7
+    },
+    {
+     "name": "Mookie Betts",
+     "war": 4.9
+    },
+    {
+     "name": "Yoshinobu Yamamoto",
+     "war": 4.9
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Emmet Sheehan",
+       "value": "0.97"
+      },
+      {
+       "name": "Alex Vesia",
+       "value": "0.99"
+      },
+      {
+       "name": "Yoshinobu Yamamoto",
+       "value": "0.99"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": 55,
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": 55
+      },
+      {
+       "name": "Andy Pages",
+       "value": 27
+      },
+      {
+       "name": "Teoscar Hern\u00e1ndez",
+       "value": 25
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": 102,
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": 102
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": 90
+      },
+      {
+       "name": "Teoscar Hern\u00e1ndez",
+       "value": 89
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Freddie Freeman"
+     ],
+     "value": ".295",
+     "top": [
+      {
+       "name": "Freddie Freeman",
+       "value": ".295"
+      },
+      {
+       "name": "Shohei Ohtani",
+       "value": ".282"
+      },
+      {
+       "name": "Andy Pages",
+       "value": ".272"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": "1.014",
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": "1.014"
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": ".869"
+      },
+      {
+       "name": "Andy Pages",
+       "value": ".774"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "98-64",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Shohei Ohtani",
+    "war": 9.0
+   },
+   "war_leaders": [
+    {
+     "name": "Shohei Ohtani",
+     "war": 9.0
+    },
+    {
+     "name": "Mookie Betts",
+     "war": 4.6
+    },
+    {
+     "name": "Freddie Freeman",
+     "war": 4.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Blake Treinen",
+       "value": "0.94"
+      },
+      {
+       "name": "Tyler Glasnow",
+       "value": "0.95"
+      },
+      {
+       "name": "Alex Vesia",
+       "value": "0.99"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": 54,
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": 54
+      },
+      {
+       "name": "Teoscar Hern\u00e1ndez",
+       "value": 33
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": 22
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": 130,
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": 130
+      },
+      {
+       "name": "Teoscar Hern\u00e1ndez",
+       "value": 99
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": 89
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": ".310",
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": ".310"
+      },
+      {
+       "name": "Mookie Betts",
+       "value": ".289"
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": ".282"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Shohei Ohtani"
+     ],
+     "value": "1.036",
+     "top": [
+      {
+       "name": "Shohei Ohtani",
+       "value": "1.036"
+      },
+      {
+       "name": "Mookie Betts",
+       "value": ".863"
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": ".854"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "100-62",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Mookie Betts",
+    "war": 8.6
+   },
+   "war_leaders": [
+    {
+     "name": "Mookie Betts",
+     "war": 8.6
+    },
+    {
+     "name": "Freddie Freeman",
+     "war": 6.8
+    },
+    {
+     "name": "Will Smith",
+     "war": 4.1
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Ryan Pepiot",
+       "value": "0.76"
+      },
+      {
+       "name": "Evan Phillips",
+       "value": "0.83"
+      },
+      {
+       "name": "Shelby Miller",
+       "value": "0.90"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Mookie Betts"
+     ],
+     "value": 39,
+     "top": [
+      {
+       "name": "Mookie Betts",
+       "value": 39
+      },
+      {
+       "name": "Max Muncy",
+       "value": 36
+      },
+      {
+       "name": "J.D. Martinez",
+       "value": 33
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Mookie Betts"
+     ],
+     "value": 107,
+     "top": [
+      {
+       "name": "Mookie Betts",
+       "value": 107
+      },
+      {
+       "name": "Max Muncy",
+       "value": 105
+      },
+      {
+       "name": "J.D. Martinez",
+       "value": 103
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Freddie Freeman"
+     ],
+     "value": ".331",
+     "top": [
+      {
+       "name": "Freddie Freeman",
+       "value": ".331"
+      },
+      {
+       "name": "Mookie Betts",
+       "value": ".307"
+      },
+      {
+       "name": "Will Smith",
+       "value": ".261"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Mookie Betts"
+     ],
+     "value": ".987",
+     "top": [
+      {
+       "name": "Mookie Betts",
+       "value": ".987"
+      },
+      {
+       "name": "Freddie Freeman",
+       "value": ".977"
+      },
+      {
+       "name": "Max Muncy",
+       "value": ".808"
       }
      ]
     }

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:27:32+00:00",
+ "generated_at": "2026-09-07T23:03:24+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 133,
@@ -122,6 +122,359 @@
       {
        "name": "Jeff McNeil",
        "value": ".692"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "76-86",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Nick Kurtz",
+    "war": 5.0
+   },
+   "war_leaders": [
+    {
+     "name": "Nick Kurtz",
+     "war": 5.0
+    },
+    {
+     "name": "Tyler Soderstrom",
+     "war": 3.8
+    },
+    {
+     "name": "Shea Langeliers",
+     "war": 3.5
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Sean Newcomb",
+       "value": "1.03"
+      },
+      {
+       "name": "Justin Sterner",
+       "value": "1.05"
+      },
+      {
+       "name": "Luis Morales",
+       "value": "1.15"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Nick Kurtz"
+     ],
+     "value": 36,
+     "top": [
+      {
+       "name": "Nick Kurtz",
+       "value": 36
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": 31
+      },
+      {
+       "name": "Brent Rooker",
+       "value": 30
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Tyler Soderstrom"
+     ],
+     "value": 93,
+     "top": [
+      {
+       "name": "Tyler Soderstrom",
+       "value": 93
+      },
+      {
+       "name": "Brent Rooker",
+       "value": 89
+      },
+      {
+       "name": "Nick Kurtz",
+       "value": 86
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Jacob Wilson"
+     ],
+     "value": ".311",
+     "top": [
+      {
+       "name": "Jacob Wilson",
+       "value": ".311"
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": ".277"
+      },
+      {
+       "name": "Tyler Soderstrom",
+       "value": ".276"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Shea Langeliers"
+     ],
+     "value": ".861",
+     "top": [
+      {
+       "name": "Shea Langeliers",
+       "value": ".861"
+      },
+      {
+       "name": "Tyler Soderstrom",
+       "value": ".820"
+      },
+      {
+       "name": "Brent Rooker",
+       "value": ".814"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "69-93",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Brent Rooker",
+    "war": 5.5
+   },
+   "war_leaders": [
+    {
+     "name": "Brent Rooker",
+     "war": 5.5
+    },
+    {
+     "name": "Lawrence Butler",
+     "war": 3.0
+    },
+    {
+     "name": "Shea Langeliers",
+     "war": 2.9
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Mason Miller",
+       "value": "0.88"
+      },
+      {
+       "name": "Osvaldo Bido",
+       "value": "1.09"
+      },
+      {
+       "name": "Tyler Ferguson",
+       "value": "1.09"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": 39,
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": 39
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": 29
+      },
+      {
+       "name": "Lawrence Butler",
+       "value": 22
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": 112,
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": 112
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": 80
+      },
+      {
+       "name": "JJ Bleday",
+       "value": 60
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": ".293",
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": ".293"
+      },
+      {
+       "name": "JJ Bleday",
+       "value": ".243"
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": ".224"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": ".927",
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": ".927"
+      },
+      {
+       "name": "JJ Bleday",
+       "value": ".761"
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": ".738"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "50-112",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "JP Sears",
+    "war": 2.9
+   },
+   "war_leaders": [
+    {
+     "name": "JP Sears",
+     "war": 2.9
+    },
+    {
+     "name": "Zack Gelof",
+     "war": 2.5
+    },
+    {
+     "name": "Ryan Noda",
+     "war": 2.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Austin Pruitt",
+       "value": "1.16"
+      },
+      {
+       "name": "JP Sears",
+       "value": "1.26"
+      },
+      {
+       "name": "Trevor May",
+       "value": "1.37"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": 30,
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": 30
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": 22
+      },
+      {
+       "name": "Ryan Noda",
+       "value": 16
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": 69,
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": 69
+      },
+      {
+       "name": "Shea Langeliers",
+       "value": 63
+      },
+      {
+       "name": "Ryan Noda",
+       "value": 54
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": ".246",
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": ".246"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Brent Rooker"
+     ],
+     "value": ".817",
+     "top": [
+      {
+       "name": "Brent Rooker",
+       "value": ".817"
       }
      ]
     }

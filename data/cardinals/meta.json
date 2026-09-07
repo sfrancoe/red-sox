@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T21:29:49+00:00",
+ "generated_at": "2026-09-07T23:04:07+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 138,
@@ -122,6 +122,375 @@
       {
        "name": "Iv\u00e1n Herrera",
        "value": ".750"
+      }
+     ]
+    }
+   }
+  },
+  "2025": {
+   "record": "78-84",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Brendan Donovan",
+    "war": 2.7
+   },
+   "war_leaders": [
+    {
+     "name": "Brendan Donovan",
+     "war": 2.7
+    },
+    {
+     "name": "Willson Contreras",
+     "war": 2.5
+    },
+    {
+     "name": "Iv\u00e1n Herrera",
+     "war": 2.2
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Matt Svanson",
+       "value": "0.88"
+      },
+      {
+       "name": "Riley O'Brien",
+       "value": "1.15"
+      },
+      {
+       "name": "Steven Matz",
+       "value": "1.18"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Willson Contreras"
+     ],
+     "value": 20,
+     "top": [
+      {
+       "name": "Willson Contreras",
+       "value": 20
+      },
+      {
+       "name": "Iv\u00e1n Herrera",
+       "value": 19
+      },
+      {
+       "name": "Alec Burleson",
+       "value": 18
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Willson Contreras"
+     ],
+     "value": 80,
+     "top": [
+      {
+       "name": "Willson Contreras",
+       "value": 80
+      },
+      {
+       "name": "Alec Burleson",
+       "value": 69
+      },
+      {
+       "name": "Iv\u00e1n Herrera",
+       "value": 66
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Alec Burleson"
+     ],
+     "value": ".290",
+     "top": [
+      {
+       "name": "Alec Burleson",
+       "value": ".290"
+      },
+      {
+       "name": "Brendan Donovan",
+       "value": ".287"
+      },
+      {
+       "name": "Willson Contreras",
+       "value": ".257"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Alec Burleson"
+     ],
+     "value": ".802",
+     "top": [
+      {
+       "name": "Alec Burleson",
+       "value": ".802"
+      },
+      {
+       "name": "Willson Contreras",
+       "value": ".791"
+      },
+      {
+       "name": "Brendan Donovan",
+       "value": ".775"
+      }
+     ]
+    }
+   }
+  },
+  "2024": {
+   "record": "83-79",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Masyn Winn",
+    "war": 5.1
+   },
+   "war_leaders": [
+    {
+     "name": "Masyn Winn",
+     "war": 5.1
+    },
+    {
+     "name": "Willson Contreras",
+     "war": 3.0
+    },
+    {
+     "name": "Ryan Helsley",
+     "war": 2.8
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Kyle Leahy",
+       "value": "1.03"
+      },
+      {
+       "name": "Sonny Gray",
+       "value": "1.09"
+      },
+      {
+       "name": "Ryan Helsley",
+       "value": "1.10"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Paul Goldschmidt"
+     ],
+     "value": 22,
+     "top": [
+      {
+       "name": "Paul Goldschmidt",
+       "value": 22
+      },
+      {
+       "name": "Alec Burleson",
+       "value": 21
+      },
+      {
+       "name": "Nolan Gorman",
+       "value": 19
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Alec Burleson"
+     ],
+     "value": 78,
+     "top": [
+      {
+       "name": "Alec Burleson",
+       "value": 78
+      },
+      {
+       "name": "Brendan Donovan",
+       "value": 73
+      },
+      {
+       "name": "Nolan Arenado",
+       "value": 71
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Brendan Donovan"
+     ],
+     "value": ".278",
+     "top": [
+      {
+       "name": "Brendan Donovan",
+       "value": ".278"
+      },
+      {
+       "name": "Nolan Arenado",
+       "value": ".272"
+      },
+      {
+       "name": "Alec Burleson",
+       "value": ".269"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Brendan Donovan"
+     ],
+     "value": ".759",
+     "top": [
+      {
+       "name": "Brendan Donovan",
+       "value": ".759"
+      },
+      {
+       "name": "Alec Burleson",
+       "value": ".734"
+      },
+      {
+       "name": "Masyn Winn",
+       "value": ".730"
+      }
+     ]
+    }
+   }
+  },
+  "2023": {
+   "record": "71-91",
+   "games": 162,
+   "in_progress": false,
+   "war_leader": {
+    "name": "Willson Contreras",
+    "war": 3.3
+   },
+   "war_leaders": [
+    {
+     "name": "Willson Contreras",
+     "war": 3.3
+    },
+    {
+     "name": "Paul Goldschmidt",
+     "war": 3.3
+    },
+    {
+     "name": "Lars Nootbaar",
+     "war": 3.3
+    }
+   ],
+   "pitching_leaders": {
+    "whip": {
+     "top": [
+      {
+       "name": "Chris Stratton",
+       "value": "1.16"
+      },
+      {
+       "name": "Giovanny Gallegos",
+       "value": "1.20"
+      },
+      {
+       "name": "Jordan Montgomery",
+       "value": "1.25"
+      }
+     ]
+    }
+   },
+   "batting_leaders": {
+    "hr": {
+     "names": [
+      "Nolan Gorman"
+     ],
+     "value": 27,
+     "top": [
+      {
+       "name": "Nolan Gorman",
+       "value": 27
+      },
+      {
+       "name": "Nolan Arenado",
+       "value": 26
+      },
+      {
+       "name": "Paul Goldschmidt",
+       "value": 25
+      }
+     ]
+    },
+    "rbi": {
+     "names": [
+      "Nolan Arenado"
+     ],
+     "value": 93,
+     "top": [
+      {
+       "name": "Nolan Arenado",
+       "value": 93
+      },
+      {
+       "name": "Paul Goldschmidt",
+       "value": 80
+      },
+      {
+       "name": "Nolan Gorman",
+       "value": 76
+      }
+     ]
+    },
+    "avg": {
+     "names": [
+      "Paul Goldschmidt"
+     ],
+     "value": ".268",
+     "top": [
+      {
+       "name": "Paul Goldschmidt",
+       "value": ".268"
+      },
+      {
+       "name": "Nolan Arenado",
+       "value": ".266"
+      },
+      {
+       "name": "Lars Nootbaar",
+       "value": ".261"
+      }
+     ]
+    },
+    "ops": {
+     "names": [
+      "Paul Goldschmidt"
+     ],
+     "value": ".810",
+     "top": [
+      {
+       "name": "Paul Goldschmidt",
+       "value": ".810"
+      },
+      {
+       "name": "Lars Nootbaar",
+       "value": ".785"
+      },
+      {
+       "name": "Nolan Arenado",
+       "value": ".774"
       }
      ]
     }
