@@ -1,10 +1,12 @@
+import { MLB_TEAMS } from './team-registry.mjs';
+
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
 const COMMON_SURNAMES = new Set([
   'anderson', 'anthony', 'campbell', 'gray', 'harris', 'hill', 'miller', 'scott', 'short',
   'story', 'walker', 'wells', 'west', 'white', 'young',
 ]);
 
-export const TEAM_CONFIG = {
+const CURATED_TEAM_CONFIG = {
   redsox: {
     label: 'Red Sox',
     listId: '1431748439818346496',
@@ -89,8 +91,31 @@ export const TEAM_CONFIG = {
   },
 };
 
+export const TEAM_CONFIG = Object.fromEntries(MLB_TEAMS.map(team => [
+  team.api_key,
+  CURATED_TEAM_CONFIG[team.api_key] || {
+    label: team.short_name,
+    xHandle: team.x_handle,
+    teamId: team.mlb_id,
+    acceptAll: true,
+    teamTerms: [
+      team.full_name.toLowerCase(), team.short_name.toLowerCase(),
+      `@${team.x_handle.toLowerCase()}`,
+    ],
+    linkTerms: [`mlb.com/${team.api_key}`],
+    excludedTerms: [],
+  },
+]));
+
 function listURL(team) {
+  if (!team.listId) {
+    return `https://syndication.twitter.com/srv/timeline-profile/screen-name/${team.xHandle}?lang=en&theme=light&showHeader=false&hideBorder=true`;
+  }
   return `https://syndication.twitter.com/srv/timeline-list/list-id/${team.listId}?lang=en&theme=light&showHeader=false&hideBorder=true`;
+}
+
+function sourceURL(team) {
+  return team.listId ? `https://x.com/i/lists/${team.listId}` : `https://x.com/${team.xHandle}`;
 }
 
 function rosterURL(team) {
@@ -148,6 +173,7 @@ function tweetContext(tweet) {
 }
 
 function relevant(tweet, players, team) {
+  if (team.acceptAll) return true;
   const context = tweetContext(tweet);
   if ([...team.teamTerms, ...team.linkTerms].some(term => context.includes(term))) return true;
   if (team.excludedTerms.some(term => context.includes(term))) return false;
@@ -196,7 +222,7 @@ export function buildFeed(entries, players, team = TEAM_CONFIG.redsox, generated
     .filter(post => new Date(post.published).valueOf() >= cutoff)
     .sort((a, b) => b.likes - a.likes || b.published.localeCompare(a.published));
   return {
-    generated_at: generatedAt.toISOString(), source: 'X', source_url: `https://x.com/i/lists/${team.listId}`,
+    generated_at: generatedAt.toISOString(), source: 'X', source_url: sourceURL(team),
     recent: posts.slice(0, 24), popular: popular.slice(0, 12),
   };
 }

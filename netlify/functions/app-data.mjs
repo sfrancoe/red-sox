@@ -1,48 +1,22 @@
+import { MLB_TEAMS } from './team-registry.mjs';
+
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
 
-const ALLOWED_PATHS = new Set([
-  'athletic.json',
-  'globe.json',
-  'herald.json',
-  'masslive.json',
-  'meta.json',
-  'pitching.json',
-  'players.json',
-  'recent-game.json',
-  'schedule.json',
-  'seasons.json',
-  'standings.json',
-  'x-posts.json',
-  'yankees/athletic.json',
-  'yankees/dailynews.json',
-  'yankees/meta.json',
-  'yankees/nypost.json',
-  'yankees/nytimes.json',
-  'yankees/pitching.json',
-  'yankees/recent-game.json',
-  'yankees/schedule.json',
-  'yankees/seasons.json',
-  'yankees/standings.json',
-  'mets/athletic.json',
-  'mets/dailynews.json',
-  'mets/meta.json',
-  'mets/nypost.json',
-  'mets/nytimes.json',
-  'mets/pitching.json',
-  'mets/recent-game.json',
-  'mets/schedule.json',
-  'mets/seasons.json',
-  'mets/standings.json',
-  'rays/athletic.json',
-  'rays/meta.json',
-  'rays/pitching.json',
-  'rays/recent-game.json',
-  'rays/schedule.json',
-  'rays/seasons.json',
-  'rays/standings.json',
-  'rays/tampabay.json',
-]);
+const STANDARD_FILES = [
+  'meta.json', 'pitching.json', 'recent-game.json', 'schedule.json',
+  'seasons.json', 'standings.json',
+];
+
+export const ALLOWED_PATHS = new Set(MLB_TEAMS.flatMap(team => {
+  const prefix = team.legacy_root_data ? '' : `${team.data_directory}/`;
+  const files = [
+    ...STANDARD_FILES,
+    ...team.news_sources.map(source => `${source.key}.json`),
+  ];
+  if (team.api_key === 'redsox') files.push('players.json', 'x-posts.json');
+  return files.map(file => `${prefix}${file}`);
+}));
 
 function requestedPath(request) {
   const pathname = new URL(request.url).pathname;

@@ -61,6 +61,7 @@ def swift_definition(team: dict[str, Any]) -> str:
             cityName: {quoted(team['city_name'])}, shortName: {quoted(team['short_name'])},
             abbreviation: {quoted(team['abbreviation'])}, cityAbbreviation: {quoted(team['city_abbreviation'])},
             apiKey: {quoted(team['api_key'])}, dataDirectory: {quoted(team['data_directory'])},
+            xHandle: {quoted(team['x_handle'])},
             usesLegacyRootData: {swift_bool(team['legacy_root_data'])}, league: {quoted(team['league'])},
             division: {quoted(team['division'])}, fangraphsID: {team['fangraphs_id']},
             baseballReferenceID: {quoted(team['baseball_reference_id'])},
@@ -157,6 +158,7 @@ struct HubTeamDefinition: Sendable {{
     let cityAbbreviation: String
     let apiKey: String
     let dataDirectory: String
+    let xHandle: String
     let usesLegacyRootData: Bool
     let league: String
     let division: String
@@ -185,6 +187,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {{
     nonisolated var pickerTitle: String {{ definition.fullName }}
     nonisolated var apiKey: String {{ definition.apiKey }}
     nonisolated var dataDirectory: String {{ definition.dataDirectory }}
+    nonisolated var xHandle: String {{ definition.xHandle }}
     nonisolated var dataPathComponent: String? {{
         definition.usesLegacyRootData ? nil : definition.dataDirectory
     }}

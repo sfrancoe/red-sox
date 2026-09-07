@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import handler from '../netlify/functions/mlb-data.mjs';
+import handler, { TEAMS } from '../netlify/functions/mlb-data.mjs';
 
 const originalFetch = globalThis.fetch;
 const requests = [];
@@ -43,6 +43,11 @@ response = await handler(new Request(
 ));
 assert.equal(response.status, 200);
 assert.match(requests[3], /teamId=139/);
+
+assert.equal(TEAMS.size, 31);
+assert.equal(TEAMS.get('orioles'), 110);
+assert.equal(TEAMS.get('dodgers'), 119);
+assert.equal(TEAMS.get('brewers'), 158);
 
 response = await handler(new Request('https://example.test/api/mlb/game?team=red-sox&gamePk=123'));
 assert.equal(response.status, 200);

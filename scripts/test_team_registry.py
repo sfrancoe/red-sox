@@ -29,7 +29,10 @@ def main() -> None:
     teams = document["teams"]
     assert document["schema_version"] == 1
     assert len(teams) == 30
-    for key in ("id", "swift_case", "mlb_id", "full_name", "abbreviation", "api_key", "data_directory"):
+    for key in (
+        "id", "swift_case", "mlb_id", "full_name", "abbreviation", "api_key",
+        "data_directory", "x_handle",
+    ):
         unique(teams, key)
 
     by_id = {team["id"]: team for team in teams}

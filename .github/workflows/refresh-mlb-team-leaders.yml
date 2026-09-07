@@ -1,0 +1,36 @@
+name: Refresh MLB expansion team leaders
+
+on:
+  schedule:
+    - cron: '45 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/fetch_team_leaders.py
+      - name: Commit if leaders changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data; then
+            echo "No expansion-team leader changes."
+          else
+            git add data
+            git commit -m "Refresh MLB expansion team leaders ($(date -u +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push
+          fi

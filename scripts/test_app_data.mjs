@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import handler from '../netlify/functions/app-data.mjs';
+import handler, { ALLOWED_PATHS } from '../netlify/functions/app-data.mjs';
 
 const originalFetch = globalThis.fetch;
 
@@ -59,3 +59,8 @@ try {
 } finally {
   globalThis.fetch = originalFetch;
 }
+
+assert.equal(ALLOWED_PATHS.has('orioles/standings.json'), true);
+assert.equal(ALLOWED_PATHS.has('dodgers/los-angeles-times.json'), true);
+assert.equal(ALLOWED_PATHS.has('redsox/standings.json'), false);
+assert.equal(ALLOWED_PATHS.has('standings.json'), true);

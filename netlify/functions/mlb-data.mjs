@@ -1,12 +1,9 @@
+import { MLB_TEAMS } from './team-registry.mjs';
+
 const MLB_ORIGIN = 'https://statsapi.mlb.com';
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
-const TEAMS = new Map([
-  ['red-sox', 111],
-  ['redsox', 111],
-  ['yankees', 147],
-  ['mets', 121],
-  ['rays', 139],
-]);
+export const TEAMS = new Map(MLB_TEAMS.map(team => [team.api_key, team.mlb_id]));
+TEAMS.set('red-sox', 111);
 
 function validDate(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(value || '');

@@ -110,4 +110,18 @@ assert.equal(TEAM_CONFIG.rays.listId, '2096730568285200550');
 assert.equal(raysFeed.source_url, 'https://x.com/i/lists/2096730568285200550');
 assert.deepEqual(raysFeed.recent.map(post => post.id), ['rays']);
 
+assert.equal(Object.keys(TEAM_CONFIG).length, 30);
+const oriolesFeed = buildFeed([
+  entry({
+    id: 'orioles-community',
+    text: 'Thank you to everyone who joined our community event.',
+    createdAt: 'Fri Sep 04 19:25:00 +0000 2026',
+    likes: 10,
+    handle: 'Orioles',
+  }),
+], new Set(), TEAM_CONFIG.orioles, generatedAt);
+assert.equal(TEAM_CONFIG.orioles.xHandle, 'Orioles');
+assert.equal(oriolesFeed.source_url, 'https://x.com/Orioles');
+assert.deepEqual(oriolesFeed.recent.map(post => post.id), ['orioles-community']);
+
 console.log('Team-specific X list filtering and ordering: OK');
