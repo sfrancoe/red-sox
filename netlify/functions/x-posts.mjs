@@ -1,6 +1,7 @@
 import { MLB_TEAMS } from './team-registry.mjs';
 
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
 const COMMON_SURNAMES = new Set([
   'anderson', 'anthony', 'campbell', 'gray', 'harris', 'hill', 'miller', 'scott', 'short',
   'story', 'walker', 'wells', 'west', 'white', 'young',
@@ -91,9 +92,8 @@ const CURATED_TEAM_CONFIG = {
   },
 };
 
-export const TEAM_CONFIG = Object.fromEntries(MLB_TEAMS.map(team => [
-  team.api_key,
-  CURATED_TEAM_CONFIG[team.api_key] || {
+export const TEAM_CONFIG = Object.fromEntries(MLB_TEAMS.map(team => {
+  const sourceConfig = CURATED_TEAM_CONFIG[team.api_key] || {
     label: team.short_name,
     xHandle: team.x_handle,
     teamId: team.mlb_id,
@@ -104,8 +104,13 @@ export const TEAM_CONFIG = Object.fromEntries(MLB_TEAMS.map(team => [
     ],
     linkTerms: [`mlb.com/${team.api_key}`],
     excludedTerms: [],
-  },
-]));
+  };
+  return [team.api_key, {
+    apiKey: team.api_key,
+    dataDirectory: team.data_directory,
+    ...sourceConfig,
+  }];
+}));
 
 function listURL(team) {
   if (!team.listId) {
@@ -120,6 +125,32 @@ function sourceURL(team) {
 
 function rosterURL(team) {
   return `https://statsapi.mlb.com/api/v1/teams/${team.teamId}/roster?rosterType=fullSeason&season=${new Date().getUTCFullYear()}&hydrate=person`;
+}
+
+export function fallbackPath(team) {
+  const prefix = team.apiKey === 'redsox' ? '' : `${team.dataDirectory}/`;
+  return `${prefix}x-posts.json`;
+}
+
+async function fetchFallbackFeed(team) {
+  const url = `${RAW_DATA_ROOT}/${fallbackPath(team)}`;
+  let lastError;
+  for (const headers of [{ Accept: 'application/json' }, {
+    Accept: 'application/json', 'User-Agent': FALLBACK_USER_AGENT,
+  }]) {
+    try {
+      const response = await fetch(url, { headers, signal: AbortSignal.timeout(10_000) });
+      if (!response.ok) throw new Error(`snapshot returned ${response.status}`);
+      const feed = await response.json();
+      if (feed.source !== 'X' || !Array.isArray(feed.recent) || !feed.recent.length) {
+        throw new Error('snapshot did not contain X posts');
+      }
+      return feed;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw new Error(`Could not fetch X snapshot: ${lastError?.message || 'unknown error'}`);
 }
 
 function cleanText(value) {
@@ -252,9 +283,19 @@ export default async request => {
     } });
   } catch (error) {
     console.error('X feed refresh failed', error);
-    return Response.json({ error: 'The live X feed is temporarily unavailable.' }, {
-      status: 502, headers: { 'Cache-Control': 'no-store' },
-    });
+    try {
+      const feed = await fetchFallbackFeed(team);
+      return Response.json(feed, { headers: {
+        'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
+        'Netlify-CDN-Cache-Control': 'public, durable, max-age=3600, stale-while-revalidate=604800',
+        'X-Hub-Ball-Feed': 'snapshot',
+      } });
+    } catch (fallbackError) {
+      console.error('X snapshot fallback failed', fallbackError);
+      return Response.json({ error: 'The live X feed is temporarily unavailable.' }, {
+        status: 502, headers: { 'Cache-Control': 'no-store' },
+      });
+    }
   }
 };
 

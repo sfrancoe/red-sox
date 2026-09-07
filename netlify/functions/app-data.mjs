@@ -5,7 +5,7 @@ const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
 
 const STANDARD_FILES = [
   'meta.json', 'pitching.json', 'recent-game.json', 'schedule.json',
-  'seasons.json', 'standings.json',
+  'seasons.json', 'standings.json', 'x-posts.json',
 ];
 
 export const ALLOWED_PATHS = new Set(MLB_TEAMS.flatMap(team => {
@@ -14,7 +14,7 @@ export const ALLOWED_PATHS = new Set(MLB_TEAMS.flatMap(team => {
     ...STANDARD_FILES,
     ...team.news_sources.map(source => `${source.key}.json`),
   ];
-  if (team.api_key === 'redsox') files.push('players.json', 'x-posts.json');
+  if (team.api_key === 'redsox') files.push('players.json');
   return files.map(file => `${prefix}${file}`);
 }));
 

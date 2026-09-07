@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { buildFeed, TEAM_CONFIG } from '../netlify/functions/x-posts.mjs';
+import { buildFeed, fallbackPath, TEAM_CONFIG } from '../netlify/functions/x-posts.mjs';
 
 const generatedAt = new Date('2026-09-04T20:00:00Z');
 
@@ -123,5 +123,7 @@ const oriolesFeed = buildFeed([
 assert.equal(TEAM_CONFIG.orioles.xHandle, 'Orioles');
 assert.equal(oriolesFeed.source_url, 'https://x.com/Orioles');
 assert.deepEqual(oriolesFeed.recent.map(post => post.id), ['orioles-community']);
+assert.equal(fallbackPath(TEAM_CONFIG.redsox), 'x-posts.json');
+assert.equal(fallbackPath(TEAM_CONFIG.orioles), 'orioles/x-posts.json');
 
 console.log('Team-specific X list filtering and ordering: OK');

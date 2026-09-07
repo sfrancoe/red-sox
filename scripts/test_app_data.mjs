@@ -61,6 +61,7 @@ try {
 }
 
 assert.equal(ALLOWED_PATHS.has('orioles/standings.json'), true);
+assert.equal(ALLOWED_PATHS.has('orioles/x-posts.json'), true);
 assert.equal(ALLOWED_PATHS.has('dodgers/los-angeles-times.json'), true);
 assert.equal(ALLOWED_PATHS.has('redsox/standings.json'), false);
 assert.equal(ALLOWED_PATHS.has('standings.json'), true);

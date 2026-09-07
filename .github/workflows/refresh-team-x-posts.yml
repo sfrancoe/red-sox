@@ -1,0 +1,93 @@
+name: Refresh official team X snapshots
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    strategy:
+      fail-fast: false
+      max-parallel: 29
+      matrix:
+        team:
+          - yankees
+          - mets
+          - rays
+          - orioles
+          - bluejays
+          - whitesox
+          - guardians
+          - tigers
+          - royals
+          - twins
+          - astros
+          - angels
+          - athletics
+          - mariners
+          - rangers
+          - braves
+          - marlins
+          - phillies
+          - nationals
+          - cubs
+          - reds
+          - brewers
+          - pirates
+          - cardinals
+          - diamondbacks
+          - rockies
+          - dodgers
+          - padres
+          - giants
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch official team profile
+        run: python3 scripts/fetch_team_x_posts.py --team '${{ matrix.team }}' --output 'artifacts/${{ matrix.team }}.json'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: x-posts-${{ matrix.team }}
+          path: artifacts/${{ matrix.team }}.json
+          if-no-files-found: error
+
+  publish:
+    needs: fetch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: x-posts-*
+          path: artifacts
+          merge-multiple: true
+      - name: Install verified snapshots
+        run: python3 scripts/fetch_team_x_posts.py --install-artifacts artifacts
+      - name: Commit if snapshots changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data; then
+            echo "No official-team X snapshot changes."
+          else
+            git add data
+            git commit -m "Refresh official team X snapshots ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+          fi
