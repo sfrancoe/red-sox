@@ -44,7 +44,7 @@ struct HomeView: View {
                     .font(.system(size: contentWidth >= 650 ? 42 : 36, weight: .regular))
 
                 Text(team.fullName)
-                    .font(.system(size: contentWidth >= 650 ? 25 : 18, weight: .black))
+                    .font(.system(size: contentWidth >= 650 ? 32 : 22, weight: .black))
                     .lineLimit(1)
                     .minimumScaleFactor(0.65)
                     .layoutPriority(1)
@@ -347,7 +347,7 @@ struct HomeView: View {
     private var todayHeading: String {
         let now = Date.now
         let calendar = Calendar.current
-        let weekday = now.formatted(.dateTime.weekday(.wide))
+        let weekday = now.formatted(.dateTime.weekday(.abbreviated))
         let month = now.formatted(.dateTime.month(.abbreviated))
         let day = calendar.component(.day, from: now)
         return "\(weekday), \(month) \(ordinal(day))"
