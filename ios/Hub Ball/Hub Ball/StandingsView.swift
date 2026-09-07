@@ -88,24 +88,32 @@ struct StandingsView: View {
     }
 
     private var tabletStandingsContent: some View {
-        ScrollView {
-            LazyVStack(spacing: 8) {
-                ForEach(StandingsLeague.allCases) { league in
-                    if let feed = store.feeds[league] {
-                        leagueSection(feed, league: league)
+        GeometryReader { geometry in
+            let rowPadding = tabletRowPadding(for: geometry.size.height)
+
+            ScrollView {
+                LazyVStack(spacing: max(8, rowPadding)) {
+                    ForEach(StandingsLeague.allCases) { league in
+                        if let feed = store.feeds[league] {
+                            leagueSection(feed, league: league, rowPadding: rowPadding)
+                        }
                     }
+                    standingsFooter
                 }
-                standingsFooter
+                .padding(.horizontal, 7)
+                .padding(.vertical, 6)
+                .foregroundStyle(AppColor.ink)
             }
-            .padding(.horizontal, 7)
-            .padding(.vertical, 6)
-            .foregroundStyle(AppColor.ink)
+            .dynamicTypeSize(.xSmall)
+            .refreshable { await store.load() }
         }
-        .dynamicTypeSize(.xSmall)
-        .refreshable { await store.load() }
     }
 
-    private func leagueSection(_ feed: StandingsFeed, league: StandingsLeague) -> some View {
+    private func leagueSection(
+        _ feed: StandingsFeed,
+        league: StandingsLeague,
+        rowPadding: CGFloat
+    ) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(league.fullName.uppercased())
                 .font(.system(size: 14, weight: .black))
@@ -121,7 +129,8 @@ struct StandingsView: View {
                             gamesBackTitle: "GB",
                             showsCutoff: false,
                             highlightsFavorite: league == store.selectedLeague,
-                            compact: true
+                            compact: true,
+                            compactRowPadding: rowPadding
                         )
                     }
                 }
@@ -134,7 +143,8 @@ struct StandingsView: View {
                         gamesBackTitle: "WCGB",
                         showsCutoff: true,
                         highlightsFavorite: league == store.selectedLeague,
-                        compact: true
+                        compact: true,
+                        compactRowPadding: rowPadding
                     )
                 }
                 .frame(maxWidth: .infinity, alignment: .top)
@@ -190,7 +200,8 @@ struct StandingsView: View {
         gamesBackTitle: String,
         showsCutoff: Bool,
         highlightsFavorite: Bool,
-        compact: Bool = false
+        compact: Bool = false,
+        compactRowPadding: CGFloat = 4
     ) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             standingsHeader(title: title, gamesBackTitle: gamesBackTitle, compact: compact)
@@ -203,7 +214,8 @@ struct StandingsView: View {
                     team,
                     gamesBackTitle: gamesBackTitle,
                     highlightsFavorite: highlightsFavorite,
-                    compact: compact
+                    compact: compact,
+                    compactRowPadding: compactRowPadding
                 )
             }
         }
@@ -234,7 +246,8 @@ struct StandingsView: View {
         _ team: StandingsTeam,
         gamesBackTitle: String,
         highlightsFavorite: Bool,
-        compact: Bool
+        compact: Bool,
+        compactRowPadding: CGFloat
     ) -> some View {
         let gamesBack = gamesBackTitle == "WCGB" ? team.wildCardGamesBack : team.gamesBack
         let emphasized = highlightsFavorite && team.isFavorite
@@ -269,7 +282,7 @@ struct StandingsView: View {
         .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 16 : 14), weight: .semibold, design: .monospaced))
         .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, compact ? 2 : 5)
-        .padding(.vertical, compact ? 4 : (contentWidth >= 650 ? 13 : 7))
+        .padding(.vertical, compact ? compactRowPadding : (contentWidth >= 650 ? 13 : 7))
         .background(emphasized ? AppColor.paleBlue : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: compact ? 4 : 9, style: .continuous))
     }
@@ -284,6 +297,10 @@ struct StandingsView: View {
             .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold, design: .monospaced))
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
             .frame(width: width)
+    }
+
+    private func tabletRowPadding(for availableHeight: CGFloat) -> CGFloat {
+        min(10, max(3, (availableHeight - 650) / 60))
     }
 
     private func columnWidths(compact: Bool, gamesBackTitle: String) -> (
