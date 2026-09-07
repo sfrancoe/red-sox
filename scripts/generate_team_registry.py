@@ -24,11 +24,7 @@ def swift_bool(value: bool) -> str:
 
 
 def swift_source(source: dict[str, str]) -> str:
-    return (
-        ".init(key: "
-        f"{quoted(source['key'])}, name: {quoted(source['name'])}, "
-        f"url: {quoted(source['url'])})"
-    )
+    return f".init(key: {quoted(source['key'])}, name: {quoted(source['name'])})"
 
 
 def swift_definition(team: dict[str, Any]) -> str:
@@ -82,7 +78,6 @@ import Foundation
 struct NewsSource: Hashable, Identifiable, Sendable {{
     let key: String
     let name: String
-    let url: String
 
     var id: String {{ key }}
     var shortName: String {{ name }}

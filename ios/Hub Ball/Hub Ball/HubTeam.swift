@@ -4,7 +4,6 @@ import Foundation
 struct NewsSource: Hashable, Identifiable, Sendable {
     let key: String
     let name: String
-    let url: String
 
     var id: String { key }
     var shortName: String { name }
@@ -134,7 +133,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 3,
             baseballReferenceID: "BOS",
             colors: .init(primary: "#BD3039", secondary: "#15324B", background: "#EAF1F6", ink: "#17212B", border: "#D8E1E8", positive: "#287052", banner: "#B8333D", accent_dark: "#8B0C13", navigation: "#133E2D"),
-            newsSources: [.init(key: "globe", name: "Globe", url: "https://www.bostonglobe.com/sports/red-sox/"), .init(key: "herald", name: "Herald", url: "https://www.bostonherald.com/sports/mlb/boston-red-sox/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/red-sox/"), .init(key: "masslive", name: "MassLive", url: "https://www.masslive.com/redsox/")],
+            newsSources: [.init(key: "globe", name: "Globe"), .init(key: "herald", name: "Herald"), .init(key: "athletic", name: "Athletic"), .init(key: "masslive", name: "MassLive")],
             features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: true, stories: true)
         ),
         .newYork: .init(
@@ -147,7 +146,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 9,
             baseballReferenceID: "NYY",
             colors: .init(primary: "#0C2340", secondary: "#0C2340", background: "#E8EEF4", ink: "#061527", border: "#C6D2DE", positive: "#1B3F65", banner: "#0C2340", accent_dark: "#061527", navigation: "#0C2340"),
-            newsSources: [.init(key: "dailynews", name: "Daily News", url: "https://www.nydailynews.com/sports/mlb/new-york-yankees/"), .init(key: "nypost", name: "NY Post", url: "https://nypost.com/sports/yankees/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/yankees/"), .init(key: "nytimes", name: "NY Times", url: "https://www.nytimes.com/topic/organization/new-york-yankees")],
+            newsSources: [.init(key: "dailynews", name: "Daily News"), .init(key: "nypost", name: "NY Post"), .init(key: "athletic", name: "Athletic"), .init(key: "nytimes", name: "NY Times")],
             features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .newYorkMets: .init(
@@ -160,7 +159,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 25,
             baseballReferenceID: "NYM",
             colors: .init(primary: "#FF5910", secondary: "#002D72", background: "#EAF1FA", ink: "#061A35", border: "#C6D4E6", positive: "#002D72", banner: "#FF5910", accent_dark: "#C33A00", navigation: "#002D72"),
-            newsSources: [.init(key: "dailynews", name: "Daily News", url: "https://www.nydailynews.com/sports/mlb/new-york-mets/"), .init(key: "nypost", name: "NY Post", url: "https://nypost.com/sports/mets/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/mets/"), .init(key: "nytimes", name: "NY Times", url: "https://www.nytimes.com/topic/organization/new-york-mets")],
+            newsSources: [.init(key: "dailynews", name: "Daily News"), .init(key: "nypost", name: "NY Post"), .init(key: "athletic", name: "Athletic"), .init(key: "nytimes", name: "NY Times")],
             features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .tampaBay: .init(
@@ -173,7 +172,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 12,
             baseballReferenceID: "TBR",
             colors: .init(primary: "#007AB2", secondary: "#092647", background: "#E7F3FA", ink: "#051B32", border: "#B5D2E1", positive: "#669E29", banner: "#669E29", accent_dark: "#004F80", navigation: "#092647"),
-            newsSources: [.init(key: "tampabay", name: "Tampa Bay Times", url: "https://www.tampabay.com/sports/rays/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/rays/")],
+            newsSources: [.init(key: "tampabay", name: "Tampa Bay Times"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .baltimore: .init(
@@ -186,7 +185,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 2,
             baseballReferenceID: "BAL",
             colors: .init(primary: "#DF4601", secondary: "#27251F", background: "#F8EEE8", ink: "#27251F", border: "#DFCBBF", positive: "#4B6B3C", banner: "#DF4601", accent_dark: "#27251F", navigation: "#27251F"),
-            newsSources: [.init(key: "baltimore-sun", name: "Baltimore Sun", url: "https://www.baltimoresun.com/sports/orioles/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/orioles/")],
+            newsSources: [.init(key: "baltimore-sun", name: "Baltimore Sun"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .toronto: .init(
@@ -199,7 +198,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 14,
             baseballReferenceID: "TOR",
             colors: .init(primary: "#134A8E", secondary: "#1D2D5C", background: "#E9F1F8", ink: "#10213B", border: "#C3D4E4", positive: "#2D6A4F", banner: "#134A8E", accent_dark: "#1D2D5C", navigation: "#1D2D5C"),
-            newsSources: [.init(key: "toronto-star", name: "Toronto Star", url: "https://www.thestar.com/sports/blue-jays/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/blue-jays/")],
+            newsSources: [.init(key: "toronto-star", name: "Toronto Star"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .chicagoWhiteSox: .init(
@@ -212,7 +211,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 4,
             baseballReferenceID: "CHW",
             colors: .init(primary: "#27251F", secondary: "#C4CED4", background: "#F0F1F1", ink: "#1B1B1B", border: "#CED3D6", positive: "#435A4B", banner: "#27251F", accent_dark: "#C4CED4", navigation: "#C4CED4"),
-            newsSources: [.init(key: "chicago-tribune", name: "Chicago Tribune", url: "https://www.chicagotribune.com/sports/white-sox/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/white-sox/")],
+            newsSources: [.init(key: "chicago-tribune", name: "Chicago Tribune"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .cleveland: .init(
@@ -225,7 +224,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 5,
             baseballReferenceID: "CLE",
             colors: .init(primary: "#E50022", secondary: "#00385D", background: "#EAF0F4", ink: "#092033", border: "#C4D0D8", positive: "#2C6E49", banner: "#E50022", accent_dark: "#00385D", navigation: "#00385D"),
-            newsSources: [.init(key: "cleveland", name: "Cleveland.com", url: "https://www.cleveland.com/guardians/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/guardians/")],
+            newsSources: [.init(key: "cleveland", name: "Cleveland.com"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .detroit: .init(
@@ -238,7 +237,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 6,
             baseballReferenceID: "DET",
             colors: .init(primary: "#0C2340", secondary: "#FA4616", background: "#EDF1F5", ink: "#0C2340", border: "#CAD3DC", positive: "#3D6B57", banner: "#0C2340", accent_dark: "#FA4616", navigation: "#FA4616"),
-            newsSources: [.init(key: "detroit-free-press", name: "Detroit Free Press", url: "https://www.freep.com/sports/tigers/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/tigers/")],
+            newsSources: [.init(key: "detroit-free-press", name: "Detroit Free Press"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .kansasCity: .init(
@@ -251,7 +250,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 7,
             baseballReferenceID: "KCR",
             colors: .init(primary: "#004687", secondary: "#BD9B60", background: "#EAF1F7", ink: "#08243E", border: "#C2D2E0", positive: "#4D704C", banner: "#004687", accent_dark: "#BD9B60", navigation: "#BD9B60"),
-            newsSources: [.init(key: "kansas-city-star", name: "Kansas City Star", url: "https://www.kansascity.com/sports/mlb/kansas-city-royals/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/royals/")],
+            newsSources: [.init(key: "kansas-city-star", name: "Kansas City Star"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .minnesota: .init(
@@ -264,7 +263,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 8,
             baseballReferenceID: "MIN",
             colors: .init(primary: "#D31145", secondary: "#002B5C", background: "#EDF1F5", ink: "#0B2137", border: "#C8D2DC", positive: "#3E6B54", banner: "#D31145", accent_dark: "#002B5C", navigation: "#002B5C"),
-            newsSources: [.init(key: "star-tribune", name: "Star Tribune", url: "https://www.startribune.com/sports/twins/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/twins/")],
+            newsSources: [.init(key: "star-tribune", name: "Star Tribune"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .houston: .init(
@@ -277,7 +276,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 21,
             baseballReferenceID: "HOU",
             colors: .init(primary: "#EB6E1F", secondary: "#002D62", background: "#F7EFEA", ink: "#10253C", border: "#D8C9BF", positive: "#356A50", banner: "#EB6E1F", accent_dark: "#002D62", navigation: "#002D62"),
-            newsSources: [.init(key: "houston-chronicle", name: "Houston Chronicle", url: "https://www.houstonchronicle.com/sports/astros/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/astros/")],
+            newsSources: [.init(key: "houston-chronicle", name: "Houston Chronicle"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .losAngelesAngels: .init(
@@ -290,7 +289,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 1,
             baseballReferenceID: "LAA",
             colors: .init(primary: "#BA0021", secondary: "#003263", background: "#F5EBEE", ink: "#132A40", border: "#D9C5CB", positive: "#356A50", banner: "#BA0021", accent_dark: "#003263", navigation: "#003263"),
-            newsSources: [.init(key: "orange-county-register", name: "OC Register", url: "https://www.ocregister.com/sports/mlb/los-angeles-angels/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/angels/")],
+            newsSources: [.init(key: "orange-county-register", name: "OC Register"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .athletics: .init(
@@ -303,7 +302,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 10,
             baseballReferenceID: "ATH",
             colors: .init(primary: "#003831", secondary: "#EFB21E", background: "#EDF3F0", ink: "#12312D", border: "#C6D7D1", positive: "#007A4D", banner: "#003831", accent_dark: "#EFB21E", navigation: "#EFB21E"),
-            newsSources: [.init(key: "nbc-sports-bay-area", name: "NBC Sports Bay Area", url: "https://www.nbcsportsbayarea.com/mlb/oakland-athletics/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/athletics/")],
+            newsSources: [.init(key: "nbc-sports-bay-area", name: "NBC Sports Bay Area"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .seattle: .init(
@@ -316,7 +315,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 11,
             baseballReferenceID: "SEA",
             colors: .init(primary: "#0C2C56", secondary: "#005C5C", background: "#EAF1F3", ink: "#10283A", border: "#C2D2D6", positive: "#147D6C", banner: "#0C2C56", accent_dark: "#005C5C", navigation: "#005C5C"),
-            newsSources: [.init(key: "seattle-times", name: "Seattle Times", url: "https://www.seattletimes.com/sports/mariners/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/mariners/")],
+            newsSources: [.init(key: "seattle-times", name: "Seattle Times"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .texas: .init(
@@ -329,7 +328,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 13,
             baseballReferenceID: "TEX",
             colors: .init(primary: "#C0111F", secondary: "#003278", background: "#EEF1F6", ink: "#102644", border: "#C7D1DF", positive: "#3A6B50", banner: "#C0111F", accent_dark: "#003278", navigation: "#003278"),
-            newsSources: [.init(key: "dallas-morning-news", name: "Dallas Morning News", url: "https://www.dallasnews.com/sports/rangers/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/rangers/")],
+            newsSources: [.init(key: "dallas-morning-news", name: "Dallas Morning News"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .atlanta: .init(
@@ -342,7 +341,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 16,
             baseballReferenceID: "ATL",
             colors: .init(primary: "#CE1141", secondary: "#13274F", background: "#F1EDF1", ink: "#16253D", border: "#D4C8CF", positive: "#3C6A50", banner: "#CE1141", accent_dark: "#13274F", navigation: "#13274F"),
-            newsSources: [.init(key: "atlanta-journal-constitution", name: "AJC", url: "https://www.ajc.com/sports/atlanta-braves/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/braves/")],
+            newsSources: [.init(key: "atlanta-journal-constitution", name: "AJC"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .miami: .init(
@@ -355,7 +354,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 20,
             baseballReferenceID: "MIA",
             colors: .init(primary: "#00A3E0", secondary: "#041E42", background: "#E9F4F8", ink: "#10253B", border: "#C2D7DF", positive: "#32705A", banner: "#00A3E0", accent_dark: "#041E42", navigation: "#041E42"),
-            newsSources: [.init(key: "miami-herald", name: "Miami Herald", url: "https://www.miamiherald.com/sports/mlb/miami-marlins/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/marlins/")],
+            newsSources: [.init(key: "miami-herald", name: "Miami Herald"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .philadelphia: .init(
@@ -368,7 +367,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 26,
             baseballReferenceID: "PHI",
             colors: .init(primary: "#E81828", secondary: "#002D72", background: "#F4ECEF", ink: "#102744", border: "#D7C7CD", positive: "#39705A", banner: "#E81828", accent_dark: "#002D72", navigation: "#002D72"),
-            newsSources: [.init(key: "philadelphia-inquirer", name: "Inquirer", url: "https://www.inquirer.com/phillies/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/phillies/")],
+            newsSources: [.init(key: "philadelphia-inquirer", name: "Inquirer"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .washington: .init(
@@ -381,7 +380,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "East", fangraphsID: 24,
             baseballReferenceID: "WSN",
             colors: .init(primary: "#AB0003", secondary: "#14225A", background: "#F2EBED", ink: "#18233E", border: "#D4C5CA", positive: "#3C6A50", banner: "#AB0003", accent_dark: "#14225A", navigation: "#14225A"),
-            newsSources: [.init(key: "washington-post", name: "Washington Post", url: "https://www.washingtonpost.com/sports/nationals/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/nationals/")],
+            newsSources: [.init(key: "washington-post", name: "Washington Post"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .chicagoCubs: .init(
@@ -394,7 +393,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 17,
             baseballReferenceID: "CHC",
             colors: .init(primary: "#CC3433", secondary: "#0E3386", background: "#EDF0F6", ink: "#15294B", border: "#C9D0DF", positive: "#3C6A50", banner: "#CC3433", accent_dark: "#0E3386", navigation: "#0E3386"),
-            newsSources: [.init(key: "chicago-tribune", name: "Chicago Tribune", url: "https://www.chicagotribune.com/sports/cubs/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/cubs/")],
+            newsSources: [.init(key: "chicago-tribune", name: "Chicago Tribune"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .cincinnati: .init(
@@ -407,7 +406,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 18,
             baseballReferenceID: "CIN",
             colors: .init(primary: "#C6011F", secondary: "#000000", background: "#F4EBED", ink: "#221B1C", border: "#D8C7CB", positive: "#3B6B50", banner: "#C6011F", accent_dark: "#000000", navigation: "#000000"),
-            newsSources: [.init(key: "cincinnati-enquirer", name: "Enquirer", url: "https://www.cincinnati.com/sports/reds/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/reds/")],
+            newsSources: [.init(key: "cincinnati-enquirer", name: "Enquirer"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .milwaukee: .init(
@@ -420,7 +419,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 23,
             baseballReferenceID: "MIL",
             colors: .init(primary: "#FFC52F", secondary: "#12284B", background: "#F8F4E8", ink: "#17263D", border: "#DDD4BD", positive: "#47704D", banner: "#FFC52F", accent_dark: "#12284B", navigation: "#12284B"),
-            newsSources: [.init(key: "milwaukee-journal-sentinel", name: "Journal Sentinel", url: "https://www.jsonline.com/sports/brewers/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/brewers/")],
+            newsSources: [.init(key: "milwaukee-journal-sentinel", name: "Journal Sentinel"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .pittsburgh: .init(
@@ -433,7 +432,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 27,
             baseballReferenceID: "PIT",
             colors: .init(primary: "#FDB827", secondary: "#27251F", background: "#F8F4E8", ink: "#29261F", border: "#DDD4BE", positive: "#48704E", banner: "#FDB827", accent_dark: "#27251F", navigation: "#27251F"),
-            newsSources: [.init(key: "pittsburgh-post-gazette", name: "Post-Gazette", url: "https://www.post-gazette.com/sports/pirates"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/pirates/")],
+            newsSources: [.init(key: "pittsburgh-post-gazette", name: "Post-Gazette"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .stLouis: .init(
@@ -446,7 +445,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "Central", fangraphsID: 28,
             baseballReferenceID: "STL",
             colors: .init(primary: "#C41E3A", secondary: "#0C2340", background: "#F3ECEE", ink: "#17263B", border: "#D7C7CB", positive: "#3B6B50", banner: "#C41E3A", accent_dark: "#0C2340", navigation: "#0C2340"),
-            newsSources: [.init(key: "st-louis-post-dispatch", name: "Post-Dispatch", url: "https://www.stltoday.com/sports/professional/mlb/cardinals/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/cardinals/")],
+            newsSources: [.init(key: "st-louis-post-dispatch", name: "Post-Dispatch"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .arizona: .init(
@@ -459,7 +458,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 15,
             baseballReferenceID: "ARI",
             colors: .init(primary: "#A71930", secondary: "#000000", background: "#F2EBED", ink: "#251C1E", border: "#D5C6CA", positive: "#3D6C51", banner: "#A71930", accent_dark: "#000000", navigation: "#000000"),
-            newsSources: [.init(key: "arizona-republic", name: "Arizona Republic", url: "https://www.azcentral.com/sports/diamondbacks/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/diamondbacks/")],
+            newsSources: [.init(key: "arizona-republic", name: "Arizona Republic"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .colorado: .init(
@@ -472,7 +471,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 19,
             baseballReferenceID: "COL",
             colors: .init(primary: "#33006F", secondary: "#C4CED4", background: "#F0EDF4", ink: "#271D35", border: "#D1C9D9", positive: "#3E6C51", banner: "#33006F", accent_dark: "#C4CED4", navigation: "#C4CED4"),
-            newsSources: [.init(key: "denver-post", name: "Denver Post", url: "https://www.denverpost.com/sports/colorado-rockies/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/rockies/")],
+            newsSources: [.init(key: "denver-post", name: "Denver Post"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .losAngelesDodgers: .init(
@@ -485,7 +484,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 22,
             baseballReferenceID: "LAD",
             colors: .init(primary: "#005A9C", secondary: "#EF3E42", background: "#EAF2F8", ink: "#102940", border: "#C3D4E1", positive: "#39705A", banner: "#005A9C", accent_dark: "#EF3E42", navigation: "#EF3E42"),
-            newsSources: [.init(key: "los-angeles-times", name: "LA Times", url: "https://www.latimes.com/sports/dodgers"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/dodgers/")],
+            newsSources: [.init(key: "los-angeles-times", name: "LA Times"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .sanDiego: .init(
@@ -498,7 +497,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 29,
             baseballReferenceID: "SDP",
             colors: .init(primary: "#2F241D", secondary: "#FFC425", background: "#F5F0E8", ink: "#2B251F", border: "#D8CEBE", positive: "#4A704E", banner: "#2F241D", accent_dark: "#FFC425", navigation: "#FFC425"),
-            newsSources: [.init(key: "san-diego-union-tribune", name: "Union-Tribune", url: "https://www.sandiegouniontribune.com/sports/padres/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/padres/")],
+            newsSources: [.init(key: "san-diego-union-tribune", name: "Union-Tribune"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         ),
         .sanFrancisco: .init(
@@ -511,7 +510,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             division: "West", fangraphsID: 30,
             baseballReferenceID: "SFG",
             colors: .init(primary: "#FD5A1E", secondary: "#27251F", background: "#F7EEE9", ink: "#2A231F", border: "#DCCABE", positive: "#47704E", banner: "#FD5A1E", accent_dark: "#27251F", navigation: "#27251F"),
-            newsSources: [.init(key: "nbc-sports-bay-area", name: "NBC Sports Bay Area", url: "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/"), .init(key: "athletic", name: "Athletic", url: "https://www.nytimes.com/athletic/mlb/team/giants/")],
+            newsSources: [.init(key: "nbc-sports-bay-area", name: "NBC Sports Bay Area"), .init(key: "athletic", name: "Athletic")],
             features: .init(native_picker: false, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: false, stories: false)
         )
     ]
