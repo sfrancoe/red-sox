@@ -25,7 +25,10 @@ fi
 
 changed_paths=$(mktemp)
 trap 'rm -f "$changed_paths"' EXIT
-if ! git diff --name-only --diff-filter=ACDMRTUXB "$cached_ref" "$commit_ref" -- >"$changed_paths"; then
+# Treat renames as a deletion plus an addition so both the old and new paths
+# are classified. Otherwise a deployed file moved into an ignored directory
+# can leave its obsolete deployed copy live.
+if ! git diff --no-renames --name-only --diff-filter=ACDMRTUXB "$cached_ref" "$commit_ref" -- >"$changed_paths"; then
   build "Git could not compare the deployed and target commits"
 fi
 

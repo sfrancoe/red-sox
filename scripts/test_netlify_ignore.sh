@@ -8,6 +8,7 @@ trap 'rm -rf "$FIXTURE"' EXIT
 git -C "$FIXTURE" init -q
 git -C "$FIXTURE" config user.email test@example.com
 git -C "$FIXTURE" config user.name "Netlify ignore test"
+git -C "$FIXTURE" config diff.renames true
 mkdir -p "$FIXTURE/scripts"
 cp "$ROOT/scripts/netlify_ignore.sh" "$FIXTURE/scripts/netlify_ignore.sh"
 chmod +x "$FIXTURE/scripts/netlify_ignore.sh"
@@ -84,8 +85,34 @@ git -C "$FIXTURE" commit -qm "rename public file"
 RENAMED=$(git -C "$FIXTURE" rev-parse HEAD)
 expect_result 1 "$DELETED" "$RENAMED" "public rename builds"
 
-expect_result 1 missing "$RENAMED" "missing cached ref builds"
-expect_result 1 "$RENAMED" invalid "invalid target ref builds"
-expect_result 1 "" "$RENAMED" "empty cached ref builds"
+mkdir -p "$FIXTURE/docs"
+git -C "$FIXTURE" mv assets/site.css docs/removed.js
+git -C "$FIXTURE" commit -qm "move public asset into docs"
+PUBLIC_TO_DOCS=$(git -C "$FIXTURE" rev-parse HEAD)
+expect_result 1 "$RENAMED" "$PUBLIC_TO_DOCS" "public asset moved into docs builds"
+
+FUNCTION=$(commit_file netlify/functions/retired.mjs)
+git -C "$FIXTURE" mv netlify/functions/retired.mjs docs/retired.mjs
+git -C "$FIXTURE" commit -qm "move function into docs"
+FUNCTION_TO_DOCS=$(git -C "$FIXTURE" rev-parse HEAD)
+expect_result 1 "$FUNCTION" "$FUNCTION_TO_DOCS" "function moved into docs builds"
+
+IGNORED=$(commit_file docs/promoted.js)
+mkdir -p "$FIXTURE/src"
+git -C "$FIXTURE" mv docs/promoted.js src/promoted.js
+git -C "$FIXTURE" commit -qm "move docs file into public source"
+IGNORED_TO_PUBLIC=$(git -C "$FIXTURE" rev-parse HEAD)
+expect_result 1 "$IGNORED" "$IGNORED_TO_PUBLIC" "ignored file moved into public source builds"
+
+IGNORED_MOVE=$(commit_file data/team/archive.json)
+mkdir -p "$FIXTURE/docs/archive"
+git -C "$FIXTURE" mv data/team/archive.json docs/archive/archive.json
+git -C "$FIXTURE" commit -qm "move file between ignored directories"
+IGNORED_TO_IGNORED=$(git -C "$FIXTURE" rev-parse HEAD)
+expect_result 0 "$IGNORED_MOVE" "$IGNORED_TO_IGNORED" "move within ignored directories skips"
+
+expect_result 1 missing "$IGNORED_TO_IGNORED" "missing cached ref builds"
+expect_result 1 "$IGNORED_TO_IGNORED" invalid "invalid target ref builds"
+expect_result 1 "" "$IGNORED_TO_IGNORED" "empty cached ref builds"
 
 printf 'netlify ignore checks passed\n'
