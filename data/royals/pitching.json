@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T21:27:12.128906+00:00",
+  "generated_at": "2026-09-08T11:45:09.371807+00:00",
   "season": 2026,
   "team": "Kansas City Royals",
   "games_played": 145,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.0,
+    "actual_war": 6.4,
     "forecast_war_to_date": 13.6,
-    "war_gap": -7.6,
-    "innings": 1266.3,
+    "war_gap": -7.2,
+    "innings": 1276.3,
     "era": 4.7
   },
   "pitchers": [
@@ -25,17 +25,17 @@
       "name": "Noah Cameron",
       "throws": "L",
       "role": "Starter",
-      "games": 27,
-      "starts": 26,
+      "games": 28,
+      "starts": 27,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "154.1",
-        "ip_value": 154.333,
-        "war": 2.79,
-        "era": 4.08,
-        "fip": 3.69,
-        "k_minus_bb_pct": 13.8
+        "ip": "160.1",
+        "ip_value": 160.333,
+        "war": 3.05,
+        "era": 3.93,
+        "fip": 3.61,
+        "k_minus_bb_pct": 14.1
       },
       "forecast": {
         "ip": 148.4,
@@ -49,8 +49,8 @@
         "ip": 132.8,
         "war": 1.39
       },
-      "war_gap": 1.4,
-      "innings_share_pct": 12.2
+      "war_gap": 1.65,
+      "innings_share_pct": 12.6
     },
     {
       "id": 608379,
@@ -82,7 +82,7 @@
         "war": 1.74
       },
       "war_gap": 0.85,
-      "innings_share_pct": 14.0
+      "innings_share_pct": 13.8
     },
     {
       "id": 607625,
@@ -98,7 +98,7 @@
         "ip_value": 159.0,
         "war": 2.0,
         "era": 5.04,
-        "fip": 4.17,
+        "fip": 4.16,
         "k_minus_bb_pct": 9.9
       },
       "forecast": {
@@ -113,8 +113,8 @@
         "ip": 144.4,
         "war": 1.56
       },
-      "war_gap": 0.44,
-      "innings_share_pct": 12.6
+      "war_gap": 0.45,
+      "innings_share_pct": 12.5
     },
     {
       "id": 663738,
@@ -130,7 +130,7 @@
         "ip_value": 66.667,
         "war": 0.86,
         "era": 3.51,
-        "fip": 3.73,
+        "fip": 3.72,
         "k_minus_bb_pct": 9.5
       },
       "forecast": {
@@ -146,7 +146,7 @@
         "war": 0.09
       },
       "war_gap": 0.77,
-      "innings_share_pct": 5.3
+      "innings_share_pct": 5.2
     },
     {
       "id": 663460,
@@ -178,7 +178,7 @@
         "war": 2.01
       },
       "war_gap": -1.17,
-      "innings_share_pct": 4.0
+      "innings_share_pct": 3.9
     },
     {
       "id": 677976,
@@ -242,7 +242,39 @@
         "war": 0.52
       },
       "war_gap": -0.0,
-      "innings_share_pct": 4.3
+      "innings_share_pct": 4.2
+    },
+    {
+      "id": 663878,
+      "name": "Nate Pearson",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 18,
+      "starts": 0,
+      "saves": 2,
+      "holds": 5,
+      "actual": {
+        "ip": "19.0",
+        "ip_value": 19.0,
+        "war": 0.46,
+        "era": 0.47,
+        "fip": 2.62,
+        "k_minus_bb_pct": 16.2
+      },
+      "forecast": {
+        "ip": 50.0,
+        "war": 0.13,
+        "era": 4.32,
+        "fip": 4.38,
+        "k_minus_bb_pct": 13.4,
+        "team_at_fetch": "KCR"
+      },
+      "forecast_to_date": {
+        "ip": 44.8,
+        "war": 0.12
+      },
+      "war_gap": 0.34,
+      "innings_share_pct": 1.5
     },
     {
       "id": 679883,
@@ -277,38 +309,6 @@
       "innings_share_pct": 5.5
     },
     {
-      "id": 663878,
-      "name": "Nate Pearson",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 17,
-      "starts": 0,
-      "saves": 2,
-      "holds": 5,
-      "actual": {
-        "ip": "17.0",
-        "ip_value": 17.0,
-        "war": 0.35,
-        "era": 0.53,
-        "fip": 2.92,
-        "k_minus_bb_pct": 13.2
-      },
-      "forecast": {
-        "ip": 50.0,
-        "war": 0.13,
-        "era": 4.32,
-        "fip": 4.38,
-        "k_minus_bb_pct": 13.4,
-        "team_at_fetch": "KCR"
-      },
-      "forecast_to_date": {
-        "ip": 44.8,
-        "war": 0.12
-      },
-      "war_gap": 0.23,
-      "innings_share_pct": 1.3
-    },
-    {
       "id": 621016,
       "name": "Jose Cuas",
       "throws": "R",
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "16.1",
         "ip_value": 16.333,
-        "war": 0.28,
+        "war": 0.27,
         "era": 2.76,
         "fip": 2.73,
         "k_minus_bb_pct": 10.4
@@ -352,9 +352,9 @@
       "actual": {
         "ip": "8.1",
         "ip_value": 8.333,
-        "war": 0.22,
+        "war": 0.21,
         "era": 2.16,
-        "fip": 2.5,
+        "fip": 2.49,
         "k_minus_bb_pct": 17.6
       },
       "forecast": {
@@ -377,17 +377,17 @@
       "name": "Craig Kimbrel",
       "throws": "R",
       "role": "Reliever",
-      "games": 9,
+      "games": 10,
       "starts": 0,
       "saves": 1,
       "holds": 1,
       "actual": {
-        "ip": "9.0",
-        "ip_value": 9.0,
-        "war": 0.15,
-        "era": 0.0,
-        "fip": 3.1,
-        "k_minus_bb_pct": 9.4
+        "ip": "10.0",
+        "ip_value": 10.0,
+        "war": 0.16,
+        "era": 3.6,
+        "fip": 3.19,
+        "k_minus_bb_pct": 7.3
       },
       "forecast": {
         "ip": 14.0,
@@ -401,8 +401,8 @@
         "ip": 12.5,
         "war": 0.02
       },
-      "war_gap": 0.13,
-      "innings_share_pct": 0.7
+      "war_gap": 0.14,
+      "innings_share_pct": 0.8
     },
     {
       "id": 543238,
@@ -450,7 +450,7 @@
         "ip_value": 4.0,
         "war": 0.03,
         "era": 6.75,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 11.8
       },
       "forecast": {
@@ -482,7 +482,7 @@
         "ip_value": 1.0,
         "war": 0.01,
         "era": 0.0,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -507,7 +507,7 @@
         "ip_value": 1.0,
         "war": 0.01,
         "era": 0.0,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -532,7 +532,7 @@
         "ip_value": 19.333,
         "war": -0.01,
         "era": 5.12,
-        "fip": 4.6,
+        "fip": 4.59,
         "k_minus_bb_pct": 4.8
       },
       "forecast": {
@@ -564,7 +564,7 @@
         "ip_value": 5.0,
         "war": -0.02,
         "era": 9.0,
-        "fip": 4.7,
+        "fip": 4.69,
         "k_minus_bb_pct": 3.6
       },
       "forecast": {
@@ -596,7 +596,7 @@
         "ip_value": 1.333,
         "war": -0.04,
         "era": 13.5,
-        "fip": 8.35,
+        "fip": 8.34,
         "k_minus_bb_pct": -22.2
       },
       "forecast": {
@@ -660,7 +660,7 @@
         "ip_value": 8.333,
         "war": -0.18,
         "era": 8.64,
-        "fip": 7.3,
+        "fip": 7.29,
         "k_minus_bb_pct": 9.8
       },
       "forecast": {
@@ -692,7 +692,7 @@
         "ip_value": 1.333,
         "war": -0.19,
         "era": 40.5,
-        "fip": 15.1,
+        "fip": 15.09,
         "k_minus_bb_pct": -9.1
       },
       "forecast": {
@@ -788,7 +788,7 @@
         "ip_value": 0.333,
         "war": -0.26,
         "era": 162.0,
-        "fip": 60.1,
+        "fip": 60.09,
         "k_minus_bb_pct": -28.6
       },
       "forecast": {
@@ -805,6 +805,38 @@
       },
       "war_gap": -0.4,
       "innings_share_pct": 0.0
+    },
+    {
+      "id": 656638,
+      "name": "Alex Lange",
+      "throws": "R",
+      "role": "Closer",
+      "games": 53,
+      "starts": 0,
+      "saves": 10,
+      "holds": 3,
+      "actual": {
+        "ip": "54.2",
+        "ip_value": 54.667,
+        "war": -0.27,
+        "era": 5.93,
+        "fip": 4.74,
+        "k_minus_bb_pct": 11.5
+      },
+      "forecast": {
+        "ip": 52.0,
+        "war": 0.18,
+        "era": 4.02,
+        "fip": 4.03,
+        "k_minus_bb_pct": 12.4,
+        "team_at_fetch": "KCR"
+      },
+      "forecast_to_date": {
+        "ip": 46.5,
+        "war": 0.16
+      },
+      "war_gap": -0.43,
+      "innings_share_pct": 4.3
     },
     {
       "id": 672021,
@@ -839,36 +871,36 @@
       "innings_share_pct": 0.4
     },
     {
-      "id": 656638,
-      "name": "Alex Lange",
+      "id": 674444,
+      "name": "Steven Cruz",
       "throws": "R",
-      "role": "Closer",
-      "games": 53,
-      "starts": 0,
-      "saves": 10,
-      "holds": 3,
+      "role": "Reliever",
+      "games": 51,
+      "starts": 2,
+      "saves": 6,
+      "holds": 5,
       "actual": {
-        "ip": "54.2",
-        "ip_value": 54.667,
-        "war": -0.27,
-        "era": 5.93,
-        "fip": 4.74,
-        "k_minus_bb_pct": 11.5
+        "ip": "53.2",
+        "ip_value": 53.667,
+        "war": -0.28,
+        "era": 4.19,
+        "fip": 5.07,
+        "k_minus_bb_pct": 17.4
       },
       "forecast": {
-        "ip": 52.0,
-        "war": 0.18,
-        "era": 4.02,
-        "fip": 4.03,
-        "k_minus_bb_pct": 12.4,
+        "ip": 45.0,
+        "war": 0.07,
+        "era": 4.3,
+        "fip": 4.31,
+        "k_minus_bb_pct": 11.6,
         "team_at_fetch": "KCR"
       },
       "forecast_to_date": {
-        "ip": 46.5,
-        "war": 0.16
+        "ip": 40.3,
+        "war": 0.07
       },
-      "war_gap": -0.43,
-      "innings_share_pct": 4.3
+      "war_gap": -0.34,
+      "innings_share_pct": 4.2
     },
     {
       "id": 669212,
@@ -928,38 +960,6 @@
       "innings_share_pct": 0.4
     },
     {
-      "id": 674444,
-      "name": "Steven Cruz",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 50,
-      "starts": 2,
-      "saves": 6,
-      "holds": 5,
-      "actual": {
-        "ip": "52.2",
-        "ip_value": 52.667,
-        "war": -0.31,
-        "era": 4.27,
-        "fip": 5.15,
-        "k_minus_bb_pct": 17.3
-      },
-      "forecast": {
-        "ip": 45.0,
-        "war": 0.07,
-        "era": 4.3,
-        "fip": 4.31,
-        "k_minus_bb_pct": 11.6,
-        "team_at_fetch": "KCR"
-      },
-      "forecast_to_date": {
-        "ip": 40.3,
-        "war": 0.07
-      },
-      "war_gap": -0.37,
-      "innings_share_pct": 4.2
-    },
-    {
       "id": 670167,
       "name": "John Schreiber",
       "throws": "R",
@@ -1005,7 +1005,7 @@
         "ip_value": 9.667,
         "war": -0.34,
         "era": 13.97,
-        "fip": 9.1,
+        "fip": 9.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -1052,7 +1052,7 @@
         "ip": 51.9,
         "war": 0.08
       },
-      "war_gap": -0.59,
+      "war_gap": -0.6,
       "innings_share_pct": 2.5
     },
     {

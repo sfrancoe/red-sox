@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T21:27:16.855198+00:00",
+  "generated_at": "2026-09-08T11:45:10.865469+00:00",
   "season": 2026,
   "team": "Los Angeles Angels",
   "games_played": 144,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 11.9,
+    "actual_war": 11.8,
     "forecast_war_to_date": 12.3,
-    "war_gap": -0.4,
-    "innings": 1263.0,
+    "war_gap": -0.6,
+    "innings": 1271.0,
     "era": 4.23
   },
   "pitchers": [
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "162.0",
         "ip_value": 162.0,
-        "war": 4.15,
+        "war": 4.16,
         "era": 3.44,
         "fip": 3.1,
         "k_minus_bb_pct": 21.2
@@ -49,8 +49,8 @@
         "ip": 134.0,
         "war": 1.75
       },
-      "war_gap": 2.4,
-      "innings_share_pct": 12.8
+      "war_gap": 2.41,
+      "innings_share_pct": 12.7
     },
     {
       "id": 700712,
@@ -66,7 +66,7 @@
         "ip_value": 131.333,
         "war": 2.08,
         "era": 2.74,
-        "fip": 3.77,
+        "fip": 3.76,
         "k_minus_bb_pct": 10.7
       },
       "forecast": {
@@ -82,7 +82,7 @@
         "war": -0.04
       },
       "war_gap": 2.12,
-      "innings_share_pct": 10.4
+      "innings_share_pct": 10.3
     },
     {
       "id": 667755,
@@ -113,7 +113,7 @@
         "ip": 157.6,
         "war": 2.69
       },
-      "war_gap": -0.68,
+      "war_gap": -0.67,
       "innings_share_pct": 9.7
     },
     {
@@ -130,7 +130,7 @@
         "ip_value": 28.667,
         "war": 1.05,
         "era": 2.51,
-        "fip": 1.88,
+        "fip": 1.87,
         "k_minus_bb_pct": 28.4
       },
       "forecast": {
@@ -177,7 +177,7 @@
         "ip": 158.0,
         "war": 2.29
       },
-      "war_gap": -1.71,
+      "war_gap": -1.7,
       "innings_share_pct": 3.9
     },
     {
@@ -290,7 +290,7 @@
         "ip_value": 10.0,
         "war": 0.41,
         "era": 2.7,
-        "fip": 1.6,
+        "fip": 1.59,
         "k_minus_bb_pct": 20.9
       },
       "forecast": {
@@ -341,70 +341,6 @@
       "innings_share_pct": 4.1
     },
     {
-      "id": 680570,
-      "name": "Grayson Rodriguez",
-      "throws": "R",
-      "role": "Starter",
-      "games": 16,
-      "starts": 16,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "77.2",
-        "ip_value": 77.667,
-        "war": 0.37,
-        "era": 6.03,
-        "fip": 4.76,
-        "k_minus_bb_pct": 11.2
-      },
-      "forecast": {
-        "ip": 119.7,
-        "war": 2.13,
-        "era": 3.82,
-        "fip": 3.83,
-        "k_minus_bb_pct": 17.0,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 106.4,
-        "war": 1.89
-      },
-      "war_gap": -1.53,
-      "innings_share_pct": 6.1
-    },
-    {
-      "id": 690829,
-      "name": "Ben Joyce",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 10,
-      "starts": 0,
-      "saves": 3,
-      "holds": 2,
-      "actual": {
-        "ip": "9.1",
-        "ip_value": 9.333,
-        "war": 0.35,
-        "era": 2.89,
-        "fip": 2.24,
-        "k_minus_bb_pct": 22.2
-      },
-      "forecast": {
-        "ip": 48.0,
-        "war": 0.48,
-        "era": 3.42,
-        "fip": 3.53,
-        "k_minus_bb_pct": 18.0,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 42.7,
-        "war": 0.42
-      },
-      "war_gap": -0.08,
-      "innings_share_pct": 0.7
-    },
-    {
       "id": 489446,
       "name": "Kirby Yates",
       "throws": "R",
@@ -435,6 +371,38 @@
       },
       "war_gap": 0.08,
       "innings_share_pct": 2.2
+    },
+    {
+      "id": 690829,
+      "name": "Ben Joyce",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 11,
+      "starts": 0,
+      "saves": 3,
+      "holds": 2,
+      "actual": {
+        "ip": "10.1",
+        "ip_value": 10.333,
+        "war": 0.34,
+        "era": 2.61,
+        "fip": 2.32,
+        "k_minus_bb_pct": 20.5
+      },
+      "forecast": {
+        "ip": 48.0,
+        "war": 0.48,
+        "era": 3.42,
+        "fip": 3.53,
+        "k_minus_bb_pct": 18.0,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 42.7,
+        "war": 0.42
+      },
+      "war_gap": -0.08,
+      "innings_share_pct": 0.8
     },
     {
       "id": 695049,
@@ -473,17 +441,17 @@
       "name": "Blake Weiman",
       "throws": "L",
       "role": "Reliever",
-      "games": 10,
+      "games": 11,
       "starts": 0,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "10.1",
-        "ip_value": 10.333,
+        "ip": "11.1",
+        "ip_value": 11.333,
         "war": 0.26,
-        "era": 2.61,
-        "fip": 2.71,
-        "k_minus_bb_pct": 18.8
+        "era": 2.38,
+        "fip": 2.74,
+        "k_minus_bb_pct": 17.6
       },
       "forecast": {
         "ip": 1.0,
@@ -498,7 +466,7 @@
         "war": -0.0
       },
       "war_gap": 0.26,
-      "innings_share_pct": 0.8
+      "innings_share_pct": 0.9
     },
     {
       "id": 686799,
@@ -530,7 +498,7 @@
         "war": 0.27
       },
       "war_gap": -0.07,
-      "innings_share_pct": 5.1
+      "innings_share_pct": 5.0
     },
     {
       "id": 820862,
@@ -561,8 +529,8 @@
         "ip": 23.1,
         "war": 0.03
       },
-      "war_gap": 0.14,
-      "innings_share_pct": 3.9
+      "war_gap": 0.15,
+      "innings_share_pct": 3.8
     },
     {
       "id": 684665,
@@ -578,7 +546,7 @@
         "ip_value": 14.0,
         "war": 0.15,
         "era": 4.5,
-        "fip": 4.03,
+        "fip": 4.02,
         "k_minus_bb_pct": 10.2
       },
       "forecast": {
@@ -597,6 +565,38 @@
       "innings_share_pct": 1.1
     },
     {
+      "id": 680570,
+      "name": "Grayson Rodriguez",
+      "throws": "R",
+      "role": "Starter",
+      "games": 17,
+      "starts": 17,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "81.2",
+        "ip_value": 81.667,
+        "war": 0.13,
+        "era": 6.28,
+        "fip": 5.07,
+        "k_minus_bb_pct": 10.3
+      },
+      "forecast": {
+        "ip": 119.7,
+        "war": 2.13,
+        "era": 3.82,
+        "fip": 3.83,
+        "k_minus_bb_pct": 17.0,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 106.4,
+        "war": 1.89
+      },
+      "war_gap": -1.76,
+      "innings_share_pct": 6.4
+    },
+    {
       "id": 691946,
       "name": "George Klassen",
       "throws": "R",
@@ -610,7 +610,7 @@
         "ip_value": 27.0,
         "war": 0.13,
         "era": 3.67,
-        "fip": 4.73,
+        "fip": 4.72,
         "k_minus_bb_pct": 2.4
       },
       "forecast": {
@@ -690,7 +690,7 @@
         "war": 0.02
       },
       "war_gap": 0.02,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     },
     {
       "id": 671111,
@@ -738,7 +738,7 @@
         "ip_value": 8.0,
         "war": 0.02,
         "era": 10.13,
-        "fip": 4.35,
+        "fip": 4.34,
         "k_minus_bb_pct": 14.3
       },
       "forecast": {
@@ -802,7 +802,7 @@
         "ip_value": 2.0,
         "war": -0.06,
         "era": 4.5,
-        "fip": 9.6,
+        "fip": 9.59,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -827,7 +827,7 @@
         "ip_value": 2.0,
         "war": -0.09,
         "era": 18.0,
-        "fip": 12.6,
+        "fip": 12.59,
         "k_minus_bb_pct": -14.3
       },
       "forecast": null,
@@ -884,7 +884,7 @@
         "ip_value": 20.0,
         "war": -0.2,
         "era": 7.65,
-        "fip": 5.65,
+        "fip": 5.64,
         "k_minus_bb_pct": 7.5
       },
       "forecast": {
@@ -901,6 +901,38 @@
       },
       "war_gap": -0.16,
       "innings_share_pct": 1.6
+    },
+    {
+      "id": 815083,
+      "name": "Mitch Farris",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 28,
+      "starts": 0,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "50.1",
+        "ip_value": 50.333,
+        "war": -0.25,
+        "era": 4.11,
+        "fip": 4.82,
+        "k_minus_bb_pct": 13.2
+      },
+      "forecast": {
+        "ip": 9.1,
+        "war": 0.04,
+        "era": 4.74,
+        "fip": 4.93,
+        "k_minus_bb_pct": 9.0,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 8.1,
+        "war": 0.04
+      },
+      "war_gap": -0.29,
+      "innings_share_pct": 4.0
     },
     {
       "id": 680704,
@@ -948,7 +980,7 @@
         "ip_value": 3.333,
         "war": -0.29,
         "era": 13.5,
-        "fip": 10.9,
+        "fip": 10.89,
         "k_minus_bb_pct": -8.3
       },
       "forecast": {
@@ -965,38 +997,6 @@
       },
       "war_gap": -0.42,
       "innings_share_pct": 0.3
-    },
-    {
-      "id": 815083,
-      "name": "Mitch Farris",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 27,
-      "starts": 0,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "48.1",
-        "ip_value": 48.333,
-        "war": -0.31,
-        "era": 4.28,
-        "fip": 4.96,
-        "k_minus_bb_pct": 12.9
-      },
-      "forecast": {
-        "ip": 9.1,
-        "war": 0.04,
-        "era": 4.74,
-        "fip": 4.93,
-        "k_minus_bb_pct": 9.0,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 8.1,
-        "war": 0.04
-      },
-      "war_gap": -0.34,
-      "innings_share_pct": 3.8
     },
     {
       "id": 696147,
@@ -1059,7 +1059,7 @@
         "ip": 63.5,
         "war": 0.75
       },
-      "war_gap": -1.14,
+      "war_gap": -1.13,
       "innings_share_pct": 6.2
     },
     {

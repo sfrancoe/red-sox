@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T21:29:26.365561+00:00",
+  "generated_at": "2026-09-08T11:45:17.304261+00:00",
   "season": 2026,
   "team": "Arizona Diamondbacks",
   "games_played": 145,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 10.7,
+    "actual_war": 10.9,
     "forecast_war_to_date": 12.4,
-    "war_gap": -1.7,
-    "innings": 1278.0,
-    "era": 4.15
+    "war_gap": -1.5,
+    "innings": 1288.0,
+    "era": 4.14
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 1.38
       },
       "war_gap": 1.67,
-      "innings_share_pct": 13.5
+      "innings_share_pct": 13.4
     },
     {
       "id": 647336,
@@ -82,7 +82,7 @@
         "war": 0.88
       },
       "war_gap": 1.6,
-      "innings_share_pct": 7.5
+      "innings_share_pct": 7.4
     },
     {
       "id": 694297,
@@ -114,7 +114,7 @@
         "war": 1.62
       },
       "war_gap": -0.02,
-      "innings_share_pct": 9.2
+      "innings_share_pct": 9.1
     },
     {
       "id": 666661,
@@ -146,24 +146,24 @@
         "war": -0.04
       },
       "war_gap": 1.6,
-      "innings_share_pct": 4.5
+      "innings_share_pct": 4.4
     },
     {
       "id": 805299,
       "name": "Brandyn Garcia",
       "throws": "L",
       "role": "Setup",
-      "games": 50,
+      "games": 51,
       "starts": 0,
       "saves": 5,
       "holds": 16,
       "actual": {
-        "ip": "42.1",
-        "ip_value": 42.333,
-        "war": 1.2,
-        "era": 2.13,
-        "fip": 2.36,
-        "k_minus_bb_pct": 25.6
+        "ip": "43.1",
+        "ip_value": 43.333,
+        "war": 1.28,
+        "era": 2.08,
+        "fip": 2.29,
+        "k_minus_bb_pct": 26.2
       },
       "forecast": {
         "ip": 46.0,
@@ -177,8 +177,8 @@
         "ip": 41.2,
         "war": 0.02
       },
-      "war_gap": 1.18,
-      "innings_share_pct": 3.3
+      "war_gap": 1.26,
+      "innings_share_pct": 3.4
     },
     {
       "id": 642528,
@@ -210,7 +210,7 @@
         "war": 0.27
       },
       "war_gap": 0.66,
-      "innings_share_pct": 4.6
+      "innings_share_pct": 4.5
     },
     {
       "id": 656464,
@@ -242,24 +242,24 @@
         "war": 0.39
       },
       "war_gap": 0.39,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     },
     {
       "id": 664199,
       "name": "Taylor Clarke",
       "throws": "R",
       "role": "Setup",
-      "games": 63,
+      "games": 64,
       "starts": 1,
       "saves": 0,
       "holds": 13,
       "actual": {
-        "ip": "64.0",
-        "ip_value": 64.0,
-        "war": 0.45,
-        "era": 2.53,
-        "fip": 3.83,
-        "k_minus_bb_pct": 10.7
+        "ip": "66.0",
+        "ip_value": 66.0,
+        "war": 0.54,
+        "era": 2.45,
+        "fip": 3.75,
+        "k_minus_bb_pct": 11.2
       },
       "forecast": {
         "ip": 61.0,
@@ -273,8 +273,8 @@
         "ip": 54.6,
         "war": 0.16
       },
-      "war_gap": 0.3,
-      "innings_share_pct": 5.0
+      "war_gap": 0.39,
+      "innings_share_pct": 5.1
     },
     {
       "id": 683352,
@@ -345,17 +345,17 @@
       "name": "Gerardo Carrillo",
       "throws": "R",
       "role": "Reliever",
-      "games": 12,
+      "games": 13,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "17.0",
-        "ip_value": 17.0,
-        "war": 0.19,
-        "era": 2.65,
-        "fip": 3.39,
-        "k_minus_bb_pct": 6.6
+        "ip": "17.1",
+        "ip_value": 17.333,
+        "war": 0.15,
+        "era": 4.15,
+        "fip": 3.61,
+        "k_minus_bb_pct": 6.2
       },
       "forecast": {
         "ip": 1.0,
@@ -369,7 +369,7 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.19,
+      "war_gap": 0.15,
       "innings_share_pct": 1.3
     },
     {
@@ -377,17 +377,17 @@
       "name": "Jose Cabrera",
       "throws": "R",
       "role": "Starter",
-      "games": 6,
+      "games": 7,
       "starts": 5,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "24.0",
-        "ip_value": 24.0,
-        "war": 0.08,
-        "era": 4.88,
-        "fip": 5.22,
-        "k_minus_bb_pct": 8.6
+        "ip": "27.0",
+        "ip_value": 27.0,
+        "war": 0.11,
+        "era": 4.33,
+        "fip": 5.13,
+        "k_minus_bb_pct": 6.7
       },
       "forecast": {
         "ip": 1.0,
@@ -401,8 +401,72 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.08,
-      "innings_share_pct": 1.9
+      "war_gap": 0.11,
+      "innings_share_pct": 2.1
+    },
+    {
+      "id": 571882,
+      "name": "Derek Law",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 5,
+      "starts": 1,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "6.2",
+        "ip_value": 6.667,
+        "war": 0.08,
+        "era": 1.35,
+        "fip": 3.09,
+        "k_minus_bb_pct": 8.0
+      },
+      "forecast": {
+        "ip": 17.0,
+        "war": 0.04,
+        "era": 4.12,
+        "fip": 4.01,
+        "k_minus_bb_pct": 12.0,
+        "team_at_fetch": "ARI"
+      },
+      "forecast_to_date": {
+        "ip": 15.2,
+        "war": 0.04
+      },
+      "war_gap": 0.05,
+      "innings_share_pct": 0.5
+    },
+    {
+      "id": 679885,
+      "name": "Justin Martinez",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 7,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "6.2",
+        "ip_value": 6.667,
+        "war": 0.05,
+        "era": 0.0,
+        "fip": 3.39,
+        "k_minus_bb_pct": 10.7
+      },
+      "forecast": {
+        "ip": 20.0,
+        "war": 0.3,
+        "era": 3.07,
+        "fip": 3.17,
+        "k_minus_bb_pct": 18.1,
+        "team_at_fetch": "ARI"
+      },
+      "forecast_to_date": {
+        "ip": 17.9,
+        "war": 0.27
+      },
+      "war_gap": -0.22,
+      "innings_share_pct": 0.5
     },
     {
       "id": 686228,
@@ -469,70 +533,6 @@
       "innings_share_pct": 1.5
     },
     {
-      "id": 571882,
-      "name": "Derek Law",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 4,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "4.2",
-        "ip_value": 4.667,
-        "war": 0.04,
-        "era": 1.93,
-        "fip": 3.1,
-        "k_minus_bb_pct": 10.5
-      },
-      "forecast": {
-        "ip": 17.0,
-        "war": 0.04,
-        "era": 4.12,
-        "fip": 4.01,
-        "k_minus_bb_pct": 12.0,
-        "team_at_fetch": "ARI"
-      },
-      "forecast_to_date": {
-        "ip": 15.2,
-        "war": 0.04
-      },
-      "war_gap": 0.0,
-      "innings_share_pct": 0.4
-    },
-    {
-      "id": 679885,
-      "name": "Justin Martinez",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 6,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "5.2",
-        "ip_value": 5.667,
-        "war": 0.04,
-        "era": 0.0,
-        "fip": 3.27,
-        "k_minus_bb_pct": 12.5
-      },
-      "forecast": {
-        "ip": 20.0,
-        "war": 0.3,
-        "era": 3.07,
-        "fip": 3.17,
-        "k_minus_bb_pct": 18.1,
-        "team_at_fetch": "ARI"
-      },
-      "forecast_to_date": {
-        "ip": 17.9,
-        "war": 0.27
-      },
-      "war_gap": -0.23,
-      "innings_share_pct": 0.4
-    },
-    {
       "id": 680728,
       "name": "Adrian Del Castillo",
       "throws": "R",
@@ -546,7 +546,7 @@
         "ip_value": 1.667,
         "war": 0.02,
         "era": 5.4,
-        "fip": 4.9,
+        "fip": 4.89,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -571,7 +571,7 @@
         "ip_value": 1.0,
         "war": 0.01,
         "era": 9.0,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -594,17 +594,17 @@
       "name": "Dennis Santana",
       "throws": "R",
       "role": "Reliever",
-      "games": 6,
+      "games": 7,
       "starts": 0,
-      "saves": 0,
+      "saves": 1,
       "holds": 0,
       "actual": {
-        "ip": "5.1",
-        "ip_value": 5.333,
-        "war": -0.02,
-        "era": 1.69,
-        "fip": 4.78,
-        "k_minus_bb_pct": 17.4
+        "ip": "6.0",
+        "ip_value": 6.0,
+        "war": -0.01,
+        "era": 1.5,
+        "fip": 4.26,
+        "k_minus_bb_pct": 20.0
       },
       "forecast": {
         "ip": 68.0,
@@ -618,8 +618,8 @@
         "ip": 60.9,
         "war": 0.25
       },
-      "war_gap": -0.28,
-      "innings_share_pct": 0.4
+      "war_gap": -0.26,
+      "innings_share_pct": 0.5
     },
     {
       "id": 669704,
@@ -635,7 +635,7 @@
         "ip_value": 1.0,
         "war": -0.03,
         "era": 9.0,
-        "fip": 10.1,
+        "fip": 10.09,
         "k_minus_bb_pct": -28.6
       },
       "forecast": {
@@ -740,7 +740,7 @@
         "war": 1.95
       },
       "war_gap": -2.02,
-      "innings_share_pct": 7.7
+      "innings_share_pct": 7.6
     },
     {
       "id": 669194,
@@ -788,7 +788,7 @@
         "ip_value": 0.667,
         "war": -0.07,
         "era": 94.5,
-        "fip": 27.1,
+        "fip": 27.09,
         "k_minus_bb_pct": -10.0
       },
       "forecast": {
@@ -820,7 +820,7 @@
         "ip_value": 4.0,
         "war": -0.1,
         "era": 11.25,
-        "fip": 8.6,
+        "fip": 8.59,
         "k_minus_bb_pct": -13.0
       },
       "forecast": null,
@@ -909,7 +909,7 @@
         "ip_value": 11.667,
         "war": -0.19,
         "era": 7.71,
-        "fip": 6.7,
+        "fip": 6.69,
         "k_minus_bb_pct": 6.8
       },
       "forecast": {
@@ -988,8 +988,8 @@
         "ip": 154.5,
         "war": 2.13
       },
-      "war_gap": -2.46,
-      "innings_share_pct": 11.6
+      "war_gap": -2.47,
+      "innings_share_pct": 11.5
     },
     {
       "id": 641793,
@@ -1037,7 +1037,7 @@
         "ip_value": 39.0,
         "war": -0.59,
         "era": 6.23,
-        "fip": 5.69,
+        "fip": 5.68,
         "k_minus_bb_pct": 21.5
       },
       "forecast": {
@@ -1053,7 +1053,7 @@
         "war": 0.06
       },
       "war_gap": -0.65,
-      "innings_share_pct": 3.1
+      "innings_share_pct": 3.0
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T00:41:39.489309+00:00",
+  "generated_at": "2026-09-08T11:45:14.557397+00:00",
   "season": 2026,
   "team": "Washington Nationals",
   "games_played": 146,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 3.9,
+    "actual_war": 4.0,
     "forecast_war_to_date": 9.8,
     "war_gap": -5.9,
-    "innings": 1286.0,
+    "innings": 1294.0,
     "era": 4.74
   },
   "pitchers": [
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "158.2",
         "ip_value": 158.667,
-        "war": 3.56,
+        "war": 3.55,
         "era": 3.12,
         "fip": 3.29,
         "k_minus_bb_pct": 21.0
@@ -81,8 +81,8 @@
         "ip": 86.9,
         "war": 0.78
       },
-      "war_gap": 1.33,
-      "innings_share_pct": 7.4
+      "war_gap": 1.32,
+      "innings_share_pct": 7.3
     },
     {
       "id": 656492,
@@ -114,24 +114,24 @@
         "war": 1.82
       },
       "war_gap": 0.03,
-      "innings_share_pct": 10.1
+      "innings_share_pct": 10.0
     },
     {
       "id": 663623,
       "name": "Jake Irvin",
       "throws": "R",
       "role": "Starter",
-      "games": 18,
-      "starts": 18,
+      "games": 19,
+      "starts": 19,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "85.2",
-        "ip_value": 85.667,
-        "war": 0.5,
-        "era": 5.57,
-        "fip": 5.06,
-        "k_minus_bb_pct": 12.4
+        "ip": "91.1",
+        "ip_value": 91.333,
+        "war": 0.63,
+        "era": 5.52,
+        "fip": 4.93,
+        "k_minus_bb_pct": 11.8
       },
       "forecast": {
         "ip": 134.3,
@@ -145,8 +145,8 @@
         "ip": 121.1,
         "war": 0.72
       },
-      "war_gap": -0.22,
-      "innings_share_pct": 6.7
+      "war_gap": -0.09,
+      "innings_share_pct": 7.1
     },
     {
       "id": 695418,
@@ -281,17 +281,17 @@
       "name": "Jared Simpson",
       "throws": "L",
       "role": "Reliever",
-      "games": 1,
+      "games": 2,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "3.0",
-        "ip_value": 3.0,
+        "ip": "4.0",
+        "ip_value": 4.0,
         "war": 0.19,
         "era": 0.0,
-        "fip": 1.1,
-        "k_minus_bb_pct": 37.5
+        "fip": 1.09,
+        "k_minus_bb_pct": 36.4
       },
       "forecast": {
         "ip": 1.0,
@@ -306,7 +306,7 @@
         "war": -0.01
       },
       "war_gap": 0.2,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 0.3
     },
     {
       "id": 687223,
@@ -322,7 +322,7 @@
         "ip_value": 16.333,
         "war": 0.18,
         "era": 7.71,
-        "fip": 4.08,
+        "fip": 4.07,
         "k_minus_bb_pct": 9.0
       },
       "forecast": {
@@ -418,7 +418,7 @@
         "ip_value": 10.0,
         "war": 0.08,
         "era": 1.8,
-        "fip": 4.1,
+        "fip": 4.09,
         "k_minus_bb_pct": 10.3
       },
       "forecast": {
@@ -546,7 +546,7 @@
         "ip_value": 8.333,
         "war": 0.02,
         "era": 3.24,
-        "fip": 4.54,
+        "fip": 4.53,
         "k_minus_bb_pct": 24.2
       },
       "forecast": {
@@ -561,40 +561,8 @@
         "ip": 51.4,
         "war": 0.2
       },
-      "war_gap": -0.18,
+      "war_gap": -0.19,
       "innings_share_pct": 0.6
-    },
-    {
-      "id": 695378,
-      "name": "Jack Sinclair",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 2,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "1.2",
-        "ip_value": 1.667,
-        "war": 0.02,
-        "era": 0.0,
-        "fip": 3.1,
-        "k_minus_bb_pct": 28.6
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.01,
-        "era": 4.9,
-        "fip": 5.14,
-        "k_minus_bb_pct": 5.9,
-        "team_at_fetch": "WSN"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.01
-      },
-      "war_gap": 0.02,
-      "innings_share_pct": 0.1
     },
     {
       "id": 671131,
@@ -610,7 +578,7 @@
         "ip_value": 1.333,
         "war": -0.0,
         "era": 47.25,
-        "fip": 4.6,
+        "fip": 4.59,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -642,7 +610,7 @@
         "ip_value": 1.0,
         "war": -0.01,
         "era": 9.0,
-        "fip": 6.1,
+        "fip": 6.09,
         "k_minus_bb_pct": -20.0
       },
       "forecast": null,
@@ -652,6 +620,38 @@
       },
       "war_gap": -0.01,
       "innings_share_pct": 0.1
+    },
+    {
+      "id": 695378,
+      "name": "Jack Sinclair",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 3,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "3.0",
+        "ip_value": 3.0,
+        "war": -0.02,
+        "era": 0.0,
+        "fip": 5.09,
+        "k_minus_bb_pct": 7.7
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.01,
+        "era": 4.9,
+        "fip": 5.14,
+        "k_minus_bb_pct": 5.9,
+        "team_at_fetch": "WSN"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.01
+      },
+      "war_gap": -0.01,
+      "innings_share_pct": 0.2
     },
     {
       "id": 642759,
@@ -667,7 +667,7 @@
         "ip_value": 4.0,
         "war": -0.04,
         "era": 2.25,
-        "fip": 6.35,
+        "fip": 6.34,
         "k_minus_bb_pct": 5.6
       },
       "forecast": {
@@ -731,7 +731,7 @@
         "ip_value": 2.0,
         "war": -0.09,
         "era": 22.5,
-        "fip": 14.1,
+        "fip": 14.09,
         "k_minus_bb_pct": -12.5
       },
       "forecast": null,
@@ -756,7 +756,7 @@
         "ip_value": 4.0,
         "war": -0.1,
         "era": 13.5,
-        "fip": 9.35,
+        "fip": 9.34,
         "k_minus_bb_pct": -3.7
       },
       "forecast": null,
@@ -797,7 +797,7 @@
         "war": 0.15
       },
       "war_gap": -0.27,
-      "innings_share_pct": 2.9
+      "innings_share_pct": 2.8
     },
     {
       "id": 664875,
@@ -843,7 +843,7 @@
       "actual": {
         "ip": "16.1",
         "ip_value": 16.333,
-        "war": -0.16,
+        "war": -0.17,
         "era": 7.71,
         "fip": 5.24,
         "k_minus_bb_pct": 10.8
@@ -877,7 +877,7 @@
         "ip_value": 5.0,
         "war": -0.18,
         "era": 14.4,
-        "fip": 8.7,
+        "fip": 8.69,
         "k_minus_bb_pct": 3.6
       },
       "forecast": {
@@ -909,7 +909,7 @@
         "ip_value": 4.0,
         "war": -0.21,
         "era": 11.25,
-        "fip": 8.1,
+        "fip": 8.09,
         "k_minus_bb_pct": -4.2
       },
       "forecast": {
@@ -1035,7 +1035,7 @@
       "actual": {
         "ip": "13.2",
         "ip_value": 13.667,
-        "war": -0.31,
+        "war": -0.32,
         "era": 7.9,
         "fip": 6.9,
         "k_minus_bb_pct": 11.4
@@ -1084,7 +1084,7 @@
         "ip": 41.5,
         "war": 0.09
       },
-      "war_gap": -0.43,
+      "war_gap": -0.44,
       "innings_share_pct": 1.8
     },
     {
@@ -1165,7 +1165,7 @@
         "ip_value": 31.667,
         "war": -0.44,
         "era": 6.82,
-        "fip": 5.5,
+        "fip": 5.49,
         "k_minus_bb_pct": 9.9
       },
       "forecast": {
@@ -1181,7 +1181,7 @@
         "war": 0.08
       },
       "war_gap": -0.53,
-      "innings_share_pct": 2.5
+      "innings_share_pct": 2.4
     },
     {
       "id": 641793,
@@ -1195,7 +1195,7 @@
       "actual": {
         "ip": "112.1",
         "ip_value": 112.333,
-        "war": -0.52,
+        "war": -0.53,
         "era": 4.97,
         "fip": 5.76,
         "k_minus_bb_pct": 7.3
@@ -1229,7 +1229,7 @@
         "ip_value": 39.667,
         "war": -0.53,
         "era": 6.58,
-        "fip": 5.47,
+        "fip": 5.46,
         "k_minus_bb_pct": 11.8
       },
       "forecast": {
@@ -1244,7 +1244,7 @@
         "ip": 44.8,
         "war": 0.21
       },
-      "war_gap": -0.73,
+      "war_gap": -0.74,
       "innings_share_pct": 3.1
     },
     {
@@ -1291,7 +1291,7 @@
       "actual": {
         "ip": "116.0",
         "ip_value": 116.0,
-        "war": -0.9,
+        "war": -0.91,
         "era": 5.82,
         "fip": 5.77,
         "k_minus_bb_pct": 7.0
@@ -1308,7 +1308,7 @@
         "ip": 128.9,
         "war": 1.03
       },
-      "war_gap": -1.93,
+      "war_gap": -1.94,
       "innings_share_pct": 9.0
     }
   ]

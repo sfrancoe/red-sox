@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T21:27:08.920845+00:00",
+  "generated_at": "2026-09-08T11:45:08.503788+00:00",
   "season": 2026,
   "team": "Cleveland Guardians",
   "games_played": 145,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 16.6,
+    "actual_war": 16.3,
     "forecast_war_to_date": 12.1,
-    "war_gap": 4.5,
-    "innings": 1280.7,
-    "era": 3.75
+    "war_gap": 4.2,
+    "innings": 1288.7,
+    "era": 3.76
   },
   "pitchers": [
     {
@@ -49,7 +49,7 @@
         "ip": 123.9,
         "war": 1.3
       },
-      "war_gap": 3.05,
+      "war_gap": 3.06,
       "innings_share_pct": 13.0
     },
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "169.0",
         "ip_value": 169.0,
-        "war": 3.23,
+        "war": 3.22,
         "era": 3.78,
         "fip": 3.49,
         "k_minus_bb_pct": 25.7
@@ -82,7 +82,7 @@
         "war": 1.77
       },
       "war_gap": 1.46,
-      "innings_share_pct": 13.2
+      "innings_share_pct": 13.1
     },
     {
       "id": 671922,
@@ -121,17 +121,17 @@
       "name": "Joey Cantillo",
       "throws": "L",
       "role": "Starter",
-      "games": 29,
-      "starts": 29,
+      "games": 30,
+      "starts": 30,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "141.2",
-        "ip_value": 141.667,
-        "war": 1.89,
-        "era": 3.81,
-        "fip": 4.02,
-        "k_minus_bb_pct": 12.8
+        "ip": "144.0",
+        "ip_value": 144.0,
+        "war": 1.62,
+        "era": 4.0,
+        "fip": 4.2,
+        "k_minus_bb_pct": 12.1
       },
       "forecast": {
         "ip": 148.8,
@@ -145,8 +145,8 @@
         "ip": 133.2,
         "war": 1.26
       },
-      "war_gap": 0.63,
-      "innings_share_pct": 11.1
+      "war_gap": 0.36,
+      "innings_share_pct": 11.2
     },
     {
       "id": 676440,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "166.1",
         "ip_value": 166.333,
-        "war": 1.27,
+        "war": 1.26,
         "era": 4.06,
         "fip": 4.57,
         "k_minus_bb_pct": 11.8
@@ -177,8 +177,8 @@
         "ip": 163.0,
         "war": 2.07
       },
-      "war_gap": -0.8,
-      "innings_share_pct": 13.0
+      "war_gap": -0.81,
+      "innings_share_pct": 12.9
     },
     {
       "id": 681870,
@@ -192,9 +192,9 @@
       "actual": {
         "ip": "42.1",
         "ip_value": 42.333,
-        "war": 1.07,
+        "war": 1.06,
         "era": 2.76,
-        "fip": 2.77,
+        "fip": 2.76,
         "k_minus_bb_pct": 23.0
       },
       "forecast": {
@@ -245,38 +245,6 @@
       "innings_share_pct": 4.1
     },
     {
-      "id": 677944,
-      "name": "Slade Cecconi",
-      "throws": "R",
-      "role": "Starter",
-      "games": 24,
-      "starts": 21,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "112.2",
-        "ip_value": 112.667,
-        "war": 0.66,
-        "era": 5.03,
-        "fip": 4.64,
-        "k_minus_bb_pct": 10.6
-      },
-      "forecast": {
-        "ip": 157.4,
-        "war": 1.16,
-        "era": 4.52,
-        "fip": 4.5,
-        "k_minus_bb_pct": 13.4,
-        "team_at_fetch": "CLE"
-      },
-      "forecast_to_date": {
-        "ip": 140.9,
-        "war": 1.04
-      },
-      "war_gap": -0.38,
-      "innings_share_pct": 8.8
-    },
-    {
       "id": 670036,
       "name": "Matt Festa",
       "throws": "R",
@@ -309,6 +277,38 @@
       "innings_share_pct": 4.7
     },
     {
+      "id": 677944,
+      "name": "Slade Cecconi",
+      "throws": "R",
+      "role": "Starter",
+      "games": 25,
+      "starts": 21,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "115.2",
+        "ip_value": 115.667,
+        "war": 0.64,
+        "era": 5.06,
+        "fip": 4.66,
+        "k_minus_bb_pct": 11.0
+      },
+      "forecast": {
+        "ip": 157.4,
+        "war": 1.16,
+        "era": 4.52,
+        "fip": 4.5,
+        "k_minus_bb_pct": 13.4,
+        "team_at_fetch": "CLE"
+      },
+      "forecast_to_date": {
+        "ip": 140.9,
+        "war": 1.04
+      },
+      "war_gap": -0.4,
+      "innings_share_pct": 9.0
+    },
+    {
       "id": 683769,
       "name": "Hunter Gaddis",
       "throws": "R",
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "50.2",
         "ip_value": 50.667,
-        "war": 0.5,
+        "war": 0.49,
         "era": 2.84,
         "fip": 3.79,
         "k_minus_bb_pct": 13.0
@@ -338,7 +338,7 @@
         "war": 0.13
       },
       "war_gap": 0.36,
-      "innings_share_pct": 4.0
+      "innings_share_pct": 3.9
     },
     {
       "id": 656492,
@@ -377,17 +377,17 @@
       "name": "Franco Aleman",
       "throws": "R",
       "role": "Reliever",
-      "games": 18,
+      "games": 19,
       "starts": 0,
       "saves": 0,
       "holds": 3,
       "actual": {
-        "ip": "18.2",
-        "ip_value": 18.667,
-        "war": 0.2,
-        "era": 3.38,
-        "fip": 3.74,
-        "k_minus_bb_pct": 17.1
+        "ip": "19.1",
+        "ip_value": 19.333,
+        "war": 0.19,
+        "era": 3.26,
+        "fip": 3.82,
+        "k_minus_bb_pct": 16.3
       },
       "forecast": {
         "ip": 22.0,
@@ -409,25 +409,25 @@
       "name": "Daniel Espino",
       "throws": "R",
       "role": "Reliever",
-      "games": 7,
+      "games": 8,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "8.0",
-        "ip_value": 8.0,
-        "war": 0.11,
-        "era": 3.38,
-        "fip": 2.47,
-        "k_minus_bb_pct": 32.4
+        "ip": "9.0",
+        "ip_value": 9.0,
+        "war": 0.15,
+        "era": 3.0,
+        "fip": 2.09,
+        "k_minus_bb_pct": 33.3
       },
       "forecast": null,
       "forecast_to_date": {
         "ip": 0.0,
         "war": 0.0
       },
-      "war_gap": 0.11,
-      "innings_share_pct": 0.6
+      "war_gap": 0.15,
+      "innings_share_pct": 0.7
     },
     {
       "id": 702021,
@@ -507,7 +507,7 @@
         "ip_value": 2.0,
         "war": 0.05,
         "era": 0.0,
-        "fip": 0.1,
+        "fip": 0.09,
         "k_minus_bb_pct": 37.5
       },
       "forecast": {
@@ -539,7 +539,7 @@
         "ip_value": 4.333,
         "war": 0.05,
         "era": 6.23,
-        "fip": 2.64,
+        "fip": 2.63,
         "k_minus_bb_pct": 5.0
       },
       "forecast": null,
@@ -583,6 +583,38 @@
       "innings_share_pct": 0.2
     },
     {
+      "id": 684974,
+      "name": "Craig Yoho",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 14,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "14.2",
+        "ip_value": 14.667,
+        "war": -0.04,
+        "era": 5.52,
+        "fip": 4.73,
+        "k_minus_bb_pct": 17.9
+      },
+      "forecast": {
+        "ip": 42.0,
+        "war": 0.08,
+        "era": 3.97,
+        "fip": 4.13,
+        "k_minus_bb_pct": 12.8,
+        "team_at_fetch": "CLE"
+      },
+      "forecast_to_date": {
+        "ip": 37.6,
+        "war": 0.07
+      },
+      "war_gap": -0.11,
+      "innings_share_pct": 1.1
+    },
+    {
       "id": 671106,
       "name": "Logan Allen",
       "throws": "L",
@@ -596,7 +628,7 @@
         "ip_value": 16.667,
         "war": -0.04,
         "era": 5.94,
-        "fip": 4.96,
+        "fip": 4.95,
         "k_minus_bb_pct": 12.3
       },
       "forecast": {
@@ -660,7 +692,7 @@
         "ip_value": 49.667,
         "war": -0.06,
         "era": 3.08,
-        "fip": 4.41,
+        "fip": 4.4,
         "k_minus_bb_pct": 9.6
       },
       "forecast": {
@@ -711,38 +743,6 @@
       "innings_share_pct": 2.6
     },
     {
-      "id": 684974,
-      "name": "Craig Yoho",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 13,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "13.2",
-        "ip_value": 13.667,
-        "war": -0.07,
-        "era": 5.93,
-        "fip": 5.0,
-        "k_minus_bb_pct": 17.5
-      },
-      "forecast": {
-        "ip": 42.0,
-        "war": 0.08,
-        "era": 3.97,
-        "fip": 4.13,
-        "k_minus_bb_pct": 12.8,
-        "team_at_fetch": "CLE"
-      },
-      "forecast_to_date": {
-        "ip": 37.6,
-        "war": 0.07
-      },
-      "war_gap": -0.14,
-      "innings_share_pct": 1.1
-    },
-    {
       "id": 688883,
       "name": "Peyton Pallette",
       "throws": "R",
@@ -788,7 +788,7 @@
         "ip_value": 15.333,
         "war": -0.31,
         "era": 5.28,
-        "fip": 6.1,
+        "fip": 6.09,
         "k_minus_bb_pct": 16.4
       },
       "forecast": {
