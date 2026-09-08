@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T22:50:31.938689+00:00",
+  "generated_at": "2026-09-08T11:19:12.504516+00:00",
   "season": 2026,
   "team": "Boston Red Sox",
   "games_played": 145,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 20.1,
+    "actual_war": 20.3,
     "forecast_war_to_date": 19.7,
-    "war_gap": 0.3,
-    "innings": 1281.3,
-    "era": 3.6
+    "war_gap": 0.6,
+    "innings": 1290.3,
+    "era": 3.59
   },
   "pitchers": [
     {
@@ -34,7 +34,7 @@
         "ip_value": 137.0,
         "war": 3.74,
         "era": 3.15,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 22.1
       },
       "forecast": {
@@ -50,7 +50,7 @@
         "war": 0.37
       },
       "war_gap": 3.37,
-      "innings_share_pct": 10.7
+      "innings_share_pct": 10.6
     },
     {
       "id": 624133,
@@ -82,7 +82,7 @@
         "war": 2.91
       },
       "war_gap": 0.5,
-      "innings_share_pct": 10.2
+      "innings_share_pct": 10.1
     },
     {
       "id": 543243,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "150.2",
         "ip_value": 150.667,
-        "war": 2.96,
+        "war": 2.97,
         "era": 2.69,
         "fip": 3.49,
         "k_minus_bb_pct": 15.5
@@ -114,7 +114,7 @@
         "war": 3.47
       },
       "war_gap": -0.51,
-      "innings_share_pct": 11.8
+      "innings_share_pct": 11.7
     },
     {
       "id": 687562,
@@ -146,24 +146,24 @@
         "war": 0.04
       },
       "war_gap": 2.35,
-      "innings_share_pct": 7.8
+      "innings_share_pct": 7.7
     },
     {
       "id": 676477,
       "name": "Garrett Whitlock",
       "throws": "R",
       "role": "Setup",
-      "games": 48,
+      "games": 49,
       "starts": 0,
-      "saves": 2,
+      "saves": 3,
       "holds": 24,
       "actual": {
-        "ip": "47.0",
-        "ip_value": 47.0,
-        "war": 1.69,
-        "era": 1.91,
-        "fip": 2.16,
-        "k_minus_bb_pct": 25.4
+        "ip": "48.0",
+        "ip_value": 48.0,
+        "war": 1.75,
+        "era": 1.88,
+        "fip": 2.09,
+        "k_minus_bb_pct": 26.1
       },
       "forecast": {
         "ip": 70.0,
@@ -177,7 +177,7 @@
         "ip": 62.7,
         "war": 0.72
       },
-      "war_gap": 0.96,
+      "war_gap": 1.03,
       "innings_share_pct": 3.7
     },
     {
@@ -226,7 +226,7 @@
         "ip_value": 38.667,
         "war": 0.89,
         "era": 3.26,
-        "fip": 2.61,
+        "fip": 2.6,
         "k_minus_bb_pct": 18.2
       },
       "forecast": {
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "91.2",
         "ip_value": 91.667,
-        "war": 0.66,
+        "war": 0.67,
         "era": 3.44,
         "fip": 4.6,
         "k_minus_bb_pct": 15.1
@@ -306,7 +306,39 @@
         "war": 1.13
       },
       "war_gap": -0.47,
-      "innings_share_pct": 7.2
+      "innings_share_pct": 7.1
+    },
+    {
+      "id": 678394,
+      "name": "Brayan Bello",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 23,
+      "starts": 9,
+      "saves": 1,
+      "holds": 0,
+      "actual": {
+        "ip": "102.2",
+        "ip_value": 102.667,
+        "war": 0.64,
+        "era": 4.82,
+        "fip": 4.21,
+        "k_minus_bb_pct": 9.3
+      },
+      "forecast": {
+        "ip": 156.1,
+        "war": 1.84,
+        "era": 4.41,
+        "fip": 4.21,
+        "k_minus_bb_pct": 11.0,
+        "team_at_fetch": "BOS"
+      },
+      "forecast_to_date": {
+        "ip": 139.7,
+        "war": 1.64
+      },
+      "war_gap": -1.01,
+      "innings_share_pct": 8.0
     },
     {
       "id": 686580,
@@ -339,38 +371,6 @@
       },
       "war_gap": 0.2,
       "innings_share_pct": 2.4
-    },
-    {
-      "id": 678394,
-      "name": "Brayan Bello",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 22,
-      "starts": 8,
-      "saves": 1,
-      "holds": 0,
-      "actual": {
-        "ip": "97.2",
-        "ip_value": 97.667,
-        "war": 0.48,
-        "era": 5.07,
-        "fip": 4.33,
-        "k_minus_bb_pct": 8.6
-      },
-      "forecast": {
-        "ip": 156.1,
-        "war": 1.84,
-        "era": 4.41,
-        "fip": 4.21,
-        "k_minus_bb_pct": 11.0,
-        "team_at_fetch": "BOS"
-      },
-      "forecast_to_date": {
-        "ip": 139.7,
-        "war": 1.64
-      },
-      "war_gap": -1.16,
-      "innings_share_pct": 7.6
     },
     {
       "id": 669062,
@@ -409,17 +409,17 @@
       "name": "Alec Gamboa",
       "throws": "L",
       "role": "Reliever",
-      "games": 15,
+      "games": 16,
       "starts": 2,
       "saves": 1,
       "holds": 1,
       "actual": {
-        "ip": "26.0",
-        "ip_value": 26.0,
+        "ip": "27.0",
+        "ip_value": 27.0,
         "war": 0.37,
-        "era": 1.04,
-        "fip": 3.14,
-        "k_minus_bb_pct": 11.0
+        "era": 1.33,
+        "fip": 3.17,
+        "k_minus_bb_pct": 10.5
       },
       "forecast": {
         "ip": 1.0,
@@ -434,7 +434,7 @@
         "war": -0.0
       },
       "war_gap": 0.37,
-      "innings_share_pct": 2.0
+      "innings_share_pct": 2.1
     },
     {
       "id": 676979,
@@ -450,7 +450,7 @@
         "ip_value": 30.0,
         "war": 0.33,
         "era": 6.3,
-        "fip": 4.3,
+        "fip": 4.29,
         "k_minus_bb_pct": 18.8
       },
       "forecast": {
@@ -512,7 +512,7 @@
       "actual": {
         "ip": "16.1",
         "ip_value": 16.333,
-        "war": 0.14,
+        "war": 0.15,
         "era": 3.31,
         "fip": 3.65,
         "k_minus_bb_pct": 9.9
@@ -529,40 +529,8 @@
         "ip": 51.9,
         "war": 0.15
       },
-      "war_gap": -0.01,
+      "war_gap": -0.0,
       "innings_share_pct": 1.3
-    },
-    {
-      "id": 681544,
-      "name": "Wyatt Olds",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 8,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "9.1",
-        "ip_value": 9.333,
-        "war": 0.12,
-        "era": 0.96,
-        "fip": 3.42,
-        "k_minus_bb_pct": 17.1
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.01,
-        "era": 5.18,
-        "fip": 5.22,
-        "k_minus_bb_pct": 5.6,
-        "team_at_fetch": "BOS"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.01
-      },
-      "war_gap": 0.13,
-      "innings_share_pct": 0.7
     },
     {
       "id": 669711,
@@ -576,9 +544,9 @@
       "actual": {
         "ip": "53.1",
         "ip_value": 53.333,
-        "war": 0.11,
+        "war": 0.12,
         "era": 3.71,
-        "fip": 4.15,
+        "fip": 4.14,
         "k_minus_bb_pct": 16.0
       },
       "forecast": {
@@ -594,7 +562,39 @@
         "war": 0.15
       },
       "war_gap": -0.04,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
+    },
+    {
+      "id": 681544,
+      "name": "Wyatt Olds",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 9,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "11.1",
+        "ip_value": 11.333,
+        "war": 0.11,
+        "era": 1.59,
+        "fip": 3.62,
+        "k_minus_bb_pct": 25.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.01,
+        "era": 5.18,
+        "fip": 5.22,
+        "k_minus_bb_pct": 5.6,
+        "team_at_fetch": "BOS"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.01
+      },
+      "war_gap": 0.12,
+      "innings_share_pct": 0.9
     },
     {
       "id": 700842,
@@ -610,7 +610,7 @@
         "ip_value": 10.0,
         "war": 0.07,
         "era": 6.3,
-        "fip": 4.2,
+        "fip": 4.19,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -706,7 +706,7 @@
         "ip_value": 55.667,
         "war": 0.02,
         "era": 4.53,
-        "fip": 4.61,
+        "fip": 4.6,
         "k_minus_bb_pct": 10.0
       },
       "forecast": {
@@ -738,7 +738,7 @@
         "ip_value": 1.0,
         "war": -0.0,
         "era": 9.0,
-        "fip": 4.1,
+        "fip": 4.09,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -786,7 +786,7 @@
         "war": 0.3
       },
       "war_gap": -0.31,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     },
     {
       "id": 686747,
@@ -802,7 +802,7 @@
         "ip_value": 0.333,
         "war": -0.08,
         "era": 27.0,
-        "fip": 36.1,
+        "fip": 36.09,
         "k_minus_bb_pct": 50.0
       },
       "forecast": {
@@ -834,7 +834,7 @@
         "ip_value": 2.667,
         "war": -0.08,
         "era": 3.38,
-        "fip": 7.6,
+        "fip": 7.59,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -945,7 +945,7 @@
         "ip": 49.2,
         "war": 0.34
       },
-      "war_gap": -0.47,
+      "war_gap": -0.46,
       "innings_share_pct": 1.7
     },
     {
@@ -962,7 +962,7 @@
         "ip_value": 0.667,
         "war": -0.15,
         "era": 67.5,
-        "fip": 55.6,
+        "fip": 55.59,
         "k_minus_bb_pct": -37.5
       },
       "forecast": null,
