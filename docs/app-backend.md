@@ -15,8 +15,17 @@ The gateway also handles the legacy `/data/*` paths so installed TestFlight
 builds continue receiving fresh data during the transition.
 
 This keeps frequent data commits from consuming production-deployment credits.
-Only changes under `netlify/`, `netlify.toml`, or `privacy/` trigger a Netlify
-production deployment.
+The build-ignore check compares Netlify's last published commit with the target
+commit, so it also covers batches of commits. Data-only, native-app-only,
+documentation-only, and automation-only changes skip production deployment.
+Changes to the public site, `netlify/`, `netlify.toml`, the site build/ignore
+scripts, or the team registry build a new release. Unknown paths build by
+default, as do first builds and builds whose Git references cannot be verified.
+
+Keep data refreshes and native design work separate from backend releases when
+practical. A mixed commit that includes any deployed file correctly triggers a
+release. Netlify build hooks bypass ignore commands, so hook-triggered releases
+must remain an intentional manual operation.
 
 ## Backend address
 

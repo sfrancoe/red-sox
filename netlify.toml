@@ -3,6 +3,7 @@
 
 [build]
   command = "bash scripts/build_site.sh"
+  ignore = "bash scripts/netlify_ignore.sh"
   publish = "_site"
 
 [[redirects]]
