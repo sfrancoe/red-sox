@@ -34,6 +34,12 @@ enum AppColor {
     static let border = rule
     static let separator = rule
     static let panelBorderWidth: CGFloat = 1
+
+    static func streakColor(_ streak: String) -> Color {
+        let count = Int(streak.dropFirst()) ?? 0
+        guard count >= 3 else { return bone }
+        return streak.hasPrefix("W") ? amber : steel
+    }
 }
 
 enum AppFont {

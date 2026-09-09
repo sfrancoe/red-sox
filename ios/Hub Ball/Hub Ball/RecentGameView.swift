@@ -275,8 +275,8 @@ struct RecentGameView: View {
             .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
             .foregroundStyle(AppColor.ink)
 
-            combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
-            combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
+            combinedLineScoreRow(game.away, innings: game.innings, isAway: true, isWinner: game.away.runs > game.home.runs)
+            combinedLineScoreRow(game.home, innings: game.innings, isAway: false, isWinner: game.home.runs > game.away.runs)
         }
         .monospacedDigit()
         .frame(minWidth: 0, maxWidth: .infinity)
@@ -285,10 +285,11 @@ struct RecentGameView: View {
     private func combinedLineScoreRow(
         _ team: TeamBoxScore,
         innings: [Inning],
-        isAway: Bool
+        isAway: Bool,
+        isWinner: Bool
     ) -> some View {
         HStack(spacing: 0) {
-            Text(team.cityName)
+            Text(team.abbreviation)
                 .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: .black))
                 .foregroundStyle(AppColor.navy)
                 .frame(width: contentWidth >= 650 ? 90 : 50, alignment: .leading)
@@ -301,7 +302,7 @@ struct RecentGameView: View {
                     .frame(minWidth: 0, maxWidth: .infinity)
             }
 
-            lineScoreTotal(team.runs, emphasized: true)
+            lineScoreTotal(team.runs, emphasized: isWinner)
             lineScoreTotal(team.hits)
             lineScoreTotal(team.errors)
             lineScoreTotal(team.leftOnBase)
@@ -326,7 +327,7 @@ struct RecentGameView: View {
                     ? .system(size: contentWidth >= 650 ? 17 : 15, weight: .black, design: .monospaced)
                     : .system(size: contentWidth >= 650 ? 13 : 11, weight: .semibold, design: .monospaced)
             )
-            .foregroundStyle(emphasized ? AppColor.red : AppColor.ink)
+            .foregroundStyle(emphasized ? AppColor.amber : AppColor.bone)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
     }
 

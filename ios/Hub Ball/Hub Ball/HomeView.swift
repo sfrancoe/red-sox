@@ -110,7 +110,7 @@ struct HomeView: View {
                             HStack(spacing: 8) {
                                 Text(team.rank)
                                     .font(AppFont.number)
-                                    .foregroundStyle(AppColor.navy.opacity(0.42))
+                                    .foregroundStyle(AppColor.boneMuted)
                                     .frame(width: 12, alignment: .trailing)
                                 Text(team.cityName)
                                     .font(.system(size: 15, weight: team.isFavorite ? .black : .bold))
@@ -128,7 +128,7 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity)
                             Text(team.streak)
                                 .font(AppFont.number)
-                                .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
+                                .foregroundStyle(AppColor.streakColor(team.streak))
                                 .frame(maxWidth: .infinity)
                         }
                         .foregroundStyle(AppColor.navy)
@@ -182,15 +182,21 @@ struct HomeView: View {
                     .frame(height: 36)
                     .modifier(HomeTableHeaderStyle())
 
+                    HStack(spacing: 16) {
+                        scoreTeam(favorite, isWinner: favorite.runs > opponent.runs)
+                        scoreTeam(opponent, isWinner: opponent.runs > favorite.runs)
+                    }
+                    .padding(.horizontal, 13)
+                    .padding(.vertical, 8)
+
                     gameResultRow(favorite, emphasized: true)
                     Divider().overlay(AppColor.separator).padding(.leading, 13)
                     gameResultRow(opponent, emphasized: false)
 
                     HStack(spacing: 8) {
-                        Text("\(team.shortName.uppercased()) HR")
+                        Text("Home runs")
                             .font(.system(size: 10, weight: .black))
-                            .tracking(0.5)
-                            .foregroundStyle(AppColor.red)
+                            .foregroundStyle(AppColor.boneMuted)
                         Text(homeRunSummary(for: favorite))
                             .font(.system(size: 11, weight: .bold))
                             .foregroundStyle(AppColor.navy)
@@ -203,15 +209,14 @@ struct HomeView: View {
                     .background(AppColor.paleBlue.opacity(0.35))
 
                     HStack(spacing: 8) {
-                        Text(game.isLive ? "LIVE" : "PITCHING")
-                            .foregroundStyle(AppColor.red)
+                        Text(game.isLive ? "Live" : "Pitching")
+                            .foregroundStyle(AppColor.boneMuted)
                         Text(game.isLive ? game.liveStatus ?? "In progress" : pitchingSummary(for: game))
                             .foregroundStyle(AppColor.navy)
                             .lineLimit(1)
                             .minimumScaleFactor(0.78)
                     }
                     .font(.system(size: 10, weight: .black))
-                    .tracking(0.35)
                     .padding(.horizontal, 13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 27)
@@ -385,20 +390,20 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
     }
 
-    private func scoreTeam(_ team: TeamBoxScore, isFavorite: Bool) -> some View {
+    private func scoreTeam(_ team: TeamBoxScore, isWinner: Bool) -> some View {
         HStack(alignment: .center, spacing: 7) {
             VStack(alignment: .leading, spacing: 1) {
                 Text(team.abbreviation)
-                    .font(.system(size: 21, weight: .black, design: .rounded))
-                    .foregroundStyle(isFavorite ? AppColor.red : AppColor.navy)
+                    .font(AppFont.displayMedium)
+                    .foregroundStyle(AppColor.bone)
                 Text(team.record)
                     .font(.system(size: 9, weight: .bold))
                     .foregroundStyle(AppColor.navy.opacity(0.46))
             }
             Spacer(minLength: 2)
             Text("\(team.runs)")
-                .font(.system(size: 36, weight: .black, design: .rounded))
-                .foregroundStyle(isFavorite ? AppColor.red : AppColor.navy)
+                .font(AppFont.numberExtraLarge)
+                .foregroundStyle(isWinner ? AppColor.amber : AppColor.bone)
                 .monospacedDigit()
         }
         .frame(maxWidth: .infinity)

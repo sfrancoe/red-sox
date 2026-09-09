@@ -255,10 +255,11 @@ struct StandingsView: View {
             HStack(spacing: compact ? 2 : 5) {
                 Text(team.rank)
                     .font(AppFont.number)
-                    .foregroundStyle(AppColor.hunterGreen)
+                    .foregroundStyle(AppColor.boneMuted)
                     .frame(width: compact ? 11 : 15)
                 Text(team.cityName)
-                    .font(.system(size: compact ? 15 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold))
+                    .font(AppFont.body)
+                    .foregroundStyle(emphasized ? AppColor.amber : AppColor.bone)
                     .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -270,18 +271,19 @@ struct StandingsView: View {
                 gamesBack,
                 width: widths.gamesBack,
                 emphasized: emphasized,
-                compact: compact
+                compact: compact,
+                color: gamesBack == "—" ? AppColor.boneMuted : gamesBack == "0" || gamesBack == "0.0" ? AppColor.bone : AppColor.steel
             )
             tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
                 .font(AppFont.number)
                 .lineLimit(1)
                 .minimumScaleFactor(0.85)
-                .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
+                .foregroundStyle(AppColor.streakColor(team.streak))
                 .frame(width: widths.streak)
         }
         .font(AppFont.number)
-        .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
+        .foregroundStyle(AppColor.bone)
         .padding(.horizontal, compact ? 2 : 5)
         .padding(.vertical, compact ? compactRowPadding : (contentWidth >= 650 ? 13 : 7))
         .background(emphasized ? AppColor.paleBlue : Color.clear)
@@ -292,13 +294,14 @@ struct StandingsView: View {
         _ value: String,
         width: CGFloat,
         emphasized: Bool = false,
-        compact: Bool = false
+        compact: Bool = false,
+        color: Color? = nil
     ) -> some View {
         Text(value)
             .font(AppFont.number)
             .lineLimit(1)
             .minimumScaleFactor(0.85)
-            .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
+            .foregroundStyle(color ?? AppColor.bone)
             .frame(width: width)
     }
 
