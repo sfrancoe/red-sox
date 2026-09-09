@@ -24,8 +24,8 @@ struct ScheduleView: View {
                         scheduleContent(schedule)
                     } else if store.isLoading {
                         ProgressView("Loading the schedule…")
-                            .tint(.black)
-                            .foregroundStyle(.black)
+                            .tint(AppColor.ink)
+                            .foregroundStyle(AppColor.ink)
                     } else {
                         errorView
                     }
@@ -65,7 +65,7 @@ struct ScheduleView: View {
 
                 Text("\(schedule.games.count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
                     .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
-                    .foregroundStyle(Color.black.opacity(0.82))
+                    .foregroundStyle(AppColor.ink.opacity(0.82))
                     .padding(.vertical, 2)
             }
             .padding(.horizontal, 12)

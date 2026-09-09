@@ -21,8 +21,8 @@ struct StandingsView: View {
                     }
                 } else if store.isLoading {
                     ProgressView("Loading standings…")
-                        .tint(.black)
-                        .foregroundStyle(.black)
+                        .tint(AppColor.ink)
+                        .foregroundStyle(AppColor.ink)
                 } else {
                     errorView
                 }
@@ -68,7 +68,7 @@ struct StandingsView: View {
 
                         Text("Top three teams hold the wild-card positions.")
                             .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
-                            .foregroundStyle(Color.black.opacity(0.82))
+                            .foregroundStyle(AppColor.ink.opacity(0.82))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 4)
                     }
@@ -118,7 +118,7 @@ struct StandingsView: View {
             Text(league.fullName.uppercased())
                 .font(.system(size: 14, weight: .black))
                 .tracking(0.4)
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
 
             HStack(alignment: .top, spacing: 6) {
                 VStack(spacing: 3) {
@@ -157,7 +157,7 @@ struct StandingsView: View {
         let updated = updates.first ?? "—"
         return Text("Updated \(updated) · MLB Stats API")
             .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
-            .foregroundStyle(Color.black.opacity(0.72))
+            .foregroundStyle(AppColor.ink.opacity(0.72))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 5)
     }
@@ -177,7 +177,7 @@ struct StandingsView: View {
                         )
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
-                        .foregroundStyle(Color.black)
+                        .foregroundStyle(AppColor.ink)
                 }
                 .buttonStyle(.plain)
             }

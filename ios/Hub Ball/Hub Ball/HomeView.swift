@@ -27,8 +27,8 @@ struct HomeView: View {
                     briefing
                 } else if store.isLoading {
                     ProgressView("Loading today's briefing…")
-                        .tint(.black)
-                        .foregroundStyle(.black)
+                        .tint(AppColor.ink)
+                        .foregroundStyle(AppColor.ink)
                 } else {
                     errorView
                 }
@@ -57,7 +57,7 @@ struct HomeView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
             }
-            .foregroundStyle(Color.black)
+            .foregroundStyle(AppColor.ink)
             .padding(.horizontal, 12)
             .padding(.top, 10)
             .accessibilityElement(children: .ignore)
@@ -236,7 +236,7 @@ struct HomeView: View {
                 if upcomingGames.isEmpty {
                     Text("No upcoming games are scheduled.")
                         .font(.subheadline)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                         .frame(maxWidth: .infinity, minHeight: 110)
                 }
             }
@@ -403,7 +403,7 @@ struct HomeView: View {
             .padding(.horizontal, 7)
             .frame(height: 22)
             .background(result.lowercased() == "win" ? AppColor.resultWin : AppColor.resultLoss)
-            .foregroundStyle(.black)
+            .foregroundStyle(AppColor.ink)
             .clipShape(Rectangle())
     }
 
@@ -463,7 +463,7 @@ struct HomeView: View {
                 .buttonStyle(HubProminentButtonStyle())
                 .tint(AppColor.navy)
         }
-        .foregroundStyle(.black)
+        .foregroundStyle(AppColor.ink)
         .padding(24)
     }
 }
@@ -471,7 +471,7 @@ struct HomeView: View {
 private struct HomeTableHeaderStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .foregroundStyle(Color.black.opacity(0.82))
+            .foregroundStyle(AppColor.ink.opacity(0.82))
             .background(AppColor.teamAccent.opacity(0.06))
             .overlay(alignment: .top) {
                 Rectangle().fill(Color.black.opacity(0.78)).frame(height: 1)

@@ -73,17 +73,17 @@ struct PlayersView: View {
                 Circle().fill(AppColor.teamAccent)
                 Image(systemName: "baseball.fill")
                     .font(.system(size: 32))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
             }
             .frame(width: 62, height: 62)
 
             VStack(alignment: .leading, spacing: -3) {
                 Text("BOSTON BASEBALL")
                     .font(.system(size: contentWidth >= 650 ? 35 : 27, weight: .black))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                 Text("PLAYER REFERENCE")
                     .font(.system(size: contentWidth >= 650 ? 25 : 20, weight: .medium))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
             }
             Spacer(minLength: 4)
             VStack(alignment: .trailing, spacing: 2) {
@@ -91,7 +91,7 @@ struct PlayersView: View {
                     .font(.title2.weight(.black).monospacedDigit())
                 Text("PLAYERS")
                     .font(.system(size: 9, weight: .bold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
             }
         }
         .padding(.horizontal, 16)
@@ -126,14 +126,14 @@ struct PlayersView: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(player.name)
                     .font(.system(size: 19, weight: .bold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                 Text("\(player.position.name) · \(player.rosterStatus)")
                     .font(.system(size: 12))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                 if let age = player.age {
                     Text("Age \(age)\(player.birthplace.isEmpty ? "" : " · \(player.birthplace)")")
                         .font(.system(size: 12))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                         .lineLimit(1)
                 }
             }
@@ -143,7 +143,7 @@ struct PlayersView: View {
                 .foregroundStyle(AppColor.darkRed)
             Image(systemName: "chevron.right")
                 .font(.caption.weight(.bold))
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 9)
@@ -170,7 +170,7 @@ struct PlayersView: View {
             }
         }
         .font(.caption2)
-        .foregroundStyle(.black)
+        .foregroundStyle(AppColor.ink)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
         .background(AppColor.paper)
@@ -223,7 +223,7 @@ private struct PlayerReferenceView: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(player.name)
                     .font(.system(size: contentWidth >= 650 ? 34 : 28, weight: .black))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                     .fixedSize(horizontal: false, vertical: true)
                 if contentWidth < 450 {
                     compactReferenceLine(player.position.name)
@@ -233,7 +233,7 @@ private struct PlayerReferenceView: View {
                 } else {
                     referenceLine("Position", player.position.name)
                     referenceLine("Bats", player.bats ?? "—", trailingLabel: "Throws", trailingValue: player.throws ?? "—")
-                    if let measurements { Text(measurements).font(.system(size: 13)).foregroundStyle(.black) }
+                    if let measurements { Text(measurements).font(.system(size: 13)).foregroundStyle(AppColor.ink) }
                     referenceLine("Current team", "Boston Red Sox")
                 }
             }
@@ -241,7 +241,7 @@ private struct PlayerReferenceView: View {
             VStack(spacing: 6) {
                 Text(player.rosterStatus.uppercased())
                     .font(.system(size: 10, weight: .bold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 10)
                     .frame(minHeight: 25)
@@ -281,13 +281,13 @@ private struct PlayerReferenceView: View {
             }
         }
         .font(.system(size: 13))
-        .foregroundStyle(.black)
+        .foregroundStyle(AppColor.ink)
     }
 
     private func compactReferenceLine(_ value: String) -> some View {
         Text(value)
             .font(.system(size: 12, weight: .medium))
-            .foregroundStyle(Color.black.opacity(0.78))
+            .foregroundStyle(AppColor.ink.opacity(0.78))
             .lineLimit(2)
             .fixedSize(horizontal: false, vertical: true)
     }
@@ -331,7 +331,7 @@ private struct PlayerReferenceView: View {
                 .foregroundStyle(AppColor.darkRed)
             Text(value)
                 .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
                 .lineLimit(2)
                 .minimumScaleFactor(0.8)
         }
@@ -369,10 +369,10 @@ private struct PlayerReferenceView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Career statistics are not available in the completed 2025 data release.")
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                     Text("This usually means the player debuted in 2026 or has not yet appeared in an MLB game.")
                         .font(.system(size: 12))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)
@@ -392,7 +392,7 @@ private struct PlayerReferenceView: View {
                         .foregroundStyle(AppColor.darkRed)
                     Text(item.1)
                         .font(.system(size: 14, weight: .semibold).monospacedDigit())
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                 }
                 .frame(maxWidth: .infinity, minHeight: 52)
                 .overlay(alignment: .trailing) { Divider() }
@@ -432,11 +432,11 @@ private struct PlayerReferenceView: View {
                 HStack(spacing: 10) {
                     Text("\(index + 1)")
                         .font(.caption.monospacedDigit())
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                         .frame(width: 22, alignment: .trailing)
                     Text(team)
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                     Spacer()
                 }
                 .padding(.horizontal, 12)
@@ -451,13 +451,13 @@ private struct PlayerReferenceView: View {
             if player.education.entries.isEmpty {
                 Text("No college or school is listed in the open data record.")
                     .font(.system(size: 14))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                     .padding(12)
             } else {
                 ForEach(player.education.entries, id: \.self) { entry in
                     Text(entry)
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                         .padding(12)
                 }
             }
@@ -468,11 +468,11 @@ private struct PlayerReferenceView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(source?.attribution ?? "Open Wikimedia data")
                 .font(.system(size: 12))
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
             if let statsAttribution = source?.statsAttribution {
                 Text(statsAttribution)
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
             }
             HStack(spacing: 18) {
                 if let url = player.sourceURL { Link("Wikidata record", destination: url) }

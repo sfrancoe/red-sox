@@ -48,8 +48,8 @@ struct HeadlinesView: View {
                         }
                     } else if store.isLoading {
                         ProgressView("Loading headlines…")
-                            .tint(.black)
-                            .foregroundStyle(.black)
+                            .tint(AppColor.ink)
+                            .foregroundStyle(AppColor.ink)
                     } else {
                         errorView
                     }
@@ -66,7 +66,7 @@ struct HeadlinesView: View {
         VStack(spacing: 0) {
             Text(store.feeds[source]?.source ?? source.shortName)
                 .font(.system(size: 20, weight: .black))
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 14)
@@ -180,7 +180,7 @@ struct HeadlinesView: View {
                         .minimumScaleFactor(0.72)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .foregroundStyle(Color.black)
+                        .foregroundStyle(AppColor.ink)
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(selection.wrappedValue == source ? .isSelected : [])
@@ -203,13 +203,13 @@ struct HeadlinesView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(feed.source)
                 .font(.system(size: 14, weight: .black))
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
 
             Spacer()
 
             Text("Updated \(feed.refreshedText)")
                 .font(.system(size: 9, weight: .medium))
-                .foregroundStyle(Color.black.opacity(0.78))
+                .foregroundStyle(AppColor.ink.opacity(0.78))
                 .multilineTextAlignment(.trailing)
         }
     }
@@ -238,11 +238,11 @@ struct HeadlinesView: View {
                     .lineLimit(1)
 
                 Text("·")
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(AppColor.ink)
 
                 Text(article.publishedText)
                     .font(.system(size: 11, weight: .medium))
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(AppColor.ink)
 
                 Spacer(minLength: 4)
 
@@ -257,7 +257,7 @@ struct HeadlinesView: View {
             if !article.description.isEmpty {
                 Text(article.description)
                     .font(.system(size: 14))
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(AppColor.ink)
                     .lineSpacing(2)
                     .lineLimit(4)
             }

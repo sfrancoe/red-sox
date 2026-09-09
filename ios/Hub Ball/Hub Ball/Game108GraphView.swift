@@ -20,8 +20,8 @@ struct Game108GraphView: View {
                     graphContent
                 } else if store.isLoading {
                     ProgressView("Loading Game 108…")
-                        .tint(.black)
-                        .foregroundStyle(.black)
+                        .tint(AppColor.ink)
+                        .foregroundStyle(AppColor.ink)
                 } else {
                     errorView
                 }
@@ -63,7 +63,7 @@ struct Game108GraphView: View {
                                         .font(.caption.weight(.black))
                                         .tracking(0.8)
                                 }
-                                .foregroundStyle(.black)
+                                .foregroundStyle(AppColor.ink)
                                 .padding(.horizontal, 22)
                                 .padding(.vertical, 16)
                                 .background(AppColor.accentSoft)
@@ -95,7 +95,7 @@ struct Game108GraphView: View {
         Text("Four straight seasons with the same record after 108 games: 57–51. Where will 2026 go from here?")
             .font(.subheadline.weight(.bold))
             .italic()
-            .foregroundStyle(.black)
+            .foregroundStyle(AppColor.ink)
             .lineSpacing(1)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -108,7 +108,7 @@ struct Game108GraphView: View {
                 } label: {
                     Label(isPlaying ? "Pause" : "Play", systemImage: isPlaying ? "pause.fill" : "play.fill")
                         .font(.system(size: 11, weight: .black))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
                         .background(AppColor.accentSoft)
@@ -121,7 +121,7 @@ struct Game108GraphView: View {
                 } label: {
                     Label("Restart", systemImage: "arrow.counterclockwise")
                         .font(.system(size: 11, weight: .black))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColor.ink)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
                         .background(AppColor.accentSoft)
@@ -141,7 +141,7 @@ struct Game108GraphView: View {
                         systemImage: isMusicOn ? "speaker.wave.2.fill" : "speaker.slash.fill"
                     )
                     .font(.system(size: 10, weight: .black))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
                     .frame(maxWidth: .infinity)
@@ -155,7 +155,7 @@ struct Game108GraphView: View {
             HStack(spacing: 5) {
                 Text("SPEED")
                     .font(.system(size: 11, weight: .black))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                     .padding(.horizontal, 8)
 
                 ForEach([1.0, 2.0, 4.0], id: \.self) { option in
@@ -164,7 +164,7 @@ struct Game108GraphView: View {
                     } label: {
                         Text("\(Int(option))×")
                             .font(.system(size: 12, weight: .black))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(AppColor.ink)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
                             .background(speed == option ? AppColor.accentSoft : AppColor.paper)
@@ -482,7 +482,7 @@ private struct Game108Canvas: View {
             context.draw(
                 Text(label)
                     .font(.system(size: 9, weight: .medium))
-                    .foregroundStyle(.black),
+                    .foregroundStyle(AppColor.ink),
                 at: CGPoint(x: plot.minX - 5, y: y),
                 anchor: .trailing
             )
@@ -497,7 +497,7 @@ private struct Game108Canvas: View {
             context.draw(
                 Text(game == 0 ? "OPEN" : "G\(game)")
                     .font(.system(size: 8, weight: .bold))
-                    .foregroundStyle(.black),
+                    .foregroundStyle(AppColor.ink),
                 at: CGPoint(x: x, y: plot.maxY + 13),
                 anchor: .center
             )
@@ -518,7 +518,7 @@ private struct Game108Canvas: View {
         context: inout GraphicsContext,
         plot: CGRect
     ) {
-        let annotationColor = Color.black
+        let annotationColor = AppColor.ink
         let point = CGPoint(
             x: xPosition(108, plot: plot),
             y: yPosition(6, plot: plot)
@@ -564,7 +564,7 @@ private struct Game108Canvas: View {
         context.draw(
             Text(label)
                 .font(.system(size: 12, weight: .black))
-                .foregroundStyle(.black),
+                .foregroundStyle(AppColor.ink),
             at: labelPoint,
             anchor: season.year == 2026 ? .leading : .bottomTrailing
         )

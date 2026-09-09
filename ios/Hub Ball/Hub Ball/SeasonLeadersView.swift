@@ -21,8 +21,8 @@ struct SeasonLeadersView: View {
                     }
                 } else if store.isLoading {
                     ProgressView("Loading season leaders…")
-                        .tint(.black)
-                        .foregroundStyle(.black)
+                        .tint(AppColor.ink)
+                        .foregroundStyle(AppColor.ink)
                 } else {
                     errorView
                 }
@@ -93,7 +93,7 @@ struct SeasonLeadersView: View {
                     .font(.caption2.weight(.semibold))
             }
         }
-        .foregroundStyle(Color.black.opacity(0.84))
+        .foregroundStyle(AppColor.ink.opacity(0.84))
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
@@ -153,7 +153,7 @@ struct SeasonLeadersView: View {
 
             Text(season.record)
                 .font(.subheadline.weight(.bold))
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
         }
     }
 

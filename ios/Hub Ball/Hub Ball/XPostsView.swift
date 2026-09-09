@@ -18,8 +18,8 @@ struct XPostsView: View {
                         feedContent(feed)
                     } else if store.isLoading {
                         ProgressView("Loading X posts…")
-                            .tint(.black)
-                            .foregroundStyle(.black)
+                            .tint(AppColor.ink)
+                            .foregroundStyle(AppColor.ink)
                     } else {
                         errorView
                     }
@@ -70,7 +70,7 @@ struct XPostsView: View {
                         .minimumScaleFactor(0.78)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .foregroundStyle(Color.black)
+                        .foregroundStyle(AppColor.ink)
                 }
                 .buttonStyle(.plain)
             }
@@ -101,9 +101,9 @@ struct XPostsView: View {
                         .font(.headline.weight(.black))
                     Text("Checked \(feed.checkedText)")
                         .font(.caption)
-                        .foregroundStyle(Color.black.opacity(0.8))
+                        .foregroundStyle(AppColor.ink.opacity(0.8))
                 }
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
@@ -135,13 +135,13 @@ struct XPostsView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(mode.title)
                 .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
-                .foregroundStyle(.black)
+                .foregroundStyle(AppColor.ink)
 
             Spacer()
 
             Text("Checked \(feed.checkedText)")
                 .font(.system(size: contentWidth >= 650 ? 12 : 9))
-                .foregroundStyle(Color.black.opacity(0.8))
+                .foregroundStyle(AppColor.ink.opacity(0.8))
                 .multilineTextAlignment(.trailing)
         }
         .padding(.bottom, 8)

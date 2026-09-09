@@ -9,7 +9,7 @@ enum AppColor {
     // A soft-white field lets the white panels read as gently raised surfaces.
     static let cream = Color(red: 248.0 / 255.0, green: 248.0 / 255.0, blue: 246.0 / 255.0)
     static let paper = Color.white
-    static let ink = Color.black
+    static var ink: Color { Color(hubHex: selectedTeam.colors.ink) }
     static let resultWin = Color(red: 0.76, green: 0.88, blue: 0.78)
     static let resultLoss = Color(red: 0.94, green: 0.76, blue: 0.76)
     static let resultWinText = Color(red: 0.08, green: 0.42, blue: 0.20)

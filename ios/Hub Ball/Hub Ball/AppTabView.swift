@@ -111,6 +111,7 @@ struct AppTabView: View {
             }
         }
         .background(AppColor.cream)
+        .foregroundStyle(AppColor.ink)
         .onAppear {
             guard !hasAppeared else { return }
             #if DEBUG

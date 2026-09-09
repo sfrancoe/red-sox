@@ -32,8 +32,8 @@ struct RecentGameView: View {
                         }
                     } else if store.isLoading {
                         ProgressView("Loading Game Center…")
-                            .tint(.black)
-                            .foregroundStyle(.black)
+                            .tint(AppColor.ink)
+                            .foregroundStyle(AppColor.ink)
                     } else {
                         errorView
                     }
@@ -88,7 +88,7 @@ struct RecentGameView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 7)
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(AppColor.ink)
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(
@@ -241,7 +241,7 @@ struct RecentGameView: View {
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
                     .background(game.isLive ? AppColor.accentSoft : AppColor.resultWin)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                     .clipShape(Rectangle())
             }
 
@@ -282,7 +282,7 @@ struct RecentGameView: View {
                 lineScoreLegend("LOB")
             }
             .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
-            .foregroundStyle(.black)
+            .foregroundStyle(AppColor.ink)
 
             combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
             combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
@@ -465,7 +465,7 @@ struct RecentGameView: View {
                 .minimumScaleFactor(0.72)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)
-                .foregroundStyle(Color.black)
+                .foregroundStyle(AppColor.ink)
                 .overlay(alignment: .bottom) {
                     Rectangle()
                         .fill(selectedStatsTeam == selection ? AppColor.teamAccent : Color.clear)
@@ -484,7 +484,7 @@ struct RecentGameView: View {
             }
         }
         .font(.caption2.weight(.bold))
-        .foregroundStyle(.black)
+        .foregroundStyle(AppColor.ink)
     }
 
     private func statRow(

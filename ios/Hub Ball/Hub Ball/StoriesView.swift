@@ -26,7 +26,7 @@ struct StoriesView: View {
                                 HStack(spacing: 16) {
                                     Image(systemName: "chart.xyaxis.line")
                                         .font(.system(size: 30, weight: .bold))
-                                        .foregroundStyle(.black)
+                                        .foregroundStyle(AppColor.ink)
                                         .frame(width: 62, height: 62)
                                         .background(AppColor.accentSoft)
                                         .clipShape(Rectangle())
@@ -58,7 +58,7 @@ struct StoriesView: View {
                         systemImage: "book.pages",
                         description: Text("This section will appear when the first New York visual story is ready.")
                     )
-                    .foregroundStyle(.black)
+                    .foregroundStyle(AppColor.ink)
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
