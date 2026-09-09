@@ -91,7 +91,28 @@ def seed_post(team: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_feed(team: dict[str, Any], entries: list[dict[str, Any]]) -> dict[str, Any]:
+def existing_feed_is_usable(path: Path, team: dict[str, Any]) -> bool:
+    try:
+        feed = json.loads(path.read_text())
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return False
+    recent = feed.get("recent")
+    if feed.get("source") != "X" or not isinstance(recent, list) or not recent:
+        return False
+    return all(
+        isinstance(post, dict)
+        and post.get("id")
+        and post.get("text")
+        and str(post.get("handle") or "").lower() == team["x_handle"].lower()
+        for post in recent
+    )
+
+
+def build_feed(
+    team: dict[str, Any],
+    entries: list[dict[str, Any]],
+    fallback_path: Path | None = None,
+) -> dict[str, Any] | None:
     posts: list[dict[str, Any]] = []
     seen: set[str] = set()
     for entry in entries:
@@ -104,6 +125,12 @@ def build_feed(team: dict[str, Any], entries: list[dict[str, Any]]) -> dict[str,
             continue
         seen.add(post["id"])
         posts.append(post)
+    if not posts and fallback_path is not None and existing_feed_is_usable(fallback_path, team):
+        print(
+            f"WARNING: The MLB clubs list has no current @{team['x_handle']} post; "
+            f"kept the existing snapshot at {fallback_path}"
+        )
+        return None
     if not posts:
         posts.append(seed_post(team))
 
@@ -169,12 +196,18 @@ def main() -> None:
         entries = fetch_entries()
         for team in all_teams():
             if team["api_key"] != "redsox":
-                write_feed(output_path(team), build_feed(team, entries))
+                path = output_path(team)
+                feed = build_feed(team, entries, fallback_path=path)
+                if feed is not None:
+                    write_feed(path, feed)
         return
     if not args.team:
         parser.error("--team or --all is required when fetching")
     team = team_by_key(args.team)
-    write_feed(args.output or output_path(team), build_feed(team, fetch_entries()))
+    path = args.output or output_path(team)
+    feed = build_feed(team, fetch_entries(), fallback_path=path)
+    if feed is not None:
+        write_feed(path, feed)
 
 
 if __name__ == "__main__":
