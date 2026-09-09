@@ -2,10 +2,13 @@ import SwiftUI
 
 enum AppColor {
     static let night = Color(hubHex: "#0B1B2B")
-    static let nightRaised = Color(hubHex: "#14293D")
+    static let nightRaised = Color(hubHex: "#1A3348")
+    static let nightCell = Color(hubHex: "#22405C")
     static let rule = Color(hubHex: "#26415A")
     static let bone = Color(hubHex: "#F5F2EA")
     static let boneMuted = Color(hubHex: "#7C93A8")
+    static let boneDim = Color(hubHex: "#A9BECE")
+    static let emptyDay = Color(hubHex: "#41607C")
     static let amber = Color(hubHex: "#E8A33D")
     static let steel = Color(hubHex: "#4FA3D1")
 

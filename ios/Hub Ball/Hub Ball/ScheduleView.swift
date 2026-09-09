@@ -113,19 +113,19 @@ struct ScheduleView: View {
 
         return VStack(spacing: 3) {
             Text(date.formatted(.dateTime.day()))
-                .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
-                .foregroundStyle(AppColor.ink)
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(game == nil ? AppColor.boneMuted : selected ? AppColor.amber : AppColor.bone)
 
             if let game {
                 Text("\(game.locationWord) \(opponentCode(game.opponent))")
-                    .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .black))
-                    .foregroundStyle(AppColor.ink)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(selected || isHome ? AppColor.bone : AppColor.boneMuted)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
 
                 Text(game.formattedTime)
-                    .font(.system(size: contentWidth >= 650 ? 12 : 7, weight: .semibold))
-                    .foregroundStyle(AppColor.ink)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(selected ? AppColor.bone : isHome ? AppColor.boneDim : AppColor.boneMuted)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
 
@@ -137,18 +137,21 @@ struct ScheduleView: View {
             } else {
                 Text("—")
                     .font(.system(size: contentWidth >= 650 ? 12 : 8, weight: .medium))
-                    .foregroundStyle(AppColor.ink)
+                    .foregroundStyle(AppColor.bone)
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: contentWidth >= 650 ? 92 : 67)
+        .frame(height: contentWidth >= 650 ? 92 : 72)
         .background {
-            Rectangle()
-                .fill(isHome ? AppColor.paperRaised : AppColor.paper)
+            RoundedRectangle(cornerRadius: 4)
+                .fill(selected || isHome ? AppColor.nightCell : AppColor.night)
         }
         .overlay {
-            if isToday(date) {
-                VStack { Spacer(); Rectangle().fill(AppColor.ink).frame(height: 2) }
+            if game != nil && !isHome && !selected {
+                RoundedRectangle(cornerRadius: 4).stroke(AppColor.rule, lineWidth: 1)
+            }
+            if selected {
+                VStack { Spacer(); Rectangle().fill(AppColor.amber).frame(height: 3) }
             }
         }
         .contentShape(Rectangle())
@@ -245,7 +248,7 @@ struct ScheduleView: View {
                 .foregroundStyle(AppColor.hunterGreen)
             Text(value.isEmpty ? "To be announced" : value)
                 .font(.system(size: contentWidth >= 650 ? 19 : 17, weight: .bold))
-                .foregroundStyle(AppColor.ink)
+                    .foregroundStyle(AppColor.emptyDay)
                 .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
         }
     }
