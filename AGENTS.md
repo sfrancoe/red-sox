@@ -99,6 +99,15 @@ across stories. One chart per page — it keeps state in module/function scope.
 
 **10. Ask before anything paid.** No paid APIs or services without checking first.
 
+**11. `main` is the only Hub Ball release and device-installation source.** Never answer
+"latest build" from the current checkout alone. Run
+`python3 scripts/check_hub_ball_release.py`, which validates
+`config/hub-ball-release.json`, the Xcode settings, Git cleanliness, and every registered
+worktree. Install on a device only through `scripts/install_hub_ball.sh`. When bumping a
+build, update both Xcode build configurations and the release manifest in the same
+commit. A side branch may contain future work, but it is not a release until merged to
+`main` and declared in the manifest.
+
 ---
 
 ## The premise check
