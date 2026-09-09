@@ -157,9 +157,19 @@ struct HomeView: View {
             Button { onSelect(.games) } label: {
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        Text(compactNumericDate(game.gameDate))
-                            .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        HStack(spacing: 7) {
+                            Text(compactNumericDate(game.gameDate))
+                            if !game.isLive {
+                                Text(game.result.lowercased() == "win" ? "W" : "L")
+                                    .foregroundStyle(
+                                        game.result.lowercased() == "win"
+                                            ? AppColor.resultWinText
+                                            : AppColor.resultLossText
+                                    )
+                            }
+                        }
+                        .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         Text("R").frame(width: 38, alignment: .trailing)
                         Text("H").frame(width: 38, alignment: .trailing)
                         Text("E").frame(width: 38, alignment: .trailing)
