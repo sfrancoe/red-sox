@@ -177,20 +177,16 @@ struct StandingsView: View {
                         )
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
-                        .foregroundStyle(AppColor.ink)
+                        .foregroundStyle(store.mode == mode ? AppColor.ink : AppColor.inkMuted)
+                        .overlay(alignment: .bottom) {
+                            if store.mode == mode {
+                                Rectangle().fill(AppColor.accent).frame(height: 2)
+                            }
+                        }
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(.horizontal, 5)
-        .padding(.vertical, 2)
-        .background(AppColor.paper)
-        .clipShape(Rectangle())
-        .overlay {
-            Rectangle()
-                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-        }
-        .panelElevation()
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
     }
@@ -258,7 +254,7 @@ struct StandingsView: View {
         return HStack(spacing: 0) {
             HStack(spacing: compact ? 2 : 5) {
                 Text(team.rank)
-                    .font(.system(size: compact ? 12 : (contentWidth >= 650 ? 14 : 12), weight: emphasized ? .black : .bold, design: .monospaced))
+                    .font(AppFont.number)
                     .foregroundStyle(AppColor.hunterGreen)
                     .frame(width: compact ? 11 : 15)
                 Text(team.cityName)
@@ -278,13 +274,13 @@ struct StandingsView: View {
             )
             tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
-                .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .bold, design: .monospaced))
+                .font(AppFont.number)
                 .lineLimit(1)
                 .minimumScaleFactor(0.85)
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                 .frame(width: widths.streak)
         }
-        .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: .semibold, design: .monospaced))
+        .font(AppFont.number)
         .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
         .padding(.horizontal, compact ? 2 : 5)
         .padding(.vertical, compact ? compactRowPadding : (contentWidth >= 650 ? 13 : 7))
@@ -299,7 +295,7 @@ struct StandingsView: View {
         compact: Bool = false
     ) -> some View {
         Text(value)
-            .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold, design: .monospaced))
+            .font(AppFont.number)
             .lineLimit(1)
             .minimumScaleFactor(0.85)
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)

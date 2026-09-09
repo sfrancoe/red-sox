@@ -70,20 +70,16 @@ struct XPostsView: View {
                         .minimumScaleFactor(0.78)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .foregroundStyle(AppColor.ink)
+                        .foregroundStyle(store.selectedMode == mode ? AppColor.ink : AppColor.inkMuted)
+                        .overlay(alignment: .bottom) {
+                            if store.selectedMode == mode {
+                                Rectangle().fill(AppColor.accent).frame(height: 2)
+                            }
+                        }
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(.horizontal, 5)
-        .padding(.vertical, 2)
-        .background(AppColor.paper)
-        .clipShape(Rectangle())
-        .overlay {
-            Rectangle()
-                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-        }
-        .panelElevation()
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }
@@ -134,13 +130,13 @@ struct XPostsView: View {
     private func feedHeader(_ feed: XFeed, mode: XFeedMode) -> some View {
         HStack(alignment: .firstTextBaseline) {
             Text(mode.title)
-                .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
+                        .font(AppFont.body)
                 .foregroundStyle(AppColor.ink)
 
             Spacer()
 
             Text("Checked \(feed.checkedText)")
-                .font(.system(size: contentWidth >= 650 ? 12 : 9))
+                        .font(AppFont.label)
                 .foregroundStyle(AppColor.ink.opacity(0.8))
                 .multilineTextAlignment(.trailing)
         }
@@ -223,7 +219,7 @@ struct XPostsView: View {
             }
         }
         .padding(10)
-        .background(AppColor.paper)
+        .background(AppColor.paperRaised)
         .clipShape(Rectangle())
         .overlay(alignment: .bottom) {
             if contentWidth < 650 {

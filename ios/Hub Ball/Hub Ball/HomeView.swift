@@ -44,7 +44,7 @@ struct HomeView: View {
                     .font(.system(size: contentWidth >= 650 ? 42 : 36, weight: .regular))
 
                 Text(team.fullName)
-                    .font(.system(size: contentWidth >= 650 ? 32 : 22, weight: .black))
+                    .font(AppFont.displayLarge)
                     .lineLimit(1)
                     .minimumScaleFactor(0.65)
                     .layoutPriority(1)
@@ -52,8 +52,7 @@ struct HomeView: View {
                 Spacer()
 
                 Text(todayHeading)
-                    .font(.system(size: contentWidth >= 650 ? 18 : 14, weight: .bold))
-                    .tracking(0.2)
+                    .font(AppFont.label)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
             }
@@ -101,8 +100,7 @@ struct HomeView: View {
                         Text("L10").frame(maxWidth: .infinity)
                         Text("STRK").frame(maxWidth: .infinity)
                     }
-                    .font(.system(size: 11, weight: .black))
-                    .tracking(0.8)
+                    .font(AppFont.label)
                     .padding(.horizontal, 13)
                     .frame(height: 36)
                     .modifier(HomeTableHeaderStyle())
@@ -111,7 +109,7 @@ struct HomeView: View {
                         HStack(spacing: 0) {
                             HStack(spacing: 8) {
                                 Text(team.rank)
-                                    .font(.system(size: 12, weight: .bold, design: .monospaced))
+                                    .font(AppFont.number)
                                     .foregroundStyle(AppColor.navy.opacity(0.42))
                                     .frame(width: 12, alignment: .trailing)
                                 Text(team.cityName)
@@ -123,13 +121,13 @@ struct HomeView: View {
                             standingNumber(team.wins, emphasized: team.isFavorite)
                             standingNumber(team.losses, emphasized: team.isFavorite)
                             Text(team.gamesBack)
-                                .font(.system(size: 14, weight: team.isFavorite ? .black : .medium, design: .monospaced))
+                                .font(AppFont.number)
                                 .frame(maxWidth: .infinity)
                             Text(team.lastTen)
-                                .font(.system(size: 14, weight: team.isFavorite ? .black : .medium, design: .monospaced))
+                                .font(AppFont.number)
                                 .frame(maxWidth: .infinity)
                             Text(team.streak)
-                                .font(.system(size: 14, weight: team.isFavorite ? .black : .bold, design: .monospaced))
+                                .font(AppFont.number)
                                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
                                 .frame(maxWidth: .infinity)
                         }
@@ -207,7 +205,7 @@ struct HomeView: View {
                     .padding(.horizontal, 13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 27)
-                    .background(AppColor.paper)
+                    .background(AppColor.paperRaised)
                 }
                 .modifier(HomeCardStyle())
             }
@@ -474,10 +472,10 @@ private struct HomeTableHeaderStyle: ViewModifier {
             .foregroundStyle(AppColor.ink.opacity(0.82))
             .background(AppColor.teamAccent.opacity(0.06))
             .overlay(alignment: .top) {
-                Rectangle().fill(Color.black.opacity(0.78)).frame(height: 1)
+                Rectangle().fill(AppColor.ink.opacity(0.78)).frame(height: 1)
             }
             .overlay(alignment: .bottom) {
-                Rectangle().fill(Color.black.opacity(0.78)).frame(height: 1)
+                Rectangle().fill(AppColor.ink.opacity(0.78)).frame(height: 1)
             }
     }
 }
@@ -485,12 +483,7 @@ private struct HomeTableHeaderStyle: ViewModifier {
 private struct HomeCardStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .background(AppColor.paper)
             .clipShape(Rectangle())
-            .overlay {
-                Rectangle()
-                    .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-            }
-            .panelElevation()
+            .overlay(alignment: .top) { Rectangle().fill(AppColor.rule).frame(height: 1) }
     }
 }

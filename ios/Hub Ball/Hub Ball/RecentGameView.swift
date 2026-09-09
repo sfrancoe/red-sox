@@ -88,7 +88,12 @@ struct RecentGameView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 7)
-                    .foregroundStyle(AppColor.ink)
+                    .foregroundStyle(selectedGameID == game.gamePk ? AppColor.ink : AppColor.inkMuted)
+                    .overlay(alignment: .bottom) {
+                        if selectedGameID == game.gamePk {
+                            Rectangle().fill(AppColor.accent).frame(height: 2)
+                        }
+                    }
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(
@@ -98,15 +103,6 @@ struct RecentGameView: View {
                 )
             }
         }
-        .padding(.horizontal, 5)
-        .padding(.vertical, 2)
-        .background(AppColor.paper)
-        .clipShape(Rectangle())
-        .overlay {
-            Rectangle()
-                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-        }
-        .panelElevation()
         .padding(.horizontal, 16)
         .padding(.top, 10)
         .padding(.bottom, 4)
@@ -200,13 +196,9 @@ struct RecentGameView: View {
                         reportDivider
                         linksCard(game)
                     }
-                    .background(AppColor.paper)
-                    .clipShape(Rectangle())
-                    .overlay {
-                        Rectangle()
-                            .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
+                    .overlay(alignment: .top) {
+                        Rectangle().fill(AppColor.rule).frame(height: 1)
                     }
-                    .panelElevation()
                 }
             }
             .padding(.horizontal, 16)
@@ -236,13 +228,12 @@ struct RecentGameView: View {
 
                 Spacer()
 
-                Text(game.isLive ? "LIVE" : "FINAL")
-                    .font(.caption.weight(.black))
-                    .padding(.horizontal, 9)
-                    .padding(.vertical, 4)
-                    .background(game.isLive ? AppColor.accentSoft : AppColor.resultWin)
-                    .foregroundStyle(AppColor.ink)
-                    .clipShape(Rectangle())
+                HStack(spacing: 5) {
+                    if game.isLive { Circle().fill(AppColor.accent).frame(width: 6, height: 6) }
+                    Text(game.isLive ? "Live" : "Final")
+                }
+                .font(AppFont.label)
+                .foregroundStyle(game.isLive ? AppColor.accent : AppColor.inkMuted)
             }
 
             VStack(alignment: .leading, spacing: 4) {

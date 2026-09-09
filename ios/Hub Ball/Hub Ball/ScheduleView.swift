@@ -110,7 +110,6 @@ struct ScheduleView: View {
         let game = games.first
         let selected = games.contains { $0.id == selectedGameID }
         let isHome = game?.location == "home"
-        let accent = AppColor.teamAccent
 
         return VStack(spacing: 3) {
             Text(date.formatted(.dateTime.day()))
@@ -145,14 +144,12 @@ struct ScheduleView: View {
         .frame(height: contentWidth >= 650 ? 92 : 67)
         .background {
             Rectangle()
-                .fill(selected || isHome ? AppColor.accentSoft : game == nil ? AppColor.paper : accent.opacity(0.06))
+                .fill(isHome ? AppColor.paperRaised : AppColor.paper)
         }
         .overlay {
-            Rectangle()
-                .stroke(
-                    selected ? accent : isToday(date) ? AppColor.navy : AppColor.border.opacity(0.75),
-                    lineWidth: selected || isToday(date) ? 1.5 : 0.7
-                )
+            if isToday(date) {
+                VStack { Spacer(); Rectangle().fill(AppColor.ink).frame(height: 2) }
+            }
         }
         .contentShape(Rectangle())
         .onTapGesture {

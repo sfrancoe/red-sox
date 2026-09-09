@@ -146,7 +146,7 @@ struct SeasonLeadersView: View {
 
                 Image(systemName: "crown.fill")
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundStyle(Color(red: 0.84, green: 0.64, blue: 0.12))
+                    .foregroundStyle(AppColor.accent)
             }
 
             Spacer()

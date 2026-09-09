@@ -1,46 +1,51 @@
 import SwiftUI
 
 enum AppColor {
-    private static var selectedTeam: HubTeam {
-        let stored = UserDefaults.standard.string(forKey: HubPreferences.selectedTeamKey)
-        return HubTeam(rawValue: stored ?? "") ?? .boston
-    }
+    static let night = Color(hubHex: "#0B1B2B")
+    static let nightRaised = Color(hubHex: "#14293D")
+    static let rule = Color(hubHex: "#26415A")
+    static let bone = Color(hubHex: "#F5F2EA")
+    static let boneMuted = Color(hubHex: "#7C93A8")
+    static let amber = Color(hubHex: "#E8A33D")
+    static let steel = Color(hubHex: "#4FA3D1")
 
-    // A soft-white field lets the white panels read as gently raised surfaces.
-    static let cream = Color(red: 248.0 / 255.0, green: 248.0 / 255.0, blue: 246.0 / 255.0)
-    static let paper = Color.white
-    static var ink: Color {
-        let colors = selectedTeam.colors
-        let darkTeamHex = perceivedBrightness(colors.primary) <= perceivedBrightness(colors.secondary)
-            ? colors.primary
-            : colors.secondary
-        return Color(hubHex: darkTeamHex)
-    }
-    static let resultWin = Color(red: 0.76, green: 0.88, blue: 0.78)
-    static let resultLoss = Color(red: 0.94, green: 0.76, blue: 0.76)
-    static let resultWinText = Color(red: 0.08, green: 0.42, blue: 0.20)
-    static let resultLossText = Color(red: 0.72, green: 0.08, blue: 0.12)
+    // Legacy aliases keep existing view structure intact while routing every active
+    // color through the Night Game palette above.
+    static let paper = night
+    static let paperRaised = nightRaised
+    static let ink = bone
+    static let inkMuted = boneMuted
+    static let accent = amber
+    static let positive = amber
+    static let cream = night
+    static let resultWin = nightRaised
+    static let resultLoss = nightRaised
+    static let resultWinText = amber
+    static let resultLossText = steel
+    static let teamAccent = bone
+    static let accentSoft = nightRaised
+    static let paleBlue = nightRaised
+    static let paleRed = night
+    static let navy = bone
+    static let red = steel
+    static let darkRed = steel
+    static let green = amber
+    static let hunterGreen = boneMuted
+    static let border = rule
+    static let separator = rule
+    static let panelBorderWidth: CGFloat = 1
+}
 
-    static var teamAccent: Color { Color(hubHex: selectedTeam.colors.primary) }
-    static var accentSoft: Color { teamAccent.opacity(0.14) }
-    static var paleBlue: Color { teamAccent.opacity(0.10) }
-    static var paleRed: Color { cream }
-    static var navy: Color { ink }
-    static var red: Color { ink }
-    static var darkRed: Color { ink }
-    static var green: Color { ink }
-    static var hunterGreen: Color { ink }
-    static var border: Color { teamAccent.opacity(0.82) }
-    static var separator: Color { teamAccent.opacity(0.34) }
-    static let panelBorderWidth: CGFloat = 2
-
-    private static func perceivedBrightness(_ hex: String) -> Double {
-        let value = UInt64(hex.dropFirst(), radix: 16) ?? 0
-        let red = Double((value >> 16) & 0xff)
-        let green = Double((value >> 8) & 0xff)
-        let blue = Double(value & 0xff)
-        return red * 0.2126 + green * 0.7152 + blue * 0.0722
-    }
+enum AppFont {
+    static let displayLarge = Font.custom("BarlowCondensed-SemiBold", size: 30)
+    static let displayMedium = Font.custom("BarlowCondensed-SemiBold", size: 22)
+    static let displaySmall = Font.custom("BarlowCondensed-SemiBold", size: 17)
+    static let body = Font.custom("Inter-Regular", size: 16)
+    static let bodySmall = Font.custom("Inter-Regular", size: 14)
+    static let label = Font.custom("Inter-Medium", size: 12)
+    static let numberExtraLarge = Font.custom("Inter-Medium", size: 40)
+    static let numberLarge = Font.custom("Inter-Medium", size: 24)
+    static let number = Font.custom("Inter-Regular", size: 14)
 }
 
 private extension Color {
@@ -58,39 +63,28 @@ extension View {
     func cardStyle(accent: Color? = nil, padding: CGFloat = 16) -> some View {
         self
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(padding)
-            .background(AppColor.paper)
-            .overlay(alignment: .leading) {
-                if let accent {
-                    Rectangle()
-                        .fill(accent)
-                        .frame(width: 4)
-                }
+            .padding(.top, 24)
+            .padding(.horizontal, padding)
+            .padding(.bottom, padding)
+            .overlay(alignment: .top) {
+                Rectangle().fill(accent ?? AppColor.rule).frame(height: 1)
             }
             .clipShape(Rectangle())
-            .overlay {
-                Rectangle()
-                    .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-            }
-            .panelElevation()
     }
 
     func panelElevation() -> some View {
-        shadow(color: Color.black.opacity(0.11), radius: 7, x: 0, y: 3)
+        self
     }
 }
 
 struct HubProminentButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.headline.weight(.bold))
+            .font(AppFont.label)
             .foregroundStyle(AppColor.ink)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
-            .background(configuration.isPressed ? AppColor.teamAccent.opacity(0.22) : AppColor.accentSoft)
-            .overlay {
-                Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-            }
+            .background(configuration.isPressed ? AppColor.nightRaised : AppColor.night)
             .contentShape(Rectangle())
     }
 }

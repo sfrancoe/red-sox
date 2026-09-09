@@ -46,7 +46,7 @@ struct PitchingView: View {
 
                 HStack(alignment: .center) {
                     Text(store.filter.reportsTitle)
-                        .font(.title3.weight(.black))
+                        .font(AppFont.displaySmall)
                         .foregroundStyle(AppColor.ink)
 
                     Spacer()
@@ -85,7 +85,7 @@ struct PitchingView: View {
                         store.filter = filter
                     }
                 } label: {
-                    Text(filter.title.uppercased())
+                    Text(filter.title)
                         .font(
                             .system(
                                 size: store.filter == filter ? 16 : 13,
@@ -94,21 +94,17 @@ struct PitchingView: View {
                         )
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .foregroundStyle(AppColor.ink)
+                        .foregroundStyle(store.filter == filter ? AppColor.ink : AppColor.inkMuted)
+                        .overlay(alignment: .bottom) {
+                            if store.filter == filter {
+                                Rectangle().fill(AppColor.accent).frame(height: 2)
+                            }
+                        }
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(store.filter == filter ? .isSelected : [])
             }
         }
-        .padding(.horizontal, 5)
-        .padding(.vertical, 2)
-        .background(AppColor.paper)
-        .clipShape(Rectangle())
-        .overlay {
-            Rectangle()
-                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-        }
-        .panelElevation()
     }
 
     private func impactCard(chartHeight: CGFloat) -> some View {
@@ -162,7 +158,7 @@ struct PitchingView: View {
                 Spacer()
 
                 Text("\(pitcher.warGap.signedText) fWAR")
-                    .font(.subheadline.monospacedDigit().weight(.black))
+                    .font(AppFont.numberLarge)
                     .foregroundStyle(pitcher.warGap >= 0 ? AppColor.green : AppColor.red)
             }
 
@@ -181,12 +177,12 @@ struct PitchingView: View {
         GeometryReader { geometry in
             let maximum = max(actual, forecast, 0.35) * 1.12
             ZStack(alignment: .leading) {
-                Rectangle().fill(AppColor.paleBlue)
+                Rectangle().fill(AppColor.rule)
                 Rectangle()
-                    .fill(AppColor.teamAccent)
+                    .fill(actual >= forecast ? AppColor.positive : AppColor.accent)
                     .frame(width: geometry.size.width * max(actual, 0) / maximum)
                 Rectangle()
-                    .fill(AppColor.navy)
+                    .fill(AppColor.inkMuted)
                     .frame(width: 2, height: 15)
                     .offset(x: geometry.size.width * max(forecast, 0) / maximum)
             }
@@ -289,7 +285,7 @@ private struct PitchingImpactChart: View {
             parity.addLine(to: CGPoint(x: x(parityMax), y: y(parityMax)))
             context.stroke(
                 parity,
-                with: .color(AppColor.navy.opacity(0.5)),
+                with: .color(AppColor.inkMuted),
                 style: StrokeStyle(lineWidth: 1.2, dash: [5, 5])
             )
 
@@ -324,7 +320,7 @@ private struct PitchingImpactChart: View {
                 context.stroke(
                     pointPath,
                     with: .color(
-                        (pitcher.warGap >= 0 ? AppColor.hunterGreen : AppColor.red).opacity(0.42)
+                        (pitcher.warGap >= 0 ? AppColor.positive : AppColor.accent).opacity(0.7)
                     ),
                     lineWidth: 0.8
                 )

@@ -95,7 +95,7 @@ struct AppTabView: View {
                 }
 
                 if !usesPersistentSidebar && showsSidebar {
-                    Color.black.opacity(0.18)
+                    AppColor.ink.opacity(0.18)
                         .ignoresSafeArea()
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -112,6 +112,7 @@ struct AppTabView: View {
         }
         .background(AppColor.cream)
         .foregroundStyle(AppColor.ink)
+        .font(AppFont.body)
         .onAppear {
             guard !hasAppeared else { return }
             #if DEBUG
@@ -245,7 +246,7 @@ struct AppTabView: View {
             .accessibilityHint("Toggle the Hub Ball navigation menu")
 
             Text(selectedTab.title)
-                .font(.headline)
+                .font(AppFont.displayLarge)
             Spacer()
 
             Button {
@@ -258,12 +259,10 @@ struct AppTabView: View {
             .buttonStyle(.plain)
             .accessibilityLabel("Settings")
         }
-        .foregroundStyle(AppColor.hunterGreen)
+        .foregroundStyle(AppColor.bone)
         .padding(.horizontal, 8)
-        .background(AppColor.paper)
-        .overlay(alignment: .bottom) {
-            Divider().overlay(AppColor.separator)
-        }
+        .frame(height: 56)
+        .background(AppColor.nightRaised)
     }
 
     private func sidebar(isCompact: Bool) -> some View {

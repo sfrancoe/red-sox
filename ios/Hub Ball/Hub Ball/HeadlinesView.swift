@@ -65,7 +65,7 @@ struct HeadlinesView: View {
     private func newspaperQuadrant(_ source: NewsSource) -> some View {
         VStack(spacing: 0) {
             Text(store.feeds[source]?.source ?? source.shortName)
-                .font(.system(size: 20, weight: .black))
+                .font(AppFont.displaySmall)
                 .foregroundStyle(AppColor.ink)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -94,10 +94,8 @@ struct HeadlinesView: View {
             .refreshable { await store.load() }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(AppColor.paper)
         .clipped()
-        .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
-        .panelElevation()
+        .overlay(alignment: .top) { Rectangle().fill(AppColor.rule).frame(height: 1) }
     }
 
     private func newspaperStory(_ article: NewsArticle) -> some View {
@@ -119,14 +117,14 @@ struct HeadlinesView: View {
 
             if !article.description.isEmpty {
                 Text(article.description)
-                    .font(.system(size: 13))
+                    .font(AppFont.bodySmall)
                     .foregroundStyle(AppColor.ink.opacity(0.8))
                     .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
             Text(article.publishedText)
-                .font(.system(size: 10))
+                .font(AppFont.label)
                 .foregroundStyle(AppColor.hunterGreen)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -180,21 +178,17 @@ struct HeadlinesView: View {
                         .minimumScaleFactor(0.72)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .foregroundStyle(AppColor.ink)
+                        .foregroundStyle(selection.wrappedValue == source ? AppColor.ink : AppColor.inkMuted)
+                        .overlay(alignment: .bottom) {
+                            if selection.wrappedValue == source {
+                                Rectangle().fill(AppColor.accent).frame(height: 2)
+                            }
+                        }
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(selection.wrappedValue == source ? .isSelected : [])
             }
         }
-        .padding(.horizontal, 5)
-        .padding(.vertical, 2)
-        .background(AppColor.paper)
-        .clipShape(Rectangle())
-        .overlay {
-            Rectangle()
-                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-        }
-        .panelElevation()
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }
@@ -271,7 +265,7 @@ struct HeadlinesView: View {
                 .font(.system(size: 11, weight: .black))
                 .foregroundColor(AppColor.red)
             Text("\(Text(article.title))\(badge)")
-                .font(.system(size: fontSize, weight: .bold))
+                .font(AppFont.displaySmall)
                 .foregroundStyle(AppColor.ink)
                 .lineLimit(lineLimit)
                 .fixedSize(horizontal: false, vertical: true)

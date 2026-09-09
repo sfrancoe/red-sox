@@ -21,7 +21,7 @@ private struct SoxMarket: Decodable, Identifiable {
     let rules: String
     let url: String
     var key: String { provider + id }
-    var tint: Color { provider == "Kalshi" ? AppColor.green : Color(red: 0.24, green: 0.40, blue: 0.85) }
+    var tint: Color { provider == "Kalshi" ? AppColor.positive : AppColor.accent }
     var percent: String { probability.map { String(format: "%.1f%%", $0 * 100) } ?? "—" }
     var dayLabel: String {
         guard let date else { return "Season outlook" }
