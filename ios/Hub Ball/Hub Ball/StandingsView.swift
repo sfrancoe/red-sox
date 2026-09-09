@@ -210,7 +210,7 @@ struct StandingsView: View {
                 standingsRow(
                     team,
                     gamesBackTitle: gamesBackTitle,
-                    showsGamesBackRule: index > 0,
+                    showsGamesBackRule: highlightsFavorite && team.isFavorite,
                     highlightsFavorite: highlightsFavorite,
                     compact: compact,
                     compactRowPadding: compactRowPadding
@@ -308,7 +308,10 @@ struct StandingsView: View {
             .foregroundStyle(color ?? AppColor.bone)
             .overlay(alignment: .bottom) {
                 if showsUnderline {
-                    Rectangle().fill(AppColor.amber).frame(height: 2)
+                    Rectangle()
+                        .fill(AppColor.amber)
+                        .frame(height: 1)
+                        .offset(y: 2)
                 }
             }
             .frame(width: width)

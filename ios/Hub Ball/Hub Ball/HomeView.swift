@@ -123,8 +123,11 @@ struct HomeView: View {
                             Text(team.gamesBack)
                                 .font(AppFont.number)
                                 .overlay(alignment: .bottom) {
-                                    if index > 0 {
-                                        Rectangle().fill(AppColor.amber).frame(height: 2)
+                                    if team.isFavorite {
+                                        Rectangle()
+                                            .fill(AppColor.amber)
+                                            .frame(height: 1)
+                                            .offset(y: 2)
                                     }
                                 }
                                 .frame(maxWidth: .infinity)
