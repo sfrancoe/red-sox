@@ -20,8 +20,8 @@ struct Game108GraphView: View {
                     graphContent
                 } else if store.isLoading {
                     ProgressView("Loading Game 108…")
-                        .tint(.white)
-                        .foregroundStyle(.white)
+                        .tint(.black)
+                        .foregroundStyle(.black)
                 } else {
                     errorView
                 }
@@ -63,21 +63,20 @@ struct Game108GraphView: View {
                                         .font(.caption.weight(.black))
                                         .tracking(0.8)
                                 }
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.black)
                                 .padding(.horizontal, 22)
                                 .padding(.vertical, 16)
-                                .background(AppColor.red)
-                                .clipShape(Capsule())
-                                .shadow(color: AppColor.navy.opacity(0.22), radius: 12, y: 5)
+                                .background(AppColor.accentSoft)
+                                .clipShape(Rectangle())
                             }
                         }
                     }
                     .frame(height: chartHeight)
                     .padding(10)
                     .background(AppColor.paper)
-                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .clipShape(Rectangle())
                     .overlay {
-                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        Rectangle()
                             .stroke(AppColor.border, lineWidth: 1)
                     }
 
@@ -95,7 +94,7 @@ struct Game108GraphView: View {
         Text("Four straight seasons with the same record after 108 games: 57–51. Where will 2026 go from here?")
             .font(.subheadline.weight(.bold))
             .italic()
-            .foregroundStyle(.white)
+            .foregroundStyle(.black)
             .lineSpacing(1)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -108,11 +107,11 @@ struct Game108GraphView: View {
                 } label: {
                     Label(isPlaying ? "Pause" : "Play", systemImage: isPlaying ? "pause.fill" : "play.fill")
                         .font(.system(size: 11, weight: .black))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .background(AppColor.hunterGreen)
-                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                        .background(AppColor.accentSoft)
+                        .clipShape(Rectangle())
                 }
                 .buttonStyle(.plain)
 
@@ -121,11 +120,11 @@ struct Game108GraphView: View {
                 } label: {
                     Label("Restart", systemImage: "arrow.counterclockwise")
                         .font(.system(size: 11, weight: .black))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .background(AppColor.hunterGreen)
-                        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                        .background(AppColor.accentSoft)
+                        .clipShape(Rectangle())
                 }
                 .buttonStyle(.plain)
 
@@ -141,13 +140,13 @@ struct Game108GraphView: View {
                         systemImage: isMusicOn ? "speaker.wave.2.fill" : "speaker.slash.fill"
                     )
                     .font(.system(size: 10, weight: .black))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 9)
-                    .background(AppColor.hunterGreen)
-                    .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+                    .background(AppColor.accentSoft)
+                    .clipShape(Rectangle())
                 }
                 .buttonStyle(.plain)
             }
@@ -155,7 +154,7 @@ struct Game108GraphView: View {
             HStack(spacing: 5) {
                 Text("SPEED")
                     .font(.system(size: 11, weight: .black))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .padding(.horizontal, 8)
 
                 ForEach([1.0, 2.0, 4.0], id: \.self) { option in
@@ -164,15 +163,15 @@ struct Game108GraphView: View {
                     } label: {
                         Text("\(Int(option))×")
                             .font(.system(size: 12, weight: .black))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.black)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
-                            .background(speed == option ? AppColor.green : AppColor.hunterGreen)
-                            .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                            .background(speed == option ? AppColor.accentSoft : AppColor.paper)
+                            .clipShape(Rectangle())
                             .overlay {
-                                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                Rectangle()
                                     .stroke(
-                                        speed == option ? Color.white : Color.white.opacity(0.18),
+                                        speed == option ? AppColor.teamAccent : AppColor.border,
                                         lineWidth: speed == option ? 2 : 0.8
                                     )
                             }
@@ -181,8 +180,8 @@ struct Game108GraphView: View {
                 }
             }
             .padding(5)
-            .background(AppColor.hunterGreen)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .background(AppColor.accentSoft)
+            .clipShape(Rectangle())
         }
     }
 
@@ -272,7 +271,7 @@ struct Game108GraphView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }
@@ -482,7 +481,7 @@ private struct Game108Canvas: View {
             context.draw(
                 Text(label)
                     .font(.system(size: 9, weight: .medium))
-                    .foregroundStyle(.secondary),
+                    .foregroundStyle(.black),
                 at: CGPoint(x: plot.minX - 5, y: y),
                 anchor: .trailing
             )
@@ -497,7 +496,7 @@ private struct Game108Canvas: View {
             context.draw(
                 Text(game == 0 ? "OPEN" : "G\(game)")
                     .font(.system(size: 8, weight: .bold))
-                    .foregroundStyle(.secondary),
+                    .foregroundStyle(.black),
                 at: CGPoint(x: x, y: plot.maxY + 13),
                 anchor: .center
             )
@@ -564,7 +563,7 @@ private struct Game108Canvas: View {
         context.draw(
             Text(label)
                 .font(.system(size: 12, weight: .black))
-                .foregroundStyle(color),
+                .foregroundStyle(.black),
             at: labelPoint,
             anchor: season.year == 2026 ? .leading : .bottomTrailing
         )

@@ -27,8 +27,8 @@ struct HomeView: View {
                     briefing
                 } else if store.isLoading {
                     ProgressView("Loading today's briefing…")
-                        .tint(.white)
-                        .foregroundStyle(.white)
+                        .tint(.black)
+                        .foregroundStyle(.black)
                 } else {
                     errorView
                 }
@@ -57,7 +57,7 @@ struct HomeView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
             }
-            .foregroundStyle(Color.white)
+            .foregroundStyle(Color.black)
             .padding(.horizontal, 12)
             .padding(.top, 10)
             .accessibilityElement(children: .ignore)
@@ -136,7 +136,7 @@ struct HomeView: View {
                         .foregroundStyle(AppColor.navy)
                         .padding(.horizontal, 13)
                         .frame(height: 35)
-                        .background(team.isFavorite ? AppColor.paleBlue.opacity(0.72) : Color.white)
+                        .background(team.isFavorite ? AppColor.paleBlue.opacity(0.72) : AppColor.paper)
 
                         if index < division.teams.count - 1 {
                             Divider().overlay(AppColor.border).padding(.leading, 13)
@@ -207,7 +207,7 @@ struct HomeView: View {
                     .padding(.horizontal, 13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 27)
-                    .background(Color.white)
+                    .background(AppColor.paper)
                 }
                 .modifier(HomeCardStyle())
             }
@@ -236,7 +236,7 @@ struct HomeView: View {
                 if upcomingGames.isEmpty {
                     Text("No upcoming games are scheduled.")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.black)
                         .frame(maxWidth: .infinity, minHeight: 110)
                 }
             }
@@ -300,7 +300,7 @@ struct HomeView: View {
         .foregroundStyle(AppColor.navy)
         .padding(.horizontal, 13)
         .frame(height: 35)
-        .background(emphasized ? AppColor.paleBlue.opacity(0.72) : Color.white)
+        .background(emphasized ? AppColor.paleBlue.opacity(0.72) : AppColor.paper)
     }
 
     private func gameResultNumber(_ value: Int, width: CGFloat, emphasized: Bool) -> some View {
@@ -402,9 +402,9 @@ struct HomeView: View {
             .tracking(0.7)
             .padding(.horizontal, 7)
             .frame(height: 22)
-            .background(result.lowercased() == "win" ? AppColor.green : AppColor.red)
-            .foregroundStyle(.white)
-            .clipShape(Capsule())
+            .background(result.lowercased() == "win" ? AppColor.resultWin : AppColor.resultLoss)
+            .foregroundStyle(.black)
+            .clipShape(Rectangle())
     }
 
     private func oddsCell(_ value: String, width: CGFloat) -> some View {
@@ -460,10 +460,10 @@ struct HomeView: View {
             Text(store.errorMessage ?? "Today's briefing is unavailable.")
                 .multilineTextAlignment(.center)
             Button("Try again") { Task { await store.load() } }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(HubProminentButtonStyle())
                 .tint(AppColor.navy)
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(.black)
         .padding(24)
     }
 }
@@ -472,7 +472,7 @@ private struct HomeTableHeaderStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundStyle(Color.black.opacity(0.82))
-            .background(Color.black.opacity(0.045))
+            .background(AppColor.teamAccent.opacity(0.06))
             .overlay(alignment: .top) {
                 Rectangle().fill(Color.black.opacity(0.78)).frame(height: 1)
             }
@@ -485,12 +485,11 @@ private struct HomeTableHeaderStyle: ViewModifier {
 private struct HomeCardStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .background(AppColor.paper)
+            .clipShape(Rectangle())
             .overlay {
-                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                Rectangle()
                     .stroke(AppColor.border.opacity(0.9), lineWidth: 1)
             }
-            .shadow(color: AppColor.navy.opacity(0.07), radius: 7, y: 2)
     }
 }

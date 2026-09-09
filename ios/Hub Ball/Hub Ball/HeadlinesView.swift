@@ -40,7 +40,7 @@ struct HeadlinesView: View {
                                 HStack(spacing: 0) {
                                     newspaperColumn(selection: $store.selectedSource)
                                     if contentWidth >= 720 {
-                                        Divider().overlay(Color.white.opacity(0.3))
+                                        Divider().overlay(AppColor.teamAccent.opacity(0.3))
                                         newspaperColumn(selection: $secondarySource)
                                     }
                                 }
@@ -48,8 +48,8 @@ struct HeadlinesView: View {
                         }
                     } else if store.isLoading {
                         ProgressView("Loading headlines…")
-                            .tint(.white)
-                            .foregroundStyle(.white)
+                            .tint(.black)
+                            .foregroundStyle(.black)
                     } else {
                         errorView
                     }
@@ -66,12 +66,12 @@ struct HeadlinesView: View {
         VStack(spacing: 0) {
             Text(store.feeds[source]?.source ?? source.shortName)
                 .font(.system(size: 20, weight: .black))
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 12)
-                .background(AppColor.hunterGreen)
+                .background(AppColor.accentSoft)
                 .accessibilityAddTraits(.isHeader)
 
             Divider().overlay(AppColor.border)
@@ -186,11 +186,11 @@ struct HeadlinesView: View {
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
@@ -200,13 +200,13 @@ struct HeadlinesView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(feed.source)
                 .font(.system(size: 14, weight: .black))
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
 
             Spacer()
 
             Text("Updated \(feed.refreshedText)")
                 .font(.system(size: 9, weight: .medium))
-                .foregroundStyle(Color.white.opacity(0.78))
+                .foregroundStyle(Color.black.opacity(0.78))
                 .multilineTextAlignment(.trailing)
         }
     }
@@ -285,7 +285,7 @@ struct HeadlinesView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

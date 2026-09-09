@@ -21,8 +21,8 @@ struct SeasonLeadersView: View {
                     }
                 } else if store.isLoading {
                     ProgressView("Loading season leaders…")
-                        .tint(.white)
-                        .foregroundStyle(.white)
+                        .tint(.black)
+                        .foregroundStyle(.black)
                 } else {
                     errorView
                 }
@@ -70,7 +70,7 @@ struct SeasonLeadersView: View {
                             .padding(12)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .background(AppColor.paper)
-                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                            .clipShape(Rectangle())
                         }
                     }
                 }
@@ -91,7 +91,7 @@ struct SeasonLeadersView: View {
                     .font(.caption2.weight(.semibold))
             }
         }
-        .foregroundStyle(Color.white.opacity(0.84))
+        .foregroundStyle(Color.black.opacity(0.84))
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
@@ -139,11 +139,11 @@ struct SeasonLeadersView: View {
         HStack(alignment: .firstTextBaseline) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(year)
-                    .font(.system(size: 28, weight: .black, design: .rounded))
+                    .font(.system(size: 32, weight: .black, design: .rounded))
                     .foregroundStyle(year == "2026" ? AppColor.red : AppColor.navy)
 
                 Image(systemName: "crown.fill")
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.system(size: 20, weight: .bold))
                     .foregroundStyle(Color(red: 0.84, green: 0.64, blue: 0.12))
             }
 
@@ -151,14 +151,14 @@ struct SeasonLeadersView: View {
 
             Text(season.record)
                 .font(.subheadline.weight(.bold))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.black)
         }
     }
 
     private func portraitCategory(_ category: LeaderCategory) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(category.title)
-                .font(.system(size: 14, weight: .black))
+                .font(.system(size: 16, weight: .black))
                 .foregroundStyle(AppColor.green)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Divider().overlay(AppColor.navy.opacity(0.5))
@@ -166,7 +166,7 @@ struct SeasonLeadersView: View {
                 ForEach(Array(category.leaders.prefix(3).enumerated()), id: \.element.id) { index, leader in
                     HStack(spacing: 6) {
                         Text("\(index + 1)")
-                            .font(.system(size: 11, weight: .bold))
+                            .font(.system(size: 13, weight: .bold))
                             .foregroundStyle(AppColor.red)
                             .frame(width: 10)
                         Text(leader.name)
@@ -176,7 +176,7 @@ struct SeasonLeadersView: View {
                             .monospacedDigit()
                             .fontWeight(index == 0 ? .bold : .regular)
                     }
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
                 }
             }
         }
@@ -186,7 +186,7 @@ struct SeasonLeadersView: View {
     private func categoryCell(_ category: LeaderCategory, compact: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: compact ? 4 : 7) {
             Text(category.title)
-                .font(.caption.weight(.black))
+                .font(.subheadline.weight(.black))
                 .tracking(0.7)
                 .foregroundStyle(AppColor.green)
 
@@ -194,7 +194,7 @@ struct SeasonLeadersView: View {
                 ForEach(Array(category.leaders.prefix(3).enumerated()), id: \.element.id) { index, leader in
                     HStack(alignment: .firstTextBaseline, spacing: 5) {
                         Text("\(index + 1)")
-                            .font(.caption2.weight(.black))
+                            .font(.subheadline.weight(.black))
                             .foregroundStyle(AppColor.red)
                             .frame(width: 10, alignment: .leading)
 
@@ -207,12 +207,12 @@ struct SeasonLeadersView: View {
                             .fontWeight(index == 0 ? .bold : .regular)
                             .monospacedDigit()
                     }
-                    .font(.caption)
+                    .font(.system(size: 18))
                 }
             }
         }
         .padding(.horizontal, 2)
-        .padding(.vertical, compact ? 2 : 11)
+        .padding(.vertical, compact ? 4 : 14)
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
 
@@ -225,7 +225,7 @@ struct SeasonLeadersView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

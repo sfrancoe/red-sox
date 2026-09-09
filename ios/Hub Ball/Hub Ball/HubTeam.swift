@@ -538,7 +538,9 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
     nonisolated var hasPublishedStories: Bool { features.stories }
 
     nonisolated static var availableTeams: [HubTeam] {
-        allCases.filter { $0.features.nativePicker }
+        allCases
+            .filter { $0.features.nativePicker }
+            .sorted { $0.fullName.localizedCaseInsensitiveCompare($1.fullName) == .orderedAscending }
     }
 }
 

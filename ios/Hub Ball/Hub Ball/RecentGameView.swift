@@ -32,8 +32,8 @@ struct RecentGameView: View {
                         }
                     } else if store.isLoading {
                         ProgressView("Loading Game Center…")
-                            .tint(.white)
-                            .foregroundStyle(.white)
+                            .tint(.black)
+                            .foregroundStyle(.black)
                     } else {
                         errorView
                     }
@@ -100,11 +100,11 @@ struct RecentGameView: View {
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
         .padding(.horizontal, 16)
         .padding(.top, 10)
@@ -133,7 +133,7 @@ struct RecentGameView: View {
                 )
             )
             .tracking(0.5)
-            .foregroundStyle(result.lowercased() == "win" ? AppColor.green : AppColor.red)
+            .foregroundStyle(result.lowercased() == "win" ? AppColor.resultWinText : AppColor.resultLossText)
     }
 
     private func gameTabTitle(_ game: RecentGame) -> String {
@@ -141,9 +141,7 @@ struct RecentGameView: View {
 
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
-        var title = Calendar.current.isDateInToday(date)
-            ? "TODAY"
-            : date.formatted(.dateTime.month(.abbreviated).day()).uppercased()
+        var title = date.formatted(.dateTime.month(.abbreviated).day()).uppercased()
         let gamesOnDate = store.games
             .filter { candidate in
                 guard let candidateDate = formatter.date(from: candidate.gameDate) else { return false }
@@ -202,9 +200,9 @@ struct RecentGameView: View {
                         linksCard(game)
                     }
                     .background(AppColor.paper)
-                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .clipShape(Rectangle())
                     .overlay {
-                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        Rectangle()
                             .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
                     }
                 }
@@ -240,9 +238,9 @@ struct RecentGameView: View {
                     .font(.caption.weight(.black))
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
-                    .background(game.isLive ? AppColor.red : AppColor.green)
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
+                    .background(game.isLive ? AppColor.accentSoft : AppColor.resultWin)
+                    .foregroundStyle(.black)
+                    .clipShape(Rectangle())
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -282,7 +280,7 @@ struct RecentGameView: View {
                 lineScoreLegend("LOB")
             }
             .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.black)
 
             combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
             combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
@@ -354,7 +352,7 @@ struct RecentGameView: View {
                     ForEach(game.facts, id: \.self) { fact in
                         HStack(alignment: .top, spacing: 9) {
                             Circle()
-                                .fill(AppColor.red)
+                                .fill(AppColor.teamAccent)
                                 .frame(width: 5, height: 5)
                                 .padding(.top, 7)
                             Text(fact)
@@ -468,7 +466,7 @@ struct RecentGameView: View {
                 .foregroundStyle(Color.black)
                 .overlay(alignment: .bottom) {
                     Rectangle()
-                        .fill(selectedStatsTeam == selection ? AppColor.red : Color.clear)
+                        .fill(selectedStatsTeam == selection ? AppColor.teamAccent : Color.clear)
                         .frame(height: 2)
                 }
         }
@@ -484,7 +482,7 @@ struct RecentGameView: View {
             }
         }
         .font(.caption2.weight(.bold))
-        .foregroundStyle(.secondary)
+        .foregroundStyle(.black)
     }
 
     private func statRow(
@@ -623,7 +621,7 @@ struct RecentGameView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

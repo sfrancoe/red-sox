@@ -6,18 +6,25 @@ enum AppColor {
         return HubTeam(rawValue: stored ?? "") ?? .boston
     }
 
-    static let cream = Color(red: 0.957, green: 0.969, blue: 0.980)
-    static let paper = Color.white
+    // Hub Ball's neutral field: every screen and panel uses the same warm paper.
+    static let cream = Color(red: 239.0 / 255.0, green: 231.0 / 255.0, blue: 213.0 / 255.0)
+    static let paper = cream
+    static let ink = Color.black
+    static let resultWin = Color(red: 0.76, green: 0.88, blue: 0.78)
+    static let resultLoss = Color(red: 0.94, green: 0.76, blue: 0.76)
+    static let resultWinText = Color(red: 0.08, green: 0.42, blue: 0.20)
+    static let resultLossText = Color(red: 0.72, green: 0.08, blue: 0.12)
 
-    static var paleBlue: Color { Color(hubHex: selectedTeam.colors.background) }
-    static var paleRed: Color { Color(hubHex: selectedTeam.colors.banner) }
-    static var navy: Color { Color(hubHex: selectedTeam.colors.secondary) }
-    static var red: Color { Color(hubHex: selectedTeam.colors.primary) }
-    static var darkRed: Color { Color(hubHex: selectedTeam.colors.accentDark) }
-    static var green: Color { Color(hubHex: selectedTeam.colors.positive) }
-    static var hunterGreen: Color { Color(hubHex: selectedTeam.colors.navigation) }
-    static var ink: Color { Color(hubHex: selectedTeam.colors.ink) }
-    static var border: Color { Color(hubHex: selectedTeam.colors.border) }
+    static var teamAccent: Color { Color(hubHex: selectedTeam.colors.primary) }
+    static var accentSoft: Color { teamAccent.opacity(0.14) }
+    static var paleBlue: Color { teamAccent.opacity(0.10) }
+    static var paleRed: Color { cream }
+    static var navy: Color { ink }
+    static var red: Color { ink }
+    static var darkRed: Color { ink }
+    static var green: Color { ink }
+    static var hunterGreen: Color { ink }
+    static var border: Color { teamAccent.opacity(0.46) }
 }
 
 private extension Color {
@@ -41,15 +48,29 @@ extension View {
                 if let accent {
                     Rectangle()
                         .fill(accent)
-                        .frame(width: 5)
+                        .frame(width: 4)
                 }
             }
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .clipShape(Rectangle())
             .overlay {
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
+                Rectangle()
+                    .stroke(AppColor.border, lineWidth: 1)
             }
-            .shadow(color: AppColor.navy.opacity(0.08), radius: 12, y: 4)
+    }
+}
+
+struct HubProminentButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.headline.weight(.bold))
+            .foregroundStyle(AppColor.ink)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(configuration.isPressed ? AppColor.teamAccent.opacity(0.22) : AppColor.accentSoft)
+            .overlay {
+                Rectangle().stroke(AppColor.border, lineWidth: 1)
+            }
+            .contentShape(Rectangle())
     }
 }
 

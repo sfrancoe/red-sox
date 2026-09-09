@@ -21,8 +21,8 @@ struct StandingsView: View {
                     }
                 } else if store.isLoading {
                     ProgressView("Loading standings…")
-                        .tint(.white)
-                        .foregroundStyle(.white)
+                        .tint(.black)
+                        .foregroundStyle(.black)
                 } else {
                     errorView
                 }
@@ -32,7 +32,7 @@ struct StandingsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(AppColor.paleRed, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarColorScheme(.light, for: .navigationBar)
         .task {
             await store.load()
         }
@@ -68,7 +68,7 @@ struct StandingsView: View {
 
                         Text("Top three teams hold the wild-card positions.")
                             .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
-                            .foregroundStyle(Color.white.opacity(0.82))
+                            .foregroundStyle(Color.black.opacity(0.82))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 4)
                     }
@@ -118,7 +118,7 @@ struct StandingsView: View {
             Text(league.fullName.uppercased())
                 .font(.system(size: 14, weight: .black))
                 .tracking(0.4)
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
 
             HStack(alignment: .top, spacing: 6) {
                 VStack(spacing: 3) {
@@ -157,7 +157,7 @@ struct StandingsView: View {
         let updated = updates.first ?? "—"
         return Text("Updated \(updated) · MLB Stats API")
             .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
-            .foregroundStyle(Color.white.opacity(0.72))
+            .foregroundStyle(Color.black.opacity(0.72))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 5)
     }
@@ -184,11 +184,11 @@ struct StandingsView: View {
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
@@ -288,7 +288,7 @@ struct StandingsView: View {
         .padding(.horizontal, compact ? 2 : 5)
         .padding(.vertical, compact ? compactRowPadding : (contentWidth >= 650 ? 13 : 7))
         .background(emphasized ? AppColor.paleBlue : Color.clear)
-        .clipShape(RoundedRectangle(cornerRadius: compact ? 4 : 9, style: .continuous))
+        .clipShape(Rectangle())
     }
 
     private func tableValue(
@@ -325,12 +325,12 @@ struct StandingsView: View {
 
     private func cutoffLine(compact: Bool) -> some View {
         HStack(spacing: 8) {
-            Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
+            Rectangle().fill(AppColor.teamAccent.opacity(0.55)).frame(height: 1)
             Text("PLAYOFF CUT")
                 .font(.system(size: compact ? 8 : (contentWidth >= 650 ? 13 : 11), weight: .black))
                 .tracking(0.5)
                 .foregroundStyle(AppColor.red)
-            Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
+            Rectangle().fill(AppColor.teamAccent.opacity(0.55)).frame(height: 1)
         }
         .padding(.vertical, compact ? 0 : 1)
     }
@@ -344,7 +344,7 @@ struct StandingsView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

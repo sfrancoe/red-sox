@@ -145,12 +145,12 @@ struct MarketsView: View {
                         .padding(.top, width >= 650 ? 28 : 20)
                     marketBoard
                 } else if store.loading {
-                    ProgressView("Finding Red Sox markets…").tint(.white).foregroundStyle(.white).frame(maxWidth: .infinity, minHeight: 220)
+                    ProgressView("Finding Red Sox markets…").tint(.black).foregroundStyle(.black).frame(maxWidth: .infinity, minHeight: 220)
                 } else {
-                    ContentUnavailableView("Markets unavailable", systemImage: "chart.line.downtrend.xyaxis", description: Text(store.error ?? "Refresh to load the latest markets.")).foregroundStyle(.white)
+                    ContentUnavailableView("Markets unavailable", systemImage: "chart.line.downtrend.xyaxis", description: Text(store.error ?? "Refresh to load the latest markets.")).foregroundStyle(.black)
                 }
                 if let error = store.error {
-                    Label(error, systemImage: "exclamationmark.circle").font(.subheadline).foregroundStyle(.white)
+                    Label(error, systemImage: "exclamationmark.circle").font(.subheadline).foregroundStyle(.black)
                 }
                 methodology
             }
@@ -182,7 +182,7 @@ struct MarketsView: View {
             ForEach(snapshot.sources.filter { !$0.available }, id: \.name) { source in
                 Label("\(source.name) unavailable", systemImage: "exclamationmark.circle")
                     .font(.caption)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
             }
         }
     }
@@ -200,10 +200,10 @@ struct MarketsView: View {
                         .frame(width: 96, alignment: .trailing)
                 }
                 .font(.caption2.bold())
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
                 .padding(.horizontal, 8)
                 .frame(minHeight: 30)
-                .background(AppColor.hunterGreen)
+                .background(AppColor.accentSoft)
                 ForEach(Array(picks.enumerated()), id: \.element.key) { index, market in
                     Button { detail = market } label: {
                         HStack(spacing: 0) {
@@ -263,14 +263,14 @@ struct MarketsView: View {
                 Text(String(format: "%.1f", abs(change))).monospacedDigit()
             }
             .font(.caption.weight(.semibold))
-            .foregroundStyle(color)
+            .foregroundStyle(.black)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(String(format: "7-day change %@ %.1f percentage points", change > 0 ? "up" : change < 0 ? "down" : "unchanged at", abs(change)))
         } else if store.pending.contains(key) {
             ProgressView().controlSize(.mini)
                 .accessibilityLabel("Loading 7-day change")
         } else {
-            Text("—").foregroundStyle(.secondary)
+            Text("—").foregroundStyle(.black)
                 .accessibilityLabel("7-day change unavailable")
         }
     }
@@ -293,7 +293,7 @@ struct MarketsView: View {
             .padding(.horizontal, 14)
             .frame(minHeight: 44)
             .background(AppColor.paper)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .clipShape(Rectangle())
 
             Toggle("Volume over 10K", isOn: $volumeOnly)
                 .font(.subheadline.weight(.bold))
@@ -302,15 +302,15 @@ struct MarketsView: View {
                 .padding(.horizontal, 14)
                 .frame(minHeight: 44)
                 .background(AppColor.paper)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .clipShape(Rectangle())
 
             if filtered.isEmpty {
-                ContentUnavailableView("No markets resolve then", systemImage: "calendar", description: Text("Try another resolve window. New markets appear as they are listed.")).foregroundStyle(.white)
+                ContentUnavailableView("No markets resolve then", systemImage: "calendar", description: Text("Try another resolve window. New markets appear as they are listed.")).foregroundStyle(.black)
             }
             if !filtered.isEmpty {
                 Text("Tap for details · Swipe for more")
                     .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.85))
+                    .foregroundStyle(Color.black.opacity(0.85))
                     .lineLimit(1)
                     .minimumScaleFactor(0.85)
                 marketTable
@@ -326,7 +326,7 @@ struct MarketsView: View {
         Text(text)
             .font(header ? .caption2.weight(.bold) : .caption)
             .monospacedDigit()
-            .foregroundStyle(header ? .white : color)
+            .foregroundStyle(AppColor.ink)
             .lineLimit(column == 0 && !header ? 2 : 1)
             .frame(width: marketColumnWidths[column] - 16,
                    alignment: column == 1 || column == 6 ? .trailing : .leading)
@@ -335,7 +335,7 @@ struct MarketsView: View {
             .frame(minHeight: header ? 30 : 48)
             .frame(maxHeight: .infinity)
             .overlay(alignment: .trailing) {
-                Rectangle().fill(header ? .white.opacity(0.18) : AppColor.border)
+                Rectangle().fill(AppColor.border)
                     .frame(width: 0.5)
             }
     }
@@ -347,7 +347,7 @@ struct MarketsView: View {
                         tableCell(title, column: column, header: true)
                     }
                 }.fixedSize(horizontal: false, vertical: true)
-                    .background(AppColor.hunterGreen)
+                    .background(AppColor.accentSoft)
                 LazyVStack(spacing: 0) {
                     ForEach(Array(filtered.enumerated()), id: \.element.key) { index, market in
                         Button { detail = market } label: {
@@ -421,10 +421,10 @@ struct MarketsView: View {
     private var methodology: some View {
         DisclosureGroup("How to read these markets") {
             Text("A 60% price means the market prices that outcome at roughly 60 cents per dollar of potential payout; it is not a guarantee. Kalshi probabilities use the midpoint of a two-sided bid/ask quote. Polymarket probabilities use its published outcome prices. Charts show hourly observations, and movement is measured in percentage points across the available history. Volume is shown in each provider’s own units and should not be added together. Quotes refresh about every two minutes while this page is open. This is an informational market-data view.")
-                .font(.footnote).foregroundStyle(.secondary).padding(.top, 8)
+                .font(.footnote).foregroundStyle(.black).padding(.top, 8)
         }.font(.subheadline.weight(.semibold)).tint(AppColor.hunterGreen)
             .padding(16).background(AppColor.paper)
-            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .clipShape(Rectangle())
     }
 }
 
@@ -461,7 +461,7 @@ private struct MarketTrend: View {
                         }
                     }
                     if let selectedDate {
-                        RuleMark(x: .value("Selected", selectedDate)).foregroundStyle(.secondary).lineStyle(StrokeStyle(lineWidth: 1, dash: [3]))
+                        RuleMark(x: .value("Selected", selectedDate)).foregroundStyle(.black).lineStyle(StrokeStyle(lineWidth: 1, dash: [3]))
                     }
                 }
                 .chartForegroundStyleScale(domain: markets.map(\.provider), range: markets.map(\.tint))
@@ -482,18 +482,18 @@ private struct MarketTrend: View {
                 ForEach(markets, id: \.key) { market in
                     let history = points(market)
                     if let selectedDate, let nearest = history.min(by: { abs($0.date.timeIntervalSince(selectedDate)) < abs($1.date.timeIntervalSince(selectedDate)) }) {
-                        Text("\(market.provider) · \(nearest.date.formatted(date: .abbreviated, time: .shortened)) · \(String(format: "%.1f%%", nearest.p * 100))").font(.caption).foregroundStyle(market.tint)
+                        Text("\(market.provider) · \(nearest.date.formatted(date: .abbreviated, time: .shortened)) · \(String(format: "%.1f%%", nearest.p * 100))").font(.caption).foregroundStyle(.black)
                     } else if let first = history.first, let last = history.last, history.count >= 2 {
-                        Text(String(format: "%@  %+.1f pts across available history", market.provider, (last.p-first.p)*100)).font(.caption.weight(.semibold)).foregroundStyle(market.tint)
+                        Text(String(format: "%@  %+.1f pts across available history", market.provider, (last.p-first.p)*100)).font(.caption.weight(.semibold)).foregroundStyle(.black)
                     }
                 }
             } else if markets.contains(where: { store.pending.contains(store.historyKey($0, days: days)) }) {
                 ProgressView("Loading price history…").frame(maxWidth: .infinity, minHeight: 160)
             } else {
-                Label("Not enough price history yet", systemImage: "chart.xyaxis.line").foregroundStyle(.secondary).frame(maxWidth: .infinity, minHeight: 130)
+                Label("Not enough price history yet", systemImage: "chart.xyaxis.line").foregroundStyle(.black).frame(maxWidth: .infinity, minHeight: 130)
             }
             ForEach(markets.filter { points($0).count < 2 && store.histories[store.historyKey($0, days: days)] != nil }, id: \.key) { m in
-                Text("\(m.provider): insufficient history in this window").font(.caption).foregroundStyle(.secondary)
+                Text("\(m.provider): insufficient history in this window").font(.caption).foregroundStyle(.black)
             }
             ForEach(markets.filter { store.historyErrors.contains(store.historyKey($0, days: days)) }, id: \.key) { m in
                 Button("Retry \(m.provider) history") { Task { await store.loadHistory(m, days: days) } }.font(.caption)
@@ -510,22 +510,22 @@ private struct MarketDetail: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    Text(market.provider.uppercased()).font(.caption.bold()).tracking(2).foregroundStyle(market.tint)
+                    Text(market.provider.uppercased()).font(.caption.bold()).tracking(2).foregroundStyle(.black)
                     Text(market.question).font(.title.bold())
                     HStack(alignment: .firstTextBaseline) {
                         Text(market.percent).font(.system(size: 52, weight: .black, design: .rounded))
-                        Text(market.outcome).font(.headline).foregroundStyle(.secondary)
+                        Text(market.outcome).font(.headline).foregroundStyle(.black)
                     }.foregroundStyle(AppColor.hunterGreen)
-                    Text("Snapshot price · \(market.dayLabel)").font(.caption).foregroundStyle(.secondary)
-                    if let date = store.snapshot?.date { Text("Retrieved \(date.formatted(date: .abbreviated, time: .shortened))").font(.caption).foregroundStyle(.secondary) }
+                    Text("Snapshot price · \(market.dayLabel)").font(.caption).foregroundStyle(.black)
+                    if let date = store.snapshot?.date { Text("Retrieved \(date.formatted(date: .abbreviated, time: .shortened))").font(.caption).foregroundStyle(.black) }
                     MarketTrend(markets: [market], store: store)
                     if let bid = market.bid, let ask = market.ask {
                         HStack {
                             quote("Bid", bid); Spacer(); quote("Ask", ask); Spacer(); quote("Spread", max(0, ask-bid))
-                        }.padding().background(AppColor.cream).clipShape(RoundedRectangle(cornerRadius: 14))
+                        }.padding().background(AppColor.cream).clipShape(Rectangle())
                     }
                     Text("What resolves this market?").font(.headline)
-                    Text(market.rules).font(.subheadline).foregroundStyle(.secondary).textSelection(.enabled)
+                    Text(market.rules).font(.subheadline).foregroundStyle(.black).textSelection(.enabled)
                     if let url = URL(string: market.url) { Link("Source & full market rules ↗", destination: url).font(.headline).tint(market.tint) }
                 }.padding(24)
             }.navigationTitle("Market detail").navigationBarTitleDisplayMode(.inline)
@@ -533,6 +533,6 @@ private struct MarketDetail: View {
         }
     }
     private func quote(_ label: String, _ value: Double) -> some View {
-        VStack(alignment: .leading) { Text(label).font(.caption).foregroundStyle(.secondary); Text(String(format: "%.1f¢", value*100)).font(.headline).monospacedDigit() }
+        VStack(alignment: .leading) { Text(label).font(.caption).foregroundStyle(.black); Text(String(format: "%.1f¢", value*100)).font(.headline).monospacedDigit() }
     }
 }
