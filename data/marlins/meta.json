@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-09-08T15:21:36+00:00",
+ "generated_at": "2026-09-09T15:19:08+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 146,
  "seasons": {
   "2026": {
-   "record": "72-73",
-   "games": 145,
+   "record": "72-74",
+   "games": 146,
    "in_progress": true,
    "war_leader": {
     "name": "Otto Lopez",
-    "war": 5.7
+    "war": 5.6
    },
    "war_leaders": [
     {
      "name": "Otto Lopez",
-     "war": 5.7
-    },
-    {
-     "name": "Sandy Alcantara",
-     "war": 3.3
+     "war": 5.6
     },
     {
      "name": "Xavier Edwards",
+     "war": 3.0
+    },
+    {
+     "name": "Sandy Alcantara",
      "war": 2.9
     }
    ],
@@ -67,17 +67,16 @@
     },
     "rbi": {
      "names": [
-      "Heriberto Hern\u00e1ndez",
       "Otto Lopez"
      ],
-     "value": 63,
+     "value": 64,
      "top": [
       {
-       "name": "Heriberto Hern\u00e1ndez",
-       "value": 63
+       "name": "Otto Lopez",
+       "value": 64
       },
       {
-       "name": "Otto Lopez",
+       "name": "Heriberto Hern\u00e1ndez",
        "value": 63
       },
       {
@@ -102,7 +101,7 @@
       },
       {
        "name": "Kyle Stowers",
-       "value": ".246"
+       "value": ".245"
       }
      ]
     },
@@ -110,15 +109,15 @@
      "names": [
       "Kyle Stowers"
      ],
-     "value": ".808",
+     "value": ".804",
      "top": [
       {
        "name": "Kyle Stowers",
-       "value": ".808"
+       "value": ".804"
       },
       {
        "name": "Otto Lopez",
-       "value": ".776"
+       "value": ".775"
       },
       {
        "name": "Xavier Edwards",
