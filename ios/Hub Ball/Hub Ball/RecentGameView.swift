@@ -104,7 +104,7 @@ struct RecentGameView: View {
         .clipShape(Rectangle())
         .overlay {
             Rectangle()
-                .stroke(AppColor.border, lineWidth: 1)
+                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
         }
         .panelElevation()
         .padding(.horizontal, 16)
@@ -204,7 +204,7 @@ struct RecentGameView: View {
                     .clipShape(Rectangle())
                     .overlay {
                         Rectangle()
-                            .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
+                            .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
                     }
                     .panelElevation()
                 }

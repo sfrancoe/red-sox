@@ -30,7 +30,9 @@ enum AppColor {
     static var darkRed: Color { ink }
     static var green: Color { ink }
     static var hunterGreen: Color { ink }
-    static var border: Color { teamAccent.opacity(0.46) }
+    static var border: Color { teamAccent.opacity(0.82) }
+    static var separator: Color { teamAccent.opacity(0.34) }
+    static let panelBorderWidth: CGFloat = 2
 
     private static func perceivedBrightness(_ hex: String) -> Double {
         let value = UInt64(hex.dropFirst(), radix: 16) ?? 0
@@ -68,7 +70,7 @@ extension View {
             .clipShape(Rectangle())
             .overlay {
                 Rectangle()
-                    .stroke(AppColor.border, lineWidth: 1)
+                    .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
             }
             .panelElevation()
     }
@@ -87,7 +89,7 @@ struct HubProminentButtonStyle: ButtonStyle {
             .padding(.vertical, 10)
             .background(configuration.isPressed ? AppColor.teamAccent.opacity(0.22) : AppColor.accentSoft)
             .overlay {
-                Rectangle().stroke(AppColor.border, lineWidth: 1)
+                Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
             }
             .contentShape(Rectangle())
     }

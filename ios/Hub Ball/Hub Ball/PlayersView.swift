@@ -158,7 +158,7 @@ struct PlayersView: View {
                 .foregroundStyle(AppColor.navy)
         }
         .frame(width: width, height: height)
-        .overlay { Rectangle().stroke(AppColor.border, lineWidth: 1) }
+        .overlay { Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth) }
         .accessibilityHidden(true)
     }
 
@@ -266,7 +266,7 @@ private struct PlayerReferenceView: View {
                 .foregroundStyle(AppColor.navy)
         }
         .frame(width: contentWidth >= 650 ? 112 : 82, height: contentWidth >= 650 ? 132 : 104)
-        .overlay { Rectangle().stroke(AppColor.border, lineWidth: 1) }
+        .overlay { Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth) }
         .accessibilityLabel("No player photograph")
     }
 

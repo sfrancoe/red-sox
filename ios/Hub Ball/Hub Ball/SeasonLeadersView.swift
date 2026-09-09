@@ -71,7 +71,7 @@ struct SeasonLeadersView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .background(AppColor.paper)
                             .clipShape(Rectangle())
-                            .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+                            .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
                             .panelElevation()
                         }
                     }

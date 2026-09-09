@@ -77,7 +77,7 @@ struct Game108GraphView: View {
                     .clipShape(Rectangle())
                     .overlay {
                         Rectangle()
-                            .stroke(AppColor.border, lineWidth: 1)
+                            .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
                     }
                     .panelElevation()
 
@@ -493,7 +493,7 @@ private struct Game108Canvas: View {
             var line = Path()
             line.move(to: CGPoint(x: x, y: plot.minY))
             line.addLine(to: CGPoint(x: x, y: plot.maxY))
-            context.stroke(line, with: .color(AppColor.border), lineWidth: 0.8)
+            context.stroke(line, with: .color(AppColor.separator), lineWidth: 0.8)
             context.draw(
                 Text(game == 0 ? "OPEN" : "G\(game)")
                     .font(.system(size: 8, weight: .bold))

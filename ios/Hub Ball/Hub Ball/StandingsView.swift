@@ -188,7 +188,7 @@ struct StandingsView: View {
         .clipShape(Rectangle())
         .overlay {
             Rectangle()
-                .stroke(AppColor.border, lineWidth: 1)
+                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
         }
         .panelElevation()
         .padding(.horizontal, 12)

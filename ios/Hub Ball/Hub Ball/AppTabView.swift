@@ -262,7 +262,7 @@ struct AppTabView: View {
         .padding(.horizontal, 8)
         .background(AppColor.paper)
         .overlay(alignment: .bottom) {
-            Divider().overlay(AppColor.border)
+            Divider().overlay(AppColor.separator)
         }
     }
 

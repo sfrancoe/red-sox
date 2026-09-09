@@ -81,7 +81,7 @@ struct XPostsView: View {
         .clipShape(Rectangle())
         .overlay {
             Rectangle()
-                .stroke(AppColor.border, lineWidth: 1)
+                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
         }
         .panelElevation()
         .padding(.horizontal, 16)
@@ -228,7 +228,7 @@ struct XPostsView: View {
         .overlay(alignment: .bottom) {
             if contentWidth < 650 {
                 Rectangle()
-                    .fill(AppColor.border.opacity(0.8))
+                    .fill(AppColor.separator)
                     .frame(height: 1)
             }
         }

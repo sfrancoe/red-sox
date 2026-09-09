@@ -106,7 +106,7 @@ struct PitchingView: View {
         .clipShape(Rectangle())
         .overlay {
             Rectangle()
-                .stroke(AppColor.border, lineWidth: 1)
+                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
         }
         .panelElevation()
     }
@@ -274,7 +274,7 @@ private struct PitchingImpactChart: View {
                     var horizontal = Path()
                     horizontal.move(to: CGPoint(x: plot.minX, y: y(value)))
                     horizontal.addLine(to: CGPoint(x: plot.maxX, y: y(value)))
-                    context.stroke(horizontal, with: .color(AppColor.border), lineWidth: 0.8)
+                    context.stroke(horizontal, with: .color(AppColor.separator), lineWidth: 0.8)
                     context.draw(
                         Text("\(tick)").font(.system(size: 8)).foregroundStyle(AppColor.ink),
                         at: CGPoint(x: plot.minX - 7, y: y(value)),

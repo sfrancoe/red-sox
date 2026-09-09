@@ -15,7 +15,7 @@ struct TeamSettingsView: View {
                             ForEach(HubTeam.availableTeams) { team in
                                 teamButton(team)
                                 if team.id != HubTeam.availableTeams.last?.id {
-                                    Divider().overlay(AppColor.border)
+                                    Divider().overlay(AppColor.separator)
                                 }
                             }
                         }
@@ -110,7 +110,7 @@ struct TeamOnboardingView: View {
                                 .background(AppColor.paper)
                                 .clipShape(Rectangle())
                                 .overlay {
-                                    Rectangle().stroke(AppColor.border, lineWidth: 1)
+                                    Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
                                 }
                                 .panelElevation()
                             }

@@ -74,7 +74,7 @@ struct HeadlinesView: View {
                 .background(AppColor.accentSoft)
                 .accessibilityAddTraits(.isHeader)
 
-            Divider().overlay(AppColor.border)
+            Divider().overlay(AppColor.separator)
 
             ScrollView {
                 LazyVStack(spacing: 0) {
@@ -82,7 +82,7 @@ struct HeadlinesView: View {
                         ForEach(Array(feed.articles.enumerated()), id: \.element.id) { index, article in
                             newspaperStory(article)
                             if index < feed.articles.count - 1 {
-                                Divider().overlay(AppColor.border)
+                                Divider().overlay(AppColor.separator)
                             }
                         }
                     } else {
@@ -96,7 +96,7 @@ struct HeadlinesView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColor.paper)
         .clipped()
-        .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+        .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
         .panelElevation()
     }
 
@@ -192,7 +192,7 @@ struct HeadlinesView: View {
         .clipShape(Rectangle())
         .overlay {
             Rectangle()
-                .stroke(AppColor.border, lineWidth: 1)
+                .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
         }
         .panelElevation()
         .padding(.horizontal, 16)

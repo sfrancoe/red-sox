@@ -217,14 +217,14 @@ struct MarketsView: View {
                                 .frame(width: 72, alignment: .trailing)
                                 .frame(maxHeight: .infinity)
                                 .overlay(alignment: .leading) {
-                                    Rectangle().fill(AppColor.border).frame(width: 0.5)
+                                    Rectangle().fill(AppColor.separator).frame(width: 0.5)
                                 }
                             sevenDayChange(for: market)
                                 .padding(.horizontal, 8)
                                 .frame(width: 96, alignment: .trailing)
                                 .frame(maxHeight: .infinity)
                                 .overlay(alignment: .leading) {
-                                    Rectangle().fill(AppColor.border).frame(width: 0.5)
+                                    Rectangle().fill(AppColor.separator).frame(width: 0.5)
                                 }
                         }
                         .font(.caption)
@@ -232,7 +232,7 @@ struct MarketsView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .background(index.isMultiple(of: 2) ? AppColor.paper : AppColor.cream)
                         .overlay(alignment: .bottom) {
-                            Rectangle().fill(AppColor.border).frame(height: 0.5)
+                            Rectangle().fill(AppColor.separator).frame(height: 0.5)
                         }
                         .contentShape(Rectangle())
                     }
@@ -243,7 +243,7 @@ struct MarketsView: View {
             }
         }
         .overlay {
-            if !picks.isEmpty { Rectangle().stroke(AppColor.border, lineWidth: 1) }
+            if !picks.isEmpty { Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth) }
         }
         .task(id: store.snapshot?.generatedAt) {
             for market in picks { await store.loadHistory(market, days: 7) }
@@ -294,7 +294,7 @@ struct MarketsView: View {
             .frame(minHeight: 44)
             .background(AppColor.paper)
             .clipShape(Rectangle())
-            .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+            .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
             .panelElevation()
 
             Toggle("Volume over 10K", isOn: $volumeOnly)
@@ -305,7 +305,7 @@ struct MarketsView: View {
                 .frame(minHeight: 44)
                 .background(AppColor.paper)
                 .clipShape(Rectangle())
-                .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+                .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
                 .panelElevation()
 
             if filtered.isEmpty {
@@ -339,7 +339,7 @@ struct MarketsView: View {
             .frame(minHeight: header ? 30 : 48)
             .frame(maxHeight: .infinity)
             .overlay(alignment: .trailing) {
-                Rectangle().fill(AppColor.border)
+                Rectangle().fill(AppColor.separator)
                     .frame(width: 0.5)
             }
     }
@@ -368,7 +368,7 @@ struct MarketsView: View {
                             }.fixedSize(horizontal: false, vertical: true)
                                 .background(index.isMultiple(of: 2) ? AppColor.paper : AppColor.cream)
                                 .overlay(alignment: .bottom) {
-                                    Rectangle().fill(AppColor.border).frame(height: 0.5)
+                                    Rectangle().fill(AppColor.separator).frame(height: 0.5)
                                 }
                                 .contentShape(Rectangle())
                         }.buttonStyle(.plain)
@@ -380,7 +380,7 @@ struct MarketsView: View {
             }
         }
         .background(AppColor.paper)
-        .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+        .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
         .panelElevation()
     }
 
@@ -430,7 +430,7 @@ struct MarketsView: View {
         }.font(.subheadline.weight(.semibold)).tint(AppColor.hunterGreen)
             .padding(16).background(AppColor.paper)
             .clipShape(Rectangle())
-            .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+            .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
             .panelElevation()
     }
 }

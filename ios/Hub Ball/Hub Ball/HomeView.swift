@@ -139,7 +139,7 @@ struct HomeView: View {
                         .background(team.isFavorite ? AppColor.paleBlue.opacity(0.72) : AppColor.paper)
 
                         if index < division.teams.count - 1 {
-                            Divider().overlay(AppColor.border).padding(.leading, 13)
+                            Divider().overlay(AppColor.separator).padding(.leading, 13)
                         }
                     }
                 }
@@ -175,7 +175,7 @@ struct HomeView: View {
                     .modifier(HomeTableHeaderStyle())
 
                     gameResultRow(favorite, emphasized: true)
-                    Divider().overlay(AppColor.border).padding(.leading, 13)
+                    Divider().overlay(AppColor.separator).padding(.leading, 13)
                     gameResultRow(opponent, emphasized: false)
 
                     HStack(spacing: 8) {
@@ -229,7 +229,7 @@ struct HomeView: View {
                     let game = Array(upcomingGames)[index]
                     upcomingRow(game)
                     if index < upcomingGames.count - 1 {
-                        Divider().overlay(AppColor.border).padding(.leading, 13)
+                        Divider().overlay(AppColor.separator).padding(.leading, 13)
                     }
                 }
 
@@ -489,7 +489,7 @@ private struct HomeCardStyle: ViewModifier {
             .clipShape(Rectangle())
             .overlay {
                 Rectangle()
-                    .stroke(AppColor.border.opacity(0.9), lineWidth: 1)
+                    .stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
             }
             .panelElevation()
     }
