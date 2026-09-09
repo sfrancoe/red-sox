@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:38.047084+00:00",
+  "generated_at": "2026-09-09T16:54:09.105621+00:00",
   "season": 2026,
   "team": "Chicago White Sox",
   "games_played": 144,
@@ -16,8 +16,8 @@
     "actual_war": 11.3,
     "forecast_war_to_date": 12.2,
     "war_gap": -0.9,
-    "innings": 1274.0,
-    "era": 4.11
+    "innings": 1283.0,
+    "era": 4.15
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Sean Burke",
       "throws": "R",
       "role": "Swingman",
-      "games": 28,
-      "starts": 24,
+      "games": 29,
+      "starts": 25,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "154.2",
-        "ip_value": 154.667,
+        "ip": "156.0",
+        "ip_value": 156.0,
         "war": 2.87,
-        "era": 3.2,
-        "fip": 3.65,
-        "k_minus_bb_pct": 17.8
+        "era": 3.58,
+        "fip": 3.66,
+        "k_minus_bb_pct": 17.4
       },
       "forecast": {
         "ip": 142.1,
@@ -50,7 +50,7 @@
         "war": 0.82
       },
       "war_gap": 2.05,
-      "innings_share_pct": 12.1
+      "innings_share_pct": 12.2
     },
     {
       "id": 663436,
@@ -82,7 +82,7 @@
         "war": 1.19
       },
       "war_gap": 1.39,
-      "innings_share_pct": 10.3
+      "innings_share_pct": 10.2
     },
     {
       "id": 691799,
@@ -114,7 +114,7 @@
         "war": 1.12
       },
       "war_gap": 0.83,
-      "innings_share_pct": 5.9
+      "innings_share_pct": 5.8
     },
     {
       "id": 656794,
@@ -130,7 +130,7 @@
         "ip_value": 81.667,
         "war": 1.9,
         "era": 2.42,
-        "fip": 2.89,
+        "fip": 2.88,
         "k_minus_bb_pct": 13.9
       },
       "forecast": {
@@ -194,7 +194,7 @@
         "ip_value": 141.0,
         "war": 0.96,
         "era": 4.47,
-        "fip": 4.85,
+        "fip": 4.84,
         "k_minus_bb_pct": 10.4
       },
       "forecast": {
@@ -209,8 +209,8 @@
         "ip": 124.5,
         "war": 1.42
       },
-      "war_gap": -0.45,
-      "innings_share_pct": 11.1
+      "war_gap": -0.46,
+      "innings_share_pct": 11.0
     },
     {
       "id": 702273,
@@ -290,7 +290,7 @@
         "ip_value": 16.0,
         "war": 0.34,
         "era": 0.56,
-        "fip": 2.91,
+        "fip": 2.9,
         "k_minus_bb_pct": 21.0
       },
       "forecast": {
@@ -306,7 +306,7 @@
         "war": 0.13
       },
       "war_gap": 0.21,
-      "innings_share_pct": 1.3
+      "innings_share_pct": 1.2
     },
     {
       "id": 669684,
@@ -338,7 +338,7 @@
         "war": 0.16
       },
       "war_gap": 0.11,
-      "innings_share_pct": 2.4
+      "innings_share_pct": 2.3
     },
     {
       "id": 670950,
@@ -354,7 +354,7 @@
         "ip_value": 64.0,
         "war": 0.26,
         "era": 3.52,
-        "fip": 4.24,
+        "fip": 4.23,
         "k_minus_bb_pct": 14.5
       },
       "forecast": {
@@ -377,17 +377,17 @@
       "name": "Tyler Davis",
       "throws": "R",
       "role": "Reliever",
-      "games": 28,
+      "games": 29,
       "starts": 0,
       "saves": 1,
       "holds": 0,
       "actual": {
-        "ip": "29.2",
-        "ip_value": 29.667,
+        "ip": "30.2",
+        "ip_value": 30.667,
         "war": 0.25,
-        "era": 3.64,
-        "fip": 3.84,
-        "k_minus_bb_pct": 8.5
+        "era": 3.52,
+        "fip": 3.81,
+        "k_minus_bb_pct": 8.1
       },
       "forecast": {
         "ip": 1.0,
@@ -401,25 +401,25 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.25,
-      "innings_share_pct": 2.3
+      "war_gap": 0.26,
+      "innings_share_pct": 2.4
     },
     {
       "id": 664353,
       "name": "José Urquidy",
       "throws": "R",
       "role": "Reliever",
-      "games": 5,
+      "games": 6,
       "starts": 1,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "18.2",
-        "ip_value": 18.667,
-        "war": 0.13,
-        "era": 4.34,
-        "fip": 3.95,
-        "k_minus_bb_pct": 12.8
+        "ip": "22.2",
+        "ip_value": 22.667,
+        "war": 0.06,
+        "era": 4.37,
+        "fip": 4.42,
+        "k_minus_bb_pct": 10.5
       },
       "forecast": {
         "ip": 62.5,
@@ -433,8 +433,40 @@
         "ip": 55.6,
         "war": 0.0
       },
-      "war_gap": 0.13,
-      "innings_share_pct": 1.5
+      "war_gap": 0.06,
+      "innings_share_pct": 1.8
+    },
+    {
+      "id": 805326,
+      "name": "Tyler Schweitzer",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 17,
+      "starts": 0,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "35.1",
+        "ip_value": 35.333,
+        "war": 0.05,
+        "era": 3.06,
+        "fip": 4.25,
+        "k_minus_bb_pct": 3.4
+      },
+      "forecast": {
+        "ip": 12.0,
+        "war": -0.01,
+        "era": 4.3,
+        "fip": 4.62,
+        "k_minus_bb_pct": 8.9,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 10.7,
+        "war": -0.01
+      },
+      "war_gap": 0.05,
+      "innings_share_pct": 2.8
     },
     {
       "id": 624512,
@@ -460,38 +492,6 @@
       },
       "war_gap": 0.02,
       "innings_share_pct": 0.1
-    },
-    {
-      "id": 805326,
-      "name": "Tyler Schweitzer",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 16,
-      "starts": 0,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "32.2",
-        "ip_value": 32.667,
-        "war": 0.01,
-        "era": 3.31,
-        "fip": 4.35,
-        "k_minus_bb_pct": 3.7
-      },
-      "forecast": {
-        "ip": 12.0,
-        "war": -0.01,
-        "era": 4.3,
-        "fip": 4.62,
-        "k_minus_bb_pct": 8.9,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 10.7,
-        "war": -0.01
-      },
-      "war_gap": 0.01,
-      "innings_share_pct": 2.6
     },
     {
       "id": 685126,
@@ -619,7 +619,7 @@
         "war": 1.6
       },
       "war_gap": -1.63,
-      "innings_share_pct": 0.7
+      "innings_share_pct": 0.6
     },
     {
       "id": 697812,
@@ -635,7 +635,7 @@
         "ip_value": 10.333,
         "war": -0.03,
         "era": 3.48,
-        "fip": 4.55,
+        "fip": 4.54,
         "k_minus_bb_pct": 1.9
       },
       "forecast": {
@@ -836,7 +836,7 @@
         "war": 0.48
       },
       "war_gap": -0.63,
-      "innings_share_pct": 10.1
+      "innings_share_pct": 10.0
     },
     {
       "id": 699151,
@@ -980,7 +980,7 @@
         "ip_value": 26.333,
         "war": -0.24,
         "era": 7.52,
-        "fip": 6.44,
+        "fip": 6.43,
         "k_minus_bb_pct": 12.1
       },
       "forecast": {

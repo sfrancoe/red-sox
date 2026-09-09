@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:35.437813+00:00",
+  "generated_at": "2026-09-09T16:54:05.833857+00:00",
   "season": 2026,
   "team": "Baltimore Orioles",
   "games_played": 146,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.9,
+    "actual_war": 14.8,
     "forecast_war_to_date": 13.0,
-    "war_gap": 1.9,
-    "innings": 1292.3,
-    "era": 4.14
+    "war_gap": 1.8,
+    "innings": 1301.3,
+    "era": 4.15
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "151.2",
         "ip_value": 151.667,
-        "war": 3.55,
+        "war": 3.56,
         "era": 4.15,
         "fip": 3.44,
         "k_minus_bb_pct": 16.1
@@ -114,24 +114,24 @@
         "war": 2.74
       },
       "war_gap": -1.02,
-      "innings_share_pct": 11.8
+      "innings_share_pct": 11.7
     },
     {
       "id": 687064,
       "name": "Brandon Young",
       "throws": "R",
       "role": "Starter",
-      "games": 24,
-      "starts": 24,
+      "games": 25,
+      "starts": 25,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "137.0",
-        "ip_value": 137.0,
-        "war": 1.45,
-        "era": 3.42,
-        "fip": 4.41,
-        "k_minus_bb_pct": 10.6
+        "ip": "140.2",
+        "ip_value": 140.667,
+        "war": 1.35,
+        "era": 3.71,
+        "fip": 4.5,
+        "k_minus_bb_pct": 10.2
       },
       "forecast": {
         "ip": 25.9,
@@ -145,25 +145,25 @@
         "ip": 23.3,
         "war": 0.11
       },
-      "war_gap": 1.34,
-      "innings_share_pct": 10.6
+      "war_gap": 1.24,
+      "innings_share_pct": 10.8
     },
     {
       "id": 664991,
       "name": "Grant Wolfram",
       "throws": "L",
       "role": "Setup",
-      "games": 53,
+      "games": 54,
       "starts": 0,
       "saves": 1,
       "holds": 12,
       "actual": {
-        "ip": "45.0",
-        "ip_value": 45.0,
-        "war": 0.9,
-        "era": 5.0,
-        "fip": 2.85,
-        "k_minus_bb_pct": 19.2
+        "ip": "46.1",
+        "ip_value": 46.333,
+        "war": 0.96,
+        "era": 4.86,
+        "fip": 2.81,
+        "k_minus_bb_pct": 19.3
       },
       "forecast": {
         "ip": 50.0,
@@ -177,8 +177,8 @@
         "ip": 45.1,
         "war": 0.09
       },
-      "war_gap": 0.81,
-      "innings_share_pct": 3.5
+      "war_gap": 0.87,
+      "innings_share_pct": 3.6
     },
     {
       "id": 666974,
@@ -210,7 +210,7 @@
         "war": 0.36
       },
       "war_gap": 0.51,
-      "innings_share_pct": 3.5
+      "innings_share_pct": 3.4
     },
     {
       "id": 669330,
@@ -242,7 +242,7 @@
         "war": 0.33
       },
       "war_gap": 0.54,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
     },
     {
       "id": 605135,
@@ -290,7 +290,7 @@
         "ip_value": 60.667,
         "war": 0.55,
         "era": 3.12,
-        "fip": 4.07,
+        "fip": 4.06,
         "k_minus_bb_pct": 17.6
       },
       "forecast": {
@@ -305,7 +305,7 @@
         "ip": 50.5,
         "war": 0.0
       },
-      "war_gap": 0.54,
+      "war_gap": 0.55,
       "innings_share_pct": 4.7
     },
     {
@@ -313,17 +313,17 @@
       "name": "Cam Sanders",
       "throws": "R",
       "role": "Reliever",
-      "games": 14,
+      "games": 15,
       "starts": 0,
       "saves": 3,
       "holds": 1,
       "actual": {
-        "ip": "16.0",
-        "ip_value": 16.0,
-        "war": 0.5,
-        "era": 2.81,
-        "fip": 2.28,
-        "k_minus_bb_pct": 20.3
+        "ip": "17.0",
+        "ip_value": 17.0,
+        "war": 0.48,
+        "era": 2.65,
+        "fip": 2.39,
+        "k_minus_bb_pct": 18.8
       },
       "forecast": {
         "ip": 34.0,
@@ -337,25 +337,25 @@
         "ip": 30.6,
         "war": -0.08
       },
-      "war_gap": 0.58,
-      "innings_share_pct": 1.2
+      "war_gap": 0.56,
+      "innings_share_pct": 1.3
     },
     {
       "id": 689296,
       "name": "Anthony Nunez",
       "throws": "R",
       "role": "Reliever",
-      "games": 45,
+      "games": 46,
       "starts": 0,
       "saves": 3,
       "holds": 7,
       "actual": {
-        "ip": "52.1",
-        "ip_value": 52.333,
-        "war": 0.38,
-        "era": 4.13,
-        "fip": 3.73,
-        "k_minus_bb_pct": 14.7
+        "ip": "53.2",
+        "ip_value": 53.667,
+        "war": 0.42,
+        "era": 4.02,
+        "fip": 3.67,
+        "k_minus_bb_pct": 14.8
       },
       "forecast": {
         "ip": 25.0,
@@ -369,8 +369,8 @@
         "ip": 22.5,
         "war": 0.08
       },
-      "war_gap": 0.3,
-      "innings_share_pct": 4.0
+      "war_gap": 0.34,
+      "innings_share_pct": 4.1
     },
     {
       "id": 552640,
@@ -402,7 +402,7 @@
         "war": 0.33
       },
       "war_gap": -0.01,
-      "innings_share_pct": 3.5
+      "innings_share_pct": 3.4
     },
     {
       "id": 677020,
@@ -448,7 +448,7 @@
       "actual": {
         "ip": "33.1",
         "ip_value": 33.333,
-        "war": 0.22,
+        "war": 0.21,
         "era": 4.05,
         "fip": 4.8,
         "k_minus_bb_pct": 8.5
@@ -467,38 +467,6 @@
       },
       "war_gap": 0.03,
       "innings_share_pct": 2.6
-    },
-    {
-      "id": 695380,
-      "name": "Alex Hoppe",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 13,
-      "starts": 0,
-      "saves": 1,
-      "holds": 4,
-      "actual": {
-        "ip": "10.1",
-        "ip_value": 10.333,
-        "war": 0.15,
-        "era": 0.0,
-        "fip": 3.48,
-        "k_minus_bb_pct": 4.8
-      },
-      "forecast": {
-        "ip": 22.0,
-        "war": -0.04,
-        "era": 4.03,
-        "fip": 4.32,
-        "k_minus_bb_pct": 9.0,
-        "team_at_fetch": "BAL"
-      },
-      "forecast_to_date": {
-        "ip": 19.8,
-        "war": -0.04
-      },
-      "war_gap": 0.19,
-      "innings_share_pct": 0.8
     },
     {
       "id": 608650,
@@ -562,7 +530,39 @@
         "war": 0.21
       },
       "war_gap": -0.08,
-      "innings_share_pct": 2.0
+      "innings_share_pct": 1.9
+    },
+    {
+      "id": 695380,
+      "name": "Alex Hoppe",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 14,
+      "starts": 0,
+      "saves": 1,
+      "holds": 4,
+      "actual": {
+        "ip": "11.0",
+        "ip_value": 11.0,
+        "war": 0.1,
+        "era": 0.0,
+        "fip": 3.82,
+        "k_minus_bb_pct": 2.0
+      },
+      "forecast": {
+        "ip": 22.0,
+        "war": -0.04,
+        "era": 4.03,
+        "fip": 4.32,
+        "k_minus_bb_pct": 9.0,
+        "team_at_fetch": "BAL"
+      },
+      "forecast_to_date": {
+        "ip": 19.8,
+        "war": -0.04
+      },
+      "war_gap": 0.13,
+      "innings_share_pct": 0.8
     },
     {
       "id": 544150,
@@ -594,7 +594,7 @@
         "war": 0.03
       },
       "war_gap": 0.03,
-      "innings_share_pct": 4.6
+      "innings_share_pct": 4.5
     },
     {
       "id": 621107,
@@ -738,7 +738,7 @@
         "ip_value": 9.0,
         "war": -0.04,
         "era": 9.0,
-        "fip": 5.21,
+        "fip": 5.2,
         "k_minus_bb_pct": 2.0
       },
       "forecast": {
@@ -753,7 +753,7 @@
         "ip": 28.8,
         "war": -0.06
       },
-      "war_gap": 0.02,
+      "war_gap": 0.03,
       "innings_share_pct": 0.7
     },
     {
@@ -818,17 +818,17 @@
       "name": "Luis De León",
       "throws": "L",
       "role": "Reliever",
-      "games": 3,
+      "games": 4,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "2.2",
-        "ip_value": 2.667,
-        "war": -0.11,
-        "era": 6.75,
-        "fip": 7.59,
-        "k_minus_bb_pct": 8.3
+        "ip": "3.2",
+        "ip_value": 3.667,
+        "war": -0.1,
+        "era": 4.91,
+        "fip": 6.37,
+        "k_minus_bb_pct": 6.7
       },
       "forecast": {
         "ip": 1.0,
@@ -842,8 +842,8 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": -0.11,
-      "innings_share_pct": 0.2
+      "war_gap": -0.1,
+      "innings_share_pct": 0.3
     },
     {
       "id": 675919,
@@ -978,7 +978,7 @@
       "actual": {
         "ip": "33.0",
         "ip_value": 33.0,
-        "war": -0.38,
+        "war": -0.39,
         "era": 7.36,
         "fip": 6.4,
         "k_minus_bb_pct": 3.1
@@ -996,7 +996,7 @@
         "war": 0.08
       },
       "war_gap": -0.47,
-      "innings_share_pct": 2.6
+      "innings_share_pct": 2.5
     }
   ]
 }

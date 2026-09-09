@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:40.647455+00:00",
+  "generated_at": "2026-09-09T16:54:12.514119+00:00",
   "season": 2026,
   "team": "Detroit Tigers",
   "games_played": 145,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.1,
+    "actual_war": 14.2,
     "forecast_war_to_date": 18.2,
     "war_gap": -4.1,
-    "innings": 1276.0,
-    "era": 3.69
+    "innings": 1285.0,
+    "era": 3.68
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 5.27
       },
       "war_gap": -2.3,
-      "innings_share_pct": 7.6
+      "innings_share_pct": 7.5
     },
     {
       "id": 663554,
@@ -66,7 +66,7 @@
         "ip_value": 86.667,
         "war": 2.96,
         "era": 2.7,
-        "fip": 2.58,
+        "fip": 2.57,
         "k_minus_bb_pct": 19.4
       },
       "forecast": {
@@ -81,8 +81,8 @@
         "ip": 134.8,
         "war": 1.93
       },
-      "war_gap": 1.02,
-      "innings_share_pct": 6.8
+      "war_gap": 1.03,
+      "innings_share_pct": 6.7
     },
     {
       "id": 672456,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "143.0",
         "ip_value": 143.0,
-        "war": 2.44,
+        "war": 2.45,
         "era": 3.52,
         "fip": 3.89,
         "k_minus_bb_pct": 11.1
@@ -113,8 +113,8 @@
         "ip": 48.9,
         "war": 0.26
       },
-      "war_gap": 2.18,
-      "innings_share_pct": 11.2
+      "war_gap": 2.19,
+      "innings_share_pct": 11.1
     },
     {
       "id": 664285,
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "157.2",
         "ip_value": 157.667,
-        "war": 1.68,
+        "war": 1.69,
         "era": 4.17,
         "fip": 4.19,
         "k_minus_bb_pct": 8.9
@@ -145,8 +145,8 @@
         "ip": 170.4,
         "war": 3.34
       },
-      "war_gap": -1.65,
-      "innings_share_pct": 12.4
+      "war_gap": -1.64,
+      "innings_share_pct": 12.3
     },
     {
       "id": 675512,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "108.0",
         "ip_value": 108.0,
-        "war": 1.58,
+        "war": 1.57,
         "era": 2.42,
         "fip": 4.05,
         "k_minus_bb_pct": 13.1
@@ -178,7 +178,7 @@
         "war": 0.41
       },
       "war_gap": 1.17,
-      "innings_share_pct": 8.5
+      "innings_share_pct": 8.4
     },
     {
       "id": 656427,
@@ -209,40 +209,8 @@
         "ip": 146.0,
         "war": 2.32
       },
-      "war_gap": -1.02,
-      "innings_share_pct": 6.8
-    },
-    {
-      "id": 623454,
-      "name": "Drew Anderson",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 46,
-      "starts": 8,
-      "saves": 2,
-      "holds": 6,
-      "actual": {
-        "ip": "91.2",
-        "ip_value": 91.667,
-        "war": 0.62,
-        "era": 3.73,
-        "fip": 4.14,
-        "k_minus_bb_pct": 16.3
-      },
-      "forecast": {
-        "ip": 85.7,
-        "war": 0.99,
-        "era": 3.72,
-        "fip": 3.62,
-        "k_minus_bb_pct": 17.1,
-        "team_at_fetch": "DET"
-      },
-      "forecast_to_date": {
-        "ip": 76.7,
-        "war": 0.89
-      },
-      "war_gap": -0.27,
-      "innings_share_pct": 7.2
+      "war_gap": -1.01,
+      "innings_share_pct": 6.7
     },
     {
       "id": 805427,
@@ -258,7 +226,7 @@
         "ip_value": 32.667,
         "war": 0.6,
         "era": 3.86,
-        "fip": 2.7,
+        "fip": 2.69,
         "k_minus_bb_pct": 26.6
       },
       "forecast": {
@@ -274,7 +242,39 @@
         "war": 0.07
       },
       "war_gap": 0.53,
-      "innings_share_pct": 2.6
+      "innings_share_pct": 2.5
+    },
+    {
+      "id": 623454,
+      "name": "Drew Anderson",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 47,
+      "starts": 9,
+      "saves": 2,
+      "holds": 6,
+      "actual": {
+        "ip": "97.0",
+        "ip_value": 97.0,
+        "war": 0.59,
+        "era": 3.8,
+        "fip": 4.23,
+        "k_minus_bb_pct": 15.7
+      },
+      "forecast": {
+        "ip": 85.7,
+        "war": 0.99,
+        "era": 3.72,
+        "fip": 3.62,
+        "k_minus_bb_pct": 17.1,
+        "team_at_fetch": "DET"
+      },
+      "forecast_to_date": {
+        "ip": 76.7,
+        "war": 0.89
+      },
+      "war_gap": -0.3,
+      "innings_share_pct": 7.5
     },
     {
       "id": 680744,
@@ -306,7 +306,7 @@
         "war": 0.11
       },
       "war_gap": 0.31,
-      "innings_share_pct": 3.1
+      "innings_share_pct": 3.0
     },
     {
       "id": 646241,
@@ -402,24 +402,24 @@
         "war": 0.4
       },
       "war_gap": -0.11,
-      "innings_share_pct": 5.3
+      "innings_share_pct": 5.2
     },
     {
       "id": 676428,
       "name": "Brant Hurter",
       "throws": "L",
       "role": "Reliever",
-      "games": 21,
+      "games": 22,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "25.1",
-        "ip_value": 25.333,
-        "war": 0.19,
-        "era": 2.84,
-        "fip": 3.73,
-        "k_minus_bb_pct": 5.9
+        "ip": "26.2",
+        "ip_value": 26.667,
+        "war": 0.24,
+        "era": 2.7,
+        "fip": 3.62,
+        "k_minus_bb_pct": 6.7
       },
       "forecast": {
         "ip": 55.0,
@@ -433,8 +433,8 @@
         "ip": 49.2,
         "war": 0.32
       },
-      "war_gap": -0.14,
-      "innings_share_pct": 2.0
+      "war_gap": -0.09,
+      "innings_share_pct": 2.1
     },
     {
       "id": 808825,
@@ -482,7 +482,7 @@
         "ip_value": 6.333,
         "war": 0.1,
         "era": 0.0,
-        "fip": 3.73,
+        "fip": 3.72,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -514,7 +514,7 @@
         "ip_value": 17.0,
         "war": 0.08,
         "era": 3.18,
-        "fip": 3.51,
+        "fip": 3.5,
         "k_minus_bb_pct": 17.8
       },
       "forecast": {
@@ -578,7 +578,7 @@
         "ip_value": 15.667,
         "war": 0.06,
         "era": 3.45,
-        "fip": 4.12,
+        "fip": 4.11,
         "k_minus_bb_pct": 13.0
       },
       "forecast": {
@@ -658,17 +658,17 @@
       "name": "Beau Brieske",
       "throws": "R",
       "role": "Reliever",
-      "games": 11,
+      "games": 12,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "13.0",
-        "ip_value": 13.0,
-        "war": -0.06,
-        "era": 6.23,
-        "fip": 5.4,
-        "k_minus_bb_pct": 13.0
+        "ip": "14.2",
+        "ip_value": 14.667,
+        "war": -0.03,
+        "era": 5.52,
+        "fip": 5.14,
+        "k_minus_bb_pct": 11.9
       },
       "forecast": {
         "ip": 24.0,
@@ -682,40 +682,8 @@
         "ip": 21.5,
         "war": 0.03
       },
-      "war_gap": -0.09,
-      "innings_share_pct": 1.0
-    },
-    {
-      "id": 700270,
-      "name": "Yilber Díaz",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 2,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "3.0",
-        "ip_value": 3.0,
-        "war": -0.07,
-        "era": 12.0,
-        "fip": 8.76,
-        "k_minus_bb_pct": 0.0
-      },
-      "forecast": {
-        "ip": 22.0,
-        "war": -0.08,
-        "era": 4.45,
-        "fip": 4.45,
-        "k_minus_bb_pct": 10.0,
-        "team_at_fetch": "DET"
-      },
-      "forecast_to_date": {
-        "ip": 19.7,
-        "war": -0.08
-      },
-      "war_gap": 0.01,
-      "innings_share_pct": 0.2
+      "war_gap": -0.06,
+      "innings_share_pct": 1.1
     },
     {
       "id": 663432,
@@ -748,6 +716,38 @@
       },
       "war_gap": -0.04,
       "innings_share_pct": 0.5
+    },
+    {
+      "id": 700270,
+      "name": "Yilber Díaz",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 3,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "3.2",
+        "ip_value": 3.667,
+        "war": -0.08,
+        "era": 9.82,
+        "fip": 7.73,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 22.0,
+        "war": -0.08,
+        "era": 4.45,
+        "fip": 4.45,
+        "k_minus_bb_pct": 10.0,
+        "team_at_fetch": "DET"
+      },
+      "forecast_to_date": {
+        "ip": 19.7,
+        "war": -0.08
+      },
+      "war_gap": 0.0,
+      "innings_share_pct": 0.3
     },
     {
       "id": 434378,
@@ -914,7 +914,7 @@
       "actual": {
         "ip": "58.1",
         "ip_value": 58.333,
-        "war": -0.71,
+        "war": -0.7,
         "era": 3.86,
         "fip": 5.32,
         "k_minus_bb_pct": 4.7
@@ -931,8 +931,8 @@
         "ip": 57.3,
         "war": 0.37
       },
-      "war_gap": -1.08,
-      "innings_share_pct": 4.6
+      "war_gap": -1.07,
+      "innings_share_pct": 4.5
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:46.605787+00:00",
+  "generated_at": "2026-09-09T16:54:20.369313+00:00",
   "season": 2026,
   "team": "Athletics",
   "games_played": 146,
@@ -16,8 +16,8 @@
     "actual_war": 5.9,
     "forecast_war_to_date": 10.1,
     "war_gap": -4.2,
-    "innings": 1282.0,
-    "era": 5.42
+    "innings": 1291.0,
+    "era": 5.41
   },
   "pitchers": [
     {
@@ -34,7 +34,7 @@
         "ip_value": 96.667,
         "war": 1.91,
         "era": 5.12,
-        "fip": 3.74,
+        "fip": 3.73,
         "k_minus_bb_pct": 14.4
       },
       "forecast": {
@@ -82,7 +82,7 @@
         "war": 1.01
       },
       "war_gap": 0.68,
-      "innings_share_pct": 10.8
+      "innings_share_pct": 10.7
     },
     {
       "id": 682052,
@@ -98,7 +98,7 @@
         "ip_value": 111.0,
         "war": 0.94,
         "era": 4.78,
-        "fip": 4.99,
+        "fip": 4.98,
         "k_minus_bb_pct": 10.4
       },
       "forecast": {
@@ -113,8 +113,8 @@
         "ip": 111.8,
         "war": 1.32
       },
-      "war_gap": -0.37,
-      "innings_share_pct": 8.7
+      "war_gap": -0.38,
+      "innings_share_pct": 8.6
     },
     {
       "id": 622663,
@@ -130,7 +130,7 @@
         "ip_value": 62.667,
         "war": 0.72,
         "era": 4.16,
-        "fip": 4.47,
+        "fip": 4.46,
         "k_minus_bb_pct": 12.5
       },
       "forecast": {
@@ -194,7 +194,7 @@
         "ip_value": 33.667,
         "war": 0.63,
         "era": 4.28,
-        "fip": 2.95,
+        "fip": 2.94,
         "k_minus_bb_pct": 18.8
       },
       "forecast": {
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "33.1",
         "ip_value": 33.333,
-        "war": 0.57,
+        "war": 0.56,
         "era": 4.32,
         "fip": 3.27,
         "k_minus_bb_pct": 13.1
@@ -273,7 +273,7 @@
         "ip": 23.4,
         "war": 0.15
       },
-      "war_gap": 0.42,
+      "war_gap": 0.41,
       "innings_share_pct": 2.6
     },
     {
@@ -313,17 +313,17 @@
       "name": "Jack Perkins",
       "throws": "R",
       "role": "Swingman",
-      "games": 33,
-      "starts": 13,
+      "games": 34,
+      "starts": 14,
       "saves": 3,
       "holds": 1,
       "actual": {
-        "ip": "98.1",
-        "ip_value": 98.333,
-        "war": 0.44,
-        "era": 6.5,
-        "fip": 4.85,
-        "k_minus_bb_pct": 15.3
+        "ip": "103.1",
+        "ip_value": 103.333,
+        "war": 0.36,
+        "era": 6.53,
+        "fip": 4.96,
+        "k_minus_bb_pct": 15.2
       },
       "forecast": {
         "ip": 24.0,
@@ -337,8 +337,8 @@
         "ip": 21.6,
         "war": 0.17
       },
-      "war_gap": 0.28,
-      "innings_share_pct": 7.7
+      "war_gap": 0.19,
+      "innings_share_pct": 8.0
     },
     {
       "id": 650644,
@@ -427,14 +427,14 @@
         "era": 3.9,
         "fip": 4.01,
         "k_minus_bb_pct": 14.7,
-        "team_at_fetch": "ATH"
+        "team_at_fetch": null
       },
       "forecast_to_date": {
         "ip": 57.8,
         "war": 0.26
       },
       "war_gap": -0.04,
-      "innings_share_pct": 3.4
+      "innings_share_pct": 3.3
     },
     {
       "id": 696522,
@@ -469,6 +469,38 @@
       "innings_share_pct": 1.1
     },
     {
+      "id": 688297,
+      "name": "Chris Roycroft",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "7.1",
+        "ip_value": 7.333,
+        "war": 0.15,
+        "era": 1.23,
+        "fip": 2.82,
+        "k_minus_bb_pct": 6.7
+      },
+      "forecast": {
+        "ip": 52.0,
+        "war": 0.03,
+        "era": 4.1,
+        "fip": 4.32,
+        "k_minus_bb_pct": 8.1,
+        "team_at_fetch": "ATH"
+      },
+      "forecast_to_date": {
+        "ip": 46.9,
+        "war": 0.03
+      },
+      "war_gap": 0.13,
+      "innings_share_pct": 0.6
+    },
+    {
       "id": 680723,
       "name": "Drew Rom",
       "throws": "L",
@@ -501,36 +533,36 @@
       "innings_share_pct": 0.4
     },
     {
-      "id": 688297,
-      "name": "Chris Roycroft",
+      "id": 664129,
+      "name": "Geoff Hartlieb",
       "throws": "R",
       "role": "Reliever",
-      "games": 3,
+      "games": 12,
       "starts": 0,
       "saves": 0,
-      "holds": 1,
+      "holds": 2,
       "actual": {
-        "ip": "5.1",
-        "ip_value": 5.333,
+        "ip": "19.2",
+        "ip_value": 19.667,
         "war": 0.09,
-        "era": 1.69,
-        "fip": 3.09,
-        "k_minus_bb_pct": 4.5
+        "era": 4.58,
+        "fip": 4.21,
+        "k_minus_bb_pct": 2.3
       },
       "forecast": {
-        "ip": 52.0,
-        "war": 0.03,
-        "era": 4.1,
-        "fip": 4.32,
-        "k_minus_bb_pct": 8.1,
+        "ip": 1.0,
+        "war": 0.0,
+        "era": 4.32,
+        "fip": 4.38,
+        "k_minus_bb_pct": 11.1,
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 46.9,
-        "war": 0.03
+        "ip": 0.9,
+        "war": 0.0
       },
-      "war_gap": 0.06,
-      "innings_share_pct": 0.4
+      "war_gap": 0.09,
+      "innings_share_pct": 1.5
     },
     {
       "id": 621139,
@@ -563,38 +595,6 @@
       },
       "war_gap": 0.08,
       "innings_share_pct": 0.2
-    },
-    {
-      "id": 664129,
-      "name": "Geoff Hartlieb",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 11,
-      "starts": 0,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "17.2",
-        "ip_value": 17.667,
-        "war": 0.06,
-        "era": 5.09,
-        "fip": 4.4,
-        "k_minus_bb_pct": 1.2
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": 0.0,
-        "era": 4.32,
-        "fip": 4.38,
-        "k_minus_bb_pct": 11.1,
-        "team_at_fetch": "ATH"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": 0.0
-      },
-      "war_gap": 0.06,
-      "innings_share_pct": 1.4
     },
     {
       "id": 683155,
@@ -736,7 +736,7 @@
       "actual": {
         "ip": "47.0",
         "ip_value": 47.0,
-        "war": -0.05,
+        "war": -0.06,
         "era": 4.21,
         "fip": 4.56,
         "k_minus_bb_pct": 16.4
@@ -754,7 +754,7 @@
         "war": 0.05
       },
       "war_gap": -0.11,
-      "innings_share_pct": 3.7
+      "innings_share_pct": 3.6
     },
     {
       "id": 621053,
@@ -939,7 +939,7 @@
         "war": -0.0
       },
       "war_gap": -0.36,
-      "innings_share_pct": 1.4
+      "innings_share_pct": 1.3
     },
     {
       "id": 686993,
@@ -955,7 +955,7 @@
         "ip_value": 42.667,
         "war": -0.44,
         "era": 6.12,
-        "fip": 5.49,
+        "fip": 5.48,
         "k_minus_bb_pct": 14.7
       },
       "forecast": {

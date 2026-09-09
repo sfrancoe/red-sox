@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:36.547069+00:00",
+  "generated_at": "2026-09-09T16:54:07.355610+00:00",
   "season": 2026,
   "team": "Toronto Blue Jays",
   "games_played": 146,
@@ -16,8 +16,8 @@
     "actual_war": 14.6,
     "forecast_war_to_date": 23.6,
     "war_gap": -9.0,
-    "innings": 1289.0,
-    "era": 3.94
+    "innings": 1298.0,
+    "era": 3.93
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "161.1",
         "ip_value": 161.333,
-        "war": 5.45,
+        "war": 5.46,
         "era": 2.4,
         "fip": 2.47,
         "k_minus_bb_pct": 24.8
@@ -50,7 +50,7 @@
         "war": 3.39
       },
       "war_gap": 2.07,
-      "innings_share_pct": 12.5
+      "innings_share_pct": 12.4
     },
     {
       "id": 686973,
@@ -114,32 +114,32 @@
         "war": 2.64
       },
       "war_gap": -0.04,
-      "innings_share_pct": 9.9
+      "innings_share_pct": 9.8
     },
     {
       "id": 693686,
       "name": "Spencer Miles",
       "throws": "R",
       "role": "Swingman",
-      "games": 44,
+      "games": 45,
       "starts": 6,
-      "saves": 1,
+      "saves": 2,
       "holds": 1,
       "actual": {
-        "ip": "85.2",
-        "ip_value": 85.667,
-        "war": 1.57,
-        "era": 2.84,
-        "fip": 2.8,
-        "k_minus_bb_pct": 16.6
+        "ip": "87.2",
+        "ip_value": 87.667,
+        "war": 1.68,
+        "era": 2.77,
+        "fip": 2.74,
+        "k_minus_bb_pct": 17.1
       },
       "forecast": null,
       "forecast_to_date": {
         "ip": 0.0,
         "war": 0.0
       },
-      "war_gap": 1.57,
-      "innings_share_pct": 6.6
+      "war_gap": 1.68,
+      "innings_share_pct": 6.8
     },
     {
       "id": 702056,
@@ -155,7 +155,7 @@
         "ip_value": 93.667,
         "war": 1.31,
         "era": 3.65,
-        "fip": 4.08,
+        "fip": 4.07,
         "k_minus_bb_pct": 11.7
       },
       "forecast": {
@@ -171,7 +171,7 @@
         "war": 1.77
       },
       "war_gap": -0.46,
-      "innings_share_pct": 7.3
+      "innings_share_pct": 7.2
     },
     {
       "id": 656546,
@@ -234,7 +234,7 @@
         "ip": 66.7,
         "war": 0.23
       },
-      "war_gap": 0.89,
+      "war_gap": 0.9,
       "innings_share_pct": 5.0
     },
     {
@@ -251,7 +251,7 @@
         "ip_value": 57.333,
         "war": 0.55,
         "era": 3.3,
-        "fip": 3.71,
+        "fip": 3.7,
         "k_minus_bb_pct": 14.9
       },
       "forecast": {
@@ -268,38 +268,6 @@
       },
       "war_gap": 0.47,
       "innings_share_pct": 4.4
-    },
-    {
-      "id": 667755,
-      "name": "José Soriano",
-      "throws": "R",
-      "role": "Starter",
-      "games": 6,
-      "starts": 6,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "33.0",
-        "ip_value": 33.0,
-        "war": 0.45,
-        "era": 4.36,
-        "fip": 3.88,
-        "k_minus_bb_pct": 7.7
-      },
-      "forecast": {
-        "ip": 177.3,
-        "war": 3.02,
-        "era": 3.68,
-        "fip": 3.79,
-        "k_minus_bb_pct": 11.8,
-        "team_at_fetch": "TOR"
-      },
-      "forecast_to_date": {
-        "ip": 159.8,
-        "war": 2.73
-      },
-      "war_gap": -2.28,
-      "innings_share_pct": 2.6
     },
     {
       "id": 571578,
@@ -332,6 +300,38 @@
       },
       "war_gap": -0.02,
       "innings_share_pct": 6.2
+    },
+    {
+      "id": 667755,
+      "name": "José Soriano",
+      "throws": "R",
+      "role": "Starter",
+      "games": 7,
+      "starts": 7,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "40.0",
+        "ip_value": 40.0,
+        "war": 0.35,
+        "era": 4.05,
+        "fip": 4.32,
+        "k_minus_bb_pct": 7.6
+      },
+      "forecast": {
+        "ip": 177.3,
+        "war": 3.02,
+        "era": 3.68,
+        "fip": 3.79,
+        "k_minus_bb_pct": 11.8,
+        "team_at_fetch": "TOR"
+      },
+      "forecast_to_date": {
+        "ip": 159.8,
+        "war": 2.73
+      },
+      "war_gap": -2.37,
+      "innings_share_pct": 3.1
     },
     {
       "id": 573009,
@@ -395,7 +395,7 @@
         "war": 0.24
       },
       "war_gap": -0.1,
-      "innings_share_pct": 5.5
+      "innings_share_pct": 5.4
     },
     {
       "id": 669456,
@@ -426,7 +426,7 @@
         "ip": 111.6,
         "war": 1.81
       },
-      "war_gap": -1.69,
+      "war_gap": -1.68,
       "innings_share_pct": 4.3
     },
     {
@@ -603,7 +603,7 @@
         "ip_value": 33.0,
         "war": 0.01,
         "era": 3.82,
-        "fip": 4.19,
+        "fip": 4.18,
         "k_minus_bb_pct": 15.1
       },
       "forecast": {
@@ -618,8 +618,8 @@
         "ip": 52.3,
         "war": 0.33
       },
-      "war_gap": -0.31,
-      "innings_share_pct": 2.6
+      "war_gap": -0.32,
+      "innings_share_pct": 2.5
     },
     {
       "id": 681084,
@@ -989,7 +989,7 @@
         "war": 1.21
       },
       "war_gap": -1.38,
-      "innings_share_pct": 4.9
+      "innings_share_pct": 4.8
     },
     {
       "id": 684320,
@@ -1005,7 +1005,7 @@
         "ip_value": 9.333,
         "war": -0.19,
         "era": 7.71,
-        "fip": 7.17,
+        "fip": 7.16,
         "k_minus_bb_pct": -2.2
       },
       "forecast": {
@@ -1037,7 +1037,7 @@
         "ip_value": 23.667,
         "war": -0.3,
         "era": 7.23,
-        "fip": 5.38,
+        "fip": 5.37,
         "k_minus_bb_pct": 14.4
       },
       "forecast": {
@@ -1180,7 +1180,7 @@
         "ip": 25.2,
         "war": 0.1
       },
-      "war_gap": -0.68,
+      "war_gap": -0.69,
       "innings_share_pct": 0.6
     },
     {
