@@ -11,7 +11,6 @@ private enum MainTab: Int, CaseIterable {
     case pitching
     case leaders
     case stories
-    case settings
 
     var title: String {
         switch self {
@@ -25,33 +24,17 @@ private enum MainTab: Int, CaseIterable {
         case .pitching: "Pitching"
         case .leaders: "Leaders"
         case .stories: "Stories"
-        case .settings: "Settings"
         }
     }
 
-    var icon: String {
-        switch self {
-        case .home: "house.fill"
-        case .recent: "baseball.fill"
-        case .schedule: "calendar"
-        case .headlines: "newspaper.fill"
-        case .xPosts: "bubble.left.and.bubble.right.fill"
-        case .standings: "list.number"
-        case .players: "person.3.fill"
-        case .pitching: "figure.baseball"
-        case .leaders: "crown.fill"
-        case .stories: "book.pages.fill"
-        case .settings: "gearshape.fill"
-        }
-    }
 }
 
 struct AppTabView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @AppStorage("hubSidebarCollapsed") private var sidebarCollapsed = false
     @AppStorage(HubPreferences.selectedTeamKey) private var selectedTeamID = HubTeam.boston.id
     @AppStorage(HubPreferences.completedTeamOnboardingKey) private var completedTeamOnboarding = false
     @State private var selectedTab: MainTab = .home
+    @State private var settingsPresented = false
     @State private var hasAppeared = false
     @State private var backgroundedAt: Date?
     @State private var selectedPlayerID: Int?
@@ -74,41 +57,13 @@ struct AppTabView: View {
 
     var body: some View {
         GeometryReader { window in
-            let usesPersistentSidebar = window.size.width >= 1000
-            let showsSidebar = !sidebarCollapsed
-            ZStack(alignment: .leading) {
-                HStack(spacing: 0) {
-                    if usesPersistentSidebar && showsSidebar {
-                        sidebar(isCompact: false)
-                            .frame(width: 210)
-                    }
-                    VStack(spacing: 0) {
-                        sidebarControls
-                        selectedContent(usesPersistentSidebar: usesPersistentSidebar)
-                            .id(team.id)
-                            .environment(
-                                \.hubContentWidth,
-                                window.size.width - (usesPersistentSidebar && showsSidebar ? 210 : 0)
-                            )
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-
-                if !usesPersistentSidebar && showsSidebar {
-                    AppColor.ink.opacity(0.18)
-                        .ignoresSafeArea()
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                sidebarCollapsed = true
-                            }
-                        }
-
-                    sidebar(isCompact: true)
-                        .frame(width: min(280, window.size.width * 0.78))
-                        .transition(.move(edge: .leading))
-                }
+            VStack(spacing: 0) {
+                topNavigation
+                selectedContent
+                    .id(team.id)
+                    .environment(\.hubContentWidth, window.size.width)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(AppColor.cream)
         .foregroundStyle(AppColor.ink)
@@ -122,10 +77,8 @@ struct AppTabView: View {
                let playerID = Int(playerArgument.replacingOccurrences(of: "-show-player=", with: "")) {
                 selectedPlayerID = playerID
                 selectedTab = .players
-                sidebarCollapsed = true
             } else if team.supportsPlayers, arguments.contains("-show-players") {
                 selectedTab = .players
-                sidebarCollapsed = true
             } else {
                 selectedTab = team.supportsHome ? .home : .recent
             }
@@ -157,9 +110,16 @@ struct AppTabView: View {
         .fullScreenCover(isPresented: onboardingPresented) {
             TeamOnboardingView(selectedTeamID: $selectedTeamID) {
                 completedTeamOnboarding = true
-                sidebarCollapsed = true
                 selectedTab = team.supportsHome ? .home : .recent
             }
+        }
+        .sheet(isPresented: $settingsPresented) {
+            TeamSettingsView(selectedTeamID: $selectedTeamID) { selectedTeam in
+                selectedPlayerID = nil
+                selectedTab = selectedTeam.supportsHome ? .home : .recent
+                settingsPresented = false
+            }
+            .presentationDragIndicator(.visible)
         }
     }
 
@@ -173,7 +133,7 @@ struct AppTabView: View {
     }
 
     @ViewBuilder
-    private func selectedContent(usesPersistentSidebar: Bool) -> some View {
+    private var selectedContent: some View {
         switch selectedTab {
         case .home:
                 HomeView(team: team) { destination in
@@ -213,12 +173,6 @@ struct AppTabView: View {
         case .stories:
                 StoriesView(team: team)
                     .mainTabSwipe(selection: $selectedTab, current: .stories, availableTabs: availableTabs)
-        case .settings:
-                TeamSettingsView(selectedTeamID: $selectedTeamID) { selectedTeam in
-                    selectedPlayerID = nil
-                    selectedTab = selectedTeam.supportsHome ? .home : .recent
-                    sidebarCollapsed = !usesPersistentSidebar
-                }
         }
     }
 
@@ -226,107 +180,114 @@ struct AppTabView: View {
         guard team.supportsPlayers else { return }
         selectedPlayerID = playerID
         selectedTab = .players
-        sidebarCollapsed = true
     }
 
-    private var sidebarControls: some View {
-        HStack(spacing: 12) {
-            Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    sidebarCollapsed.toggle()
-                }
-            } label: {
-                Image(systemName: "sidebar.left")
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(width: 44, height: 44)
+    private var topNavigation: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 12) {
+                Button {
+                    settingsPresented = true
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: "baseball.fill")
+                            .font(.system(size: 18, weight: .bold))
+
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(team.shortName)
+                                .font(.headline.weight(.bold))
+                                .lineLimit(1)
+                            Text("SWITCH TEAM")
+                                .font(.caption2.weight(.bold))
+                                .tracking(0.6)
+                                .foregroundStyle(AppColor.boneMuted)
+                        }
+
+                        Image(systemName: "chevron.down")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(AppColor.boneMuted)
+                    }
+                    .frame(minHeight: 44)
                     .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(sidebarCollapsed ? "Show sidebar" : "Hide sidebar")
-            .accessibilityHint("Toggle the Hub Ball navigation menu")
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Switch team")
+                .accessibilityValue(team.pickerTitle)
+                .accessibilityHint("Opens the team picker")
 
-            Text(selectedTab.title)
-                .font(AppFont.displayLarge)
-            Spacer()
+                Spacer(minLength: 8)
 
-            Button {
-                selectedTab = .settings
-            } label: {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 18, weight: .semibold))
-                    .frame(width: 44, height: 44)
+                Button {
+                    settingsPresented = true
+                } label: {
+                    Image(systemName: "gearshape")
+                        .font(.system(size: 18, weight: .semibold))
+                        .frame(width: 44, height: 44)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Settings")
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Settings")
+            .padding(.horizontal, 12)
+
+            pageStrip
         }
         .foregroundStyle(AppColor.bone)
-        .padding(.horizontal, 8)
-        .frame(height: 56)
         .background(AppColor.nightRaised)
     }
 
-    private func sidebar(isCompact: Bool) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Label("HUB BALL", systemImage: "baseball.fill")
-                .font(isCompact ? .headline.weight(.black) : .title2.weight(.black))
-                .foregroundStyle(AppColor.hunterGreen)
-                .padding(.horizontal, isCompact ? 16 : 20)
-                .padding(.top, isCompact ? 18 : 24)
-                .padding(.bottom, isCompact ? 12 : 16)
-            Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    selectedTab = .settings
-                    if isCompact {
-                        sidebarCollapsed = true
-                    }
-                }
-            } label: {
-                HStack(spacing: 6) {
-                    Text(team.pickerTitle.uppercased())
-                        .font(isCompact ? .caption.weight(.black) : .caption2.weight(.black))
-                        .tracking(0.5)
-                        .lineLimit(1)
-                    Image(systemName: "chevron.right")
-                        .font(isCompact ? .caption.weight(.black) : .caption2.weight(.black))
-                }
-                .foregroundStyle(AppColor.ink.opacity(0.62))
-                .frame(maxWidth: .infinity, minHeight: 28, alignment: .leading)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .padding(.horizontal, isCompact ? 16 : 20)
-            .padding(.bottom, 4)
-            .accessibilityLabel("Switch team")
-            .accessibilityValue(team.pickerTitle)
-            .accessibilityHint("Opens the team picker")
-            List(availableTabs, id: \.self) { tab in
-                Button {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        selectedTab = tab
-                        if isCompact {
-                            sidebarCollapsed = true
+    private var pageStrip: some View {
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal) {
+                HStack(alignment: .lastTextBaseline, spacing: 22) {
+                    ForEach(availableTabs, id: \.self) { tab in
+                        Button {
+                            withAnimation(.easeOut(duration: 0.2)) {
+                                selectedTab = tab
+                            }
+                        } label: {
+                            Text(tab.title)
+                                .font(
+                                    .system(
+                                        size: selectedTab == tab ? 18 : 15,
+                                        weight: selectedTab == tab ? .bold : .medium
+                                    )
+                                )
+                                .foregroundStyle(
+                                    selectedTab == tab ? AppColor.bone : AppColor.boneMuted
+                                )
+                                .fixedSize(horizontal: true, vertical: false)
+                                .padding(.vertical, 11)
+                                .overlay(alignment: .bottom) {
+                                    if selectedTab == tab {
+                                        Rectangle()
+                                            .fill(AppColor.amber)
+                                            .frame(height: 2)
+                                    }
+                                }
                         }
+                        .buttonStyle(.plain)
+                        .id(tab)
+                        .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
                     }
-                } label: {
-                    Label(tab.title, systemImage: tab.icon)
-                        .font(isCompact ? .headline.weight(.semibold) : .headline)
-                        .frame(
-                            maxWidth: .infinity,
-                            minHeight: isCompact ? 42 : 34,
-                            alignment: .leading
-                        )
-                        .foregroundStyle(AppColor.ink)
-                        .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
-                .listRowBackground(selectedTab == tab ? AppColor.accentSoft : Color.clear)
-                .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
+                .padding(.horizontal, 16)
             }
-            .listStyle(.sidebar)
-            .contentMargins(.top, 0, for: .scrollContent)
-            .scrollContentBackground(.hidden)
+            .scrollIndicators(.hidden)
+            .onAppear {
+                proxy.scrollTo(selectedTab, anchor: .center)
+            }
+            .onChange(of: selectedTab) { _, newTab in
+                withAnimation(.easeOut(duration: 0.2)) {
+                    proxy.scrollTo(newTab, anchor: .center)
+                }
+            }
+            .onChange(of: availableTabs) { _, tabs in
+                guard tabs.contains(selectedTab) else { return }
+                proxy.scrollTo(selectedTab, anchor: .center)
+            }
         }
-        .background(AppColor.cream)
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(AppColor.rule).frame(height: 1)
+        }
     }
 
 }
@@ -367,7 +328,7 @@ private struct MainTabSwipeModifier: ViewModifier {
         }
 
         let direction = horizontalDistance < 0 ? 1 : -1
-        let swipeTabs = availableTabs.filter { $0 != .settings }
+        let swipeTabs = availableTabs
         guard !swipeTabs.isEmpty,
               let currentIndex = swipeTabs.firstIndex(of: current) else { return }
         let destinationIndex = (currentIndex + direction + swipeTabs.count) % swipeTabs.count

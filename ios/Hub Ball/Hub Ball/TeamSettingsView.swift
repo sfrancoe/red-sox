@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TeamSettingsView: View {
+    @Environment(\.dismiss) private var dismiss
     @Binding var selectedTeamID: String
     let onSelect: (HubTeam) -> Void
 
@@ -30,7 +31,16 @@ struct TeamSettingsView: View {
                     }
                 }
             }
-            .toolbar(.hidden, for: .navigationBar)
+            .navigationTitle("Teams & Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(AppColor.nightRaised, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                }
+            }
         }
     }
 
