@@ -13,12 +13,16 @@ struct StandingsView: View {
             AppColor.paleRed.ignoresSafeArea()
 
             Group {
-                if let feed = store.feed {
-                    standingsContent(feed)
+                if store.feeds.count == StandingsLeague.allCases.count {
+                    if contentWidth >= 650 {
+                        tabletStandingsContent
+                    } else {
+                        phoneStandingsContent
+                    }
                 } else if store.isLoading {
                     ProgressView("Loading standings…")
-                        .tint(.white)
-                        .foregroundStyle(.white)
+                        .tint(.black)
+                        .foregroundStyle(.black)
                 } else {
                     errorView
                 }
@@ -28,49 +32,48 @@ struct StandingsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(AppColor.paleRed, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarColorScheme(.light, for: .navigationBar)
         .task {
             await store.load()
         }
     }
 
-    private func standingsContent(_ feed: StandingsFeed) -> some View {
+    private var phoneStandingsContent: some View {
         VStack(spacing: 0) {
             modePicker
 
             ScrollView {
                 LazyVStack(spacing: 5) {
-                    if store.mode == .divisions {
+                    if let league = store.mode.league,
+                       let feed = store.feeds[league] {
                         HubCardGrid(minimumWidth: 440, compactSpacing: 5) {
                             ForEach(feed.divisions) { division in
                                 standingsCard(
                                     title: division.name,
                                     teams: division.teams,
                                     gamesBackTitle: "GB",
-                                    showsCutoff: false
+                                    showsCutoff: false,
+                                    highlightsFavorite: league == store.selectedLeague
                                 )
                             }
                         }
-                    } else {
+                    } else if let feed = store.feeds[store.selectedLeague] {
                         standingsCard(
-                            title: "AL Wild Card",
+                            title: "\(store.selectedLeague.shortName) Wild Card",
                             teams: feed.wildCard,
                             gamesBackTitle: "WCGB",
-                            showsCutoff: true
+                            showsCutoff: true,
+                            highlightsFavorite: true
                         )
 
                         Text("Top three teams hold the wild-card positions.")
                             .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
-                            .foregroundStyle(Color.white.opacity(0.82))
+                            .foregroundStyle(Color.black.opacity(0.82))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 4)
                     }
 
-                    Text("Updated \(feed.updatedText) · \(feed.source)")
-                        .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
-                        .foregroundStyle(Color.white.opacity(0.72))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.vertical, 5)
+                    standingsFooter
                 }
                 .padding(.horizontal, 12)
                 .padding(.bottom, 12)
@@ -82,6 +85,81 @@ struct StandingsView: View {
             }
         }
         .padding(.top, contentWidth >= 650 ? 16 : 12)
+    }
+
+    private var tabletStandingsContent: some View {
+        GeometryReader { geometry in
+            let rowPadding = tabletRowPadding(for: geometry.size.height)
+
+            ScrollView {
+                LazyVStack(spacing: max(8, rowPadding)) {
+                    ForEach(StandingsLeague.allCases) { league in
+                        if let feed = store.feeds[league] {
+                            leagueSection(feed, league: league, rowPadding: rowPadding)
+                        }
+                    }
+                    standingsFooter
+                }
+                .padding(.horizontal, 7)
+                .padding(.vertical, 6)
+                .foregroundStyle(AppColor.ink)
+            }
+            .dynamicTypeSize(.xSmall)
+            .refreshable { await store.load() }
+        }
+    }
+
+    private func leagueSection(
+        _ feed: StandingsFeed,
+        league: StandingsLeague,
+        rowPadding: CGFloat
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(league.fullName.uppercased())
+                .font(.system(size: 14, weight: .black))
+                .tracking(0.4)
+                .foregroundStyle(.black)
+
+            HStack(alignment: .top, spacing: 6) {
+                VStack(spacing: 3) {
+                    ForEach(feed.divisions) { division in
+                        standingsCard(
+                            title: division.name,
+                            teams: division.teams,
+                            gamesBackTitle: "GB",
+                            showsCutoff: false,
+                            highlightsFavorite: league == store.selectedLeague,
+                            compact: true,
+                            compactRowPadding: rowPadding
+                        )
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .top)
+
+                VStack(spacing: 3) {
+                    standingsCard(
+                        title: "\(league.shortName) Wild Card",
+                        teams: feed.wildCard,
+                        gamesBackTitle: "WCGB",
+                        showsCutoff: true,
+                        highlightsFavorite: league == store.selectedLeague,
+                        compact: true,
+                        compactRowPadding: rowPadding
+                    )
+                }
+                .frame(maxWidth: .infinity, alignment: .top)
+            }
+        }
+    }
+
+    private var standingsFooter: some View {
+        let updates = StandingsLeague.allCases.compactMap { store.feeds[$0]?.updatedText }
+        let updated = updates.first ?? "—"
+        return Text("Updated \(updated) · MLB Stats API")
+            .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
+            .foregroundStyle(Color.black.opacity(0.72))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 5)
     }
 
     private var modePicker: some View {
@@ -106,11 +184,11 @@ struct StandingsView: View {
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
@@ -120,99 +198,141 @@ struct StandingsView: View {
         title: String,
         teams: [StandingsTeam],
         gamesBackTitle: String,
-        showsCutoff: Bool
+        showsCutoff: Bool,
+        highlightsFavorite: Bool,
+        compact: Bool = false,
+        compactRowPadding: CGFloat = 4
     ) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            standingsHeader(title: title, gamesBackTitle: gamesBackTitle)
+            standingsHeader(title: title, gamesBackTitle: gamesBackTitle, compact: compact)
 
             ForEach(Array(teams.enumerated()), id: \.element.id) { index, team in
                 if showsCutoff && index == 3 {
-                    cutoffLine
+                    cutoffLine(compact: compact)
                 }
-                standingsRow(team, gamesBackTitle: gamesBackTitle)
+                standingsRow(
+                    team,
+                    gamesBackTitle: gamesBackTitle,
+                    highlightsFavorite: highlightsFavorite,
+                    compact: compact,
+                    compactRowPadding: compactRowPadding
+                )
             }
         }
-        .cardStyle(padding: 10)
+        .cardStyle(padding: compact ? 6 : 10)
     }
 
-    private func standingsHeader(title: String, gamesBackTitle: String) -> some View {
-        HStack(spacing: 0) {
-            Text(title.uppercased())
-                .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
-                .foregroundStyle(AppColor.navy)
-                .frame(width: contentWidth >= 650 ? 160 : nil, alignment: .leading)
-                .frame(maxWidth: contentWidth >= 650 ? nil : .infinity, alignment: .leading)
-            Text("W").frame(minWidth: 28, maxWidth: contentWidth >= 650 ? .infinity : (28))
-            Text("L").frame(minWidth: 28, maxWidth: contentWidth >= 650 ? .infinity : (28))
-            Text("PCT").frame(minWidth: 46, maxWidth: contentWidth >= 650 ? .infinity : (46))
-            Text(gamesBackTitle).frame(minWidth: gamesBackTitle == "WCGB" ? 48 : 38, maxWidth: contentWidth >= 650 ? .infinity : (gamesBackTitle == "WCGB" ? 48 : 38))
-            Text("L10").frame(minWidth: 42, maxWidth: contentWidth >= 650 ? .infinity : (42))
-            Text("STRK").frame(minWidth: 38, maxWidth: contentWidth >= 650 ? .infinity : (38))
-        }
-        .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
-        .foregroundStyle(AppColor.hunterGreen)
-        .padding(.horizontal, 5)
-        .padding(.bottom, 2)
-    }
-
-    private func standingsRow(_ team: StandingsTeam, gamesBackTitle: String) -> some View {
-        let gamesBack = gamesBackTitle == "WCGB" ? team.wildCardGamesBack : team.gamesBack
+    private func standingsHeader(title: String, gamesBackTitle: String, compact: Bool) -> some View {
+        let widths = columnWidths(compact: compact, gamesBackTitle: gamesBackTitle)
         return HStack(spacing: 0) {
-            HStack(spacing: 5) {
+            Text(title.uppercased())
+                .font(.system(size: compact ? 12 : (contentWidth >= 650 ? 18 : 16), weight: .black))
+                .foregroundStyle(AppColor.navy)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text("W").frame(width: widths.wins)
+            Text("L").frame(width: widths.losses)
+            Text("PCT").frame(width: widths.pct)
+            Text(gamesBackTitle).frame(width: widths.gamesBack)
+            Text("L10").frame(width: widths.lastTen)
+            Text("STRK").frame(width: widths.streak)
+        }
+        .font(.system(size: compact ? 11 : (contentWidth >= 650 ? 13 : 11), weight: .black))
+        .lineLimit(1)
+        .minimumScaleFactor(0.75)
+        .foregroundStyle(AppColor.hunterGreen)
+        .padding(.horizontal, compact ? 2 : 5)
+        .padding(.bottom, compact ? 0 : 2)
+    }
+
+    private func standingsRow(
+        _ team: StandingsTeam,
+        gamesBackTitle: String,
+        highlightsFavorite: Bool,
+        compact: Bool,
+        compactRowPadding: CGFloat
+    ) -> some View {
+        let gamesBack = gamesBackTitle == "WCGB" ? team.wildCardGamesBack : team.gamesBack
+        let emphasized = highlightsFavorite && team.isFavorite
+        let widths = columnWidths(compact: compact, gamesBackTitle: gamesBackTitle)
+        return HStack(spacing: 0) {
+            HStack(spacing: compact ? 2 : 5) {
                 Text(team.rank)
-                    .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: team.isFavorite ? .black : .bold, design: .monospaced))
+                    .font(.system(size: compact ? 12 : (contentWidth >= 650 ? 14 : 12), weight: emphasized ? .black : .bold, design: .monospaced))
                     .foregroundStyle(AppColor.hunterGreen)
-                    .frame(width: 15)
+                    .frame(width: compact ? 11 : 15)
                 Text(team.cityName)
-                    .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isFavorite ? .black : .semibold))
+                    .font(.system(size: compact ? 15 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold))
                     .lineLimit(1)
             }
-            .frame(width: contentWidth >= 650 ? 160 : nil, alignment: .leading)
-                .frame(maxWidth: contentWidth >= 650 ? nil : .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
 
-            tableValue("\(team.wins)", width: 28, emphasized: team.isFavorite)
-            tableValue("\(team.losses)", width: 28, emphasized: team.isFavorite)
-            tableValue(team.pct, width: 46, emphasized: team.isFavorite)
+            tableValue("\(team.wins)", width: widths.wins, emphasized: emphasized, compact: compact)
+            tableValue("\(team.losses)", width: widths.losses, emphasized: emphasized, compact: compact)
+            tableValue(team.pct, width: widths.pct, emphasized: emphasized, compact: compact)
             tableValue(
                 gamesBack,
-                width: gamesBackTitle == "WCGB" ? 48 : 38,
-                emphasized: team.isFavorite
+                width: widths.gamesBack,
+                emphasized: emphasized,
+                compact: compact
             )
-            tableValue(team.lastTen, width: 42, emphasized: team.isFavorite)
+            tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
-                .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: team.isFavorite ? .black : .bold, design: .monospaced))
+                .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .bold, design: .monospaced))
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
                 .foregroundStyle(team.streak.hasPrefix("W") ? AppColor.green : AppColor.red)
-                .frame(minWidth: 38, maxWidth: contentWidth >= 650 ? .infinity : (38))
+                .frame(width: widths.streak)
         }
-        .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .semibold, design: .monospaced))
-        .foregroundStyle(team.isFavorite ? AppColor.navy : AppColor.hunterGreen)
-        .padding(.horizontal, 5)
-        .padding(.vertical, contentWidth >= 650 ? 13 : 7)
-        .background(team.isFavorite ? AppColor.paleBlue : Color.clear)
-        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+        .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: .semibold, design: .monospaced))
+        .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
+        .padding(.horizontal, compact ? 2 : 5)
+        .padding(.vertical, compact ? compactRowPadding : (contentWidth >= 650 ? 13 : 7))
+        .background(emphasized ? AppColor.paleBlue : Color.clear)
+        .clipShape(Rectangle())
     }
 
     private func tableValue(
         _ value: String,
         width: CGFloat,
-        emphasized: Bool = false
+        emphasized: Bool = false,
+        compact: Bool = false
     ) -> some View {
         Text(value)
-            .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: emphasized ? .black : .semibold, design: .monospaced))
+            .font(.system(size: compact ? 14 : (contentWidth >= 650 ? 16 : 14), weight: emphasized ? .black : .semibold, design: .monospaced))
+            .lineLimit(1)
+            .minimumScaleFactor(0.85)
             .foregroundStyle(emphasized ? AppColor.navy : AppColor.hunterGreen)
-            .frame(minWidth: width, maxWidth: contentWidth >= 650 ? .infinity : (width))
+            .frame(width: width)
     }
 
-    private var cutoffLine: some View {
+    private func tabletRowPadding(for availableHeight: CGFloat) -> CGFloat {
+        min(5, max(1.5, (availableHeight - 800) / 90))
+    }
+
+    private func columnWidths(compact: Bool, gamesBackTitle: String) -> (
+        wins: CGFloat,
+        losses: CGFloat,
+        pct: CGFloat,
+        gamesBack: CGFloat,
+        lastTen: CGFloat,
+        streak: CGFloat
+    ) {
+        if compact {
+            return (28, 28, 48, gamesBackTitle == "WCGB" ? 55 : 48, 44, 43)
+        }
+        return (28, 28, 46, gamesBackTitle == "WCGB" ? 48 : 38, 42, 38)
+    }
+
+    private func cutoffLine(compact: Bool) -> some View {
         HStack(spacing: 8) {
-            Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
+            Rectangle().fill(AppColor.teamAccent.opacity(0.55)).frame(height: 1)
             Text("PLAYOFF CUT")
-                .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
+                .font(.system(size: compact ? 8 : (contentWidth >= 650 ? 13 : 11), weight: .black))
                 .tracking(0.5)
                 .foregroundStyle(AppColor.red)
-            Rectangle().fill(AppColor.red.opacity(0.55)).frame(height: 1)
+            Rectangle().fill(AppColor.teamAccent.opacity(0.55)).frame(height: 1)
         }
-        .padding(.vertical, 1)
+        .padding(.vertical, compact ? 0 : 1)
     }
 
     private var errorView: some View {
@@ -224,7 +344,7 @@ struct StandingsView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

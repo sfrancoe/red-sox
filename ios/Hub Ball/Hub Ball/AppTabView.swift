@@ -3,10 +3,10 @@ import SwiftUI
 private enum MainTab: Int, CaseIterable {
     case home
     case recent
+    case standings
     case schedule
     case headlines
     case xPosts
-    case standings
     case players
     case pitching
     case leaders
@@ -107,7 +107,6 @@ struct AppTabView: View {
                     sidebar(isCompact: true)
                         .frame(width: min(280, window.size.width * 0.78))
                         .transition(.move(edge: .leading))
-                        .shadow(color: AppColor.navy.opacity(0.22), radius: 16, x: 5)
                 }
             }
         }
@@ -194,7 +193,7 @@ struct AppTabView: View {
                     .mainTabSwipe(selection: $selectedTab, current: .headlines, availableTabs: availableTabs)
         case .xPosts:
                 XPostsView(team: team)
-                    .mainTabSwipe(selection: $selectedTab, current: .xPosts, availableTabs: availableTabs, edgeOnly: true)
+                    .mainTabSwipe(selection: $selectedTab, current: .xPosts, availableTabs: availableTabs)
         case .standings:
                 StandingsView(team: team)
                     .mainTabSwipe(selection: $selectedTab, current: .standings, availableTabs: availableTabs)
@@ -267,12 +266,13 @@ struct AppTabView: View {
     }
 
     private func sidebar(isCompact: Bool) -> some View {
-        VStack(alignment: .leading, spacing: isCompact ? 12 : 20) {
+        VStack(alignment: .leading, spacing: 0) {
             Label("HUB BALL", systemImage: "baseball.fill")
-                .font(isCompact ? .subheadline.weight(.black) : .title2.weight(.black))
+                .font(isCompact ? .headline.weight(.black) : .title2.weight(.black))
                 .foregroundStyle(AppColor.hunterGreen)
                 .padding(.horizontal, isCompact ? 16 : 20)
                 .padding(.top, isCompact ? 18 : 24)
+                .padding(.bottom, isCompact ? 12 : 16)
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     selectedTab = .settings
@@ -283,11 +283,11 @@ struct AppTabView: View {
             } label: {
                 HStack(spacing: 6) {
                     Text(team.pickerTitle.uppercased())
-                        .font(.caption2.weight(.black))
+                        .font(isCompact ? .caption.weight(.black) : .caption2.weight(.black))
                         .tracking(0.5)
                         .lineLimit(1)
                     Image(systemName: "chevron.right")
-                        .font(.caption2.weight(.black))
+                        .font(isCompact ? .caption.weight(.black) : .caption2.weight(.black))
                 }
                 .foregroundStyle(AppColor.ink.opacity(0.62))
                 .frame(maxWidth: .infinity, minHeight: 28, alignment: .leading)
@@ -295,6 +295,7 @@ struct AppTabView: View {
             }
             .buttonStyle(.plain)
             .padding(.horizontal, isCompact ? 16 : 20)
+            .padding(.bottom, 4)
             .accessibilityLabel("Switch team")
             .accessibilityValue(team.pickerTitle)
             .accessibilityHint("Opens the team picker")
@@ -308,20 +309,21 @@ struct AppTabView: View {
                     }
                 } label: {
                     Label(tab.title, systemImage: tab.icon)
-                        .font(isCompact ? .caption.weight(.semibold) : .headline)
+                        .font(isCompact ? .headline.weight(.semibold) : .headline)
                         .frame(
                             maxWidth: .infinity,
-                            minHeight: isCompact ? 28 : 34,
+                            minHeight: isCompact ? 42 : 34,
                             alignment: .leading
                         )
-                        .foregroundStyle(selectedTab == tab ? Color.white : AppColor.hunterGreen)
+                        .foregroundStyle(AppColor.ink)
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .listRowBackground(selectedTab == tab ? AppColor.hunterGreen : Color.clear)
+                .listRowBackground(selectedTab == tab ? AppColor.accentSoft : Color.clear)
                 .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
             }
             .listStyle(.sidebar)
+            .contentMargins(.top, 0, for: .scrollContent)
             .scrollContentBackground(.hidden)
         }
         .background(AppColor.cream)
@@ -348,8 +350,6 @@ private struct MainTabSwipeModifier: ViewModifier {
     }
 
     private func handleSwipe(_ value: DragGesture.Value) {
-        // Wide layouts use explicit navigation; horizontal drags belong to charts/pages.
-        guard contentWidth < 650 else { return }
         let horizontalDistance = value.translation.width
         let verticalDistance = value.translation.height
 
@@ -367,10 +367,11 @@ private struct MainTabSwipeModifier: ViewModifier {
         }
 
         let direction = horizontalDistance < 0 ? 1 : -1
-        guard let currentIndex = availableTabs.firstIndex(of: current) else { return }
-        let destinationIndex = currentIndex + direction
-        guard availableTabs.indices.contains(destinationIndex) else { return }
-        let destination = availableTabs[destinationIndex]
+        let swipeTabs = availableTabs.filter { $0 != .settings }
+        guard !swipeTabs.isEmpty,
+              let currentIndex = swipeTabs.firstIndex(of: current) else { return }
+        let destinationIndex = (currentIndex + direction + swipeTabs.count) % swipeTabs.count
+        let destination = swipeTabs[destinationIndex]
 
         withAnimation(.easeOut(duration: 0.2)) {
             selection = destination

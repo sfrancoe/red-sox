@@ -24,8 +24,8 @@ struct ScheduleView: View {
                         scheduleContent(schedule)
                     } else if store.isLoading {
                         ProgressView("Loading the schedule…")
-                            .tint(.white)
-                            .foregroundStyle(.white)
+                            .tint(.black)
+                            .foregroundStyle(.black)
                     } else {
                         errorView
                     }
@@ -65,7 +65,7 @@ struct ScheduleView: View {
 
                 Text("\(schedule.games.count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
                     .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
-                    .foregroundStyle(Color.white.opacity(0.82))
+                    .foregroundStyle(Color.black.opacity(0.82))
                     .padding(.vertical, 2)
             }
             .padding(.horizontal, 12)
@@ -110,52 +110,51 @@ struct ScheduleView: View {
         let game = games.first
         let selected = games.contains { $0.id == selectedGameID }
         let isHome = game?.location == "home"
-        let accent = isHome ? AppColor.red : AppColor.hunterGreen
-        let usesDarkBackground = selected || isHome
+        let accent = AppColor.teamAccent
 
         return VStack(spacing: 3) {
             Text(date.formatted(.dateTime.day()))
                 .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .bold))
-                .foregroundStyle(usesDarkBackground ? Color.white : AppColor.navy)
+                .foregroundStyle(AppColor.ink)
 
             if let game {
                 Text("\(game.locationWord) \(opponentCode(game.opponent))")
                     .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .black))
-                    .foregroundStyle(usesDarkBackground ? Color.white : accent)
+                    .foregroundStyle(AppColor.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
 
                 Text(game.formattedTime)
                     .font(.system(size: contentWidth >= 650 ? 12 : 7, weight: .semibold))
-                    .foregroundStyle(usesDarkBackground ? Color.white.opacity(0.88) : AppColor.ink.opacity(0.72))
+                    .foregroundStyle(AppColor.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
 
                 if games.count > 1 || game.doubleheader {
                     Text("DH")
                         .font(.system(size: contentWidth >= 650 ? 12 : 7, weight: .black))
-                        .foregroundStyle(usesDarkBackground ? Color.white : AppColor.red)
+                        .foregroundStyle(AppColor.ink)
                 }
             } else {
                 Text("—")
                     .font(.system(size: contentWidth >= 650 ? 12 : 8, weight: .medium))
-                    .foregroundStyle(AppColor.border)
+                    .foregroundStyle(AppColor.ink)
             }
         }
         .frame(maxWidth: .infinity)
         .frame(height: contentWidth >= 650 ? 92 : 67)
         .background {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(selected || isHome ? accent : game == nil ? AppColor.paleBlue.opacity(0.36) : accent.opacity(0.09))
+            Rectangle()
+                .fill(selected || isHome ? AppColor.accentSoft : game == nil ? AppColor.paper : accent.opacity(0.06))
         }
         .overlay {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
+            Rectangle()
                 .stroke(
                     selected ? accent : isToday(date) ? AppColor.navy : AppColor.border.opacity(0.75),
                     lineWidth: selected || isToday(date) ? 1.5 : 0.7
                 )
         }
-        .contentShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .contentShape(Rectangle())
         .onTapGesture {
             if let game {
                 withAnimation(.easeOut(duration: 0.18)) {
@@ -225,7 +224,7 @@ struct ScheduleView: View {
                 }
                 .padding(14)
                 .background(AppColor.paleBlue.opacity(0.5))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .clipShape(Rectangle())
             }
 
             if game.doubleheader {
@@ -398,7 +397,7 @@ struct ScheduleView: View {
             Button("Try Again") {
                 Task { await loadSchedule() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

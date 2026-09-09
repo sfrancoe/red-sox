@@ -1,6 +1,6 @@
 # Native app backend
 
-The iOS apps use Netlify as a small API gateway, not as a deployment mechanism
+The Hub Ball iOS app uses Netlify as a small API gateway, not as a deployment mechanism
 for changing data.
 
 ## Data flow
@@ -29,12 +29,11 @@ must remain an intentional manual operation.
 
 ## Backend address
 
-The Red Sox app's provider address lives in `AppBackend.swift`. The Yankees app
-keeps its shared roots in `TeamConfig.swift`. When a custom API domain is ready,
-change those two definitions and the App Store preflight endpoint list together.
+Hub Ball's provider address lives in `AppBackend.swift`. When a custom API domain is
+ready, change that definition and the App Store preflight endpoint list together.
 
 ## Adding a data file
 
 Add the generated JSON path to `ALLOWED_PATHS` in `app-data.mjs`, add a test case,
-then use `AppBackend.dataURL` or `TeamConfig.dataURL` from the app. Do not expose
-an unrestricted repository proxy.
+then use `AppBackend.dataURL` from the app. Do not expose an unrestricted repository
+proxy.

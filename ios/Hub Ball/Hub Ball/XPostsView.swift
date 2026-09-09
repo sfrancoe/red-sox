@@ -18,8 +18,8 @@ struct XPostsView: View {
                         feedContent(feed)
                     } else if store.isLoading {
                         ProgressView("Loading X posts…")
-                            .tint(.white)
-                            .foregroundStyle(.white)
+                            .tint(.black)
+                            .foregroundStyle(.black)
                     } else {
                         errorView
                     }
@@ -37,21 +37,18 @@ struct XPostsView: View {
         if contentWidth >= 720 {
             HStack(spacing: 0) {
                 postsPage(feed.recent, feed: feed, mode: .recent, pinnedHeader: true)
-                Divider().overlay(Color.white.opacity(0.3))
+                Divider().overlay(AppColor.teamAccent.opacity(0.3))
                 postsPage(feed.popular, feed: feed, mode: .liked, pinnedHeader: true)
             }
         } else {
             VStack(spacing: 0) {
                 modePicker
 
-                TabView(selection: $store.selectedMode) {
+                if store.selectedMode == .recent {
                     postsPage(feed.recent, feed: feed, mode: .recent)
-                        .tag(XFeedMode.recent)
-
+                } else {
                     postsPage(feed.popular, feed: feed, mode: .liked)
-                        .tag(XFeedMode.liked)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
             }
         }
     }
@@ -80,11 +77,11 @@ struct XPostsView: View {
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
@@ -103,9 +100,9 @@ struct XPostsView: View {
                         .font(.headline.weight(.black))
                     Text("Checked \(feed.checkedText)")
                         .font(.caption)
-                        .foregroundStyle(Color.white.opacity(0.8))
+                        .foregroundStyle(Color.black.opacity(0.8))
                 }
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
@@ -137,13 +134,13 @@ struct XPostsView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(mode.title)
                 .font(.system(size: contentWidth >= 650 ? 18 : 16, weight: .black))
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
 
             Spacer()
 
             Text("Checked \(feed.checkedText)")
                 .font(.system(size: contentWidth >= 650 ? 12 : 9))
-                .foregroundStyle(Color.white.opacity(0.8))
+                .foregroundStyle(Color.black.opacity(0.8))
                 .multilineTextAlignment(.trailing)
         }
         .padding(.bottom, 8)
@@ -204,7 +201,7 @@ struct XPostsView: View {
                         .clipped()
                     }
                     .frame(height: contentWidth >= 650 ? 210 : 125)
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .clipShape(Rectangle())
                 }
 
                 HStack {
@@ -226,7 +223,7 @@ struct XPostsView: View {
         }
         .padding(10)
         .background(AppColor.paper)
-        .clipShape(RoundedRectangle(cornerRadius: contentWidth >= 650 ? 16 : 0))
+        .clipShape(Rectangle())
         .overlay(alignment: .bottom) {
             if contentWidth < 650 {
                 Rectangle()
@@ -267,7 +264,7 @@ struct XPostsView: View {
         .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColor.paleBlue.opacity(0.7))
-        .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+        .clipShape(Rectangle())
     }
 
     private var errorView: some View {
@@ -279,7 +276,7 @@ struct XPostsView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

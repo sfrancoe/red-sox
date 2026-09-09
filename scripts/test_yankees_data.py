@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Yankees feeds and the matching offline resources in the iOS target."""
+"""Validate Yankees team feeds consumed by the multi-team Hub Ball app."""
 
 from __future__ import annotations
 
@@ -10,7 +10,6 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "yankees"
-APP = ROOT / "ios" / "Yankees Hub" / "Yankees Hub"
 
 
 def load(name: str):
@@ -63,15 +62,7 @@ def main() -> None:
             assert all("red sox folk hero" not in article["title"].lower()
                        for article in feed["articles"])
 
-    for file in DATA.glob("*.json"):
-        bundled = APP / f"yankees-{file.name}"
-        if bundled.exists():
-            assert json.loads(file.read_text()) == json.loads(bundled.read_text()), bundled.name
-
-    app_sources = "\n".join(path.read_text() for path in APP.glob("*.swift"))
-    assert "Game108" not in app_sources and '"Game 108"' not in app_sources
-    assert not (APP / "Game108GraphView.swift").exists()
-    print("Yankees feeds, offline resources, team identity, and seven-tab scope: OK")
+    print("Hub Ball Yankees feeds and team identity: OK")
 
 
 if __name__ == "__main__":

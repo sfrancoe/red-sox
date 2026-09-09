@@ -32,8 +32,8 @@ struct RecentGameView: View {
                         }
                     } else if store.isLoading {
                         ProgressView("Loading Game Center…")
-                            .tint(.white)
-                            .foregroundStyle(.white)
+                            .tint(.black)
+                            .foregroundStyle(.black)
                     } else {
                         errorView
                     }
@@ -66,34 +66,45 @@ struct RecentGameView: View {
 
     private var gameSelector: some View {
         HStack(spacing: 0) {
-            ForEach(Array(store.games.enumerated()), id: \.element.gamePk) { index, game in
+            ForEach(store.games, id: \.gamePk) { game in
                 Button {
                     selectedGameID = game.gamePk
                     selectedStatsTeam = .favorite
                 } label: {
-                    Text(gameTabTitle(game, index: index))
-                        .font(
-                            .system(
-                                size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
-                                weight: selectedGame?.gamePk == game.gamePk ? .black : .semibold
-                            )
-                        )
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.78)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .foregroundStyle(Color.black)
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 7) {
+                            gameTabLabel(game)
+                            if !game.isLive {
+                                gameResultLabel(game.result, game: game)
+                            }
+                        }
+
+                        VStack(spacing: 4) {
+                            gameTabLabel(game)
+                            if !game.isLive {
+                                gameResultLabel(game.result, game: game)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 7)
+                    .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(
+                    game.isLive
+                        ? gameTabTitle(game)
+                        : "\(gameTabTitle(game)), \(game.result)"
+                )
             }
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
         .padding(.horizontal, 16)
         .padding(.top, 10)
@@ -101,9 +112,32 @@ struct RecentGameView: View {
         .background(AppColor.paleRed)
     }
 
-    private func gameTabTitle(_ game: RecentGame, index: Int) -> String {
+    private func gameTabLabel(_ game: RecentGame) -> some View {
+        Text(gameTabTitle(game))
+            .font(
+                .system(
+                    size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
+                    weight: selectedGame?.gamePk == game.gamePk ? .black : .semibold
+                )
+            )
+            .lineLimit(1)
+            .minimumScaleFactor(0.72)
+    }
+
+    private func gameResultLabel(_ result: String, game: RecentGame) -> some View {
+        Text(result.lowercased() == "win" ? "(W)" : "(L)")
+            .font(
+                .system(
+                    size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
+                    weight: .black
+                )
+            )
+            .tracking(0.5)
+            .foregroundStyle(result.lowercased() == "win" ? AppColor.resultWinText : AppColor.resultLossText)
+    }
+
+    private func gameTabTitle(_ game: RecentGame) -> String {
         if game.isLive { return "LIVE" }
-        if index == 0, !store.hasLiveGame { return "LAST GAME" }
 
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
@@ -166,9 +200,9 @@ struct RecentGameView: View {
                         linksCard(game)
                     }
                     .background(AppColor.paper)
-                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .clipShape(Rectangle())
                     .overlay {
-                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        Rectangle()
                             .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
                     }
                 }
@@ -204,9 +238,9 @@ struct RecentGameView: View {
                     .font(.caption.weight(.black))
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
-                    .background(game.isLive ? AppColor.red : AppColor.green)
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
+                    .background(game.isLive ? AppColor.accentSoft : AppColor.resultWin)
+                    .foregroundStyle(.black)
+                    .clipShape(Rectangle())
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -246,7 +280,7 @@ struct RecentGameView: View {
                 lineScoreLegend("LOB")
             }
             .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.black)
 
             combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
             combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
@@ -318,7 +352,7 @@ struct RecentGameView: View {
                     ForEach(game.facts, id: \.self) { fact in
                         HStack(alignment: .top, spacing: 9) {
                             Circle()
-                                .fill(AppColor.red)
+                                .fill(AppColor.teamAccent)
                                 .frame(width: 5, height: 5)
                                 .padding(.top, 7)
                             Text(fact)
@@ -432,7 +466,7 @@ struct RecentGameView: View {
                 .foregroundStyle(Color.black)
                 .overlay(alignment: .bottom) {
                     Rectangle()
-                        .fill(selectedStatsTeam == selection ? AppColor.red : Color.clear)
+                        .fill(selectedStatsTeam == selection ? AppColor.teamAccent : Color.clear)
                         .frame(height: 2)
                 }
         }
@@ -448,7 +482,7 @@ struct RecentGameView: View {
             }
         }
         .font(.caption2.weight(.bold))
-        .foregroundStyle(.secondary)
+        .foregroundStyle(.black)
     }
 
     private func statRow(
@@ -587,7 +621,7 @@ struct RecentGameView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

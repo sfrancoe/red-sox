@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the four Yankees newspaper feeds used by the Yankees Hub app."""
+"""Fetch the four Yankees newspaper feeds used by Hub Ball."""
 
 from __future__ import annotations
 

@@ -4,15 +4,25 @@ import Observation
 @MainActor
 @Observable
 final class StandingsStore {
-    private let endpoint: URL
+    private let endpoints: [StandingsLeague: URL]
 
-    var feed: StandingsFeed?
-    var mode: StandingsMode = .divisions
+    let selectedLeague: StandingsLeague
+    var feeds: [StandingsLeague: StandingsFeed] = [:]
+    var mode: StandingsMode
     var isLoading = false
     var errorMessage: String?
 
     init(team: HubTeam = .boston) {
-        endpoint = AppBackend.dataURL("standings.json", team: team)
+        let league: StandingsLeague = team.definition.league == "NL" ? .national : .american
+        selectedLeague = league
+        mode = league.divisionsMode
+
+        let americanSource = league == .american ? team : HubTeam.boston
+        let nationalSource = league == .national ? team : HubTeam.newYorkMets
+        endpoints = [
+            .american: AppBackend.dataURL("standings.json", team: americanSource),
+            .national: AppBackend.dataURL("standings.json", team: nationalSource),
+        ]
     }
 
     func load() async {
@@ -23,22 +33,35 @@ final class StandingsStore {
         defer { isLoading = false }
 
         do {
-            var request = URLRequest(url: endpoint)
-            request.cachePolicy = .reloadRevalidatingCacheData
-            request.timeoutInterval = 20
-
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
+            guard let americanURL = endpoints[.american],
+                  let nationalURL = endpoints[.national] else {
                 throw StandingsError.badResponse
             }
-
+            async let americanData = Self.fetch(americanURL)
+            async let nationalData = Self.fetch(nationalURL)
+            let (loadedAmericanData, loadedNationalData) = try await (americanData, nationalData)
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            feed = try decoder.decode(StandingsFeed.self, from: data)
+            feeds = [
+                .american: try decoder.decode(StandingsFeed.self, from: loadedAmericanData),
+                .national: try decoder.decode(StandingsFeed.self, from: loadedNationalData),
+            ]
         } catch {
             errorMessage = "We couldn't load the standings. Check your connection and try again."
         }
+    }
+
+    private static func fetch(_ url: URL) async throws -> Data {
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadRevalidatingCacheData
+        request.timeoutInterval = 20
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw StandingsError.badResponse
+        }
+        return data
     }
 }
 

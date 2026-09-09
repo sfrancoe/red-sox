@@ -79,16 +79,54 @@ struct StandingsTeam: Decodable, Identifiable {
     }
 }
 
+enum StandingsLeague: String, CaseIterable, Identifiable {
+    case american
+    case national
+
+    var id: Self { self }
+
+    var shortName: String {
+        switch self {
+        case .american: "AL"
+        case .national: "NL"
+        }
+    }
+
+    var fullName: String {
+        switch self {
+        case .american: "American League"
+        case .national: "National League"
+        }
+    }
+
+    var divisionsMode: StandingsMode {
+        switch self {
+        case .american: .americanDivisions
+        case .national: .nationalDivisions
+        }
+    }
+}
+
 enum StandingsMode: String, CaseIterable, Identifiable {
-    case divisions
+    case americanDivisions
+    case nationalDivisions
     case wildCard
 
     var id: Self { self }
 
     var title: String {
         switch self {
-        case .divisions: "AL Divisions"
+        case .americanDivisions: "AL Divisions"
+        case .nationalDivisions: "NL Divisions"
         case .wildCard: "Wild Card"
+        }
+    }
+
+    var league: StandingsLeague? {
+        switch self {
+        case .americanDivisions: .american
+        case .nationalDivisions: .national
+        case .wildCard: nil
         }
     }
 }

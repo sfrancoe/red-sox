@@ -11,18 +11,34 @@ struct TeamSettingsView: View {
 
                 ScrollView {
                     VStack(spacing: 0) {
-                        ForEach(HubTeam.availableTeams) { team in
-                            teamButton(team)
-                            if team.id != HubTeam.availableTeams.last?.id {
-                                Divider().overlay(AppColor.border)
+                        VStack(spacing: 0) {
+                            ForEach(HubTeam.availableTeams) { team in
+                                teamButton(team)
+                                if team.id != HubTeam.availableTeams.last?.id {
+                                    Divider().overlay(AppColor.border)
+                                }
                             }
                         }
+                        .padding(16)
+
+                        Text(versionLabel)
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(AppColor.ink.opacity(0.62))
+                            .padding(.top, 10)
+                            .padding(.bottom, 24)
+                            .accessibilityLabel("Hub Ball version \(versionLabel)")
                     }
-                    .padding(16)
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
         }
+    }
+
+    private var versionLabel: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "—"
+        let build = info?["CFBundleVersion"] as? String ?? "—"
+        return "Hub Ball \(version) (\(build))"
     }
 
     private func teamButton(_ team: HubTeam) -> some View {
@@ -60,7 +76,7 @@ struct TeamOnboardingView: View {
 
                     Image(systemName: "baseball.fill")
                         .font(.system(size: usesAccessibilityLayout ? 42 : 58, weight: .black))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
 
                     VStack(spacing: usesAccessibilityLayout ? 5 : 8) {
                         Text("WELCOME TO HUB BALL")
@@ -69,9 +85,9 @@ struct TeamOnboardingView: View {
                         Text("Choose the team you want to follow first. You can switch anytime in Settings.")
                             .font(.body)
                             .multilineTextAlignment(.center)
-                            .foregroundStyle(Color.white.opacity(0.86))
+                            .foregroundStyle(Color.black.opacity(0.86))
                     }
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
 
                     VStack(spacing: usesAccessibilityLayout ? 8 : 12) {
                         ForEach(HubTeam.availableTeams) { team in
@@ -92,7 +108,7 @@ struct TeamOnboardingView: View {
                                 }
                                 .padding(usesAccessibilityLayout ? 12 : 17)
                                 .background(AppColor.paper)
-                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                .clipShape(Rectangle())
                             }
                             .buttonStyle(.plain)
                         }
@@ -103,17 +119,17 @@ struct TeamOnboardingView: View {
                             .font(.headline.weight(.black))
                             .lineLimit(1)
                             .minimumScaleFactor(0.78)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.black)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, usesAccessibilityLayout ? 12 : 15)
-                            .background(AppColor.hunterGreen)
-                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                            .background(AppColor.accentSoft)
+                            .clipShape(Rectangle())
                     }
                     .buttonStyle(.plain)
 
                     Text("All 30 MLB teams are available.")
                         .font(.caption)
-                        .foregroundStyle(Color.white.opacity(0.78))
+                        .foregroundStyle(Color.black.opacity(0.78))
                         .multilineTextAlignment(.center)
                 }
                 .padding(.horizontal, 22)

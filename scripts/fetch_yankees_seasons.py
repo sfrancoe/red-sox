@@ -42,7 +42,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 WAR_BAT_URL = "https://www.baseball-reference.com/data/war_daily_bat.txt"
 WAR_PITCH_URL = "https://www.baseball-reference.com/data/war_daily_pitch.txt"
 BBREF_TEAM = "NYY"
-UA = "yankees-hub/1.0"
+UA = "hub-ball/1.0"
 
 def fetch_json(url: str, attempts: int = 4) -> dict:
     """GET with retry + backoff. Raises on final failure."""

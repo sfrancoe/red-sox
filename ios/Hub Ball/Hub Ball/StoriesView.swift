@@ -26,10 +26,10 @@ struct StoriesView: View {
                                 HStack(spacing: 16) {
                                     Image(systemName: "chart.xyaxis.line")
                                         .font(.system(size: 30, weight: .bold))
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(.black)
                                         .frame(width: 62, height: 62)
-                                        .background(AppColor.red)
-                                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                        .background(AppColor.accentSoft)
+                                        .clipShape(Rectangle())
 
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text("FOUR ROADS, ONE RECORD")
@@ -58,7 +58,7 @@ struct StoriesView: View {
                         systemImage: "book.pages",
                         description: Text("This section will appear when the first New York visual story is ready.")
                     )
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                 }
             }
             .toolbar(.hidden, for: .navigationBar)

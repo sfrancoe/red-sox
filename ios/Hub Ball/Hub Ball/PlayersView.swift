@@ -25,7 +25,7 @@ struct PlayersView: View {
                     errorView
                 }
             }
-            .background(Color.white)
+            .background(AppColor.paper)
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Int.self) { playerID in
                 if let player = store.player(id: playerID) {
@@ -62,7 +62,7 @@ struct PlayersView: View {
                 sourceFooter(feed.source)
             }
         }
-        .background(Color.white)
+        .background(AppColor.paper)
         .refreshable { await store.load() }
         .searchable(text: $store.searchText, prompt: "Search player or position")
     }
@@ -70,20 +70,20 @@ struct PlayersView: View {
     private func directoryHeader(_ feed: PlayersFeed) -> some View {
         HStack(alignment: .center, spacing: 14) {
             ZStack {
-                Circle().fill(AppColor.red)
+                Circle().fill(AppColor.teamAccent)
                 Image(systemName: "baseball.fill")
                     .font(.system(size: 32))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
             }
             .frame(width: 62, height: 62)
 
             VStack(alignment: .leading, spacing: -3) {
                 Text("BOSTON BASEBALL")
                     .font(.system(size: contentWidth >= 650 ? 35 : 27, weight: .black))
-                    .foregroundStyle(Color(white: 0.22))
+                    .foregroundStyle(.black)
                 Text("PLAYER REFERENCE")
                     .font(.system(size: contentWidth >= 650 ? 25 : 20, weight: .medium))
-                    .foregroundStyle(Color(white: 0.35))
+                    .foregroundStyle(.black)
             }
             Spacer(minLength: 4)
             VStack(alignment: .trailing, spacing: 2) {
@@ -91,7 +91,7 @@ struct PlayersView: View {
                     .font(.title2.weight(.black).monospacedDigit())
                 Text("PLAYERS")
                     .font(.system(size: 9, weight: .bold))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.black)
             }
         }
         .padding(.horizontal, 16)
@@ -107,17 +107,17 @@ struct PlayersView: View {
                     } label: {
                         Text(filter.title)
                             .font(.system(size: 13, weight: .bold))
-                            .foregroundStyle(store.filter == filter ? Color.white : Color(white: 0.25))
+                            .foregroundStyle(AppColor.ink)
                             .padding(.horizontal, 15)
                             .frame(height: 38)
-                            .background(store.filter == filter ? AppColor.darkRed : Color(white: 0.94))
+                            .background(store.filter == filter ? AppColor.accentSoft : AppColor.paper)
                     }
                     .buttonStyle(.plain)
                     .accessibilityAddTraits(store.filter == filter ? .isSelected : [])
                 }
             }
         }
-        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.darkRed).frame(height: 2) }
+        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.teamAccent).frame(height: 2) }
     }
 
     private func rosterRow(_ player: RedSoxPlayer) -> some View {
@@ -129,11 +129,11 @@ struct PlayersView: View {
                     .foregroundStyle(.black)
                 Text("\(player.position.name) · \(player.rosterStatus)")
                     .font(.system(size: 12))
-                    .foregroundStyle(Color(white: 0.28))
+                    .foregroundStyle(.black)
                 if let age = player.age {
                     Text("Age \(age)\(player.birthplace.isEmpty ? "" : " · \(player.birthplace)")")
                         .font(.system(size: 12))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.black)
                         .lineLimit(1)
                 }
             }
@@ -143,7 +143,7 @@ struct PlayersView: View {
                 .foregroundStyle(AppColor.darkRed)
             Image(systemName: "chevron.right")
                 .font(.caption.weight(.bold))
-                .foregroundStyle(Color(white: 0.55))
+                .foregroundStyle(.black)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 9)
@@ -152,13 +152,13 @@ struct PlayersView: View {
 
     private func monogram(_ player: RedSoxPlayer, width: CGFloat, height: CGFloat, fontSize: CGFloat) -> some View {
         ZStack {
-            Rectangle().fill(Color(white: 0.9))
+            Rectangle().fill(AppColor.paper)
             Text(player.initials)
                 .font(.system(size: fontSize, weight: .black))
                 .foregroundStyle(AppColor.navy)
         }
         .frame(width: width, height: height)
-        .overlay { Rectangle().stroke(Color(white: 0.35), lineWidth: 1) }
+        .overlay { Rectangle().stroke(AppColor.border, lineWidth: 1) }
         .accessibilityHidden(true)
     }
 
@@ -170,10 +170,10 @@ struct PlayersView: View {
             }
         }
         .font(.caption2)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(.black)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(Color(white: 0.96))
+        .background(AppColor.paper)
     }
 
     private func openRequestedPlayerIfAvailable() {
@@ -189,7 +189,7 @@ struct PlayersView: View {
             Text(store.errorMessage ?? "The roster could not be loaded.")
         } actions: {
             Button("Try Again") { Task { await store.load() } }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(HubProminentButtonStyle())
                 .tint(AppColor.darkRed)
         }
     }
@@ -212,7 +212,7 @@ private struct PlayerReferenceView: View {
                 referenceSection("Sources") { sourceRows }
             }
         }
-        .background(Color.white)
+        .background(AppColor.paper)
         .navigationTitle(player.name)
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -241,12 +241,12 @@ private struct PlayerReferenceView: View {
             VStack(spacing: 6) {
                 Text(player.rosterStatus.uppercased())
                     .font(.system(size: 10, weight: .bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 10)
                     .frame(minHeight: 25)
-                    .background(AppColor.darkRed)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .background(AppColor.accentSoft)
+                    .clipShape(Rectangle())
                 if let number = player.number {
                     Text("#\(number)")
                         .font(.system(size: 24, weight: .black).monospacedDigit())
@@ -260,13 +260,13 @@ private struct PlayerReferenceView: View {
 
     private var monogram: some View {
         ZStack {
-            Rectangle().fill(Color(white: 0.9))
+            Rectangle().fill(AppColor.paper)
             Text(player.initials)
                 .font(.system(size: contentWidth >= 650 ? 34 : 27, weight: .black))
                 .foregroundStyle(AppColor.navy)
         }
         .frame(width: contentWidth >= 650 ? 112 : 82, height: contentWidth >= 650 ? 132 : 104)
-        .overlay { Rectangle().stroke(Color(white: 0.3), lineWidth: 1) }
+        .overlay { Rectangle().stroke(AppColor.border, lineWidth: 1) }
         .accessibilityLabel("No player photograph")
     }
 
@@ -302,13 +302,13 @@ private struct PlayerReferenceView: View {
             ForEach(["SUMMARY", "TEAMS", "EDUCATION", "SOURCES"], id: \.self) { title in
                 Text(title)
                     .font(.system(size: 10, weight: .bold))
-                    .foregroundStyle(title == "SUMMARY" ? Color.white : Color(white: 0.25))
+                    .foregroundStyle(AppColor.ink)
                     .frame(maxWidth: .infinity)
                     .frame(height: 34)
-                    .background(title == "SUMMARY" ? AppColor.darkRed : Color(white: 0.94))
+                    .background(title == "SUMMARY" ? AppColor.accentSoft : AppColor.paper)
             }
         }
-        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.darkRed).frame(height: 2) }
+        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.teamAccent).frame(height: 2) }
     }
 
     private var summaryGrid: some View {
@@ -372,7 +372,7 @@ private struct PlayerReferenceView: View {
                         .foregroundStyle(.black)
                     Text("This usually means the player debuted in 2026 or has not yet appeared in an MLB game.")
                         .font(.system(size: 12))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.black)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)
@@ -420,8 +420,8 @@ private struct PlayerReferenceView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 9)
-                .background(Color(white: 0.95))
-                .overlay(alignment: .bottom) { Rectangle().fill(AppColor.darkRed).frame(height: 1) }
+                .background(AppColor.paper)
+                .overlay(alignment: .bottom) { Rectangle().fill(AppColor.teamAccent).frame(height: 1) }
             content()
         }
     }
@@ -432,7 +432,7 @@ private struct PlayerReferenceView: View {
                 HStack(spacing: 10) {
                     Text("\(index + 1)")
                         .font(.caption.monospacedDigit())
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.black)
                         .frame(width: 22, alignment: .trailing)
                     Text(team)
                         .font(.system(size: 14, weight: .semibold))
@@ -451,7 +451,7 @@ private struct PlayerReferenceView: View {
             if player.education.entries.isEmpty {
                 Text("No college or school is listed in the open data record.")
                     .font(.system(size: 14))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.black)
                     .padding(12)
             } else {
                 ForEach(player.education.entries, id: \.self) { entry in
@@ -468,11 +468,11 @@ private struct PlayerReferenceView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(source?.attribution ?? "Open Wikimedia data")
                 .font(.system(size: 12))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.black)
             if let statsAttribution = source?.statsAttribution {
                 Text(statsAttribution)
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.black)
             }
             HStack(spacing: 18) {
                 if let url = player.sourceURL { Link("Wikidata record", destination: url) }

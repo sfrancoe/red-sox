@@ -22,8 +22,8 @@ struct PitchingView: View {
                         pitchingContent(feed, chartHeight: contentWidth >= 650 ? max(380, geometry.size.height * 0.55) : 270)
                     } else if store.isLoading {
                         ProgressView("Loading pitching…")
-                            .tint(.white)
-                            .foregroundStyle(.white)
+                            .tint(.black)
+                            .foregroundStyle(.black)
                     } else {
                         errorView
                     }
@@ -47,7 +47,7 @@ struct PitchingView: View {
                 HStack(alignment: .center) {
                     Text(store.filter.reportsTitle)
                         .font(.title3.weight(.black))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
 
                     Spacer()
 
@@ -58,7 +58,7 @@ struct PitchingView: View {
                     }
                     .labelsHidden()
                     .pickerStyle(.menu)
-                    .tint(.white)
+                    .tint(.black)
                 }
 
                 HubCardGrid {
@@ -102,11 +102,11 @@ struct PitchingView: View {
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
     }
 
@@ -155,7 +155,7 @@ struct PitchingView: View {
                     }
                     Text("\(pitcher.handedness) · \(pitcher.role) · \(pitcher.games) G\(pitcher.starts > 0 ? " · \(pitcher.starts) GS" : "")")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.black)
                 }
 
                 Spacer()
@@ -180,9 +180,9 @@ struct PitchingView: View {
         GeometryReader { geometry in
             let maximum = max(actual, forecast, 0.35) * 1.12
             ZStack(alignment: .leading) {
-                Capsule().fill(AppColor.paleBlue)
-                Capsule()
-                    .fill(AppColor.red)
+                Rectangle().fill(AppColor.paleBlue)
+                Rectangle()
+                    .fill(AppColor.teamAccent)
                     .frame(width: geometry.size.width * max(actual, 0) / maximum)
                 Rectangle()
                     .fill(AppColor.navy)
@@ -191,7 +191,7 @@ struct PitchingView: View {
             }
         }
         .frame(height: 10)
-        .clipShape(Capsule())
+        .clipShape(Rectangle())
     }
 
     private func comparisonTable(_ pitcher: PitcherReport) -> some View {
@@ -202,7 +202,7 @@ struct PitchingView: View {
                 Text("FORECAST")
             }
             .font(.caption2.weight(.black))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.black)
 
             comparisonRow("fWAR", pitcher.actual.war.twoPlaces, pitcher.forecastToDate.war.twoPlaces)
             comparisonRow("Innings", pitcher.actual.ip, pitcher.forecastToDate.ip.onePlace)
@@ -220,7 +220,7 @@ struct PitchingView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             Text(actual)
             Text(forecast)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.black)
         }
     }
 
@@ -230,7 +230,7 @@ struct PitchingView: View {
             Text("Updated \(feed.updatedText) · FanGraphs + MLB")
         }
         .font(.caption)
-        .foregroundStyle(Color.white.opacity(0.82))
+        .foregroundStyle(Color.black.opacity(0.82))
         .padding(.vertical, 8)
     }
 
@@ -243,7 +243,7 @@ struct PitchingView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }
@@ -275,7 +275,7 @@ private struct PitchingImpactChart: View {
                     horizontal.addLine(to: CGPoint(x: plot.maxX, y: y(value)))
                     context.stroke(horizontal, with: .color(AppColor.border), lineWidth: 0.8)
                     context.draw(
-                        Text("\(tick)").font(.system(size: 8)).foregroundStyle(.secondary),
+                        Text("\(tick)").font(.system(size: 8)).foregroundStyle(.black),
                         at: CGPoint(x: plot.minX - 7, y: y(value)),
                         anchor: .trailing
                     )

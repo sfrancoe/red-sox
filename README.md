@@ -10,15 +10,35 @@ The native iOS app includes an App Store readiness check. Run
 verify live non-metered feeds. See `app-store/README.md` for the remaining human
 review items.
 
+## Product map
+
+There are two app identities:
+
+| Name | Status | Bundle ID | Source |
+|---|---|---|---|
+| **Hub Ball** | Active; all new work goes here | `com.sfrancoe.HubBall` | `main` → `ios/Hub Ball/` |
+| **Boston Baseball Hub** | Legacy; maintenance only until retirement | `com.sfrancoe.Red-Sox-Records` | Preserved in Git history, not duplicated in the working tree |
+
+The New York Yankees are a supported team inside Hub Ball, not a separate app.
+The former standalone Yankees iOS project has been retired. See
+[`docs/PRODUCTS.md`](docs/PRODUCTS.md) for naming and retirement rules.
+
+`main` is the only installation and release source. To install the declared current
+build on a paired device, use:
+
+```bash
+bash scripts/install_hub_ball.sh --device <device-identifier>
+```
+
+The installer refuses a dirty source tree, a non-`main` branch, a manifest mismatch,
+or a lower build than another worktree.
+
 Open `ios/Hub Ball/Hub Ball.xcodeproj` in Xcode, or run an unsigned simulator build:
 
 ```bash
 xcodebuild -project "ios/Hub Ball/Hub Ball.xcodeproj" -scheme "Hub Ball" \
   -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO build
 ```
-
-The separate `ios/Yankees Hub/` project remains independently buildable as
-`NY Baseball Hub`.
 
 ## Stories
 
