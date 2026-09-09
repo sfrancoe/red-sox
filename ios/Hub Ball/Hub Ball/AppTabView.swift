@@ -192,15 +192,9 @@ struct AppTabView: View {
                         Image(systemName: "baseball.fill")
                             .font(.system(size: 18, weight: .bold))
 
-                        VStack(alignment: .leading, spacing: 1) {
-                            Text(team.shortName)
-                                .font(.headline.weight(.bold))
-                                .lineLimit(1)
-                            Text("SWITCH TEAM")
-                                .font(.caption2.weight(.bold))
-                                .tracking(0.6)
-                                .foregroundStyle(AppColor.boneMuted)
-                        }
+                        Text(team.shortName)
+                            .font(.headline.weight(.bold))
+                            .lineLimit(1)
 
                         Image(systemName: "chevron.down")
                             .font(.caption.weight(.bold))

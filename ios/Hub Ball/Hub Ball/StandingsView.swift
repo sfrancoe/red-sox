@@ -229,7 +229,11 @@ struct StandingsView: View {
             Text("W").frame(width: widths.wins)
             Text("L").frame(width: widths.losses)
             Text("PCT").frame(width: widths.pct)
-            Text(gamesBackTitle).frame(width: widths.gamesBack)
+            Text(gamesBackTitle)
+                .frame(width: widths.gamesBack)
+                .overlay(alignment: .bottom) {
+                    Rectangle().fill(AppColor.amber).frame(height: 2)
+                }
             Text("L10").frame(width: widths.lastTen)
             Text("STRK").frame(width: widths.streak)
         }
