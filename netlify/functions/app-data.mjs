@@ -14,7 +14,7 @@ export const ALLOWED_PATHS = new Set(MLB_TEAMS.flatMap(team => {
     ...STANDARD_FILES,
     ...team.news_sources.map(source => `${source.key}.json`),
   ];
-  if (team.api_key === 'redsox') files.push('players.json');
+  if (team.features.players) files.push('players.json');
   return files.map(file => `${prefix}${file}`);
 }));
 

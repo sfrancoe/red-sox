@@ -1,6 +1,6 @@
 # Open player facts and reuse policy
 
-The native iPhone and iPad Players directory is deliberately photo-free and does not
+The native iPhone and iPad Players directories for all 30 MLB teams are deliberately photo-free and do not
 include paid sports feeds. It presents a concise roster, basic biographical facts, and
 completed-season career statistics with links back to the source records.
 
@@ -12,7 +12,7 @@ completed-season career statistics with links back to the source records.
   measurements, position, identifiers, and team membership. Wikidata publishes its
   structured data under CC0 1.0, so it may be reused commercially without requesting
   an individual license or paying a fee.
-- **Wikipedia's Boston roster template and player infoboxes** supply the current
+- **Wikipedia's current roster templates and player infoboxes** supply each club's current
   roster, uniform numbers, broad position groups, roster status, and major-team
   history. Wikipedia is free for commercial reuse under CC BY-SA 4.0. The app provides
   attribution and source links; it copies no article prose or images.
@@ -40,17 +40,23 @@ python3 scripts/test_open_players.py
 python3 scripts/test_players.py
 ```
 
-The refresh fails loudly if the roster cannot be parsed, two players collide on an
-identity key, or the response shape changes. Missing individual facts remain blank;
+Pass `--team yankees` (or another registry key) to refresh one club. With no team
+argument, the script refreshes all 30 clubs. The refresh fails loudly if a roster cannot
+be parsed, two players collide on an identity key, or the response shape changes.
+Missing individual facts remain blank;
 the script does not infer or invent them. Retrosheet career logs are cached until its
 completed-season release changes, avoiding unnecessary repeat downloads. Tests reject
 player photos, MLB image/API hosts, paid-provider references, missing team histories,
-and missing source links. They also require both batting and pitching coverage and
-verify the career-stat cutoff.
+and missing source links, and verify the career-stat cutoff.
+
+If Retrosheet is temporarily unreachable, `--skip-new-career-stats` preserves cached
+statistics and marks only uncached records as temporarily unavailable. The normal
+scheduled refresh does not use this option, so it fills those records on the next
+successful run.
 
 ## Scope
 
-The page includes name, number, position, roster status, age, birth date and place,
+Each team page includes name, number, position, roster status, age, birth date and place,
 height/weight when available, education when available, major teams played for, and
 standard career batting or pitching totals through 2025. Players absent from the 2025
 release—normally 2026 debuts or players awaiting an MLB appearance—receive an explicit

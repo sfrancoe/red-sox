@@ -2,13 +2,16 @@ import SwiftUI
 
 struct PlayersView: View {
     @Environment(\.hubContentWidth) private var contentWidth
-    @State private var store = PlayersStore()
+    @State private var store: PlayersStore
     @State private var path: [Int] = []
 
+    let team: HubTeam
     let requestedPlayerID: Int?
     let onRequestHandled: () -> Void
 
-    init(requestedPlayerID: Int? = nil, onRequestHandled: @escaping () -> Void = {}) {
+    init(team: HubTeam, requestedPlayerID: Int? = nil, onRequestHandled: @escaping () -> Void = {}) {
+        self.team = team
+        _store = State(initialValue: PlayersStore(team: team))
         self.requestedPlayerID = requestedPlayerID
         self.onRequestHandled = onRequestHandled
     }
@@ -29,7 +32,7 @@ struct PlayersView: View {
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Int.self) { playerID in
                 if let player = store.player(id: playerID) {
-                    PlayerReferenceView(player: player, source: store.feed?.source)
+                    PlayerReferenceView(team: team, player: player, source: store.feed?.source)
                 } else {
                     ContentUnavailableView("Player unavailable", systemImage: "person.crop.circle.badge.questionmark")
                 }
@@ -56,7 +59,7 @@ struct PlayersView: View {
                             rosterRow(player)
                         }
                         .buttonStyle(.plain)
-                        Divider().padding(.leading, 76)
+                        Divider().padding(.leading, 14)
                     }
                 }
                 sourceFooter(feed.source)
@@ -78,7 +81,7 @@ struct PlayersView: View {
             .frame(width: 62, height: 62)
 
             VStack(alignment: .leading, spacing: -3) {
-                Text("BOSTON BASEBALL")
+                Text("\(team.cityName.uppercased()) BASEBALL")
                     .font(.system(size: contentWidth >= 650 ? 35 : 27, weight: .black))
                     .foregroundStyle(AppColor.ink)
                 Text("PLAYER REFERENCE")
@@ -122,7 +125,6 @@ struct PlayersView: View {
 
     private func rosterRow(_ player: RedSoxPlayer) -> some View {
         HStack(spacing: 12) {
-            monogram(player, width: 52, height: 64, fontSize: 19)
             VStack(alignment: .leading, spacing: 3) {
                 Text(player.name)
                     .font(.system(size: 19, weight: .bold))
@@ -148,18 +150,6 @@ struct PlayersView: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 9)
         .contentShape(Rectangle())
-    }
-
-    private func monogram(_ player: RedSoxPlayer, width: CGFloat, height: CGFloat, fontSize: CGFloat) -> some View {
-        ZStack {
-            Rectangle().fill(AppColor.paper)
-            Text(player.initials)
-                .font(.system(size: fontSize, weight: .black))
-                .foregroundStyle(AppColor.navy)
-        }
-        .frame(width: width, height: height)
-        .overlay { Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth) }
-        .accessibilityHidden(true)
     }
 
     private func sourceFooter(_ source: PlayersSource) -> some View {
@@ -197,6 +187,7 @@ struct PlayersView: View {
 
 private struct PlayerReferenceView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    let team: HubTeam
     let player: RedSoxPlayer
     let source: PlayersSource?
 
@@ -219,7 +210,6 @@ private struct PlayerReferenceView: View {
 
     private var identityHeader: some View {
         HStack(alignment: .top, spacing: 16) {
-            monogram
             VStack(alignment: .leading, spacing: 5) {
                 Text(player.name)
                     .font(.system(size: contentWidth >= 650 ? 34 : 28, weight: .black))
@@ -229,12 +219,12 @@ private struct PlayerReferenceView: View {
                     compactReferenceLine(player.position.name)
                     compactReferenceLine("Bats \(player.bats ?? "—") · Throws \(player.throws ?? "—")")
                     if let measurements { compactReferenceLine(measurements) }
-                    compactReferenceLine("Boston Red Sox")
+                    compactReferenceLine(team.fullName)
                 } else {
                     referenceLine("Position", player.position.name)
                     referenceLine("Bats", player.bats ?? "—", trailingLabel: "Throws", trailingValue: player.throws ?? "—")
                     if let measurements { Text(measurements).font(.system(size: 13)).foregroundStyle(AppColor.ink) }
-                    referenceLine("Current team", "Boston Red Sox")
+                    referenceLine("Current team", team.fullName)
                 }
             }
             Spacer(minLength: 0)
@@ -256,18 +246,6 @@ private struct PlayerReferenceView: View {
             .frame(maxWidth: contentWidth >= 650 ? 150 : 92)
         }
         .padding(16)
-    }
-
-    private var monogram: some View {
-        ZStack {
-            Rectangle().fill(AppColor.paper)
-            Text(player.initials)
-                .font(.system(size: contentWidth >= 650 ? 34 : 27, weight: .black))
-                .foregroundStyle(AppColor.navy)
-        }
-        .frame(width: contentWidth >= 650 ? 112 : 82, height: contentWidth >= 650 ? 132 : 104)
-        .overlay { Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth) }
-        .accessibilityLabel("No player photograph")
     }
 
     @ViewBuilder
@@ -367,10 +345,10 @@ private struct PlayerReferenceView: View {
                 ])
             } else {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Career statistics are not available in the completed 2025 data release.")
+                    Text(careerStatsUnavailableTitle)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(AppColor.ink)
-                    Text("This usually means the player debuted in 2026 or has not yet appeared in an MLB game.")
+                    Text(careerStatsUnavailableDetail)
                         .font(.system(size: 12))
                         .foregroundStyle(AppColor.ink)
                 }
@@ -378,6 +356,20 @@ private struct PlayerReferenceView: View {
                 .padding(12)
             }
         }
+    }
+
+    private var careerStatsUnavailableTitle: String {
+        if player.careerStats?.status == "not_in_2025_release" {
+            return "Career statistics are not available in the completed 2025 data release."
+        }
+        return "Career statistics are not available in this data snapshot."
+    }
+
+    private var careerStatsUnavailableDetail: String {
+        if player.careerStats?.status == "not_in_2025_release" {
+            return "This usually means the player debuted in 2026 or has not yet appeared in an MLB game."
+        }
+        return "Roster and biographical information remain available."
     }
 
     private func statGrid(_ values: [(String, String)]) -> some View {
@@ -428,20 +420,28 @@ private struct PlayerReferenceView: View {
 
     private var teamsTable: some View {
         VStack(spacing: 0) {
-            ForEach(Array(player.teams.enumerated()), id: \.offset) { index, team in
-                HStack(spacing: 10) {
-                    Text("\(index + 1)")
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(AppColor.ink)
-                        .frame(width: 22, alignment: .trailing)
-                    Text(team)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(AppColor.ink)
-                    Spacer()
+            if player.teams.isEmpty {
+                Text("No prior team history is listed in the open data record.")
+                    .font(.system(size: 14))
+                    .foregroundStyle(AppColor.ink)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(12)
+            } else {
+                ForEach(Array(player.teams.enumerated()), id: \.offset) { index, team in
+                    HStack(spacing: 10) {
+                        Text("\(index + 1)")
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(AppColor.ink)
+                            .frame(width: 22, alignment: .trailing)
+                        Text(team)
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(AppColor.ink)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 9)
+                    if index < player.teams.count - 1 { Divider().padding(.leading, 44) }
                 }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 9)
-                if index < player.teams.count - 1 { Divider().padding(.leading, 44) }
             }
         }
     }
@@ -489,6 +489,6 @@ private struct PlayerReferenceView: View {
 }
 
 #Preview {
-    PlayersView()
+    PlayersView(team: .boston)
         .environment(\.hubContentWidth, 390)
 }

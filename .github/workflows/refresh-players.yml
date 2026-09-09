@@ -1,0 +1,41 @@
+name: Refresh all MLB player directories
+
+on:
+  schedule:
+    - cron: '23 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch open player data for all 30 teams
+        run: python3 scripts/fetch_players.py
+      - name: Check player data
+        run: |
+          python3 scripts/test_open_players.py
+          python3 scripts/test_players.py
+      - name: Commit if player data changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data "ios/Hub Ball/Hub Ball/players.json"; then
+            echo "No player data changes."
+          else
+            git add data "ios/Hub Ball/Hub Ball/players.json"
+            git commit -m "Refresh MLB player directories ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+          fi

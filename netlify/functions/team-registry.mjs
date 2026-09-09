@@ -125,7 +125,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -189,7 +189,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -244,7 +244,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -295,7 +295,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -346,7 +346,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -397,7 +397,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -448,7 +448,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -499,7 +499,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -550,7 +550,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -601,7 +601,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -653,7 +653,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -704,7 +704,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -758,7 +758,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -809,7 +809,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -861,7 +861,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -912,7 +912,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -963,7 +963,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1014,7 +1014,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1065,7 +1065,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1116,7 +1116,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1167,7 +1167,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1218,7 +1218,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1269,7 +1269,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1320,7 +1320,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1371,7 +1371,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1422,7 +1422,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1474,7 +1474,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1525,7 +1525,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   },
@@ -1576,7 +1576,7 @@ export const MLB_TEAMS = Object.freeze([
       "leaders": true,
       "news": true,
       "x_posts": true,
-      "players": false,
+      "players": true,
       "stories": false
     }
   }

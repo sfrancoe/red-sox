@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import html
+import argparse
 import csv
 import io
 import json
@@ -17,6 +18,7 @@ import re
 import time
 import unicodedata
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -24,13 +26,13 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 
+from team_registry import all_teams, data_directory, team_by_key
+
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_PATH = ROOT / "data" / "players.json"
 IOS_OUTPUT_PATH = ROOT / "ios" / "Hub Ball" / "Hub Ball" / "players.json"
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
-ROSTER_TEMPLATE = "Template:Boston Red Sox roster"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 CHADWICK_REGISTER_URL = (
     "https://raw.githubusercontent.com/chadwickbureau/register/master/data/people-{suffix}.csv"
@@ -74,7 +76,13 @@ def fetch_json(base_url: str, params: dict[str, str]) -> Any:
             except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
                 last_error = exc
                 if attempt < 2:
-                    time.sleep(2**attempt)
+                    retry_after = 0
+                    if isinstance(exc, HTTPError) and exc.code == 429:
+                        try:
+                            retry_after = int(exc.headers.get("Retry-After", "0"))
+                        except (TypeError, ValueError):
+                            pass
+                    time.sleep(max(2**attempt, retry_after, 10 if isinstance(exc, HTTPError) and exc.code == 429 else 0))
     raise RuntimeError(f"Could not fetch open player data from {base_url}: {last_error}")
 
 
@@ -188,6 +196,15 @@ def career_stats(retrosheet_id: str | None) -> dict[str, Any]:
     return aggregate_career_stats(batting_rows, pitching_rows, fielding_rows)
 
 
+def unavailable_career_stats() -> dict[str, Any]:
+    return {
+        "through_season": RETROSHEET_STATS_THROUGH,
+        "status": "temporarily_unavailable",
+        "batting": None,
+        "pitching": None,
+    }
+
+
 def aggregate_career_stats(
     batting_rows: list[dict[str, str]],
     pitching_rows: list[dict[str, str]],
@@ -261,19 +278,31 @@ def aggregate_career_stats(
     }
 
 
+def output_path(team: dict[str, Any]) -> Path:
+    root = ROOT / "data" if team["legacy_root_data"] else data_directory(team)
+    return root / "players.json"
+
+
 def cached_career_stats() -> dict[str, dict[str, Any]]:
-    if not OUTPUT_PATH.exists():
-        return {}
-    try:
-        previous = json.loads(OUTPUT_PATH.read_text())
-    except (OSError, json.JSONDecodeError):
-        return {}
-    return {
-        player["retrosheet_id"]: player["career_stats"]
-        for player in previous.get("players", [])
-        if player.get("retrosheet_id")
-        and player.get("career_stats", {}).get("through_season") == RETROSHEET_STATS_THROUGH
-    }
+    cached: dict[str, dict[str, Any]] = {}
+    paths = [output_path(team) for team in all_teams()]
+    for path in paths:
+        if not path.exists():
+            continue
+        try:
+            previous = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        for player in previous.get("players", []):
+            retrosheet_id = player.get("retrosheet_id")
+            stats = player.get("career_stats", {})
+            if (
+                retrosheet_id
+                and stats.get("through_season") == RETROSHEET_STATS_THROUGH
+                and stats.get("status") != "temporarily_unavailable"
+            ):
+                cached[retrosheet_id] = stats
+    return cached
 
 
 def clean_number(value: str) -> str | None:
@@ -330,10 +359,10 @@ def parse_roster(wikitext: str) -> tuple[list[dict[str, Any]], str | None]:
     return rows, roster_date
 
 
-def wikipedia_roster() -> tuple[list[dict[str, Any]], str | None, int | None]:
+def wikipedia_roster(roster_template: str) -> tuple[list[dict[str, Any]], str | None, int | None]:
     payload = fetch_json(
         WIKIPEDIA_API,
-        {"action": "parse", "page": ROSTER_TEMPLATE, "prop": "wikitext", "format": "json"},
+        {"action": "parse", "page": roster_template, "prop": "wikitext", "format": "json"},
     )
     parsed = payload.get("parse", {})
     rows, roster_date = parse_roster(parsed.get("wikitext", {}).get("*", ""))
@@ -541,7 +570,10 @@ def position_name(group: str, entity: dict[str, Any], labels: dict[str, str]) ->
     return cleaned[0] if cleaned else group
 
 
-def player_row(roster: dict[str, Any], qid: str | None, entity: dict[str, Any], labels: dict[str, str], wikitext: str) -> dict[str, Any]:
+def player_row(
+    team: dict[str, Any], roster: dict[str, Any], qid: str | None,
+    entity: dict[str, Any], labels: dict[str, str], wikitext: str,
+) -> dict[str, Any]:
     mlb_id = first_string(entity, "P3541")
     player_id = int(mlb_id) if mlb_id and mlb_id.isdigit() else fallback_id(roster["name"])
     birth_date = first_time(entity, "P569") or wikipedia_birth_date(wikitext)
@@ -549,6 +581,8 @@ def player_row(roster: dict[str, Any], qid: str | None, entity: dict[str, Any], 
     college_ids = entity_ids_for(entity, "P69")
     team_ids = entity_ids_for(entity, "P54")
     teams = wikipedia_teams(wikitext) or [labels[value] for value in team_ids if value in labels]
+    if team["full_name"] not in teams:
+        teams.append(team["full_name"])
     wikipedia_title = entity.get("sitelinks", {}).get("enwiki", {}).get("title") or roster["page_title"]
     return {
         "id": player_id,
@@ -587,9 +621,14 @@ def player_row(roster: dict[str, Any], qid: str | None, entity: dict[str, Any], 
     }
 
 
-def build_feed(roster_rows: list[dict[str, Any]], title_to_qid: dict[str, str], entities: dict[str, Any], labels: dict[str, str], page_text: dict[str, str], roster_date: str | None, roster_revision: int | None) -> dict[str, Any]:
+def build_feed(
+    team: dict[str, Any], roster_template: str,
+    roster_rows: list[dict[str, Any]], title_to_qid: dict[str, str],
+    entities: dict[str, Any], labels: dict[str, str], page_text: dict[str, str],
+    roster_date: str | None, roster_revision: int | None,
+) -> dict[str, Any]:
     players = [
-        player_row(row, title_to_qid.get(row["page_title"]), entities.get(title_to_qid.get(row["page_title"], ""), {}), labels, page_text.get(row["page_title"], ""))
+        player_row(team, row, title_to_qid.get(row["page_title"]), entities.get(title_to_qid.get(row["page_title"], ""), {}), labels, page_text.get(row["page_title"], ""))
         for row in roster_rows
     ]
     players.sort(key=lambda row: row["name"].split()[-1])
@@ -598,7 +637,7 @@ def build_feed(roster_rows: list[dict[str, Any]], title_to_qid: dict[str, str], 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "roster_as_of": roster_date,
-        "team": {"id": 111, "name": "Boston"},
+        "team": {"id": team["mlb_id"], "name": team["full_name"]},
         "roster_type": "open-current-roster",
         "player_count": len(players),
         "active_count": sum(row["is_active_roster"] for row in players),
@@ -607,7 +646,7 @@ def build_feed(roster_rows: list[dict[str, Any]], title_to_qid: dict[str, str], 
             "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
             "license": "Wikidata CC0 1.0; Wikipedia CC BY-SA 4.0; Chadwick ODC Attribution 1.0; Retrosheet commercial use with required credit",
             "wikidata_url": "https://www.wikidata.org/",
-            "roster_url": "https://en.wikipedia.org/wiki/Template:Boston_Red_Sox_roster",
+            "roster_url": f"https://en.wikipedia.org/wiki/{quote(roster_template.replace(' ', '_'))}",
             "roster_revision": roster_revision,
             "stats_url": "https://www.retrosheet.org/downloads/csvdownloads.html",
             "stats_through": RETROSHEET_STATS_THROUGH,
@@ -617,9 +656,12 @@ def build_feed(roster_rows: list[dict[str, Any]], title_to_qid: dict[str, str], 
     }
 
 
-def main() -> None:
-    cached_stats = cached_career_stats()
-    roster_rows, roster_date, roster_revision = wikipedia_roster()
+def build_team_feed(
+    team: dict[str, Any], cached_stats: dict[str, dict[str, Any]],
+    people: list[dict[str, str]], skip_new_career_stats: bool = False,
+) -> dict[str, Any]:
+    roster_template = f"Template:{team['full_name']} roster"
+    roster_rows, roster_date, roster_revision = wikipedia_roster(roster_template)
     title_to_qid = wikidata_ids([row["page_title"] for row in roster_rows])
     entities = wikidata_entities(sorted(set(title_to_qid.values())))
     page_text = wikipedia_wikitext([row["page_title"] for row in roster_rows])
@@ -628,16 +670,52 @@ def main() -> None:
         for property_id in ("P19", "P69", "P54", "P413"):
             linked_ids.update(entity_ids_for(entity, property_id))
     labels = labels_for(linked_ids)
-    feed = build_feed(roster_rows, title_to_qid, entities, labels, page_text, roster_date, roster_revision)
-    people = chadwick_people()
+    feed = build_feed(
+        team, roster_template, roster_rows, title_to_qid, entities, labels,
+        page_text, roster_date, roster_revision,
+    )
     resolve_retrosheet_ids(feed["players"], people)
+    missing_ids = sorted({
+        player["retrosheet_id"]
+        for player in feed["players"]
+        if player["retrosheet_id"] and player["retrosheet_id"] not in cached_stats
+    })
+    if skip_new_career_stats:
+        cached_stats.update({player_id: unavailable_career_stats() for player_id in missing_ids})
+    else:
+        # Retrosheet's public server is intentionally treated gently; two parallel
+        # lookups keep the all-team refresh practical without opening a burst of connections.
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            cached_stats.update(zip(missing_ids, executor.map(career_stats, missing_ids)))
     for player in feed["players"]:
         retrosheet_id = player["retrosheet_id"]
         player["career_stats"] = cached_stats.get(retrosheet_id) or career_stats(retrosheet_id)
-    contents = json.dumps(feed, indent=2, ensure_ascii=False) + "\n"
-    for path in (OUTPUT_PATH, IOS_OUTPUT_PATH):
+    return feed
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--team", action="append", default=[],
+        help="Team API key, abbreviation, or registry ID. Repeat to refresh several teams.",
+    )
+    parser.add_argument(
+        "--skip-new-career-stats", action="store_true",
+        help="Build rosters from cached stats when Retrosheet is temporarily unavailable.",
+    )
+    args = parser.parse_args()
+    teams = [team_by_key(key) for key in args.team] if args.team else all_teams()
+    cached_stats = cached_career_stats()
+    people = chadwick_people()
+    for team in teams:
+        feed = build_team_feed(team, cached_stats, people, args.skip_new_career_stats)
+        contents = json.dumps(feed, indent=2, ensure_ascii=False) + "\n"
+        path = output_path(team)
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(contents)
-    print(f"Wrote {feed['player_count']} open-data player profiles to both snapshots")
+        if team["api_key"] == "redsox":
+            IOS_OUTPUT_PATH.write_text(contents)
+        print(f"Wrote {feed['player_count']} open-data player profiles for {team['full_name']}")
 
 
 if __name__ == "__main__":

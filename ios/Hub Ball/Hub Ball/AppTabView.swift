@@ -200,7 +200,7 @@ struct AppTabView: View {
                 StandingsView(team: team)
                     .mainTabSwipe(selection: $selectedTab, current: .standings, availableTabs: availableTabs)
         case .players:
-                PlayersView(requestedPlayerID: selectedPlayerID) {
+                PlayersView(team: team, requestedPlayerID: selectedPlayerID) {
                     selectedPlayerID = nil
                 }
                 .mainTabSwipe(selection: $selectedTab, current: .players, availableTabs: availableTabs)

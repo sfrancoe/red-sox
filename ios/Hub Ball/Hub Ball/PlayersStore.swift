@@ -4,13 +4,17 @@ import Observation
 @MainActor
 @Observable
 final class PlayersStore {
-    private static let endpoint = AppBackend.dataURL("players.json")
+    let team: HubTeam
 
     var feed: PlayersFeed?
     var filter: PlayerPositionFilter = .all
     var searchText = ""
     var isLoading = false
     var errorMessage: String?
+
+    init(team: HubTeam) {
+        self.team = team
+    }
 
     var visiblePlayers: [RedSoxPlayer] {
         guard let feed else { return [] }
@@ -48,13 +52,13 @@ final class PlayersStore {
             }
         } catch {
             if feed == nil {
-                errorMessage = "We couldn't load the Red Sox roster. Check your connection and try again."
+                errorMessage = "We couldn't load the \(team.shortName) roster. Check your connection and try again."
             }
         }
     }
 
     private func loadRemote() async throws -> PlayersFeed {
-        var request = URLRequest(url: Self.endpoint)
+        var request = URLRequest(url: AppBackend.dataURL("players.json", team: team))
         request.cachePolicy = .reloadRevalidatingCacheData
         request.timeoutInterval = 20
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -66,6 +70,9 @@ final class PlayersStore {
     }
 
     private func loadBundledSnapshot() throws -> PlayersFeed {
+        guard team == .boston else {
+            throw PlayersError.missingSnapshot
+        }
         guard let url = Bundle.main.url(forResource: "players", withExtension: "json") else {
             throw PlayersError.missingSnapshot
         }

@@ -34,6 +34,11 @@ try {
   assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/mets/standings.json');
 
   calls = [];
+  response = await handler(new Request('https://example.test/api/data/yankees/players.json'));
+  assert.equal(response.status, 200);
+  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/yankees/players.json');
+
+  calls = [];
   response = await handler(new Request('https://example.test/api/data/rays/tampabay.json'));
   assert.equal(response.status, 200);
   assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/rays/tampabay.json');
@@ -62,6 +67,7 @@ try {
 
 assert.equal(ALLOWED_PATHS.has('orioles/standings.json'), true);
 assert.equal(ALLOWED_PATHS.has('orioles/x-posts.json'), true);
+assert.equal(ALLOWED_PATHS.has('orioles/players.json'), true);
 assert.equal(ALLOWED_PATHS.has('dodgers/los-angeles-times.json'), true);
 assert.equal(ALLOWED_PATHS.has('redsox/standings.json'), false);
 assert.equal(ALLOWED_PATHS.has('standings.json'), true);

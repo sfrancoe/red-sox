@@ -1,0 +1,3108 @@
+{
+  "generated_at": "2026-09-09T10:20:15.518167+00:00",
+  "roster_as_of": "September 6, 2026",
+  "team": {
+    "id": 110,
+    "name": "Baltimore Orioles"
+  },
+  "roster_type": "open-current-roster",
+  "player_count": 46,
+  "active_count": 28,
+  "source": {
+    "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
+    "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
+    "license": "Wikidata CC0 1.0; Wikipedia CC BY-SA 4.0; Chadwick ODC Attribution 1.0; Retrosheet commercial use with required credit",
+    "wikidata_url": "https://www.wikidata.org/",
+    "roster_url": "https://en.wikipedia.org/wiki/Template%3ABaltimore_Orioles_roster",
+    "roster_revision": null,
+    "stats_url": "https://www.retrosheet.org/downloads/csvdownloads.html",
+    "stats_through": 2025,
+    "stats_attribution": "The information used here was obtained free of charge from and is copyrighted by Retrosheet. Interested parties may contact Retrosheet at 20 Sunset Rd., Newark, DE 19711."
+  },
+  "players": [
+    {
+      "id": 669211,
+      "wikidata_id": "Q98410217",
+      "slug": "keegan-akin",
+      "name": "Keegan Akin",
+      "full_name": "Keegan Akin",
+      "number": "45",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
+      "birth_date": "1995-04-01",
+      "age": 31,
+      "birthplace": "Alma",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "August 14, 2020",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Western Michigan University"
+          },
+          {
+            "name": "Bullock Creek High School"
+          }
+        ]
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q98410217",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Keegan_Akin",
+      "retrosheet_id": "akink001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 231,
+          "plate_appearances": 2,
+          "at_bats": 2,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 2,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.0,
+          "on_base_percentage": 0.0,
+          "slugging_percentage": 0.0,
+          "ops": 0.0
+        },
+        "pitching": {
+          "games": 231,
+          "games_started": 28,
+          "wins": 16,
+          "losses": 22,
+          "saves": 11,
+          "innings_outs": 1104,
+          "hits": 350,
+          "runs": 203,
+          "earned_runs": 183,
+          "home_runs": 51,
+          "walks": 129,
+          "strikeouts": 377,
+          "hit_batters": 7,
+          "wild_pitches": 14,
+          "balks": 2,
+          "complete_games": 0,
+          "era": 4.48,
+          "whip": 1.302
+        }
+      }
+    },
+    {
+      "id": 1144815210,
+      "wikidata_id": "Q125207747",
+      "slug": "blaze-alexander",
+      "name": "Blaze Alexander",
+      "full_name": "Blaze Alexander",
+      "number": "23",
+      "position": {
+        "name": "Infielder",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1999-06-11",
+      "age": 27,
+      "birthplace": "Cape Coral",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "March 28, 2024",
+      "debut_team": "Arizona Diamondbacks",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Arizona Diamondbacks",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q125207747",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Blaze_Alexander",
+      "retrosheet_id": "alexb001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 135,
+          "plate_appearances": 451,
+          "at_bats": 396,
+          "runs": 50,
+          "hits": 94,
+          "doubles": 19,
+          "triples": 1,
+          "home_runs": 10,
+          "runs_batted_in": 49,
+          "walks": 37,
+          "strikeouts": 135,
+          "stolen_bases": 7,
+          "caught_stealing": 7,
+          "average": 0.237,
+          "on_base_percentage": 0.322,
+          "slugging_percentage": 0.366,
+          "ops": 0.688
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 624413,
+      "wikidata_id": "Q27926052",
+      "slug": "pete-alonso",
+      "name": "Pete Alonso",
+      "full_name": "Pete Alonso",
+      "number": "25",
+      "position": {
+        "name": "First Baseman",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1994-12-07",
+      "age": 31,
+      "birthplace": "Q49255",
+      "height": "6' 3\"",
+      "weight": 245,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "March 28, 2019",
+      "debut_team": "New York Mets",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Henry B. Plant High School"
+          },
+          {
+            "name": "University of Florida"
+          }
+        ]
+      },
+      "teams": [
+        "New York Mets",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q27926052",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Pete_Alonso",
+      "retrosheet_id": "alonp001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 1008,
+          "plate_appearances": 4316,
+          "at_bats": 3763,
+          "runs": 580,
+          "hits": 951,
+          "doubles": 183,
+          "triples": 8,
+          "home_runs": 264,
+          "runs_batted_in": 712,
+          "walks": 419,
+          "strikeouts": 984,
+          "stolen_bases": 18,
+          "caught_stealing": 4,
+          "average": 0.253,
+          "on_base_percentage": 0.341,
+          "slugging_percentage": 0.516,
+          "ops": 0.857
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 694212,
+      "wikidata_id": "Q121355276",
+      "slug": "samuel-basallo",
+      "name": "Samuel Basallo",
+      "full_name": "Samuel Basallo",
+      "number": "29",
+      "position": {
+        "name": "Catcher",
+        "group": "Catcher",
+        "abbreviation": "C"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2004-08-13",
+      "age": 22,
+      "birthplace": "Santo Domingo",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "August 17, 2025",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q121355276",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Samuel_Basallo",
+      "retrosheet_id": "basas001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 31,
+          "plate_appearances": 118,
+          "at_bats": 109,
+          "runs": 10,
+          "hits": 18,
+          "doubles": 6,
+          "triples": 0,
+          "home_runs": 4,
+          "runs_batted_in": 15,
+          "walks": 6,
+          "strikeouts": 30,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.165,
+          "on_base_percentage": 0.229,
+          "slugging_percentage": 0.33,
+          "ops": 0.559
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 605135,
+      "wikidata_id": "Q16198285",
+      "slug": "chris-bassitt",
+      "name": "Chris Bassitt",
+      "full_name": "Chris Bassitt",
+      "number": "40",
+      "position": {
+        "name": "Starting Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1989-02-22",
+      "age": 37,
+      "birthplace": "Toledo",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 30, 2014",
+      "debut_team": "Chicago White Sox",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Genoa Area High School"
+          }
+        ]
+      },
+      "teams": [
+        "Chicago White Sox",
+        "Oakland Athletics",
+        "New York Mets",
+        "Toronto Blue Jays",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q16198285",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Chris_Bassitt",
+      "retrosheet_id": "bassc001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 232,
+          "plate_appearances": 9,
+          "at_bats": 8,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 5,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.0,
+          "on_base_percentage": 0.0,
+          "slugging_percentage": 0.0,
+          "ops": 0.0
+        },
+        "pitching": {
+          "games": 232,
+          "games_started": 218,
+          "wins": 83,
+          "losses": 65,
+          "saves": 0,
+          "innings_outs": 3836,
+          "hits": 1184,
+          "runs": 559,
+          "earned_runs": 517,
+          "home_runs": 143,
+          "walks": 409,
+          "strikeouts": 1191,
+          "hit_batters": 96,
+          "wild_pitches": 34,
+          "balks": 10,
+          "complete_games": 3,
+          "era": 3.64,
+          "whip": 1.246
+        }
+      }
+    },
+    {
+      "id": 642585,
+      "wikidata_id": "Q111578266",
+      "slug": "felix-bautista",
+      "name": "Félix Bautista",
+      "full_name": "Félix Bautista",
+      "number": "74",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
+      "birth_date": "1995-06-20",
+      "age": 31,
+      "birthplace": "Santo Domingo, Dominican Republic",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 10, 2022",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q111578266",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/F%C3%A9lix_Bautista_%28baseball%29",
+      "retrosheet_id": "bautf001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 156,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 156,
+          "games_started": 0,
+          "wins": 13,
+          "losses": 7,
+          "saves": 67,
+          "innings_outs": 484,
+          "hits": 84,
+          "runs": 42,
+          "earned_runs": 36,
+          "home_runs": 14,
+          "walks": 72,
+          "strikeouts": 248,
+          "hit_batters": 3,
+          "wild_pitches": 10,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 2.01,
+          "whip": 0.967
+        }
+      }
+    },
+    {
+      "id": 669358,
+      "wikidata_id": "Q30033371",
+      "slug": "shane-baz",
+      "name": "Shane Baz",
+      "full_name": "Shane Baz",
+      "number": "34",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1999-06-17",
+      "age": 27,
+      "birthplace": "Cypress",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "September 20, 2021",
+      "debut_team": "Tampa Bay Rays",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Tampa Bay Rays",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q30033371",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Shane_Baz",
+      "retrosheet_id": "baz-s001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 54,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 54,
+          "games_started": 54,
+          "wins": 17,
+          "losses": 17,
+          "saves": 0,
+          "innings_outs": 858,
+          "hits": 248,
+          "runs": 137,
+          "earned_runs": 135,
+          "home_runs": 43,
+          "walks": 103,
+          "strikeouts": 293,
+          "hit_batters": 14,
+          "wild_pitches": 8,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.25,
+          "whip": 1.227
+        }
+      }
+    },
+    {
+      "id": 1018534143,
+      "wikidata_id": "Q111916319",
+      "slug": "dylan-beavers",
+      "name": "Dylan Beavers",
+      "full_name": "Dylan Beavers",
+      "number": "12",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2001-08-11",
+      "age": 25,
+      "birthplace": "San Luis Obispo, California, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "August 16, 2025",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q111916319",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Dylan_Beavers",
+      "retrosheet_id": "beavd001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 35,
+          "plate_appearances": 137,
+          "at_bats": 110,
+          "runs": 16,
+          "hits": 25,
+          "doubles": 5,
+          "triples": 1,
+          "home_runs": 4,
+          "runs_batted_in": 14,
+          "walks": 26,
+          "strikeouts": 36,
+          "stolen_bases": 2,
+          "caught_stealing": 2,
+          "average": 0.227,
+          "on_base_percentage": 0.375,
+          "slugging_percentage": 0.4,
+          "ops": 0.775
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 680694,
+      "wikidata_id": "Q111721129",
+      "slug": "kyle-bradish",
+      "name": "Kyle Bradish",
+      "full_name": "Kyle Bradish",
+      "number": "38",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1996-09-12",
+      "age": 29,
+      "birthplace": "Peoria, Arizona, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 29, 2022",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q111721129",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Kyle_Bradish",
+      "retrosheet_id": "bradk001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 67,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 67,
+          "games_started": 67,
+          "wins": 19,
+          "losses": 15,
+          "saves": 0,
+          "innings_outs": 1073,
+          "hits": 301,
+          "runs": 143,
+          "earned_runs": 138,
+          "home_runs": 36,
+          "walks": 115,
+          "strikeouts": 379,
+          "hit_batters": 19,
+          "wild_pitches": 18,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 3.47,
+          "whip": 1.163
+        }
+      }
+    },
+    {
+      "id": 666974,
+      "wikidata_id": "Q111972321",
+      "slug": "yennier-cano",
+      "name": "Yennier Canó",
+      "full_name": "Yennier Cano",
+      "number": "78",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1994-03-09",
+      "age": 32,
+      "birthplace": "Ciego de Ávila, Cuba",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "May 12, 2022",
+      "debut_team": "Minnesota Twins",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Minnesota Twins",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q111972321",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Yennier_Can%C3%B3",
+      "retrosheet_id": "canoy001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 220,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 220,
+          "games_started": 0,
+          "wins": 9,
+          "losses": 15,
+          "saves": 15,
+          "innings_outs": 626,
+          "hits": 202,
+          "runs": 102,
+          "earned_runs": 94,
+          "home_runs": 20,
+          "walks": 77,
+          "strikeouts": 204,
+          "hit_batters": 8,
+          "wild_pitches": 6,
+          "balks": 3,
+          "complete_games": 0,
+          "era": 4.05,
+          "whip": 1.337
+        }
+      }
+    },
+    {
+      "id": 1071328560,
+      "wikidata_id": "Q104198287",
+      "slug": "colton-cowser",
+      "name": "Colton Cowser",
+      "full_name": "Colton Cowser",
+      "number": "17",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2000-03-20",
+      "age": 26,
+      "birthplace": "Houston, Texas, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "July 5, 2023",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Sam Houston State University"
+          }
+        ]
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q104198287",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Colton_Cowser",
+      "retrosheet_id": "cowsc001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 271,
+          "plate_appearances": 998,
+          "at_bats": 887,
+          "runs": 128,
+          "hits": 192,
+          "doubles": 40,
+          "triples": 3,
+          "home_runs": 40,
+          "runs_batted_in": 113,
+          "walks": 92,
+          "strikeouts": 322,
+          "stolen_bases": 24,
+          "caught_stealing": 4,
+          "average": 0.216,
+          "on_base_percentage": 0.3,
+          "slugging_percentage": 0.404,
+          "ops": 0.704
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 621107,
+      "wikidata_id": "Q18390636",
+      "slug": "zach-eflin",
+      "name": "Zach Eflin",
+      "full_name": "Zach Eflin",
+      "number": "24",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
+      "birth_date": "1994-04-08",
+      "age": 32,
+      "birthplace": "Chuluota",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "June 14, 2016",
+      "debut_team": "Philadelphia Phillies",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Paul J. Hagerty High School"
+          }
+        ]
+      },
+      "teams": [
+        "Philadelphia Phillies",
+        "Tampa Bay Rays",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q18390636",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Zach_Eflin",
+      "retrosheet_id": "efliz001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 201,
+          "plate_appearances": 184,
+          "at_bats": 167,
+          "runs": 10,
+          "hits": 21,
+          "doubles": 3,
+          "triples": 0,
+          "home_runs": 1,
+          "runs_batted_in": 6,
+          "walks": 1,
+          "strikeouts": 94,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.126,
+          "on_base_percentage": 0.136,
+          "slugging_percentage": 0.162,
+          "ops": 0.298
+        },
+        "pitching": {
+          "games": 200,
+          "games_started": 188,
+          "wins": 68,
+          "losses": 67,
+          "saves": 1,
+          "innings_outs": 3221,
+          "hits": 1106,
+          "runs": 550,
+          "earned_runs": 511,
+          "home_runs": 162,
+          "walks": 221,
+          "strikeouts": 922,
+          "hit_batters": 32,
+          "wild_pitches": 14,
+          "balks": 0,
+          "complete_games": 5,
+          "era": 4.28,
+          "whip": 1.236
+        }
+      }
+    },
+    {
+      "id": 687952,
+      "wikidata_id": "Q116467028",
+      "slug": "christian-encarnacion-strand",
+      "name": "Christian Encarnacion-Strand",
+      "full_name": "Christian Encarnacion-Strand",
+      "number": "32",
+      "position": {
+        "name": "Infielder",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1999-12-01",
+      "age": 26,
+      "birthplace": "Walnut Creek",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 17, 2023",
+      "debut_team": "Cincinnati Reds",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Cincinnati Reds",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q116467028",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Christian_Encarnacion-Strand",
+      "retrosheet_id": "encac001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 128,
+          "plate_appearances": 501,
+          "at_bats": 468,
+          "runs": 55,
+          "hits": 109,
+          "doubles": 17,
+          "triples": 0,
+          "home_runs": 21,
+          "runs_batted_in": 72,
+          "walks": 21,
+          "strikeouts": 136,
+          "stolen_bases": 2,
+          "caught_stealing": 2,
+          "average": 0.233,
+          "on_base_percentage": 0.275,
+          "slugging_percentage": 0.404,
+          "ops": 0.679
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 1050404543,
+      "wikidata_id": "Q139795825",
+      "slug": "cameron-foster",
+      "name": "Cameron Foster",
+      "full_name": "Cameron Foster",
+      "number": "65",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "1999-03-17",
+      "age": 27,
+      "birthplace": "Houston, Texas, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 16, 2026",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q139795825",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cameron_Foster",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 973381354,
+      "wikidata_id": "Q105723194",
+      "slug": "christian-franklin",
+      "name": "Christian Franklin",
+      "full_name": "Christian Franklin",
+      "number": "27",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Injured list",
+      "is_active_roster": false,
+      "birth_date": "1999-11-30",
+      "age": 26,
+      "birthplace": "Overland Park, Kansas, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 4, 2026",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "University of Arkansas"
+          }
+        ]
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q105723194",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Christian_Franklin",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 670329,
+      "wikidata_id": "Q66764409",
+      "slug": "rico-garcia",
+      "name": "Rico Garcia",
+      "full_name": "Rico Garcia",
+      "number": "50",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1994-01-10",
+      "age": 32,
+      "birthplace": "Honolulu",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 27, 2019",
+      "debut_team": "Colorado Rockies",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Saint Louis School"
+          },
+          {
+            "name": "Hawaii Pacific University"
+          }
+        ]
+      },
+      "teams": [
+        "Colorado Rockies",
+        "San Francisco Giants",
+        "Baltimore Orioles",
+        "Oakland Athletics",
+        "Washington Nationals",
+        "New York Mets",
+        "New York Yankees"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q66764409",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rico_Garcia",
+      "retrosheet_id": "garcr006",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 59,
+          "plate_appearances": 1,
+          "at_bats": 1,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 1,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.0,
+          "on_base_percentage": 0.0,
+          "slugging_percentage": 0.0,
+          "ops": 0.0
+        },
+        "pitching": {
+          "games": 59,
+          "games_started": 2,
+          "wins": 1,
+          "losses": 4,
+          "saves": 0,
+          "innings_outs": 210,
+          "hits": 80,
+          "runs": 41,
+          "earned_runs": 41,
+          "home_runs": 16,
+          "walks": 28,
+          "strikeouts": 59,
+          "hit_batters": 0,
+          "wild_pitches": 5,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.27,
+          "whip": 1.543
+        }
+      }
+    },
+    {
+      "id": 1045177056,
+      "wikidata_id": "Q139666682",
+      "slug": "trey-gibson",
+      "name": "Trey Gibson",
+      "full_name": "Trey Gibson",
+      "number": "43",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "2002-05-18",
+      "age": 24,
+      "birthplace": "Newport News",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "May 3, 2026",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q139666682",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Trey_Gibson",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 664854,
+      "wikidata_id": "Q42434072",
+      "slug": "ryan-helsley",
+      "name": "Ryan Helsley",
+      "full_name": "Ryan Helsley",
+      "number": "21",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
+      "birth_date": "1994-07-18",
+      "age": 32,
+      "birthplace": "Tahlequah",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 16, 2019",
+      "debut_team": "St. Louis Cardinals",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Sequoyah High School"
+          }
+        ]
+      },
+      "teams": [
+        "St. Louis Cardinals",
+        "New York Mets",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q42434072",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ryan_Helsley",
+      "retrosheet_id": "helsr001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 297,
+          "plate_appearances": 3,
+          "at_bats": 3,
+          "runs": 0,
+          "hits": 1,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 2,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.333,
+          "on_base_percentage": 0.333,
+          "slugging_percentage": 0.333,
+          "ops": 0.666
+        },
+        "pitching": {
+          "games": 297,
+          "games_started": 0,
+          "wins": 31,
+          "losses": 18,
+          "saves": 105,
+          "innings_outs": 959,
+          "hits": 243,
+          "runs": 118,
+          "earned_runs": 105,
+          "home_runs": 30,
+          "walks": 132,
+          "strikeouts": 377,
+          "hit_batters": 3,
+          "wild_pitches": 21,
+          "balks": 2,
+          "complete_games": 0,
+          "era": 2.96,
+          "whip": 1.173
+        }
+      }
+    },
+    {
+      "id": 683002,
+      "wikidata_id": "Q111441021",
+      "slug": "gunnar-henderson",
+      "name": "Gunnar Henderson",
+      "full_name": "Gunnar Henderson",
+      "number": "2",
+      "position": {
+        "name": "Third Baseman",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2001-06-29",
+      "age": 25,
+      "birthplace": "Montgomery",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "August 31, 2022",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "John T. Morgan Academy"
+          }
+        ]
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q111441021",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Gunnar_Henderson",
+      "retrosheet_id": "hendg002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 497,
+          "plate_appearances": 2124,
+          "at_bats": 1883,
+          "runs": 315,
+          "hits": 508,
+          "doubles": 101,
+          "triples": 22,
+          "home_runs": 86,
+          "runs_batted_in": 260,
+          "walks": 212,
+          "strikeouts": 489,
+          "stolen_bases": 62,
+          "caught_stealing": 13,
+          "average": 0.27,
+          "on_base_percentage": 0.347,
+          "slugging_percentage": 0.484,
+          "ops": 0.831
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 676051,
+      "wikidata_id": "Q97685788",
+      "slug": "codi-heuer",
+      "name": "Codi Heuer",
+      "full_name": "Codi Heuer",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "1996-07-03",
+      "age": 30,
+      "birthplace": "Missoula",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 24, 2020",
+      "debut_team": "Chicago White Sox",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Wichita State University"
+          },
+          {
+            "name": "Fossil Ridge High School"
+          }
+        ]
+      },
+      "teams": [
+        "Chicago White Sox",
+        "Chicago Cubs",
+        "Texas Rangers",
+        "Detroit Tigers",
+        "Cleveland Guardians"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q97685788",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Codi_Heuer",
+      "retrosheet_id": "heuec001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 89,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 89,
+          "games_started": 0,
+          "wins": 10,
+          "losses": 4,
+          "saves": 3,
+          "innings_outs": 287,
+          "hits": 81,
+          "runs": 41,
+          "earned_runs": 39,
+          "home_runs": 11,
+          "walks": 34,
+          "strikeouts": 86,
+          "hit_batters": 2,
+          "wild_pitches": 7,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 3.67,
+          "whip": 1.202
+        }
+      }
+    },
+    {
+      "id": 677956,
+      "wikidata_id": "Q127277834",
+      "slug": "rece-hinds",
+      "name": "Rece Hinds",
+      "full_name": "Rece Hinds",
+      "number": "62",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2000-09-05",
+      "age": 26,
+      "birthplace": "Niceville, Florida, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 8, 2024",
+      "debut_team": "Cincinnati Reds",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Cincinnati Reds",
+        "Miami Marlins",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q127277834",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rece_Hinds",
+      "retrosheet_id": "hindr001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 39,
+          "plate_appearances": 95,
+          "at_bats": 89,
+          "runs": 15,
+          "hits": 17,
+          "doubles": 5,
+          "triples": 1,
+          "home_runs": 7,
+          "runs_batted_in": 14,
+          "walks": 5,
+          "strikeouts": 37,
+          "stolen_bases": 2,
+          "caught_stealing": 0,
+          "average": 0.191,
+          "on_base_percentage": 0.242,
+          "slugging_percentage": 0.506,
+          "ops": 0.748
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 1016704953,
+      "wikidata_id": "Q134567576",
+      "slug": "yaramil-hiraldo",
+      "name": "Yaramil Hiraldo",
+      "full_name": "Yaramil Hiraldo",
+      "number": "76",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "1995-12-31",
+      "age": 30,
+      "birthplace": "Santiago, Dominican Republic",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "May 27, 2025",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q134567576",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Yaramil_Hiraldo",
+      "retrosheet_id": "hiray002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 18,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 18,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 59,
+          "hits": 17,
+          "runs": 13,
+          "earned_runs": 10,
+          "home_runs": 4,
+          "walks": 9,
+          "strikeouts": 21,
+          "hit_batters": 0,
+          "wild_pitches": 2,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.58,
+          "whip": 1.322
+        }
+      }
+    },
+    {
+      "id": 915152947,
+      "wikidata_id": "Q111730171",
+      "slug": "jackson-holliday",
+      "name": "Jackson Holliday",
+      "full_name": "Jackson Holliday",
+      "number": "7",
+      "position": {
+        "name": "Infielder",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2003-12-04",
+      "age": 22,
+      "birthplace": "Austin",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "April 10, 2024",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q111730171",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jackson_Holliday",
+      "retrosheet_id": "hollj003",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 209,
+          "plate_appearances": 857,
+          "at_bats": 776,
+          "runs": 98,
+          "hits": 178,
+          "doubles": 25,
+          "triples": 5,
+          "home_runs": 22,
+          "runs_batted_in": 78,
+          "walks": 71,
+          "strikeouts": 209,
+          "stolen_bases": 21,
+          "caught_stealing": 11,
+          "average": 0.229,
+          "on_base_percentage": 0.3,
+          "slugging_percentage": 0.36,
+          "ops": 0.66
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 947046459,
+      "wikidata_id": "Q139581110",
+      "slug": "alex-hoppe",
+      "name": "Alex Hoppe",
+      "full_name": "Alex Hoppe",
+      "number": "26",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1998-12-17",
+      "age": 27,
+      "birthplace": "Davenport, Iowa, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 27, 2026",
+      "debut_team": "Seattle Mariners",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Seattle Mariners",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q139581110",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Alex_Hoppe",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 669236,
+      "wikidata_id": "Q106994230",
+      "slug": "jeremiah-jackson",
+      "name": "Jeremiah Jackson",
+      "full_name": "Jeremiah Jackson",
+      "number": "82",
+      "position": {
+        "name": "Infielder",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "2000-03-26",
+      "age": 26,
+      "birthplace": "Antioch, Tennessee, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 1, 2025",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q106994230",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jeremiah_Jackson",
+      "retrosheet_id": "jackj002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 48,
+          "plate_appearances": 183,
+          "at_bats": 170,
+          "runs": 20,
+          "hits": 47,
+          "doubles": 10,
+          "triples": 2,
+          "home_runs": 5,
+          "runs_batted_in": 21,
+          "walks": 11,
+          "strikeouts": 50,
+          "stolen_bases": 0,
+          "caught_stealing": 2,
+          "average": 0.276,
+          "on_base_percentage": 0.328,
+          "slugging_percentage": 0.447,
+          "ops": 0.775
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 673357,
+      "wikidata_id": "Q28842101",
+      "slug": "luis-robert-jr",
+      "name": "Luis Robert Jr.",
+      "full_name": "Luis Robert Jr.",
+      "number": "88",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Injured list",
+      "is_active_roster": false,
+      "birth_date": "1997-08-03",
+      "age": 29,
+      "birthplace": "Havana",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 24, 2020",
+      "debut_team": "Chicago White Sox",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Chicago White Sox",
+        "New York Mets",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q28842101",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Luis_Robert_Jr.",
+      "retrosheet_id": "robel002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 577,
+          "plate_appearances": 2375,
+          "at_bats": 2178,
+          "runs": 318,
+          "hits": 565,
+          "doubles": 115,
+          "triples": 2,
+          "home_runs": 102,
+          "runs_batted_in": 298,
+          "walks": 149,
+          "strikeouts": 636,
+          "stolen_bases": 102,
+          "caught_stealing": 24,
+          "average": 0.259,
+          "on_base_percentage": 0.313,
+          "slugging_percentage": 0.455,
+          "ops": 0.768
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 552640,
+      "wikidata_id": "Q33093251",
+      "slug": "andrew-kittredge",
+      "name": "Andrew Kittredge",
+      "full_name": "Andrew Kittredge",
+      "number": "39",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1990-03-17",
+      "age": 36,
+      "birthplace": "Spokane",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 18, 2017",
+      "debut_team": "Tampa Bay Rays",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Q219563"
+          },
+          {
+            "name": "Joel E. Ferris High School"
+          }
+        ]
+      },
+      "teams": [
+        "Tampa Bay Rays",
+        "St. Louis Cardinals",
+        "Baltimore Orioles",
+        "Chicago Cubs"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q33093251",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Andrew_Kittredge",
+      "retrosheet_id": "kitta001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 309,
+          "plate_appearances": 1,
+          "at_bats": 1,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 1,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.0,
+          "on_base_percentage": 0.0,
+          "slugging_percentage": 0.0,
+          "ops": 0.0
+        },
+        "pitching": {
+          "games": 309,
+          "games_started": 15,
+          "wins": 27,
+          "losses": 15,
+          "saves": 21,
+          "innings_outs": 1015,
+          "hits": 309,
+          "runs": 145,
+          "earned_runs": 129,
+          "home_runs": 45,
+          "walks": 87,
+          "strikeouts": 337,
+          "hit_batters": 7,
+          "wild_pitches": 10,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 3.43,
+          "whip": 1.17
+        }
+      }
+    },
+    {
+      "id": 1126739582,
+      "wikidata_id": "Q85199601",
+      "slug": "heston-kjerstad",
+      "name": "Heston Kjerstad",
+      "full_name": "Heston Kjerstad",
+      "number": "13",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1999-02-12",
+      "age": 27,
+      "birthplace": "Amarillo",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "September 14, 2023",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Randall High School"
+          }
+        ]
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q85199601",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Heston_Kjerstad",
+      "retrosheet_id": "kjerh001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 106,
+          "plate_appearances": 314,
+          "at_bats": 285,
+          "runs": 27,
+          "hits": 62,
+          "doubles": 8,
+          "triples": 2,
+          "home_runs": 10,
+          "runs_batted_in": 36,
+          "walks": 18,
+          "strikeouts": 88,
+          "stolen_bases": 2,
+          "caught_stealing": 0,
+          "average": 0.218,
+          "on_base_percentage": 0.284,
+          "slugging_percentage": 0.365,
+          "ops": 0.649
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 1106472518,
+      "wikidata_id": null,
+      "slug": "luis-de-leon",
+      "name": "Luis De León",
+      "full_name": "Luis De León",
+      "number": "81",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2003-04-14",
+      "age": 23,
+      "birthplace": "Barahona, Dominican Republic",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "September 1, 2026",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": null,
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Luis_De_Le%C3%B3n",
+      "retrosheet_id": "delel001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 209,
+          "plate_appearances": 42,
+          "at_bats": 35,
+          "runs": 4,
+          "hits": 4,
+          "doubles": 1,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 2,
+          "strikeouts": 19,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.114,
+          "on_base_percentage": 0.162,
+          "slugging_percentage": 0.143,
+          "ops": 0.305
+        },
+        "pitching": {
+          "games": 207,
+          "games_started": 1,
+          "wins": 17,
+          "losses": 19,
+          "saves": 32,
+          "innings_outs": 1003,
+          "hits": 284,
+          "runs": 131,
+          "earned_runs": 116,
+          "home_runs": 39,
+          "walks": 77,
+          "strikeouts": 248,
+          "hit_batters": 12,
+          "wild_pitches": 3,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 3.12,
+          "whip": 1.08
+        }
+      }
+    },
+    {
+      "id": 691723,
+      "wikidata_id": "Q121354617",
+      "slug": "coby-mayo",
+      "name": "Coby Mayo",
+      "full_name": "Coby Mayo",
+      "number": "16",
+      "position": {
+        "name": "Infielder",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2001-12-10",
+      "age": 24,
+      "birthplace": "Coral Springs",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 2, 2024",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q121354617",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Coby_Mayo",
+      "retrosheet_id": "mayoc001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 102,
+          "plate_appearances": 340,
+          "at_bats": 304,
+          "runs": 34,
+          "hits": 61,
+          "doubles": 12,
+          "triples": 0,
+          "home_runs": 11,
+          "runs_batted_in": 28,
+          "walks": 31,
+          "strikeouts": 106,
+          "stolen_bases": 3,
+          "caught_stealing": 0,
+          "average": 0.201,
+          "on_base_percentage": 0.285,
+          "slugging_percentage": 0.349,
+          "ops": 0.634
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 663624,
+      "wikidata_id": "Q64746911",
+      "slug": "ryan-mountcastle",
+      "name": "Ryan Mountcastle",
+      "full_name": "Ryan Mountcastle",
+      "number": "6",
+      "position": {
+        "name": "Infielder",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
+      "birth_date": "1997-02-18",
+      "age": 29,
+      "birthplace": "Winter Springs",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 21, 2020",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Paul J. Hagerty High School"
+          }
+        ]
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q64746911",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Ryan_Mountcastle",
+      "retrosheet_id": "mounr001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 652,
+          "plate_appearances": 2669,
+          "at_bats": 2443,
+          "runs": 303,
+          "hits": 642,
+          "doubles": 125,
+          "triples": 5,
+          "home_runs": 98,
+          "runs_batted_in": 363,
+          "walks": 174,
+          "strikeouts": 664,
+          "stolen_bases": 17,
+          "caught_stealing": 6,
+          "average": 0.263,
+          "on_base_percentage": 0.312,
+          "slugging_percentage": 0.438,
+          "ops": 0.75
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 665966,
+      "wikidata_id": "Q130331654",
+      "slug": "carlos-narvaez",
+      "name": "Carlos Narváez",
+      "full_name": "Carlos Narváez",
+      "number": "75",
+      "position": {
+        "name": "Catcher",
+        "group": "Catcher",
+        "abbreviation": "C"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1998-11-26",
+      "age": 27,
+      "birthplace": "Maracay, Venezuela",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 20, 2024",
+      "debut_team": "New York Yankees",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "New York Yankees",
+        "Boston Red Sox",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q130331654",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Carlos_Narv%C3%A1ez",
+      "retrosheet_id": "narvc002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 124,
+          "plate_appearances": 461,
+          "at_bats": 416,
+          "runs": 51,
+          "hits": 100,
+          "doubles": 27,
+          "triples": 0,
+          "home_runs": 15,
+          "runs_batted_in": 50,
+          "walks": 40,
+          "strikeouts": 117,
+          "stolen_bases": 1,
+          "caught_stealing": 1,
+          "average": 0.24,
+          "on_base_percentage": 0.307,
+          "slugging_percentage": 0.413,
+          "ops": 0.72
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 1098168575,
+      "wikidata_id": "Q138836545",
+      "slug": "anthony-nunez",
+      "name": "Anthony Nunez",
+      "full_name": "Anthony Nunez",
+      "number": "66",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2001-07-10",
+      "age": 25,
+      "birthplace": "Miami, Florida, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Switch",
+      "throws": "Right",
+      "debut_date": "March 28, 2026",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q138836545",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Anthony_Nunez",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 641933,
+      "wikidata_id": "Q24289074",
+      "slug": "tyler-o-neill",
+      "name": "Tyler O'Neill",
+      "full_name": "Tyler O'Neill",
+      "number": "9",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Injured list",
+      "is_active_roster": false,
+      "birth_date": "1995-06-22",
+      "age": 31,
+      "birthplace": "Maple Ridge",
+      "height": "5' 11\"",
+      "weight": 209,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 19, 2018",
+      "debut_team": "St. Louis Cardinals",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Garibaldi Secondary School"
+          }
+        ]
+      },
+      "teams": [
+        "St. Louis Cardinals",
+        "Boston Red Sox",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q24289074",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Tyler_O%27Neill",
+      "retrosheet_id": "oneit001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 644,
+          "plate_appearances": 2318,
+          "at_bats": 2056,
+          "runs": 335,
+          "hits": 498,
+          "doubles": 91,
+          "triples": 4,
+          "home_runs": 118,
+          "runs_batted_in": 304,
+          "walks": 211,
+          "strikeouts": 701,
+          "stolen_bases": 48,
+          "caught_stealing": 9,
+          "average": 0.242,
+          "on_base_percentage": 0.32,
+          "slugging_percentage": 0.463,
+          "ops": 0.783
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 700249,
+      "wikidata_id": "Q126377575",
+      "slug": "cade-povich",
+      "name": "Cade Povich",
+      "full_name": "Cade Povich",
+      "number": "37",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "2000-04-12",
+      "age": 26,
+      "birthplace": "Reno",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "June 6, 2024",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q126377575",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cade_Povich",
+      "retrosheet_id": "povic001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 38,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 38,
+          "games_started": 36,
+          "wins": 6,
+          "losses": 17,
+          "saves": 0,
+          "innings_outs": 576,
+          "hits": 205,
+          "runs": 119,
+          "earned_runs": 111,
+          "home_runs": 29,
+          "walks": 77,
+          "strikeouts": 187,
+          "hit_batters": 4,
+          "wild_pitches": 7,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.2,
+          "whip": 1.469
+        }
+      }
+    },
+    {
+      "id": 650968,
+      "wikidata_id": "Q108077687",
+      "slug": "yohel-pozo",
+      "name": "Yohel Pozo",
+      "full_name": "Yohel Pozo",
+      "number": "79",
+      "position": {
+        "name": "Catcher",
+        "group": "Catcher",
+        "abbreviation": "C"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1997-06-14",
+      "age": 29,
+      "birthplace": "Maracaibo, Venezuela",
+      "height": "6' 0\"",
+      "weight": 201,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 13, 2021",
+      "debut_team": "Texas Rangers",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Texas Rangers",
+        "St. Louis Cardinals",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q108077687",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Yohel_Pozo",
+      "retrosheet_id": "pozoy001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 88,
+          "plate_appearances": 245,
+          "at_bats": 234,
+          "runs": 24,
+          "hits": 58,
+          "doubles": 12,
+          "triples": 0,
+          "home_runs": 6,
+          "runs_batted_in": 28,
+          "walks": 10,
+          "strikeouts": 32,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.248,
+          "on_base_percentage": 0.278,
+          "slugging_percentage": 0.376,
+          "ops": 0.654
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 669432,
+      "wikidata_id": "Q30122836",
+      "slug": "trevor-rogers",
+      "name": "Trevor Rogers",
+      "full_name": "Trevor Rogers",
+      "number": "28",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1997-11-13",
+      "age": 28,
+      "birthplace": "Carlsbad",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "August 25, 2020",
+      "debut_team": "Miami Marlins",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Carlsbad High School"
+          }
+        ]
+      },
+      "teams": [
+        "Miami Marlins",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q30122836",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Trevor_Rogers_%28baseball%29",
+      "retrosheet_id": "roget003",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 103,
+          "plate_appearances": 48,
+          "at_bats": 45,
+          "runs": 0,
+          "hits": 3,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 1,
+          "strikeouts": 29,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.067,
+          "on_base_percentage": 0.087,
+          "slugging_percentage": 0.067,
+          "ops": 0.154
+        },
+        "pitching": {
+          "games": 102,
+          "games_started": 102,
+          "wins": 24,
+          "losses": 37,
+          "saves": 0,
+          "innings_outs": 1560,
+          "hits": 481,
+          "runs": 241,
+          "earned_runs": 221,
+          "home_runs": 48,
+          "walks": 195,
+          "strikeouts": 521,
+          "hit_batters": 21,
+          "wild_pitches": 10,
+          "balks": 4,
+          "complete_games": 1,
+          "era": 3.83,
+          "whip": 1.3
+        }
+      }
+    },
+    {
+      "id": 676742,
+      "wikidata_id": "Q135654232",
+      "slug": "cam-sanders",
+      "name": "Cam Sanders",
+      "full_name": "Cam Sanders",
+      "number": "73",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1996-12-09",
+      "age": 29,
+      "birthplace": "Thibodaux, Louisiana, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 5, 2025",
+      "debut_team": "Pittsburgh Pirates",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Pittsburgh Pirates",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q135654232",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Cam_Sanders",
+      "retrosheet_id": "sandc002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 6,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 6,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 20,
+          "hits": 9,
+          "runs": 6,
+          "earned_runs": 6,
+          "home_runs": 2,
+          "walks": 5,
+          "strikeouts": 4,
+          "hit_batters": 0,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 8.1,
+          "whip": 2.1
+        }
+      }
+    },
+    {
+      "id": 681882,
+      "wikidata_id": "Q121337962",
+      "slug": "colin-selby",
+      "name": "Colin Selby",
+      "full_name": "Colin Selby",
+      "number": "60",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
+      "birth_date": "1997-10-24",
+      "age": 28,
+      "birthplace": "Chesapeake",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 9, 2023",
+      "debut_team": "Pittsburgh Pirates",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Pittsburgh Pirates",
+        "Kansas City Royals",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q121337962",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Colin_Selby",
+      "retrosheet_id": "selbc001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 37,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 37,
+          "games_started": 5,
+          "wins": 2,
+          "losses": 4,
+          "saves": 0,
+          "innings_outs": 135,
+          "hits": 48,
+          "runs": 32,
+          "earned_runs": 31,
+          "home_runs": 6,
+          "walks": 21,
+          "strikeouts": 49,
+          "hit_batters": 1,
+          "wild_pitches": 4,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.2,
+          "whip": 1.533
+        }
+      }
+    },
+    {
+      "id": 665750,
+      "wikidata_id": "Q97645643",
+      "slug": "leody-taveras",
+      "name": "Leody Taveras",
+      "full_name": "Leody Taveras",
+      "number": "30",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1998-09-08",
+      "age": 28,
+      "birthplace": "Tenares",
+      "height": null,
+      "weight": null,
+      "bats": "Switch",
+      "throws": "Right",
+      "debut_date": "July 24, 2020",
+      "debut_team": "Texas Rangers",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Texas Rangers",
+        "Seattle Mariners",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q97645643",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Leody_Taveras",
+      "retrosheet_id": "tavel001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 533,
+          "plate_appearances": 1923,
+          "at_bats": 1769,
+          "runs": 212,
+          "hits": 418,
+          "doubles": 80,
+          "triples": 12,
+          "home_runs": 41,
+          "runs_batted_in": 177,
+          "walks": 126,
+          "strikeouts": 470,
+          "stolen_bases": 75,
+          "caught_stealing": 19,
+          "average": 0.236,
+          "on_base_percentage": 0.287,
+          "slugging_percentage": 0.365,
+          "ops": 0.652
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 906403790,
+      "wikidata_id": null,
+      "slug": "reed-trimble",
+      "name": "Reed Trimble",
+      "full_name": "Reed Trimble",
+      "number": "62",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": null,
+      "age": null,
+      "birthplace": "",
+      "height": null,
+      "weight": null,
+      "bats": null,
+      "throws": null,
+      "debut_date": null,
+      "debut_team": null,
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [],
+      "source_url": null,
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Reed_Trimble",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 677020,
+      "wikidata_id": "Q118433031",
+      "slug": "josh-walker",
+      "name": "Josh Walker",
+      "full_name": "Josh Walker",
+      "number": "61",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1994-12-01",
+      "age": 31,
+      "birthplace": "Otisville",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "May 16, 2023",
+      "debut_team": "New York Mets",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "New York Mets",
+        "Toronto Blue Jays",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q118433031",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Josh_Walker_%28baseball%29",
+      "retrosheet_id": "walkj004",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 27,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 27,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 1,
+          "saves": 0,
+          "innings_outs": 82,
+          "hits": 33,
+          "runs": 22,
+          "earned_runs": 20,
+          "home_runs": 3,
+          "walks": 14,
+          "strikeouts": 31,
+          "hit_batters": 1,
+          "wild_pitches": 3,
+          "balks": 2,
+          "complete_games": 0,
+          "era": 6.59,
+          "whip": 1.72
+        }
+      }
+    },
+    {
+      "id": 996334676,
+      "wikidata_id": "Q95970456",
+      "slug": "jordan-westburg",
+      "name": "Jordan Westburg",
+      "full_name": "Jordan Westburg",
+      "number": "11",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
+      "birth_date": "1999-02-18",
+      "age": 27,
+      "birthplace": "New Braunfels",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "June 26, 2023",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Mississippi State University"
+          },
+          {
+            "name": "New Braunfels High School"
+          }
+        ]
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q95970456",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jordan_Westburg",
+      "retrosheet_id": "westj002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 260,
+          "plate_appearances": 1027,
+          "at_bats": 952,
+          "runs": 142,
+          "hits": 251,
+          "doubles": 53,
+          "triples": 8,
+          "home_runs": 38,
+          "runs_batted_in": 127,
+          "walks": 55,
+          "strikeouts": 233,
+          "stolen_bases": 11,
+          "caught_stealing": 6,
+          "average": 0.264,
+          "on_base_percentage": 0.312,
+          "slugging_percentage": 0.456,
+          "ops": 0.768
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 664991,
+      "wikidata_id": "Q131036279",
+      "slug": "grant-wolfram",
+      "name": "Grant Wolfram",
+      "full_name": "Grant Wolfram",
+      "number": "48",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1996-12-12",
+      "age": 29,
+      "birthplace": "Hamilton, Michigan, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "April 26, 2025",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q131036279",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Grant_Wolfram",
+      "retrosheet_id": "wolfg001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 21,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 21,
+          "games_started": 0,
+          "wins": 3,
+          "losses": 1,
+          "saves": 0,
+          "innings_outs": 80,
+          "hits": 35,
+          "runs": 20,
+          "earned_runs": 16,
+          "home_runs": 2,
+          "walks": 15,
+          "strikeouts": 31,
+          "hit_batters": 1,
+          "wild_pitches": 3,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.4,
+          "whip": 1.875
+        }
+      }
+    },
+    {
+      "id": 687064,
+      "wikidata_id": "Q134006209",
+      "slug": "brandon-young",
+      "name": "Brandon Young",
+      "full_name": "Brandon Young",
+      "number": "63",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1998-08-19",
+      "age": 28,
+      "birthplace": "Lumberton, Texas, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 19, 2025",
+      "debut_team": "Baltimore Orioles",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q134006209",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Brandon_Young_%28baseball%29",
+      "retrosheet_id": "younb001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 12,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 12,
+          "games_started": 12,
+          "wins": 1,
+          "losses": 7,
+          "saves": 0,
+          "innings_outs": 173,
+          "hits": 67,
+          "runs": 42,
+          "earned_runs": 40,
+          "home_runs": 12,
+          "walks": 22,
+          "strikeouts": 47,
+          "hit_batters": 0,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.24,
+          "whip": 1.543
+        }
+      }
+    },
+    {
+      "id": 691172,
+      "wikidata_id": "Q60243006",
+      "slug": "yosver-zulueta",
+      "name": "Yosver Zulueta",
+      "full_name": "Yosver Zulueta",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "1998-01-23",
+      "age": 28,
+      "birthplace": "Villa Clara Province",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "June 25, 2024",
+      "debut_team": "Cincinnati Reds",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Cincinnati Reds"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q60243006",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Yosver_Zulueta",
+      "retrosheet_id": "zuluy001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 19,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 19,
+          "games_started": 0,
+          "wins": 1,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 71,
+          "hits": 20,
+          "runs": 15,
+          "earned_runs": 14,
+          "home_runs": 3,
+          "walks": 11,
+          "strikeouts": 25,
+          "hit_batters": 1,
+          "wild_pitches": 2,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.32,
+          "whip": 1.31
+        }
+      }
+    }
+  ]
+}

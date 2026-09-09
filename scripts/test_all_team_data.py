@@ -42,6 +42,11 @@ def validate(team: dict) -> None:
     assert pitching["pitchers"] and pitching["games_played"] > 0
     assert all(row["id"] and row["name"] for row in pitching["pitchers"])
 
+    players = load(root, "players.json")
+    assert players["team"] == {"id": team["mlb_id"], "name": team["full_name"]}
+    assert players["player_count"] == len(players["players"])
+    assert players["players"]
+
     seasons = load(root, "seasons.json")
     assert {"2023", "2024", "2025"}.issubset(seasons)
     current = seasons[max(seasons)]
