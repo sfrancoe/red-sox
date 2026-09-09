@@ -182,16 +182,9 @@ struct HomeView: View {
                     .frame(height: 36)
                     .modifier(HomeTableHeaderStyle())
 
-                    HStack(spacing: 16) {
-                        scoreTeam(favorite, isWinner: favorite.runs > opponent.runs)
-                        scoreTeam(opponent, isWinner: opponent.runs > favorite.runs)
-                    }
-                    .padding(.horizontal, 13)
-                    .padding(.vertical, 8)
-
-                    gameResultRow(favorite, emphasized: true)
+                    gameResultRow(favorite, isWinner: favorite.runs > opponent.runs)
                     Divider().overlay(AppColor.separator).padding(.leading, 13)
-                    gameResultRow(opponent, emphasized: false)
+                    gameResultRow(opponent, isWinner: opponent.runs > favorite.runs)
 
                     HStack(spacing: 8) {
                         Text("Home runs")
@@ -297,28 +290,34 @@ struct HomeView: View {
         .accessibilityElement(children: .combine)
     }
 
-    private func gameResultRow(_ team: TeamBoxScore, emphasized: Bool) -> some View {
+    private func gameResultRow(_ team: TeamBoxScore, isWinner: Bool) -> some View {
         HStack(spacing: 0) {
             Text(team.cityName)
-                .font(.system(size: 15, weight: emphasized ? .black : .bold))
+                .font(.system(size: 15, weight: .medium))
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            gameResultNumber(team.runs, width: 38, emphasized: emphasized)
-            gameResultNumber(team.hits, width: 38, emphasized: emphasized)
-            gameResultNumber(team.errors, width: 38, emphasized: emphasized)
-            gameResultNumber(team.leftOnBase, width: 44, emphasized: emphasized)
-            gameResultNumber(team.batting.reduce(0) { $0 + ($1.stolenBases ?? 0) }, width: 36, emphasized: emphasized)
+            gameResultNumber(team.runs, width: 38, isRunTotal: true, isWinner: isWinner)
+            gameResultNumber(team.hits, width: 38)
+            gameResultNumber(team.errors, width: 38)
+            gameResultNumber(team.leftOnBase, width: 44)
+            gameResultNumber(team.batting.reduce(0) { $0 + ($1.stolenBases ?? 0) }, width: 36)
         }
         .foregroundStyle(AppColor.navy)
         .padding(.horizontal, 13)
         .frame(height: 35)
-        .background(emphasized ? AppColor.paleBlue.opacity(0.72) : AppColor.paper)
+        .background(isWinner ? AppColor.paleBlue.opacity(0.72) : AppColor.paper)
     }
 
-    private func gameResultNumber(_ value: Int, width: CGFloat, emphasized: Bool) -> some View {
+    private func gameResultNumber(
+        _ value: Int,
+        width: CGFloat,
+        isRunTotal: Bool = false,
+        isWinner: Bool = false
+    ) -> some View {
         Text("\(value)")
-            .font(.system(size: 14, weight: emphasized ? .black : .medium, design: .monospaced))
+            .font(isRunTotal ? AppFont.numberLarge : AppFont.number)
+            .foregroundStyle(isRunTotal && isWinner ? AppColor.amber : AppColor.bone)
             .frame(width: width, alignment: .trailing)
     }
 
