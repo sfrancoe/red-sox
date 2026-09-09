@@ -96,11 +96,7 @@ struct HomeView: View {
                             .frame(width: contentWidth >= 650 ? 200 : 135, alignment: .leading)
                         Text("W").frame(maxWidth: .infinity)
                         Text("L").frame(maxWidth: .infinity)
-                        Text("GB")
-                            .frame(maxWidth: .infinity)
-                            .overlay(alignment: .bottom) {
-                                Rectangle().fill(AppColor.amber).frame(height: 2)
-                            }
+                        Text("GB").frame(maxWidth: .infinity)
                         Text("L10").frame(maxWidth: .infinity)
                         Text("STRK").frame(maxWidth: .infinity)
                     }
@@ -126,6 +122,11 @@ struct HomeView: View {
                             standingNumber(team.losses, emphasized: team.isFavorite)
                             Text(team.gamesBack)
                                 .font(AppFont.number)
+                                .overlay(alignment: .bottom) {
+                                    if index > 0 {
+                                        Rectangle().fill(AppColor.amber).frame(height: 2)
+                                    }
+                                }
                                 .frame(maxWidth: .infinity)
                             Text(team.lastTen)
                                 .font(AppFont.number)

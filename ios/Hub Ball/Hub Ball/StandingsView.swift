@@ -210,6 +210,7 @@ struct StandingsView: View {
                 standingsRow(
                     team,
                     gamesBackTitle: gamesBackTitle,
+                    showsGamesBackRule: index > 0,
                     highlightsFavorite: highlightsFavorite,
                     compact: compact,
                     compactRowPadding: compactRowPadding
@@ -229,11 +230,7 @@ struct StandingsView: View {
             Text("W").frame(width: widths.wins)
             Text("L").frame(width: widths.losses)
             Text("PCT").frame(width: widths.pct)
-            Text(gamesBackTitle)
-                .frame(width: widths.gamesBack)
-                .overlay(alignment: .bottom) {
-                    Rectangle().fill(AppColor.amber).frame(height: 2)
-                }
+            Text(gamesBackTitle).frame(width: widths.gamesBack)
             Text("L10").frame(width: widths.lastTen)
             Text("STRK").frame(width: widths.streak)
         }
@@ -248,6 +245,7 @@ struct StandingsView: View {
     private func standingsRow(
         _ team: StandingsTeam,
         gamesBackTitle: String,
+        showsGamesBackRule: Bool,
         highlightsFavorite: Bool,
         compact: Bool,
         compactRowPadding: CGFloat
@@ -276,7 +274,8 @@ struct StandingsView: View {
                 width: widths.gamesBack,
                 emphasized: emphasized,
                 compact: compact,
-                color: gamesBack == "—" ? AppColor.boneMuted : gamesBack == "0" || gamesBack == "0.0" ? AppColor.bone : AppColor.steel
+                color: gamesBack == "—" ? AppColor.boneMuted : gamesBack == "0" || gamesBack == "0.0" ? AppColor.bone : AppColor.steel,
+                showsUnderline: showsGamesBackRule
             )
             tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
@@ -299,13 +298,19 @@ struct StandingsView: View {
         width: CGFloat,
         emphasized: Bool = false,
         compact: Bool = false,
-        color: Color? = nil
+        color: Color? = nil,
+        showsUnderline: Bool = false
     ) -> some View {
         Text(value)
             .font(AppFont.number)
             .lineLimit(1)
             .minimumScaleFactor(0.85)
             .foregroundStyle(color ?? AppColor.bone)
+            .overlay(alignment: .bottom) {
+                if showsUnderline {
+                    Rectangle().fill(AppColor.amber).frame(height: 2)
+                }
+            }
             .frame(width: width)
     }
 
