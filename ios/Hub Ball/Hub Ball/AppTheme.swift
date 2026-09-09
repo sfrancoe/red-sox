@@ -9,7 +9,13 @@ enum AppColor {
     // A soft-white field lets the white panels read as gently raised surfaces.
     static let cream = Color(red: 248.0 / 255.0, green: 248.0 / 255.0, blue: 246.0 / 255.0)
     static let paper = Color.white
-    static var ink: Color { Color(hubHex: selectedTeam.colors.ink) }
+    static var ink: Color {
+        let colors = selectedTeam.colors
+        let darkTeamHex = perceivedBrightness(colors.primary) <= perceivedBrightness(colors.secondary)
+            ? colors.primary
+            : colors.secondary
+        return Color(hubHex: darkTeamHex)
+    }
     static let resultWin = Color(red: 0.76, green: 0.88, blue: 0.78)
     static let resultLoss = Color(red: 0.94, green: 0.76, blue: 0.76)
     static let resultWinText = Color(red: 0.08, green: 0.42, blue: 0.20)
@@ -25,6 +31,14 @@ enum AppColor {
     static var green: Color { ink }
     static var hunterGreen: Color { ink }
     static var border: Color { teamAccent.opacity(0.46) }
+
+    private static func perceivedBrightness(_ hex: String) -> Double {
+        let value = UInt64(hex.dropFirst(), radix: 16) ?? 0
+        let red = Double((value >> 16) & 0xff)
+        let green = Double((value >> 8) & 0xff)
+        let blue = Double(value & 0xff)
+        return red * 0.2126 + green * 0.7152 + blue * 0.0722
+    }
 }
 
 private extension Color {
