@@ -83,6 +83,7 @@ struct XPostsView: View {
             Rectangle()
                 .stroke(AppColor.border, lineWidth: 1)
         }
+        .panelElevation()
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }
@@ -231,6 +232,7 @@ struct XPostsView: View {
                     .frame(height: 1)
             }
         }
+        .panelElevation()
     }
 
     private func authorAvatar(_ post: XPost) -> some View {

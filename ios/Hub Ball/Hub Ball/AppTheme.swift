@@ -6,9 +6,9 @@ enum AppColor {
         return HubTeam(rawValue: stored ?? "") ?? .boston
     }
 
-    // Hub Ball's neutral field: every screen and panel uses the same warm paper.
-    static let cream = Color(red: 239.0 / 255.0, green: 231.0 / 255.0, blue: 213.0 / 255.0)
-    static let paper = cream
+    // A soft-white field lets the white panels read as gently raised surfaces.
+    static let cream = Color(red: 248.0 / 255.0, green: 248.0 / 255.0, blue: 246.0 / 255.0)
+    static let paper = Color.white
     static let ink = Color.black
     static let resultWin = Color(red: 0.76, green: 0.88, blue: 0.78)
     static let resultLoss = Color(red: 0.94, green: 0.76, blue: 0.76)
@@ -56,6 +56,11 @@ extension View {
                 Rectangle()
                     .stroke(AppColor.border, lineWidth: 1)
             }
+            .panelElevation()
+    }
+
+    func panelElevation() -> some View {
+        shadow(color: Color.black.opacity(0.11), radius: 7, x: 0, y: 3)
     }
 }
 

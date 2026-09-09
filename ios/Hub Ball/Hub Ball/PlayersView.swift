@@ -25,7 +25,7 @@ struct PlayersView: View {
                     errorView
                 }
             }
-            .background(AppColor.paper)
+            .background(AppColor.cream)
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Int.self) { playerID in
                 if let player = store.player(id: playerID) {
@@ -62,7 +62,7 @@ struct PlayersView: View {
                 sourceFooter(feed.source)
             }
         }
-        .background(AppColor.paper)
+        .background(AppColor.cream)
         .refreshable { await store.load() }
         .searchable(text: $store.searchText, prompt: "Search player or position")
     }
@@ -212,7 +212,7 @@ private struct PlayerReferenceView: View {
                 referenceSection("Sources") { sourceRows }
             }
         }
-        .background(AppColor.paper)
+        .background(AppColor.cream)
         .navigationTitle(player.name)
         .navigationBarTitleDisplayMode(.inline)
     }

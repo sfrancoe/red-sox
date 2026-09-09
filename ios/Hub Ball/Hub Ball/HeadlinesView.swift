@@ -96,6 +96,8 @@ struct HeadlinesView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColor.paper)
         .clipped()
+        .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+        .panelElevation()
     }
 
     private func newspaperStory(_ article: NewsArticle) -> some View {
@@ -192,6 +194,7 @@ struct HeadlinesView: View {
             Rectangle()
                 .stroke(AppColor.border, lineWidth: 1)
         }
+        .panelElevation()
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }

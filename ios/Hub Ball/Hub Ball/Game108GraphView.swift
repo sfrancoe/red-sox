@@ -79,6 +79,7 @@ struct Game108GraphView: View {
                         Rectangle()
                             .stroke(AppColor.border, lineWidth: 1)
                     }
+                    .panelElevation()
 
                     controls
                     storyHeader

@@ -108,6 +108,7 @@ struct PitchingView: View {
             Rectangle()
                 .stroke(AppColor.border, lineWidth: 1)
         }
+        .panelElevation()
     }
 
     private func impactCard(chartHeight: CGFloat) -> some View {

@@ -491,5 +491,6 @@ private struct HomeCardStyle: ViewModifier {
                 Rectangle()
                     .stroke(AppColor.border.opacity(0.9), lineWidth: 1)
             }
+            .panelElevation()
     }
 }

@@ -110,7 +110,7 @@ struct AppTabView: View {
                 }
             }
         }
-        .background(AppColor.paper)
+        .background(AppColor.cream)
         .onAppear {
             guard !hasAppeared else { return }
             #if DEBUG

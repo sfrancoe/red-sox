@@ -106,6 +106,7 @@ struct RecentGameView: View {
             Rectangle()
                 .stroke(AppColor.border, lineWidth: 1)
         }
+        .panelElevation()
         .padding(.horizontal, 16)
         .padding(.top, 10)
         .padding(.bottom, 4)
@@ -205,6 +206,7 @@ struct RecentGameView: View {
                         Rectangle()
                             .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
                     }
+                    .panelElevation()
                 }
             }
             .padding(.horizontal, 16)

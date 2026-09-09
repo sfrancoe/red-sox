@@ -7,7 +7,7 @@ struct TeamSettingsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                AppColor.paper.ignoresSafeArea()
+                AppColor.cream.ignoresSafeArea()
 
                 ScrollView {
                     VStack(spacing: 0) {
@@ -109,6 +109,10 @@ struct TeamOnboardingView: View {
                                 .padding(usesAccessibilityLayout ? 12 : 17)
                                 .background(AppColor.paper)
                                 .clipShape(Rectangle())
+                                .overlay {
+                                    Rectangle().stroke(AppColor.border, lineWidth: 1)
+                                }
+                                .panelElevation()
                             }
                             .buttonStyle(.plain)
                         }

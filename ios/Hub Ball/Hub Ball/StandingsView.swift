@@ -190,6 +190,7 @@ struct StandingsView: View {
             Rectangle()
                 .stroke(AppColor.border, lineWidth: 1)
         }
+        .panelElevation()
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
     }

@@ -294,6 +294,8 @@ struct MarketsView: View {
             .frame(minHeight: 44)
             .background(AppColor.paper)
             .clipShape(Rectangle())
+            .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+            .panelElevation()
 
             Toggle("Volume over 10K", isOn: $volumeOnly)
                 .font(.subheadline.weight(.bold))
@@ -303,6 +305,8 @@ struct MarketsView: View {
                 .frame(minHeight: 44)
                 .background(AppColor.paper)
                 .clipShape(Rectangle())
+                .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+                .panelElevation()
 
             if filtered.isEmpty {
                 ContentUnavailableView("No markets resolve then", systemImage: "calendar", description: Text("Try another resolve window. New markets appear as they are listed.")).foregroundStyle(.black)
@@ -377,6 +381,7 @@ struct MarketsView: View {
         }
         .background(AppColor.paper)
         .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+        .panelElevation()
     }
 
     private func matchesResolveWindow(_ market: SoxMarket) -> Bool {
@@ -425,6 +430,8 @@ struct MarketsView: View {
         }.font(.subheadline.weight(.semibold)).tint(AppColor.hunterGreen)
             .padding(16).background(AppColor.paper)
             .clipShape(Rectangle())
+            .overlay(Rectangle().stroke(AppColor.border, lineWidth: 1))
+            .panelElevation()
     }
 }
 
