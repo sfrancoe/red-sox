@@ -29,11 +29,11 @@ done
 
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
-check_args=()
 if [[ "$allow_dirty" == true ]]; then
-  check_args+=(--allow-dirty)
+  python3 scripts/check_hub_ball_release.py --allow-dirty
+else
+  python3 scripts/check_hub_ball_release.py
 fi
-python3 scripts/check_hub_ball_release.py "${check_args[@]}"
 
 derived_data="$(mktemp -d "${TMPDIR:-/tmp}/hub-ball-install.XXXXXX")"
 cleanup() {
