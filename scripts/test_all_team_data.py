@@ -24,6 +24,12 @@ def validate(team: dict) -> None:
     assert schedule["team"] == team["short_name"]
     assert schedule["games"]
     assert all(game["game_pk"] for game in schedule["games"])
+    assert all(isinstance(game.get("broadcasts"), list) for game in schedule["games"])
+    assert all(
+        {"name", "is_national", "home_away", "availability", "available_for_streaming"}
+        <= broadcast.keys()
+        for game in schedule["games"] for broadcast in game["broadcasts"]
+    )
 
     recent = load(root, "recent-game.json")
     assert team["mlb_id"] in {recent["away"]["id"], recent["home"]["id"]}

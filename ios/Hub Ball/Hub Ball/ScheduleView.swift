@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ScheduleView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.hubTeamPalette) private var palette
     @State private var store: ScheduleStore
     @State private var selectedGameID: Int?
     let team: HubTeam
@@ -63,7 +64,7 @@ struct ScheduleView: View {
                     }
                 }
 
-                Text("\(schedule.games.count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
+                Text("\(remainingGames(in: schedule).count) games remaining · Through \(formattedSeasonEnd(schedule.regularSeasonEnd))")
                     .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
                     .foregroundStyle(AppColor.ink.opacity(0.82))
                     .padding(.vertical, 2)
@@ -79,9 +80,8 @@ struct ScheduleView: View {
 
     private func monthCard(_ month: CalendarMonth, schedule: Schedule) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(month.title.uppercased())
+            Text(month.title)
                 .font(.system(size: contentWidth >= 650 ? 19 : 17, weight: .black))
-                .tracking(0.8)
                 .foregroundStyle(AppColor.navy)
 
             LazyVGrid(columns: calendarColumns, spacing: 3) {
@@ -113,7 +113,7 @@ struct ScheduleView: View {
 
         return VStack(spacing: 3) {
             Text(date.formatted(.dateTime.day()))
-                .font(.system(size: 15, weight: .medium))
+                .font(.system(size: 15, weight: game == nil ? .regular : .medium))
                 .foregroundStyle(game == nil ? AppColor.boneMuted : selected ? AppColor.amber : AppColor.bone)
 
             if let game {
@@ -136,19 +136,19 @@ struct ScheduleView: View {
                 }
             } else {
                 Text("—")
-                    .font(.system(size: contentWidth >= 650 ? 12 : 8, weight: .medium))
-                    .foregroundStyle(AppColor.bone)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(AppColor.emptyDay)
             }
         }
         .frame(maxWidth: .infinity)
         .frame(height: contentWidth >= 650 ? 92 : 72)
         .background {
             RoundedRectangle(cornerRadius: 4)
-                .fill(selected || isHome ? AppColor.nightCell : AppColor.night)
+                .fill(isHome ? palette.tint : AppColor.night)
         }
         .overlay {
             if game != nil && !isHome && !selected {
-                RoundedRectangle(cornerRadius: 4).stroke(AppColor.rule, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 4).stroke(AppColor.calendarOutline, lineWidth: 1)
             }
             if selected {
                 VStack { Spacer(); Rectangle().fill(AppColor.amber).frame(height: 3) }
@@ -170,9 +170,8 @@ struct ScheduleView: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(game.fullFormattedDay.uppercased())
+                    Text(game.fullFormattedDay)
                         .font(.system(size: contentWidth >= 650 ? 16 : 14, weight: .black))
-                        .tracking(0.45)
                         .foregroundStyle(AppColor.red)
 
                     Text("\(game.locationWord) \(game.opponent)")
@@ -189,33 +188,26 @@ struct ScheduleView: View {
 
             Divider()
 
-            HStack {
-                detailItem("VENUE", game.venue)
-                Spacer()
-                detailItem("OPPONENT", game.opponentRecord, alignment: .trailing)
-            }
-
             if game.showProbables {
                 VStack(alignment: .leading, spacing: 7) {
-                    Text("PROJECTED STARTERS")
+                    Text("Projected starters")
                         .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
-                        .tracking(0.45)
                         .foregroundStyle(AppColor.red)
 
                     HStack(alignment: .top) {
                         starterDetail(
-                            team.cityName.uppercased(),
+                            team.cityName,
                             pitcherName(game.favoriteTeamPitcher),
                             game.favoriteTeamPitcherRecord
                         )
                         Spacer()
-                        Text("VS.")
+                        Text("vs.")
                             .font(.system(size: contentWidth >= 650 ? 14 : 12, weight: .black))
                             .foregroundStyle(AppColor.border)
                             .padding(.top, 13)
                         Spacer()
                         starterDetail(
-                            game.opponent.uppercased(),
+                            game.opponent,
                             pitcherName(game.opponentPitcher),
                             game.opponentPitcherRecord,
                             alignment: .trailing
@@ -223,12 +215,18 @@ struct ScheduleView: View {
                     }
                 }
                 .padding(14)
-                .background(AppColor.paleBlue.opacity(0.5))
+                .background(AppColor.nightRaised)
                 .clipShape(Rectangle())
             }
 
+            HStack {
+                detailItem("Venue", game.venue)
+                Spacer()
+                detailItem("Opponent", game.opponentRecord, alignment: .trailing)
+            }
+
             if game.doubleheader {
-                Text("DOUBLEHEADER · GAME \(game.gameNumber)")
+                Text("Doubleheader · Game \(game.gameNumber)")
                     .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .black))
                     .foregroundStyle(AppColor.red)
             }
@@ -244,11 +242,10 @@ struct ScheduleView: View {
         VStack(alignment: alignment, spacing: 2) {
             Text(label)
                 .font(.system(size: contentWidth >= 650 ? 13 : 11, weight: .black))
-                .tracking(0.35)
                 .foregroundStyle(AppColor.hunterGreen)
             Text(value.isEmpty ? "To be announced" : value)
                 .font(.system(size: contentWidth >= 650 ? 19 : 17, weight: .bold))
-                    .foregroundStyle(AppColor.emptyDay)
+                .foregroundStyle(AppColor.ink)
                 .multilineTextAlignment(alignment == .trailing ? .trailing : .leading)
         }
     }
@@ -262,7 +259,6 @@ struct ScheduleView: View {
         VStack(alignment: alignment, spacing: 3) {
             Text(label)
                 .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .black))
-                .tracking(0.35)
                 .foregroundStyle(AppColor.hunterGreen)
             Text(name)
                 .font(.system(size: contentWidth >= 650 ? 20 : 18, weight: .black))
@@ -286,13 +282,15 @@ struct ScheduleView: View {
     private func loadSchedule() async {
         await store.load()
         guard let schedule = store.schedule else { return }
-        if selectedGameID == nil || !schedule.games.contains(where: { $0.id == selectedGameID }) {
-            selectedGameID = schedule.games.first?.id
+        let games = remainingGames(in: schedule)
+        if selectedGameID == nil || !games.contains(where: { $0.id == selectedGameID }) {
+            selectedGameID = games.first?.id
         }
     }
 
     private func selectedGame(in schedule: Schedule) -> ScheduledGame? {
-        schedule.games.first { $0.id == selectedGameID } ?? schedule.games.first
+        let games = remainingGames(in: schedule)
+        return games.first { $0.id == selectedGameID } ?? games.first
     }
 
     private func games(on date: Date, in schedule: Schedule) -> [ScheduledGame] {
@@ -303,12 +301,12 @@ struct ScheduleView: View {
     }
 
     private func calendarMonths(for schedule: Schedule) -> [CalendarMonth] {
-        guard let firstGameDate = schedule.games.first?.date,
-              let seasonEnd = seasonEndDate(schedule.regularSeasonEnd) else {
+        let cutoff = easternCalendar.startOfDay(for: Date())
+        guard let seasonEnd = seasonEndDate(schedule.regularSeasonEnd), cutoff <= seasonEnd else {
             return []
         }
 
-        var cursor = firstDayOfMonth(firstGameDate)
+        var cursor = firstDayOfMonth(cutoff)
         let finalMonth = firstDayOfMonth(seasonEnd)
         var months: [CalendarMonth] = []
 
@@ -318,9 +316,14 @@ struct ScheduleView: View {
             var days = Array<Date?>(repeating: nil, count: leadingBlanks)
             days.append(contentsOf: dayRange.compactMap { day in
                 easternCalendar.date(byAdding: .day, value: day - 1, to: cursor)
-            }.map(Optional.some))
+            }.map { date in
+                date >= cutoff ? Optional.some(date) : nil
+            })
             while days.count % 7 != 0 {
                 days.append(nil)
+            }
+            while days.count >= 7 && days.prefix(7).allSatisfy({ $0 == nil }) {
+                days.removeFirst(7)
             }
 
             months.append(
@@ -336,6 +339,14 @@ struct ScheduleView: View {
             cursor = next
         }
         return months
+    }
+
+    private func remainingGames(in schedule: Schedule) -> [ScheduledGame] {
+        let cutoff = easternCalendar.startOfDay(for: Date())
+        return schedule.games.filter { game in
+            guard let date = game.date else { return false }
+            return date >= cutoff
+        }
     }
 
     private var easternCalendar: Calendar {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:37.045340+00:00",
+  "generated_at": "2026-09-10T00:05:26.028522+00:00",
   "source": "MLB Stats API",
   "team": "White Sox",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 824549,
       "game_date": "2026-09-09T23:40:00Z",
-      "status": "Scheduled",
+      "status": "In Progress",
       "venue": "Rate Field",
       "location": "home",
       "opponent": "Pirates",
@@ -20,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824550,
@@ -38,7 +54,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823012,
@@ -47,16 +79,39 @@
       "venue": "Busch Stadium",
       "location": "away",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
+      "opponent_record": "72-75",
       "favorite_team_record": "75-69",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Matthew Liberatore",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "5-14",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "KMOV-4",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823009,
@@ -65,16 +120,32 @@
       "venue": "Busch Stadium",
       "location": "away",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
+      "opponent_record": "72-75",
       "favorite_team_record": "75-69",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Kyle Leahy",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "10-4",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823008,
@@ -83,16 +154,32 @@
       "venue": "Busch Stadium",
       "location": "away",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
+      "opponent_record": "72-75",
       "favorite_team_record": "75-69",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Michael McGreevy",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "6-9",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824386,
@@ -110,7 +197,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Guardians.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824384,
@@ -128,7 +231,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Guardians.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824382,
@@ -146,7 +265,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "ESPN/ESPN App",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ESPN/ESPN App",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 824548,
@@ -155,7 +290,7 @@
       "venue": "Rate Field",
       "location": "home",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "75-69",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -164,7 +299,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824547,
@@ -173,7 +324,7 @@
       "venue": "Rate Field",
       "location": "home",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "75-69",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -182,7 +333,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824545,
@@ -191,7 +358,7 @@
       "venue": "Rate Field",
       "location": "home",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "75-69",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -200,7 +367,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824546,
@@ -209,7 +392,7 @@
       "venue": "Rate Field",
       "location": "home",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "75-69",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -218,7 +401,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824061,
@@ -236,7 +435,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824060,
@@ -254,7 +469,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824059,
@@ -272,7 +503,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824544,
@@ -290,7 +537,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824543,
@@ -308,7 +571,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824542,
@@ -326,7 +605,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

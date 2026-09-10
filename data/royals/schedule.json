@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:40.967534+00:00",
+  "generated_at": "2026-09-10T00:05:27.829462+00:00",
   "source": "MLB Stats API",
   "team": "Royals",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 824064,
       "game_date": "2026-09-09T23:40:00Z",
-      "status": "Scheduled",
+      "status": "Delayed Start",
       "venue": "Kauffman Stadium",
       "location": "home",
       "opponent": "D-backs",
@@ -20,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "DBACKS.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824711,
@@ -32,13 +48,29 @@
       "opponent_record": "80-66",
       "favorite_team_record": "64-82",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Sonny Gray",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "17-4",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824712,
@@ -50,13 +82,29 @@
       "opponent_record": "80-66",
       "favorite_team_record": "64-82",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Ranger Suarez",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "6-4",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824708,
@@ -68,13 +116,29 @@
       "opponent_record": "80-66",
       "favorite_team_record": "64-82",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Payton Tolle",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "9-6",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824143,
@@ -92,7 +156,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824140,
@@ -110,7 +190,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824141,
@@ -128,7 +224,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "FOX / FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "FOX / FOX ONE",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823331,
@@ -146,7 +258,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823330,
@@ -164,7 +292,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823329,
@@ -182,7 +326,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824061,
@@ -200,7 +360,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824060,
@@ -218,7 +394,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824059,
@@ -236,7 +428,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824058,
@@ -254,7 +462,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Guardians.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824057,
@@ -272,7 +496,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Guardians.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824055,
@@ -290,7 +530,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Guardians.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

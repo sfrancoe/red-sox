@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:43.318069+00:00",
+  "generated_at": "2026-09-10T00:05:28.965388+00:00",
   "source": "MLB Stats API",
   "team": "Astros",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 823416,
       "game_date": "2026-09-09T22:40:00Z",
-      "status": "Scheduled",
+      "status": "In Progress",
       "venue": "Citizens Bank Park",
       "location": "away",
       "opponent": "Phillies",
@@ -20,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSP",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823413,
@@ -31,14 +47,37 @@
       "opponent": "Phillies",
       "opponent_record": "81-64",
       "favorite_team_record": "74-71",
-      "favorite_team_pitcher": "",
+      "favorite_team_pitcher": "Cristian Javier",
       "opponent_pitcher": "Zack Wheeler",
-      "favorite_team_pitcher_record": "—",
+      "favorite_team_pitcher_record": "2-5",
       "opponent_pitcher_record": "12-5",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBC 10",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": false
+        },
+        {
+          "name": "NBCSP",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822930,
@@ -56,7 +95,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rays.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822927,
@@ -74,7 +129,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rays.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822928,
@@ -92,7 +163,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rays.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824143,
@@ -110,7 +197,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824140,
@@ -128,7 +231,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824141,
@@ -146,7 +265,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "FOX / FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "FOX / FOX ONE",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 824138,
@@ -164,7 +299,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "BravesVision",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824137,
@@ -182,7 +333,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "BravesVision",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824139,
@@ -200,7 +367,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "BravesVision",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823089,
@@ -209,7 +392,7 @@
       "venue": "T-Mobile Park",
       "location": "away",
       "opponent": "Mariners",
-      "opponent_record": "67-78",
+      "opponent_record": "68-78",
       "favorite_team_record": "74-71",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -218,7 +401,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823086,
@@ -227,7 +426,7 @@
       "venue": "T-Mobile Park",
       "location": "away",
       "opponent": "Mariners",
-      "opponent_record": "67-78",
+      "opponent_record": "68-78",
       "favorite_team_record": "74-71",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -236,7 +435,16 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824950,
@@ -245,7 +453,7 @@
       "venue": "Sutter Health Park",
       "location": "away",
       "opponent": "Athletics",
-      "opponent_record": "58-88",
+      "opponent_record": "59-88",
       "favorite_team_record": "74-71",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -254,7 +462,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSCA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824947,
@@ -263,7 +487,7 @@
       "venue": "Sutter Health Park",
       "location": "away",
       "opponent": "Athletics",
-      "opponent_record": "58-88",
+      "opponent_record": "59-88",
       "favorite_team_record": "74-71",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -272,7 +496,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSCA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824949,
@@ -281,7 +521,7 @@
       "venue": "Sutter Health Park",
       "location": "away",
       "opponent": "Athletics",
-      "opponent_record": "58-88",
+      "opponent_record": "59-88",
       "favorite_team_record": "74-71",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -290,7 +530,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSCA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824948,
@@ -299,7 +555,7 @@
       "venue": "Sutter Health Park",
       "location": "away",
       "opponent": "Athletics",
-      "opponent_record": "58-88",
+      "opponent_record": "59-88",
       "favorite_team_record": "74-71",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -308,7 +564,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSCA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

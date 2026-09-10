@@ -1,27 +1,9 @@
 {
-  "generated_at": "2026-09-09T05:19:05.363460+00:00",
+  "generated_at": "2026-09-10T00:05:41.995066+00:00",
   "source": "MLB Stats API",
   "team": "Giants",
   "regular_season_end": "2026-09-27",
   "games": [
-    {
-      "game_pk": 823172,
-      "game_date": "2026-09-09T19:45:00Z",
-      "status": "Scheduled",
-      "venue": "Oracle Park",
-      "location": "home",
-      "opponent": "Cardinals",
-      "opponent_record": "72-74",
-      "favorite_team_record": "61-85",
-      "favorite_team_pitcher": "Blade Tidwell",
-      "opponent_pitcher": "Andre Pallante",
-      "favorite_team_pitcher_record": "0-2",
-      "opponent_pitcher_record": "12-6",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1
-    },
     {
       "game_pk": 823173,
       "game_date": "2026-09-12T02:15:00Z",
@@ -29,16 +11,32 @@
       "venue": "Oracle Park",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
-      "favorite_team_record": "61-85",
-      "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_record": "78-68",
+      "favorite_team_record": "62-85",
+      "favorite_team_pitcher": "Anthony Molina",
+      "opponent_pitcher": "Robbie Ray",
+      "favorite_team_pitcher_record": "3-0",
+      "opponent_pitcher_record": "11-8",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "exclusive",
+          "available_for_streaming": false
+        },
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "exclusive",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823170,
@@ -47,16 +45,32 @@
       "venue": "Oracle Park",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
-      "favorite_team_record": "61-85",
-      "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_record": "78-68",
+      "favorite_team_record": "62-85",
+      "favorite_team_pitcher": "Cesar Perdomo",
+      "opponent_pitcher": "Michael King",
+      "favorite_team_pitcher_record": "0-0",
+      "opponent_pitcher_record": "10-9",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823171,
@@ -65,16 +79,32 @@
       "venue": "Oracle Park",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
-      "favorite_team_record": "61-85",
-      "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_record": "78-68",
+      "favorite_team_record": "62-85",
+      "favorite_team_pitcher": "Logan Webb",
+      "opponent_pitcher": "Nick Pivetta",
+      "favorite_team_pitcher_record": "8-8",
+      "opponent_pitcher_record": "2-2",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Peacock/NBCSN",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "exclusive",
+          "available_for_streaming": false
+        },
+        {
+          "name": "Peacock/NBCSN",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "exclusive",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823006,
@@ -83,8 +113,8 @@
       "venue": "Busch Stadium",
       "location": "away",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
-      "favorite_team_record": "61-85",
+      "opponent_record": "72-75",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -92,7 +122,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823007,
@@ -101,8 +147,8 @@
       "venue": "Busch Stadium",
       "location": "away",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
-      "favorite_team_record": "61-85",
+      "opponent_record": "72-75",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -110,7 +156,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823004,
@@ -119,8 +181,8 @@
       "venue": "Busch Stadium",
       "location": "away",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
-      "favorite_team_record": "61-85",
+      "opponent_record": "72-75",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -128,7 +190,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823898,
@@ -138,7 +216,7 @@
       "location": "away",
       "opponent": "Dodgers",
       "opponent_record": "88-57",
-      "favorite_team_record": "61-85",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -146,7 +224,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "exclusive",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "exclusive",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823899,
@@ -156,7 +250,7 @@
       "location": "away",
       "opponent": "Dodgers",
       "opponent_record": "88-57",
-      "favorite_team_record": "61-85",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -164,7 +258,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823896,
@@ -174,7 +284,7 @@
       "location": "away",
       "opponent": "Dodgers",
       "opponent_record": "88-57",
-      "favorite_team_record": "61-85",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -182,7 +292,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823169,
@@ -191,8 +317,8 @@
       "venue": "Oracle Park",
       "location": "home",
       "opponent": "Twins",
-      "opponent_record": "69-76",
-      "favorite_team_record": "61-85",
+      "opponent_record": "69-77",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -200,7 +326,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Twins.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823166,
@@ -209,8 +351,8 @@
       "venue": "Oracle Park",
       "location": "home",
       "opponent": "Twins",
-      "opponent_record": "69-76",
-      "favorite_team_record": "61-85",
+      "opponent_record": "69-77",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -218,7 +360,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Twins.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823168,
@@ -227,8 +385,8 @@
       "venue": "Oracle Park",
       "location": "home",
       "opponent": "Twins",
-      "opponent_record": "69-76",
-      "favorite_team_record": "61-85",
+      "opponent_record": "69-77",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -236,7 +394,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Twins.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823167,
@@ -246,7 +420,7 @@
       "location": "home",
       "opponent": "Dodgers",
       "opponent_record": "88-57",
-      "favorite_team_record": "61-85",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -254,7 +428,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823165,
@@ -264,7 +454,7 @@
       "location": "home",
       "opponent": "Dodgers",
       "opponent_record": "88-57",
-      "favorite_team_record": "61-85",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -272,7 +462,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823164,
@@ -282,7 +488,7 @@
       "location": "home",
       "opponent": "Dodgers",
       "opponent_record": "88-57",
-      "favorite_team_record": "61-85",
+      "favorite_team_record": "62-85",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -290,7 +496,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

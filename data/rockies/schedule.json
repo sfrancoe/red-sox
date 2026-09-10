@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:19:02.128290+00:00",
+  "generated_at": "2026-09-10T00:05:39.507029+00:00",
   "source": "MLB Stats API",
   "team": "Rockies",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 823497,
       "game_date": "2026-09-09T23:05:00Z",
-      "status": "Scheduled",
+      "status": "In Progress",
       "venue": "Yankee Stadium",
       "location": "away",
       "opponent": "Yankees",
@@ -20,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "YES",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823499,
@@ -38,7 +54,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "YES",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824227,
@@ -47,16 +79,32 @@
       "venue": "Comerica Park",
       "location": "away",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Framber Valdez",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "9-10",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824224,
@@ -65,7 +113,7 @@
       "venue": "Comerica Park",
       "location": "away",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -74,7 +122,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824225,
@@ -83,16 +147,32 @@
       "venue": "Comerica Park",
       "location": "away",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Jackson Jobe",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "1-2",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824308,
@@ -101,7 +181,7 @@
       "venue": "Coors Field",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
+      "opponent_record": "78-68",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -110,7 +190,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824307,
@@ -119,7 +215,7 @@
       "venue": "Coors Field",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
+      "opponent_record": "78-68",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -128,7 +224,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824306,
@@ -137,7 +249,7 @@
       "venue": "Coors Field",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
+      "opponent_record": "78-68",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -146,7 +258,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824305,
@@ -155,7 +283,7 @@
       "venue": "Coors Field",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
+      "opponent_record": "78-68",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -164,7 +292,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824303,
@@ -173,7 +317,7 @@
       "venue": "Coors Field",
       "location": "home",
       "opponent": "Mariners",
-      "opponent_record": "67-78",
+      "opponent_record": "68-78",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -182,7 +326,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824304,
@@ -191,7 +351,7 @@
       "venue": "Coors Field",
       "location": "home",
       "opponent": "Mariners",
-      "opponent_record": "67-78",
+      "opponent_record": "68-78",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -200,7 +360,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824300,
@@ -209,7 +385,7 @@
       "venue": "Coors Field",
       "location": "home",
       "opponent": "Mariners",
-      "opponent_record": "67-78",
+      "opponent_record": "68-78",
       "favorite_team_record": "55-89",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -218,7 +394,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824302,
@@ -236,7 +428,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "DBACKS.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824301,
@@ -254,7 +462,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "DBACKS.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824298,
@@ -272,7 +496,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "DBACKS.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824544,
@@ -290,7 +530,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824543,
@@ -308,7 +564,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824542,
@@ -326,7 +598,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

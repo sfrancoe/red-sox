@@ -21,6 +21,7 @@ def main() -> None:
     assert schedule["team"] == "Rays"
     assert schedule["games"]
     assert all(game["game_pk"] for game in schedule["games"])
+    assert all(isinstance(game.get("broadcasts"), list) for game in schedule["games"])
 
     recent = load("recent-game")
     assert 139 in {recent["away"]["id"], recent["home"]["id"]}

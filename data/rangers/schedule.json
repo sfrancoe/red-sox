@@ -1,27 +1,9 @@
 {
-  "generated_at": "2026-09-09T05:18:48.488091+00:00",
+  "generated_at": "2026-09-10T00:05:31.832529+00:00",
   "source": "MLB Stats API",
   "team": "Rangers",
   "regular_season_end": "2026-09-27",
   "games": [
-    {
-      "game_pk": 823090,
-      "game_date": "2026-09-09T20:10:00Z",
-      "status": "Scheduled",
-      "venue": "T-Mobile Park",
-      "location": "away",
-      "opponent": "Mariners",
-      "opponent_record": "67-78",
-      "favorite_team_record": "72-73",
-      "favorite_team_pitcher": "Cody Bradford",
-      "opponent_pitcher": "Kade Anderson",
-      "favorite_team_pitcher_record": "0-4",
-      "opponent_pitcher_record": "0-1",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1
-    },
     {
       "game_pk": 823088,
       "game_date": "2026-09-10T20:10:00Z",
@@ -29,8 +11,8 @@
       "venue": "T-Mobile Park",
       "location": "away",
       "opponent": "Mariners",
-      "opponent_record": "67-78",
-      "favorite_team_record": "72-73",
+      "opponent_record": "68-78",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "Jacob deGrom",
       "opponent_pitcher": "Logan Gilbert",
       "favorite_team_pitcher_record": "10-9",
@@ -38,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 825036,
@@ -48,7 +46,7 @@
       "location": "away",
       "opponent": "D-backs",
       "opponent_record": "78-68",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -56,7 +54,30 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "DBACKS.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "CW33",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 825035,
@@ -66,7 +87,7 @@
       "location": "away",
       "opponent": "D-backs",
       "opponent_record": "78-68",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -74,7 +95,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "DBACKS.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 825033,
@@ -84,7 +121,7 @@
       "location": "away",
       "opponent": "D-backs",
       "opponent_record": "78-68",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -92,7 +129,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "DBACKS.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822849,
@@ -102,7 +155,7 @@
       "location": "home",
       "opponent": "Red Sox",
       "opponent_record": "80-66",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -110,7 +163,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822846,
@@ -120,7 +189,7 @@
       "location": "home",
       "opponent": "Red Sox",
       "opponent_record": "80-66",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -128,7 +197,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822845,
@@ -138,7 +223,7 @@
       "location": "home",
       "opponent": "Red Sox",
       "opponent_record": "80-66",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -146,7 +231,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822847,
@@ -155,8 +256,8 @@
       "venue": "Globe Life Field",
       "location": "home",
       "opponent": "Blue Jays",
-      "opponent_record": "73-73",
-      "favorite_team_record": "72-73",
+      "opponent_record": "73-74",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -164,7 +265,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822843,
@@ -173,8 +290,8 @@
       "venue": "Globe Life Field",
       "location": "home",
       "opponent": "Blue Jays",
-      "opponent_record": "73-73",
-      "favorite_team_record": "72-73",
+      "opponent_record": "73-74",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -182,7 +299,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822844,
@@ -191,8 +324,8 @@
       "venue": "Globe Life Field",
       "location": "home",
       "opponent": "Blue Jays",
-      "opponent_record": "73-73",
-      "favorite_team_record": "72-73",
+      "opponent_record": "73-74",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -200,7 +333,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822840,
@@ -210,7 +359,7 @@
       "location": "home",
       "opponent": "Mets",
       "opponent_record": "67-78",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -218,7 +367,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822841,
@@ -228,7 +393,7 @@
       "location": "home",
       "opponent": "Mets",
       "opponent_record": "67-78",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -236,7 +401,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822842,
@@ -246,7 +427,7 @@
       "location": "home",
       "opponent": "Mets",
       "opponent_record": "67-78",
-      "favorite_team_record": "72-73",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -254,7 +435,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823652,
@@ -263,8 +460,8 @@
       "venue": "Target Field",
       "location": "away",
       "opponent": "Twins",
-      "opponent_record": "69-76",
-      "favorite_team_record": "72-73",
+      "opponent_record": "69-77",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -272,7 +469,30 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Twins.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "CW33",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823653,
@@ -281,8 +501,8 @@
       "venue": "Target Field",
       "location": "away",
       "opponent": "Twins",
-      "opponent_record": "69-76",
-      "favorite_team_record": "72-73",
+      "opponent_record": "69-77",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -290,7 +510,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Twins.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823650,
@@ -299,8 +535,8 @@
       "venue": "Target Field",
       "location": "away",
       "opponent": "Twins",
-      "opponent_record": "69-76",
-      "favorite_team_record": "72-73",
+      "opponent_record": "69-77",
+      "favorite_team_record": "72-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -308,7 +544,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Twins.TV Presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

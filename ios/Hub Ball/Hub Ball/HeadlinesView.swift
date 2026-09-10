@@ -40,7 +40,7 @@ struct HeadlinesView: View {
                                 HStack(spacing: 0) {
                                     newspaperColumn(selection: $store.selectedSource)
                                     if contentWidth >= 720 {
-                                        Divider().overlay(AppColor.teamAccent.opacity(0.3))
+                                        Divider().overlay(AppColor.rule)
                                         newspaperColumn(selection: $secondarySource)
                                     }
                                 }
@@ -71,7 +71,7 @@ struct HeadlinesView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 12)
-                .background(AppColor.accentSoft)
+                .background(AppColor.nightRaised)
                 .accessibilityAddTraits(.isHeader)
 
             Divider().overlay(AppColor.separator)
@@ -104,7 +104,7 @@ struct HeadlinesView: View {
                 Link(destination: url) {
                     newspaperStoryText(article)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(SwipeSafeLinkStyle())
             } else {
                 newspaperStoryText(article)
             }
@@ -214,7 +214,7 @@ struct HeadlinesView: View {
                 Link(destination: url) {
                     articleContent(article)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(SwipeSafeLinkStyle())
             } else {
                 articleContent(article)
             }
@@ -285,6 +285,18 @@ struct HeadlinesView: View {
             .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
+    }
+}
+
+// Link's built-in press can complete alongside the parent page-swipe gesture.
+// A real tap keeps the link behavior, while a drag fails this tap gesture.
+private struct SwipeSafeLinkStyle: PrimitiveButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .contentShape(Rectangle())
+            .onTapGesture {
+                configuration.trigger()
+            }
     }
 }
 

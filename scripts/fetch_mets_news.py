@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the four Mets newspaper feeds used by the Mets Hub app."""
+"""Fetch the three Mets newspaper feeds used by Hub Ball."""
 
 from __future__ import annotations
 
@@ -20,12 +20,6 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "data" / "mets"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 SOURCES = {
-    "nytimes": {
-        "name": "The New York Times",
-        "url": "https://www.nytimes.com/svc/collections/v1/publish/http%3A%2F%2Fwww.nytimes.com%2Ftopic%2Forganization%2Fnew-york-mets/rss.xml",
-        "kind": "rss",
-        "category": "Mets",
-    },
     "nypost": {
         "name": "New York Post",
         "url": "https://nypost.com/sports/mets/",

@@ -45,6 +45,10 @@ struct AppTabView: View {
         HubTeam(rawValue: selectedTeamID) ?? .boston
     }
 
+    private var palette: HubTeamPalette {
+        HubTeamPalette(team: team)
+    }
+
     private var availableTabs: [MainTab] {
         MainTab.allCases.filter { tab in
             switch tab {
@@ -68,6 +72,7 @@ struct AppTabView: View {
         .background(AppColor.cream)
         .foregroundStyle(AppColor.ink)
         .font(AppFont.body)
+        .environment(\.hubTeamPalette, palette)
         .onAppear {
             guard !hasAppeared else { return }
             #if DEBUG
@@ -225,7 +230,7 @@ struct AppTabView: View {
             pageStrip
         }
         .foregroundStyle(AppColor.bone)
-        .background(AppColor.nightRaised)
+        .background(HubMastheadBackground(palette: palette))
     }
 
     private var pageStrip: some View {
@@ -255,6 +260,7 @@ struct AppTabView: View {
                                         Rectangle()
                                             .fill(AppColor.amber)
                                             .frame(height: 2)
+                                            .offset(y: -3)
                                     }
                                 }
                         }
@@ -278,9 +284,6 @@ struct AppTabView: View {
                 guard tabs.contains(selectedTab) else { return }
                 proxy.scrollTo(selectedTab, anchor: .center)
             }
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle().fill(AppColor.rule).frame(height: 1)
         }
     }
 

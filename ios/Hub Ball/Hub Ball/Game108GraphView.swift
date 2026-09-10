@@ -66,7 +66,7 @@ struct Game108GraphView: View {
                                 .foregroundStyle(AppColor.ink)
                                 .padding(.horizontal, 22)
                                 .padding(.vertical, 16)
-                                .background(AppColor.accentSoft)
+                                .background(AppColor.nightRaised)
                                 .clipShape(Rectangle())
                             }
                         }
@@ -111,7 +111,7 @@ struct Game108GraphView: View {
                         .foregroundStyle(AppColor.ink)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .background(AppColor.accentSoft)
+                        .background(AppColor.nightRaised)
                         .clipShape(Rectangle())
                 }
                 .buttonStyle(.plain)
@@ -124,7 +124,7 @@ struct Game108GraphView: View {
                         .foregroundStyle(AppColor.ink)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
-                        .background(AppColor.accentSoft)
+                        .background(AppColor.nightRaised)
                         .clipShape(Rectangle())
                 }
                 .buttonStyle(.plain)
@@ -146,7 +146,7 @@ struct Game108GraphView: View {
                     .minimumScaleFactor(0.72)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 9)
-                    .background(AppColor.accentSoft)
+                    .background(AppColor.nightRaised)
                     .clipShape(Rectangle())
                 }
                 .buttonStyle(.plain)
@@ -167,12 +167,12 @@ struct Game108GraphView: View {
                             .foregroundStyle(AppColor.ink)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
-                            .background(speed == option ? AppColor.accentSoft : AppColor.paper)
+                            .background(speed == option ? AppColor.nightRaised : AppColor.paper)
                             .clipShape(Rectangle())
                             .overlay {
                                 Rectangle()
                                     .stroke(
-                                        speed == option ? AppColor.teamAccent : AppColor.border,
+                                        speed == option ? AppColor.amber : AppColor.border,
                                         lineWidth: speed == option ? 2 : 0.8
                                     )
                             }
@@ -181,7 +181,7 @@ struct Game108GraphView: View {
                 }
             }
             .padding(5)
-            .background(AppColor.accentSoft)
+            .background(AppColor.nightRaised)
             .clipShape(Rectangle())
         }
     }

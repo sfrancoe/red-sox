@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:18:57.997438+00:00",
+  "generated_at": "2026-09-10T00:05:37.493344+00:00",
   "source": "MLB Stats API",
   "team": "Pirates",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 824549,
       "game_date": "2026-09-09T23:40:00Z",
-      "status": "Scheduled",
+      "status": "In Progress",
       "venue": "Rate Field",
       "location": "away",
       "opponent": "White Sox",
@@ -20,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824550,
@@ -38,7 +54,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824631,
@@ -50,13 +82,29 @@
       "opponent_record": "81-65",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Shota Imanaga",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "9-10",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marquee Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824630,
@@ -68,13 +116,29 @@
       "opponent_record": "81-65",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Clay Holmes",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "6-7",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marquee Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824628,
@@ -86,13 +150,29 @@
       "opponent_record": "81-65",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Matthew Boyd",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "8-4",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marquee Sports Network",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823333,
@@ -110,7 +190,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Brewers.TV Presented by Potawatomi Sportsbook",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823332,
@@ -128,7 +224,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Brewers.TV Presented by Potawatomi Sportsbook",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823334,
@@ -146,7 +258,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Brewers.TV Presented by Potawatomi Sportsbook",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823331,
@@ -164,7 +292,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823330,
@@ -182,7 +326,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823329,
@@ -200,7 +360,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Royals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823328,
@@ -209,7 +385,7 @@
       "venue": "PNC Park",
       "location": "home",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
+      "opponent_record": "72-75",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -218,7 +394,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823327,
@@ -227,7 +419,7 @@
       "venue": "PNC Park",
       "location": "home",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
+      "opponent_record": "72-75",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -236,7 +428,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823326,
@@ -245,7 +453,7 @@
       "venue": "PNC Park",
       "location": "home",
       "opponent": "Cardinals",
-      "opponent_record": "72-74",
+      "opponent_record": "72-75",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -254,7 +462,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824220,
@@ -263,7 +487,7 @@
       "venue": "Comerica Park",
       "location": "away",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -272,7 +496,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824219,
@@ -281,7 +521,7 @@
       "venue": "Comerica Park",
       "location": "away",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -290,7 +530,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824217,
@@ -299,7 +555,7 @@
       "venue": "Comerica Park",
       "location": "away",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
+      "opponent_record": "67-79",
       "favorite_team_record": "72-73",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -308,7 +564,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

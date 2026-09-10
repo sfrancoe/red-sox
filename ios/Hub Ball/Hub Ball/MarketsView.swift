@@ -203,7 +203,7 @@ struct MarketsView: View {
                 .foregroundStyle(AppColor.ink)
                 .padding(.horizontal, 8)
                 .frame(minHeight: 30)
-                .background(AppColor.accentSoft)
+                .background(AppColor.nightRaised)
                 ForEach(Array(picks.enumerated()), id: \.element.key) { index, market in
                     Button { detail = market } label: {
                         HStack(spacing: 0) {
@@ -351,7 +351,7 @@ struct MarketsView: View {
                         tableCell(title, column: column, header: true)
                     }
                 }.fixedSize(horizontal: false, vertical: true)
-                    .background(AppColor.accentSoft)
+                    .background(AppColor.nightRaised)
                 LazyVStack(spacing: 0) {
                     ForEach(Array(filtered.enumerated()), id: \.element.key) { index, market in
                         Button { detail = market } label: {

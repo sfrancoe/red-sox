@@ -2,6 +2,7 @@ import SwiftUI
 
 struct StandingsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.hubTeamPalette) private var palette
     @State private var store: StandingsStore
 
     init(team: HubTeam = .boston) {
@@ -115,9 +116,8 @@ struct StandingsView: View {
         rowPadding: CGFloat
     ) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(league.fullName.uppercased())
+            Text(league.fullName)
                 .font(.system(size: 14, weight: .black))
-                .tracking(0.4)
                 .foregroundStyle(AppColor.ink)
 
             HStack(alignment: .top, spacing: 6) {
@@ -210,7 +210,6 @@ struct StandingsView: View {
                 standingsRow(
                     team,
                     gamesBackTitle: gamesBackTitle,
-                    showsGamesBackRule: highlightsFavorite && team.isFavorite,
                     highlightsFavorite: highlightsFavorite,
                     compact: compact,
                     compactRowPadding: compactRowPadding
@@ -223,7 +222,7 @@ struct StandingsView: View {
     private func standingsHeader(title: String, gamesBackTitle: String, compact: Bool) -> some View {
         let widths = columnWidths(compact: compact, gamesBackTitle: gamesBackTitle)
         return HStack(spacing: 0) {
-            Text(title.uppercased())
+            Text(title)
                 .font(.system(size: compact ? 12 : (contentWidth >= 650 ? 18 : 16), weight: .black))
                 .foregroundStyle(AppColor.navy)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -245,7 +244,6 @@ struct StandingsView: View {
     private func standingsRow(
         _ team: StandingsTeam,
         gamesBackTitle: String,
-        showsGamesBackRule: Bool,
         highlightsFavorite: Bool,
         compact: Bool,
         compactRowPadding: CGFloat
@@ -274,8 +272,7 @@ struct StandingsView: View {
                 width: widths.gamesBack,
                 emphasized: emphasized,
                 compact: compact,
-                color: gamesBack == "—" ? AppColor.boneMuted : gamesBack == "0" || gamesBack == "0.0" ? AppColor.bone : AppColor.steel,
-                showsUnderline: showsGamesBackRule
+                color: gamesBack == "—" ? AppColor.boneMuted : gamesBack == "0" || gamesBack == "0.0" ? AppColor.bone : AppColor.steel
             )
             tableValue(team.lastTen, width: widths.lastTen, emphasized: emphasized, compact: compact)
             Text(team.streak)
@@ -289,7 +286,12 @@ struct StandingsView: View {
         .foregroundStyle(AppColor.bone)
         .padding(.horizontal, compact ? 2 : 5)
         .padding(.vertical, compact ? compactRowPadding : (contentWidth >= 650 ? 13 : 7))
-        .background(emphasized ? AppColor.paleBlue : Color.clear)
+        .background(emphasized ? palette.tint : Color.clear)
+        .overlay(alignment: .leading) {
+            if emphasized {
+                Rectangle().fill(palette.line).frame(width: 3)
+            }
+        }
         .clipShape(Rectangle())
     }
 
@@ -298,22 +300,13 @@ struct StandingsView: View {
         width: CGFloat,
         emphasized: Bool = false,
         compact: Bool = false,
-        color: Color? = nil,
-        showsUnderline: Bool = false
+        color: Color? = nil
     ) -> some View {
         Text(value)
             .font(AppFont.number)
             .lineLimit(1)
             .minimumScaleFactor(0.85)
             .foregroundStyle(color ?? AppColor.bone)
-            .overlay(alignment: .bottom) {
-                if showsUnderline {
-                    Rectangle()
-                        .fill(AppColor.amber)
-                        .frame(height: 1)
-                        .offset(y: 2)
-                }
-            }
             .frame(width: width)
     }
 
@@ -338,9 +331,8 @@ struct StandingsView: View {
     private func cutoffLine(compact: Bool) -> some View {
         HStack(spacing: 8) {
             Rectangle().fill(AppColor.teamAccent.opacity(0.55)).frame(height: 1)
-            Text("PLAYOFF CUT")
+            Text("Playoff cut")
                 .font(.system(size: compact ? 8 : (contentWidth >= 650 ? 13 : 11), weight: .black))
-                .tracking(0.5)
                 .foregroundStyle(AppColor.red)
             Rectangle().fill(AppColor.teamAccent.opacity(0.55)).frame(height: 1)
         }

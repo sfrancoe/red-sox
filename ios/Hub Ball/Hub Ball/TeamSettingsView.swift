@@ -61,7 +61,7 @@ struct TeamSettingsView: View {
                 .foregroundStyle(AppColor.navy)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
-                .background(selectedTeamID == team.id ? AppColor.paleBlue : Color.clear)
+                .background(selectedTeamID == team.id ? AppColor.nightRaised : Color.clear)
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -75,7 +75,6 @@ struct TeamOnboardingView: View {
     let onContinue: () -> Void
 
     private var usesAccessibilityLayout: Bool { dynamicTypeSize.isAccessibilitySize }
-
     var body: some View {
         ZStack {
             AppColor.paleRed.ignoresSafeArea()
@@ -136,7 +135,7 @@ struct TeamOnboardingView: View {
                             .foregroundStyle(AppColor.ink)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, usesAccessibilityLayout ? 12 : 15)
-                            .background(AppColor.accentSoft)
+                            .background(AppColor.nightRaised)
                             .clipShape(Rectangle())
                     }
                     .buttonStyle(.plain)

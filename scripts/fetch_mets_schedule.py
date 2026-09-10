@@ -12,13 +12,15 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
+from schedule_broadcasts import television_broadcasts
+
 
 NYM = 121
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "data" / "mets" / "schedule.json"
 API = (
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId={team}"
-    "&startDate={start}&endDate={end}&gameType=R&hydrate=probablePitcher,team"
+    "&startDate={start}&endDate={end}&gameType=R&hydrate=probablePitcher,team,broadcasts(all)"
 )
 SEASON_API = "https://statsapi.mlb.com/api/v1/seasons/{season}?sportId=1"
 PITCHER_STATS_API = (
@@ -129,6 +131,7 @@ def game_row(game: dict[str, Any], today, pitcher_records: dict[int, str]) -> di
         "series_description": game.get("seriesDescription") or "Regular Season",
         "doubleheader": game.get("doubleHeader") not in (None, "N"),
         "game_number": game.get("gameNumber") or 1,
+        "broadcasts": television_broadcasts(game),
     }
 
 

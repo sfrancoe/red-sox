@@ -1,27 +1,9 @@
 {
-  "generated_at": "2026-09-09T05:18:59.486163+00:00",
+  "generated_at": "2026-09-10T00:05:38.096849+00:00",
   "source": "MLB Stats API",
   "team": "Cardinals",
   "regular_season_end": "2026-09-27",
   "games": [
-    {
-      "game_pk": 823172,
-      "game_date": "2026-09-09T19:45:00Z",
-      "status": "Scheduled",
-      "venue": "Oracle Park",
-      "location": "away",
-      "opponent": "Giants",
-      "opponent_record": "61-85",
-      "favorite_team_record": "72-74",
-      "favorite_team_pitcher": "Andre Pallante",
-      "opponent_pitcher": "Blade Tidwell",
-      "favorite_team_pitcher_record": "12-6",
-      "opponent_pitcher_record": "0-2",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1
-    },
     {
       "game_pk": 823012,
       "game_date": "2026-09-12T00:15:00Z",
@@ -30,15 +12,38 @@
       "location": "home",
       "opponent": "White Sox",
       "opponent_record": "75-69",
-      "favorite_team_record": "72-74",
-      "favorite_team_pitcher": "",
+      "favorite_team_record": "72-75",
+      "favorite_team_pitcher": "Matthew Liberatore",
       "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
+      "favorite_team_pitcher_record": "5-14",
       "opponent_pitcher_record": "—",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "KMOV-4",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823009,
@@ -48,15 +53,31 @@
       "location": "home",
       "opponent": "White Sox",
       "opponent_record": "75-69",
-      "favorite_team_record": "72-74",
-      "favorite_team_pitcher": "",
+      "favorite_team_record": "72-75",
+      "favorite_team_pitcher": "Kyle Leahy",
       "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
+      "favorite_team_pitcher_record": "10-4",
       "opponent_pitcher_record": "—",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823008,
@@ -66,15 +87,31 @@
       "location": "home",
       "opponent": "White Sox",
       "opponent_record": "75-69",
-      "favorite_team_record": "72-74",
-      "favorite_team_pitcher": "",
+      "favorite_team_record": "72-75",
+      "favorite_team_pitcher": "Michael McGreevy",
       "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
+      "favorite_team_pitcher_record": "6-9",
       "opponent_pitcher_record": "—",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Chicago Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823006,
@@ -83,8 +120,8 @@
       "venue": "Busch Stadium",
       "location": "home",
       "opponent": "Giants",
-      "opponent_record": "61-85",
-      "favorite_team_record": "72-74",
+      "opponent_record": "62-85",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -92,7 +129,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823007,
@@ -101,8 +154,8 @@
       "venue": "Busch Stadium",
       "location": "home",
       "opponent": "Giants",
-      "opponent_record": "61-85",
-      "favorite_team_record": "72-74",
+      "opponent_record": "62-85",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -110,7 +163,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823004,
@@ -119,8 +188,8 @@
       "venue": "Busch Stadium",
       "location": "home",
       "opponent": "Giants",
-      "opponent_record": "61-85",
-      "favorite_team_record": "72-74",
+      "opponent_record": "62-85",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -128,7 +197,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823005,
@@ -137,8 +222,8 @@
       "venue": "Busch Stadium",
       "location": "home",
       "opponent": "Nationals",
-      "opponent_record": "67-80",
-      "favorite_team_record": "72-74",
+      "opponent_record": "67-81",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -146,7 +231,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Nationals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823003,
@@ -155,8 +256,8 @@
       "venue": "Busch Stadium",
       "location": "home",
       "opponent": "Nationals",
-      "opponent_record": "67-80",
-      "favorite_team_record": "72-74",
+      "opponent_record": "67-81",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -164,7 +265,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Nationals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823001,
@@ -173,8 +290,8 @@
       "venue": "Busch Stadium",
       "location": "home",
       "opponent": "Nationals",
-      "opponent_record": "67-80",
-      "favorite_team_record": "72-74",
+      "opponent_record": "67-81",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -182,7 +299,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Nationals.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823328,
@@ -192,7 +325,7 @@
       "location": "away",
       "opponent": "Pirates",
       "opponent_record": "72-73",
-      "favorite_team_record": "72-74",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -200,7 +333,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823327,
@@ -210,7 +359,7 @@
       "location": "away",
       "opponent": "Pirates",
       "opponent_record": "72-73",
-      "favorite_team_record": "72-74",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -218,7 +367,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823326,
@@ -228,7 +393,7 @@
       "location": "away",
       "opponent": "Pirates",
       "opponent_record": "72-73",
-      "favorite_team_record": "72-74",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -236,7 +401,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet Pittsburgh",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823735,
@@ -246,7 +427,7 @@
       "location": "away",
       "opponent": "Brewers",
       "opponent_record": "90-56",
-      "favorite_team_record": "72-74",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -254,7 +435,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Brewers.TV Presented by Potawatomi Sportsbook",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823733,
@@ -264,7 +461,7 @@
       "location": "away",
       "opponent": "Brewers",
       "opponent_record": "90-56",
-      "favorite_team_record": "72-74",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -272,7 +469,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Brewers.TV Presented by Potawatomi Sportsbook",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823731,
@@ -282,7 +495,7 @@
       "location": "away",
       "opponent": "Brewers",
       "opponent_record": "90-56",
-      "favorite_team_record": "72-74",
+      "favorite_team_record": "72-75",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -290,7 +503,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Brewers.TV Presented by Potawatomi Sportsbook",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Cardinals.TV Presented by bet365",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

@@ -25,13 +25,14 @@ struct ScheduledGame: Decodable, Identifiable, Sendable {
     let seriesDescription: String
     let doubleheader: Bool
     let gameNumber: Int
+    let broadcasts: [GameBroadcast]
 
     private enum CodingKeys: String, CodingKey {
         case gamePk, gameDate, status, venue, location, opponent, opponentRecord
         case favoriteTeamRecord, favoriteTeamPitcher, favoriteTeamPitcherRecord
         case redSoxRecord, redSoxPitcher, redSoxPitcherRecord
         case opponentPitcher, opponentPitcherRecord, showProbables
-        case seriesDescription, doubleheader, gameNumber
+        case seriesDescription, doubleheader, gameNumber, broadcasts
     }
 
     init(from decoder: Decoder) throws {
@@ -55,6 +56,7 @@ struct ScheduledGame: Decodable, Identifiable, Sendable {
         seriesDescription = try values.decode(String.self, forKey: .seriesDescription)
         doubleheader = try values.decode(Bool.self, forKey: .doubleheader)
         gameNumber = try values.decode(Int.self, forKey: .gameNumber)
+        broadcasts = try values.decodeIfPresent([GameBroadcast].self, forKey: .broadcasts) ?? []
     }
 
     var id: Int { gamePk }
@@ -99,5 +101,47 @@ struct ScheduledGame: Decodable, Identifiable, Sendable {
             return nil
         }
         return "\(favoriteTeamPitcher) vs \(opponentPitcher)"
+    }
+
+    var watchOptions: [String] {
+        let relevant = broadcasts.filter { $0.isNational || $0.homeAway == location }
+        let candidates = relevant.isEmpty ? broadcasts : relevant
+        var options: [String] = []
+        var seen = Set<String>()
+
+        for broadcast in candidates {
+            let name = broadcast.displayName
+            if seen.insert(name.lowercased()).inserted {
+                options.append(name)
+            }
+        }
+
+        let streamsOnMLBTV = candidates.contains {
+            !$0.isNational && $0.availableForStreaming && $0.availability != "exclusive"
+        }
+        if streamsOnMLBTV, seen.insert("mlb.tv (out of market)").inserted {
+            options.append("MLB.TV (out of market)")
+        }
+        return options
+    }
+
+    var watchSummary: String {
+        watchOptions.isEmpty ? "TV TBD" : watchOptions.joined(separator: " · ")
+    }
+}
+
+struct GameBroadcast: Decodable, Sendable {
+    let name: String
+    let isNational: Bool
+    let homeAway: String
+    let availability: String
+    let availableForStreaming: Bool
+
+    var displayName: String {
+        switch name {
+        case "MLBN": return "MLB Network"
+        case "MLBN (out-of-market only)": return "MLB Network (out of market)"
+        default: return name
+        }
     }
 }

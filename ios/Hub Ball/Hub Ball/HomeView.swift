@@ -8,6 +8,7 @@ enum HomeDestination {
 
 struct HomeView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.hubTeamPalette) private var palette
     @State private var store: HomeStore
     let team: HubTeam
     let onSelect: (HomeDestination) -> Void
@@ -42,6 +43,7 @@ struct HomeView: View {
             HStack(spacing: 9) {
                 Image(systemName: "baseball.fill")
                     .font(.system(size: contentWidth >= 650 ? 42 : 36, weight: .regular))
+                    .foregroundStyle(palette.line)
 
                 Text(team.fullName)
                     .font(AppFont.displayLarge)
@@ -77,7 +79,7 @@ struct HomeView: View {
                 upcomingBoard
             }
             .padding(.horizontal, contentWidth >= 650 ? 18 : 12)
-            .padding(.top, 107)
+            .padding(.top, 87)
             .padding(.bottom, 12)
         }
         .refreshable { await store.load() }
@@ -91,7 +93,7 @@ struct HomeView: View {
             Button { onSelect(.standings) } label: {
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        Text("TEAM")
+                        Text("Team")
                             .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
                             .frame(width: contentWidth >= 650 ? 200 : 135, alignment: .leading)
                         Text("W").frame(maxWidth: .infinity)
@@ -114,6 +116,7 @@ struct HomeView: View {
                                     .frame(width: 12, alignment: .trailing)
                                 Text(team.cityName)
                                     .font(.system(size: 15, weight: team.isFavorite ? .black : .bold))
+                                    .foregroundStyle(team.isFavorite ? AppColor.amber : AppColor.bone)
                                     .lineLimit(1)
                             }
                             .frame(width: contentWidth >= 650 ? 200 : 135, alignment: .leading)
@@ -122,14 +125,6 @@ struct HomeView: View {
                             standingNumber(team.losses, emphasized: team.isFavorite)
                             Text(team.gamesBack)
                                 .font(AppFont.number)
-                                .overlay(alignment: .bottom) {
-                                    if team.isFavorite {
-                                        Rectangle()
-                                            .fill(AppColor.amber)
-                                            .frame(height: 1)
-                                            .offset(y: 2)
-                                    }
-                                }
                                 .frame(maxWidth: .infinity)
                             Text(team.lastTen)
                                 .font(AppFont.number)
@@ -142,7 +137,12 @@ struct HomeView: View {
                         .foregroundStyle(AppColor.navy)
                         .padding(.horizontal, 13)
                         .frame(height: 35)
-                        .background(team.isFavorite ? AppColor.paleBlue.opacity(0.72) : AppColor.paper)
+                        .background(team.isFavorite ? palette.tint : AppColor.paper)
+                        .overlay(alignment: .leading) {
+                            if team.isFavorite {
+                                Rectangle().fill(palette.line).frame(width: 3)
+                            }
+                        }
 
                         if index < division.teams.count - 1 {
                             Divider().overlay(AppColor.separator).padding(.leading, 13)
@@ -207,7 +207,7 @@ struct HomeView: View {
                     .padding(.horizontal, 13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 27)
-                    .background(AppColor.paleBlue.opacity(0.35))
+                    .background(AppColor.nightRaised)
 
                     HStack(spacing: 8) {
                         Text(game.isLive ? "Live" : "Pitching")
@@ -216,12 +216,20 @@ struct HomeView: View {
                             .foregroundStyle(AppColor.navy)
                             .lineLimit(1)
                             .minimumScaleFactor(0.78)
+                        if game.isLive, let scheduledGame = scheduledGame(for: game) {
+                            Text("·")
+                                .foregroundStyle(AppColor.boneMuted)
+                            Text(scheduledGame.watchSummary)
+                                .foregroundStyle(AppColor.navy)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.72)
+                        }
                     }
                     .font(.system(size: 10, weight: .black))
                     .padding(.horizontal, 13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 27)
-                    .background(AppColor.paperRaised)
+                    .background(AppColor.nightRaised)
                 }
                 .modifier(HomeCardStyle())
             }
@@ -260,14 +268,13 @@ struct HomeView: View {
 
     private var tableHeader: some View {
         HStack(spacing: 8) {
-            Text(contentWidth < 400 ? "NEXT 3" : "NEXT 3 GAMES")
+            Text(contentWidth < 400 ? "Next 3" : "Next 3 games")
                 .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("TIME").frame(width: 52, alignment: .center)
-            Text("\(team.shortName.uppercased()) STARTER").frame(width: 128, alignment: .trailing)
+            Text("Time").frame(width: 52, alignment: .center)
+            Text("Starter").frame(width: 128, alignment: .trailing)
         }
         .font(.system(size: 11, weight: .black))
-        .tracking(0.75)
         .padding(.horizontal, 13)
         .frame(height: 36)
         .modifier(HomeTableHeaderStyle())
@@ -275,11 +282,18 @@ struct HomeView: View {
 
     private func upcomingRow(_ game: ScheduledGame) -> some View {
         return HStack(spacing: 8) {
-            Text("\(shortGameDate(game.gameDate)) \(game.locationWord) \(game.opponent)")
-                .font(.system(size: 14, weight: .bold))
-                .lineLimit(1)
-                .minimumScaleFactor(0.82)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(alignment: .leading, spacing: 1) {
+                Text("\(shortGameDate(game.gameDate)) \(game.locationWord) \(game.opponent)")
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+                Text(game.watchSummary)
+                    .font(.system(size: 10, weight: .black))
+                    .foregroundStyle(AppColor.navy.opacity(0.68))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             Text(game.formattedTime)
                 .font(.system(size: 13, weight: .medium, design: .monospaced))
@@ -294,8 +308,12 @@ struct HomeView: View {
         }
         .foregroundStyle(AppColor.navy)
         .padding(.horizontal, 13)
-        .frame(height: 35)
+        .frame(height: 48)
         .accessibilityElement(children: .combine)
+    }
+
+    private func scheduledGame(for game: RecentGame) -> ScheduledGame? {
+        store.schedule?.games.first { $0.gamePk == game.gamePk }
     }
 
     private func gameResultRow(_ team: TeamBoxScore, isWinner: Bool) -> some View {
@@ -314,7 +332,7 @@ struct HomeView: View {
         .foregroundStyle(AppColor.navy)
         .padding(.horizontal, 13)
         .frame(height: 35)
-        .background(isWinner ? AppColor.paleBlue.opacity(0.72) : AppColor.paper)
+        .background(AppColor.nightRaised)
     }
 
     private func gameResultNumber(
@@ -324,7 +342,7 @@ struct HomeView: View {
         isWinner: Bool = false
     ) -> some View {
         Text("\(value)")
-            .font(isRunTotal ? AppFont.numberLarge : AppFont.number)
+            .font(AppFont.number)
             .foregroundStyle(isRunTotal && isWinner ? AppColor.amber : AppColor.bone)
             .frame(width: width, alignment: .trailing)
     }
@@ -368,6 +386,9 @@ struct HomeView: View {
         let now = Date.now
         let calendar = Calendar.current
         let weekday = now.formatted(.dateTime.weekday(.abbreviated))
+        if contentWidth < 650 {
+            return "\(weekday) \(calendar.component(.month, from: now))/\(calendar.component(.day, from: now))"
+        }
         let month = now.formatted(.dateTime.month(.abbreviated))
         let day = calendar.component(.day, from: now)
         return "\(weekday), \(month) \(ordinal(day))"
@@ -422,7 +443,7 @@ struct HomeView: View {
             .tracking(0.7)
             .padding(.horizontal, 7)
             .frame(height: 22)
-            .background(result.lowercased() == "win" ? AppColor.resultWin : AppColor.resultLoss)
+            .background(AppColor.nightRaised)
             .foregroundStyle(AppColor.ink)
             .clipShape(Rectangle())
     }
@@ -492,7 +513,7 @@ private struct HomeTableHeaderStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundStyle(AppColor.ink.opacity(0.82))
-            .background(AppColor.teamAccent.opacity(0.06))
+            .background(AppColor.nightRaised)
             .overlay(alignment: .top) {
                 Rectangle().fill(AppColor.ink.opacity(0.78)).frame(height: 1)
             }
@@ -505,6 +526,7 @@ private struct HomeTableHeaderStyle: ViewModifier {
 private struct HomeCardStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
+            .background(AppColor.nightRaised)
             .clipShape(Rectangle())
             .overlay(alignment: .top) { Rectangle().fill(AppColor.rule).frame(height: 1) }
     }

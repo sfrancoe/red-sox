@@ -113,7 +113,7 @@ struct PlayersView: View {
                             .foregroundStyle(AppColor.ink)
                             .padding(.horizontal, 15)
                             .frame(height: 38)
-                            .background(store.filter == filter ? AppColor.accentSoft : AppColor.paper)
+                            .background(store.filter == filter ? AppColor.nightRaised : AppColor.paper)
                     }
                     .buttonStyle(.plain)
                     .accessibilityAddTraits(store.filter == filter ? .isSelected : [])
@@ -235,7 +235,7 @@ private struct PlayerReferenceView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 10)
                     .frame(minHeight: 25)
-                    .background(AppColor.accentSoft)
+                    .background(AppColor.nightRaised)
                     .clipShape(Rectangle())
                 if let number = player.number {
                     Text("#\(number)")
@@ -283,7 +283,7 @@ private struct PlayerReferenceView: View {
                     .foregroundStyle(AppColor.ink)
                     .frame(maxWidth: .infinity)
                     .frame(height: 34)
-                    .background(title == "SUMMARY" ? AppColor.accentSoft : AppColor.paper)
+                    .background(title == "SUMMARY" ? AppColor.nightRaised : AppColor.paper)
             }
         }
         .overlay(alignment: .bottom) { Rectangle().fill(AppColor.teamAccent).frame(height: 2) }

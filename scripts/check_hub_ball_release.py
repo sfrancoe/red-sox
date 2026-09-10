@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import subprocess
@@ -55,7 +56,20 @@ def worktrees() -> list[Path]:
     ]
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Validate the canonical Hub Ball release source."
+    )
+    parser.add_argument(
+        "--allow-dirty",
+        action="store_true",
+        help="allow uncommitted release-sensitive files for a local development install",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     branch = git("branch", "--show-current")
     if branch != manifest["canonical_branch"]:
@@ -77,9 +91,15 @@ def main() -> int:
         return 1
 
     dirty = git("status", "--porcelain", "--", *RELEASE_PATHS)
-    if dirty:
+    if dirty and not args.allow_dirty:
         print("FAIL: release-sensitive files are not committed:\n" + dirty, file=sys.stderr)
         return 1
+    if dirty:
+        print(
+            "WARNING: allowing uncommitted release-sensitive files for a local "
+            "development install:\n" + dirty,
+            file=sys.stderr,
+        )
 
     newer: list[str] = []
     found: list[tuple[int, Path]] = []

@@ -14,6 +14,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from team_registry import data_directory, expansion_teams, team_by_key
+from schedule_broadcasts import television_broadcasts
 
 
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
@@ -21,7 +22,7 @@ EASTERN = ZoneInfo("America/New_York")
 MLB = "https://statsapi.mlb.com"
 SCHEDULE_API = (
     MLB + "/api/v1/schedule?sportId=1&teamId={team}&startDate={start}"
-    "&endDate={end}&gameType=R&hydrate=probablePitcher,team"
+    "&endDate={end}&gameType=R&hydrate=probablePitcher,team,broadcasts(all)"
 )
 SEASON_API = MLB + "/api/v1/seasons/{season}?sportId=1"
 PITCHER_STATS_API = (
@@ -165,6 +166,7 @@ def schedule_feed(team: dict[str, Any]) -> dict[str, Any]:
                 "series_description": game.get("seriesDescription") or "Regular Season",
                 "doubleheader": game.get("doubleHeader") not in (None, "N"),
                 "game_number": game.get("gameNumber") or 1,
+                "broadcasts": television_broadcasts(game),
             })
     games.sort(key=lambda game: (game["game_date"], game["game_pk"] or 0))
     return {

@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import colorsys
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +15,127 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "config" / "mlb-teams.json"
 SWIFT_OUTPUT = ROOT / "ios" / "Hub Ball" / "Hub Ball" / "HubTeam.swift"
 JAVASCRIPT_OUTPUT = ROOT / "netlify" / "functions" / "team-registry.mjs"
+
+TEAM_LINE_OVERRIDES = {
+    # Precomputed Boston red preserves the primary hue with clearer saturation.
+    "boston": "#D83C45",
+    "newYork": "#E8E4DA",
+    "tampaBay": "#8FBCE6",
+    "chicagoWhiteSox": "#C4CED4",
+    "detroit": "#FA4616",
+    "kansasCity": "#2F65BD",
+    "houston": "#EB6E1F",
+    "athletics": "#0F7A4C",
+    "seattle": "#009B8E",
+    "miami": "#00A3E0",
+    "toronto": "#2C62B5",
+    "texas": "#2E5CB8",
+    "milwaukee": "#8FA8C4",
+    "pittsburgh": "#B7B2A8",
+    "colorado": "#8B6DB8",
+    "arizona": "#30CED8",
+    "losAngelesDodgers": "#1F4E9C",
+    "sanDiego": "#A47552",
+}
+
+
+def rgb(hex_color: str) -> tuple[float, float, float]:
+    value = hex_color.removeprefix("#")
+    return tuple(int(value[index:index + 2], 16) / 255 for index in (0, 2, 4))
+
+
+def hex_color(color: tuple[float, float, float]) -> str:
+    channels = (round(max(0, min(1, channel)) * 255) for channel in color)
+    return "#" + "".join(f"{channel:02X}" for channel in channels)
+
+
+def relative_luminance(color: tuple[float, float, float]) -> float:
+    def linear(channel: float) -> float:
+        return channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+
+    red, green, blue = map(linear, color)
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+
+def oklab(color: tuple[float, float, float]) -> tuple[float, float, float]:
+    def linear(channel: float) -> float:
+        return channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+
+    red, green, blue = map(linear, color)
+    l = 0.4122214708 * red + 0.5363325363 * green + 0.0514459929 * blue
+    m = 0.2119034982 * red + 0.6806995451 * green + 0.1073969566 * blue
+    s = 0.0883024619 * red + 0.2817188376 * green + 0.6299787005 * blue
+    l_, m_, s_ = (
+        math.copysign(abs(channel) ** (1 / 3), channel)
+        for channel in (l, m, s)
+    )
+    return (
+        0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_,
+        1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_,
+        0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_,
+    )
+
+
+def oklch_color(lightness: float, chroma: float, hue: float) -> tuple[float, float, float]:
+    a = chroma * math.cos(hue)
+    b = chroma * math.sin(hue)
+    l_ = lightness + 0.3963377774 * a + 0.2158037573 * b
+    m_ = lightness - 0.1055613458 * a - 0.0638541728 * b
+    s_ = lightness - 0.0894841775 * a - 1.2914855480 * b
+    l, m, s = l_ ** 3, m_ ** 3, s_ ** 3
+    linear_rgb = (
+        4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+        -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+        -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s,
+    )
+
+    def gamma(channel: float) -> float:
+        return 12.92 * channel if channel <= 0.0031308 else 1.055 * channel ** (1 / 2.4) - 0.055
+
+    return tuple(gamma(channel) for channel in linear_rgb)
+
+
+def with_luminance(color: tuple[float, float, float], target: float) -> tuple[float, float, float]:
+    hue, lightness, saturation = colorsys.rgb_to_hls(*color)
+    low, high = 0.0, 1.0
+    for _ in range(40):
+        lightness = (low + high) / 2
+        candidate = colorsys.hls_to_rgb(hue, lightness, saturation)
+        if relative_luminance(candidate) < target:
+            low = lightness
+        else:
+            high = lightness
+    return colorsys.hls_to_rgb(hue, (low + high) / 2, saturation)
+
+
+def team_tint(primary: str, swift_case: str) -> str:
+    if swift_case == "newYork":
+        return "#141F30"
+    source = oklab(rgb(primary))
+    source_chroma = math.hypot(source[1], source[2])
+    if source_chroma < 0.03:
+        fallback = TEAM_LINE_OVERRIDES.get(swift_case)
+        if fallback is None:
+            return "#14293D"
+        source = oklab(rgb(fallback))
+        source_chroma = math.hypot(source[1], source[2])
+        if source_chroma < 0.03:
+            return "#14293D"
+    hue = math.atan2(source[2], source[1])
+    # Shared revision-1 calibration: quieter chrome at unchanged lightness.
+    return hex_color(oklch_color(0.22, 0.015, hue))
+
+
+def team_line(primary: str, swift_case: str, tint: str) -> str:
+    selected = rgb(TEAM_LINE_OVERRIDES.get(swift_case, primary))
+    # Leave a small margin so conversion to 8-bit hex cannot round a nominal
+    # 3:1 result below the contrast floor.
+    minimum_luminance = max(0.18, 3.05 * (relative_luminance(rgb(tint)) + 0.05) - 0.05)
+    if relative_luminance(selected) < minimum_luminance:
+        selected = with_luminance(selected, minimum_luminance)
+    elif swift_case not in TEAM_LINE_OVERRIDES:
+        selected = with_luminance(selected, 0.25)
+    return hex_color(selected)
 
 
 def quoted(value: str) -> str:
@@ -29,6 +152,7 @@ def swift_source(source: dict[str, str]) -> str:
 
 def swift_definition(team: dict[str, Any]) -> str:
     colors = team["colors"]
+    tint = team_tint(colors["primary"], team["swift_case"])
     features = team["features"]
     sources = ", ".join(swift_source(source) for source in team["news_sources"])
     feature_values = ", ".join(
@@ -51,6 +175,10 @@ def swift_definition(team: dict[str, Any]) -> str:
             ("accent_dark", colors["secondary"]),
             ("navigation", colors["secondary"]),
         )
+    )
+    color_values += (
+        f", team_tint: {quoted(tint)}"
+        f", team_line: {quoted(team_line(colors['primary'], team['swift_case'], tint))}"
     )
     return f"""        .{team['swift_case']}: .init(
             mlbID: {team['mlb_id']}, fullName: {quoted(team['full_name'])},
@@ -94,11 +222,13 @@ struct HubTeamColors: Sendable {{
     let banner: String
     let accentDark: String
     let navigation: String
+    let teamTint: String
+    let teamLine: String
 
     init(
         primary: String, secondary: String, background: String, ink: String,
         border: String, positive: String, banner: String, accent_dark: String,
-        navigation: String
+        navigation: String, team_tint: String, team_line: String
     ) {{
         self.primary = primary
         self.secondary = secondary
@@ -109,6 +239,8 @@ struct HubTeamColors: Sendable {{
         self.banner = banner
         self.accentDark = accent_dark
         self.navigation = navigation
+        self.teamTint = team_tint
+        self.teamLine = team_line
     }}
 }}
 

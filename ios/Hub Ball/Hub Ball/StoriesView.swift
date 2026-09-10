@@ -28,7 +28,7 @@ struct StoriesView: View {
                                         .font(.system(size: 30, weight: .bold))
                                         .foregroundStyle(AppColor.ink)
                                         .frame(width: 62, height: 62)
-                                        .background(AppColor.accentSoft)
+                                        .background(AppColor.nightRaised)
                                         .clipShape(Rectangle())
 
                                     VStack(alignment: .leading, spacing: 4) {

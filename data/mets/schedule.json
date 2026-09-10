@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:03:29.932952+00:00",
+  "generated_at": "2026-09-10T00:05:20.817185+00:00",
   "source": "MLB Stats API",
   "team": "Mets",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 823818,
       "game_date": "2026-09-09T22:40:00Z",
-      "status": "Scheduled",
+      "status": "In Progress",
       "venue": "loanDepot park",
       "location": "away",
       "opponent": "Marlins",
@@ -20,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marlins.TV presented by Werner, Hoffman, Greig & Garcia",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823498,
@@ -38,7 +54,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "WPIX",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "YES",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823496,
@@ -56,7 +88,37 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "YES",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "MLB Network",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "MLB Network",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823495,
@@ -74,7 +136,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "YES",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823575,
@@ -92,7 +170,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823574,
@@ -110,7 +204,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823576,
@@ -128,7 +238,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "ESPN/ESPN App",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "ESPN/ESPN App",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823573,
@@ -146,7 +272,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "FOX / FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "FOX / FOX ONE",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823572,
@@ -164,7 +306,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "exclusive",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "exclusive",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823571,
@@ -182,7 +340,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSP",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823570,
@@ -200,7 +374,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSP",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "WPIX",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822840,
@@ -209,7 +399,7 @@
       "venue": "Globe Life Field",
       "location": "away",
       "opponent": "Rangers",
-      "opponent_record": "72-73",
+      "opponent_record": "72-74",
       "favorite_team_record": "67-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -218,7 +408,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822841,
@@ -227,7 +433,7 @@
       "venue": "Globe Life Field",
       "location": "away",
       "opponent": "Rangers",
-      "opponent_record": "72-73",
+      "opponent_record": "72-74",
       "favorite_team_record": "67-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -236,7 +442,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822842,
@@ -245,7 +467,7 @@
       "venue": "Globe Life Field",
       "location": "away",
       "opponent": "Rangers",
-      "opponent_record": "72-73",
+      "opponent_record": "72-74",
       "favorite_team_record": "67-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -254,7 +476,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822681,
@@ -263,7 +501,7 @@
       "venue": "Nationals Park",
       "location": "away",
       "opponent": "Nationals",
-      "opponent_record": "67-80",
+      "opponent_record": "67-81",
       "favorite_team_record": "67-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -272,7 +510,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "WPIX",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Nationals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822678,
@@ -281,7 +535,7 @@
       "venue": "Nationals Park",
       "location": "away",
       "opponent": "Nationals",
-      "opponent_record": "67-80",
+      "opponent_record": "67-81",
       "favorite_team_record": "67-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -290,7 +544,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Nationals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822679,
@@ -299,7 +569,7 @@
       "venue": "Nationals Park",
       "location": "away",
       "opponent": "Nationals",
-      "opponent_record": "67-80",
+      "opponent_record": "67-81",
       "favorite_team_record": "67-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -308,7 +578,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SNY",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Nationals.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

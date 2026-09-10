@@ -1,27 +1,9 @@
 {
-  "generated_at": "2026-09-09T05:18:35.749111+00:00",
+  "generated_at": "2026-09-10T00:05:25.408751+00:00",
   "source": "MLB Stats API",
   "team": "Blue Jays",
   "regular_season_end": "2026-09-27",
   "games": [
-    {
-      "game_pk": 824956,
-      "game_date": "2026-09-09T19:05:00Z",
-      "status": "Scheduled",
-      "venue": "Sutter Health Park",
-      "location": "away",
-      "opponent": "Athletics",
-      "opponent_record": "58-88",
-      "favorite_team_record": "73-73",
-      "favorite_team_pitcher": "Braydon Fisher",
-      "opponent_pitcher": "Brady Basso",
-      "favorite_team_pitcher_record": "3-4",
-      "opponent_pitcher_record": "1-2",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1
-    },
     {
       "game_pk": 822767,
       "game_date": "2026-09-11T23:07:00Z",
@@ -30,15 +12,31 @@
       "location": "home",
       "opponent": "Orioles",
       "opponent_record": "70-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Chris Bassitt",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "6-5",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822768,
@@ -48,15 +46,31 @@
       "location": "home",
       "opponent": "Orioles",
       "opponent_record": "70-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Kyle Bradish",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "7-13",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822764,
@@ -66,15 +80,31 @@
       "location": "home",
       "opponent": "Orioles",
       "opponent_record": "70-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Trevor Rogers",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "10-9",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822765,
@@ -83,8 +113,8 @@
       "venue": "Rogers Centre",
       "location": "home",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
-      "favorite_team_record": "73-73",
+      "opponent_record": "67-79",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -92,7 +122,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822762,
@@ -101,8 +147,8 @@
       "venue": "Rogers Centre",
       "location": "home",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
-      "favorite_team_record": "73-73",
+      "opponent_record": "67-79",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -110,7 +156,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822763,
@@ -119,8 +181,8 @@
       "venue": "Rogers Centre",
       "location": "home",
       "opponent": "Tigers",
-      "opponent_record": "66-79",
-      "favorite_team_record": "73-73",
+      "opponent_record": "67-79",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -128,7 +190,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Detroit SportsNet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822847,
@@ -137,8 +215,8 @@
       "venue": "Globe Life Field",
       "location": "away",
       "opponent": "Rangers",
-      "opponent_record": "72-73",
-      "favorite_team_record": "73-73",
+      "opponent_record": "72-74",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -146,7 +224,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822843,
@@ -155,8 +249,8 @@
       "venue": "Globe Life Field",
       "location": "away",
       "opponent": "Rangers",
-      "opponent_record": "72-73",
-      "favorite_team_record": "73-73",
+      "opponent_record": "72-74",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -164,7 +258,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822844,
@@ -173,8 +283,8 @@
       "venue": "Globe Life Field",
       "location": "away",
       "opponent": "Rangers",
-      "opponent_record": "72-73",
-      "favorite_team_record": "73-73",
+      "opponent_record": "72-74",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -182,7 +292,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824787,
@@ -192,7 +318,7 @@
       "location": "away",
       "opponent": "Orioles",
       "opponent_record": "70-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -200,7 +326,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824785,
@@ -210,7 +352,7 @@
       "location": "away",
       "opponent": "Orioles",
       "opponent_record": "70-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -218,7 +360,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824784,
@@ -228,7 +386,7 @@
       "location": "away",
       "opponent": "Orioles",
       "opponent_record": "70-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -236,7 +394,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "MASN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822760,
@@ -246,7 +420,7 @@
       "location": "home",
       "opponent": "Reds",
       "opponent_record": "69-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -254,7 +428,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822759,
@@ -264,7 +454,7 @@
       "location": "home",
       "opponent": "Reds",
       "opponent_record": "69-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -272,7 +462,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 822761,
@@ -282,7 +488,7 @@
       "location": "home",
       "opponent": "Reds",
       "opponent_record": "69-76",
-      "favorite_team_record": "73-73",
+      "favorite_team_record": "73-74",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -290,7 +496,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Sportsnet",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

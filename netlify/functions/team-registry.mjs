@@ -41,7 +41,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/red-sox/"
       },
       {
@@ -106,13 +106,8 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/yankees/"
-      },
-      {
-        "key": "nytimes",
-        "name": "NY Times",
-        "url": "https://www.nytimes.com/topic/organization/new-york-yankees"
       }
     ],
     "features": {
@@ -170,13 +165,8 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/mets/"
-      },
-      {
-        "key": "nytimes",
-        "name": "NY Times",
-        "url": "https://www.nytimes.com/topic/organization/new-york-mets"
       }
     ],
     "features": {
@@ -230,7 +220,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/rays/"
       }
     ],
@@ -281,7 +271,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/orioles/"
       }
     ],
@@ -332,7 +322,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/blue-jays/"
       }
     ],
@@ -383,7 +373,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/white-sox/"
       }
     ],
@@ -434,7 +424,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/guardians/"
       }
     ],
@@ -485,7 +475,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/tigers/"
       }
     ],
@@ -536,7 +526,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/royals/"
       }
     ],
@@ -587,7 +577,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/twins/"
       }
     ],
@@ -639,7 +629,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/astros/"
       }
     ],
@@ -690,7 +680,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/angels/"
       }
     ],
@@ -744,7 +734,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/athletics/"
       }
     ],
@@ -795,7 +785,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/mariners/"
       }
     ],
@@ -847,7 +837,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/rangers/"
       }
     ],
@@ -898,7 +888,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/braves/"
       }
     ],
@@ -949,7 +939,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/marlins/"
       }
     ],
@@ -1000,7 +990,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/phillies/"
       }
     ],
@@ -1051,7 +1041,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/nationals/"
       }
     ],
@@ -1102,7 +1092,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/cubs/"
       }
     ],
@@ -1153,7 +1143,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/reds/"
       }
     ],
@@ -1204,7 +1194,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/brewers/"
       }
     ],
@@ -1255,7 +1245,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/pirates/"
       }
     ],
@@ -1306,7 +1296,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/cardinals/"
       }
     ],
@@ -1357,7 +1347,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/diamondbacks/"
       }
     ],
@@ -1408,7 +1398,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/rockies/"
       }
     ],
@@ -1460,7 +1450,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/dodgers/"
       }
     ],
@@ -1511,7 +1501,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/padres/"
       }
     ],
@@ -1562,7 +1552,7 @@ export const MLB_TEAMS = Object.freeze([
       },
       {
         "key": "athletic",
-        "name": "Athletic",
+        "name": "The Athletic",
         "url": "https://www.nytimes.com/athletic/mlb/team/giants/"
       }
     ],

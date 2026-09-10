@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:19:03.289068+00:00",
+  "generated_at": "2026-09-10T00:05:40.022638+00:00",
   "source": "MLB Stats API",
   "team": "Dodgers",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 823900,
       "game_date": "2026-09-10T02:10:00Z",
-      "status": "Scheduled",
+      "status": "Pre-Game",
       "venue": "UNIQLO Field at Dodger Stadium",
       "location": "home",
       "opponent": "Reds",
@@ -20,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823817,
@@ -38,7 +54,30 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marlins.TV presented by Werner, Hoffman, Greig & Garcia",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "CW 33 WBFS",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823819,
@@ -56,7 +95,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marlins.TV presented by Werner, Hoffman, Greig & Garcia",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823815,
@@ -74,7 +129,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marlins.TV presented by Werner, Hoffman, Greig & Garcia",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824465,
@@ -92,7 +163,37 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Gray Media",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": false
+        },
+        {
+          "name": "WXIX FOX19",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 824466,
@@ -110,7 +211,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824467,
@@ -128,7 +245,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824464,
@@ -146,7 +279,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Reds.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823898,
@@ -155,7 +304,7 @@
       "venue": "UNIQLO Field at Dodger Stadium",
       "location": "home",
       "opponent": "Giants",
-      "opponent_record": "61-85",
+      "opponent_record": "62-85",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -164,7 +313,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "exclusive",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Apple TV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "exclusive",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823899,
@@ -173,7 +338,7 @@
       "venue": "UNIQLO Field at Dodger Stadium",
       "location": "home",
       "opponent": "Giants",
-      "opponent_record": "61-85",
+      "opponent_record": "62-85",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -182,7 +347,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823896,
@@ -191,7 +372,7 @@
       "venue": "UNIQLO Field at Dodger Stadium",
       "location": "home",
       "opponent": "Giants",
-      "opponent_record": "61-85",
+      "opponent_record": "62-85",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -200,7 +381,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823897,
@@ -209,7 +406,7 @@
       "venue": "UNIQLO Field at Dodger Stadium",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
+      "opponent_record": "78-68",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -218,7 +415,37 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "TBS",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TBS (out-of-market only)",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823894,
@@ -227,7 +454,7 @@
       "venue": "UNIQLO Field at Dodger Stadium",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
+      "opponent_record": "78-68",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -236,7 +463,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823895,
@@ -245,7 +488,7 @@
       "venue": "UNIQLO Field at Dodger Stadium",
       "location": "home",
       "opponent": "Padres",
-      "opponent_record": "77-68",
+      "opponent_record": "78-68",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -254,7 +497,37 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Padres.TV Presented by UC San Diego Health",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "MLB Network",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "MLB Network",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
     },
     {
       "game_pk": 823167,
@@ -263,7 +536,7 @@
       "venue": "Oracle Park",
       "location": "away",
       "opponent": "Giants",
-      "opponent_record": "61-85",
+      "opponent_record": "62-85",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -272,7 +545,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823165,
@@ -281,7 +570,7 @@
       "venue": "Oracle Park",
       "location": "away",
       "opponent": "Giants",
-      "opponent_record": "61-85",
+      "opponent_record": "62-85",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -290,7 +579,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823164,
@@ -299,7 +604,7 @@
       "venue": "Oracle Park",
       "location": "away",
       "opponent": "Giants",
-      "opponent_record": "61-85",
+      "opponent_record": "62-85",
       "favorite_team_record": "88-57",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
@@ -308,7 +613,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCS BA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "SportsNet LA",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

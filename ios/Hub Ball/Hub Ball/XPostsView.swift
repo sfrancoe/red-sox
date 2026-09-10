@@ -37,7 +37,7 @@ struct XPostsView: View {
         if contentWidth >= 720 {
             HStack(spacing: 0) {
                 postsPage(feed.recent, feed: feed, mode: .recent, pinnedHeader: true)
-                Divider().overlay(AppColor.teamAccent.opacity(0.3))
+                Divider().overlay(AppColor.rule)
                 postsPage(feed.popular, feed: feed, mode: .liked, pinnedHeader: true)
             }
         } else {
@@ -190,7 +190,7 @@ struct XPostsView: View {
                             image.resizable().scaledToFill()
                         } placeholder: {
                             ZStack {
-                                AppColor.paleBlue
+                                AppColor.nightRaised
                                 ProgressView().tint(AppColor.red)
                             }
                         }
@@ -219,7 +219,7 @@ struct XPostsView: View {
             }
         }
         .padding(10)
-        .background(AppColor.paperRaised)
+        .background(AppColor.nightRaised)
         .clipShape(Rectangle())
         .overlay(alignment: .bottom) {
             if contentWidth < 650 {
@@ -238,7 +238,7 @@ struct XPostsView: View {
                 .scaledToFill()
         } placeholder: {
             ZStack {
-                AppColor.paleBlue
+                AppColor.nightRaised
                 Image(systemName: "person.fill")
                     .foregroundStyle(AppColor.navy.opacity(0.55))
             }
@@ -261,7 +261,7 @@ struct XPostsView: View {
         }
         .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColor.paleBlue.opacity(0.7))
+        .background(AppColor.nightRaised)
         .clipShape(Rectangle())
     }
 

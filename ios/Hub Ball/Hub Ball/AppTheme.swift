@@ -1,13 +1,26 @@
 import SwiftUI
 
+struct HubTeamPalette: Sendable {
+    let tint: Color
+    let line: Color
+    let usesPinstripes: Bool
+
+    init(team: HubTeam) {
+        tint = Color(hubHex: team.colors.teamTint)
+        line = Color(hubHex: team.colors.teamLine)
+        usesPinstripes = team == .newYork
+    }
+}
+
 enum AppColor {
     static let night = Color(hubHex: "#0B1B2B")
-    static let nightRaised = Color(hubHex: "#1A3348")
+    static let nightRaised = Color(hubHex: "#14293D")
     static let nightCell = Color(hubHex: "#22405C")
     static let rule = Color(hubHex: "#26415A")
     static let bone = Color(hubHex: "#F5F2EA")
     static let boneMuted = Color(hubHex: "#7C93A8")
     static let boneDim = Color(hubHex: "#A9BECE")
+    static let calendarOutline = Color(hubHex: "#2E4E6B")
     static let emptyDay = Color(hubHex: "#41607C")
     static let amber = Color(hubHex: "#E8A33D")
     static let steel = Color(hubHex: "#4FA3D1")
@@ -57,7 +70,7 @@ enum AppFont {
     static let number = Font.custom("Inter-Regular", size: 14)
 }
 
-private extension Color {
+extension Color {
     init(hubHex: String) {
         let value = UInt64(hubHex.dropFirst(), radix: 16) ?? 0
         self.init(
@@ -68,9 +81,12 @@ private extension Color {
     }
 }
 
-extension View {
-    func cardStyle(accent: Color? = nil, padding: CGFloat = 16) -> some View {
-        self
+private struct HubCardStyleModifier: ViewModifier {
+    let accent: Color?
+    let padding: CGFloat
+
+    func body(content: Content) -> some View {
+        content
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 24)
             .padding(.horizontal, padding)
@@ -79,6 +95,12 @@ extension View {
                 Rectangle().fill(accent ?? AppColor.rule).frame(height: 1)
             }
             .clipShape(Rectangle())
+    }
+}
+
+extension View {
+    func cardStyle(accent: Color? = nil, padding: CGFloat = 16) -> some View {
+        modifier(HubCardStyleModifier(accent: accent, padding: padding))
     }
 
     func panelElevation() -> some View {
@@ -103,10 +125,43 @@ private struct ContentWidthKey: EnvironmentKey {
     static let defaultValue: CGFloat = 390
 }
 
+private struct HubTeamPaletteKey: EnvironmentKey {
+    static let defaultValue = HubTeamPalette(team: .boston)
+}
+
 extension EnvironmentValues {
     var hubContentWidth: CGFloat {
         get { self[ContentWidthKey.self] }
         set { self[ContentWidthKey.self] = newValue }
+    }
+
+    var hubTeamPalette: HubTeamPalette {
+        get { self[HubTeamPaletteKey.self] }
+        set { self[HubTeamPaletteKey.self] = newValue }
+    }
+}
+
+struct HubMastheadBackground: View {
+    let palette: HubTeamPalette
+
+    var body: some View {
+        ZStack {
+            palette.tint
+            if palette.usesPinstripes {
+                Canvas { context, size in
+                    var x: CGFloat = 0
+                    while x <= size.width {
+                        let stripe = Path(CGRect(x: x, y: 0, width: 1, height: size.height))
+                        context.fill(stripe, with: .color(AppColor.bone.opacity(0.06)))
+                        x += 9
+                    }
+                }
+                .allowsHitTesting(false)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(palette.line).frame(height: 3)
+        }
     }
 }
 

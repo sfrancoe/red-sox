@@ -1,27 +1,9 @@
 {
-  "generated_at": "2026-09-09T05:18:47.254084+00:00",
+  "generated_at": "2026-09-10T00:05:31.278476+00:00",
   "source": "MLB Stats API",
   "team": "Mariners",
   "regular_season_end": "2026-09-27",
   "games": [
-    {
-      "game_pk": 823090,
-      "game_date": "2026-09-09T20:10:00Z",
-      "status": "Scheduled",
-      "venue": "T-Mobile Park",
-      "location": "home",
-      "opponent": "Rangers",
-      "opponent_record": "72-73",
-      "favorite_team_record": "67-78",
-      "favorite_team_pitcher": "Kade Anderson",
-      "opponent_pitcher": "Cody Bradford",
-      "favorite_team_pitcher_record": "0-1",
-      "opponent_pitcher_record": "0-4",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1
-    },
     {
       "game_pk": 823088,
       "game_date": "2026-09-10T20:10:00Z",
@@ -29,8 +11,8 @@
       "venue": "T-Mobile Park",
       "location": "home",
       "opponent": "Rangers",
-      "opponent_record": "72-73",
-      "favorite_team_record": "67-78",
+      "opponent_record": "72-74",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "Logan Gilbert",
       "opponent_pitcher": "Jacob deGrom",
       "favorite_team_pitcher_record": "11-9",
@@ -38,7 +20,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rangers Sports Network, presented by Progressive",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824954,
@@ -47,8 +45,8 @@
       "venue": "Sutter Health Park",
       "location": "away",
       "opponent": "Athletics",
-      "opponent_record": "58-88",
-      "favorite_team_record": "67-78",
+      "opponent_record": "59-88",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "Jeffrey Springs",
       "favorite_team_pitcher_record": "—",
@@ -56,7 +54,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSCA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824955,
@@ -65,8 +79,8 @@
       "venue": "Sutter Health Park",
       "location": "away",
       "opponent": "Athletics",
-      "opponent_record": "58-88",
-      "favorite_team_record": "67-78",
+      "opponent_record": "59-88",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "Gage Jump",
       "favorite_team_pitcher_record": "—",
@@ -74,7 +88,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSCA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824952,
@@ -83,8 +113,8 @@
       "venue": "Sutter Health Park",
       "location": "away",
       "opponent": "Athletics",
-      "opponent_record": "58-88",
-      "favorite_team_record": "67-78",
+      "opponent_record": "59-88",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "Jacob Lopez",
       "favorite_team_pitcher_record": "—",
@@ -92,7 +122,23 @@
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBCSCA",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823981,
@@ -102,7 +148,7 @@
       "location": "away",
       "opponent": "Angels",
       "opponent_record": "55-90",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -110,7 +156,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ABTV, presented by Pechanga Resort Casino",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823980,
@@ -120,7 +182,7 @@
       "location": "away",
       "opponent": "Angels",
       "opponent_record": "55-90",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -128,7 +190,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ABTV, presented by Pechanga Resort Casino",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823979,
@@ -138,7 +216,7 @@
       "location": "away",
       "opponent": "Angels",
       "opponent_record": "55-90",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -146,7 +224,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ABTV, presented by Pechanga Resort Casino",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824303,
@@ -156,7 +250,7 @@
       "location": "away",
       "opponent": "Rockies",
       "opponent_record": "55-89",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -164,7 +258,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824304,
@@ -174,7 +284,7 @@
       "location": "away",
       "opponent": "Rockies",
       "opponent_record": "55-89",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -182,7 +292,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 824300,
@@ -192,7 +318,7 @@
       "location": "away",
       "opponent": "Rockies",
       "opponent_record": "55-89",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -200,7 +326,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Rockies.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823089,
@@ -210,7 +352,7 @@
       "location": "home",
       "opponent": "Astros",
       "opponent_record": "74-71",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -218,7 +360,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823086,
@@ -228,7 +386,7 @@
       "location": "home",
       "opponent": "Astros",
       "opponent_record": "74-71",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -236,7 +394,16 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Space City Home Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823087,
@@ -246,7 +413,7 @@
       "location": "home",
       "opponent": "Angels",
       "opponent_record": "55-90",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -254,7 +421,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ABTV, presented by Pechanga Resort Casino",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823085,
@@ -264,7 +447,7 @@
       "location": "home",
       "opponent": "Angels",
       "opponent_record": "55-90",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -272,7 +455,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ABTV, presented by Pechanga Resort Casino",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823083,
@@ -282,7 +481,7 @@
       "location": "home",
       "opponent": "Angels",
       "opponent_record": "55-90",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -290,7 +489,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ABTV, presented by Pechanga Resort Casino",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     },
     {
       "game_pk": 823084,
@@ -300,7 +515,7 @@
       "location": "home",
       "opponent": "Angels",
       "opponent_record": "55-90",
-      "favorite_team_record": "67-78",
+      "favorite_team_record": "68-78",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -308,7 +523,23 @@
       "show_probables": false,
       "series_description": "Regular Season",
       "doubleheader": false,
-      "game_number": 1
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "Mariners.TV",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "ABTV, presented by Pechanga Resort Casino",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_in_market",
+          "available_for_streaming": true
+        }
+      ]
     }
   ]
 }

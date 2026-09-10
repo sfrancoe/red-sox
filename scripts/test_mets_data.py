@@ -21,6 +21,7 @@ def main() -> None:
     assert schedule["team"] == "Mets"
     assert schedule["games"]
     assert all(game["game_pk"] for game in schedule["games"])
+    assert all(isinstance(game.get("broadcasts"), list) for game in schedule["games"])
 
     recent = load("recent-game")
     assert 121 in {recent["away"]["id"], recent["home"]["id"]}
@@ -44,7 +45,6 @@ def main() -> None:
     assert len(current["diff"]) == len(current["seq"]) == current["end_game"]
 
     domains = {
-        "nytimes": "nytimes.com",
         "nypost": "nypost.com",
         "dailynews": "nydailynews.com",
         "athletic": "nytimes.com",

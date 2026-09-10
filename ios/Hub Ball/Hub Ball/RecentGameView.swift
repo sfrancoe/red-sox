@@ -10,6 +10,7 @@ struct RecentGameView: View {
     @State private var store: RecentGameStore
     @State private var selectedStatsTeam: BoxScoreTeamSelection = .favorite
     @State private var selectedGameID: Int?
+    private let statColumnSpacing: CGFloat = 6
     let team: HubTeam
     let onSelectPlayer: (Int) -> Void
 
@@ -134,11 +135,11 @@ struct RecentGameView: View {
     }
 
     private func gameTabTitle(_ game: RecentGame) -> String {
-        if game.isLive { return "LIVE" }
+        if game.isLive { return "Live" }
 
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
-        var title = date.formatted(.dateTime.month(.abbreviated).day()).uppercased()
+        var title = date.formatted(.dateTime.month(.abbreviated).day())
         let gamesOnDate = store.games
             .filter { candidate in
                 guard let candidateDate = formatter.date(from: candidate.gameDate) else { return false }
@@ -222,9 +223,8 @@ struct RecentGameView: View {
     private func scoreCard(_ game: RecentGame) -> some View {
         VStack(spacing: 9) {
             HStack {
-                Text(game.formattedDate.uppercased())
+                Text(game.formattedDate)
                     .font(.title3.weight(.black))
-                    .tracking(0.4)
 
                 Spacer()
 
@@ -255,6 +255,7 @@ struct RecentGameView: View {
 
             combinedLineScore(game)
         }
+        .background(AppColor.nightRaised)
         .cardStyle(padding: 12)
     }
 
@@ -468,8 +469,8 @@ struct RecentGameView: View {
     }
 
     private func statHeader(labels: [String], widths: [CGFloat] = []) -> some View {
-        HStack {
-            Text("PLAYER")
+        HStack(spacing: statColumnSpacing) {
+            Text("Player")
                 .frame(maxWidth: .infinity, alignment: .leading)
             ForEach(Array(labels.enumerated()), id: \.offset) { index, label in
                 Text(label).frame(width: widths.indices.contains(index) ? widths[index] : 32)
@@ -488,7 +489,7 @@ struct RecentGameView: View {
         detailInline: Bool = false,
         columnWidths: [CGFloat] = []
     ) -> some View {
-        HStack(spacing: 6) {
+        HStack(spacing: statColumnSpacing) {
             VStack(alignment: .leading, spacing: 1) {
                 HStack(spacing: 4) {
                     if let playerID {
@@ -545,7 +546,7 @@ struct RecentGameView: View {
             ForEach(game.scoringPlays) { play in
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
-                        Text(play.inning.uppercased())
+                        Text(play.inning)
                             .font(.caption.weight(.black))
                             .foregroundStyle(AppColor.red)
                         Spacer()
@@ -593,16 +594,14 @@ struct RecentGameView: View {
     }
 
     private func sectionTitle(_ title: String) -> some View {
-        Text(title.uppercased())
+        Text(title)
             .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
-            .tracking(1.1)
             .foregroundStyle(AppColor.navy)
     }
 
     private func primarySectionTitle(_ title: String) -> some View {
-        Text(title.uppercased())
+        Text(title)
             .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
-            .tracking(1.1)
             .foregroundStyle(AppColor.navy)
     }
 
