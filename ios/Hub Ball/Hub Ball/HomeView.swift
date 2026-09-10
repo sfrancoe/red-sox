@@ -177,7 +177,9 @@ struct HomeView: View {
                     HStack(spacing: 0) {
                         HStack(spacing: 7) {
                             Text(compactNumericDate(game.gameDate))
-                            if !game.isLive {
+                            if game.isLive {
+                                LiveGameIndicator()
+                            } else {
                                 Text(game.result.lowercased() == "win" ? "W" : "L")
                                     .foregroundStyle(
                                         game.result.lowercased() == "win"
@@ -362,8 +364,7 @@ struct HomeView: View {
         guard !hitters.isEmpty else { return "None" }
         return hitters.map { batter in
             let total = batter.seasonHomeRuns.map(String.init) ?? "—"
-            let surname = batter.name.split(separator: " ").last.map(String.init) ?? batter.name
-            return "\(surname) (\(total))"
+            return "\(surname(batter.name)) (\(total))"
         }.joined(separator: ", ")
     }
 
@@ -419,7 +420,17 @@ struct HomeView: View {
     }
 
     private func surname(_ name: String) -> String {
-        name.split(separator: " ").last.map(String.init) ?? name
+        let parts = name.split(separator: " ")
+        guard let last = parts.last else { return name }
+
+        let suffix = last
+            .trimmingCharacters(in: .punctuationCharacters)
+            .lowercased()
+        let generationalSuffixes = Set(["jr", "sr", "ii", "iii", "iv", "v"])
+        if generationalSuffixes.contains(suffix), parts.count > 1 {
+            return String(parts[parts.count - 2])
+        }
+        return String(last)
     }
 
     private func standingNumber(_ value: Int, emphasized: Bool) -> some View {

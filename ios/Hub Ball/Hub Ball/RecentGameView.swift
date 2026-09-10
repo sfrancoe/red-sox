@@ -229,7 +229,7 @@ struct RecentGameView: View {
                 Spacer()
 
                 if game.isLive {
-                    RecapLiveIndicator()
+                    LiveGameIndicator()
                 } else {
                     Text("Final")
                         .font(AppFont.label)
@@ -620,7 +620,7 @@ struct RecentGameView: View {
     RecentGameView()
 }
 
-private struct RecapLiveIndicator: View {
+struct LiveGameIndicator: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
