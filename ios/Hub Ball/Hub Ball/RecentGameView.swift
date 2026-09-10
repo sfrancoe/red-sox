@@ -228,20 +228,20 @@ struct RecentGameView: View {
 
                 Spacer()
 
-                HStack(spacing: 5) {
-                    if game.isLive { Circle().fill(AppColor.accent).frame(width: 6, height: 6) }
-                    Text(game.isLive ? "Live" : "Final")
+                if game.isLive {
+                    RecapLiveIndicator()
+                } else {
+                    Text("Final")
+                        .font(AppFont.label)
+                        .foregroundStyle(AppColor.inkMuted)
                 }
-                .font(AppFont.label)
-                .foregroundStyle(game.isLive ? AppColor.accent : AppColor.inkMuted)
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(game.gameDetails)
+                Text(game.gameDetails(watchSummary: store.watchSummary(for: game)))
                     .font(.subheadline)
-                    .foregroundStyle(AppColor.hunterGreen)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+                    .foregroundStyle(AppColor.bone.opacity(0.85))
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if game.isLive, let liveStatus = game.liveStatus {
                     Text(liveStatus)
@@ -496,14 +496,10 @@ struct RecentGameView: View {
                         Button {
                             onSelectPlayer(playerID)
                         } label: {
-                            HStack(spacing: 3) {
-                                Text(name)
-                                Image(systemName: "person.crop.circle")
-                                    .font(.caption2)
-                            }
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(AppColor.navy)
-                            .lineLimit(1)
+                            Text(name)
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(AppColor.navy)
+                                .lineLimit(1)
                         }
                         .buttonStyle(.plain)
                         .accessibilityHint("Open player biography")
@@ -622,4 +618,26 @@ struct RecentGameView: View {
 
 #Preview {
     RecentGameView()
+}
+
+private struct RecapLiveIndicator: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: reduceMotion)) { context in
+            let phase = context.date.timeIntervalSinceReferenceDate * .pi * 2 / 1.6
+            let opacity = reduceMotion ? 1.0 : 0.75 + 0.25 * cos(phase)
+
+            HStack(spacing: 5) {
+                Circle().frame(width: 6, height: 6)
+                Text("LIVE")
+            }
+            .font(AppFont.label)
+            .foregroundStyle(Color(hubHex: "#FF4545"))
+            .opacity(opacity)
+        }
+        .fixedSize()
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Live game")
+    }
 }

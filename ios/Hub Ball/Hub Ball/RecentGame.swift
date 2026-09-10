@@ -34,8 +34,11 @@ struct RecentGame: Codable, Sendable {
         )
     }
 
-    var gameDetails: String {
+    func gameDetails(watchSummary: String? = nil) -> String {
         var details = [venue]
+        if let watchSummary {
+            details.append(watchSummary)
+        }
         if let gameDurationMinutes, gameDurationMinutes > 0 {
             let hours = gameDurationMinutes / 60
             let minutes = gameDurationMinutes % 60

@@ -5,6 +5,7 @@ import Observation
 @Observable
 final class RecentGameStore {
     private let client: MLBGameClient
+    private let scheduleStore: ScheduleStore
     private var cache: [Int: RecentGame] = [:]
 
     var games: [RecentGame] = []
@@ -13,10 +14,16 @@ final class RecentGameStore {
 
     init(team: HubTeam = .boston) {
         client = MLBGameClient(team: team)
+        scheduleStore = ScheduleStore(team: team)
     }
 
     var hasLiveGame: Bool {
         games.contains(where: \.isLive)
+    }
+
+    func watchSummary(for game: RecentGame) -> String? {
+        let scheduledGame = scheduleStore.schedule?.games.first { $0.gamePk == game.gamePk }
+        return scheduledGame?.watchSummary ?? (game.isLive ? "TV TBD" : nil)
     }
 
     func load() async {
@@ -36,6 +43,8 @@ final class RecentGameStore {
         }
         defer { isLoading = false }
 
+        async let scheduleRefresh: Void = scheduleStore.load()
+
         do {
             let descriptors = try await client.gameDescriptors()
 
@@ -52,6 +61,7 @@ final class RecentGameStore {
                 throw RecentGameError.noGames
             }
 
+            await scheduleRefresh
             games = refreshedGames
             errorMessage = nil
         } catch {
