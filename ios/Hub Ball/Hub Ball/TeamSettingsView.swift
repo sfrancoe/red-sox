@@ -4,10 +4,25 @@ private enum TeamFavoritesStorage {
     static let key = "hubFavoriteTeamIDs"
 }
 
+private enum SettingsTab: String, CaseIterable, Identifiable {
+    case teams
+    case pageOrder
+
+    var id: Self { self }
+
+    var title: String {
+        switch self {
+        case .teams: "Teams"
+        case .pageOrder: "Page Order"
+        }
+    }
+}
+
 struct TeamSettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(TeamFavoritesStorage.key) private var favoriteTeamIDs = ""
     @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
+    @State private var selectedSettingsTab = SettingsTab.teams
     @Binding var selectedTeamID: String
     let onSelect: (HubTeam) -> Void
 
@@ -31,31 +46,18 @@ struct TeamSettingsView: View {
             ZStack {
                 AppColor.cream.ignoresSafeArea()
 
-                ScrollView {
-                    VStack(spacing: 0) {
-                        pageOrderSection
-                            .padding(16)
+                VStack(spacing: 0) {
+                    settingsTabBar
 
-                        VStack(spacing: 0) {
-                            if !favoriteTeams.isEmpty {
-                                teamSection(title: "Favorites", teams: favoriteTeams, allowsReordering: true)
-                                    .padding(.bottom, 20)
-                            }
-
-                            teamSection(title: "All Teams", teams: HubTeam.availableTeams)
-                        }
-                        .padding(16)
-
-                        Text(versionLabel)
-                            .font(.caption.monospacedDigit())
-                            .foregroundStyle(AppColor.ink.opacity(0.62))
-                            .padding(.top, 10)
-                            .padding(.bottom, 24)
-                            .accessibilityLabel("Hub Ball version \(versionLabel)")
+                    switch selectedSettingsTab {
+                    case .teams:
+                        teamsTab
+                    case .pageOrder:
+                        pageOrderTab
                     }
                 }
             }
-            .navigationTitle("Teams & Settings")
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(AppColor.nightRaised, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
@@ -65,6 +67,65 @@ struct TeamSettingsView: View {
                     Button("Done") { dismiss() }
                 }
             }
+        }
+    }
+
+    private var settingsTabBar: some View {
+        HStack(spacing: 0) {
+            ForEach(SettingsTab.allCases) { tab in
+                Button {
+                    selectedSettingsTab = tab
+                } label: {
+                    Text(tab.title)
+                        .font(.headline.weight(selectedSettingsTab == tab ? .bold : .semibold))
+                        .foregroundStyle(selectedSettingsTab == tab ? AppColor.ink : AppColor.inkMuted)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 13)
+                        .overlay(alignment: .bottom) {
+                            if selectedSettingsTab == tab {
+                                Rectangle()
+                                    .fill(AppColor.accent)
+                                    .frame(height: 3)
+                            }
+                        }
+                }
+                .buttonStyle(.plain)
+                .accessibilityAddTraits(selectedSettingsTab == tab ? .isSelected : [])
+            }
+        }
+        .background(AppColor.paper)
+        .overlay(alignment: .bottom) {
+            Divider().overlay(AppColor.separator)
+        }
+    }
+
+    private var teamsTab: some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                VStack(spacing: 0) {
+                    if !favoriteTeams.isEmpty {
+                        teamSection(title: "Favorites", teams: favoriteTeams, allowsReordering: true)
+                            .padding(.bottom, 20)
+                    }
+
+                    teamSection(title: "All Teams", teams: HubTeam.availableTeams)
+                }
+                .padding(16)
+
+                Text(versionLabel)
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(AppColor.ink.opacity(0.62))
+                    .padding(.top, 10)
+                    .padding(.bottom, 24)
+                    .accessibilityLabel("Hub Ball version \(versionLabel)")
+            }
+        }
+    }
+
+    private var pageOrderTab: some View {
+        ScrollView {
+            pageOrderSection
+                .padding(16)
         }
     }
 
