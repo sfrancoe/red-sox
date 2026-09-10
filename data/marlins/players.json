@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-09T10:36:08.489978+00:00",
-  "roster_as_of": "September 3, 2026",
+  "generated_at": "2026-09-10T13:52:32.556793+00:00",
+  "roster_as_of": "September 9, 2026",
   "team": {
     "id": 146,
     "name": "Miami Marlins"
@@ -55,8 +55,26 @@
       "retrosheet_id": "acosm002",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 19,
+          "plate_appearances": 61,
+          "at_bats": 54,
+          "runs": 7,
+          "hits": 11,
+          "doubles": 1,
+          "triples": 0,
+          "home_runs": 3,
+          "runs_batted_in": 5,
+          "walks": 6,
+          "strikeouts": 17,
+          "stolen_bases": 1,
+          "caught_stealing": 2,
+          "average": 0.204,
+          "on_base_percentage": 0.295,
+          "slugging_percentage": 0.389,
+          "ops": 0.684
+        },
         "pitching": null
       }
     },
@@ -96,9 +114,46 @@
       "retrosheet_id": "alcas001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 177,
+          "plate_appearances": 140,
+          "at_bats": 128,
+          "runs": 2,
+          "hits": 7,
+          "doubles": 2,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 4,
+          "walks": 5,
+          "strikeouts": 99,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.055,
+          "on_base_percentage": 0.104,
+          "slugging_percentage": 0.07,
+          "ops": 0.174
+        },
+        "pitching": {
+          "games": 177,
+          "games_started": 169,
+          "wins": 52,
+          "losses": 67,
+          "saves": 0,
+          "innings_outs": 3226,
+          "hits": 934,
+          "runs": 485,
+          "earned_runs": 436,
+          "home_runs": 113,
+          "walks": 330,
+          "strikeouts": 931,
+          "hit_batters": 44,
+          "wild_pitches": 26,
+          "balks": 6,
+          "complete_games": 12,
+          "era": 3.65,
+          "whip": 1.175
+        }
       }
     },
     {
@@ -140,9 +195,46 @@
       "retrosheet_id": "benda001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 193,
+          "plate_appearances": 2,
+          "at_bats": 2,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 1,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.0,
+          "on_base_percentage": 0.0,
+          "slugging_percentage": 0.0,
+          "ops": 0.0
+        },
+        "pitching": {
+          "games": 192,
+          "games_started": 1,
+          "wins": 12,
+          "losses": 12,
+          "saves": 14,
+          "innings_outs": 551,
+          "hits": 144,
+          "runs": 67,
+          "earned_runs": 62,
+          "home_runs": 14,
+          "walks": 67,
+          "strikeouts": 189,
+          "hit_batters": 13,
+          "wild_pitches": 8,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 3.04,
+          "whip": 1.149
+        }
       }
     },
     {
@@ -173,7 +265,8 @@
         "colleges": []
       },
       "teams": [
-        "Pittsburgh Pirates"
+        "Pittsburgh Pirates",
+        "Miami Marlins"
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139736934",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Brandan_Bidois",
@@ -197,8 +290,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2000-12-25",
       "age": 25,
       "birthplace": "Conyers, Georgia, U.S.",
@@ -222,9 +315,46 @@
       "retrosheet_id": "blalb001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 21,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 21,
+          "games_started": 18,
+          "wins": 3,
+          "losses": 9,
+          "saves": 0,
+          "innings_outs": 268,
+          "hits": 120,
+          "runs": 83,
+          "earned_runs": 81,
+          "home_runs": 21,
+          "walks": 43,
+          "strikeouts": 47,
+          "hit_batters": 4,
+          "wild_pitches": 2,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 8.16,
+          "whip": 1.825
+        }
       }
     },
     {
@@ -263,9 +393,46 @@
       "retrosheet_id": "brzyz001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 32,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 32,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 1,
+          "saves": 0,
+          "innings_outs": 86,
+          "hits": 37,
+          "runs": 32,
+          "earned_runs": 32,
+          "home_runs": 8,
+          "walks": 15,
+          "strikeouts": 28,
+          "hit_batters": 2,
+          "wild_pitches": 2,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 10.05,
+          "whip": 1.814
+        }
       }
     },
     {
@@ -308,8 +475,26 @@
       "retrosheet_id": "caiso001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 12,
+          "plate_appearances": 27,
+          "at_bats": 26,
+          "runs": 4,
+          "hits": 5,
+          "doubles": 1,
+          "triples": 0,
+          "home_runs": 1,
+          "runs_batted_in": 4,
+          "walks": 1,
+          "strikeouts": 11,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.192,
+          "on_base_percentage": 0.222,
+          "slugging_percentage": 0.346,
+          "ops": 0.568
+        },
         "pitching": null
       }
     },
@@ -348,8 +533,26 @@
       "retrosheet_id": "conig001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 54,
+          "plate_appearances": 175,
+          "at_bats": 161,
+          "runs": 27,
+          "hits": 42,
+          "doubles": 11,
+          "triples": 1,
+          "home_runs": 5,
+          "runs_batted_in": 20,
+          "walks": 13,
+          "strikeouts": 53,
+          "stolen_bases": 0,
+          "caught_stealing": 1,
+          "average": 0.261,
+          "on_base_percentage": 0.32,
+          "slugging_percentage": 0.435,
+          "ops": 0.755
+        },
         "pitching": null
       }
     },
@@ -381,15 +584,34 @@
         "colleges": []
       },
       "teams": [
-        "Tampa Bay Rays"
+        "Tampa Bay Rays",
+        "Miami Marlins"
       ],
       "source_url": "https://www.wikidata.org/wiki/Q130211111",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Logan_Driscoll",
       "retrosheet_id": "drisl001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 15,
+          "plate_appearances": 37,
+          "at_bats": 35,
+          "runs": 2,
+          "hits": 6,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 1,
+          "runs_batted_in": 5,
+          "walks": 1,
+          "strikeouts": 6,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.171,
+          "on_base_percentage": 0.189,
+          "slugging_percentage": 0.257,
+          "ops": 0.446
+        },
         "pitching": null
       }
     },
@@ -428,8 +650,26 @@
       "retrosheet_id": "edwax001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 239,
+          "plate_appearances": 1006,
+          "at_bats": 904,
+          "runs": 126,
+          "hits": 269,
+          "doubles": 35,
+          "triples": 10,
+          "home_runs": 4,
+          "runs_batted_in": 72,
+          "walks": 85,
+          "strikeouts": 154,
+          "stolen_bases": 63,
+          "caught_stealing": 11,
+          "average": 0.298,
+          "on_base_percentage": 0.358,
+          "slugging_percentage": 0.372,
+          "ops": 0.73
+        },
         "pitching": null
       }
     },
@@ -485,8 +725,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1993-12-16",
       "age": 32,
       "birthplace": "St. Louis",
@@ -517,9 +757,46 @@
       "retrosheet_id": "fairp001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 275,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 275,
+          "games_started": 2,
+          "wins": 20,
+          "losses": 24,
+          "saves": 90,
+          "innings_outs": 796,
+          "hits": 208,
+          "runs": 110,
+          "earned_runs": 94,
+          "home_runs": 24,
+          "walks": 103,
+          "strikeouts": 332,
+          "hit_batters": 8,
+          "wild_pitches": 21,
+          "balks": 1,
+          "complete_games": 0,
+          "era": 3.19,
+          "whip": 1.172
+        }
       }
     },
     {
@@ -558,9 +835,46 @@
       "retrosheet_id": "faucc001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 157,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 157,
+          "games_started": 4,
+          "wins": 9,
+          "losses": 11,
+          "saves": 22,
+          "innings_outs": 483,
+          "hits": 159,
+          "runs": 88,
+          "earned_runs": 74,
+          "home_runs": 16,
+          "walks": 72,
+          "strikeouts": 168,
+          "hit_batters": 9,
+          "wild_pitches": 13,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.14,
+          "whip": 1.435
+        }
       }
     },
     {
@@ -638,9 +952,46 @@
       "retrosheet_id": "gibsc001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 44,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 44,
+          "games_started": 1,
+          "wins": 4,
+          "losses": 5,
+          "saves": 0,
+          "innings_outs": 164,
+          "hits": 44,
+          "runs": 18,
+          "earned_runs": 16,
+          "home_runs": 3,
+          "walks": 21,
+          "strikeouts": 43,
+          "hit_batters": 6,
+          "wild_pitches": 6,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 2.63,
+          "whip": 1.189
+        }
       }
     },
     {
@@ -671,16 +1022,54 @@
         "colleges": []
       },
       "teams": [
-        "Chicago White Sox"
+        "Chicago White Sox",
+        "Miami Marlins"
       ],
       "source_url": "https://www.wikidata.org/wiki/Q135103099",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Wikelman_Gonz%C3%A1lez",
       "retrosheet_id": "gonzw002",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 16,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 16,
+          "games_started": 0,
+          "wins": 1,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 61,
+          "hits": 13,
+          "runs": 9,
+          "earned_runs": 6,
+          "home_runs": 1,
+          "walks": 12,
+          "strikeouts": 25,
+          "hit_batters": 0,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 2.66,
+          "whip": 1.23
+        }
       }
     },
     {
@@ -719,9 +1108,46 @@
       "retrosheet_id": "gustr001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 27,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 27,
+          "games_started": 17,
+          "wins": 7,
+          "losses": 7,
+          "saves": 0,
+          "innings_outs": 305,
+          "hits": 114,
+          "runs": 67,
+          "earned_runs": 64,
+          "home_runs": 17,
+          "walks": 36,
+          "strikeouts": 97,
+          "hit_batters": 5,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.67,
+          "whip": 1.475
+        }
       }
     },
     {
@@ -760,9 +1186,46 @@
       "retrosheet_id": "henrr001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 88,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 88,
+          "games_started": 1,
+          "wins": 8,
+          "losses": 3,
+          "saves": 7,
+          "innings_outs": 312,
+          "hits": 81,
+          "runs": 35,
+          "earned_runs": 28,
+          "home_runs": 11,
+          "walks": 35,
+          "strikeouts": 122,
+          "hit_batters": 8,
+          "wild_pitches": 3,
+          "balks": 2,
+          "complete_games": 0,
+          "era": 2.42,
+          "whip": 1.115
+        }
       }
     },
     {
@@ -800,8 +1263,26 @@
       "retrosheet_id": "hernh001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 87,
+          "plate_appearances": 294,
+          "at_bats": 256,
+          "runs": 40,
+          "hits": 68,
+          "doubles": 12,
+          "triples": 1,
+          "home_runs": 10,
+          "runs_batted_in": 45,
+          "walks": 31,
+          "strikeouts": 77,
+          "stolen_bases": 1,
+          "caught_stealing": 1,
+          "average": 0.266,
+          "on_base_percentage": 0.347,
+          "slugging_percentage": 0.438,
+          "ops": 0.785
+        },
         "pitching": null
       }
     },
@@ -850,9 +1331,46 @@
       "retrosheet_id": "junkj001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 36,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 36,
+          "games_started": 23,
+          "wins": 7,
+          "losses": 7,
+          "saves": 1,
+          "innings_outs": 450,
+          "hits": 172,
+          "runs": 89,
+          "earned_runs": 81,
+          "home_runs": 18,
+          "walks": 24,
+          "strikeouts": 111,
+          "hit_batters": 4,
+          "wild_pitches": 3,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.86,
+          "whip": 1.307
+        }
       }
     },
     {
@@ -931,8 +1449,26 @@
       "retrosheet_id": "lopeo001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 269,
+          "plate_appearances": 1039,
+          "at_bats": 957,
+          "runs": 115,
+          "hits": 249,
+          "doubles": 44,
+          "triples": 1,
+          "home_runs": 21,
+          "runs_batted_in": 119,
+          "walks": 70,
+          "strikeouts": 159,
+          "stolen_bases": 35,
+          "caught_stealing": 11,
+          "average": 0.26,
+          "on_base_percentage": 0.312,
+          "slugging_percentage": 0.374,
+          "ops": 0.686
+        },
         "pitching": null
       }
     },
@@ -975,8 +1511,26 @@
       "retrosheet_id": "mackj101",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 66,
+          "plate_appearances": 303,
+          "at_bats": 260,
+          "runs": 30,
+          "hits": 60,
+          "doubles": 14,
+          "triples": 1,
+          "home_runs": 3,
+          "runs_batted_in": 43,
+          "walks": 34,
+          "strikeouts": 41,
+          "stolen_bases": 1,
+          "caught_stealing": 0,
+          "average": 0.231,
+          "on_base_percentage": 0.32,
+          "slugging_percentage": 0.327,
+          "ops": 0.647
+        },
         "pitching": null
       }
     },
@@ -1015,8 +1569,26 @@
       "retrosheet_id": "marsj002",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 55,
+          "plate_appearances": 234,
+          "at_bats": 209,
+          "runs": 28,
+          "hits": 61,
+          "doubles": 18,
+          "triples": 3,
+          "home_runs": 5,
+          "runs_batted_in": 33,
+          "walks": 22,
+          "strikeouts": 48,
+          "stolen_bases": 14,
+          "caught_stealing": 6,
+          "average": 0.292,
+          "on_base_percentage": 0.363,
+          "slugging_percentage": 0.478,
+          "ops": 0.841
+        },
         "pitching": null
       }
     },
@@ -1056,9 +1628,46 @@
       "retrosheet_id": "mazua001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 14,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 14,
+          "games_started": 14,
+          "wins": 1,
+          "losses": 7,
+          "saves": 0,
+          "innings_outs": 191,
+          "hits": 73,
+          "runs": 49,
+          "earned_runs": 44,
+          "home_runs": 10,
+          "walks": 33,
+          "strikeouts": 41,
+          "hit_batters": 3,
+          "wild_pitches": 2,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.22,
+          "whip": 1.665
+        }
       }
     },
     {
@@ -1100,9 +1709,46 @@
       "retrosheet_id": "meyem001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 25,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 25,
+          "games_started": 25,
+          "wins": 6,
+          "losses": 11,
+          "saves": 0,
+          "innings_outs": 383,
+          "hits": 141,
+          "runs": 82,
+          "earned_runs": 75,
+          "home_runs": 28,
+          "walks": 41,
+          "strikeouts": 120,
+          "hit_batters": 5,
+          "wild_pitches": 0,
+          "balks": 1,
+          "complete_games": 0,
+          "era": 5.29,
+          "whip": 1.426
+        }
       }
     },
     {
@@ -1140,9 +1786,46 @@
       "retrosheet_id": "montp001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 1,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 1,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 11,
+          "hits": 9,
+          "runs": 4,
+          "earned_runs": 4,
+          "home_runs": 0,
+          "walks": 1,
+          "strikeouts": 4,
+          "hit_batters": 0,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 9.82,
+          "whip": 2.727
+        }
       }
     },
     {
@@ -1180,9 +1863,46 @@
       "retrosheet_id": "narda001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 135,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 135,
+          "games_started": 0,
+          "wins": 12,
+          "losses": 4,
+          "saves": 3,
+          "innings_outs": 365,
+          "hits": 114,
+          "runs": 64,
+          "earned_runs": 61,
+          "home_runs": 19,
+          "walks": 53,
+          "strikeouts": 167,
+          "hit_batters": 5,
+          "wild_pitches": 2,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.51,
+          "whip": 1.373
+        }
       }
     },
     {
@@ -1224,8 +1944,26 @@
       "retrosheet_id": "navab001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 10,
+          "plate_appearances": 20,
+          "at_bats": 19,
+          "runs": 3,
+          "hits": 6,
+          "doubles": 2,
+          "triples": 0,
+          "home_runs": 1,
+          "runs_batted_in": 5,
+          "walks": 0,
+          "strikeouts": 4,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.316,
+          "on_base_percentage": 0.3,
+          "slugging_percentage": 0.579,
+          "ops": 0.879
+        },
         "pitching": null
       }
     },
@@ -1265,8 +2003,26 @@
       "retrosheet_id": "paulg001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 75,
+          "plate_appearances": 216,
+          "at_bats": 193,
+          "runs": 22,
+          "hits": 40,
+          "doubles": 9,
+          "triples": 1,
+          "home_runs": 6,
+          "runs_batted_in": 16,
+          "walks": 21,
+          "strikeouts": 51,
+          "stolen_bases": 2,
+          "caught_stealing": 0,
+          "average": 0.207,
+          "on_base_percentage": 0.284,
+          "slugging_percentage": 0.358,
+          "ops": 0.642
+        },
         "pitching": null
       }
     },
@@ -1307,9 +2063,46 @@
       "retrosheet_id": "petem001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 31,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 31,
+          "games_started": 0,
+          "wins": 3,
+          "losses": 1,
+          "saves": 0,
+          "innings_outs": 113,
+          "hits": 39,
+          "runs": 25,
+          "earned_runs": 21,
+          "home_runs": 6,
+          "walks": 18,
+          "strikeouts": 31,
+          "hit_batters": 1,
+          "wild_pitches": 2,
+          "balks": 1,
+          "complete_games": 0,
+          "era": 5.02,
+          "whip": 1.513
+        }
       }
     },
     {
@@ -1348,9 +2141,46 @@
       "retrosheet_id": "philt002",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 62,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 62,
+          "games_started": 8,
+          "wins": 6,
+          "losses": 2,
+          "saves": 4,
+          "innings_outs": 343,
+          "hits": 110,
+          "runs": 54,
+          "earned_runs": 52,
+          "home_runs": 17,
+          "walks": 31,
+          "strikeouts": 80,
+          "hit_batters": 4,
+          "wild_pitches": 6,
+          "balks": 0,
+          "complete_games": 1,
+          "era": 4.09,
+          "whip": 1.233
+        }
       }
     },
     {
@@ -1388,9 +2218,46 @@
       "retrosheet_id": "peree004",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 39,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 39,
+          "games_started": 39,
+          "wins": 12,
+          "losses": 12,
+          "saves": 0,
+          "innings_outs": 560,
+          "hits": 140,
+          "runs": 82,
+          "earned_runs": 77,
+          "home_runs": 27,
+          "walks": 63,
+          "strikeouts": 213,
+          "hit_batters": 5,
+          "wild_pitches": 15,
+          "balks": 3,
+          "complete_games": 0,
+          "era": 3.71,
+          "whip": 1.087
+        }
       }
     },
     {
@@ -1448,7 +2315,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "2001-09-10",
-      "age": 24,
+      "age": 25,
       "birthplace": "Santo Domingo",
       "height": null,
       "weight": null,
@@ -1468,8 +2335,26 @@
       "retrosheet_id": "ramia004",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 136,
+          "plate_appearances": 585,
+          "at_bats": 537,
+          "runs": 72,
+          "hits": 124,
+          "doubles": 33,
+          "triples": 1,
+          "home_runs": 21,
+          "runs_batted_in": 67,
+          "walks": 36,
+          "strikeouts": 113,
+          "stolen_bases": 16,
+          "caught_stealing": 3,
+          "average": 0.231,
+          "on_base_percentage": 0.287,
+          "slugging_percentage": 0.413,
+          "ops": 0.7
+        },
         "pitching": null
       }
     },
@@ -1512,8 +2397,26 @@
       "retrosheet_id": "ruize001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 197,
+          "plate_appearances": 621,
+          "at_bats": 560,
+          "runs": 62,
+          "hits": 135,
+          "doubles": 27,
+          "triples": 3,
+          "home_runs": 8,
+          "runs_batted_in": 59,
+          "walks": 27,
+          "strikeouts": 134,
+          "stolen_bases": 77,
+          "caught_stealing": 19,
+          "average": 0.241,
+          "on_base_percentage": 0.296,
+          "slugging_percentage": 0.343,
+          "ops": 0.639
+        },
         "pitching": null
       }
     },
@@ -1552,9 +2455,46 @@
       "retrosheet_id": "sanoj001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 135,
+          "plate_appearances": 378,
+          "at_bats": 348,
+          "runs": 43,
+          "hits": 84,
+          "doubles": 24,
+          "triples": 4,
+          "home_runs": 6,
+          "runs_batted_in": 40,
+          "walks": 20,
+          "strikeouts": 45,
+          "stolen_bases": 6,
+          "caught_stealing": 5,
+          "average": 0.241,
+          "on_base_percentage": 0.283,
+          "slugging_percentage": 0.385,
+          "ops": 0.668
+        },
+        "pitching": {
+          "games": 8,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 28,
+          "hits": 24,
+          "runs": 17,
+          "earned_runs": 17,
+          "home_runs": 4,
+          "walks": 5,
+          "strikeouts": 1,
+          "hit_batters": 0,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 16.39,
+          "whip": 3.107
+        }
       }
     },
     {
@@ -1713,8 +2653,26 @@
       "retrosheet_id": "stowk001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
+        "status": "available",
+        "batting": {
+          "games": 234,
+          "plate_appearances": 797,
+          "at_bats": 712,
+          "runs": 88,
+          "hits": 180,
+          "doubles": 36,
+          "triples": 6,
+          "home_runs": 31,
+          "runs_batted_in": 108,
+          "walks": 69,
+          "strikeouts": 240,
+          "stolen_bases": 5,
+          "caught_stealing": 2,
+          "average": 0.253,
+          "on_base_percentage": 0.325,
+          "slugging_percentage": 0.451,
+          "ops": 0.776
+        },
         "pitching": null
       }
     },
@@ -1754,9 +2712,46 @@
       "retrosheet_id": "vodnv001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 122,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 122,
+          "games_started": 0,
+          "wins": 10,
+          "losses": 7,
+          "saves": 19,
+          "innings_outs": 399,
+          "hits": 132,
+          "runs": 65,
+          "earned_runs": 60,
+          "home_runs": 11,
+          "walks": 66,
+          "strikeouts": 126,
+          "hit_batters": 1,
+          "wild_pitches": 8,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.06,
+          "whip": 1.489
+        }
       }
     },
     {
@@ -1845,9 +2840,46 @@
       "retrosheet_id": "zubet001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 66,
+          "plate_appearances": 1,
+          "at_bats": 1,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 1,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.0,
+          "on_base_percentage": 0.0,
+          "slugging_percentage": 0.0,
+          "ops": 0.0
+        },
+        "pitching": {
+          "games": 66,
+          "games_started": 0,
+          "wins": 1,
+          "losses": 6,
+          "saves": 0,
+          "innings_outs": 194,
+          "hits": 61,
+          "runs": 47,
+          "earned_runs": 45,
+          "home_runs": 14,
+          "walks": 45,
+          "strikeouts": 73,
+          "hit_batters": 2,
+          "wild_pitches": 3,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.26,
+          "whip": 1.639
+        }
       }
     }
   ]
