@@ -1,9 +1,11 @@
 import SwiftUI
+import SafariServices
 
 struct HeadlinesView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @State private var store: HeadlinesStore
     @State private var secondarySource: NewsSource
+    @State private var presentedArticle: PresentedArticle?
     let team: HubTeam
 
     init(team: HubTeam = .boston) {
@@ -60,6 +62,10 @@ struct HeadlinesView: View {
         .task {
             await store.load()
         }
+        .sheet(item: $presentedArticle) { article in
+            SafariView(url: article.url)
+                .ignoresSafeArea()
+        }
     }
 
     private func newspaperQuadrant(_ source: NewsSource) -> some View {
@@ -101,10 +107,13 @@ struct HeadlinesView: View {
     private func newspaperStory(_ article: NewsArticle) -> some View {
         Group {
             if let url = URL(string: article.url) {
-                Link(destination: url) {
+                Button {
+                    presentedArticle = PresentedArticle(url: url)
+                } label: {
                     newspaperStoryText(article)
                 }
                 .buttonStyle(SwipeSafeLinkStyle())
+                .accessibilityAddTraits(.isLink)
             } else {
                 newspaperStoryText(article)
             }
@@ -211,10 +220,13 @@ struct HeadlinesView: View {
     private func articleCard(_ article: NewsArticle) -> some View {
         Group {
             if let url = URL(string: article.url) {
-                Link(destination: url) {
+                Button {
+                    presentedArticle = PresentedArticle(url: url)
+                } label: {
                     articleContent(article)
                 }
                 .buttonStyle(SwipeSafeLinkStyle())
+                .accessibilityAddTraits(.isLink)
             } else {
                 articleContent(article)
             }
@@ -288,8 +300,24 @@ struct HeadlinesView: View {
     }
 }
 
-// Link's built-in press can complete alongside the parent page-swipe gesture.
-// A real tap keeps the link behavior, while a drag fails this tap gesture.
+private struct PresentedArticle: Identifiable {
+    let url: URL
+
+    var id: String { url.absoluteString }
+}
+
+private struct SafariView: UIViewControllerRepresentable {
+    let url: URL
+
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ controller: SFSafariViewController, context: Context) {}
+}
+
+// A primitive button's built-in press can complete alongside the parent page-swipe
+// gesture. A real tap opens the article, while a drag fails this tap gesture.
 private struct SwipeSafeLinkStyle: PrimitiveButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
