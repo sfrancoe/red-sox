@@ -257,10 +257,11 @@ struct RecentGameView: View {
                         .stroke(AppColor.border.opacity(0.65), lineWidth: 0.5)
                 }
         }
-        .background(AppColor.nightRaised)
-        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 12)
+        .padding(.top, 10)
         .padding(.bottom, 12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppColor.nightRaised)
     }
 
     private func combinedLineScore(_ game: RecentGame) -> some View {
