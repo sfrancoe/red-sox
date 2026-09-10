@@ -72,36 +72,16 @@ struct RecentGameView: View {
                     selectedGameID = game.gamePk
                     selectedStatsTeam = .favorite
                 } label: {
-                    ViewThatFits(in: .horizontal) {
-                        HStack(spacing: 7) {
-                            gameTabLabel(game)
-                            if !game.isLive {
-                                gameResultLabel(game.result, game: game)
-                            }
-                        }
-
-                        VStack(spacing: 4) {
-                            gameTabLabel(game)
-                            if !game.isLive {
-                                gameResultLabel(game.result, game: game)
-                            }
-                        }
+                    VStack(spacing: 3) {
+                        gameTabLabel(game)
+                        gameScoreLabel(game)
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 7)
+                    .padding(.vertical, 6)
                     .foregroundStyle(selectedGameID == game.gamePk ? AppColor.ink : AppColor.inkMuted)
-                    .overlay(alignment: .bottom) {
-                        if selectedGameID == game.gamePk {
-                            Rectangle().fill(AppColor.accent).frame(height: 2)
-                        }
-                    }
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(
-                    game.isLive
-                        ? gameTabTitle(game)
-                        : "\(gameTabTitle(game)), \(game.result)"
-                )
+                .accessibilityLabel(gameTabAccessibilityLabel(game))
             }
         }
         .padding(.horizontal, 16)
@@ -122,16 +102,33 @@ struct RecentGameView: View {
             .minimumScaleFactor(0.72)
     }
 
-    private func gameResultLabel(_ result: String, game: RecentGame) -> some View {
-        Text(result.lowercased() == "win" ? "(W)" : "(L)")
+    private func gameScoreLabel(_ game: RecentGame) -> some View {
+        let favorite = game.away.id == team.mlbID ? game.away : game.home
+        let opponent = game.away.id == team.mlbID ? game.home : game.away
+        let result = game.result.lowercased()
+        let prefix = game.isLive ? "" : result == "win" ? "W " : "L "
+
+        return Text("\(prefix)\(favorite.runs)–\(opponent.runs)")
             .font(
                 .system(
-                    size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
+                    size: selectedGame?.gamePk == game.gamePk ? 14 : 12,
                     weight: .black
                 )
             )
-            .tracking(0.5)
-            .foregroundStyle(result.lowercased() == "win" ? AppColor.resultWinText : AppColor.resultLossText)
+            .monospacedDigit()
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+            .foregroundStyle(
+                game.isLive
+                    ? AppColor.hunterGreen
+                    : result == "win" ? AppColor.resultWinText : AppColor.resultLossText
+            )
+    }
+
+    private func gameTabAccessibilityLabel(_ game: RecentGame) -> String {
+        let favorite = game.away.id == team.mlbID ? game.away : game.home
+        let opponent = game.away.id == team.mlbID ? game.home : game.away
+        return "\(gameTabTitle(game)), \(game.result), \(favorite.abbreviation) \(favorite.runs), \(opponent.abbreviation) \(opponent.runs)"
     }
 
     private func gameTabTitle(_ game: RecentGame) -> String {
