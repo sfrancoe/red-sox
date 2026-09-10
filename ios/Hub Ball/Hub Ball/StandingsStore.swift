@@ -20,8 +20,8 @@ final class StandingsStore {
         let americanSource = league == .american ? team : HubTeam.boston
         let nationalSource = league == .national ? team : HubTeam.newYorkMets
         endpoints = [
-            .american: AppBackend.dataURL("standings.json", team: americanSource),
-            .national: AppBackend.dataURL("standings.json", team: nationalSource),
+            .american: AppBackend.apiURL("mlb/standings", team: americanSource),
+            .national: AppBackend.apiURL("mlb/standings", team: nationalSource),
         ]
     }
 

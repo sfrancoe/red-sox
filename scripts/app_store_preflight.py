@@ -36,6 +36,7 @@ KNOWN_ENDPOINTS = {
     "https://red-sox.netlify.app/api/x-discovery",
     "https://red-sox.netlify.app/api/x-posts",
     "https://red-sox.netlify.app/api/mlb/schedule?team=red-sox",
+    "https://red-sox.netlify.app/api/mlb/standings?team=redsox",
     "https://red-sox.netlify.app/api/data/athletic.json",
     "https://red-sox.netlify.app/api/data/globe.json",
     "https://red-sox.netlify.app/api/data/herald.json",
@@ -269,10 +270,18 @@ def check_live_endpoints() -> list[Check]:
             checks.append(result("FAIL", "Live endpoint", f"{url}: {exc}"))
             continue
         try:
-            json.loads(payload)
+            parsed = json.loads(payload)
         except json.JSONDecodeError:
             checks.append(result("FAIL", "Live endpoint", f"{url}: response is not valid JSON"))
             continue
+        if "/api/mlb/standings" in url:
+            if parsed.get("freshness") != "live" or not parsed.get("source_updated_at"):
+                checks.append(result("FAIL", "Live standings", f"{url}: live data is unavailable"))
+                continue
+            divisions = parsed.get("divisions") or []
+            if len(divisions) != 3 or not parsed.get("wild_card"):
+                checks.append(result("FAIL", "Live standings", f"{url}: standings are incomplete"))
+                continue
         checks.append(result("PASS", "Live endpoint", f"HTTP {status}: {url}"))
     return checks
 

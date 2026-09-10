@@ -3,6 +3,7 @@ import SwiftUI
 struct StandingsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
+    @Environment(\.scenePhase) private var scenePhase
     @State private var store: StandingsStore
 
     init(team: HubTeam = .boston) {
@@ -36,6 +37,15 @@ struct StandingsView: View {
         .toolbarColorScheme(.light, for: .navigationBar)
         .task {
             await store.load()
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(60))
+                guard !Task.isCancelled else { break }
+                await store.load()
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active else { return }
+            Task { await store.load() }
         }
     }
 
@@ -155,7 +165,8 @@ struct StandingsView: View {
     private var standingsFooter: some View {
         let updates = StandingsLeague.allCases.compactMap { store.feeds[$0]?.updatedText }
         let updated = updates.first ?? "—"
-        return Text("Updated \(updated) · MLB Stats API")
+        let delayed = store.feeds.values.contains(where: \.isDelayed)
+        return Text("\(delayed ? "Data delayed · " : "")Updated \(updated) · MLB Stats API")
             .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
             .foregroundStyle(AppColor.ink.opacity(0.72))
             .frame(maxWidth: .infinity, alignment: .leading)

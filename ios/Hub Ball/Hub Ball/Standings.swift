@@ -2,7 +2,9 @@ import Foundation
 
 struct StandingsFeed: Decodable {
     let generatedAt: String
+    let sourceUpdatedAt: String?
     let source: String
+    let freshness: String?
     let season: Int
     let league: String
     let divisions: [StandingsDivision]
@@ -11,11 +13,14 @@ struct StandingsFeed: Decodable {
     var updatedText: String {
         let fractionalFormatter = ISO8601DateFormatter()
         fractionalFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let date = fractionalFormatter.date(from: generatedAt)
-            ?? ISO8601DateFormatter().date(from: generatedAt)
-        guard let date else { return generatedAt }
+        let value = sourceUpdatedAt ?? generatedAt
+        let date = fractionalFormatter.date(from: value)
+            ?? ISO8601DateFormatter().date(from: value)
+        guard let date else { return value }
         return date.formatted(date: .abbreviated, time: .shortened)
     }
+
+    var isDelayed: Bool { freshness == "stale" }
 }
 
 struct StandingsDivision: Decodable, Identifiable {

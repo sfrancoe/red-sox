@@ -49,7 +49,7 @@ final class HomeStore {
         do {
             async let recentData = Self.fetchData("recent-game.json", team: team)
             async let scheduleData = Self.fetchData("schedule.json", team: team)
-            async let standingsData = Self.fetchData("standings.json", team: team)
+            async let standingsData = Self.fetchStandings(team: team)
             async let currentGame = Self.fetchCurrentGame(team: team)
             let loaded = try await (recentData, scheduleData, standingsData, currentGame)
             let fallbackGame = try Self.decode(RecentGame.self, from: loaded.0)
@@ -63,6 +63,17 @@ final class HomeStore {
 
     nonisolated private static func fetchData(_ fileName: String, team: HubTeam) async throws -> Data {
         var request = URLRequest(url: AppBackend.dataURL(fileName, team: team))
+        request.cachePolicy = .reloadRevalidatingCacheData
+        request.timeoutInterval = 20
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw HomeStoreError.badResponse
+        }
+        return data
+    }
+
+    nonisolated private static func fetchStandings(team: HubTeam) async throws -> Data {
+        var request = URLRequest(url: AppBackend.apiURL("mlb/standings", team: team))
         request.cachePolicy = .reloadRevalidatingCacheData
         request.timeoutInterval = 20
         let (data, response) = try await URLSession.shared.data(for: request)

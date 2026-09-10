@@ -148,6 +148,16 @@ struct HomeView: View {
                             Divider().overlay(AppColor.separator).padding(.leading, 13)
                         }
                     }
+
+                    if let standings = store.standings, standings.isDelayed {
+                        Label("Standings delayed · Updated \(standings.updatedText)", systemImage: "clock.badge.exclamationmark")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundStyle(AppColor.inkMuted)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 13)
+                            .padding(.vertical, 8)
+                            .background(AppColor.paper)
+                    }
                 }
                 .modifier(HomeCardStyle())
             }

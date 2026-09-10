@@ -17,6 +17,7 @@ try {
   assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/schedule.json');
   assert.equal(calls[0].options.headers['User-Agent'], undefined);
   assert.match(response.headers.get('Netlify-CDN-Cache-Control'), /durable/);
+  assert.match(response.headers.get('Netlify-CDN-Cache-Control'), /stale-while-revalidate=3600/);
 
   calls = [];
   response = await handler(new Request('https://example.test/data/schedule.json'));

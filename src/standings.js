@@ -49,7 +49,7 @@ function standingsTable(teams, gamesBackKey, cutoff = false) {
   const body = document.createElement('tbody');
   teams.forEach(team => {
     const row = document.createElement('tr');
-    if (team.is_red_sox) row.classList.add('red-sox');
+    if (team.is_favorite || team.is_red_sox) row.classList.add('red-sox');
     if (cutoff && Number(team.rank) === 4) row.classList.add('outside-cutoff');
     row.appendChild(cell('td', team.rank, 'rank-cell'));
     const teamCell = cell('th', team.short_name, 'team-cell');
@@ -90,7 +90,7 @@ function updatedLabel(value) {
 
 async function loadStandings() {
   try {
-    const response = await fetch('../data/standings.json', { cache: 'no-store' });
+    const response = await fetch('/api/mlb/standings?team=redsox', { cache: 'no-store' });
     if (!response.ok) throw new Error(`Standings request returned ${response.status}`);
     const feed = await response.json();
     if (!Array.isArray(feed.divisions) || !Array.isArray(feed.wild_card)) {
@@ -99,7 +99,9 @@ async function loadStandings() {
     divisionGrid.replaceChildren(...feed.divisions.map(divisionCard));
     wildCardTable.replaceChildren(standingsTable(feed.wild_card, 'wild_card_games_back', true));
     document.getElementById('standingsKicker').textContent = `${feed.season} American League`;
-    document.getElementById('standingsUpdated').textContent = updatedLabel(feed.generated_at);
+    const updated = updatedLabel(feed.source_updated_at || feed.generated_at);
+    document.getElementById('standingsUpdated').textContent =
+      feed.freshness === 'stale' ? `Data delayed · ${updated}` : updated;
     status.hidden = true;
     const requested = new URLSearchParams(location.search).get('view');
     selectView(requested === 'wild-card' ? 'wildCardPanel' : 'divisionsPanel');
@@ -112,4 +114,8 @@ async function loadStandings() {
 await loadStandings();
 setInterval(() => {
   if (document.visibilityState === 'visible') loadStandings();
-}, 300_000);
+}, 60_000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') loadStandings();
+});
+window.addEventListener('focus', loadStandings);
