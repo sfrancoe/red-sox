@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T05:19:42.023833+00:00",
+  "generated_at": "2026-09-10T16:41:52.238403+00:00",
   "season": 2026,
   "team": "Cleveland Guardians",
   "games_played": 147,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 16.4,
+    "actual_war": 16.5,
     "forecast_war_to_date": 12.2,
-    "war_gap": 4.1,
-    "innings": 1297.7,
-    "era": 3.77
+    "war_gap": 4.2,
+    "innings": 1305.7,
+    "era": 3.8
   },
   "pitchers": [
     {
@@ -34,7 +34,7 @@
         "ip_value": 167.0,
         "war": 4.36,
         "era": 2.53,
-        "fip": 3.11,
+        "fip": 3.12,
         "k_minus_bb_pct": 19.3
       },
       "forecast": {
@@ -49,8 +49,8 @@
         "ip": 125.6,
         "war": 1.31
       },
-      "war_gap": 3.04,
-      "innings_share_pct": 12.9
+      "war_gap": 3.05,
+      "innings_share_pct": 12.8
     },
     {
       "id": 668909,
@@ -66,7 +66,7 @@
         "ip_value": 169.0,
         "war": 3.23,
         "era": 3.78,
-        "fip": 3.48,
+        "fip": 3.49,
         "k_minus_bb_pct": 25.7
       },
       "forecast": {
@@ -81,8 +81,8 @@
         "ip": 160.9,
         "war": 1.79
       },
-      "war_gap": 1.43,
-      "innings_share_pct": 13.0
+      "war_gap": 1.44,
+      "innings_share_pct": 12.9
     },
     {
       "id": 671922,
@@ -113,7 +113,7 @@
         "ip": 63.5,
         "war": 0.96
       },
-      "war_gap": 1.04,
+      "war_gap": 1.05,
       "innings_share_pct": 5.0
     },
     {
@@ -145,8 +145,8 @@
         "ip": 135.0,
         "war": 1.28
       },
-      "war_gap": 0.34,
-      "innings_share_pct": 11.1
+      "war_gap": 0.35,
+      "innings_share_pct": 11.0
     },
     {
       "id": 676440,
@@ -160,9 +160,9 @@
       "actual": {
         "ip": "170.2",
         "ip_value": 170.667,
-        "war": 1.22,
+        "war": 1.23,
         "era": 4.22,
-        "fip": 4.61,
+        "fip": 4.62,
         "k_minus_bb_pct": 11.5
       },
       "forecast": {
@@ -177,8 +177,8 @@
         "ip": 165.2,
         "war": 2.1
       },
-      "war_gap": -0.88,
-      "innings_share_pct": 13.2
+      "war_gap": -0.87,
+      "innings_share_pct": 13.1
     },
     {
       "id": 681870,
@@ -194,7 +194,7 @@
         "ip_value": 42.333,
         "war": 1.07,
         "era": 2.76,
-        "fip": 2.76,
+        "fip": 2.77,
         "k_minus_bb_pct": 23.0
       },
       "forecast": {
@@ -210,7 +210,7 @@
         "war": 0.14
       },
       "war_gap": 0.93,
-      "innings_share_pct": 3.3
+      "innings_share_pct": 3.2
     },
     {
       "id": 670059,
@@ -224,7 +224,7 @@
       "actual": {
         "ip": "52.2",
         "ip_value": 52.667,
-        "war": 0.8,
+        "war": 0.81,
         "era": 2.73,
         "fip": 3.15,
         "k_minus_bb_pct": 13.5
@@ -242,24 +242,24 @@
         "war": 0.09
       },
       "war_gap": 0.72,
-      "innings_share_pct": 4.1
+      "innings_share_pct": 4.0
     },
     {
       "id": 670036,
       "name": "Matt Festa",
       "throws": "R",
       "role": "Reliever",
-      "games": 61,
+      "games": 62,
       "starts": 0,
       "saves": 1,
       "holds": 7,
       "actual": {
-        "ip": "60.1",
-        "ip_value": 60.333,
-        "war": 0.66,
-        "era": 3.88,
-        "fip": 3.42,
-        "k_minus_bb_pct": 17.9
+        "ip": "62.2",
+        "ip_value": 62.667,
+        "war": 0.71,
+        "era": 3.73,
+        "fip": 3.4,
+        "k_minus_bb_pct": 17.6
       },
       "forecast": {
         "ip": 60.0,
@@ -273,8 +273,8 @@
         "ip": 54.4,
         "war": 0.04
       },
-      "war_gap": 0.62,
-      "innings_share_pct": 4.6
+      "war_gap": 0.68,
+      "innings_share_pct": 4.8
     },
     {
       "id": 677944,
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "115.2",
         "ip_value": 115.667,
-        "war": 0.64,
+        "war": 0.65,
         "era": 5.06,
         "fip": 4.66,
         "k_minus_bb_pct": 11.0
@@ -345,16 +345,16 @@
       "name": "Foster Griffin",
       "throws": "L",
       "role": "Starter",
-      "games": 6,
-      "starts": 6,
+      "games": 7,
+      "starts": 7,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "31.0",
-        "ip_value": 31.0,
-        "war": 0.31,
-        "era": 4.06,
-        "fip": 4.16,
+        "ip": "33.1",
+        "ip_value": 33.333,
+        "war": 0.35,
+        "era": 5.94,
+        "fip": 4.12,
         "k_minus_bb_pct": 11.3
       },
       "forecast": {
@@ -369,25 +369,50 @@
         "ip": 128.2,
         "war": 1.84
       },
-      "war_gap": -1.52,
-      "innings_share_pct": 2.4
+      "war_gap": -1.48,
+      "innings_share_pct": 2.6
+    },
+    {
+      "id": 682982,
+      "name": "Daniel Espino",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 9,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "10.0",
+        "ip_value": 10.0,
+        "war": 0.17,
+        "era": 2.7,
+        "fip": 2.0,
+        "k_minus_bb_pct": 32.6
+      },
+      "forecast": null,
+      "forecast_to_date": {
+        "ip": 0.0,
+        "war": 0.0
+      },
+      "war_gap": 0.17,
+      "innings_share_pct": 0.8
     },
     {
       "id": 680916,
       "name": "Franco Aleman",
       "throws": "R",
       "role": "Reliever",
-      "games": 19,
+      "games": 20,
       "starts": 0,
       "saves": 0,
       "holds": 3,
       "actual": {
-        "ip": "19.1",
-        "ip_value": 19.333,
-        "war": 0.19,
-        "era": 3.26,
-        "fip": 3.82,
-        "k_minus_bb_pct": 16.3
+        "ip": "21.2",
+        "ip_value": 21.667,
+        "war": 0.14,
+        "era": 2.91,
+        "fip": 4.07,
+        "k_minus_bb_pct": 18.1
       },
       "forecast": {
         "ip": 22.0,
@@ -401,33 +426,8 @@
         "ip": 20.0,
         "war": 0.05
       },
-      "war_gap": 0.15,
-      "innings_share_pct": 1.5
-    },
-    {
-      "id": 682982,
-      "name": "Daniel Espino",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 8,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "9.0",
-        "ip_value": 9.0,
-        "war": 0.15,
-        "era": 3.0,
-        "fip": 2.09,
-        "k_minus_bb_pct": 33.3
-      },
-      "forecast": null,
-      "forecast_to_date": {
-        "ip": 0.0,
-        "war": 0.0
-      },
-      "war_gap": 0.15,
-      "innings_share_pct": 0.7
+      "war_gap": 0.1,
+      "innings_share_pct": 1.7
     },
     {
       "id": 702021,
@@ -443,7 +443,7 @@
         "ip_value": 19.667,
         "war": 0.08,
         "era": 4.58,
-        "fip": 3.8,
+        "fip": 3.81,
         "k_minus_bb_pct": 25.9
       },
       "forecast": {
@@ -475,7 +475,7 @@
         "ip_value": 9.667,
         "war": 0.06,
         "era": 4.66,
-        "fip": 3.71,
+        "fip": 3.72,
         "k_minus_bb_pct": 2.2
       },
       "forecast": {
@@ -507,7 +507,7 @@
         "ip_value": 2.0,
         "war": 0.05,
         "era": 0.0,
-        "fip": 0.09,
+        "fip": 0.1,
         "k_minus_bb_pct": 37.5
       },
       "forecast": {
@@ -539,7 +539,7 @@
         "ip_value": 4.333,
         "war": 0.05,
         "era": 6.23,
-        "fip": 2.63,
+        "fip": 2.64,
         "k_minus_bb_pct": 5.0
       },
       "forecast": null,
@@ -564,7 +564,7 @@
         "ip_value": 16.0,
         "war": 0.02,
         "era": 5.06,
-        "fip": 4.34,
+        "fip": 4.35,
         "k_minus_bb_pct": 19.7
       },
       "forecast": {
@@ -660,7 +660,7 @@
         "ip_value": 16.667,
         "war": -0.04,
         "era": 5.94,
-        "fip": 4.95,
+        "fip": 4.96,
         "k_minus_bb_pct": 12.3
       },
       "forecast": {
@@ -692,7 +692,7 @@
         "ip_value": 8.667,
         "war": -0.06,
         "era": 10.38,
-        "fip": 5.4,
+        "fip": 5.41,
         "k_minus_bb_pct": 13.3
       },
       "forecast": {
@@ -722,7 +722,7 @@
       "actual": {
         "ip": "33.0",
         "ip_value": 33.0,
-        "war": -0.07,
+        "war": -0.06,
         "era": 4.91,
         "fip": 4.58,
         "k_minus_bb_pct": 9.6
@@ -788,7 +788,7 @@
         "ip_value": 15.333,
         "war": -0.31,
         "era": 5.28,
-        "fip": 6.09,
+        "fip": 6.1,
         "k_minus_bb_pct": 16.4
       },
       "forecast": {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T05:19:40.960638+00:00",
+  "generated_at": "2026-09-10T16:41:50.879437+00:00",
   "season": 2026,
   "team": "Chicago White Sox",
   "games_played": 145,
@@ -15,9 +15,9 @@
   "team_summary": {
     "actual_war": 11.3,
     "forecast_war_to_date": 12.3,
-    "war_gap": -1.0,
-    "innings": 1283.0,
-    "era": 4.15
+    "war_gap": -0.9,
+    "innings": 1292.0,
+    "era": 4.14
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "156.0",
         "ip_value": 156.0,
-        "war": 2.87,
+        "war": 2.88,
         "era": 3.58,
         "fip": 3.66,
         "k_minus_bb_pct": 17.4
@@ -49,25 +49,25 @@
         "ip": 127.1,
         "war": 0.82
       },
-      "war_gap": 2.05,
-      "innings_share_pct": 12.2
+      "war_gap": 2.06,
+      "innings_share_pct": 12.1
     },
     {
       "id": 663436,
       "name": "Davis Martin",
       "throws": "R",
       "role": "Starter",
-      "games": 25,
-      "starts": 25,
+      "games": 26,
+      "starts": 26,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "130.2",
-        "ip_value": 130.667,
-        "war": 2.58,
-        "era": 4.13,
-        "fip": 3.67,
-        "k_minus_bb_pct": 13.4
+        "ip": "135.2",
+        "ip_value": 135.667,
+        "war": 2.52,
+        "era": 4.05,
+        "fip": 3.78,
+        "k_minus_bb_pct": 12.8
       },
       "forecast": {
         "ip": 159.1,
@@ -81,8 +81,8 @@
         "ip": 142.4,
         "war": 1.2
       },
-      "war_gap": 1.38,
-      "innings_share_pct": 10.2
+      "war_gap": 1.33,
+      "innings_share_pct": 10.5
     },
     {
       "id": 691799,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "75.0",
         "ip_value": 75.0,
-        "war": 1.95,
+        "war": 1.96,
         "era": 2.16,
         "fip": 2.63,
         "k_minus_bb_pct": 23.7
@@ -121,17 +121,17 @@
       "name": "Sean Newcomb",
       "throws": "L",
       "role": "Setup",
-      "games": 52,
+      "games": 53,
       "starts": 4,
       "saves": 4,
       "holds": 10,
       "actual": {
-        "ip": "81.2",
-        "ip_value": 81.667,
-        "war": 1.9,
-        "era": 2.42,
-        "fip": 2.88,
-        "k_minus_bb_pct": 13.9
+        "ip": "83.0",
+        "ip_value": 83.0,
+        "war": 1.87,
+        "era": 2.71,
+        "fip": 2.93,
+        "k_minus_bb_pct": 13.3
       },
       "forecast": {
         "ip": 66.0,
@@ -145,7 +145,7 @@
         "ip": 59.1,
         "war": 0.38
       },
-      "war_gap": 1.52,
+      "war_gap": 1.49,
       "innings_share_pct": 6.4
     },
     {
@@ -178,7 +178,7 @@
         "war": 0.14
       },
       "war_gap": 1.18,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 4.7
     },
     {
       "id": 641743,
@@ -192,9 +192,9 @@
       "actual": {
         "ip": "141.0",
         "ip_value": 141.0,
-        "war": 0.96,
+        "war": 0.97,
         "era": 4.47,
-        "fip": 4.84,
+        "fip": 4.85,
         "k_minus_bb_pct": 10.4
       },
       "forecast": {
@@ -209,8 +209,8 @@
         "ip": 125.3,
         "war": 1.43
       },
-      "war_gap": -0.47,
-      "innings_share_pct": 11.0
+      "war_gap": -0.46,
+      "innings_share_pct": 10.9
     },
     {
       "id": 702273,
@@ -274,7 +274,7 @@
         "war": 0.32
       },
       "war_gap": 0.02,
-      "innings_share_pct": 3.4
+      "innings_share_pct": 3.3
     },
     {
       "id": 696146,
@@ -290,7 +290,7 @@
         "ip_value": 16.0,
         "war": 0.34,
         "era": 0.56,
-        "fip": 2.9,
+        "fip": 2.91,
         "k_minus_bb_pct": 21.0
       },
       "forecast": {
@@ -309,53 +309,21 @@
       "innings_share_pct": 1.2
     },
     {
-      "id": 669684,
-      "name": "Chris Murphy",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 29,
-      "starts": 2,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "30.0",
-        "ip_value": 30.0,
-        "war": 0.27,
-        "era": 4.2,
-        "fip": 3.93,
-        "k_minus_bb_pct": 10.6
-      },
-      "forecast": {
-        "ip": 56.0,
-        "war": 0.18,
-        "era": 4.02,
-        "fip": 4.31,
-        "k_minus_bb_pct": 11.2,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 50.1,
-        "war": 0.17
-      },
-      "war_gap": 0.11,
-      "innings_share_pct": 2.3
-    },
-    {
       "id": 670950,
       "name": "Trevor Richards",
       "throws": "R",
       "role": "Reliever",
-      "games": 43,
+      "games": 44,
       "starts": 0,
       "saves": 1,
       "holds": 1,
       "actual": {
-        "ip": "64.0",
-        "ip_value": 64.0,
-        "war": 0.26,
-        "era": 3.52,
-        "fip": 4.23,
-        "k_minus_bb_pct": 14.5
+        "ip": "66.0",
+        "ip_value": 66.0,
+        "war": 0.31,
+        "era": 3.41,
+        "fip": 4.16,
+        "k_minus_bb_pct": 15.2
       },
       "forecast": {
         "ip": 1.0,
@@ -369,8 +337,40 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.27,
-      "innings_share_pct": 5.0
+      "war_gap": 0.31,
+      "innings_share_pct": 5.1
+    },
+    {
+      "id": 669684,
+      "name": "Chris Murphy",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 30,
+      "starts": 2,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "30.2",
+        "ip_value": 30.667,
+        "war": 0.3,
+        "era": 4.11,
+        "fip": 3.85,
+        "k_minus_bb_pct": 11.2
+      },
+      "forecast": {
+        "ip": 56.0,
+        "war": 0.18,
+        "era": 4.02,
+        "fip": 4.31,
+        "k_minus_bb_pct": 11.2,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 50.1,
+        "war": 0.17
+      },
+      "war_gap": 0.14,
+      "innings_share_pct": 2.4
     },
     {
       "id": 699823,
@@ -450,7 +450,7 @@
         "ip_value": 35.333,
         "war": 0.05,
         "era": 3.06,
-        "fip": 4.25,
+        "fip": 4.26,
         "k_minus_bb_pct": 3.4
       },
       "forecast": {
@@ -466,7 +466,7 @@
         "war": -0.01
       },
       "war_gap": 0.06,
-      "innings_share_pct": 2.8
+      "innings_share_pct": 2.7
     },
     {
       "id": 624512,
@@ -482,7 +482,7 @@
         "ip_value": 1.0,
         "war": 0.02,
         "era": 0.0,
-        "fip": 3.09,
+        "fip": 3.1,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -507,7 +507,7 @@
         "ip_value": 27.333,
         "war": -0.0,
         "era": 5.93,
-        "fip": 4.48,
+        "fip": 4.49,
         "k_minus_bb_pct": 20.5
       },
       "forecast": {
@@ -539,7 +539,7 @@
         "ip_value": 2.0,
         "war": -0.01,
         "era": 4.5,
-        "fip": 5.09,
+        "fip": 5.1,
         "k_minus_bb_pct": -11.1
       },
       "forecast": {
@@ -571,7 +571,7 @@
         "ip_value": 38.333,
         "war": -0.02,
         "era": 3.99,
-        "fip": 4.63,
+        "fip": 4.64,
         "k_minus_bb_pct": 14.5
       },
       "forecast": {
@@ -603,7 +603,7 @@
         "ip_value": 8.333,
         "war": -0.03,
         "era": 10.8,
-        "fip": 5.61,
+        "fip": 5.62,
         "k_minus_bb_pct": 4.1
       },
       "forecast": {
@@ -635,7 +635,7 @@
         "ip_value": 10.333,
         "war": -0.03,
         "era": 3.48,
-        "fip": 4.54,
+        "fip": 4.55,
         "k_minus_bb_pct": 1.9
       },
       "forecast": {
@@ -667,7 +667,7 @@
         "ip_value": 10.0,
         "war": -0.04,
         "era": 4.5,
-        "fip": 4.79,
+        "fip": 4.8,
         "k_minus_bb_pct": 6.5
       },
       "forecast": {
@@ -731,7 +731,7 @@
         "ip_value": 2.0,
         "war": -0.07,
         "era": 4.5,
-        "fip": 10.09,
+        "fip": 10.1,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -740,13 +740,13 @@
         "era": 4.15,
         "fip": 4.32,
         "k_minus_bb_pct": 12.9,
-        "team_at_fetch": "ATL"
+        "team_at_fetch": "SFG"
       },
       "forecast_to_date": {
         "ip": 23.3,
         "war": 0.06
       },
-      "war_gap": -0.14,
+      "war_gap": -0.13,
       "innings_share_pct": 0.2
     },
     {
@@ -788,7 +788,7 @@
         "ip_value": 0.333,
         "war": -0.08,
         "era": 27.0,
-        "fip": 39.09,
+        "fip": 39.1,
         "k_minus_bb_pct": -60.0
       },
       "forecast": {
@@ -835,8 +835,8 @@
         "ip": 96.7,
         "war": 0.48
       },
-      "war_gap": -0.64,
-      "innings_share_pct": 10.0
+      "war_gap": -0.63,
+      "innings_share_pct": 9.9
     },
     {
       "id": 699151,
@@ -884,7 +884,7 @@
         "ip_value": 8.667,
         "war": -0.17,
         "era": 6.23,
-        "fip": 7.36,
+        "fip": 7.37,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -948,7 +948,7 @@
         "ip_value": 6.0,
         "war": -0.23,
         "era": 12.0,
-        "fip": 8.09,
+        "fip": 8.1,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -980,7 +980,7 @@
         "ip_value": 26.333,
         "war": -0.24,
         "era": 7.52,
-        "fip": 6.43,
+        "fip": 6.44,
         "k_minus_bb_pct": 12.1
       },
       "forecast": {
@@ -996,7 +996,7 @@
         "war": 2.13
       },
       "war_gap": -2.37,
-      "innings_share_pct": 2.1
+      "innings_share_pct": 2.0
     },
     {
       "id": 623211,
@@ -1012,7 +1012,7 @@
         "ip_value": 10.0,
         "war": -0.28,
         "era": 6.3,
-        "fip": 6.49,
+        "fip": 6.5,
         "k_minus_bb_pct": -2.2
       },
       "forecast": {
@@ -1060,7 +1060,7 @@
         "war": 0.38
       },
       "war_gap": -0.77,
-      "innings_share_pct": 1.5
+      "innings_share_pct": 1.4
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T00:36:48.786769+00:00",
+  "generated_at": "2026-09-10T16:42:00.394242+00:00",
   "season": 2026,
   "team": "Athletics",
   "games_played": 147,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 5.9,
+    "actual_war": 6.2,
     "forecast_war_to_date": 10.2,
-    "war_gap": -4.3,
-    "innings": 1291.0,
-    "era": 5.41
+    "war_gap": -4.0,
+    "innings": 1300.0,
+    "era": 5.37
   },
   "pitchers": [
     {
@@ -34,7 +34,7 @@
         "ip_value": 96.667,
         "war": 1.91,
         "era": 5.12,
-        "fip": 3.73,
+        "fip": 3.74,
         "k_minus_bb_pct": 14.4
       },
       "forecast": {
@@ -50,7 +50,7 @@
         "war": 0.51
       },
       "war_gap": 1.39,
-      "innings_share_pct": 7.5
+      "innings_share_pct": 7.4
     },
     {
       "id": 669372,
@@ -66,7 +66,7 @@
         "ip_value": 138.333,
         "war": 1.69,
         "era": 3.71,
-        "fip": 4.37,
+        "fip": 4.38,
         "k_minus_bb_pct": 11.0
       },
       "forecast": {
@@ -82,7 +82,7 @@
         "war": 1.02
       },
       "war_gap": 0.67,
-      "innings_share_pct": 10.7
+      "innings_share_pct": 10.6
     },
     {
       "id": 682052,
@@ -98,7 +98,7 @@
         "ip_value": 111.0,
         "war": 0.94,
         "era": 4.78,
-        "fip": 4.98,
+        "fip": 4.99,
         "k_minus_bb_pct": 10.4
       },
       "forecast": {
@@ -114,7 +114,39 @@
         "war": 1.33
       },
       "war_gap": -0.38,
-      "innings_share_pct": 8.6
+      "innings_share_pct": 8.5
+    },
+    {
+      "id": 665622,
+      "name": "Luis Medina",
+      "throws": "R",
+      "role": "Setup",
+      "games": 52,
+      "starts": 1,
+      "saves": 0,
+      "holds": 12,
+      "actual": {
+        "ip": "66.1",
+        "ip_value": 66.333,
+        "war": 0.76,
+        "era": 3.39,
+        "fip": 3.66,
+        "k_minus_bb_pct": 17.0
+      },
+      "forecast": {
+        "ip": 78.1,
+        "war": 0.45,
+        "era": 4.33,
+        "fip": 4.39,
+        "k_minus_bb_pct": 12.1,
+        "team_at_fetch": "ATH"
+      },
+      "forecast_to_date": {
+        "ip": 70.8,
+        "war": 0.41
+      },
+      "war_gap": 0.35,
+      "innings_share_pct": 5.1
     },
     {
       "id": 622663,
@@ -128,9 +160,9 @@
       "actual": {
         "ip": "62.2",
         "ip_value": 62.667,
-        "war": 0.72,
+        "war": 0.71,
         "era": 4.16,
-        "fip": 4.46,
+        "fip": 4.47,
         "k_minus_bb_pct": 12.5
       },
       "forecast": {
@@ -146,39 +178,71 @@
         "war": 1.64
       },
       "war_gap": -0.92,
-      "innings_share_pct": 4.9
+      "innings_share_pct": 4.8
     },
     {
-      "id": 665622,
-      "name": "Luis Medina",
-      "throws": "R",
-      "role": "Setup",
-      "games": 51,
-      "starts": 1,
+      "id": 669620,
+      "name": "Brady Basso",
+      "throws": "L",
+      "role": "Swingman",
+      "games": 23,
+      "starts": 5,
       "saves": 0,
-      "holds": 11,
+      "holds": 3,
       "actual": {
-        "ip": "65.1",
-        "ip_value": 65.333,
+        "ip": "37.1",
+        "ip_value": 37.333,
         "war": 0.69,
-        "era": 3.44,
-        "fip": 3.72,
-        "k_minus_bb_pct": 16.4
+        "era": 3.86,
+        "fip": 3.2,
+        "k_minus_bb_pct": 13.0
       },
       "forecast": {
-        "ip": 78.1,
-        "war": 0.45,
-        "era": 4.33,
-        "fip": 4.39,
-        "k_minus_bb_pct": 12.1,
+        "ip": 26.0,
+        "war": 0.16,
+        "era": 3.8,
+        "fip": 3.94,
+        "k_minus_bb_pct": 14.4,
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 70.8,
-        "war": 0.41
+        "ip": 23.6,
+        "war": 0.15
       },
-      "war_gap": 0.28,
-      "innings_share_pct": 5.1
+      "war_gap": 0.54,
+      "innings_share_pct": 2.9
+    },
+    {
+      "id": 656240,
+      "name": "Scott Blewett",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 17,
+      "starts": 0,
+      "saves": 0,
+      "holds": 2,
+      "actual": {
+        "ip": "26.1",
+        "ip_value": 26.333,
+        "war": 0.65,
+        "era": 2.39,
+        "fip": 2.07,
+        "k_minus_bb_pct": 15.7
+      },
+      "forecast": {
+        "ip": 24.0,
+        "war": -0.08,
+        "era": 4.36,
+        "fip": 4.51,
+        "k_minus_bb_pct": 9.3,
+        "team_at_fetch": "ATH"
+      },
+      "forecast_to_date": {
+        "ip": 21.8,
+        "war": -0.08
+      },
+      "war_gap": 0.73,
+      "innings_share_pct": 2.0
     },
     {
       "id": 643410,
@@ -194,7 +258,7 @@
         "ip_value": 33.667,
         "war": 0.63,
         "era": 4.28,
-        "fip": 2.94,
+        "fip": 2.95,
         "k_minus_bb_pct": 18.8
       },
       "forecast": {
@@ -213,85 +277,21 @@
       "innings_share_pct": 2.6
     },
     {
-      "id": 656240,
-      "name": "Scott Blewett",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 16,
-      "starts": 0,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "24.1",
-        "ip_value": 24.333,
-        "war": 0.62,
-        "era": 2.59,
-        "fip": 1.94,
-        "k_minus_bb_pct": 16.8
-      },
-      "forecast": {
-        "ip": 24.0,
-        "war": -0.08,
-        "era": 4.36,
-        "fip": 4.51,
-        "k_minus_bb_pct": 9.3,
-        "team_at_fetch": "ATH"
-      },
-      "forecast_to_date": {
-        "ip": 21.8,
-        "war": -0.08
-      },
-      "war_gap": 0.7,
-      "innings_share_pct": 1.9
-    },
-    {
-      "id": 669620,
-      "name": "Brady Basso",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 22,
-      "starts": 4,
-      "saves": 0,
-      "holds": 3,
-      "actual": {
-        "ip": "33.1",
-        "ip_value": 33.333,
-        "war": 0.56,
-        "era": 4.32,
-        "fip": 3.27,
-        "k_minus_bb_pct": 13.1
-      },
-      "forecast": {
-        "ip": 26.0,
-        "war": 0.16,
-        "era": 3.8,
-        "fip": 3.94,
-        "k_minus_bb_pct": 14.4,
-        "team_at_fetch": "ATH"
-      },
-      "forecast_to_date": {
-        "ip": 23.6,
-        "war": 0.15
-      },
-      "war_gap": 0.41,
-      "innings_share_pct": 2.6
-    },
-    {
       "id": 663687,
       "name": "Hogan Harris",
       "throws": "L",
       "role": "Closer",
-      "games": 66,
+      "games": 67,
       "starts": 0,
       "saves": 15,
-      "holds": 12,
+      "holds": 13,
       "actual": {
-        "ip": "62.2",
-        "ip_value": 62.667,
-        "war": 0.55,
-        "era": 3.45,
-        "fip": 4.0,
-        "k_minus_bb_pct": 15.6
+        "ip": "63.2",
+        "ip_value": 63.667,
+        "war": 0.56,
+        "era": 3.39,
+        "fip": 3.99,
+        "k_minus_bb_pct": 15.4
       },
       "forecast": {
         "ip": 66.0,
@@ -305,7 +305,7 @@
         "ip": 59.9,
         "war": 0.08
       },
-      "war_gap": 0.47,
+      "war_gap": 0.48,
       "innings_share_pct": 4.9
     },
     {
@@ -322,7 +322,7 @@
         "ip_value": 103.333,
         "war": 0.36,
         "era": 6.53,
-        "fip": 4.96,
+        "fip": 4.97,
         "k_minus_bb_pct": 15.2
       },
       "forecast": {
@@ -338,7 +338,7 @@
         "war": 0.17
       },
       "war_gap": 0.19,
-      "innings_share_pct": 8.0
+      "innings_share_pct": 7.9
     },
     {
       "id": 650644,
@@ -370,7 +370,7 @@
         "war": 1.17
       },
       "war_gap": -0.86,
-      "innings_share_pct": 5.8
+      "innings_share_pct": 5.7
     },
     {
       "id": 669270,
@@ -418,7 +418,7 @@
         "ip_value": 43.0,
         "war": 0.22,
         "era": 5.65,
-        "fip": 4.23,
+        "fip": 4.24,
         "k_minus_bb_pct": 12.8
       },
       "forecast": {
@@ -546,7 +546,7 @@
         "ip_value": 19.667,
         "war": 0.09,
         "era": 4.58,
-        "fip": 4.21,
+        "fip": 4.22,
         "k_minus_bb_pct": 2.3
       },
       "forecast": {
@@ -629,6 +629,38 @@
       "innings_share_pct": 0.3
     },
     {
+      "id": 665660,
+      "name": "Elvis Alvarado",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 48,
+      "starts": 0,
+      "saves": 6,
+      "holds": 9,
+      "actual": {
+        "ip": "48.0",
+        "ip_value": 48.0,
+        "war": 0.01,
+        "era": 4.13,
+        "fip": 4.45,
+        "k_minus_bb_pct": 17.1
+      },
+      "forecast": {
+        "ip": 54.0,
+        "war": 0.06,
+        "era": 4.32,
+        "fip": 4.47,
+        "k_minus_bb_pct": 11.5,
+        "team_at_fetch": "ATH"
+      },
+      "forecast_to_date": {
+        "ip": 49.0,
+        "war": 0.05
+      },
+      "war_gap": -0.04,
+      "innings_share_pct": 3.7
+    },
+    {
       "id": 688497,
       "name": "Taylor Rashi",
       "throws": "R",
@@ -642,7 +674,7 @@
         "ip_value": 2.0,
         "war": -0.01,
         "era": 4.5,
-        "fip": 5.09,
+        "fip": 5.1,
         "k_minus_bb_pct": -9.1
       },
       "forecast": {
@@ -674,7 +706,7 @@
         "ip_value": 1.0,
         "war": -0.03,
         "era": 36.0,
-        "fip": 12.09,
+        "fip": 12.1,
         "k_minus_bb_pct": -25.0
       },
       "forecast": {
@@ -706,7 +738,7 @@
         "ip_value": 6.667,
         "war": -0.04,
         "era": 9.45,
-        "fip": 5.34,
+        "fip": 5.35,
         "k_minus_bb_pct": 21.9
       },
       "forecast": {
@@ -725,38 +757,6 @@
       "innings_share_pct": 0.5
     },
     {
-      "id": 665660,
-      "name": "Elvis Alvarado",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 47,
-      "starts": 0,
-      "saves": 5,
-      "holds": 9,
-      "actual": {
-        "ip": "47.0",
-        "ip_value": 47.0,
-        "war": -0.06,
-        "era": 4.21,
-        "fip": 4.56,
-        "k_minus_bb_pct": 16.4
-      },
-      "forecast": {
-        "ip": 54.0,
-        "war": 0.06,
-        "era": 4.32,
-        "fip": 4.47,
-        "k_minus_bb_pct": 11.5,
-        "team_at_fetch": "ATH"
-      },
-      "forecast_to_date": {
-        "ip": 49.0,
-        "war": 0.05
-      },
-      "war_gap": -0.11,
-      "innings_share_pct": 3.6
-    },
-    {
       "id": 621053,
       "name": "Tyler Ferguson",
       "throws": "R",
@@ -770,7 +770,7 @@
         "ip_value": 1.333,
         "war": -0.12,
         "era": 27.0,
-        "fip": 21.09,
+        "fip": 21.1,
         "k_minus_bb_pct": 12.5
       },
       "forecast": {
@@ -802,7 +802,7 @@
         "ip_value": 5.0,
         "war": -0.12,
         "era": 16.2,
-        "fip": 6.89,
+        "fip": 6.9,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -834,7 +834,7 @@
         "ip_value": 3.667,
         "war": -0.14,
         "era": 14.73,
-        "fip": 8.0,
+        "fip": 8.01,
         "k_minus_bb_pct": 4.8
       },
       "forecast": {
@@ -938,7 +938,7 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": -0.36,
+      "war_gap": -0.35,
       "innings_share_pct": 1.3
     },
     {
@@ -955,7 +955,7 @@
         "ip_value": 42.667,
         "war": -0.44,
         "era": 6.12,
-        "fip": 5.48,
+        "fip": 5.49,
         "k_minus_bb_pct": 14.7
       },
       "forecast": {
@@ -987,7 +987,7 @@
         "ip_value": 130.0,
         "war": -0.49,
         "era": 6.02,
-        "fip": 6.06,
+        "fip": 6.07,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -1003,7 +1003,7 @@
         "war": 1.62
       },
       "war_gap": -2.11,
-      "innings_share_pct": 10.1
+      "innings_share_pct": 10.0
     },
     {
       "id": 806960,
@@ -1051,7 +1051,7 @@
         "ip_value": 33.333,
         "war": -0.64,
         "era": 6.48,
-        "fip": 6.42,
+        "fip": 6.43,
         "k_minus_bb_pct": 6.6
       },
       "forecast": {
@@ -1098,8 +1098,8 @@
         "ip": 24.5,
         "war": 0.1
       },
-      "war_gap": -0.78,
-      "innings_share_pct": 3.2
+      "war_gap": -0.77,
+      "innings_share_pct": 3.1
     }
   ]
 }
