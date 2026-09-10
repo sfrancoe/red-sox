@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-08T15:21:34+00:00",
+ "generated_at": "2026-09-09T15:19:06+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 108,
  "seasons": {
   "2026": {
-   "record": "54-90",
-   "games": 144,
+   "record": "55-90",
+   "games": 145,
    "in_progress": true,
    "war_leader": {
     "name": "Zach Neto",
-    "war": 3.9
+    "war": 4.2
    },
    "war_leaders": [
     {
      "name": "Zach Neto",
+     "war": 4.2
+    },
+    {
+     "name": "Reid Detmers",
      "war": 3.9
     },
     {
      "name": "Mike Trout",
      "war": 3.6
-    },
-    {
-     "name": "Reid Detmers",
-     "war": 3.5
     }
    ],
    "pitching_leaders": {
@@ -31,7 +31,7 @@
      "top": [
       {
        "name": "Reid Detmers",
-       "value": "1.06"
+       "value": "1.04"
       },
       {
        "name": "Ryan Zeferjahn",
@@ -49,11 +49,11 @@
      "names": [
       "Zach Neto"
      ],
-     "value": 23,
+     "value": 24,
      "top": [
       {
        "name": "Zach Neto",
-       "value": 23
+       "value": 24
       },
       {
        "name": "Mike Trout",
@@ -69,11 +69,11 @@
      "names": [
       "Zach Neto"
      ],
-     "value": 67,
+     "value": 69,
      "top": [
       {
        "name": "Zach Neto",
-       "value": 67
+       "value": 69
       },
       {
        "name": "Jo Adell",
@@ -81,23 +81,23 @@
       },
       {
        "name": "Vaughn Grissom",
-       "value": 59
+       "value": 60
       }
      ]
     },
     "avg": {
      "names": [
-      "Nolan Schanuel"
+      "Mike Trout"
      ],
-     "value": ".276",
+     "value": ".243",
      "top": [
-      {
-       "name": "Nolan Schanuel",
-       "value": ".276"
-      },
       {
        "name": "Mike Trout",
        "value": ".243"
+      },
+      {
+       "name": "Zach Neto",
+       "value": ".242"
       },
       {
        "name": "Jo Adell",
@@ -109,19 +109,19 @@
      "names": [
       "Mike Trout"
      ],
-     "value": ".799",
+     "value": ".800",
      "top": [
       {
        "name": "Mike Trout",
-       "value": ".799"
+       "value": ".800"
       },
       {
        "name": "Zach Neto",
-       "value": ".743"
+       "value": ".757"
       },
       {
-       "name": "Nolan Schanuel",
-       "value": ".736"
+       "name": "Jo Adell",
+       "value": ".682"
       }
      ]
     }

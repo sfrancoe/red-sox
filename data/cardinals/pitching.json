@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-09T05:19:00.492128+00:00",
+  "generated_at": "2026-09-10T00:37:04.423228+00:00",
   "season": 2026,
   "team": "St. Louis Cardinals",
-  "games_played": 146,
-  "season_fraction": 0.9012,
+  "games_played": 147,
+  "season_fraction": 0.9074,
   "method": "Actual FanGraphs pitching WAR is compared with preseason Steamer WAR prorated to St. Louis's games played.",
   "sources": {
     "actual": "FanGraphs Major League Leaderboards",
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 11.3,
+    "actual_war": 11.2,
     "forecast_war_to_date": 7.5,
-    "war_gap": 3.9,
-    "innings": 1293.7,
-    "era": 4.31
+    "war_gap": 3.7,
+    "innings": 1301.7,
+    "era": 4.29
   },
   "pitchers": [
     {
@@ -46,8 +46,8 @@
         "team_at_fetch": "MIL"
       },
       "forecast_to_date": {
-        "ip": 145.3,
-        "war": 1.42
+        "ip": 146.3,
+        "war": 1.43
       },
       "war_gap": 1.16,
       "innings_share_pct": 8.4
@@ -78,11 +78,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 108.3,
-        "war": 0.54
+        "ip": 109.0,
+        "war": 0.55
       },
       "war_gap": 1.87,
-      "innings_share_pct": 10.2
+      "innings_share_pct": 10.1
     },
     {
       "id": 669467,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "141.0",
         "ip_value": 141.0,
-        "war": 2.39,
+        "war": 2.38,
         "era": 3.51,
         "fip": 3.71,
         "k_minus_bb_pct": 9.1
@@ -110,11 +110,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 122.8,
-        "war": 1.17
+        "ip": 123.7,
+        "war": 1.18
       },
-      "war_gap": 1.21,
-      "innings_share_pct": 10.9
+      "war_gap": 1.2,
+      "innings_share_pct": 10.8
     },
     {
       "id": 700241,
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "154.0",
         "ip_value": 154.0,
-        "war": 1.64,
+        "war": 1.65,
         "era": 3.92,
         "fip": 4.24,
         "k_minus_bb_pct": 10.1
@@ -142,11 +142,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 123.8,
-        "war": 1.21
+        "ip": 124.7,
+        "war": 1.22
       },
-      "war_gap": 0.44,
-      "innings_share_pct": 11.9
+      "war_gap": 0.43,
+      "innings_share_pct": 11.8
     },
     {
       "id": 669461,
@@ -162,7 +162,7 @@
         "ip_value": 139.0,
         "war": 1.1,
         "era": 5.57,
-        "fip": 4.53,
+        "fip": 4.52,
         "k_minus_bb_pct": 15.6
       },
       "forecast": {
@@ -174,43 +174,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 141.9,
-        "war": 1.18
+        "ip": 142.8,
+        "war": 1.19
       },
       "war_gap": -0.08,
       "innings_share_pct": 10.7
-    },
-    {
-      "id": 687273,
-      "name": "Quinn Mathews",
-      "throws": "L",
-      "role": "Starter",
-      "games": 5,
-      "starts": 5,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "24.2",
-        "ip_value": 24.667,
-        "war": 0.62,
-        "era": 4.38,
-        "fip": 3.26,
-        "k_minus_bb_pct": 10.7
-      },
-      "forecast": {
-        "ip": 46.2,
-        "war": 0.31,
-        "era": 4.27,
-        "fip": 4.56,
-        "k_minus_bb_pct": 8.2,
-        "team_at_fetch": "STL"
-      },
-      "forecast_to_date": {
-        "ip": 41.6,
-        "war": 0.28
-      },
-      "war_gap": 0.34,
-      "innings_share_pct": 1.9
     },
     {
       "id": 676617,
@@ -238,11 +206,43 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 56.8,
-        "war": 0.3
+        "ip": 57.2,
+        "war": 0.31
       },
       "war_gap": 0.24,
       "innings_share_pct": 4.5
+    },
+    {
+      "id": 687273,
+      "name": "Quinn Mathews",
+      "throws": "L",
+      "role": "Starter",
+      "games": 6,
+      "starts": 6,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "30.2",
+        "ip_value": 30.667,
+        "war": 0.47,
+        "era": 4.11,
+        "fip": 4.01,
+        "k_minus_bb_pct": 10.2
+      },
+      "forecast": {
+        "ip": 46.2,
+        "war": 0.31,
+        "era": 4.27,
+        "fip": 4.56,
+        "k_minus_bb_pct": 8.2,
+        "team_at_fetch": "STL"
+      },
+      "forecast_to_date": {
+        "ip": 41.9,
+        "war": 0.28
+      },
+      "war_gap": 0.18,
+      "innings_share_pct": 2.4
     },
     {
       "id": 690928,
@@ -270,28 +270,28 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 80.6,
+        "ip": 81.1,
         "war": 0.46
       },
       "war_gap": -0.04,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
     },
     {
       "id": 700669,
       "name": "Gordon Graceffo",
       "throws": "R",
       "role": "Reliever",
-      "games": 55,
+      "games": 56,
       "starts": 1,
       "saves": 1,
       "holds": 6,
       "actual": {
-        "ip": "71.1",
-        "ip_value": 71.333,
-        "war": 0.32,
-        "era": 2.78,
-        "fip": 3.96,
-        "k_minus_bb_pct": 7.1
+        "ip": "73.1",
+        "ip_value": 73.333,
+        "war": 0.36,
+        "era": 2.7,
+        "fip": 3.92,
+        "k_minus_bb_pct": 7.2
       },
       "forecast": {
         "ip": 44.0,
@@ -302,11 +302,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 39.7,
+        "ip": 39.9,
         "war": 0.02
       },
-      "war_gap": 0.31,
-      "innings_share_pct": 5.5
+      "war_gap": 0.34,
+      "innings_share_pct": 5.6
     },
     {
       "id": 677865,
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "70.0",
         "ip_value": 70.0,
-        "war": 0.25,
+        "war": 0.26,
         "era": 3.6,
         "fip": 3.99,
         "k_minus_bb_pct": 6.8
@@ -334,7 +334,7 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 48.7,
+        "ip": 49.0,
         "war": 0.03
       },
       "war_gap": 0.22,
@@ -366,7 +366,7 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 36.0,
+        "ip": 36.3,
         "war": 0.1
       },
       "war_gap": 0.11,
@@ -401,7 +401,7 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.16,
+      "war_gap": 0.17,
       "innings_share_pct": 0.3
     },
     {
@@ -430,7 +430,7 @@
         "team_at_fetch": "MIL"
       },
       "forecast_to_date": {
-        "ip": 57.7,
+        "ip": 58.1,
         "war": 0.26
       },
       "war_gap": -0.15,
@@ -494,7 +494,7 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 45.1,
+        "ip": 45.4,
         "war": -0.01
       },
       "war_gap": 0.1,
@@ -526,7 +526,7 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 58.6,
+        "ip": 59.0,
         "war": 0.18
       },
       "war_gap": -0.14,
@@ -558,7 +558,7 @@
         "team_at_fetch": "MIA"
       },
       "forecast_to_date": {
-        "ip": 45.1,
+        "ip": 45.4,
         "war": -0.09
       },
       "war_gap": 0.12,
@@ -622,7 +622,7 @@
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 21.6,
+        "ip": 21.8,
         "war": -0.08
       },
       "war_gap": 0.08,
@@ -667,7 +667,7 @@
         "ip_value": 28.667,
         "war": -0.06,
         "era": 5.02,
-        "fip": 4.46,
+        "fip": 4.45,
         "k_minus_bb_pct": 21.8
       },
       "forecast": {
@@ -679,7 +679,7 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 25.2,
+        "ip": 25.4,
         "war": 0.09
       },
       "war_gap": -0.15,
@@ -769,7 +769,7 @@
       },
       "forecast_to_date": {
         "ip": 0.9,
-        "war": -0.0
+        "war": -0.01
       },
       "war_gap": -0.07,
       "innings_share_pct": 0.7
@@ -786,7 +786,7 @@
       "actual": {
         "ip": "57.0",
         "ip_value": 57.0,
-        "war": -0.16,
+        "war": -0.15,
         "era": 4.42,
         "fip": 4.67,
         "k_minus_bb_pct": 12.6
@@ -800,10 +800,10 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 54.1,
+        "ip": 54.4,
         "war": 0.15
       },
-      "war_gap": -0.31,
+      "war_gap": -0.3,
       "innings_share_pct": 4.4
     },
     {
@@ -864,7 +864,7 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 14.4,
+        "ip": 14.5,
         "war": 0.03
       },
       "war_gap": -0.22,
@@ -896,7 +896,7 @@
         "team_at_fetch": null
       },
       "forecast_to_date": {
-        "ip": 47.8,
+        "ip": 48.1,
         "war": 0.26
       },
       "war_gap": -0.5,
@@ -928,11 +928,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 52.3,
+        "ip": 52.6,
         "war": -0.08
       },
       "war_gap": -0.19,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 4.7
     },
     {
       "id": 688297,
@@ -960,7 +960,7 @@
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 46.9,
+        "ip": 47.2,
         "war": 0.03
       },
       "war_gap": -0.44,

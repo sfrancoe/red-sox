@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-08T15:21:39+00:00",
+ "generated_at": "2026-09-09T15:19:10+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 134,
  "seasons": {
   "2026": {
-   "record": "71-73",
-   "games": 144,
+   "record": "72-73",
+   "games": 145,
    "in_progress": true,
    "war_leader": {
     "name": "Brandon Lowe",
-    "war": 4.4
+    "war": 4.5
    },
    "war_leaders": [
     {
      "name": "Brandon Lowe",
-     "war": 4.4
+     "war": 4.5
+    },
+    {
+     "name": "Bryan Reynolds",
+     "war": 3.6
     },
     {
      "name": "Braxton Ashcraft",
      "war": 3.6
-    },
-    {
-     "name": "Bryan Reynolds",
-     "war": 3.5
     }
    ],
    "pitching_leaders": {
@@ -76,12 +76,12 @@
        "value": 83
       },
       {
-       "name": "Ryan O'Hearn",
+       "name": "Bryan Reynolds",
        "value": 69
       },
       {
-       "name": "Bryan Reynolds",
-       "value": 67
+       "name": "Ryan O'Hearn",
+       "value": 69
       }
      ]
     },
@@ -97,27 +97,28 @@
       },
       {
        "name": "Bryan Reynolds",
-       "value": ".266"
+       "value": ".268"
       },
       {
        "name": "Brandon Lowe",
-       "value": ".256"
+       "value": ".258"
       }
      ]
     },
     "ops": {
      "names": [
-      "Brandon Lowe"
+      "Brandon Lowe",
+      "Bryan Reynolds"
      ],
-     "value": ".803",
+     "value": ".805",
      "top": [
       {
        "name": "Brandon Lowe",
-       "value": ".803"
+       "value": ".805"
       },
       {
        "name": "Bryan Reynolds",
-       "value": ".801"
+       "value": ".805"
       },
       {
        "name": "Nick Gonzales",

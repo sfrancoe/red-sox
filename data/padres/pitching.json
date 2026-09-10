@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-09T05:19:05.054404+00:00",
+  "generated_at": "2026-09-10T00:37:10.300386+00:00",
   "season": 2026,
   "team": "San Diego Padres",
-  "games_played": 145,
-  "season_fraction": 0.8951,
+  "games_played": 146,
+  "season_fraction": 0.9012,
   "method": "Actual FanGraphs pitching WAR is compared with preseason Steamer WAR prorated to San Diego's games played.",
   "sources": {
     "actual": "FanGraphs Major League Leaderboards",
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 13.9,
-    "forecast_war_to_date": 14.9,
+    "actual_war": 14.0,
+    "forecast_war_to_date": 15.1,
     "war_gap": -1.0,
-    "innings": 1275.3,
+    "innings": 1284.3,
     "era": 3.91
   },
   "pitchers": [
@@ -46,10 +46,10 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 59.1,
-        "war": 1.36
+        "ip": 59.5,
+        "war": 1.37
       },
-      "war_gap": 2.07,
+      "war_gap": 2.06,
       "innings_share_pct": 4.8
     },
     {
@@ -57,17 +57,17 @@
       "name": "Adrian Morejon",
       "throws": "L",
       "role": "Setup",
-      "games": 67,
+      "games": 68,
       "starts": 0,
-      "saves": 2,
+      "saves": 3,
       "holds": 23,
       "actual": {
-        "ip": "77.2",
-        "ip_value": 77.667,
-        "war": 2.44,
-        "era": 2.9,
-        "fip": 2.44,
-        "k_minus_bb_pct": 22.3
+        "ip": "78.2",
+        "ip_value": 78.667,
+        "war": 2.51,
+        "era": 2.86,
+        "fip": 2.42,
+        "k_minus_bb_pct": 22.4
       },
       "forecast": {
         "ip": 68.0,
@@ -78,10 +78,10 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 60.9,
-        "war": 0.6
+        "ip": 61.3,
+        "war": 0.61
       },
-      "war_gap": 1.84,
+      "war_gap": 1.9,
       "innings_share_pct": 6.1
     },
     {
@@ -98,7 +98,7 @@
         "ip_value": 168.0,
         "war": 2.31,
         "era": 3.0,
-        "fip": 4.17,
+        "fip": 4.16,
         "k_minus_bb_pct": 11.4
       },
       "forecast": {
@@ -110,11 +110,11 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 149.0,
-        "war": 2.62
+        "ip": 150.1,
+        "war": 2.63
       },
-      "war_gap": -0.31,
-      "innings_share_pct": 13.2
+      "war_gap": -0.33,
+      "innings_share_pct": 13.1
     },
     {
       "id": 699134,
@@ -142,7 +142,7 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 46.5,
+        "ip": 46.9,
         "war": 0.06
       },
       "war_gap": 1.72,
@@ -160,9 +160,9 @@
       "actual": {
         "ip": "136.1",
         "ip_value": 136.333,
-        "war": 1.54,
+        "war": 1.55,
         "era": 4.56,
-        "fip": 4.33,
+        "fip": 4.32,
         "k_minus_bb_pct": 11.5
       },
       "forecast": {
@@ -174,28 +174,28 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 74.1,
+        "ip": 74.6,
         "war": 0.28
       },
       "war_gap": 1.27,
-      "innings_share_pct": 10.7
+      "innings_share_pct": 10.6
     },
     {
       "id": 681190,
       "name": "Randy Vásquez",
       "throws": "R",
       "role": "Swingman",
-      "games": 27,
+      "games": 28,
       "starts": 22,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "127.2",
-        "ip_value": 127.667,
-        "war": 1.14,
-        "era": 4.02,
-        "fip": 4.32,
-        "k_minus_bb_pct": 8.2
+        "ip": "129.0",
+        "ip_value": 129.0,
+        "war": 1.21,
+        "era": 3.98,
+        "fip": 4.28,
+        "k_minus_bb_pct": 8.5
       },
       "forecast": {
         "ip": 141.5,
@@ -206,10 +206,10 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 126.6,
+        "ip": 127.5,
         "war": 0.44
       },
-      "war_gap": 0.7,
+      "war_gap": 0.76,
       "innings_share_pct": 10.0
     },
     {
@@ -224,9 +224,9 @@
       "actual": {
         "ip": "21.0",
         "ip_value": 21.0,
-        "war": 1.05,
+        "war": 1.06,
         "era": 3.43,
-        "fip": 1.48,
+        "fip": 1.47,
         "k_minus_bb_pct": 24.1
       },
       "forecast": {
@@ -238,10 +238,10 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 155.8,
-        "war": 2.35
+        "ip": 156.9,
+        "war": 2.36
       },
-      "war_gap": -1.29,
+      "war_gap": -1.31,
       "innings_share_pct": 1.6
     },
     {
@@ -258,7 +258,7 @@
         "ip_value": 59.0,
         "war": 0.73,
         "era": 4.12,
-        "fip": 3.42,
+        "fip": 3.41,
         "k_minus_bb_pct": 15.3
       },
       "forecast": {
@@ -270,7 +270,7 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 43.0,
+        "ip": 43.3,
         "war": 0.08
       },
       "war_gap": 0.65,
@@ -302,43 +302,11 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 62.7,
-        "war": 0.92
+        "ip": 63.1,
+        "war": 0.93
       },
-      "war_gap": -0.35,
+      "war_gap": -0.36,
       "innings_share_pct": 2.4
-    },
-    {
-      "id": 673513,
-      "name": "Yuki Matsui",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 44,
-      "starts": 0,
-      "saves": 0,
-      "holds": 8,
-      "actual": {
-        "ip": "55.1",
-        "ip_value": 55.333,
-        "war": 0.36,
-        "era": 1.95,
-        "fip": 4.14,
-        "k_minus_bb_pct": 12.9
-      },
-      "forecast": {
-        "ip": 44.0,
-        "war": 0.05,
-        "era": 4.06,
-        "fip": 4.28,
-        "k_minus_bb_pct": 13.6,
-        "team_at_fetch": "SDP"
-      },
-      "forecast_to_date": {
-        "ip": 39.4,
-        "war": 0.05
-      },
-      "war_gap": 0.31,
-      "innings_share_pct": 4.3
     },
     {
       "id": 593974,
@@ -366,11 +334,43 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 51.0,
+        "ip": 51.4,
         "war": 0.16
       },
       "war_gap": 0.16,
       "innings_share_pct": 5.3
+    },
+    {
+      "id": 673513,
+      "name": "Yuki Matsui",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 45,
+      "starts": 0,
+      "saves": 0,
+      "holds": 8,
+      "actual": {
+        "ip": "56.0",
+        "ip_value": 56.0,
+        "war": 0.24,
+        "era": 2.09,
+        "fip": 4.32,
+        "k_minus_bb_pct": 13.1
+      },
+      "forecast": {
+        "ip": 44.0,
+        "war": 0.05,
+        "era": 4.06,
+        "fip": 4.28,
+        "k_minus_bb_pct": 13.6,
+        "team_at_fetch": "SDP"
+      },
+      "forecast_to_date": {
+        "ip": 39.7,
+        "war": 0.05
+      },
+      "war_gap": 0.19,
+      "innings_share_pct": 4.4
     },
     {
       "id": 656288,
@@ -398,8 +398,8 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 98.9,
-        "war": 0.65
+        "ip": 99.6,
+        "war": 0.66
       },
       "war_gap": -0.49,
       "innings_share_pct": 6.2
@@ -409,17 +409,17 @@
       "name": "David Morgan",
       "throws": "R",
       "role": "Reliever",
-      "games": 23,
+      "games": 24,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "25.0",
-        "ip_value": 25.0,
-        "war": 0.04,
-        "era": 4.68,
-        "fip": 4.13,
-        "k_minus_bb_pct": 11.2
+        "ip": "25.1",
+        "ip_value": 25.333,
+        "war": 0.05,
+        "era": 4.62,
+        "fip": 4.12,
+        "k_minus_bb_pct": 11.1
       },
       "forecast": {
         "ip": 58.0,
@@ -430,10 +430,10 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 51.9,
+        "ip": 52.3,
         "war": 0.03
       },
-      "war_gap": 0.01,
+      "war_gap": 0.02,
       "innings_share_pct": 2.0
     },
     {
@@ -450,7 +450,7 @@
         "ip_value": 32.667,
         "war": 0.0,
         "era": 4.68,
-        "fip": 5.15,
+        "fip": 5.14,
         "k_minus_bb_pct": 9.8
       },
       "forecast": {
@@ -462,11 +462,11 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 30.2,
+        "ip": 30.4,
         "war": 0.14
       },
       "war_gap": -0.14,
-      "innings_share_pct": 2.6
+      "innings_share_pct": 2.5
     },
     {
       "id": 689690,
@@ -494,7 +494,7 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 31.3,
+        "ip": 31.5,
         "war": -0.12
       },
       "war_gap": 0.1,
@@ -526,11 +526,11 @@
         "team_at_fetch": "WSN"
       },
       "forecast_to_date": {
-        "ip": 8.1,
+        "ip": 8.2,
         "war": 0.03
       },
       "war_gap": -0.11,
-      "innings_share_pct": 2.6
+      "innings_share_pct": 2.5
     },
     {
       "id": 666745,
@@ -558,7 +558,7 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 16.1,
+        "ip": 16.2,
         "war": 0.05
       },
       "war_gap": -0.12,
@@ -590,10 +590,10 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 54.6,
-        "war": 0.42
+        "ip": 55.0,
+        "war": 0.43
       },
-      "war_gap": -0.53,
+      "war_gap": -0.54,
       "innings_share_pct": 2.5
     },
     {
@@ -647,11 +647,43 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 112.5,
-        "war": 0.84
+        "ip": 113.3,
+        "war": 0.85
       },
-      "war_gap": -1.04,
+      "war_gap": -1.05,
       "innings_share_pct": 2.3
+    },
+    {
+      "id": 663554,
+      "name": "Casey Mize",
+      "throws": "R",
+      "role": "Starter",
+      "games": 7,
+      "starts": 7,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "32.2",
+        "ip_value": 32.667,
+        "war": -0.21,
+        "era": 6.34,
+        "fip": 6.34,
+        "k_minus_bb_pct": 8.3
+      },
+      "forecast": {
+        "ip": 150.6,
+        "war": 2.16,
+        "era": 4.06,
+        "fip": 4.02,
+        "k_minus_bb_pct": 14.4,
+        "team_at_fetch": "SDP"
+      },
+      "forecast_to_date": {
+        "ip": 135.7,
+        "war": 1.95
+      },
+      "war_gap": -2.16,
+      "innings_share_pct": 2.5
     },
     {
       "id": 592662,
@@ -679,10 +711,10 @@
         "team_at_fetch": "SDP"
       },
       "forecast_to_date": {
-        "ip": 160.9,
-        "war": 1.46
+        "ip": 162.0,
+        "war": 1.47
       },
-      "war_gap": -1.69,
+      "war_gap": -1.7,
       "innings_share_pct": 2.2
     },
     {
@@ -711,43 +743,11 @@
         "team_at_fetch": "MIN"
       },
       "forecast_to_date": {
-        "ip": 35.8,
+        "ip": 36.0,
         "war": 0.02
       },
       "war_gap": -0.29,
       "innings_share_pct": 3.7
-    },
-    {
-      "id": 663554,
-      "name": "Casey Mize",
-      "throws": "R",
-      "role": "Starter",
-      "games": 6,
-      "starts": 6,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "27.0",
-        "ip_value": 27.0,
-        "war": -0.3,
-        "era": 6.67,
-        "fip": 6.95,
-        "k_minus_bb_pct": 4.9
-      },
-      "forecast": {
-        "ip": 150.6,
-        "war": 2.16,
-        "era": 4.06,
-        "fip": 4.02,
-        "k_minus_bb_pct": 14.4,
-        "team_at_fetch": "SDP"
-      },
-      "forecast_to_date": {
-        "ip": 134.8,
-        "war": 1.93
-      },
-      "war_gap": -2.24,
-      "innings_share_pct": 2.1
     },
     {
       "id": 608566,
@@ -775,11 +775,11 @@
         "team_at_fetch": "MIN"
       },
       "forecast_to_date": {
-        "ip": 100.3,
-        "war": 0.57
+        "ip": 101.0,
+        "war": 0.58
       },
       "war_gap": -1.19,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
     }
   ]
 }
