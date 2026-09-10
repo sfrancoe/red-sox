@@ -4,12 +4,15 @@
 [build]
   command = "bash scripts/build_site.sh"
   publish = "_site"
+  # The native apps read changing JSON through /api/data/*. Data refreshes and
+  # iOS-only commits therefore do not need a production deployment. Exit 0
+  # skips the build; backend and required App Store page changes still deploy.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF netlify netlify.toml privacy"
 
 [[redirects]]
   from = "/"
-  to = "/recent-game/"
-  status = 302
-  force = true
+  to = "/index.html"
+  status = 200
 
 [[headers]]
   for = "/assets/fonts/*"
@@ -55,6 +58,11 @@
 
 [[headers]]
   for = "/data/pitching.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/data/players.json"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 

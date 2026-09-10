@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Hub Ball Diamond app icon</title>
+  <desc id="desc">A warm white HB monogram inside clay-colored baseball basepaths on an infield-green background.</desc>
+
+  <!-- Full-bleed artwork. iOS supplies the rounded-square mask. -->
+  <rect width="1024" height="1024" fill="#1F5A43"/>
+
+  <!-- Basepaths -->
+  <path d="M512 104 920 512 512 920 104 512Z"
+        fill="none" stroke="#A7633F" stroke-width="52" stroke-linejoin="miter"/>
+
+  <!-- First, second, and third base -->
+  <path d="M512 118 558 164 512 210 466 164Z" fill="#F7F3E8"/>
+  <path d="M814 512 860 466 906 512 860 558Z" fill="#F7F3E8"/>
+  <path d="M118 512 164 466 210 512 164 558Z" fill="#F7F3E8"/>
+
+  <!-- Home plate -->
+  <path d="M468 814H556V872L512 914 468 872Z" fill="#F7F3E8"/>
+
+  <!-- Custom geometric H -->
+  <path d="M276 300H354V466H470V300H548V724H470V548H354V724H276Z" fill="#F7F3E8"/>
+
+  <!-- Custom geometric B; counters are cut out with even-odd fill. -->
+  <path fill="#F7F3E8" fill-rule="evenodd" d="
+    M576 300H688
+    C770 300 814 342 814 408
+    C814 454 791 487 750 505
+    C800 522 828 558 828 610
+    C828 683 778 724 688 724H576Z
+
+    M654 370V472H682
+    C718 472 737 454 737 421
+    C737 387 717 370 682 370Z
+
+    M654 546V654H691
+    C730 654 751 635 751 600
+    C751 564 729 546 691 546Z"/>
+</svg>

@@ -4,71 +4,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hub Ball</title>
-<meta name="description" content="Visual stories from Boston Red Sox box scores.">
+<meta name="description" content="The latest Red Sox result, upcoming games, and AL East standing.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14'>&#9918;</text></svg>">
-<link rel="stylesheet" href="src/site-shell.css?v=20260828-pitching">
-<link rel="stylesheet" href="src/home.css?v=20260827-newspapers">
+<link rel="stylesheet" href="src/site-shell.css?v=20260905-home-pro">
+<link rel="stylesheet" href="src/home.css?v=20260905-home-pro">
 </head>
 <body>
 <header class="site-header">
   <div class="site-header__inner">
     <nav class="site-nav" aria-label="Hub Ball sections">
-      <a class="site-nav__link active" href="recent-game/">Recent game</a>
+      <a class="site-nav__link active" href="./" aria-current="page">Home</a>
+      <a class="site-nav__link" href="recent-game/">Game center</a>
       <a class="site-nav__link" href="schedule/">Schedule</a>
       <a class="site-nav__link" href="standings/">Standings</a>
       <a class="site-nav__link" href="pitching/">Pitching</a>
-      <a class="site-nav__link" href="news/">Newspaper headlines</a>
+      <a class="site-nav__link" href="news/">Newspapers</a>
       <a class="site-nav__link" href="x-posts/">X Posts</a>
-      <a class="site-nav__link" href="stories/four-roads/?view=leaders">Season leaders</a>
-      <a class="site-nav__link" href="stories/four-roads/?view=story">Game 108 graph</a>
+      <a class="site-nav__link" href="stories/four-roads/?view=leaders">Leaders</a>
+      <a class="site-nav__link" href="stories/four-roads/?view=story">Game 108</a>
     </nav>
   </div>
 </header>
-<main class="home">
-  <header class="home-top">
-    <div class="home-eyebrow">Visual stories from Boston baseball</div>
-    <h1 class="home-title">RED SOX<br><em>RECORDS</em></h1>
-    <p class="home-dek">The numbers are real. The point is how they felt. Choose a story
-      and watch a Red Sox season take shape, one game at a time.</p>
-  </header>
 
-  <section class="stories" aria-labelledby="storiesHeading">
-    <div class="stories-head">
-      <div class="stories-count">Story 01</div>
-      <h2 id="storiesHeading">Featured story</h2>
-      <p>Start with four seasons that somehow found the same door.</p>
+<main class="home">
+  <h1 class="sr-only">Red Sox daily briefing</h1>
+
+  <a class="standing-summary" id="standingSummary" href="standings/" aria-live="polite">
+    <span class="metric"><span>AL East</span><strong>Loading</strong></span>
+  </a>
+
+  <section class="daily-board" aria-label="Red Sox daily briefing">
+    <a class="result-card" id="lastGame" href="recent-game/" aria-live="polite" aria-atomic="true">
+      <span class="loading-copy">Loading final score…</span>
+    </a>
+
+    <div class="upcoming-card">
+      <a class="upcoming-head" href="schedule/">
+        <strong>Next 3 games</strong>
+        <span id="oddsStatus">Lines pending</span>
+        <span aria-hidden="true">→</span>
+      </a>
+      <div class="table-head" aria-hidden="true">
+        <span>Date</span><span>Matchup</span><span>Run line</span><span>ML</span>
+      </div>
+      <div class="games-list" id="nextGames" aria-live="polite">
+        <p class="loading-copy">Loading upcoming games…</p>
+      </div>
     </div>
-    <ul class="story-grid">
-      <li>
-        <a class="story-card" href="stories/four-roads/?view=story">
-          <span class="card-kicker">2023 – 2026</span>
-          <span class="card-title">Four Roads,<br><em>One Record</em></span>
-          <span class="card-dek">Four straight seasons arrived at the identical record after
-            108 games — then split toward four completely different endings.</span>
-          <span class="card-go">Watch the story <span aria-hidden="true">&rarr;</span></span>
-        </a>
-      </li>
-    </ul>
   </section>
 
   <footer class="home-foot">
-    Game logs via the <a href="https://statsapi.mlb.com/" rel="noreferrer noopener">MLB Stats API</a>.
+    Scores and standings via the <a href="https://statsapi.mlb.com/" rel="noreferrer noopener">MLB Stats API</a>.
+    Odds are informational and may change. 21+. Gambling problem? Call 1-800-GAMBLER.
     <span id="freshness"></span>
   </footer>
 </main>
 
-<script type="module">
-  // Show when the data was last refreshed, straight from the generated meta file.
-  try {
-    const meta = await fetch('data/meta.json').then(r => r.json());
-    // generated_at is null until the first CI refresh — and new Date(null) is the
-    // epoch, not an invalid date, so check for the value before parsing it.
-    const when = meta.generated_at ? new Date(meta.generated_at) : null;
-    if (when && !Number.isNaN(when.valueOf())) {
-      document.getElementById('freshness').textContent =
-        ' Updated ' + when.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) + '.';
-    }
-  } catch { /* meta is optional chrome — never let it break the page */ }
-</script>
+<script type="module" src="src/home.js?v=20260905-live-game"></script>
 </body>
 </html>

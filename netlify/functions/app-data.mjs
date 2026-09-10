@@ -34,6 +34,14 @@ const ALLOWED_PATHS = new Set([
   'mets/schedule.json',
   'mets/seasons.json',
   'mets/standings.json',
+  'rays/athletic.json',
+  'rays/meta.json',
+  'rays/pitching.json',
+  'rays/recent-game.json',
+  'rays/schedule.json',
+  'rays/seasons.json',
+  'rays/standings.json',
+  'rays/tampabay.json',
 ]);
 
 function requestedPath(request) {

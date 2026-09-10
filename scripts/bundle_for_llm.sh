@@ -62,7 +62,7 @@ emit(){
 }
 
 {
-  echo "RED SOX RECORDS — full source bundle"
+  echo "HUB BALL — full source bundle"
   echo "Generated $(date -u +%Y-%m-%dT%H:%M:%SZ) from commit $(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
   echo
   echo "This is the complete readable source of a small static site: plain ES modules"

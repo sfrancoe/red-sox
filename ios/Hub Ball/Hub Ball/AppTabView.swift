@@ -84,7 +84,7 @@ struct AppTabView: View {
                     }
                     VStack(spacing: 0) {
                         sidebarControls
-                        selectedContent
+                        selectedContent(usesPersistentSidebar: usesPersistentSidebar)
                             .id(team.id)
                             .environment(
                                 \.hubContentWidth,
@@ -107,7 +107,7 @@ struct AppTabView: View {
                     sidebar(isCompact: true)
                         .frame(width: min(280, window.size.width * 0.78))
                         .transition(.move(edge: .leading))
-                        .shadow(color: AppColor.navy.opacity(0.22), radius: 16, x: 5)
+                        .shadow(color: AppColor.teamAccent.opacity(0.18), radius: 12, x: 3)
                 }
             }
         }
@@ -172,7 +172,7 @@ struct AppTabView: View {
     }
 
     @ViewBuilder
-    private var selectedContent: some View {
+    private func selectedContent(usesPersistentSidebar: Bool) -> some View {
         switch selectedTab {
         case .home:
                 HomeView(team: team) { destination in
@@ -216,7 +216,7 @@ struct AppTabView: View {
                 TeamSettingsView(selectedTeamID: $selectedTeamID) { selectedTeam in
                     selectedPlayerID = nil
                     selectedTab = selectedTeam.supportsHome ? .home : .recent
-                    sidebarCollapsed = true
+                    sidebarCollapsed = !usesPersistentSidebar
                 }
         }
     }
@@ -269,7 +269,7 @@ struct AppTabView: View {
     private func sidebar(isCompact: Bool) -> some View {
         VStack(alignment: .leading, spacing: isCompact ? 12 : 20) {
             Label("HUB BALL", systemImage: "baseball.fill")
-                .font(isCompact ? .subheadline.weight(.black) : .title2.weight(.black))
+                .font(.title2.weight(.black))
                 .foregroundStyle(AppColor.hunterGreen)
                 .padding(.horizontal, isCompact ? 16 : 20)
                 .padding(.top, isCompact ? 18 : 24)
@@ -283,11 +283,11 @@ struct AppTabView: View {
             } label: {
                 HStack(spacing: 6) {
                     Text(team.pickerTitle.uppercased())
-                        .font(.caption2.weight(.black))
+                        .font(isCompact ? .body.weight(.black) : .caption2.weight(.black))
                         .tracking(0.5)
                         .lineLimit(1)
                     Image(systemName: "chevron.right")
-                        .font(.caption2.weight(.black))
+                        .font(isCompact ? .body.weight(.black) : .caption2.weight(.black))
                 }
                 .foregroundStyle(AppColor.ink.opacity(0.62))
                 .frame(maxWidth: .infinity, minHeight: 28, alignment: .leading)
@@ -308,17 +308,17 @@ struct AppTabView: View {
                     }
                 } label: {
                     Label(tab.title, systemImage: tab.icon)
-                        .font(isCompact ? .caption.weight(.semibold) : .headline)
+                        .font(isCompact ? .title3.weight(.semibold) : .headline)
                         .frame(
                             maxWidth: .infinity,
-                            minHeight: isCompact ? 28 : 34,
+                            minHeight: isCompact ? 44 : 34,
                             alignment: .leading
                         )
-                        .foregroundStyle(selectedTab == tab ? Color.white : AppColor.hunterGreen)
+                        .foregroundStyle(AppColor.ink)
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .listRowBackground(selectedTab == tab ? AppColor.hunterGreen : Color.clear)
+                .listRowBackground(selectedTab == tab ? AppColor.accentSoft : Color.clear)
                 .accessibilityAddTraits(selectedTab == tab ? .isSelected : [])
             }
             .listStyle(.sidebar)

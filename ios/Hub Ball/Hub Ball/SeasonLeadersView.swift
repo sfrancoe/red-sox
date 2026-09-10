@@ -21,8 +21,8 @@ struct SeasonLeadersView: View {
                     }
                 } else if store.isLoading {
                     ProgressView("Loading season leaders…")
-                        .tint(.white)
-                        .foregroundStyle(.white)
+                        .tint(.black)
+                        .foregroundStyle(.black)
                 } else {
                     errorView
                 }
@@ -70,7 +70,7 @@ struct SeasonLeadersView: View {
                             .padding(12)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .background(AppColor.paper)
-                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                            .clipShape(Rectangle())
                         }
                     }
                 }
@@ -91,7 +91,7 @@ struct SeasonLeadersView: View {
                     .font(.caption2.weight(.semibold))
             }
         }
-        .foregroundStyle(Color.white.opacity(0.84))
+        .foregroundStyle(Color.black.opacity(0.84))
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
@@ -151,7 +151,7 @@ struct SeasonLeadersView: View {
 
             Text(season.record)
                 .font(.subheadline.weight(.bold))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.black)
         }
     }
 
@@ -225,7 +225,7 @@ struct SeasonLeadersView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

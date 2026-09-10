@@ -46,7 +46,7 @@ function playerRows(box, role) {
     const stats = player?.stats?.[role];
     if (!stats?.[role === 'batting' ? 'plateAppearances' : 'gamesPitched']) return [];
     const keys = role === 'batting'
-      ? ['atBats', 'runs', 'hits', 'rbi', 'baseOnBalls', 'strikeOuts', 'leftOnBase']
+      ? ['atBats', 'runs', 'hits', 'rbi', 'baseOnBalls', 'strikeOuts', 'leftOnBase', 'homeRuns', 'stolenBases']
       : ['inningsPitched', 'hits', 'runs', 'earnedRuns', 'baseOnBalls', 'strikeOuts', 'homeRuns', 'numberOfPitches'];
     const row = {
       name: player.person?.fullName || 'Player',

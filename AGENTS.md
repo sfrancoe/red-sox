@@ -1,5 +1,13 @@
 # AGENTS.md — Hub Ball
 
+> **Archived workspace:** This checkout preserves unfinished pre-consolidation work and
+> is not a Hub Ball release source. The sole canonical release checkout is
+> `/Users/sfrancoe/Projects/Hub Ball` on `main`. For any "latest build," archive,
+> TestFlight, or device-install request, change to that checkout and run
+> `python3 scripts/check_hub_ball_release.py` followed by
+> `bash scripts/install_hub_ball.sh --device <device-identifier>`. Never build or install
+> Hub Ball from this archived checkout.
+
 Instructions for AI coding agents working in this repo. Read this before changing
 anything. If you are Claude Code, `CLAUDE.md` covers the same ground in more detail.
 
@@ -150,3 +158,12 @@ with backoff and fail loudly; a silent bad fetch is worse than a red build.
 2. `story.js` imports `initStory` from `../../src/chart.js` and supplies `CONFIG`
 3. Add a `<li>` card to the root `index.html`
 4. If it needs new data, extend `scripts/fetch_seasons.py` — never hand-write data files
+
+## Adding a team to Hub Ball
+
+Before installing a build that exposes a new team, publish its generated `data/<team>/`
+files and Netlify function configuration to `main`, wait for the production deploy, and
+verify representative production requests (including `/data/<team>/standings.json` and
+`/api/x-posts?team=<team>`) return successful, team-specific payloads. A local data file
+or passing local test does not make it available to a device build because the app reads
+from `https://red-sox.netlify.app`.

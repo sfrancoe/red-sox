@@ -4,6 +4,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
     case boston
     case newYork = "new-york"
     case newYorkMets = "new-york-mets"
+    case tampaBay = "tampa-bay"
 
     nonisolated var id: String { rawValue }
 
@@ -12,6 +13,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: 111
         case .newYork: 147
         case .newYorkMets: 121
+        case .tampaBay: 139
         }
     }
 
@@ -20,6 +22,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: "Boston Red Sox"
         case .newYork: "New York Yankees"
         case .newYorkMets: "New York Mets"
+        case .tampaBay: "Tampa Bay Rays"
         }
     }
 
@@ -28,6 +31,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: "Boston"
         case .newYork: "New York"
         case .newYorkMets: "New York"
+        case .tampaBay: "Tampa Bay"
         }
     }
 
@@ -36,6 +40,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: "BOS"
         case .newYork: "NY"
         case .newYorkMets: "NY"
+        case .tampaBay: "TB"
         }
     }
 
@@ -44,6 +49,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: "Red Sox"
         case .newYork: "Yankees"
         case .newYorkMets: "Mets"
+        case .tampaBay: "Rays"
         }
     }
 
@@ -52,6 +58,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: "Boston Red Sox"
         case .newYork: "New York Yankees"
         case .newYorkMets: "New York Mets"
+        case .tampaBay: "Tampa Bay Rays"
         }
     }
 
@@ -60,6 +67,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: "redsox"
         case .newYork: "yankees"
         case .newYorkMets: "mets"
+        case .tampaBay: "rays"
         }
     }
 
@@ -68,14 +76,16 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
         case .boston: nil
         case .newYork: "yankees"
         case .newYorkMets: "mets"
+        case .tampaBay: "rays"
         }
     }
 
     var newsSources: [NewsSource] {
         switch self {
         case .boston: [.globe, .herald, .athletic, .massLive]
-        case .newYork: [.nyTimes, .nyPost, .dailyNews, .athletic]
-        case .newYorkMets: [.nyTimes, .nyPost, .dailyNews, .athletic]
+        case .newYork: [.dailyNews, .nyPost, .athletic, .nyTimes]
+        case .newYorkMets: [.dailyNews, .nyPost, .athletic, .nyTimes]
+        case .tampaBay: [.tampaBayTimes, .athletic]
         }
     }
 

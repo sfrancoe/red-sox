@@ -98,6 +98,12 @@ struct MLBGameClient: Sendable {
             isLive: isLive
         )
         let decisions = dictionary(liveData["decisions"])
+        let recapPayload = dictionary(payload["officialRecap"])
+        let recapHeadline = recapPayload["headline"] as? String ?? ""
+        let recapURL = recapPayload["url"] as? String ?? ""
+        let officialRecap = recapHeadline.isEmpty || recapURL.isEmpty
+            ? nil
+            : OfficialRecap(headline: recapHeadline, url: recapURL)
 
         return RecentGame(
             generatedAt: ISO8601DateFormatter().string(from: Date()),
@@ -122,7 +128,7 @@ struct MLBGameClient: Sendable {
             home: home,
             innings: innings,
             scoringPlays: narrativePlays.map(\.display),
-            officialRecap: nil,
+            officialRecap: officialRecap,
             gamedayUrl: "https://www.mlb.com/gameday/\(integer(payload["gamePk"]) ?? 0)"
         )
     }

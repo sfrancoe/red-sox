@@ -87,6 +87,7 @@ def player_rows(team_box: dict[str, Any], role: str) -> list[dict[str, Any]]:
         if role == "pitching" and not stats.get("gamesPitched"):
             continue
         base = {
+            "mlb_id": (player.get("person") or {}).get("id") or player_id,
             "name": (player.get("person") or {}).get("fullName") or "Player",
             "position": (player.get("position") or {}).get("abbreviation") or "",
             "note": stats.get("note") or "",
@@ -95,7 +96,7 @@ def player_rows(team_box: dict[str, Any], role: str) -> list[dict[str, Any]]:
         if role == "batting":
             base.update({key: stats.get(key, 0) for key in (
                 "atBats", "runs", "hits", "rbi", "baseOnBalls", "strikeOuts",
-                "leftOnBase", "homeRuns"
+                "leftOnBase", "homeRuns", "stolenBases"
             )})
             season_batting = (player.get("seasonStats") or {}).get("batting") or {}
             base["average"] = season_batting.get("avg") or ".---"

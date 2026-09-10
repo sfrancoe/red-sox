@@ -32,8 +32,8 @@ struct RecentGameView: View {
                         }
                     } else if store.isLoading {
                         ProgressView("Loading Game Center…")
-                            .tint(.white)
-                            .foregroundStyle(.white)
+                            .tint(.black)
+                            .foregroundStyle(.black)
                     } else {
                         errorView
                     }
@@ -71,29 +71,28 @@ struct RecentGameView: View {
                     selectedGameID = game.gamePk
                     selectedStatsTeam = .favorite
                 } label: {
-                    Text(gameTabTitle(game, index: index))
+                    gameTabLabel(game, index: index)
                         .font(
                             .system(
                                 size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
-                                weight: selectedGame?.gamePk == game.gamePk ? .black : .semibold
+                                weight: .black
                             )
                         )
                         .lineLimit(1)
                         .minimumScaleFactor(0.78)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .foregroundStyle(Color.black)
                 }
                 .buttonStyle(.plain)
             }
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 2)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(AppColor.paper)
+        .clipShape(Rectangle())
         .overlay {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(AppColor.navy.opacity(0.28), lineWidth: 1)
+            Rectangle()
+                .stroke(AppColor.border, lineWidth: 1)
         }
         .padding(.horizontal, 16)
         .padding(.top, 10)
@@ -101,9 +100,17 @@ struct RecentGameView: View {
         .background(AppColor.paleRed)
     }
 
+    private func gameTabLabel(_ game: RecentGame, index: Int) -> Text {
+        let title = Text(gameTabTitle(game, index: index)).foregroundColor(.black)
+        guard !game.isLive else { return title }
+        let isWin = game.result.caseInsensitiveCompare("Win") == .orderedSame
+        let result = Text(isWin ? " (W)" : " (L)")
+            .foregroundColor(.black)
+        return title + result
+    }
+
     private func gameTabTitle(_ game: RecentGame, index: Int) -> String {
         if game.isLive { return "LIVE" }
-        if index == 0, !store.hasLiveGame { return "LAST GAME" }
 
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
@@ -166,9 +173,9 @@ struct RecentGameView: View {
                         linksCard(game)
                     }
                     .background(AppColor.paper)
-                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .clipShape(Rectangle())
                     .overlay {
-                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        Rectangle()
                             .stroke(AppColor.border.opacity(0.7), lineWidth: 1)
                     }
                 }
@@ -192,7 +199,12 @@ struct RecentGameView: View {
     }
 
     private func scoreCard(_ game: RecentGame) -> some View {
-        VStack(spacing: 9) {
+        let favorite = game.away.id == team.mlbID ? game.away : game.home
+        let opponent = game.away.id == team.mlbID ? game.home : game.away
+        let selectedTeam = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
+        let isWin = game.result.caseInsensitiveCompare("Win") == .orderedSame
+
+        return VStack(spacing: 9) {
             HStack {
                 Text(game.formattedDate.uppercased())
                     .font(.title3.weight(.black))
@@ -200,13 +212,13 @@ struct RecentGameView: View {
 
                 Spacer()
 
-                Text(game.isLive ? "LIVE" : "FINAL")
+                Text(game.isLive ? "LIVE" : isWin ? "WIN" : "LOSS")
                     .font(.caption.weight(.black))
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
-                    .background(game.isLive ? AppColor.red : AppColor.green)
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
+                    .background(game.isLive ? AppColor.accentSoft : isWin ? AppColor.resultWin : AppColor.resultLoss)
+                    .foregroundStyle(.black)
+                    .clipShape(Rectangle())
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -227,8 +239,110 @@ struct RecentGameView: View {
             Divider()
 
             combinedLineScore(game)
+
+            Divider()
+
+            compactGameDetail(
+                label: "\(homeRunCityAbbreviation(for: selectedTeam)) HR",
+                value: homeRunSummary(for: selectedTeam)
+            )
+
+            Divider()
+
+            compactGameDetail(
+                label: game.isLive ? "LIVE" : "PITCHING",
+                value: game.isLive ? game.liveStatus ?? "In progress" : pitchingSummary(for: game)
+            )
         }
         .cardStyle(padding: 12)
+    }
+
+    private func compactGameDetail(label: String, value: String) -> some View {
+        HStack(spacing: 8) {
+            Text(label)
+                .foregroundStyle(AppColor.red)
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+            Text(value)
+                .foregroundStyle(AppColor.navy)
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+        }
+        .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .black))
+        .tracking(0.35)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func homeRunSummary(for team: TeamBoxScore) -> String {
+        let hitters = team.batting.filter { $0.homeRuns > 0 }
+        guard !hitters.isEmpty else { return "None" }
+        return hitters.map { batter in
+            let total = batter.seasonHomeRuns.map(String.init) ?? "—"
+            let surname = batter.name.split(separator: " ").last.map(String.init) ?? batter.name
+            return "\(surname) (\(total))"
+        }.joined(separator: ", ")
+    }
+
+    private func homeRunCityAbbreviation(for team: TeamBoxScore) -> String {
+        switch team.id {
+        case 108, 119: "LA"
+        case 109: "AZ"
+        case 110: "BAL"
+        case 111: "BOS"
+        case 112, 145: "CHI"
+        case 113: "CIN"
+        case 114: "CLE"
+        case 115: "COL"
+        case 116: "DET"
+        case 117: "HOU"
+        case 118: "KC"
+        case 120: "WSH"
+        case 121, 147: "NY"
+        case 133: "ATH"
+        case 134: "PIT"
+        case 135: "SD"
+        case 136: "SEA"
+        case 137: "SF"
+        case 138: "STL"
+        case 139: "TB"
+        case 140: "TEX"
+        case 141: "TOR"
+        case 142: "MIN"
+        case 143: "PHI"
+        case 144: "ATL"
+        case 146: "MIA"
+        case 158: "MIL"
+        default: team.abbreviation.uppercased()
+        }
+    }
+
+    private func pitchingSummary(for game: RecentGame) -> String {
+        var decisions = [
+            pitchingDecision("W", pitcher: game.decisions.winner, game: game),
+            pitchingDecision("L", pitcher: game.decisions.loser, game: game)
+        ]
+        if !game.decisions.save.isEmpty {
+            decisions.append(pitchingDecision("SV", pitcher: game.decisions.save, game: game))
+        }
+        return decisions.joined(separator: " · ")
+    }
+
+    private func pitchingDecision(_ label: String, pitcher: String, game: RecentGame) -> String {
+        let record = decisionValue(for: pitcher, in: game.away)
+            ?? decisionValue(for: pitcher, in: game.home)
+        let name = surname(pitcher)
+        return record.map { "\(label) \(name) (\($0))" } ?? "\(label) \(name)"
+    }
+
+    private func decisionValue(for pitcher: String, in team: TeamBoxScore) -> String? {
+        guard let note = team.pitching.first(where: { $0.name == pitcher })?.note,
+              let comma = note.lastIndex(of: ",") else { return nil }
+        return note[note.index(after: comma)...]
+            .trimmingCharacters(in: CharacterSet(charactersIn: " )"))
+    }
+
+    private func surname(_ name: String) -> String {
+        name.split(separator: " ").last.map(String.init) ?? name
     }
 
     private func combinedLineScore(_ game: RecentGame) -> some View {
@@ -246,7 +360,7 @@ struct RecentGameView: View {
                 lineScoreLegend("LOB")
             }
             .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.black)
 
             combinedLineScoreRow(game.away, innings: game.innings, isAway: true)
             combinedLineScoreRow(game.home, innings: game.innings, isAway: false)
@@ -318,7 +432,7 @@ struct RecentGameView: View {
                     ForEach(game.facts, id: \.self) { fact in
                         HStack(alignment: .top, spacing: 9) {
                             Circle()
-                                .fill(AppColor.red)
+                                .fill(AppColor.teamAccent)
                                 .frame(width: 5, height: 5)
                                 .padding(.top, 7)
                             Text(fact)
@@ -432,7 +546,7 @@ struct RecentGameView: View {
                 .foregroundStyle(Color.black)
                 .overlay(alignment: .bottom) {
                     Rectangle()
-                        .fill(selectedStatsTeam == selection ? AppColor.red : Color.clear)
+                        .fill(selectedStatsTeam == selection ? AppColor.teamAccent : Color.clear)
                         .frame(height: 2)
                 }
         }
@@ -448,7 +562,7 @@ struct RecentGameView: View {
             }
         }
         .font(.caption2.weight(.bold))
-        .foregroundStyle(.secondary)
+        .foregroundStyle(.black)
     }
 
     private func statRow(
@@ -587,7 +701,7 @@ struct RecentGameView: View {
             Button("Try Again") {
                 Task { await store.load() }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(HubProminentButtonStyle())
             .tint(AppColor.red)
         }
     }

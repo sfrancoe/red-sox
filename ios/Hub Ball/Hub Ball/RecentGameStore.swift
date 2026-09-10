@@ -39,9 +39,12 @@ final class RecentGameStore {
         do {
             let descriptors = try await client.gameDescriptors()
 
-            for descriptor in descriptors {
+            for (index, descriptor) in descriptors.enumerated() {
                 let cachedGame = cache[descriptor.gamePk]
-                let needsFreshFeed = cachedGame == nil || descriptor.isLive || cachedGame?.isLive == true
+                let newestFinalNeedsRecap = index == 0 && !descriptor.isLive
+                    && cachedGame?.officialRecap == nil
+                let needsFreshFeed = cachedGame == nil || descriptor.isLive
+                    || cachedGame?.isLive == true || newestFinalNeedsRecap
                 if needsFreshFeed {
                     cache[descriptor.gamePk] = try await client.game(gamePk: descriptor.gamePk)
                 }
