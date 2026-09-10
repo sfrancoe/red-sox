@@ -1,6 +1,6 @@
 import SwiftUI
 
-private enum MainTab: Int, CaseIterable {
+enum MainTab: String, CaseIterable {
     case home
     case recent
     case standings
@@ -27,12 +27,27 @@ private enum MainTab: Int, CaseIterable {
         }
     }
 
+    static var defaultOrderStorageValue: String {
+        allCases.map(\.rawValue).joined(separator: ",")
+    }
+
+    static func ordered(from storedValue: String) -> [MainTab] {
+        var seen = Set<MainTab>()
+        let storedTabs = storedValue
+            .split(separator: ",")
+            .compactMap { MainTab(rawValue: String($0)) }
+            .filter { seen.insert($0).inserted }
+        let completeOrder = storedTabs + allCases.filter { !seen.contains($0) }
+
+        return [.home] + completeOrder.filter { $0 != .home }
+    }
 }
 
 struct AppTabView: View {
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage(HubPreferences.selectedTeamKey) private var selectedTeamID = HubTeam.boston.id
     @AppStorage(HubPreferences.completedTeamOnboardingKey) private var completedTeamOnboarding = false
+    @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
     @State private var selectedTab: MainTab = .home
     @State private var settingsPresented = false
     @State private var hasAppeared = false
@@ -50,7 +65,7 @@ struct AppTabView: View {
     }
 
     private var availableTabs: [MainTab] {
-        MainTab.allCases.filter { tab in
+        MainTab.ordered(from: storedPageOrder).filter { tab in
             switch tab {
             case .home: team.supportsHome
             case .players: team.supportsPlayers

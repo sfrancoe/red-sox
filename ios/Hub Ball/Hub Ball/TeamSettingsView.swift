@@ -7,6 +7,7 @@ private enum TeamFavoritesStorage {
 struct TeamSettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(TeamFavoritesStorage.key) private var favoriteTeamIDs = ""
+    @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
     @Binding var selectedTeamID: String
     let onSelect: (HubTeam) -> Void
 
@@ -21,6 +22,10 @@ struct TeamSettingsView: View {
             .filter { $0.features.nativePicker }
     }
 
+    private var orderedPages: [MainTab] {
+        MainTab.ordered(from: storedPageOrder)
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -28,6 +33,9 @@ struct TeamSettingsView: View {
 
                 ScrollView {
                     VStack(spacing: 0) {
+                        pageOrderSection
+                            .padding(16)
+
                         VStack(spacing: 0) {
                             if !favoriteTeams.isEmpty {
                                 teamSection(title: "Favorites", teams: favoriteTeams, allowsReordering: true)
@@ -58,6 +66,99 @@ struct TeamSettingsView: View {
                 }
             }
         }
+    }
+
+    private var pageOrderSection: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .firstTextBaseline) {
+                Text("PAGE ORDER")
+                    .font(AppFont.label)
+                    .foregroundStyle(AppColor.inkMuted)
+
+                Spacer()
+
+                Button("Restore Default") {
+                    storedPageOrder = MainTab.defaultOrderStorageValue
+                }
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(AppColor.red)
+                .disabled(storedPageOrder == MainTab.defaultOrderStorageValue)
+            }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
+
+            VStack(spacing: 0) {
+                ForEach(orderedPages, id: \.self) { page in
+                    pageOrderRow(page)
+                    if page != orderedPages.last {
+                        Divider().overlay(AppColor.separator)
+                    }
+                }
+            }
+
+            Text("Home stays first. This order is used for both the page bar and swiping.")
+                .font(.caption)
+                .foregroundStyle(AppColor.inkMuted)
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
+        }
+    }
+
+    private func pageOrderRow(_ page: MainTab) -> some View {
+        HStack(spacing: 12) {
+            Text(page.title)
+                .font(.headline)
+                .foregroundStyle(AppColor.navy)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            Image(systemName: page == .home ? "lock.fill" : "line.3.horizontal")
+                .font(.body.weight(.semibold))
+                .foregroundStyle(AppColor.inkMuted)
+                .frame(width: 44, height: 52)
+                .contentShape(Rectangle())
+                .modifier(PageDragModifier(page: page))
+        }
+        .padding(.leading, 16)
+        .dropDestination(for: String.self) { draggedPageIDs, _ in
+            guard page != .home, let draggedPageID = draggedPageIDs.first else { return false }
+            return movePage(draggedPageID, to: page)
+        }
+        .modifier(PageReorderAccessibilityModifier(page: page, onMove: movePage))
+    }
+
+    private func movePage(_ draggedPageID: String, to targetPage: MainTab) -> Bool {
+        guard let draggedPage = MainTab(rawValue: draggedPageID), draggedPage != .home else {
+            return false
+        }
+
+        var updatedPages = orderedPages
+        guard
+            let sourceIndex = updatedPages.firstIndex(of: draggedPage),
+            let targetIndex = updatedPages.firstIndex(of: targetPage),
+            sourceIndex != targetIndex
+        else {
+            return false
+        }
+
+        let movedPage = updatedPages.remove(at: sourceIndex)
+        updatedPages.insert(movedPage, at: targetIndex)
+        savePageOrder(updatedPages)
+        return true
+    }
+
+    private func movePage(_ page: MainTab, by offset: Int) {
+        guard page != .home else { return }
+        var updatedPages = orderedPages
+        guard let sourceIndex = updatedPages.firstIndex(of: page) else { return }
+        let targetIndex = sourceIndex + offset
+        guard targetIndex > 0, updatedPages.indices.contains(targetIndex) else { return }
+
+        updatedPages.swapAt(sourceIndex, targetIndex)
+        savePageOrder(updatedPages)
+    }
+
+    private func savePageOrder(_ pages: [MainTab]) {
+        storedPageOrder = pages.map(\.rawValue).joined(separator: ",")
     }
 
     private var versionLabel: String {
@@ -199,6 +300,44 @@ struct TeamSettingsView: View {
 
     private func saveFavorites(_ teams: [HubTeam]) {
         favoriteTeamIDs = teams.map(\.id).joined(separator: ",")
+    }
+}
+
+private struct PageDragModifier: ViewModifier {
+    let page: MainTab
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if page == .home {
+            content
+        } else {
+            content.draggable(page.rawValue)
+        }
+    }
+}
+
+private struct PageReorderAccessibilityModifier: ViewModifier {
+    let page: MainTab
+    let onMove: (MainTab, Int) -> Void
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if page == .home {
+            content
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Home, fixed first")
+        } else {
+            content
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(page.title)
+                .accessibilityHint("Drag to change its position in the page order")
+                .accessibilityAction(named: "Move up") {
+                    onMove(page, -1)
+                }
+                .accessibilityAction(named: "Move down") {
+                    onMove(page, 1)
+                }
+        }
     }
 }
 
