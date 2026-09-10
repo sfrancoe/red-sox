@@ -1,9 +1,25 @@
 import SwiftUI
 
+private enum TeamFavoritesStorage {
+    static let key = "hubFavoriteTeamIDs"
+}
+
 struct TeamSettingsView: View {
     @Environment(\.dismiss) private var dismiss
+    @AppStorage(TeamFavoritesStorage.key) private var favoriteTeamIDs = ""
     @Binding var selectedTeamID: String
     let onSelect: (HubTeam) -> Void
+
+    private var favoriteIDs: Set<String> {
+        Set(favoriteTeamIDs.split(separator: ",").map(String.init))
+    }
+
+    private var favoriteTeams: [HubTeam] {
+        favoriteTeamIDs
+            .split(separator: ",")
+            .compactMap { HubTeam(rawValue: String($0)) }
+            .filter { $0.features.nativePicker }
+    }
 
     var body: some View {
         NavigationStack {
@@ -13,12 +29,12 @@ struct TeamSettingsView: View {
                 ScrollView {
                     VStack(spacing: 0) {
                         VStack(spacing: 0) {
-                            ForEach(HubTeam.availableTeams) { team in
-                                teamButton(team)
-                                if team.id != HubTeam.availableTeams.last?.id {
-                                    Divider().overlay(AppColor.separator)
-                                }
+                            if !favoriteTeams.isEmpty {
+                                teamSection(title: "Favorites", teams: favoriteTeams, allowsReordering: true)
+                                    .padding(.bottom, 20)
                             }
+
+                            teamSection(title: "All Teams", teams: HubTeam.availableTeams)
                         }
                         .padding(16)
 
@@ -51,21 +67,138 @@ struct TeamSettingsView: View {
         return "Hub Ball \(version) (\(build))"
     }
 
-    private func teamButton(_ team: HubTeam) -> some View {
-        Button {
-            selectedTeamID = team.id
-            onSelect(team)
-        } label: {
-            Text(team.fullName)
-                .font(.headline)
-                .foregroundStyle(AppColor.navy)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(16)
-                .background(selectedTeamID == team.id ? AppColor.nightRaised : Color.clear)
-                .contentShape(Rectangle())
+    private func teamSection(
+        title: String,
+        teams: [HubTeam],
+        allowsReordering: Bool = false
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(title.uppercased())
+                .font(AppFont.label)
+                .foregroundStyle(AppColor.inkMuted)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+
+            VStack(spacing: 0) {
+                ForEach(teams) { team in
+                    teamRow(team, allowsReordering: allowsReordering)
+                    if team.id != teams.last?.id {
+                        Divider().overlay(AppColor.separator)
+                    }
+                }
+            }
         }
-        .buttonStyle(.plain)
-        .accessibilityAddTraits(selectedTeamID == team.id ? .isSelected : [])
+    }
+
+    @ViewBuilder
+    private func teamRow(_ team: HubTeam, allowsReordering: Bool) -> some View {
+        if allowsReordering {
+            teamRowContent(team, showsReorderHandle: true)
+                .dropDestination(for: String.self) { draggedTeamIDs, _ in
+                    guard let draggedTeamID = draggedTeamIDs.first else { return false }
+                    return moveFavorite(draggedTeamID, to: team)
+                }
+        } else {
+            teamRowContent(team, showsReorderHandle: false)
+        }
+    }
+
+    private func teamRowContent(_ team: HubTeam, showsReorderHandle: Bool) -> some View {
+        HStack(spacing: 0) {
+            Button {
+                selectedTeamID = team.id
+                onSelect(team)
+            } label: {
+                Text(team.fullName)
+                    .font(.headline)
+                    .foregroundStyle(AppColor.navy)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 16)
+                    .padding(.vertical, 16)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityAddTraits(selectedTeamID == team.id ? .isSelected : [])
+
+            Button {
+                toggleFavorite(team)
+            } label: {
+                Image(systemName: isFavorite(team) ? "star.fill" : "star")
+                    .font(.title3)
+                    .foregroundStyle(isFavorite(team) ? AppColor.amber : AppColor.inkMuted)
+                    .frame(width: 52, height: 52)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(
+                isFavorite(team)
+                    ? "Remove \(team.fullName) from favorites"
+                    : "Add \(team.fullName) to favorites"
+            )
+
+            if showsReorderHandle {
+                Image(systemName: "line.3.horizontal")
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(AppColor.inkMuted)
+                    .frame(width: 44, height: 52)
+                    .contentShape(Rectangle())
+                    .draggable(team.id)
+                    .accessibilityLabel("Reorder \(team.fullName)")
+                    .accessibilityHint("Drag to change its position in favorites")
+                    .accessibilityAction(named: "Move up") {
+                        moveFavorite(team, by: -1)
+                    }
+                    .accessibilityAction(named: "Move down") {
+                        moveFavorite(team, by: 1)
+                    }
+            }
+        }
+        .background(selectedTeamID == team.id ? AppColor.nightRaised : Color.clear)
+    }
+
+    private func isFavorite(_ team: HubTeam) -> Bool {
+        favoriteIDs.contains(team.id)
+    }
+
+    private func toggleFavorite(_ team: HubTeam) {
+        var updatedFavorites = favoriteTeams
+        if let index = updatedFavorites.firstIndex(of: team) {
+            updatedFavorites.remove(at: index)
+        } else {
+            updatedFavorites.append(team)
+        }
+
+        saveFavorites(updatedFavorites)
+    }
+
+    private func moveFavorite(_ draggedTeamID: String, to targetTeam: HubTeam) -> Bool {
+        var updatedFavorites = favoriteTeams
+        guard
+            let sourceIndex = updatedFavorites.firstIndex(where: { $0.id == draggedTeamID }),
+            let targetIndex = updatedFavorites.firstIndex(of: targetTeam),
+            sourceIndex != targetIndex
+        else {
+            return false
+        }
+
+        let movedTeam = updatedFavorites.remove(at: sourceIndex)
+        updatedFavorites.insert(movedTeam, at: targetIndex)
+        saveFavorites(updatedFavorites)
+        return true
+    }
+
+    private func moveFavorite(_ team: HubTeam, by offset: Int) {
+        var updatedFavorites = favoriteTeams
+        guard let sourceIndex = updatedFavorites.firstIndex(of: team) else { return }
+        let targetIndex = sourceIndex + offset
+        guard updatedFavorites.indices.contains(targetIndex) else { return }
+
+        updatedFavorites.swapAt(sourceIndex, targetIndex)
+        saveFavorites(updatedFavorites)
+    }
+
+    private func saveFavorites(_ teams: [HubTeam]) {
+        favoriteTeamIDs = teams.map(\.id).joined(separator: ",")
     }
 }
 
