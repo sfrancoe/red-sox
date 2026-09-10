@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-09T15:19:04+00:00",
+ "generated_at": "2026-09-10T15:12:25+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 114,
  "seasons": {
   "2026": {
-   "record": "74-72",
-   "games": 146,
+   "record": "74-73",
+   "games": 147,
    "in_progress": true,
    "war_leader": {
     "name": "Parker Messick",
@@ -19,11 +19,11 @@
     },
     {
      "name": "Steven Kwan",
-     "war": 4.3
+     "war": 4.5
     },
     {
      "name": "Chase DeLauter",
-     "war": 3.1
+     "war": 3.2
     }
    ],
    "pitching_leaders": {
@@ -47,7 +47,8 @@
    "batting_leaders": {
     "hr": {
      "names": [
-      "Angel Mart\u00ednez"
+      "Angel Mart\u00ednez",
+      "Chase DeLauter"
      ],
      "value": 14,
      "top": [
@@ -56,18 +57,19 @@
        "value": 14
       },
       {
-       "name": "Brayan Rocchio",
-       "value": 13
+       "name": "Chase DeLauter",
+       "value": 14
       },
       {
-       "name": "Chase DeLauter",
+       "name": "Brayan Rocchio",
        "value": 13
       }
      ]
     },
     "rbi": {
      "names": [
-      "Brayan Rocchio"
+      "Brayan Rocchio",
+      "Chase DeLauter"
      ],
      "value": 62,
      "top": [
@@ -77,7 +79,7 @@
       },
       {
        "name": "Chase DeLauter",
-       "value": 60
+       "value": 62
       },
       {
        "name": "Angel Mart\u00ednez",
@@ -89,19 +91,19 @@
      "names": [
       "Chase DeLauter"
      ],
-     "value": ".294",
+     "value": ".296",
      "top": [
       {
        "name": "Chase DeLauter",
-       "value": ".294"
+       "value": ".296"
       },
       {
        "name": "Steven Kwan",
-       "value": ".273"
+       "value": ".275"
       },
       {
        "name": "Brayan Rocchio",
-       "value": ".249"
+       "value": ".247"
       }
      ]
     },
@@ -109,19 +111,19 @@
      "names": [
       "Chase DeLauter"
      ],
-     "value": ".823",
+     "value": ".829",
      "top": [
       {
        "name": "Chase DeLauter",
-       "value": ".823"
+       "value": ".829"
       },
       {
        "name": "Travis Bazzana",
-       "value": ".722"
+       "value": ".721"
       },
       {
        "name": "Steven Kwan",
-       "value": ".706"
+       "value": ".707"
       }
      ]
     }

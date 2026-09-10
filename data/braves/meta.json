@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-09T15:19:08+00:00",
+ "generated_at": "2026-09-10T15:12:28+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 144,
  "seasons": {
   "2026": {
-   "record": "85-60",
-   "games": 145,
+   "record": "85-61",
+   "games": 146,
    "in_progress": true,
    "war_leader": {
     "name": "Chris Sale",
@@ -19,7 +19,7 @@
     },
     {
      "name": "Michael Harris II",
-     "war": 4.4
+     "war": 4.3
     },
     {
      "name": "Matt Olson",
@@ -61,20 +61,19 @@
       },
       {
        "name": "Drake Baldwin",
-       "value": 22
+       "value": 23
       }
      ]
     },
     "rbi": {
      "names": [
-      "Matt Olson",
-      "Michael Harris II"
+      "Matt Olson"
      ],
-     "value": 80,
+     "value": 81,
      "top": [
       {
        "name": "Matt Olson",
-       "value": 80
+       "value": 81
       },
       {
        "name": "Michael Harris II",
@@ -82,7 +81,7 @@
       },
       {
        "name": "Drake Baldwin",
-       "value": 70
+       "value": 71
       }
      ]
     },
@@ -90,11 +89,11 @@
      "names": [
       "Michael Harris II"
      ],
-     "value": ".289",
+     "value": ".287",
      "top": [
       {
        "name": "Michael Harris II",
-       "value": ".289"
+       "value": ".287"
       },
       {
        "name": "Drake Baldwin",
@@ -110,19 +109,19 @@
      "names": [
       "Matt Olson"
      ],
-     "value": ".828",
+     "value": ".827",
      "top": [
       {
        "name": "Matt Olson",
-       "value": ".828"
-      },
-      {
-       "name": "Michael Harris II",
-       "value": ".806"
+       "value": ".827"
       },
       {
        "name": "Drake Baldwin",
-       "value": ".798"
+       "value": ".805"
+      },
+      {
+       "name": "Michael Harris II",
+       "value": ".803"
       }
      ]
     }
