@@ -200,7 +200,8 @@ struct RecentGameView: View {
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 18)
+            .padding(.top, 6)
+            .padding(.bottom, 18)
             .foregroundStyle(AppColor.ink)
         }
         .refreshable {
@@ -253,7 +254,9 @@ struct RecentGameView: View {
             combinedLineScore(game)
         }
         .background(AppColor.nightRaised)
-        .cardStyle(padding: 12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 12)
+        .padding(.bottom, 12)
     }
 
     private func combinedLineScore(_ game: RecentGame) -> some View {
