@@ -249,9 +249,13 @@ struct RecentGameView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            Divider()
-
             combinedLineScore(game)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 10)
+                .overlay {
+                    Rectangle()
+                        .stroke(AppColor.border.opacity(0.65), lineWidth: 0.5)
+                }
         }
         .background(AppColor.nightRaised)
         .frame(maxWidth: .infinity, alignment: .leading)
