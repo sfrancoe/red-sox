@@ -54,9 +54,9 @@ struct StoriesView: View {
                     }
                 } else {
                     ContentUnavailableView(
-                        "New York stories are coming",
+                        "\(team.shortName) stories coming soon",
                         systemImage: "book.pages",
-                        description: Text("This section will appear when the first New York visual story is ready.")
+                        description: Text("This section will appear when the first \(team.shortName) visual story is ready.")
                     )
                     .foregroundStyle(AppColor.ink)
                 }
