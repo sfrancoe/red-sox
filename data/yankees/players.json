@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T13:42:15.906315+00:00",
-  "roster_as_of": "September 7, 2026",
+  "generated_at": "2026-09-11T13:41:00.436992+00:00",
+  "roster_as_of": "September 10, 2026",
   "team": {
     "id": 147,
     "name": "New York Yankees"
@@ -1478,65 +1478,6 @@
       }
     },
     {
-      "id": 665862,
-      "wikidata_id": "Q59779771",
-      "slug": "jazz-chisholm-jr",
-      "name": "Jazz Chisholm Jr.",
-      "full_name": "Jazz Chisholm Jr.",
-      "number": "13",
-      "position": {
-        "name": "Shortstop",
-        "group": "Infielder",
-        "abbreviation": "IF"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "1998-02-01",
-      "age": 28,
-      "birthplace": "Nassau",
-      "height": null,
-      "weight": null,
-      "bats": "Left",
-      "throws": "Right",
-      "debut_date": "September 1, 2020",
-      "debut_team": "Miami Marlins",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Miami Marlins",
-        "New York Yankees"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q59779771",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Jazz_Chisholm_Jr.",
-      "retrosheet_id": "chisj001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 579,
-          "plate_appearances": 2345,
-          "at_bats": 2109,
-          "runs": 316,
-          "hits": 522,
-          "doubles": 79,
-          "triples": 16,
-          "home_runs": 108,
-          "runs_batted_in": 308,
-          "walks": 197,
-          "strikeouts": 648,
-          "stolen_bases": 130,
-          "caught_stealing": 36,
-          "average": 0.248,
-          "on_base_percentage": 0.316,
-          "slugging_percentage": 0.454,
-          "ops": 0.77
-        },
-        "pitching": null
-      }
-    },
-    {
       "id": 671277,
       "wikidata_id": "Q96707369",
       "slug": "luis-garcia-jr",
@@ -1636,6 +1577,65 @@
         "through_season": 2025,
         "status": "not_in_2025_release",
         "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 665862,
+      "wikidata_id": "Q59779771",
+      "slug": "jazz-chisholm-jr",
+      "name": "Jazz Chisholm Jr.",
+      "full_name": "Jazz Chisholm Jr.",
+      "number": "13",
+      "position": {
+        "name": "Shortstop",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Injured list",
+      "is_active_roster": false,
+      "birth_date": "1998-02-01",
+      "age": 28,
+      "birthplace": "Nassau",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "September 1, 2020",
+      "debut_team": "Miami Marlins",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Miami Marlins",
+        "New York Yankees"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q59779771",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jazz_Chisholm_Jr.",
+      "retrosheet_id": "chisj001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 579,
+          "plate_appearances": 2345,
+          "at_bats": 2109,
+          "runs": 316,
+          "hits": 522,
+          "doubles": 79,
+          "triples": 16,
+          "home_runs": 108,
+          "runs_batted_in": 308,
+          "walks": 197,
+          "strikeouts": 648,
+          "stolen_bases": 130,
+          "caught_stealing": 36,
+          "average": 0.248,
+          "on_base_percentage": 0.316,
+          "slugging_percentage": 0.454,
+          "ops": 0.77
+        },
         "pitching": null
       }
     },
@@ -2636,8 +2636,8 @@
         "group": "Infielder",
         "abbreviation": "IF"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2001-04-28",
       "age": 25,
       "birthplace": "New York City",
