@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T16:41:59.163814+00:00",
+  "generated_at": "2026-09-11T11:49:41.414401+00:00",
   "season": 2026,
   "team": "Los Angeles Angels",
   "games_played": 146,
@@ -13,7 +13,7 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.2,
+    "actual_war": 12.1,
     "forecast_war_to_date": 12.4,
     "war_gap": -0.3,
     "innings": 1289.0,
@@ -49,7 +49,7 @@
         "ip": 135.8,
         "war": 1.77
       },
-      "war_gap": 2.68,
+      "war_gap": 2.67,
       "innings_share_pct": 13.0
     },
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "131.1",
         "ip_value": 131.333,
-        "war": 2.08,
+        "war": 2.07,
         "era": 2.74,
         "fip": 3.77,
         "k_minus_bb_pct": 10.7
@@ -81,7 +81,7 @@
         "ip": 37.9,
         "war": -0.04
       },
-      "war_gap": 2.12,
+      "war_gap": 2.11,
       "innings_share_pct": 10.2
     },
     {
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "123.0",
         "ip_value": 123.0,
-        "war": 2.02,
+        "war": 2.01,
         "era": 3.29,
         "fip": 3.79,
         "k_minus_bb_pct": 13.7
@@ -177,7 +177,7 @@
         "ip": 160.2,
         "war": 2.32
       },
-      "war_gap": -1.73,
+      "war_gap": -1.74,
       "innings_share_pct": 3.8
     },
     {
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "63.1",
         "ip_value": 63.333,
-        "war": 0.43,
+        "war": 0.42,
         "era": 4.12,
         "fip": 3.65,
         "k_minus_bb_pct": 14.3
@@ -416,7 +416,7 @@
       "actual": {
         "ip": "13.2",
         "ip_value": 13.667,
-        "war": 0.27,
+        "war": 0.26,
         "era": 3.95,
         "fip": 2.73,
         "k_minus_bb_pct": 18.5
@@ -497,7 +497,7 @@
         "ip": 73.5,
         "war": 0.28
       },
-      "war_gap": -0.07,
+      "war_gap": -0.08,
       "innings_share_pct": 5.0
     },
     {
@@ -565,6 +565,38 @@
       "innings_share_pct": 1.1
     },
     {
+      "id": 691946,
+      "name": "George Klassen",
+      "throws": "R",
+      "role": "Starter",
+      "games": 6,
+      "starts": 6,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "27.0",
+        "ip_value": 27.0,
+        "war": 0.13,
+        "era": 3.67,
+        "fip": 4.73,
+        "k_minus_bb_pct": 2.4
+      },
+      "forecast": {
+        "ip": 49.9,
+        "war": 0.36,
+        "era": 4.42,
+        "fip": 4.5,
+        "k_minus_bb_pct": 11.0,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 45.0,
+        "war": 0.32
+      },
+      "war_gap": -0.2,
+      "innings_share_pct": 2.1
+    },
+    {
       "id": 680570,
       "name": "Grayson Rodriguez",
       "throws": "R",
@@ -595,38 +627,6 @@
       },
       "war_gap": -1.79,
       "innings_share_pct": 6.3
-    },
-    {
-      "id": 691946,
-      "name": "George Klassen",
-      "throws": "R",
-      "role": "Starter",
-      "games": 6,
-      "starts": 6,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "27.0",
-        "ip_value": 27.0,
-        "war": 0.13,
-        "era": 3.67,
-        "fip": 4.73,
-        "k_minus_bb_pct": 2.4
-      },
-      "forecast": {
-        "ip": 49.9,
-        "war": 0.36,
-        "era": 4.42,
-        "fip": 4.5,
-        "k_minus_bb_pct": 11.0,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 45.0,
-        "war": 0.32
-      },
-      "war_gap": -0.19,
-      "innings_share_pct": 2.1
     },
     {
       "id": 605242,
@@ -1059,7 +1059,7 @@
         "ip": 50.5,
         "war": 0.45
       },
-      "war_gap": -0.84,
+      "war_gap": -0.85,
       "innings_share_pct": 1.8
     },
     {
@@ -1074,7 +1074,7 @@
       "actual": {
         "ip": "84.1",
         "ip_value": 84.333,
-        "war": -0.43,
+        "war": -0.44,
         "era": 5.12,
         "fip": 5.91,
         "k_minus_bb_pct": 6.6
@@ -1091,7 +1091,7 @@
         "ip": 64.4,
         "war": 0.76
       },
-      "war_gap": -1.19,
+      "war_gap": -1.2,
       "innings_share_pct": 6.5
     }
   ]

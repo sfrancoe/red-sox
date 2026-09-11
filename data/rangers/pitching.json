@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T22:46:59.326986+00:00",
+  "generated_at": "2026-09-11T11:49:42.951869+00:00",
   "season": 2026,
   "team": "Texas Rangers",
   "games_played": 147,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.4,
+    "actual_war": 14.8,
     "forecast_war_to_date": 16.2,
-    "war_gap": -1.8,
-    "innings": 1279.3,
+    "war_gap": -1.5,
+    "innings": 1287.3,
     "era": 4.31
   },
   "pitchers": [
@@ -25,17 +25,17 @@
       "name": "Jacob deGrom",
       "throws": "R",
       "role": "Starter",
-      "games": 27,
-      "starts": 27,
+      "games": 28,
+      "starts": 28,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "143.1",
-        "ip_value": 143.333,
-        "war": 3.66,
-        "era": 3.96,
-        "fip": 3.19,
-        "k_minus_bb_pct": 23.4
+        "ip": "149.1",
+        "ip_value": 149.333,
+        "war": 4.13,
+        "era": 3.8,
+        "fip": 3.02,
+        "k_minus_bb_pct": 24.6
       },
       "forecast": {
         "ip": 174.8,
@@ -49,8 +49,8 @@
         "ip": 158.6,
         "war": 3.67
       },
-      "war_gap": -0.02,
-      "innings_share_pct": 11.2
+      "war_gap": 0.45,
+      "innings_share_pct": 11.6
     },
     {
       "id": 669022,
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "157.2",
         "ip_value": 157.667,
-        "war": 2.82,
+        "war": 2.83,
         "era": 4.51,
         "fip": 3.76,
         "k_minus_bb_pct": 15.6
@@ -82,7 +82,7 @@
         "war": 2.46
       },
       "war_gap": 0.37,
-      "innings_share_pct": 12.3
+      "innings_share_pct": 12.2
     },
     {
       "id": 656641,
@@ -113,8 +113,8 @@
         "ip": 80.9,
         "war": 0.47
       },
-      "war_gap": 1.63,
-      "innings_share_pct": 5.0
+      "war_gap": 1.64,
+      "innings_share_pct": 4.9
     },
     {
       "id": 543135,
@@ -146,7 +146,7 @@
         "war": 3.05
       },
       "war_gap": -1.5,
-      "innings_share_pct": 10.4
+      "innings_share_pct": 10.3
     },
     {
       "id": 615698,
@@ -177,7 +177,7 @@
         "ip": 7.7,
         "war": 0.04
       },
-      "war_gap": 1.4,
+      "war_gap": 1.41,
       "innings_share_pct": 8.0
     },
     {
@@ -210,7 +210,7 @@
         "war": 0.07
       },
       "war_gap": 1.25,
-      "innings_share_pct": 5.1
+      "innings_share_pct": 5.0
     },
     {
       "id": 677958,
@@ -245,38 +245,6 @@
       "innings_share_pct": 10.5
     },
     {
-      "id": 596001,
-      "name": "Jakob Junis",
-      "throws": "R",
-      "role": "Setup",
-      "games": 46,
-      "starts": 1,
-      "saves": 6,
-      "holds": 17,
-      "actual": {
-        "ip": "49.1",
-        "ip_value": 49.333,
-        "war": 0.72,
-        "era": 2.74,
-        "fip": 3.38,
-        "k_minus_bb_pct": 11.3
-      },
-      "forecast": {
-        "ip": 65.0,
-        "war": 0.31,
-        "era": 4.1,
-        "fip": 4.06,
-        "k_minus_bb_pct": 14.9,
-        "team_at_fetch": "TEX"
-      },
-      "forecast_to_date": {
-        "ip": 59.0,
-        "war": 0.28
-      },
-      "war_gap": 0.44,
-      "innings_share_pct": 3.9
-    },
-    {
       "id": 683004,
       "name": "Jack Leiter",
       "throws": "R",
@@ -288,7 +256,7 @@
       "actual": {
         "ip": "80.0",
         "ip_value": 80.0,
-        "war": 0.54,
+        "war": 0.53,
         "era": 5.29,
         "fip": 4.76,
         "k_minus_bb_pct": 13.5
@@ -305,8 +273,40 @@
         "ip": 135.8,
         "war": 1.43
       },
-      "war_gap": -0.89,
-      "innings_share_pct": 6.3
+      "war_gap": -0.9,
+      "innings_share_pct": 6.2
+    },
+    {
+      "id": 596001,
+      "name": "Jakob Junis",
+      "throws": "R",
+      "role": "Setup",
+      "games": 47,
+      "starts": 1,
+      "saves": 6,
+      "holds": 17,
+      "actual": {
+        "ip": "49.1",
+        "ip_value": 49.333,
+        "war": 0.5,
+        "era": 3.47,
+        "fip": 3.71,
+        "k_minus_bb_pct": 11.1
+      },
+      "forecast": {
+        "ip": 65.0,
+        "war": 0.31,
+        "era": 4.1,
+        "fip": 4.06,
+        "k_minus_bb_pct": 14.9,
+        "team_at_fetch": "TEX"
+      },
+      "forecast_to_date": {
+        "ip": 59.0,
+        "war": 0.28
+      },
+      "war_gap": 0.23,
+      "innings_share_pct": 3.8
     },
     {
       "id": 674003,
@@ -402,7 +402,39 @@
         "war": -0.1
       },
       "war_gap": 0.36,
-      "innings_share_pct": 3.8
+      "innings_share_pct": 3.7
+    },
+    {
+      "id": 676395,
+      "name": "Robert Garcia",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 11,
+      "starts": 0,
+      "saves": 0,
+      "holds": 2,
+      "actual": {
+        "ip": "10.0",
+        "ip_value": 10.0,
+        "war": 0.12,
+        "era": 2.7,
+        "fip": 3.4,
+        "k_minus_bb_pct": 5.0
+      },
+      "forecast": {
+        "ip": 64.0,
+        "war": 0.52,
+        "era": 3.53,
+        "fip": 3.64,
+        "k_minus_bb_pct": 17.4,
+        "team_at_fetch": "TEX"
+      },
+      "forecast_to_date": {
+        "ip": 58.1,
+        "war": 0.48
+      },
+      "war_gap": -0.35,
+      "innings_share_pct": 0.8
     },
     {
       "id": 671936,
@@ -435,38 +467,6 @@
       },
       "war_gap": 0.1,
       "innings_share_pct": 0.5
-    },
-    {
-      "id": 676395,
-      "name": "Robert Garcia",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 10,
-      "starts": 0,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "9.0",
-        "ip_value": 9.0,
-        "war": 0.06,
-        "era": 3.0,
-        "fip": 3.88,
-        "k_minus_bb_pct": 0.0
-      },
-      "forecast": {
-        "ip": 64.0,
-        "war": 0.52,
-        "era": 3.53,
-        "fip": 3.64,
-        "k_minus_bb_pct": 17.4,
-        "team_at_fetch": "TEX"
-      },
-      "forecast_to_date": {
-        "ip": 58.1,
-        "war": 0.48
-      },
-      "war_gap": -0.41,
-      "innings_share_pct": 0.7
     },
     {
       "id": 670032,
@@ -724,7 +724,7 @@
         "ip_value": 5.333,
         "war": -0.05,
         "era": 5.06,
-        "fip": 6.29,
+        "fip": 6.28,
         "k_minus_bb_pct": 4.0
       },
       "forecast": {
@@ -932,17 +932,17 @@
       "name": "Robby Ahlstrom",
       "throws": "L",
       "role": "Reliever",
-      "games": 40,
+      "games": 41,
       "starts": 0,
       "saves": 0,
       "holds": 6,
       "actual": {
-        "ip": "35.1",
-        "ip_value": 35.333,
-        "war": -0.22,
-        "era": 6.11,
+        "ip": "36.1",
+        "ip_value": 36.333,
+        "war": -0.23,
+        "era": 5.94,
         "fip": 5.05,
-        "k_minus_bb_pct": 13.5
+        "k_minus_bb_pct": 13.1
       },
       "forecast": {
         "ip": 8.0,
@@ -956,7 +956,7 @@
         "ip": 7.3,
         "war": -0.04
       },
-      "war_gap": -0.18,
+      "war_gap": -0.19,
       "innings_share_pct": 2.8
     },
     {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T05:17:36.684341+00:00",
+  "generated_at": "2026-09-11T11:49:47.481377+00:00",
   "season": 2026,
   "team": "Pittsburgh Pirates",
   "games_played": 147,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 18.6,
+    "actual_war": 19.1,
     "forecast_war_to_date": 16.4,
-    "war_gap": 2.2,
-    "innings": 1304.3,
-    "era": 4.15
+    "war_gap": 2.7,
+    "innings": 1313.3,
+    "era": 4.13
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 5.15
       },
       "war_gap": -0.96,
-      "innings_share_pct": 11.9
+      "innings_share_pct": 11.8
     },
     {
       "id": 677952,
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "165.1",
         "ip_value": 165.333,
-        "war": 3.56,
+        "war": 3.55,
         "era": 3.65,
         "fip": 3.5,
         "k_minus_bb_pct": 20.7
@@ -81,8 +81,8 @@
         "ip": 132.0,
         "war": 1.54
       },
-      "war_gap": 2.01,
-      "innings_share_pct": 12.7
+      "war_gap": 2.0,
+      "innings_share_pct": 12.6
     },
     {
       "id": 696149,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "142.0",
         "ip_value": 142.0,
-        "war": 2.13,
+        "war": 2.12,
         "era": 4.25,
         "fip": 4.1,
         "k_minus_bb_pct": 9.5
@@ -113,25 +113,25 @@
         "ip": 147.4,
         "war": 1.68
       },
-      "war_gap": 0.45,
-      "innings_share_pct": 10.9
+      "war_gap": 0.44,
+      "innings_share_pct": 10.8
     },
     {
       "id": 682254,
       "name": "Mason Montgomery",
       "throws": "L",
       "role": "Swingman",
-      "games": 62,
+      "games": 63,
       "starts": 5,
-      "saves": 11,
+      "saves": 12,
       "holds": 9,
       "actual": {
-        "ip": "60.2",
-        "ip_value": 60.667,
-        "war": 1.93,
-        "era": 2.82,
-        "fip": 2.26,
-        "k_minus_bb_pct": 28.9
+        "ip": "61.2",
+        "ip_value": 61.667,
+        "war": 1.98,
+        "era": 2.77,
+        "fip": 2.24,
+        "k_minus_bb_pct": 28.8
       },
       "forecast": {
         "ip": 60.0,
@@ -145,8 +145,40 @@
         "ip": 54.4,
         "war": 0.18
       },
-      "war_gap": 1.75,
+      "war_gap": 1.8,
       "innings_share_pct": 4.7
+    },
+    {
+      "id": 683003,
+      "name": "Jared Jones",
+      "throws": "R",
+      "role": "Starter",
+      "games": 18,
+      "starts": 18,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "85.2",
+        "ip_value": 85.667,
+        "war": 1.77,
+        "era": 4.1,
+        "fip": 3.7,
+        "k_minus_bb_pct": 19.6
+      },
+      "forecast": {
+        "ip": 106.9,
+        "war": 1.72,
+        "era": 3.83,
+        "fip": 3.79,
+        "k_minus_bb_pct": 17.1,
+        "team_at_fetch": "PIT"
+      },
+      "forecast_to_date": {
+        "ip": 97.0,
+        "war": 1.56
+      },
+      "war_gap": 0.21,
+      "innings_share_pct": 6.5
     },
     {
       "id": 669387,
@@ -162,7 +194,7 @@
         "ip_value": 114.0,
         "war": 1.66,
         "era": 3.87,
-        "fip": 3.62,
+        "fip": 3.61,
         "k_minus_bb_pct": 10.5
       },
       "forecast": {
@@ -179,38 +211,6 @@
       },
       "war_gap": 0.7,
       "innings_share_pct": 8.7
-    },
-    {
-      "id": 683003,
-      "name": "Jared Jones",
-      "throws": "R",
-      "role": "Starter",
-      "games": 17,
-      "starts": 17,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "78.2",
-        "ip_value": 78.667,
-        "war": 1.42,
-        "era": 4.46,
-        "fip": 3.89,
-        "k_minus_bb_pct": 19.2
-      },
-      "forecast": {
-        "ip": 106.9,
-        "war": 1.72,
-        "era": 3.83,
-        "fip": 3.79,
-        "k_minus_bb_pct": 17.1,
-        "team_at_fetch": "PIT"
-      },
-      "forecast_to_date": {
-        "ip": 97.0,
-        "war": 1.56
-      },
-      "war_gap": -0.14,
-      "innings_share_pct": 6.0
     },
     {
       "id": 642397,
@@ -241,7 +241,7 @@
         "ip": 58.1,
         "war": 0.47
       },
-      "war_gap": 0.88,
+      "war_gap": 0.87,
       "innings_share_pct": 4.7
     },
     {
@@ -274,7 +274,7 @@
         "war": 2.07
       },
       "war_gap": -1.07,
-      "innings_share_pct": 8.9
+      "innings_share_pct": 8.8
     },
     {
       "id": 670990,
@@ -306,7 +306,7 @@
         "war": 0.13
       },
       "war_gap": 0.8,
-      "innings_share_pct": 6.0
+      "innings_share_pct": 5.9
     },
     {
       "id": 696062,
@@ -337,7 +337,7 @@
         "ip": 12.7,
         "war": -0.02
       },
-      "war_gap": 0.53,
+      "war_gap": 0.52,
       "innings_share_pct": 2.5
     },
     {
@@ -370,7 +370,7 @@
         "war": 0.14
       },
       "war_gap": 0.3,
-      "innings_share_pct": 3.3
+      "innings_share_pct": 3.2
     },
     {
       "id": 676755,
@@ -402,7 +402,7 @@
         "war": 0.03
       },
       "war_gap": 0.32,
-      "innings_share_pct": 3.0
+      "innings_share_pct": 2.9
     },
     {
       "id": 685126,
@@ -441,17 +441,17 @@
       "name": "Luke Weaver",
       "throws": "R",
       "role": "Reliever",
-      "games": 11,
+      "games": 12,
       "starts": 0,
       "saves": 0,
-      "holds": 4,
+      "holds": 5,
       "actual": {
-        "ip": "10.1",
-        "ip_value": 10.333,
-        "war": 0.12,
-        "era": 6.1,
-        "fip": 3.48,
-        "k_minus_bb_pct": 17.0
+        "ip": "11.1",
+        "ip_value": 11.333,
+        "war": 0.22,
+        "era": 5.56,
+        "fip": 3.1,
+        "k_minus_bb_pct": 20.0
       },
       "forecast": {
         "ip": 67.0,
@@ -465,8 +465,8 @@
         "ip": 60.8,
         "war": 0.31
       },
-      "war_gap": -0.18,
-      "innings_share_pct": 0.8
+      "war_gap": -0.09,
+      "innings_share_pct": 0.9
     },
     {
       "id": 489446,
@@ -576,7 +576,7 @@
       "actual": {
         "ip": "20.2",
         "ip_value": 20.667,
-        "war": 0.04,
+        "war": 0.03,
         "era": 2.61,
         "fip": 5.37,
         "k_minus_bb_pct": 12.0
@@ -593,7 +593,7 @@
         "ip": 47.2,
         "war": 0.03
       },
-      "war_gap": 0.0,
+      "war_gap": -0.0,
       "innings_share_pct": 1.6
     },
     {
@@ -697,7 +697,7 @@
       "actual": {
         "ip": "16.0",
         "ip_value": 16.0,
-        "war": 0.0,
+        "war": -0.0,
         "era": 3.38,
         "fip": 4.35,
         "k_minus_bb_pct": 6.8
@@ -714,7 +714,7 @@
         "ip": 58.1,
         "war": 0.52
       },
-      "war_gap": -0.51,
+      "war_gap": -0.52,
       "innings_share_pct": 1.2
     },
     {
@@ -788,7 +788,7 @@
         "ip_value": 5.333,
         "war": -0.05,
         "era": 6.75,
-        "fip": 6.29,
+        "fip": 6.28,
         "k_minus_bb_pct": 8.0
       },
       "forecast": {
@@ -835,7 +835,7 @@
         "ip": 30.9,
         "war": -0.08
       },
-      "war_gap": 0.03,
+      "war_gap": 0.02,
       "innings_share_pct": 0.7
     },
     {
@@ -996,7 +996,7 @@
         "war": 0.88
       },
       "war_gap": -1.39,
-      "innings_share_pct": 1.4
+      "innings_share_pct": 1.3
     }
   ]
 }

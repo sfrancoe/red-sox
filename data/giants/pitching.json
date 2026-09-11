@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T16:42:21.922027+00:00",
+  "generated_at": "2026-09-11T11:49:50.677120+00:00",
   "season": 2026,
   "team": "San Francisco Giants",
   "games_played": 147,
@@ -49,7 +49,7 @@
         "ip": 180.9,
         "war": 3.72
       },
-      "war_gap": -0.78,
+      "war_gap": -0.79,
       "innings_share_pct": 12.0
     },
     {
@@ -226,7 +226,7 @@
         "ip_value": 16.0,
         "war": 0.45,
         "era": 2.81,
-        "fip": 1.79,
+        "fip": 1.78,
         "k_minus_bb_pct": 20.9
       },
       "forecast": {
@@ -529,7 +529,7 @@
         "ip": 20.9,
         "war": 0.14
       },
-      "war_gap": -0.03,
+      "war_gap": -0.04,
       "innings_share_pct": 1.5
     },
     {
@@ -721,33 +721,8 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.02,
-      "innings_share_pct": 0.7
-    },
-    {
-      "id": 683766,
-      "name": "Christian Koss",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 2,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "2.0",
-        "ip_value": 2.0,
-        "war": 0.01,
-        "era": 13.5,
-        "fip": 3.1,
-        "k_minus_bb_pct": 0.0
-      },
-      "forecast": null,
-      "forecast_to_date": {
-        "ip": 0.0,
-        "war": 0.0
-      },
       "war_gap": 0.01,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 0.7
     },
     {
       "id": 691769,
@@ -779,6 +754,31 @@
         "war": 0.08
       },
       "war_gap": -0.07,
+      "innings_share_pct": 0.2
+    },
+    {
+      "id": 683766,
+      "name": "Christian Koss",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "2.0",
+        "ip_value": 2.0,
+        "war": 0.01,
+        "era": 13.5,
+        "fip": 3.1,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": null,
+      "forecast_to_date": {
+        "ip": 0.0,
+        "war": 0.0
+      },
+      "war_gap": 0.01,
       "innings_share_pct": 0.2
     },
     {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T16:42:11.694963+00:00",
+  "generated_at": "2026-09-11T11:49:46.435683+00:00",
   "season": 2026,
   "team": "Cincinnati Reds",
   "games_played": 146,
@@ -49,7 +49,7 @@
         "ip": 103.0,
         "war": 2.06
       },
-      "war_gap": 2.35,
+      "war_gap": 2.36,
       "innings_share_pct": 11.5
     },
     {
@@ -81,7 +81,7 @@
         "ip": 153.5,
         "war": 1.83
       },
-      "war_gap": -0.34,
+      "war_gap": -0.35,
       "innings_share_pct": 11.8
     },
     {
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "27.2",
         "ip_value": 27.667,
-        "war": 0.38,
+        "war": 0.37,
         "era": 4.23,
         "fip": 3.35,
         "k_minus_bb_pct": 18.3
@@ -305,7 +305,7 @@
         "ip": 32.4,
         "war": -0.06
       },
-      "war_gap": 0.44,
+      "war_gap": 0.43,
       "innings_share_pct": 2.1
     },
     {
@@ -643,7 +643,7 @@
         "ip": 55.0,
         "war": 0.26
       },
-      "war_gap": -0.35,
+      "war_gap": -0.36,
       "innings_share_pct": 3.3
     },
     {
@@ -768,38 +768,6 @@
       "innings_share_pct": 0.6
     },
     {
-      "id": 683742,
-      "name": "Jose Franco",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 10,
-      "starts": 0,
-      "saves": 0,
-      "holds": 1,
-      "actual": {
-        "ip": "20.1",
-        "ip_value": 20.333,
-        "war": -0.19,
-        "era": 4.43,
-        "fip": 5.9,
-        "k_minus_bb_pct": -1.1
-      },
-      "forecast": {
-        "ip": 14.0,
-        "war": 0.01,
-        "era": 4.37,
-        "fip": 4.55,
-        "k_minus_bb_pct": 12.8,
-        "team_at_fetch": "CIN"
-      },
-      "forecast_to_date": {
-        "ip": 12.6,
-        "war": 0.01
-      },
-      "war_gap": -0.2,
-      "innings_share_pct": 1.6
-    },
-    {
       "id": 682227,
       "name": "Brandon Williamson",
       "throws": "L",
@@ -830,6 +798,38 @@
       },
       "war_gap": -0.69,
       "innings_share_pct": 2.9
+    },
+    {
+      "id": 683742,
+      "name": "Jose Franco",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 10,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "20.1",
+        "ip_value": 20.333,
+        "war": -0.19,
+        "era": 4.43,
+        "fip": 5.9,
+        "k_minus_bb_pct": -1.1
+      },
+      "forecast": {
+        "ip": 14.0,
+        "war": 0.01,
+        "era": 4.37,
+        "fip": 4.55,
+        "k_minus_bb_pct": 12.8,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 12.6,
+        "war": 0.01
+      },
+      "war_gap": -0.2,
+      "innings_share_pct": 1.6
     },
     {
       "id": 680689,

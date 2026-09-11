@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T19:16:57.335654+00:00",
+  "generated_at": "2026-09-11T11:49:43.615257+00:00",
   "season": 2026,
   "team": "Atlanta Braves",
   "games_played": 147,
@@ -15,9 +15,9 @@
   "team_summary": {
     "actual_war": 14.7,
     "forecast_war_to_date": 15.3,
-    "war_gap": -0.7,
-    "innings": 1295.0,
-    "era": 3.59
+    "war_gap": -0.6,
+    "innings": 1304.0,
+    "era": 3.58
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 3.77
       },
       "war_gap": 1.67,
-      "innings_share_pct": 11.6
+      "innings_share_pct": 11.5
     },
     {
       "id": 669276,
@@ -89,17 +89,17 @@
       "name": "Didier Fuentes",
       "throws": "R",
       "role": "Setup",
-      "games": 52,
+      "games": 53,
       "starts": 1,
       "saves": 3,
       "holds": 15,
       "actual": {
-        "ip": "65.1",
-        "ip_value": 65.333,
-        "war": 1.96,
-        "era": 2.34,
-        "fip": 2.49,
-        "k_minus_bb_pct": 24.6
+        "ip": "66.1",
+        "ip_value": 66.333,
+        "war": 2.01,
+        "era": 2.31,
+        "fip": 2.46,
+        "k_minus_bb_pct": 24.7
       },
       "forecast": {
         "ip": 63.6,
@@ -113,24 +113,24 @@
         "ip": 57.7,
         "war": 0.37
       },
-      "war_gap": 1.59,
-      "innings_share_pct": 5.0
+      "war_gap": 1.64,
+      "innings_share_pct": 5.1
     },
     {
       "id": 527048,
       "name": "Martín Pérez",
       "throws": "L",
       "role": "Starter",
-      "games": 27,
-      "starts": 23,
+      "games": 28,
+      "starts": 24,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "124.2",
-        "ip_value": 124.667,
-        "war": 1.21,
-        "era": 3.25,
-        "fip": 4.32,
+        "ip": "131.2",
+        "ip_value": 131.667,
+        "war": 1.42,
+        "era": 3.08,
+        "fip": 4.24,
         "k_minus_bb_pct": 7.7
       },
       "forecast": {
@@ -145,8 +145,8 @@
         "ip": 8.1,
         "war": 0.07
       },
-      "war_gap": 1.14,
-      "innings_share_pct": 9.6
+      "war_gap": 1.36,
+      "innings_share_pct": 10.1
     },
     {
       "id": 693821,
@@ -178,7 +178,7 @@
         "war": 0.87
       },
       "war_gap": 0.28,
-      "innings_share_pct": 11.5
+      "innings_share_pct": 11.4
     },
     {
       "id": 641816,
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "36.1",
         "ip_value": 36.333,
-        "war": 1.03,
+        "war": 1.04,
         "era": 1.24,
         "fip": 2.82,
         "k_minus_bb_pct": 20.6
@@ -211,38 +211,6 @@
       },
       "war_gap": -0.22,
       "innings_share_pct": 2.8
-    },
-    {
-      "id": 628452,
-      "name": "Raisel Iglesias",
-      "throws": "R",
-      "role": "Closer",
-      "games": 52,
-      "starts": 0,
-      "saves": 31,
-      "holds": 0,
-      "actual": {
-        "ip": "53.0",
-        "ip_value": 53.0,
-        "war": 1.02,
-        "era": 2.72,
-        "fip": 3.21,
-        "k_minus_bb_pct": 18.2
-      },
-      "forecast": {
-        "ip": 66.0,
-        "war": 0.5,
-        "era": 3.71,
-        "fip": 3.62,
-        "k_minus_bb_pct": 18.9,
-        "team_at_fetch": "ATL"
-      },
-      "forecast_to_date": {
-        "ip": 59.9,
-        "war": 0.45
-      },
-      "war_gap": 0.56,
-      "innings_share_pct": 4.1
     },
     {
       "id": 656550,
@@ -307,6 +275,38 @@
       },
       "war_gap": 0.2,
       "innings_share_pct": 2.5
+    },
+    {
+      "id": 628452,
+      "name": "Raisel Iglesias",
+      "throws": "R",
+      "role": "Closer",
+      "games": 53,
+      "starts": 0,
+      "saves": 32,
+      "holds": 0,
+      "actual": {
+        "ip": "54.0",
+        "ip_value": 54.0,
+        "war": 0.81,
+        "era": 2.83,
+        "fip": 3.47,
+        "k_minus_bb_pct": 17.8
+      },
+      "forecast": {
+        "ip": 66.0,
+        "war": 0.5,
+        "era": 3.71,
+        "fip": 3.62,
+        "k_minus_bb_pct": 18.9,
+        "team_at_fetch": "ATL"
+      },
+      "forecast_to_date": {
+        "ip": 59.9,
+        "war": 0.45
+      },
+      "war_gap": 0.36,
+      "innings_share_pct": 4.1
     },
     {
       "id": 625643,
@@ -1002,8 +1002,8 @@
         "ip": 33.5,
         "war": 0.24
       },
-      "war_gap": -0.45,
-      "innings_share_pct": 4.5
+      "war_gap": -0.46,
+      "innings_share_pct": 4.4
     },
     {
       "id": 694462,
@@ -1131,7 +1131,7 @@
         "war": 0.06
       },
       "war_gap": -0.57,
-      "innings_share_pct": 1.0
+      "innings_share_pct": 0.9
     },
     {
       "id": 607481,
