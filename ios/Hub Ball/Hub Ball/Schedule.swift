@@ -67,7 +67,8 @@ struct ScheduledGame: Decodable, Identifiable, Sendable {
 
     var formattedDay: String {
         guard let date else { return gameDate }
-        return date.formatted(
+        return BaseballTime.format(
+            date,
             .dateTime
                 .weekday(.abbreviated)
                 .month(.abbreviated)
@@ -77,12 +78,13 @@ struct ScheduledGame: Decodable, Identifiable, Sendable {
 
     var formattedTime: String {
         guard let date else { return "" }
-        return date.formatted(date: .omitted, time: .shortened)
+        return BaseballTime.format(date, Date.FormatStyle(date: .omitted, time: .shortened))
     }
 
     var fullFormattedDay: String {
         guard let date else { return gameDate }
-        return date.formatted(
+        return BaseballTime.format(
+            date,
             .dateTime
                 .weekday(.wide)
                 .month(.wide)

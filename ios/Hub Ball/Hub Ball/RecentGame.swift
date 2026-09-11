@@ -26,7 +26,8 @@ struct RecentGame: Codable, Sendable {
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: gameDate) else { return gameDate }
 
-        return date.formatted(
+        return BaseballTime.format(
+            date,
             .dateTime
                 .month(.wide)
                 .day()

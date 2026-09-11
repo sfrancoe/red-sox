@@ -112,7 +112,7 @@ struct ScheduleView: View {
         let isHome = game?.location == "home"
 
         return VStack(spacing: 3) {
-            Text(date.formatted(.dateTime.day()))
+            Text(BaseballTime.format(date, .dateTime.day()))
                 .font(.system(size: 15, weight: game == nil ? .regular : .medium))
                 .foregroundStyle(game == nil ? AppColor.boneMuted : selected ? AppColor.amber : AppColor.bone)
 
@@ -329,7 +329,7 @@ struct ScheduleView: View {
             months.append(
                 CalendarMonth(
                     id: monthID(cursor),
-                    title: cursor.formatted(.dateTime.month(.wide).year()),
+                    title: BaseballTime.format(cursor, .dateTime.month(.wide).year()),
                     days: days
                 )
             )
@@ -350,9 +350,7 @@ struct ScheduleView: View {
     }
 
     private var easternCalendar: Calendar {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(identifier: "America/New_York")!
-        return calendar
+        BaseballTime.calendar
     }
 
     private func firstDayOfMonth(_ date: Date) -> Date {
@@ -396,7 +394,7 @@ struct ScheduleView: View {
 
     private func formattedSeasonEnd(_ value: String) -> String {
         guard let date = seasonEndDate(value) else { return value }
-        return date.formatted(.dateTime.month(.wide).day().year())
+        return BaseballTime.format(date, .dateTime.month(.wide).day().year())
     }
 
     private var errorView: some View {

@@ -395,12 +395,12 @@ struct HomeView: View {
 
     private var todayHeading: String {
         let now = Date.now
-        let calendar = Calendar.current
-        let weekday = now.formatted(.dateTime.weekday(.abbreviated))
+        let calendar = BaseballTime.calendar
+        let weekday = BaseballTime.format(now, .dateTime.weekday(.abbreviated))
         if contentWidth < 650 {
             return "\(weekday) \(calendar.component(.month, from: now))/\(calendar.component(.day, from: now))"
         }
-        let month = now.formatted(.dateTime.month(.abbreviated))
+        let month = BaseballTime.format(now, .dateTime.month(.abbreviated))
         let day = calendar.component(.day, from: now)
         return "\(weekday), \(month) \(ordinal(day))"
     }
@@ -492,19 +492,19 @@ struct HomeView: View {
 
     private func compactDate(_ value: String) -> String {
         guard let date = ISO8601DateFormatter().date(from: value) else { return value }
-        return date.formatted(.dateTime.month(.abbreviated).day().year())
+        return BaseballTime.format(date, .dateTime.month(.abbreviated).day().year())
     }
 
     private func compactNumericDate(_ value: String) -> String {
         guard let date = ISO8601DateFormatter().date(from: value) else { return value }
-        return date.formatted(.dateTime.month(.defaultDigits).day().year(.twoDigits))
+        return BaseballTime.format(date, .dateTime.month(.defaultDigits).day().year(.twoDigits))
     }
 
     private func shortGameDate(_ value: String) -> String {
         guard let date = ISO8601DateFormatter().date(from: value) else { return value }
-        return date.formatted(.dateTime.weekday(.abbreviated))
+        return BaseballTime.format(date, .dateTime.weekday(.abbreviated))
             + " "
-            + date.formatted(.dateTime.month(.defaultDigits).day())
+            + BaseballTime.format(date, .dateTime.month(.defaultDigits).day())
     }
 
     private func signed(_ value: Int) -> String { value > 0 ? "+\(value)" : "\(value)" }
