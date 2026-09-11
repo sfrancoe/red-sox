@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-10T15:12:28+00:00",
+ "generated_at": "2026-09-11T15:14:10+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 140,
  "seasons": {
   "2026": {
-   "record": "72-74",
-   "games": 146,
+   "record": "72-75",
+   "games": 147,
    "in_progress": true,
    "war_leader": {
     "name": "Ezequiel Duran",
-    "war": 4.7
+    "war": 4.6
    },
    "war_leaders": [
     {
      "name": "Ezequiel Duran",
-     "war": 4.7
+     "war": 4.6
     },
     {
      "name": "Wyatt Langford",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Corey Seager",
-     "war": 2.8
+     "war": 2.7
     }
    ],
    "pitching_leaders": {
@@ -39,7 +39,7 @@
       },
       {
        "name": "Jacob deGrom",
-       "value": "1.12"
+       "value": "1.08"
       }
      ]
     }
@@ -47,7 +47,8 @@
    "batting_leaders": {
     "hr": {
      "names": [
-      "Jake Burger"
+      "Jake Burger",
+      "Joc Pederson"
      ],
      "value": 26,
      "top": [
@@ -57,7 +58,7 @@
       },
       {
        "name": "Joc Pederson",
-       "value": 25
+       "value": 26
       },
       {
        "name": "Corey Seager",
@@ -89,19 +90,19 @@
      "names": [
       "Ezequiel Duran"
      ],
-     "value": ".272",
+     "value": ".270",
      "top": [
       {
        "name": "Ezequiel Duran",
-       "value": ".272"
+       "value": ".270"
       },
       {
        "name": "Brandon Nimmo",
-       "value": ".263"
+       "value": ".261"
       },
       {
        "name": "Jake Burger",
-       "value": ".238"
+       "value": ".237"
       }
      ]
     },
@@ -109,19 +110,19 @@
      "names": [
       "Ezequiel Duran"
      ],
-     "value": ".782",
+     "value": ".775",
      "top": [
       {
        "name": "Ezequiel Duran",
-       "value": ".782"
+       "value": ".775"
       },
       {
        "name": "Jake Burger",
-       "value": ".743"
+       "value": ".739"
       },
       {
        "name": "Brandon Nimmo",
-       "value": ".741"
+       "value": ".736"
       }
      ]
     }
