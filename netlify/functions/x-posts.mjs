@@ -3,6 +3,10 @@ import { MLB_TEAMS } from './team-registry.mjs';
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
 const MLB_CLUBS_LIST_URL = 'https://syndication.twitter.com/srv/timeline-list/screen-name/MLB/slug/clubs?lang=en&theme=light&showHeader=false&hideBorder=true';
+export const LIVE_FEED_CACHE_HEADERS = {
+  'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
+  'Netlify-CDN-Cache-Control': 'public, durable, max-age=300, stale-while-revalidate=3600',
+};
 const COMMON_SURNAMES = new Set([
   'anderson', 'anthony', 'campbell', 'gray', 'harris', 'hill', 'miller', 'scott', 'short',
   'story', 'walker', 'wells', 'west', 'white', 'young',
@@ -277,13 +281,10 @@ export default async request => {
     const listPayload = JSON.parse(match[1]);
     const entries = listPayload.props?.pageProps?.timeline?.entries || [];
     const feed = buildFeed(entries, rosterTerms(JSON.parse(rosterJson)), team);
-    return Response.json(feed, { headers: {
-      // X's public syndication endpoint throttles bursts across team profiles. Keep a
-      // verified response at the durable edge while Netlify refreshes it in the
-      // background so a temporary upstream throttle never empties the native feed.
-      'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
-      'Netlify-CDN-Cache-Control': 'public, durable, max-age=86400, stale-while-revalidate=604800',
-    } });
+    // Refresh the free public feed every five minutes. The stale window lets Netlify
+    // keep serving a verified response while a background refresh absorbs a brief
+    // upstream throttle.
+    return Response.json(feed, { headers: LIVE_FEED_CACHE_HEADERS });
   } catch (error) {
     console.error('X feed refresh failed', error);
     try {

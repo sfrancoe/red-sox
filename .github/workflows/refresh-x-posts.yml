@@ -1,6 +1,9 @@
 name: Refresh filtered X posts
 
 on:
+  schedule:
+    # Keep the Red Sox fallback snapshot current without overlapping the all-team job.
+    - cron: '53 */6 * * *'
   workflow_dispatch:
 
 permissions:
