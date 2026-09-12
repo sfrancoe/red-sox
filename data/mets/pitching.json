@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T04:54:39.362967+00:00",
+  "generated_at": "2026-09-12T15:46:06.968698+00:00",
   "season": 2026,
   "team": "New York Mets",
   "games_played": 147,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.0,
+    "actual_war": 13.9,
     "forecast_war_to_date": 14.4,
     "war_gap": -0.5,
-    "innings": 1300.7,
-    "era": 4.19
+    "innings": 1308.7,
+    "era": 4.21
   },
   "pitchers": [
     {
@@ -25,16 +25,16 @@
       "name": "Nolan McLean",
       "throws": "R",
       "role": "Starter",
-      "games": 28,
-      "starts": 28,
+      "games": 29,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "161.2",
-        "ip_value": 161.667,
-        "war": 3.15,
-        "era": 3.06,
-        "fip": 3.57,
+        "ip": "166.2",
+        "ip_value": 166.667,
+        "war": 3.05,
+        "era": 3.24,
+        "fip": 3.68,
         "k_minus_bb_pct": 17.0
       },
       "forecast": {
@@ -49,8 +49,8 @@
         "ip": 135.2,
         "war": 1.84
       },
-      "war_gap": 1.31,
-      "innings_share_pct": 12.4
+      "war_gap": 1.21,
+      "innings_share_pct": 12.7
     },
     {
       "id": 681035,
@@ -81,7 +81,7 @@
         "ip": 30.1,
         "war": 0.29
       },
-      "war_gap": 1.65,
+      "war_gap": 1.66,
       "innings_share_pct": 7.6
     },
     {
@@ -162,7 +162,7 @@
         "ip_value": 44.0,
         "war": 1.13,
         "era": 1.84,
-        "fip": 2.82,
+        "fip": 2.83,
         "k_minus_bb_pct": 20.1
       },
       "forecast": {
@@ -194,7 +194,7 @@
         "ip_value": 52.667,
         "war": 0.86,
         "era": 2.56,
-        "fip": 3.34,
+        "fip": 3.35,
         "k_minus_bb_pct": 12.6
       },
       "forecast": {
@@ -274,7 +274,7 @@
         "war": 1.35
       },
       "war_gap": -0.54,
-      "innings_share_pct": 10.3
+      "innings_share_pct": 10.2
     },
     {
       "id": 681320,
@@ -290,7 +290,7 @@
         "ip_value": 14.333,
         "war": 0.8,
         "era": 1.88,
-        "fip": 1.35,
+        "fip": 1.36,
         "k_minus_bb_pct": 25.5
       },
       "forecast": {
@@ -337,7 +337,7 @@
         "ip": 154.0,
         "war": 2.0
       },
-      "war_gap": -1.25,
+      "war_gap": -1.24,
       "innings_share_pct": 5.2
     },
     {
@@ -386,7 +386,7 @@
         "ip_value": 66.333,
         "war": 0.55,
         "era": 3.53,
-        "fip": 4.48,
+        "fip": 4.49,
         "k_minus_bb_pct": 13.5
       },
       "forecast": {
@@ -501,6 +501,38 @@
       "innings_share_pct": 2.0
     },
     {
+      "id": 674073,
+      "name": "Jack Weisenburger",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "7.1",
+        "ip_value": 7.333,
+        "war": 0.1,
+        "era": 2.45,
+        "fip": 2.28,
+        "k_minus_bb_pct": 13.3
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.59,
+        "fip": 4.68,
+        "k_minus_bb_pct": 9.9,
+        "team_at_fetch": "NYM"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": 0.1,
+      "innings_share_pct": 0.6
+    },
+    {
       "id": 472610,
       "name": "Luis García",
       "throws": "R",
@@ -565,38 +597,6 @@
       "innings_share_pct": 1.8
     },
     {
-      "id": 674073,
-      "name": "Jack Weisenburger",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 3,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "4.1",
-        "ip_value": 4.333,
-        "war": 0.05,
-        "era": 2.08,
-        "fip": 2.64,
-        "k_minus_bb_pct": 11.1
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.59,
-        "fip": 4.68,
-        "k_minus_bb_pct": 9.9,
-        "team_at_fetch": "NYM"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.0
-      },
-      "war_gap": 0.05,
-      "innings_share_pct": 0.3
-    },
-    {
       "id": 673380,
       "name": "Dedniel Núñez",
       "throws": "R",
@@ -626,7 +626,7 @@
         "war": 0.01
       },
       "war_gap": 0.04,
-      "innings_share_pct": 1.1
+      "innings_share_pct": 1.0
     },
     {
       "id": 663795,
@@ -721,8 +721,8 @@
         "ip": 68.6,
         "war": 0.3
       },
-      "war_gap": -0.27,
-      "innings_share_pct": 3.7
+      "war_gap": -0.26,
+      "innings_share_pct": 3.6
     },
     {
       "id": 605218,
@@ -923,7 +923,7 @@
         "ip_value": 15.0,
         "war": -0.01,
         "era": 4.8,
-        "fip": 4.76,
+        "fip": 4.77,
         "k_minus_bb_pct": 8.8
       },
       "forecast": {
@@ -939,7 +939,7 @@
         "war": 0.37
       },
       "war_gap": -0.38,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 1.1
     },
     {
       "id": 675540,
@@ -1067,7 +1067,7 @@
         "war": 0.03
       },
       "war_gap": -0.11,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 1.1
     },
     {
       "id": 702752,
@@ -1099,7 +1099,7 @@
         "war": 0.14
       },
       "war_gap": -0.24,
-      "innings_share_pct": 2.2
+      "innings_share_pct": 2.1
     },
     {
       "id": 620443,
@@ -1251,8 +1251,8 @@
         "ip": 124.7,
         "war": 1.48
       },
-      "war_gap": -1.99,
-      "innings_share_pct": 4.5
+      "war_gap": -1.98,
+      "innings_share_pct": 4.4
     }
   ]
 }
