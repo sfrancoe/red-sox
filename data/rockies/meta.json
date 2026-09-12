@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-11T15:14:14+00:00",
+ "generated_at": "2026-09-12T14:24:33+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 115,
  "seasons": {
   "2026": {
-   "record": "55-91",
-   "games": 146,
+   "record": "55-92",
+   "games": 147,
    "in_progress": true,
    "war_leader": {
     "name": "TJ Rumfield",
@@ -19,7 +19,7 @@
     },
     {
      "name": "Hunter Goodman",
-     "war": 2.4
+     "war": 2.1
     },
     {
      "name": "Brennan Bernardino",
@@ -87,17 +87,17 @@
     },
     "avg": {
      "names": [
-      "TJ Rumfield"
+      "Jake McCarthy"
      ],
-     "value": ".295",
+     "value": ".297",
      "top": [
+      {
+       "name": "Jake McCarthy",
+       "value": ".297"
+      },
       {
        "name": "TJ Rumfield",
        "value": ".295"
-      },
-      {
-       "name": "Jake McCarthy",
-       "value": ".293"
       },
       {
        "name": "Willi Castro",
@@ -117,11 +117,11 @@
       },
       {
        "name": "Hunter Goodman",
-       "value": ".832"
+       "value": ".826"
       },
       {
        "name": "Jake McCarthy",
-       "value": ".820"
+       "value": ".824"
       }
      ]
     }

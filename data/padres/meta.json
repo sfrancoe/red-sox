@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-11T15:14:14+00:00",
+ "generated_at": "2026-09-12T14:24:35+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 135,
  "seasons": {
   "2026": {
-   "record": "78-68",
-   "games": 146,
+   "record": "79-68",
+   "games": 147,
    "in_progress": true,
    "war_leader": {
-    "name": "Ty France",
-    "war": 4.2
+    "name": "Michael King",
+    "war": 4.1
    },
    "war_leaders": [
-    {
-     "name": "Ty France",
-     "war": 4.2
-    },
     {
      "name": "Michael King",
      "war": 4.1
     },
     {
+     "name": "Ty France",
+     "war": 4.1
+    },
+    {
      "name": "Fernando Tatis Jr.",
-     "war": 3.4
+     "war": 3.6
     }
    ],
    "pitching_leaders": {
@@ -31,7 +31,7 @@
      "top": [
       {
        "name": "Mason Miller",
-       "value": "0.83"
+       "value": "0.87"
       },
       {
        "name": "Bradgley Rodriguez",
@@ -39,7 +39,7 @@
       },
       {
        "name": "Adrian Morejon",
-       "value": "1.08"
+       "value": "1.07"
       }
      ]
     }
@@ -97,11 +97,11 @@
       },
       {
        "name": "Jackson Merrill",
-       "value": ".245"
+       "value": ".248"
       },
       {
        "name": "Manny Machado",
-       "value": ".224"
+       "value": ".222"
       }
      ]
     },
@@ -109,19 +109,19 @@
      "names": [
       "Fernando Tatis Jr."
      ],
-     "value": ".800",
+     "value": ".802",
      "top": [
       {
        "name": "Fernando Tatis Jr.",
-       "value": ".800"
-      },
-      {
-       "name": "Manny Machado",
-       "value": ".728"
+       "value": ".802"
       },
       {
        "name": "Jackson Merrill",
-       "value": ".726"
+       "value": ".732"
+      },
+      {
+       "name": "Manny Machado",
+       "value": ".722"
       }
      ]
     }
