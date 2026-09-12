@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T11:16:55.785049+00:00",
+  "generated_at": "2026-09-12T15:50:56.934902+00:00",
   "season": 2026,
   "team": "San Diego Padres",
   "games_played": 147,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.1,
+    "actual_war": 14.3,
     "forecast_war_to_date": 15.2,
-    "war_gap": -1.0,
-    "innings": 1293.3,
+    "war_gap": -0.9,
+    "innings": 1302.3,
     "era": 3.9
   },
   "pitchers": [
@@ -25,17 +25,17 @@
       "name": "Mason Miller",
       "throws": "R",
       "role": "Closer",
-      "games": 58,
+      "games": 59,
       "starts": 0,
-      "saves": 34,
+      "saves": 35,
       "holds": 0,
       "actual": {
-        "ip": "61.1",
-        "ip_value": 61.333,
-        "war": 3.43,
-        "era": 1.17,
-        "fip": 0.96,
-        "k_minus_bb_pct": 39.5
+        "ip": "62.1",
+        "ip_value": 62.333,
+        "war": 3.42,
+        "era": 1.16,
+        "fip": 1.03,
+        "k_minus_bb_pct": 38.5
       },
       "forecast": {
         "ip": 66.0,
@@ -49,25 +49,25 @@
         "ip": 59.9,
         "war": 1.38
       },
-      "war_gap": 2.05,
-      "innings_share_pct": 4.7
+      "war_gap": 2.03,
+      "innings_share_pct": 4.8
     },
     {
       "id": 670970,
       "name": "Adrian Morejon",
       "throws": "L",
       "role": "Setup",
-      "games": 68,
+      "games": 69,
       "starts": 0,
       "saves": 3,
-      "holds": 23,
+      "holds": 24,
       "actual": {
-        "ip": "78.2",
-        "ip_value": 78.667,
-        "war": 2.51,
-        "era": 2.86,
-        "fip": 2.42,
-        "k_minus_bb_pct": 22.4
+        "ip": "79.2",
+        "ip_value": 79.667,
+        "war": 2.59,
+        "era": 2.82,
+        "fip": 2.38,
+        "k_minus_bb_pct": 22.8
       },
       "forecast": {
         "ip": 68.0,
@@ -81,7 +81,7 @@
         "ip": 61.7,
         "war": 0.61
       },
-      "war_gap": 1.9,
+      "war_gap": 1.98,
       "innings_share_pct": 6.1
     },
     {
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "168.0",
         "ip_value": 168.0,
-        "war": 2.31,
+        "war": 2.32,
         "era": 3.0,
         "fip": 4.17,
         "k_minus_bb_pct": 11.4
@@ -114,24 +114,24 @@
         "war": 2.65
       },
       "war_gap": -0.34,
-      "innings_share_pct": 13.0
+      "innings_share_pct": 12.9
     },
     {
       "id": 699134,
       "name": "Bradgley Rodriguez",
       "throws": "R",
       "role": "Setup",
-      "games": 61,
+      "games": 62,
       "starts": 4,
       "saves": 2,
-      "holds": 13,
+      "holds": 14,
       "actual": {
-        "ip": "65.1",
-        "ip_value": 65.333,
-        "war": 1.78,
-        "era": 1.93,
-        "fip": 2.32,
-        "k_minus_bb_pct": 20.3
+        "ip": "66.1",
+        "ip_value": 66.333,
+        "war": 1.86,
+        "era": 1.9,
+        "fip": 2.27,
+        "k_minus_bb_pct": 20.7
       },
       "forecast": {
         "ip": 52.0,
@@ -145,7 +145,7 @@
         "ip": 47.2,
         "war": 0.06
       },
-      "war_gap": 1.72,
+      "war_gap": 1.79,
       "innings_share_pct": 5.1
     },
     {
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "138.2",
         "ip_value": 138.667,
-        "war": 1.48,
+        "war": 1.49,
         "era": 4.61,
         "fip": 4.39,
         "k_minus_bb_pct": 11.6
@@ -177,8 +177,8 @@
         "ip": 75.1,
         "war": 0.28
       },
-      "war_gap": 1.2,
-      "innings_share_pct": 10.7
+      "war_gap": 1.21,
+      "innings_share_pct": 10.6
     },
     {
       "id": 681190,
@@ -194,7 +194,7 @@
         "ip_value": 129.0,
         "war": 1.22,
         "era": 3.98,
-        "fip": 4.28,
+        "fip": 4.29,
         "k_minus_bb_pct": 8.5
       },
       "forecast": {
@@ -210,7 +210,7 @@
         "war": 0.45
       },
       "war_gap": 0.77,
-      "innings_share_pct": 10.0
+      "innings_share_pct": 9.9
     },
     {
       "id": 601713,
@@ -258,7 +258,7 @@
         "ip_value": 61.333,
         "war": 0.79,
         "era": 3.96,
-        "fip": 3.37,
+        "fip": 3.38,
         "k_minus_bb_pct": 15.3
       },
       "forecast": {
@@ -290,7 +290,7 @@
         "ip_value": 31.0,
         "war": 0.57,
         "era": 3.48,
-        "fip": 3.03,
+        "fip": 3.04,
         "k_minus_bb_pct": 17.5
       },
       "forecast": {
@@ -345,17 +345,17 @@
       "name": "Yuki Matsui",
       "throws": "L",
       "role": "Reliever",
-      "games": 46,
+      "games": 47,
       "starts": 0,
       "saves": 0,
-      "holds": 8,
+      "holds": 9,
       "actual": {
-        "ip": "57.0",
-        "ip_value": 57.0,
-        "war": 0.25,
-        "era": 2.05,
-        "fip": 4.31,
-        "k_minus_bb_pct": 12.9
+        "ip": "58.0",
+        "ip_value": 58.0,
+        "war": 0.27,
+        "era": 2.02,
+        "fip": 4.29,
+        "k_minus_bb_pct": 12.8
       },
       "forecast": {
         "ip": 44.0,
@@ -369,8 +369,8 @@
         "ip": 39.9,
         "war": 0.05
       },
-      "war_gap": 0.2,
-      "innings_share_pct": 4.4
+      "war_gap": 0.22,
+      "innings_share_pct": 4.5
     },
     {
       "id": 656288,
@@ -401,7 +401,7 @@
         "ip": 100.3,
         "war": 0.66
       },
-      "war_gap": -0.47,
+      "war_gap": -0.46,
       "innings_share_pct": 6.2
     },
     {
@@ -448,7 +448,7 @@
       "actual": {
         "ip": "32.2",
         "ip_value": 32.667,
-        "war": 0.0,
+        "war": 0.01,
         "era": 4.68,
         "fip": 5.15,
         "k_minus_bb_pct": 9.8
@@ -465,7 +465,7 @@
         "ip": 30.6,
         "war": 0.14
       },
-      "war_gap": -0.14,
+      "war_gap": -0.13,
       "innings_share_pct": 2.5
     },
     {
@@ -576,9 +576,9 @@
       "actual": {
         "ip": "32.1",
         "ip_value": 32.333,
-        "war": -0.11,
+        "war": -0.1,
         "era": 2.51,
-        "fip": 4.67,
+        "fip": 4.68,
         "k_minus_bb_pct": 10.4
       },
       "forecast": {
@@ -593,7 +593,7 @@
         "ip": 55.4,
         "war": 0.43
       },
-      "war_gap": -0.54,
+      "war_gap": -0.53,
       "innings_share_pct": 2.5
     },
     {
@@ -610,7 +610,7 @@
         "ip_value": 3.0,
         "war": -0.12,
         "era": 27.0,
-        "fip": 12.76,
+        "fip": 12.77,
         "k_minus_bb_pct": -5.3
       },
       "forecast": null,
@@ -635,7 +635,7 @@
         "ip_value": 29.667,
         "war": -0.2,
         "era": 5.16,
-        "fip": 6.06,
+        "fip": 6.07,
         "k_minus_bb_pct": -3.6
       },
       "forecast": {
@@ -690,17 +690,17 @@
       "name": "Robbie Ray",
       "throws": "L",
       "role": "Starter",
-      "games": 6,
-      "starts": 6,
+      "games": 7,
+      "starts": 7,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "28.2",
-        "ip_value": 28.667,
-        "war": -0.22,
-        "era": 4.71,
-        "fip": 6.06,
-        "k_minus_bb_pct": 0.0
+        "ip": "33.2",
+        "ip_value": 33.667,
+        "war": -0.26,
+        "era": 5.35,
+        "fip": 6.07,
+        "k_minus_bb_pct": 0.7
       },
       "forecast": {
         "ip": 179.8,
@@ -714,8 +714,8 @@
         "ip": 163.2,
         "war": 1.48
       },
-      "war_gap": -1.7,
-      "innings_share_pct": 2.2
+      "war_gap": -1.75,
+      "innings_share_pct": 2.6
     },
     {
       "id": 676760,

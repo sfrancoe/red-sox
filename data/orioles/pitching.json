@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T05:05:53.852843+00:00",
+  "generated_at": "2026-09-12T15:50:32.426356+00:00",
   "season": 2026,
   "team": "Baltimore Orioles",
   "games_played": 148,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.8,
+    "actual_war": 14.7,
     "forecast_war_to_date": 13.2,
-    "war_gap": 1.6,
-    "innings": 1310.3,
-    "era": 4.16
+    "war_gap": 1.5,
+    "innings": 1319.3,
+    "era": 4.15
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 1.85
       },
       "war_gap": 1.71,
-      "innings_share_pct": 11.6
+      "innings_share_pct": 11.5
     },
     {
       "id": 669358,
@@ -82,7 +82,7 @@
         "war": 1.68
       },
       "war_gap": 1.64,
-      "innings_share_pct": 12.9
+      "innings_share_pct": 12.8
     },
     {
       "id": 680694,
@@ -114,7 +114,7 @@
         "war": 2.78
       },
       "war_gap": -1.06,
-      "innings_share_pct": 11.6
+      "innings_share_pct": 11.5
     },
     {
       "id": 687064,
@@ -128,9 +128,9 @@
       "actual": {
         "ip": "140.2",
         "ip_value": 140.667,
-        "war": 1.36,
+        "war": 1.35,
         "era": 3.71,
-        "fip": 4.5,
+        "fip": 4.51,
         "k_minus_bb_pct": 10.2
       },
       "forecast": {
@@ -145,7 +145,7 @@
         "ip": 23.7,
         "war": 0.11
       },
-      "war_gap": 1.25,
+      "war_gap": 1.24,
       "innings_share_pct": 10.7
     },
     {
@@ -217,17 +217,17 @@
       "name": "Yennier Cano",
       "throws": "R",
       "role": "Setup",
-      "games": 62,
+      "games": 63,
       "starts": 0,
       "saves": 3,
       "holds": 13,
       "actual": {
-        "ip": "45.0",
-        "ip_value": 45.0,
-        "war": 0.84,
-        "era": 3.2,
-        "fip": 2.79,
-        "k_minus_bb_pct": 16.0
+        "ip": "45.2",
+        "ip_value": 45.667,
+        "war": 0.87,
+        "era": 3.15,
+        "fip": 2.75,
+        "k_minus_bb_pct": 16.4
       },
       "forecast": {
         "ip": 60.0,
@@ -241,25 +241,25 @@
         "ip": 54.8,
         "war": 0.37
       },
-      "war_gap": 0.47,
-      "innings_share_pct": 3.4
+      "war_gap": 0.5,
+      "innings_share_pct": 3.5
     },
     {
       "id": 670329,
       "name": "Rico Garcia",
       "throws": "R",
       "role": "Setup",
-      "games": 69,
+      "games": 70,
       "starts": 0,
-      "saves": 7,
+      "saves": 8,
       "holds": 18,
       "actual": {
-        "ip": "62.1",
-        "ip_value": 62.333,
-        "war": 0.69,
-        "era": 3.03,
+        "ip": "62.2",
+        "ip_value": 62.667,
+        "war": 0.7,
+        "era": 3.02,
         "fip": 3.95,
-        "k_minus_bb_pct": 18.3
+        "k_minus_bb_pct": 18.2
       },
       "forecast": {
         "ip": 56.0,
@@ -274,24 +274,24 @@
         "war": 0.0
       },
       "war_gap": 0.69,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 4.7
     },
     {
       "id": 605135,
       "name": "Chris Bassitt",
       "throws": "R",
       "role": "Starter",
-      "games": 17,
-      "starts": 15,
+      "games": 18,
+      "starts": 16,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "85.1",
-        "ip_value": 85.333,
-        "war": 0.65,
-        "era": 4.96,
-        "fip": 4.52,
-        "k_minus_bb_pct": 7.2
+        "ip": "90.1",
+        "ip_value": 90.333,
+        "war": 0.63,
+        "era": 4.88,
+        "fip": 4.57,
+        "k_minus_bb_pct": 7.3
       },
       "forecast": {
         "ip": 179.4,
@@ -305,8 +305,8 @@
         "ip": 163.9,
         "war": 1.78
       },
-      "war_gap": -1.13,
-      "innings_share_pct": 6.5
+      "war_gap": -1.15,
+      "innings_share_pct": 6.8
     },
     {
       "id": 676742,
@@ -377,17 +377,17 @@
       "name": "Josh Walker",
       "throws": "L",
       "role": "Reliever",
-      "games": 24,
+      "games": 25,
       "starts": 0,
       "saves": 1,
       "holds": 4,
       "actual": {
-        "ip": "23.2",
-        "ip_value": 23.667,
-        "war": 0.32,
-        "era": 1.9,
-        "fip": 3.39,
-        "k_minus_bb_pct": 15.2
+        "ip": "25.0",
+        "ip_value": 25.0,
+        "war": 0.36,
+        "era": 1.8,
+        "fip": 3.3,
+        "k_minus_bb_pct": 15.5
       },
       "forecast": {
         "ip": 1.0,
@@ -401,25 +401,25 @@
         "ip": 0.9,
         "war": 0.0
       },
-      "war_gap": 0.32,
-      "innings_share_pct": 1.8
+      "war_gap": 0.36,
+      "innings_share_pct": 1.9
     },
     {
       "id": 552640,
       "name": "Andrew Kittredge",
       "throws": "R",
       "role": "Reliever",
-      "games": 51,
+      "games": 52,
       "starts": 0,
       "saves": 9,
       "holds": 9,
       "actual": {
-        "ip": "44.2",
-        "ip_value": 44.667,
-        "war": 0.32,
-        "era": 3.83,
-        "fip": 3.93,
-        "k_minus_bb_pct": 12.9
+        "ip": "45.2",
+        "ip_value": 45.667,
+        "war": 0.36,
+        "era": 3.74,
+        "fip": 3.87,
+        "k_minus_bb_pct": 13.2
       },
       "forecast": {
         "ip": 60.0,
@@ -433,8 +433,8 @@
         "ip": 54.8,
         "war": 0.33
       },
-      "war_gap": -0.01,
-      "innings_share_pct": 3.4
+      "war_gap": 0.03,
+      "innings_share_pct": 3.5
     },
     {
       "id": 700249,
@@ -482,7 +482,7 @@
         "ip_value": 16.0,
         "war": 0.14,
         "era": 3.94,
-        "fip": 3.53,
+        "fip": 3.54,
         "k_minus_bb_pct": 2.9
       },
       "forecast": {
@@ -531,38 +531,6 @@
       },
       "war_gap": -0.08,
       "innings_share_pct": 1.9
-    },
-    {
-      "id": 695380,
-      "name": "Alex Hoppe",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 14,
-      "starts": 0,
-      "saves": 1,
-      "holds": 4,
-      "actual": {
-        "ip": "11.0",
-        "ip_value": 11.0,
-        "war": 0.1,
-        "era": 0.0,
-        "fip": 3.82,
-        "k_minus_bb_pct": 2.0
-      },
-      "forecast": {
-        "ip": 22.0,
-        "war": -0.04,
-        "era": 4.03,
-        "fip": 4.32,
-        "k_minus_bb_pct": 9.0,
-        "team_at_fetch": "BAL"
-      },
-      "forecast_to_date": {
-        "ip": 20.1,
-        "war": -0.04
-      },
-      "war_gap": 0.14,
-      "innings_share_pct": 0.8
     },
     {
       "id": 544150,
@@ -757,6 +725,38 @@
       "innings_share_pct": 0.7
     },
     {
+      "id": 695380,
+      "name": "Alex Hoppe",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 15,
+      "starts": 0,
+      "saves": 1,
+      "holds": 4,
+      "actual": {
+        "ip": "11.2",
+        "ip_value": 11.667,
+        "war": -0.06,
+        "era": 1.54,
+        "fip": 4.73,
+        "k_minus_bb_pct": 3.6
+      },
+      "forecast": {
+        "ip": 22.0,
+        "war": -0.04,
+        "era": 4.03,
+        "fip": 4.32,
+        "k_minus_bb_pct": 9.0,
+        "team_at_fetch": "BAL"
+      },
+      "forecast_to_date": {
+        "ip": 20.1,
+        "war": -0.04
+      },
+      "war_gap": -0.02,
+      "innings_share_pct": 0.9
+    },
+    {
       "id": 644433,
       "name": "Chadwick Tromp",
       "throws": "R",
@@ -795,7 +795,7 @@
         "ip_value": 15.333,
         "war": -0.09,
         "era": 4.11,
-        "fip": 4.66,
+        "fip": 4.67,
         "k_minus_bb_pct": 17.6
       },
       "forecast": {
@@ -889,7 +889,7 @@
       "actual": {
         "ip": "7.2",
         "ip_value": 7.667,
-        "war": -0.12,
+        "war": -0.13,
         "era": 5.87,
         "fip": 5.84,
         "k_minus_bb_pct": 18.9

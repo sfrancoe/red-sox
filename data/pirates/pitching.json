@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T22:48:16.448849+00:00",
+  "generated_at": "2026-09-12T15:50:52.547521+00:00",
   "season": 2026,
   "team": "Pittsburgh Pirates",
   "games_played": 148,
@@ -16,8 +16,8 @@
     "actual_war": 19.1,
     "forecast_war_to_date": 16.5,
     "war_gap": 2.6,
-    "innings": 1313.3,
-    "era": 4.13
+    "innings": 1321.3,
+    "era": 4.18
   },
   "pitchers": [
     {
@@ -32,9 +32,9 @@
       "actual": {
         "ip": "155.0",
         "ip_value": 155.0,
-        "war": 4.19,
+        "war": 4.2,
         "era": 3.83,
-        "fip": 3.08,
+        "fip": 3.09,
         "k_minus_bb_pct": 21.2
       },
       "forecast": {
@@ -49,8 +49,8 @@
         "ip": 177.2,
         "war": 5.19
       },
-      "war_gap": -1.0,
-      "innings_share_pct": 11.8
+      "war_gap": -0.99,
+      "innings_share_pct": 11.7
     },
     {
       "id": 677952,
@@ -81,8 +81,8 @@
         "ip": 132.9,
         "war": 1.55
       },
-      "war_gap": 1.99,
-      "innings_share_pct": 12.6
+      "war_gap": 2.0,
+      "innings_share_pct": 12.5
     },
     {
       "id": 696149,
@@ -113,8 +113,8 @@
         "ip": 148.4,
         "war": 1.69
       },
-      "war_gap": 0.43,
-      "innings_share_pct": 10.8
+      "war_gap": 0.44,
+      "innings_share_pct": 10.7
     },
     {
       "id": 682254,
@@ -162,7 +162,7 @@
         "ip_value": 85.667,
         "war": 1.77,
         "era": 4.1,
-        "fip": 3.7,
+        "fip": 3.71,
         "k_minus_bb_pct": 19.6
       },
       "forecast": {
@@ -194,7 +194,7 @@
         "ip_value": 114.0,
         "war": 1.66,
         "era": 3.87,
-        "fip": 3.61,
+        "fip": 3.62,
         "k_minus_bb_pct": 10.5
       },
       "forecast": {
@@ -210,7 +210,7 @@
         "war": 0.97
       },
       "war_gap": 0.69,
-      "innings_share_pct": 8.7
+      "innings_share_pct": 8.6
     },
     {
       "id": 642397,
@@ -242,7 +242,7 @@
         "war": 0.47
       },
       "war_gap": 0.87,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     },
     {
       "id": 656605,
@@ -313,17 +313,17 @@
       "name": "Wilber Dotel",
       "throws": "R",
       "role": "Reliever",
-      "games": 17,
-      "starts": 0,
+      "games": 18,
+      "starts": 1,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "32.2",
-        "ip_value": 32.667,
-        "war": 0.5,
-        "era": 4.41,
-        "fip": 3.1,
-        "k_minus_bb_pct": 14.5
+        "ip": "34.2",
+        "ip_value": 34.667,
+        "war": 0.57,
+        "era": 4.93,
+        "fip": 3.04,
+        "k_minus_bb_pct": 14.2
       },
       "forecast": {
         "ip": 14.0,
@@ -337,8 +337,8 @@
         "ip": 12.8,
         "war": -0.02
       },
-      "war_gap": 0.52,
-      "innings_share_pct": 2.5
+      "war_gap": 0.6,
+      "innings_share_pct": 2.6
     },
     {
       "id": 681895,
@@ -418,7 +418,7 @@
         "ip_value": 11.0,
         "war": 0.33,
         "era": 4.91,
-        "fip": 1.64,
+        "fip": 1.65,
         "k_minus_bb_pct": 21.3
       },
       "forecast": {
@@ -482,7 +482,7 @@
         "ip_value": 12.333,
         "war": 0.12,
         "era": 2.19,
-        "fip": 3.58,
+        "fip": 3.59,
         "k_minus_bb_pct": 11.8
       },
       "forecast": {
@@ -501,38 +501,6 @@
       "innings_share_pct": 0.9
     },
     {
-      "id": 694753,
-      "name": "Khristian Curtis",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 3,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "11.0",
-        "ip_value": 11.0,
-        "war": 0.08,
-        "era": 1.64,
-        "fip": 3.46,
-        "k_minus_bb_pct": 2.6
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 5.09,
-        "fip": 5.1,
-        "k_minus_bb_pct": 6.0,
-        "team_at_fetch": "PIT"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.0
-      },
-      "war_gap": 0.08,
-      "innings_share_pct": 0.8
-    },
-    {
       "id": 676702,
       "name": "Hunter Stratton",
       "throws": "R",
@@ -546,7 +514,7 @@
         "ip_value": 2.333,
         "war": 0.05,
         "era": 7.71,
-        "fip": 1.38,
+        "fip": 1.39,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -610,7 +578,7 @@
         "ip_value": 6.333,
         "war": 0.03,
         "era": 8.53,
-        "fip": 4.2,
+        "fip": 4.21,
         "k_minus_bb_pct": 11.1
       },
       "forecast": {
@@ -788,7 +756,7 @@
         "ip_value": 5.333,
         "war": -0.05,
         "era": 6.75,
-        "fip": 6.28,
+        "fip": 6.29,
         "k_minus_bb_pct": 8.0
       },
       "forecast": {
@@ -835,12 +803,12 @@
         "ip": 31.1,
         "war": -0.08
       },
-      "war_gap": 0.02,
+      "war_gap": 0.03,
       "innings_share_pct": 0.7
     },
     {
-      "id": 699008,
-      "name": "Antwone Kelly",
+      "id": 694753,
+      "name": "Khristian Curtis",
       "throws": "R",
       "role": "Reliever",
       "games": 4,
@@ -848,12 +816,44 @@
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "8.1",
-        "ip_value": 8.333,
-        "war": -0.14,
-        "era": 5.4,
-        "fip": 6.46,
-        "k_minus_bb_pct": 2.8
+        "ip": "14.0",
+        "ip_value": 14.0,
+        "war": -0.06,
+        "era": 5.14,
+        "fip": 4.96,
+        "k_minus_bb_pct": -1.8
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 5.09,
+        "fip": 5.1,
+        "k_minus_bb_pct": 6.0,
+        "team_at_fetch": "PIT"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": -0.06,
+      "innings_share_pct": 1.1
+    },
+    {
+      "id": 699008,
+      "name": "Antwone Kelly",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 5,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "11.1",
+        "ip_value": 11.333,
+        "war": -0.09,
+        "era": 6.35,
+        "fip": 5.39,
+        "k_minus_bb_pct": 4.0
       },
       "forecast": {
         "ip": 1.0,
@@ -867,8 +867,8 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": -0.14,
-      "innings_share_pct": 0.6
+      "war_gap": -0.09,
+      "innings_share_pct": 0.9
     },
     {
       "id": 664875,
@@ -916,7 +916,7 @@
         "ip_value": 15.667,
         "war": -0.34,
         "era": 6.32,
-        "fip": 7.18,
+        "fip": 7.19,
         "k_minus_bb_pct": 10.0
       },
       "forecast": {
@@ -948,7 +948,7 @@
         "ip_value": 41.667,
         "war": -0.35,
         "era": 6.05,
-        "fip": 5.47,
+        "fip": 5.48,
         "k_minus_bb_pct": 8.6
       },
       "forecast": {
@@ -980,7 +980,7 @@
         "ip_value": 17.667,
         "war": -0.51,
         "era": 7.64,
-        "fip": 7.0,
+        "fip": 7.01,
         "k_minus_bb_pct": 1.1
       },
       "forecast": {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T05:05:59.551684+00:00",
+  "generated_at": "2026-09-12T15:50:38.918887+00:00",
   "season": 2026,
   "team": "Minnesota Twins",
   "games_played": 147,
@@ -15,8 +15,8 @@
   "team_summary": {
     "actual_war": 9.9,
     "forecast_war_to_date": 15.9,
-    "war_gap": -6.1,
-    "innings": 1286.7,
+    "war_gap": -6.0,
+    "innings": 1295.7,
     "era": 4.67
   },
   "pitchers": [
@@ -50,24 +50,24 @@
         "war": 3.02
       },
       "war_gap": -0.42,
-      "innings_share_pct": 10.1
+      "innings_share_pct": 10.0
     },
     {
       "id": 671737,
       "name": "Taj Bradley",
       "throws": "R",
       "role": "Starter",
-      "games": 28,
-      "starts": 28,
+      "games": 29,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "159.1",
-        "ip_value": 159.333,
-        "war": 2.15,
-        "era": 3.95,
-        "fip": 4.02,
-        "k_minus_bb_pct": 17.2
+        "ip": "165.1",
+        "ip_value": 165.333,
+        "war": 2.3,
+        "era": 3.81,
+        "fip": 3.99,
+        "k_minus_bb_pct": 16.9
       },
       "forecast": {
         "ip": 145.4,
@@ -81,8 +81,8 @@
         "ip": 132.0,
         "war": 1.67
       },
-      "war_gap": 0.47,
-      "innings_share_pct": 12.4
+      "war_gap": 0.63,
+      "innings_share_pct": 12.8
     },
     {
       "id": 687570,
@@ -114,7 +114,7 @@
         "war": 0.46
       },
       "war_gap": 1.01,
-      "innings_share_pct": 8.4
+      "innings_share_pct": 8.3
     },
     {
       "id": 641927,
@@ -178,24 +178,24 @@
         "war": 0.14
       },
       "war_gap": 0.84,
-      "innings_share_pct": 5.2
+      "innings_share_pct": 5.1
     },
     {
       "id": 672782,
       "name": "Yoendrys Gómez",
       "throws": "R",
       "role": "Closer",
-      "games": 49,
+      "games": 50,
       "starts": 0,
       "saves": 21,
       "holds": 6,
       "actual": {
-        "ip": "44.1",
-        "ip_value": 44.333,
-        "war": 0.67,
-        "era": 2.44,
-        "fip": 3.39,
-        "k_minus_bb_pct": 11.4
+        "ip": "44.2",
+        "ip_value": 44.667,
+        "war": 0.59,
+        "era": 3.02,
+        "fip": 3.53,
+        "k_minus_bb_pct": 10.1
       },
       "forecast": {
         "ip": 61.0,
@@ -209,7 +209,7 @@
         "ip": 55.4,
         "war": 0.29
       },
-      "war_gap": 0.38,
+      "war_gap": 0.3,
       "innings_share_pct": 3.4
     },
     {
@@ -226,7 +226,7 @@
         "ip_value": 20.333,
         "war": 0.56,
         "era": 3.98,
-        "fip": 2.75,
+        "fip": 2.76,
         "k_minus_bb_pct": 14.0
       },
       "forecast": {
@@ -290,7 +290,7 @@
         "ip_value": 35.667,
         "war": 0.47,
         "era": 4.79,
-        "fip": 3.99,
+        "fip": 4.0,
         "k_minus_bb_pct": 11.6
       },
       "forecast": {
@@ -313,17 +313,17 @@
       "name": "Jeff Hoffman",
       "throws": "R",
       "role": "Reliever",
-      "games": 13,
+      "games": 14,
       "starts": 0,
       "saves": 0,
       "holds": 6,
       "actual": {
-        "ip": "12.0",
-        "ip_value": 12.0,
-        "war": 0.33,
-        "era": 3.0,
-        "fip": 2.26,
-        "k_minus_bb_pct": 18.9
+        "ip": "12.2",
+        "ip_value": 12.667,
+        "war": 0.37,
+        "era": 2.84,
+        "fip": 2.15,
+        "k_minus_bb_pct": 20.0
       },
       "forecast": {
         "ip": 63.0,
@@ -337,8 +337,8 @@
         "ip": 57.2,
         "war": 0.71
       },
-      "war_gap": -0.38,
-      "innings_share_pct": 0.9
+      "war_gap": -0.34,
+      "innings_share_pct": 1.0
     },
     {
       "id": 805673,
@@ -354,7 +354,7 @@
         "ip_value": 119.333,
         "war": 0.32,
         "era": 4.98,
-        "fip": 4.97,
+        "fip": 4.98,
         "k_minus_bb_pct": 12.4
       },
       "forecast": {
@@ -370,39 +370,7 @@
         "war": 1.34
       },
       "war_gap": -1.02,
-      "innings_share_pct": 9.3
-    },
-    {
-      "id": 621345,
-      "name": "A.J. Minter",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 16,
-      "starts": 0,
-      "saves": 0,
-      "holds": 7,
-      "actual": {
-        "ip": "15.0",
-        "ip_value": 15.0,
-        "war": 0.29,
-        "era": 0.6,
-        "fip": 3.23,
-        "k_minus_bb_pct": 13.8
-      },
-      "forecast": {
-        "ip": 52.0,
-        "war": 0.44,
-        "era": 3.3,
-        "fip": 3.49,
-        "k_minus_bb_pct": 18.9,
-        "team_at_fetch": "MIN"
-      },
-      "forecast_to_date": {
-        "ip": 47.2,
-        "war": 0.4
-      },
-      "war_gap": -0.11,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 9.2
     },
     {
       "id": 696070,
@@ -450,7 +418,7 @@
         "ip_value": 21.0,
         "war": 0.26,
         "era": 4.29,
-        "fip": 3.14,
+        "fip": 3.15,
         "k_minus_bb_pct": 18.9
       },
       "forecast": {
@@ -469,6 +437,38 @@
       "innings_share_pct": 1.6
     },
     {
+      "id": 681892,
+      "name": "Kody Funderburk",
+      "throws": "L",
+      "role": "Setup",
+      "games": 51,
+      "starts": 0,
+      "saves": 1,
+      "holds": 11,
+      "actual": {
+        "ip": "47.2",
+        "ip_value": 47.667,
+        "war": 0.22,
+        "era": 3.97,
+        "fip": 3.88,
+        "k_minus_bb_pct": 8.2
+      },
+      "forecast": {
+        "ip": 65.0,
+        "war": 0.38,
+        "era": 3.69,
+        "fip": 3.8,
+        "k_minus_bb_pct": 12.8,
+        "team_at_fetch": "MIN"
+      },
+      "forecast_to_date": {
+        "ip": 59.0,
+        "war": 0.34
+      },
+      "war_gap": -0.12,
+      "innings_share_pct": 3.7
+    },
+    {
       "id": 573124,
       "name": "Taylor Rogers",
       "throws": "L",
@@ -482,7 +482,7 @@
         "ip_value": 52.667,
         "war": 0.22,
         "era": 4.61,
-        "fip": 4.1,
+        "fip": 4.11,
         "k_minus_bb_pct": 7.9
       },
       "forecast": {
@@ -499,6 +499,38 @@
       },
       "war_gap": -0.14,
       "innings_share_pct": 4.1
+    },
+    {
+      "id": 621345,
+      "name": "A.J. Minter",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 17,
+      "starts": 0,
+      "saves": 0,
+      "holds": 7,
+      "actual": {
+        "ip": "16.1",
+        "ip_value": 16.333,
+        "war": 0.2,
+        "era": 1.65,
+        "fip": 3.9,
+        "k_minus_bb_pct": 13.8
+      },
+      "forecast": {
+        "ip": 52.0,
+        "war": 0.44,
+        "era": 3.3,
+        "fip": 3.49,
+        "k_minus_bb_pct": 18.9,
+        "team_at_fetch": "MIN"
+      },
+      "forecast_to_date": {
+        "ip": 47.2,
+        "war": 0.4
+      },
+      "war_gap": -0.21,
+      "innings_share_pct": 1.3
     },
     {
       "id": 681252,
@@ -531,38 +563,6 @@
       },
       "war_gap": 0.19,
       "innings_share_pct": 0.3
-    },
-    {
-      "id": 681892,
-      "name": "Kody Funderburk",
-      "throws": "L",
-      "role": "Setup",
-      "games": 50,
-      "starts": 0,
-      "saves": 1,
-      "holds": 11,
-      "actual": {
-        "ip": "47.0",
-        "ip_value": 47.0,
-        "war": 0.19,
-        "era": 4.02,
-        "fip": 3.93,
-        "k_minus_bb_pct": 7.8
-      },
-      "forecast": {
-        "ip": 65.0,
-        "war": 0.38,
-        "era": 3.69,
-        "fip": 3.8,
-        "k_minus_bb_pct": 12.8,
-        "team_at_fetch": "MIN"
-      },
-      "forecast_to_date": {
-        "ip": 59.0,
-        "war": 0.34
-      },
-      "war_gap": -0.15,
-      "innings_share_pct": 3.7
     },
     {
       "id": 608723,
@@ -626,7 +626,7 @@
         "war": 0.03
       },
       "war_gap": 0.04,
-      "innings_share_pct": 3.8
+      "innings_share_pct": 3.7
     },
     {
       "id": 670183,
@@ -658,7 +658,7 @@
         "war": -0.05
       },
       "war_gap": 0.09,
-      "innings_share_pct": 0.9
+      "innings_share_pct": 0.8
     },
     {
       "id": 607455,
@@ -690,7 +690,7 @@
         "war": 0.18
       },
       "war_gap": -0.19,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     },
     {
       "id": 606115,
@@ -763,7 +763,7 @@
         "ip_value": 4.333,
         "war": -0.13,
         "era": 4.15,
-        "fip": 7.94,
+        "fip": 7.95,
         "k_minus_bb_pct": -10.5
       },
       "forecast": {
@@ -916,7 +916,7 @@
         "ip_value": 12.0,
         "war": -0.25,
         "era": 8.25,
-        "fip": 6.01,
+        "fip": 6.02,
         "k_minus_bb_pct": 10.7
       },
       "forecast": {
@@ -996,7 +996,7 @@
         "war": -0.01
       },
       "war_gap": -0.31,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     },
     {
       "id": 680573,
@@ -1010,7 +1010,7 @@
       "actual": {
         "ip": "47.2",
         "ip_value": 47.667,
-        "war": -0.43,
+        "war": -0.44,
         "era": 7.74,
         "fip": 6.16,
         "k_minus_bb_pct": 0.4
@@ -1076,7 +1076,7 @@
         "ip_value": 6.0,
         "war": -0.55,
         "era": 18.0,
-        "fip": 13.26,
+        "fip": 13.27,
         "k_minus_bb_pct": 7.7
       },
       "forecast": {

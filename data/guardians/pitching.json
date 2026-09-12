@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T05:05:56.639085+00:00",
+  "generated_at": "2026-09-12T15:50:35.792305+00:00",
   "season": 2026,
   "team": "Cleveland Guardians",
   "games_played": 148,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 16.4,
+    "actual_war": 16.7,
     "forecast_war_to_date": 12.3,
-    "war_gap": 4.1,
-    "innings": 1305.7,
-    "era": 3.8
+    "war_gap": 4.3,
+    "innings": 1314.7,
+    "era": 3.79
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Parker Messick",
       "throws": "L",
       "role": "Starter",
-      "games": 28,
-      "starts": 28,
+      "games": 29,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "167.0",
-        "ip_value": 167.0,
-        "war": 4.35,
-        "era": 2.53,
-        "fip": 3.12,
-        "k_minus_bb_pct": 19.3
+        "ip": "172.1",
+        "ip_value": 172.333,
+        "war": 4.48,
+        "era": 2.51,
+        "fip": 3.11,
+        "k_minus_bb_pct": 19.1
       },
       "forecast": {
         "ip": 138.4,
@@ -49,8 +49,8 @@
         "ip": 126.4,
         "war": 1.32
       },
-      "war_gap": 3.03,
-      "innings_share_pct": 12.8
+      "war_gap": 3.16,
+      "innings_share_pct": 13.1
     },
     {
       "id": 668909,
@@ -89,17 +89,17 @@
       "name": "Cade Smith",
       "throws": "R",
       "role": "Closer",
-      "games": 61,
+      "games": 62,
       "starts": 0,
-      "saves": 35,
+      "saves": 36,
       "holds": 0,
       "actual": {
-        "ip": "65.0",
-        "ip_value": 65.0,
-        "war": 2.0,
-        "era": 2.22,
-        "fip": 2.37,
-        "k_minus_bb_pct": 27.4
+        "ip": "66.0",
+        "ip_value": 66.0,
+        "war": 2.04,
+        "era": 2.18,
+        "fip": 2.39,
+        "k_minus_bb_pct": 27.1
       },
       "forecast": {
         "ip": 70.0,
@@ -113,7 +113,7 @@
         "ip": 64.0,
         "war": 0.96
       },
-      "war_gap": 1.04,
+      "war_gap": 1.07,
       "innings_share_pct": 5.0
     },
     {
@@ -162,7 +162,7 @@
         "ip_value": 170.667,
         "war": 1.22,
         "era": 4.22,
-        "fip": 4.61,
+        "fip": 4.62,
         "k_minus_bb_pct": 11.5
       },
       "forecast": {
@@ -177,25 +177,25 @@
         "ip": 166.4,
         "war": 2.11
       },
-      "war_gap": -0.9,
-      "innings_share_pct": 13.1
+      "war_gap": -0.89,
+      "innings_share_pct": 13.0
     },
     {
       "id": 681870,
       "name": "Erik Sabrowski",
       "throws": "L",
       "role": "Setup",
-      "games": 53,
+      "games": 54,
       "starts": 0,
       "saves": 1,
-      "holds": 23,
+      "holds": 24,
       "actual": {
-        "ip": "42.1",
-        "ip_value": 42.333,
-        "war": 1.06,
-        "era": 2.76,
-        "fip": 2.77,
-        "k_minus_bb_pct": 23.0
+        "ip": "43.0",
+        "ip_value": 43.0,
+        "war": 1.03,
+        "era": 2.93,
+        "fip": 2.84,
+        "k_minus_bb_pct": 22.7
       },
       "forecast": {
         "ip": 63.0,
@@ -209,8 +209,8 @@
         "ip": 57.6,
         "war": 0.14
       },
-      "war_gap": 0.93,
-      "innings_share_pct": 3.2
+      "war_gap": 0.89,
+      "innings_share_pct": 3.3
     },
     {
       "id": 670059,
@@ -226,7 +226,7 @@
         "ip_value": 52.667,
         "war": 0.8,
         "era": 2.73,
-        "fip": 3.15,
+        "fip": 3.16,
         "k_minus_bb_pct": 13.5
       },
       "forecast": {
@@ -306,24 +306,24 @@
         "war": 1.06
       },
       "war_gap": -0.42,
-      "innings_share_pct": 8.9
+      "innings_share_pct": 8.8
     },
     {
       "id": 683769,
       "name": "Hunter Gaddis",
       "throws": "R",
       "role": "Setup",
-      "games": 59,
+      "games": 60,
       "starts": 0,
       "saves": 1,
       "holds": 28,
       "actual": {
-        "ip": "51.2",
-        "ip_value": 51.667,
-        "war": 0.49,
-        "era": 2.79,
-        "fip": 3.79,
-        "k_minus_bb_pct": 12.8
+        "ip": "53.0",
+        "ip_value": 53.0,
+        "war": 0.54,
+        "era": 2.72,
+        "fip": 3.74,
+        "k_minus_bb_pct": 12.9
       },
       "forecast": {
         "ip": 61.0,
@@ -337,7 +337,7 @@
         "ip": 55.7,
         "war": 0.13
       },
-      "war_gap": 0.36,
+      "war_gap": 0.41,
       "innings_share_pct": 4.0
     },
     {
@@ -370,7 +370,7 @@
         "war": 1.85
       },
       "war_gap": -1.5,
-      "innings_share_pct": 2.6
+      "innings_share_pct": 2.5
     },
     {
       "id": 682982,
@@ -426,8 +426,8 @@
         "ip": 20.1,
         "war": 0.05
       },
-      "war_gap": 0.1,
-      "innings_share_pct": 1.7
+      "war_gap": 0.09,
+      "innings_share_pct": 1.6
     },
     {
       "id": 702021,
@@ -460,6 +460,38 @@
       },
       "war_gap": 0.08,
       "innings_share_pct": 1.5
+    },
+    {
+      "id": 682120,
+      "name": "Tim Herrin",
+      "throws": "L",
+      "role": "Setup",
+      "games": 61,
+      "starts": 0,
+      "saves": 0,
+      "holds": 15,
+      "actual": {
+        "ip": "51.2",
+        "ip_value": 51.667,
+        "war": 0.07,
+        "era": 2.96,
+        "fip": 4.24,
+        "k_minus_bb_pct": 10.7
+      },
+      "forecast": {
+        "ip": 56.0,
+        "war": 0.2,
+        "era": 3.78,
+        "fip": 3.96,
+        "k_minus_bb_pct": 13.5,
+        "team_at_fetch": "CLE"
+      },
+      "forecast_to_date": {
+        "ip": 51.2,
+        "war": 0.18
+      },
+      "war_gap": -0.11,
+      "innings_share_pct": 3.9
     },
     {
       "id": 676051,
@@ -583,38 +615,6 @@
       "innings_share_pct": 1.2
     },
     {
-      "id": 682120,
-      "name": "Tim Herrin",
-      "throws": "L",
-      "role": "Setup",
-      "games": 60,
-      "starts": 0,
-      "saves": 0,
-      "holds": 15,
-      "actual": {
-        "ip": "51.0",
-        "ip_value": 51.0,
-        "war": 0.01,
-        "era": 3.0,
-        "fip": 4.29,
-        "k_minus_bb_pct": 10.4
-      },
-      "forecast": {
-        "ip": 56.0,
-        "war": 0.2,
-        "era": 3.78,
-        "fip": 3.96,
-        "k_minus_bb_pct": 13.5,
-        "team_at_fetch": "CLE"
-      },
-      "forecast_to_date": {
-        "ip": 51.2,
-        "war": 0.18
-      },
-      "war_gap": -0.17,
-      "innings_share_pct": 3.9
-    },
-    {
       "id": 672578,
       "name": "Carlos Hernández",
       "throws": "R",
@@ -628,7 +628,7 @@
         "ip_value": 3.0,
         "war": -0.03,
         "era": 6.0,
-        "fip": 5.76,
+        "fip": 5.77,
         "k_minus_bb_pct": 21.4
       },
       "forecast": {
@@ -756,7 +756,7 @@
         "ip_value": 20.667,
         "war": -0.12,
         "era": 5.23,
-        "fip": 4.98,
+        "fip": 4.99,
         "k_minus_bb_pct": 6.2
       },
       "forecast": {

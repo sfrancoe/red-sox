@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T05:05:57.704538+00:00",
+  "generated_at": "2026-09-12T15:50:37.003534+00:00",
   "season": 2026,
   "team": "Detroit Tigers",
   "games_played": 147,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.2,
+    "actual_war": 14.4,
     "forecast_war_to_date": 18.5,
-    "war_gap": -4.3,
-    "innings": 1294.0,
-    "era": 3.67
+    "war_gap": -4.1,
+    "innings": 1303.0,
+    "era": 3.65
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 5.34
       },
       "war_gap": -2.37,
-      "innings_share_pct": 7.5
+      "innings_share_pct": 7.4
     },
     {
       "id": 663554,
@@ -98,7 +98,7 @@
         "ip_value": 147.0,
         "war": 2.18,
         "era": 3.55,
-        "fip": 4.08,
+        "fip": 4.09,
         "k_minus_bb_pct": 10.8
       },
       "forecast": {
@@ -114,24 +114,24 @@
         "war": 0.26
       },
       "war_gap": 1.92,
-      "innings_share_pct": 11.4
+      "innings_share_pct": 11.3
     },
     {
       "id": 664285,
       "name": "Framber Valdez",
       "throws": "L",
       "role": "Starter",
-      "games": 28,
-      "starts": 28,
+      "games": 29,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "157.2",
-        "ip_value": 157.667,
-        "war": 1.69,
-        "era": 4.17,
-        "fip": 4.19,
-        "k_minus_bb_pct": 8.9
+        "ip": "163.2",
+        "ip_value": 163.667,
+        "war": 1.81,
+        "era": 4.01,
+        "fip": 4.17,
+        "k_minus_bb_pct": 8.6
       },
       "forecast": {
         "ip": 190.4,
@@ -145,8 +145,8 @@
         "ip": 172.8,
         "war": 3.38
       },
-      "war_gap": -1.69,
-      "innings_share_pct": 12.2
+      "war_gap": -1.57,
+      "innings_share_pct": 12.6
     },
     {
       "id": 675512,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "108.0",
         "ip_value": 108.0,
-        "war": 1.57,
+        "war": 1.58,
         "era": 2.42,
         "fip": 4.05,
         "k_minus_bb_pct": 13.1
@@ -192,9 +192,9 @@
       "actual": {
         "ip": "86.1",
         "ip_value": 86.333,
-        "war": 1.3,
+        "war": 1.31,
         "era": 4.59,
-        "fip": 4.09,
+        "fip": 4.1,
         "k_minus_bb_pct": 15.4
       },
       "forecast": {
@@ -210,7 +210,7 @@
         "war": 2.35
       },
       "war_gap": -1.04,
-      "innings_share_pct": 6.7
+      "innings_share_pct": 6.6
     },
     {
       "id": 805427,
@@ -274,7 +274,7 @@
         "war": 0.9
       },
       "war_gap": -0.31,
-      "innings_share_pct": 7.5
+      "innings_share_pct": 7.4
     },
     {
       "id": 680744,
@@ -290,7 +290,7 @@
         "ip_value": 39.0,
         "war": 0.42,
         "era": 3.46,
-        "fip": 3.53,
+        "fip": 3.54,
         "k_minus_bb_pct": 16.9
       },
       "forecast": {
@@ -370,7 +370,7 @@
         "war": -0.12
       },
       "war_gap": 0.47,
-      "innings_share_pct": 3.3
+      "innings_share_pct": 3.2
     },
     {
       "id": 676684,
@@ -402,24 +402,24 @@
         "war": 0.7
       },
       "war_gap": -0.36,
-      "innings_share_pct": 2.1
+      "innings_share_pct": 2.0
     },
     {
       "id": 676428,
       "name": "Brant Hurter",
       "throws": "L",
       "role": "Reliever",
-      "games": 22,
+      "games": 23,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "26.2",
-        "ip_value": 26.667,
+        "ip": "27.1",
+        "ip_value": 27.333,
         "war": 0.24,
-        "era": 2.7,
-        "fip": 3.62,
-        "k_minus_bb_pct": 6.7
+        "era": 2.96,
+        "fip": 3.61,
+        "k_minus_bb_pct": 6.4
       },
       "forecast": {
         "ip": 55.0,
@@ -450,7 +450,7 @@
         "ip_value": 7.0,
         "war": 0.16,
         "era": 0.0,
-        "fip": 3.38,
+        "fip": 3.39,
         "k_minus_bb_pct": 3.8
       },
       "forecast": {
@@ -497,8 +497,40 @@
         "ip": 5.4,
         "war": 0.01
       },
-      "war_gap": 0.14,
-      "innings_share_pct": 1.0
+      "war_gap": 0.15,
+      "innings_share_pct": 0.9
+    },
+    {
+      "id": 445276,
+      "name": "Kenley Jansen",
+      "throws": "R",
+      "role": "Closer",
+      "games": 45,
+      "starts": 0,
+      "saves": 19,
+      "holds": 1,
+      "actual": {
+        "ip": "40.0",
+        "ip_value": 40.0,
+        "war": 0.1,
+        "era": 3.6,
+        "fip": 4.77,
+        "k_minus_bb_pct": 14.0
+      },
+      "forecast": {
+        "ip": 60.0,
+        "war": 0.29,
+        "era": 4.06,
+        "fip": 4.03,
+        "k_minus_bb_pct": 16.1,
+        "team_at_fetch": "DET"
+      },
+      "forecast_to_date": {
+        "ip": 54.4,
+        "war": 0.26
+      },
+      "war_gap": -0.15,
+      "innings_share_pct": 3.1
     },
     {
       "id": 572143,
@@ -531,38 +563,6 @@
       },
       "war_gap": 0.08,
       "innings_share_pct": 1.3
-    },
-    {
-      "id": 445276,
-      "name": "Kenley Jansen",
-      "throws": "R",
-      "role": "Closer",
-      "games": 44,
-      "starts": 0,
-      "saves": 18,
-      "holds": 1,
-      "actual": {
-        "ip": "39.2",
-        "ip_value": 39.667,
-        "war": 0.07,
-        "era": 3.63,
-        "fip": 4.84,
-        "k_minus_bb_pct": 13.5
-      },
-      "forecast": {
-        "ip": 60.0,
-        "war": 0.29,
-        "era": 4.06,
-        "fip": 4.03,
-        "k_minus_bb_pct": 16.1,
-        "team_at_fetch": "DET"
-      },
-      "forecast_to_date": {
-        "ip": 54.4,
-        "war": 0.26
-      },
-      "war_gap": -0.19,
-      "innings_share_pct": 3.1
     },
     {
       "id": 657756,
@@ -635,7 +635,7 @@
         "ip_value": 28.333,
         "war": 0.02,
         "era": 4.45,
-        "fip": 5.14,
+        "fip": 5.15,
         "k_minus_bb_pct": 11.2
       },
       "forecast": {
@@ -667,7 +667,7 @@
         "ip_value": 14.667,
         "war": -0.03,
         "era": 5.52,
-        "fip": 5.14,
+        "fip": 5.15,
         "k_minus_bb_pct": 11.9
       },
       "forecast": {
@@ -731,7 +731,7 @@
         "ip_value": 3.667,
         "war": -0.08,
         "era": 9.82,
-        "fip": 7.73,
+        "fip": 7.74,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -763,7 +763,7 @@
         "ip_value": 3.667,
         "war": -0.08,
         "era": 12.27,
-        "fip": 7.73,
+        "fip": 7.74,
         "k_minus_bb_pct": -5.3
       },
       "forecast": {
@@ -843,17 +843,17 @@
       "name": "Jacob Waguespack",
       "throws": "R",
       "role": "Reliever",
-      "games": 29,
+      "games": 30,
       "starts": 1,
       "saves": 0,
       "holds": 5,
       "actual": {
-        "ip": "36.2",
-        "ip_value": 36.667,
-        "war": -0.38,
-        "era": 2.95,
-        "fip": 5.36,
-        "k_minus_bb_pct": 4.8
+        "ip": "38.2",
+        "ip_value": 38.667,
+        "war": -0.3,
+        "era": 2.79,
+        "fip": 5.14,
+        "k_minus_bb_pct": 5.9
       },
       "forecast": {
         "ip": 1.0,
@@ -867,8 +867,8 @@
         "ip": 0.9,
         "war": 0.0
       },
-      "war_gap": -0.38,
-      "innings_share_pct": 2.8
+      "war_gap": -0.31,
+      "innings_share_pct": 3.0
     },
     {
       "id": 669724,
