@@ -35,6 +35,7 @@ FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 KNOWN_ENDPOINTS = {
     "https://red-sox.netlify.app/api/x-discovery",
     "https://red-sox.netlify.app/api/x-posts",
+    "https://red-sox.netlify.app/api/hr-chase",
     "https://red-sox.netlify.app/api/mlb/schedule?team=red-sox",
     "https://red-sox.netlify.app/api/mlb/standings?team=redsox",
     "https://red-sox.netlify.app/api/data/athletic.json",

@@ -14,8 +14,8 @@ final class HomeRunChaseStore {
         defer { isRefreshing = false }
 
         do {
-            let liveSeason = try await Self.fetchJudgeSeason()
-            let seasonEnd = try? await Self.fetchRegularSeasonEnd(year: liveSeason.year)
+            let live = try await Self.fetchJudgeSeason()
+            let liveSeason = live.season
             var judge = ChaseData.judge
             if let index = judge.seasons.firstIndex(where: { $0.year == liveSeason.year }) {
                 judge.seasons[index] = liveSeason
@@ -27,7 +27,7 @@ final class HomeRunChaseStore {
             let projectedTotal = Self.projectionTotal(
                 for: judge,
                 liveTotal: total,
-                regularSeasonEnd: seasonEnd
+                regularSeasonEnd: live.regularSeasonEnd
             )
             config = ChaseData.config(subject: judge, projectionHR: projectedTotal)
             refreshNote = "Updated from MLB"
@@ -36,18 +36,8 @@ final class HomeRunChaseStore {
         }
     }
 
-    private static func fetchJudgeSeason() async throws -> HRSeason {
-        let year = Calendar(identifier: .gregorian).component(
-            .year,
-            from: Date()
-        )
-        guard let url = URL(string:
-            "https://statsapi.mlb.com/api/v1/people/\(ChaseData.judgePlayerID)/stats?stats=season&group=hitting&season=\(year)"
-        ) else {
-            throw ChaseStoreError.badURL
-        }
-
-        var request = URLRequest(url: url)
+    private static func fetchJudgeSeason() async throws -> LiveJudgeSeason {
+        var request = URLRequest(url: AppBackend.apiURL("hr-chase", team: .newYork))
         request.cachePolicy = .reloadRevalidatingCacheData
         request.timeoutInterval = 20
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -55,35 +45,25 @@ final class HomeRunChaseStore {
             throw ChaseStoreError.badResponse
         }
 
-        let payload = try JSONDecoder().decode(MLBStatsPayload.self, from: data)
-        guard let split = payload.stats.first?.splits.first else {
-            throw ChaseStoreError.missingStats
-        }
-        let age = 34 + (year - ChaseData.projectionYear)
-        return HRSeason(year: year, age: age, hr: split.stat.homeRuns, ab: split.stat.atBats)
-    }
-
-    private static func fetchRegularSeasonEnd(year: Int) async throws -> Date {
-        guard let url = URL(string: "https://statsapi.mlb.com/api/v1/seasons/\(year)?sportId=1") else {
-            throw ChaseStoreError.badURL
-        }
-        let (data, response) = try await URLSession.shared.data(from: url)
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw ChaseStoreError.badResponse
-        }
-        let payload = try JSONDecoder().decode(MLBSeasonPayload.self, from: data)
-        guard let rawDate = payload.seasons.first?.regularSeasonEndDate else {
-            throw ChaseStoreError.missingStats
-        }
+        let payload = try JSONDecoder().decode(LiveJudgePayload.self, from: data)
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .gregorian)
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(identifier: "America/New_York")
         formatter.dateFormat = "yyyy-MM-dd"
-        guard let date = formatter.date(from: rawDate) else {
+        guard let date = formatter.date(from: payload.regularSeasonEndDate) else {
             throw ChaseStoreError.missingStats
         }
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: 1, to: date) ?? date
+        let end = Calendar(identifier: .gregorian).date(byAdding: .day, value: 1, to: date) ?? date
+        return LiveJudgeSeason(
+            season: HRSeason(
+                year: payload.year,
+                age: payload.age,
+                hr: payload.homeRuns,
+                ab: payload.atBats
+            ),
+            regularSeasonEnd: end
+        )
     }
 
     private static func projectionTotal(
@@ -105,33 +85,20 @@ final class HomeRunChaseStore {
     }
 }
 
-private struct MLBSeasonPayload: Decodable {
-    let seasons: [Season]
-
-    struct Season: Decodable {
-        let regularSeasonEndDate: String
-    }
+private struct LiveJudgeSeason {
+    let season: HRSeason
+    let regularSeasonEnd: Date
 }
 
-private struct MLBStatsPayload: Decodable {
-    let stats: [StatsBlock]
-
-    struct StatsBlock: Decodable {
-        let splits: [Split]
-    }
-
-    struct Split: Decodable {
-        let stat: Stats
-    }
-
-    struct Stats: Decodable {
-        let homeRuns: Int
-        let atBats: Int
-    }
+private struct LiveJudgePayload: Decodable {
+    let year: Int
+    let age: Int
+    let homeRuns: Int
+    let atBats: Int
+    let regularSeasonEndDate: String
 }
 
 private enum ChaseStoreError: Error {
-    case badURL
     case badResponse
     case missingStats
 }
