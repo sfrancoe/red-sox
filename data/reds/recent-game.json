@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T05:06:10.181962+00:00",
+  "generated_at": "2026-09-12T18:47:06.246062+00:00",
   "source": "MLB Stats API",
   "game_pk": 823736,
   "game_date": "2026-09-11T23:45:00Z",
@@ -27,7 +27,7 @@
     "record": "69-78",
     "runs": 0,
     "hits": 2,
-    "errors": 1,
+    "errors": 2,
     "left_on_base": 5,
     "batting": [
       {
@@ -239,7 +239,7 @@
         "inningsPitched": "2.0",
         "hits": 9,
         "runs": 8,
-        "earnedRuns": 8,
+        "earnedRuns": 7,
         "baseOnBalls": 0,
         "strikeOuts": 0,
         "homeRuns": 2,
@@ -450,7 +450,7 @@
         "atBats": 2,
         "runs": 1,
         "hits": 2,
-        "rbi": 1,
+        "rbi": 0,
         "baseOnBalls": 0,
         "strikeOuts": 0,
         "leftOnBase": 0,
@@ -625,7 +625,7 @@
       "groundIntoTriplePlay": 0,
       "plateAppearances": 49,
       "totalBases": 39,
-      "rbi": 19,
+      "rbi": 18,
       "leftOnBase": 14,
       "sacBunts": 0,
       "sacFlies": 1,
@@ -649,7 +649,7 @@
       "away": {
         "runs": 0,
         "hits": 1,
-        "errors": 0,
+        "errors": 1,
         "leftOnBase": 1
       }
     },
@@ -799,8 +799,8 @@
       "half": "bottom",
       "batter": "Andrew Vaughn",
       "event": "Double",
-      "rbi": 1,
-      "description": "Andrew Vaughn doubles (18) on a line drive to left fielder JJ Bleday. Brice Turang scores.",
+      "rbi": 0,
+      "description": "Andrew Vaughn doubles (18) on a line drive to left fielder JJ Bleday. Brice Turang scores. Fielding error by left fielder JJ Bleday.",
       "away_score": 0,
       "home_score": 2
     },
