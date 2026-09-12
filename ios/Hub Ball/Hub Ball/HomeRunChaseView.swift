@@ -75,9 +75,11 @@ struct HomeRunChaseView: View {
 
     private func chapterView(_ index: Int) -> some View {
         GeometryReader { proxy in
+            let compact = proxy.size.height < 760
+
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    storyHeader(index)
+                VStack(alignment: .leading, spacing: compact ? 10 : 16) {
+                    storyHeader(index, compact: compact)
 
                     ChaseChart(
                         config: config,
@@ -88,60 +90,102 @@ struct HomeRunChaseView: View {
                         projectionProgress: index == 2 ? projectionProgress : 1,
                         contractEndAge: index == 2 ? config.contractEndAge : nil
                     )
-                    .frame(height: min(max(proxy.size.height * 0.40, 300), 430))
+                    .frame(height: compact
+                        ? min(max(proxy.size.height * 0.31, 205), 250)
+                        : min(max(proxy.size.height * 0.40, 300), 430)
+                    )
                     .background(AppColor.nightRaised)
                     .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
                     .accessibilityLabel(chartAccessibilityLabel(index))
 
-                    chapterPanel(index)
+                    chapterPanel(index, compact: compact)
                     navigation
                 }
                 .padding(.horizontal, 16)
-                .padding(.vertical, 14)
+                .padding(.vertical, compact ? 8 : 14)
                 .frame(maxWidth: 760)
                 .frame(maxWidth: .infinity)
             }
         }
     }
 
-    private func storyHeader(_ index: Int) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(kicker(index).uppercased())
-                .font(AppFont.label)
-                .tracking(1.2)
-                .foregroundStyle(AppColor.amber)
+    private func storyHeader(_ index: Int, compact: Bool) -> some View {
+        VStack(alignment: .leading, spacing: compact ? 3 : 6) {
+            HStack(spacing: 8) {
+                Text(kicker(index).uppercased())
+                    .font(AppFont.label)
+                    .tracking(compact ? 0.7 : 1.2)
+                    .foregroundStyle(AppColor.amber)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+
+                Spacer(minLength: 0)
+
+                if let refreshNote = store.refreshNote {
+                    Image(systemName: store.isRefreshing ? "arrow.triangle.2.circlepath" : "checkmark.circle")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(AppColor.boneMuted)
+                        .accessibilityLabel(refreshNote)
+                }
+            }
 
             Text(hero(index))
-                .font(.system(size: 68, weight: .bold, design: .serif))
+                .font(.system(size: compact ? 50 : 68, weight: .bold, design: .serif))
                 .monospacedDigit()
                 .foregroundStyle(AppColor.bone)
                 .contentTransition(.numericText())
 
-            Text(subhead(index))
-                .font(AppFont.body)
+            Text(subhead(index, compact: compact))
+                .font(compact ? AppFont.bodySmall : AppFont.body)
                 .foregroundStyle(AppColor.boneDim)
-                .lineSpacing(3)
-
-            if let refreshNote = store.refreshNote {
-                Label(refreshNote, systemImage: store.isRefreshing ? "arrow.triangle.2.circlepath" : "checkmark.circle")
-                    .font(AppFont.label)
-                    .foregroundStyle(AppColor.boneMuted)
-            }
+                .lineSpacing(compact ? 1 : 3)
         }
     }
 
     @ViewBuilder
-    private func chapterPanel(_ index: Int) -> some View {
+    private func chapterPanel(_ index: Int, compact: Bool) -> some View {
         switch index {
         case 0:
-            ageBars
+            if compact { compactAgeBars } else { ageBars }
         case 1:
-            atBatBars
+            if compact { compactAtBatBars } else { atBatBars }
         case 2:
-            milestoneGrid
+            milestoneGrid(compact: compact)
         default:
             projectionControls
         }
+    }
+
+    private var compactAgeBars: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            panelTitle("HOME RUNS THROUGH AGE \(subjectAge)")
+            CompactChaseBars(
+                players: config.players,
+                values: Dictionary(uniqueKeysWithValues: config.players.map {
+                    ($0.id, ChaseEngine.hr(for: $0, at: Double(subjectAge), axis: .age))
+                }),
+                maximum: 550
+            )
+        }
+        .chasePanel(padding: 10)
+    }
+
+    private var compactAtBatBars: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            panelTitle("APPROX. HR THROUGH \(subjectAtBats.formatted()) AT-BATS")
+            CompactChaseBars(
+                players: config.players,
+                values: Dictionary(uniqueKeysWithValues: config.players.map {
+                    ($0.id, ChaseEngine.hr(for: $0, at: Double(subjectAtBats), axis: .atBats))
+                }),
+                maximum: Double(subjectTotal)
+            )
+            Text("Approximate within seasons. Ruth began as a pitcher; Bonds and McGwire carry steroid-era context.")
+                .font(.system(size: 10))
+                .foregroundStyle(AppColor.boneMuted)
+                .lineLimit(2)
+        }
+        .chasePanel(padding: 10)
     }
 
     private var ageBars: some View {
@@ -193,7 +237,7 @@ struct HomeRunChaseView: View {
         .chasePanel()
     }
 
-    private var milestoneGrid: some View {
+    private func milestoneGrid(compact: Bool) -> some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 1) {
             ForEach(ChaseEngine.milestones(for: config)) { milestone in
                 VStack(alignment: .leading, spacing: 4) {
@@ -208,7 +252,7 @@ struct HomeRunChaseView: View {
                         .foregroundStyle(AppColor.boneMuted)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(14)
+                .padding(compact ? 8 : 14)
                 .background(AppColor.nightRaised)
             }
         }
@@ -315,11 +359,15 @@ struct HomeRunChaseView: View {
         }
     }
 
-    private func subhead(_ index: Int) -> String {
+    private func subhead(_ index: Int, compact: Bool) -> String {
         switch index {
         case 0:
             return "Judge's first full season came at 25. By age, he's last of these five."
         case 1:
+            if compact {
+                let lead = ChaseData.ruth300thHomeRunAtBat - ChaseData.judge300thHomeRunAtBat
+                return "At \(subjectAtBats.formatted()) AB, Judge led this group. He reached 300 HR \(lead) at-bats before Ruth."
+            }
             return "Through the same \(subjectAtBats.formatted()) at-bats, nobody here had more. His 300th came in at-bat \(ChaseData.judge300thHomeRunAtBat.formatted()); Ruth needed \(ChaseData.ruth300thHomeRunAtBat.formatted())."
         case 2:
             return "One homer every \(careerRate.abPerHR.formatted(.number.precision(.fractionLength(1)))) at-bats, 540 at-bats a year, zero decline."
@@ -446,9 +494,44 @@ struct ChaseBar: View {
     }
 }
 
+private struct CompactChaseBars: View {
+    let players: [PlayerHRSeries]
+    let values: [String: Double]
+    let maximum: Double
+
+    private var sortedPlayers: [PlayerHRSeries] {
+        players.sorted { values[$0.id, default: 0] > values[$1.id, default: 0] }
+    }
+
+    var body: some View {
+        HStack(alignment: .bottom, spacing: 5) {
+            ForEach(sortedPlayers) { player in
+                let value = values[player.id, default: 0]
+                VStack(spacing: 2) {
+                    Spacer(minLength: 0)
+                    Text(String(Int(value.rounded())))
+                        .font(.system(size: 10, weight: .semibold))
+                        .monospacedDigit()
+                    Rectangle()
+                        .fill(player.isSubject ? AppColor.amber : AppColor.boneMuted.opacity(0.6))
+                        .frame(height: max(3, 38 * value / maximum))
+                    Text(player.name)
+                        .font(.system(size: 9, weight: player.isSubject ? .bold : .medium))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                }
+                .foregroundStyle(player.isSubject ? AppColor.amber : AppColor.boneDim)
+                .frame(maxWidth: .infinity)
+            }
+        }
+        .frame(height: 62)
+        .accessibilityElement(children: .combine)
+    }
+}
+
 private extension View {
-    func chasePanel() -> some View {
-        padding(16)
+    func chasePanel(padding: CGFloat = 16) -> some View {
+        self.padding(padding)
             .background(AppColor.nightRaised)
             .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
     }
