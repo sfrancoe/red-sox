@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-11T13:57:17.963310+00:00",
-  "roster_as_of": "September 7, 2026",
+  "generated_at": "2026-09-12T13:13:27.817742+00:00",
+  "roster_as_of": "September 11, 2026",
   "team": {
     "id": 119,
     "name": "Los Angeles Dodgers"
   },
   "roster_type": "open-current-roster",
-  "player_count": 46,
+  "player_count": 47,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -769,7 +769,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1989-09-12",
-      "age": 36,
+      "age": 37,
       "birthplace": "Fountain Valley",
       "height": "6' 5\"",
       "weight": null,
@@ -1774,7 +1774,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
+      "roster_status": "60-day injured list",
       "is_active_roster": false,
       "birth_date": "1995-06-03",
       "age": 31,
@@ -2006,11 +2006,11 @@
       "number": "17",
       "position": {
         "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
+        "group": "Hitter",
+        "abbreviation": "DH"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1994-07-05",
       "age": 32,
       "birthplace": "Mizusawa",
@@ -2141,6 +2141,46 @@
           "slugging_percentage": 0.439,
           "ops": 0.749
         },
+        "pitching": null
+      }
+    },
+    {
+      "id": 800543,
+      "wikidata_id": "Q126005819",
+      "slug": "josue-de-paula",
+      "name": "Josue De Paula",
+      "full_name": "Josue De Paula",
+      "number": "95",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2005-05-24",
+      "age": 21,
+      "birthplace": "Brooklyn",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "September 11, 2026",
+      "debut_team": "Los Angeles Dodgers",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Los Angeles Dodgers"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q126005819",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Josue_De_Paula",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
         "pitching": null
       }
     },
