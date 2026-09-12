@@ -92,7 +92,9 @@ struct AppTabView: View {
             guard !hasAppeared else { return }
             #if DEBUG
             let arguments = ProcessInfo.processInfo.arguments
-            if team.supportsPlayers,
+            if arguments.contains("-show-stories"), team.hasPublishedStories {
+                selectedTab = .stories
+            } else if team.supportsPlayers,
                let playerArgument = arguments.first(where: { $0.hasPrefix("-show-player=") }),
                let playerID = Int(playerArgument.replacingOccurrences(of: "-show-player=", with: "")) {
                 selectedPlayerID = playerID
@@ -154,6 +156,19 @@ struct AppTabView: View {
 
     @ViewBuilder
     private var selectedContent: some View {
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("-show-home-run-chase") {
+            NavigationStack { HomeRunChaseView() }
+        } else {
+            selectedTabContent
+        }
+        #else
+        selectedTabContent
+        #endif
+    }
+
+    @ViewBuilder
+    private var selectedTabContent: some View {
         switch selectedTab {
         case .home:
                 HomeView(team: team) { destination in

@@ -335,6 +335,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {{
 enum HubPreferences {{
     static let selectedTeamKey = "hubSelectedTeam"
     static let completedTeamOnboardingKey = "hubCompletedTeamOnboarding"
+    static let pageOrderKey = "hubPageOrder"
 }}
 """
 

@@ -151,7 +151,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             baseballReferenceID: "NYY",
             colors: .init(primary: "#0C2340", secondary: "#0C2340", background: "#E8EEF4", ink: "#061527", border: "#C6D2DE", positive: "#1B3F65", banner: "#0C2340", accent_dark: "#061527", navigation: "#0C2340", team_tint: "#141F30", team_line: "#E8E4DA"),
             newsSources: [.init(key: "dailynews", name: "Daily News"), .init(key: "nypost", name: "NY Post"), .init(key: "athletic", name: "The Athletic")],
-            features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: true, stories: false)
+            features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: true, stories: true)
         ),
         .newYorkMets: .init(
             mlbID: 121, fullName: "New York Mets",
