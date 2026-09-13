@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T04:48:27.248781+00:00",
+  "generated_at": "2026-09-13T11:52:27.609603+00:00",
   "season": 2026,
   "team": "Boston Red Sox",
   "games_played": 149,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 20.4,
+    "actual_war": 20.7,
     "forecast_war_to_date": 20.3,
-    "war_gap": 0.2,
-    "innings": 1317.3,
-    "era": 3.62
+    "war_gap": 0.4,
+    "innings": 1326.3,
+    "era": 3.6
   },
   "pitchers": [
     {
@@ -50,24 +50,24 @@
         "war": 0.38
       },
       "war_gap": 3.36,
-      "innings_share_pct": 10.4
+      "innings_share_pct": 10.3
     },
     {
       "id": 624133,
       "name": "Ranger Suarez",
       "throws": "L",
       "role": "Starter",
-      "games": 25,
-      "starts": 25,
+      "games": 26,
+      "starts": 26,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "130.2",
-        "ip_value": 130.667,
-        "war": 3.41,
-        "era": 3.44,
-        "fip": 3.11,
-        "k_minus_bb_pct": 15.1
+        "ip": "137.2",
+        "ip_value": 137.667,
+        "war": 3.63,
+        "era": 3.33,
+        "fip": 3.09,
+        "k_minus_bb_pct": 15.8
       },
       "forecast": {
         "ip": 171.5,
@@ -81,8 +81,8 @@
         "ip": 157.7,
         "war": 3.0
       },
-      "war_gap": 0.41,
-      "innings_share_pct": 9.9
+      "war_gap": 0.64,
+      "innings_share_pct": 10.4
     },
     {
       "id": 543243,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "156.2",
         "ip_value": 156.667,
-        "war": 3.18,
+        "war": 3.17,
         "era": 2.76,
         "fip": 3.46,
         "k_minus_bb_pct": 15.4
@@ -113,8 +113,8 @@
         "ip": 166.8,
         "war": 3.57
       },
-      "war_gap": -0.39,
-      "innings_share_pct": 11.9
+      "war_gap": -0.4,
+      "innings_share_pct": 11.8
     },
     {
       "id": 687562,
@@ -130,7 +130,7 @@
         "ip_value": 105.0,
         "war": 2.07,
         "era": 3.69,
-        "fip": 3.63,
+        "fip": 3.64,
         "k_minus_bb_pct": 15.3
       },
       "forecast": {
@@ -146,24 +146,24 @@
         "war": 0.04
       },
       "war_gap": 2.03,
-      "innings_share_pct": 8.0
+      "innings_share_pct": 7.9
     },
     {
       "id": 676477,
       "name": "Garrett Whitlock",
       "throws": "R",
       "role": "Setup",
-      "games": 49,
+      "games": 50,
       "starts": 0,
       "saves": 3,
-      "holds": 24,
+      "holds": 25,
       "actual": {
-        "ip": "48.0",
-        "ip_value": 48.0,
-        "war": 1.75,
-        "era": 1.88,
-        "fip": 2.1,
-        "k_minus_bb_pct": 26.1
+        "ip": "49.0",
+        "ip_value": 49.0,
+        "war": 1.85,
+        "era": 1.84,
+        "fip": 2.0,
+        "k_minus_bb_pct": 27.3
       },
       "forecast": {
         "ip": 70.0,
@@ -177,25 +177,25 @@
         "ip": 64.4,
         "war": 0.74
       },
-      "war_gap": 1.01,
-      "innings_share_pct": 3.6
+      "war_gap": 1.1,
+      "innings_share_pct": 3.7
     },
     {
       "id": 547973,
       "name": "Aroldis Chapman",
       "throws": "L",
       "role": "Closer",
-      "games": 50,
+      "games": 51,
       "starts": 0,
       "saves": 33,
       "holds": 0,
       "actual": {
-        "ip": "48.2",
-        "ip_value": 48.667,
-        "war": 1.52,
-        "era": 2.03,
-        "fip": 2.52,
-        "k_minus_bb_pct": 22.4
+        "ip": "49.2",
+        "ip_value": 49.667,
+        "war": 1.47,
+        "era": 1.99,
+        "fip": 2.6,
+        "k_minus_bb_pct": 21.5
       },
       "forecast": {
         "ip": 62.0,
@@ -209,7 +209,7 @@
         "ip": 57.0,
         "war": 0.92
       },
-      "war_gap": 0.6,
+      "war_gap": 0.55,
       "innings_share_pct": 3.7
     },
     {
@@ -226,7 +226,7 @@
         "ip_value": 55.0,
         "war": 0.97,
         "era": 4.58,
-        "fip": 3.97,
+        "fip": 3.98,
         "k_minus_bb_pct": 11.9
       },
       "forecast": {
@@ -242,7 +242,7 @@
         "war": 1.03
       },
       "war_gap": -0.06,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
     },
     {
       "id": 594027,
@@ -306,7 +306,7 @@
         "war": 1.16
       },
       "war_gap": -0.5,
-      "innings_share_pct": 7.0
+      "innings_share_pct": 6.9
     },
     {
       "id": 678394,
@@ -338,7 +338,7 @@
         "war": 1.69
       },
       "war_gap": -1.06,
-      "innings_share_pct": 7.8
+      "innings_share_pct": 7.7
     },
     {
       "id": 686580,
@@ -386,7 +386,7 @@
         "ip_value": 14.333,
         "war": 0.43,
         "era": 0.63,
-        "fip": 1.98,
+        "fip": 1.99,
         "k_minus_bb_pct": 32.2
       },
       "forecast": {
@@ -482,7 +482,7 @@
         "ip_value": 20.333,
         "war": 0.18,
         "era": 2.66,
-        "fip": 3.54,
+        "fip": 3.55,
         "k_minus_bb_pct": 10.0
       },
       "forecast": {
@@ -530,7 +530,7 @@
         "war": 0.16
       },
       "war_gap": 0.02,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
     },
     {
       "id": 677161,
@@ -642,7 +642,7 @@
         "ip_value": 8.0,
         "war": 0.03,
         "era": 3.38,
-        "fip": 3.97,
+        "fip": 3.98,
         "k_minus_bb_pct": 12.5
       },
       "forecast": {
@@ -706,7 +706,7 @@
         "ip_value": 16.333,
         "war": 0.02,
         "era": 5.51,
-        "fip": 4.2,
+        "fip": 4.21,
         "k_minus_bb_pct": 17.5
       },
       "forecast": {
@@ -930,7 +930,7 @@
         "ip_value": 22.0,
         "war": -0.13,
         "era": 4.5,
-        "fip": 4.96,
+        "fip": 4.97,
         "k_minus_bb_pct": -5.2
       },
       "forecast": {
