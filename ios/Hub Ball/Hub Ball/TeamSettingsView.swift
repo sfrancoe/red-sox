@@ -23,6 +23,7 @@ struct TeamSettingsView: View {
     @AppStorage(TeamFavoritesStorage.key) private var favoriteTeamIDs = ""
     @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
     @State private var selectedSettingsTab = SettingsTab.teams
+    @State private var pageOrderHapticTick = UUID()
     @Binding var selectedTeamID: String
     let onSelect: (HubTeam) -> Void
 
@@ -123,14 +124,21 @@ struct TeamSettingsView: View {
     }
 
     private var pageOrderTab: some View {
-        ScrollView {
+        List {
             pageOrderSection
-                .padding(16)
         }
+        .listStyle(.insetGrouped)
+        .environment(\.editMode, .constant(.active))
+        .sensoryFeedback(.selection, trigger: pageOrderHapticTick)
     }
 
     private var pageOrderSection: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        Section {
+            ForEach(orderedPages, id: \.self) { page in
+                pageOrderRow(page)
+            }
+            .onMove(perform: movePages)
+        } header: {
             HStack(alignment: .firstTextBaseline) {
                 Text("PAGE ORDER")
                     .font(AppFont.label)
@@ -145,23 +153,11 @@ struct TeamSettingsView: View {
                 .foregroundStyle(AppColor.red)
                 .disabled(storedPageOrder == MainTab.defaultOrderStorageValue)
             }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 8)
-
-            VStack(spacing: 0) {
-                ForEach(orderedPages, id: \.self) { page in
-                    pageOrderRow(page)
-                    if page != orderedPages.last {
-                        Divider().overlay(AppColor.separator)
-                    }
-                }
-            }
-
+            .textCase(nil)
+        } footer: {
             Text("Home stays first. This order is used for both the page bar and swiping.")
                 .font(.caption)
                 .foregroundStyle(AppColor.inkMuted)
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
         }
     }
 
@@ -177,34 +173,19 @@ struct TeamSettingsView: View {
                 .foregroundStyle(AppColor.inkMuted)
                 .frame(width: 44, height: 52)
                 .contentShape(Rectangle())
-                .modifier(PageDragModifier(page: page))
         }
-        .padding(.leading, 16)
-        .dropDestination(for: String.self) { draggedPageIDs, _ in
-            guard page != .home, let draggedPageID = draggedPageIDs.first else { return false }
-            return movePage(draggedPageID, to: page)
-        }
+        .moveDisabled(page == .home)
         .modifier(PageReorderAccessibilityModifier(page: page, onMove: movePage))
     }
 
-    private func movePage(_ draggedPageID: String, to targetPage: MainTab) -> Bool {
-        guard let draggedPage = MainTab(rawValue: draggedPageID), draggedPage != .home else {
-            return false
-        }
-
+    private func movePages(from offsets: IndexSet, to destination: Int) {
         var updatedPages = orderedPages
-        guard
-            let sourceIndex = updatedPages.firstIndex(of: draggedPage),
-            let targetIndex = updatedPages.firstIndex(of: targetPage),
-            sourceIndex != targetIndex
-        else {
-            return false
-        }
+        guard !offsets.contains(0) else { return }
 
-        let movedPage = updatedPages.remove(at: sourceIndex)
-        updatedPages.insert(movedPage, at: targetIndex)
+        updatedPages.move(fromOffsets: offsets, toOffset: max(destination, 1))
+        guard updatedPages != orderedPages else { return }
         savePageOrder(updatedPages)
-        return true
+        pageOrderHapticTick = UUID()
     }
 
     private func movePage(_ page: MainTab, by offset: Int) {
@@ -216,6 +197,7 @@ struct TeamSettingsView: View {
 
         updatedPages.swapAt(sourceIndex, targetIndex)
         savePageOrder(updatedPages)
+        pageOrderHapticTick = UUID()
     }
 
     private func savePageOrder(_ pages: [MainTab]) {
@@ -361,19 +343,6 @@ struct TeamSettingsView: View {
 
     private func saveFavorites(_ teams: [HubTeam]) {
         favoriteTeamIDs = teams.map(\.id).joined(separator: ",")
-    }
-}
-
-private struct PageDragModifier: ViewModifier {
-    let page: MainTab
-
-    @ViewBuilder
-    func body(content: Content) -> some View {
-        if page == .home {
-            content
-        } else {
-            content.draggable(page.rawValue)
-        }
     }
 }
 
