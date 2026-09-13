@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-12T12:58:17.473002+00:00",
-  "roster_as_of": "September 8, 2026",
+  "generated_at": "2026-09-13T13:52:17.519748+00:00",
+  "roster_as_of": "September 12, 2026",
   "team": {
     "id": 139,
     "name": "Tampa Bay Rays"
@@ -511,8 +511,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2001-03-29",
       "age": 25,
       "birthplace": "Lawrenceville, Georgia, U.S.",
@@ -918,84 +918,6 @@
       }
     },
     {
-      "id": 675627,
-      "wikidata_id": "Q112160981",
-      "slug": "michael-grove",
-      "name": "Michael Grove",
-      "full_name": "Michael Grove",
-      "number": "58",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1996-12-18",
-      "age": 29,
-      "birthplace": "Wheeling",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "May 15, 2022",
-      "debut_team": "Los Angeles Dodgers",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Los Angeles Dodgers",
-        "Tampa Bay Rays"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q112160981",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Michael_Grove",
-      "retrosheet_id": "grovm001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 64,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 64,
-          "games_started": 20,
-          "wins": 7,
-          "losses": 7,
-          "saves": 0,
-          "innings_outs": 448,
-          "hits": 161,
-          "runs": 99,
-          "earned_runs": 91,
-          "home_runs": 24,
-          "walks": 45,
-          "strikeouts": 151,
-          "hit_batters": 9,
-          "wild_pitches": 7,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 5.48,
-          "whip": 1.379
-        }
-      }
-    },
-    {
       "id": 669169,
       "wikidata_id": "Q108576609",
       "slug": "jonathan-heasley",
@@ -1130,6 +1052,46 @@
           "slugging_percentage": 0.346,
           "ops": 0.692
         },
+        "pitching": null
+      }
+    },
+    {
+      "id": 987281091,
+      "wikidata_id": null,
+      "slug": "brody-hopkins",
+      "name": "Brody Hopkins",
+      "full_name": "Brody Hopkins",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": null,
+      "age": null,
+      "birthplace": "",
+      "height": null,
+      "weight": null,
+      "bats": null,
+      "throws": null,
+      "debut_date": null,
+      "debut_team": null,
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Tampa Bay Rays"
+      ],
+      "source_url": null,
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Brody_Hopkins",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
         "pitching": null
       }
     },
