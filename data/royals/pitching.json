@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T00:23:18.225176+00:00",
+  "generated_at": "2026-09-13T12:18:21.488840+00:00",
   "season": 2026,
   "team": "Kansas City Royals",
   "games_played": 149,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.8,
+    "actual_war": 7.0,
     "forecast_war_to_date": 14.0,
-    "war_gap": -7.2,
-    "innings": 1305.3,
-    "era": 4.63
+    "war_gap": -7.0,
+    "innings": 1313.3,
+    "era": 4.64
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 1.43
       },
       "war_gap": 1.63,
-      "innings_share_pct": 12.3
+      "innings_share_pct": 12.2
     },
     {
       "id": 608379,
@@ -81,8 +81,8 @@
         "ip": 156.4,
         "war": 1.78
       },
-      "war_gap": 0.95,
-      "innings_share_pct": 14.0
+      "war_gap": 0.96,
+      "innings_share_pct": 13.9
     },
     {
       "id": 607625,
@@ -114,7 +114,39 @@
         "war": 1.6
       },
       "war_gap": 0.48,
-      "innings_share_pct": 12.6
+      "innings_share_pct": 12.5
+    },
+    {
+      "id": 677976,
+      "name": "Randy Dobnak",
+      "throws": "R",
+      "role": "Starter",
+      "games": 13,
+      "starts": 11,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "69.1",
+        "ip_value": 69.333,
+        "war": 0.86,
+        "era": 2.73,
+        "fip": 3.95,
+        "k_minus_bb_pct": 8.3
+      },
+      "forecast": {
+        "ip": 10.0,
+        "war": -0.01,
+        "era": 3.93,
+        "fip": 4.15,
+        "k_minus_bb_pct": 10.5,
+        "team_at_fetch": "KCR"
+      },
+      "forecast_to_date": {
+        "ip": 9.2,
+        "war": -0.01
+      },
+      "war_gap": 0.87,
+      "innings_share_pct": 5.3
     },
     {
       "id": 663460,
@@ -146,7 +178,7 @@
         "war": 2.06
       },
       "war_gap": -1.22,
-      "innings_share_pct": 3.9
+      "innings_share_pct": 3.8
     },
     {
       "id": 663738,
@@ -181,38 +213,6 @@
       "innings_share_pct": 5.5
     },
     {
-      "id": 677976,
-      "name": "Randy Dobnak",
-      "throws": "R",
-      "role": "Starter",
-      "games": 12,
-      "starts": 10,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "63.2",
-        "ip_value": 63.667,
-        "war": 0.67,
-        "era": 2.54,
-        "fip": 4.11,
-        "k_minus_bb_pct": 7.5
-      },
-      "forecast": {
-        "ip": 10.0,
-        "war": -0.01,
-        "era": 3.93,
-        "fip": 4.15,
-        "k_minus_bb_pct": 10.5,
-        "team_at_fetch": "KCR"
-      },
-      "forecast_to_date": {
-        "ip": 9.2,
-        "war": -0.01
-      },
-      "war_gap": 0.68,
-      "innings_share_pct": 4.9
-    },
-    {
       "id": 663568,
       "name": "Stephen Kolek",
       "throws": "R",
@@ -226,7 +226,7 @@
         "ip_value": 54.0,
         "war": 0.53,
         "era": 4.5,
-        "fip": 4.54,
+        "fip": 4.55,
         "k_minus_bb_pct": 9.8
       },
       "forecast": {
@@ -258,7 +258,7 @@
         "ip_value": 21.0,
         "war": 0.51,
         "era": 0.43,
-        "fip": 2.62,
+        "fip": 2.63,
         "k_minus_bb_pct": 15.9
       },
       "forecast": {
@@ -290,7 +290,7 @@
         "ip_value": 70.0,
         "war": 0.38,
         "era": 5.53,
-        "fip": 4.54,
+        "fip": 4.55,
         "k_minus_bb_pct": 6.1
       },
       "forecast": {
@@ -305,8 +305,8 @@
         "ip": 38.6,
         "war": 0.11
       },
-      "war_gap": 0.27,
-      "innings_share_pct": 5.4
+      "war_gap": 0.28,
+      "innings_share_pct": 5.3
     },
     {
       "id": 621016,
@@ -322,7 +322,7 @@
         "ip_value": 18.0,
         "war": 0.32,
         "era": 2.5,
-        "fip": 2.82,
+        "fip": 2.83,
         "k_minus_bb_pct": 9.4
       },
       "forecast": {
@@ -401,7 +401,7 @@
         "ip": 12.9,
         "war": 0.03
       },
-      "war_gap": 0.17,
+      "war_gap": 0.18,
       "innings_share_pct": 0.8
     },
     {
@@ -409,17 +409,17 @@
       "name": "Anthony Gose",
       "throws": "L",
       "role": "Reliever",
-      "games": 7,
+      "games": 8,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "7.1",
-        "ip_value": 7.333,
-        "war": 0.12,
+        "ip": "7.2",
+        "ip_value": 7.667,
+        "war": 0.16,
         "era": 0.0,
-        "fip": 3.51,
-        "k_minus_bb_pct": -3.7
+        "fip": 3.23,
+        "k_minus_bb_pct": 0.0
       },
       "forecast": {
         "ip": 1.0,
@@ -433,7 +433,7 @@
         "ip": 0.9,
         "war": 0.01
       },
-      "war_gap": 0.11,
+      "war_gap": 0.15,
       "innings_share_pct": 0.6
     },
     {
@@ -450,7 +450,7 @@
         "ip_value": 5.333,
         "war": 0.07,
         "era": 5.06,
-        "fip": 2.72,
+        "fip": 2.73,
         "k_minus_bb_pct": 14.3
       },
       "forecast": {
@@ -628,7 +628,7 @@
         "ip_value": 23.333,
         "war": -0.1,
         "era": 3.86,
-        "fip": 4.94,
+        "fip": 4.95,
         "k_minus_bb_pct": 10.5
       },
       "forecast": {
@@ -651,17 +651,17 @@
       "name": "Easton McGee",
       "throws": "R",
       "role": "Reliever",
-      "games": 6,
+      "games": 7,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "8.1",
-        "ip_value": 8.333,
-        "war": -0.18,
-        "era": 8.64,
-        "fip": 7.3,
-        "k_minus_bb_pct": 9.8
+        "ip": "9.1",
+        "ip_value": 9.333,
+        "war": -0.17,
+        "era": 8.68,
+        "fip": 6.85,
+        "k_minus_bb_pct": 8.7
       },
       "forecast": {
         "ip": 34.0,
@@ -675,8 +675,8 @@
         "ip": 31.3,
         "war": 0.0
       },
-      "war_gap": -0.18,
-      "innings_share_pct": 0.6
+      "war_gap": -0.17,
+      "innings_share_pct": 0.7
     },
     {
       "id": 607481,
@@ -711,6 +711,38 @@
       "innings_share_pct": 0.1
     },
     {
+      "id": 666142,
+      "name": "Cole Ragans",
+      "throws": "L",
+      "role": "Starter",
+      "games": 8,
+      "starts": 8,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "35.1",
+        "ip_value": 35.333,
+        "war": -0.24,
+        "era": 4.84,
+        "fip": 6.19,
+        "k_minus_bb_pct": 14.6
+      },
+      "forecast": {
+        "ip": 172.0,
+        "war": 4.07,
+        "era": 3.31,
+        "fip": 3.3,
+        "k_minus_bb_pct": 20.9,
+        "team_at_fetch": "KCR"
+      },
+      "forecast_to_date": {
+        "ip": 158.2,
+        "war": 3.74
+      },
+      "war_gap": -3.98,
+      "innings_share_pct": 2.7
+    },
+    {
       "id": 687765,
       "name": "Mitch Spence",
       "throws": "R",
@@ -741,38 +773,6 @@
       },
       "war_gap": -0.34,
       "innings_share_pct": 0.7
-    },
-    {
-      "id": 666142,
-      "name": "Cole Ragans",
-      "throws": "L",
-      "role": "Starter",
-      "games": 8,
-      "starts": 8,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "35.1",
-        "ip_value": 35.333,
-        "war": -0.24,
-        "era": 4.84,
-        "fip": 6.18,
-        "k_minus_bb_pct": 14.6
-      },
-      "forecast": {
-        "ip": 172.0,
-        "war": 4.07,
-        "era": 3.31,
-        "fip": 3.3,
-        "k_minus_bb_pct": 20.9,
-        "team_at_fetch": "KCR"
-      },
-      "forecast_to_date": {
-        "ip": 158.2,
-        "war": 3.74
-      },
-      "war_gap": -3.98,
-      "innings_share_pct": 2.7
     },
     {
       "id": 608032,
@@ -818,9 +818,9 @@
       "actual": {
         "ip": "55.2",
         "ip_value": 55.667,
-        "war": -0.27,
+        "war": -0.26,
         "era": 4.04,
-        "fip": 5.02,
+        "fip": 5.03,
         "k_minus_bb_pct": 16.8
       },
       "forecast": {
@@ -836,7 +836,7 @@
         "war": 0.07
       },
       "war_gap": -0.33,
-      "innings_share_pct": 4.3
+      "innings_share_pct": 4.2
     },
     {
       "id": 672021,
@@ -852,7 +852,7 @@
         "ip_value": 5.333,
         "war": -0.27,
         "era": 10.13,
-        "fip": 10.97,
+        "fip": 10.98,
         "k_minus_bb_pct": -11.1
       },
       "forecast": {
@@ -884,7 +884,7 @@
         "ip_value": 19.333,
         "war": -0.28,
         "era": 5.12,
-        "fip": 6.51,
+        "fip": 6.52,
         "k_minus_bb_pct": 7.7
       },
       "forecast": {
@@ -916,7 +916,7 @@
         "ip_value": 4.667,
         "war": -0.3,
         "era": 25.07,
-        "fip": 16.81,
+        "fip": 16.82,
         "k_minus_bb_pct": -9.1
       },
       "forecast": null,
@@ -941,7 +941,7 @@
         "ip_value": 49.333,
         "war": -0.32,
         "era": 3.65,
-        "fip": 4.88,
+        "fip": 4.89,
         "k_minus_bb_pct": 6.9
       },
       "forecast": {
@@ -956,7 +956,7 @@
         "ip": 58.9,
         "war": 0.24
       },
-      "war_gap": -0.56,
+      "war_gap": -0.55,
       "innings_share_pct": 3.8
     },
     {
@@ -996,17 +996,17 @@
       "name": "Alex Lange",
       "throws": "R",
       "role": "Closer",
-      "games": 54,
+      "games": 55,
       "starts": 0,
       "saves": 10,
       "holds": 3,
       "actual": {
-        "ip": "55.2",
-        "ip_value": 55.667,
-        "war": -0.46,
-        "era": 5.98,
-        "fip": 5.02,
-        "k_minus_bb_pct": 10.8
+        "ip": "56.2",
+        "ip_value": 56.667,
+        "war": -0.47,
+        "era": 6.04,
+        "fip": 5.04,
+        "k_minus_bb_pct": 10.2
       },
       "forecast": {
         "ip": 52.0,
@@ -1020,7 +1020,7 @@
         "ip": 47.8,
         "war": 0.16
       },
-      "war_gap": -0.62,
+      "war_gap": -0.63,
       "innings_share_pct": 4.3
     },
     {
@@ -1037,7 +1037,7 @@
         "ip_value": 31.333,
         "war": -0.51,
         "era": 4.31,
-        "fip": 6.48,
+        "fip": 6.49,
         "k_minus_bb_pct": -0.7
       },
       "forecast": {
@@ -1069,7 +1069,7 @@
         "ip_value": 43.333,
         "war": -0.58,
         "era": 6.23,
-        "fip": 5.59,
+        "fip": 5.6,
         "k_minus_bb_pct": 1.0
       },
       "forecast": {

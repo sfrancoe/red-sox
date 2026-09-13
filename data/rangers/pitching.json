@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T05:23:44.409851+00:00",
+  "generated_at": "2026-09-13T12:18:28.923949+00:00",
   "season": 2026,
   "team": "Texas Rangers",
   "games_played": 149,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.5,
+    "actual_war": 14.8,
     "forecast_war_to_date": 16.4,
-    "war_gap": -2.0,
-    "innings": 1295.3,
-    "era": 4.34
+    "war_gap": -1.6,
+    "innings": 1304.3,
+    "era": 4.33
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 3.72
       },
       "war_gap": 0.4,
-      "innings_share_pct": 11.5
+      "innings_share_pct": 11.4
     },
     {
       "id": 669022,
@@ -64,9 +64,9 @@
       "actual": {
         "ip": "161.2",
         "ip_value": 161.667,
-        "war": 2.85,
+        "war": 2.86,
         "era": 4.62,
-        "fip": 3.77,
+        "fip": 3.78,
         "k_minus_bb_pct": 15.1
       },
       "forecast": {
@@ -81,25 +81,25 @@
         "ip": 148.3,
         "war": 2.49
       },
-      "war_gap": 0.36,
-      "innings_share_pct": 12.5
+      "war_gap": 0.37,
+      "innings_share_pct": 12.4
     },
     {
       "id": 656641,
       "name": "Jacob Latz",
       "throws": "L",
       "role": "Closer",
-      "games": 51,
+      "games": 52,
       "starts": 1,
       "saves": 28,
       "holds": 3,
       "actual": {
-        "ip": "63.1",
-        "ip_value": 63.333,
-        "war": 2.11,
-        "era": 1.85,
-        "fip": 2.66,
-        "k_minus_bb_pct": 21.2
+        "ip": "64.2",
+        "ip_value": 64.667,
+        "war": 2.17,
+        "era": 1.81,
+        "fip": 2.61,
+        "k_minus_bb_pct": 21.7
       },
       "forecast": {
         "ip": 89.2,
@@ -113,25 +113,25 @@
         "ip": 82.0,
         "war": 0.48
       },
-      "war_gap": 1.63,
-      "innings_share_pct": 4.9
+      "war_gap": 1.69,
+      "innings_share_pct": 5.0
     },
     {
       "id": 543135,
       "name": "Nathan Eovaldi",
       "throws": "R",
       "role": "Starter",
-      "games": 22,
+      "games": 23,
       "starts": 22,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "132.2",
-        "ip_value": 132.667,
-        "war": 1.54,
-        "era": 4.21,
-        "fip": 4.27,
-        "k_minus_bb_pct": 18.9
+        "ip": "135.1",
+        "ip_value": 135.333,
+        "war": 1.6,
+        "era": 4.19,
+        "fip": 4.24,
+        "k_minus_bb_pct": 18.8
       },
       "forecast": {
         "ip": 174.5,
@@ -145,8 +145,8 @@
         "ip": 160.5,
         "war": 3.09
       },
-      "war_gap": -1.54,
-      "innings_share_pct": 10.2
+      "war_gap": -1.49,
+      "innings_share_pct": 10.4
     },
     {
       "id": 615698,
@@ -181,6 +181,38 @@
       "innings_share_pct": 7.9
     },
     {
+      "id": 677958,
+      "name": "Kumar Rocker",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 28,
+      "starts": 25,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "138.2",
+        "ip_value": 138.667,
+        "war": 1.37,
+        "era": 4.54,
+        "fip": 4.39,
+        "k_minus_bb_pct": 12.3
+      },
+      "forecast": {
+        "ip": 137.8,
+        "war": 1.61,
+        "era": 4.23,
+        "fip": 4.13,
+        "k_minus_bb_pct": 13.2,
+        "team_at_fetch": "TEX"
+      },
+      "forecast_to_date": {
+        "ip": 126.8,
+        "war": 1.48
+      },
+      "war_gap": -0.1,
+      "innings_share_pct": 10.6
+    },
+    {
       "id": 641302,
       "name": "Tyler Alexander",
       "throws": "L",
@@ -213,38 +245,6 @@
       "innings_share_pct": 5.0
     },
     {
-      "id": 677958,
-      "name": "Kumar Rocker",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 27,
-      "starts": 24,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "134.2",
-        "ip_value": 134.667,
-        "war": 1.24,
-        "era": 4.61,
-        "fip": 4.46,
-        "k_minus_bb_pct": 12.1
-      },
-      "forecast": {
-        "ip": 137.8,
-        "war": 1.61,
-        "era": 4.23,
-        "fip": 4.13,
-        "k_minus_bb_pct": 13.2,
-        "team_at_fetch": "TEX"
-      },
-      "forecast_to_date": {
-        "ip": 126.8,
-        "war": 1.48
-      },
-      "war_gap": -0.24,
-      "innings_share_pct": 10.4
-    },
-    {
       "id": 683004,
       "name": "Jack Leiter",
       "throws": "R",
@@ -256,9 +256,9 @@
       "actual": {
         "ip": "80.0",
         "ip_value": 80.0,
-        "war": 0.53,
+        "war": 0.54,
         "era": 5.29,
-        "fip": 4.76,
+        "fip": 4.77,
         "k_minus_bb_pct": 13.5
       },
       "forecast": {
@@ -273,8 +273,8 @@
         "ip": 137.7,
         "war": 1.45
       },
-      "war_gap": -0.92,
-      "innings_share_pct": 6.2
+      "war_gap": -0.91,
+      "innings_share_pct": 6.1
     },
     {
       "id": 596001,
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "50.1",
         "ip_value": 50.333,
-        "war": 0.47,
+        "war": 0.48,
         "era": 3.4,
         "fip": 3.76,
         "k_minus_bb_pct": 10.3
@@ -305,7 +305,7 @@
         "ip": 59.8,
         "war": 0.28
       },
-      "war_gap": 0.19,
+      "war_gap": 0.2,
       "innings_share_pct": 3.9
     },
     {
@@ -338,7 +338,7 @@
         "war": 0.45
       },
       "war_gap": -0.05,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     },
     {
       "id": 682608,
@@ -354,7 +354,7 @@
         "ip_value": 55.0,
         "war": 0.37,
         "era": 3.93,
-        "fip": 4.15,
+        "fip": 4.16,
         "k_minus_bb_pct": 17.2
       },
       "forecast": {
@@ -409,17 +409,17 @@
       "name": "Robert Garcia",
       "throws": "L",
       "role": "Reliever",
-      "games": 11,
+      "games": 12,
       "starts": 0,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "10.0",
-        "ip_value": 10.0,
-        "war": 0.12,
-        "era": 2.7,
-        "fip": 3.4,
-        "k_minus_bb_pct": 5.0
+        "ip": "11.0",
+        "ip_value": 11.0,
+        "war": 0.16,
+        "era": 2.45,
+        "fip": 3.19,
+        "k_minus_bb_pct": 7.0
       },
       "forecast": {
         "ip": 64.0,
@@ -433,7 +433,7 @@
         "ip": 58.9,
         "war": 0.48
       },
-      "war_gap": -0.36,
+      "war_gap": -0.32,
       "innings_share_pct": 0.8
     },
     {
@@ -660,7 +660,7 @@
         "ip_value": 23.0,
         "war": -0.05,
         "era": 5.09,
-        "fip": 5.01,
+        "fip": 5.02,
         "k_minus_bb_pct": 2.9
       },
       "forecast": {
@@ -788,7 +788,7 @@
         "ip_value": 3.0,
         "war": -0.08,
         "era": 21.0,
-        "fip": 9.43,
+        "fip": 9.44,
         "k_minus_bb_pct": -5.6
       },
       "forecast": null,
@@ -813,7 +813,7 @@
         "ip_value": 5.667,
         "war": -0.09,
         "era": 3.18,
-        "fip": 6.98,
+        "fip": 6.99,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -843,7 +843,7 @@
       "actual": {
         "ip": "6.2",
         "ip_value": 6.667,
-        "war": -0.11,
+        "war": -0.1,
         "era": 8.1,
         "fip": 6.7,
         "k_minus_bb_pct": 11.1
@@ -909,7 +909,7 @@
         "ip_value": 4.333,
         "war": -0.21,
         "era": 20.77,
-        "fip": 10.02,
+        "fip": 10.03,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -941,7 +941,7 @@
         "ip_value": 36.333,
         "war": -0.23,
         "era": 5.94,
-        "fip": 5.05,
+        "fip": 5.06,
         "k_minus_bb_pct": 13.1
       },
       "forecast": {
@@ -1005,7 +1005,7 @@
         "ip_value": 15.333,
         "war": -0.26,
         "era": 5.28,
-        "fip": 5.77,
+        "fip": 5.78,
         "k_minus_bb_pct": 4.2
       },
       "forecast": {
@@ -1069,7 +1069,7 @@
         "ip_value": 10.333,
         "war": -0.33,
         "era": 9.58,
-        "fip": 9.0,
+        "fip": 9.01,
         "k_minus_bb_pct": -1.8
       },
       "forecast": {
