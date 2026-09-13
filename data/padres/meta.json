@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-12T14:24:35+00:00",
+ "generated_at": "2026-09-13T15:04:59+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 135,
  "seasons": {
   "2026": {
-   "record": "79-68",
-   "games": 147,
+   "record": "80-68",
+   "games": 148,
    "in_progress": true,
    "war_leader": {
     "name": "Michael King",
-    "war": 4.1
+    "war": 4.2
    },
    "war_leaders": [
     {
      "name": "Michael King",
-     "war": 4.1
+     "war": 4.2
     },
     {
      "name": "Ty France",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Fernando Tatis Jr.",
-     "war": 3.6
+     "war": 3.8
     }
    ],
    "pitching_leaders": {
@@ -31,15 +31,15 @@
      "top": [
       {
        "name": "Mason Miller",
-       "value": "0.87"
-      },
-      {
-       "name": "Bradgley Rodriguez",
-       "value": "1.04"
+       "value": "0.85"
       },
       {
        "name": "Adrian Morejon",
-       "value": "1.07"
+       "value": "1.05"
+      },
+      {
+       "name": "Kyle Hart",
+       "value": "1.08"
       }
      ]
     }
@@ -57,31 +57,32 @@
       },
       {
        "name": "Jackson Merrill",
-       "value": 24
+       "value": 25
       },
       {
        "name": "Fernando Tatis Jr.",
-       "value": 20
+       "value": 21
       }
      ]
     },
     "rbi": {
      "names": [
+      "Jackson Merrill",
       "Manny Machado"
      ],
      "value": 80,
      "top": [
       {
+       "name": "Jackson Merrill",
+       "value": 80
+      },
+      {
        "name": "Manny Machado",
        "value": 80
       },
       {
-       "name": "Jackson Merrill",
-       "value": 79
-      },
-      {
        "name": "Fernando Tatis Jr.",
-       "value": 72
+       "value": 73
       }
      ]
     },
@@ -89,19 +90,19 @@
      "names": [
       "Fernando Tatis Jr."
      ],
-     "value": ".284",
+     "value": ".286",
      "top": [
       {
        "name": "Fernando Tatis Jr.",
-       "value": ".284"
+       "value": ".286"
       },
       {
        "name": "Jackson Merrill",
        "value": ".248"
       },
       {
-       "name": "Manny Machado",
-       "value": ".222"
+       "name": "Xander Bogaerts",
+       "value": ".224"
       }
      ]
     },
@@ -109,19 +110,19 @@
      "names": [
       "Fernando Tatis Jr."
      ],
-     "value": ".802",
+     "value": ".813",
      "top": [
       {
        "name": "Fernando Tatis Jr.",
-       "value": ".802"
+       "value": ".813"
       },
       {
        "name": "Jackson Merrill",
-       "value": ".732"
+       "value": ".738"
       },
       {
        "name": "Manny Machado",
-       "value": ".722"
+       "value": ".717"
       }
      ]
     }
