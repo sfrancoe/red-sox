@@ -429,7 +429,7 @@ struct BrewersShutoutView: View {
     }
 
     @MainActor private func makePoster() {
-        let renderer = ImageRenderer(content: ContributionPoster(games: games).frame(width: 600, height: 1000))
+        let renderer = ImageRenderer(content: ContributionPoster(games: games).frame(width: 600, height: 1200))
         renderer.scale = 2
         do {
             guard let data = renderer.uiImage?.pngData() else { throw CocoaError(.fileWriteUnknown) }
@@ -577,7 +577,7 @@ private struct ContributionPoster: View {
         let credits = hitterCredits(games.flatMap(\.events))
         VStack(alignment: .leading, spacing: 20) {
             Text("MILWAUKEE / 2026").font(.system(size: 14, weight: .bold, design: .monospaced)).tracking(3).foregroundStyle(ShutoutStyle.gold)
-            Text("WHO BUILT\nTHE 42?").font(.system(size: 65, weight: .black, design: .rounded)).tracking(-2)
+            Text("WHO BUILT\nTHE 42?").font(.system(size: 65, weight: .black, design: .rounded)).tracking(-2).fixedSize(horizontal: false, vertical: true)
             HStack(alignment: .firstTextBaseline) {
                 Text("42–0").font(.system(size: 62, weight: .black, design: .rounded)).foregroundStyle(ShutoutStyle.gold)
                 Spacer()
