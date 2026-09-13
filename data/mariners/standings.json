@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T05:23:42.014043+00:00",
+  "generated_at": "2026-09-13T18:58:26.054975+00:00",
   "source": "MLB Stats API",
   "season": 2026,
   "league": "American League",
@@ -140,13 +140,13 @@
           "short_name": "Detroit",
           "abbreviation": "DET",
           "rank": "4",
-          "wins": 69,
+          "wins": 70,
           "losses": 79,
-          "pct": ".466",
-          "games_back": "7.0",
-          "wild_card_games_back": "5.5",
+          "pct": ".470",
+          "games_back": "6.5",
+          "wild_card_games_back": "5.0",
           "last_ten": "6-4",
-          "streak": "W3",
+          "streak": "W4",
           "is_favorite": false
         },
         {
@@ -355,11 +355,26 @@
       "is_favorite": false
     },
     {
+      "id": 116,
+      "name": "Detroit Tigers",
+      "short_name": "Detroit",
+      "abbreviation": "DET",
+      "rank": "8",
+      "wins": 70,
+      "losses": 79,
+      "pct": ".470",
+      "games_back": "6.5",
+      "wild_card_games_back": "5.0",
+      "last_ten": "6-4",
+      "streak": "W4",
+      "is_favorite": false
+    },
+    {
       "id": 136,
       "name": "Seattle Mariners",
       "short_name": "Seattle",
       "abbreviation": "SEA",
-      "rank": "8",
+      "rank": "9",
       "wins": 70,
       "losses": 79,
       "pct": ".470",
@@ -368,21 +383,6 @@
       "last_ten": "5-5",
       "streak": "W1",
       "is_favorite": true
-    },
-    {
-      "id": 116,
-      "name": "Detroit Tigers",
-      "short_name": "Detroit",
-      "abbreviation": "DET",
-      "rank": "9",
-      "wins": 69,
-      "losses": 79,
-      "pct": ".466",
-      "games_back": "7.0",
-      "wild_card_games_back": "5.5",
-      "last_ten": "6-4",
-      "streak": "W3",
-      "is_favorite": false
     },
     {
       "id": 118,
