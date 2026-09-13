@@ -4,6 +4,7 @@ import UIKit
 private enum ShutoutStyle {
     static let navy = Color(red: 0.035, green: 0.075, blue: 0.14)
     static let gold = Color(red: 1, green: 0.77, blue: 0.18)
+    static let blue = Color(red: 0.36, green: 0.76, blue: 1)
     static let cream = Color(red: 0.97, green: 0.94, blue: 0.86)
 }
 
@@ -33,6 +34,7 @@ struct BrewersShutoutView: View {
     @State private var loadFailed = false
     @State private var phase = 0
     @State private var scores = [0, 0]
+    @State private var progress = [0.0, 0.0]
     @State private var playing = false
     @State private var runID = UUID()
     @State private var inning = 9.0
@@ -72,23 +74,24 @@ struct BrewersShutoutView: View {
                 if loadFailed {
                     ContentUnavailableView("Story unavailable", systemImage: "exclamationmark.circle", description: Text("The saved game data could not be read."))
                 } else if games.count == 2 {
-                    HStack(alignment: .bottom, spacing: 26) {
+                    HStack(spacing: 16) {
                         ForEach(Array(games.enumerated()), id: \.element.id) { index, game in
-                            ShutoutTower(game: game, score: phase == 0 ? 0 : scores[index], highlight: exploring && selectedGame == index)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    guard exploring else { return }
-                                    selectedGame = index
-                                }
-                                .accessibilityAddTraits(exploring ? .isButton : [])
-                                .accessibilityAction {
-                                    if exploring { selectedGame = index }
-                                }
-                                .opacity(phase == 1 && index == 1 ? 0.15 : 1)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("vs. \(game.opponent)").font(.system(size: 12, weight: .semibold))
+                                Text("\(scores[index])–0")
+                                    .font(.system(size: 32, weight: .black, design: .rounded)).monospacedDigit()
+                                Text(game.dateLabel).font(.system(size: 9, design: .monospaced))
+                            }
+                            .foregroundStyle(index == 0 ? ShutoutStyle.gold : ShutoutStyle.blue)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .opacity(phase == 1 && index == 1 ? 0.35 : 1)
                         }
                     }
-                    .frame(height: min(340, max(290, viewport.size.height * 0.48)))
-                    Text(phase == 0 ? "Keep your eye on the zeros." : "ONE GOLD TILE = ONE MILWAUKEE RUN")
+                    ShutoutLineChart(games: games, firstProgress: progress[0], secondProgress: progress[1])
+                        .frame(height: min(300, max(220, viewport.size.height * 0.36)))
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("Cumulative runs by inning. Milwaukee against Seattle: \(scores[0]). Against Cincinnati: \(scores[1]). Both opponents: zero.")
+                    Text(phase == 0 ? "Two lines climb. One never moves." : "CUMULATIVE RUNS · INNING TOTALS")
                         .font(.system(size: 10, weight: .medium, design: .monospaced))
                         .tracking(1)
                         .foregroundStyle(ShutoutStyle.cream.opacity(0.6))
@@ -96,7 +99,7 @@ struct BrewersShutoutView: View {
 
                     if exploring { exploration }
                     else {
-                        Text(phase == 0 ? "Two nights. One season. A place in baseball history." : phase == 1 ? "Seattle • August 18\nThe first tower reaches 22. The zero never moves." : "Cincinnati • September 11\nAnother eruption. Another untouched zero.")
+                        Text(phase == 0 ? "Two nights. One season. A place in baseball history." : phase == 1 ? "Seattle • August 18\nOne run through four innings. Then the climb." : "Cincinnati • September 11\nAnother eruption. Another untouched zero.")
                             .font(.system(size: 16))
                             .foregroundStyle(ShutoutStyle.cream.opacity(0.75))
                             .fixedSize(horizontal: false, vertical: true)
@@ -151,6 +154,7 @@ struct BrewersShutoutView: View {
                 .accessibilityValue(inning == 0 ? "Before the game" : "Through inning \(Int(inning))")
                 .onChange(of: inning) { _, value in
                     scores = games.map { $0.score(through: Int(value)) }
+                    progress = [value, value]
                 }
             HStack {
                 Button { inning = max(0, inning - 1) } label: {
@@ -209,7 +213,7 @@ struct BrewersShutoutView: View {
             Button {
                 if playing { playing = false; runID = UUID() }
                 else if reduceMotion { finish() }
-                else { scores = [0, 0]; phase = 1; playing = true; runID = UUID() }
+                else { scores = [0, 0]; progress = [0, 0]; phase = 1; playing = true; runID = UUID() }
             } label: {
                 Label(playing ? "Pause story" : phase == 0 ? "Play the impossible" : "Replay both nights", systemImage: playing ? "pause.fill" : "play.fill")
                     .font(.system(size: 15, weight: .bold))
@@ -245,7 +249,7 @@ struct BrewersShutoutView: View {
                     ForEach(games) { game in
                         Link("\(game.dateLabel) · \(game.total)–0 vs. \(game.opponent)", destination: game.source)
                     }
-                    Text("Scoring tiles and play descriptions come from MLB's final game feeds. The home ninth was not played in either game.")
+                    Text("Inning totals and play descriptions come from MLB's final game feeds. The home ninth was not played in either game.")
                 }
                 Section("Historical distinction & playoff clinch") {
                     Link("Yahoo Sports · September 12, 2026", destination: URL(string: "https://malaysia.news.yahoo.com/brewers-clinch-playoffs-become-first-team-in-mlb-history-to-record-multiple-shutout-wins-of-20-plus-runs-in-a-season-121406831.html")!)
@@ -274,14 +278,16 @@ struct BrewersShutoutView: View {
             for index in 0..<2 {
                 phase = index + 1
                 try await Task.sleep(for: .seconds(1.4))
-                for play in games[index].plays {
+                for frame in 1...9 {
                     try Task.checkCancellation()
-                    for total in (scores[index] + 1)...play.total {
-                        scores[index] = total
-                        try await Task.sleep(for: .milliseconds(130))
+                    scores[index] = games[index].score(through: frame)
+                    withAnimation(.linear(duration: 1.15)) {
+                        progress[index] = Double(frame)
                     }
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred(intensity: 0.45)
-                    try await Task.sleep(for: .milliseconds(650))
+                    try await Task.sleep(for: .seconds(1.15))
+                    if games[index].innings[frame - 1] > 0 {
+                        UIImpactFeedbackGenerator(style: .soft).impactOccurred(intensity: 0.45)
+                    }
                 }
                 try await Task.sleep(for: .seconds(1.6))
             }
@@ -292,6 +298,7 @@ struct BrewersShutoutView: View {
     private func finish() {
         phase = 3; playing = false; inning = 9
         scores = games.map(\.total)
+        progress = [9, 9]
     }
 
     @MainActor private func makePoster() {
@@ -307,32 +314,62 @@ struct BrewersShutoutView: View {
     }
 }
 
-private struct ShutoutTower: View {
-    let game: ShutoutGame
-    let score: Int
-    var highlight = false
+/// Straight segments connect verified end-of-inning totals; no fitted curve or invented play timing.
+private struct ShutoutLineChart: View, Animatable {
+    let games: [ShutoutGame]
+    var firstProgress: Double
+    var secondProgress: Double
+    var animatableData: AnimatablePair<Double, Double> {
+        get { AnimatablePair(firstProgress, secondProgress) }
+        set { firstProgress = newValue.first; secondProgress = newValue.second }
+    }
+
     var body: some View {
-        VStack(spacing: 8) {
-            Text(String(score)).font(.system(size: 42, weight: .black, design: .rounded)).monospacedDigit()
-                .foregroundStyle(ShutoutStyle.gold)
-            GeometryReader { proxy in
-                VStack(spacing: 3) {
-                    ForEach((1...22).reversed(), id: \.self) { run in
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(run <= score ? ShutoutStyle.gold : ShutoutStyle.cream.opacity(0.035))
-                            .frame(height: max(1, (proxy.size.height - 63) / 22))
-                    }
+        Canvas { context, size in
+            let left: CGFloat = 25
+            let right = size.width - 30
+            let top: CGFloat = 12
+            let bottom = size.height - 36
+            func point(_ inning: Double, _ runs: Double) -> CGPoint {
+                CGPoint(x: left + (right - left) * inning / 9,
+                        y: bottom - (bottom - top) * runs / 24)
+            }
+            for runs in [0, 5, 10, 15, 20] {
+                let y = point(0, Double(runs)).y
+                var grid = Path(); grid.move(to: CGPoint(x: left, y: y)); grid.addLine(to: CGPoint(x: right, y: y))
+                context.stroke(grid, with: .color(ShutoutStyle.cream.opacity(runs == 0 ? 0.7 : 0.12)),
+                               style: StrokeStyle(lineWidth: runs == 0 ? 2 : 0.5, dash: runs == 0 ? [4, 4] : []))
+                context.draw(Text(String(runs)).font(.system(size: 9, design: .monospaced)).foregroundColor(ShutoutStyle.cream.opacity(0.65)), at: CGPoint(x: left - 9, y: y), anchor: .trailing)
+            }
+            for inning in 1...9 {
+                context.draw(Text(String(inning)).font(.system(size: 10, design: .monospaced)).foregroundColor(ShutoutStyle.cream.opacity(0.65)), at: CGPoint(x: point(Double(inning), 0).x, y: bottom + 14))
+            }
+            context.draw(Text("INNING").font(.system(size: 8, weight: .bold, design: .monospaced)).foregroundColor(ShutoutStyle.cream.opacity(0.5)), at: CGPoint(x: (left + right) / 2, y: size.height - 2), anchor: .bottom)
+            for (index, game) in games.enumerated() {
+                let progress = min(9, max(0, index == 0 ? firstProgress : secondProgress))
+                guard progress > 0 else { continue }
+                let color = index == 0 ? ShutoutStyle.gold : ShutoutStyle.blue
+                var path = Path(); path.move(to: point(0, 0))
+                let complete = Int(progress)
+                if complete > 0 {
+                    for inning in 1...complete { path.addLine(to: point(Double(inning), Double(game.score(through: inning)))) }
+                }
+                var tip = point(Double(complete), Double(game.score(through: complete)))
+                if complete < 9 {
+                    let fraction = progress - Double(complete)
+                    let runs = Double(game.score(through: complete)) + fraction * Double(game.innings[complete])
+                    tip = point(progress, runs)
+                    path.addLine(to: tip)
+                }
+                context.stroke(path, with: .color(color.opacity(0.12)), style: StrokeStyle(lineWidth: 9, lineCap: .round, lineJoin: .round))
+                context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round, dash: index == 0 ? [] : [6, 3]))
+                context.fill(Path(ellipseIn: CGRect(x: tip.x - 4, y: tip.y - 4, width: 8, height: 8)), with: .color(color))
+                if progress == 9 {
+                    context.draw(Text(String(game.total)).font(.system(size: 12, weight: .black, design: .rounded)).foregroundColor(color), at: CGPoint(x: tip.x + 9, y: tip.y), anchor: .leading)
                 }
             }
-            Rectangle().fill(ShutoutStyle.gold.opacity(0.5)).frame(height: 1)
-            Text("0").font(.system(size: 52, weight: .black, design: .rounded)).monospacedDigit()
-            Text(game.opponent.uppercased()).font(.system(size: 10, weight: .bold, design: .monospaced))
-            Text(game.dateLabel).font(.system(size: 9, design: .monospaced)).opacity(0.6)
-            Capsule().fill(highlight ? ShutoutStyle.gold : .clear).frame(height: 3)
+            context.draw(Text("OPPONENTS  0").font(.system(size: 9, weight: .bold, design: .monospaced)).foregroundColor(ShutoutStyle.cream), at: CGPoint(x: right - 4, y: bottom - 9), anchor: .bottomTrailing)
         }
-        .frame(maxWidth: .infinity)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(game.dateLabel). Milwaukee \(score), \(game.opponent) zero.\(highlight ? " Selected." : "")")
     }
 }
 
@@ -342,9 +379,13 @@ private struct ShutoutPoster: View {
         VStack(alignment: .leading, spacing: 24) {
             Text("MILWAUKEE BREWERS / 2026").font(.system(size: 14, weight: .bold, design: .monospaced)).tracking(3).foregroundStyle(ShutoutStyle.gold)
             Text("ALL.\nOR NOTHING.").font(.system(size: 68, weight: .black, design: .rounded)).tracking(-3)
-            HStack(spacing: 45) {
-                ForEach(games) { game in ShutoutTower(game: game, score: game.total) }
-            }.frame(height: 390)
+            HStack {
+                Text("vs. SEATTLE · AUG 18").foregroundStyle(ShutoutStyle.gold)
+                Spacer()
+                Text("vs. CINCINNATI · SEP 11").foregroundStyle(ShutoutStyle.blue)
+            }.font(.system(size: 12, weight: .bold, design: .monospaced))
+            ShutoutLineChart(games: games, firstProgress: 9, secondProgress: 9)
+                .frame(height: 350)
             Text("42 runs. Zero answers.").font(.system(size: 30, weight: .bold))
             Text("The first MLB team with two 20+ run shutouts in one season.")
                 .font(.system(size: 17)).fixedSize(horizontal: false, vertical: true)
@@ -374,16 +415,10 @@ struct BrewersShutoutStoryCard: View {
                     .font(.system(size: 32, weight: .black, design: .rounded))
                     .tracking(-1).fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                HStack(alignment: .bottom, spacing: 6) {
-                    ForEach([22, 20], id: \.self) { runs in
-                        VStack(spacing: 2) {
-                            ForEach(0..<runs, id: \.self) { _ in
-                                Rectangle().fill(ShutoutStyle.gold).frame(width: 19, height: 3)
-                            }
-                            Text("0").font(.system(size: 23, weight: .black, design: .rounded))
-                        }
-                    }
-                }.accessibilityHidden(true)
+                Image(systemName: "chart.xyaxis.line")
+                    .font(.system(size: 52, weight: .light))
+                    .foregroundStyle(ShutoutStyle.blue)
+                    .accessibilityHidden(true)
             }
             Text("42 runs. Zero answers.").font(.system(size: 17, weight: .semibold))
             HStack {
