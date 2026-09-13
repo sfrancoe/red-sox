@@ -75,6 +75,12 @@ private func hitterCredits(_ events: [ShutoutEvent]) -> [HitterCredit] {
     }
 }
 
+private func cumulativeBattingEvents(_ games: [ShutoutGame], chapter: Int, cursor: Int) -> [ShutoutEvent] {
+    let finished = games.prefix(chapter).flatMap(\.events)
+    guard chapter < games.count else { return finished }
+    return finished + games[chapter].events.prefix(max(0, cursor + 1))
+}
+
 struct BrewersShutoutView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
@@ -96,8 +102,12 @@ struct BrewersShutoutView: View {
     private var seen: [ShutoutEvent] { combined ? games.flatMap(\.events) : Array(game.events.prefix(cursor + 1)) }
     private var current: ShutoutEvent? { combined || cursor < 0 ? nil : game.events[cursor] }
     private var score: Int { combined ? 42 : current?.total ?? 0 }
-    private var credits: [HitterCredit] { hitterCredits(seen) }
-    private var nonRBI: Int { seen.filter { !$0.top }.reduce(0) { $0 + $1.runs - $1.rbi } }
+    // Batting credits carry forward; pitching and the score line stay game-specific.
+    private var cumulativeEvents: [ShutoutEvent] {
+        cumulativeBattingEvents(games, chapter: chapter, cursor: cursor)
+    }
+    private var credits: [HitterCredit] { hitterCredits(cumulativeEvents) }
+    private var nonRBI: Int { cumulativeEvents.filter { !$0.top }.reduce(0) { $0 + $1.runs - $1.rbi } }
     private var leaderMaximum: Int { max(1, hitterCredits(games.flatMap(\.events)).map(\.rbi).max() ?? 1) }
 
     var body: some View {
@@ -203,7 +213,7 @@ struct BrewersShutoutView: View {
                      progress: combined ? 0 : Double(cursor + 1),
                      credits: credits, maximum: leaderMaximum,
                      activePlayer: current?.top == false && (current?.rbi ?? 0) > 0 ? current?.batter.id : nil,
-                     reduceMotion: reduceMotion, select: { selectedPlayer = $0 })
+                     reduceMotion: reduceMotion, lineDuration: (current?.runs ?? 0) > 0 ? 0.85 : 0.18, select: { selectedPlayer = $0 })
     }
 
     private var momentCard: some View {
@@ -247,7 +257,7 @@ struct BrewersShutoutView: View {
     private var hitterPanel: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text(combined ? "WHO DROVE THEM HOME?" : "LIVE RUN PRODUCERS")
+                Text(combined ? "WHO DROVE THEM HOME?" : "CUMULATIVE RUN PRODUCERS")
                     .font(.system(size: 12, weight: .black, design: .monospaced))
                 Spacer()
                 Text("RBI").font(.system(size: 11, weight: .bold)).foregroundStyle(ShutoutStyle.gold)
@@ -274,7 +284,7 @@ struct BrewersShutoutView: View {
                 Text("\(credits.reduce(0) { $0 + $1.rbi }) RBI + \(nonRBI) runs without an RBI = 42 runs. Runs scored are shown separately; they overlap with RBI and are not added again.")
                     .font(.system(size: 12)).foregroundStyle(ShutoutStyle.cream.opacity(0.65))
             } else {
-                Text("Bars show RBI. R = runs scored, H = hits. Tap a player for their moments.")
+                Text("Totals carry across both games. R = runs scored, H = hits. Tap a player for their moments.")
                     .font(.system(size: 11)).foregroundStyle(ShutoutStyle.cream.opacity(0.6))
             }
         }
@@ -368,7 +378,7 @@ struct BrewersShutoutView: View {
                     ForEach(games) { game in Link("\(game.dateLabel) · \(game.total)–0 vs. \(game.opponent)", destination: game.boxScoreURL) }
                 }
                 Section("How we count contributions") {
-                    Text("RBI bars rank the top six contributors from left to right, with alphabetical ties. Bar heights use RBI totals; the background lines use team run differential over innings. The graph advances through completed plays. Plays are spaced evenly within each inning, not by clock time. RBI, runs scored, hits and pitching totals reconcile to MLB's final box scores.")
+                    Text("RBI bars accumulate across both games: Seattle’s totals carry forward into Cincinnati. They rank the top six contributors from left to right, with alphabetical ties. Bar heights use RBI totals; the background lines use team run differential over innings. The graph advances through completed plays. Plays are spaced evenly within each inning, not by clock time. RBI, runs scored, hits and pitching totals reconcile to MLB's final box scores.")
                     Text("Runs without an RBI remain separate. Pitcher outs include outs made by the defense; they are not estimates of runs prevented. The 42–0 combines two games.")
                 }
                 Section("Historical distinction & playoff clinch") {
@@ -391,12 +401,11 @@ struct BrewersShutoutView: View {
                     try Task.checkCancellation()
                     let event = games[index].events[next]
                     if let replayPlayer, !event.involves(replayPlayer) { continue }
-                    if reduceMotion { cursor = next }
-                    else { withAnimation(.easeOut(duration: 0.15)) { cursor = next } }
+                    cursor = next
                     if event.runs > 0 {
                         UIImpactFeedbackGenerator(style: event.runs >= 4 ? .heavy : .soft).impactOccurred()
                     }
-                    let delay = replayPlayer != nil ? 1.6 : event.runs >= 4 ? 2.0 : event.runs > 0 ? 1.15 : event.top && event.strikeouts > 0 ? 0.35 : 0.085
+                    let delay = replayPlayer != nil ? 1.6 : event.runs >= 4 ? 2.2 : event.runs > 0 ? 1.4 : event.top && event.strikeouts > 0 ? 0.45 : 0.18
                     try await Task.sleep(for: .seconds(delay))
                 }
                 try await Task.sleep(for: .seconds(1.5))
@@ -516,6 +525,7 @@ private struct RBIRaceChart: View {
     let maximum: Int
     let activePlayer: Int?
     let reduceMotion: Bool
+    let lineDuration: Double
     let select: (ShutoutPerson) -> Void
     private var leaders: [HitterCredit] { Array(credits.filter { $0.rbi > 0 }.prefix(6)) }
     private var revision: [Int] { leaders.flatMap { [$0.id, $0.rbi] } }
@@ -525,7 +535,7 @@ private struct RBIRaceChart: View {
                 Label("RUN DIFFERENTIAL", systemImage: "waveform.path")
                     .foregroundStyle(ShutoutStyle.blue)
                 Spacer()
-                Text("TOP 6 · RBI").foregroundStyle(ShutoutStyle.gold)
+                Text("TOP 6 · TOTAL RBI").foregroundStyle(ShutoutStyle.gold)
             }.font(.system(size: 9, weight: .bold, design: .monospaced))
             GeometryReader { proxy in
                 let left: CGFloat = 26
@@ -536,6 +546,7 @@ private struct RBIRaceChart: View {
                     ContributionGraph(games: games, cursors: cursors, progress: progress, featured: nil,
                                       lineColors: [ShutoutStyle.blue, .white], showInnings: false)
                         .frame(height: 214)
+                        .animation(reduceMotion ? nil : .linear(duration: lineDuration), value: progress)
                     ForEach(leaders) { hitter in
                         let rank = leaders.firstIndex { $0.id == hitter.id } ?? 0
                         let height = max(4, 142 * CGFloat(hitter.rbi) / CGFloat(maximum))
@@ -577,11 +588,11 @@ private struct RBIRaceChart: View {
                             .frame(width: plotWidth, height: 120).offset(x: left, y: 25)
                     }
                 }
-                .animation(reduceMotion ? nil : .spring(response: 0.55, dampingFraction: 0.82), value: revision)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.75), value: revision)
             }.frame(height: 242)
-            Text(games.count == 1 ? "Line: innings 1 → 9 · Bars: most RBI on the left" : "Lines: Seattle (blue), Cincinnati (white) · Bars: both games")
+            Text(games.count == 1 ? "Line: this game · Bars: cumulative RBI across both games" : "Lines: Seattle (blue), Cincinnati (white) · Bars: both games")
                 .font(.system(size: 9, design: .monospaced)).foregroundStyle(ShutoutStyle.cream.opacity(0.6))
-            Text("Ties alphabetical · Tap a bar for player moments")
+            Text("Seattle RBI carry into Cincinnati · Ties alphabetical")
                 .font(.system(size: 9)).foregroundStyle(ShutoutStyle.cream.opacity(0.5))
         }
     }
@@ -618,13 +629,27 @@ private struct ContributionGraph: View, Animatable {
                 let completed = games.count == 1 ? min(game.events.count, max(0, Int(progress))) : cursors[index] + 1
                 let seen = Array(game.events.prefix(completed))
                 var line = Path(); line.move(to: point(0, 0))
-                for event in seen { line.addLine(to: point(event.position, event.total)) }
+                var tip = point(0, 0)
+                // Fixed, monotone cubic segments pass through every actual score.
+                // De Casteljau reveals the current segment without moving earlier geometry.
+                func mix(_ a: CGPoint, _ b: CGPoint, _ t: Double) -> CGPoint {
+                    CGPoint(x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t)
+                }
+                func appendSegment(to end: CGPoint, fraction: Double = 1) {
+                    let midX = (tip.x + end.x) / 2
+                    let c1 = CGPoint(x: midX, y: tip.y)
+                    let c2 = CGPoint(x: midX, y: end.y)
+                    let t = min(1, max(0, fraction))
+                    let a = mix(tip, c1, t), b = mix(c1, c2, t), c = mix(c2, end, t)
+                    let d = mix(a, b, t), e = mix(b, c, t)
+                    let endpoint = mix(d, e, t)
+                    line.addCurve(to: endpoint, control1: a, control2: d)
+                    tip = endpoint
+                }
+                for event in seen { appendSegment(to: point(event.position, event.total)) }
                 if games.count == 1 && completed < game.events.count {
-                    let fraction = progress - Double(completed)
-                    let previous = seen.last.map { point($0.position, $0.total) } ?? point(0, 0)
-                    let next = point(game.events[completed].position, game.events[completed].total)
-                    line.addLine(to: CGPoint(x: previous.x + (next.x - previous.x) * fraction,
-                                            y: previous.y + (next.y - previous.y) * fraction))
+                    let next = game.events[completed]
+                    appendSegment(to: point(next.position, next.total), fraction: progress - Double(completed))
                 }
                 context.stroke(line, with: .color(color.opacity(0.1)), style: StrokeStyle(lineWidth: 8, lineJoin: .round))
                 context.stroke(line, with: .color(color), style: StrokeStyle(lineWidth: 2.5, lineJoin: .round))
@@ -633,9 +658,8 @@ private struct ContributionGraph: View, Animatable {
                     let radius: CGFloat = event.id == featured ? 5 : 2
                     context.fill(Path(ellipseIn: CGRect(x: p.x - radius, y: p.y - radius, width: radius * 2, height: radius * 2)), with: .color(color))
                 }
-                if let last = seen.last {
-                    let p = point(last.position, last.total)
-                    context.fill(Path(ellipseIn: CGRect(x: p.x - 3, y: p.y - 3, width: 6, height: 6)), with: .color(color))
+                if !seen.isEmpty || progress > 0 {
+                    context.fill(Path(ellipseIn: CGRect(x: tip.x - 3, y: tip.y - 3, width: 6, height: 6)), with: .color(color))
                 }
             }
             if showInnings {
