@@ -50,6 +50,10 @@ KNOWN_ENDPOINTS = {
     "https://red-sox.netlify.app/api/data/seasons.json",
     "https://red-sox.netlify.app/api/data/standings.json",
 }
+# Editorial citations open in the browser; they are not application data feeds.
+EDITORIAL_LINKS = {
+    "https://malaysia.news.yahoo.com/brewers-clinch-playoffs-become-first-team-in-mlb-history-to-record-multiple-shutout-wins-of-20-plus-runs-in-a-season-121406831.html",
+}
 JSON_PROBE_OVERRIDES = {
     "https://red-sox.netlify.app": "https://red-sox.netlify.app/api/data/meta.json",
     "https://statsapi.mlb.com": "https://statsapi.mlb.com/api/v1/teams/111",
@@ -240,7 +244,7 @@ def check_transport_security() -> Check:
 
 
 def fetch_url(url: str, fallback: bool = False) -> tuple[int, bytes]:
-    headers = {"Accept": "application/json"}
+    headers = {"Accept": "text/html" if url in EDITORIAL_LINKS else "application/json"}
     if fallback:
         headers["User-Agent"] = FALLBACK_USER_AGENT
     request = urllib.request.Request(url, headers=headers)
@@ -269,6 +273,11 @@ def check_live_endpoints() -> list[Check]:
                 continue
         except Exception as exc:  # noqa: BLE001
             checks.append(result("FAIL", "Live endpoint", f"{url}: {exc}"))
+            continue
+        if url in EDITORIAL_LINKS:
+            valid_html = b"<html" in payload.lower() and b"<title" in payload.lower()
+            checks.append(result("PASS" if valid_html else "FAIL", "Editorial source link",
+                                 f"HTTP {status}: {url}" if valid_html else f"{url}: expected an HTML page"))
             continue
         try:
             parsed = json.loads(payload)
