@@ -71,7 +71,6 @@ private func hitterCredits(_ events: [ShutoutEvent]) -> [HitterCredit] {
     }
     return credits.values.sorted {
         if $0.rbi != $1.rbi { return $0.rbi > $1.rbi }
-        if $0.runs != $1.runs { return $0.runs > $1.runs }
         return $0.person.name < $1.person.name
     }
 }
@@ -107,7 +106,7 @@ struct BrewersShutoutView: View {
             if games.count == 2 {
                 ScrollViewReader { scroll in
                     ScrollView {
-                        VStack(alignment: .leading, spacing: 20) {
+                        VStack(alignment: .leading, spacing: 14) {
                             Color.clear.frame(height: 0).id("top")
                             chapterPicker
                             header
@@ -191,23 +190,20 @@ struct BrewersShutoutView: View {
     }
 
     private var gameStage: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            ContributionGraph(games: [game], cursors: [cursor], progress: Double(cursor + 1), featured: (current?.runs ?? 0) > 0 ? current?.id : nil)
-                .frame(height: 180)
-                .overlay(alignment: .top) {
-                    HStack(spacing: 10) {
-                        ForEach(Array(credits.prefix(3))) { hitter in
-                            Text("\(hitter.person.surname) \(hitter.rbi) RBI")
-                                .font(.system(size: 9, weight: .bold, design: .monospaced))
-                                .lineLimit(1).minimumScaleFactor(0.8)
-                                .foregroundStyle(ShutoutStyle.gold)
-                        }
-                    }
-                }
-                .accessibilityLabel("Milwaukee run differential through \(current?.moment ?? "the start"): \(score). Opponent zero.")
+        VStack(alignment: .leading, spacing: 12) {
+            raceChart
             momentCard
             PitchingStrip(events: seen, title: "PROTECTING THE ZERO", compact: true, activeOnly: true, select: { selectedPlayer = $0 })
         }
+    }
+
+    private var raceChart: some View {
+        RBIRaceChart(games: combined ? games : [game],
+                     cursors: combined ? games.map { $0.events.count - 1 } : [cursor],
+                     progress: combined ? 0 : Double(cursor + 1),
+                     credits: credits, maximum: leaderMaximum,
+                     activePlayer: current?.top == false && (current?.rbi ?? 0) > 0 ? current?.batter.id : nil,
+                     reduceMotion: reduceMotion, select: { selectedPlayer = $0 })
     }
 
     private var momentCard: some View {
@@ -236,7 +232,7 @@ struct BrewersShutoutView: View {
                 }
             } else {
                 Text("WHO LIGHTS THE FUSE?").font(.system(size: 16, weight: .black, design: .rounded))
-                Text("Follow the run producers. Watch the pitchers protect every inch of the lead.")
+                Text("The line climbs. RBI bars grow and race for the leftmost spot.")
                     .font(.system(size: 13)).foregroundStyle(ShutoutStyle.cream.opacity(0.7))
             }
         }
@@ -246,14 +242,7 @@ struct BrewersShutoutView: View {
         .accessibilityElement(children: .combine)
     }
 
-    private var combinedChart: some View {
-        ContributionGraph(games: games, cursors: games.map { $0.events.count - 1 }, progress: 0, featured: nil)
-            .frame(height: 220)
-            .overlay(alignment: .topLeading) {
-                Text("GOLD: SEATTLE 22–0   BLUE: CINCINNATI 20–0")
-                    .font(.system(size: 9, weight: .bold, design: .monospaced)).foregroundStyle(ShutoutStyle.cream.opacity(0.7))
-            }
-    }
+    private var combinedChart: some View { raceChart }
 
     private var hitterPanel: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -379,7 +368,7 @@ struct BrewersShutoutView: View {
                     ForEach(games) { game in Link("\(game.dateLabel) · \(game.total)–0 vs. \(game.opponent)", destination: game.boxScoreURL) }
                 }
                 Section("How we count contributions") {
-                    Text("The graph advances through completed plays. Plays are spaced evenly within each inning, not by clock time. RBI, runs scored, hits and pitching totals reconcile to MLB's final box scores.")
+                    Text("RBI bars rank the top six contributors from left to right, with alphabetical ties. Bar heights use RBI totals; the background lines use team run differential over innings. The graph advances through completed plays. Plays are spaced evenly within each inning, not by clock time. RBI, runs scored, hits and pitching totals reconcile to MLB's final box scores.")
                     Text("Runs without an RBI remain separate. Pitcher outs include outs made by the defense; they are not estimates of runs prevented. The 42–0 combines two games.")
                 }
                 Section("Historical distinction & playoff clinch") {
@@ -517,6 +506,87 @@ private struct PitchingStrip: View {
     }
 }
 
+// Bars use RBI and rank; the background lines use team runs and inning progression.
+// Stable player IDs and explicit positions preserve identity as ranks change.
+private struct RBIRaceChart: View {
+    let games: [ShutoutGame]
+    let cursors: [Int]
+    let progress: Double
+    let credits: [HitterCredit]
+    let maximum: Int
+    let activePlayer: Int?
+    let reduceMotion: Bool
+    let select: (ShutoutPerson) -> Void
+    private var leaders: [HitterCredit] { Array(credits.filter { $0.rbi > 0 }.prefix(6)) }
+    private var revision: [Int] { leaders.flatMap { [$0.id, $0.rbi] } }
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Label("RUN DIFFERENTIAL", systemImage: "waveform.path")
+                    .foregroundStyle(ShutoutStyle.blue)
+                Spacer()
+                Text("TOP 6 · RBI").foregroundStyle(ShutoutStyle.gold)
+            }.font(.system(size: 9, weight: .bold, design: .monospaced))
+            GeometryReader { proxy in
+                let left: CGFloat = 26
+                let plotWidth = max(1, proxy.size.width - left - 10)
+                let slot = plotWidth / 6
+                let baseline: CGFloat = 187
+                ZStack(alignment: .topLeading) {
+                    ContributionGraph(games: games, cursors: cursors, progress: progress, featured: nil,
+                                      lineColors: [ShutoutStyle.blue, .white], showInnings: false)
+                        .frame(height: 214)
+                    ForEach(leaders) { hitter in
+                        let rank = leaders.firstIndex { $0.id == hitter.id } ?? 0
+                        let height = max(4, 142 * CGFloat(hitter.rbi) / CGFloat(maximum))
+                        let active = activePlayer == hitter.id
+                        Button { select(hitter.person) } label: {
+                            VStack(spacing: 4) {
+                                Text(String(hitter.rbi))
+                                    .font(.system(size: 21, weight: .black, design: .rounded))
+                                    .foregroundStyle(active ? .white : ShutoutStyle.gold)
+                                    .frame(height: 25)
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(ShutoutStyle.gold.opacity(active ? 0.88 : 0.5))
+                                    .overlay(alignment: .top) {
+                                        RoundedRectangle(cornerRadius: 2).fill(active ? .white : ShutoutStyle.gold).frame(height: 3)
+                                    }
+                                    .frame(height: height)
+                                    .shadow(color: ShutoutStyle.gold.opacity(active ? 0.65 : 0), radius: 9)
+                                Text(hitter.person.surname)
+                                    .font(.system(size: 10, weight: .bold))
+                                    .lineLimit(2).minimumScaleFactor(0.75)
+                                    .frame(height: 30, alignment: .top)
+                                    .foregroundStyle(ShutoutStyle.cream)
+                                Text(rank == 0 ? "LEADER" : "#\(rank + 1)")
+                                    .font(.system(size: 7, weight: .black, design: .monospaced))
+                                    .foregroundStyle(rank == 0 ? ShutoutStyle.gold : ShutoutStyle.cream.opacity(0.5))
+                                    .frame(height: 10)
+                            }
+                            .frame(width: max(1, slot - 6))
+                        }
+                        .buttonStyle(.plain)
+                        .position(x: left + slot * (CGFloat(rank) + 0.5), y: baseline - height / 2 + 9.5)
+                        .transition(.opacity)
+                        .accessibilityLabel("Rank \(rank + 1), \(hitter.person.name), \(hitter.rbi) RBI. Tap for player moments.")
+                    }
+                    if leaders.isEmpty {
+                        Text("WHO TAKES THE LEAD?")
+                            .font(.system(size: 14, weight: .black, design: .rounded))
+                            .foregroundStyle(ShutoutStyle.gold.opacity(0.8))
+                            .frame(width: plotWidth, height: 120).offset(x: left, y: 25)
+                    }
+                }
+                .animation(reduceMotion ? nil : .spring(response: 0.55, dampingFraction: 0.82), value: revision)
+            }.frame(height: 242)
+            Text(games.count == 1 ? "Line: innings 1 → 9 · Bars: most RBI on the left" : "Lines: Seattle (blue), Cincinnati (white) · Bars: both games")
+                .font(.system(size: 9, design: .monospaced)).foregroundStyle(ShutoutStyle.cream.opacity(0.6))
+            Text("Ties alphabetical · Tap a bar for player moments")
+                .font(.system(size: 9)).foregroundStyle(ShutoutStyle.cream.opacity(0.5))
+        }
+    }
+}
+
 private struct ContributionGraph: View, Animatable {
     let games: [ShutoutGame]
     let cursors: [Int]
@@ -526,6 +596,8 @@ private struct ContributionGraph: View, Animatable {
         set { progress = newValue }
     }
     let featured: Int?
+    var lineColors: [Color] = [ShutoutStyle.gold, ShutoutStyle.blue]
+    var showInnings = true
     var body: some View {
         Canvas { context, size in
             let left: CGFloat = 24, right = size.width - 24, bottom = size.height - 27
@@ -538,11 +610,11 @@ private struct ContributionGraph: View, Animatable {
                 context.stroke(grid, with: .color(ShutoutStyle.cream.opacity(run == 0 ? 0.65 : 0.12)), style: StrokeStyle(lineWidth: 1, dash: run == 0 ? [3, 3] : []))
                 context.draw(Text(String(run)).font(.system(size: 9, design: .monospaced)).foregroundColor(ShutoutStyle.cream.opacity(0.6)), at: CGPoint(x: left - 8, y: y), anchor: .trailing)
             }
-            for inning in 1...9 {
+            for inning in (showInnings ? Array(1...9) : []) {
                 context.draw(Text(String(inning)).font(.system(size: 9, design: .monospaced)).foregroundColor(ShutoutStyle.cream.opacity(0.6)), at: CGPoint(x: point(Double(inning), 0).x, y: bottom + 13))
             }
             for (index, game) in games.enumerated() {
-                let color = index == 0 ? ShutoutStyle.gold : ShutoutStyle.blue
+                let color = lineColors[index % lineColors.count]
                 let completed = games.count == 1 ? min(game.events.count, max(0, Int(progress))) : cursors[index] + 1
                 let seen = Array(game.events.prefix(completed))
                 var line = Path(); line.move(to: point(0, 0))
@@ -566,7 +638,9 @@ private struct ContributionGraph: View, Animatable {
                     context.fill(Path(ellipseIn: CGRect(x: p.x - 3, y: p.y - 3, width: 6, height: 6)), with: .color(color))
                 }
             }
-            context.draw(Text("OPPONENTS 0").font(.system(size: 9, weight: .bold, design: .monospaced)).foregroundColor(ShutoutStyle.cream), at: CGPoint(x: right, y: bottom - 9), anchor: .bottomTrailing)
+            if showInnings {
+                context.draw(Text("OPPONENTS 0").font(.system(size: 9, weight: .bold, design: .monospaced)).foregroundColor(ShutoutStyle.cream), at: CGPoint(x: right, y: bottom - 9), anchor: .bottomTrailing)
+            }
         }.accessibilityHidden(true)
     }
 }
