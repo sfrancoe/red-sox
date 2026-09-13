@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-12T14:15:39+00:00",
+ "generated_at": "2026-09-13T14:57:23+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 121,
@@ -374,25 +374,25 @@
    }
   },
   "2026": {
-   "record": "68-79",
-   "games": 147,
+   "record": "69-79",
+   "games": 148,
    "in_progress": true,
    "war_leader": {
     "name": "Carson Benge",
-    "war": 3.1
+    "war": 3.2
    },
    "war_leaders": [
     {
      "name": "Carson Benge",
+     "war": 3.2
+    },
+    {
+     "name": "Juan Soto",
      "war": 3.1
     },
     {
      "name": "A.J. Ewing",
-     "war": 3.0
-    },
-    {
-     "name": "Juan Soto",
-     "war": 3.0
+     "war": 2.9
     }
    ],
    "pitching_leaders": {
@@ -418,19 +418,19 @@
      "names": [
       "Juan Soto"
      ],
-     "value": 24,
+     "value": 25,
      "top": [
       {
        "name": "Juan Soto",
-       "value": 24
+       "value": 25
       },
       {
        "name": "Francisco Lindor",
-       "value": 18
+       "value": 20
       },
       {
-       "name": "Bo Bichette",
-       "value": 16
+       "name": "Carson Benge",
+       "value": 17
       }
      ]
     },
@@ -446,11 +446,11 @@
       },
       {
        "name": "Juan Soto",
-       "value": 59
+       "value": 60
       },
       {
        "name": "Carson Benge",
-       "value": 55
+       "value": 57
       }
      ]
     },
@@ -458,15 +458,15 @@
      "names": [
       "Carson Benge"
      ],
-     "value": ".272",
+     "value": ".273",
      "top": [
       {
        "name": "Carson Benge",
-       "value": ".272"
+       "value": ".273"
       },
       {
        "name": "Bo Bichette",
-       "value": ".265"
+       "value": ".263"
       },
       {
        "name": "Marcus Semien",
@@ -478,19 +478,19 @@
      "names": [
       "Carson Benge"
      ],
-     "value": ".745",
+     "value": ".751",
      "top": [
       {
        "name": "Carson Benge",
-       "value": ".745"
+       "value": ".751"
       },
       {
        "name": "Bo Bichette",
-       "value": ".714"
+       "value": ".708"
       },
       {
        "name": "Marcus Semien",
-       "value": ".632"
+       "value": ".629"
       }
      ]
     }
