@@ -206,8 +206,9 @@ struct AppTabView: View {
                 SeasonLeadersView(team: team)
                     .mainTabSwipe(selection: $selectedTab, current: .leaders, availableTabs: availableTabs)
         case .stories:
+                // Stories can contain their own horizontal paging and sliders. An outer
+                // page swipe would interpret those interactions as a trip to another tab.
                 StoriesView(team: team)
-                    .mainTabSwipe(selection: $selectedTab, current: .stories, availableTabs: availableTabs)
         }
     }
 
