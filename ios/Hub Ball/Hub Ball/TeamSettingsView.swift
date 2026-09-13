@@ -373,88 +373,154 @@ private struct PageReorderAccessibilityModifier: ViewModifier {
 
 struct TeamOnboardingView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @AppStorage(TeamFavoritesStorage.key) private var favoriteTeamIDs = ""
     @Binding var selectedTeamID: String
+    @State private var pendingTeamID: String?
     let onContinue: () -> Void
 
     private var usesAccessibilityLayout: Bool { dynamicTypeSize.isAccessibilitySize }
-    var body: some View {
-        ZStack {
-            AppColor.paleRed.ignoresSafeArea()
 
-            ScrollView {
-                VStack(spacing: usesAccessibilityLayout ? 14 : 24) {
-                    Spacer(minLength: usesAccessibilityLayout ? 8 : 34)
+    private var pendingTeam: HubTeam? {
+        pendingTeamID.flatMap(HubTeam.init(rawValue:))
+    }
+
+    var body: some View {
+        GeometryReader { window in
+            let compact = usesAccessibilityLayout || window.size.height < 700
+
+            ZStack {
+                AppColor.paleRed.ignoresSafeArea()
+
+                VStack(spacing: compact ? 14 : 24) {
+                    Spacer(minLength: compact ? 4 : 18)
 
                     Image(systemName: "baseball.fill")
-                        .font(.system(size: usesAccessibilityLayout ? 42 : 58, weight: .black))
+                        .font(.system(size: compact ? 42 : 58, weight: .black))
                         .foregroundStyle(AppColor.ink)
 
-                    VStack(spacing: usesAccessibilityLayout ? 5 : 8) {
+                    VStack(spacing: compact ? 5 : 8) {
                         Text("WELCOME TO HUB BALL")
-                            .font(.system(size: usesAccessibilityLayout ? 26 : 30, weight: .black))
+                            .font(.system(size: compact ? 26 : 30, weight: .black))
                             .multilineTextAlignment(.center)
-                        Text("Choose the team you want to follow first. You can switch anytime in Settings.")
+                        Text("Choose your first team to follow")
+                            .font(.title3.weight(.bold))
+                            .multilineTextAlignment(.center)
+                        Text(
+                            compact
+                                ? "Pick one now. Switch teams later in Settings."
+                                : "Pick one to get started. You can switch teams anytime in Settings."
+                        )
                             .font(.body)
                             .multilineTextAlignment(.center)
                             .foregroundStyle(AppColor.ink.opacity(0.86))
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     .foregroundStyle(AppColor.ink)
 
-                    VStack(spacing: usesAccessibilityLayout ? 8 : 12) {
-                        ForEach(HubTeam.availableTeams) { team in
-                            Button {
-                                selectedTeamID = team.id
-                            } label: {
-                                HStack(spacing: 14) {
-                                    Image(systemName: "baseball.fill")
-                                        .font(.title2)
-                                        .foregroundStyle(AppColor.red)
-                                    Text(team.pickerTitle)
-                                        .font(.headline)
-                                        .foregroundStyle(AppColor.navy)
-                                    Spacer()
-                                    Image(systemName: selectedTeamID == team.id ? "checkmark.circle.fill" : "circle")
-                                        .font(.title3)
-                                        .foregroundStyle(selectedTeamID == team.id ? AppColor.green : AppColor.border)
-                                }
-                                .padding(usesAccessibilityLayout ? 12 : 17)
-                                .background(AppColor.paper)
-                                .clipShape(Rectangle())
-                                .overlay {
-                                    Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
-                                }
-                                .panelElevation()
-                            }
-                            .buttonStyle(.plain)
-                        }
+                    teamMenu
+
+                    HStack(alignment: .top, spacing: 12) {
+                        Image(systemName: "star.fill")
+                            .font(.title3)
+                            .foregroundStyle(AppColor.amber)
+                            .accessibilityHidden(true)
+
+                        Text(
+                            compact
+                                ? "Follow more later: in Settings, tap the star beside each team."
+                                : "Want to follow more teams? In Settings, tap the star beside each team you want to add."
+                        )
+                            .font(.subheadline)
+                            .foregroundStyle(AppColor.ink.opacity(0.86))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(compact ? 12 : 16)
+                    .background(AppColor.paper.opacity(0.72))
+                    .overlay {
+                        Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
                     }
 
-                    Button(action: onContinue) {
+                    Button(action: completeOnboarding) {
                         Text("FOLLOW THIS TEAM")
                             .font(.headline.weight(.black))
                             .lineLimit(1)
                             .minimumScaleFactor(0.78)
                             .foregroundStyle(AppColor.ink)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, usesAccessibilityLayout ? 12 : 15)
-                            .background(AppColor.nightRaised)
+                            .padding(.vertical, compact ? 12 : 15)
+                            .background(pendingTeam == nil ? AppColor.border : AppColor.nightRaised)
                             .clipShape(Rectangle())
                     }
                     .buttonStyle(.plain)
+                    .disabled(pendingTeam == nil)
+                    .accessibilityHint(pendingTeam == nil ? "Choose a team first" : "Completes setup")
 
-                    Text("All 30 MLB teams are available.")
-                        .font(.caption)
-                        .foregroundStyle(AppColor.ink.opacity(0.78))
-                        .multilineTextAlignment(.center)
+                    Spacer(minLength: compact ? 4 : 18)
                 }
                 .padding(.horizontal, 22)
-                .padding(.bottom, usesAccessibilityLayout ? 12 : 28)
+                .padding(.vertical, compact ? 8 : 16)
+                .frame(maxWidth: 540, maxHeight: .infinity)
             }
         }
         .interactiveDismissDisabled()
-        // Keep every first-run choice reachable on short phones while still
-        // honoring the first two accessibility text sizes.
+        // Keep the single-screen layout intact while honoring the first two
+        // accessibility text sizes.
         .dynamicTypeSize(...DynamicTypeSize.accessibility2)
+    }
+
+    private var teamMenu: some View {
+        Menu {
+            ForEach(HubTeam.availableTeams) { team in
+                Button {
+                    pendingTeamID = team.id
+                } label: {
+                    if pendingTeamID == team.id {
+                        Label(team.pickerTitle, systemImage: "checkmark")
+                    } else {
+                        Text(team.pickerTitle)
+                    }
+                }
+            }
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "baseball.fill")
+                    .font(.title2)
+                    .foregroundStyle(AppColor.red)
+
+                Text(pendingTeam?.pickerTitle ?? "Choose a team")
+                    .font(.headline)
+                    .foregroundStyle(pendingTeam == nil ? AppColor.inkMuted : AppColor.navy)
+
+                Spacer()
+
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.body.weight(.bold))
+                    .foregroundStyle(AppColor.inkMuted)
+            }
+            .padding(usesAccessibilityLayout ? 12 : 17)
+            .background(AppColor.paper)
+            .overlay {
+                Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)
+            }
+            .panelElevation()
+        }
+        .accessibilityLabel("Choose your first team to follow")
+        .accessibilityValue(pendingTeam?.pickerTitle ?? "No team selected")
+    }
+
+    private func completeOnboarding() {
+        guard let pendingTeam else { return }
+
+        selectedTeamID = pendingTeam.id
+
+        var favorites = favoriteTeamIDs.split(separator: ",").map(String.init)
+        if !favorites.contains(pendingTeam.id) {
+            favorites.append(pendingTeam.id)
+            favoriteTeamIDs = favorites.joined(separator: ",")
+        }
+
+        onContinue()
     }
 }
 
