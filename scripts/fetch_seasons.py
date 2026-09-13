@@ -329,8 +329,69 @@ def fetch_brewers_shutouts() -> int:
             previous = score
         if sum(innings) != expected or sum(p["runs"] for p in plays) != expected:
             raise ValueError(f"Scoring sequence disagrees with final score: {game_id}")
+        all_plays = feed["liveData"]["plays"]["allPlays"]
+        events = []
+        previous_score = 0
+        previous_outs = 0
+        previous_half = None
+        for event_index, play in enumerate(all_plays):
+            about, result, matchup = play["about"], play["result"], play["matchup"]
+            half = (about["inning"], about["isTopInning"])
+            if half != previous_half:
+                previous_outs = 0
+            outs = play["count"]["outs"] - previous_outs
+            if not 0 <= outs <= 3:
+                raise ValueError("Invalid out progression")
+            inning_plays = [p for p in all_plays if p["about"]["inning"] == about["inning"]]
+            position = about["inning"] - 1 + (inning_plays.index(play) + 1) / len(inning_plays)
+            runners = {r["details"]["runner"]["id"]: dict(id=r["details"]["runner"]["id"],
+                       name=r["details"]["runner"]["fullName"])
+                       for r in play["runners"] if r["details"].get("isScoringEvent")}
+            runs = result["homeScore"] - previous_score
+            top = about["isTopInning"]
+            rbi = 0 if top else result.get("rbi", 0)
+            if not 0 <= rbi <= runs or (top and (runs != 0 or runners)):
+                raise ValueError("Invalid RBI or shutout score progression")
+            if not top and len(runners) != runs:
+                raise ValueError("Run scorers disagree with score progression")
+            events.append(dict(id=event_index, inning=about["inning"], top=top, position=position,
+                               total=result["homeScore"], runs=runs, rbi=rbi,
+                               batter=dict(id=matchup["batter"]["id"], name=matchup["batter"]["fullName"]),
+                               pitcher=dict(id=matchup["pitcher"]["id"], name=matchup["pitcher"]["fullName"]),
+                               scorers=[] if top else list(runners.values()),
+                               outs=outs, strikeouts=int(result["eventType"].startswith("strikeout")),
+                               hits=int(result["eventType"] in {"single", "double", "triple", "home_run"}),
+                               walks=int(result["eventType"] in {"walk", "intent_walk"}),
+                               event=result["event"], description=result["description"]))
+            previous_score, previous_outs, previous_half = result["homeScore"], play["count"]["outs"], half
+        home = feed["liveData"]["boxscore"]["teams"]["home"]
+        batters, pitchers = [], []
+        for player in home["players"].values():
+            stats = player["stats"].get("batting", {})
+            if stats:
+                batters.append(dict(id=player["person"]["id"], name=player["person"]["fullName"],
+                                    rbi=stats.get("rbi", 0), runs=stats.get("runs", 0), hits=stats.get("hits", 0)))
+        for pid in home["pitchers"]:
+            player = home["players"][f"ID{pid}"]
+            stats = player["stats"]["pitching"]
+            pitchers.append(dict(id=pid, name=player["person"]["fullName"], outs=stats["outs"],
+                                 strikeouts=stats["strikeOuts"], hits=stats["hits"], walks=stats["baseOnBalls"]))
+        for batter in batters:
+            actual = [sum(e["rbi"] for e in events if not e["top"] and e["batter"]["id"] == batter["id"]),
+                      sum(r["id"] == batter["id"] for e in events for r in e["scorers"]),
+                      sum(e["hits"] for e in events if not e["top"] and e["batter"]["id"] == batter["id"])]
+            if actual != [batter[k] for k in ("rbi", "runs", "hits")]:
+                raise ValueError(f"Batting attribution disagrees with box score: {batter['name']} {actual}")
+        for pitcher in pitchers:
+            for stat in ("outs", "strikeouts", "hits", "walks"):
+                actual = sum(e[stat] for e in events if e["top"] and e["pitcher"]["id"] == pitcher["id"])
+                if actual != pitcher[stat]:
+                    raise ValueError(f"Pitching attribution disagrees: {pitcher['name']} {stat} {actual}")
+        if sum(p["outs"] for p in pitchers) != 27 or sum(b["runs"] for b in batters) != expected:
+            raise ValueError("Expected 27 outs and every Milwaukee run accounted for")
         games.append(dict(id=game_id, date=date, opponent=opponent, total=expected,
-                          innings=innings, plays=plays, source=source))
+                          innings=innings, plays=plays, source=source, events=events,
+                          batters=batters, pitchers=pitchers))
     payload = json.dumps(dict(games=games), indent=2) + "\n"
     for destination in [ROOT / "data/brewers/shutouts.json",
                         ROOT / "ios/Hub Ball/Hub Ball/brewers-shutouts.json"]:

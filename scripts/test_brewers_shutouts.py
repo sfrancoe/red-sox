@@ -28,6 +28,37 @@ class BrewersStoryTests(unittest.TestCase):
             for inning in range(1, 10):
                 self.assertEqual(sum(p['runs'] for p in game['plays'] if p['inning'] == inning), game['innings'][inning - 1])
 
+    def test_player_credits_and_pitching_reconcile_to_box_scores(self):
+        games = json.loads((ROOT / 'data/brewers/shutouts.json').read_text())['games']
+        rbi_total = 0
+        non_rbi_total = 0
+        for game in games:
+            events = game['events']
+            previous = 0
+            for event in events:
+                self.assertGreaterEqual(event['runs'], 0)
+                self.assertLessEqual(event['rbi'], event['runs'])
+                self.assertGreaterEqual(event['rbi'], 0)
+                self.assertEqual(event['total'], previous + event['runs'])
+                self.assertEqual(len(event['scorers']), event['runs'])
+                previous = event['total']
+            self.assertEqual(previous, game['total'])
+            self.assertEqual(sorted(e['position'] for e in events), [e['position'] for e in events])
+            self.assertEqual(events[-1]['position'], 9)
+            for batter in game['batters']:
+                work = [e for e in events if not e['top'] and e['batter']['id'] == batter['id']]
+                self.assertEqual(sum(e['rbi'] for e in work), batter['rbi'])
+                self.assertEqual(sum(e['hits'] for e in work), batter['hits'])
+                self.assertEqual(sum(r['id'] == batter['id'] for e in events for r in e['scorers']), batter['runs'])
+            for pitcher in game['pitchers']:
+                work = [e for e in events if e['top'] and e['pitcher']['id'] == pitcher['id']]
+                for stat in ('outs', 'strikeouts', 'hits', 'walks'):
+                    self.assertEqual(sum(e[stat] for e in work), pitcher[stat], (pitcher['name'], stat))
+            self.assertEqual(sum(e['outs'] for e in events if e['top']), 27)
+            rbi_total += sum(e['rbi'] for e in events)
+            non_rbi_total += sum(e['runs'] - e['rbi'] for e in events)
+        self.assertEqual((rbi_total, non_rbi_total), (37, 5))
+
     def test_invalid_game_never_overwrites_story(self):
         feed = {
             'gameData': {'status': {'abstractGameState': 'Final'},
