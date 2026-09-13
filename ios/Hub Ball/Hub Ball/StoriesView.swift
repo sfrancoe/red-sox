@@ -30,6 +30,15 @@ struct StoriesView: View {
                                 }
                             }
 
+                            if team == .milwaukee {
+                                NavigationLink {
+                                    BrewersShutoutView()
+                                } label: {
+                                    BrewersShutoutStoryCard()
+                                }
+                                .buttonStyle(.plain)
+                            }
+
                             if team == .newYork {
                                 storyLink(
                                     title: "THE HOME RUN CHASE",

@@ -301,7 +301,48 @@ def build_season(year: int) -> dict:
     return out
 
 
+def fetch_brewers_shutouts() -> int:
+    """Generate a bundled, reproducible historical story from final MLB feeds."""
+    games = []
+    for game_id, date, opponent, expected in [
+        (823749, "2026-08-18", "Seattle", 22),
+        (823736, "2026-09-11", "Cincinnati", 20),
+    ]:
+        source = f"https://statsapi.mlb.com/api/v1.1/game/{game_id}/feed/live"
+        feed = fetch_json(source)
+        line = feed["liveData"]["linescore"]
+        if (feed["gameData"]["status"]["abstractGameState"] != "Final"
+                or feed["gameData"]["teams"]["home"]["id"] != 158
+                or feed["gameData"]["datetime"]["officialDate"] != date
+                or line["teams"]["home"]["runs"] != expected
+                or line["teams"]["away"]["runs"] != 0):
+            raise ValueError(f"Brewers story premise failed for {game_id}")
+        innings = [i["home"].get("runs", 0) for i in line["innings"]]
+        plays = []
+        previous = 0
+        for play in feed["liveData"]["plays"]["allPlays"]:
+            score = play["result"]["homeScore"]
+            if score > previous:
+                plays.append(dict(id=play["atBatIndex"], inning=play["about"]["inning"],
+                                  runs=score - previous, total=score,
+                                  description=play["result"]["description"]))
+            previous = score
+        if sum(innings) != expected or sum(p["runs"] for p in plays) != expected:
+            raise ValueError(f"Scoring sequence disagrees with final score: {game_id}")
+        games.append(dict(id=game_id, date=date, opponent=opponent, total=expected,
+                          innings=innings, plays=plays, source=source))
+    payload = json.dumps(dict(games=games), indent=2) + "\n"
+    for destination in [ROOT / "data/brewers/shutouts.json",
+                        ROOT / "ios/Hub Ball/Hub Ball/brewers-shutouts.json"]:
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(payload)
+    print("CONFIRMED: two shutouts, 42 runs; scoring plays and innings reconcile.")
+    return 0
+
+
 def main() -> int:
+    if sys.argv[1:] == ["--brewers-shutouts"]:
+        return fetch_brewers_shutouts()
     years = [int(a) for a in sys.argv[1:]] or SEASONS
     print(f"Fetching Red Sox seasons {years} from MLB Stats API")
 

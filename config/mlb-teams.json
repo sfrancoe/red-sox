@@ -137,7 +137,7 @@
       "id": "milwaukee", "swift_case": "milwaukee", "mlb_id": 158, "full_name": "Milwaukee Brewers", "city_name": "Milwaukee", "short_name": "Brewers", "abbreviation": "MIL", "city_abbreviation": "MIL", "api_key": "brewers", "data_directory": "brewers", "x_handle": "Brewers", "legacy_root_data": false, "league": "NL", "division": "Central", "fangraphs_id": 23, "baseball_reference_id": "MIL",
       "colors": {"primary": "#FFC52F", "secondary": "#12284B", "background": "#F8F4E8", "ink": "#17263D", "border": "#DDD4BD", "positive": "#47704D"},
       "news_sources": [{"key": "milwaukee-journal-sentinel", "name": "Journal Sentinel", "url": "https://www.jsonline.com/sports/brewers/"}, {"key": "athletic", "name": "The Athletic", "url": "https://www.nytimes.com/athletic/mlb/team/brewers/"}],
-      "features": {"native_picker": true, "home": true, "recent_game": true, "schedule": true, "standings": true, "pitching": true, "leaders": true, "news": true, "x_posts": true, "players": true, "stories": false}
+      "features": {"native_picker": true, "home": true, "recent_game": true, "schedule": true, "standings": true, "pitching": true, "leaders": true, "news": true, "x_posts": true, "players": true, "stories": true}
     },
     {
       "id": "pittsburgh", "swift_case": "pittsburgh", "mlb_id": 134, "full_name": "Pittsburgh Pirates", "city_name": "Pittsburgh", "short_name": "Pirates", "abbreviation": "PIT", "city_abbreviation": "PIT", "api_key": "pirates", "data_directory": "pirates", "x_handle": "Pirates", "legacy_root_data": false, "league": "NL", "division": "Central", "fangraphs_id": 27, "baseball_reference_id": "PIT",

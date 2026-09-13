@@ -424,7 +424,7 @@ enum HubTeam: String, CaseIterable, Identifiable, Sendable {
             baseballReferenceID: "MIL",
             colors: .init(primary: "#FFC52F", secondary: "#12284B", background: "#F8F4E8", ink: "#17263D", border: "#DDD4BD", positive: "#47704D", banner: "#FFC52F", accent_dark: "#12284B", navigation: "#12284B", team_tint: "#1E1A13", team_line: "#8FA8C4"),
             newsSources: [.init(key: "milwaukee-journal-sentinel", name: "Journal Sentinel"), .init(key: "athletic", name: "The Athletic")],
-            features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: true, stories: false)
+            features: .init(native_picker: true, home: true, recent_game: true, schedule: true, standings: true, pitching: true, leaders: true, news: true, x_posts: true, players: true, stories: true)
         ),
         .pittsburgh: .init(
             mlbID: 134, fullName: "Pittsburgh Pirates",
