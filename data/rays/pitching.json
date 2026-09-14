@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:34:07.596698+00:00",
+  "generated_at": "2026-09-14T13:15:45.579758+00:00",
   "season": 2026,
   "team": "Tampa Bay Rays",
   "games_played": 149,
@@ -14,9 +14,9 @@
   },
   "team_summary": {
     "actual_war": 15.4,
-    "forecast_war_to_date": 18.0,
+    "forecast_war_to_date": 18.1,
     "war_gap": -2.6,
-    "innings": 1321.0,
+    "innings": 1330.0,
     "era": 3.79
   },
   "pitchers": [
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "160.1",
         "ip_value": 160.333,
-        "war": 4.56,
+        "war": 4.58,
         "era": 2.81,
         "fip": 2.88,
         "k_minus_bb_pct": 21.3
@@ -49,7 +49,7 @@
         "ip": 157.3,
         "war": 2.98
       },
-      "war_gap": 1.58,
+      "war_gap": 1.6,
       "innings_share_pct": 12.1
     },
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "166.1",
         "ip_value": 166.333,
-        "war": 2.81,
+        "war": 2.84,
         "era": 2.92,
         "fip": 3.9,
         "k_minus_bb_pct": 11.2
@@ -81,8 +81,8 @@
         "ip": 132.7,
         "war": 1.25
       },
-      "war_gap": 1.56,
-      "innings_share_pct": 12.6
+      "war_gap": 1.59,
+      "innings_share_pct": 12.5
     },
     {
       "id": 663556,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "118.0",
         "ip_value": 118.0,
-        "war": 2.43,
+        "war": 2.44,
         "era": 3.36,
         "fip": 3.5,
         "k_minus_bb_pct": 13.8
@@ -113,7 +113,7 @@
         "ip": 130.8,
         "war": 2.97
       },
-      "war_gap": -0.54,
+      "war_gap": -0.52,
       "innings_share_pct": 8.9
     },
     {
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "122.1",
         "ip_value": 122.333,
-        "war": 1.5,
+        "war": 1.51,
         "era": 4.27,
         "fip": 4.03,
         "k_minus_bb_pct": 22.8
@@ -145,8 +145,8 @@
         "ip": 103.2,
         "war": 1.0
       },
-      "war_gap": 0.5,
-      "innings_share_pct": 9.3
+      "war_gap": 0.52,
+      "innings_share_pct": 9.2
     },
     {
       "id": 641329,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "58.1",
         "ip_value": 58.333,
-        "war": 1.28,
+        "war": 1.29,
         "era": 1.54,
         "fip": 3.05,
         "k_minus_bb_pct": 17.9
@@ -177,7 +177,7 @@
         "ip": 57.9,
         "war": 0.56
       },
-      "war_gap": 0.72,
+      "war_gap": 0.73,
       "innings_share_pct": 4.4
     },
     {
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "99.1",
         "ip_value": 99.333,
-        "war": 1.07,
+        "war": 1.09,
         "era": 3.99,
         "fip": 4.05,
         "k_minus_bb_pct": 16.9
@@ -209,7 +209,7 @@
         "ip": 62.5,
         "war": 1.08
       },
-      "war_gap": -0.01,
+      "war_gap": 0.01,
       "innings_share_pct": 7.5
     },
     {
@@ -224,7 +224,7 @@
       "actual": {
         "ip": "68.0",
         "ip_value": 68.0,
-        "war": 1.04,
+        "war": 1.06,
         "era": 2.51,
         "fip": 3.28,
         "k_minus_bb_pct": 16.7
@@ -241,7 +241,7 @@
         "ip": 44.1,
         "war": 0.29
       },
-      "war_gap": 0.75,
+      "war_gap": 0.76,
       "innings_share_pct": 5.1
     },
     {
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "35.2",
         "ip_value": 35.667,
-        "war": 0.6,
+        "war": 0.61,
         "era": 2.27,
         "fip": 3.19,
         "k_minus_bb_pct": 25.2
@@ -275,38 +275,6 @@
       },
       "war_gap": 0.53,
       "innings_share_pct": 2.7
-    },
-    {
-      "id": 668984,
-      "name": "Casey Legumina",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 42,
-      "starts": 6,
-      "saves": 0,
-      "holds": 7,
-      "actual": {
-        "ip": "53.2",
-        "ip_value": 53.667,
-        "war": 0.56,
-        "era": 3.52,
-        "fip": 3.64,
-        "k_minus_bb_pct": 11.6
-      },
-      "forecast": {
-        "ip": 50.0,
-        "war": -0.03,
-        "era": 4.03,
-        "fip": 4.25,
-        "k_minus_bb_pct": 12.7,
-        "team_at_fetch": "TBR"
-      },
-      "forecast_to_date": {
-        "ip": 46.0,
-        "war": -0.03
-      },
-      "war_gap": 0.59,
-      "innings_share_pct": 4.1
     },
     {
       "id": 671212,
@@ -339,6 +307,38 @@
       },
       "war_gap": -0.42,
       "innings_share_pct": 1.4
+    },
+    {
+      "id": 642547,
+      "name": "Freddy Peralta",
+      "throws": "R",
+      "role": "Starter",
+      "games": 8,
+      "starts": 8,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "44.1",
+        "ip_value": 44.333,
+        "war": 0.46,
+        "era": 3.86,
+        "fip": 4.25,
+        "k_minus_bb_pct": 13.3
+      },
+      "forecast": {
+        "ip": 168.3,
+        "war": 2.74,
+        "era": 3.8,
+        "fip": 3.92,
+        "k_minus_bb_pct": 17.3,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 154.8,
+        "war": 2.52
+      },
+      "war_gap": -2.07,
+      "innings_share_pct": 3.3
     },
     {
       "id": 669330,
@@ -377,17 +377,17 @@
       "name": "Cole Sulser",
       "throws": "R",
       "role": "Setup",
-      "games": 44,
+      "games": 45,
       "starts": 2,
       "saves": 2,
       "holds": 11,
       "actual": {
-        "ip": "49.1",
-        "ip_value": 49.333,
-        "war": 0.39,
-        "era": 4.74,
-        "fip": 3.87,
-        "k_minus_bb_pct": 16.3
+        "ip": "50.1",
+        "ip_value": 50.333,
+        "war": 0.43,
+        "era": 4.65,
+        "fip": 3.82,
+        "k_minus_bb_pct": 16.5
       },
       "forecast": {
         "ip": 56.0,
@@ -401,40 +401,40 @@
         "ip": 51.5,
         "war": 0.14
       },
-      "war_gap": 0.26,
-      "innings_share_pct": 3.7
+      "war_gap": 0.3,
+      "innings_share_pct": 3.8
     },
     {
-      "id": 642547,
-      "name": "Freddy Peralta",
+      "id": 668984,
+      "name": "Casey Legumina",
       "throws": "R",
-      "role": "Starter",
-      "games": 7,
-      "starts": 7,
+      "role": "Swingman",
+      "games": 43,
+      "starts": 6,
       "saves": 0,
-      "holds": 0,
+      "holds": 7,
       "actual": {
-        "ip": "39.1",
-        "ip_value": 39.333,
-        "war": 0.35,
-        "era": 4.35,
-        "fip": 4.37,
-        "k_minus_bb_pct": 14.2
+        "ip": "54.2",
+        "ip_value": 54.667,
+        "war": 0.26,
+        "era": 3.79,
+        "fip": 4.18,
+        "k_minus_bb_pct": 10.8
       },
       "forecast": {
-        "ip": 168.3,
-        "war": 2.74,
-        "era": 3.8,
-        "fip": 3.92,
-        "k_minus_bb_pct": 17.3,
+        "ip": 50.0,
+        "war": -0.03,
+        "era": 4.03,
+        "fip": 4.25,
+        "k_minus_bb_pct": 12.7,
         "team_at_fetch": "TBR"
       },
       "forecast_to_date": {
-        "ip": 154.8,
-        "war": 2.52
+        "ip": 46.0,
+        "war": -0.03
       },
-      "war_gap": -2.17,
-      "innings_share_pct": 3.0
+      "war_gap": 0.28,
+      "innings_share_pct": 4.1
     },
     {
       "id": 664076,
@@ -448,7 +448,7 @@
       "actual": {
         "ip": "41.1",
         "ip_value": 41.333,
-        "war": 0.19,
+        "war": 0.2,
         "era": 4.79,
         "fip": 4.12,
         "k_minus_bb_pct": 17.7
@@ -512,7 +512,7 @@
       "actual": {
         "ip": "19.1",
         "ip_value": 19.333,
-        "war": 0.03,
+        "war": 0.04,
         "era": 6.98,
         "fip": 4.5,
         "k_minus_bb_pct": 0.0
@@ -595,6 +595,38 @@
       },
       "war_gap": -0.02,
       "innings_share_pct": 0.2
+    },
+    {
+      "id": 571927,
+      "name": "Steven Matz",
+      "throws": "L",
+      "role": "Swingman",
+      "games": 31,
+      "starts": 11,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "75.0",
+        "ip_value": 75.0,
+        "war": -0.04,
+        "era": 5.64,
+        "fip": 5.13,
+        "k_minus_bb_pct": 9.4
+      },
+      "forecast": {
+        "ip": 137.6,
+        "war": 2.0,
+        "era": 4.06,
+        "fip": 4.13,
+        "k_minus_bb_pct": 13.3,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 126.5,
+        "war": 1.84
+      },
+      "war_gap": -1.88,
+      "innings_share_pct": 5.6
     },
     {
       "id": 655889,
@@ -686,36 +718,36 @@
       "innings_share_pct": 0.3
     },
     {
-      "id": 571927,
-      "name": "Steven Matz",
-      "throws": "L",
-      "role": "Swingman",
-      "games": 30,
-      "starts": 11,
-      "saves": 1,
-      "holds": 1,
+      "id": 811315,
+      "name": "Brody Hopkins",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
       "actual": {
-        "ip": "74.0",
-        "ip_value": 74.0,
-        "war": -0.08,
-        "era": 5.72,
-        "fip": 5.16,
-        "k_minus_bb_pct": 9.5
+        "ip": "1.0",
+        "ip_value": 1.0,
+        "war": -0.07,
+        "era": 18.0,
+        "fip": 17.1,
+        "k_minus_bb_pct": 0.0
       },
       "forecast": {
-        "ip": 137.6,
-        "war": 2.0,
-        "era": 4.06,
-        "fip": 4.13,
-        "k_minus_bb_pct": 13.3,
+        "ip": 9.2,
+        "war": 0.06,
+        "era": 4.61,
+        "fip": 4.75,
+        "k_minus_bb_pct": 8.8,
         "team_at_fetch": "TBR"
       },
       "forecast_to_date": {
-        "ip": 126.5,
-        "war": 1.84
+        "ip": 8.5,
+        "war": 0.06
       },
-      "war_gap": -1.92,
-      "innings_share_pct": 5.6
+      "war_gap": -0.13,
+      "innings_share_pct": 0.1
     },
     {
       "id": 669169,
@@ -857,7 +889,7 @@
       "actual": {
         "ip": "19.1",
         "ip_value": 19.333,
-        "war": -0.29,
+        "war": -0.28,
         "era": 6.52,
         "fip": 6.62,
         "k_minus_bb_pct": 11.6
@@ -953,7 +985,7 @@
       "actual": {
         "ip": "17.1",
         "ip_value": 17.333,
-        "war": -0.36,
+        "war": -0.35,
         "era": 6.23,
         "fip": 7.26,
         "k_minus_bb_pct": 3.7
@@ -985,7 +1017,7 @@
       "actual": {
         "ip": "44.2",
         "ip_value": 44.667,
-        "war": -0.46,
+        "war": -0.45,
         "era": 4.03,
         "fip": 5.63,
         "k_minus_bb_pct": 10.2
@@ -1002,7 +1034,7 @@
         "ip": 33.1,
         "war": 0.15
       },
-      "war_gap": -0.6,
+      "war_gap": -0.59,
       "innings_share_pct": 3.4
     }
   ]
