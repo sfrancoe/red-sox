@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:37:56.258837+00:00",
+  "generated_at": "2026-09-14T13:22:11.264020+00:00",
   "season": 2026,
   "team": "Chicago White Sox",
   "games_played": 149,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 11.6,
+    "actual_war": 12.2,
     "forecast_war_to_date": 12.6,
-    "war_gap": -1.0,
-    "innings": 1318.0,
-    "era": 4.16
+    "war_gap": -0.4,
+    "innings": 1326.0,
+    "era": 4.13
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "156.0",
         "ip_value": 156.0,
-        "war": 2.87,
+        "war": 2.88,
         "era": 3.58,
         "fip": 3.67,
         "k_minus_bb_pct": 17.4
@@ -49,7 +49,7 @@
         "ip": 130.7,
         "war": 0.85
       },
-      "war_gap": 2.02,
+      "war_gap": 2.04,
       "innings_share_pct": 11.8
     },
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "135.2",
         "ip_value": 135.667,
-        "war": 2.51,
+        "war": 2.53,
         "era": 4.05,
         "fip": 3.78,
         "k_minus_bb_pct": 12.8
@@ -81,8 +81,8 @@
         "ip": 146.3,
         "war": 1.23
       },
-      "war_gap": 1.28,
-      "innings_share_pct": 10.3
+      "war_gap": 1.3,
+      "innings_share_pct": 10.2
     },
     {
       "id": 656794,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "84.1",
         "ip_value": 84.333,
-        "war": 1.96,
+        "war": 1.97,
         "era": 2.77,
         "fip": 2.88,
         "k_minus_bb_pct": 13.9
@@ -113,7 +113,7 @@
         "ip": 60.7,
         "war": 0.39
       },
-      "war_gap": 1.57,
+      "war_gap": 1.58,
       "innings_share_pct": 6.4
     },
     {
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "76.2",
         "ip_value": 76.667,
-        "war": 1.83,
+        "war": 1.84,
         "era": 2.23,
         "fip": 2.78,
         "k_minus_bb_pct": 23.7
@@ -145,7 +145,7 @@
         "ip": 86.2,
         "war": 1.16
       },
-      "war_gap": 0.66,
+      "war_gap": 0.67,
       "innings_share_pct": 5.8
     },
     {
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "62.2",
         "ip_value": 62.667,
-        "war": 1.39,
+        "war": 1.4,
         "era": 2.87,
         "fip": 3.09,
         "k_minus_bb_pct": 15.9
@@ -177,8 +177,8 @@
         "ip": 31.3,
         "war": 0.15
       },
-      "war_gap": 1.24,
-      "innings_share_pct": 4.8
+      "war_gap": 1.25,
+      "innings_share_pct": 4.7
     },
     {
       "id": 641743,
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "145.0",
         "ip_value": 145.0,
-        "war": 1.05,
+        "war": 1.06,
         "era": 4.53,
         "fip": 4.82,
         "k_minus_bb_pct": 10.3
@@ -209,8 +209,8 @@
         "ip": 128.8,
         "war": 1.47
       },
-      "war_gap": -0.42,
-      "innings_share_pct": 11.0
+      "war_gap": -0.41,
+      "innings_share_pct": 10.9
     },
     {
       "id": 696146,
@@ -224,7 +224,7 @@
       "actual": {
         "ip": "20.0",
         "ip_value": 20.0,
-        "war": 0.56,
+        "war": 0.57,
         "era": 0.45,
         "fip": 2.35,
         "k_minus_bb_pct": 25.0
@@ -241,8 +241,40 @@
         "ip": 17.0,
         "war": 0.13
       },
-      "war_gap": 0.43,
+      "war_gap": 0.44,
       "innings_share_pct": 1.5
+    },
+    {
+      "id": 669684,
+      "name": "Chris Murphy",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 31,
+      "starts": 2,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "32.0",
+        "ip_value": 32.0,
+        "war": 0.45,
+        "era": 3.94,
+        "fip": 3.57,
+        "k_minus_bb_pct": 13.6
+      },
+      "forecast": {
+        "ip": 56.0,
+        "war": 0.18,
+        "era": 4.02,
+        "fip": 4.31,
+        "k_minus_bb_pct": 11.2,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 51.5,
+        "war": 0.17
+      },
+      "war_gap": 0.28,
+      "innings_share_pct": 2.4
     },
     {
       "id": 663855,
@@ -256,7 +288,7 @@
       "actual": {
         "ip": "44.1",
         "ip_value": 44.333,
-        "war": 0.36,
+        "war": 0.37,
         "era": 4.26,
         "fip": 3.8,
         "k_minus_bb_pct": 13.5
@@ -273,8 +305,8 @@
         "ip": 57.0,
         "war": 0.33
       },
-      "war_gap": 0.03,
-      "innings_share_pct": 3.4
+      "war_gap": 0.04,
+      "innings_share_pct": 3.3
     },
     {
       "id": 702273,
@@ -288,7 +320,7 @@
       "actual": {
         "ip": "65.1",
         "ip_value": 65.333,
-        "war": 0.35,
+        "war": 0.36,
         "era": 6.06,
         "fip": 4.88,
         "k_minus_bb_pct": 9.6
@@ -306,24 +338,24 @@
         "war": 0.23
       },
       "war_gap": 0.12,
-      "innings_share_pct": 5.0
+      "innings_share_pct": 4.9
     },
     {
       "id": 670950,
       "name": "Trevor Richards",
       "throws": "R",
       "role": "Reliever",
-      "games": 45,
+      "games": 46,
       "starts": 0,
       "saves": 1,
       "holds": 1,
       "actual": {
-        "ip": "68.0",
-        "ip_value": 68.0,
-        "war": 0.34,
-        "era": 3.71,
-        "fip": 4.12,
-        "k_minus_bb_pct": 14.9
+        "ip": "69.0",
+        "ip_value": 69.0,
+        "war": 0.35,
+        "era": 3.65,
+        "fip": 4.1,
+        "k_minus_bb_pct": 14.8
       },
       "forecast": {
         "ip": 1.0,
@@ -337,40 +369,8 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.34,
+      "war_gap": 0.36,
       "innings_share_pct": 5.2
-    },
-    {
-      "id": 669684,
-      "name": "Chris Murphy",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 30,
-      "starts": 2,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "30.2",
-        "ip_value": 30.667,
-        "war": 0.3,
-        "era": 4.11,
-        "fip": 3.85,
-        "k_minus_bb_pct": 11.2
-      },
-      "forecast": {
-        "ip": 56.0,
-        "war": 0.18,
-        "era": 4.02,
-        "fip": 4.31,
-        "k_minus_bb_pct": 11.2,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 51.5,
-        "war": 0.17
-      },
-      "war_gap": 0.13,
-      "innings_share_pct": 2.3
     },
     {
       "id": 699823,
@@ -416,7 +416,7 @@
       "actual": {
         "ip": "37.1",
         "ip_value": 37.333,
-        "war": 0.08,
+        "war": 0.09,
         "era": 3.13,
         "fip": 4.15,
         "k_minus_bb_pct": 3.9
@@ -435,6 +435,38 @@
       },
       "war_gap": 0.09,
       "innings_share_pct": 2.8
+    },
+    {
+      "id": 689818,
+      "name": "David Sandlin",
+      "throws": "R",
+      "role": "Starter",
+      "games": 6,
+      "starts": 4,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "30.1",
+        "ip_value": 30.333,
+        "war": 0.07,
+        "era": 5.64,
+        "fip": 5.05,
+        "k_minus_bb_pct": 13.5
+      },
+      "forecast": {
+        "ip": 18.0,
+        "war": 0.02,
+        "era": 4.3,
+        "fip": 4.49,
+        "k_minus_bb_pct": 12.7,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 16.6,
+        "war": 0.02
+      },
+      "war_gap": 0.05,
+      "innings_share_pct": 2.3
     },
     {
       "id": 664353,
@@ -633,9 +665,9 @@
       "actual": {
         "ip": "10.1",
         "ip_value": 10.333,
-        "war": -0.04,
+        "war": -0.03,
         "era": 3.48,
-        "fip": 4.56,
+        "fip": 4.55,
         "k_minus_bb_pct": 1.9
       },
       "forecast": {
@@ -871,38 +903,6 @@
       "innings_share_pct": 0.7
     },
     {
-      "id": 689818,
-      "name": "David Sandlin",
-      "throws": "R",
-      "role": "Starter",
-      "games": 5,
-      "starts": 3,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "24.2",
-        "ip_value": 24.667,
-        "war": -0.21,
-        "era": 6.93,
-        "fip": 5.9,
-        "k_minus_bb_pct": 11.3
-      },
-      "forecast": {
-        "ip": 18.0,
-        "war": 0.02,
-        "era": 4.3,
-        "fip": 4.49,
-        "k_minus_bb_pct": 12.7,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 16.6,
-        "war": 0.02
-      },
-      "war_gap": -0.22,
-      "innings_share_pct": 1.9
-    },
-    {
       "id": 607200,
       "name": "Erick Fedde",
       "throws": "R",
@@ -914,7 +914,7 @@
       "actual": {
         "ip": "133.2",
         "ip_value": 133.667,
-        "war": -0.22,
+        "war": -0.21,
         "era": 3.97,
         "fip": 5.12,
         "k_minus_bb_pct": 7.5
@@ -931,7 +931,7 @@
         "ip": 99.4,
         "war": 0.5
       },
-      "war_gap": -0.72,
+      "war_gap": -0.71,
       "innings_share_pct": 10.1
     },
     {
@@ -963,7 +963,7 @@
         "ip": 36.8,
         "war": 0.08
       },
-      "war_gap": -0.31,
+      "war_gap": -0.3,
       "innings_share_pct": 0.5
     },
     {
@@ -1059,7 +1059,7 @@
         "ip": 58.9,
         "war": 0.39
       },
-      "war_gap": -0.78,
+      "war_gap": -0.77,
       "innings_share_pct": 1.4
     }
   ]

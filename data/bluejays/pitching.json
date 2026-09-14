@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:37:55.244301+00:00",
+  "generated_at": "2026-09-14T13:22:09.612798+00:00",
   "season": 2026,
   "team": "Toronto Blue Jays",
   "games_played": 150,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.9,
+    "actual_war": 15.3,
     "forecast_war_to_date": 24.2,
-    "war_gap": -9.2,
-    "innings": 1324.0,
-    "era": 3.93
+    "war_gap": -8.8,
+    "innings": 1333.0,
+    "era": 3.91
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Dylan Cease",
       "throws": "R",
       "role": "Starter",
-      "games": 27,
-      "starts": 27,
+      "games": 28,
+      "starts": 28,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "161.1",
-        "ip_value": 161.333,
-        "war": 5.46,
-        "era": 2.4,
+        "ip": "166.1",
+        "ip_value": 166.333,
+        "war": 5.62,
+        "era": 2.38,
         "fip": 2.48,
-        "k_minus_bb_pct": 24.8
+        "k_minus_bb_pct": 24.6
       },
       "forecast": {
         "ip": 177.8,
@@ -49,8 +49,8 @@
         "ip": 164.6,
         "war": 3.48
       },
-      "war_gap": 1.99,
-      "innings_share_pct": 12.2
+      "war_gap": 2.14,
+      "innings_share_pct": 12.5
     },
     {
       "id": 686973,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "127.1",
         "ip_value": 127.333,
-        "war": 2.61,
+        "war": 2.62,
         "era": 4.38,
         "fip": 3.51,
         "k_minus_bb_pct": 16.9
@@ -113,7 +113,7 @@
         "ip": 171.7,
         "war": 2.71
       },
-      "war_gap": -0.1,
+      "war_gap": -0.09,
       "innings_share_pct": 9.6
     },
     {
@@ -139,7 +139,7 @@
         "war": 0.0
       },
       "war_gap": 1.78,
-      "innings_share_pct": 6.8
+      "innings_share_pct": 6.7
     },
     {
       "id": 702056,
@@ -153,7 +153,7 @@
       "actual": {
         "ip": "93.2",
         "ip_value": 93.667,
-        "war": 1.32,
+        "war": 1.33,
         "era": 3.65,
         "fip": 4.09,
         "k_minus_bb_pct": 11.7
@@ -170,8 +170,40 @@
         "ip": 122.7,
         "war": 1.82
       },
-      "war_gap": -0.5,
-      "innings_share_pct": 7.1
+      "war_gap": -0.49,
+      "innings_share_pct": 7.0
+    },
+    {
+      "id": 643511,
+      "name": "Tyler Rogers",
+      "throws": "R",
+      "role": "Setup",
+      "games": 70,
+      "starts": 0,
+      "saves": 4,
+      "holds": 32,
+      "actual": {
+        "ip": "67.2",
+        "ip_value": 67.667,
+        "war": 1.17,
+        "era": 1.73,
+        "fip": 3.24,
+        "k_minus_bb_pct": 5.7
+      },
+      "forecast": {
+        "ip": 74.0,
+        "war": 0.25,
+        "era": 3.99,
+        "fip": 4.02,
+        "k_minus_bb_pct": 10.8,
+        "team_at_fetch": "TOR"
+      },
+      "forecast_to_date": {
+        "ip": 68.5,
+        "war": 0.23
+      },
+      "war_gap": 0.94,
+      "innings_share_pct": 5.1
     },
     {
       "id": 656546,
@@ -206,53 +238,21 @@
       "innings_share_pct": 3.6
     },
     {
-      "id": 643511,
-      "name": "Tyler Rogers",
-      "throws": "R",
-      "role": "Setup",
-      "games": 69,
-      "starts": 0,
-      "saves": 4,
-      "holds": 31,
-      "actual": {
-        "ip": "66.2",
-        "ip_value": 66.667,
-        "war": 1.13,
-        "era": 1.76,
-        "fip": 3.27,
-        "k_minus_bb_pct": 5.4
-      },
-      "forecast": {
-        "ip": 74.0,
-        "war": 0.25,
-        "era": 3.99,
-        "fip": 4.02,
-        "k_minus_bb_pct": 10.8,
-        "team_at_fetch": "TOR"
-      },
-      "forecast_to_date": {
-        "ip": 68.5,
-        "war": 0.23
-      },
-      "war_gap": 0.9,
-      "innings_share_pct": 5.0
-    },
-    {
       "id": 689254,
       "name": "Mason Fluharty",
       "throws": "L",
       "role": "Setup",
-      "games": 77,
+      "games": 78,
       "starts": 4,
       "saves": 1,
-      "holds": 14,
+      "holds": 15,
       "actual": {
-        "ip": "58.0",
-        "ip_value": 58.0,
-        "war": 0.58,
-        "era": 3.41,
-        "fip": 3.67,
-        "k_minus_bb_pct": 15.0
+        "ip": "59.0",
+        "ip_value": 59.0,
+        "war": 0.65,
+        "era": 3.36,
+        "fip": 3.59,
+        "k_minus_bb_pct": 15.6
       },
       "forecast": {
         "ip": 42.0,
@@ -266,7 +266,7 @@
         "ip": 38.9,
         "war": 0.08
       },
-      "war_gap": 0.5,
+      "war_gap": 0.57,
       "innings_share_pct": 4.4
     },
     {
@@ -377,7 +377,7 @@
       "actual": {
         "ip": "55.2",
         "ip_value": 55.667,
-        "war": 0.13,
+        "war": 0.14,
         "era": 4.37,
         "fip": 5.15,
         "k_minus_bb_pct": 8.3
@@ -402,17 +402,17 @@
       "name": "Braydon Fisher",
       "throws": "R",
       "role": "Swingman",
-      "games": 71,
+      "games": 72,
       "starts": 9,
       "saves": 1,
-      "holds": 12,
+      "holds": 13,
       "actual": {
-        "ip": "72.1",
-        "ip_value": 72.333,
-        "war": 0.09,
-        "era": 3.24,
-        "fip": 4.28,
-        "k_minus_bb_pct": 11.2
+        "ip": "72.2",
+        "ip_value": 72.667,
+        "war": 0.12,
+        "era": 3.22,
+        "fip": 4.25,
+        "k_minus_bb_pct": 11.5
       },
       "forecast": {
         "ip": 52.0,
@@ -426,7 +426,7 @@
         "ip": 48.1,
         "war": 0.24
       },
-      "war_gap": -0.15,
+      "war_gap": -0.12,
       "innings_share_pct": 5.5
     },
     {
@@ -562,17 +562,17 @@
       "name": "Ricky Tiedemann",
       "throws": "L",
       "role": "Reliever",
-      "games": 4,
+      "games": 5,
       "starts": 0,
       "saves": 0,
-      "holds": 0,
+      "holds": 1,
       "actual": {
-        "ip": "5.1",
-        "ip_value": 5.333,
+        "ip": "6.0",
+        "ip_value": 6.0,
         "war": 0.03,
-        "era": 1.69,
-        "fip": 3.85,
-        "k_minus_bb_pct": 8.0
+        "era": 1.5,
+        "fip": 3.94,
+        "k_minus_bb_pct": 6.9
       },
       "forecast": {
         "ip": 17.2,
@@ -587,7 +587,7 @@
         "war": 0.15
       },
       "war_gap": -0.12,
-      "innings_share_pct": 0.4
+      "innings_share_pct": 0.5
     },
     {
       "id": 623149,
@@ -633,7 +633,7 @@
       "actual": {
         "ip": "33.0",
         "ip_value": 33.0,
-        "war": 0.01,
+        "war": 0.02,
         "era": 3.82,
         "fip": 4.19,
         "k_minus_bb_pct": 15.1
@@ -907,7 +907,7 @@
       "actual": {
         "ip": "67.2",
         "ip_value": 67.667,
-        "war": -0.13,
+        "war": -0.12,
         "era": 6.38,
         "fip": 5.62,
         "k_minus_bb_pct": 7.8
@@ -932,17 +932,17 @@
       "name": "Michael Lorenzen",
       "throws": "R",
       "role": "Reliever",
-      "games": 4,
+      "games": 5,
       "starts": 0,
       "saves": 1,
       "holds": 0,
       "actual": {
-        "ip": "8.2",
-        "ip_value": 8.667,
-        "war": -0.15,
-        "era": 6.23,
-        "fip": 6.91,
-        "k_minus_bb_pct": 10.0
+        "ip": "9.2",
+        "ip_value": 9.667,
+        "war": -0.12,
+        "era": 5.59,
+        "fip": 6.31,
+        "k_minus_bb_pct": 11.4
       },
       "forecast": {
         "ip": 148.9,
@@ -956,7 +956,7 @@
         "ip": 137.9,
         "war": 1.02
       },
-      "war_gap": -1.17,
+      "war_gap": -1.15,
       "innings_share_pct": 0.7
     },
     {
@@ -1116,7 +1116,7 @@
         "ip": 78.8,
         "war": 0.44
       },
-      "war_gap": -0.8,
+      "war_gap": -0.81,
       "innings_share_pct": 1.4
     },
     {
@@ -1180,7 +1180,7 @@
         "ip": 25.9,
         "war": 0.11
       },
-      "war_gap": -0.69,
+      "war_gap": -0.68,
       "innings_share_pct": 0.6
     },
     {
@@ -1195,7 +1195,7 @@
       "actual": {
         "ip": "36.1",
         "ip_value": 36.333,
-        "war": -0.6,
+        "war": -0.59,
         "era": 6.69,
         "fip": 6.93,
         "k_minus_bb_pct": 6.2
@@ -1212,7 +1212,7 @@
         "ip": 60.8,
         "war": 0.29
       },
-      "war_gap": -0.89,
+      "war_gap": -0.88,
       "innings_share_pct": 2.7
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:38:09.949260+00:00",
+  "generated_at": "2026-09-14T13:22:27.586947+00:00",
   "season": 2026,
   "team": "Miami Marlins",
   "games_played": 150,
@@ -16,7 +16,7 @@
     "actual_war": 13.3,
     "forecast_war_to_date": 13.3,
     "war_gap": 0.0,
-    "innings": 1309.7,
+    "innings": 1318.7,
     "era": 4.12
   },
   "pitchers": [
@@ -49,8 +49,8 @@
         "ip": 172.8,
         "war": 2.33
       },
-      "war_gap": 0.75,
-      "innings_share_pct": 15.3
+      "war_gap": 0.76,
+      "innings_share_pct": 15.2
     },
     {
       "id": 676974,
@@ -82,23 +82,23 @@
         "war": 1.75
       },
       "war_gap": 0.6,
-      "innings_share_pct": 8.5
+      "innings_share_pct": 8.4
     },
     {
       "id": 691587,
       "name": "Eury Pérez",
       "throws": "R",
       "role": "Starter",
-      "games": 26,
-      "starts": 26,
+      "games": 27,
+      "starts": 27,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "139.1",
-        "ip_value": 139.333,
-        "war": 2.16,
-        "era": 3.94,
-        "fip": 4.04,
+        "ip": "144.1",
+        "ip_value": 144.333,
+        "war": 2.17,
+        "era": 3.99,
+        "fip": 4.09,
         "k_minus_bb_pct": 15.1
       },
       "forecast": {
@@ -114,7 +114,7 @@
         "war": 2.42
       },
       "war_gap": -0.25,
-      "innings_share_pct": 10.6
+      "innings_share_pct": 10.9
     },
     {
       "id": 676083,
@@ -146,7 +146,7 @@
         "war": 0.63
       },
       "war_gap": 1.04,
-      "innings_share_pct": 8.5
+      "innings_share_pct": 8.4
     },
     {
       "id": 656848,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "59.1",
         "ip_value": 59.333,
-        "war": 1.18,
+        "war": 1.17,
         "era": 3.19,
         "fip": 3.34,
         "k_minus_bb_pct": 17.9
@@ -210,7 +210,7 @@
         "war": 0.22
       },
       "war_gap": 0.86,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 4.7
     },
     {
       "id": 687473,
@@ -241,8 +241,8 @@
         "ip": 42.2,
         "war": 0.23
       },
-      "war_gap": 0.75,
-      "innings_share_pct": 6.0
+      "war_gap": 0.76,
+      "innings_share_pct": 5.9
     },
     {
       "id": 669622,
@@ -305,40 +305,8 @@
         "ip": 63.0,
         "war": 0.11
       },
-      "war_gap": 0.26,
-      "innings_share_pct": 9.1
-    },
-    {
-      "id": 690978,
-      "name": "Dax Fulton",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 12,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "23.2",
-        "ip_value": 23.667,
-        "war": 0.27,
-        "era": 3.04,
-        "fip": 2.89,
-        "k_minus_bb_pct": 9.5
-      },
-      "forecast": {
-        "ip": 27.2,
-        "war": 0.08,
-        "era": 4.21,
-        "fip": 4.44,
-        "k_minus_bb_pct": 8.7,
-        "team_at_fetch": "MIA"
-      },
-      "forecast_to_date": {
-        "ip": 25.2,
-        "war": 0.07
-      },
-      "war_gap": 0.2,
-      "innings_share_pct": 1.8
+      "war_gap": 0.25,
+      "innings_share_pct": 9.0
     },
     {
       "id": 669199,
@@ -370,7 +338,39 @@
         "war": 0.04
       },
       "war_gap": 0.21,
-      "innings_share_pct": 4.5
+      "innings_share_pct": 4.4
+    },
+    {
+      "id": 690978,
+      "name": "Dax Fulton",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 13,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "24.1",
+        "ip_value": 24.333,
+        "war": 0.24,
+        "era": 2.96,
+        "fip": 3.06,
+        "k_minus_bb_pct": 9.1
+      },
+      "forecast": {
+        "ip": 27.2,
+        "war": 0.08,
+        "era": 4.21,
+        "fip": 4.44,
+        "k_minus_bb_pct": 8.7,
+        "team_at_fetch": "MIA"
+      },
+      "forecast_to_date": {
+        "ip": 25.2,
+        "war": 0.07
+      },
+      "war_gap": 0.17,
+      "innings_share_pct": 1.8
     },
     {
       "id": 687531,
@@ -433,8 +433,8 @@
         "ip": 57.4,
         "war": 0.63
       },
-      "war_gap": -0.57,
-      "innings_share_pct": 3.2
+      "war_gap": -0.56,
+      "innings_share_pct": 3.1
     },
     {
       "id": 663978,
@@ -469,21 +469,53 @@
       "innings_share_pct": 2.3
     },
     {
+      "id": 667652,
+      "name": "Jack Ralston",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 10,
+      "starts": 0,
+      "saves": 0,
+      "holds": 2,
+      "actual": {
+        "ip": "10.1",
+        "ip_value": 10.333,
+        "war": 0.04,
+        "era": 3.48,
+        "fip": 4.07,
+        "k_minus_bb_pct": 9.3
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.01,
+        "era": 4.81,
+        "fip": 4.96,
+        "k_minus_bb_pct": 6.7,
+        "team_at_fetch": "MIA"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.01
+      },
+      "war_gap": 0.05,
+      "innings_share_pct": 0.8
+    },
+    {
       "id": 680767,
       "name": "Victor Vodnik",
       "throws": "R",
       "role": "Reliever",
-      "games": 14,
+      "games": 15,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "15.0",
-        "ip_value": 15.0,
-        "war": 0.04,
-        "era": 6.0,
-        "fip": 3.9,
-        "k_minus_bb_pct": 2.9
+        "ip": "16.1",
+        "ip_value": 16.333,
+        "war": 0.03,
+        "era": 6.06,
+        "fip": 4.02,
+        "k_minus_bb_pct": 1.3
       },
       "forecast": {
         "ip": 64.0,
@@ -497,8 +529,8 @@
         "ip": 59.3,
         "war": 0.24
       },
-      "war_gap": -0.19,
-      "innings_share_pct": 1.1
+      "war_gap": -0.2,
+      "innings_share_pct": 1.2
     },
     {
       "id": 694350,
@@ -595,38 +627,6 @@
       },
       "war_gap": -0.01,
       "innings_share_pct": 3.5
-    },
-    {
-      "id": 667652,
-      "name": "Jack Ralston",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 9,
-      "starts": 0,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "9.1",
-        "ip_value": 9.333,
-        "war": -0.02,
-        "era": 3.86,
-        "fip": 4.39,
-        "k_minus_bb_pct": 7.7
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.01,
-        "era": 4.81,
-        "fip": 4.96,
-        "k_minus_bb_pct": 6.7,
-        "team_at_fetch": "MIA"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.01
-      },
-      "war_gap": -0.01,
-      "innings_share_pct": 0.7
     },
     {
       "id": 666129,
@@ -818,17 +818,17 @@
       "name": "Josh Ekness",
       "throws": "R",
       "role": "Reliever",
-      "games": 23,
+      "games": 24,
       "starts": 0,
       "saves": 1,
       "holds": 2,
       "actual": {
-        "ip": "22.2",
-        "ip_value": 22.667,
-        "war": -0.18,
-        "era": 4.37,
-        "fip": 5.22,
-        "k_minus_bb_pct": 0.0
+        "ip": "23.2",
+        "ip_value": 23.667,
+        "war": -0.2,
+        "era": 4.18,
+        "fip": 5.26,
+        "k_minus_bb_pct": -0.9
       },
       "forecast": {
         "ip": 22.0,
@@ -842,8 +842,8 @@
         "ip": 20.4,
         "war": -0.07
       },
-      "war_gap": -0.11,
-      "innings_share_pct": 1.7
+      "war_gap": -0.13,
+      "innings_share_pct": 1.8
     },
     {
       "id": 676604,
@@ -891,7 +891,7 @@
         "ip_value": 49.667,
         "war": -0.26,
         "era": 3.99,
-        "fip": 4.88,
+        "fip": 4.87,
         "k_minus_bb_pct": 8.1
       },
       "forecast": {

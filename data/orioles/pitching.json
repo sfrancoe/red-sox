@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:37:54.150973+00:00",
+  "generated_at": "2026-09-14T13:22:07.982981+00:00",
   "season": 2026,
   "team": "Baltimore Orioles",
   "games_played": 150,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.6,
+    "actual_war": 14.3,
     "forecast_war_to_date": 13.4,
-    "war_gap": 1.2,
-    "innings": 1327.3,
-    "era": 4.18
+    "war_gap": 0.9,
+    "innings": 1335.3,
+    "era": 4.21
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Trevor Rogers",
       "throws": "L",
       "role": "Starter",
-      "games": 27,
-      "starts": 27,
+      "games": 28,
+      "starts": 28,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "151.2",
-        "ip_value": 151.667,
-        "war": 3.56,
-        "era": 4.15,
-        "fip": 3.45,
-        "k_minus_bb_pct": 16.1
+        "ip": "157.2",
+        "ip_value": 157.667,
+        "war": 3.33,
+        "era": 4.22,
+        "fip": 3.64,
+        "k_minus_bb_pct": 16.0
       },
       "forecast": {
         "ip": 158.8,
@@ -49,8 +49,8 @@
         "ip": 147.1,
         "war": 1.88
       },
-      "war_gap": 1.68,
-      "innings_share_pct": 11.4
+      "war_gap": 1.46,
+      "innings_share_pct": 11.8
     },
     {
       "id": 669358,
@@ -81,7 +81,7 @@
         "ip": 147.1,
         "war": 1.71
       },
-      "war_gap": 1.62,
+      "war_gap": 1.63,
       "innings_share_pct": 12.7
     },
     {
@@ -114,7 +114,7 @@
         "war": 2.82
       },
       "war_gap": -1.34,
-      "innings_share_pct": 11.7
+      "innings_share_pct": 11.6
     },
     {
       "id": 687064,
@@ -145,8 +145,8 @@
         "ip": 24.0,
         "war": 0.11
       },
-      "war_gap": 1.24,
-      "innings_share_pct": 10.6
+      "war_gap": 1.25,
+      "innings_share_pct": 10.5
     },
     {
       "id": 664991,
@@ -178,7 +178,7 @@
         "war": 0.1
       },
       "war_gap": 0.92,
-      "innings_share_pct": 3.6
+      "innings_share_pct": 3.5
     },
     {
       "id": 669330,
@@ -210,7 +210,7 @@
         "war": 0.34
       },
       "war_gap": 0.53,
-      "innings_share_pct": 4.1
+      "innings_share_pct": 4.0
     },
     {
       "id": 666974,
@@ -273,7 +273,7 @@
         "ip": 51.9,
         "war": 0.0
       },
-      "war_gap": 0.69,
+      "war_gap": 0.7,
       "innings_share_pct": 4.7
     },
     {
@@ -338,24 +338,24 @@
         "war": 0.08
       },
       "war_gap": 0.38,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
     },
     {
       "id": 676742,
       "name": "Cam Sanders",
       "throws": "R",
       "role": "Reliever",
-      "games": 16,
+      "games": 17,
       "starts": 0,
       "saves": 3,
       "holds": 1,
       "actual": {
-        "ip": "17.2",
-        "ip_value": 17.667,
-        "war": 0.39,
-        "era": 3.06,
-        "fip": 2.76,
-        "k_minus_bb_pct": 16.2
+        "ip": "18.0",
+        "ip_value": 18.0,
+        "war": 0.41,
+        "era": 3.0,
+        "fip": 2.66,
+        "k_minus_bb_pct": 17.1
       },
       "forecast": {
         "ip": 34.0,
@@ -369,7 +369,7 @@
         "ip": 31.5,
         "war": -0.08
       },
-      "war_gap": 0.47,
+      "war_gap": 0.49,
       "innings_share_pct": 1.3
     },
     {
@@ -384,7 +384,7 @@
       "actual": {
         "ip": "25.0",
         "ip_value": 25.0,
-        "war": 0.36,
+        "war": 0.37,
         "era": 1.8,
         "fip": 3.3,
         "k_minus_bb_pct": 15.5
@@ -465,7 +465,7 @@
         "ip": 20.2,
         "war": 0.19
       },
-      "war_gap": 0.02,
+      "war_gap": 0.03,
       "innings_share_pct": 2.5
     },
     {
@@ -736,7 +736,7 @@
       "actual": {
         "ip": "11.2",
         "ip_value": 11.667,
-        "war": -0.06,
+        "war": -0.05,
         "era": 1.54,
         "fip": 4.73,
         "k_minus_bb_pct": 3.6
@@ -843,7 +843,7 @@
         "war": 0.61
       },
       "war_gap": -0.69,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 1.1
     },
     {
       "id": 675919,
@@ -878,21 +878,46 @@
       "innings_share_pct": 0.3
     },
     {
-      "id": 682274,
-      "name": "Yaramil Hiraldo",
+      "id": 642215,
+      "name": "Weston Wilson",
       "throws": "R",
       "role": "Reliever",
-      "games": 7,
+      "games": 3,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "7.2",
-        "ip_value": 7.667,
+        "ip": "2.1",
+        "ip_value": 2.333,
         "war": -0.12,
-        "era": 5.87,
-        "fip": 5.84,
-        "k_minus_bb_pct": 18.9
+        "era": 15.43,
+        "fip": 14.25,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": null,
+      "forecast_to_date": {
+        "ip": 0.0,
+        "war": 0.0
+      },
+      "war_gap": -0.12,
+      "innings_share_pct": 0.2
+    },
+    {
+      "id": 682274,
+      "name": "Yaramil Hiraldo",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 8,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "9.1",
+        "ip_value": 9.333,
+        "war": -0.18,
+        "era": 8.68,
+        "fip": 6.64,
+        "k_minus_bb_pct": 6.2
       },
       "forecast": {
         "ip": 38.0,
@@ -906,33 +931,8 @@
         "ip": 35.2,
         "war": 0.18
       },
-      "war_gap": -0.31,
-      "innings_share_pct": 0.6
-    },
-    {
-      "id": 642215,
-      "name": "Weston Wilson",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 3,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "2.1",
-        "ip_value": 2.333,
-        "war": -0.13,
-        "era": 15.43,
-        "fip": 14.25,
-        "k_minus_bb_pct": 0.0
-      },
-      "forecast": null,
-      "forecast_to_date": {
-        "ip": 0.0,
-        "war": 0.0
-      },
-      "war_gap": -0.13,
-      "innings_share_pct": 0.2
+      "war_gap": -0.36,
+      "innings_share_pct": 0.7
     },
     {
       "id": 665152,
@@ -963,7 +963,7 @@
         "ip": 106.4,
         "war": 0.84
       },
-      "war_gap": -1.18,
+      "war_gap": -1.17,
       "innings_share_pct": 2.7
     },
     {

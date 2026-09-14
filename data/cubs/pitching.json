@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:38:12.837979+00:00",
+  "generated_at": "2026-09-14T13:22:31.677642+00:00",
   "season": 2026,
   "team": "Chicago Cubs",
   "games_played": 150,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 4.1,
+    "actual_war": 4.3,
     "forecast_war_to_date": 19.8,
-    "war_gap": -15.8,
-    "innings": 1330.0,
+    "war_gap": -15.5,
+    "innings": 1339.0,
     "era": 4.19
   },
   "pitchers": [
@@ -53,6 +53,38 @@
       "innings_share_pct": 5.1
     },
     {
+      "id": 571510,
+      "name": "Matthew Boyd",
+      "throws": "L",
+      "role": "Starter",
+      "games": 20,
+      "starts": 20,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "114.2",
+        "ip_value": 114.667,
+        "war": 1.34,
+        "era": 4.16,
+        "fip": 4.35,
+        "k_minus_bb_pct": 11.4
+      },
+      "forecast": {
+        "ip": 173.8,
+        "war": 2.24,
+        "era": 3.93,
+        "fip": 4.18,
+        "k_minus_bb_pct": 14.2,
+        "team_at_fetch": "CHC"
+      },
+      "forecast_to_date": {
+        "ip": 160.9,
+        "war": 2.08
+      },
+      "war_gap": -0.74,
+      "innings_share_pct": 8.6
+    },
+    {
       "id": 684007,
       "name": "Shota Imanaga",
       "throws": "L",
@@ -82,56 +114,24 @@
         "war": 1.82
       },
       "war_gap": -0.53,
-      "innings_share_pct": 12.2
-    },
-    {
-      "id": 571510,
-      "name": "Matthew Boyd",
-      "throws": "L",
-      "role": "Starter",
-      "games": 19,
-      "starts": 19,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "109.1",
-        "ip_value": 109.333,
-        "war": 1.22,
-        "era": 4.03,
-        "fip": 4.41,
-        "k_minus_bb_pct": 11.8
-      },
-      "forecast": {
-        "ip": 173.8,
-        "war": 2.24,
-        "era": 3.93,
-        "fip": 4.18,
-        "k_minus_bb_pct": 14.2,
-        "team_at_fetch": "CHC"
-      },
-      "forecast_to_date": {
-        "ip": 160.9,
-        "war": 2.08
-      },
-      "war_gap": -0.86,
-      "innings_share_pct": 8.2
+      "innings_share_pct": 12.1
     },
     {
       "id": 650644,
       "name": "Aaron Civale",
       "throws": "R",
       "role": "Reliever",
-      "games": 13,
+      "games": 14,
       "starts": 0,
       "saves": 2,
       "holds": 0,
       "actual": {
-        "ip": "28.1",
-        "ip_value": 28.333,
-        "war": 0.52,
-        "era": 1.27,
-        "fip": 2.57,
-        "k_minus_bb_pct": 18.3
+        "ip": "30.1",
+        "ip_value": 30.333,
+        "war": 0.56,
+        "era": 1.19,
+        "fip": 2.67,
+        "k_minus_bb_pct": 17.1
       },
       "forecast": {
         "ip": 133.7,
@@ -145,8 +145,8 @@
         "ip": 123.8,
         "war": 1.2
       },
-      "war_gap": -0.67,
-      "innings_share_pct": 2.1
+      "war_gap": -0.64,
+      "innings_share_pct": 2.3
     },
     {
       "id": 656849,
@@ -178,7 +178,7 @@
         "war": 2.04
       },
       "war_gap": -1.54,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 4.7
     },
     {
       "id": 605280,
@@ -209,7 +209,7 @@
         "ip": 142.6,
         "war": 1.75
       },
-      "war_gap": -1.31,
+      "war_gap": -1.3,
       "innings_share_pct": 2.9
     },
     {
@@ -242,7 +242,7 @@
         "war": 0.43
       },
       "war_gap": -0.06,
-      "innings_share_pct": 10.0
+      "innings_share_pct": 9.9
     },
     {
       "id": 657097,
@@ -466,7 +466,7 @@
         "war": -0.01
       },
       "war_gap": 0.06,
-      "innings_share_pct": 0.3
+      "innings_share_pct": 0.2
     },
     {
       "id": 621389,
@@ -530,7 +530,7 @@
         "war": 1.15
       },
       "war_gap": -1.11,
-      "innings_share_pct": 0.6
+      "innings_share_pct": 0.5
     },
     {
       "id": 605441,
@@ -565,6 +565,38 @@
       "innings_share_pct": 0.1
     },
     {
+      "id": 694037,
+      "name": "Daniel Palencia",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 28,
+      "starts": 0,
+      "saves": 3,
+      "holds": 0,
+      "actual": {
+        "ip": "25.0",
+        "ip_value": 25.0,
+        "war": 0.01,
+        "era": 4.32,
+        "fip": 4.42,
+        "k_minus_bb_pct": 14.8
+      },
+      "forecast": {
+        "ip": 67.0,
+        "war": 0.48,
+        "era": 3.61,
+        "fip": 3.73,
+        "k_minus_bb_pct": 16.8,
+        "team_at_fetch": "CHC"
+      },
+      "forecast_to_date": {
+        "ip": 62.0,
+        "war": 0.45
+      },
+      "war_gap": -0.44,
+      "innings_share_pct": 1.9
+    },
+    {
       "id": 681520,
       "name": "Antoine Kelly",
       "throws": "L",
@@ -597,38 +629,6 @@
       "innings_share_pct": 0.1
     },
     {
-      "id": 694037,
-      "name": "Daniel Palencia",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 27,
-      "starts": 0,
-      "saves": 3,
-      "holds": 0,
-      "actual": {
-        "ip": "24.0",
-        "ip_value": 24.0,
-        "war": 0.0,
-        "era": 4.5,
-        "fip": 4.44,
-        "k_minus_bb_pct": 15.4
-      },
-      "forecast": {
-        "ip": 67.0,
-        "war": 0.48,
-        "era": 3.61,
-        "fip": 3.73,
-        "k_minus_bb_pct": 16.8,
-        "team_at_fetch": "CHC"
-      },
-      "forecast_to_date": {
-        "ip": 62.0,
-        "war": 0.45
-      },
-      "war_gap": -0.44,
-      "innings_share_pct": 1.8
-    },
-    {
       "id": 681806,
       "name": "Andrew Wantz",
       "throws": "R",
@@ -658,7 +658,7 @@
         "war": -0.0
       },
       "war_gap": -0.0,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 0.1
     },
     {
       "id": 666171,
@@ -817,7 +817,7 @@
         "ip": 55.6,
         "war": 0.17
       },
-      "war_gap": -0.23,
+      "war_gap": -0.22,
       "innings_share_pct": 2.7
     },
     {
@@ -1003,7 +1003,7 @@
         "war": 0.15
       },
       "war_gap": -0.29,
-      "innings_share_pct": 6.7
+      "innings_share_pct": 6.6
     },
     {
       "id": 640451,
@@ -1138,17 +1138,17 @@
       "name": "Caleb Thielbar",
       "throws": "L",
       "role": "Reliever",
-      "games": 54,
+      "games": 55,
       "starts": 0,
       "saves": 3,
       "holds": 7,
       "actual": {
-        "ip": "46.0",
-        "ip_value": 46.0,
-        "war": -0.35,
-        "era": 4.89,
-        "fip": 4.97,
-        "k_minus_bb_pct": 19.9
+        "ip": "46.2",
+        "ip_value": 46.667,
+        "war": -0.31,
+        "era": 4.82,
+        "fip": 4.9,
+        "k_minus_bb_pct": 20.1
       },
       "forecast": {
         "ip": 66.0,
@@ -1162,7 +1162,7 @@
         "ip": 61.1,
         "war": 0.41
       },
-      "war_gap": -0.76,
+      "war_gap": -0.72,
       "innings_share_pct": 3.5
     },
     {
@@ -1243,7 +1243,7 @@
         "ip_value": 76.0,
         "war": -1.07,
         "era": 5.92,
-        "fip": 6.74,
+        "fip": 6.73,
         "k_minus_bb_pct": 12.6
       },
       "forecast": {

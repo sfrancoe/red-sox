@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:38:02.186095+00:00",
+  "generated_at": "2026-09-14T13:22:18.617011+00:00",
   "season": 2026,
   "team": "Houston Astros",
   "games_played": 150,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 7.2,
+    "actual_war": 6.9,
     "forecast_war_to_date": 13.1,
-    "war_gap": -5.9,
-    "innings": 1321.7,
-    "era": 4.52
+    "war_gap": -6.2,
+    "innings": 1329.7,
+    "era": 4.56
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "145.2",
         "ip_value": 145.667,
-        "war": 2.43,
+        "war": 2.44,
         "era": 3.71,
         "fip": 3.82,
         "k_minus_bb_pct": 13.8
@@ -114,7 +114,7 @@
         "war": 3.32
       },
       "war_gap": -2.04,
-      "innings_share_pct": 7.0
+      "innings_share_pct": 6.9
     },
     {
       "id": 595345,
@@ -153,17 +153,17 @@
       "name": "Hayden Wesneski",
       "throws": "R",
       "role": "Starter",
-      "games": 8,
-      "starts": 8,
+      "games": 9,
+      "starts": 9,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "45.2",
-        "ip_value": 45.667,
-        "war": 0.99,
-        "era": 3.35,
-        "fip": 3.43,
-        "k_minus_bb_pct": 12.2
+        "ip": "48.2",
+        "ip_value": 48.667,
+        "war": 0.87,
+        "era": 3.7,
+        "fip": 3.72,
+        "k_minus_bb_pct": 11.1
       },
       "forecast": {
         "ip": 31.0,
@@ -177,25 +177,25 @@
         "ip": 28.7,
         "war": 0.21
       },
-      "war_gap": 0.78,
-      "innings_share_pct": 3.5
+      "war_gap": 0.66,
+      "innings_share_pct": 3.7
     },
     {
       "id": 660853,
       "name": "Enyel De Los Santos",
       "throws": "R",
       "role": "Setup",
-      "games": 63,
+      "games": 64,
       "starts": 0,
       "saves": 5,
       "holds": 10,
       "actual": {
-        "ip": "67.1",
-        "ip_value": 67.333,
-        "war": 0.73,
-        "era": 4.28,
-        "fip": 3.65,
-        "k_minus_bb_pct": 15.8
+        "ip": "68.0",
+        "ip_value": 68.0,
+        "war": 0.58,
+        "era": 4.5,
+        "fip": 3.84,
+        "k_minus_bb_pct": 15.4
       },
       "forecast": {
         "ip": 60.0,
@@ -209,7 +209,7 @@
         "ip": 55.6,
         "war": 0.07
       },
-      "war_gap": 0.66,
+      "war_gap": 0.51,
       "innings_share_pct": 5.1
     },
     {
@@ -305,8 +305,8 @@
         "ip": 78.8,
         "war": 0.44
       },
-      "war_gap": -0.14,
-      "innings_share_pct": 6.7
+      "war_gap": -0.13,
+      "innings_share_pct": 6.6
     },
     {
       "id": 805123,
@@ -402,7 +402,7 @@
         "war": 0.27
       },
       "war_gap": -0.11,
-      "innings_share_pct": 5.6
+      "innings_share_pct": 5.5
     },
     {
       "id": 621121,
@@ -529,7 +529,7 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.04,
+      "war_gap": 0.05,
       "innings_share_pct": 1.2
     },
     {
@@ -601,7 +601,7 @@
       "actual": {
         "ip": "20.0",
         "ip_value": 20.0,
-        "war": -0.02,
+        "war": -0.01,
         "era": 5.4,
         "fip": 5.1,
         "k_minus_bb_pct": 8.4
@@ -896,38 +896,6 @@
       "innings_share_pct": 1.7
     },
     {
-      "id": 669854,
-      "name": "Ronel Blanco",
-      "throws": "R",
-      "role": "Starter",
-      "games": 6,
-      "starts": 5,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "27.1",
-        "ip_value": 27.333,
-        "war": -0.35,
-        "era": 6.59,
-        "fip": 6.51,
-        "k_minus_bb_pct": 6.8
-      },
-      "forecast": {
-        "ip": 21.1,
-        "war": 0.19,
-        "era": 4.02,
-        "fip": 4.05,
-        "k_minus_bb_pct": 16.3,
-        "team_at_fetch": "HOU"
-      },
-      "forecast_to_date": {
-        "ip": 19.6,
-        "war": 0.18
-      },
-      "war_gap": -0.53,
-      "innings_share_pct": 2.1
-    },
-    {
       "id": 687911,
       "name": "Bryan King",
       "throws": "L",
@@ -989,7 +957,39 @@
         "war": 1.57
       },
       "war_gap": -1.93,
-      "innings_share_pct": 7.2
+      "innings_share_pct": 7.1
+    },
+    {
+      "id": 669854,
+      "name": "Ronel Blanco",
+      "throws": "R",
+      "role": "Starter",
+      "games": 7,
+      "starts": 5,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "31.2",
+        "ip_value": 31.667,
+        "war": -0.42,
+        "era": 7.11,
+        "fip": 6.67,
+        "k_minus_bb_pct": 8.1
+      },
+      "forecast": {
+        "ip": 21.1,
+        "war": 0.19,
+        "era": 4.02,
+        "fip": 4.05,
+        "k_minus_bb_pct": 16.3,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 19.6,
+        "war": 0.18
+      },
+      "war_gap": -0.6,
+      "innings_share_pct": 2.4
     },
     {
       "id": 676467,

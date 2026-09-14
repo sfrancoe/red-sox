@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T22:38:03.572907+00:00",
+  "generated_at": "2026-09-14T13:22:20.141604+00:00",
   "season": 2026,
   "team": "Los Angeles Angels",
   "games_played": 149,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.6,
+    "actual_war": 12.9,
     "forecast_war_to_date": 12.7,
-    "war_gap": -0.1,
-    "innings": 1306.3,
-    "era": 4.22
+    "war_gap": 0.2,
+    "innings": 1314.3,
+    "era": 4.23
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "168.0",
         "ip_value": 168.0,
-        "war": 4.45,
+        "war": 4.46,
         "era": 3.32,
         "fip": 3.04,
         "k_minus_bb_pct": 21.7
@@ -49,8 +49,8 @@
         "ip": 138.6,
         "war": 1.81
       },
-      "war_gap": 2.64,
-      "innings_share_pct": 12.9
+      "war_gap": 2.65,
+      "innings_share_pct": 12.8
     },
     {
       "id": 700712,
@@ -82,7 +82,7 @@
         "war": -0.04
       },
       "war_gap": 2.35,
-      "innings_share_pct": 10.5
+      "innings_share_pct": 10.4
     },
     {
       "id": 667755,
@@ -177,8 +177,8 @@
         "ip": 163.5,
         "war": 2.37
       },
-      "war_gap": -1.72,
-      "innings_share_pct": 4.1
+      "war_gap": -1.71,
+      "innings_share_pct": 4.0
     },
     {
       "id": 670245,
@@ -245,38 +245,6 @@
       "innings_share_pct": 3.0
     },
     {
-      "id": 642048,
-      "name": "Tayler Saucedo",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 21,
-      "starts": 0,
-      "saves": 0,
-      "holds": 7,
-      "actual": {
-        "ip": "16.2",
-        "ip_value": 16.667,
-        "war": 0.45,
-        "era": 3.24,
-        "fip": 2.38,
-        "k_minus_bb_pct": 23.9
-      },
-      "forecast": {
-        "ip": 25.0,
-        "war": 0.04,
-        "era": 4.08,
-        "fip": 4.28,
-        "k_minus_bb_pct": 10.1,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 23.0,
-        "war": 0.03
-      },
-      "war_gap": 0.41,
-      "innings_share_pct": 1.3
-    },
-    {
       "id": 608718,
       "name": "Brent Suter",
       "throws": "L",
@@ -288,7 +256,7 @@
       "actual": {
         "ip": "63.1",
         "ip_value": 63.333,
-        "war": 0.42,
+        "war": 0.43,
         "era": 4.12,
         "fip": 3.66,
         "k_minus_bb_pct": 14.3
@@ -309,6 +277,38 @@
       "innings_share_pct": 4.8
     },
     {
+      "id": 642048,
+      "name": "Tayler Saucedo",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 22,
+      "starts": 0,
+      "saves": 0,
+      "holds": 7,
+      "actual": {
+        "ip": "17.2",
+        "ip_value": 17.667,
+        "war": 0.43,
+        "era": 3.06,
+        "fip": 2.59,
+        "k_minus_bb_pct": 22.2
+      },
+      "forecast": {
+        "ip": 25.0,
+        "war": 0.04,
+        "era": 4.08,
+        "fip": 4.28,
+        "k_minus_bb_pct": 10.1,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 23.0,
+        "war": 0.03
+      },
+      "war_gap": 0.39,
+      "innings_share_pct": 1.3
+    },
+    {
       "id": 666171,
       "name": "Ryan Zeferjahn",
       "throws": "R",
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "51.2",
         "ip_value": 51.667,
-        "war": 0.4,
+        "war": 0.41,
         "era": 3.66,
         "fip": 3.78,
         "k_minus_bb_pct": 19.2
@@ -337,8 +337,8 @@
         "ip": 47.8,
         "war": -0.0
       },
-      "war_gap": 0.4,
-      "innings_share_pct": 4.0
+      "war_gap": 0.41,
+      "innings_share_pct": 3.9
     },
     {
       "id": 690829,
@@ -405,6 +405,38 @@
       "innings_share_pct": 2.1
     },
     {
+      "id": 680570,
+      "name": "Grayson Rodriguez",
+      "throws": "R",
+      "role": "Starter",
+      "games": 18,
+      "starts": 18,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "87.0",
+        "ip_value": 87.0,
+        "war": 0.3,
+        "era": 6.1,
+        "fip": 4.9,
+        "k_minus_bb_pct": 10.4
+      },
+      "forecast": {
+        "ip": 119.7,
+        "war": 2.13,
+        "era": 3.82,
+        "fip": 3.83,
+        "k_minus_bb_pct": 17.0,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 110.1,
+        "war": 1.96
+      },
+      "war_gap": -1.66,
+      "innings_share_pct": 6.6
+    },
+    {
       "id": 676620,
       "name": "Blake Weiman",
       "throws": "L",
@@ -448,7 +480,7 @@
       "actual": {
         "ip": "13.2",
         "ip_value": 13.667,
-        "war": 0.26,
+        "war": 0.27,
         "era": 3.95,
         "fip": 2.74,
         "k_minus_bb_pct": 18.5
@@ -512,7 +544,7 @@
       "actual": {
         "ip": "64.0",
         "ip_value": 64.0,
-        "war": 0.2,
+        "war": 0.21,
         "era": 6.19,
         "fip": 4.98,
         "k_minus_bb_pct": 3.7
@@ -529,7 +561,7 @@
         "ip": 75.0,
         "war": 0.28
       },
-      "war_gap": -0.08,
+      "war_gap": -0.07,
       "innings_share_pct": 4.9
     },
     {
@@ -537,17 +569,17 @@
       "name": "Luke Murphy",
       "throws": "R",
       "role": "Reliever",
-      "games": 15,
+      "games": 16,
       "starts": 0,
       "saves": 0,
       "holds": 4,
       "actual": {
-        "ip": "15.0",
-        "ip_value": 15.0,
+        "ip": "16.0",
+        "ip_value": 16.0,
         "war": 0.16,
-        "era": 4.2,
-        "fip": 3.97,
-        "k_minus_bb_pct": 9.7
+        "era": 6.19,
+        "fip": 3.98,
+        "k_minus_bb_pct": 8.6
       },
       "forecast": {
         "ip": 1.0,
@@ -562,39 +594,7 @@
         "war": -0.0
       },
       "war_gap": 0.17,
-      "innings_share_pct": 1.1
-    },
-    {
-      "id": 680570,
-      "name": "Grayson Rodriguez",
-      "throws": "R",
-      "role": "Starter",
-      "games": 17,
-      "starts": 17,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "81.2",
-        "ip_value": 81.667,
-        "war": 0.13,
-        "era": 6.28,
-        "fip": 5.07,
-        "k_minus_bb_pct": 10.3
-      },
-      "forecast": {
-        "ip": 119.7,
-        "war": 2.13,
-        "era": 3.82,
-        "fip": 3.83,
-        "k_minus_bb_pct": 17.0,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 110.1,
-        "war": 1.96
-      },
-      "war_gap": -1.83,
-      "innings_share_pct": 6.3
+      "innings_share_pct": 1.2
     },
     {
       "id": 691946,
@@ -627,6 +627,38 @@
       },
       "war_gap": -0.2,
       "innings_share_pct": 2.1
+    },
+    {
+      "id": 671111,
+      "name": "Sammy Peralta",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 9,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "10.0",
+        "ip_value": 10.0,
+        "war": 0.08,
+        "era": 6.3,
+        "fip": 3.9,
+        "k_minus_bb_pct": 25.0
+      },
+      "forecast": {
+        "ip": 10.0,
+        "war": 0.03,
+        "era": 4.1,
+        "fip": 4.3,
+        "k_minus_bb_pct": 11.7,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 9.2,
+        "war": 0.03
+      },
+      "war_gap": 0.05,
+      "innings_share_pct": 0.8
     },
     {
       "id": 605242,
@@ -691,38 +723,6 @@
       },
       "war_gap": 0.02,
       "innings_share_pct": 2.6
-    },
-    {
-      "id": 671111,
-      "name": "Sammy Peralta",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 8,
-      "starts": 0,
-      "saves": 0,
-      "holds": 1,
-      "actual": {
-        "ip": "9.1",
-        "ip_value": 9.333,
-        "war": 0.02,
-        "era": 6.75,
-        "fip": 4.39,
-        "k_minus_bb_pct": 22.2
-      },
-      "forecast": {
-        "ip": 10.0,
-        "war": 0.03,
-        "era": 4.1,
-        "fip": 4.3,
-        "k_minus_bb_pct": 11.7,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 9.2,
-        "war": 0.03
-      },
-      "war_gap": -0.01,
-      "innings_share_pct": 0.7
     },
     {
       "id": 605447,
@@ -932,7 +932,7 @@
         "war": 0.04
       },
       "war_gap": -0.29,
-      "innings_share_pct": 3.9
+      "innings_share_pct": 3.8
     },
     {
       "id": 680704,
@@ -1010,7 +1010,7 @@
       "actual": {
         "ip": "45.2",
         "ip_value": 45.667,
-        "war": -0.35,
+        "war": -0.34,
         "era": 4.14,
         "fip": 4.77,
         "k_minus_bb_pct": 9.6
@@ -1091,8 +1091,8 @@
         "ip": 65.7,
         "war": 0.78
       },
-      "war_gap": -1.21,
-      "innings_share_pct": 6.5
+      "war_gap": -1.2,
+      "innings_share_pct": 6.4
     }
   ]
 }
