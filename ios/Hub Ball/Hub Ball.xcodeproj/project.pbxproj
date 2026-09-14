@@ -10,19 +10,8 @@
 		8128DAE330464115004B3947 /* Hub Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hub Ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		8128DAE530464115004B3947 /* Hub Ball */ = {
-			exceptions = (
-				A1B2C3D430464115004B3947 /* Exceptions for \"Hub Ball\" folder in \"Hub Ball\" target */,
-			);
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Hub Ball";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A1B2C3D430464115004B3947 /* Exceptions for \"Hub Ball\" folder in \"Hub Ball\" target */ = {
+		A1B2C3D430464115004B3947 /* Exceptions for "Hub Ball" folder in "Hub Ball" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -30,6 +19,17 @@
 			target = 8128DAE230464115004B3947 /* Hub Ball */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8128DAE530464115004B3947 /* Hub Ball */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A1B2C3D430464115004B3947 /* Exceptions for "Hub Ball" folder in "Hub Ball" target */,
+			);
+			path = "Hub Ball";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8128DAE030464115004B3947 /* Frameworks */ = {
@@ -263,7 +263,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEVELOPMENT_TEAM = NTY8T25W6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -297,7 +297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEVELOPMENT_TEAM = NTY8T25W6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;

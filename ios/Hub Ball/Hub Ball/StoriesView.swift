@@ -22,6 +22,14 @@ struct StoriesView: View {
 
                             if team == .boston {
                                 storyLink(
+                                    title: "NINE PITCHES",
+                                    summary: "Payton Tolle opened against Kansas City with nine pitches, nine strikes and three strikeouts.",
+                                    systemImage: "9.circle.fill"
+                                ) {
+                                    NinePitchesView()
+                                }
+
+                                storyLink(
                                     title: "FOUR ROADS, ONE RECORD",
                                     summary: "Four Boston seasons reached 57–51 after 108 games—then went four different ways.",
                                     systemImage: "chart.xyaxis.line"
