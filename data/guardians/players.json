@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-13T13:55:00.634876+00:00",
-  "roster_as_of": "September 6, 2026",
+  "generated_at": "2026-09-14T16:01:01.093496+00:00",
+  "roster_as_of": "September 13, 2026",
   "team": {
     "id": 114,
     "name": "Cleveland Guardians"
   },
   "roster_type": "open-current-roster",
-  "player_count": 42,
+  "player_count": 43,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -95,8 +95,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2000-06-26",
       "age": 26,
       "birthplace": "Yaguajay, Cuba",
@@ -477,6 +477,86 @@
           "complete_games": 2,
           "era": 3.61,
           "whip": 1.175
+        }
+      }
+    },
+    {
+      "id": 641401,
+      "wikidata_id": "Q98398908",
+      "slug": "connor-brogdon",
+      "name": "Connor Brogdon",
+      "full_name": "Connor Brogdon",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1995-01-29",
+      "age": 31,
+      "birthplace": "Clovis",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 13, 2020",
+      "debut_team": "Philadelphia Phillies",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Philadelphia Phillies",
+        "Los Angeles Dodgers",
+        "Los Angeles Angels",
+        "Cleveland Guardians"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q98398908",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Connor_Brogdon",
+      "retrosheet_id": "brogc001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 186,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 186,
+          "games_started": 2,
+          "wins": 13,
+          "losses": 10,
+          "saves": 3,
+          "innings_outs": 576,
+          "hits": 175,
+          "runs": 102,
+          "earned_runs": 93,
+          "home_runs": 35,
+          "walks": 71,
+          "strikeouts": 195,
+          "hit_batters": 3,
+          "wild_pitches": 10,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.36,
+          "whip": 1.281
         }
       }
     },

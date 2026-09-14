@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-13T14:06:13.968999+00:00",
-  "roster_as_of": "September 12, 2026",
+  "generated_at": "2026-09-14T16:12:15.933533+00:00",
+  "roster_as_of": "September 13, 2026",
   "team": {
     "id": 109,
     "name": "Arizona Diamondbacks"
   },
   "roster_type": "open-current-roster",
-  "player_count": 46,
+  "player_count": 45,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -661,11 +661,11 @@
       "number": "11",
       "position": {
         "name": "First Baseman",
-        "group": "Infielder",
-        "abbreviation": "IF"
+        "group": "Hitter",
+        "abbreviation": "DH"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2003-09-22",
       "age": 22,
       "birthplace": "Cumaná",
@@ -1065,65 +1065,6 @@
       }
     },
     {
-      "id": 666971,
-      "wikidata_id": "Q18978027",
-      "slug": "lourdes-gurriel-jr",
-      "name": "Lourdes Gurriel Jr.",
-      "full_name": "Lourdes Gurriel Jr.",
-      "number": "12",
-      "position": {
-        "name": "Infielder",
-        "group": "Outfielder",
-        "abbreviation": "OF"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "1993-10-10",
-      "age": 32,
-      "birthplace": "Sancti Spíritus",
-      "height": "6' 4\"",
-      "weight": 183,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "April 20, 2018",
-      "debut_team": "Toronto Blue Jays",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Toronto Blue Jays",
-        "Arizona Diamondbacks"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q18978027",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Lourdes_Gurriel_Jr.",
-      "retrosheet_id": "gurrl001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 875,
-          "plate_appearances": 3555,
-          "at_bats": 3288,
-          "runs": 413,
-          "hits": 902,
-          "doubles": 182,
-          "triples": 11,
-          "home_runs": 129,
-          "runs_batted_in": 491,
-          "walks": 199,
-          "strikeouts": 658,
-          "stolen_bases": 36,
-          "caught_stealing": 19,
-          "average": 0.274,
-          "on_base_percentage": 0.319,
-          "slugging_percentage": 0.454,
-          "ops": 0.773
-        },
-        "pitching": null
-      }
-    },
-    {
       "id": 518876,
       "wikidata_id": "Q18621033",
       "slug": "merrill-kelly",
@@ -1224,7 +1165,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1990-09-14",
-      "age": 35,
+      "age": 36,
       "birthplace": "Pittsburgh",
       "height": null,
       "weight": null,
@@ -2580,7 +2521,7 @@
       "slug": "pavin-smith",
       "name": "Pavin Smith",
       "full_name": "Pavin Smith",
-      "number": "--",
+      "number": "26",
       "position": {
         "name": "First Baseman",
         "group": "Infielder",
