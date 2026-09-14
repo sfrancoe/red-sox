@@ -53,6 +53,8 @@ KNOWN_ENDPOINTS = {
 # Editorial citations open in the browser; they are not application data feeds.
 EDITORIAL_LINKS = {
     "https://malaysia.news.yahoo.com/brewers-clinch-playoffs-become-first-team-in-mlb-history-to-record-multiple-shutout-wins-of-20-plus-runs-in-a-season-121406831.html",
+    "https://www.mlb.com/gameday/824708",
+    "https://x.com/gingersnaphyde/status/2099245461748002821",
 }
 JSON_PROBE_OVERRIDES = {
     "https://red-sox.netlify.app": "https://red-sox.netlify.app/api/data/meta.json",
