@@ -2,6 +2,7 @@ import SwiftUI
 
 enum HomeDestination {
     case games
+    case watch
     case schedule
     case standings
 }
@@ -73,6 +74,23 @@ struct HomeView: View {
         ScrollView {
             VStack(spacing: 0) {
                 lastGameCard
+                Button { onSelect(.watch) } label: {
+                    HStack(spacing: 14) {
+                        Image(systemName: "play.rectangle.fill")
+                            .font(.title).foregroundStyle(AppColor.amber)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("WATCH \(team.shortName.uppercased())").font(AppFont.displayMedium)
+                            Text("Highlights, clubhouse stories and more on YouTube")
+                                .font(.subheadline).foregroundStyle(AppColor.boneDim)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                    .padding(16)
+                    .background(AppColor.nightRaised)
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 24)
                 Color.clear.frame(height: 32)
                 standingsCard
                 Color.clear.frame(height: 32)
