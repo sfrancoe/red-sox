@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-14T16:12:15.933533+00:00",
-  "roster_as_of": "September 13, 2026",
+  "generated_at": "2026-09-15T14:38:14.283486+00:00",
+  "roster_as_of": "September 14, 2026",
   "team": {
     "id": 109,
     "name": "Arizona Diamondbacks"
   },
   "roster_type": "open-current-roster",
-  "player_count": 45,
+  "player_count": 46,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -883,6 +883,12 @@
         "colleges": [
           {
             "name": "El Capitan High School"
+          },
+          {
+            "name": "Southwestern College"
+          },
+          {
+            "name": "University of Arizona"
           }
         ]
       },
@@ -2757,6 +2763,67 @@
           "era": 1.71,
           "whip": 1.101
         }
+      }
+    },
+    {
+      "id": 660821,
+      "wikidata_id": "Q52717395",
+      "slug": "jesus-sanchez",
+      "name": "Jesús Sánchez",
+      "full_name": "Jesús Sánchez",
+      "number": "--",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "OF"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "1997-10-07",
+      "age": 28,
+      "birthplace": "Higüey",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "August 21, 2020",
+      "debut_team": "Miami Marlins",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Miami Marlins",
+        "Houston Astros",
+        "Toronto Blue Jays",
+        "Arizona Diamondbacks"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q52717395",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jes%C3%BAs_S%C3%A1nchez_%28outfielder%29",
+      "retrosheet_id": "sancj003",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 580,
+          "plate_appearances": 2059,
+          "at_bats": 1865,
+          "runs": 230,
+          "hits": 446,
+          "doubles": 92,
+          "triples": 13,
+          "home_runs": 73,
+          "runs_batted_in": 238,
+          "walks": 171,
+          "strikeouts": 538,
+          "stolen_bases": 33,
+          "caught_stealing": 7,
+          "average": 0.239,
+          "on_base_percentage": 0.307,
+          "slugging_percentage": 0.42,
+          "ops": 0.727
+        },
+        "pitching": null
       }
     },
     {

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-14T16:06:35.136862+00:00",
-  "roster_as_of": "September 11, 2026",
+  "generated_at": "2026-09-15T14:32:30.488154+00:00",
+  "roster_as_of": "September 14, 2026",
   "team": {
     "id": 144,
     "name": "Atlanta Braves"
   },
   "roster_type": "open-current-roster",
-  "player_count": 45,
+  "player_count": 44,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -395,90 +395,6 @@
           "complete_games": 1,
           "era": 4.58,
           "whip": 1.355
-        }
-      }
-    },
-    {
-      "id": 663559,
-      "wikidata_id": "Q106625819",
-      "slug": "bailey-falter",
-      "name": "Bailey Falter",
-      "full_name": "Bailey Falter",
-      "number": "70",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "1997-04-24",
-      "age": 29,
-      "birthplace": "Chino Hills",
-      "height": "6' 4\"",
-      "weight": 174,
-      "bats": "Right",
-      "throws": "Left",
-      "debut_date": "April 25, 2021",
-      "debut_team": "Philadelphia Phillies",
-      "education": {
-        "high_schools": [],
-        "colleges": [
-          {
-            "name": "Chino Hills High School"
-          }
-        ]
-      },
-      "teams": [
-        "Philadelphia Phillies",
-        "Pittsburgh Pirates",
-        "Kansas City Royals",
-        "Atlanta Braves"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q106625819",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Bailey_Falter",
-      "retrosheet_id": "faltb001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 114,
-          "plate_appearances": 5,
-          "at_bats": 5,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 5,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": 0.0,
-          "on_base_percentage": 0.0,
-          "slugging_percentage": 0.0,
-          "ops": 0.0
-        },
-        "pitching": {
-          "games": 114,
-          "games_started": 83,
-          "wins": 25,
-          "losses": 30,
-          "saves": 0,
-          "innings_outs": 1398,
-          "hits": 466,
-          "runs": 255,
-          "earned_runs": 237,
-          "home_runs": 74,
-          "walks": 134,
-          "strikeouts": 346,
-          "hit_batters": 9,
-          "wild_pitches": 9,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 4.58,
-          "whip": 1.288
         }
       }
     },
@@ -1681,6 +1597,46 @@
       }
     },
     {
+      "id": 966576252,
+      "wikidata_id": "Q113133571",
+      "slug": "owen-murphy",
+      "name": "Owen Murphy",
+      "full_name": "Owen Murphy",
+      "number": "73",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2003-09-27",
+      "age": 22,
+      "birthplace": "Chicago, Illinois, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 6, 2026",
+      "debut_team": "Atlanta Braves",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Atlanta Braves"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q113133571",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Owen_Murphy_%28baseball%29",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
       "id": 669221,
       "wikidata_id": "Q60229705",
       "slug": "sean-murphy",
@@ -1743,46 +1699,6 @@
           "slugging_percentage": 0.426,
           "ops": 0.751
         },
-        "pitching": null
-      }
-    },
-    {
-      "id": 966576252,
-      "wikidata_id": "Q113133571",
-      "slug": "owen-murphy",
-      "name": "Owen Murphy",
-      "full_name": "Owen Murphy",
-      "number": "73",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "2003-09-27",
-      "age": 22,
-      "birthplace": "Chicago, Illinois, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "July 6, 2026",
-      "debut_team": "Atlanta Braves",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Atlanta Braves"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q113133571",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Owen_Murphy_%28baseball%29",
-      "retrosheet_id": null,
-      "career_stats": {
-        "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
         "pitching": null
       }
     },
