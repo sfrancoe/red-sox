@@ -209,6 +209,6 @@ private struct CompactLeaderRow: View {
     }
 }
 
-private extension SeasonLeaders { static let categoryTitles = ["WAR", "WHIP", "HR", "AVG", "OPS", "RBI"] }
+private extension SeasonLeaders { static let categoryTitles = ["HR", "AVG", "OPS", "RBI", "WHIP", "WAR"] }
 
 #Preview { NavigationStack { SeasonLeadersView() } }

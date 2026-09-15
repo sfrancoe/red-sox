@@ -10,17 +10,17 @@ struct SeasonLeaders: Codable, Sendable {
 
     var categories: [LeaderCategory] {
         [
+            LeaderCategory(title: "HR", leaders: battingLeaders.hr.top),
+            LeaderCategory(title: "AVG", leaders: battingLeaders.avg.top),
+            LeaderCategory(title: "OPS", leaders: battingLeaders.ops.top),
+            LeaderCategory(title: "RBI", leaders: battingLeaders.rbi.top),
+            LeaderCategory(title: "WHIP", leaders: pitchingLeaders.whip.top),
             LeaderCategory(
                 title: "WAR",
                 leaders: warLeaders.map {
                     RankedLeader(name: $0.name, value: $0.war.formatted(.number.precision(.fractionLength(1))))
                 }
-            ),
-            LeaderCategory(title: "WHIP", leaders: pitchingLeaders.whip.top),
-            LeaderCategory(title: "HR", leaders: battingLeaders.hr.top),
-            LeaderCategory(title: "AVG", leaders: battingLeaders.avg.top),
-            LeaderCategory(title: "OPS", leaders: battingLeaders.ops.top),
-            LeaderCategory(title: "RBI", leaders: battingLeaders.rbi.top)
+            )
         ]
     }
 }

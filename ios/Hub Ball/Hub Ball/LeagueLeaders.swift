@@ -9,7 +9,7 @@ enum LeaderboardScope: String, CaseIterable, Identifiable, Sendable {
 
     func title(for team: HubTeam) -> String {
         switch self {
-        case .team: "Team"
+        case .team: team.abbreviation
         case .league: team.definition.league
         case .mlb: "MLB"
         }
@@ -17,7 +17,7 @@ enum LeaderboardScope: String, CaseIterable, Identifiable, Sendable {
 
     func accessibilityTitle(for team: HubTeam) -> String {
         switch self {
-        case .team: "Team leaders"
+        case .team: "\(team.definition.shortName) leaders"
         case .league: team.definition.league == "NL" ? "National League leaders" : "American League leaders"
         case .mlb: "Major League Baseball leaders"
         }
