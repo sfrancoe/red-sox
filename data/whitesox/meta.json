@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-14T17:03:50+00:00",
+ "generated_at": "2026-09-15T15:43:01+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 145,
  "seasons": {
   "2026": {
-   "record": "76-73",
-   "games": 149,
+   "record": "77-73",
+   "games": 150,
    "in_progress": true,
    "war_leader": {
     "name": "Miguel Vargas",
-    "war": 4.5
+    "war": 4.7
    },
    "war_leaders": [
     {
      "name": "Miguel Vargas",
-     "war": 4.5
+     "war": 4.7
     },
     {
      "name": "Tristan Peters",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Sean Burke",
-     "war": 3.8
+     "war": 4.0
     }
    ],
    "pitching_leaders": {
@@ -35,7 +35,7 @@
       },
       {
        "name": "Trevor Richards",
-       "value": "1.12"
+       "value": "1.11"
       },
       {
        "name": "Sean Newcomb",
@@ -48,6 +48,7 @@
     "hr": {
      "names": [
       "Colson Montgomery",
+      "Miguel Vargas",
       "Munetaka Murakami"
      ],
      "value": 31,
@@ -57,12 +58,12 @@
        "value": 31
       },
       {
-       "name": "Munetaka Murakami",
+       "name": "Miguel Vargas",
        "value": 31
       },
       {
-       "name": "Miguel Vargas",
-       "value": 30
+       "name": "Munetaka Murakami",
+       "value": 31
       }
      ]
     },
@@ -78,11 +79,11 @@
       },
       {
        "name": "Miguel Vargas",
-       "value": 79
+       "value": 81
       },
       {
        "name": "Andrew Benintendi",
-       "value": 70
+       "value": 71
       }
      ]
     },
@@ -102,7 +103,7 @@
       },
       {
        "name": "Miguel Vargas",
-       "value": ".247"
+       "value": ".249"
       }
      ]
     },
@@ -110,19 +111,19 @@
      "names": [
       "Miguel Vargas"
      ],
-     "value": ".825",
+     "value": ".832",
      "top": [
       {
        "name": "Miguel Vargas",
-       "value": ".825"
+       "value": ".832"
       },
       {
        "name": "Munetaka Murakami",
-       "value": ".813"
+       "value": ".810"
       },
       {
        "name": "Sam Antonacci",
-       "value": ".759"
+       "value": ".758"
       }
      ]
     }
