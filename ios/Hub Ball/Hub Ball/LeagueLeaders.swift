@@ -56,6 +56,12 @@ struct ComparisonCategory: Codable, Sendable {
     let entries: [ComparisonLeader]
 
     var isAvailable: Bool { availability == "available" }
+    var topTen: [ComparisonLeader] { Array(entries.prefix(10)) }
+
+    func teamSupplement(teamID: Int) -> [ComparisonLeader] {
+        guard !topTen.contains(where: { $0.teamID == teamID }) else { return [] }
+        return Array(entries.filter { $0.teamID == teamID }.prefix(3))
+    }
 }
 
 struct ComparisonLeader: Codable, Identifiable, Sendable {
@@ -82,5 +88,5 @@ struct ComparisonLeader: Codable, Identifiable, Sendable {
     }
 
     var id: String { "\(provider)-\(playerID)" }
-    var rankText: String { tied ? "T-\(rank)" : "\(rank)" }
+    var rankText: String { tied ? "T\(rank)" : "\(rank)" }
 }

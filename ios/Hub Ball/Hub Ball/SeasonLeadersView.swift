@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SeasonLeadersView: View {
     @State private var store: SeasonLeadersStore
-    @State private var scope: LeaderboardScope = .team
+    @State private var scope: LeaderboardScope = .mlb
     @State private var detail: LeaderboardDetail?
     private let team: HubTeam
 
@@ -19,7 +19,10 @@ struct SeasonLeadersView: View {
         }
         .navigationTitle("Season Leaders")
         .navigationBarTitleDisplayMode(.inline)
-        .task { await store.load() }
+        .task {
+            await store.load()
+            if scope != .team { for year in store.sortedYears { await store.loadComparison(year: year) } }
+        }
         .sheet(item: $detail) { LeaderboardDetailSheet(detail: $0) }
     }
 
@@ -101,43 +104,40 @@ struct SeasonLeadersView: View {
     }
 
     private func teamCategory(_ category: LeaderCategory) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 3) {
             Text(category.title).font(.subheadline.weight(.black)).tracking(0.7).foregroundStyle(AppColor.green)
-            ForEach(Array(category.leaders.prefix(3).enumerated()), id: \.element.id) { index, leader in
+            ForEach(Array(category.leaders.prefix(10).enumerated()), id: \.element.id) { index, leader in
                 HStack(alignment: .firstTextBaseline, spacing: 5) {
-                    rankText("\(index + 1)"); Text(leader.name).lineLimit(2); Spacer(minLength: 2)
+                    rankText("\(index + 1)"); LeaderName(name: leader.name, abbreviation: team.abbreviation); Spacer(minLength: 2)
                     Text(leader.value).fontWeight(index == 0 ? .bold : .regular).monospacedDigit()
-                }.font(.system(size: 18))
+                }.font(.callout)
             }
-        }.padding(.vertical, 14)
+        }.padding(.vertical, 10)
     }
 
     private func comparisonCategory(title: String, category: ComparisonCategory?, year: String, payload: LeagueLeadersPayload) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .firstTextBaseline) {
                 Text(title).font(.subheadline.weight(.black)).tracking(0.7).foregroundStyle(AppColor.green)
                 Text(category?.eligibility ?? "Comparison unavailable").font(.caption).foregroundStyle(AppColor.ink.opacity(0.7))
             }
             if let category, category.isAvailable {
-                ForEach(category.entries.prefix(3)) { leader in
-                    HStack(alignment: .firstTextBaseline, spacing: 5) {
-                        rankText(leader.rankText)
-                        VStack(alignment: .leading, spacing: 1) { Text(leader.name).lineLimit(2); Text(leader.teamAbbreviation ?? "Multiple teams").font(.caption).foregroundStyle(AppColor.ink.opacity(0.7)) }
-                        Spacer(minLength: 2); Text(leader.displayValue).fontWeight(leader.rank == 1 ? .bold : .regular).monospacedDigit()
-                    }.font(.system(size: 18))
-                    .padding(.horizontal, leader.teamID == team.definition.mlbID ? 5 : 0)
-                    .background(leader.teamID == team.definition.mlbID ? AppColor.accent.opacity(0.14) : .clear)
-                    .overlay(alignment: .trailing) {
-                        if leader.teamID == team.definition.mlbID {
-                            Text("Your team").font(.caption2.weight(.bold)).foregroundStyle(AppColor.ink.opacity(0.75)).offset(y: 17)
-                        }
-                    }
-                    .accessibilityLabel("\(leader.name), \(leader.tied ? "tied for" : "ranked") \(leader.rankText) in \(scope.heading(for: team)), \(leader.displayValue)")
+                ForEach(category.topTen) { leader in
+                    CompactLeaderRow(leader: leader, selectedTeamID: team.definition.mlbID)
                 }
-                Button("See top 10 & team") { detail = LeaderboardDetail(year: year, title: title, scopeName: scope.heading(for: team), category: category, generatedAt: payload.generatedAt, teamID: team.definition.mlbID, teamName: team.definition.shortName) }
+                let supplement = category.teamSupplement(teamID: team.definition.mlbID)
+                if !supplement.isEmpty {
+                    Divider().padding(.top, 5)
+                    Text("\(team.abbreviation) · TEAM TOP 3")
+                        .font(.caption.weight(.bold)).foregroundStyle(AppColor.green).padding(.top, 3)
+                    ForEach(supplement) { leader in
+                        CompactLeaderRow(leader: leader, selectedTeamID: team.definition.mlbID)
+                    }
+                }
+                Button("Category details & source") { detail = LeaderboardDetail(year: year, title: title, scopeName: scope.heading(for: team), category: category, generatedAt: payload.generatedAt, teamID: team.definition.mlbID, teamName: team.definition.shortName) }
                     .font(.subheadline.weight(.semibold)).frame(minHeight: 44)
             } else { Text(category?.message ?? "Comparison unavailable.").font(.subheadline) }
-        }.padding(.vertical, 14)
+        }.padding(.vertical, 10)
     }
 
     private func rankText(_ text: String) -> some View { Text(text).font(.subheadline.weight(.black)).foregroundStyle(AppColor.red).frame(minWidth: 28, alignment: .leading) }
@@ -160,18 +160,52 @@ private struct LeaderboardDetailSheet: View {
         NavigationStack {
             List {
                 Section("\(detail.year) · \(detail.scopeName)") { Text(detail.title).font(.title2.weight(.bold)); Text(detail.category.eligibility) }
-                Section("Top 10") { ForEach(detail.category.entries.prefix(10)) { leaderRow($0) } }
-                let teamOutsideTopTen = detail.category.entries.filter { $0.teamID == detail.teamID && $0.rank > 10 }
+                Section("Top 10") { ForEach(detail.category.topTen) { leaderRow($0) } }
+                let teamOutsideTopTen = detail.category.teamSupplement(teamID: detail.teamID)
                 if !teamOutsideTopTen.isEmpty {
-                    Section("\(detail.teamName) players") { ForEach(teamOutsideTopTen) { leaderRow($0) } }
+                    Section("\(detail.teamName) · Top 3") { ForEach(teamOutsideTopTen) { leaderRow($0) } }
                 }
                 Section("Source") { Text("MLB Stats API · Generated \(detail.generatedAt)").font(.footnote) }
-            }.navigationTitle("League Leaders").toolbar { ToolbarItem(placement: .confirmationAction) { Button("Close") { dismiss() } } }
-        }
+            }.environment(\.defaultMinListRowHeight, 28)
+                .scrollContentBackground(.hidden).background(AppColor.night).foregroundStyle(AppColor.ink)
+                .navigationTitle("League Leaders").navigationBarTitleDisplayMode(.inline).toolbar { ToolbarItem(placement: .confirmationAction) { Button("Close") { dismiss() } } }
+        }.preferredColorScheme(.dark)
     }
 
     private func leaderRow(_ leader: ComparisonLeader) -> some View {
-        HStack { Text(leader.rankText).frame(minWidth: 32, alignment: .leading); Text(leader.name); Spacer(); Text(leader.displayValue).monospacedDigit() }
+        CompactLeaderRow(leader: leader, selectedTeamID: detail.teamID)
+            .listRowInsets(EdgeInsets(top: 3, leading: 16, bottom: 3, trailing: 16))
+    }
+}
+
+private struct LeaderName: View {
+    let name: String
+    let abbreviation: String
+    var body: some View {
+        (Text(name) + Text("  \(abbreviation)").font(.caption.weight(.semibold)).foregroundColor(AppColor.ink.opacity(0.65)))
+            .lineLimit(2).fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+private struct CompactLeaderRow: View {
+    let leader: ComparisonLeader
+    let selectedTeamID: Int
+    private var isSelectedTeam: Bool { leader.teamID == selectedTeamID }
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 5) {
+            Text(leader.rankText).font(.caption.weight(.black)).foregroundStyle(AppColor.red)
+                .frame(minWidth: 30, alignment: .leading)
+            LeaderName(name: leader.name, abbreviation: leader.teamAbbreviation ?? "TOT")
+            if isSelectedTeam {
+                Image(systemName: "star.fill").font(.system(size: 8)).foregroundStyle(AppColor.green)
+            }
+            Spacer(minLength: 2)
+            Text(leader.displayValue).fontWeight(leader.rank == 1 ? .bold : .regular).monospacedDigit()
+        }
+        .font(.callout).padding(.horizontal, 4).padding(.vertical, 2)
+        .background(isSelectedTeam ? AppColor.accent.opacity(0.14) : .clear, in: RoundedRectangle(cornerRadius: 4))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(leader.name), \(leader.teamAbbreviation ?? "multiple teams"), \(leader.tied ? "tied for" : "ranked") \(leader.rank), \(leader.displayValue)\(isSelectedTeam ? ", your team" : "")")
     }
 }
 
