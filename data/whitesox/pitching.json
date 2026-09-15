@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T05:24:01.344398+00:00",
+  "generated_at": "2026-09-15T12:09:19.699891+00:00",
   "season": 2026,
   "team": "Chicago White Sox",
   "games_played": 150,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.2,
+    "actual_war": 12.3,
     "forecast_war_to_date": 12.7,
-    "war_gap": -0.5,
-    "innings": 1326.0,
-    "era": 4.13
+    "war_gap": -0.4,
+    "innings": 1335.0,
+    "era": 4.11
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Sean Burke",
       "throws": "R",
       "role": "Swingman",
-      "games": 29,
+      "games": 30,
       "starts": 25,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "156.0",
-        "ip_value": 156.0,
-        "war": 2.88,
-        "era": 3.58,
-        "fip": 3.67,
-        "k_minus_bb_pct": 17.4
+        "ip": "161.0",
+        "ip_value": 161.0,
+        "war": 2.97,
+        "era": 3.47,
+        "fip": 3.64,
+        "k_minus_bb_pct": 17.2
       },
       "forecast": {
         "ip": 142.1,
@@ -49,8 +49,8 @@
         "ip": 131.5,
         "war": 0.85
       },
-      "war_gap": 2.03,
-      "innings_share_pct": 11.8
+      "war_gap": 2.12,
+      "innings_share_pct": 12.1
     },
     {
       "id": 663436,
@@ -89,17 +89,17 @@
       "name": "Sean Newcomb",
       "throws": "L",
       "role": "Swingman",
-      "games": 54,
-      "starts": 5,
+      "games": 55,
+      "starts": 6,
       "saves": 4,
       "holds": 10,
       "actual": {
-        "ip": "84.1",
-        "ip_value": 84.333,
-        "war": 1.97,
-        "era": 2.77,
+        "ip": "85.1",
+        "ip_value": 85.333,
+        "war": 1.99,
+        "era": 2.74,
         "fip": 2.88,
-        "k_minus_bb_pct": 13.9
+        "k_minus_bb_pct": 13.8
       },
       "forecast": {
         "ip": 66.0,
@@ -113,7 +113,7 @@
         "ip": 61.1,
         "war": 0.39
       },
-      "war_gap": 1.57,
+      "war_gap": 1.6,
       "innings_share_pct": 6.4
     },
     {
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "76.2",
         "ip_value": 76.667,
-        "war": 1.84,
+        "war": 1.83,
         "era": 2.23,
         "fip": 2.78,
         "k_minus_bb_pct": 23.7
@@ -146,7 +146,7 @@
         "war": 1.17
       },
       "war_gap": 0.66,
-      "innings_share_pct": 5.8
+      "innings_share_pct": 5.7
     },
     {
       "id": 663542,
@@ -217,17 +217,17 @@
       "name": "Hagen Smith",
       "throws": "L",
       "role": "Reliever",
-      "games": 12,
+      "games": 13,
       "starts": 1,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "20.0",
-        "ip_value": 20.0,
-        "war": 0.57,
-        "era": 0.45,
-        "fip": 2.35,
-        "k_minus_bb_pct": 25.0
+        "ip": "22.0",
+        "ip_value": 22.0,
+        "war": 0.66,
+        "era": 0.41,
+        "fip": 2.15,
+        "k_minus_bb_pct": 26.5
       },
       "forecast": {
         "ip": 18.5,
@@ -241,8 +241,8 @@
         "ip": 17.1,
         "war": 0.13
       },
-      "war_gap": 0.43,
-      "innings_share_pct": 1.5
+      "war_gap": 0.53,
+      "innings_share_pct": 1.6
     },
     {
       "id": 669684,
@@ -341,38 +341,6 @@
       "innings_share_pct": 4.9
     },
     {
-      "id": 670950,
-      "name": "Trevor Richards",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 46,
-      "starts": 0,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "69.0",
-        "ip_value": 69.0,
-        "war": 0.35,
-        "era": 3.65,
-        "fip": 4.1,
-        "k_minus_bb_pct": 14.8
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.64,
-        "fip": 4.8,
-        "k_minus_bb_pct": 11.4,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.0
-      },
-      "war_gap": 0.36,
-      "innings_share_pct": 5.2
-    },
-    {
       "id": 699823,
       "name": "Tyler Davis",
       "throws": "R",
@@ -403,6 +371,38 @@
       },
       "war_gap": 0.26,
       "innings_share_pct": 2.3
+    },
+    {
+      "id": 670950,
+      "name": "Trevor Richards",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 47,
+      "starts": 0,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "70.0",
+        "ip_value": 70.0,
+        "war": 0.25,
+        "era": 3.6,
+        "fip": 4.28,
+        "k_minus_bb_pct": 14.5
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.64,
+        "fip": 4.8,
+        "k_minus_bb_pct": 11.4,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": 0.25,
+      "innings_share_pct": 5.2
     },
     {
       "id": 805326,
@@ -555,7 +555,7 @@
         "war": 0.15
       },
       "war_gap": -0.15,
-      "innings_share_pct": 2.1
+      "innings_share_pct": 2.0
     },
     {
       "id": 680951,
@@ -587,7 +587,7 @@
         "war": 0.05
       },
       "war_gap": -0.06,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 0.1
     },
     {
       "id": 622554,
@@ -667,7 +667,7 @@
         "ip_value": 10.333,
         "war": -0.03,
         "era": 3.48,
-        "fip": 4.55,
+        "fip": 4.56,
         "k_minus_bb_pct": 1.9
       },
       "forecast": {
@@ -715,7 +715,7 @@
         "war": -0.12
       },
       "war_gap": 0.08,
-      "innings_share_pct": 0.8
+      "innings_share_pct": 0.7
     },
     {
       "id": 686563,
@@ -779,7 +779,7 @@
         "war": 0.07
       },
       "war_gap": -0.14,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 0.1
     },
     {
       "id": 682668,
@@ -900,7 +900,7 @@
         "war": 0.06
       },
       "war_gap": -0.24,
-      "innings_share_pct": 0.7
+      "innings_share_pct": 0.6
     },
     {
       "id": 607200,
@@ -932,7 +932,7 @@
         "war": 0.5
       },
       "war_gap": -0.71,
-      "innings_share_pct": 10.1
+      "innings_share_pct": 10.0
     },
     {
       "id": 656457,
@@ -964,7 +964,7 @@
         "war": 0.08
       },
       "war_gap": -0.31,
-      "innings_share_pct": 0.5
+      "innings_share_pct": 0.4
     },
     {
       "id": 622491,
@@ -1028,7 +1028,7 @@
         "war": 0.14
       },
       "war_gap": -0.43,
-      "innings_share_pct": 0.8
+      "innings_share_pct": 0.7
     },
     {
       "id": 673929,

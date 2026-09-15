@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T05:24:07.126523+00:00",
+  "generated_at": "2026-09-15T12:09:41.267098+00:00",
   "season": 2026,
   "team": "Miami Marlins",
   "games_played": 151,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 13.3,
+    "actual_war": 13.0,
     "forecast_war_to_date": 13.3,
-    "war_gap": -0.0,
-    "innings": 1318.7,
-    "era": 4.12
+    "war_gap": -0.3,
+    "innings": 1327.0,
+    "era": 4.14
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Sandy Alcantara",
       "throws": "R",
       "role": "Starter",
-      "games": 31,
-      "starts": 31,
+      "games": 32,
+      "starts": 32,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "200.0",
-        "ip_value": 200.0,
+        "ip": "205.0",
+        "ip_value": 205.0,
         "war": 3.08,
-        "era": 3.78,
-        "fip": 4.05,
-        "k_minus_bb_pct": 10.6
+        "era": 3.86,
+        "fip": 4.07,
+        "k_minus_bb_pct": 10.7
       },
       "forecast": {
         "ip": 186.6,
@@ -50,7 +50,7 @@
         "war": 2.34
       },
       "war_gap": 0.74,
-      "innings_share_pct": 15.2
+      "innings_share_pct": 15.4
     },
     {
       "id": 676974,
@@ -81,7 +81,7 @@
         "ip": 139.0,
         "war": 1.77
       },
-      "war_gap": 0.59,
+      "war_gap": 0.58,
       "innings_share_pct": 8.4
     },
     {
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "144.1",
         "ip_value": 144.333,
-        "war": 2.17,
+        "war": 2.16,
         "era": 3.99,
         "fip": 4.09,
         "k_minus_bb_pct": 15.1
@@ -145,7 +145,7 @@
         "ip": 86.4,
         "war": 0.63
       },
-      "war_gap": 1.04,
+      "war_gap": 1.03,
       "innings_share_pct": 8.4
     },
     {
@@ -153,17 +153,17 @@
       "name": "Michael Petersen",
       "throws": "R",
       "role": "Setup",
-      "games": 59,
+      "games": 60,
       "starts": 0,
       "saves": 1,
-      "holds": 24,
+      "holds": 25,
       "actual": {
-        "ip": "59.1",
-        "ip_value": 59.333,
-        "war": 1.17,
-        "era": 3.19,
-        "fip": 3.34,
-        "k_minus_bb_pct": 17.9
+        "ip": "60.1",
+        "ip_value": 60.333,
+        "war": 1.27,
+        "era": 3.13,
+        "fip": 3.24,
+        "k_minus_bb_pct": 18.8
       },
       "forecast": {
         "ip": 48.0,
@@ -177,7 +177,7 @@
         "ip": 44.7,
         "war": -0.04
       },
-      "war_gap": 1.22,
+      "war_gap": 1.31,
       "innings_share_pct": 4.5
     },
     {
@@ -185,17 +185,17 @@
       "name": "Calvin Faucher",
       "throws": "R",
       "role": "Setup",
-      "games": 63,
+      "games": 64,
       "starts": 0,
       "saves": 3,
-      "holds": 16,
+      "holds": 17,
       "actual": {
-        "ip": "62.1",
-        "ip_value": 62.333,
-        "war": 1.08,
-        "era": 3.61,
-        "fip": 2.94,
-        "k_minus_bb_pct": 12.3
+        "ip": "63.1",
+        "ip_value": 63.333,
+        "war": 1.09,
+        "era": 3.55,
+        "fip": 2.95,
+        "k_minus_bb_pct": 12.2
       },
       "forecast": {
         "ip": 64.0,
@@ -209,8 +209,8 @@
         "ip": 59.7,
         "war": 0.22
       },
-      "war_gap": 0.86,
-      "innings_share_pct": 4.7
+      "war_gap": 0.87,
+      "innings_share_pct": 4.8
     },
     {
       "id": 687473,
@@ -405,38 +405,6 @@
       "innings_share_pct": 0.9
     },
     {
-      "id": 664126,
-      "name": "Pete Fairbanks",
-      "throws": "R",
-      "role": "Closer",
-      "games": 45,
-      "starts": 1,
-      "saves": 19,
-      "holds": 2,
-      "actual": {
-        "ip": "41.1",
-        "ip_value": 41.333,
-        "war": 0.07,
-        "era": 6.1,
-        "fip": 4.53,
-        "k_minus_bb_pct": 20.3
-      },
-      "forecast": {
-        "ip": 62.0,
-        "war": 0.68,
-        "era": 3.57,
-        "fip": 3.58,
-        "k_minus_bb_pct": 16.8,
-        "team_at_fetch": "MIA"
-      },
-      "forecast_to_date": {
-        "ip": 57.8,
-        "war": 0.64
-      },
-      "war_gap": -0.57,
-      "innings_share_pct": 3.1
-    },
-    {
       "id": 663978,
       "name": "Chris Paddack",
       "throws": "R",
@@ -469,36 +437,36 @@
       "innings_share_pct": 2.3
     },
     {
-      "id": 667652,
-      "name": "Jack Ralston",
+      "id": 664126,
+      "name": "Pete Fairbanks",
       "throws": "R",
-      "role": "Reliever",
-      "games": 10,
-      "starts": 0,
-      "saves": 0,
+      "role": "Closer",
+      "games": 46,
+      "starts": 1,
+      "saves": 19,
       "holds": 2,
       "actual": {
-        "ip": "10.1",
-        "ip_value": 10.333,
-        "war": 0.04,
-        "era": 3.48,
-        "fip": 4.07,
-        "k_minus_bb_pct": 9.3
+        "ip": "41.1",
+        "ip_value": 41.333,
+        "war": 0.03,
+        "era": 6.31,
+        "fip": 4.6,
+        "k_minus_bb_pct": 19.7
       },
       "forecast": {
-        "ip": 1.0,
-        "war": -0.01,
-        "era": 4.81,
-        "fip": 4.96,
-        "k_minus_bb_pct": 6.7,
+        "ip": 62.0,
+        "war": 0.68,
+        "era": 3.57,
+        "fip": 3.58,
+        "k_minus_bb_pct": 16.8,
         "team_at_fetch": "MIA"
       },
       "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.01
+        "ip": 57.8,
+        "war": 0.64
       },
-      "war_gap": 0.05,
-      "innings_share_pct": 0.8
+      "war_gap": -0.61,
+      "innings_share_pct": 3.1
     },
     {
       "id": 680767,
@@ -626,7 +594,7 @@
         "war": -0.0
       },
       "war_gap": -0.01,
-      "innings_share_pct": 3.5
+      "innings_share_pct": 3.4
     },
     {
       "id": 666129,
@@ -757,6 +725,38 @@
       "innings_share_pct": 0.4
     },
     {
+      "id": 667652,
+      "name": "Jack Ralston",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 11,
+      "starts": 0,
+      "saves": 0,
+      "holds": 2,
+      "actual": {
+        "ip": "10.2",
+        "ip_value": 10.667,
+        "war": -0.12,
+        "era": 4.22,
+        "fip": 5.26,
+        "k_minus_bb_pct": 8.9
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.01,
+        "era": 4.81,
+        "fip": 4.96,
+        "k_minus_bb_pct": 6.7,
+        "team_at_fetch": "MIA"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.01
+      },
+      "war_gap": -0.11,
+      "innings_share_pct": 0.8
+    },
+    {
       "id": 691594,
       "name": "Javier Sanoja",
       "throws": "R",
@@ -846,38 +846,6 @@
       "innings_share_pct": 1.8
     },
     {
-      "id": 676604,
-      "name": "Tyler Zuber",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 40,
-      "starts": 0,
-      "saves": 1,
-      "holds": 8,
-      "actual": {
-        "ip": "35.2",
-        "ip_value": 35.667,
-        "war": -0.23,
-        "era": 4.79,
-        "fip": 4.84,
-        "k_minus_bb_pct": 18.6
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.68,
-        "fip": 4.74,
-        "k_minus_bb_pct": 9.9,
-        "team_at_fetch": "MIA"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.0
-      },
-      "war_gap": -0.23,
-      "innings_share_pct": 2.7
-    },
-    {
       "id": 667463,
       "name": "John King",
       "throws": "L",
@@ -891,7 +859,7 @@
         "ip_value": 49.667,
         "war": -0.26,
         "era": 3.99,
-        "fip": 4.87,
+        "fip": 4.88,
         "k_minus_bb_pct": 8.1
       },
       "forecast": {
@@ -907,7 +875,39 @@
         "war": 0.18
       },
       "war_gap": -0.43,
-      "innings_share_pct": 3.8
+      "innings_share_pct": 3.7
+    },
+    {
+      "id": 676604,
+      "name": "Tyler Zuber",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 41,
+      "starts": 0,
+      "saves": 1,
+      "holds": 9,
+      "actual": {
+        "ip": "36.2",
+        "ip_value": 36.667,
+        "war": -0.39,
+        "era": 5.15,
+        "fip": 5.18,
+        "k_minus_bb_pct": 18.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.68,
+        "fip": 4.74,
+        "k_minus_bb_pct": 9.9,
+        "team_at_fetch": "MIA"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": -0.39,
+      "innings_share_pct": 2.8
     }
   ]
 }

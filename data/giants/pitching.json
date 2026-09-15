@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T05:24:13.000150+00:00",
+  "generated_at": "2026-09-15T12:10:05.380657+00:00",
   "season": 2026,
   "team": "San Francisco Giants",
   "games_played": 151,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 9.6,
+    "actual_war": 9.8,
     "forecast_war_to_date": 11.5,
-    "war_gap": -1.9,
-    "innings": 1324.0,
-    "era": 4.39
+    "war_gap": -1.7,
+    "innings": 1332.0,
+    "era": 4.38
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "160.2",
         "ip_value": 160.667,
-        "war": 3.09,
+        "war": 3.1,
         "era": 4.31,
         "fip": 3.46,
         "k_minus_bb_pct": 13.9
@@ -57,17 +57,17 @@
       "name": "Landen Roupp",
       "throws": "R",
       "role": "Starter",
-      "games": 28,
-      "starts": 28,
+      "games": 29,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "150.2",
-        "ip_value": 150.667,
-        "war": 2.43,
-        "era": 4.0,
-        "fip": 3.74,
-        "k_minus_bb_pct": 10.5
+        "ip": "155.0",
+        "ip_value": 155.0,
+        "war": 2.51,
+        "era": 4.01,
+        "fip": 3.73,
+        "k_minus_bb_pct": 10.4
       },
       "forecast": {
         "ip": 131.9,
@@ -81,8 +81,8 @@
         "ip": 122.9,
         "war": 1.05
       },
-      "war_gap": 1.37,
-      "innings_share_pct": 11.4
+      "war_gap": 1.46,
+      "innings_share_pct": 11.6
     },
     {
       "id": 592662,
@@ -113,8 +113,8 @@
         "ip": 167.6,
         "war": 1.52
       },
-      "war_gap": -0.47,
-      "innings_share_pct": 9.3
+      "war_gap": -0.46,
+      "innings_share_pct": 9.2
     },
     {
       "id": 641816,
@@ -146,7 +146,7 @@
         "war": 1.29
       },
       "war_gap": -0.44,
-      "innings_share_pct": 7.2
+      "innings_share_pct": 7.1
     },
     {
       "id": 686790,
@@ -217,17 +217,17 @@
       "name": "Trent Harris",
       "throws": "R",
       "role": "Reliever",
-      "games": 15,
+      "games": 16,
       "starts": 0,
       "saves": 1,
       "holds": 4,
       "actual": {
-        "ip": "17.0",
-        "ip_value": 17.0,
-        "war": 0.48,
-        "era": 2.65,
-        "fip": 1.75,
-        "k_minus_bb_pct": 21.7
+        "ip": "18.0",
+        "ip_value": 18.0,
+        "war": 0.51,
+        "era": 2.5,
+        "fip": 1.71,
+        "k_minus_bb_pct": 22.2
       },
       "forecast": {
         "ip": 8.0,
@@ -241,8 +241,8 @@
         "ip": 7.5,
         "war": 0.0
       },
-      "war_gap": 0.47,
-      "innings_share_pct": 1.3
+      "war_gap": 0.5,
+      "innings_share_pct": 1.4
     },
     {
       "id": 605288,
@@ -274,7 +274,7 @@
         "war": 1.03
       },
       "war_gap": -0.59,
-      "innings_share_pct": 8.3
+      "innings_share_pct": 8.2
     },
     {
       "id": 656529,
@@ -465,7 +465,7 @@
         "ip": 56.8,
         "war": 0.4
       },
-      "war_gap": -0.09,
+      "war_gap": -0.08,
       "innings_share_pct": 3.2
     },
     {
@@ -562,7 +562,7 @@
         "war": 0.11
       },
       "war_gap": -0.05,
-      "innings_share_pct": 4.6
+      "innings_share_pct": 4.5
     },
     {
       "id": 683363,
@@ -903,38 +903,6 @@
       "innings_share_pct": 0.1
     },
     {
-      "id": 665665,
-      "name": "Reiver Sanmartin",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 22,
-      "starts": 0,
-      "saves": 0,
-      "holds": 4,
-      "actual": {
-        "ip": "21.0",
-        "ip_value": 21.0,
-        "war": -0.04,
-        "era": 4.29,
-        "fip": 4.29,
-        "k_minus_bb_pct": 11.2
-      },
-      "forecast": {
-        "ip": 15.0,
-        "war": -0.02,
-        "era": 3.96,
-        "fip": 4.1,
-        "k_minus_bb_pct": 8.8,
-        "team_at_fetch": "SFG"
-      },
-      "forecast_to_date": {
-        "ip": 14.0,
-        "war": -0.02
-      },
-      "war_gap": -0.02,
-      "innings_share_pct": 1.6
-    },
-    {
       "id": 678576,
       "name": "Wilkin Ramos",
       "throws": "R",
@@ -965,6 +933,38 @@
       },
       "war_gap": -0.05,
       "innings_share_pct": 0.2
+    },
+    {
+      "id": 665665,
+      "name": "Reiver Sanmartin",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 23,
+      "starts": 0,
+      "saves": 0,
+      "holds": 4,
+      "actual": {
+        "ip": "21.0",
+        "ip_value": 21.0,
+        "war": -0.08,
+        "era": 4.29,
+        "fip": 4.44,
+        "k_minus_bb_pct": 9.8
+      },
+      "forecast": {
+        "ip": 15.0,
+        "war": -0.02,
+        "era": 3.96,
+        "fip": 4.1,
+        "k_minus_bb_pct": 8.8,
+        "team_at_fetch": "SFG"
+      },
+      "forecast_to_date": {
+        "ip": 14.0,
+        "war": -0.02
+      },
+      "war_gap": -0.06,
+      "innings_share_pct": 1.6
     },
     {
       "id": 621366,
@@ -1010,7 +1010,7 @@
       "actual": {
         "ip": "14.0",
         "ip_value": 14.0,
-        "war": -0.12,
+        "war": -0.11,
         "era": 7.07,
         "fip": 5.39,
         "k_minus_bb_pct": 1.6
@@ -1029,6 +1029,38 @@
       },
       "war_gap": -0.13,
       "innings_share_pct": 1.1
+    },
+    {
+      "id": 669270,
+      "name": "Joel Kuhnel",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 5,
+      "starts": 0,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "5.1",
+        "ip_value": 5.333,
+        "war": -0.15,
+        "era": 3.38,
+        "fip": 5.92,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 11.0,
+        "war": 0.04,
+        "era": 4.08,
+        "fip": 4.17,
+        "k_minus_bb_pct": 9.3,
+        "team_at_fetch": "SFG"
+      },
+      "forecast_to_date": {
+        "ip": 10.3,
+        "war": 0.04
+      },
+      "war_gap": -0.19,
+      "innings_share_pct": 0.4
     },
     {
       "id": 676130,
@@ -1061,38 +1093,6 @@
       },
       "war_gap": -0.2,
       "innings_share_pct": 0.2
-    },
-    {
-      "id": 669270,
-      "name": "Joel Kuhnel",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 4,
-      "starts": 0,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "3.2",
-        "ip_value": 3.667,
-        "war": -0.22,
-        "era": 4.91,
-        "fip": 7.74,
-        "k_minus_bb_pct": -5.6
-      },
-      "forecast": {
-        "ip": 11.0,
-        "war": 0.04,
-        "era": 4.08,
-        "fip": 4.17,
-        "k_minus_bb_pct": 9.3,
-        "team_at_fetch": "SFG"
-      },
-      "forecast_to_date": {
-        "ip": 10.3,
-        "war": 0.04
-      },
-      "war_gap": -0.26,
-      "innings_share_pct": 0.3
     },
     {
       "id": 676254,
@@ -1131,17 +1131,17 @@
       "name": "Carson Seymour",
       "throws": "R",
       "role": "Reliever",
-      "games": 18,
+      "games": 19,
       "starts": 0,
       "saves": 1,
       "holds": 6,
       "actual": {
-        "ip": "25.0",
-        "ip_value": 25.0,
-        "war": -0.55,
-        "era": 5.4,
-        "fip": 5.98,
-        "k_minus_bb_pct": 4.3
+        "ip": "26.0",
+        "ip_value": 26.0,
+        "war": -0.53,
+        "era": 5.19,
+        "fip": 5.87,
+        "k_minus_bb_pct": 4.2
       },
       "forecast": {
         "ip": 31.9,
@@ -1155,8 +1155,8 @@
         "ip": 29.7,
         "war": 0.12
       },
-      "war_gap": -0.67,
-      "innings_share_pct": 1.9
+      "war_gap": -0.65,
+      "innings_share_pct": 2.0
     },
     {
       "id": 657424,

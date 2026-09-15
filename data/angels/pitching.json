@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T05:24:04.534820+00:00",
+  "generated_at": "2026-09-15T12:09:30.982685+00:00",
   "season": 2026,
   "team": "Los Angeles Angels",
   "games_played": 150,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.9,
+    "actual_war": 12.8,
     "forecast_war_to_date": 12.8,
-    "war_gap": 0.1,
-    "innings": 1314.3,
+    "war_gap": 0.0,
+    "innings": 1323.3,
     "era": 4.23
   },
   "pitchers": [
@@ -25,17 +25,17 @@
       "name": "Reid Detmers",
       "throws": "L",
       "role": "Starter",
-      "games": 29,
-      "starts": 29,
+      "games": 30,
+      "starts": 30,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "168.0",
-        "ip_value": 168.0,
-        "war": 4.46,
-        "era": 3.32,
+        "ip": "174.0",
+        "ip_value": 174.0,
+        "war": 4.59,
+        "era": 3.36,
         "fip": 3.04,
-        "k_minus_bb_pct": 21.7
+        "k_minus_bb_pct": 22.0
       },
       "forecast": {
         "ip": 150.7,
@@ -49,8 +49,8 @@
         "ip": 139.6,
         "war": 1.82
       },
-      "war_gap": 2.64,
-      "innings_share_pct": 12.8
+      "war_gap": 2.77,
+      "innings_share_pct": 13.1
     },
     {
       "id": 700712,
@@ -81,7 +81,7 @@
         "ip": 38.9,
         "war": -0.04
       },
-      "war_gap": 2.36,
+      "war_gap": 2.35,
       "innings_share_pct": 10.4
     },
     {
@@ -114,7 +114,7 @@
         "war": 2.8
       },
       "war_gap": -0.78,
-      "innings_share_pct": 9.4
+      "innings_share_pct": 9.3
     },
     {
       "id": 696519,
@@ -185,17 +185,17 @@
       "name": "Ryan Watson",
       "throws": "R",
       "role": "Reliever",
-      "games": 14,
+      "games": 15,
       "starts": 0,
       "saves": 1,
-      "holds": 6,
+      "holds": 7,
       "actual": {
-        "ip": "12.0",
-        "ip_value": 12.0,
-        "war": 0.52,
-        "era": 2.25,
-        "fip": 1.35,
-        "k_minus_bb_pct": 24.0
+        "ip": "13.1",
+        "ip_value": 13.333,
+        "war": 0.58,
+        "era": 2.03,
+        "fip": 1.23,
+        "k_minus_bb_pct": 25.9
       },
       "forecast": {
         "ip": 42.0,
@@ -209,8 +209,8 @@
         "ip": 38.9,
         "war": 0.06
       },
-      "war_gap": 0.46,
-      "innings_share_pct": 0.9
+      "war_gap": 0.52,
+      "innings_share_pct": 1.0
     },
     {
       "id": 681217,
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "17.2",
         "ip_value": 17.667,
-        "war": 0.43,
+        "war": 0.42,
         "era": 3.06,
         "fip": 2.59,
         "k_minus_bb_pct": 22.2
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "51.2",
         "ip_value": 51.667,
-        "war": 0.41,
+        "war": 0.4,
         "era": 3.66,
         "fip": 3.78,
         "k_minus_bb_pct": 19.2
@@ -339,38 +339,6 @@
       },
       "war_gap": 0.41,
       "innings_share_pct": 3.9
-    },
-    {
-      "id": 690829,
-      "name": "Ben Joyce",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 13,
-      "starts": 0,
-      "saves": 4,
-      "holds": 2,
-      "actual": {
-        "ip": "12.1",
-        "ip_value": 12.333,
-        "war": 0.35,
-        "era": 3.65,
-        "fip": 2.62,
-        "k_minus_bb_pct": 16.3
-      },
-      "forecast": {
-        "ip": 48.0,
-        "war": 0.48,
-        "era": 3.42,
-        "fip": 3.53,
-        "k_minus_bb_pct": 18.0,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 44.4,
-        "war": 0.44
-      },
-      "war_gap": -0.09,
-      "innings_share_pct": 0.9
     },
     {
       "id": 489446,
@@ -437,38 +405,6 @@
       "innings_share_pct": 6.6
     },
     {
-      "id": 676620,
-      "name": "Blake Weiman",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 12,
-      "starts": 0,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "13.1",
-        "ip_value": 13.333,
-        "war": 0.3,
-        "era": 2.03,
-        "fip": 2.65,
-        "k_minus_bb_pct": 17.2
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.39,
-        "fip": 4.61,
-        "k_minus_bb_pct": 10.0,
-        "team_at_fetch": "LAA"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.0
-      },
-      "war_gap": 0.3,
-      "innings_share_pct": 1.0
-    },
-    {
       "id": 695049,
       "name": "Brett Kerry",
       "throws": "R",
@@ -498,6 +434,38 @@
         "war": -0.0
       },
       "war_gap": 0.27,
+      "innings_share_pct": 1.0
+    },
+    {
+      "id": 690829,
+      "name": "Ben Joyce",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 14,
+      "starts": 0,
+      "saves": 5,
+      "holds": 2,
+      "actual": {
+        "ip": "13.1",
+        "ip_value": 13.333,
+        "war": 0.26,
+        "era": 3.38,
+        "fip": 3.1,
+        "k_minus_bb_pct": 11.1
+      },
+      "forecast": {
+        "ip": 48.0,
+        "war": 0.48,
+        "era": 3.42,
+        "fip": 3.53,
+        "k_minus_bb_pct": 18.0,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 44.4,
+        "war": 0.44
+      },
+      "war_gap": -0.18,
       "innings_share_pct": 1.0
     },
     {
@@ -562,7 +530,39 @@
         "war": 0.28
       },
       "war_gap": -0.08,
-      "innings_share_pct": 4.9
+      "innings_share_pct": 4.8
+    },
+    {
+      "id": 676620,
+      "name": "Blake Weiman",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 13,
+      "starts": 0,
+      "saves": 0,
+      "holds": 3,
+      "actual": {
+        "ip": "14.0",
+        "ip_value": 14.0,
+        "war": 0.17,
+        "era": 2.57,
+        "fip": 3.46,
+        "k_minus_bb_pct": 18.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.39,
+        "fip": 4.61,
+        "k_minus_bb_pct": 10.0,
+        "team_at_fetch": "LAA"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": 0.17,
+      "innings_share_pct": 1.1
     },
     {
       "id": 684665,
@@ -626,7 +626,7 @@
         "war": 0.33
       },
       "war_gap": -0.2,
-      "innings_share_pct": 2.1
+      "innings_share_pct": 2.0
     },
     {
       "id": 671111,
@@ -722,7 +722,7 @@
         "war": 0.02
       },
       "war_gap": 0.02,
-      "innings_share_pct": 2.6
+      "innings_share_pct": 2.5
     },
     {
       "id": 605447,
@@ -1059,7 +1059,7 @@
         "ip": 51.9,
         "war": 0.47
       },
-      "war_gap": -0.85,
+      "war_gap": -0.86,
       "innings_share_pct": 1.8
     },
     {
