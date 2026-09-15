@@ -13,6 +13,12 @@ enum AppBackend {
         return root.appending(path: path)
     }
 
+    /// A shared app-data artifact. Unlike `dataURL`, this intentionally omits a
+    /// team directory so every club reads the same comparison snapshot.
+    nonisolated static func sharedDataURL(_ path: String) -> URL {
+        dataRoot.appending(path: path)
+    }
+
     nonisolated private static var dataRoot: URL {
         #if DEBUG
         if let value = ProcessInfo.processInfo.environment["HUB_DATA_ROOT"],

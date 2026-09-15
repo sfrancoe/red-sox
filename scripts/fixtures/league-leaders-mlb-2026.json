@@ -1,0 +1,768 @@
+{
+  "season": 2026,
+  "request": "https://statsapi.mlb.com/api/v1/stats?stats=season&group=hitting&season=2026&gameType=R&playerPool=ALL&leagueId=103&hydrate=person,team&limit=1000",
+  "returned_splits": 380,
+  "first_rows": [
+    {
+      "season": "2026",
+      "stat": {
+        "age": 23,
+        "gamesPlayed": 16,
+        "groundOuts": 19,
+        "airOuts": 9,
+        "runs": 8,
+        "doubles": 7,
+        "triples": 0,
+        "homeRuns": 1,
+        "strikeOuts": 7,
+        "baseOnBalls": 1,
+        "intentionalWalks": 0,
+        "hits": 25,
+        "hitByPitch": 1,
+        "avg": ".417",
+        "atBats": 60,
+        "obp": ".435",
+        "slg": ".583",
+        "ops": "1.018",
+        "caughtStealing": 1,
+        "stolenBases": 0,
+        "stolenBasePercentage": ".000",
+        "caughtStealingPercentage": "1.000",
+        "groundIntoDoublePlay": 3,
+        "numberOfPitches": 226,
+        "plateAppearances": 62,
+        "totalBases": 35,
+        "rbi": 4,
+        "leftOnBase": 18,
+        "sacBunts": 0,
+        "sacFlies": 0,
+        "babip": ".462",
+        "groundOutsToAirouts": "2.11",
+        "catchersInterference": 0,
+        "atBatsPerHomeRun": "60.00"
+      },
+      "team": {
+        "springLeague": {
+          "id": 114,
+          "name": "Cactus League",
+          "link": "/api/v1/league/114",
+          "abbreviation": "CL"
+        },
+        "allStarStatus": "N",
+        "id": 133,
+        "name": "Athletics",
+        "link": "/api/v1/teams/133",
+        "season": 2026,
+        "venue": {
+          "id": 2529,
+          "name": "Sutter Health Park",
+          "link": "/api/v1/venues/2529"
+        },
+        "springVenue": {
+          "id": 2507,
+          "link": "/api/v1/venues/2507"
+        },
+        "teamCode": "ath",
+        "fileCode": "ath",
+        "abbreviation": "ATH",
+        "teamName": "Athletics",
+        "locationName": "Sacramento",
+        "firstYearOfPlay": "1901",
+        "league": {
+          "id": 103,
+          "name": "American League",
+          "link": "/api/v1/league/103"
+        },
+        "division": {
+          "id": 200,
+          "name": "American League West",
+          "link": "/api/v1/divisions/200"
+        },
+        "sport": {
+          "id": 1,
+          "link": "/api/v1/sports/1",
+          "name": "Major League Baseball"
+        },
+        "shortName": "Athletics",
+        "franchiseName": "Athletics",
+        "clubName": "Athletics",
+        "active": true
+      },
+      "player": {
+        "id": 811965,
+        "fullName": "Joshua Kuroda-Grauer",
+        "link": "/api/v1/people/811965",
+        "firstName": "Joshua",
+        "lastName": "Kuroda-Grauer",
+        "primaryNumber": "44",
+        "birthDate": "2003-01-31",
+        "currentAge": 23,
+        "birthCity": "New Brunswick",
+        "birthStateProvince": "NJ",
+        "birthCountry": "USA",
+        "height": "5' 10\"",
+        "weight": 205,
+        "active": true,
+        "primaryPosition": {
+          "code": "5",
+          "name": "Third Base",
+          "type": "Infielder",
+          "abbreviation": "3B"
+        },
+        "useName": "Joshua",
+        "useLastName": "Kuroda-Grauer",
+        "boxscoreName": "Kuroda-Grauer",
+        "gender": "M",
+        "isPlayer": true,
+        "isVerified": true,
+        "draftYear": 2024,
+        "mlbDebutDate": "2026-06-29",
+        "batSide": {
+          "code": "R",
+          "description": "Right"
+        },
+        "pitchHand": {
+          "code": "R",
+          "description": "Right"
+        },
+        "nameFirstLast": "Joshua Kuroda-Grauer",
+        "nameSlug": "joshua-kuroda-grauer-811965",
+        "firstLastName": "Joshua Kuroda-Grauer",
+        "lastFirstName": "Kuroda-Grauer, Joshua",
+        "lastInitName": "Kuroda-Grauer, J",
+        "initLastName": "J Kuroda-Grauer",
+        "fullFMLName": "Joshua Kuroda-Grauer",
+        "fullLFMName": "Kuroda-Grauer, Joshua ",
+        "strikeZoneTop": 3.13,
+        "strikeZoneBottom": 1.58
+      },
+      "league": {
+        "id": 103,
+        "name": "AL",
+        "link": "/api/v1/league/103"
+      },
+      "sport": {
+        "id": 1,
+        "link": "/api/v1/sports/1",
+        "abbreviation": "MLB"
+      },
+      "numTeams": 1,
+      "rank": 1,
+      "position": {
+        "code": "5",
+        "name": "Third Base",
+        "type": "Infielder",
+        "abbreviation": "3B"
+      }
+    },
+    {
+      "season": "2026",
+      "stat": {
+        "age": 30,
+        "gamesPlayed": 12,
+        "groundOuts": 6,
+        "airOuts": 3,
+        "runs": 3,
+        "doubles": 1,
+        "triples": 0,
+        "homeRuns": 0,
+        "strikeOuts": 3,
+        "baseOnBalls": 2,
+        "intentionalWalks": 0,
+        "hits": 7,
+        "hitByPitch": 0,
+        "avg": ".368",
+        "atBats": 19,
+        "obp": ".429",
+        "slg": ".421",
+        "ops": ".850",
+        "caughtStealing": 0,
+        "stolenBases": 0,
+        "stolenBasePercentage": ".---",
+        "caughtStealingPercentage": ".---",
+        "groundIntoDoublePlay": 0,
+        "numberOfPitches": 85,
+        "plateAppearances": 21,
+        "totalBases": 8,
+        "rbi": 2,
+        "leftOnBase": 9,
+        "sacBunts": 0,
+        "sacFlies": 0,
+        "babip": ".438",
+        "groundOutsToAirouts": "2.00",
+        "catchersInterference": 0,
+        "atBatsPerHomeRun": "-.--"
+      },
+      "team": {
+        "springLeague": {
+          "id": 114,
+          "name": "Cactus League",
+          "link": "/api/v1/league/114",
+          "abbreviation": "CL"
+        },
+        "allStarStatus": "N",
+        "id": 133,
+        "name": "Athletics",
+        "link": "/api/v1/teams/133",
+        "season": 2026,
+        "venue": {
+          "id": 2529,
+          "name": "Sutter Health Park",
+          "link": "/api/v1/venues/2529"
+        },
+        "springVenue": {
+          "id": 2507,
+          "link": "/api/v1/venues/2507"
+        },
+        "teamCode": "ath",
+        "fileCode": "ath",
+        "abbreviation": "ATH",
+        "teamName": "Athletics",
+        "locationName": "Sacramento",
+        "firstYearOfPlay": "1901",
+        "league": {
+          "id": 103,
+          "name": "American League",
+          "link": "/api/v1/league/103"
+        },
+        "division": {
+          "id": 200,
+          "name": "American League West",
+          "link": "/api/v1/divisions/200"
+        },
+        "sport": {
+          "id": 1,
+          "link": "/api/v1/sports/1",
+          "name": "Major League Baseball"
+        },
+        "shortName": "Athletics",
+        "franchiseName": "Athletics",
+        "clubName": "Athletics",
+        "active": true
+      },
+      "player": {
+        "id": 683021,
+        "fullName": "Michael Stefanic",
+        "link": "/api/v1/people/683021",
+        "firstName": "Michael",
+        "lastName": "Stefanic",
+        "primaryNumber": "17",
+        "birthDate": "1996-02-24",
+        "currentAge": 30,
+        "birthCity": "Boise",
+        "birthStateProvince": "ID",
+        "birthCountry": "USA",
+        "height": "5' 9\"",
+        "weight": 180,
+        "active": true,
+        "primaryPosition": {
+          "code": "4",
+          "name": "Second Base",
+          "type": "Infielder",
+          "abbreviation": "2B"
+        },
+        "useName": "Michael",
+        "useLastName": "Stefanic",
+        "boxscoreName": "Stefanic",
+        "gender": "M",
+        "isPlayer": true,
+        "isVerified": true,
+        "pronunciation": "stef-AH-nic",
+        "mlbDebutDate": "2022-07-03",
+        "batSide": {
+          "code": "R",
+          "description": "Right"
+        },
+        "pitchHand": {
+          "code": "R",
+          "description": "Right"
+        },
+        "nameFirstLast": "Michael Stefanic",
+        "nameSlug": "michael-stefanic-683021",
+        "firstLastName": "Michael Stefanic",
+        "lastFirstName": "Stefanic, Michael",
+        "lastInitName": "Stefanic, M",
+        "initLastName": "M Stefanic",
+        "fullFMLName": "Michael  Stefanic",
+        "fullLFMName": "Stefanic, Michael ",
+        "strikeZoneTop": 3.082,
+        "strikeZoneBottom": 1.556
+      },
+      "league": {
+        "id": 103,
+        "name": "AL",
+        "link": "/api/v1/league/103"
+      },
+      "sport": {
+        "id": 1,
+        "link": "/api/v1/sports/1",
+        "abbreviation": "MLB"
+      },
+      "numTeams": 1,
+      "rank": 2,
+      "position": {
+        "code": "4",
+        "name": "Second Base",
+        "type": "Infielder",
+        "abbreviation": "2B"
+      }
+    },
+    {
+      "season": "2026",
+      "stat": {
+        "age": 28,
+        "gamesPlayed": 4,
+        "groundOuts": 0,
+        "airOuts": 4,
+        "runs": 0,
+        "doubles": 1,
+        "triples": 0,
+        "homeRuns": 0,
+        "strikeOuts": 4,
+        "baseOnBalls": 0,
+        "intentionalWalks": 0,
+        "hits": 4,
+        "hitByPitch": 0,
+        "avg": ".364",
+        "atBats": 11,
+        "obp": ".333",
+        "slg": ".455",
+        "ops": ".788",
+        "caughtStealing": 0,
+        "stolenBases": 0,
+        "stolenBasePercentage": ".---",
+        "caughtStealingPercentage": ".---",
+        "groundIntoDoublePlay": 0,
+        "numberOfPitches": 50,
+        "plateAppearances": 12,
+        "totalBases": 5,
+        "rbi": 2,
+        "leftOnBase": 4,
+        "sacBunts": 0,
+        "sacFlies": 1,
+        "babip": ".500",
+        "groundOutsToAirouts": "0.00",
+        "catchersInterference": 0,
+        "atBatsPerHomeRun": "-.--"
+      },
+      "team": {
+        "springLeague": {
+          "id": 114,
+          "name": "Cactus League",
+          "link": "/api/v1/league/114",
+          "abbreviation": "CL"
+        },
+        "allStarStatus": "N",
+        "id": 108,
+        "name": "Los Angeles Angels",
+        "link": "/api/v1/teams/108",
+        "season": 2026,
+        "venue": {
+          "id": 1,
+          "name": "Angel Stadium",
+          "link": "/api/v1/venues/1"
+        },
+        "springVenue": {
+          "id": 2500,
+          "link": "/api/v1/venues/2500"
+        },
+        "teamCode": "ana",
+        "fileCode": "ana",
+        "abbreviation": "LAA",
+        "teamName": "Angels",
+        "locationName": "Anaheim",
+        "firstYearOfPlay": "1961",
+        "league": {
+          "id": 103,
+          "name": "American League",
+          "link": "/api/v1/league/103"
+        },
+        "division": {
+          "id": 200,
+          "name": "American League West",
+          "link": "/api/v1/divisions/200"
+        },
+        "sport": {
+          "id": 1,
+          "link": "/api/v1/sports/1",
+          "name": "Major League Baseball"
+        },
+        "shortName": "LA Angels",
+        "franchiseName": "Los Angeles",
+        "clubName": "Angels",
+        "active": true
+      },
+      "player": {
+        "id": 672569,
+        "fullName": "Gustavo Campero",
+        "link": "/api/v1/people/672569",
+        "firstName": "Gustavo",
+        "lastName": "Campero",
+        "primaryNumber": "51",
+        "birthDate": "1997-09-20",
+        "currentAge": 28,
+        "birthCity": "Lorica",
+        "birthCountry": "Colombia",
+        "height": "5' 6\"",
+        "weight": 183,
+        "active": true,
+        "primaryPosition": {
+          "code": "O",
+          "name": "Outfield",
+          "type": "Outfielder",
+          "abbreviation": "OF"
+        },
+        "useName": "Gustavo",
+        "useLastName": "Campero",
+        "middleName": "Angel",
+        "boxscoreName": "Campero",
+        "gender": "M",
+        "nameMatrilineal": "Patron",
+        "isPlayer": true,
+        "isVerified": true,
+        "mlbDebutDate": "2024-09-15",
+        "batSide": {
+          "code": "S",
+          "description": "Switch"
+        },
+        "pitchHand": {
+          "code": "R",
+          "description": "Right"
+        },
+        "nameFirstLast": "Gustavo Campero",
+        "nameSlug": "gustavo-campero-672569",
+        "firstLastName": "Gustavo Campero",
+        "lastFirstName": "Campero, Gustavo",
+        "lastInitName": "Campero, G",
+        "initLastName": "G Campero",
+        "fullFMLName": "Gustavo Angel Campero",
+        "fullLFMName": "Campero, Gustavo Angel",
+        "strikeZoneTop": 2.956,
+        "strikeZoneBottom": 1.492
+      },
+      "league": {
+        "id": 103,
+        "name": "AL",
+        "link": "/api/v1/league/103"
+      },
+      "sport": {
+        "id": 1,
+        "link": "/api/v1/sports/1",
+        "abbreviation": "MLB"
+      },
+      "numTeams": 1,
+      "rank": 3,
+      "position": {
+        "code": "7",
+        "name": "Outfielder",
+        "type": "Outfielder",
+        "abbreviation": "LF"
+      }
+    },
+    {
+      "season": "2026",
+      "stat": {
+        "age": 21,
+        "gamesPlayed": 5,
+        "groundOuts": 3,
+        "airOuts": 3,
+        "runs": 3,
+        "doubles": 1,
+        "triples": 0,
+        "homeRuns": 1,
+        "strikeOuts": 3,
+        "baseOnBalls": 4,
+        "intentionalWalks": 0,
+        "hits": 4,
+        "hitByPitch": 0,
+        "avg": ".333",
+        "atBats": 12,
+        "obp": ".471",
+        "slg": ".667",
+        "ops": "1.138",
+        "caughtStealing": 0,
+        "stolenBases": 1,
+        "stolenBasePercentage": "1.000",
+        "caughtStealingPercentage": ".000",
+        "groundIntoDoublePlay": 0,
+        "numberOfPitches": 56,
+        "plateAppearances": 17,
+        "totalBases": 8,
+        "rbi": 3,
+        "leftOnBase": 4,
+        "sacBunts": 0,
+        "sacFlies": 1,
+        "babip": ".333",
+        "groundOutsToAirouts": "1.00",
+        "catchersInterference": 0,
+        "atBatsPerHomeRun": "12.00"
+      },
+      "team": {
+        "springLeague": {
+          "id": 114,
+          "name": "Cactus League",
+          "link": "/api/v1/league/114",
+          "abbreviation": "CL"
+        },
+        "allStarStatus": "N",
+        "id": 136,
+        "name": "Seattle Mariners",
+        "link": "/api/v1/teams/136",
+        "season": 2026,
+        "venue": {
+          "id": 680,
+          "name": "T-Mobile Park",
+          "link": "/api/v1/venues/680"
+        },
+        "springVenue": {
+          "id": 2530,
+          "link": "/api/v1/venues/2530"
+        },
+        "teamCode": "sea",
+        "fileCode": "sea",
+        "abbreviation": "SEA",
+        "teamName": "Mariners",
+        "locationName": "Seattle",
+        "firstYearOfPlay": "1977",
+        "league": {
+          "id": 103,
+          "name": "American League",
+          "link": "/api/v1/league/103"
+        },
+        "division": {
+          "id": 200,
+          "name": "American League West",
+          "link": "/api/v1/divisions/200"
+        },
+        "sport": {
+          "id": 1,
+          "link": "/api/v1/sports/1",
+          "name": "Major League Baseball"
+        },
+        "shortName": "Seattle",
+        "franchiseName": "Seattle",
+        "clubName": "Mariners",
+        "active": true
+      },
+      "player": {
+        "id": 703197,
+        "fullName": "Michael Arroyo",
+        "link": "/api/v1/people/703197",
+        "firstName": "Michael",
+        "lastName": "Arroyo",
+        "primaryNumber": "96",
+        "birthDate": "2004-11-03",
+        "currentAge": 21,
+        "birthCity": "Cartagena",
+        "birthCountry": "Colombia",
+        "height": "5' 10\"",
+        "weight": 160,
+        "active": true,
+        "primaryPosition": {
+          "code": "6",
+          "name": "Shortstop",
+          "type": "Infielder",
+          "abbreviation": "SS"
+        },
+        "useName": "Michael",
+        "useLastName": "Arroyo",
+        "boxscoreName": "Arroyo, M",
+        "gender": "M",
+        "nameMatrilineal": "Padilla",
+        "isPlayer": true,
+        "isVerified": true,
+        "mlbDebutDate": "2026-09-06",
+        "batSide": {
+          "code": "R",
+          "description": "Right"
+        },
+        "pitchHand": {
+          "code": "R",
+          "description": "Right"
+        },
+        "nameFirstLast": "Michael Arroyo",
+        "nameSlug": "michael-arroyo-703197",
+        "firstLastName": "Michael Arroyo",
+        "lastFirstName": "Arroyo, Michael",
+        "lastInitName": "Arroyo, M",
+        "initLastName": "M Arroyo",
+        "fullFMLName": "Michael Arroyo",
+        "fullLFMName": "Arroyo, Michael",
+        "strikeZoneTop": 3.11,
+        "strikeZoneBottom": 1.57
+      },
+      "league": {
+        "id": 103,
+        "name": "AL",
+        "link": "/api/v1/league/103"
+      },
+      "sport": {
+        "id": 1,
+        "link": "/api/v1/sports/1",
+        "abbreviation": "MLB"
+      },
+      "numTeams": 1,
+      "rank": 4,
+      "position": {
+        "code": "4",
+        "name": "Second Base",
+        "type": "Infielder",
+        "abbreviation": "2B"
+      }
+    },
+    {
+      "season": "2026",
+      "stat": {
+        "age": 25,
+        "gamesPlayed": 6,
+        "groundOuts": 0,
+        "airOuts": 3,
+        "runs": 0,
+        "doubles": 1,
+        "triples": 0,
+        "homeRuns": 0,
+        "strikeOuts": 4,
+        "baseOnBalls": 3,
+        "intentionalWalks": 0,
+        "hits": 3,
+        "hitByPitch": 0,
+        "avg": ".333",
+        "atBats": 9,
+        "obp": ".462",
+        "slg": ".444",
+        "ops": ".906",
+        "caughtStealing": 0,
+        "stolenBases": 0,
+        "stolenBasePercentage": ".---",
+        "caughtStealingPercentage": ".---",
+        "groundIntoDoublePlay": 0,
+        "numberOfPitches": 54,
+        "plateAppearances": 13,
+        "totalBases": 4,
+        "rbi": 1,
+        "leftOnBase": 4,
+        "sacBunts": 0,
+        "sacFlies": 1,
+        "babip": ".500",
+        "groundOutsToAirouts": "0.00",
+        "catchersInterference": 0,
+        "atBatsPerHomeRun": "-.--"
+      },
+      "team": {
+        "springLeague": {
+          "id": 115,
+          "name": "Grapefruit League",
+          "link": "/api/v1/league/115",
+          "abbreviation": "GL"
+        },
+        "allStarStatus": "N",
+        "id": 110,
+        "name": "Baltimore Orioles",
+        "link": "/api/v1/teams/110",
+        "season": 2026,
+        "venue": {
+          "id": 2,
+          "name": "Oriole Park at Camden Yards",
+          "link": "/api/v1/venues/2"
+        },
+        "springVenue": {
+          "id": 2508,
+          "link": "/api/v1/venues/2508"
+        },
+        "teamCode": "bal",
+        "fileCode": "bal",
+        "abbreviation": "BAL",
+        "teamName": "Orioles",
+        "locationName": "Baltimore",
+        "firstYearOfPlay": "1901",
+        "league": {
+          "id": 103,
+          "name": "American League",
+          "link": "/api/v1/league/103"
+        },
+        "division": {
+          "id": 201,
+          "name": "American League East",
+          "link": "/api/v1/divisions/201"
+        },
+        "sport": {
+          "id": 1,
+          "link": "/api/v1/sports/1",
+          "name": "Major League Baseball"
+        },
+        "shortName": "Baltimore",
+        "franchiseName": "Baltimore",
+        "clubName": "Orioles",
+        "active": true
+      },
+      "player": {
+        "id": 677956,
+        "fullName": "Rece Hinds",
+        "link": "/api/v1/people/677956",
+        "firstName": "Rece",
+        "lastName": "Hinds",
+        "primaryNumber": "62",
+        "birthDate": "2000-09-05",
+        "currentAge": 26,
+        "birthCity": "Niceville",
+        "birthStateProvince": "FL",
+        "birthCountry": "USA",
+        "height": "6' 3\"",
+        "weight": 215,
+        "active": true,
+        "primaryPosition": {
+          "code": "9",
+          "name": "Outfielder",
+          "type": "Outfielder",
+          "abbreviation": "RF"
+        },
+        "useName": "Rece",
+        "useLastName": "Hinds",
+        "middleName": "Xola",
+        "boxscoreName": "Hinds",
+        "gender": "M",
+        "isPlayer": true,
+        "isVerified": true,
+        "draftYear": 2019,
+        "mlbDebutDate": "2024-07-08",
+        "batSide": {
+          "code": "R",
+          "description": "Right"
+        },
+        "pitchHand": {
+          "code": "R",
+          "description": "Right"
+        },
+        "nameFirstLast": "Rece Hinds",
+        "nameSlug": "rece-hinds-677956",
+        "firstLastName": "Rece Hinds",
+        "lastFirstName": "Hinds, Rece",
+        "lastInitName": "Hinds, R",
+        "initLastName": "R Hinds",
+        "fullFMLName": "Rece Xola Hinds",
+        "fullLFMName": "Hinds, Rece Xola",
+        "strikeZoneTop": 3.346,
+        "strikeZoneBottom": 1.688
+      },
+      "league": {
+        "id": 103,
+        "name": "AL",
+        "link": "/api/v1/league/103"
+      },
+      "sport": {
+        "id": 1,
+        "link": "/api/v1/sports/1",
+        "abbreviation": "MLB"
+      },
+      "numTeams": 1,
+      "rank": 4,
+      "position": {
+        "code": "8",
+        "name": "Outfielder",
+        "type": "Outfielder",
+        "abbreviation": "CF"
+      }
+    }
+  ],
+  "notes": "Inspect aggregate/stint behavior and person.id before enabling a season."
+}

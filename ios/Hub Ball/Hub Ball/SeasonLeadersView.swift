@@ -1,240 +1,180 @@
 import SwiftUI
 
 struct SeasonLeadersView: View {
-    @Environment(\.hubContentWidth) private var contentWidth
     @State private var store: SeasonLeadersStore
+    @State private var scope: LeaderboardScope = .team
+    @State private var detail: LeaderboardDetail?
+    private let team: HubTeam
 
     init(team: HubTeam = .boston) {
+        self.team = team
         _store = State(initialValue: SeasonLeadersStore(team: team))
     }
 
     var body: some View {
         ZStack {
             AppColor.paleRed.ignoresSafeArea()
-
-            Group {
-                if !store.seasons.isEmpty {
-                    if contentWidth >= 650 {
-                        tabletLeadersContent
-                    } else {
-                        leadersContent
-                    }
-                } else if store.isLoading {
-                    ProgressView("Loading season leaders…")
-                        .tint(AppColor.ink)
-                        .foregroundStyle(AppColor.ink)
-                } else {
-                    errorView
-                }
-            }
+            if store.seasons.isEmpty && !store.isLoading { errorView }
+            else { VStack(spacing: 0) { scopeControl; content } }
         }
         .navigationTitle("Season Leaders")
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await store.load()
-        }
+        .task { await store.load() }
+        .sheet(item: $detail) { LeaderboardDetailSheet(detail: $0) }
     }
 
-    private var tabletLeadersContent: some View {
-        VStack(spacing: 10) {
-            let years = store.sortedYears
-            ForEach(Array(stride(from: 0, to: years.count, by: 2)), id: \.self) { row in
-                HStack(spacing: 12) {
-                    ForEach(Array(years.dropFirst(row).prefix(2)), id: \.self) { year in
-                        if let season = store.seasons[year] {
-                            VStack(alignment: .leading, spacing: 8) {
-                                yearHeader(year: year, season: season)
-                                GeometryReader { space in
-                                    let rowHeight = max(0, (space.size.height - 8) / 3)
-                                    ScrollView {
-                                        if space.size.height > space.size.width {
-                                            VStack(spacing: 0) {
-                                                ForEach(season.categories) { category in
-                                                    portraitCategory(category)
-                                                        .frame(minHeight: max(0, space.size.height / 6))
-                                                }
-                                            }
-                                        } else {
-                                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())],
-                                                      alignment: .leading, spacing: 4) {
-                                                ForEach(season.categories) { category in
-                                                    categoryCell(category, compact: rowHeight < 100)
-                                                        .frame(minHeight: rowHeight, alignment: .center)
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .refreshable { await store.load() }
-                                }
-                            }
-                            .padding(12)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                            .background(AppColor.paper)
-                            .clipShape(Rectangle())
-                            .overlay(Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth))
-                            .panelElevation()
-                        }
-                    }
+    private var scopeControl: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Compare leaders").font(.caption.weight(.bold)).tracking(0.5)
+            Picker("Compare leaders", selection: $scope) {
+                ForEach(LeaderboardScope.allCases) { item in
+                    Text(item.title(for: team)).tag(item).accessibilityLabel(item.accessibilityTitle(for: team))
                 }
-                .frame(maxHeight: .infinity)
-            }
-            footer
+            }.pickerStyle(.segmented)
+            if scope == .team { Text("See how your team stacks up in \(team.definition.league) and MLB.").font(.caption) }
         }
-        .padding(12)
-        .foregroundStyle(AppColor.ink)
+        .padding(.horizontal, 16).padding(.vertical, 10).background(AppColor.paleRed)
+        .onChange(of: scope) { newScope in
+            guard newScope != .team else { return }
+            Task { for year in store.sortedYears { await store.loadComparison(year: year) } }
+        }
     }
 
-    private var footer: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("AVG and OPS use qualified hitters. WHIP requires at least 40 innings.")
-                .font(.caption)
-            if let metadata = store.metadata {
-                Text("Updated \(metadata.updatedText) · MLB + Baseball Reference")
-                    .font(.caption2.weight(.semibold))
-            }
-        }
-        .foregroundStyle(AppColor.ink.opacity(0.84))
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private var leadersContent: some View {
+    private var content: some View {
         ScrollView {
             LazyVStack(spacing: 14) {
-                HubCardGrid {
-                    ForEach(store.sortedYears, id: \.self) { year in
-                        if let season = store.seasons[year] {
-                            yearCard(year: year, season: season)
+                if store.seasons.isEmpty { ProgressView("Loading season leaders…").padding(.top, 48) }
+                else {
+                    HubCardGrid {
+                        ForEach(store.sortedYears, id: \.self) { year in
+                            if let season = store.seasons[year] { yearCard(year: year, season: season) }
                         }
                     }
+                    Text("AVG and OPS use qualified hitters. WHIP requires at least 40 innings.")
+                        .font(.caption).frame(maxWidth: .infinity, alignment: .leading)
                 }
-
-                footer
-
-            }
-            .padding(16)
-            .foregroundStyle(AppColor.ink)
+            }.padding(16).foregroundStyle(AppColor.ink)
         }
         .refreshable {
             await store.load()
+            if scope != .team { for year in store.sortedYears { await store.retryComparison(year: year) } }
         }
     }
 
     private func yearCard(year: String, season: SeasonLeaders) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             yearHeader(year: year, season: season)
-
             VStack(spacing: 0) {
-                ForEach(Array(season.categories.enumerated()), id: \.element.id) { index, category in
-                    categoryCell(category)
-
-                    if index < season.categories.count - 1 {
-                        Divider()
-                            .overlay(AppColor.navy.opacity(0.5))
+                if scope == .team {
+                    ForEach(Array(season.categories.enumerated()), id: \.element.id) { index, category in
+                        teamCategory(category)
+                        if index < season.categories.count - 1 { divider }
                     }
-                }
+                } else { comparisonCategories(year: year) }
             }
-        }
-        .cardStyle()
+        }.cardStyle().animation(.easeInOut(duration: 0.18), value: scope)
+    }
+
+    @ViewBuilder private func comparisonCategories(year: String) -> some View {
+        if let payload = store.comparison(year: year), let key = scope.payloadKey(for: team), let categories = payload.scopes[key] {
+            ForEach(Array(SeasonLeaders.categoryTitles.enumerated()), id: \.element) { index, title in
+                comparisonCategory(title: title, category: categories[title.lowercased()], year: year, payload: payload)
+                if index < SeasonLeaders.categoryTitles.count - 1 { divider }
+            }
+        } else if let error = store.comparisonErrors[year] {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(error).font(.subheadline.weight(.semibold))
+                HStack { Button("Retry") { Task { await store.retryComparison(year: year) } }; Button("Back to Team") { scope = .team } }.buttonStyle(.bordered)
+            }.padding(.vertical, 12)
+        } else { ProgressView("Loading league leaders…").padding(.vertical, 28) }
     }
 
     private func yearHeader(year: String, season: SeasonLeaders) -> some View {
         HStack(alignment: .firstTextBaseline) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(year)
-                    .font(.system(size: 32, weight: .black, design: .rounded))
-                    .foregroundStyle(year == "2026" ? AppColor.red : AppColor.navy)
-
-                Image(systemName: "crown.fill")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundStyle(AppColor.accent)
+                Text(year).font(.system(size: 32, weight: .black, design: .rounded)).foregroundStyle(isCurrentSeason(year) ? AppColor.red : AppColor.navy)
+                Image(systemName: "crown.fill").font(.system(size: 20, weight: .bold)).foregroundStyle(AppColor.accent)
             }
-
             Spacer()
-
-            Text(season.record)
-                .font(.subheadline.weight(.bold))
-                .foregroundStyle(AppColor.ink)
+            Text(scope == .team ? season.record : scope.heading(for: team)).font(.subheadline.weight(.bold))
         }
     }
 
-    private func portraitCategory(_ category: LeaderCategory) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(category.title)
-                .font(.system(size: 16, weight: .black))
-                .foregroundStyle(AppColor.green)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Divider().overlay(AppColor.navy.opacity(0.5))
-            VStack(alignment: .leading, spacing: 2) {
-                ForEach(Array(category.leaders.prefix(3).enumerated()), id: \.element.id) { index, leader in
-                    HStack(spacing: 6) {
-                        Text("\(index + 1)")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundStyle(AppColor.red)
-                            .frame(width: 10)
-                        Text(leader.name)
-                            .lineLimit(1)
-                        Spacer(minLength: 2)
-                        Text(leader.value)
-                            .monospacedDigit()
-                            .fontWeight(index == 0 ? .bold : .regular)
-                    }
-                    .font(.system(size: 18))
-                }
+    private func teamCategory(_ category: LeaderCategory) -> some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text(category.title).font(.subheadline.weight(.black)).tracking(0.7).foregroundStyle(AppColor.green)
+            ForEach(Array(category.leaders.prefix(3).enumerated()), id: \.element.id) { index, leader in
+                HStack(alignment: .firstTextBaseline, spacing: 5) {
+                    rankText("\(index + 1)"); Text(leader.name).lineLimit(2); Spacer(minLength: 2)
+                    Text(leader.value).fontWeight(index == 0 ? .bold : .regular).monospacedDigit()
+                }.font(.system(size: 18))
             }
-        }
-        .padding(.vertical, 2)
+        }.padding(.vertical, 14)
     }
 
-    private func categoryCell(_ category: LeaderCategory, compact: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: compact ? 4 : 7) {
-            Text(category.title)
-                .font(.subheadline.weight(.black))
-                .tracking(0.7)
-                .foregroundStyle(AppColor.green)
-
-            VStack(alignment: .leading, spacing: compact ? 2 : 4) {
-                ForEach(Array(category.leaders.prefix(3).enumerated()), id: \.element.id) { index, leader in
+    private func comparisonCategory(title: String, category: ComparisonCategory?, year: String, payload: LeagueLeadersPayload) -> some View {
+        VStack(alignment: .leading, spacing: 7) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(title).font(.subheadline.weight(.black)).tracking(0.7).foregroundStyle(AppColor.green)
+                Text(category?.eligibility ?? "Comparison unavailable").font(.caption).foregroundStyle(AppColor.ink.opacity(0.7))
+            }
+            if let category, category.isAvailable {
+                ForEach(category.entries.prefix(3)) { leader in
                     HStack(alignment: .firstTextBaseline, spacing: 5) {
-                        Text("\(index + 1)")
-                            .font(.subheadline.weight(.black))
-                            .foregroundStyle(AppColor.red)
-                            .frame(width: 10, alignment: .leading)
-
-                        Text(leader.name)
-                            .lineLimit(1)
-
-                        Spacer(minLength: 2)
-
-                        Text(leader.value)
-                            .fontWeight(index == 0 ? .bold : .regular)
-                            .monospacedDigit()
+                        rankText(leader.rankText)
+                        VStack(alignment: .leading, spacing: 1) { Text(leader.name).lineLimit(2); Text(leader.teamAbbreviation ?? "Multiple teams").font(.caption).foregroundStyle(AppColor.ink.opacity(0.7)) }
+                        Spacer(minLength: 2); Text(leader.displayValue).fontWeight(leader.rank == 1 ? .bold : .regular).monospacedDigit()
+                    }.font(.system(size: 18))
+                    .padding(.horizontal, leader.teamID == team.definition.mlbID ? 5 : 0)
+                    .background(leader.teamID == team.definition.mlbID ? AppColor.accent.opacity(0.14) : .clear)
+                    .overlay(alignment: .trailing) {
+                        if leader.teamID == team.definition.mlbID {
+                            Text("Your team").font(.caption2.weight(.bold)).foregroundStyle(AppColor.ink.opacity(0.75)).offset(y: 17)
+                        }
                     }
-                    .font(.system(size: 18))
+                    .accessibilityLabel("\(leader.name), \(leader.tied ? "tied for" : "ranked") \(leader.rankText) in \(scope.heading(for: team)), \(leader.displayValue)")
                 }
-            }
-        }
-        .padding(.horizontal, 2)
-        .padding(.vertical, compact ? 4 : 14)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
+                Button("See top 10 & team") { detail = LeaderboardDetail(year: year, title: title, scopeName: scope.heading(for: team), category: category, generatedAt: payload.generatedAt, teamID: team.definition.mlbID, teamName: team.definition.shortName) }
+                    .font(.subheadline.weight(.semibold)).frame(minHeight: 44)
+            } else { Text(category?.message ?? "Comparison unavailable.").font(.subheadline) }
+        }.padding(.vertical, 14)
     }
 
+    private func rankText(_ text: String) -> some View { Text(text).font(.subheadline.weight(.black)).foregroundStyle(AppColor.red).frame(minWidth: 28, alignment: .leading) }
+    private var divider: some View { Divider().overlay(AppColor.navy.opacity(0.5)) }
+    private func isCurrentSeason(_ year: String) -> Bool { year == String(Calendar.current.component(.year, from: .now)) }
     private var errorView: some View {
-        ContentUnavailableView {
-            Label("Leaders Unavailable", systemImage: "wifi.exclamationmark")
-        } description: {
-            Text(store.errorMessage ?? "The season leaders could not be loaded.")
-        } actions: {
-            Button("Try Again") {
-                Task { await store.load() }
-            }
-            .buttonStyle(HubProminentButtonStyle())
-            .tint(AppColor.red)
-        }
+        ContentUnavailableView { Label("Leaders Unavailable", systemImage: "wifi.exclamationmark") } description: { Text(store.errorMessage ?? "The season leaders could not be loaded.") } actions: { Button("Try Again") { Task { await store.load() } }.buttonStyle(HubProminentButtonStyle()).tint(AppColor.red) }
     }
 }
 
-#Preview {
-    NavigationStack {
-        SeasonLeadersView()
+private struct LeaderboardDetail: Identifiable {
+    let year: String; let title: String; let scopeName: String; let category: ComparisonCategory; let generatedAt: String; let teamID: Int; let teamName: String
+    var id: String { "\(year)-\(scopeName)-\(title)" }
+}
+
+private struct LeaderboardDetailSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let detail: LeaderboardDetail
+    var body: some View {
+        NavigationStack {
+            List {
+                Section("\(detail.year) · \(detail.scopeName)") { Text(detail.title).font(.title2.weight(.bold)); Text(detail.category.eligibility) }
+                Section("Top 10") { ForEach(detail.category.entries.prefix(10)) { leaderRow($0) } }
+                let teamOutsideTopTen = detail.category.entries.filter { $0.teamID == detail.teamID && $0.rank > 10 }
+                if !teamOutsideTopTen.isEmpty {
+                    Section("\(detail.teamName) players") { ForEach(teamOutsideTopTen) { leaderRow($0) } }
+                }
+                Section("Source") { Text("MLB Stats API · Generated \(detail.generatedAt)").font(.footnote) }
+            }.navigationTitle("League Leaders").toolbar { ToolbarItem(placement: .confirmationAction) { Button("Close") { dismiss() } } }
+        }
+    }
+
+    private func leaderRow(_ leader: ComparisonLeader) -> some View {
+        HStack { Text(leader.rankText).frame(minWidth: 32, alignment: .leading); Text(leader.name); Spacer(); Text(leader.displayValue).monospacedDigit() }
     }
 }
+
+private extension SeasonLeaders { static let categoryTitles = ["WAR", "WHIP", "HR", "AVG", "OPS", "RBI"] }
+
+#Preview { NavigationStack { SeasonLeadersView() } }

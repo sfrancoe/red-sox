@@ -18,6 +18,12 @@ export const ALLOWED_PATHS = new Set(MLB_TEAMS.flatMap(team => {
   return files.map(file => `${prefix}${file}`);
 }));
 
+// Shared comparison artifacts never carry a team-directory prefix. Keep the
+// allowlist finite: a new season is a deliberate gateway/deployment change.
+for (const year of [2023, 2024, 2025, 2026]) {
+  ALLOWED_PATHS.add(`leaderboards/${year}.json`);
+}
+
 function requestedPath(request) {
   const pathname = new URL(request.url).pathname;
   const prefix = ['/api/data/', '/data/'].find(candidate => pathname.startsWith(candidate));

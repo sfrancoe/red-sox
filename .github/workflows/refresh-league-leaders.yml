@@ -1,0 +1,36 @@
+name: Refresh league leaderboards
+
+on:
+  schedule:
+    - cron: '35 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/fetch_league_leaders.py
+      - name: Commit verified snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/leaderboards; then
+            echo "No league leaderboard changes."
+          else
+            git add data/leaderboards
+            git commit -m "Refresh league leaders ($(date -u +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push
+          fi
