@@ -196,12 +196,11 @@ private struct CompactLeaderRow: View {
             Text(leader.rankText).font(.caption.weight(.black)).foregroundStyle(AppColor.red)
                 .frame(minWidth: 30, alignment: .leading)
             LeaderName(name: leader.name, abbreviation: leader.teamAbbreviation ?? "TOT")
-                .fontWeight(isSelectedTeam ? .bold : .regular)
             if isSelectedTeam {
                 Image(systemName: "star.fill").font(.system(size: 9)).foregroundStyle(.yellow)
             }
             Spacer(minLength: 2)
-            Text(leader.displayValue).fontWeight(isSelectedTeam || leader.rank == 1 ? .bold : .regular).monospacedDigit()
+            Text(leader.displayValue).fontWeight(!isSelectedTeam && leader.rank == 1 ? .bold : .regular).monospacedDigit()
         }
         .font(.callout).padding(.horizontal, 4).padding(.vertical, 2)
         .foregroundStyle(isSelectedTeam ? Color.yellow : AppColor.ink)
