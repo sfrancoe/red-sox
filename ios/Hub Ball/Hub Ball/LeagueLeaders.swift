@@ -69,6 +69,18 @@ struct ComparisonLeader: Codable, Identifiable, Sendable {
     let rank: Int
     let tied: Bool
 
+    // `convertFromSnakeCase` turns `player_id` into `playerId`, not the Swift
+    // initialism spelling `playerID`. Keep the public Swift names and decode
+    // these two stable API keys explicitly.
+    private enum CodingKeys: String, CodingKey {
+        case playerID = "playerId"
+        case provider, name, value
+        case displayValue
+        case teamID = "teamId"
+        case teamAbbreviation
+        case rank, tied
+    }
+
     var id: String { "\(provider)-\(playerID)" }
     var rankText: String { tied ? "T-\(rank)" : "\(rank)" }
 }
