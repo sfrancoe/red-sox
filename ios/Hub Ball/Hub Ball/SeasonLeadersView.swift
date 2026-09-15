@@ -29,12 +29,22 @@ struct SeasonLeadersView: View {
     private var scopeControl: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Compare leaders").font(.caption.weight(.bold)).tracking(0.5)
-            Picker("Compare leaders", selection: $scope) {
+            HStack(spacing: 8) {
                 ForEach(LeaderboardScope.allCases) { item in
-                    Text(item.title(for: team)).tag(item).accessibilityLabel(item.accessibilityTitle(for: team))
+                    Button { scope = item } label: {
+                        Text(item.title(for: team))
+                            .font(.subheadline.weight(.semibold))
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .foregroundStyle(scope == item ? AppColor.night : AppColor.ink)
+                            .background(scope == item ? AppColor.accent : AppColor.nightCell, in: RoundedRectangle(cornerRadius: 8))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(item.accessibilityTitle(for: team))
+                    .accessibilityAddTraits(scope == item ? .isSelected : [])
                 }
-            }.pickerStyle(.segmented)
-            if scope == .team { Text("See how your team stacks up in \(team.definition.league) and MLB.").font(.caption) }
+            }
+            Text("Tap \(team.definition.league) for league leaders or MLB for all teams.")
+                .font(.caption).foregroundStyle(AppColor.ink)
         }
         .padding(.horizontal, 16).padding(.vertical, 10).background(AppColor.paleRed)
         .onChange(of: scope) { newScope in
