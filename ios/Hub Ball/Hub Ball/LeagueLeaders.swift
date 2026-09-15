@@ -59,8 +59,9 @@ struct ComparisonCategory: Codable, Sendable {
     var topTen: [ComparisonLeader] { Array(entries.prefix(10)) }
 
     func teamSupplement(teamID: Int) -> [ComparisonLeader] {
-        guard !topTen.contains(where: { $0.teamID == teamID }) else { return [] }
-        return Array(entries.filter { $0.teamID == teamID }.prefix(3))
+        let displayedIDs = Set(topTen.map(\.id))
+        return entries.filter { $0.teamID == teamID }.prefix(3)
+            .filter { !displayedIDs.contains($0.id) }
     }
 }
 

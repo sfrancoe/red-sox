@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SeasonLeadersView: View {
     @State private var store: SeasonLeadersStore
-    @State private var scope: LeaderboardScope = .mlb
+    @State private var scope: LeaderboardScope = .team
     @State private var detail: LeaderboardDetail?
     private let team: HubTeam
 
@@ -196,14 +196,15 @@ private struct CompactLeaderRow: View {
             Text(leader.rankText).font(.caption.weight(.black)).foregroundStyle(AppColor.red)
                 .frame(minWidth: 30, alignment: .leading)
             LeaderName(name: leader.name, abbreviation: leader.teamAbbreviation ?? "TOT")
+                .fontWeight(isSelectedTeam ? .bold : .regular)
             if isSelectedTeam {
-                Image(systemName: "star.fill").font(.system(size: 8)).foregroundStyle(AppColor.green)
+                Image(systemName: "star.fill").font(.system(size: 9)).foregroundStyle(.yellow)
             }
             Spacer(minLength: 2)
-            Text(leader.displayValue).fontWeight(leader.rank == 1 ? .bold : .regular).monospacedDigit()
+            Text(leader.displayValue).fontWeight(isSelectedTeam || leader.rank == 1 ? .bold : .regular).monospacedDigit()
         }
         .font(.callout).padding(.horizontal, 4).padding(.vertical, 2)
-        .background(isSelectedTeam ? AppColor.accent.opacity(0.14) : .clear, in: RoundedRectangle(cornerRadius: 4))
+        .foregroundStyle(isSelectedTeam ? Color.yellow : AppColor.ink)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(leader.name), \(leader.teamAbbreviation ?? "multiple teams"), \(leader.tied ? "tied for" : "ranked") \(leader.rank), \(leader.displayValue)\(isSelectedTeam ? ", your team" : "")")
     }
