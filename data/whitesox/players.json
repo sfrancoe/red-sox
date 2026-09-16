@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-15T14:26:15.199407+00:00",
-  "roster_as_of": "September 13, 2026",
+  "generated_at": "2026-09-16T14:19:16.214447+00:00",
+  "roster_as_of": "September 15, 2026",
   "team": {
     "id": 145,
     "name": "Chicago White Sox"
   },
   "roster_type": "open-current-roster",
-  "player_count": 47,
+  "player_count": 46,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -2508,8 +2508,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2003-08-05",
       "age": 23,
       "birthplace": "Naperville",
@@ -2913,86 +2913,6 @@
           "complete_games": 0,
           "era": 5.48,
           "whip": 1.263
-        }
-      }
-    },
-    {
-      "id": 664353,
-      "wikidata_id": "Q65003402",
-      "slug": "jose-urquidy",
-      "name": "José Urquidy",
-      "full_name": "José Urquidy",
-      "number": "70",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "1995-05-01",
-      "age": 31,
-      "birthplace": "Mazatlán",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "July 2, 2019",
-      "debut_team": "Houston Astros",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Houston Astros",
-        "Detroit Tigers",
-        "Pittsburgh Pirates",
-        "Chicago White Sox"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q65003402",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Jos%C3%A9_Urquidy",
-      "retrosheet_id": "urquj001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 81,
-          "plate_appearances": 8,
-          "at_bats": 8,
-          "runs": 0,
-          "hits": 1,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 6,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": 0.125,
-          "on_base_percentage": 0.125,
-          "slugging_percentage": 0.125,
-          "ops": 0.25
-        },
-        "pitching": {
-          "games": 81,
-          "games_started": 70,
-          "wins": 27,
-          "losses": 16,
-          "saves": 1,
-          "innings_outs": 1222,
-          "hits": 370,
-          "runs": 183,
-          "earned_runs": 181,
-          "home_runs": 67,
-          "walks": 100,
-          "strikeouts": 329,
-          "hit_batters": 12,
-          "wild_pitches": 11,
-          "balks": 1,
-          "complete_games": 0,
-          "era": 4.0,
-          "whip": 1.154
         }
       }
     },
