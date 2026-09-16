@@ -27,26 +27,21 @@ struct SeasonLeadersView: View {
     }
 
     private var scopeControl: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("Compare leaders").font(.caption.weight(.bold)).tracking(0.5)
-            HStack(spacing: 8) {
-                ForEach(LeaderboardScope.allCases) { item in
-                    Button { scope = item } label: {
-                        Text(item.title(for: team))
-                            .font(.subheadline.weight(.semibold))
-                            .frame(maxWidth: .infinity, minHeight: 44)
-                            .foregroundStyle(scope == item ? AppColor.night : AppColor.ink)
-                            .background(scope == item ? AppColor.accent : AppColor.nightCell, in: RoundedRectangle(cornerRadius: 8))
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(item.accessibilityTitle(for: team))
-                    .accessibilityAddTraits(scope == item ? .isSelected : [])
+        HStack(spacing: 4) {
+            ForEach(LeaderboardScope.allCases) { item in
+                Button { scope = item } label: {
+                    Text(item.title(for: team))
+                        .font(.caption.weight(.semibold))
+                        .frame(maxWidth: .infinity, minHeight: 22)
+                        .foregroundStyle(scope == item ? AppColor.night : AppColor.ink)
+                        .background(scope == item ? AppColor.accent : AppColor.nightCell, in: RoundedRectangle(cornerRadius: 4))
                 }
+                .buttonStyle(.plain)
+                .accessibilityLabel(item.accessibilityTitle(for: team))
+                .accessibilityAddTraits(scope == item ? .isSelected : [])
             }
-            Text("Tap \(team.definition.league) for league leaders or MLB for all teams.")
-                .font(.caption).foregroundStyle(AppColor.ink)
         }
-        .padding(.horizontal, 16).padding(.vertical, 10).background(AppColor.paleRed)
+        .padding(.horizontal, 16).padding(.top, 8).background(AppColor.paleRed)
         .onChange(of: scope) { newScope in
             guard newScope != .team else { return }
             Task { for year in store.sortedYears { await store.loadComparison(year: year) } }
@@ -66,7 +61,7 @@ struct SeasonLeadersView: View {
                     Text("AVG and OPS use qualified hitters. WHIP requires at least 40 innings.")
                         .font(.caption).frame(maxWidth: .infinity, alignment: .leading)
                 }
-            }.padding(16).foregroundStyle(AppColor.ink)
+            }.padding(.horizontal, 16).padding(.top, 4).padding(.bottom, 16).foregroundStyle(AppColor.ink)
         }
         .refreshable {
             await store.load()
