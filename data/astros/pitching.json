@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T07:55:17.154028+00:00",
+  "generated_at": "2026-09-16T13:44:43.102661+00:00",
   "season": 2026,
   "team": "Houston Astros",
   "games_played": 151,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.9,
+    "actual_war": 7.1,
     "forecast_war_to_date": 13.2,
-    "war_gap": -6.3,
-    "innings": 1329.7,
-    "era": 4.56
+    "war_gap": -6.1,
+    "innings": 1338.7,
+    "era": 4.54
   },
   "pitchers": [
     {
@@ -32,9 +32,9 @@
       "actual": {
         "ip": "145.2",
         "ip_value": 145.667,
-        "war": 2.44,
+        "war": 2.43,
         "era": 3.71,
-        "fip": 3.82,
+        "fip": 3.81,
         "k_minus_bb_pct": 13.8
       },
       "forecast": {
@@ -49,25 +49,25 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 2.44,
-      "innings_share_pct": 11.0
+      "war_gap": 2.43,
+      "innings_share_pct": 10.9
     },
     {
       "id": 623352,
       "name": "Josh Hader",
       "throws": "L",
       "role": "Closer",
-      "games": 42,
+      "games": 43,
       "starts": 0,
-      "saves": 25,
+      "saves": 26,
       "holds": 0,
       "actual": {
-        "ip": "41.1",
-        "ip_value": 41.333,
-        "war": 2.03,
-        "era": 0.87,
-        "fip": 1.6,
-        "k_minus_bb_pct": 28.5
+        "ip": "42.1",
+        "ip_value": 42.333,
+        "war": 2.07,
+        "era": 0.85,
+        "fip": 1.59,
+        "k_minus_bb_pct": 28.4
       },
       "forecast": {
         "ip": 61.0,
@@ -81,25 +81,25 @@
         "ip": 56.9,
         "war": 0.8
       },
-      "war_gap": 1.22,
-      "innings_share_pct": 3.1
+      "war_gap": 1.27,
+      "innings_share_pct": 3.2
     },
     {
       "id": 686613,
       "name": "Hunter Brown",
       "throws": "R",
       "role": "Starter",
-      "games": 17,
-      "starts": 17,
+      "games": 18,
+      "starts": 18,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "92.0",
-        "ip_value": 92.0,
-        "war": 1.28,
-        "era": 3.52,
-        "fip": 4.11,
-        "k_minus_bb_pct": 14.0
+        "ip": "97.0",
+        "ip_value": 97.0,
+        "war": 1.51,
+        "era": 3.43,
+        "fip": 3.94,
+        "k_minus_bb_pct": 15.0
       },
       "forecast": {
         "ip": 184.2,
@@ -113,8 +113,8 @@
         "ip": 171.7,
         "war": 3.34
       },
-      "war_gap": -2.06,
-      "innings_share_pct": 6.9
+      "war_gap": -1.83,
+      "innings_share_pct": 7.2
     },
     {
       "id": 595345,
@@ -130,7 +130,7 @@
         "ip_value": 67.667,
         "war": 1.25,
         "era": 2.13,
-        "fip": 3.24,
+        "fip": 3.23,
         "k_minus_bb_pct": 20.7
       },
       "forecast": {
@@ -178,7 +178,7 @@
         "war": 0.21
       },
       "war_gap": 0.66,
-      "innings_share_pct": 3.7
+      "innings_share_pct": 3.6
     },
     {
       "id": 660853,
@@ -194,7 +194,7 @@
         "ip_value": 68.0,
         "war": 0.58,
         "era": 4.5,
-        "fip": 3.84,
+        "fip": 3.83,
         "k_minus_bb_pct": 15.4
       },
       "forecast": {
@@ -226,7 +226,7 @@
         "ip_value": 72.667,
         "war": 0.46,
         "era": 5.2,
-        "fip": 4.44,
+        "fip": 4.43,
         "k_minus_bb_pct": 12.6
       },
       "forecast": {
@@ -242,7 +242,7 @@
         "war": 1.64
       },
       "war_gap": -1.18,
-      "innings_share_pct": 5.5
+      "innings_share_pct": 5.4
     },
     {
       "id": 664299,
@@ -258,7 +258,7 @@
         "ip_value": 55.667,
         "war": 0.32,
         "era": 5.5,
-        "fip": 4.58,
+        "fip": 4.57,
         "k_minus_bb_pct": 13.2
       },
       "forecast": {
@@ -275,6 +275,38 @@
       },
       "war_gap": -0.51,
       "innings_share_pct": 4.2
+    },
+    {
+      "id": 805123,
+      "name": "AJ Blubaugh",
+      "throws": "R",
+      "role": "Setup",
+      "games": 59,
+      "starts": 0,
+      "saves": 1,
+      "holds": 10,
+      "actual": {
+        "ip": "91.0",
+        "ip_value": 91.0,
+        "war": 0.32,
+        "era": 3.26,
+        "fip": 4.17,
+        "k_minus_bb_pct": 14.0
+      },
+      "forecast": {
+        "ip": 46.0,
+        "war": 0.09,
+        "era": 4.37,
+        "fip": 4.48,
+        "k_minus_bb_pct": 12.6,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 42.9,
+        "war": 0.08
+      },
+      "war_gap": 0.24,
+      "innings_share_pct": 6.8
     },
     {
       "id": 681293,
@@ -309,38 +341,6 @@
       "innings_share_pct": 6.6
     },
     {
-      "id": 805123,
-      "name": "AJ Blubaugh",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 58,
-      "starts": 0,
-      "saves": 1,
-      "holds": 9,
-      "actual": {
-        "ip": "90.0",
-        "ip_value": 90.0,
-        "war": 0.28,
-        "era": 3.3,
-        "fip": 4.2,
-        "k_minus_bb_pct": 13.9
-      },
-      "forecast": {
-        "ip": 46.0,
-        "war": 0.09,
-        "era": 4.37,
-        "fip": 4.48,
-        "k_minus_bb_pct": 12.6,
-        "team_at_fetch": "HOU"
-      },
-      "forecast_to_date": {
-        "ip": 42.9,
-        "war": 0.08
-      },
-      "war_gap": 0.2,
-      "innings_share_pct": 6.8
-    },
-    {
       "id": 701121,
       "name": "Logan VanWey",
       "throws": "R",
@@ -354,7 +354,7 @@
         "ip_value": 6.0,
         "war": 0.18,
         "era": 1.5,
-        "fip": 1.44,
+        "fip": 1.43,
         "k_minus_bb_pct": 22.7
       },
       "forecast": {
@@ -370,7 +370,7 @@
         "war": -0.0
       },
       "war_gap": 0.18,
-      "innings_share_pct": 0.5
+      "innings_share_pct": 0.4
     },
     {
       "id": 678906,
@@ -434,7 +434,7 @@
         "war": 1.13
       },
       "war_gap": -1.02,
-      "innings_share_pct": 3.0
+      "innings_share_pct": 2.9
     },
     {
       "id": 663878,
@@ -482,7 +482,7 @@
         "ip_value": 8.0,
         "war": 0.05,
         "era": 3.38,
-        "fip": 4.23,
+        "fip": 4.22,
         "k_minus_bb_pct": 30.0
       },
       "forecast": {
@@ -530,7 +530,7 @@
         "war": -0.0
       },
       "war_gap": 0.05,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 1.1
     },
     {
       "id": 676694,
@@ -556,38 +556,6 @@
       },
       "war_gap": 0.01,
       "innings_share_pct": 0.1
-    },
-    {
-      "id": 656986,
-      "name": "Bennett Sousa",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 29,
-      "starts": 1,
-      "saves": 0,
-      "holds": 9,
-      "actual": {
-        "ip": "25.0",
-        "ip_value": 25.0,
-        "war": 0.01,
-        "era": 5.4,
-        "fip": 4.5,
-        "k_minus_bb_pct": 8.7
-      },
-      "forecast": {
-        "ip": 30.0,
-        "war": 0.25,
-        "era": 3.6,
-        "fip": 3.67,
-        "k_minus_bb_pct": 17.5,
-        "team_at_fetch": "HOU"
-      },
-      "forecast_to_date": {
-        "ip": 28.0,
-        "war": 0.23
-      },
-      "war_gap": -0.23,
-      "innings_share_pct": 1.9
     },
     {
       "id": 675989,
@@ -717,7 +685,7 @@
         "ip_value": 18.333,
         "war": -0.09,
         "era": 9.33,
-        "fip": 5.89,
+        "fip": 5.88,
         "k_minus_bb_pct": 7.1
       },
       "forecast": {
@@ -768,6 +736,38 @@
       "innings_share_pct": 0.5
     },
     {
+      "id": 656986,
+      "name": "Bennett Sousa",
+      "throws": "L",
+      "role": "Setup",
+      "games": 30,
+      "starts": 1,
+      "saves": 0,
+      "holds": 10,
+      "actual": {
+        "ip": "26.0",
+        "ip_value": 26.0,
+        "war": -0.11,
+        "era": 5.54,
+        "fip": 4.87,
+        "k_minus_bb_pct": 9.2
+      },
+      "forecast": {
+        "ip": 30.0,
+        "war": 0.25,
+        "era": 3.6,
+        "fip": 3.67,
+        "k_minus_bb_pct": 17.5,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 28.0,
+        "war": 0.23
+      },
+      "war_gap": -0.35,
+      "innings_share_pct": 1.9
+    },
+    {
       "id": 685005,
       "name": "Christian Roa",
       "throws": "R",
@@ -779,7 +779,7 @@
       "actual": {
         "ip": "8.2",
         "ip_value": 8.667,
-        "war": -0.15,
+        "war": -0.16,
         "era": 5.19,
         "fip": 6.68,
         "k_minus_bb_pct": -2.3
@@ -797,24 +797,24 @@
         "war": -0.16
       },
       "war_gap": 0.01,
-      "innings_share_pct": 0.7
+      "innings_share_pct": 0.6
     },
     {
       "id": 650556,
       "name": "Bryan Abreu",
       "throws": "R",
       "role": "Setup",
-      "games": 61,
+      "games": 62,
       "starts": 0,
       "saves": 8,
-      "holds": 14,
+      "holds": 15,
       "actual": {
-        "ip": "58.1",
-        "ip_value": 58.333,
-        "war": -0.22,
-        "era": 3.86,
-        "fip": 4.6,
-        "k_minus_bb_pct": 14.3
+        "ip": "59.1",
+        "ip_value": 59.333,
+        "war": -0.18,
+        "era": 3.79,
+        "fip": 4.53,
+        "k_minus_bb_pct": 14.6
       },
       "forecast": {
         "ip": 68.0,
@@ -828,7 +828,7 @@
         "ip": 63.4,
         "war": 0.89
       },
-      "war_gap": -1.11,
+      "war_gap": -1.07,
       "innings_share_pct": 4.4
     },
     {
@@ -875,7 +875,7 @@
       "actual": {
         "ip": "23.0",
         "ip_value": 23.0,
-        "war": -0.33,
+        "war": -0.34,
         "era": 4.3,
         "fip": 6.45,
         "k_minus_bb_pct": 3.1
@@ -892,7 +892,7 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": -0.33,
+      "war_gap": -0.34,
       "innings_share_pct": 1.7
     },
     {
@@ -939,9 +939,9 @@
       "actual": {
         "ip": "94.2",
         "ip_value": 94.667,
-        "war": -0.36,
+        "war": -0.37,
         "era": 5.99,
-        "fip": 5.64,
+        "fip": 5.63,
         "k_minus_bb_pct": 9.5
       },
       "forecast": {
@@ -956,7 +956,7 @@
         "ip": 136.3,
         "war": 1.58
       },
-      "war_gap": -1.94,
+      "war_gap": -1.95,
       "innings_share_pct": 7.1
     },
     {
@@ -988,7 +988,7 @@
         "ip": 19.7,
         "war": 0.18
       },
-      "war_gap": -0.59,
+      "war_gap": -0.6,
       "innings_share_pct": 2.4
     },
     {
@@ -1053,7 +1053,7 @@
         "war": 0.62
       },
       "war_gap": -1.24,
-      "innings_share_pct": 2.0
+      "innings_share_pct": 1.9
     }
   ]
 }

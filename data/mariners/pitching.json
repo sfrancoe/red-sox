@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T07:55:20.464839+00:00",
+  "generated_at": "2026-09-16T13:44:45.082224+00:00",
   "season": 2026,
   "team": "Seattle Mariners",
   "games_played": 152,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.8,
+    "actual_war": 12.9,
     "forecast_war_to_date": 16.3,
-    "war_gap": -3.6,
-    "innings": 1332.3,
-    "era": 4.24
+    "war_gap": -3.4,
+    "innings": 1340.3,
+    "era": 4.22
   },
   "pitchers": [
     {
@@ -50,23 +50,23 @@
         "war": 3.1
       },
       "war_gap": 0.62,
-      "innings_share_pct": 12.2
+      "innings_share_pct": 12.1
     },
     {
       "id": 669302,
       "name": "Logan Gilbert",
       "throws": "R",
       "role": "Starter",
-      "games": 29,
-      "starts": 29,
+      "games": 30,
+      "starts": 30,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "172.0",
-        "ip_value": 172.0,
-        "war": 2.63,
-        "era": 3.72,
-        "fip": 3.84,
+        "ip": "178.0",
+        "ip_value": 178.0,
+        "war": 2.66,
+        "era": 3.69,
+        "fip": 3.86,
         "k_minus_bb_pct": 20.8
       },
       "forecast": {
@@ -81,8 +81,8 @@
         "ip": 156.2,
         "war": 2.98
       },
-      "war_gap": -0.35,
-      "innings_share_pct": 12.9
+      "war_gap": -0.32,
+      "innings_share_pct": 13.3
     },
     {
       "id": 669923,
@@ -96,9 +96,9 @@
       "actual": {
         "ip": "165.1",
         "ip_value": 165.333,
-        "war": 2.49,
+        "war": 2.5,
         "era": 4.25,
-        "fip": 3.85,
+        "fip": 3.84,
         "k_minus_bb_pct": 14.2
       },
       "forecast": {
@@ -114,7 +114,7 @@
         "war": 2.97
       },
       "war_gap": -0.48,
-      "innings_share_pct": 12.4
+      "innings_share_pct": 12.3
     },
     {
       "id": 676106,
@@ -130,7 +130,7 @@
         "ip_value": 138.667,
         "war": 1.75,
         "era": 3.57,
-        "fip": 4.01,
+        "fip": 4.0,
         "k_minus_bb_pct": 16.6
       },
       "forecast": {
@@ -146,7 +146,7 @@
         "war": 0.15
       },
       "war_gap": 1.6,
-      "innings_share_pct": 10.4
+      "innings_share_pct": 10.3
     },
     {
       "id": 662253,
@@ -162,7 +162,7 @@
         "ip_value": 55.0,
         "war": 0.89,
         "era": 4.25,
-        "fip": 3.18,
+        "fip": 3.17,
         "k_minus_bb_pct": 27.4
       },
       "forecast": {
@@ -194,7 +194,7 @@
         "ip_value": 107.333,
         "war": 0.68,
         "era": 4.19,
-        "fip": 4.56,
+        "fip": 4.55,
         "k_minus_bb_pct": 16.5
       },
       "forecast": {
@@ -210,7 +210,7 @@
         "war": 1.3
       },
       "war_gap": -0.61,
-      "innings_share_pct": 8.1
+      "innings_share_pct": 8.0
     },
     {
       "id": 622491,
@@ -226,7 +226,7 @@
         "ip_value": 99.667,
         "war": 0.62,
         "era": 5.06,
-        "fip": 4.58,
+        "fip": 4.57,
         "k_minus_bb_pct": 12.2
       },
       "forecast": {
@@ -242,7 +242,7 @@
         "war": 2.23
       },
       "war_gap": -1.61,
-      "innings_share_pct": 7.5
+      "innings_share_pct": 7.4
     },
     {
       "id": 666374,
@@ -274,7 +274,7 @@
         "war": 0.62
       },
       "war_gap": -0.3,
-      "innings_share_pct": 1.3
+      "innings_share_pct": 1.2
     },
     {
       "id": 695380,
@@ -322,7 +322,7 @@
         "ip_value": 25.333,
         "war": 0.22,
         "era": 5.33,
-        "fip": 4.45,
+        "fip": 4.44,
         "k_minus_bb_pct": 12.1
       },
       "forecast": null,
@@ -459,7 +459,39 @@
         "war": -0.02
       },
       "war_gap": 0.12,
-      "innings_share_pct": 1.0
+      "innings_share_pct": 0.9
+    },
+    {
+      "id": 642100,
+      "name": "Gabe Speier",
+      "throws": "L",
+      "role": "Setup",
+      "games": 50,
+      "starts": 0,
+      "saves": 1,
+      "holds": 21,
+      "actual": {
+        "ip": "42.2",
+        "ip_value": 42.667,
+        "war": 0.09,
+        "era": 2.95,
+        "fip": 4.15,
+        "k_minus_bb_pct": 14.1
+      },
+      "forecast": {
+        "ip": 58.0,
+        "war": 0.53,
+        "era": 3.21,
+        "fip": 3.32,
+        "k_minus_bb_pct": 20.4,
+        "team_at_fetch": "SEA"
+      },
+      "forecast_to_date": {
+        "ip": 54.4,
+        "war": 0.5
+      },
+      "war_gap": -0.41,
+      "innings_share_pct": 3.2
     },
     {
       "id": 621074,
@@ -491,39 +523,7 @@
         "war": 0.0
       },
       "war_gap": 0.03,
-      "innings_share_pct": 3.0
-    },
-    {
-      "id": 642100,
-      "name": "Gabe Speier",
-      "throws": "L",
-      "role": "Setup",
-      "games": 49,
-      "starts": 0,
-      "saves": 1,
-      "holds": 21,
-      "actual": {
-        "ip": "41.2",
-        "ip_value": 41.667,
-        "war": 0.02,
-        "era": 3.02,
-        "fip": 4.28,
-        "k_minus_bb_pct": 13.3
-      },
-      "forecast": {
-        "ip": 58.0,
-        "war": 0.53,
-        "era": 3.21,
-        "fip": 3.32,
-        "k_minus_bb_pct": 20.4,
-        "team_at_fetch": "SEA"
-      },
-      "forecast_to_date": {
-        "ip": 54.4,
-        "war": 0.5
-      },
-      "war_gap": -0.48,
-      "innings_share_pct": 3.1
+      "innings_share_pct": 2.9
     },
     {
       "id": 642215,
@@ -612,7 +612,7 @@
         "war": 0.27
       },
       "war_gap": -0.28,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 0.1
     },
     {
       "id": 645302,
@@ -669,7 +669,7 @@
         "war": 0.17
       },
       "war_gap": -0.2,
-      "innings_share_pct": 0.3
+      "innings_share_pct": 0.2
     },
     {
       "id": 682445,
@@ -815,24 +815,24 @@
         "war": -0.0
       },
       "war_gap": -0.17,
-      "innings_share_pct": 2.1
+      "innings_share_pct": 2.0
     },
     {
       "id": 622554,
       "name": "Seranthony Domínguez",
       "throws": "R",
       "role": "Reliever",
-      "games": 19,
+      "games": 20,
       "starts": 0,
       "saves": 0,
       "holds": 3,
       "actual": {
-        "ip": "18.1",
-        "ip_value": 18.333,
-        "war": -0.21,
-        "era": 3.93,
-        "fip": 5.39,
-        "k_minus_bb_pct": 5.3
+        "ip": "19.1",
+        "ip_value": 19.333,
+        "war": -0.18,
+        "era": 3.72,
+        "fip": 5.17,
+        "k_minus_bb_pct": 6.3
       },
       "forecast": {
         "ip": 63.0,
@@ -846,7 +846,7 @@
         "ip": 59.1,
         "war": 0.49
       },
-      "war_gap": -0.7,
+      "war_gap": -0.67,
       "innings_share_pct": 1.4
     },
     {
@@ -879,7 +879,7 @@
         "war": -0.04
       },
       "war_gap": -0.36,
-      "innings_share_pct": 0.6
+      "innings_share_pct": 0.5
     },
     {
       "id": 660825,
@@ -893,7 +893,7 @@
       "actual": {
         "ip": "63.1",
         "ip_value": 63.333,
-        "war": -0.42,
+        "war": -0.41,
         "era": 3.98,
         "fip": 4.68,
         "k_minus_bb_pct": 15.1
@@ -911,7 +911,7 @@
         "war": 0.27
       },
       "war_gap": -0.69,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 4.7
     }
   ]
 }
