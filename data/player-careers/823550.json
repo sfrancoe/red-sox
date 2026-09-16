@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "player_id": 823550,
+  "generated_at": "2026-09-16T23:20:07.090739+00:00",
+  "data_as_of": "2026-09-16",
+  "status": "available",
+  "coverage": [
+    {
+      "league": "MLB",
+      "level": "MLB",
+      "first_season": 2026,
+      "last_season": 2026,
+      "status": "available",
+      "note": null
+    },
+    {
+      "league": "Minors",
+      "level": "Minors",
+      "first_season": 2026,
+      "last_season": 2026,
+      "status": "available",
+      "note": null
+    }
+  ],
+  "source": {
+    "name": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/people/823550/stats",
+    "attribution": "Season and minor-league statistics supplied by the MLB Stats API; regular season only."
+  },
+  "batting": [
+    {
+      "id": "823550-hitting-minors-2026-11-4904",
+      "season": 2026,
+      "team": "El Paso Chihuahuas",
+      "league": "Pacific Coast League",
+      "level": "AAA",
+      "row_type": "team_stint",
+      "games": 28,
+      "at_bats": 113,
+      "runs": 16,
+      "hits": 30,
+      "doubles": 3,
+      "triples": 0,
+      "home_runs": 1,
+      "runs_batted_in": 15,
+      "stolen_bases": 1,
+      "walks": 12,
+      "strikeouts": 29,
+      "average": 0.265,
+      "on_base_percentage": 0.336,
+      "slugging_percentage": 0.319,
+      "ops": 0.655
+    },
+    {
+      "id": "823550-hitting-mlb-2026-1-135",
+      "season": 2026,
+      "team": "San Diego Padres",
+      "league": "National League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 71,
+      "at_bats": 122,
+      "runs": 19,
+      "hits": 23,
+      "doubles": 4,
+      "triples": 0,
+      "home_runs": 1,
+      "runs_batted_in": 16,
+      "stolen_bases": 13,
+      "walks": 18,
+      "strikeouts": 27,
+      "average": 0.189,
+      "on_base_percentage": 0.291,
+      "slugging_percentage": 0.246,
+      "ops": 0.537
+    }
+  ],
+  "pitching": []
+}

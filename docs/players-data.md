@@ -23,12 +23,20 @@ completed-season career statistics with links back to the source records.
 - **The Chadwick Baseball Bureau Persons Register** maps Wikimedia/MLB identifiers to
   stable Retrosheet IDs. Its ODC Attribution 1.0 license permits commercial use with
   attribution.
+- **MLB Stats API** is used for the separately hosted `data/player-careers/<id>.json`
+  records: regular-season MLB and available Minor League year/team rows, including the
+  current season. The public endpoint is a data source, not an assertion of an
+  open-data licence. Each career record retains its provider URL, retrieval date and
+  coverage state; the app labels unavailable or partial coverage rather than creating
+  zero-stat seasons. International professional records are not yet sourced and are
+  therefore not represented as complete career coverage.
 
-This is open-licensed data, not license-free content in the literal sense: CC0 places
-Wikidata data in the public domain, while Wikipedia's CC BY-SA license requires
-attribution and share-alike treatment when protected content is reused. The generated
-feed records the licenses, required attribution, statistics cutoff, and exact
-roster-template revision.
+The roster feed remains open-licensed data, not license-free content in the literal
+sense: CC0 places Wikidata data in the public domain, while Wikipedia's CC BY-SA
+license requires attribution and share-alike treatment when protected content is
+reused. The detailed career records have a different source policy: public API access
+does not by itself create an open licence. The generated feeds retain their source URLs,
+retrieval date and coverage rather than describing the combined dataset as CC0.
 
 ## Refresh and verification
 
@@ -38,6 +46,7 @@ Run:
 python3 scripts/fetch_players.py
 python3 scripts/test_open_players.py
 python3 scripts/test_players.py
+python3 scripts/test_player_careers.py
 ```
 
 Pass `--team yankees` (or another registry key) to refresh one club. With no team
@@ -50,18 +59,19 @@ player photos, MLB image/API hosts, paid-provider references, missing team histo
 and missing source links, and verify the career-stat cutoff.
 
 If Retrosheet is temporarily unreachable, `--skip-new-career-stats` preserves cached
-statistics and marks only uncached records as temporarily unavailable. The normal
-scheduled refresh does not use this option, so it fills those records on the next
-successful run.
+statistics and marks only uncached records as temporarily unavailable. Use
+`--skip-new-career-details` only when retaining the last valid season-by-season
+snapshot is preferable to refreshing current-season rows. The normal scheduled refresh
+does not use either option.
 
 ## Scope
 
 Each team page includes name, number, position, roster status, age, birth date and place,
-height/weight when available, education when available, major teams played for, and
-standard career batting or pitching totals through 2025. Players absent from the 2025
-release—normally 2026 debuts or players awaiting an MLB appearance—receive an explicit
-unavailable state. It intentionally excludes headshots, article biography text, WAR,
-OPS+, awards, contract values, and private/personal details.
+height/weight when available, education when available, and a separate career card.
+When the detailed feed is available, it lists regular-season year/team/level rows and
+keeps unavailable values blank; the card exposes batting and pitching records
+independently for two-way players. It intentionally excludes headshots, article biography
+text, WAR, OPS+, awards, contract values, and private/personal details.
 
 Open-data sourcing does not grant permission to use club logos, uniform designs, or
 other league and team trademarks. Those product-branding questions remain separate.

@@ -23,16 +23,17 @@ struct PlayersView: View {
                     directory(feed)
                 } else if store.isLoading {
                     ProgressView("Loading players…")
+                        .tint(AppColor.steel)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     errorView
                 }
             }
-            .background(AppColor.cream)
+            .background(AppColor.night)
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Int.self) { playerID in
                 if let player = store.player(id: playerID) {
-                    PlayerReferenceView(team: team, player: player, source: store.feed?.source)
+                    PlayerReferenceView(team: team, player: player, source: store.feed?.source, store: store)
                 } else {
                     ContentUnavailableView("Player unavailable", systemImage: "person.crop.circle.badge.questionmark")
                 }
@@ -49,56 +50,67 @@ struct PlayersView: View {
         ScrollView {
             LazyVStack(spacing: 0) {
                 directoryHeader(feed)
+                searchField
                 filterBar
+                spreadsheetHeader
                 if store.visiblePlayers.isEmpty {
                     ContentUnavailableView.search(text: store.searchText)
-                        .frame(minHeight: 300)
+                        .frame(minHeight: 280)
                 } else {
                     ForEach(store.visiblePlayers) { player in
                         NavigationLink(value: player.id) {
-                            rosterRow(player)
+                            spreadsheetRow(player)
                         }
                         .buttonStyle(.plain)
-                        Divider().padding(.leading, 14)
                     }
                 }
                 sourceFooter(feed.source)
             }
+            .padding(.bottom, 20)
         }
-        .background(AppColor.cream)
         .refreshable { await store.load() }
-        .searchable(text: $store.searchText, prompt: "Search player or position")
+        .background(AppColor.night)
     }
 
     private func directoryHeader(_ feed: PlayersFeed) -> some View {
-        HStack(alignment: .center, spacing: 14) {
-            ZStack {
-                Circle().fill(AppColor.teamAccent)
-                Image(systemName: "baseball.fill")
-                    .font(.system(size: 32))
-                    .foregroundStyle(AppColor.ink)
-            }
-            .frame(width: 62, height: 62)
-
-            VStack(alignment: .leading, spacing: -3) {
-                Text("\(team.cityName.uppercased()) BASEBALL")
-                    .font(.system(size: contentWidth >= 650 ? 35 : 27, weight: .black))
-                    .foregroundStyle(AppColor.ink)
-                Text("PLAYER REFERENCE")
-                    .font(.system(size: contentWidth >= 650 ? 25 : 20, weight: .medium))
-                    .foregroundStyle(AppColor.ink)
-            }
-            Spacer(minLength: 4)
-            VStack(alignment: .trailing, spacing: 2) {
-                Text("\(feed.playerCount)")
-                    .font(.title2.weight(.black).monospacedDigit())
+        HStack(alignment: .bottom, spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text("PLAYERS")
-                    .font(.system(size: 9, weight: .bold))
-                    .foregroundStyle(AppColor.ink)
+                    .font(AppFont.displayLarge)
+                    .tracking(0.5)
+                    .foregroundStyle(AppColor.bone)
+                Text("\(team.fullName.uppercased()) ROSTER · \(feed.playerCount) LISTED")
+                    .font(AppFont.label.weight(.semibold))
+                    .foregroundStyle(AppColor.boneMuted)
             }
+            Spacer(minLength: 8)
+            Text(feed.updatedText)
+                .font(AppFont.label.monospacedDigit())
+                .foregroundStyle(AppColor.boneMuted)
+                .lineLimit(1)
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 14)
+        .padding(.top, 18)
+        .padding(.bottom, 14)
+    }
+
+    private var searchField: some View {
+        HStack(spacing: 9) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(AppColor.steel)
+            TextField("Search players", text: $store.searchText)
+                .textInputAutocapitalization(.words)
+                .autocorrectionDisabled()
+                .foregroundStyle(AppColor.bone)
+                .tint(AppColor.steel)
+        }
+        .font(AppFont.bodySmall)
+        .padding(.horizontal, 12)
+        .frame(height: 44)
+        .background(AppColor.nightRaised)
+        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
     }
 
     private var filterBar: some View {
@@ -109,61 +121,108 @@ struct PlayersView: View {
                         withAnimation(.easeOut(duration: 0.15)) { store.filter = filter }
                     } label: {
                         Text(filter.title)
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundStyle(AppColor.ink)
-                            .padding(.horizontal, 15)
-                            .frame(height: 38)
-                            .background(store.filter == filter ? AppColor.nightRaised : AppColor.paper)
+                            .font(AppFont.label.weight(.semibold))
+                            .foregroundStyle(store.filter == filter ? AppColor.bone : AppColor.boneMuted)
+                            .padding(.horizontal, 14)
+                            .frame(height: 36)
+                            .background(store.filter == filter ? AppColor.nightCell : AppColor.nightRaised)
+                            .overlay(alignment: .bottom) {
+                                if store.filter == filter {
+                                    Rectangle().fill(AppColor.amber).frame(height: 2)
+                                }
+                            }
                     }
                     .buttonStyle(.plain)
                     .accessibilityAddTraits(store.filter == filter ? .isSelected : [])
                 }
             }
+            .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
         }
-        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.teamAccent).frame(height: 2) }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
     }
 
-    private func rosterRow(_ player: RedSoxPlayer) -> some View {
-        HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text(player.name)
-                    .font(.system(size: 19, weight: .bold))
-                    .foregroundStyle(AppColor.ink)
-                Text("\(player.position.name) · \(player.rosterStatus)")
-                    .font(.system(size: 12))
-                    .foregroundStyle(AppColor.ink)
-                if let age = player.age {
-                    Text("Age \(age)\(player.birthplace.isEmpty ? "" : " · \(player.birthplace)")")
-                        .font(.system(size: 12))
-                        .foregroundStyle(AppColor.ink)
-                        .lineLimit(1)
+    private var spreadsheetHeader: some View {
+        HStack(spacing: 0) {
+            sortHeader(.number, width: 42, alignment: .trailing)
+            sortHeader(.name, alignment: .leading)
+            sortHeader(.position, width: 44)
+            sortHeader(.batsThrows, width: 48)
+            if contentWidth >= 520 { sortHeader(.age, width: 40) }
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 33)
+        .padding(.horizontal, 16)
+        .background(AppColor.nightRaised)
+        .overlay(alignment: .top) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+    }
+
+    private func sortHeader(_ column: PlayerDirectorySort, width: CGFloat? = nil, alignment: Alignment = .center) -> some View {
+        Button { store.toggleSort(column) } label: {
+            HStack(spacing: 3) {
+                Text(column.title.uppercased())
+                if store.sort == column {
+                    Image(systemName: store.sortsAscending ? "arrow.up" : "arrow.down")
+                        .font(.system(size: 8, weight: .bold))
                 }
             }
-            Spacer()
-            Text(player.number.map { "#\($0)" } ?? "")
-                .font(.system(size: 15, weight: .bold).monospacedDigit())
-                .foregroundStyle(AppColor.darkRed)
-            Image(systemName: "chevron.right")
-                .font(.caption.weight(.bold))
-                .foregroundStyle(AppColor.ink)
+            .font(AppFont.label.weight(.semibold))
+            .foregroundStyle(store.sort == column ? AppColor.bone : AppColor.boneMuted)
+            .frame(maxWidth: width == nil ? .infinity : nil, alignment: alignment)
+            .frame(width: width, alignment: alignment)
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 9)
+        .buttonStyle(.plain)
+        .accessibilityLabel("Sort by \(column.title)")
+    }
+
+    private func spreadsheetRow(_ player: RedSoxPlayer) -> some View {
+        HStack(spacing: 0) {
+            Text(player.number ?? "—")
+                .font(AppFont.number.monospacedDigit())
+                .foregroundStyle(AppColor.boneDim)
+                .frame(width: 42, alignment: .trailing)
+            Text(player.name)
+                .font(AppFont.bodySmall.weight(.medium))
+                .foregroundStyle(AppColor.bone)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 12)
+            Text(player.position.abbreviation)
+                .font(AppFont.label.monospaced())
+                .foregroundStyle(AppColor.boneDim)
+                .frame(width: 44)
+            Text("\(player.bats?.shortHand ?? "—")/\(player.throws?.shortHand ?? "—")")
+                .font(AppFont.label.monospaced())
+                .foregroundStyle(AppColor.boneDim)
+                .frame(width: 48)
+            if contentWidth >= 520 {
+                Text(player.age.map(String.init) ?? "—")
+                    .font(AppFont.label.monospacedDigit())
+                    .foregroundStyle(AppColor.boneDim)
+                    .frame(width: 40)
+            }
+            Image(systemName: "chevron.right")
+                .font(.system(size: 10, weight: .bold))
+                .foregroundStyle(AppColor.steel)
+                .frame(width: 22)
+        }
+        .frame(minHeight: 45)
+        .padding(.horizontal, 16)
+        .background(AppColor.night)
+        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
         .contentShape(Rectangle())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(player.name), number \(player.number ?? "unassigned"), \(player.position.name), bats \(player.bats ?? "unavailable"), throws \(player.throws ?? "unavailable")")
+        .accessibilityHint("Opens career card")
     }
 
     private func sourceFooter(_ source: PlayersSource) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
-            Text(source.attribution)
-            if let statsAttribution = source.statsAttribution {
-                Text(statsAttribution)
-            }
-        }
-        .font(.caption2)
-        .foregroundStyle(AppColor.ink)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
-        .background(AppColor.paper)
+        Text(source.attribution)
+            .font(AppFont.label)
+            .foregroundStyle(AppColor.boneMuted)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(16)
     }
 
     private func openRequestedPlayerIfAvailable() {
@@ -180,9 +239,26 @@ struct PlayersView: View {
         } actions: {
             Button("Try Again") { Task { await store.load() } }
                 .buttonStyle(HubProminentButtonStyle())
-                .tint(AppColor.darkRed)
+                .tint(AppColor.amber)
         }
+        .foregroundStyle(AppColor.bone)
     }
+}
+
+private enum PlayerRecordMode: String, CaseIterable, Identifiable {
+    case batting
+    case pitching
+
+    var id: String { rawValue }
+    var title: String { self == .batting ? "Batting" : "Pitching" }
+}
+
+private enum CareerScope: String, CaseIterable, Identifiable {
+    case all = "All levels"
+    case mlb = "MLB"
+    case minors = "Minors"
+
+    var id: String { rawValue }
 }
 
 private struct PlayerReferenceView: View {
@@ -190,301 +266,381 @@ private struct PlayerReferenceView: View {
     let team: HubTeam
     let player: RedSoxPlayer
     let source: PlayersSource?
+    let store: PlayersStore
+    @State private var mode: PlayerRecordMode
+    @State private var scope: CareerScope = .all
+
+    init(team: HubTeam, player: RedSoxPlayer, source: PlayersSource?, store: PlayersStore) {
+        self.team = team
+        self.player = player
+        self.source = source
+        self.store = store
+        _mode = State(initialValue: player.positionFilter == .pitcher ? .pitching : .batting)
+    }
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 0) {
-                identityHeader
-                sectionBar
-                summaryGrid
-                careerStatsSection
-                referenceSection("Teams Played For") { teamsTable }
-                referenceSection("Education") { educationRows }
-                referenceSection("Sources") { sourceRows }
+            LazyVStack(spacing: 12) {
+                nameBand
+                biographyPanel
+                careerPanel
+                if !player.education.entries.isEmpty { educationPanel }
+                sourcePanel
             }
+            .padding(16)
+            .padding(.bottom, 20)
         }
-        .background(AppColor.cream)
-        .navigationTitle(player.name)
+        .background(AppColor.night)
+        .navigationTitle("Players")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .task { await store.loadCareer(for: player) }
     }
 
-    private var identityHeader: some View {
-        HStack(alignment: .top, spacing: 16) {
-            VStack(alignment: .leading, spacing: 5) {
-                Text(player.name)
-                    .font(.system(size: contentWidth >= 650 ? 34 : 28, weight: .black))
-                    .foregroundStyle(AppColor.ink)
-                    .fixedSize(horizontal: false, vertical: true)
-                if contentWidth < 450 {
-                    compactReferenceLine(player.position.name)
-                    compactReferenceLine("Bats \(player.bats ?? "—") · Throws \(player.throws ?? "—")")
-                    if let measurements { compactReferenceLine(measurements) }
-                    compactReferenceLine(team.fullName)
-                } else {
-                    referenceLine("Position", player.position.name)
-                    referenceLine("Bats", player.bats ?? "—", trailingLabel: "Throws", trailingValue: player.throws ?? "—")
-                    if let measurements { Text(measurements).font(.system(size: 13)).foregroundStyle(AppColor.ink) }
-                    referenceLine("Current team", team.fullName)
-                }
+    private var biographyPanel: some View {
+        Grid(horizontalSpacing: 16, verticalSpacing: 9) {
+            GridRow {
+                bioValue("BATS", player.bats ?? "—")
+                bioValue("THROWS", player.throws ?? "—")
+                bioValue("BORN", player.formattedShortDate(player.birthDate) ?? "—")
             }
-            Spacer(minLength: 0)
-            VStack(spacing: 6) {
-                Text(player.rosterStatus.uppercased())
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundStyle(AppColor.ink)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 10)
-                    .frame(minHeight: 25)
-                    .background(AppColor.nightRaised)
-                    .clipShape(Rectangle())
-                if let number = player.number {
-                    Text("#\(number)")
-                        .font(.system(size: 24, weight: .black).monospacedDigit())
-                        .foregroundStyle(AppColor.darkRed)
-                }
+            GridRow {
+                bioValue("BIRTHPLACE", player.birthplace.isEmpty ? "—" : player.birthplace)
+                bioValue("MLB DEBUT", player.formattedShortDate(player.debutDate) ?? "—")
+                bioValue("STATUS", player.rosterStatus)
             }
-            .frame(maxWidth: contentWidth >= 650 ? 150 : 92)
         }
-        .padding(16)
+        .padding(14)
+        .background(AppColor.nightRaised)
+        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
     }
 
     @ViewBuilder
-    private func referenceLine(_ label: String, _ value: String, trailingLabel: String? = nil, trailingValue: String? = nil) -> some View {
-        HStack(spacing: 4) {
-            Text("\(label):").fontWeight(.bold)
-            Text(value)
-            if let trailingLabel, let trailingValue {
-                Text("· \(trailingLabel):").fontWeight(.bold)
-                Text(trailingValue)
+    private func bioValue(_ label: String, _ value: String) -> some View {
+        if contentWidth < 460 {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(label)
+                    .font(AppFont.label.weight(.semibold))
+                    .foregroundStyle(AppColor.boneMuted)
+                Text(value)
+                    .font(AppFont.label)
+                    .foregroundStyle(AppColor.boneDim)
+                    .lineLimit(2)
             }
-        }
-        .font(.system(size: 13))
-        .foregroundStyle(AppColor.ink)
-    }
-
-    private func compactReferenceLine(_ value: String) -> some View {
-        Text(value)
-            .font(.system(size: 12, weight: .medium))
-            .foregroundStyle(AppColor.ink.opacity(0.78))
-            .lineLimit(2)
-            .fixedSize(horizontal: false, vertical: true)
-    }
-
-    private var measurements: String? {
-        let values = [player.height, player.weight.map { "\($0) lb" }].compactMap { $0 }
-        return values.isEmpty ? nil : values.joined(separator: ", ")
-    }
-
-    private var sectionBar: some View {
-        HStack(spacing: 0) {
-            ForEach(["SUMMARY", "TEAMS", "EDUCATION", "SOURCES"], id: \.self) { title in
-                Text(title)
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundStyle(AppColor.ink)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 34)
-                    .background(title == "SUMMARY" ? AppColor.nightRaised : AppColor.paper)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        } else {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(label)
+                    .font(AppFont.label.weight(.semibold))
+                    .foregroundStyle(AppColor.boneMuted)
+                    .frame(width: 74, alignment: .leading)
+                Text(value)
+                    .font(AppFont.label)
+                    .foregroundStyle(AppColor.boneDim)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .lineLimit(2)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.teamAccent).frame(height: 2) }
     }
 
-    private var summaryGrid: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: contentWidth >= 700 ? 6 : 3), spacing: 0) {
-            summaryCell("AGE", player.age.map(String.init) ?? "—")
-            summaryCell("BORN", player.formattedDate(player.birthDate) ?? "—")
-            summaryCell("FROM", player.birthplace.isEmpty ? "—" : player.birthplace)
-            summaryCell("DEBUT", player.debutDate ?? "—")
-            summaryCell("DEBUT TEAM", player.debutTeam ?? "—")
-            summaryCell("TEAMS", "\(player.teams.count)")
-        }
-        .padding(.vertical, 13)
-        .overlay(alignment: .bottom) { Divider() }
-    }
-
-    private func summaryCell(_ label: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(label)
-                .font(.system(size: 10, weight: .black))
-                .foregroundStyle(AppColor.darkRed)
-            Text(value)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(AppColor.ink)
+    private var nameBand: some View {
+        HStack(spacing: 12) {
+            Text(player.number ?? "—")
+                .font(AppFont.numberExtraLarge.monospacedDigit())
+                .foregroundStyle(AppColor.amber)
+                .frame(minWidth: 44, alignment: .leading)
+            Rectangle().fill(AppColor.rule).frame(width: 1, height: 36)
+            Text(player.fullName ?? player.name)
+                .font(AppFont.displayLarge)
+                .foregroundStyle(AppColor.bone)
                 .lineLimit(2)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.76)
+            Spacer(minLength: 4)
+            Text(player.position.abbreviation)
+                .font(AppFont.displayMedium.monospaced())
+                .foregroundStyle(AppColor.boneDim)
         }
-        .frame(maxWidth: .infinity, minHeight: 55, alignment: .topLeading)
-        .padding(.horizontal, 10)
-        .overlay(alignment: .trailing) { Divider() }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 9)
+        .background(AppColor.nightRaised)
+        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+        .accessibilityElement(children: .combine)
     }
 
     @ViewBuilder
-    private var careerStatsSection: some View {
-        let throughSeason = player.careerStats?.throughSeason ?? source?.statsThrough ?? 2025
-        referenceSection("Career Statistics · Through \(throughSeason)") {
-            if player.positionFilter == .pitcher, let stats = player.careerStats?.pitching {
-                statGrid([
-                    ("G", "\(stats.games)"), ("GS", "\(stats.gamesStarted)"),
-                    ("W", "\(stats.wins)"), ("L", "\(stats.losses)"),
-                    ("SV", "\(stats.saves)"), ("IP", stats.inningsPitched),
-                    ("H", "\(stats.hits)"), ("ER", "\(stats.earnedRuns)"),
-                    ("HR", "\(stats.homeRuns)"), ("BB", "\(stats.walks)"),
-                    ("SO", "\(stats.strikeouts)"), ("ERA", decimal(stats.era, digits: 2)),
-                    ("WHIP", rate(stats.whip)),
-                ])
-            } else if let stats = player.careerStats?.batting {
-                statGrid([
-                    ("G", "\(stats.games)"), ("PA", "\(stats.plateAppearances)"),
-                    ("AB", "\(stats.atBats)"), ("R", "\(stats.runs)"),
-                    ("H", "\(stats.hits)"), ("2B", "\(stats.doubles)"),
-                    ("3B", "\(stats.triples)"), ("HR", "\(stats.homeRuns)"),
-                    ("RBI", "\(stats.runsBattedIn)"), ("BB", "\(stats.walks)"),
-                    ("SO", "\(stats.strikeouts)"), ("SB", "\(stats.stolenBases)"),
-                    ("AVG", rate(stats.average)), ("OBP", rate(stats.onBasePercentage)),
-                    ("SLG", rate(stats.sluggingPercentage)), ("OPS", rate(stats.ops)),
-                ])
+    private var careerPanel: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if hasBothRecords { recordModePicker }
+            scopePicker
+
+            if let career = store.career(for: player) {
+                careerTable(career)
+                careerFooter(career)
+            } else if store.isLoadingCareer(for: player) {
+                HStack(spacing: 8) {
+                    ProgressView().tint(AppColor.steel)
+                    Text("Loading career record…")
+                }
+                .font(AppFont.bodySmall)
+                .foregroundStyle(AppColor.boneDim)
+                .padding(16)
             } else {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(careerStatsUnavailableTitle)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(AppColor.ink)
-                    Text(careerStatsUnavailableDetail)
-                        .font(.system(size: 12))
-                        .foregroundStyle(AppColor.ink)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(12)
+                unavailableCareer
             }
         }
+        .background(AppColor.nightRaised)
+        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
     }
 
-    private var careerStatsUnavailableTitle: String {
-        if player.careerStats?.status == "not_in_2025_release" {
-            return "Career statistics are not available in the completed 2025 data release."
+    private var hasBothRecords: Bool {
+        if let career = store.career(for: player) {
+            return !career.battingRows.isEmpty && !career.pitchingRows.isEmpty
         }
-        return "Career statistics are not available in this data snapshot."
+        return player.careerStats?.batting != nil && player.careerStats?.pitching != nil
     }
 
-    private var careerStatsUnavailableDetail: String {
-        if player.careerStats?.status == "not_in_2025_release" {
-            return "This usually means the player debuted in 2026 or has not yet appeared in an MLB game."
-        }
-        return "Roster and biographical information remain available."
-    }
-
-    private func statGrid(_ values: [(String, String)]) -> some View {
-        LazyVGrid(
-            columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: contentWidth >= 700 ? 7 : 4),
-            spacing: 0
-        ) {
-            ForEach(Array(values.enumerated()), id: \.offset) { _, item in
-                VStack(spacing: 3) {
-                    Text(item.0)
-                        .font(.system(size: 10, weight: .black))
-                        .foregroundStyle(AppColor.darkRed)
-                    Text(item.1)
-                        .font(.system(size: 14, weight: .semibold).monospacedDigit())
-                        .foregroundStyle(AppColor.ink)
+    private var recordModePicker: some View {
+        HStack(spacing: 0) {
+            ForEach(PlayerRecordMode.allCases) { option in
+                Button { mode = option } label: {
+                    Text(option.title)
+                        .font(AppFont.label.weight(.semibold))
+                        .foregroundStyle(mode == option ? AppColor.bone : AppColor.boneMuted)
+                        .frame(maxWidth: .infinity, minHeight: 34)
+                        .background(mode == option ? AppColor.nightCell : AppColor.night)
                 }
-                .frame(maxWidth: .infinity, minHeight: 52)
-                .overlay(alignment: .trailing) { Divider() }
-                .overlay(alignment: .bottom) { Divider() }
+                .buttonStyle(.plain)
             }
         }
+        .padding(.horizontal, 10)
+        .padding(.top, 10)
     }
 
-    private func rate(_ value: Double?) -> String {
-        guard let value else { return "—" }
+    private var scopePicker: some View {
+        HStack(spacing: 6) {
+            ForEach(CareerScope.allCases) { option in
+                Button { scope = option } label: {
+                    Text(option.rawValue)
+                        .font(AppFont.label)
+                        .foregroundStyle(scope == option ? AppColor.bone : AppColor.boneMuted)
+                        .frame(maxWidth: .infinity, minHeight: 30)
+                        .background(scope == option ? AppColor.nightCell : AppColor.night)
+                        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(10)
+    }
+
+    @ViewBuilder
+    private func careerTable(_ career: PlayerCareerFeed) -> some View {
+        if mode == .batting {
+            let rows = career.battingRows.filter { includes(level: $0.level, league: $0.league) }
+            if rows.isEmpty { noRows } else { battingTable(rows) }
+        } else {
+            let rows = career.pitchingRows.filter { includes(level: $0.level, league: $0.league) }
+            if rows.isEmpty { noRows } else { pitchingTable(rows) }
+        }
+    }
+
+    private var noRows: some View {
+        Text("No \(scope.rawValue.lowercased()) regular-season rows are available for this record.")
+            .font(AppFont.bodySmall)
+            .foregroundStyle(AppColor.boneMuted)
+            .padding(16)
+    }
+
+    private func includes(level: String?, league: String?) -> Bool {
+        guard scope != .all else { return true }
+        let description = "\(level ?? "") \(league ?? "")".lowercased()
+        let isMLB = description.contains("mlb") || description.contains("major")
+        return scope == .mlb ? isMLB : !isMLB
+    }
+
+    private func battingTable(_ rows: [PlayerBattingSeason]) -> some View {
+        ScrollView(.horizontal, showsIndicators: true) {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    tableHeader("YEAR", 48); tableHeader("TEAM", 126); tableHeader("LEVEL", 55)
+                    tableHeader("G", 40); tableHeader("AB", 46); tableHeader("R", 40); tableHeader("H", 40)
+                    tableHeader("2B", 40); tableHeader("3B", 40); tableHeader("HR", 40); tableHeader("RBI", 46)
+                    tableHeader("SB", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("AVG", 50)
+                    tableHeader("OBP", 50); tableHeader("SLG", 50); tableHeader("OPS", 50)
+                }
+                .background(AppColor.nightCell)
+                ForEach(rows) { row in
+                    HStack(spacing: 0) {
+                        tableValue("\(row.season)", 48, leading: true); tableValue(row.team, 126, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
+                        tableValue(row.games, 40); tableValue(row.atBats, 46); tableValue(row.runs, 40); tableValue(row.hits, 40)
+                        tableValue(row.doubles, 40); tableValue(row.triples, 40); tableValue(row.homeRuns, 40); tableValue(row.runsBattedIn, 46)
+                        tableValue(row.stolenBases, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(rate(row.average), 50)
+                        tableValue(rate(row.onBasePercentage), 50); tableValue(rate(row.sluggingPercentage), 50); tableValue(rate(row.ops), 50)
+                    }
+                    .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(battingAccessibility(row))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func pitchingTable(_ rows: [PlayerPitchingSeason]) -> some View {
+        ScrollView(.horizontal, showsIndicators: true) {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    tableHeader("YEAR", 48); tableHeader("TEAM", 126); tableHeader("LEVEL", 55)
+                    tableHeader("G", 40); tableHeader("GS", 40); tableHeader("W", 40); tableHeader("L", 40)
+                    tableHeader("SV", 40); tableHeader("IP", 50); tableHeader("H", 40); tableHeader("ER", 40)
+                    tableHeader("HR", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("ERA", 50); tableHeader("WHIP", 54)
+                }
+                .background(AppColor.nightCell)
+                ForEach(rows) { row in
+                    HStack(spacing: 0) {
+                        tableValue("\(row.season)", 48, leading: true); tableValue(row.team, 126, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
+                        tableValue(row.games, 40); tableValue(row.gamesStarted, 40); tableValue(row.wins, 40); tableValue(row.losses, 40)
+                        tableValue(row.saves, 40); tableValue(row.inningsPitched, 50); tableValue(row.hits, 40); tableValue(row.earnedRuns, 40)
+                        tableValue(row.homeRuns, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(decimal(row.era), 50); tableValue(rate(row.whip), 54)
+                    }
+                    .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(pitchingAccessibility(row))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func tableHeader(_ text: String, _ width: CGFloat) -> some View {
+        Text(text)
+            .font(AppFont.label.weight(.semibold))
+            .foregroundStyle(AppColor.bone)
+            .frame(width: width, height: 31)
+            .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
+    }
+
+    private func tableValue(_ value: String?, _ width: CGFloat, leading: Bool = false) -> some View {
+        Text(value ?? "—")
+            .font(AppFont.label.monospacedDigit())
+            .foregroundStyle(AppColor.boneDim)
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
+            .padding(.leading, leading ? 5 : 0)
+            .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
+            .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+    }
+
+    private func tableValue(_ value: Int?, _ width: CGFloat) -> some View { tableValue(value.map(String.init), width) }
+
+    private func rate(_ value: Double?) -> String? {
+        guard let value else { return nil }
         let rendered = String(format: "%.3f", value)
         return rendered.hasPrefix("0.") ? String(rendered.dropFirst()) : rendered
     }
 
-    private func decimal(_ value: Double?, digits: Int) -> String {
-        guard let value else { return "—" }
-        return String(format: "%.*f", digits, value)
+    private func decimal(_ value: Double?) -> String? {
+        guard let value else { return nil }
+        return String(format: "%.2f", value)
     }
 
-    private func referenceSection<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(title.uppercased())
-                .font(.system(size: 13, weight: .black))
-                .foregroundStyle(AppColor.darkRed)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 9)
-                .background(AppColor.paper)
-                .overlay(alignment: .bottom) { Rectangle().fill(AppColor.teamAccent).frame(height: 1) }
-            content()
-        }
+    private func battingAccessibility(_ row: PlayerBattingSeason) -> String {
+        "\(row.season), \(row.team), \(row.level ?? row.league ?? "level unavailable"). \(row.games ?? 0) games, \(row.hits ?? 0) hits, \(row.homeRuns ?? 0) home runs."
     }
 
-    private var teamsTable: some View {
-        VStack(spacing: 0) {
-            if player.teams.isEmpty {
-                Text("No prior team history is listed in the open data record.")
-                    .font(.system(size: 14))
-                    .foregroundStyle(AppColor.ink)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(12)
-            } else {
-                ForEach(Array(player.teams.enumerated()), id: \.offset) { index, team in
-                    HStack(spacing: 10) {
-                        Text("\(index + 1)")
-                            .font(.caption.monospacedDigit())
-                            .foregroundStyle(AppColor.ink)
-                            .frame(width: 22, alignment: .trailing)
-                        Text(team)
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundStyle(AppColor.ink)
-                        Spacer()
-                    }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 9)
-                    if index < player.teams.count - 1 { Divider().padding(.leading, 44) }
-                }
+    private func pitchingAccessibility(_ row: PlayerPitchingSeason) -> String {
+        "\(row.season), \(row.team), \(row.level ?? row.league ?? "level unavailable"). \(row.games ?? 0) games, \(row.wins ?? 0) wins, \(row.strikeouts ?? 0) strikeouts."
+    }
+
+    private func careerFooter(_ career: PlayerCareerFeed) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            if let dataAsOf = career.dataAsOf {
+                Text("DATA AS OF \(dataAsOf.uppercased())")
+            }
+            if let note = career.coverage?.first(where: { $0.status != "available" })?.note {
+                Text(note)
             }
         }
+        .font(AppFont.label)
+        .foregroundStyle(AppColor.boneMuted)
+        .padding(12)
     }
 
-    private var educationRows: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            if player.education.entries.isEmpty {
-                Text("No college or school is listed in the open data record.")
-                    .font(.system(size: 14))
-                    .foregroundStyle(AppColor.ink)
-                    .padding(12)
-            } else {
+    private var unavailableCareer: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("DETAILED RECORD UNAVAILABLE")
+                .font(AppFont.label.weight(.semibold))
+                .foregroundStyle(AppColor.amber)
+            Text(store.careerError(for: player) ?? "This roster snapshot includes verified biography and career totals, but not a season-by-season record for this player.")
+                .font(AppFont.bodySmall)
+                .foregroundStyle(AppColor.boneDim)
+            if let through = player.careerStats?.throughSeason {
+                Text("Existing MLB totals are through \(through). No missing season has been represented as a zero.")
+                    .font(AppFont.label)
+                    .foregroundStyle(AppColor.boneMuted)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(14)
+        .overlay(alignment: .leading) { Rectangle().fill(AppColor.amber).frame(width: 3) }
+    }
+
+    private var educationPanel: some View {
+        detailPanel("EDUCATION") {
+            VStack(alignment: .leading, spacing: 7) {
                 ForEach(player.education.entries, id: \.self) { entry in
                     Text(entry)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(AppColor.ink)
-                        .padding(12)
+                        .font(AppFont.bodySmall)
+                        .foregroundStyle(AppColor.boneDim)
                 }
             }
         }
     }
 
-    private var sourceRows: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(source?.attribution ?? "Open Wikimedia data")
-                .font(.system(size: 12))
-                .foregroundStyle(AppColor.ink)
-            if let statsAttribution = source?.statsAttribution {
-                Text(statsAttribution)
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(AppColor.ink)
-            }
-            HStack(spacing: 18) {
-                if let url = player.sourceURL { Link("Wikidata record", destination: url) }
-                if let url = player.articleURL { Link("Wikipedia article", destination: url) }
-                if let value = source?.statsUrl, let url = URL(string: value) {
-                    Link("Retrosheet", destination: url)
+    private var sourcePanel: some View {
+        detailPanel("SOURCES") {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(store.career(for: player)?.source?.attribution ?? source?.attribution ?? "Open source player data")
+                if let attribution = source?.statsAttribution { Text(attribution) }
+                HStack(spacing: 16) {
+                    if let url = player.sourceURL { Link("Wikidata", destination: url) }
+                    if let url = player.articleURL { Link("Wikipedia", destination: url) }
+                    if let value = store.career(for: player)?.source?.url, let url = URL(string: value) { Link("Career source", destination: url) }
                 }
+                .font(AppFont.label.weight(.semibold))
+                .foregroundStyle(AppColor.steel)
             }
-            .font(.system(size: 13, weight: .bold))
-            .foregroundStyle(AppColor.darkRed)
+            .font(AppFont.label)
+            .foregroundStyle(AppColor.boneMuted)
         }
-        .padding(12)
+    }
+
+    private func detailPanel<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(title)
+                .font(AppFont.displaySmall)
+                .foregroundStyle(AppColor.bone)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+            content().padding(12)
+        }
+        .background(AppColor.nightRaised)
+        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+    }
+}
+
+private extension String {
+    var shortHand: String {
+        switch lowercased() {
+        case "left": "L"
+        case "right": "R"
+        case "switch": "S"
+        default: self
+        }
     }
 }
 

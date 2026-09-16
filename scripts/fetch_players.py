@@ -31,8 +31,10 @@ from team_registry import all_teams, data_directory, team_by_key
 
 ROOT = Path(__file__).resolve().parents[1]
 IOS_OUTPUT_PATH = ROOT / "ios" / "Hub Ball" / "Hub Ball" / "players.json"
+CAREER_OUTPUT_DIRECTORY = ROOT / "data" / "player-careers"
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
+MLB_STATS_API = "https://statsapi.mlb.com/api/v1/people/{player_id}/stats"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 CHADWICK_REGISTER_URL = (
     "https://raw.githubusercontent.com/chadwickbureau/register/master/data/people-{suffix}.csv"
@@ -43,6 +45,8 @@ RETROSHEET_NOTICE = (
     "The information used here was obtained free of charge from and is copyrighted by Retrosheet. "
     "Interested parties may contact Retrosheet at 20 Sunset Rd., Newark, DE 19711."
 )
+CAREER_SCHEMA_VERSION = 1
+FALLBACK_ID_BASE = 1_900_000_000
 
 SECTION_DETAILS = {
     "Starters": ("Pitcher", "P", True),
@@ -148,6 +152,32 @@ def resolve_retrosheet_ids(players: list[dict[str, Any]], people: list[dict[str,
             if len(candidates) == 1:
                 match = candidates[0]
         player["retrosheet_id"] = match.get("key_retro") if match else None
+
+
+def current_mlb_people() -> dict[str, list[dict[str, Any]]]:
+    """Index the current official directory once for stable IDs absent from Wikidata."""
+    payload = fetch_json("https://statsapi.mlb.com/api/v1/sports/1/players", {"season": str(datetime.now(timezone.utc).year)})
+    indexed: dict[str, list[dict[str, Any]]] = {}
+    for person in payload.get("people", []):
+        if person.get("id") and person.get("fullName"):
+            indexed.setdefault(normalized_name(person["fullName"]), []).append(person)
+    return indexed
+
+
+def resolve_mlb_ids(players: list[dict[str, Any]], indexed_people: dict[str, list[dict[str, Any]]]) -> None:
+    """Fill only unambiguous official IDs; never infer one from a name alone."""
+    for player in players:
+        if player.get("mlb_id"):
+            continue
+        candidates = indexed_people.get(normalized_name(player["name"]), [])
+        if player.get("birth_date"):
+            dated = [person for person in candidates if person.get("birthDate") == player["birth_date"]]
+            candidates = dated or []
+        if len(candidates) == 1:
+            player["mlb_id"] = int(candidates[0]["id"])
+            player["id"] = player["mlb_id"]
+        elif player.get("mlb_id") is None:
+            player["id"] = fallback_id(player["name"])
 
 
 def integer(row: dict[str, str], key: str) -> int:
@@ -276,6 +306,192 @@ def aggregate_career_stats(
         "batting": batting,
         "pitching": pitching,
     }
+
+
+def optional_int(value: Any) -> int | None:
+    if value in (None, "", "--", "---"):
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def optional_float(value: Any) -> float | None:
+    if value in (None, "", "--", "---", ".---"):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def innings_outs(value: Any) -> int | None:
+    """Convert baseball innings notation (12.2 = 12 innings, 2 outs) to outs."""
+    rendered = str(value or "").strip()
+    match = re.fullmatch(r"(\d+)\.(\d)", rendered)
+    if not match or match.group(2) not in {"0", "1", "2"}:
+        return None
+    return int(match.group(1)) * 3 + int(match.group(2))
+
+
+def stats_splits(player_id: int, group: str, minors: bool) -> list[dict[str, Any]]:
+    params = {"stats": "yearByYear", "group": group}
+    if minors:
+        params["leagueListId"] = "milb_all"
+    else:
+        params["sportId"] = "1"
+    payload = fetch_json(MLB_STATS_API.format(player_id=player_id), params)
+    stats = payload.get("stats", [])
+    return stats[0].get("splits", []) if stats else []
+
+
+def career_season_rows(player_id: int, group: str, minors: bool) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for split in stats_splits(player_id, group, minors):
+        season = optional_int(split.get("season"))
+        if not season or split.get("gameType") not in (None, "R"):
+            continue
+        stat = split.get("stat", {})
+        sport = split.get("sport", {})
+        league = split.get("league", {})
+        is_subtotal = optional_int(split.get("numTeams")) not in (None, 1)
+        # A minor-league response includes both a full minor-league season subtotal
+        # and intermediate league-level subtotals. Keep only the full subtotal plus
+        # its team stints; otherwise a traded season is counted multiple times.
+        if is_subtotal and sport.get("abbreviation") != "Minors":
+            continue
+        team = split.get("team", {})
+        team_name = team.get("name") or (f"{split.get('numTeams')} teams" if is_subtotal else None)
+        if not team_name:
+            # An unlabelled aggregate cannot be reconciled with team stints.
+            continue
+        row = {
+            "id": f"{player_id}-{group}-{'minors' if minors else 'mlb'}-{season}-{sport.get('id', 'level')}-{team.get('id', 'subtotal')}",
+            "season": season,
+            "team": team_name,
+            "league": league.get("name"),
+            "level": sport.get("abbreviation"),
+            "row_type": "subtotal" if is_subtotal else "team_stint",
+            "games": optional_int(stat.get("gamesPlayed")),
+        }
+        if group == "hitting":
+            row.update({
+                "at_bats": optional_int(stat.get("atBats")), "runs": optional_int(stat.get("runs")),
+                "hits": optional_int(stat.get("hits")), "doubles": optional_int(stat.get("doubles")),
+                "triples": optional_int(stat.get("triples")), "home_runs": optional_int(stat.get("homeRuns")),
+                "runs_batted_in": optional_int(stat.get("rbi")), "stolen_bases": optional_int(stat.get("stolenBases")),
+                "walks": optional_int(stat.get("baseOnBalls")), "strikeouts": optional_int(stat.get("strikeOuts")),
+                "average": optional_float(stat.get("avg")), "on_base_percentage": optional_float(stat.get("obp")),
+                "slugging_percentage": optional_float(stat.get("slg")), "ops": optional_float(stat.get("ops")),
+            })
+            if not any(row[key] for key in ("at_bats", "hits", "walks", "runs_batted_in", "home_runs", "stolen_bases")):
+                # The API can emit a season row for a pitcher who never had a plate
+                # appearance. Keep its no-appearance row, but never turn .000 into a
+                # fabricated batting rate.
+                for key in ("average", "on_base_percentage", "slugging_percentage", "ops"):
+                    row[key] = None
+        else:
+            row.update({
+                "games_started": optional_int(stat.get("gamesStarted")), "wins": optional_int(stat.get("wins")),
+                "losses": optional_int(stat.get("losses")), "saves": optional_int(stat.get("saves")),
+                "innings_outs": innings_outs(stat.get("inningsPitched")), "hits": optional_int(stat.get("hits")),
+                "earned_runs": optional_int(stat.get("earnedRuns")), "home_runs": optional_int(stat.get("homeRuns")),
+                "walks": optional_int(stat.get("baseOnBalls")), "strikeouts": optional_int(stat.get("strikeOuts")),
+                "era": optional_float(stat.get("era")), "whip": optional_float(stat.get("whip")),
+            })
+            if not row["innings_outs"]:
+                row["era"] = None
+                row["whip"] = None
+        rows.append(row)
+    return sorted(rows, key=lambda row: (row["season"], row["row_type"] == "subtotal", row["team"]))
+
+
+def detailed_career(player: dict[str, Any]) -> dict[str, Any]:
+    """Return year/team rows from the provider, preserving unavailable values as null."""
+    player_id = player["id"]
+    if player_id >= FALLBACK_ID_BASE:
+        return {
+            "schema_version": CAREER_SCHEMA_VERSION,
+            "player_id": player_id,
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "data_as_of": None,
+            "status": "unavailable",
+            "coverage": [],
+            "source": None,
+            "batting": [],
+            "pitching": [],
+        }
+    batting = career_season_rows(player_id, "hitting", False) + career_season_rows(player_id, "hitting", True)
+    pitching = career_season_rows(player_id, "pitching", False) + career_season_rows(player_id, "pitching", True)
+    batting.sort(key=lambda row: (row["season"], row["row_type"] == "subtotal", row["team"]))
+    pitching.sort(key=lambda row: (row["season"], row["row_type"] == "subtotal", row["team"]))
+    coverage = []
+    for level, rows in (("MLB", [*filter(lambda row: row["level"] == "MLB", batting + pitching)]), ("Minors", [*filter(lambda row: row["level"] != "MLB", batting + pitching)])):
+        if rows:
+            coverage.append({
+                "league": level,
+                "level": level,
+                "first_season": min(row["season"] for row in rows),
+                "last_season": max(row["season"] for row in rows),
+                "status": "available",
+                "note": None,
+            })
+    return {
+        "schema_version": CAREER_SCHEMA_VERSION,
+        "player_id": player_id,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "data_as_of": datetime.now(timezone.utc).date().isoformat(),
+        "status": "available" if batting or pitching else "unavailable",
+        "coverage": coverage,
+        "source": {
+            "name": "MLB Stats API",
+            "url": MLB_STATS_API.format(player_id=player_id),
+            "attribution": "Season and minor-league statistics supplied by the MLB Stats API; regular season only.",
+        },
+        "batting": batting,
+        "pitching": pitching,
+    }
+
+
+def write_detailed_careers(players: list[dict[str, Any]], skip_new: bool) -> None:
+    CAREER_OUTPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)
+    pending = []
+    for player in players:
+        path = CAREER_OUTPUT_DIRECTORY / f"{player['id']}.json"
+        if skip_new and path.exists():
+            continue
+        pending.append(player)
+
+    def refresh(player: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any] | None]:
+        path = CAREER_OUTPUT_DIRECTORY / f"{player['id']}.json"
+        try:
+            return player, detailed_career(player)
+        except RuntimeError:
+            if path.exists():
+                # A prior good snapshot is safer than deleting a career on a transient outage.
+                return player, None
+            return player, {
+                "schema_version": CAREER_SCHEMA_VERSION,
+                "player_id": player["id"],
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "data_as_of": None,
+                "status": "temporarily_unavailable",
+                "coverage": [],
+                "source": None,
+                "batting": [],
+                "pitching": [],
+            }
+
+    # Four players at once is enough to keep the daily 30-team refresh practical
+    # without treating the public provider as an unlimited bulk-export service.
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        results = executor.map(refresh, pending)
+        for player, detail in results:
+            if detail is None:
+                continue
+            path = CAREER_OUTPUT_DIRECTORY / f"{player['id']}.json"
+            path.write_text(json.dumps(detail, indent=2, ensure_ascii=False) + "\n")
 
 
 def output_path(team: dict[str, Any]) -> Path:
@@ -532,7 +748,7 @@ def age_from_birth_date(value: str | None, today: date | None = None) -> int | N
 
 
 def fallback_id(name: str) -> int:
-    return 900_000_000 + int(hashlib.sha256(name.encode()).hexdigest()[:7], 16)
+    return FALLBACK_ID_BASE + int(hashlib.sha256(name.encode()).hexdigest()[:7], 16) % 100_000_000
 
 
 def labels_for(ids: set[str]) -> dict[str, str]:
@@ -586,6 +802,7 @@ def player_row(
     wikipedia_title = entity.get("sitelinks", {}).get("enwiki", {}).get("title") or roster["page_title"]
     return {
         "id": player_id,
+        "mlb_id": int(mlb_id) if mlb_id and mlb_id.isdigit() else None,
         "wikidata_id": qid,
         "slug": slugify(roster["name"], player_id),
         "name": roster["name"],
@@ -658,7 +875,8 @@ def build_feed(
 
 def build_team_feed(
     team: dict[str, Any], cached_stats: dict[str, dict[str, Any]],
-    people: list[dict[str, str]], skip_new_career_stats: bool = False,
+    people: list[dict[str, str]], indexed_mlb_people: dict[str, list[dict[str, Any]]],
+    skip_new_career_stats: bool = False,
 ) -> dict[str, Any]:
     roster_template = f"Template:{team['full_name']} roster"
     roster_rows, roster_date, roster_revision = wikipedia_roster(roster_template)
@@ -674,6 +892,9 @@ def build_team_feed(
         team, roster_template, roster_rows, title_to_qid, entities, labels,
         page_text, roster_date, roster_revision,
     )
+    resolve_mlb_ids(feed["players"], indexed_mlb_people)
+    if len({player["id"] for player in feed["players"]}) != len(feed["players"]):
+        raise RuntimeError("Official player identifier resolution produced a duplicate identity key")
     resolve_retrosheet_ids(feed["players"], people)
     missing_ids = sorted({
         player["retrosheet_id"]
@@ -693,6 +914,26 @@ def build_team_feed(
     return feed
 
 
+def resolve_existing_feeds(teams: list[dict[str, Any]], indexed_mlb_people: dict[str, list[dict[str, Any]]]) -> None:
+    """Migrate generated roster IDs without re-fetching unchanged roster templates."""
+    expected_career_ids: set[int] = set()
+    for team in teams:
+        path = output_path(team)
+        feed = json.loads(path.read_text())
+        resolve_mlb_ids(feed["players"], indexed_mlb_people)
+        if len({player["id"] for player in feed["players"]}) != len(feed["players"]):
+            raise RuntimeError("Official player identifier resolution produced a duplicate identity key")
+        contents = json.dumps(feed, indent=2, ensure_ascii=False) + "\n"
+        path.write_text(contents)
+        if team["api_key"] == "redsox":
+            IOS_OUTPUT_PATH.write_text(contents)
+        write_detailed_careers(feed["players"], skip_new=True)
+        expected_career_ids.update(player["id"] for player in feed["players"])
+    for path in CAREER_OUTPUT_DIRECTORY.glob("*.json"):
+        if path.stem.isdigit() and int(path.stem) not in expected_career_ids:
+            path.unlink()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -703,19 +944,38 @@ def main() -> None:
         "--skip-new-career-stats", action="store_true",
         help="Build rosters from cached stats when Retrosheet is temporarily unavailable.",
     )
+    parser.add_argument(
+        "--skip-new-career-details", action="store_true",
+        help="Keep existing detailed career feeds instead of refreshing the current-season provider data.",
+    )
+    parser.add_argument(
+        "--resolve-existing-identifiers", action="store_true",
+        help="Resolve official IDs in current generated feeds without re-fetching roster templates.",
+    )
     args = parser.parse_args()
     teams = [team_by_key(key) for key in args.team] if args.team else all_teams()
+    if args.resolve_existing_identifiers:
+        resolve_existing_feeds(teams, current_mlb_people())
+        return
     cached_stats = cached_career_stats()
     people = chadwick_people()
+    indexed_mlb_people = current_mlb_people()
+    expected_career_ids: set[int] = set()
     for team in teams:
-        feed = build_team_feed(team, cached_stats, people, args.skip_new_career_stats)
+        feed = build_team_feed(team, cached_stats, people, indexed_mlb_people, args.skip_new_career_stats)
         contents = json.dumps(feed, indent=2, ensure_ascii=False) + "\n"
         path = output_path(team)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(contents)
         if team["api_key"] == "redsox":
             IOS_OUTPUT_PATH.write_text(contents)
+        write_detailed_careers(feed["players"], args.skip_new_career_details)
+        expected_career_ids.update(player["id"] for player in feed["players"])
         print(f"Wrote {feed['player_count']} open-data player profiles for {team['full_name']}")
+    if not args.team:
+        for path in CAREER_OUTPUT_DIRECTORY.glob("*.json"):
+            if path.stem.isdigit() and int(path.stem) not in expected_career_ids:
+                path.unlink()
 
 
 if __name__ == "__main__":

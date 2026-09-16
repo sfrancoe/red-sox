@@ -22,6 +22,26 @@ enum PlayerPositionFilter: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
+enum PlayerDirectorySort: String, CaseIterable, Identifiable, Sendable {
+    case name
+    case number
+    case position
+    case batsThrows
+    case age
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .name: "Player"
+        case .number: "#"
+        case .position: "Pos"
+        case .batsThrows: "B/T"
+        case .age: "Age"
+        }
+    }
+}
+
 struct PlayersFeed: Codable, Sendable {
     let generatedAt: String
     let rosterAsOf: String?
@@ -56,6 +76,7 @@ struct PlayersTeam: Codable, Sendable {
 
 struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
     let id: Int
+    let mlbID: Int?
     let wikidataId: String?
     let slug: String
     let name: String
@@ -129,6 +150,23 @@ struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
         guard let date = formatter.date(from: value) else { return value }
         return date.formatted(.dateTime.month(.wide).day().year())
     }
+
+    func formattedShortDate(_ value: String?) -> String? {
+        guard let value else { return nil }
+        let parser = DateFormatter()
+        parser.locale = Locale(identifier: "en_US_POSIX")
+        let formats = ["yyyy-MM-dd", "MMMM d, yyyy", "MMM d, yyyy"]
+        guard let date = formats.lazy.compactMap({ format -> Date? in
+            parser.dateFormat = format
+            return parser.date(from: value)
+        }).first else {
+            return value
+        }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "MM/dd/yy"
+        return formatter.string(from: date)
+    }
 }
 
 struct PlayerCareerStats: Codable, Hashable, Sendable {
@@ -138,6 +176,93 @@ struct PlayerCareerStats: Codable, Hashable, Sendable {
     let pitching: PlayerPitchingStats?
 
     var isAvailable: Bool { status == "available" }
+}
+
+/// A detailed record is intentionally separate from the lightweight roster feed.
+/// The app can therefore open a directory immediately and fetch/cache the longer
+/// career table only when a person is selected.
+struct PlayerCareerFeed: Codable, Hashable, Sendable {
+    let schemaVersion: Int?
+    let playerID: Int?
+    let generatedAt: String?
+    let dataAsOf: String?
+    let status: String?
+    let coverage: [PlayerCareerCoverage]?
+    let source: PlayerCareerSource?
+    let batting: [PlayerBattingSeason]?
+    let pitching: [PlayerPitchingSeason]?
+
+    var battingRows: [PlayerBattingSeason] { batting ?? [] }
+    var pitchingRows: [PlayerPitchingSeason] { pitching ?? [] }
+    var isAvailable: Bool { status == "available" }
+}
+
+struct PlayerCareerCoverage: Codable, Hashable, Sendable {
+    let league: String?
+    let level: String?
+    let firstSeason: Int?
+    let lastSeason: Int?
+    let status: String?
+    let note: String?
+}
+
+struct PlayerCareerSource: Codable, Hashable, Sendable {
+    let name: String?
+    let url: String?
+    let attribution: String?
+}
+
+/// A season can be a team stint or an explicitly-labelled combined subtotal.
+/// Counts remain nullable: a blank source value is never turned into a zero.
+struct PlayerBattingSeason: Codable, Identifiable, Hashable, Sendable {
+    let id: String
+    let season: Int
+    let team: String
+    let league: String?
+    let level: String?
+    let rowType: String?
+    let games: Int?
+    let atBats: Int?
+    let runs: Int?
+    let hits: Int?
+    let doubles: Int?
+    let triples: Int?
+    let homeRuns: Int?
+    let runsBattedIn: Int?
+    let stolenBases: Int?
+    let walks: Int?
+    let strikeouts: Int?
+    let average: Double?
+    let onBasePercentage: Double?
+    let sluggingPercentage: Double?
+    let ops: Double?
+}
+
+struct PlayerPitchingSeason: Codable, Identifiable, Hashable, Sendable {
+    let id: String
+    let season: Int
+    let team: String
+    let league: String?
+    let level: String?
+    let rowType: String?
+    let games: Int?
+    let gamesStarted: Int?
+    let wins: Int?
+    let losses: Int?
+    let saves: Int?
+    let inningsOuts: Int?
+    let hits: Int?
+    let earnedRuns: Int?
+    let homeRuns: Int?
+    let walks: Int?
+    let strikeouts: Int?
+    let era: Double?
+    let whip: Double?
+
+    var inningsPitched: String? {
+        guard let inningsOuts else { return nil }
+        return "\(inningsOuts / 3).\(inningsOuts % 3)"
+    }
 }
 
 struct PlayerBattingStats: Codable, Hashable, Sendable {

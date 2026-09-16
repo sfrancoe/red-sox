@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-16T14:16:12.365573+00:00",
-  "roster_as_of": "September 11, 2026",
+  "generated_at": "2026-09-16T23:27:12.246803+00:00",
+  "roster_as_of": "September 16, 2026",
   "team": {
     "id": 147,
     "name": "New York Yankees"
   },
   "roster_type": "open-current-roster",
-  "player_count": 43,
+  "player_count": 42,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -21,7 +21,8 @@
   },
   "players": [
     {
-      "id": 1050783007,
+      "id": 694341,
+      "mlb_id": 694341,
       "wikidata_id": "Q107565782",
       "slug": "brendan-beck",
       "name": "Brendan Beck",
@@ -66,6 +67,7 @@
     },
     {
       "id": 670280,
+      "mlb_id": 670280,
       "wikidata_id": "Q67225024",
       "slug": "david-bednar",
       "name": "David Bednar",
@@ -149,6 +151,7 @@
     },
     {
       "id": 641355,
+      "mlb_id": 641355,
       "wikidata_id": "Q29514757",
       "slug": "cody-bellinger",
       "name": "Cody Bellinger",
@@ -213,6 +216,7 @@
     },
     {
       "id": 621112,
+      "mlb_id": 621112,
       "wikidata_id": "Q30042385",
       "slug": "paul-blackburn",
       "name": "Paul Blackburn",
@@ -296,6 +300,7 @@
     },
     {
       "id": 676609,
+      "mlb_id": 676609,
       "wikidata_id": "Q118220115",
       "slug": "jose-caballero",
       "name": "José Caballero",
@@ -378,84 +383,8 @@
       }
     },
     {
-      "id": 665828,
-      "wikidata_id": "Q111112053",
-      "slug": "oswaldo-cabrera",
-      "name": "Oswaldo Cabrera",
-      "full_name": "Oswaldo Cabrera",
-      "number": "95",
-      "position": {
-        "name": "Infielder",
-        "group": "Infielder",
-        "abbreviation": "IF"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1999-03-01",
-      "age": 27,
-      "birthplace": "Guarenas",
-      "height": null,
-      "weight": null,
-      "bats": "Switch",
-      "throws": "Right",
-      "debut_date": "August 17, 2022",
-      "debut_team": "New York Yankees",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "New York Yankees"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q111112053",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Oswaldo_Cabrera",
-      "retrosheet_id": "cabro002",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 302,
-          "plate_appearances": 949,
-          "at_bats": 858,
-          "runs": 120,
-          "hits": 201,
-          "doubles": 34,
-          "triples": 1,
-          "home_runs": 20,
-          "runs_batted_in": 95,
-          "walks": 72,
-          "strikeouts": 204,
-          "stolen_bases": 15,
-          "caught_stealing": 5,
-          "average": 0.234,
-          "on_base_percentage": 0.295,
-          "slugging_percentage": 0.346,
-          "ops": 0.641
-        },
-        "pitching": {
-          "games": 1,
-          "games_started": 0,
-          "wins": 0,
-          "losses": 0,
-          "saves": 0,
-          "innings_outs": 1,
-          "hits": 0,
-          "runs": 0,
-          "earned_runs": 0,
-          "home_runs": 0,
-          "walks": 2,
-          "strikeouts": 0,
-          "hit_batters": 0,
-          "wild_pitches": 0,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 0.0,
-          "whip": 6.0
-        }
-      }
-    },
-    {
       "id": 665645,
+      "mlb_id": 665645,
       "wikidata_id": "Q108459055",
       "slug": "kervin-castro",
       "name": "Kervin Castro",
@@ -534,7 +463,8 @@
       }
     },
     {
-      "id": 1131919294,
+      "id": 683409,
+      "mlb_id": 683409,
       "wikidata_id": "Q126372774",
       "slug": "angel-chivilli",
       "name": "Angel Chivilli",
@@ -566,16 +496,17 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q126372774",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Angel_Chivilli",
-      "retrosheet_id": null,
+      "retrosheet_id": "chiva001",
       "career_stats": {
         "through_season": 2025,
-        "status": "not_in_2025_release",
+        "status": "temporarily_unavailable",
         "batting": null,
         "pitching": null
       }
     },
     {
       "id": 543037,
+      "mlb_id": 543037,
       "wikidata_id": "Q5552563",
       "slug": "gerrit-cole",
       "name": "Gerrit Cole",
@@ -662,6 +593,7 @@
     },
     {
       "id": 518585,
+      "mlb_id": 518585,
       "wikidata_id": "Q113993381",
       "slug": "fernando-cruz",
       "name": "Fernando Cruz",
@@ -740,6 +672,7 @@
     },
     {
       "id": 691176,
+      "mlb_id": 691176,
       "wikidata_id": "Q66364670",
       "slug": "jasson-dominguez",
       "name": "Jasson Domínguez",
@@ -798,6 +731,7 @@
     },
     {
       "id": 641555,
+      "mlb_id": 641555,
       "wikidata_id": "Q130837001",
       "slug": "j-c-escarra",
       "name": "J. C. Escarra",
@@ -856,6 +790,7 @@
     },
     {
       "id": 608331,
+      "mlb_id": 608331,
       "wikidata_id": "Q29833482",
       "slug": "max-fried",
       "name": "Max Fried",
@@ -941,6 +876,7 @@
     },
     {
       "id": 605242,
+      "mlb_id": 605242,
       "wikidata_id": "Q16578206",
       "slug": "michael-fulmer",
       "name": "Michael Fulmer",
@@ -1023,6 +959,7 @@
     },
     {
       "id": 661563,
+      "mlb_id": 661563,
       "wikidata_id": "Q107920179",
       "slug": "luis-gil",
       "name": "Luis Gil",
@@ -1100,6 +1037,7 @@
     },
     {
       "id": 502671,
+      "mlb_id": 502671,
       "wikidata_id": "Q3067488",
       "slug": "paul-goldschmidt",
       "name": "Paul Goldschmidt",
@@ -1170,6 +1108,7 @@
     },
     {
       "id": 663757,
+      "mlb_id": 663757,
       "wikidata_id": "Q19973662",
       "slug": "trent-grisham",
       "name": "Trent Grisham",
@@ -1233,7 +1172,8 @@
       }
     },
     {
-      "id": 997691368,
+      "id": 690440,
+      "mlb_id": 690440,
       "wikidata_id": "Q140608411",
       "slug": "bradley-hanner",
       "name": "Bradley Hanner",
@@ -1244,8 +1184,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1999-02-10",
       "age": 27,
       "birthplace": "Rhoadesville, Virginia, U.S.",
@@ -1274,6 +1214,7 @@
     },
     {
       "id": 687396,
+      "mlb_id": 687396,
       "wikidata_id": "Q117808455",
       "slug": "brent-headrick",
       "name": "Brent Headrick",
@@ -1352,6 +1293,7 @@
     },
     {
       "id": 657612,
+      "mlb_id": 657612,
       "wikidata_id": "Q53343729",
       "slug": "tim-hill",
       "name": "Tim Hill",
@@ -1439,6 +1381,7 @@
     },
     {
       "id": 682987,
+      "mlb_id": 682987,
       "wikidata_id": "Q112659497",
       "slug": "spencer-jones",
       "name": "Spencer Jones",
@@ -1479,6 +1422,7 @@
     },
     {
       "id": 671277,
+      "mlb_id": 671277,
       "wikidata_id": "Q96707369",
       "slug": "luis-garcia-jr",
       "name": "Luis García Jr.",
@@ -1538,6 +1482,7 @@
     },
     {
       "id": 806146,
+      "mlb_id": 806146,
       "wikidata_id": "Q116937074",
       "slug": "george-lombard-jr",
       "name": "George Lombard Jr.",
@@ -1582,6 +1527,7 @@
     },
     {
       "id": 665862,
+      "mlb_id": 665862,
       "wikidata_id": "Q59779771",
       "slug": "jazz-chisholm-jr",
       "name": "Jazz Chisholm Jr.",
@@ -1641,6 +1587,7 @@
     },
     {
       "id": 592450,
+      "mlb_id": 592450,
       "wikidata_id": "Q16234676",
       "slug": "aaron-judge",
       "name": "Aaron Judge",
@@ -1706,6 +1653,7 @@
     },
     {
       "id": 641857,
+      "mlb_id": 641857,
       "wikidata_id": "Q36828735",
       "slug": "ryan-mcmahon",
       "name": "Ryan McMahon",
@@ -1769,6 +1717,7 @@
     },
     {
       "id": 671218,
+      "mlb_id": 671218,
       "wikidata_id": "Q30248200",
       "slug": "heliot-ramos",
       "name": "Heliot Ramos",
@@ -1828,6 +1777,7 @@
     },
     {
       "id": 700250,
+      "mlb_id": 700250,
       "wikidata_id": "Q126725742",
       "slug": "ben-rice",
       "name": "Ben Rice",
@@ -1885,7 +1835,8 @@
       }
     },
     {
-      "id": 925698687,
+      "id": 695684,
+      "mlb_id": 695684,
       "wikidata_id": "Q139666433",
       "slug": "elmer-rodriguez",
       "name": "Elmer Rodríguez",
@@ -1926,6 +1877,7 @@
     },
     {
       "id": 607074,
+      "mlb_id": 607074,
       "wikidata_id": "Q5042575",
       "slug": "carlos-rodon",
       "name": "Carlos Rodón",
@@ -2012,6 +1964,7 @@
     },
     {
       "id": 642708,
+      "mlb_id": 642708,
       "wikidata_id": "Q16658122",
       "slug": "amed-rosario",
       "name": "Amed Rosario",
@@ -2095,6 +2048,7 @@
     },
     {
       "id": 660787,
+      "mlb_id": 660787,
       "wikidata_id": "Q112114001",
       "slug": "yerry-de-los-santos",
       "name": "Yerry De Los Santos",
@@ -2172,7 +2126,8 @@
       }
     },
     {
-      "id": 1161566433,
+      "id": 693645,
+      "mlb_id": 693645,
       "wikidata_id": "Q135116160",
       "slug": "cam-schlittler",
       "name": "Cam Schlittler",
@@ -2250,6 +2205,7 @@
     },
     {
       "id": 657376,
+      "mlb_id": 657376,
       "wikidata_id": "Q29513525",
       "slug": "clarke-schmidt",
       "name": "Clarke Schmidt",
@@ -2260,8 +2216,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "60-day injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1996-02-20",
       "age": 30,
       "birthplace": "Acworth",
@@ -2334,6 +2290,7 @@
     },
     {
       "id": 670167,
+      "mlb_id": 670167,
       "wikidata_id": "Q66363077",
       "slug": "john-schreiber",
       "name": "John Schreiber",
@@ -2421,6 +2378,7 @@
     },
     {
       "id": 680474,
+      "mlb_id": 680474,
       "wikidata_id": "Q120068742",
       "slug": "max-schuemann",
       "name": "Max Schuemann",
@@ -2481,6 +2439,7 @@
     },
     {
       "id": 519317,
+      "mlb_id": 519317,
       "wikidata_id": "Q3105192",
       "slug": "giancarlo-stanton",
       "name": "Giancarlo Stanton",
@@ -2544,6 +2503,7 @@
     },
     {
       "id": 645305,
+      "mlb_id": 645305,
       "wikidata_id": "Q98318480",
       "slug": "ali-sanchez",
       "name": "Ali Sánchez",
@@ -2625,7 +2585,8 @@
       }
     },
     {
-      "id": 1026279916,
+      "id": 683011,
+      "mlb_id": 683011,
       "wikidata_id": "Q64358896",
       "slug": "anthony-volpe",
       "name": "Anthony Volpe",
@@ -2688,6 +2649,7 @@
     },
     {
       "id": 701542,
+      "mlb_id": 701542,
       "wikidata_id": "Q125107172",
       "slug": "will-warren",
       "name": "Will Warren",
@@ -2765,6 +2727,7 @@
     },
     {
       "id": 677960,
+      "mlb_id": 677960,
       "wikidata_id": "Q54861164",
       "slug": "ryan-weathers",
       "name": "Ryan Weathers",
@@ -2844,6 +2807,7 @@
     },
     {
       "id": 669224,
+      "mlb_id": 669224,
       "wikidata_id": "Q86410935",
       "slug": "austin-wells",
       "name": "Austin Wells",
@@ -2909,6 +2873,7 @@
     },
     {
       "id": 642232,
+      "mlb_id": 642232,
       "wikidata_id": "Q50818808",
       "slug": "ryan-yarbrough",
       "name": "Ryan Yarbrough",

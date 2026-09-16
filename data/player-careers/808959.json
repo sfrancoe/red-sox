@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "player_id": 808959,
+  "generated_at": "2026-09-16T23:05:44.847284+00:00",
+  "data_as_of": "2026-09-16",
+  "status": "available",
+  "coverage": [
+    {
+      "league": "MLB",
+      "level": "MLB",
+      "first_season": 2026,
+      "last_season": 2026,
+      "status": "available",
+      "note": null
+    },
+    {
+      "league": "Minors",
+      "level": "Minors",
+      "first_season": 2026,
+      "last_season": 2026,
+      "status": "available",
+      "note": null
+    }
+  ],
+  "source": {
+    "name": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/people/808959/stats",
+    "attribution": "Season and minor-league statistics supplied by the MLB Stats API; regular season only."
+  },
+  "batting": [
+    {
+      "id": "808959-hitting-minors-2026-11-494",
+      "season": 2026,
+      "team": "Charlotte Knights",
+      "league": "International League",
+      "level": "AAA",
+      "row_type": "team_stint",
+      "games": 2,
+      "at_bats": 7,
+      "runs": 1,
+      "hits": 2,
+      "doubles": 1,
+      "triples": 0,
+      "home_runs": 0,
+      "runs_batted_in": 1,
+      "stolen_bases": 0,
+      "walks": 1,
+      "strikeouts": 2,
+      "average": 0.286,
+      "on_base_percentage": 0.375,
+      "slugging_percentage": 0.429,
+      "ops": 0.804
+    },
+    {
+      "id": "808959-hitting-mlb-2026-1-145",
+      "season": 2026,
+      "team": "Chicago White Sox",
+      "league": "American League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 117,
+      "at_bats": 416,
+      "runs": 75,
+      "hits": 84,
+      "doubles": 14,
+      "triples": 0,
+      "home_runs": 31,
+      "runs_batted_in": 65,
+      "stolen_bases": 1,
+      "walks": 87,
+      "strikeouts": 181,
+      "average": 0.202,
+      "on_base_percentage": 0.344,
+      "slugging_percentage": 0.459,
+      "ops": 0.803
+    }
+  ],
+  "pitching": []
+}
