@@ -24,6 +24,13 @@ for (const year of [2023, 2024, 2025, 2026]) {
   ALLOWED_PATHS.add(`leaderboards/${year}.json`);
 }
 
+// A player card requests a single generated career record by the stable numeric
+// ID in its roster feed. Restrict this dynamic collection to a filename only:
+// no nested paths, extensions, or arbitrary repository reads are permitted.
+function isAllowedPath(path) {
+  return ALLOWED_PATHS.has(path) || /^player-careers\/\d{1,10}\.json$/.test(path);
+}
+
 function requestedPath(request) {
   const pathname = new URL(request.url).pathname;
   const prefix = ['/api/data/', '/data/'].find(candidate => pathname.startsWith(candidate));
@@ -59,7 +66,7 @@ async function fetchSource(path, request = fetch) {
 
 export default async request => {
   const path = requestedPath(request);
-  if (!path || !ALLOWED_PATHS.has(path)) {
+  if (!path || !isAllowedPath(path)) {
     return Response.json({ error: 'Unknown app data file.' }, {
       status: 404,
       headers: { 'Cache-Control': 'no-store' },

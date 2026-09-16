@@ -55,7 +55,17 @@ try {
   assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/rays/tampabay.json');
 
   calls = [];
+  response = await handler(new Request('https://example.test/api/data/player-careers/680776.json'));
+  assert.equal(response.status, 200);
+  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/player-careers/680776.json');
+
+  calls = [];
   response = await handler(new Request('https://example.test/api/data/../netlify.toml'));
+  assert.equal(response.status, 404);
+  assert.equal(calls.length, 0);
+
+  calls = [];
+  response = await handler(new Request('https://example.test/api/data/player-careers/680776.json/extra'));
   assert.equal(response.status, 404);
   assert.equal(calls.length, 0);
 
