@@ -469,7 +469,7 @@ private struct PlayerReferenceView: View {
                     HStack(spacing: 0) {
                         tableHeader("LEVEL", 55, leading: true)
                         tableHeader("G", 40); tableHeader("AB", 46); tableHeader("R", 40); tableHeader("H", 40)
-                        tableHeader("2B", 40); tableHeader("3B", 40); tableHeader("HR", 40); tableHeader("RBI", 46)
+                        tableHeader("HR", 40); tableHeader("3B", 40); tableHeader("2B", 40); tableHeader("RBI", 46)
                         tableHeader("SB", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("AVG", 50)
                         tableHeader("OBP", 50); tableHeader("SLG", 50); tableHeader("OPS", 50)
                     }
@@ -478,7 +478,7 @@ private struct PlayerReferenceView: View {
                         HStack(spacing: 0) {
                             tableValue(row.level ?? row.league ?? "—", 55, leading: true)
                             tableValue(row.games, 40); tableValue(row.atBats, 46); tableValue(row.runs, 40); tableValue(row.hits, 40)
-                            tableValue(row.doubles, 40); tableValue(row.triples, 40); tableValue(row.homeRuns, 40); tableValue(row.runsBattedIn, 46)
+                            tableValue(row.homeRuns, 40); tableValue(row.triples, 40); tableValue(row.doubles, 40); tableValue(row.runsBattedIn, 46)
                             tableValue(row.stolenBases, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(rate(row.average), 50)
                             tableValue(rate(row.onBasePercentage), 50); tableValue(rate(row.sluggingPercentage), 50); tableValue(rate(row.ops), 50)
                         }
@@ -489,7 +489,7 @@ private struct PlayerReferenceView: View {
                     HStack(spacing: 0) {
                         summaryValue("—", 55, leading: true)
                         summaryValue(total(summaryRows.map(\.games)), 40); summaryValue(total(summaryRows.map(\.atBats)), 46); summaryValue(total(summaryRows.map(\.runs)), 40); summaryValue(total(summaryRows.map(\.hits)), 40)
-                        summaryValue(total(summaryRows.map(\.doubles)), 40); summaryValue(total(summaryRows.map(\.triples)), 40); summaryValue(total(summaryRows.map(\.homeRuns)), 40); summaryValue(total(summaryRows.map(\.runsBattedIn)), 46)
+                        summaryValue(total(summaryRows.map(\.homeRuns)), 40); summaryValue(total(summaryRows.map(\.triples)), 40); summaryValue(total(summaryRows.map(\.doubles)), 40); summaryValue(total(summaryRows.map(\.runsBattedIn)), 46)
                         summaryValue(total(summaryRows.map(\.stolenBases)), 40); summaryValue(total(summaryRows.map(\.walks)), 40); summaryValue(total(summaryRows.map(\.strikeouts)), 40); summaryValue(rate(battingRate(summaryRows, \.average)), 50)
                         summaryValue(rate(battingRate(summaryRows, \.onBasePercentage)), 50); summaryValue(rate(battingRate(summaryRows, \.sluggingPercentage)), 50); summaryValue(rate(battingRate(summaryRows, \.ops)), 50)
                     }
