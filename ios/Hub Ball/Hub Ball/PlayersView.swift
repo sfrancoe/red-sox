@@ -334,15 +334,15 @@ private struct PlayerReferenceView: View {
     private var playerNavigationTitle: some View {
         HStack(spacing: 12) {
             Text(player.number ?? "—")
-                .font(.custom("Inter-Medium", size: 28).monospacedDigit())
+                .font(.custom("Inter-Medium", size: 24).monospacedDigit())
                 .foregroundStyle(AppColor.amber)
             Text(player.fullName ?? player.name)
-                .font(AppFont.displayLarge)
+                .font(.custom("BarlowCondensed-SemiBold", size: 27))
                 .foregroundStyle(AppColor.bone)
                 .lineLimit(1)
                 .minimumScaleFactor(0.65)
             Text(player.position.abbreviation)
-                .font(.custom("Inter-Medium", size: 28).monospaced())
+                .font(.custom("Inter-Medium", size: 24).monospaced())
                 .foregroundStyle(AppColor.boneDim)
         }
         .accessibilityElement(children: .combine)
@@ -440,64 +440,97 @@ private struct PlayerReferenceView: View {
     }
 
     private func battingTable(_ rows: [PlayerBattingSeason]) -> some View {
-        ScrollView(.horizontal, showsIndicators: true) {
+        HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    tableHeader("YEAR", 48); tableHeader("TEAM", 58); tableHeader("LEVEL", 55)
-                    tableHeader("G", 40); tableHeader("AB", 46); tableHeader("R", 40); tableHeader("H", 40)
-                    tableHeader("2B", 40); tableHeader("3B", 40); tableHeader("HR", 40); tableHeader("RBI", 46)
-                    tableHeader("SB", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("AVG", 50)
-                    tableHeader("OBP", 50); tableHeader("SLG", 50); tableHeader("OPS", 50)
+                    tableHeader("YEAR", 48, leading: true); tableHeader("TEAM", 58, leading: true)
                 }
                 .background(AppColor.nightCell)
                 ForEach(rows) { row in
                     HStack(spacing: 0) {
-                        tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
-                        tableValue(row.games, 40); tableValue(row.atBats, 46); tableValue(row.runs, 40); tableValue(row.hits, 40)
-                        tableValue(row.doubles, 40); tableValue(row.triples, 40); tableValue(row.homeRuns, 40); tableValue(row.runsBattedIn, 46)
-                        tableValue(row.stolenBases, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(rate(row.average), 50)
-                        tableValue(rate(row.onBasePercentage), 50); tableValue(rate(row.sluggingPercentage), 50); tableValue(rate(row.ops), 50)
+                        tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true)
                     }
                     .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel(battingAccessibility(row))
+                }
+            }
+            .zIndex(1)
+
+            ScrollView(.horizontal, showsIndicators: true) {
+                VStack(spacing: 0) {
+                    HStack(spacing: 0) {
+                        tableHeader("LEVEL", 55, leading: true)
+                        tableHeader("G", 40); tableHeader("AB", 46); tableHeader("R", 40); tableHeader("H", 40)
+                        tableHeader("2B", 40); tableHeader("3B", 40); tableHeader("HR", 40); tableHeader("RBI", 46)
+                        tableHeader("SB", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("AVG", 50)
+                        tableHeader("OBP", 50); tableHeader("SLG", 50); tableHeader("OPS", 50)
+                    }
+                    .background(AppColor.nightCell)
+                    ForEach(rows) { row in
+                        HStack(spacing: 0) {
+                            tableValue(row.level ?? row.league ?? "—", 55, leading: true)
+                            tableValue(row.games, 40); tableValue(row.atBats, 46); tableValue(row.runs, 40); tableValue(row.hits, 40)
+                            tableValue(row.doubles, 40); tableValue(row.triples, 40); tableValue(row.homeRuns, 40); tableValue(row.runsBattedIn, 46)
+                            tableValue(row.stolenBases, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(rate(row.average), 50)
+                            tableValue(rate(row.onBasePercentage), 50); tableValue(rate(row.sluggingPercentage), 50); tableValue(rate(row.ops), 50)
+                        }
+                        .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(battingAccessibility(row))
+                    }
                 }
             }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func pitchingTable(_ rows: [PlayerPitchingSeason]) -> some View {
-        ScrollView(.horizontal, showsIndicators: true) {
+        HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    tableHeader("YEAR", 48); tableHeader("TEAM", 58); tableHeader("LEVEL", 55)
-                    tableHeader("G", 40); tableHeader("GS", 40); tableHeader("W", 40); tableHeader("L", 40)
-                    tableHeader("SV", 40); tableHeader("IP", 50); tableHeader("H", 40); tableHeader("ER", 40)
-                    tableHeader("HR", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("ERA", 50); tableHeader("WHIP", 54)
+                    tableHeader("YEAR", 48, leading: true); tableHeader("TEAM", 58, leading: true)
                 }
                 .background(AppColor.nightCell)
                 ForEach(rows) { row in
                     HStack(spacing: 0) {
-                        tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
-                        tableValue(row.games, 40); tableValue(row.gamesStarted, 40); tableValue(row.wins, 40); tableValue(row.losses, 40)
-                        tableValue(row.saves, 40); tableValue(row.inningsPitched, 50); tableValue(row.hits, 40); tableValue(row.earnedRuns, 40)
-                        tableValue(row.homeRuns, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(decimal(row.era), 50); tableValue(rate(row.whip), 54)
+                        tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true)
                     }
                     .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel(pitchingAccessibility(row))
+                }
+            }
+            .zIndex(1)
+
+            ScrollView(.horizontal, showsIndicators: true) {
+                VStack(spacing: 0) {
+                    HStack(spacing: 0) {
+                        tableHeader("LEVEL", 55, leading: true)
+                        tableHeader("G", 40); tableHeader("GS", 40); tableHeader("W", 40); tableHeader("L", 40)
+                        tableHeader("SV", 40); tableHeader("IP", 50); tableHeader("H", 40); tableHeader("ER", 40)
+                        tableHeader("HR", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("ERA", 50); tableHeader("WHIP", 54)
+                    }
+                    .background(AppColor.nightCell)
+                    ForEach(rows) { row in
+                        HStack(spacing: 0) {
+                            tableValue(row.level ?? row.league ?? "—", 55, leading: true)
+                            tableValue(row.games, 40); tableValue(row.gamesStarted, 40); tableValue(row.wins, 40); tableValue(row.losses, 40)
+                            tableValue(row.saves, 40); tableValue(row.inningsPitched, 50); tableValue(row.hits, 40); tableValue(row.earnedRuns, 40)
+                            tableValue(row.homeRuns, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(decimal(row.era), 50); tableValue(rate(row.whip), 54)
+                        }
+                        .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(pitchingAccessibility(row))
+                    }
                 }
             }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func tableHeader(_ text: String, _ width: CGFloat) -> some View {
+    private func tableHeader(_ text: String, _ width: CGFloat, leading: Bool = false) -> some View {
         Text(text)
             .font(AppFont.label.weight(.semibold))
             .foregroundStyle(AppColor.bone)
-            .frame(width: width, height: 31)
+            .padding(.leading, leading ? 5 : 0)
+            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
             .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
     }
 
@@ -507,8 +540,8 @@ private struct PlayerReferenceView: View {
             .foregroundStyle(AppColor.boneDim)
             .lineLimit(1)
             .truncationMode(.tail)
-            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
             .padding(.leading, leading ? 5 : 0)
+            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
             .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
             .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
     }
