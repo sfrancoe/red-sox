@@ -471,7 +471,10 @@ struct TeamOnboardingView: View {
 
     private var teamMenu: some View {
         Menu {
-            ForEach(HubTeam.availableTeams) { team in
+            // SwiftUI presents Menu items from the anchor outward, reversing the
+            // source sequence in this long picker. Feed it Z-to-A so testers see
+            // the teams in the expected A-to-Z order.
+            ForEach(HubTeam.availableTeams.reversed()) { team in
                 Button {
                     pendingTeamID = team.id
                 } label: {
