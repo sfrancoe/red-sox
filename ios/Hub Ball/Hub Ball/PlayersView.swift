@@ -234,6 +234,61 @@ private enum CareerScope: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
+private enum BattingCareerSort: String, CaseIterable {
+    case year, team, level, games, atBats, runs, hits, homeRuns, triples, doubles
+    case runsBattedIn, stolenBases, walks, strikeouts, average, onBasePercentage
+    case sluggingPercentage, ops
+
+    var title: String {
+        switch self {
+        case .year: "Year"
+        case .team: "Team"
+        case .level: "Level"
+        case .games: "G"
+        case .atBats: "AB"
+        case .runs: "R"
+        case .hits: "H"
+        case .homeRuns: "HR"
+        case .triples: "3B"
+        case .doubles: "2B"
+        case .runsBattedIn: "RBI"
+        case .stolenBases: "SB"
+        case .walks: "BB"
+        case .strikeouts: "SO"
+        case .average: "AVG"
+        case .onBasePercentage: "OBP"
+        case .sluggingPercentage: "SLG"
+        case .ops: "OPS"
+        }
+    }
+}
+
+private enum PitchingCareerSort: String, CaseIterable {
+    case year, team, level, games, gamesStarted, wins, losses, saves, inningsOuts
+    case hits, earnedRuns, homeRuns, walks, strikeouts, era, whip
+
+    var title: String {
+        switch self {
+        case .year: "Year"
+        case .team: "Team"
+        case .level: "Level"
+        case .games: "G"
+        case .gamesStarted: "GS"
+        case .wins: "W"
+        case .losses: "L"
+        case .saves: "SV"
+        case .inningsOuts: "IP"
+        case .hits: "H"
+        case .earnedRuns: "ER"
+        case .homeRuns: "HR"
+        case .walks: "BB"
+        case .strikeouts: "SO"
+        case .era: "ERA"
+        case .whip: "WHIP"
+        }
+    }
+}
+
 private struct PlayerReferenceView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.dismiss) private var dismiss
@@ -243,6 +298,10 @@ private struct PlayerReferenceView: View {
     let store: PlayersStore
     @State private var mode: PlayerRecordMode
     @State private var scope: CareerScope = .mlb
+    @State private var battingSort: BattingCareerSort = .year
+    @State private var battingSortsAscending = true
+    @State private var pitchingSort: PitchingCareerSort = .year
+    @State private var pitchingSortsAscending = true
 
     init(team: HubTeam, player: RedSoxPlayer, source: PlayersSource?, store: PlayersStore) {
         self.team = team
@@ -446,13 +505,14 @@ private struct PlayerReferenceView: View {
 
     private func battingTable(_ rows: [PlayerBattingSeason]) -> some View {
         let summaryRows = battingSummaryRows(rows)
+        let sortedRows = sortedBattingRows(rows)
         return HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    tableHeader("YEAR", 48, leading: true); tableHeader("TEAM", 58, leading: true)
+                    battingHeader(.year, 48, leading: true); battingHeader(.team, 58, leading: true)
                 }
                 .background(AppColor.nightCell)
-                ForEach(rows) { row in
+                ForEach(sortedRows) { row in
                     HStack(spacing: 0) {
                         tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true)
                     }
@@ -467,14 +527,14 @@ private struct PlayerReferenceView: View {
             ScrollView(.horizontal, showsIndicators: true) {
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        tableHeader("LEVEL", 55, leading: true)
-                        tableHeader("G", 40); tableHeader("AB", 46); tableHeader("R", 40); tableHeader("H", 40)
-                        tableHeader("HR", 40); tableHeader("3B", 40); tableHeader("2B", 40); tableHeader("RBI", 46)
-                        tableHeader("SB", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("AVG", 50)
-                        tableHeader("OBP", 50); tableHeader("SLG", 50); tableHeader("OPS", 50)
+                        battingHeader(.level, 55, leading: true)
+                        battingHeader(.games, 40); battingHeader(.atBats, 46); battingHeader(.runs, 40); battingHeader(.hits, 40)
+                        battingHeader(.homeRuns, 40); battingHeader(.triples, 40); battingHeader(.doubles, 40); battingHeader(.runsBattedIn, 46)
+                        battingHeader(.stolenBases, 40); battingHeader(.walks, 40); battingHeader(.strikeouts, 40); battingHeader(.average, 50)
+                        battingHeader(.onBasePercentage, 50); battingHeader(.sluggingPercentage, 50); battingHeader(.ops, 50)
                     }
                     .background(AppColor.nightCell)
-                    ForEach(rows) { row in
+                    ForEach(sortedRows) { row in
                         HStack(spacing: 0) {
                             tableValue(row.level ?? row.league ?? "—", 55, leading: true)
                             tableValue(row.games, 40); tableValue(row.atBats, 46); tableValue(row.runs, 40); tableValue(row.hits, 40)
@@ -503,13 +563,14 @@ private struct PlayerReferenceView: View {
 
     private func pitchingTable(_ rows: [PlayerPitchingSeason]) -> some View {
         let summaryRows = pitchingSummaryRows(rows)
+        let sortedRows = sortedPitchingRows(rows)
         return HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    tableHeader("YEAR", 48, leading: true); tableHeader("TEAM", 58, leading: true)
+                    pitchingHeader(.year, 48, leading: true); pitchingHeader(.team, 58, leading: true)
                 }
                 .background(AppColor.nightCell)
-                ForEach(rows) { row in
+                ForEach(sortedRows) { row in
                     HStack(spacing: 0) {
                         tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true)
                     }
@@ -524,13 +585,13 @@ private struct PlayerReferenceView: View {
             ScrollView(.horizontal, showsIndicators: true) {
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        tableHeader("LEVEL", 55, leading: true)
-                        tableHeader("G", 40); tableHeader("GS", 40); tableHeader("W", 40); tableHeader("L", 40)
-                        tableHeader("SV", 40); tableHeader("IP", 50); tableHeader("H", 40); tableHeader("ER", 40)
-                        tableHeader("HR", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("ERA", 50); tableHeader("WHIP", 54)
+                        pitchingHeader(.level, 55, leading: true)
+                        pitchingHeader(.games, 40); pitchingHeader(.gamesStarted, 40); pitchingHeader(.wins, 40); pitchingHeader(.losses, 40)
+                        pitchingHeader(.saves, 40); pitchingHeader(.inningsOuts, 50); pitchingHeader(.hits, 40); pitchingHeader(.earnedRuns, 40)
+                        pitchingHeader(.homeRuns, 40); pitchingHeader(.walks, 40); pitchingHeader(.strikeouts, 40); pitchingHeader(.era, 50); pitchingHeader(.whip, 54)
                     }
                     .background(AppColor.nightCell)
-                    ForEach(rows) { row in
+                    ForEach(sortedRows) { row in
                         HStack(spacing: 0) {
                             tableValue(row.level ?? row.league ?? "—", 55, leading: true)
                             tableValue(row.games, 40); tableValue(row.gamesStarted, 40); tableValue(row.wins, 40); tableValue(row.losses, 40)
@@ -555,13 +616,152 @@ private struct PlayerReferenceView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func tableHeader(_ text: String, _ width: CGFloat, leading: Bool = false) -> some View {
-        Text(text)
+    private func battingHeader(_ column: BattingCareerSort, _ width: CGFloat, leading: Bool = false) -> some View {
+        sortableHeader(
+            column.title,
+            width,
+            leading: leading,
+            isSelected: battingSort == column,
+            ascending: battingSortsAscending,
+            action: { toggleBattingSort(column) }
+        )
+    }
+
+    private func pitchingHeader(_ column: PitchingCareerSort, _ width: CGFloat, leading: Bool = false) -> some View {
+        sortableHeader(
+            column.title,
+            width,
+            leading: leading,
+            isSelected: pitchingSort == column,
+            ascending: pitchingSortsAscending,
+            action: { togglePitchingSort(column) }
+        )
+    }
+
+    private func sortableHeader(
+        _ text: String,
+        _ width: CGFloat,
+        leading: Bool,
+        isSelected: Bool,
+        ascending: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack(spacing: 2) {
+                Text(text)
+                if isSelected {
+                    Image(systemName: ascending ? "arrow.up" : "arrow.down")
+                        .font(.system(size: 7, weight: .bold))
+                }
+            }
             .font(AppFont.label.weight(.semibold))
-            .foregroundStyle(AppColor.bone)
+            .foregroundStyle(isSelected ? AppColor.bone : AppColor.boneMuted)
             .padding(.leading, leading ? 5 : 0)
             .frame(width: width, height: 31, alignment: leading ? .leading : .center)
             .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Sort by \(text)")
+        .accessibilityValue(isSelected ? (ascending ? "Ascending" : "Descending") : "Not selected")
+    }
+
+    private func toggleBattingSort(_ column: BattingCareerSort) {
+        if battingSort == column {
+            battingSortsAscending.toggle()
+        } else {
+            battingSort = column
+            battingSortsAscending = true
+        }
+    }
+
+    private func togglePitchingSort(_ column: PitchingCareerSort) {
+        if pitchingSort == column {
+            pitchingSortsAscending.toggle()
+        } else {
+            pitchingSort = column
+            pitchingSortsAscending = true
+        }
+    }
+
+    private func sortedBattingRows(_ rows: [PlayerBattingSeason]) -> [PlayerBattingSeason] {
+        rows.sorted { lhs, rhs in
+            let comparison: ComparisonResult
+            switch battingSort {
+            case .year: comparison = sortComparison(lhs.season, rhs.season, ascending: battingSortsAscending)
+            case .team: comparison = sortComparison(lhs.team, rhs.team, ascending: battingSortsAscending)
+            case .level: comparison = sortComparison(lhs.level, rhs.level, ascending: battingSortsAscending)
+            case .games: comparison = sortComparison(lhs.games, rhs.games, ascending: battingSortsAscending)
+            case .atBats: comparison = sortComparison(lhs.atBats, rhs.atBats, ascending: battingSortsAscending)
+            case .runs: comparison = sortComparison(lhs.runs, rhs.runs, ascending: battingSortsAscending)
+            case .hits: comparison = sortComparison(lhs.hits, rhs.hits, ascending: battingSortsAscending)
+            case .homeRuns: comparison = sortComparison(lhs.homeRuns, rhs.homeRuns, ascending: battingSortsAscending)
+            case .triples: comparison = sortComparison(lhs.triples, rhs.triples, ascending: battingSortsAscending)
+            case .doubles: comparison = sortComparison(lhs.doubles, rhs.doubles, ascending: battingSortsAscending)
+            case .runsBattedIn: comparison = sortComparison(lhs.runsBattedIn, rhs.runsBattedIn, ascending: battingSortsAscending)
+            case .stolenBases: comparison = sortComparison(lhs.stolenBases, rhs.stolenBases, ascending: battingSortsAscending)
+            case .walks: comparison = sortComparison(lhs.walks, rhs.walks, ascending: battingSortsAscending)
+            case .strikeouts: comparison = sortComparison(lhs.strikeouts, rhs.strikeouts, ascending: battingSortsAscending)
+            case .average: comparison = sortComparison(lhs.average, rhs.average, ascending: battingSortsAscending)
+            case .onBasePercentage: comparison = sortComparison(lhs.onBasePercentage, rhs.onBasePercentage, ascending: battingSortsAscending)
+            case .sluggingPercentage: comparison = sortComparison(lhs.sluggingPercentage, rhs.sluggingPercentage, ascending: battingSortsAscending)
+            case .ops: comparison = sortComparison(lhs.ops, rhs.ops, ascending: battingSortsAscending)
+            }
+            return comparison == .orderedSame
+                ? stableRowOrder(lhs.season, lhs.team, lhs.id, rhs.season, rhs.team, rhs.id)
+                : comparison == .orderedAscending
+        }
+    }
+
+    private func sortedPitchingRows(_ rows: [PlayerPitchingSeason]) -> [PlayerPitchingSeason] {
+        rows.sorted { lhs, rhs in
+            let comparison: ComparisonResult
+            switch pitchingSort {
+            case .year: comparison = sortComparison(lhs.season, rhs.season, ascending: pitchingSortsAscending)
+            case .team: comparison = sortComparison(lhs.team, rhs.team, ascending: pitchingSortsAscending)
+            case .level: comparison = sortComparison(lhs.level, rhs.level, ascending: pitchingSortsAscending)
+            case .games: comparison = sortComparison(lhs.games, rhs.games, ascending: pitchingSortsAscending)
+            case .gamesStarted: comparison = sortComparison(lhs.gamesStarted, rhs.gamesStarted, ascending: pitchingSortsAscending)
+            case .wins: comparison = sortComparison(lhs.wins, rhs.wins, ascending: pitchingSortsAscending)
+            case .losses: comparison = sortComparison(lhs.losses, rhs.losses, ascending: pitchingSortsAscending)
+            case .saves: comparison = sortComparison(lhs.saves, rhs.saves, ascending: pitchingSortsAscending)
+            case .inningsOuts: comparison = sortComparison(lhs.inningsOuts, rhs.inningsOuts, ascending: pitchingSortsAscending)
+            case .hits: comparison = sortComparison(lhs.hits, rhs.hits, ascending: pitchingSortsAscending)
+            case .earnedRuns: comparison = sortComparison(lhs.earnedRuns, rhs.earnedRuns, ascending: pitchingSortsAscending)
+            case .homeRuns: comparison = sortComparison(lhs.homeRuns, rhs.homeRuns, ascending: pitchingSortsAscending)
+            case .walks: comparison = sortComparison(lhs.walks, rhs.walks, ascending: pitchingSortsAscending)
+            case .strikeouts: comparison = sortComparison(lhs.strikeouts, rhs.strikeouts, ascending: pitchingSortsAscending)
+            case .era: comparison = sortComparison(lhs.era, rhs.era, ascending: pitchingSortsAscending)
+            case .whip: comparison = sortComparison(lhs.whip, rhs.whip, ascending: pitchingSortsAscending)
+            }
+            return comparison == .orderedSame
+                ? stableRowOrder(lhs.season, lhs.team, lhs.id, rhs.season, rhs.team, rhs.id)
+                : comparison == .orderedAscending
+        }
+    }
+
+    private func sortComparison<Value: Comparable>(_ lhs: Value?, _ rhs: Value?, ascending: Bool) -> ComparisonResult {
+        switch (lhs, rhs) {
+        case let (lhs?, rhs?):
+            if lhs == rhs { return .orderedSame }
+            return (ascending ? lhs < rhs : lhs > rhs) ? .orderedAscending : .orderedDescending
+        case (nil, nil):
+            return .orderedSame
+        case (nil, _):
+            return .orderedDescending
+        case (_, nil):
+            return .orderedAscending
+        }
+    }
+
+    private func sortComparison<Value: Comparable>(_ lhs: Value, _ rhs: Value, ascending: Bool) -> ComparisonResult {
+        if lhs == rhs { return .orderedSame }
+        return (ascending ? lhs < rhs : lhs > rhs) ? .orderedAscending : .orderedDescending
+    }
+
+    private func stableRowOrder(_ lhsSeason: Int, _ lhsTeam: String, _ lhsID: String, _ rhsSeason: Int, _ rhsTeam: String, _ rhsID: String) -> Bool {
+        if lhsSeason != rhsSeason { return lhsSeason < rhsSeason }
+        if lhsTeam != rhsTeam { return lhsTeam < rhsTeam }
+        return lhsID < rhsID
     }
 
     private func tableValue(_ value: String?, _ width: CGFloat, leading: Bool = false) -> some View {
