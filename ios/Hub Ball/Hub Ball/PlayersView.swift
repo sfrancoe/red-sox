@@ -333,17 +333,22 @@ private struct PlayerReferenceView: View {
 
     private var playerNavigationTitle: some View {
         HStack(spacing: 12) {
-            Text(player.number ?? "—")
-                .font(.custom("Inter-Medium", size: 24).monospacedDigit())
+            Text(player.number.map { "#\($0)" } ?? "—")
+                .font(AppFont.displaySmall.monospacedDigit())
                 .foregroundStyle(AppColor.amber)
             Text(player.fullName ?? player.name)
-                .font(.custom("BarlowCondensed-SemiBold", size: 27))
+                .font(AppFont.displayMedium)
                 .foregroundStyle(AppColor.bone)
                 .lineLimit(1)
-                .minimumScaleFactor(0.65)
+                .minimumScaleFactor(0.75)
             Text(player.position.abbreviation)
-                .font(.custom("Inter-Medium", size: 24).monospaced())
+                .font(AppFont.label.weight(.semibold).monospaced())
                 .foregroundStyle(AppColor.boneDim)
+                .padding(.horizontal, 7)
+                .padding(.vertical, 4)
+                .background(AppColor.nightCell)
+                .overlay { Capsule().stroke(AppColor.rule, lineWidth: 1) }
+                .clipShape(Capsule())
         }
         .accessibilityElement(children: .combine)
     }
@@ -440,7 +445,8 @@ private struct PlayerReferenceView: View {
     }
 
     private func battingTable(_ rows: [PlayerBattingSeason]) -> some View {
-        HStack(alignment: .top, spacing: 0) {
+        let summaryRows = battingSummaryRows(rows)
+        return HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     tableHeader("YEAR", 48, leading: true); tableHeader("TEAM", 58, leading: true)
@@ -451,6 +457,9 @@ private struct PlayerReferenceView: View {
                         tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true)
                     }
                     .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
+                }
+                HStack(spacing: 0) {
+                    summaryValue("TOT", 48, leading: true); summaryValue("AVG", 58, leading: true)
                 }
             }
             .zIndex(1)
@@ -477,6 +486,15 @@ private struct PlayerReferenceView: View {
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel(battingAccessibility(row))
                     }
+                    HStack(spacing: 0) {
+                        summaryValue("—", 55, leading: true)
+                        summaryValue(total(summaryRows.map(\.games)), 40); summaryValue(total(summaryRows.map(\.atBats)), 46); summaryValue(total(summaryRows.map(\.runs)), 40); summaryValue(total(summaryRows.map(\.hits)), 40)
+                        summaryValue(total(summaryRows.map(\.doubles)), 40); summaryValue(total(summaryRows.map(\.triples)), 40); summaryValue(total(summaryRows.map(\.homeRuns)), 40); summaryValue(total(summaryRows.map(\.runsBattedIn)), 46)
+                        summaryValue(total(summaryRows.map(\.stolenBases)), 40); summaryValue(total(summaryRows.map(\.walks)), 40); summaryValue(total(summaryRows.map(\.strikeouts)), 40); summaryValue(rate(battingRate(summaryRows, \.average)), 50)
+                        summaryValue(rate(battingRate(summaryRows, \.onBasePercentage)), 50); summaryValue(rate(battingRate(summaryRows, \.sluggingPercentage)), 50); summaryValue(rate(battingRate(summaryRows, \.ops)), 50)
+                    }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Career totals and weighted average rates")
                 }
             }
         }
@@ -484,7 +502,8 @@ private struct PlayerReferenceView: View {
     }
 
     private func pitchingTable(_ rows: [PlayerPitchingSeason]) -> some View {
-        HStack(alignment: .top, spacing: 0) {
+        let summaryRows = pitchingSummaryRows(rows)
+        return HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     tableHeader("YEAR", 48, leading: true); tableHeader("TEAM", 58, leading: true)
@@ -495,6 +514,9 @@ private struct PlayerReferenceView: View {
                         tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true)
                     }
                     .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
+                }
+                HStack(spacing: 0) {
+                    summaryValue("TOT", 48, leading: true); summaryValue("AVG", 58, leading: true)
                 }
             }
             .zIndex(1)
@@ -519,6 +541,14 @@ private struct PlayerReferenceView: View {
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel(pitchingAccessibility(row))
                     }
+                    HStack(spacing: 0) {
+                        summaryValue("—", 55, leading: true)
+                        summaryValue(total(summaryRows.map(\.games)), 40); summaryValue(total(summaryRows.map(\.gamesStarted)), 40); summaryValue(total(summaryRows.map(\.wins)), 40); summaryValue(total(summaryRows.map(\.losses)), 40)
+                        summaryValue(total(summaryRows.map(\.saves)), 40); summaryValue(inningsPitched(summaryRows), 50); summaryValue(total(summaryRows.map(\.hits)), 40); summaryValue(total(summaryRows.map(\.earnedRuns)), 40)
+                        summaryValue(total(summaryRows.map(\.homeRuns)), 40); summaryValue(total(summaryRows.map(\.walks)), 40); summaryValue(total(summaryRows.map(\.strikeouts)), 40); summaryValue(decimal(earnedRunAverage(summaryRows)), 50); summaryValue(rate(walksAndHitsPerInning(summaryRows)), 54)
+                    }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Career totals and aggregate pitching rates")
                 }
             }
         }
@@ -547,6 +577,96 @@ private struct PlayerReferenceView: View {
     }
 
     private func tableValue(_ value: Int?, _ width: CGFloat) -> some View { tableValue(value.map(String.init), width) }
+
+    private func summaryValue(_ value: String?, _ width: CGFloat, leading: Bool = false) -> some View {
+        Text(value ?? "—")
+            .font(AppFont.label.weight(.semibold).monospacedDigit())
+            .foregroundStyle(AppColor.bone)
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .padding(.leading, leading ? 5 : 0)
+            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
+            .background(AppColor.nightCell)
+            .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
+            .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+    }
+
+    private func battingSummaryRows(_ rows: [PlayerBattingSeason]) -> [PlayerBattingSeason] {
+        rowsBySeason(rows) { $0.season }
+    }
+
+    private func pitchingSummaryRows(_ rows: [PlayerPitchingSeason]) -> [PlayerPitchingSeason] {
+        rowsBySeason(rows) { $0.season }
+    }
+
+    private func rowsBySeason<Row>(_ rows: [Row], season: (Row) -> Int, rowType: (Row) -> String?) -> [Row] {
+        Dictionary(grouping: rows, by: season)
+            .keys
+            .sorted()
+            .flatMap { year in
+                let seasonRows = Dictionary(grouping: rows, by: season)[year] ?? []
+                let subtotals = seasonRows.filter { rowType($0) == "subtotal" }
+                return subtotals.isEmpty ? seasonRows : subtotals
+            }
+    }
+
+    private func rowsBySeason(_ rows: [PlayerBattingSeason], _ season: (PlayerBattingSeason) -> Int) -> [PlayerBattingSeason] {
+        rowsBySeason(rows, season: season, rowType: \.rowType)
+    }
+
+    private func rowsBySeason(_ rows: [PlayerPitchingSeason], _ season: (PlayerPitchingSeason) -> Int) -> [PlayerPitchingSeason] {
+        rowsBySeason(rows, season: season, rowType: \.rowType)
+    }
+
+    private func total(_ values: [Int?]) -> String? {
+        let values = values.compactMap { $0 }
+        guard !values.isEmpty else { return nil }
+        return String(values.reduce(0, +))
+    }
+
+    private func battingRate(_ rows: [PlayerBattingSeason], _ keyPath: KeyPath<PlayerBattingSeason, Double?>) -> Double? {
+        weightedAverage(rows.compactMap { row in
+            row[keyPath: keyPath].map { ($0, row.atBats) }
+        })
+    }
+
+    private func weightedAverage(_ values: [(Double, Int?)]) -> Double? {
+        guard !values.isEmpty else { return nil }
+        let weighted = values.compactMap { pair -> (Double, Int)? in
+            guard let weight = pair.1, weight > 0 else { return nil }
+            return (pair.0, weight)
+        }
+        guard !weighted.isEmpty else {
+            return values.map(\.0).reduce(0, +) / Double(values.count)
+        }
+        let totalWeight = weighted.reduce(0) { $0 + $1.1 }
+        return weighted.reduce(0) { $0 + $1.0 * Double($1.1) } / Double(totalWeight)
+    }
+
+    private func inningsPitched(_ rows: [PlayerPitchingSeason]) -> String? {
+        guard let outs = totalOuts(rows) else { return nil }
+        return "\(outs / 3).\(outs % 3)"
+    }
+
+    private func earnedRunAverage(_ rows: [PlayerPitchingSeason]) -> Double? {
+        guard let outs = totalOuts(rows), let earnedRuns = totalInt(rows.map(\.earnedRuns)), outs > 0 else { return nil }
+        return Double(earnedRuns * 27) / Double(outs)
+    }
+
+    private func walksAndHitsPerInning(_ rows: [PlayerPitchingSeason]) -> Double? {
+        guard let outs = totalOuts(rows), let walks = totalInt(rows.map(\.walks)), let hits = totalInt(rows.map(\.hits)), outs > 0 else { return nil }
+        return Double((walks + hits) * 3) / Double(outs)
+    }
+
+    private func totalOuts(_ rows: [PlayerPitchingSeason]) -> Int? {
+        totalInt(rows.map(\.inningsOuts))
+    }
+
+    private func totalInt(_ values: [Int?]) -> Int? {
+        let values = values.compactMap { $0 }
+        guard !values.isEmpty else { return nil }
+        return values.reduce(0, +)
+    }
 
     private func rate(_ value: Double?) -> String? {
         guard let value else { return nil }
@@ -592,18 +712,14 @@ private struct PlayerReferenceView: View {
         "\(row.season), \(row.team), \(row.level ?? row.league ?? "level unavailable"). \(row.games ?? 0) games, \(row.wins ?? 0) wins, \(row.strikeouts ?? 0) strikeouts."
     }
 
+    @ViewBuilder
     private func careerFooter(_ career: PlayerCareerFeed) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            if let dataAsOf = career.dataAsOf {
-                Text("DATA AS OF \(dataAsOf.uppercased())")
-            }
-            if let note = career.coverage?.first(where: { $0.status != "available" })?.note {
-                Text(note)
-            }
+        if let note = career.coverage?.first(where: { $0.status != "available" })?.note {
+            Text(note)
+                .font(AppFont.label)
+                .foregroundStyle(AppColor.boneMuted)
+                .padding(12)
         }
-        .font(AppFont.label)
-        .foregroundStyle(AppColor.boneMuted)
-        .padding(12)
     }
 
     private var unavailableCareer: some View {
