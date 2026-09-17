@@ -43,6 +43,7 @@ def validate(team: dict) -> int:
     wikidata_matches = 0
     for player in players:
         assert player["name"] and player["position"]["group"] in POSITION_GROUPS
+        assert player["position"]["name"] and player["position"]["abbreviation"]
         if player.get("mlb_id") is not None:
             assert player["mlb_id"] == player["id"], f"mismatched MLB ID for {player['name']}"
         else:

@@ -35,6 +35,7 @@ CAREER_OUTPUT_DIRECTORY = ROOT / "data" / "player-careers"
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 MLB_STATS_API = "https://statsapi.mlb.com/api/v1/people/{player_id}/stats"
+MLB_PEOPLE_API = "https://statsapi.mlb.com/api/v1/people"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 CHADWICK_REGISTER_URL = (
     "https://raw.githubusercontent.com/chadwickbureau/register/master/data/people-{suffix}.csv"
@@ -178,6 +179,38 @@ def resolve_mlb_ids(players: list[dict[str, Any]], indexed_people: dict[str, lis
             player["id"] = player["mlb_id"]
         elif player.get("mlb_id") is None:
             player["id"] = fallback_id(player["name"])
+
+
+def primary_mlb_positions(player_ids: list[int]) -> dict[int, dict[str, str]]:
+    """Return the official primary position for each resolved MLB player ID."""
+    positions: dict[int, dict[str, str]] = {}
+    unique_ids = sorted(set(player_ids))
+    for start in range(0, len(unique_ids), 100):
+        payload = fetch_json(
+            MLB_PEOPLE_API,
+            {"personIds": ",".join(str(player_id) for player_id in unique_ids[start:start + 100])},
+        )
+        for person in payload.get("people", []):
+            player_id = person.get("id")
+            position = person.get("primaryPosition") or {}
+            name = str(position.get("name") or "").strip()
+            abbreviation = str(position.get("abbreviation") or "").strip()
+            if not isinstance(player_id, int) or not name or not abbreviation or abbreviation == "X":
+                continue
+            positions[player_id] = {"name": name, "abbreviation": abbreviation}
+    return positions
+
+
+def apply_primary_mlb_positions(players: list[dict[str, Any]]) -> None:
+    """Keep broad roster groups for filters while displaying the MLB primary position."""
+    positions = primary_mlb_positions([
+        player["mlb_id"] for player in players if isinstance(player.get("mlb_id"), int)
+    ])
+    for player in players:
+        position = positions.get(player.get("mlb_id"))
+        if position:
+            player["position"]["name"] = position["name"]
+            player["position"]["abbreviation"] = position["abbreviation"]
 
 
 def integer(row: dict[str, str], key: str) -> int:
@@ -895,6 +928,7 @@ def build_team_feed(
     resolve_mlb_ids(feed["players"], indexed_mlb_people)
     if len({player["id"] for player in feed["players"]}) != len(feed["players"]):
         raise RuntimeError("Official player identifier resolution produced a duplicate identity key")
+    apply_primary_mlb_positions(feed["players"])
     resolve_retrosheet_ids(feed["players"], people)
     missing_ids = sorted({
         player["retrosheet_id"]
@@ -916,22 +950,17 @@ def build_team_feed(
 
 def resolve_existing_feeds(teams: list[dict[str, Any]], indexed_mlb_people: dict[str, list[dict[str, Any]]]) -> None:
     """Migrate generated roster IDs without re-fetching unchanged roster templates."""
-    expected_career_ids: set[int] = set()
     for team in teams:
         path = output_path(team)
         feed = json.loads(path.read_text())
         resolve_mlb_ids(feed["players"], indexed_mlb_people)
         if len({player["id"] for player in feed["players"]}) != len(feed["players"]):
             raise RuntimeError("Official player identifier resolution produced a duplicate identity key")
+        apply_primary_mlb_positions(feed["players"])
         contents = json.dumps(feed, indent=2, ensure_ascii=False) + "\n"
         path.write_text(contents)
         if team["api_key"] == "redsox":
             IOS_OUTPUT_PATH.write_text(contents)
-        write_detailed_careers(feed["players"], skip_new=True)
-        expected_career_ids.update(player["id"] for player in feed["players"])
-    for path in CAREER_OUTPUT_DIRECTORY.glob("*.json"):
-        if path.stem.isdigit() and int(path.stem) not in expected_career_ids:
-            path.unlink()
 
 
 def main() -> None:
