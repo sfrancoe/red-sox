@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "player_id": 688692,
-  "generated_at": "2026-09-16T23:29:38.275069+00:00",
-  "data_as_of": "2026-09-16",
+  "generated_at": "2026-09-17T14:33:40.464513+00:00",
+  "data_as_of": "2026-09-17",
   "status": "available",
   "coverage": [
     {
@@ -27,31 +27,7 @@
     "url": "https://statsapi.mlb.com/api/v1/people/688692/stats",
     "attribution": "Season and minor-league statistics supplied by the MLB Stats API; regular season only."
   },
-  "batting": [
-    {
-      "id": "688692-hitting-mlb-2026-1-120",
-      "season": 2026,
-      "team": "Washington Nationals",
-      "league": "National League",
-      "level": "MLB",
-      "row_type": "team_stint",
-      "games": 4,
-      "at_bats": 0,
-      "runs": 0,
-      "hits": 0,
-      "doubles": 0,
-      "triples": 0,
-      "home_runs": 0,
-      "runs_batted_in": 0,
-      "stolen_bases": 0,
-      "walks": 0,
-      "strikeouts": 0,
-      "average": null,
-      "on_base_percentage": null,
-      "slugging_percentage": null,
-      "ops": null
-    }
-  ],
+  "batting": [],
   "pitching": [
     {
       "id": "688692-pitching-minors-2023-14-436",
@@ -168,7 +144,7 @@
       "games": 4,
       "games_started": 1,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "saves": 0,
       "innings_outs": 13,
       "hits": 1,

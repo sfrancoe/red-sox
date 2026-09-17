@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T23:07:42.346814+00:00",
+  "generated_at": "2026-09-17T14:27:11.014203+00:00",
   "roster_as_of": "September 15, 2026",
   "team": {
     "id": 118,
@@ -22,6 +22,7 @@
   "players": [
     {
       "id": 679883,
+      "mlb_id": 679883,
       "wikidata_id": "Q135769833",
       "slug": "luinder-avila",
       "name": "Luinder Avila",
@@ -95,11 +96,11 @@
           "era": 1.29,
           "whip": 0.929
         }
-      },
-      "mlb_id": 679883
+      }
     },
     {
-      "id": 1916233975,
+      "id": 686701,
+      "mlb_id": 686701,
       "wikidata_id": "Q134184146",
       "slug": "ryan-bergert",
       "name": "Ryan Bergert",
@@ -178,6 +179,7 @@
     },
     {
       "id": 702352,
+      "mlb_id": 702352,
       "wikidata_id": "Q126691043",
       "slug": "spencer-bivens",
       "name": "Spencer Bivens",
@@ -209,17 +211,54 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q126691043",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Spencer_Bivens",
-      "retrosheet_id": null,
+      "retrosheet_id": "bives001",
       "career_stats": {
         "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
-      },
-      "mlb_id": 702352
+        "status": "available",
+        "batting": {
+          "games": 81,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 81,
+          "games_started": 2,
+          "wins": 7,
+          "losses": 4,
+          "saves": 4,
+          "innings_outs": 389,
+          "hits": 130,
+          "runs": 62,
+          "earned_runs": 53,
+          "home_runs": 15,
+          "walks": 36,
+          "strikeouts": 98,
+          "hit_batters": 6,
+          "wild_pitches": 3,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 3.68,
+          "whip": 1.28
+        }
+      }
     },
     {
       "id": 696131,
+      "mlb_id": 696131,
       "wikidata_id": "Q125814601",
       "slug": "mason-black",
       "name": "Mason Black",
@@ -294,20 +333,20 @@
           "era": 6.47,
           "whip": 1.636
         }
-      },
-      "mlb_id": 696131
+      }
     },
     {
       "id": 695506,
+      "mlb_id": 695506,
       "wikidata_id": "Q117317934",
       "slug": "jac-caglianone",
       "name": "Jac Caglianone",
       "full_name": "Jac Caglianone",
       "number": "14",
       "position": {
-        "name": "First Baseman",
+        "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "RF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -360,11 +399,11 @@
           "ops": 0.532
         },
         "pitching": null
-      },
-      "mlb_id": 695506
+      }
     },
     {
       "id": 702070,
+      "mlb_id": 702070,
       "wikidata_id": "Q134386500",
       "slug": "noah-cameron",
       "name": "Noah Cameron",
@@ -445,11 +484,11 @@
           "era": 2.99,
           "whip": 1.099
         }
-      },
-      "mlb_id": 702070
+      }
     },
     {
       "id": 686555,
+      "mlb_id": 686555,
       "wikidata_id": "Q130349034",
       "slug": "isaac-collins",
       "name": "Isaac Collins",
@@ -458,7 +497,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "LF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -505,11 +544,11 @@
           "ops": 0.759
         },
         "pitching": null
-      },
-      "mlb_id": 686555
+      }
     },
     {
       "id": 674444,
+      "mlb_id": 674444,
       "wikidata_id": "Q122110100",
       "slug": "steven-cruz",
       "name": "Steven Cruz",
@@ -583,11 +622,11 @@
           "era": 3.66,
           "whip": 1.203
         }
-      },
-      "mlb_id": 674444
+      }
     },
     {
       "id": 621016,
+      "mlb_id": 621016,
       "wikidata_id": "Q112193332",
       "slug": "jose-cuas",
       "name": "José Cuas",
@@ -667,11 +706,11 @@
           "era": 4.37,
           "whip": 1.592
         }
-      },
-      "mlb_id": 621016
+      }
     },
     {
       "id": 677976,
+      "mlb_id": 677976,
       "wikidata_id": "Q66309991",
       "slug": "randy-dobnak",
       "name": "Randy Dobnak",
@@ -750,11 +789,11 @@
           "era": 4.86,
           "whip": 1.372
         }
-      },
-      "mlb_id": 677976
+      }
     },
     {
       "id": 679922,
+      "mlb_id": 679922,
       "wikidata_id": "Q134302397",
       "slug": "carlos-duran",
       "name": "Carlos Durán",
@@ -829,11 +868,11 @@
           "era": 81.0,
           "whip": 12.0
         }
-      },
-      "mlb_id": 679922
+      }
     },
     {
       "id": 668674,
+      "mlb_id": 668674,
       "wikidata_id": "Q118499741",
       "slug": "lucas-erceg",
       "name": "Lucas Erceg",
@@ -908,11 +947,11 @@
           "era": 3.54,
           "whip": 1.258
         }
-      },
-      "mlb_id": 668674
+      }
     },
     {
       "id": 608032,
+      "mlb_id": 608032,
       "wikidata_id": "Q24005070",
       "slug": "carlos-estevez",
       "name": "Carlos Estévez",
@@ -989,20 +1028,20 @@
           "era": 3.97,
           "whip": 1.315
         }
-      },
-      "mlb_id": 608032
+      }
     },
     {
       "id": 672580,
+      "mlb_id": 672580,
       "wikidata_id": "Q113129952",
       "slug": "maikel-garcia",
       "name": "Maikel García",
       "full_name": "Maikel García",
       "number": "11",
       "position": {
-        "name": "Infielder",
+        "name": "Third Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "3B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1048,11 +1087,11 @@
           "ops": 0.701
         },
         "pitching": null
-      },
-      "mlb_id": 672580
+      }
     },
     {
-      "id": 1954871473,
+      "id": 664062,
+      "mlb_id": 664062,
       "wikidata_id": "Q64853364",
       "slug": "tony-gonsolin",
       "name": "Tony Gonsolin",
@@ -1138,13 +1177,14 @@
     },
     {
       "id": 543238,
+      "mlb_id": 543238,
       "wikidata_id": "Q2852868",
       "slug": "anthony-gose",
       "name": "Anthony Gose",
       "full_name": "Anthony Gose",
       "number": "34",
       "position": {
-        "name": "Outfielder",
+        "name": "Pitcher",
         "group": "Pitcher",
         "abbreviation": "P"
       },
@@ -1214,11 +1254,11 @@
           "era": 4.78,
           "whip": 1.344
         }
-      },
-      "mlb_id": 543238
+      }
     },
     {
       "id": 676510,
+      "mlb_id": 676510,
       "wikidata_id": "Q135192954",
       "slug": "nolan-hoffman",
       "name": "Nolan Hoffman",
@@ -1250,17 +1290,54 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q135192954",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Nolan_Hoffman_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "hoffn001",
       "career_stats": {
         "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
-      },
-      "mlb_id": 676510
+        "status": "available",
+        "batting": {
+          "games": 1,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 1,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 3,
+          "hits": 3,
+          "runs": 3,
+          "earned_runs": 3,
+          "home_runs": 0,
+          "walks": 1,
+          "strikeouts": 2,
+          "hit_batters": 0,
+          "wild_pitches": 1,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 27.0,
+          "whip": 4.0
+        }
+      }
     },
     {
       "id": 663738,
+      "mlb_id": 663738,
       "wikidata_id": "Q96273338",
       "slug": "daniel-lynch-iv",
       "name": "Daniel Lynch IV",
@@ -1341,20 +1418,20 @@
           "era": 4.56,
           "whip": 1.43
         }
-      },
-      "mlb_id": 663738
+      }
     },
     {
       "id": 663697,
+      "mlb_id": 663697,
       "wikidata_id": "Q52210990",
       "slug": "jonathan-india",
       "name": "Jonathan India",
       "full_name": "Jonathan India",
       "number": "6",
       "position": {
-        "name": "Third Baseman",
+        "name": "Second Base",
         "group": "Pitcher",
-        "abbreviation": "P"
+        "abbreviation": "2B"
       },
       "roster_status": "60-day injured list",
       "is_active_roster": false,
@@ -1405,11 +1482,11 @@
           "ops": 0.744
         },
         "pitching": null
-      },
-      "mlb_id": 663697
+      }
     },
     {
       "id": 664728,
+      "mlb_id": 664728,
       "wikidata_id": "Q106328195",
       "slug": "kyle-isbel",
       "name": "Kyle Isbel",
@@ -1418,7 +1495,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "CF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1471,11 +1548,11 @@
           "ops": 0.653
         },
         "pitching": null
-      },
-      "mlb_id": 664728
+      }
     },
     {
       "id": 695600,
+      "mlb_id": 695600,
       "wikidata_id": "Q136051155",
       "slug": "carter-jensen",
       "name": "Carter Jensen",
@@ -1530,11 +1607,11 @@
           "ops": 0.941
         },
         "pitching": null
-      },
-      "mlb_id": 695600
+      }
     },
     {
       "id": 677951,
+      "mlb_id": 677951,
       "wikidata_id": "Q64009042",
       "slug": "bobby-witt-jr",
       "name": "Bobby Witt Jr.",
@@ -1543,7 +1620,7 @@
       "position": {
         "name": "Shortstop",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1593,11 +1670,11 @@
           "ops": 0.844
         },
         "pitching": null
-      },
-      "mlb_id": 677951
+      }
     },
     {
       "id": 518886,
+      "mlb_id": 518886,
       "wikidata_id": "Q2760861",
       "slug": "craig-kimbrel",
       "name": "Craig Kimbrel",
@@ -1689,11 +1766,11 @@
           "era": 2.58,
           "whip": 1.02
         }
-      },
-      "mlb_id": 518886
+      }
     },
     {
       "id": 663568,
+      "mlb_id": 663568,
       "wikidata_id": "Q125026799",
       "slug": "stephen-kolek",
       "name": "Stephen Kolek",
@@ -1768,11 +1845,11 @@
           "era": 4.01,
           "whip": 1.255
         }
-      },
-      "mlb_id": 663568
+      }
     },
     {
       "id": 1908526786,
+      "mlb_id": null,
       "wikidata_id": null,
       "slug": "ben-kudrna",
       "name": "Ben Kudrna",
@@ -1813,6 +1890,7 @@
     },
     {
       "id": 656638,
+      "mlb_id": 656638,
       "wikidata_id": "Q20707853",
       "slug": "alex-lange",
       "name": "Alex Lange",
@@ -1894,11 +1972,11 @@
           "era": 3.7,
           "whip": 1.381
         }
-      },
-      "mlb_id": 656638
+      }
     },
     {
       "id": 681432,
+      "mlb_id": 681432,
       "wikidata_id": "Q116937241",
       "slug": "luke-little",
       "name": "Luke Little",
@@ -1973,20 +2051,20 @@
           "era": 2.8,
           "whip": 1.387
         }
-      },
-      "mlb_id": 681432
+      }
     },
     {
       "id": 679845,
+      "mlb_id": 679845,
       "wikidata_id": "Q93172135",
       "slug": "nick-loftin",
       "name": "Nick Loftin",
       "full_name": "Nick Loftin",
       "number": "12",
       "position": {
-        "name": "Outfielder",
+        "name": "Third Base",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "3B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2055,18 +2133,18 @@
           "era": 0.0,
           "whip": 1.0
         }
-      },
-      "mlb_id": 679845
+      }
     },
     {
       "id": 607625,
+      "mlb_id": 607625,
       "wikidata_id": "Q16605329",
       "slug": "seth-lugo",
       "name": "Seth Lugo",
       "full_name": "Seth Lugo",
       "number": "67",
       "position": {
-        "name": "Relief Pitcher",
+        "name": "Pitcher",
         "group": "Pitcher",
         "abbreviation": "P"
       },
@@ -2142,11 +2220,11 @@
           "era": 3.49,
           "whip": 1.173
         }
-      },
-      "mlb_id": 607625
+      }
     },
     {
       "id": 683090,
+      "mlb_id": 683090,
       "wikidata_id": "Q134426331",
       "slug": "matthew-lugo",
       "name": "Matthew Lugo",
@@ -2155,7 +2233,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "LF"
       },
       "roster_status": "Inactive roster",
       "is_active_roster": false,
@@ -2202,11 +2280,11 @@
           "ops": 0.707
         },
         "pitching": null
-      },
-      "mlb_id": 683090
+      }
     },
     {
       "id": 571912,
+      "mlb_id": 571912,
       "wikidata_id": "Q18350801",
       "slug": "luke-maile",
       "name": "Luke Maile",
@@ -2292,11 +2370,11 @@
           "era": 11.25,
           "whip": 1.833
         }
-      },
-      "mlb_id": 571912
+      }
     },
     {
-      "id": 1985551120,
+      "id": 679525,
+      "mlb_id": 679525,
       "wikidata_id": "Q120189101",
       "slug": "alec-marsh",
       "name": "Alec Marsh",
@@ -2374,15 +2452,16 @@
     },
     {
       "id": 686681,
+      "mlb_id": 686681,
       "wikidata_id": "Q112960566",
       "slug": "michael-massey",
       "name": "Michael Massey",
       "full_name": "Michael Massey",
       "number": "19",
       "position": {
-        "name": "Infielder",
+        "name": "Second Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "2B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2428,11 +2507,11 @@
           "ops": 0.667
         },
         "pitching": null
-      },
-      "mlb_id": 686681
+      }
     },
     {
       "id": 1923710789,
+      "mlb_id": null,
       "wikidata_id": "Q120189116",
       "slug": "james-mcarthur",
       "name": "James McArthur",
@@ -2514,6 +2593,7 @@
     },
     {
       "id": 668834,
+      "mlb_id": 668834,
       "wikidata_id": "Q114314983",
       "slug": "easton-mcgee",
       "name": "Easton McGee",
@@ -2590,11 +2670,11 @@
           "era": 3.33,
           "whip": 1.068
         }
-      },
-      "mlb_id": 668834
+      }
     },
     {
       "id": 683232,
+      "mlb_id": 683232,
       "wikidata_id": "Q98150763",
       "slug": "nick-mears",
       "name": "Nick Mears",
@@ -2675,20 +2755,20 @@
           "era": 4.61,
           "whip": 1.335
         }
-      },
-      "mlb_id": 683232
+      }
     },
     {
       "id": 686469,
+      "mlb_id": 686469,
       "wikidata_id": "Q112761981",
       "slug": "vinnie-pasquantino",
       "name": "Vinnie Pasquantino",
       "full_name": "Vinnie Pasquantino",
       "number": "9",
       "position": {
-        "name": "Infielder",
+        "name": "First Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "1B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2734,11 +2814,11 @@
           "ops": 0.786
         },
         "pitching": null
-      },
-      "mlb_id": 686469
+      }
     },
     {
       "id": 663878,
+      "mlb_id": 663878,
       "wikidata_id": "Q30150649",
       "slug": "nate-pearson",
       "name": "Nate Pearson",
@@ -2822,20 +2902,20 @@
           "era": 5.17,
           "whip": 1.449
         }
-      },
-      "mlb_id": 663878
+      }
     },
     {
       "id": 521692,
+      "mlb_id": 521692,
       "wikidata_id": "Q3470332",
       "slug": "salvador-perez",
       "name": "Salvador Perez",
       "full_name": "Salvador Pérez",
       "number": "13",
       "position": {
-        "name": "Catcher",
+        "name": "Designated Hitter",
         "group": "Catcher",
-        "abbreviation": "C"
+        "abbreviation": "DH"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2881,11 +2961,11 @@
           "ops": 0.758
         },
         "pitching": null
-      },
-      "mlb_id": 521692
+      }
     },
     {
       "id": 666142,
+      "mlb_id": 666142,
       "wikidata_id": "Q24572705",
       "slug": "cole-ragans",
       "name": "Cole Ragans",
@@ -2960,11 +3040,11 @@
           "era": 3.66,
           "whip": 1.188
         }
-      },
-      "mlb_id": 666142
+      }
     },
     {
       "id": 670231,
+      "mlb_id": 670231,
       "wikidata_id": "Q134583279",
       "slug": "john-rave",
       "name": "John Rave",
@@ -2973,7 +3053,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "RF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -3019,20 +3099,20 @@
           "ops": 0.59
         },
         "pitching": null
-      },
-      "mlb_id": 670231
+      }
     },
     {
       "id": 668942,
+      "mlb_id": 668942,
       "wikidata_id": "Q66459263",
       "slug": "josh-rojas",
       "name": "Josh Rojas",
       "full_name": "Josh Rojas",
       "number": "40",
       "position": {
-        "name": "Outfielder",
+        "name": "Third Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "3B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -3104,11 +3184,11 @@
           "era": 13.5,
           "whip": 2.5
         }
-      },
-      "mlb_id": 668942
+      }
     },
     {
       "id": 657756,
+      "mlb_id": 657756,
       "wikidata_id": "Q70973081",
       "slug": "connor-seabold",
       "name": "Connor Seabold",
@@ -3193,11 +3273,11 @@
           "era": 7.79,
           "whip": 1.765
         }
-      },
-      "mlb_id": 657756
+      }
     },
     {
       "id": 687765,
+      "mlb_id": 687765,
       "wikidata_id": "Q123693786",
       "slug": "mitch-spence",
       "name": "Mitch Spence",
@@ -3273,11 +3353,11 @@
           "era": 4.77,
           "whip": 1.403
         }
-      },
-      "mlb_id": 687765
+      }
     },
     {
       "id": 671162,
+      "mlb_id": 671162,
       "wikidata_id": "Q133835163",
       "slug": "connor-thomas",
       "name": "Connor Thomas",
@@ -3360,20 +3440,20 @@
           "era": 20.25,
           "whip": 2.625
         }
-      },
-      "mlb_id": 671162
+      }
     },
     {
       "id": 686475,
+      "mlb_id": 686475,
       "wikidata_id": "Q133770898",
       "slug": "tyler-tolbert",
       "name": "Tyler Tolbert",
       "full_name": "Tyler Tolbert",
       "number": "2",
       "position": {
-        "name": "Infielder",
+        "name": "Shortstop",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -3419,18 +3499,18 @@
           "ops": 0.701
         },
         "pitching": null
-      },
-      "mlb_id": 686475
+      }
     },
     {
       "id": 608379,
+      "mlb_id": 608379,
       "wikidata_id": "Q13417050",
       "slug": "michael-wacha",
       "name": "Michael Wacha",
       "full_name": "Michael Wacha",
       "number": "52",
       "position": {
-        "name": "Starting Pitcher",
+        "name": "Pitcher",
         "group": "Pitcher",
         "abbreviation": "P"
       },
@@ -3509,11 +3589,11 @@
           "era": 3.89,
           "whip": 1.274
         }
-      },
-      "mlb_id": 608379
+      }
     },
     {
       "id": 694360,
+      "mlb_id": 694360,
       "wikidata_id": "Q139736462",
       "slug": "beck-way",
       "name": "Beck Way",
@@ -3550,11 +3630,11 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 694360
+      }
     },
     {
       "id": 1928747533,
+      "mlb_id": null,
       "wikidata_id": null,
       "slug": "steven-zobac",
       "name": "Steven Zobac",
