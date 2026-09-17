@@ -133,8 +133,6 @@ struct SeasonLeadersView: View {
                 let supplement = category.teamSupplement(teamID: team.definition.mlbID)
                 if !supplement.isEmpty {
                     Divider().padding(.top, 5)
-                    Text("\(team.abbreviation) · TEAM TOP 3")
-                        .font(.caption.weight(.bold)).foregroundStyle(AppColor.green).padding(.top, 3)
                     ForEach(supplement) { leader in
                         CompactLeaderRow(leader: leader, selectedTeamID: team.definition.mlbID)
                     }
