@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T07:59:15.335506+00:00",
+  "generated_at": "2026-09-17T18:34:36.242711+00:00",
   "source": "MLB Stats API",
   "team": "Astros",
   "regular_season_end": "2026-09-27",
@@ -23,14 +23,14 @@
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "FOX / FOX ONE",
+          "name": "FOX/ FOX ONE",
           "is_national": true,
           "home_away": "home",
           "availability": "national",
           "available_for_streaming": true
         },
         {
-          "name": "FOX / FOX ONE",
+          "name": "FOX/ FOX ONE",
           "is_national": true,
           "home_away": "away",
           "availability": "national",
@@ -193,10 +193,17 @@
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "Space City Home Network",
-          "is_national": false,
+          "name": "ESPN/ESPN App",
+          "is_national": true,
           "home_away": "away",
-          "availability": "local_out_of_market",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "ESPN/ESPN App",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
           "available_for_streaming": true
         }
       ]

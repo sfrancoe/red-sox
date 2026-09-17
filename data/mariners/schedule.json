@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T07:59:19.490489+00:00",
+  "generated_at": "2026-09-17T18:34:38.307999+00:00",
   "source": "MLB Stats API",
   "team": "Mariners",
   "regular_season_end": "2026-09-27",
@@ -48,9 +48,9 @@
       "opponent_record": "56-96",
       "favorite_team_record": "71-82",
       "favorite_team_pitcher": "Bryce Miller",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Gabriel Hughes",
       "favorite_team_pitcher_record": "4-9",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "0-8",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
@@ -82,9 +82,9 @@
       "opponent_record": "56-96",
       "favorite_team_record": "71-82",
       "favorite_team_pitcher": "Kade Anderson",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Tomoyuki Sugano",
       "favorite_team_pitcher_record": "1-2",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "12-10",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
@@ -159,10 +159,17 @@
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "Space City Home Network",
-          "is_national": false,
+          "name": "ESPN/ESPN App",
+          "is_national": true,
           "home_away": "away",
-          "availability": "local_out_of_market",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "ESPN/ESPN App",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
           "available_for_streaming": true
         }
       ]
