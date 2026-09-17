@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T07:59:37.136389+00:00",
+  "generated_at": "2026-09-17T13:48:00.286696+00:00",
   "season": 2026,
   "team": "Los Angeles Dodgers",
   "games_played": 152,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 23.0,
-    "forecast_war_to_date": 25.1,
-    "war_gap": -2.1,
-    "innings": 1336.7,
-    "era": 3.64
+    "actual_war": 22.9,
+    "forecast_war_to_date": 27.2,
+    "war_gap": -4.3,
+    "innings": 1344.7,
+    "era": 3.65
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 3.22
       },
       "war_gap": 1.44,
-      "innings_share_pct": 13.4
+      "innings_share_pct": 13.3
     },
     {
       "id": 660271,
@@ -98,7 +98,7 @@
         "ip_value": 59.667,
         "war": 2.16,
         "era": 2.87,
-        "fip": 2.18,
+        "fip": 2.17,
         "k_minus_bb_pct": 26.2
       },
       "forecast": {
@@ -114,7 +114,7 @@
         "war": 0.66
       },
       "war_gap": 1.5,
-      "innings_share_pct": 4.5
+      "innings_share_pct": 4.4
     },
     {
       "id": 607192,
@@ -130,7 +130,7 @@
         "ip_value": 61.667,
         "war": 1.85,
         "era": 3.5,
-        "fip": 2.94,
+        "fip": 2.93,
         "k_minus_bb_pct": 23.2
       },
       "forecast": {
@@ -185,17 +185,17 @@
       "name": "Blake Snell",
       "throws": "L",
       "role": "Starter",
-      "games": 7,
-      "starts": 7,
+      "games": 8,
+      "starts": 8,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "37.2",
-        "ip_value": 37.667,
-        "war": 1.74,
-        "era": 1.91,
-        "fip": 1.75,
-        "k_minus_bb_pct": 22.7
+        "ip": "38.2",
+        "ip_value": 38.667,
+        "war": 1.78,
+        "era": 1.86,
+        "fip": 1.73,
+        "k_minus_bb_pct": 22.9
       },
       "forecast": {
         "ip": 127.0,
@@ -209,8 +209,8 @@
         "ip": 119.1,
         "war": 2.37
       },
-      "war_gap": -0.63,
-      "innings_share_pct": 2.8
+      "war_gap": -0.6,
+      "innings_share_pct": 2.9
     },
     {
       "id": 680736,
@@ -241,8 +241,8 @@
         "ip": 60.5,
         "war": 0.38
       },
-      "war_gap": 1.3,
-      "innings_share_pct": 10.0
+      "war_gap": 1.31,
+      "innings_share_pct": 9.9
     },
     {
       "id": 683618,
@@ -313,17 +313,17 @@
       "name": "Alex Vesia",
       "throws": "L",
       "role": "Setup",
-      "games": 67,
+      "games": 68,
       "starts": 0,
       "saves": 3,
       "holds": 20,
       "actual": {
-        "ip": "53.1",
-        "ip_value": 53.333,
-        "war": 1.01,
-        "era": 2.87,
-        "fip": 3.31,
-        "k_minus_bb_pct": 16.3
+        "ip": "54.0",
+        "ip_value": 54.0,
+        "war": 1.05,
+        "era": 2.83,
+        "fip": 3.3,
+        "k_minus_bb_pct": 16.1
       },
       "forecast": {
         "ip": 61.0,
@@ -337,7 +337,7 @@
         "ip": 57.2,
         "war": 0.53
       },
-      "war_gap": 0.48,
+      "war_gap": 0.52,
       "innings_share_pct": 4.0
     },
     {
@@ -354,7 +354,7 @@
         "ip_value": 119.333,
         "war": 0.92,
         "era": 4.6,
-        "fip": 4.87,
+        "fip": 4.86,
         "k_minus_bb_pct": 13.5
       },
       "forecast": {
@@ -377,17 +377,17 @@
       "name": "Jack Dreyer",
       "throws": "L",
       "role": "Setup",
-      "games": 62,
+      "games": 63,
       "starts": 1,
       "saves": 2,
       "holds": 11,
       "actual": {
-        "ip": "58.1",
-        "ip_value": 58.333,
-        "war": 0.91,
-        "era": 2.93,
-        "fip": 3.46,
-        "k_minus_bb_pct": 20.4
+        "ip": "59.1",
+        "ip_value": 59.333,
+        "war": 0.85,
+        "era": 3.19,
+        "fip": 3.55,
+        "k_minus_bb_pct": 19.0
       },
       "forecast": {
         "ip": 52.0,
@@ -401,7 +401,7 @@
         "ip": 48.8,
         "war": 0.2
       },
-      "war_gap": 0.71,
+      "war_gap": 0.65,
       "innings_share_pct": 4.4
     },
     {
@@ -466,24 +466,24 @@
         "war": 0.51
       },
       "war_gap": -0.05,
-      "innings_share_pct": 3.3
+      "innings_share_pct": 3.2
     },
     {
       "id": 595014,
       "name": "Blake Treinen",
       "throws": "R",
       "role": "Reliever",
-      "games": 32,
+      "games": 33,
       "starts": 0,
       "saves": 1,
       "holds": 6,
       "actual": {
-        "ip": "26.0",
-        "ip_value": 26.0,
-        "war": 0.35,
-        "era": 3.46,
-        "fip": 3.33,
-        "k_minus_bb_pct": 15.0
+        "ip": "27.0",
+        "ip_value": 27.0,
+        "war": 0.39,
+        "era": 3.33,
+        "fip": 3.24,
+        "k_minus_bb_pct": 15.4
       },
       "forecast": {
         "ip": 54.0,
@@ -497,8 +497,8 @@
         "ip": 50.7,
         "war": 0.46
       },
-      "war_gap": -0.11,
-      "innings_share_pct": 1.9
+      "war_gap": -0.07,
+      "innings_share_pct": 2.0
     },
     {
       "id": 592779,
@@ -629,6 +629,38 @@
       "innings_share_pct": 1.6
     },
     {
+      "id": 663460,
+      "name": "Kris Bubic",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "1.0",
+        "ip_value": 1.0,
+        "war": 0.03,
+        "era": 0.0,
+        "fip": -0.9,
+        "k_minus_bb_pct": 50.0
+      },
+      "forecast": {
+        "ip": 149.3,
+        "war": 2.24,
+        "era": 3.91,
+        "fip": 3.95,
+        "k_minus_bb_pct": 14.2,
+        "team_at_fetch": "LAD"
+      },
+      "forecast_to_date": {
+        "ip": 140.1,
+        "war": 2.1
+      },
+      "war_gap": -2.07,
+      "innings_share_pct": 0.1
+    },
+    {
       "id": 671109,
       "name": "Jake Eder",
       "throws": "L",
@@ -659,38 +691,6 @@
       },
       "war_gap": 0.02,
       "innings_share_pct": 0.3
-    },
-    {
-      "id": 676272,
-      "name": "Bobby Miller",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 1,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "3.0",
-        "ip_value": 3.0,
-        "war": 0.01,
-        "era": 3.0,
-        "fip": 4.77,
-        "k_minus_bb_pct": 0.0
-      },
-      "forecast": {
-        "ip": 18.0,
-        "war": 0.05,
-        "era": 4.09,
-        "fip": 4.23,
-        "k_minus_bb_pct": 13.6,
-        "team_at_fetch": "LAD"
-      },
-      "forecast_to_date": {
-        "ip": 16.9,
-        "war": 0.04
-      },
-      "war_gap": -0.03,
-      "innings_share_pct": 0.2
     },
     {
       "id": 571771,
@@ -846,6 +846,38 @@
       "innings_share_pct": 0.3
     },
     {
+      "id": 676272,
+      "name": "Bobby Miller",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "5.1",
+        "ip_value": 5.333,
+        "war": -0.12,
+        "era": 5.06,
+        "fip": 7.22,
+        "k_minus_bb_pct": 4.2
+      },
+      "forecast": {
+        "ip": 18.0,
+        "war": 0.05,
+        "era": 4.09,
+        "fip": 4.23,
+        "k_minus_bb_pct": 13.6,
+        "team_at_fetch": "LAD"
+      },
+      "forecast_to_date": {
+        "ip": 16.9,
+        "war": 0.04
+      },
+      "war_gap": -0.16,
+      "innings_share_pct": 0.4
+    },
+    {
       "id": 608344,
       "name": "Cole Irvin",
       "throws": "L",
@@ -935,38 +967,6 @@
       "innings_share_pct": 0.7
     },
     {
-      "id": 678020,
-      "name": "Seth Halvorsen",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 8,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "7.0",
-        "ip_value": 7.0,
-        "war": -0.18,
-        "era": 7.71,
-        "fip": 7.24,
-        "k_minus_bb_pct": 3.2
-      },
-      "forecast": {
-        "ip": 50.0,
-        "war": 0.06,
-        "era": 4.77,
-        "fip": 4.58,
-        "k_minus_bb_pct": 9.8,
-        "team_at_fetch": "LAD"
-      },
-      "forecast_to_date": {
-        "ip": 46.9,
-        "war": 0.06
-      },
-      "war_gap": -0.24,
-      "innings_share_pct": 0.5
-    },
-    {
       "id": 689017,
       "name": "Landon Knack",
       "throws": "R",
@@ -1012,7 +1012,7 @@
         "ip_value": 13.667,
         "war": -0.27,
         "era": 11.85,
-        "fip": 6.03,
+        "fip": 6.02,
         "k_minus_bb_pct": 11.4
       },
       "forecast": {
@@ -1029,6 +1029,38 @@
       },
       "war_gap": -1.34,
       "innings_share_pct": 1.0
+    },
+    {
+      "id": 678020,
+      "name": "Seth Halvorsen",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 9,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "8.0",
+        "ip_value": 8.0,
+        "war": -0.29,
+        "era": 9.0,
+        "fip": 8.35,
+        "k_minus_bb_pct": 2.8
+      },
+      "forecast": {
+        "ip": 50.0,
+        "war": 0.06,
+        "era": 4.77,
+        "fip": 4.58,
+        "k_minus_bb_pct": 9.8,
+        "team_at_fetch": "LAD"
+      },
+      "forecast_to_date": {
+        "ip": 46.9,
+        "war": 0.06
+      },
+      "war_gap": -0.35,
+      "innings_share_pct": 0.6
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T07:59:22.452245+00:00",
+  "generated_at": "2026-09-17T13:47:43.580515+00:00",
   "season": 2026,
   "team": "Atlanta Braves",
   "games_played": 153,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 15.4,
+    "actual_war": 15.2,
     "forecast_war_to_date": 16.0,
-    "war_gap": -0.6,
-    "innings": 1350.0,
-    "era": 3.61
+    "war_gap": -0.8,
+    "innings": 1358.0,
+    "era": 3.64
   },
   "pitchers": [
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "69.1",
         "ip_value": 69.333,
-        "war": 2.16,
+        "war": 2.17,
         "era": 2.21,
         "fip": 2.45,
         "k_minus_bb_pct": 24.4
@@ -128,9 +128,9 @@
       "actual": {
         "ip": "137.2",
         "ip_value": 137.667,
-        "war": 1.51,
+        "war": 1.52,
         "era": 3.07,
-        "fip": 4.25,
+        "fip": 4.24,
         "k_minus_bb_pct": 7.0
       },
       "forecast": {
@@ -146,7 +146,7 @@
         "war": 0.07
       },
       "war_gap": 1.45,
-      "innings_share_pct": 10.2
+      "innings_share_pct": 10.1
     },
     {
       "id": 693821,
@@ -162,7 +162,7 @@
         "ip_value": 149.0,
         "war": 1.18,
         "era": 4.11,
-        "fip": 4.62,
+        "fip": 4.61,
         "k_minus_bb_pct": 11.4
       },
       "forecast": {
@@ -274,7 +274,7 @@
         "war": 1.33
       },
       "war_gap": -0.46,
-      "innings_share_pct": 10.5
+      "innings_share_pct": 10.4
     },
     {
       "id": 663158,
@@ -305,7 +305,7 @@
         "ip": 63.3,
         "war": 0.67
       },
-      "war_gap": 0.17,
+      "war_gap": 0.18,
       "innings_share_pct": 2.4
     },
     {
@@ -322,7 +322,7 @@
         "ip_value": 79.333,
         "war": 0.59,
         "era": 4.54,
-        "fip": 4.39,
+        "fip": 4.38,
         "k_minus_bb_pct": 11.3
       },
       "forecast": {
@@ -338,7 +338,7 @@
         "war": 1.77
       },
       "war_gap": -1.17,
-      "innings_share_pct": 5.9
+      "innings_share_pct": 5.8
     },
     {
       "id": 682989,
@@ -377,17 +377,17 @@
       "name": "Dylan Dodd",
       "throws": "L",
       "role": "Setup",
-      "games": 44,
+      "games": 45,
       "starts": 0,
       "saves": 1,
       "holds": 14,
       "actual": {
-        "ip": "45.1",
-        "ip_value": 45.333,
+        "ip": "45.2",
+        "ip_value": 45.667,
         "war": 0.44,
-        "era": 2.38,
-        "fip": 3.81,
-        "k_minus_bb_pct": 18.6
+        "era": 2.36,
+        "fip": 3.8,
+        "k_minus_bb_pct": 18.5
       },
       "forecast": {
         "ip": 42.0,
@@ -473,17 +473,17 @@
       "name": "Brent Suter",
       "throws": "L",
       "role": "Reliever",
-      "games": 10,
+      "games": 11,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "23.0",
-        "ip_value": 23.0,
-        "war": 0.12,
-        "era": 1.96,
-        "fip": 3.71,
-        "k_minus_bb_pct": 10.4
+        "ip": "23.2",
+        "ip_value": 23.667,
+        "war": 0.14,
+        "era": 1.9,
+        "fip": 3.6,
+        "k_minus_bb_pct": 11.2
       },
       "forecast": {
         "ip": 61.0,
@@ -497,40 +497,8 @@
         "ip": 57.6,
         "war": -0.0
       },
-      "war_gap": 0.13,
+      "war_gap": 0.15,
       "innings_share_pct": 1.7
-    },
-    {
-      "id": 702566,
-      "name": "Owen Murphy",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 3,
-      "starts": 1,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "6.2",
-        "ip_value": 6.667,
-        "war": 0.08,
-        "era": 4.05,
-        "fip": 4.6,
-        "k_minus_bb_pct": 13.8
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 5.23,
-        "fip": 5.24,
-        "k_minus_bb_pct": 7.9,
-        "team_at_fetch": "ATL"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.0
-      },
-      "war_gap": 0.08,
-      "innings_share_pct": 0.5
     },
     {
       "id": 675911,
@@ -546,7 +514,7 @@
         "ip_value": 39.0,
         "war": 0.08,
         "era": 5.31,
-        "fip": 5.36,
+        "fip": 5.35,
         "k_minus_bb_pct": 15.8
       },
       "forecast": {
@@ -782,6 +750,38 @@
       "innings_share_pct": 0.4
     },
     {
+      "id": 702566,
+      "name": "Owen Murphy",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 1,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "9.0",
+        "ip_value": 9.0,
+        "war": -0.05,
+        "era": 5.0,
+        "fip": 5.54,
+        "k_minus_bb_pct": 11.9
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 5.23,
+        "fip": 5.24,
+        "k_minus_bb_pct": 7.9,
+        "team_at_fetch": "ATL"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": -0.05,
+      "innings_share_pct": 0.7
+    },
+    {
       "id": 674370,
       "name": "Osvaldo Bido",
       "throws": "R",
@@ -878,38 +878,6 @@
       "innings_share_pct": 0.6
     },
     {
-      "id": 700363,
-      "name": "AJ Smith-Shawver",
-      "throws": "R",
-      "role": "Starter",
-      "games": 6,
-      "starts": 5,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "26.0",
-        "ip_value": 26.0,
-        "war": -0.15,
-        "era": 6.92,
-        "fip": 6.02,
-        "k_minus_bb_pct": 3.2
-      },
-      "forecast": {
-        "ip": 8.0,
-        "war": 0.05,
-        "era": 3.79,
-        "fip": 3.69,
-        "k_minus_bb_pct": 18.5,
-        "team_at_fetch": "ATL"
-      },
-      "forecast_to_date": {
-        "ip": 7.6,
-        "war": 0.04
-      },
-      "war_gap": -0.2,
-      "innings_share_pct": 1.9
-    },
-    {
       "id": 622694,
       "name": "Elieser Hernández",
       "throws": "R",
@@ -940,6 +908,38 @@
       },
       "war_gap": -0.15,
       "innings_share_pct": 0.8
+    },
+    {
+      "id": 700363,
+      "name": "AJ Smith-Shawver",
+      "throws": "R",
+      "role": "Starter",
+      "games": 6,
+      "starts": 5,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "26.0",
+        "ip_value": 26.0,
+        "war": -0.15,
+        "era": 6.92,
+        "fip": 6.02,
+        "k_minus_bb_pct": 3.2
+      },
+      "forecast": {
+        "ip": 8.0,
+        "war": 0.05,
+        "era": 3.79,
+        "fip": 3.69,
+        "k_minus_bb_pct": 18.5,
+        "team_at_fetch": "ATL"
+      },
+      "forecast_to_date": {
+        "ip": 7.6,
+        "war": 0.04
+      },
+      "war_gap": -0.2,
+      "innings_share_pct": 1.9
     },
     {
       "id": 471911,
@@ -974,38 +974,6 @@
       "innings_share_pct": 1.2
     },
     {
-      "id": 702275,
-      "name": "JR Ritchie",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 14,
-      "starts": 8,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "58.0",
-        "ip_value": 58.0,
-        "war": -0.2,
-        "era": 4.5,
-        "fip": 5.41,
-        "k_minus_bb_pct": 6.6
-      },
-      "forecast": {
-        "ip": 36.9,
-        "war": 0.27,
-        "era": 4.56,
-        "fip": 4.55,
-        "k_minus_bb_pct": 9.8,
-        "team_at_fetch": "ATL"
-      },
-      "forecast_to_date": {
-        "ip": 34.9,
-        "war": 0.25
-      },
-      "war_gap": -0.46,
-      "innings_share_pct": 4.3
-    },
-    {
       "id": 694462,
       "name": "Hurston Waldrep",
       "throws": "R",
@@ -1038,6 +1006,38 @@
       "innings_share_pct": 0.8
     },
     {
+      "id": 702275,
+      "name": "JR Ritchie",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 15,
+      "starts": 9,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "62.2",
+        "ip_value": 62.667,
+        "war": -0.35,
+        "era": 5.03,
+        "fip": 5.63,
+        "k_minus_bb_pct": 7.2
+      },
+      "forecast": {
+        "ip": 36.9,
+        "war": 0.27,
+        "era": 4.56,
+        "fip": 4.55,
+        "k_minus_bb_pct": 9.8,
+        "team_at_fetch": "ATL"
+      },
+      "forecast_to_date": {
+        "ip": 34.9,
+        "war": 0.25
+      },
+      "war_gap": -0.61,
+      "innings_share_pct": 4.6
+    },
+    {
       "id": 641755,
       "name": "Tyler Kinley",
       "throws": "R",
@@ -1067,7 +1067,7 @@
         "war": 0.29
       },
       "war_gap": -0.72,
-      "innings_share_pct": 3.2
+      "innings_share_pct": 3.1
     },
     {
       "id": 671162,
