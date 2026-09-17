@@ -198,7 +198,8 @@ struct AppTabView: View {
                 PlayersView(team: team, requestedPlayerID: selectedPlayerID) {
                     selectedPlayerID = nil
                 }
-                .mainTabSwipe(selection: $selectedTab, current: .players, availableTabs: availableTabs)
+                // Player history contains a horizontally scrollable stats table.
+                // Keep its gestures inside the player screen instead of switching tabs.
         case .pitching:
                 PitchingView(team: team, onSelectPlayer: showPlayer)
                     .mainTabSwipe(selection: $selectedTab, current: .pitching, availableTabs: availableTabs)

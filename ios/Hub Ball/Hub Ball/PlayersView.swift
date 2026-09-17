@@ -49,7 +49,6 @@ struct PlayersView: View {
     private func directory(_ feed: PlayersFeed) -> some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                directoryHeader(feed)
                 searchField
                 filterBar
                 spreadsheetHeader
@@ -72,28 +71,6 @@ struct PlayersView: View {
         .background(AppColor.night)
     }
 
-    private func directoryHeader(_ feed: PlayersFeed) -> some View {
-        HStack(alignment: .bottom, spacing: 12) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("PLAYERS")
-                    .font(AppFont.displayLarge)
-                    .tracking(0.5)
-                    .foregroundStyle(AppColor.bone)
-                Text("\(team.fullName.uppercased()) ROSTER · \(feed.playerCount) LISTED")
-                    .font(AppFont.label.weight(.semibold))
-                    .foregroundStyle(AppColor.boneMuted)
-            }
-            Spacer(minLength: 8)
-            Text(feed.updatedText)
-                .font(AppFont.label.monospacedDigit())
-                .foregroundStyle(AppColor.boneMuted)
-                .lineLimit(1)
-        }
-        .padding(.horizontal, 16)
-        .padding(.top, 18)
-        .padding(.bottom, 14)
-    }
-
     private var searchField: some View {
         HStack(spacing: 9) {
             Image(systemName: "magnifyingglass")
@@ -106,10 +83,11 @@ struct PlayersView: View {
         }
         .font(AppFont.bodySmall)
         .padding(.horizontal, 12)
-        .frame(height: 44)
+        .frame(height: 38)
         .background(AppColor.nightRaised)
         .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
         .padding(.horizontal, 16)
+        .padding(.top, 12)
         .padding(.bottom, 12)
     }
 
@@ -124,7 +102,7 @@ struct PlayersView: View {
                             .font(AppFont.label.weight(.semibold))
                             .foregroundStyle(store.filter == filter ? AppColor.bone : AppColor.boneMuted)
                             .padding(.horizontal, 14)
-                            .frame(height: 36)
+                            .frame(height: 34)
                             .background(store.filter == filter ? AppColor.nightCell : AppColor.nightRaised)
                             .overlay(alignment: .bottom) {
                                 if store.filter == filter {
@@ -144,11 +122,11 @@ struct PlayersView: View {
 
     private var spreadsheetHeader: some View {
         HStack(spacing: 0) {
-            sortHeader(.number, width: 42, alignment: .trailing)
-            sortHeader(.name, alignment: .leading)
-            sortHeader(.position, width: 44)
-            sortHeader(.batsThrows, width: 48)
-            if contentWidth >= 520 { sortHeader(.age, width: 40) }
+            sortHeader(.number, width: 42, alignment: .leading)
+            sortHeader(.name, width: contentWidth >= 520 ? 240 : 200, alignment: .leading)
+            sortHeader(.position, width: 48, alignment: .leading)
+            sortHeader(.batsThrows, width: 48, alignment: .leading)
+            if contentWidth >= 520 { sortHeader(.age, width: 40, alignment: .leading) }
         }
         .frame(maxWidth: .infinity)
         .frame(height: 33)
@@ -181,33 +159,28 @@ struct PlayersView: View {
             Text(player.number ?? "—")
                 .font(AppFont.number.monospacedDigit())
                 .foregroundStyle(AppColor.boneDim)
-                .frame(width: 42, alignment: .trailing)
+                .frame(width: 42, alignment: .leading)
             Text(player.name)
                 .font(AppFont.bodySmall.weight(.medium))
                 .foregroundStyle(AppColor.bone)
                 .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 12)
+                .frame(width: contentWidth >= 520 ? 240 : 200, alignment: .leading)
             Text(player.position.abbreviation)
                 .font(AppFont.label.monospaced())
                 .foregroundStyle(AppColor.boneDim)
-                .frame(width: 44)
+                .frame(width: 48, alignment: .leading)
             Text("\(player.bats?.shortHand ?? "—")/\(player.throws?.shortHand ?? "—")")
                 .font(AppFont.label.monospaced())
                 .foregroundStyle(AppColor.boneDim)
-                .frame(width: 48)
+                .frame(width: 48, alignment: .leading)
             if contentWidth >= 520 {
                 Text(player.age.map(String.init) ?? "—")
                     .font(AppFont.label.monospacedDigit())
                     .foregroundStyle(AppColor.boneDim)
-                    .frame(width: 40)
+                    .frame(width: 40, alignment: .leading)
             }
-            Image(systemName: "chevron.right")
-                .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(AppColor.steel)
-                .frame(width: 22)
         }
-        .frame(minHeight: 45)
+        .frame(minHeight: 40)
         .padding(.horizontal, 16)
         .background(AppColor.night)
         .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
@@ -254,21 +227,22 @@ private enum PlayerRecordMode: String, CaseIterable, Identifiable {
 }
 
 private enum CareerScope: String, CaseIterable, Identifiable {
-    case all = "All levels"
     case mlb = "MLB"
-    case minors = "Minors"
+    case league = "Minor League"
+    case both = "Both"
 
     var id: String { rawValue }
 }
 
 private struct PlayerReferenceView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dismiss) private var dismiss
     let team: HubTeam
     let player: RedSoxPlayer
     let source: PlayersSource?
     let store: PlayersStore
     @State private var mode: PlayerRecordMode
-    @State private var scope: CareerScope = .all
+    @State private var scope: CareerScope = .mlb
 
     init(team: HubTeam, player: RedSoxPlayer, source: PlayersSource?, store: PlayersStore) {
         self.team = team
@@ -281,7 +255,6 @@ private struct PlayerReferenceView: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                nameBand
                 biographyPanel
                 careerPanel
                 if !player.education.entries.isEmpty { educationPanel }
@@ -291,9 +264,23 @@ private struct PlayerReferenceView: View {
             .padding(.bottom, 20)
         }
         .background(AppColor.night)
-        .navigationTitle("Players")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button { dismiss() } label: {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(AppColor.bone)
+                        .frame(width: 28, height: 28)
+                }
+                .accessibilityLabel("Back to players")
+            }
+            ToolbarItem(placement: .principal) {
+                playerNavigationTitle
+            }
+        }
         .task { await store.loadCareer(for: player) }
     }
 
@@ -344,27 +331,20 @@ private struct PlayerReferenceView: View {
         }
     }
 
-    private var nameBand: some View {
+    private var playerNavigationTitle: some View {
         HStack(spacing: 12) {
             Text(player.number ?? "—")
-                .font(AppFont.numberExtraLarge.monospacedDigit())
+                .font(.custom("Inter-Medium", size: 28).monospacedDigit())
                 .foregroundStyle(AppColor.amber)
-                .frame(minWidth: 44, alignment: .leading)
-            Rectangle().fill(AppColor.rule).frame(width: 1, height: 36)
             Text(player.fullName ?? player.name)
                 .font(AppFont.displayLarge)
                 .foregroundStyle(AppColor.bone)
-                .lineLimit(2)
-                .minimumScaleFactor(0.76)
-            Spacer(minLength: 4)
+                .lineLimit(1)
+                .minimumScaleFactor(0.65)
             Text(player.position.abbreviation)
-                .font(AppFont.displayMedium.monospaced())
+                .font(.custom("Inter-Medium", size: 28).monospaced())
                 .foregroundStyle(AppColor.boneDim)
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 9)
-        .background(AppColor.nightRaised)
-        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
         .accessibilityElement(children: .combine)
     }
 
@@ -453,7 +433,7 @@ private struct PlayerReferenceView: View {
     }
 
     private func includes(level: String?, league: String?) -> Bool {
-        guard scope != .all else { return true }
+        guard scope != .both else { return true }
         let description = "\(level ?? "") \(league ?? "")".lowercased()
         let isMLB = description.contains("mlb") || description.contains("major")
         return scope == .mlb ? isMLB : !isMLB
@@ -463,7 +443,7 @@ private struct PlayerReferenceView: View {
         ScrollView(.horizontal, showsIndicators: true) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    tableHeader("YEAR", 48); tableHeader("TEAM", 126); tableHeader("LEVEL", 55)
+                    tableHeader("YEAR", 48); tableHeader("TEAM", 58); tableHeader("LEVEL", 55)
                     tableHeader("G", 40); tableHeader("AB", 46); tableHeader("R", 40); tableHeader("H", 40)
                     tableHeader("2B", 40); tableHeader("3B", 40); tableHeader("HR", 40); tableHeader("RBI", 46)
                     tableHeader("SB", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("AVG", 50)
@@ -472,7 +452,7 @@ private struct PlayerReferenceView: View {
                 .background(AppColor.nightCell)
                 ForEach(rows) { row in
                     HStack(spacing: 0) {
-                        tableValue("\(row.season)", 48, leading: true); tableValue(row.team, 126, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
+                        tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
                         tableValue(row.games, 40); tableValue(row.atBats, 46); tableValue(row.runs, 40); tableValue(row.hits, 40)
                         tableValue(row.doubles, 40); tableValue(row.triples, 40); tableValue(row.homeRuns, 40); tableValue(row.runsBattedIn, 46)
                         tableValue(row.stolenBases, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(rate(row.average), 50)
@@ -491,7 +471,7 @@ private struct PlayerReferenceView: View {
         ScrollView(.horizontal, showsIndicators: true) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    tableHeader("YEAR", 48); tableHeader("TEAM", 126); tableHeader("LEVEL", 55)
+                    tableHeader("YEAR", 48); tableHeader("TEAM", 58); tableHeader("LEVEL", 55)
                     tableHeader("G", 40); tableHeader("GS", 40); tableHeader("W", 40); tableHeader("L", 40)
                     tableHeader("SV", 40); tableHeader("IP", 50); tableHeader("H", 40); tableHeader("ER", 40)
                     tableHeader("HR", 40); tableHeader("BB", 40); tableHeader("SO", 40); tableHeader("ERA", 50); tableHeader("WHIP", 54)
@@ -499,7 +479,7 @@ private struct PlayerReferenceView: View {
                 .background(AppColor.nightCell)
                 ForEach(rows) { row in
                     HStack(spacing: 0) {
-                        tableValue("\(row.season)", 48, leading: true); tableValue(row.team, 126, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
+                        tableValue("\(row.season)", 48, leading: true); tableValue(compactTeamName(row.team), 58, leading: true); tableValue(row.level ?? row.league ?? "—", 55, leading: true)
                         tableValue(row.games, 40); tableValue(row.gamesStarted, 40); tableValue(row.wins, 40); tableValue(row.losses, 40)
                         tableValue(row.saves, 40); tableValue(row.inningsPitched, 50); tableValue(row.hits, 40); tableValue(row.earnedRuns, 40)
                         tableValue(row.homeRuns, 40); tableValue(row.walks, 40); tableValue(row.strikeouts, 40); tableValue(decimal(row.era), 50); tableValue(rate(row.whip), 54)
@@ -544,6 +524,31 @@ private struct PlayerReferenceView: View {
     private func decimal(_ value: Double?) -> String? {
         guard let value else { return nil }
         return String(format: "%.2f", value)
+    }
+
+    /// The provider stores full club names. The history grid deliberately uses a
+    /// compact, stable label so that more statistics remain visible on a phone.
+    private func compactTeamName(_ team: String) -> String {
+        let mlbAbbreviations = [
+            "Arizona Diamondbacks": "ARI", "Atlanta Braves": "ATL", "Baltimore Orioles": "BAL",
+            "Boston Red Sox": "BOS", "Chicago Cubs": "CHC", "Chicago White Sox": "CWS",
+            "Cincinnati Reds": "CIN", "Cleveland Guardians": "CLE", "Cleveland Indians": "CLE",
+            "Colorado Rockies": "COL", "Detroit Tigers": "DET", "Houston Astros": "HOU",
+            "Kansas City Royals": "KC", "Los Angeles Angels": "LAA", "Los Angeles Dodgers": "LAD",
+            "Miami Marlins": "MIA", "Milwaukee Brewers": "MIL", "Minnesota Twins": "MIN",
+            "New York Mets": "NYM", "New York Yankees": "NYY", "Oakland Athletics": "OAK",
+            "Athletics": "ATH", "Philadelphia Phillies": "PHI", "Pittsburgh Pirates": "PIT",
+            "San Diego Padres": "SD", "San Francisco Giants": "SF", "Seattle Mariners": "SEA",
+            "St. Louis Cardinals": "STL", "Tampa Bay Rays": "TB", "Texas Rangers": "TEX",
+            "Toronto Blue Jays": "TOR", "Washington Nationals": "WSH"
+        ]
+        if let abbreviation = mlbAbbreviations[team] { return abbreviation }
+        if let teams = team.split(separator: " ").first, Int(teams) != nil, team.hasSuffix("teams") {
+            return "\(teams) TM"
+        }
+        let words = team.split(separator: " ").filter { !$0.isEmpty }
+        guard words.count > 1 else { return team }
+        return words.compactMap(\.first).map(String.init).joined().uppercased()
     }
 
     private func battingAccessibility(_ row: PlayerBattingSeason) -> String {

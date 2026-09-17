@@ -3,7 +3,6 @@ import Foundation
 enum PlayerPositionFilter: String, CaseIterable, Identifiable, Sendable {
     case all
     case pitcher
-    case catcher
     case infielder
     case outfielder
     case hitter
@@ -14,7 +13,6 @@ enum PlayerPositionFilter: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .all: "All"
         case .pitcher: "Pitchers"
-        case .catcher: "Catchers"
         case .infielder: "Infielders"
         case .outfielder: "Outfielders"
         case .hitter: "DH / Utility"
@@ -102,7 +100,11 @@ struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
     let careerStats: PlayerCareerStats?
 
     var positionFilter: PlayerPositionFilter {
-        PlayerPositionFilter(rawValue: position.group.lowercased()) ?? .hitter
+        if position.group.lowercased() == "catcher" {
+            // Catchers remain discoverable without carrying a dedicated filter tab.
+            return .infielder
+        }
+        return PlayerPositionFilter(rawValue: position.group.lowercased()) ?? .hitter
     }
 
     var sourceURL: URL? {
