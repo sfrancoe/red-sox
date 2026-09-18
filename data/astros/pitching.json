@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T07:37:17.592608+00:00",
+  "generated_at": "2026-09-18T13:10:06.055007+00:00",
   "season": 2026,
   "team": "Houston Astros",
   "games_played": 153,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.8,
+    "actual_war": 7.0,
     "forecast_war_to_date": 13.4,
-    "war_gap": -6.6,
-    "innings": 1347.7,
-    "era": 4.54
+    "war_gap": -6.4,
+    "innings": 1356.7,
+    "era": 4.52
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "145.2",
         "ip_value": 145.667,
-        "war": 2.43,
+        "war": 2.44,
         "era": 3.71,
         "fip": 3.81,
         "k_minus_bb_pct": 13.8
@@ -49,25 +49,25 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 2.43,
-      "innings_share_pct": 10.8
+      "war_gap": 2.44,
+      "innings_share_pct": 10.7
     },
     {
       "id": 623352,
       "name": "Josh Hader",
       "throws": "L",
       "role": "Closer",
-      "games": 43,
+      "games": 44,
       "starts": 0,
       "saves": 26,
       "holds": 0,
       "actual": {
-        "ip": "42.1",
-        "ip_value": 42.333,
-        "war": 2.07,
-        "era": 0.85,
-        "fip": 1.58,
-        "k_minus_bb_pct": 28.4
+        "ip": "43.1",
+        "ip_value": 43.333,
+        "war": 2.06,
+        "era": 0.83,
+        "fip": 1.62,
+        "k_minus_bb_pct": 27.8
       },
       "forecast": {
         "ip": 61.0,
@@ -81,8 +81,8 @@
         "ip": 57.6,
         "war": 0.81
       },
-      "war_gap": 1.26,
-      "innings_share_pct": 3.1
+      "war_gap": 1.25,
+      "innings_share_pct": 3.2
     },
     {
       "id": 686613,
@@ -114,7 +114,7 @@
         "war": 3.39
       },
       "war_gap": -1.87,
-      "innings_share_pct": 7.2
+      "innings_share_pct": 7.1
     },
     {
       "id": 595345,
@@ -210,7 +210,7 @@
         "war": 1.66
       },
       "war_gap": -1.21,
-      "innings_share_pct": 5.5
+      "innings_share_pct": 5.4
     },
     {
       "id": 660853,
@@ -241,7 +241,7 @@
         "ip": 56.7,
         "war": 0.08
       },
-      "war_gap": 0.34,
+      "war_gap": 0.35,
       "innings_share_pct": 5.1
     },
     {
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "91.0",
         "ip_value": 91.0,
-        "war": 0.31,
+        "war": 0.32,
         "era": 3.26,
         "fip": 4.16,
         "k_minus_bb_pct": 14.0
@@ -273,8 +273,8 @@
         "ip": 43.4,
         "war": 0.08
       },
-      "war_gap": 0.23,
-      "innings_share_pct": 6.8
+      "war_gap": 0.24,
+      "innings_share_pct": 6.7
     },
     {
       "id": 681293,
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "61.0",
         "ip_value": 61.0,
-        "war": 0.24,
+        "war": 0.25,
         "era": 5.31,
         "fip": 4.74,
         "k_minus_bb_pct": 11.6
@@ -384,7 +384,7 @@
       "actual": {
         "ip": "73.2",
         "ip_value": 73.667,
-        "war": 0.16,
+        "war": 0.17,
         "era": 4.76,
         "fip": 4.75,
         "k_minus_bb_pct": 12.2
@@ -402,7 +402,7 @@
         "war": 0.28
       },
       "war_gap": -0.11,
-      "innings_share_pct": 5.5
+      "innings_share_pct": 5.4
     },
     {
       "id": 621121,
@@ -467,38 +467,6 @@
       },
       "war_gap": -0.07,
       "innings_share_pct": 1.5
-    },
-    {
-      "id": 699044,
-      "name": "Miguel Ullola",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 6,
-      "starts": 1,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "8.0",
-        "ip_value": 8.0,
-        "war": 0.05,
-        "era": 3.38,
-        "fip": 4.22,
-        "k_minus_bb_pct": 30.0
-      },
-      "forecast": {
-        "ip": 10.0,
-        "war": -0.0,
-        "era": 4.17,
-        "fip": 4.41,
-        "k_minus_bb_pct": 12.9,
-        "team_at_fetch": "HOU"
-      },
-      "forecast_to_date": {
-        "ip": 9.4,
-        "war": -0.0
-      },
-      "war_gap": 0.05,
-      "innings_share_pct": 0.6
     },
     {
       "id": 695001,
@@ -569,7 +537,7 @@
       "actual": {
         "ip": "20.0",
         "ip_value": 20.0,
-        "war": -0.02,
+        "war": -0.01,
         "era": 5.4,
         "fip": 5.1,
         "k_minus_bb_pct": 8.4
@@ -620,6 +588,38 @@
       },
       "war_gap": 0.07,
       "innings_share_pct": 1.0
+    },
+    {
+      "id": 699044,
+      "name": "Miguel Ullola",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 7,
+      "starts": 2,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "8.2",
+        "ip_value": 8.667,
+        "war": -0.04,
+        "era": 4.15,
+        "fip": 5.17,
+        "k_minus_bb_pct": 20.6
+      },
+      "forecast": {
+        "ip": 10.0,
+        "war": -0.0,
+        "era": 4.17,
+        "fip": 4.41,
+        "k_minus_bb_pct": 12.9,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 9.4,
+        "war": -0.0
+      },
+      "war_gap": -0.04,
+      "innings_share_pct": 0.6
     },
     {
       "id": 663967,
@@ -736,6 +736,38 @@
       "innings_share_pct": 0.5
     },
     {
+      "id": 814490,
+      "name": "Ethan Pecko",
+      "throws": "R",
+      "role": "Starter",
+      "games": 6,
+      "starts": 4,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "28.2",
+        "ip_value": 28.667,
+        "war": -0.11,
+        "era": 3.77,
+        "fip": 5.5,
+        "k_minus_bb_pct": 6.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.54,
+        "fip": 4.58,
+        "k_minus_bb_pct": 11.3,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": -0.0
+      },
+      "war_gap": -0.11,
+      "innings_share_pct": 2.1
+    },
+    {
       "id": 656986,
       "name": "Bennett Sousa",
       "throws": "L",
@@ -766,6 +798,38 @@
       },
       "war_gap": -0.35,
       "innings_share_pct": 1.9
+    },
+    {
+      "id": 650556,
+      "name": "Bryan Abreu",
+      "throws": "R",
+      "role": "Setup",
+      "games": 63,
+      "starts": 0,
+      "saves": 8,
+      "holds": 16,
+      "actual": {
+        "ip": "59.2",
+        "ip_value": 59.667,
+        "war": -0.15,
+        "era": 3.77,
+        "fip": 4.49,
+        "k_minus_bb_pct": 14.9
+      },
+      "forecast": {
+        "ip": 68.0,
+        "war": 0.95,
+        "era": 3.23,
+        "fip": 3.24,
+        "k_minus_bb_pct": 21.5,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 64.2,
+        "war": 0.9
+      },
+      "war_gap": -1.05,
+      "innings_share_pct": 4.4
     },
     {
       "id": 685005,
@@ -800,36 +864,36 @@
       "innings_share_pct": 0.6
     },
     {
-      "id": 650556,
-      "name": "Bryan Abreu",
-      "throws": "R",
+      "id": 687911,
+      "name": "Bryan King",
+      "throws": "L",
       "role": "Setup",
-      "games": 62,
-      "starts": 0,
-      "saves": 8,
-      "holds": 15,
+      "games": 57,
+      "starts": 1,
+      "saves": 6,
+      "holds": 12,
       "actual": {
-        "ip": "59.1",
-        "ip_value": 59.333,
-        "war": -0.19,
-        "era": 3.79,
-        "fip": 4.53,
-        "k_minus_bb_pct": 14.6
+        "ip": "58.1",
+        "ip_value": 58.333,
+        "war": -0.3,
+        "era": 4.78,
+        "fip": 4.69,
+        "k_minus_bb_pct": 9.5
       },
       "forecast": {
-        "ip": 68.0,
-        "war": 0.95,
-        "era": 3.23,
-        "fip": 3.24,
-        "k_minus_bb_pct": 21.5,
+        "ip": 67.0,
+        "war": 0.46,
+        "era": 3.72,
+        "fip": 3.83,
+        "k_minus_bb_pct": 16.1,
         "team_at_fetch": "HOU"
       },
       "forecast_to_date": {
-        "ip": 64.2,
-        "war": 0.9
+        "ip": 63.3,
+        "war": 0.44
       },
-      "war_gap": -1.08,
-      "innings_share_pct": 4.4
+      "war_gap": -0.74,
+      "innings_share_pct": 4.3
     },
     {
       "id": 682610,
@@ -862,70 +926,6 @@
       },
       "war_gap": -0.2,
       "innings_share_pct": 0.3
-    },
-    {
-      "id": 814490,
-      "name": "Ethan Pecko",
-      "throws": "R",
-      "role": "Starter",
-      "games": 5,
-      "starts": 4,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "23.0",
-        "ip_value": 23.0,
-        "war": -0.34,
-        "era": 4.3,
-        "fip": 6.44,
-        "k_minus_bb_pct": 3.1
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.54,
-        "fip": 4.58,
-        "k_minus_bb_pct": 11.3,
-        "team_at_fetch": "HOU"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": -0.0
-      },
-      "war_gap": -0.34,
-      "innings_share_pct": 1.7
-    },
-    {
-      "id": 687911,
-      "name": "Bryan King",
-      "throws": "L",
-      "role": "Setup",
-      "games": 56,
-      "starts": 1,
-      "saves": 6,
-      "holds": 12,
-      "actual": {
-        "ip": "57.0",
-        "ip_value": 57.0,
-        "war": -0.35,
-        "era": 4.89,
-        "fip": 4.76,
-        "k_minus_bb_pct": 9.3
-      },
-      "forecast": {
-        "ip": 67.0,
-        "war": 0.46,
-        "era": 3.72,
-        "fip": 3.83,
-        "k_minus_bb_pct": 16.1,
-        "team_at_fetch": "HOU"
-      },
-      "forecast_to_date": {
-        "ip": 63.3,
-        "war": 0.44
-      },
-      "war_gap": -0.79,
-      "innings_share_pct": 4.2
     },
     {
       "id": 681347,

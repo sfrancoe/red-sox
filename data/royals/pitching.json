@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T07:37:16.245818+00:00",
+  "generated_at": "2026-09-18T13:10:04.856571+00:00",
   "season": 2026,
   "team": "Kansas City Royals",
   "games_played": 153,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.8,
+    "actual_war": 6.2,
     "forecast_war_to_date": 14.3,
-    "war_gap": -7.5,
-    "innings": 1338.3,
-    "era": 4.62
+    "war_gap": -8.1,
+    "innings": 1346.3,
+    "era": 4.63
   },
   "pitchers": [
     {
@@ -49,7 +49,7 @@
         "ip": 140.1,
         "war": 1.47
       },
-      "war_gap": 1.6,
+      "war_gap": 1.59,
       "innings_share_pct": 12.4
     },
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "188.2",
         "ip_value": 188.667,
-        "war": 2.46,
+        "war": 2.45,
         "era": 3.34,
         "fip": 4.27,
         "k_minus_bb_pct": 13.2
@@ -81,25 +81,25 @@
         "ip": 160.6,
         "war": 1.83
       },
-      "war_gap": 0.63,
-      "innings_share_pct": 14.1
+      "war_gap": 0.62,
+      "innings_share_pct": 14.0
     },
     {
       "id": 607625,
       "name": "Seth Lugo",
       "throws": "R",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "164.0",
-        "ip_value": 164.0,
-        "war": 2.06,
-        "era": 4.99,
-        "fip": 4.16,
-        "k_minus_bb_pct": 10.3
+        "ip": "169.0",
+        "ip_value": 169.0,
+        "war": 1.66,
+        "era": 5.06,
+        "fip": 4.4,
+        "k_minus_bb_pct": 10.5
       },
       "forecast": {
         "ip": 161.3,
@@ -113,8 +113,8 @@
         "ip": 152.3,
         "war": 1.64
       },
-      "war_gap": 0.41,
-      "innings_share_pct": 12.3
+      "war_gap": 0.02,
+      "innings_share_pct": 12.6
     },
     {
       "id": 663738,
@@ -145,7 +145,7 @@
         "ip": 55.7,
         "war": 0.1
       },
-      "war_gap": 0.9,
+      "war_gap": 0.89,
       "innings_share_pct": 5.7
     },
     {
@@ -178,7 +178,7 @@
         "war": -0.01
       },
       "war_gap": 0.86,
-      "innings_share_pct": 5.2
+      "innings_share_pct": 5.1
     },
     {
       "id": 663460,
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "50.1",
         "ip_value": 50.333,
-        "war": 0.84,
+        "war": 0.83,
         "era": 4.11,
         "fip": 3.71,
         "k_minus_bb_pct": 12.1
@@ -210,7 +210,7 @@
         "war": 2.12
       },
       "war_gap": -1.28,
-      "innings_share_pct": 3.8
+      "innings_share_pct": 3.7
     },
     {
       "id": 663568,
@@ -309,53 +309,21 @@
       "innings_share_pct": 5.2
     },
     {
-      "id": 671162,
-      "name": "Connor Thomas",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 11,
-      "starts": 0,
-      "saves": 0,
-      "holds": 3,
-      "actual": {
-        "ip": "11.0",
-        "ip_value": 11.0,
-        "war": 0.33,
-        "era": 2.45,
-        "fip": 2.28,
-        "k_minus_bb_pct": 17.8
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": 0.0,
-        "era": 4.09,
-        "fip": 4.19,
-        "k_minus_bb_pct": 9.9,
-        "team_at_fetch": "KCR"
-      },
-      "forecast_to_date": {
-        "ip": 0.9,
-        "war": 0.0
-      },
-      "war_gap": 0.33,
-      "innings_share_pct": 0.8
-    },
-    {
       "id": 621016,
       "name": "Jose Cuas",
       "throws": "R",
       "role": "Reliever",
-      "games": 20,
+      "games": 21,
       "starts": 0,
       "saves": 0,
       "holds": 4,
       "actual": {
-        "ip": "19.0",
-        "ip_value": 19.0,
-        "war": 0.33,
-        "era": 2.37,
-        "fip": 2.78,
-        "k_minus_bb_pct": 10.1
+        "ip": "20.0",
+        "ip_value": 20.0,
+        "war": 0.35,
+        "era": 2.25,
+        "fip": 2.7,
+        "k_minus_bb_pct": 10.9
       },
       "forecast": {
         "ip": 1.0,
@@ -369,8 +337,40 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": 0.33,
-      "innings_share_pct": 1.4
+      "war_gap": 0.36,
+      "innings_share_pct": 1.5
+    },
+    {
+      "id": 671162,
+      "name": "Connor Thomas",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 12,
+      "starts": 0,
+      "saves": 0,
+      "holds": 3,
+      "actual": {
+        "ip": "12.0",
+        "ip_value": 12.0,
+        "war": 0.29,
+        "era": 3.0,
+        "fip": 2.6,
+        "k_minus_bb_pct": 13.7
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": 0.0,
+        "era": 4.09,
+        "fip": 4.19,
+        "k_minus_bb_pct": 9.9,
+        "team_at_fetch": "KCR"
+      },
+      "forecast_to_date": {
+        "ip": 0.9,
+        "war": 0.0
+      },
+      "war_gap": 0.29,
+      "innings_share_pct": 0.9
     },
     {
       "id": 543238,
@@ -384,7 +384,7 @@
       "actual": {
         "ip": "8.1",
         "ip_value": 8.333,
-        "war": 0.22,
+        "war": 0.21,
         "era": 0.0,
         "fip": 2.98,
         "k_minus_bb_pct": 3.2
@@ -433,7 +433,7 @@
         "ip": 13.2,
         "war": 0.03
       },
-      "war_gap": 0.12,
+      "war_gap": 0.11,
       "innings_share_pct": 0.9
     },
     {
@@ -739,7 +739,7 @@
         "ip": 22.7,
         "war": 0.1
       },
-      "war_gap": -0.34,
+      "war_gap": -0.35,
       "innings_share_pct": 0.7
     },
     {
@@ -992,38 +992,6 @@
       "innings_share_pct": 4.2
     },
     {
-      "id": 656638,
-      "name": "Alex Lange",
-      "throws": "R",
-      "role": "Closer",
-      "games": 55,
-      "starts": 0,
-      "saves": 10,
-      "holds": 3,
-      "actual": {
-        "ip": "56.2",
-        "ip_value": 56.667,
-        "war": -0.48,
-        "era": 6.04,
-        "fip": 5.04,
-        "k_minus_bb_pct": 10.2
-      },
-      "forecast": {
-        "ip": 52.0,
-        "war": 0.18,
-        "era": 4.02,
-        "fip": 4.03,
-        "k_minus_bb_pct": 12.4,
-        "team_at_fetch": "KCR"
-      },
-      "forecast_to_date": {
-        "ip": 49.1,
-        "war": 0.17
-      },
-      "war_gap": -0.65,
-      "innings_share_pct": 4.2
-    },
-    {
       "id": 696131,
       "name": "Mason Black",
       "throws": "R",
@@ -1088,6 +1056,38 @@
       "innings_share_pct": 3.3
     },
     {
+      "id": 656638,
+      "name": "Alex Lange",
+      "throws": "R",
+      "role": "Closer",
+      "games": 56,
+      "starts": 0,
+      "saves": 10,
+      "holds": 3,
+      "actual": {
+        "ip": "57.2",
+        "ip_value": 57.667,
+        "war": -0.63,
+        "era": 6.09,
+        "fip": 5.25,
+        "k_minus_bb_pct": 10.4
+      },
+      "forecast": {
+        "ip": 52.0,
+        "war": 0.18,
+        "era": 4.02,
+        "fip": 4.03,
+        "k_minus_bb_pct": 12.4,
+        "team_at_fetch": "KCR"
+      },
+      "forecast_to_date": {
+        "ip": 49.1,
+        "war": 0.17
+      },
+      "war_gap": -0.8,
+      "innings_share_pct": 4.3
+    },
+    {
       "id": 621381,
       "name": "Matt Strahm",
       "throws": "L",
@@ -1099,7 +1099,7 @@
       "actual": {
         "ip": "35.2",
         "ip_value": 35.667,
-        "war": -1.28,
+        "war": -1.29,
         "era": 7.32,
         "fip": 7.13,
         "k_minus_bb_pct": 9.9
@@ -1117,7 +1117,7 @@
         "war": 0.62
       },
       "war_gap": -1.9,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     }
   ]
 }

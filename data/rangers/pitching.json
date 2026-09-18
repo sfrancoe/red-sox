@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T07:37:20.237982+00:00",
+  "generated_at": "2026-09-18T13:10:08.444777+00:00",
   "season": 2026,
   "team": "Texas Rangers",
   "games_played": 153,
@@ -16,7 +16,7 @@
     "actual_war": 14.9,
     "forecast_war_to_date": 16.9,
     "war_gap": -2.0,
-    "innings": 1331.3,
+    "innings": 1340.3,
     "era": 4.31
   },
   "pitchers": [
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "154.1",
         "ip_value": 154.333,
-        "war": 4.21,
+        "war": 4.22,
         "era": 3.79,
         "fip": 3.04,
         "k_minus_bb_pct": 24.9
@@ -50,7 +50,7 @@
         "war": 3.82
       },
       "war_gap": 0.39,
-      "innings_share_pct": 11.6
+      "innings_share_pct": 11.5
     },
     {
       "id": 669022,
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "165.2",
         "ip_value": 165.667,
-        "war": 2.68,
+        "war": 2.69,
         "era": 4.67,
         "fip": 3.89,
         "k_minus_bb_pct": 14.3
@@ -81,7 +81,7 @@
         "ip": 152.3,
         "war": 2.56
       },
-      "war_gap": 0.12,
+      "war_gap": 0.13,
       "innings_share_pct": 12.4
     },
     {
@@ -89,16 +89,16 @@
       "name": "Jacob Latz",
       "throws": "L",
       "role": "Closer",
-      "games": 54,
+      "games": 55,
       "starts": 1,
       "saves": 30,
       "holds": 3,
       "actual": {
-        "ip": "67.1",
-        "ip_value": 67.333,
-        "war": 2.3,
-        "era": 2.0,
-        "fip": 2.59,
+        "ip": "68.1",
+        "ip_value": 68.333,
+        "war": 2.2,
+        "era": 2.11,
+        "fip": 2.76,
         "k_minus_bb_pct": 21.3
       },
       "forecast": {
@@ -113,7 +113,7 @@
         "ip": 84.2,
         "war": 0.49
       },
-      "war_gap": 1.8,
+      "war_gap": 1.71,
       "innings_share_pct": 5.1
     },
     {
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "139.1",
         "ip_value": 139.333,
-        "war": 1.64,
+        "war": 1.65,
         "era": 4.07,
         "fip": 4.21,
         "k_minus_bb_pct": 18.6
@@ -145,8 +145,8 @@
         "ip": 164.8,
         "war": 3.17
       },
-      "war_gap": -1.53,
-      "innings_share_pct": 10.5
+      "war_gap": -1.52,
+      "innings_share_pct": 10.4
     },
     {
       "id": 615698,
@@ -178,7 +178,7 @@
         "war": 0.04
       },
       "war_gap": 1.46,
-      "innings_share_pct": 8.2
+      "innings_share_pct": 8.1
     },
     {
       "id": 677958,
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "138.2",
         "ip_value": 138.667,
-        "war": 1.35,
+        "war": 1.36,
         "era": 4.54,
         "fip": 4.39,
         "k_minus_bb_pct": 12.3
@@ -210,24 +210,24 @@
         "war": 1.52
       },
       "war_gap": -0.16,
-      "innings_share_pct": 10.4
+      "innings_share_pct": 10.3
     },
     {
       "id": 641302,
       "name": "Tyler Alexander",
       "throws": "L",
-      "role": "Setup",
-      "games": 68,
-      "starts": 4,
+      "role": "Swingman",
+      "games": 69,
+      "starts": 5,
       "saves": 4,
       "holds": 13,
       "actual": {
-        "ip": "66.2",
-        "ip_value": 66.667,
-        "war": 1.17,
-        "era": 3.38,
-        "fip": 3.01,
-        "k_minus_bb_pct": 13.4
+        "ip": "67.2",
+        "ip_value": 67.667,
+        "war": 1.16,
+        "era": 3.33,
+        "fip": 3.05,
+        "k_minus_bb_pct": 12.8
       },
       "forecast": {
         "ip": 72.8,
@@ -241,40 +241,8 @@
         "ip": 68.7,
         "war": 0.07
       },
-      "war_gap": 1.09,
+      "war_gap": 1.08,
       "innings_share_pct": 5.0
-    },
-    {
-      "id": 596001,
-      "name": "Jakob Junis",
-      "throws": "R",
-      "role": "Setup",
-      "games": 49,
-      "starts": 1,
-      "saves": 6,
-      "holds": 17,
-      "actual": {
-        "ip": "51.1",
-        "ip_value": 51.333,
-        "war": 0.54,
-        "era": 3.33,
-        "fip": 3.66,
-        "k_minus_bb_pct": 11.1
-      },
-      "forecast": {
-        "ip": 65.0,
-        "war": 0.31,
-        "era": 4.1,
-        "fip": 4.06,
-        "k_minus_bb_pct": 14.9,
-        "team_at_fetch": "TEX"
-      },
-      "forecast_to_date": {
-        "ip": 61.4,
-        "war": 0.29
-      },
-      "war_gap": 0.25,
-      "innings_share_pct": 3.9
     },
     {
       "id": 683004,
@@ -313,17 +281,17 @@
       "name": "Cody Bradford",
       "throws": "L",
       "role": "Starter",
-      "games": 7,
+      "games": 8,
       "starts": 7,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "34.1",
-        "ip_value": 34.333,
-        "war": 0.39,
-        "era": 4.72,
-        "fip": 4.49,
-        "k_minus_bb_pct": 5.3
+        "ip": "38.2",
+        "ip_value": 38.667,
+        "war": 0.51,
+        "era": 4.19,
+        "fip": 4.26,
+        "k_minus_bb_pct": 5.9
       },
       "forecast": {
         "ip": 68.6,
@@ -337,8 +305,40 @@
         "ip": 64.7,
         "war": 0.47
       },
-      "war_gap": -0.07,
-      "innings_share_pct": 2.6
+      "war_gap": 0.05,
+      "innings_share_pct": 2.9
+    },
+    {
+      "id": 596001,
+      "name": "Jakob Junis",
+      "throws": "R",
+      "role": "Setup",
+      "games": 50,
+      "starts": 1,
+      "saves": 6,
+      "holds": 18,
+      "actual": {
+        "ip": "51.2",
+        "ip_value": 51.667,
+        "war": 0.47,
+        "era": 3.66,
+        "fip": 3.77,
+        "k_minus_bb_pct": 10.5
+      },
+      "forecast": {
+        "ip": 65.0,
+        "war": 0.31,
+        "era": 4.1,
+        "fip": 4.06,
+        "k_minus_bb_pct": 14.9,
+        "team_at_fetch": "TEX"
+      },
+      "forecast_to_date": {
+        "ip": 61.4,
+        "war": 0.29
+      },
+      "war_gap": 0.18,
+      "innings_share_pct": 3.9
     },
     {
       "id": 682608,
@@ -494,6 +494,38 @@
       "innings_share_pct": 0.5
     },
     {
+      "id": 656756,
+      "name": "Jordan Montgomery",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 9,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "18.0",
+        "ip_value": 18.0,
+        "war": 0.01,
+        "era": 5.0,
+        "fip": 4.54,
+        "k_minus_bb_pct": 13.3
+      },
+      "forecast": {
+        "ip": 48.2,
+        "war": 0.43,
+        "era": 4.28,
+        "fip": 4.3,
+        "k_minus_bb_pct": 11.5,
+        "team_at_fetch": "TEX"
+      },
+      "forecast_to_date": {
+        "ip": 45.6,
+        "war": 0.41
+      },
+      "war_gap": -0.4,
+      "innings_share_pct": 1.3
+    },
+    {
       "id": 693713,
       "name": "Emiliano Teodo",
       "throws": "R",
@@ -583,38 +615,6 @@
       "innings_share_pct": 0.1
     },
     {
-      "id": 656756,
-      "name": "Jordan Montgomery",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 8,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "17.0",
-        "ip_value": 17.0,
-        "war": -0.02,
-        "era": 5.29,
-        "fip": 4.63,
-        "k_minus_bb_pct": 13.9
-      },
-      "forecast": {
-        "ip": 48.2,
-        "war": 0.43,
-        "era": 4.28,
-        "fip": 4.3,
-        "k_minus_bb_pct": 11.5,
-        "team_at_fetch": "TEX"
-      },
-      "forecast_to_date": {
-        "ip": 45.6,
-        "war": 0.41
-      },
-      "war_gap": -0.43,
-      "innings_share_pct": 1.3
-    },
-    {
       "id": 605452,
       "name": "Joe Ross",
       "throws": "R",
@@ -647,38 +647,6 @@
       "innings_share_pct": 0.6
     },
     {
-      "id": 592866,
-      "name": "Trevor Williams",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 4,
-      "starts": 1,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "5.1",
-        "ip_value": 5.333,
-        "war": -0.05,
-        "era": 5.06,
-        "fip": 6.28,
-        "k_minus_bb_pct": 4.0
-      },
-      "forecast": {
-        "ip": 30.7,
-        "war": 0.15,
-        "era": 4.27,
-        "fip": 4.28,
-        "k_minus_bb_pct": 13.6,
-        "team_at_fetch": "TEX"
-      },
-      "forecast_to_date": {
-        "ip": 29.0,
-        "war": 0.14
-      },
-      "war_gap": -0.19,
-      "innings_share_pct": 0.4
-    },
-    {
       "id": 686560,
       "name": "Gavin Collyer",
       "throws": "R",
@@ -709,6 +677,38 @@
       },
       "war_gap": 0.11,
       "innings_share_pct": 1.7
+    },
+    {
+      "id": 592866,
+      "name": "Trevor Williams",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 1,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "5.1",
+        "ip_value": 5.333,
+        "war": -0.05,
+        "era": 5.06,
+        "fip": 6.28,
+        "k_minus_bb_pct": 4.0
+      },
+      "forecast": {
+        "ip": 30.7,
+        "war": 0.15,
+        "era": 4.27,
+        "fip": 4.28,
+        "k_minus_bb_pct": 13.6,
+        "team_at_fetch": "TEX"
+      },
+      "forecast_to_date": {
+        "ip": 29.0,
+        "war": 0.14
+      },
+      "war_gap": -0.19,
+      "innings_share_pct": 0.4
     },
     {
       "id": 663978,
@@ -772,7 +772,7 @@
         "war": -0.0
       },
       "war_gap": -0.07,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 0.1
     },
     {
       "id": 543309,
@@ -868,17 +868,17 @@
       "name": "Chase Silseth",
       "throws": "R",
       "role": "Reliever",
-      "games": 20,
+      "games": 21,
       "starts": 0,
       "saves": 0,
-      "holds": 7,
+      "holds": 8,
       "actual": {
-        "ip": "16.1",
-        "ip_value": 16.333,
-        "war": -0.17,
-        "era": 4.96,
-        "fip": 5.24,
-        "k_minus_bb_pct": 7.9
+        "ip": "17.0",
+        "ip_value": 17.0,
+        "war": -0.11,
+        "era": 4.76,
+        "fip": 4.92,
+        "k_minus_bb_pct": 10.1
       },
       "forecast": {
         "ip": 62.0,
@@ -892,8 +892,8 @@
         "ip": 58.6,
         "war": 0.24
       },
-      "war_gap": -0.41,
-      "innings_share_pct": 1.2
+      "war_gap": -0.36,
+      "innings_share_pct": 1.3
     },
     {
       "id": 687239,
@@ -960,38 +960,6 @@
       "innings_share_pct": 0.3
     },
     {
-      "id": 695239,
-      "name": "Robby Ahlstrom",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 41,
-      "starts": 0,
-      "saves": 0,
-      "holds": 6,
-      "actual": {
-        "ip": "36.1",
-        "ip_value": 36.333,
-        "war": -0.24,
-        "era": 5.94,
-        "fip": 5.05,
-        "k_minus_bb_pct": 13.1
-      },
-      "forecast": {
-        "ip": 8.0,
-        "war": -0.05,
-        "era": 4.7,
-        "fip": 4.97,
-        "k_minus_bb_pct": 7.3,
-        "team_at_fetch": "TEX"
-      },
-      "forecast_to_date": {
-        "ip": 7.6,
-        "war": -0.04
-      },
-      "war_gap": -0.19,
-      "innings_share_pct": 2.7
-    },
-    {
       "id": 455119,
       "name": "Chris Martin",
       "throws": "R",
@@ -1021,7 +989,7 @@
         "war": 0.67
       },
       "war_gap": -0.91,
-      "innings_share_pct": 1.1
+      "innings_share_pct": 1.0
     },
     {
       "id": 656222,
@@ -1053,7 +1021,39 @@
         "war": 0.2
       },
       "war_gap": -0.49,
-      "innings_share_pct": 2.0
+      "innings_share_pct": 1.9
+    },
+    {
+      "id": 695239,
+      "name": "Robby Ahlstrom",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 42,
+      "starts": 0,
+      "saves": 0,
+      "holds": 7,
+      "actual": {
+        "ip": "37.0",
+        "ip_value": 37.0,
+        "war": -0.29,
+        "era": 6.08,
+        "fip": 5.18,
+        "k_minus_bb_pct": 11.6
+      },
+      "forecast": {
+        "ip": 8.0,
+        "war": -0.05,
+        "era": 4.7,
+        "fip": 4.97,
+        "k_minus_bb_pct": 7.3,
+        "team_at_fetch": "TEX"
+      },
+      "forecast_to_date": {
+        "ip": 7.6,
+        "war": -0.04
+      },
+      "war_gap": -0.25,
+      "innings_share_pct": 2.8
     },
     {
       "id": 681168,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T00:47:58.531398+00:00",
+  "generated_at": "2026-09-18T13:10:16.276071+00:00",
   "season": 2026,
   "team": "San Diego Padres",
   "games_played": 153,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 14.2,
+    "actual_war": 14.5,
     "forecast_war_to_date": 15.8,
-    "war_gap": -1.6,
-    "innings": 1346.3,
-    "era": 3.97
+    "war_gap": -1.2,
+    "innings": 1355.3,
+    "era": 3.96
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 1.44
       },
       "war_gap": 2.23,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 4.7
     },
     {
       "id": 670970,
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "81.2",
         "ip_value": 81.667,
-        "war": 2.71,
+        "war": 2.72,
         "era": 2.87,
         "fip": 2.35,
         "k_minus_bb_pct": 22.8
@@ -82,24 +82,24 @@
         "war": 0.64
       },
       "war_gap": 2.08,
-      "innings_share_pct": 6.1
+      "innings_share_pct": 6.0
     },
     {
       "id": 650633,
       "name": "Michael King",
       "throws": "R",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "175.0",
-        "ip_value": 175.0,
-        "war": 2.31,
+        "ip": "181.0",
+        "ip_value": 181.0,
+        "war": 2.55,
         "era": 3.03,
-        "fip": 4.23,
-        "k_minus_bb_pct": 11.5
+        "fip": 4.16,
+        "k_minus_bb_pct": 11.7
       },
       "forecast": {
         "ip": 166.5,
@@ -113,8 +113,8 @@
         "ip": 157.3,
         "war": 2.76
       },
-      "war_gap": -0.45,
-      "innings_share_pct": 13.0
+      "war_gap": -0.22,
+      "innings_share_pct": 13.4
     },
     {
       "id": 621111,
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "143.1",
         "ip_value": 143.333,
-        "war": 1.44,
+        "war": 1.45,
         "era": 4.58,
         "fip": 4.46,
         "k_minus_bb_pct": 11.2
@@ -178,7 +178,7 @@
         "war": 0.06
       },
       "war_gap": 1.32,
-      "innings_share_pct": 5.1
+      "innings_share_pct": 5.0
     },
     {
       "id": 681190,
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "132.2",
         "ip_value": 132.667,
-        "war": 1.12,
+        "war": 1.13,
         "era": 4.07,
         "fip": 4.36,
         "k_minus_bb_pct": 8.2
@@ -210,7 +210,7 @@
         "war": 0.47
       },
       "war_gap": 0.66,
-      "innings_share_pct": 9.9
+      "innings_share_pct": 9.8
     },
     {
       "id": 601713,
@@ -242,7 +242,7 @@
         "war": 2.48
       },
       "war_gap": -1.37,
-      "innings_share_pct": 1.9
+      "innings_share_pct": 1.8
     },
     {
       "id": 606996,
@@ -274,7 +274,7 @@
         "war": 0.08
       },
       "war_gap": 0.63,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     },
     {
       "id": 669093,
@@ -345,17 +345,17 @@
       "name": "Yuki Matsui",
       "throws": "L",
       "role": "Reliever",
-      "games": 49,
+      "games": 50,
       "starts": 0,
       "saves": 1,
       "holds": 9,
       "actual": {
-        "ip": "60.0",
-        "ip_value": 60.0,
-        "war": 0.28,
-        "era": 1.95,
-        "fip": 4.28,
-        "k_minus_bb_pct": 12.3
+        "ip": "61.0",
+        "ip_value": 61.0,
+        "war": 0.33,
+        "era": 1.92,
+        "fip": 4.19,
+        "k_minus_bb_pct": 13.0
       },
       "forecast": {
         "ip": 44.0,
@@ -369,7 +369,7 @@
         "ip": 41.6,
         "war": 0.05
       },
-      "war_gap": 0.23,
+      "war_gap": 0.28,
       "innings_share_pct": 4.5
     },
     {
@@ -377,17 +377,17 @@
       "name": "Griffin Canning",
       "throws": "R",
       "role": "Swingman",
-      "games": 26,
+      "games": 27,
       "starts": 11,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "80.2",
-        "ip_value": 80.667,
-        "war": 0.21,
-        "era": 5.8,
-        "fip": 4.75,
-        "k_minus_bb_pct": 12.4
+        "ip": "82.2",
+        "ip_value": 82.667,
+        "war": 0.22,
+        "era": 5.66,
+        "fip": 4.72,
+        "k_minus_bb_pct": 12.1
       },
       "forecast": {
         "ip": 110.5,
@@ -401,8 +401,8 @@
         "ip": 104.4,
         "war": 0.69
       },
-      "war_gap": -0.48,
-      "innings_share_pct": 6.0
+      "war_gap": -0.47,
+      "innings_share_pct": 6.1
     },
     {
       "id": 688158,
@@ -546,7 +546,7 @@
         "ip_value": 9.0,
         "war": -0.08,
         "era": 3.0,
-        "fip": 4.99,
+        "fip": 4.98,
         "k_minus_bb_pct": 14.3
       },
       "forecast": {

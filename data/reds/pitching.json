@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T21:46:51.263683+00:00",
+  "generated_at": "2026-09-18T13:10:12.109803+00:00",
   "season": 2026,
   "team": "Cincinnati Reds",
   "games_played": 153,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 7.8,
+    "actual_war": 7.6,
     "forecast_war_to_date": 14.9,
-    "war_gap": -7.1,
-    "innings": 1345.0,
-    "era": 4.86
+    "war_gap": -7.3,
+    "innings": 1354.0,
+    "era": 4.88
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "151.1",
         "ip_value": 151.333,
-        "war": 4.35,
+        "war": 4.36,
         "era": 2.8,
         "fip": 3.17,
         "k_minus_bb_pct": 20.7
@@ -49,8 +49,8 @@
         "ip": 107.9,
         "war": 2.16
       },
-      "war_gap": 2.19,
-      "innings_share_pct": 11.3
+      "war_gap": 2.2,
+      "innings_share_pct": 11.2
     },
     {
       "id": 671096,
@@ -81,8 +81,8 @@
         "ip": 160.9,
         "war": 1.92
       },
-      "war_gap": -0.55,
-      "innings_share_pct": 11.8
+      "war_gap": -0.56,
+      "innings_share_pct": 11.7
     },
     {
       "id": 695076,
@@ -178,7 +178,7 @@
         "war": 1.52
       },
       "war_gap": -0.84,
-      "innings_share_pct": 2.1
+      "innings_share_pct": 2.0
     },
     {
       "id": 622088,
@@ -211,38 +211,6 @@
       },
       "war_gap": 0.59,
       "innings_share_pct": 3.8
-    },
-    {
-      "id": 663903,
-      "name": "Brady Singer",
-      "throws": "R",
-      "role": "Starter",
-      "games": 29,
-      "starts": 29,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "150.2",
-        "ip_value": 150.667,
-        "war": 0.41,
-        "era": 5.38,
-        "fip": 5.4,
-        "k_minus_bb_pct": 10.1
-      },
-      "forecast": {
-        "ip": 178.2,
-        "war": 2.31,
-        "era": 4.37,
-        "fip": 4.36,
-        "k_minus_bb_pct": 14.3,
-        "team_at_fetch": "CIN"
-      },
-      "forecast_to_date": {
-        "ip": 168.3,
-        "war": 2.18
-      },
-      "war_gap": -1.77,
-      "innings_share_pct": 11.2
     },
     {
       "id": 641941,
@@ -309,6 +277,38 @@
       "innings_share_pct": 2.3
     },
     {
+      "id": 682825,
+      "name": "Luis Mey",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 25,
+      "starts": 0,
+      "saves": 0,
+      "holds": 4,
+      "actual": {
+        "ip": "31.1",
+        "ip_value": 31.333,
+        "war": 0.35,
+        "era": 6.03,
+        "fip": 3.51,
+        "k_minus_bb_pct": 18.4
+      },
+      "forecast": {
+        "ip": 36.0,
+        "war": -0.07,
+        "era": 4.66,
+        "fip": 4.88,
+        "k_minus_bb_pct": 7.1,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 34.0,
+        "war": -0.06
+      },
+      "war_gap": 0.41,
+      "innings_share_pct": 2.3
+    },
+    {
       "id": 594580,
       "name": "Sam Moll",
       "throws": "L",
@@ -341,36 +341,36 @@
       "innings_share_pct": 4.2
     },
     {
-      "id": 682825,
-      "name": "Luis Mey",
+      "id": 663903,
+      "name": "Brady Singer",
       "throws": "R",
-      "role": "Reliever",
-      "games": 24,
-      "starts": 0,
+      "role": "Starter",
+      "games": 30,
+      "starts": 30,
       "saves": 0,
-      "holds": 4,
+      "holds": 0,
       "actual": {
-        "ip": "29.2",
-        "ip_value": 29.667,
-        "war": 0.29,
-        "era": 6.37,
-        "fip": 3.67,
-        "k_minus_bb_pct": 17.7
+        "ip": "154.0",
+        "ip_value": 154.0,
+        "war": 0.19,
+        "era": 5.67,
+        "fip": 5.55,
+        "k_minus_bb_pct": 9.2
       },
       "forecast": {
-        "ip": 36.0,
-        "war": -0.07,
-        "era": 4.66,
-        "fip": 4.88,
-        "k_minus_bb_pct": 7.1,
+        "ip": 178.2,
+        "war": 2.31,
+        "era": 4.37,
+        "fip": 4.36,
+        "k_minus_bb_pct": 14.3,
         "team_at_fetch": "CIN"
       },
       "forecast_to_date": {
-        "ip": 34.0,
-        "war": -0.06
+        "ip": 168.3,
+        "war": 2.18
       },
-      "war_gap": 0.35,
-      "innings_share_pct": 2.2
+      "war_gap": -2.0,
+      "innings_share_pct": 11.4
     },
     {
       "id": 663978,
@@ -402,7 +402,7 @@
         "war": 1.11
       },
       "war_gap": -0.94,
-      "innings_share_pct": 1.7
+      "innings_share_pct": 1.6
     },
     {
       "id": 657571,
@@ -628,7 +628,7 @@
         "ip_value": 96.667,
         "war": -0.13,
         "era": 5.12,
-        "fip": 5.76,
+        "fip": 5.75,
         "k_minus_bb_pct": 8.5
       },
       "forecast": {
@@ -644,7 +644,7 @@
         "war": 2.31
       },
       "war_gap": -2.44,
-      "innings_share_pct": 7.2
+      "innings_share_pct": 7.1
     },
     {
       "id": 624431,
@@ -708,17 +708,17 @@
       "name": "Pierce Johnson",
       "throws": "R",
       "role": "Reliever",
-      "games": 52,
+      "games": 53,
       "starts": 0,
       "saves": 1,
       "holds": 8,
       "actual": {
-        "ip": "44.2",
-        "ip_value": 44.667,
-        "war": -0.17,
-        "era": 4.84,
-        "fip": 4.98,
-        "k_minus_bb_pct": 9.7
+        "ip": "45.2",
+        "ip_value": 45.667,
+        "war": -0.16,
+        "era": 4.73,
+        "fip": 4.94,
+        "k_minus_bb_pct": 9.6
       },
       "forecast": {
         "ip": 61.0,
@@ -732,8 +732,8 @@
         "ip": 57.6,
         "war": 0.28
       },
-      "war_gap": -0.45,
-      "innings_share_pct": 3.3
+      "war_gap": -0.43,
+      "innings_share_pct": 3.4
     },
     {
       "id": 693312,
@@ -766,38 +766,6 @@
       },
       "war_gap": -0.31,
       "innings_share_pct": 0.5
-    },
-    {
-      "id": 682227,
-      "name": "Brandon Williamson",
-      "throws": "L",
-      "role": "Starter",
-      "games": 9,
-      "starts": 7,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "41.2",
-        "ip_value": 41.667,
-        "war": -0.19,
-        "era": 5.62,
-        "fip": 6.07,
-        "k_minus_bb_pct": 1.6
-      },
-      "forecast": {
-        "ip": 93.9,
-        "war": 0.55,
-        "era": 4.65,
-        "fip": 4.77,
-        "k_minus_bb_pct": 12.3,
-        "team_at_fetch": "CIN"
-      },
-      "forecast_to_date": {
-        "ip": 88.7,
-        "war": 0.52
-      },
-      "war_gap": -0.71,
-      "innings_share_pct": 3.1
     },
     {
       "id": 683742,
@@ -893,7 +861,7 @@
         "war": 0.14
       },
       "war_gap": -0.35,
-      "innings_share_pct": 2.4
+      "innings_share_pct": 2.3
     },
     {
       "id": 687209,
@@ -928,6 +896,38 @@
       "innings_share_pct": 1.0
     },
     {
+      "id": 682227,
+      "name": "Brandon Williamson",
+      "throws": "L",
+      "role": "Starter",
+      "games": 10,
+      "starts": 7,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "43.2",
+        "ip_value": 43.667,
+        "war": -0.23,
+        "era": 5.56,
+        "fip": 6.19,
+        "k_minus_bb_pct": 2.0
+      },
+      "forecast": {
+        "ip": 93.9,
+        "war": 0.55,
+        "era": 4.65,
+        "fip": 4.77,
+        "k_minus_bb_pct": 12.3,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 88.7,
+        "war": 0.52
+      },
+      "war_gap": -0.76,
+      "innings_share_pct": 3.2
+    },
+    {
       "id": 683175,
       "name": "Connor Phillips",
       "throws": "R",
@@ -956,25 +956,25 @@
         "ip": 54.8,
         "war": 0.03
       },
-      "war_gap": -0.37,
-      "innings_share_pct": 2.1
+      "war_gap": -0.36,
+      "innings_share_pct": 2.0
     },
     {
       "id": 663574,
       "name": "Tony Santillan",
       "throws": "R",
       "role": "Setup",
-      "games": 43,
+      "games": 44,
       "starts": 0,
       "saves": 5,
       "holds": 11,
       "actual": {
-        "ip": "39.2",
-        "ip_value": 39.667,
-        "war": -1.14,
-        "era": 6.58,
-        "fip": 7.0,
-        "k_minus_bb_pct": 5.4
+        "ip": "40.2",
+        "ip_value": 40.667,
+        "war": -1.18,
+        "era": 6.42,
+        "fip": 7.06,
+        "k_minus_bb_pct": 4.2
       },
       "forecast": {
         "ip": 70.0,
@@ -988,8 +988,8 @@
         "ip": 66.1,
         "war": 0.2
       },
-      "war_gap": -1.34,
-      "innings_share_pct": 2.9
+      "war_gap": -1.38,
+      "innings_share_pct": 3.0
     }
   ]
 }

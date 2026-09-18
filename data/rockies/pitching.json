@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T00:47:56.687620+00:00",
+  "generated_at": "2026-09-18T13:10:15.158360+00:00",
   "season": 2026,
   "team": "Colorado Rockies",
   "games_played": 153,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.4,
+    "actual_war": 6.5,
     "forecast_war_to_date": 7.3,
-    "war_gap": -0.9,
-    "innings": 1333.7,
-    "era": 5.59
+    "war_gap": -0.8,
+    "innings": 1342.7,
+    "era": 5.62
   },
   "pitchers": [
     {
@@ -85,6 +85,38 @@
       "innings_share_pct": 4.4
     },
     {
+      "id": 657514,
+      "name": "Brennan Bernardino",
+      "throws": "L",
+      "role": "Setup",
+      "games": 70,
+      "starts": 2,
+      "saves": 1,
+      "holds": 13,
+      "actual": {
+        "ip": "60.1",
+        "ip_value": 60.333,
+        "war": 0.87,
+        "era": 2.83,
+        "fip": 3.63,
+        "k_minus_bb_pct": 11.9
+      },
+      "forecast": {
+        "ip": 58.0,
+        "war": 0.12,
+        "era": 4.52,
+        "fip": 4.41,
+        "k_minus_bb_pct": 10.7,
+        "team_at_fetch": "COL"
+      },
+      "forecast_to_date": {
+        "ip": 54.8,
+        "war": 0.11
+      },
+      "war_gap": 0.76,
+      "innings_share_pct": 4.5
+    },
+    {
       "id": 607536,
       "name": "Kyle Freeland",
       "throws": "L",
@@ -96,7 +128,7 @@
       "actual": {
         "ip": "128.1",
         "ip_value": 128.333,
-        "war": 0.88,
+        "war": 0.87,
         "era": 6.38,
         "fip": 5.01,
         "k_minus_bb_pct": 13.2
@@ -117,53 +149,21 @@
       "innings_share_pct": 9.6
     },
     {
-      "id": 657514,
-      "name": "Brennan Bernardino",
-      "throws": "L",
-      "role": "Setup",
-      "games": 69,
-      "starts": 2,
-      "saves": 1,
-      "holds": 13,
-      "actual": {
-        "ip": "59.1",
-        "ip_value": 59.333,
-        "war": 0.85,
-        "era": 2.88,
-        "fip": 3.65,
-        "k_minus_bb_pct": 11.3
-      },
-      "forecast": {
-        "ip": 58.0,
-        "war": 0.12,
-        "era": 4.52,
-        "fip": 4.41,
-        "k_minus_bb_pct": 10.7,
-        "team_at_fetch": "COL"
-      },
-      "forecast_to_date": {
-        "ip": 54.8,
-        "war": 0.11
-      },
-      "war_gap": 0.74,
-      "innings_share_pct": 4.4
-    },
-    {
       "id": 685299,
       "name": "Tanner Gordon",
       "throws": "R",
       "role": "Swingman",
-      "games": 22,
-      "starts": 10,
+      "games": 23,
+      "starts": 11,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "97.1",
-        "ip_value": 97.333,
-        "war": 0.73,
-        "era": 5.55,
-        "fip": 4.45,
-        "k_minus_bb_pct": 14.7
+        "ip": "100.1",
+        "ip_value": 100.333,
+        "war": 0.68,
+        "era": 6.01,
+        "fip": 4.54,
+        "k_minus_bb_pct": 14.3
       },
       "forecast": {
         "ip": 57.2,
@@ -177,8 +177,8 @@
         "ip": 54.0,
         "war": 0.25
       },
-      "war_gap": 0.48,
-      "innings_share_pct": 7.3
+      "war_gap": 0.44,
+      "innings_share_pct": 7.5
     },
     {
       "id": 663372,
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "116.2",
         "ip_value": 116.667,
-        "war": 0.68,
+        "war": 0.67,
         "era": 5.63,
         "fip": 5.13,
         "k_minus_bb_pct": 7.3
@@ -217,17 +217,17 @@
       "name": "Jordan Romano",
       "throws": "R",
       "role": "Closer",
-      "games": 23,
+      "games": 24,
       "starts": 0,
       "saves": 11,
       "holds": 1,
       "actual": {
-        "ip": "21.2",
-        "ip_value": 21.667,
-        "war": 0.56,
-        "era": 3.32,
-        "fip": 3.28,
-        "k_minus_bb_pct": 10.9
+        "ip": "22.2",
+        "ip_value": 22.667,
+        "war": 0.61,
+        "era": 3.18,
+        "fip": 3.23,
+        "k_minus_bb_pct": 11.5
       },
       "forecast": {
         "ip": 60.0,
@@ -241,8 +241,8 @@
         "ip": 56.7,
         "war": 0.4
       },
-      "war_gap": 0.16,
-      "innings_share_pct": 1.6
+      "war_gap": 0.2,
+      "innings_share_pct": 1.7
     },
     {
       "id": 547179,
@@ -274,7 +274,7 @@
         "war": 1.04
       },
       "war_gap": -0.56,
-      "innings_share_pct": 8.7
+      "innings_share_pct": 8.6
     },
     {
       "id": 801403,
@@ -337,8 +337,8 @@
         "ip": 62.3,
         "war": 0.17
       },
-      "war_gap": 0.19,
-      "innings_share_pct": 4.9
+      "war_gap": 0.18,
+      "innings_share_pct": 4.8
     },
     {
       "id": 608372,
@@ -370,7 +370,7 @@
         "war": 0.77
       },
       "war_gap": -0.53,
-      "innings_share_pct": 10.7
+      "innings_share_pct": 10.6
     },
     {
       "id": 815081,
@@ -437,6 +437,38 @@
       "innings_share_pct": 3.1
     },
     {
+      "id": 677955,
+      "name": "Jaden Hill",
+      "throws": "R",
+      "role": "Setup",
+      "games": 43,
+      "starts": 0,
+      "saves": 2,
+      "holds": 13,
+      "actual": {
+        "ip": "36.2",
+        "ip_value": 36.667,
+        "war": 0.2,
+        "era": 5.65,
+        "fip": 4.27,
+        "k_minus_bb_pct": 8.2
+      },
+      "forecast": {
+        "ip": 55.0,
+        "war": 0.19,
+        "era": 4.59,
+        "fip": 4.26,
+        "k_minus_bb_pct": 12.6,
+        "team_at_fetch": "COL"
+      },
+      "forecast_to_date": {
+        "ip": 51.9,
+        "war": 0.18
+      },
+      "war_gap": 0.02,
+      "innings_share_pct": 2.7
+    },
+    {
       "id": 624522,
       "name": "Keegan Thompson",
       "throws": "R",
@@ -469,53 +501,21 @@
       "innings_share_pct": 0.9
     },
     {
-      "id": 677955,
-      "name": "Jaden Hill",
-      "throws": "R",
-      "role": "Setup",
-      "games": 42,
-      "starts": 0,
-      "saves": 2,
-      "holds": 13,
-      "actual": {
-        "ip": "35.2",
-        "ip_value": 35.667,
-        "war": 0.18,
-        "era": 5.8,
-        "fip": 4.3,
-        "k_minus_bb_pct": 8.3
-      },
-      "forecast": {
-        "ip": 55.0,
-        "war": 0.19,
-        "era": 4.59,
-        "fip": 4.26,
-        "k_minus_bb_pct": 12.6,
-        "team_at_fetch": "COL"
-      },
-      "forecast_to_date": {
-        "ip": 51.9,
-        "war": 0.18
-      },
-      "war_gap": 0.0,
-      "innings_share_pct": 2.7
-    },
-    {
       "id": 688642,
       "name": "Zach Agnos",
       "throws": "R",
       "role": "Reliever",
-      "games": 39,
+      "games": 40,
       "starts": 3,
       "saves": 2,
       "holds": 1,
       "actual": {
-        "ip": "84.0",
-        "ip_value": 84.0,
-        "war": 0.1,
+        "ip": "87.0",
+        "ip_value": 87.0,
+        "war": 0.18,
         "era": 6.0,
-        "fip": 4.57,
-        "k_minus_bb_pct": 5.6
+        "fip": 4.48,
+        "k_minus_bb_pct": 5.9
       },
       "forecast": {
         "ip": 60.0,
@@ -529,8 +529,8 @@
         "ip": 56.7,
         "war": -0.31
       },
-      "war_gap": 0.41,
-      "innings_share_pct": 6.3
+      "war_gap": 0.49,
+      "innings_share_pct": 6.5
     },
     {
       "id": 680767,
@@ -946,7 +946,7 @@
       "actual": {
         "ip": "23.0",
         "ip_value": 23.0,
-        "war": -0.14,
+        "war": -0.13,
         "era": 5.09,
         "fip": 6.18,
         "k_minus_bb_pct": 10.9
@@ -963,7 +963,7 @@
         "ip": 0.9,
         "war": -0.0
       },
-      "war_gap": -0.14,
+      "war_gap": -0.13,
       "innings_share_pct": 1.7
     },
     {
@@ -1059,7 +1059,7 @@
         "ip": 72.7,
         "war": 0.21
       },
-      "war_gap": -0.5,
+      "war_gap": -0.51,
       "innings_share_pct": 3.7
     },
     {
