@@ -23,6 +23,10 @@ FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 BING_NEWS = "https://www.bing.com/news/search"
 
 
+class NoArticlesReturnedError(RuntimeError):
+    """A valid source query had no matching articles at this refresh."""
+
+
 def fetch_xml(url: str) -> ElementTree.Element:
     last_error: Exception | None = None
     for headers in ({}, {"User-Agent": FALLBACK_USER_AGENT}):
@@ -87,7 +91,9 @@ def source_feed(team: dict[str, Any], source: dict[str, str]) -> dict[str, Any]:
             "category": team["short_name"],
         })
     if not articles:
-        raise RuntimeError(f"No {source['name']} articles returned for {team['full_name']}")
+        raise NoArticlesReturnedError(
+            f"No {source['name']} articles returned for {team['full_name']}"
+        )
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": source["name"], "source_url": source["url"], "articles": articles[:20],
@@ -99,7 +105,13 @@ def fetch_team(team: dict[str, Any]) -> None:
     output.mkdir(parents=True, exist_ok=True)
     print(f"{team['full_name']} news:")
     for source in team["news_sources"]:
-        feed = source_feed(team, source)
+        try:
+            feed = source_feed(team, source)
+        except NoArticlesReturnedError as exc:
+            # Search-index coverage can be briefly empty. Keep the prior verified
+            # snapshot instead of failing the entire league refresh or overwriting it.
+            print(f"  warning: {exc}; keeping the previous snapshot")
+            continue
         path = output / f"{source['key']}.json"
         try:
             current = json.loads(path.read_text())
