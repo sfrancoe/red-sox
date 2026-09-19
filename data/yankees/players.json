@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T23:27:12.246803+00:00",
+  "generated_at": "2026-09-18T13:42:12.149761+00:00",
   "roster_as_of": "September 16, 2026",
   "team": {
     "id": 147,
@@ -158,9 +158,9 @@
       "full_name": "Cody Bellinger",
       "number": "35",
       "position": {
-        "name": "First Baseman",
+        "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "LF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -309,7 +309,7 @@
       "position": {
         "name": "Shortstop",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -499,9 +499,46 @@
       "retrosheet_id": "chiva001",
       "career_stats": {
         "through_season": 2025,
-        "status": "temporarily_unavailable",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 73,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 73,
+          "games_started": 0,
+          "wins": 3,
+          "losses": 8,
+          "saves": 1,
+          "innings_outs": 271,
+          "hits": 107,
+          "runs": 66,
+          "earned_runs": 62,
+          "home_runs": 20,
+          "walks": 33,
+          "strikeouts": 71,
+          "hit_batters": 7,
+          "wild_pitches": 4,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.18,
+          "whip": 1.55
+        }
       }
     },
     {
@@ -513,7 +550,7 @@
       "full_name": "Gerrit Cole",
       "number": "45",
       "position": {
-        "name": "Starting Pitcher",
+        "name": "Pitcher",
         "group": "Pitcher",
         "abbreviation": "P"
       },
@@ -681,7 +718,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "RF"
       },
       "roster_status": "Inactive roster",
       "is_active_roster": false,
@@ -1044,9 +1081,9 @@
       "full_name": "Paul Goldschmidt",
       "number": "48",
       "position": {
-        "name": "First Baseman",
+        "name": "First Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "1B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1117,7 +1154,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "CF"
       },
       "roster_status": "Injured list",
       "is_active_roster": false,
@@ -1390,7 +1427,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "RF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1429,9 +1466,9 @@
       "full_name": "Luis García Jr.",
       "number": "26",
       "position": {
-        "name": "Infielder",
+        "name": "First Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "1B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1489,9 +1526,9 @@
       "full_name": "George Lombard Jr.",
       "number": "96",
       "position": {
-        "name": "Infielder",
+        "name": "Shortstop",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1534,9 +1571,9 @@
       "full_name": "Jazz Chisholm Jr.",
       "number": "13",
       "position": {
-        "name": "Shortstop",
+        "name": "Second Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "2B"
       },
       "roster_status": "Injured list",
       "is_active_roster": false,
@@ -1596,7 +1633,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "RF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1660,9 +1697,9 @@
       "full_name": "Ryan McMahon",
       "number": "19",
       "position": {
-        "name": "Infielder",
+        "name": "Third Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "3B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1726,7 +1763,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "LF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1784,7 +1821,7 @@
       "full_name": "Ben Rice",
       "number": "22",
       "position": {
-        "name": "Hitter",
+        "name": "Designated Hitter",
         "group": "Hitter",
         "abbreviation": "DH"
       },
@@ -1971,9 +2008,9 @@
       "full_name": "Amed Rosario",
       "number": "14",
       "position": {
-        "name": "Shortstop",
+        "name": "Third Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "3B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2385,9 +2422,9 @@
       "full_name": "Max Schuemann",
       "number": "30",
       "position": {
-        "name": "Infielder",
+        "name": "Outfielder",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "LF"
       },
       "roster_status": "Inactive roster",
       "is_active_roster": false,
@@ -2446,9 +2483,9 @@
       "full_name": "Giancarlo Stanton",
       "number": "27",
       "position": {
-        "name": "Left Fielder",
+        "name": "Designated Hitter",
         "group": "Pitcher",
-        "abbreviation": "P"
+        "abbreviation": "DH"
       },
       "roster_status": "60-day injured list",
       "is_active_roster": false,
@@ -2595,7 +2632,7 @@
       "position": {
         "name": "Shortstop",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,

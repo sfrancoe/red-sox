@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-16T21:43:48.226537+00:00",
+  "generated_at": "2026-09-19T05:05:52.543573+00:00",
   "season": 2026,
   "team": "Toronto Blue Jays",
-  "games_played": 153,
-  "season_fraction": 0.9444,
+  "games_played": 154,
+  "season_fraction": 0.9506,
   "method": "Actual FanGraphs pitching WAR is compared with preseason Steamer WAR prorated to Toronto's games played.",
   "sources": {
     "actual": "FanGraphs Major League Leaderboards",
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 15.4,
-    "forecast_war_to_date": 24.6,
+    "actual_war": 15.6,
+    "forecast_war_to_date": 24.8,
     "war_gap": -9.2,
-    "innings": 1351.0,
-    "era": 3.95
+    "innings": 1360.0,
+    "era": 3.93
   },
   "pitchers": [
     {
@@ -46,28 +46,28 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 167.9,
-        "war": 3.55
+        "ip": 169.0,
+        "war": 3.57
       },
-      "war_gap": 2.07,
-      "innings_share_pct": 12.3
+      "war_gap": 2.04,
+      "innings_share_pct": 12.2
     },
     {
       "id": 686973,
       "name": "Louis Varland",
       "throws": "R",
       "role": "Closer",
-      "games": 68,
+      "games": 69,
       "starts": 0,
-      "saves": 33,
+      "saves": 34,
       "holds": 5,
       "actual": {
-        "ip": "75.0",
-        "ip_value": 75.0,
-        "war": 2.95,
-        "era": 1.32,
-        "fip": 1.85,
-        "k_minus_bb_pct": 23.9
+        "ip": "76.0",
+        "ip_value": 76.0,
+        "war": 3.03,
+        "era": 1.3,
+        "fip": 1.81,
+        "k_minus_bb_pct": 24.3
       },
       "forecast": {
         "ip": 67.0,
@@ -78,10 +78,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 63.3,
-        "war": 0.71
+        "ip": 63.7,
+        "war": 0.72
       },
-      "war_gap": 2.24,
+      "war_gap": 2.31,
       "innings_share_pct": 5.6
     },
     {
@@ -96,9 +96,9 @@
       "actual": {
         "ip": "127.1",
         "ip_value": 127.333,
-        "war": 2.61,
+        "war": 2.62,
         "era": 4.38,
-        "fip": 3.51,
+        "fip": 3.5,
         "k_minus_bb_pct": 16.9
       },
       "forecast": {
@@ -110,10 +110,10 @@
         "team_at_fetch": "CHC"
       },
       "forecast_to_date": {
-        "ip": 175.1,
-        "war": 2.77
+        "ip": 176.2,
+        "war": 2.79
       },
-      "war_gap": -0.15,
+      "war_gap": -0.17,
       "innings_share_pct": 9.4
     },
     {
@@ -121,25 +121,25 @@
       "name": "Spencer Miles",
       "throws": "R",
       "role": "Swingman",
-      "games": 46,
+      "games": 47,
       "starts": 7,
       "saves": 2,
       "holds": 1,
       "actual": {
-        "ip": "89.2",
-        "ip_value": 89.667,
-        "war": 1.78,
-        "era": 2.71,
-        "fip": 2.71,
-        "k_minus_bb_pct": 17.5
+        "ip": "91.2",
+        "ip_value": 91.667,
+        "war": 1.8,
+        "era": 2.65,
+        "fip": 2.73,
+        "k_minus_bb_pct": 17.0
       },
       "forecast": null,
       "forecast_to_date": {
         "ip": 0.0,
         "war": 0.0
       },
-      "war_gap": 1.78,
-      "innings_share_pct": 6.6
+      "war_gap": 1.8,
+      "innings_share_pct": 6.7
     },
     {
       "id": 702056,
@@ -167,10 +167,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 125.2,
-        "war": 1.85
+        "ip": 126.0,
+        "war": 1.87
       },
-      "war_gap": -0.53,
+      "war_gap": -0.55,
       "innings_share_pct": 6.9
     },
     {
@@ -199,7 +199,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 69.9,
+        "ip": 70.3,
         "war": 0.24
       },
       "war_gap": 0.93,
@@ -219,7 +219,7 @@
         "ip_value": 48.0,
         "war": 1.14,
         "era": 3.94,
-        "fip": 2.5,
+        "fip": 2.49,
         "k_minus_bb_pct": 26.5
       },
       "forecast": {
@@ -231,28 +231,28 @@
         "team_at_fetch": "MIN"
       },
       "forecast_to_date": {
-        "ip": 59.5,
+        "ip": 59.9,
         "war": 0.74
       },
-      "war_gap": 0.4,
-      "innings_share_pct": 3.6
+      "war_gap": 0.39,
+      "innings_share_pct": 3.5
     },
     {
       "id": 689254,
       "name": "Mason Fluharty",
       "throws": "L",
       "role": "Setup",
-      "games": 78,
+      "games": 79,
       "starts": 4,
       "saves": 1,
-      "holds": 15,
+      "holds": 16,
       "actual": {
-        "ip": "59.0",
-        "ip_value": 59.0,
-        "war": 0.65,
-        "era": 3.36,
-        "fip": 3.59,
-        "k_minus_bb_pct": 15.6
+        "ip": "60.0",
+        "ip_value": 60.0,
+        "war": 0.66,
+        "era": 3.3,
+        "fip": 3.58,
+        "k_minus_bb_pct": 15.4
       },
       "forecast": {
         "ip": 42.0,
@@ -263,10 +263,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 39.7,
+        "ip": 39.9,
         "war": 0.08
       },
-      "war_gap": 0.57,
+      "war_gap": 0.58,
       "innings_share_pct": 4.4
     },
     {
@@ -283,7 +283,7 @@
         "ip_value": 46.333,
         "war": 0.57,
         "era": 4.27,
-        "fip": 4.01,
+        "fip": 4.0,
         "k_minus_bb_pct": 8.7
       },
       "forecast": {
@@ -295,10 +295,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 167.4,
-        "war": 2.86
+        "ip": 168.5,
+        "war": 2.87
       },
-      "war_gap": -2.29,
+      "war_gap": -2.31,
       "innings_share_pct": 3.4
     },
     {
@@ -313,9 +313,9 @@
       "actual": {
         "ip": "80.0",
         "ip_value": 80.0,
-        "war": 0.45,
+        "war": 0.44,
         "era": 5.51,
-        "fip": 4.64,
+        "fip": 4.63,
         "k_minus_bb_pct": 10.6
       },
       "forecast": {
@@ -327,10 +327,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 59.6,
+        "ip": 59.9,
         "war": 0.48
       },
-      "war_gap": -0.03,
+      "war_gap": -0.04,
       "innings_share_pct": 5.9
     },
     {
@@ -347,7 +347,7 @@
         "ip_value": 26.0,
         "war": 0.15,
         "era": 3.12,
-        "fip": 3.68,
+        "fip": 3.67,
         "k_minus_bb_pct": 15.1
       },
       "forecast": {
@@ -359,7 +359,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 10.4,
+        "ip": 10.5,
         "war": 0.05
       },
       "war_gap": 0.1,
@@ -377,9 +377,9 @@
       "actual": {
         "ip": "55.2",
         "ip_value": 55.667,
-        "war": 0.14,
+        "war": 0.13,
         "era": 4.37,
-        "fip": 5.15,
+        "fip": 5.14,
         "k_minus_bb_pct": 8.3
       },
       "forecast": {
@@ -391,10 +391,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 117.0,
-        "war": 1.9
+        "ip": 117.7,
+        "war": 1.91
       },
-      "war_gap": -1.77,
+      "war_gap": -1.78,
       "innings_share_pct": 4.1
     },
     {
@@ -409,9 +409,9 @@
       "actual": {
         "ip": "74.0",
         "ip_value": 74.0,
-        "war": 0.11,
+        "war": 0.1,
         "era": 3.16,
-        "fip": 4.28,
+        "fip": 4.27,
         "k_minus_bb_pct": 11.0
       },
       "forecast": {
@@ -423,11 +423,11 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 49.1,
+        "ip": 49.4,
         "war": 0.25
       },
-      "war_gap": -0.14,
-      "innings_share_pct": 5.5
+      "war_gap": -0.15,
+      "innings_share_pct": 5.4
     },
     {
       "id": 664074,
@@ -455,10 +455,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 146.2,
-        "war": 2.25
+        "ip": 147.2,
+        "war": 2.26
       },
-      "war_gap": -2.16,
+      "war_gap": -2.18,
       "innings_share_pct": 0.2
     },
     {
@@ -487,7 +487,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": 0.09,
@@ -519,7 +519,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": 0.08,
@@ -551,8 +551,8 @@
         "team_at_fetch": "WSN"
       },
       "forecast_to_date": {
-        "ip": 8.6,
-        "war": 0.03
+        "ip": 8.7,
+        "war": 0.04
       },
       "war_gap": 0.0,
       "innings_share_pct": 0.3
@@ -583,10 +583,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 138.9,
-        "war": 1.38
+        "ip": 139.8,
+        "war": 1.39
       },
-      "war_gap": -1.35,
+      "war_gap": -1.36,
       "innings_share_pct": 0.7
     },
     {
@@ -615,7 +615,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 16.3,
+        "ip": 16.4,
         "war": 0.15
       },
       "war_gap": -0.13,
@@ -647,7 +647,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 58.6,
+        "ip": 58.9,
         "war": 0.06
       },
       "war_gap": -0.04,
@@ -679,8 +679,8 @@
         "team_at_fetch": "MIN"
       },
       "forecast_to_date": {
-        "ip": 54.8,
-        "war": 0.34
+        "ip": 55.1,
+        "war": 0.35
       },
       "war_gap": -0.33,
       "innings_share_pct": 2.4
@@ -711,7 +711,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": 0.01,
@@ -743,7 +743,7 @@
         "team_at_fetch": "KCR"
       },
       "forecast_to_date": {
-        "ip": 49.1,
+        "ip": 49.4,
         "war": -0.12
       },
       "war_gap": 0.11,
@@ -775,7 +775,7 @@
         "team_at_fetch": "TEX"
       },
       "forecast_to_date": {
-        "ip": 17.0,
+        "ip": 17.1,
         "war": 0.02
       },
       "war_gap": -0.03,
@@ -807,11 +807,43 @@
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": -0.02,
       "innings_share_pct": 0.1
+    },
+    {
+      "id": 453286,
+      "name": "Max Scherzer",
+      "throws": "R",
+      "role": "Starter",
+      "games": 16,
+      "starts": 16,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "72.2",
+        "ip_value": 72.667,
+        "war": -0.04,
+        "era": 6.07,
+        "fip": 5.48,
+        "k_minus_bb_pct": 7.3
+      },
+      "forecast": {
+        "ip": 117.3,
+        "war": 1.34,
+        "era": 4.21,
+        "fip": 4.23,
+        "k_minus_bb_pct": 17.5,
+        "team_at_fetch": "TOR"
+      },
+      "forecast_to_date": {
+        "ip": 111.6,
+        "war": 1.27
+      },
+      "war_gap": -1.31,
+      "innings_share_pct": 5.3
     },
     {
       "id": 664702,
@@ -864,11 +896,11 @@
         "team_at_fetch": "SEA"
       },
       "forecast_to_date": {
-        "ip": 141.5,
-        "war": 1.39
+        "ip": 142.4,
+        "war": 1.4
       },
-      "war_gap": -1.45,
-      "innings_share_pct": 1.4
+      "war_gap": -1.46,
+      "innings_share_pct": 1.3
     },
     {
       "id": 623168,
@@ -921,43 +953,11 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": -0.09,
       "innings_share_pct": 0.5
-    },
-    {
-      "id": 453286,
-      "name": "Max Scherzer",
-      "throws": "R",
-      "role": "Starter",
-      "games": 15,
-      "starts": 15,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "67.2",
-        "ip_value": 67.667,
-        "war": -0.12,
-        "era": 6.38,
-        "fip": 5.61,
-        "k_minus_bb_pct": 7.8
-      },
-      "forecast": {
-        "ip": 117.3,
-        "war": 1.34,
-        "era": 4.21,
-        "fip": 4.23,
-        "k_minus_bb_pct": 17.5,
-        "team_at_fetch": "TOR"
-      },
-      "forecast_to_date": {
-        "ip": 110.8,
-        "war": 1.26
-      },
-      "war_gap": -1.39,
-      "innings_share_pct": 5.0
     },
     {
       "id": 676596,
@@ -973,7 +973,7 @@
         "ip_value": 3.0,
         "war": -0.15,
         "era": 12.0,
-        "fip": 9.77,
+        "fip": 9.76,
         "k_minus_bb_pct": -5.6
       },
       "forecast": {
@@ -985,7 +985,7 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": -0.15,
@@ -1017,7 +1017,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 21.7,
+        "ip": 21.9,
         "war": 0.11
       },
       "war_gap": -0.3,
@@ -1037,7 +1037,7 @@
         "ip_value": 25.667,
         "war": -0.24,
         "era": 7.01,
-        "fip": 5.09,
+        "fip": 5.08,
         "k_minus_bb_pct": 15.3
       },
       "forecast": {
@@ -1049,7 +1049,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 51.0,
+        "ip": 51.3,
         "war": 0.37
       },
       "war_gap": -0.6,
@@ -1081,10 +1081,10 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 140.6,
-        "war": 1.04
+        "ip": 141.6,
+        "war": 1.05
       },
-      "war_gap": -1.31,
+      "war_gap": -1.32,
       "innings_share_pct": 0.9
     },
     {
@@ -1113,7 +1113,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 30.2,
+        "ip": 30.4,
         "war": 0.02
       },
       "war_gap": -0.35,
@@ -1145,7 +1145,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 80.4,
+        "ip": 80.9,
         "war": 0.45
       },
       "war_gap": -0.8,
@@ -1165,7 +1165,7 @@
         "ip_value": 6.0,
         "war": -0.52,
         "era": 9.0,
-        "fip": 11.77,
+        "fip": 11.76,
         "k_minus_bb_pct": -12.9
       },
       "forecast": {
@@ -1177,7 +1177,7 @@
         "team_at_fetch": null
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": -0.52,
@@ -1209,7 +1209,7 @@
         "team_at_fetch": "TOR"
       },
       "forecast_to_date": {
-        "ip": 26.4,
+        "ip": 26.6,
         "war": 0.11
       },
       "war_gap": -0.69,
@@ -1229,7 +1229,7 @@
         "ip_value": 36.333,
         "war": -0.6,
         "era": 6.69,
-        "fip": 6.93,
+        "fip": 6.92,
         "k_minus_bb_pct": 6.2
       },
       "forecast": {
@@ -1241,10 +1241,10 @@
         "team_at_fetch": "LAD"
       },
       "forecast_to_date": {
-        "ip": 62.0,
+        "ip": 62.4,
         "war": 0.3
       },
-      "war_gap": -0.89,
+      "war_gap": -0.9,
       "innings_share_pct": 2.7
     }
   ]

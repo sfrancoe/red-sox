@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "player_id": 677592,
-  "generated_at": "2026-09-16T23:17:11.842474+00:00",
-  "data_as_of": "2026-09-16",
+  "generated_at": "2026-09-18T13:56:36.477413+00:00",
+  "data_as_of": "2026-09-18",
   "status": "available",
   "coverage": [
     {
@@ -489,6 +489,29 @@
       "ops": 0.722
     },
     {
+      "id": "677592-hitting-minors-2026-11-235",
+      "season": 2026,
+      "team": "Memphis Redbirds",
+      "league": "International League",
+      "level": "AAA",
+      "row_type": "team_stint",
+      "games": 1,
+      "at_bats": 3,
+      "runs": 1,
+      "hits": 1,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "runs_batted_in": 1,
+      "stolen_bases": 0,
+      "walks": 2,
+      "strikeouts": 1,
+      "average": 0.333,
+      "on_base_percentage": 0.6,
+      "slugging_percentage": 0.333,
+      "ops": 0.933
+    },
+    {
       "id": "677592-hitting-mlb-2026-1-138",
       "season": 2026,
       "team": "St. Louis Cardinals",
@@ -510,6 +533,29 @@
       "on_base_percentage": 0.409,
       "slugging_percentage": 0.444,
       "ops": 0.853
+    },
+    {
+      "id": "677592-hitting-minors-2026-21-subtotal",
+      "season": 2026,
+      "team": "2 teams",
+      "league": null,
+      "level": "Minors",
+      "row_type": "subtotal",
+      "games": 13,
+      "at_bats": 46,
+      "runs": 9,
+      "hits": 11,
+      "doubles": 1,
+      "triples": 0,
+      "home_runs": 4,
+      "runs_batted_in": 9,
+      "stolen_bases": 0,
+      "walks": 8,
+      "strikeouts": 16,
+      "average": 0.239,
+      "on_base_percentage": 0.352,
+      "slugging_percentage": 0.522,
+      "ops": 0.874
     }
   ],
   "pitching": []

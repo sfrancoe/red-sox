@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-16T15:34:44+00:00",
+ "generated_at": "2026-09-18T15:11:39+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 109,
  "seasons": {
   "2026": {
-   "record": "80-72",
-   "games": 152,
+   "record": "80-73",
+   "games": 153,
    "in_progress": true,
    "war_leader": {
     "name": "Gabriel Moreno",
-    "war": 5.3
+    "war": 5.7
    },
    "war_leaders": [
     {
      "name": "Gabriel Moreno",
-     "war": 5.3
+     "war": 5.7
     },
     {
      "name": "Eduardo Rodr\u00edguez",
-     "war": 5.1
+     "war": 5.0
     },
     {
      "name": "Corbin Carroll",
-     "war": 4.8
+     "war": 4.9
     }
    ],
    "pitching_leaders": {
@@ -39,7 +39,7 @@
       },
       {
        "name": "Jonathan Lo\u00e1isiga",
-       "value": "1.02"
+       "value": "1.03"
       }
      ]
     }
@@ -49,11 +49,11 @@
      "names": [
       "Nolan Arenado"
      ],
-     "value": 25,
+     "value": 26,
      "top": [
       {
        "name": "Nolan Arenado",
-       "value": 25
+       "value": 26
       },
       {
        "name": "Ketel Marte",
@@ -67,14 +67,13 @@
     },
     "rbi": {
      "names": [
-      "Gabriel Moreno",
-      "Ketel Marte"
+      "Gabriel Moreno"
      ],
-     "value": 74,
+     "value": 75,
      "top": [
       {
        "name": "Gabriel Moreno",
-       "value": 74
+       "value": 75
       },
       {
        "name": "Ketel Marte",
@@ -82,7 +81,7 @@
       },
       {
        "name": "Nolan Arenado",
-       "value": 73
+       "value": 74
       }
      ]
     },
@@ -90,19 +89,19 @@
      "names": [
       "Gabriel Moreno"
      ],
-     "value": ".303",
+     "value": ".307",
      "top": [
       {
        "name": "Gabriel Moreno",
-       "value": ".303"
-      },
-      {
-       "name": "Ildemaro Vargas",
-       "value": ".252"
+       "value": ".307"
       },
       {
        "name": "Geraldo Perdomo",
-       "value": ".251"
+       "value": ".252"
+      },
+      {
+       "name": "Ketel Marte",
+       "value": ".250"
       }
      ]
     },
@@ -110,19 +109,19 @@
      "names": [
       "Gabriel Moreno"
      ],
-     "value": ".856",
+     "value": ".870",
      "top": [
       {
        "name": "Gabriel Moreno",
-       "value": ".856"
+       "value": ".870"
       },
       {
        "name": "Corbin Carroll",
-       "value": ".801"
+       "value": ".795"
       },
       {
        "name": "Nolan Arenado",
-       "value": ".762"
+       "value": ".770"
       }
      ]
     }

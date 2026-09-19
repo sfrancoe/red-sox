@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-17T07:59:25.372969+00:00",
+  "generated_at": "2026-09-19T05:05:59.169466+00:00",
   "season": 2026,
   "team": "Philadelphia Phillies",
-  "games_played": 152,
-  "season_fraction": 0.9383,
+  "games_played": 154,
+  "season_fraction": 0.9506,
   "method": "Actual FanGraphs pitching WAR is compared with preseason Steamer WAR prorated to Philadelphia's games played.",
   "sources": {
     "actual": "FanGraphs Major League Leaderboards",
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 21.9,
-    "forecast_war_to_date": 18.7,
-    "war_gap": 3.2,
-    "innings": 1341.3,
-    "era": 4.01
+    "actual_war": 22.6,
+    "forecast_war_to_date": 19.0,
+    "war_gap": 3.6,
+    "innings": 1359.3,
+    "era": 3.96
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "193.2",
         "ip_value": 193.667,
-        "war": 5.83,
+        "war": 5.84,
         "era": 2.93,
         "fip": 2.79,
         "k_minus_bb_pct": 21.2
@@ -46,11 +46,11 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 185.8,
-        "war": 4.41
+        "ip": 188.3,
+        "war": 4.47
       },
-      "war_gap": 1.42,
-      "innings_share_pct": 14.4
+      "war_gap": 1.37,
+      "innings_share_pct": 14.2
     },
     {
       "id": 666200,
@@ -78,28 +78,28 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 169.8,
-        "war": 3.3
+        "ip": 172.0,
+        "war": 3.34
       },
-      "war_gap": 2.25,
-      "innings_share_pct": 13.3
+      "war_gap": 2.22,
+      "innings_share_pct": 13.1
     },
     {
       "id": 554430,
       "name": "Zack Wheeler",
       "throws": "R",
       "role": "Starter",
-      "games": 25,
-      "starts": 25,
+      "games": 26,
+      "starts": 26,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "143.1",
-        "ip_value": 143.333,
-        "war": 3.25,
-        "era": 3.14,
-        "fip": 3.54,
-        "k_minus_bb_pct": 22.1
+        "ip": "150.1",
+        "ip_value": 150.333,
+        "war": 3.55,
+        "era": 2.99,
+        "fip": 3.47,
+        "k_minus_bb_pct": 21.9
       },
       "forecast": {
         "ip": 154.8,
@@ -110,28 +110,28 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 145.3,
-        "war": 3.49
+        "ip": 147.2,
+        "war": 3.53
       },
-      "war_gap": -0.23,
-      "innings_share_pct": 10.7
+      "war_gap": 0.01,
+      "innings_share_pct": 11.1
     },
     {
       "id": 661395,
       "name": "Jhoan Duran",
       "throws": "R",
       "role": "Closer",
-      "games": 56,
+      "games": 58,
       "starts": 0,
-      "saves": 30,
+      "saves": 32,
       "holds": 0,
       "actual": {
-        "ip": "54.1",
-        "ip_value": 54.333,
-        "war": 2.57,
-        "era": 1.82,
-        "fip": 1.53,
-        "k_minus_bb_pct": 30.3
+        "ip": "56.1",
+        "ip_value": 56.333,
+        "war": 2.74,
+        "era": 1.76,
+        "fip": 1.45,
+        "k_minus_bb_pct": 31.1
       },
       "forecast": {
         "ip": 70.0,
@@ -142,10 +142,10 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 65.7,
-        "war": 1.16
+        "ip": 66.5,
+        "war": 1.18
       },
-      "war_gap": 1.41,
+      "war_gap": 1.56,
       "innings_share_pct": 4.1
     },
     {
@@ -153,17 +153,17 @@
       "name": "Aaron Nola",
       "throws": "R",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "161.1",
-        "ip_value": 161.333,
-        "war": 1.28,
-        "era": 4.69,
-        "fip": 4.85,
-        "k_minus_bb_pct": 15.9
+        "ip": "168.1",
+        "ip_value": 168.333,
+        "war": 1.45,
+        "era": 4.49,
+        "fip": 4.78,
+        "k_minus_bb_pct": 15.5
       },
       "forecast": {
         "ip": 180.7,
@@ -174,28 +174,28 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 169.5,
-        "war": 2.78
+        "ip": 171.8,
+        "war": 2.82
       },
-      "war_gap": -1.5,
-      "innings_share_pct": 12.0
+      "war_gap": -1.37,
+      "innings_share_pct": 12.4
     },
     {
       "id": 641835,
       "name": "Tim Mayza",
       "throws": "L",
       "role": "Swingman",
-      "games": 55,
+      "games": 56,
       "starts": 5,
       "saves": 0,
-      "holds": 1,
+      "holds": 2,
       "actual": {
-        "ip": "64.1",
-        "ip_value": 64.333,
-        "war": 1.0,
-        "era": 3.08,
-        "fip": 3.1,
-        "k_minus_bb_pct": 19.0
+        "ip": "64.2",
+        "ip_value": 64.667,
+        "war": 0.98,
+        "era": 3.06,
+        "fip": 3.14,
+        "k_minus_bb_pct": 18.4
       },
       "forecast": {
         "ip": 48.0,
@@ -206,10 +206,10 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 45.0,
+        "ip": 45.6,
         "war": 0.13
       },
-      "war_gap": 0.87,
+      "war_gap": 0.84,
       "innings_share_pct": 4.8
     },
     {
@@ -224,9 +224,9 @@
       "actual": {
         "ip": "115.1",
         "ip_value": 115.333,
-        "war": 0.95,
+        "war": 0.96,
         "era": 5.54,
-        "fip": 4.76,
+        "fip": 4.75,
         "k_minus_bb_pct": 11.2
       },
       "forecast": {
@@ -238,28 +238,28 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 119.0,
-        "war": 0.66
+        "ip": 120.5,
+        "war": 0.67
       },
       "war_gap": 0.29,
-      "innings_share_pct": 8.6
+      "innings_share_pct": 8.5
     },
     {
       "id": 680742,
       "name": "Jonathan Bowlan",
       "throws": "R",
       "role": "Setup",
-      "games": 58,
+      "games": 59,
       "starts": 0,
       "saves": 2,
-      "holds": 13,
+      "holds": 14,
       "actual": {
-        "ip": "55.2",
-        "ip_value": 55.667,
-        "war": 0.81,
-        "era": 3.4,
-        "fip": 3.39,
-        "k_minus_bb_pct": 25.2
+        "ip": "56.1",
+        "ip_value": 56.333,
+        "war": 0.83,
+        "era": 3.36,
+        "fip": 3.36,
+        "k_minus_bb_pct": 25.3
       },
       "forecast": {
         "ip": 58.0,
@@ -270,28 +270,28 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 54.4,
+        "ip": 55.1,
         "war": 0.27
       },
-      "war_gap": 0.54,
-      "innings_share_pct": 4.2
+      "war_gap": 0.56,
+      "innings_share_pct": 4.1
     },
     {
       "id": 621237,
       "name": "José Alvarado",
       "throws": "L",
       "role": "Setup",
-      "games": 62,
+      "games": 63,
       "starts": 0,
       "saves": 1,
-      "holds": 15,
+      "holds": 16,
       "actual": {
-        "ip": "54.1",
-        "ip_value": 54.333,
-        "war": 0.67,
-        "era": 5.3,
-        "fip": 3.65,
-        "k_minus_bb_pct": 16.7
+        "ip": "55.1",
+        "ip_value": 55.333,
+        "war": 0.68,
+        "era": 5.2,
+        "fip": 3.66,
+        "k_minus_bb_pct": 16.5
       },
       "forecast": {
         "ip": 64.0,
@@ -302,8 +302,8 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 60.0,
-        "war": 0.75
+        "ip": 60.8,
+        "war": 0.76
       },
       "war_gap": -0.08,
       "innings_share_pct": 4.1
@@ -322,7 +322,7 @@
         "ip_value": 56.0,
         "war": 0.49,
         "era": 4.02,
-        "fip": 3.96,
+        "fip": 3.95,
         "k_minus_bb_pct": 10.7
       },
       "forecast": {
@@ -334,11 +334,11 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 50.7,
-        "war": 0.55
+        "ip": 51.3,
+        "war": 0.56
       },
-      "war_gap": -0.06,
-      "innings_share_pct": 4.2
+      "war_gap": -0.07,
+      "innings_share_pct": 4.1
     },
     {
       "id": 686934,
@@ -354,7 +354,7 @@
         "ip_value": 14.667,
         "war": 0.25,
         "era": 2.45,
-        "fip": 3.24,
+        "fip": 3.23,
         "k_minus_bb_pct": 13.6
       },
       "forecast": {
@@ -366,7 +366,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": 0.25,
@@ -398,7 +398,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 19.9,
+        "ip": 20.2,
         "war": 0.03
       },
       "war_gap": 0.21,
@@ -430,7 +430,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 63.8,
+        "ip": 64.6,
         "war": 0.28
       },
       "war_gap": -0.09,
@@ -462,7 +462,7 @@
         "team_at_fetch": "CHW"
       },
       "forecast_to_date": {
-        "ip": 0.9,
+        "ip": 1.0,
         "war": -0.0
       },
       "war_gap": 0.16,
@@ -494,7 +494,7 @@
         "team_at_fetch": "MIA"
       },
       "forecast_to_date": {
-        "ip": 39.4,
+        "ip": 39.9,
         "war": 0.05
       },
       "war_gap": 0.06,
@@ -512,7 +512,7 @@
       "actual": {
         "ip": "16.1",
         "ip_value": 16.333,
-        "war": 0.09,
+        "war": 0.1,
         "era": 5.51,
         "fip": 4.2,
         "k_minus_bb_pct": 7.5
@@ -526,10 +526,10 @@
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 18.8,
+        "ip": 19.0,
         "war": -0.07
       },
-      "war_gap": 0.16,
+      "war_gap": 0.17,
       "innings_share_pct": 1.2
     },
     {
@@ -558,7 +558,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 48.8,
+        "ip": 49.4,
         "war": 0.0
       },
       "war_gap": 0.05,
@@ -590,7 +590,7 @@
         "team_at_fetch": "KCR"
       },
       "forecast_to_date": {
-        "ip": 12.2,
+        "ip": 12.4,
         "war": -0.0
       },
       "war_gap": 0.04,
@@ -622,10 +622,10 @@
         "team_at_fetch": "MIL"
       },
       "forecast_to_date": {
-        "ip": 18.6,
+        "ip": 18.9,
         "war": -0.03
       },
-      "war_gap": 0.02,
+      "war_gap": 0.03,
       "innings_share_pct": 0.1
     },
     {
@@ -704,7 +704,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 13.1,
+        "ip": 13.3,
         "war": -0.0
       },
       "war_gap": -0.04,
@@ -761,7 +761,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 55.4,
+        "ip": 56.1,
         "war": -0.06
       },
       "war_gap": -0.03,
@@ -781,7 +781,7 @@
         "ip_value": 3.0,
         "war": -0.09,
         "era": 12.0,
-        "fip": 9.77,
+        "fip": 9.76,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -793,7 +793,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 22.5,
+        "ip": 22.8,
         "war": 0.04
       },
       "war_gap": -0.13,
@@ -811,7 +811,7 @@
       "actual": {
         "ip": "49.2",
         "ip_value": 49.667,
-        "war": -0.13,
+        "war": -0.12,
         "era": 4.17,
         "fip": 4.83,
         "k_minus_bb_pct": 18.0
@@ -825,7 +825,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 35.7,
+        "ip": 36.1,
         "war": -0.0
       },
       "war_gap": -0.12,
@@ -843,7 +843,7 @@
       "actual": {
         "ip": "8.0",
         "ip_value": 8.0,
-        "war": -0.16,
+        "war": -0.15,
         "era": 5.63,
         "fip": 7.85,
         "k_minus_bb_pct": 5.7
@@ -857,7 +857,7 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 29.1,
+        "ip": 29.5,
         "war": -0.05
       },
       "war_gap": -0.1,
@@ -889,8 +889,8 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 59.1,
-        "war": 0.41
+        "ip": 59.9,
+        "war": 0.42
       },
       "war_gap": -0.63,
       "innings_share_pct": 2.3
@@ -921,8 +921,8 @@
         "team_at_fetch": "PHI"
       },
       "forecast_to_date": {
-        "ip": 58.2,
-        "war": 0.26
+        "ip": 58.9,
+        "war": 0.27
       },
       "war_gap": -0.56,
       "innings_share_pct": 0.8
@@ -941,7 +941,7 @@
         "ip_value": 22.667,
         "war": -0.5,
         "era": 9.13,
-        "fip": 7.78,
+        "fip": 7.77,
         "k_minus_bb_pct": 5.2
       },
       "forecast": {
@@ -953,10 +953,10 @@
         "team_at_fetch": null
       },
       "forecast_to_date": {
-        "ip": 114.0,
+        "ip": 115.5,
         "war": 0.36
       },
-      "war_gap": -0.85,
+      "war_gap": -0.86,
       "innings_share_pct": 1.7
     }
   ]

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-16T23:07:08.540285+00:00",
-  "roster_as_of": "September 14, 2026",
+  "generated_at": "2026-09-18T13:46:31.046866+00:00",
+  "roster_as_of": "September 17, 2026",
   "team": {
     "id": 116,
     "name": "Detroit Tigers"
@@ -22,6 +22,7 @@
   "players": [
     {
       "id": 623454,
+      "mlb_id": 623454,
       "wikidata_id": "Q34927109",
       "slug": "drew-anderson",
       "name": "Drew Anderson",
@@ -104,11 +105,11 @@
           "era": 6.5,
           "whip": 1.579
         }
-      },
-      "mlb_id": 623454
+      }
     },
     {
-      "id": 1975138305,
+      "id": 689225,
+      "mlb_id": 689225,
       "wikidata_id": "Q111697169",
       "slug": "beau-brieske",
       "name": "Beau Brieske",
@@ -190,15 +191,16 @@
     },
     {
       "id": 595879,
+      "mlb_id": 595879,
       "wikidata_id": "Q16163541",
       "slug": "javier-baez",
       "name": "Javier Báez",
       "full_name": "Javier Báez",
       "number": "28",
       "position": {
-        "name": "Utility Player",
+        "name": "Shortstop",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -250,11 +252,11 @@
           "ops": 0.726
         },
         "pitching": null
-      },
-      "mlb_id": 595879
+      }
     },
     {
       "id": 814430,
+      "mlb_id": 814430,
       "wikidata_id": "Q141107686",
       "slug": "brett-callahan",
       "name": "Brett Callahan",
@@ -263,7 +265,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "LF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -291,11 +293,11 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 814430
+      }
     },
     {
       "id": 681481,
+      "mlb_id": 681481,
       "wikidata_id": "Q113494976",
       "slug": "kerry-carpenter",
       "name": "Kerry Carpenter",
@@ -304,7 +306,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "RF"
       },
       "roster_status": "Injured list",
       "is_active_roster": false,
@@ -354,11 +356,11 @@
           "ops": 0.829
         },
         "pitching": null
-      },
-      "mlb_id": 681481
+      }
     },
     {
       "id": 703601,
+      "mlb_id": 703601,
       "wikidata_id": "Q113567320",
       "slug": "max-clark",
       "name": "Max Clark",
@@ -367,7 +369,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "CF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -399,11 +401,11 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 703601
+      }
     },
     {
       "id": 693307,
+      "mlb_id": 693307,
       "wikidata_id": "Q91394712",
       "slug": "dillon-dingler",
       "name": "Dillon Dingler",
@@ -417,7 +419,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1998-09-17",
-      "age": 27,
+      "age": 28,
       "birthplace": "Massillon, Ohio, U.S.",
       "height": null,
       "weight": null,
@@ -462,11 +464,11 @@
           "ops": 0.713
         },
         "pitching": null
-      },
-      "mlb_id": 693307
+      }
     },
     {
       "id": 700270,
+      "mlb_id": 700270,
       "wikidata_id": "Q127278405",
       "slug": "yilber-diaz",
       "name": "Yilber Díaz",
@@ -541,11 +543,11 @@
           "era": 4.31,
           "whip": 1.468
         }
-      },
-      "mlb_id": 700270
+      }
     },
     {
       "id": 640448,
+      "mlb_id": 640448,
       "wikidata_id": "Q19787026",
       "slug": "kyle-finnegan",
       "name": "Kyle Finnegan",
@@ -556,8 +558,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1991-09-04",
       "age": 35,
       "birthplace": "Detroit",
@@ -624,11 +626,11 @@
           "era": 3.55,
           "whip": 1.284
         }
-      },
-      "mlb_id": 640448
+      }
     },
     {
       "id": 656427,
+      "mlb_id": 656427,
       "wikidata_id": "Q17182711",
       "slug": "jack-flaherty",
       "name": "Jack Flaherty",
@@ -709,11 +711,11 @@
           "era": 3.8,
           "whip": 1.198
         }
-      },
-      "mlb_id": 656427
+      }
     },
     {
       "id": 1965762892,
+      "mlb_id": null,
       "wikidata_id": "Q122350826",
       "slug": "sawyer-gipson-long",
       "name": "Sawyer Gipson-Long",
@@ -791,6 +793,7 @@
     },
     {
       "id": 682985,
+      "mlb_id": 682985,
       "wikidata_id": "Q64374840",
       "slug": "riley-greene",
       "name": "Riley Greene",
@@ -799,7 +802,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "LF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -849,11 +852,11 @@
           "ops": 0.785
         },
         "pitching": null
-      },
-      "mlb_id": 682985
+      }
     },
     {
       "id": 669724,
+      "mlb_id": 669724,
       "wikidata_id": "Q122745922",
       "slug": "brenan-hanifee",
       "name": "Brenan Hanifee",
@@ -927,11 +930,11 @@
           "era": 2.77,
           "whip": 1.272
         }
-      },
-      "mlb_id": 669724
+      }
     },
     {
       "id": 663947,
+      "mlb_id": 663947,
       "wikidata_id": "Q111749669",
       "slug": "tyler-holton",
       "name": "Tyler Holton",
@@ -1006,11 +1009,11 @@
           "era": 2.63,
           "whip": 0.898
         }
-      },
-      "mlb_id": 663947
+      }
     },
     {
-      "id": 1940189791,
+      "id": 690544,
+      "mlb_id": 690544,
       "wikidata_id": "Q126942708",
       "slug": "bailey-horn",
       "name": "Bailey Horn",
@@ -1089,6 +1092,7 @@
     },
     {
       "id": 676428,
+      "mlb_id": 676428,
       "wikidata_id": "Q128595780",
       "slug": "brant-hurter",
       "name": "Brant Hurter",
@@ -1162,18 +1166,18 @@
           "era": 2.49,
           "whip": 1.145
         }
-      },
-      "mlb_id": 676428
+      }
     },
     {
       "id": 445276,
+      "mlb_id": 445276,
       "wikidata_id": "Q1902109",
       "slug": "kenley-jansen",
       "name": "Kenley Jansen",
       "full_name": "Kenley Jansen",
       "number": "74",
       "position": {
-        "name": "Closer",
+        "name": "Pitcher",
         "group": "Pitcher",
         "abbreviation": "P"
       },
@@ -1244,11 +1248,11 @@
           "era": 2.56,
           "whip": 0.961
         }
-      },
-      "mlb_id": 445276
+      }
     },
     {
       "id": 646241,
+      "mlb_id": 646241,
       "wikidata_id": "Q122342424",
       "slug": "enmanuel-de-jesus",
       "name": "Enmanuel De Jesus",
@@ -1325,11 +1329,11 @@
           "era": 11.37,
           "whip": 2.053
         }
-      },
-      "mlb_id": 646241
+      }
     },
     {
       "id": 695549,
+      "mlb_id": 695549,
       "wikidata_id": "Q107399521",
       "slug": "jackson-jobe",
       "name": "Jackson Jobe",
@@ -1403,11 +1407,11 @@
           "era": 3.91,
           "whip": 1.415
         }
-      },
-      "mlb_id": 695549
+      }
     },
     {
       "id": 667452,
+      "mlb_id": 667452,
       "wikidata_id": "Q117350991",
       "slug": "corey-julks",
       "name": "Corey Julks",
@@ -1416,7 +1420,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "LF"
       },
       "roster_status": "Inactive roster",
       "is_active_roster": false,
@@ -1464,20 +1468,20 @@
           "ops": 0.625
         },
         "pitching": null
-      },
-      "mlb_id": 667452
+      }
     },
     {
       "id": 690291,
+      "mlb_id": 690291,
       "wikidata_id": "Q110952384",
       "slug": "jace-jung",
       "name": "Jace Jung",
       "full_name": "Jace Jung",
       "number": "17",
       "position": {
-        "name": "Infielder",
+        "name": "Third Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "3B"
       },
       "roster_status": "Inactive roster",
       "is_active_roster": false,
@@ -1523,20 +1527,20 @@
           "ops": 0.545
         },
         "pitching": null
-      },
-      "mlb_id": 690291
+      }
     },
     {
       "id": 690993,
+      "mlb_id": 690993,
       "wikidata_id": "Q123230307",
       "slug": "colt-keith",
       "name": "Colt Keith",
       "full_name": "Colt Keith",
       "number": "33",
       "position": {
-        "name": "Second Baseman",
+        "name": "Third Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "3B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1589,11 +1593,11 @@
           "ops": 0.715
         },
         "pitching": null
-      },
-      "mlb_id": 690993
+      }
     },
     {
       "id": 641755,
+      "mlb_id": 641755,
       "wikidata_id": "Q50807850",
       "slug": "tyler-kinley",
       "name": "Tyler Kinley",
@@ -1675,20 +1679,20 @@
           "era": 4.75,
           "whip": 1.346
         }
-      },
-      "mlb_id": 641755
+      }
     },
     {
       "id": 701678,
+      "mlb_id": 701678,
       "wikidata_id": "Q132816806",
       "slug": "hao-yu-lee",
       "name": "Hao-Yu Lee",
       "full_name": "Hao-Yu Lee",
       "number": "50",
       "position": {
-        "name": "Infielder",
+        "name": "Second Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "2B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1720,11 +1724,11 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 701678
+      }
     },
     {
       "id": 1948747205,
+      "mlb_id": null,
       "wikidata_id": null,
       "slug": "thayron-liranzo",
       "name": "Thayron Liranzo",
@@ -1765,6 +1769,7 @@
     },
     {
       "id": 680744,
+      "mlb_id": 680744,
       "wikidata_id": "Q105700914",
       "slug": "ty-madden",
       "name": "Ty Madden",
@@ -1775,8 +1780,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2000-02-21",
       "age": 26,
       "birthplace": "Cypress, Texas, U.S.",
@@ -1845,11 +1850,11 @@
           "era": 4.3,
           "whip": 1.435
         }
-      },
-      "mlb_id": 680744
+      }
     },
     {
       "id": 701162,
+      "mlb_id": 701162,
       "wikidata_id": "Q140333991",
       "slug": "ben-malgeri",
       "name": "Ben Malgeri",
@@ -1858,7 +1863,7 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "OF"
+        "abbreviation": "RF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1886,20 +1891,20 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 701162
+      }
     },
     {
       "id": 805808,
+      "mlb_id": 805808,
       "wikidata_id": "Q120442644",
       "slug": "kevin-mcgonigle",
       "name": "Kevin McGonigle",
       "full_name": "Kevin McGonigle",
       "number": "7",
       "position": {
-        "name": "Infielder",
+        "name": "Shortstop",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -1931,20 +1936,20 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 805808
+      }
     },
     {
       "id": 656716,
+      "mlb_id": 656716,
       "wikidata_id": "Q98123023",
       "slug": "zach-mckinstry",
       "name": "Zach McKinstry",
       "full_name": "Zach McKinstry",
       "number": "39",
       "position": {
-        "name": "Infielder",
+        "name": "Outfielder",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "RF"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2015,20 +2020,20 @@
           "era": 10.8,
           "whip": 1.5
         }
-      },
-      "mlb_id": 656716
+      }
     },
     {
       "id": 678009,
+      "mlb_id": 678009,
       "wikidata_id": "Q121763883",
       "slug": "parker-meadows",
       "name": "Parker Meadows",
       "full_name": "Parker Meadows",
       "number": "22",
       "position": {
-        "name": "Pitcher",
+        "name": "Outfielder",
         "group": "Pitcher",
-        "abbreviation": "P"
+        "abbreviation": "CF"
       },
       "roster_status": "60-day injured list",
       "is_active_roster": false,
@@ -2074,11 +2079,11 @@
           "ops": 0.694
         },
         "pitching": null
-      },
-      "mlb_id": 678009
+      }
     },
     {
       "id": 675512,
+      "mlb_id": 675512,
       "wikidata_id": "Q135454780",
       "slug": "troy-melton",
       "name": "Troy Melton",
@@ -2152,11 +2157,11 @@
           "era": 2.76,
           "whip": 1.007
         }
-      },
-      "mlb_id": 675512
+      }
     },
     {
       "id": 1988621403,
+      "mlb_id": null,
       "wikidata_id": null,
       "slug": "jake-miller",
       "name": "Jake Miller",
@@ -2197,6 +2202,7 @@
     },
     {
       "id": 672456,
+      "mlb_id": 672456,
       "wikidata_id": "Q126194169",
       "slug": "keider-montero",
       "name": "Keider Montero",
@@ -2270,11 +2276,11 @@
           "era": 4.57,
           "whip": 1.36
         }
-      },
-      "mlb_id": 672456
+      }
     },
     {
       "id": 1958861254,
+      "mlb_id": null,
       "wikidata_id": "Q118999219",
       "slug": "reese-olson",
       "name": "Reese Olson",
@@ -2352,15 +2358,16 @@
     },
     {
       "id": 807726,
-      "wikidata_id": "Q141350780",
+      "mlb_id": 807726,
+      "wikidata_id": "Q139736442",
       "slug": "john-peck",
       "name": "John Peck",
       "full_name": "John Peck",
       "number": "18",
       "position": {
-        "name": "Infielder",
+        "name": "Shortstop",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "SS"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2380,7 +2387,7 @@
       "teams": [
         "Detroit Tigers"
       ],
-      "source_url": "https://www.wikidata.org/wiki/Q141350780",
+      "source_url": "https://www.wikidata.org/wiki/Q139736442",
       "wikipedia_url": "https://en.wikipedia.org/wiki/John_Peck_%28baseball%29",
       "retrosheet_id": null,
       "career_stats": {
@@ -2388,20 +2395,20 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 807726
+      }
     },
     {
       "id": 672761,
+      "mlb_id": 672761,
       "wikidata_id": "Q125398842",
       "slug": "wenceel-perez",
       "name": "Wenceel Pérez",
       "full_name": "Wenceel Pérez",
       "number": "46",
       "position": {
-        "name": "Pitcher",
+        "name": "Outfielder",
         "group": "Pitcher",
-        "abbreviation": "P"
+        "abbreviation": "RF"
       },
       "roster_status": "60-day injured list",
       "is_active_roster": false,
@@ -2447,11 +2454,11 @@
           "ops": 0.709
         },
         "pitching": null
-      },
-      "mlb_id": 672761
+      }
     },
     {
       "id": 1973691116,
+      "mlb_id": null,
       "wikidata_id": "Q127605250",
       "slug": "river-ryan",
       "name": "River Ryan",
@@ -2530,6 +2537,7 @@
     },
     {
       "id": 1914731426,
+      "mlb_id": null,
       "wikidata_id": "Q139736443",
       "slug": "andrew-sears",
       "name": "Andrew Sears",
@@ -2570,13 +2578,14 @@
     },
     {
       "id": 572143,
+      "mlb_id": 572143,
       "wikidata_id": "Q13305493",
       "slug": "burch-smith",
       "name": "Burch Smith",
       "full_name": "Burch Smith",
       "number": "65",
       "position": {
-        "name": "Starting Pitcher",
+        "name": "Pitcher",
         "group": "Pitcher",
         "abbreviation": "P"
       },
@@ -2656,11 +2665,11 @@
           "era": 5.79,
           "whip": 1.512
         }
-      },
-      "mlb_id": 572143
+      }
     },
     {
       "id": 805427,
+      "mlb_id": 805427,
       "wikidata_id": "Q135921593",
       "slug": "drew-sommers",
       "name": "Drew Sommers",
@@ -2734,20 +2743,20 @@
           "era": 18.0,
           "whip": 3.333
         }
-      },
-      "mlb_id": 805427
+      }
     },
     {
-      "id": 1927484773,
+      "id": 700242,
+      "mlb_id": 700242,
       "wikidata_id": "Q107481674",
       "slug": "trey-sweeney",
       "name": "Trey Sweeney",
       "full_name": "Trey Sweeney",
       "number": "27",
       "position": {
-        "name": "Pitcher",
+        "name": "Shortstop",
         "group": "Pitcher",
-        "abbreviation": "P"
+        "abbreviation": "SS"
       },
       "roster_status": "60-day injured list",
       "is_active_roster": false,
@@ -2797,15 +2806,16 @@
     },
     {
       "id": 679529,
+      "mlb_id": 679529,
       "wikidata_id": "Q64010395",
       "slug": "spencer-torkelson",
       "name": "Spencer Torkelson",
       "full_name": "Spencer Torkelson",
       "number": "20",
       "position": {
-        "name": "First Baseman",
+        "name": "First Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "1B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2858,20 +2868,20 @@
           "ops": 0.722
         },
         "pitching": null
-      },
-      "mlb_id": 679529
+      }
     },
     {
       "id": 650402,
+      "mlb_id": 650402,
       "wikidata_id": "Q26720726",
       "slug": "gleyber-torres",
       "name": "Gleyber Torres",
       "full_name": "Gleyber Torres",
       "number": "25",
       "position": {
-        "name": "Shortstop",
+        "name": "Second Base",
         "group": "Infielder",
-        "abbreviation": "IF"
+        "abbreviation": "2B"
       },
       "roster_status": "Active",
       "is_active_roster": true,
@@ -2918,11 +2928,11 @@
           "ops": 0.77
         },
         "pitching": null
-      },
-      "mlb_id": 650402
+      }
     },
     {
       "id": 664285,
+      "mlb_id": 664285,
       "wikidata_id": "Q56224192",
       "slug": "framber-valdez",
       "name": "Framber Valdez",
@@ -2997,18 +3007,18 @@
           "era": 3.36,
           "whip": 1.204
         }
-      },
-      "mlb_id": 664285
+      }
     },
     {
       "id": 680664,
+      "mlb_id": 680664,
       "wikidata_id": "Q139736444",
       "slug": "eduardo-valencia",
       "name": "Eduardo Valencia",
       "full_name": "Eduardo Valencia",
       "number": "32",
       "position": {
-        "name": "Hitter",
+        "name": "Designated Hitter",
         "group": "Hitter",
         "abbreviation": "DH"
       },
@@ -3038,18 +3048,18 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      },
-      "mlb_id": 680664
+      }
     },
     {
       "id": 434378,
+      "mlb_id": 434378,
       "wikidata_id": "Q981788",
       "slug": "justin-verlander",
       "name": "Justin Verlander",
       "full_name": "Justin Verlander",
       "number": "35",
       "position": {
-        "name": "Starting Pitcher",
+        "name": "Pitcher",
         "group": "Pitcher",
         "abbreviation": "P"
       },
@@ -3123,11 +3133,11 @@
           "era": 3.32,
           "whip": 1.135
         }
-      },
-      "mlb_id": 434378
+      }
     },
     {
       "id": 676684,
+      "mlb_id": 676684,
       "wikidata_id": "Q104093814",
       "slug": "will-vest",
       "name": "Will Vest",
@@ -3206,20 +3216,20 @@
           "era": 3.56,
           "whip": 1.244
         }
-      },
-      "mlb_id": 676684
+      }
     },
     {
       "id": 663837,
+      "mlb_id": 663837,
       "wikidata_id": "Q107301243",
       "slug": "matt-vierling",
       "name": "Matt Vierling",
       "full_name": "Matt Vierling",
       "number": "8",
       "position": {
-        "name": "Pitcher",
+        "name": "Outfielder",
         "group": "Pitcher",
-        "abbreviation": "P"
+        "abbreviation": "CF"
       },
       "roster_status": "60-day injured list",
       "is_active_roster": false,
@@ -3266,11 +3276,11 @@
           "ops": 0.709
         },
         "pitching": null
-      },
-      "mlb_id": 663837
+      }
     },
     {
       "id": 621097,
+      "mlb_id": 621097,
       "wikidata_id": "Q64748280",
       "slug": "jacob-waguespack",
       "name": "Jacob Waguespack",
@@ -3354,8 +3364,7 @@
           "era": 5.11,
           "whip": 1.543
         }
-      },
-      "mlb_id": 621097
+      }
     }
   ]
 }

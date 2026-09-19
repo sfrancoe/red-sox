@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-16T15:34:26+00:00",
+ "generated_at": "2026-09-18T15:11:32+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 145,
  "seasons": {
   "2026": {
-   "record": "77-74",
-   "games": 151,
+   "record": "78-75",
+   "games": 153,
    "in_progress": true,
    "war_leader": {
     "name": "Miguel Vargas",
-    "war": 4.6
+    "war": 4.7
    },
    "war_leaders": [
     {
      "name": "Miguel Vargas",
-     "war": 4.6
+     "war": 4.7
     },
     {
      "name": "Tristan Peters",
@@ -31,15 +31,15 @@
      "top": [
       {
        "name": "Grant Taylor",
-       "value": "1.09"
+       "value": "1.10"
       },
       {
        "name": "Trevor Richards",
        "value": "1.11"
       },
       {
-       "name": "Sean Newcomb",
-       "value": "1.14"
+       "name": "Bryan Hudson",
+       "value": "1.15"
       }
      ]
     }
@@ -47,22 +47,20 @@
    "batting_leaders": {
     "hr": {
      "names": [
-      "Colson Montgomery",
-      "Miguel Vargas",
       "Munetaka Murakami"
      ],
-     "value": 31,
+     "value": 32,
      "top": [
+      {
+       "name": "Munetaka Murakami",
+       "value": 32
+      },
       {
        "name": "Colson Montgomery",
        "value": 31
       },
       {
        "name": "Miguel Vargas",
-       "value": 31
-      },
-      {
-       "name": "Munetaka Murakami",
        "value": 31
       }
      ]
@@ -90,21 +88,22 @@
     },
     "avg": {
      "names": [
+      "Chase Meidroth",
       "Sam Antonacci"
      ],
      "value": ".271",
      "top": [
       {
+       "name": "Chase Meidroth",
+       "value": ".271"
+      },
+      {
        "name": "Sam Antonacci",
        "value": ".271"
       },
       {
-       "name": "Chase Meidroth",
-       "value": ".268"
-      },
-      {
        "name": "Miguel Vargas",
-       "value": ".249"
+       "value": ".248"
       }
      ]
     },
@@ -112,19 +111,19 @@
      "names": [
       "Miguel Vargas"
      ],
-     "value": ".833",
+     "value": ".827",
      "top": [
       {
        "name": "Miguel Vargas",
-       "value": ".833"
+       "value": ".827"
       },
       {
        "name": "Munetaka Murakami",
-       "value": ".804"
+       "value": ".817"
       },
       {
        "name": "Sam Antonacci",
-       "value": ".760"
+       "value": ".759"
       }
      ]
     }

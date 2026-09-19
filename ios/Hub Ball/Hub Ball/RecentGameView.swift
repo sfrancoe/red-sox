@@ -7,6 +7,7 @@ private enum BoxScoreTeamSelection {
 
 struct RecentGameView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.scenePhase) private var scenePhase
     @State private var store: RecentGameStore
     @State private var selectedStatsTeam: BoxScoreTeamSelection = .favorite
     @State private var selectedGameID: Int?
@@ -42,7 +43,8 @@ struct RecentGameView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        .task {
+        .task(id: scenePhase) {
+            guard scenePhase == .active else { return }
             await store.load()
             synchronizeSelection()
 
