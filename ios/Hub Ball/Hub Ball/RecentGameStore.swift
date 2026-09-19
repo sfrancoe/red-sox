@@ -35,7 +35,7 @@ final class RecentGameStore {
     }
 
     private func refresh(showLoadingState: Bool) async {
-        guard !isLoading else { return }
+        guard !isLoading, !Task.isCancelled else { return }
 
         isLoading = true
         if showLoadingState {
@@ -43,7 +43,7 @@ final class RecentGameStore {
         }
         defer { isLoading = false }
 
-        async let scheduleRefresh: Void = scheduleStore.load()
+        async let scheduleRefresh: Void = scheduleStore.load(minimumRefreshInterval: 5 * 60)
 
         do {
             let descriptors = try await client.gameDescriptors()
@@ -62,9 +62,11 @@ final class RecentGameStore {
             }
 
             await scheduleRefresh
+            try Task.checkCancellation()
             games = refreshedGames
             errorMessage = nil
         } catch {
+            guard !Task.isCancelled else { return }
             if games.isEmpty {
                 errorMessage = "We couldn't load the Game Center. Check your connection and try again."
             }

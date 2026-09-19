@@ -6,10 +6,13 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
 import re
+import sys
 import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlencode, urlparse
@@ -100,7 +103,8 @@ def source_feed(team: dict[str, Any], source: dict[str, str]) -> dict[str, Any]:
     }
 
 
-def fetch_team(team: dict[str, Any]) -> None:
+def fetch_team(team: dict[str, Any]) -> list[str]:
+    failures = []
     output = data_directory(team)
     output.mkdir(parents=True, exist_ok=True)
     print(f"{team['full_name']} news:")
@@ -112,6 +116,13 @@ def fetch_team(team: dict[str, Any]) -> None:
             # snapshot instead of failing the entire league refresh or overwriting it.
             print(f"  warning: {exc}; keeping the previous snapshot")
             continue
+        except Exception as exc:
+            # A broken publisher must not prevent other sources/teams publishing.
+            # Report the failed run only after all healthy feeds have been saved.
+            failure = f"{team['full_name']} / {source['name']}: {exc}"
+            failures.append(failure)
+            print(f"  ERROR: {failure}; keeping the previous snapshot", file=sys.stderr)
+            continue
         path = output / f"{source['key']}.json"
         try:
             current = json.loads(path.read_text())
@@ -122,16 +133,29 @@ def fetch_team(team: dict[str, Any]) -> None:
             continue
         path.write_text(json.dumps(feed, indent=2, ensure_ascii=False) + "\n")
         print(f"  wrote {path}")
+    return failures
 
 
-def main() -> None:
+def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--team", action="append", default=[])
     args = parser.parse_args()
     teams = [team_by_key(key) for key in args.team] if args.team else expansion_teams()
+    failures = []
     for team in teams:
-        fetch_team(team)
+        failures.extend(fetch_team(team))
+    summary = (
+        f"News refresh: {len(teams)} teams processed; {len(failures)} source failures.\n"
+        "Successful updates are ready to publish. Failed sources retain their previous snapshots.\n"
+    )
+    if failures:
+        summary += "\n" + "\n".join(f"- {failure}" for failure in failures) + "\n"
+    print(summary)
+    if summary_path := os.environ.get("GITHUB_STEP_SUMMARY"):
+        with Path(summary_path).open("a", encoding="utf-8") as handle:
+            handle.write(summary)
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
