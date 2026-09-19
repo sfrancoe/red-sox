@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T04:56:57.968291+00:00",
+  "generated_at": "2026-09-19T16:01:33.102868+00:00",
   "season": 2026,
   "team": "Tampa Bay Rays",
   "games_played": 153,
@@ -16,7 +16,7 @@
     "actual_war": 15.9,
     "forecast_war_to_date": 18.5,
     "war_gap": -2.6,
-    "innings": 1357.0,
+    "innings": 1366.0,
     "era": 3.75
   },
   "pitchers": [
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "165.1",
         "ip_value": 165.333,
-        "war": 4.67,
+        "war": 4.66,
         "era": 2.72,
         "fip": 2.88,
         "k_minus_bb_pct": 20.8
@@ -49,8 +49,8 @@
         "ip": 161.5,
         "war": 3.06
       },
-      "war_gap": 1.61,
-      "innings_share_pct": 12.2
+      "war_gap": 1.6,
+      "innings_share_pct": 12.1
     },
     {
       "id": 607259,
@@ -66,7 +66,7 @@
         "ip_value": 171.333,
         "war": 2.73,
         "era": 2.94,
-        "fip": 3.98,
+        "fip": 3.99,
         "k_minus_bb_pct": 11.3
       },
       "forecast": {
@@ -82,7 +82,7 @@
         "war": 1.28
       },
       "war_gap": 1.45,
-      "innings_share_pct": 12.6
+      "innings_share_pct": 12.5
     },
     {
       "id": 663556,
@@ -98,7 +98,7 @@
         "ip_value": 118.0,
         "war": 2.42,
         "era": 3.36,
-        "fip": 3.49,
+        "fip": 3.5,
         "k_minus_bb_pct": 13.8
       },
       "forecast": {
@@ -113,25 +113,25 @@
         "ip": 134.3,
         "war": 3.05
       },
-      "war_gap": -0.62,
-      "innings_share_pct": 8.7
+      "war_gap": -0.63,
+      "innings_share_pct": 8.6
     },
     {
       "id": 693855,
       "name": "Ian Seymour",
       "throws": "L",
       "role": "Swingman",
-      "games": 44,
-      "starts": 14,
+      "games": 45,
+      "starts": 15,
       "saves": 2,
       "holds": 9,
       "actual": {
-        "ip": "122.1",
-        "ip_value": 122.333,
-        "war": 1.49,
-        "era": 4.27,
-        "fip": 4.02,
-        "k_minus_bb_pct": 22.8
+        "ip": "127.1",
+        "ip_value": 127.333,
+        "war": 1.37,
+        "era": 4.38,
+        "fip": 4.18,
+        "k_minus_bb_pct": 22.3
       },
       "forecast": {
         "ip": 112.2,
@@ -145,8 +145,8 @@
         "ip": 106.0,
         "war": 1.02
       },
-      "war_gap": 0.46,
-      "innings_share_pct": 9.0
+      "war_gap": 0.34,
+      "innings_share_pct": 9.3
     },
     {
       "id": 643377,
@@ -178,7 +178,7 @@
         "war": 1.11
       },
       "war_gap": 0.23,
-      "innings_share_pct": 7.7
+      "innings_share_pct": 7.6
     },
     {
       "id": 687330,
@@ -242,7 +242,7 @@
         "war": 0.57
       },
       "war_gap": 0.73,
-      "innings_share_pct": 4.4
+      "innings_share_pct": 4.3
     },
     {
       "id": 592155,
@@ -369,8 +369,8 @@
         "ip": 158.9,
         "war": 2.59
       },
-      "war_gap": -2.14,
-      "innings_share_pct": 3.3
+      "war_gap": -2.15,
+      "innings_share_pct": 3.2
     },
     {
       "id": 642121,
@@ -405,6 +405,38 @@
       "innings_share_pct": 3.8
     },
     {
+      "id": 668984,
+      "name": "Casey Legumina",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 45,
+      "starts": 6,
+      "saves": 0,
+      "holds": 7,
+      "actual": {
+        "ip": "57.2",
+        "ip_value": 57.667,
+        "war": 0.23,
+        "era": 3.75,
+        "fip": 4.21,
+        "k_minus_bb_pct": 11.9
+      },
+      "forecast": {
+        "ip": 50.0,
+        "war": -0.03,
+        "era": 4.03,
+        "fip": 4.25,
+        "k_minus_bb_pct": 12.7,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 47.2,
+        "war": -0.03
+      },
+      "war_gap": 0.26,
+      "innings_share_pct": 4.2
+    },
+    {
       "id": 664076,
       "name": "Garrett Cleavinger",
       "throws": "L",
@@ -435,38 +467,6 @@
       },
       "war_gap": -0.6,
       "innings_share_pct": 3.0
-    },
-    {
-      "id": 668984,
-      "name": "Casey Legumina",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 44,
-      "starts": 6,
-      "saves": 0,
-      "holds": 7,
-      "actual": {
-        "ip": "55.2",
-        "ip_value": 55.667,
-        "war": 0.12,
-        "era": 3.88,
-        "fip": 4.39,
-        "k_minus_bb_pct": 10.6
-      },
-      "forecast": {
-        "ip": 50.0,
-        "war": -0.03,
-        "era": 4.03,
-        "fip": 4.25,
-        "k_minus_bb_pct": 12.7,
-        "team_at_fetch": "TBR"
-      },
-      "forecast_to_date": {
-        "ip": 47.2,
-        "war": -0.03
-      },
-      "war_gap": 0.15,
-      "innings_share_pct": 4.1
     },
     {
       "id": 518886,
@@ -505,17 +505,17 @@
       "name": "Ty Johnson",
       "throws": "R",
       "role": "Reliever",
-      "games": 4,
+      "games": 5,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "3.0",
-        "ip_value": 3.0,
-        "war": 0.05,
-        "era": 6.0,
-        "fip": 2.76,
-        "k_minus_bb_pct": 13.3
+        "ip": "4.0",
+        "ip_value": 4.0,
+        "war": 0.09,
+        "era": 4.5,
+        "fip": 2.35,
+        "k_minus_bb_pct": 16.7
       },
       "forecast": {
         "ip": 18.5,
@@ -529,8 +529,8 @@
         "ip": 17.4,
         "war": 0.21
       },
-      "war_gap": -0.15,
-      "innings_share_pct": 0.2
+      "war_gap": -0.12,
+      "innings_share_pct": 0.3
     },
     {
       "id": 685801,
@@ -578,7 +578,7 @@
         "ip_value": 76.0,
         "war": -0.01,
         "era": 5.57,
-        "fip": 5.04,
+        "fip": 5.05,
         "k_minus_bb_pct": 9.9
       },
       "forecast": {
@@ -633,17 +633,17 @@
       "name": "Alex Cook",
       "throws": "R",
       "role": "Reliever",
-      "games": 3,
+      "games": 4,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "4.2",
-        "ip_value": 4.667,
-        "war": -0.03,
-        "era": 5.79,
-        "fip": 5.45,
-        "k_minus_bb_pct": 10.0
+        "ip": "5.2",
+        "ip_value": 5.667,
+        "war": -0.02,
+        "era": 4.76,
+        "fip": 4.69,
+        "k_minus_bb_pct": 12.5
       },
       "forecast": {
         "ip": 1.0,
@@ -657,8 +657,8 @@
         "ip": 0.9,
         "war": 0.0
       },
-      "war_gap": -0.04,
-      "innings_share_pct": 0.3
+      "war_gap": -0.02,
+      "innings_share_pct": 0.4
     },
     {
       "id": 655889,
@@ -827,7 +827,7 @@
         "ip_value": 7.0,
         "war": -0.12,
         "era": 5.14,
-        "fip": 6.95,
+        "fip": 6.96,
         "k_minus_bb_pct": 21.4
       },
       "forecast": {
@@ -842,7 +842,7 @@
         "ip": 0.9,
         "war": 0.01
       },
-      "war_gap": -0.13,
+      "war_gap": -0.12,
       "innings_share_pct": 0.5
     },
     {
@@ -891,7 +891,7 @@
         "ip_value": 19.333,
         "war": -0.29,
         "era": 6.52,
-        "fip": 6.61,
+        "fip": 6.62,
         "k_minus_bb_pct": 11.6
       },
       "forecast": {
