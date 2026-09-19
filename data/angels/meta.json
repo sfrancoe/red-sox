@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-18T15:11:34+00:00",
+ "generated_at": "2026-09-19T14:49:42+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 108,
  "seasons": {
   "2026": {
-   "record": "59-94",
-   "games": 153,
+   "record": "59-95",
+   "games": 154,
    "in_progress": true,
    "war_leader": {
     "name": "Zach Neto",
-    "war": 5.0
+    "war": 4.9
    },
    "war_leaders": [
     {
      "name": "Zach Neto",
-     "war": 5.0
+     "war": 4.9
     },
     {
      "name": "Walbert Ure\u00f1a",
-     "war": 4.0
+     "war": 3.9
     },
     {
      "name": "Reid Detmers",
-     "war": 3.9
+     "war": 3.8
     }
    ],
    "pitching_leaders": {
@@ -87,18 +87,17 @@
     },
     "avg": {
      "names": [
-      "Mike Trout",
       "Zach Neto"
      ],
-     "value": ".241",
+     "value": ".240",
      "top": [
       {
-       "name": "Mike Trout",
-       "value": ".241"
+       "name": "Zach Neto",
+       "value": ".240"
       },
       {
-       "name": "Zach Neto",
-       "value": ".241"
+       "name": "Mike Trout",
+       "value": ".239"
       }
      ]
     },
@@ -106,15 +105,15 @@
      "names": [
       "Mike Trout"
      ],
-     "value": ".802",
+     "value": ".796",
      "top": [
       {
        "name": "Mike Trout",
-       "value": ".802"
+       "value": ".796"
       },
       {
        "name": "Zach Neto",
-       "value": ".763"
+       "value": ".762"
       }
      ]
     }

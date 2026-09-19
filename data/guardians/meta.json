@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-18T15:11:32+00:00",
+ "generated_at": "2026-09-19T14:49:38+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 114,
  "seasons": {
   "2026": {
-   "record": "78-75",
-   "games": 153,
+   "record": "79-75",
+   "games": 154,
    "in_progress": true,
    "war_leader": {
     "name": "Parker Messick",
-    "war": 5.7
+    "war": 5.8
    },
    "war_leaders": [
     {
      "name": "Parker Messick",
-     "war": 5.7
+     "war": 5.8
     },
     {
      "name": "Steven Kwan",
-     "war": 4.9
+     "war": 5.0
     },
     {
      "name": "Chase DeLauter",
-     "war": 3.1
+     "war": 3.2
     }
    ],
    "pitching_leaders": {
@@ -31,7 +31,7 @@
      "top": [
       {
        "name": "Cade Smith",
-       "value": "1.00"
+       "value": "0.99"
       },
       {
        "name": "Colin Holderman",
@@ -47,7 +47,8 @@
    "batting_leaders": {
     "hr": {
      "names": [
-      "Angel Mart\u00ednez"
+      "Angel Mart\u00ednez",
+      "Travis Bazzana"
      ],
      "value": 15,
      "top": [
@@ -56,11 +57,11 @@
        "value": 15
       },
       {
-       "name": "Chase DeLauter",
-       "value": 14
+       "name": "Travis Bazzana",
+       "value": 15
       },
       {
-       "name": "Travis Bazzana",
+       "name": "Chase DeLauter",
        "value": 14
       }
      ]
@@ -69,11 +70,11 @@
      "names": [
       "Brayan Rocchio"
      ],
-     "value": 67,
+     "value": 69,
      "top": [
       {
        "name": "Brayan Rocchio",
-       "value": 67
+       "value": 69
       },
       {
        "name": "Chase DeLauter",
@@ -81,7 +82,7 @@
       },
       {
        "name": "Travis Bazzana",
-       "value": 56
+       "value": 57
       }
      ]
     },
@@ -97,11 +98,11 @@
       },
       {
        "name": "Steven Kwan",
-       "value": ".277"
+       "value": ".275"
       },
       {
-       "name": "Travis Bazzana",
-       "value": ".249"
+       "name": "Brayan Rocchio",
+       "value": ".250"
       }
      ]
     },
@@ -117,11 +118,11 @@
       },
       {
        "name": "Travis Bazzana",
-       "value": ".750"
+       "value": ".757"
       },
       {
        "name": "Steven Kwan",
-       "value": ".719"
+       "value": ".718"
       }
      ]
     }
