@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-18T13:54:12.247398+00:00",
-  "roster_as_of": "September 17, 2026",
+  "generated_at": "2026-09-19T13:27:00.527879+00:00",
+  "roster_as_of": "September 18, 2026",
   "team": {
     "id": 112,
     "name": "Chicago Cubs"
@@ -2252,47 +2252,6 @@
       }
     },
     {
-      "id": 1944232587,
-      "mlb_id": null,
-      "wikidata_id": null,
-      "slug": "bj-murray",
-      "name": "BJ Murray",
-      "full_name": "BJ Murray",
-      "number": "83",
-      "position": {
-        "name": "Infielder",
-        "group": "Infielder",
-        "abbreviation": "IF"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": null,
-      "age": null,
-      "birthplace": "",
-      "height": null,
-      "weight": null,
-      "bats": null,
-      "throws": null,
-      "debut_date": null,
-      "debut_team": null,
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Chicago Cubs"
-      ],
-      "source_url": null,
-      "wikipedia_url": "https://en.wikipedia.org/wiki/BJ_Murray",
-      "retrosheet_id": null,
-      "career_stats": {
-        "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
-      }
-    },
-    {
       "id": 681151,
       "mlb_id": 681151,
       "wikidata_id": "Q136101741",
@@ -2369,6 +2328,47 @@
           "era": 1.54,
           "whip": 1.114
         }
+      }
+    },
+    {
+      "id": 1944232587,
+      "mlb_id": null,
+      "wikidata_id": null,
+      "slug": "bj-murray",
+      "name": "BJ Murray",
+      "full_name": "BJ Murray",
+      "number": "83",
+      "position": {
+        "name": "Infielder",
+        "group": "Infielder",
+        "abbreviation": "IF"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": null,
+      "age": null,
+      "birthplace": "",
+      "height": null,
+      "weight": null,
+      "bats": null,
+      "throws": null,
+      "debut_date": null,
+      "debut_team": null,
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Chicago Cubs"
+      ],
+      "source_url": null,
+      "wikipedia_url": "https://en.wikipedia.org/wiki/BJ_Murray",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
       }
     },
     {
@@ -3055,8 +3055,8 @@
         "group": "Infielder",
         "abbreviation": "SS"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1994-02-11",
       "age": 32,
       "birthplace": "Kennesaw",

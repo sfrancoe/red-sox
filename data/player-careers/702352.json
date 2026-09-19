@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "player_id": 702352,
-  "generated_at": "2026-09-18T13:47:16.380062+00:00",
-  "data_as_of": "2026-09-18",
+  "generated_at": "2026-09-19T13:20:05.656889+00:00",
+  "data_as_of": "2026-09-19",
   "status": "available",
   "coverage": [
     {
@@ -219,6 +219,27 @@
       "whip": 1.33
     },
     {
+      "id": "702352-pitching-minors-2026-11-541",
+      "season": 2026,
+      "team": "Omaha Storm Chasers",
+      "league": "International League",
+      "level": "AAA",
+      "row_type": "team_stint",
+      "games": 1,
+      "games_started": 0,
+      "wins": 0,
+      "losses": 0,
+      "saves": 0,
+      "innings_outs": 3,
+      "hits": 1,
+      "earned_runs": 0,
+      "home_runs": 0,
+      "walks": 1,
+      "strikeouts": 1,
+      "era": 0.0,
+      "whip": 2.0
+    },
+    {
       "id": "702352-pitching-minors-2026-11-105",
       "season": 2026,
       "team": "Sacramento River Cats",
@@ -259,6 +280,27 @@
       "strikeouts": 8,
       "era": 14.4,
       "whip": 3.0
+    },
+    {
+      "id": "702352-pitching-minors-2026-21-subtotal",
+      "season": 2026,
+      "team": "2 teams",
+      "league": null,
+      "level": "Minors",
+      "row_type": "subtotal",
+      "games": 36,
+      "games_started": 7,
+      "wins": 5,
+      "losses": 3,
+      "saves": 1,
+      "innings_outs": 228,
+      "hits": 77,
+      "earned_runs": 41,
+      "home_runs": 10,
+      "walks": 29,
+      "strikeouts": 73,
+      "era": 4.86,
+      "whip": 1.39
     }
   ]
 }

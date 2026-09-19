@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-18T13:51:07.404132+00:00",
-  "roster_as_of": "September 14, 2026",
+  "generated_at": "2026-09-19T13:23:44.403817+00:00",
+  "roster_as_of": "September 18, 2026",
   "team": {
     "id": 140,
     "name": "Texas Rangers"
   },
   "roster_type": "open-current-roster",
-  "player_count": 45,
+  "player_count": 46,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -33,8 +33,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1999-06-18",
       "age": 27,
       "birthplace": "Placerville, California, U.S.",
@@ -2249,6 +2249,86 @@
       }
     },
     {
+      "id": 671305,
+      "mlb_id": 671305,
+      "wikidata_id": "Q126459776",
+      "slug": "michel-otanez",
+      "name": "Michel Otañez",
+      "full_name": "Michel Otañez",
+      "number": "58",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1997-07-03",
+      "age": 29,
+      "birthplace": "Villa La Mata, Dominican Republic",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "June 10, 2024",
+      "debut_team": "Oakland Athletics",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Oakland Athletics",
+        "Athletics",
+        "Texas Rangers"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q126459776",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Michel_Ota%C3%B1ez",
+      "retrosheet_id": "otanm001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 42,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 42,
+          "games_started": 0,
+          "wins": 1,
+          "losses": 0,
+          "saves": 1,
+          "innings_outs": 118,
+          "hits": 34,
+          "runs": 23,
+          "earned_runs": 21,
+          "home_runs": 4,
+          "walks": 25,
+          "strikeouts": 61,
+          "hit_batters": 4,
+          "wild_pitches": 6,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.81,
+          "whip": 1.5
+        }
+      }
+    },
+    {
       "id": 592626,
       "mlb_id": 592626,
       "wikidata_id": "Q16234668",
@@ -2536,7 +2616,7 @@
       "slug": "winston-santos",
       "name": "Winston Santos",
       "full_name": "Winston Santos",
-      "number": "84",
+      "number": "47",
       "position": {
         "name": "Pitcher",
         "group": "Pitcher",
@@ -2720,7 +2800,7 @@
       "slug": "emiliano-teodo",
       "name": "Emiliano Teodo",
       "full_name": "Emiliano Teodo",
-      "number": "82",
+      "number": "56",
       "position": {
         "name": "Pitcher",
         "group": "Pitcher",
@@ -2853,7 +2933,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
+      "roster_status": "60-day injured list",
       "is_active_roster": false,
       "birth_date": "1999-11-25",
       "age": 26,
