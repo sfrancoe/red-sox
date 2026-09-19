@@ -147,16 +147,35 @@ def check_app_icon() -> Check:
 def check_privacy_manifest() -> Check:
     if not PRIVACY_MANIFEST.exists():
         return result(
-            "WARN",
+            "FAIL",
             "Privacy manifest",
             "PrivacyInfo.xcprivacy is missing. Confirm data collection and required-reason APIs.",
         )
     try:
         with PRIVACY_MANIFEST.open("rb") as handle:
-            plistlib.load(handle)
+            manifest = plistlib.load(handle)
     except (OSError, plistlib.InvalidFileException) as exc:
         return result("FAIL", "Privacy manifest", f"The manifest is not a valid property list: {exc}")
-    return result("PASS", "Privacy manifest", "PrivacyInfo.xcprivacy is present and readable.")
+    if not isinstance(manifest, dict):
+        return result("FAIL", "Privacy manifest", "The manifest must contain a dictionary.")
+    accessed = manifest.get("NSPrivacyAccessedAPITypes", [])
+    if not isinstance(accessed, list) or any(not isinstance(entry, dict) for entry in accessed):
+        return result("FAIL", "Privacy manifest", "NSPrivacyAccessedAPITypes must be an array of dictionaries.")
+    uses_defaults = any(
+        re.search(r"\bUserDefaults\b|@AppStorage\b", release_source(path))
+        for path in swift_sources()
+    )
+    if uses_defaults and not any(
+        entry.get("NSPrivacyAccessedAPIType") == "NSPrivacyAccessedAPICategoryUserDefaults"
+        and isinstance(entry.get("NSPrivacyAccessedAPITypeReasons"), list)
+        and "CA92.1" in entry["NSPrivacyAccessedAPITypeReasons"]
+        for entry in accessed
+    ):
+        return result(
+            "FAIL", "Privacy manifest",
+            "App-local UserDefaults/@AppStorage requires the UserDefaults category with reason CA92.1.",
+        )
+    return result("PASS", "Privacy manifest", "Manifest is readable and app-local UserDefaults usage is declared.")
 
 
 def check_metadata() -> list[Check]:
