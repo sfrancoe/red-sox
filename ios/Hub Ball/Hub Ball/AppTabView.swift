@@ -3,6 +3,7 @@ import SwiftUI
 enum MainTab: String, CaseIterable {
     case home
     case recent
+    case watch
     case standings
     case schedule
     case headlines
@@ -16,6 +17,7 @@ enum MainTab: String, CaseIterable {
         switch self {
         case .home: "Home"
         case .recent: "Game Recaps"
+        case .watch: "Watch"
         case .schedule: "Schedule"
         case .headlines: "Newspapers"
         case .xPosts: "X Posts"
@@ -37,7 +39,14 @@ enum MainTab: String, CaseIterable {
             .split(separator: ",")
             .compactMap { MainTab(rawValue: String($0)) }
             .filter { seen.insert($0).inserted }
-        let completeOrder = storedTabs + allCases.filter { !seen.contains($0) }
+        var completeOrder = storedTabs + allCases.filter { !seen.contains($0) }
+        // Put the new destination near the front for existing users, while
+        // respecting anyone who has already arranged Watch in Settings.
+        if !seen.contains(.watch) {
+            completeOrder.removeAll { $0 == .watch }
+            let position = completeOrder.firstIndex(of: .recent).map { $0 + 1 } ?? 1
+            completeOrder.insert(.watch, at: min(position, completeOrder.count))
+        }
 
         return [.home] + completeOrder.filter { $0 != .home }
     }
@@ -92,7 +101,9 @@ struct AppTabView: View {
             guard !hasAppeared else { return }
             #if DEBUG
             let arguments = ProcessInfo.processInfo.arguments
-            if arguments.contains("-show-stories"), team.hasPublishedStories {
+            if arguments.contains("-show-watch") {
+                selectedTab = .watch
+            } else if arguments.contains("-show-stories"), team.hasPublishedStories {
                 selectedTab = .stories
             } else if team.supportsPlayers,
                let playerArgument = arguments.first(where: { $0.hasPrefix("-show-player=") }),
@@ -174,11 +185,14 @@ struct AppTabView: View {
                 HomeView(team: team) { destination in
                     switch destination {
                     case .games: selectedTab = .recent
+                    case .watch: selectedTab = .watch
                     case .schedule: selectedTab = .schedule
                     case .standings: selectedTab = .standings
                     }
                 }
                 .mainTabSwipe(selection: $selectedTab, current: .home, availableTabs: availableTabs)
+        case .watch:
+                WatchView(team: team)
         case .recent:
                 RecentGameView(team: team, onSelectPlayer: showPlayer)
                     .mainTabSwipe(selection: $selectedTab, current: .recent, availableTabs: availableTabs)
