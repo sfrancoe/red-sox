@@ -33,7 +33,7 @@ struct RecentGameView: View {
                             gameContent(game)
                         }
                     } else if store.isLoading {
-                        ProgressView("Loading Game Center…")
+                        ProgressView("Loading Game Recaps…")
                             .tint(AppColor.ink)
                             .foregroundStyle(AppColor.ink)
                     } else {
@@ -612,7 +612,7 @@ struct RecentGameView: View {
         ContentUnavailableView {
             Label("Game Unavailable", systemImage: "wifi.exclamationmark")
         } description: {
-            Text(store.errorMessage ?? "Game Center could not be loaded.")
+            Text(store.errorMessage ?? "Game Recaps could not be loaded.")
         } actions: {
             Button("Try Again") {
                 Task { await store.load() }

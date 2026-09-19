@@ -148,5 +148,52 @@ assert.equal(response.status, 200);
 assert.equal(response.headers.get('X-Data-Freshness'), 'stale');
 assert.equal((await response.json()).freshness, 'stale');
 
+const cacheHeaderCases = [
+  ['live', { abstractGameState: 'Live', codedGameState: 'I' },
+    'public, max-age=5, stale-while-revalidate=15',
+    'public, durable, max-age=5, stale-while-revalidate=15'],
+  ['confirmed final', { abstractGameState: 'Final', codedGameState: 'F' },
+    'public, max-age=300, stale-while-revalidate=60',
+    'public, durable, max-age=300, stale-while-revalidate=60'],
+  ['confirmed extra-innings final', { abstractGameState: 'Final', codedGameState: 'O' },
+    'public, max-age=300, stale-while-revalidate=60',
+    'public, durable, max-age=300, stale-while-revalidate=60'],
+  ['suspended', { abstractGameState: 'Live', codedGameState: 'S' },
+    'public, max-age=5, stale-while-revalidate=15',
+    'public, durable, max-age=5, stale-while-revalidate=15'],
+  ['postponed', { abstractGameState: 'Preview', codedGameState: 'P' },
+    'public, max-age=5, stale-while-revalidate=15',
+    'public, durable, max-age=5, stale-while-revalidate=15'],
+  ['cancelled', { abstractGameState: 'Final', codedGameState: 'C' },
+    'public, max-age=5, stale-while-revalidate=15',
+    'public, durable, max-age=5, stale-while-revalidate=15'],
+  ['missing status', {},
+    'public, max-age=5, stale-while-revalidate=15',
+    'public, durable, max-age=5, stale-while-revalidate=15'],
+  ['malformed status', null,
+    'public, max-age=5, stale-while-revalidate=15',
+    'public, durable, max-age=5, stale-while-revalidate=15'],
+  ['unknown status', { abstractGameState: 'Final', codedGameState: 'D' },
+    'public, max-age=5, stale-while-revalidate=15',
+    'public, durable, max-age=5, stale-while-revalidate=15'],
+];
+
+for (const [label, status, cacheControl, cdnCacheControl] of cacheHeaderCases) {
+  globalThis.fetch = async url => {
+    if (String(url).includes('/content')) return new Response('{}');
+    return new Response(JSON.stringify({
+      gamePk: 123,
+      gameData: {
+        status,
+        teams: { away: { id: 111 }, home: { id: 147 } },
+      },
+    }));
+  };
+  response = await handler(new Request('https://example.test/api/mlb/game?team=red-sox&gamePk=123'));
+  assert.equal(response.status, 200, label);
+  assert.equal(response.headers.get('Cache-Control'), cacheControl, label);
+  assert.equal(response.headers.get('Netlify-CDN-Cache-Control'), cdnCacheControl, label);
+}
+
 globalThis.fetch = originalFetch;
 console.log('MLB live-data gateway tests passed');

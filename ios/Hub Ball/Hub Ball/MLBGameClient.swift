@@ -8,9 +8,11 @@ struct MLBGameDescriptor: Sendable {
 
 struct MLBGameClient: Sendable {
     private let team: HubTeam
+    private let session: URLSession
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam = .boston, session: URLSession = .shared) {
         self.team = team
+        self.session = session
     }
 
     func gameDescriptors(now: Date = Date()) async throws -> [MLBGameDescriptor] {
@@ -61,9 +63,9 @@ struct MLBGameClient: Sendable {
 
     private func json(from url: URL) async throws -> JSON {
         var request = URLRequest(url: url)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.cachePolicy = .useProtocolCachePolicy
         request.timeoutInterval = 20
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await session.data(for: request)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200,
               let payload = try JSONSerialization.jsonObject(with: data) as? JSON else {
             throw MLBGameError.badResponse

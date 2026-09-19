@@ -6,15 +6,22 @@ import Observation
 final class RecentGameStore {
     private let client: MLBGameClient
     private let scheduleStore: ScheduleStore
-    private var cache: [Int: RecentGame] = [:]
+    private let now: () -> Date
+    private let finalCacheLifetime: TimeInterval = 5 * 60
+    private var cache: [Int: CachedGame] = [:]
 
     var games: [RecentGame] = []
     var isLoading = false
     var errorMessage: String?
 
-    init(team: HubTeam = .boston) {
-        client = MLBGameClient(team: team)
-        scheduleStore = ScheduleStore(team: team)
+    init(
+        team: HubTeam = .boston,
+        session: URLSession = .shared,
+        now: @escaping () -> Date = Date.init
+    ) {
+        client = MLBGameClient(team: team, session: session)
+        scheduleStore = ScheduleStore(team: team, session: session, now: now)
+        self.now = now
     }
 
     var hasLiveGame: Bool {
@@ -50,13 +57,22 @@ final class RecentGameStore {
 
             for descriptor in descriptors {
                 let cachedGame = cache[descriptor.gamePk]
-                let needsFreshFeed = cachedGame == nil || descriptor.isLive || cachedGame?.isLive == true
+                let needsFreshFeed = cachedGame == nil
+                    || descriptor.isLive
+                    || cachedGame?.game.isLive == true
+                    || cachedGame.map { now().timeIntervalSince($0.fetchedAt) >= finalCacheLifetime } == true
                 if needsFreshFeed {
-                    cache[descriptor.gamePk] = try await client.game(gamePk: descriptor.gamePk)
+                    do {
+                        let game = try await client.game(gamePk: descriptor.gamePk)
+                        cache[descriptor.gamePk] = CachedGame(game: game, fetchedAt: now())
+                    } catch {
+                        // Keep the last good game and its original fetch time. A failed
+                        // final revalidation must not make stale data look freshly checked.
+                    }
                 }
             }
 
-            let refreshedGames = descriptors.compactMap { cache[$0.gamePk] }
+            let refreshedGames = descriptors.compactMap { cache[$0.gamePk]?.game }
             guard !refreshedGames.isEmpty else {
                 throw RecentGameError.noGames
             }
@@ -68,7 +84,7 @@ final class RecentGameStore {
         } catch {
             guard !Task.isCancelled else { return }
             if games.isEmpty {
-                errorMessage = "We couldn't load the Game Center. Check your connection and try again."
+                errorMessage = "We couldn't load Game Recaps. Check your connection and try again."
             }
         }
     }
@@ -76,4 +92,9 @@ final class RecentGameStore {
 
 private enum RecentGameError: Error {
     case noGames
+}
+
+private struct CachedGame {
+    let game: RecentGame
+    let fetchedAt: Date
 }

@@ -3,6 +3,8 @@ import { MLB_TEAMS } from './team-registry.mjs';
 const MLB_ORIGIN = 'https://statsapi.mlb.com';
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
 const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const LIVE_GAME_CACHE_CONTROL = 'public, max-age=5, stale-while-revalidate=15';
+const FINAL_GAME_CACHE_CONTROL = 'public, max-age=300, stale-while-revalidate=60';
 export const TEAMS = new Map(MLB_TEAMS.map(team => [team.api_key, team.mlb_id]));
 TEAMS.set('red-sox', 111);
 const TEAM_CONFIGS = new Map(MLB_TEAMS.map(team => [team.api_key, team]));
@@ -185,6 +187,13 @@ function officialRecap(content) {
   return { headline, url: `https://www.mlb.com/news/${slug}` };
 }
 
+export function gameCacheControl(payload) {
+  const status = payload?.gameData?.status;
+  const isConfirmedFinal = status?.abstractGameState === 'Final'
+    && ['F', 'O'].includes(status?.codedGameState);
+  return isConfirmedFinal ? FINAL_GAME_CACHE_CONTROL : LIVE_GAME_CACHE_CONTROL;
+}
+
 export default async request => {
   const requestURL = new URL(request.url);
   const team = TEAM_CONFIGS.get(requestURL.searchParams.get('team'));
@@ -222,10 +231,14 @@ export default async request => {
         'Content-Type': 'application/json; charset=utf-8',
         'Cache-Control': upstream.route === 'standings'
           ? 'public, max-age=30, stale-while-revalidate=30'
-          : 'public, max-age=5, stale-while-revalidate=15',
+          : upstream.route === 'game'
+            ? gameCacheControl(payload)
+            : LIVE_GAME_CACHE_CONTROL,
         'Netlify-CDN-Cache-Control': upstream.route === 'standings'
           ? 'public, durable, max-age=30, stale-while-revalidate=30'
-          : 'public, durable, max-age=5, stale-while-revalidate=15',
+          : upstream.route === 'game'
+            ? `public, durable, ${gameCacheControl(payload).slice('public, '.length)}`
+            : `public, durable, ${LIVE_GAME_CACHE_CONTROL.slice('public, '.length)}`,
         'X-Data-Freshness': 'live',
         'Access-Control-Allow-Origin': '*',
         'X-Content-Type-Options': 'nosniff',
