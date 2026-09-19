@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T05:06:02.870496+00:00",
+  "generated_at": "2026-09-19T16:05:11.772410+00:00",
   "season": 2026,
   "team": "Arizona Diamondbacks",
   "games_played": 154,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.1,
+    "actual_war": 11.9,
     "forecast_war_to_date": 13.8,
-    "war_gap": -1.7,
-    "innings": 1363.0,
-    "era": 4.11
+    "war_gap": -1.8,
+    "innings": 1372.0,
+    "era": 4.13
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Eduardo Rodriguez",
       "throws": "L",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "178.1",
-        "ip_value": 178.333,
-        "war": 3.24,
-        "era": 2.62,
-        "fip": 3.74,
-        "k_minus_bb_pct": 10.5
+        "ip": "183.2",
+        "ip_value": 183.667,
+        "war": 3.07,
+        "era": 2.89,
+        "fip": 3.88,
+        "k_minus_bb_pct": 10.2
       },
       "forecast": {
         "ip": 133.5,
@@ -49,8 +49,8 @@
         "ip": 126.9,
         "war": 1.47
       },
-      "war_gap": 1.77,
-      "innings_share_pct": 13.1
+      "war_gap": 1.61,
+      "innings_share_pct": 13.4
     },
     {
       "id": 647336,
@@ -82,7 +82,7 @@
         "war": 0.94
       },
       "war_gap": 1.61,
-      "innings_share_pct": 7.7
+      "innings_share_pct": 7.6
     },
     {
       "id": 694297,
@@ -113,8 +113,8 @@
         "ip": 156.0,
         "war": 1.72
       },
-      "war_gap": 0.03,
-      "innings_share_pct": 9.1
+      "war_gap": 0.04,
+      "innings_share_pct": 9.0
     },
     {
       "id": 666661,
@@ -130,7 +130,7 @@
         "ip_value": 60.333,
         "war": 1.5,
         "era": 2.24,
-        "fip": 2.71,
+        "fip": 2.72,
         "k_minus_bb_pct": 19.5
       },
       "forecast": {
@@ -226,7 +226,7 @@
         "ip_value": 63.667,
         "war": 0.96,
         "era": 4.1,
-        "fip": 3.25,
+        "fip": 3.26,
         "k_minus_bb_pct": 19.5
       },
       "forecast": {
@@ -241,25 +241,25 @@
         "ip": 56.1,
         "war": 0.41
       },
-      "war_gap": 0.54,
-      "innings_share_pct": 4.7
+      "war_gap": 0.55,
+      "innings_share_pct": 4.6
     },
     {
       "id": 664199,
       "name": "Taylor Clarke",
       "throws": "R",
       "role": "Setup",
-      "games": 67,
+      "games": 68,
       "starts": 1,
       "saves": 0,
       "holds": 13,
       "actual": {
-        "ip": "69.2",
-        "ip_value": 69.667,
+        "ip": "70.1",
+        "ip_value": 70.333,
         "war": 0.61,
-        "era": 2.71,
+        "era": 2.69,
         "fip": 3.71,
-        "k_minus_bb_pct": 10.8
+        "k_minus_bb_pct": 10.7
       },
       "forecast": {
         "ip": 61.0,
@@ -273,7 +273,7 @@
         "ip": 58.0,
         "war": 0.17
       },
-      "war_gap": 0.44,
+      "war_gap": 0.45,
       "innings_share_pct": 5.1
     },
     {
@@ -450,7 +450,7 @@
         "ip_value": 27.0,
         "war": 0.12,
         "era": 4.33,
-        "fip": 5.13,
+        "fip": 5.14,
         "k_minus_bb_pct": 6.7
       },
       "forecast": {
@@ -482,7 +482,7 @@
         "ip_value": 9.0,
         "war": 0.12,
         "era": 1.0,
-        "fip": 2.98,
+        "fip": 2.99,
         "k_minus_bb_pct": 8.8
       },
       "forecast": {
@@ -603,7 +603,7 @@
         "ip_value": 7.667,
         "war": -0.03,
         "era": 5.87,
-        "fip": 5.7,
+        "fip": 5.71,
         "k_minus_bb_pct": 12.5
       },
       "forecast": {
@@ -832,6 +832,38 @@
       "innings_share_pct": 0.3
     },
     {
+      "id": 668678,
+      "name": "Zac Gallen",
+      "throws": "R",
+      "role": "Starter",
+      "games": 21,
+      "starts": 20,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "104.1",
+        "ip_value": 104.333,
+        "war": -0.13,
+        "era": 6.12,
+        "fip": 5.36,
+        "k_minus_bb_pct": 6.2
+      },
+      "forecast": {
+        "ip": 183.9,
+        "war": 2.18,
+        "era": 4.24,
+        "fip": 3.96,
+        "k_minus_bb_pct": 14.5,
+        "team_at_fetch": "ARI"
+      },
+      "forecast_to_date": {
+        "ip": 174.8,
+        "war": 2.07
+      },
+      "war_gap": -2.2,
+      "innings_share_pct": 7.6
+    },
+    {
       "id": 605452,
       "name": "Joe Ross",
       "throws": "R",
@@ -845,7 +877,7 @@
         "ip_value": 3.667,
         "war": -0.14,
         "era": 19.64,
-        "fip": 8.82,
+        "fip": 8.83,
         "k_minus_bb_pct": -9.1
       },
       "forecast": {
@@ -862,38 +894,6 @@
       },
       "war_gap": -0.16,
       "innings_share_pct": 0.3
-    },
-    {
-      "id": 668678,
-      "name": "Zac Gallen",
-      "throws": "R",
-      "role": "Starter",
-      "games": 20,
-      "starts": 20,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "101.1",
-        "ip_value": 101.333,
-        "war": -0.14,
-        "era": 6.22,
-        "fip": 5.41,
-        "k_minus_bb_pct": 6.4
-      },
-      "forecast": {
-        "ip": 183.9,
-        "war": 2.18,
-        "era": 4.24,
-        "fip": 3.96,
-        "k_minus_bb_pct": 14.5,
-        "team_at_fetch": "ARI"
-      },
-      "forecast_to_date": {
-        "ip": 174.8,
-        "war": 2.07
-      },
-      "war_gap": -2.21,
-      "innings_share_pct": 7.4
     },
     {
       "id": 691769,
@@ -925,7 +925,7 @@
         "war": 0.08
       },
       "war_gap": -0.24,
-      "innings_share_pct": 1.1
+      "innings_share_pct": 1.0
     },
     {
       "id": 518876,
@@ -939,7 +939,7 @@
       "actual": {
         "ip": "156.2",
         "ip_value": 156.667,
-        "war": -0.17,
+        "war": -0.16,
         "era": 5.0,
         "fip": 5.4,
         "k_minus_bb_pct": 6.1
@@ -957,7 +957,7 @@
         "war": 2.26
       },
       "war_gap": -2.42,
-      "innings_share_pct": 11.5
+      "innings_share_pct": 11.4
     },
     {
       "id": 694851,
@@ -1085,7 +1085,7 @@
         "war": 0.06
       },
       "war_gap": -0.63,
-      "innings_share_pct": 2.9
+      "innings_share_pct": 2.8
     }
   ]
 }

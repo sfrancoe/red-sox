@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T05:06:00.790866+00:00",
+  "generated_at": "2026-09-19T16:05:05.622166+00:00",
   "season": 2026,
   "team": "Cincinnati Reds",
   "games_played": 154,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 7.6,
+    "actual_war": 7.7,
     "forecast_war_to_date": 15.0,
-    "war_gap": -7.4,
-    "innings": 1354.0,
-    "era": 4.88
+    "war_gap": -7.3,
+    "innings": 1363.0,
+    "era": 4.87
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Chase Burns",
       "throws": "R",
       "role": "Starter",
-      "games": 28,
-      "starts": 28,
+      "games": 29,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "151.1",
-        "ip_value": 151.333,
-        "war": 4.36,
-        "era": 2.8,
-        "fip": 3.17,
-        "k_minus_bb_pct": 20.7
+        "ip": "154.1",
+        "ip_value": 154.333,
+        "war": 4.32,
+        "era": 2.86,
+        "fip": 3.24,
+        "k_minus_bb_pct": 20.5
       },
       "forecast": {
         "ip": 114.2,
@@ -49,8 +49,8 @@
         "ip": 108.6,
         "war": 2.17
       },
-      "war_gap": 2.18,
-      "innings_share_pct": 11.2
+      "war_gap": 2.15,
+      "innings_share_pct": 11.3
     },
     {
       "id": 671096,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "124.1",
         "ip_value": 124.333,
-        "war": 1.15,
+        "war": 1.16,
         "era": 5.79,
         "fip": 4.78,
         "k_minus_bb_pct": 8.3
@@ -114,24 +114,24 @@
         "war": 1.1
       },
       "war_gap": 0.05,
-      "innings_share_pct": 9.2
+      "innings_share_pct": 9.1
     },
     {
       "id": 656271,
       "name": "Brock Burke",
       "throws": "L",
       "role": "Setup",
-      "games": 74,
+      "games": 75,
       "starts": 0,
       "saves": 2,
-      "holds": 20,
+      "holds": 21,
       "actual": {
-        "ip": "71.1",
-        "ip_value": 71.333,
-        "war": 0.79,
-        "era": 2.4,
-        "fip": 3.8,
-        "k_minus_bb_pct": 10.9
+        "ip": "72.1",
+        "ip_value": 72.333,
+        "war": 0.83,
+        "era": 2.36,
+        "fip": 3.76,
+        "k_minus_bb_pct": 11.1
       },
       "forecast": {
         "ip": 62.0,
@@ -145,7 +145,7 @@
         "ip": 58.9,
         "war": 0.17
       },
-      "war_gap": 0.62,
+      "war_gap": 0.66,
       "innings_share_pct": 5.3
     },
     {
@@ -184,17 +184,17 @@
       "id": 622088,
       "name": "Tejay Antone",
       "throws": "R",
-      "role": "Reliever",
-      "games": 54,
+      "role": "Setup",
+      "games": 55,
       "starts": 0,
       "saves": 1,
-      "holds": 9,
+      "holds": 10,
       "actual": {
-        "ip": "51.0",
-        "ip_value": 51.0,
-        "war": 0.58,
-        "era": 3.35,
-        "fip": 3.84,
+        "ip": "52.0",
+        "ip_value": 52.0,
+        "war": 0.59,
+        "era": 3.29,
+        "fip": 3.85,
         "k_minus_bb_pct": 17.1
       },
       "forecast": {
@@ -217,17 +217,17 @@
       "name": "Emilio Pagán",
       "throws": "R",
       "role": "Closer",
-      "games": 42,
+      "games": 43,
       "starts": 0,
-      "saves": 23,
+      "saves": 24,
       "holds": 0,
       "actual": {
-        "ip": "39.2",
-        "ip_value": 39.667,
+        "ip": "40.2",
+        "ip_value": 40.667,
         "war": 0.38,
-        "era": 3.63,
+        "era": 3.54,
         "fip": 4.33,
-        "k_minus_bb_pct": 19.6
+        "k_minus_bb_pct": 19.3
       },
       "forecast": {
         "ip": 66.0,
@@ -242,39 +242,7 @@
         "war": 0.38
       },
       "war_gap": -0.0,
-      "innings_share_pct": 2.9
-    },
-    {
-      "id": 668933,
-      "name": "Graham Ashcraft",
-      "throws": "R",
-      "role": "Setup",
-      "games": 31,
-      "starts": 0,
-      "saves": 1,
-      "holds": 11,
-      "actual": {
-        "ip": "31.1",
-        "ip_value": 31.333,
-        "war": 0.35,
-        "era": 4.6,
-        "fip": 3.67,
-        "k_minus_bb_pct": 11.1
-      },
-      "forecast": {
-        "ip": 65.0,
-        "war": 0.39,
-        "era": 3.95,
-        "fip": 3.97,
-        "k_minus_bb_pct": 13.8,
-        "team_at_fetch": "CIN"
-      },
-      "forecast_to_date": {
-        "ip": 61.8,
-        "war": 0.37
-      },
-      "war_gap": -0.02,
-      "innings_share_pct": 2.3
+      "innings_share_pct": 3.0
     },
     {
       "id": 682825,
@@ -309,6 +277,38 @@
       "innings_share_pct": 2.3
     },
     {
+      "id": 668933,
+      "name": "Graham Ashcraft",
+      "throws": "R",
+      "role": "Setup",
+      "games": 31,
+      "starts": 0,
+      "saves": 1,
+      "holds": 11,
+      "actual": {
+        "ip": "31.1",
+        "ip_value": 31.333,
+        "war": 0.35,
+        "era": 4.6,
+        "fip": 3.67,
+        "k_minus_bb_pct": 11.1
+      },
+      "forecast": {
+        "ip": 65.0,
+        "war": 0.39,
+        "era": 3.95,
+        "fip": 3.97,
+        "k_minus_bb_pct": 13.8,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 61.8,
+        "war": 0.37
+      },
+      "war_gap": -0.02,
+      "innings_share_pct": 2.3
+    },
+    {
       "id": 594580,
       "name": "Sam Moll",
       "throws": "L",
@@ -338,7 +338,7 @@
         "war": 0.24
       },
       "war_gap": 0.06,
-      "innings_share_pct": 4.2
+      "innings_share_pct": 4.1
     },
     {
       "id": 663903,
@@ -370,7 +370,7 @@
         "war": 2.2
       },
       "war_gap": -2.01,
-      "innings_share_pct": 11.4
+      "innings_share_pct": 11.3
     },
     {
       "id": 663978,
@@ -501,6 +501,38 @@
       "innings_share_pct": 0.6
     },
     {
+      "id": 687924,
+      "name": "Julian Aguiar",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "3.0",
+        "ip_value": 3.0,
+        "war": 0.06,
+        "era": 6.0,
+        "fip": 2.76,
+        "k_minus_bb_pct": 7.1
+      },
+      "forecast": {
+        "ip": 35.1,
+        "war": 0.05,
+        "era": 4.63,
+        "fip": 4.76,
+        "k_minus_bb_pct": 11.4,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 33.3,
+        "war": 0.04
+      },
+      "war_gap": 0.02,
+      "innings_share_pct": 0.2
+    },
+    {
       "id": 670062,
       "name": "Julian Garcia",
       "throws": "R",
@@ -628,7 +660,7 @@
         "ip_value": 96.667,
         "war": -0.13,
         "era": 5.12,
-        "fip": 5.75,
+        "fip": 5.76,
         "k_minus_bb_pct": 8.5
       },
       "forecast": {
@@ -672,38 +704,6 @@
       "innings_share_pct": 0.7
     },
     {
-      "id": 676760,
-      "name": "Ron Marinaccio",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 4,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "5.1",
-        "ip_value": 5.333,
-        "war": -0.16,
-        "era": 16.88,
-        "fip": 8.35,
-        "k_minus_bb_pct": -3.1
-      },
-      "forecast": {
-        "ip": 40.0,
-        "war": 0.02,
-        "era": 4.35,
-        "fip": 4.52,
-        "k_minus_bb_pct": 10.9,
-        "team_at_fetch": "MIN"
-      },
-      "forecast_to_date": {
-        "ip": 38.0,
-        "war": 0.02
-      },
-      "war_gap": -0.18,
-      "innings_share_pct": 0.4
-    },
-    {
       "id": 572955,
       "name": "Pierce Johnson",
       "throws": "R",
@@ -734,6 +734,38 @@
       },
       "war_gap": -0.44,
       "innings_share_pct": 3.4
+    },
+    {
+      "id": 676760,
+      "name": "Ron Marinaccio",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "5.1",
+        "ip_value": 5.333,
+        "war": -0.16,
+        "era": 16.88,
+        "fip": 8.35,
+        "k_minus_bb_pct": -3.1
+      },
+      "forecast": {
+        "ip": 40.0,
+        "war": 0.02,
+        "era": 4.35,
+        "fip": 4.52,
+        "k_minus_bb_pct": 10.9,
+        "team_at_fetch": "MIN"
+      },
+      "forecast_to_date": {
+        "ip": 38.0,
+        "war": 0.02
+      },
+      "war_gap": -0.18,
+      "innings_share_pct": 0.4
     },
     {
       "id": 693312,
@@ -941,7 +973,7 @@
         "ip_value": 27.667,
         "war": -0.33,
         "era": 5.53,
-        "fip": 5.84,
+        "fip": 5.85,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -956,7 +988,7 @@
         "ip": 55.1,
         "war": 0.03
       },
-      "war_gap": -0.37,
+      "war_gap": -0.36,
       "innings_share_pct": 2.0
     },
     {

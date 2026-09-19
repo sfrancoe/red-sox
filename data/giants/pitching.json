@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T05:06:04.546662+00:00",
+  "generated_at": "2026-09-19T16:05:17.261579+00:00",
   "season": 2026,
   "team": "San Francisco Giants",
   "games_played": 154,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 10.1,
+    "actual_war": 9.7,
     "forecast_war_to_date": 11.7,
-    "war_gap": -1.6,
-    "innings": 1351.0,
-    "era": 4.35
+    "war_gap": -2.1,
+    "innings": 1359.0,
+    "era": 4.38
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "160.2",
         "ip_value": 160.667,
-        "war": 3.11,
+        "war": 3.1,
         "era": 4.31,
         "fip": 3.45,
         "k_minus_bb_pct": 13.9
@@ -50,7 +50,7 @@
         "war": 3.89
       },
       "war_gap": -0.79,
-      "innings_share_pct": 11.9
+      "innings_share_pct": 11.8
     },
     {
       "id": 694738,
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "155.0",
         "ip_value": 155.0,
-        "war": 2.53,
+        "war": 2.52,
         "era": 4.01,
         "fip": 3.72,
         "k_minus_bb_pct": 10.4
@@ -82,7 +82,7 @@
         "war": 1.08
       },
       "war_gap": 1.45,
-      "innings_share_pct": 11.5
+      "innings_share_pct": 11.4
     },
     {
       "id": 592662,
@@ -114,7 +114,7 @@
         "war": 1.55
       },
       "war_gap": -0.49,
-      "innings_share_pct": 9.1
+      "innings_share_pct": 9.0
     },
     {
       "id": 641816,
@@ -130,7 +130,7 @@
         "ip_value": 94.667,
         "war": 0.85,
         "era": 5.13,
-        "fip": 4.37,
+        "fip": 4.38,
         "k_minus_bb_pct": 12.9
       },
       "forecast": {
@@ -241,7 +241,7 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": 0.58,
+      "war_gap": 0.59,
       "innings_share_pct": 1.7
     },
     {
@@ -274,7 +274,7 @@
         "war": 0.0
       },
       "war_gap": 0.5,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     },
     {
       "id": 605288,
@@ -305,7 +305,7 @@
         "ip": 140.0,
         "war": 1.05
       },
-      "war_gap": -0.6,
+      "war_gap": -0.61,
       "innings_share_pct": 8.1
     },
     {
@@ -448,9 +448,9 @@
       "actual": {
         "ip": "43.0",
         "ip_value": 43.0,
-        "war": 0.32,
+        "war": 0.31,
         "era": 3.35,
-        "fip": 3.86,
+        "fip": 3.87,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -469,53 +469,21 @@
       "innings_share_pct": 3.2
     },
     {
-      "id": 702885,
-      "name": "Cesar Perdomo",
-      "throws": "L",
-      "role": "Starter",
-      "games": 3,
-      "starts": 2,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "14.2",
-        "ip_value": 14.667,
-        "war": 0.13,
-        "era": 3.68,
-        "fip": 4.19,
-        "k_minus_bb_pct": 11.5
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 5.01,
-        "fip": 5.16,
-        "k_minus_bb_pct": 4.5,
-        "team_at_fetch": "SFG"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.0
-      },
-      "war_gap": 0.13,
-      "innings_share_pct": 1.1
-    },
-    {
       "id": 671345,
       "name": "Jason Foley",
       "throws": "R",
       "role": "Reliever",
-      "games": 20,
+      "games": 21,
       "starts": 0,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "21.2",
-        "ip_value": 21.667,
-        "war": 0.12,
-        "era": 4.15,
-        "fip": 3.74,
-        "k_minus_bb_pct": 4.0
+        "ip": "23.0",
+        "ip_value": 23.0,
+        "war": 0.15,
+        "era": 4.3,
+        "fip": 3.75,
+        "k_minus_bb_pct": 3.8
       },
       "forecast": {
         "ip": 23.0,
@@ -529,8 +497,8 @@
         "ip": 21.9,
         "war": 0.14
       },
-      "war_gap": -0.02,
-      "innings_share_pct": 1.6
+      "war_gap": 0.01,
+      "innings_share_pct": 1.7
     },
     {
       "id": 664141,
@@ -562,7 +530,7 @@
         "war": 0.11
       },
       "war_gap": -0.05,
-      "innings_share_pct": 4.5
+      "innings_share_pct": 4.4
     },
     {
       "id": 683363,
@@ -594,7 +562,7 @@
         "war": -0.0
       },
       "war_gap": 0.06,
-      "innings_share_pct": 1.5
+      "innings_share_pct": 1.4
     },
     {
       "id": 805074,
@@ -693,38 +661,6 @@
       "innings_share_pct": 0.1
     },
     {
-      "id": 691769,
-      "name": "Philip Abner",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 3,
-      "starts": 0,
-      "saves": 0,
-      "holds": 1,
-      "actual": {
-        "ip": "3.1",
-        "ip_value": 3.333,
-        "war": 0.04,
-        "era": 0.0,
-        "fip": 2.8,
-        "k_minus_bb_pct": 9.1
-      },
-      "forecast": {
-        "ip": 27.0,
-        "war": 0.09,
-        "era": 4.09,
-        "fip": 4.15,
-        "k_minus_bb_pct": 11.5,
-        "team_at_fetch": "SFG"
-      },
-      "forecast_to_date": {
-        "ip": 25.7,
-        "war": 0.08
-      },
-      "war_gap": -0.04,
-      "innings_share_pct": 0.2
-    },
-    {
       "id": 666711,
       "name": "Joel Peguero",
       "throws": "R",
@@ -755,6 +691,38 @@
       },
       "war_gap": 0.25,
       "innings_share_pct": 0.8
+    },
+    {
+      "id": 702885,
+      "name": "Cesar Perdomo",
+      "throws": "L",
+      "role": "Starter",
+      "games": 4,
+      "starts": 3,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "19.1",
+        "ip_value": 19.333,
+        "war": 0.03,
+        "era": 3.72,
+        "fip": 4.96,
+        "k_minus_bb_pct": 6.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 5.01,
+        "fip": 5.16,
+        "k_minus_bb_pct": 4.5,
+        "team_at_fetch": "SFG"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": 0.03,
+      "innings_share_pct": 1.4
     },
     {
       "id": 683766,
@@ -795,7 +763,7 @@
         "ip_value": 34.667,
         "war": -0.0,
         "era": 6.49,
-        "fip": 5.37,
+        "fip": 5.38,
         "k_minus_bb_pct": 3.0
       },
       "forecast": {
@@ -996,7 +964,7 @@
         "war": 0.13
       },
       "war_gap": -0.23,
-      "innings_share_pct": 1.8
+      "innings_share_pct": 1.7
     },
     {
       "id": 663941,
@@ -1074,7 +1042,7 @@
       "actual": {
         "ip": "6.1",
         "ip_value": 6.333,
-        "war": -0.24,
+        "war": -0.25,
         "era": 2.84,
         "fip": 6.41,
         "k_minus_bb_pct": -7.1
@@ -1095,6 +1063,38 @@
       "innings_share_pct": 0.5
     },
     {
+      "id": 691769,
+      "name": "Philip Abner",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 4,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "4.1",
+        "ip_value": 4.333,
+        "war": -0.38,
+        "era": 10.38,
+        "fip": 14.64,
+        "k_minus_bb_pct": 10.5
+      },
+      "forecast": {
+        "ip": 27.0,
+        "war": 0.09,
+        "era": 4.09,
+        "fip": 4.15,
+        "k_minus_bb_pct": 11.5,
+        "team_at_fetch": "SFG"
+      },
+      "forecast_to_date": {
+        "ip": 25.7,
+        "war": 0.08
+      },
+      "war_gap": -0.47,
+      "innings_share_pct": 0.3
+    },
+    {
       "id": 676254,
       "name": "Ryan Walker",
       "throws": "R",
@@ -1108,7 +1108,7 @@
         "ip_value": 32.667,
         "war": -0.47,
         "era": 7.16,
-        "fip": 5.51,
+        "fip": 5.52,
         "k_minus_bb_pct": 2.6
       },
       "forecast": {
@@ -1123,7 +1123,7 @@
         "ip": 59.9,
         "war": 0.49
       },
-      "war_gap": -0.96,
+      "war_gap": -0.97,
       "innings_share_pct": 2.4
     },
     {
@@ -1131,17 +1131,17 @@
       "name": "Carson Seymour",
       "throws": "R",
       "role": "Reliever",
-      "games": 20,
+      "games": 21,
       "starts": 0,
       "saves": 1,
       "holds": 7,
       "actual": {
-        "ip": "26.2",
-        "ip_value": 26.667,
-        "war": -0.57,
-        "era": 5.06,
-        "fip": 6.02,
-        "k_minus_bb_pct": 2.4
+        "ip": "27.2",
+        "ip_value": 27.667,
+        "war": -0.5,
+        "era": 4.88,
+        "fip": 5.77,
+        "k_minus_bb_pct": 3.9
       },
       "forecast": {
         "ip": 31.9,
@@ -1155,7 +1155,7 @@
         "ip": 30.3,
         "war": 0.12
       },
-      "war_gap": -0.69,
+      "war_gap": -0.62,
       "innings_share_pct": 2.0
     },
     {
@@ -1170,7 +1170,7 @@
       "actual": {
         "ip": "27.1",
         "ip_value": 27.333,
-        "war": -0.77,
+        "war": -0.78,
         "era": 5.6,
         "fip": 6.32,
         "k_minus_bb_pct": 4.0

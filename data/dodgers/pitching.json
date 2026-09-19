@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T05:06:03.753074+00:00",
+  "generated_at": "2026-09-19T16:05:14.541059+00:00",
   "season": 2026,
   "team": "Los Angeles Dodgers",
   "games_played": 154,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 23.1,
+    "actual_war": 23.5,
     "forecast_war_to_date": 27.5,
-    "war_gap": -4.5,
-    "innings": 1353.7,
-    "era": 3.64
+    "war_gap": -4.0,
+    "innings": 1362.7,
+    "era": 3.63
   },
   "pitchers": [
     {
@@ -32,9 +32,9 @@
       "actual": {
         "ip": "179.0",
         "ip_value": 179.0,
-        "war": 4.66,
+        "war": 4.67,
         "era": 2.51,
-        "fip": 3.27,
+        "fip": 3.28,
         "k_minus_bb_pct": 20.1
       },
       "forecast": {
@@ -49,8 +49,8 @@
         "ip": 146.8,
         "war": 3.26
       },
-      "war_gap": 1.4,
-      "innings_share_pct": 13.2
+      "war_gap": 1.41,
+      "innings_share_pct": 13.1
     },
     {
       "id": 660271,
@@ -89,16 +89,16 @@
       "name": "Tanner Scott",
       "throws": "L",
       "role": "Closer",
-      "games": 65,
+      "games": 66,
       "starts": 0,
       "saves": 22,
-      "holds": 12,
+      "holds": 13,
       "actual": {
-        "ip": "59.2",
-        "ip_value": 59.667,
-        "war": 2.16,
-        "era": 2.87,
-        "fip": 2.17,
+        "ip": "60.2",
+        "ip_value": 60.667,
+        "war": 2.25,
+        "era": 2.82,
+        "fip": 2.16,
         "k_minus_bb_pct": 26.2
       },
       "forecast": {
@@ -113,25 +113,25 @@
         "ip": 59.9,
         "war": 0.67
       },
-      "war_gap": 1.49,
-      "innings_share_pct": 4.4
+      "war_gap": 1.58,
+      "innings_share_pct": 4.5
     },
     {
       "id": 607192,
       "name": "Tyler Glasnow",
       "throws": "R",
       "role": "Starter",
-      "games": 11,
-      "starts": 11,
+      "games": 12,
+      "starts": 12,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "61.2",
-        "ip_value": 61.667,
-        "war": 1.85,
-        "era": 3.5,
-        "fip": 2.93,
-        "k_minus_bb_pct": 23.2
+        "ip": "67.2",
+        "ip_value": 67.667,
+        "war": 2.01,
+        "era": 3.46,
+        "fip": 2.94,
+        "k_minus_bb_pct": 24.2
       },
       "forecast": {
         "ip": 141.2,
@@ -145,8 +145,8 @@
         "ip": 134.2,
         "war": 2.77
       },
-      "war_gap": -0.92,
-      "innings_share_pct": 4.6
+      "war_gap": -0.75,
+      "innings_share_pct": 5.0
     },
     {
       "id": 680736,
@@ -177,8 +177,8 @@
         "ip": 61.3,
         "war": 0.38
       },
-      "war_gap": 1.44,
-      "innings_share_pct": 10.1
+      "war_gap": 1.45,
+      "innings_share_pct": 10.0
     },
     {
       "id": 669373,
@@ -242,7 +242,7 @@
         "war": 2.41
       },
       "war_gap": -0.62,
-      "innings_share_pct": 2.9
+      "innings_share_pct": 2.8
     },
     {
       "id": 683618,
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "107.0",
         "ip_value": 107.0,
-        "war": 1.35,
+        "war": 1.36,
         "era": 4.79,
         "fip": 4.47,
         "k_minus_bb_pct": 20.0
@@ -354,7 +354,7 @@
         "ip_value": 119.333,
         "war": 0.93,
         "era": 4.6,
-        "fip": 4.86,
+        "fip": 4.87,
         "k_minus_bb_pct": 13.5
       },
       "forecast": {
@@ -416,7 +416,7 @@
       "actual": {
         "ip": "41.2",
         "ip_value": 41.667,
-        "war": 0.65,
+        "war": 0.66,
         "era": 3.67,
         "fip": 3.41,
         "k_minus_bb_pct": 14.8
@@ -433,7 +433,7 @@
         "ip": 55.1,
         "war": 0.1
       },
-      "war_gap": 0.55,
+      "war_gap": 0.56,
       "innings_share_pct": 3.1
     },
     {
@@ -597,6 +597,38 @@
       "innings_share_pct": 0.6
     },
     {
+      "id": 663460,
+      "name": "Kris Bubic",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "2.0",
+        "ip_value": 2.0,
+        "war": 0.09,
+        "era": 0.0,
+        "fip": 0.1,
+        "k_minus_bb_pct": 37.5
+      },
+      "forecast": {
+        "ip": 149.3,
+        "war": 2.24,
+        "era": 3.91,
+        "fip": 3.95,
+        "k_minus_bb_pct": 14.2,
+        "team_at_fetch": "LAD"
+      },
+      "forecast_to_date": {
+        "ip": 142.0,
+        "war": 2.13
+      },
+      "war_gap": -2.04,
+      "innings_share_pct": 0.1
+    },
+    {
       "id": 623465,
       "name": "Evan Phillips",
       "throws": "R",
@@ -625,40 +657,8 @@
         "ip": 26.6,
         "war": 0.26
       },
-      "war_gap": -0.23,
+      "war_gap": -0.22,
       "innings_share_pct": 1.6
-    },
-    {
-      "id": 663460,
-      "name": "Kris Bubic",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 1,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "1.0",
-        "ip_value": 1.0,
-        "war": 0.03,
-        "era": 0.0,
-        "fip": -0.9,
-        "k_minus_bb_pct": 50.0
-      },
-      "forecast": {
-        "ip": 149.3,
-        "war": 2.24,
-        "era": 3.91,
-        "fip": 3.95,
-        "k_minus_bb_pct": 14.2,
-        "team_at_fetch": "LAD"
-      },
-      "forecast_to_date": {
-        "ip": 142.0,
-        "war": 2.13
-      },
-      "war_gap": -2.1,
-      "innings_share_pct": 0.1
     },
     {
       "id": 671109,
@@ -761,7 +761,7 @@
       "actual": {
         "ip": "25.1",
         "ip_value": 25.333,
-        "war": -0.07,
+        "war": -0.06,
         "era": 5.68,
         "fip": 4.95,
         "k_minus_bb_pct": 8.3
@@ -889,7 +889,7 @@
       "actual": {
         "ip": "6.0",
         "ip_value": 6.0,
-        "war": -0.13,
+        "war": -0.12,
         "era": 9.0,
         "fip": 5.6,
         "k_minus_bb_pct": 6.7
@@ -906,7 +906,7 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": -0.13,
+      "war_gap": -0.12,
       "innings_share_pct": 0.4
     },
     {
@@ -933,6 +933,38 @@
       },
       "war_gap": -0.13,
       "innings_share_pct": 0.3
+    },
+    {
+      "id": 621242,
+      "name": "Edwin Díaz",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 17,
+      "starts": 0,
+      "saves": 7,
+      "holds": 0,
+      "actual": {
+        "ip": "14.2",
+        "ip_value": 14.667,
+        "war": -0.17,
+        "era": 11.05,
+        "fip": 5.55,
+        "k_minus_bb_pct": 13.3
+      },
+      "forecast": {
+        "ip": 66.0,
+        "war": 1.14,
+        "era": 3.03,
+        "fip": 2.92,
+        "k_minus_bb_pct": 24.9,
+        "team_at_fetch": "LAD"
+      },
+      "forecast_to_date": {
+        "ip": 62.7,
+        "war": 1.08
+      },
+      "war_gap": -1.25,
+      "innings_share_pct": 1.1
     },
     {
       "id": 656212,
@@ -980,7 +1012,7 @@
         "ip_value": 11.667,
         "war": -0.19,
         "era": 3.86,
-        "fip": 6.95,
+        "fip": 6.96,
         "k_minus_bb_pct": 12.0
       },
       "forecast": {
@@ -1029,38 +1061,6 @@
       },
       "war_gap": -0.32,
       "innings_share_pct": 0.7
-    },
-    {
-      "id": 621242,
-      "name": "Edwin Díaz",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 16,
-      "starts": 0,
-      "saves": 7,
-      "holds": 0,
-      "actual": {
-        "ip": "13.2",
-        "ip_value": 13.667,
-        "war": -0.27,
-        "era": 11.85,
-        "fip": 6.02,
-        "k_minus_bb_pct": 11.4
-      },
-      "forecast": {
-        "ip": 66.0,
-        "war": 1.14,
-        "era": 3.03,
-        "fip": 2.92,
-        "k_minus_bb_pct": 24.9,
-        "team_at_fetch": "LAD"
-      },
-      "forecast_to_date": {
-        "ip": 62.7,
-        "war": 1.08
-      },
-      "war_gap": -1.36,
-      "innings_share_pct": 1.0
     }
   ]
 }

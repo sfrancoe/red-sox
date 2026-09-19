@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T05:05:59.169466+00:00",
+  "generated_at": "2026-09-19T16:05:00.742316+00:00",
   "season": 2026,
   "team": "Philadelphia Phillies",
   "games_played": 154,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 22.6,
+    "actual_war": 22.9,
     "forecast_war_to_date": 19.0,
-    "war_gap": 3.6,
-    "innings": 1359.3,
-    "era": 3.96
+    "war_gap": 3.9,
+    "innings": 1367.3,
+    "era": 3.98
   },
   "pitchers": [
     {
@@ -81,7 +81,7 @@
         "ip": 172.0,
         "war": 3.34
       },
-      "war_gap": 2.22,
+      "war_gap": 2.21,
       "innings_share_pct": 13.1
     },
     {
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "150.1",
         "ip_value": 150.333,
-        "war": 3.55,
+        "war": 3.54,
         "era": 2.99,
         "fip": 3.47,
         "k_minus_bb_pct": 21.9
@@ -114,7 +114,7 @@
         "war": 3.53
       },
       "war_gap": 0.01,
-      "innings_share_pct": 11.1
+      "innings_share_pct": 11.0
     },
     {
       "id": 661395,
@@ -162,7 +162,7 @@
         "ip_value": 168.333,
         "war": 1.45,
         "era": 4.49,
-        "fip": 4.78,
+        "fip": 4.79,
         "k_minus_bb_pct": 15.5
       },
       "forecast": {
@@ -178,39 +178,7 @@
         "war": 2.82
       },
       "war_gap": -1.37,
-      "innings_share_pct": 12.4
-    },
-    {
-      "id": 641835,
-      "name": "Tim Mayza",
-      "throws": "L",
-      "role": "Swingman",
-      "games": 56,
-      "starts": 5,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "64.2",
-        "ip_value": 64.667,
-        "war": 0.98,
-        "era": 3.06,
-        "fip": 3.14,
-        "k_minus_bb_pct": 18.4
-      },
-      "forecast": {
-        "ip": 48.0,
-        "war": 0.14,
-        "era": 4.0,
-        "fip": 4.18,
-        "k_minus_bb_pct": 10.5,
-        "team_at_fetch": "PHI"
-      },
-      "forecast_to_date": {
-        "ip": 45.6,
-        "war": 0.13
-      },
-      "war_gap": 0.84,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 12.3
     },
     {
       "id": 691725,
@@ -242,7 +210,39 @@
         "war": 0.67
       },
       "war_gap": 0.29,
-      "innings_share_pct": 8.5
+      "innings_share_pct": 8.4
+    },
+    {
+      "id": 641835,
+      "name": "Tim Mayza",
+      "throws": "L",
+      "role": "Swingman",
+      "games": 57,
+      "starts": 6,
+      "saves": 0,
+      "holds": 2,
+      "actual": {
+        "ip": "65.0",
+        "ip_value": 65.0,
+        "war": 0.95,
+        "era": 3.46,
+        "fip": 3.19,
+        "k_minus_bb_pct": 17.7
+      },
+      "forecast": {
+        "ip": 48.0,
+        "war": 0.14,
+        "era": 4.0,
+        "fip": 4.18,
+        "k_minus_bb_pct": 10.5,
+        "team_at_fetch": "PHI"
+      },
+      "forecast_to_date": {
+        "ip": 45.6,
+        "war": 0.13
+      },
+      "war_gap": 0.82,
+      "innings_share_pct": 4.8
     },
     {
       "id": 680742,
@@ -306,24 +306,56 @@
         "war": 0.76
       },
       "war_gap": -0.08,
-      "innings_share_pct": 4.1
+      "innings_share_pct": 4.0
+    },
+    {
+      "id": 664353,
+      "name": "José Urquidy",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "4.2",
+        "ip_value": 4.667,
+        "war": 0.4,
+        "era": 0.0,
+        "fip": 0.53,
+        "k_minus_bb_pct": 31.6
+      },
+      "forecast": {
+        "ip": 62.5,
+        "war": 0.01,
+        "era": 4.8,
+        "fip": 4.74,
+        "k_minus_bb_pct": 10.8,
+        "team_at_fetch": "PHI"
+      },
+      "forecast_to_date": {
+        "ip": 59.5,
+        "war": 0.0
+      },
+      "war_gap": 0.4,
+      "innings_share_pct": 0.3
     },
     {
       "id": 689147,
       "name": "Orion Kerkering",
       "throws": "R",
       "role": "Setup",
-      "games": 60,
+      "games": 61,
       "starts": 0,
       "saves": 2,
       "holds": 17,
       "actual": {
-        "ip": "56.0",
-        "ip_value": 56.0,
-        "war": 0.49,
-        "era": 4.02,
-        "fip": 3.95,
-        "k_minus_bb_pct": 10.7
+        "ip": "57.0",
+        "ip_value": 57.0,
+        "war": 0.4,
+        "era": 4.42,
+        "fip": 4.1,
+        "k_minus_bb_pct": 11.2
       },
       "forecast": {
         "ip": 54.0,
@@ -337,8 +369,8 @@
         "ip": 51.3,
         "war": 0.56
       },
-      "war_gap": -0.07,
-      "innings_share_pct": 4.1
+      "war_gap": -0.16,
+      "innings_share_pct": 4.2
     },
     {
       "id": 686934,
@@ -829,7 +861,7 @@
         "war": -0.0
       },
       "war_gap": -0.12,
-      "innings_share_pct": 3.7
+      "innings_share_pct": 3.6
     },
     {
       "id": 676661,
@@ -868,17 +900,17 @@
       "name": "Tanner Banks",
       "throws": "L",
       "role": "Reliever",
-      "games": 29,
+      "games": 30,
       "starts": 1,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "31.0",
-        "ip_value": 31.0,
-        "war": -0.22,
-        "era": 7.26,
-        "fip": 5.45,
-        "k_minus_bb_pct": 14.2
+        "ip": "33.0",
+        "ip_value": 33.0,
+        "war": -0.24,
+        "era": 6.82,
+        "fip": 5.49,
+        "k_minus_bb_pct": 12.8
       },
       "forecast": {
         "ip": 63.0,
@@ -892,8 +924,8 @@
         "ip": 59.9,
         "war": 0.42
       },
-      "war_gap": -0.63,
-      "innings_share_pct": 2.3
+      "war_gap": -0.66,
+      "innings_share_pct": 2.4
     },
     {
       "id": 548384,
