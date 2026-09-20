@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-19T14:49:38+00:00",
+ "generated_at": "2026-09-20T14:53:42+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 114,
  "seasons": {
   "2026": {
-   "record": "79-75",
-   "games": 154,
+   "record": "80-75",
+   "games": 155,
    "in_progress": true,
    "war_leader": {
     "name": "Parker Messick",
-    "war": 5.8
+    "war": 5.9
    },
    "war_leaders": [
     {
      "name": "Parker Messick",
-     "war": 5.8
+     "war": 5.9
     },
     {
      "name": "Steven Kwan",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Chase DeLauter",
-     "war": 3.2
+     "war": 3.3
     }
    ],
    "pitching_leaders": {
@@ -47,22 +47,21 @@
    "batting_leaders": {
     "hr": {
      "names": [
-      "Angel Mart\u00ednez",
-      "Travis Bazzana"
+      "Angel Mart\u00ednez"
      ],
-     "value": 15,
+     "value": 17,
      "top": [
       {
        "name": "Angel Mart\u00ednez",
+       "value": 17
+      },
+      {
+       "name": "Chase DeLauter",
        "value": 15
       },
       {
        "name": "Travis Bazzana",
        "value": 15
-      },
-      {
-       "name": "Chase DeLauter",
-       "value": 14
       }
      ]
     },
@@ -70,18 +69,18 @@
      "names": [
       "Brayan Rocchio"
      ],
-     "value": 69,
+     "value": 70,
      "top": [
       {
        "name": "Brayan Rocchio",
-       "value": 69
+       "value": 70
       },
       {
        "name": "Chase DeLauter",
-       "value": 62
+       "value": 65
       },
       {
-       "name": "Travis Bazzana",
+       "name": "Angel Mart\u00ednez",
        "value": 57
       }
      ]
@@ -90,15 +89,15 @@
      "names": [
       "Chase DeLauter"
      ],
-     "value": ".289",
+     "value": ".290",
      "top": [
       {
        "name": "Chase DeLauter",
-       "value": ".289"
+       "value": ".290"
       },
       {
        "name": "Steven Kwan",
-       "value": ".275"
+       "value": ".277"
       },
       {
        "name": "Brayan Rocchio",
@@ -110,15 +109,15 @@
      "names": [
       "Chase DeLauter"
      ],
-     "value": ".815",
+     "value": ".821",
      "top": [
       {
        "name": "Chase DeLauter",
-       "value": ".815"
+       "value": ".821"
       },
       {
        "name": "Travis Bazzana",
-       "value": ".757"
+       "value": ".750"
       },
       {
        "name": "Steven Kwan",
