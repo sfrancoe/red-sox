@@ -34,6 +34,15 @@ enum AppBackend {
     }
 
     nonisolated static func apiURL(_ endpoint: String, team: HubTeam = .boston) -> URL {
+#if DEBUG
+        if let value = ProcessInfo.processInfo.environment["HUB_API_ROOT"],
+           let override = URL(string: value) {
+            return override
+                .appending(path: "api")
+                .appending(path: endpoint)
+                .appending(queryItems: [URLQueryItem(name: "team", value: team.apiKey)])
+        }
+#endif
         let url = origin
             .appending(path: "api")
             .appending(path: endpoint)

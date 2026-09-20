@@ -94,6 +94,8 @@ struct AppTabView: View {
             let arguments = ProcessInfo.processInfo.arguments
             if arguments.contains("-show-stories"), team.hasPublishedStories {
                 selectedTab = .stories
+            } else if arguments.contains("-show-recent") {
+                selectedTab = .recent
             } else if team.supportsPlayers,
                let playerArgument = arguments.first(where: { $0.hasPrefix("-show-player=") }),
                let playerID = Int(playerArgument.replacingOccurrences(of: "-show-player=", with: "")) {
