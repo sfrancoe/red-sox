@@ -147,9 +147,13 @@ final class RecentGameStore {
 
         do {
             var descriptors: [MLBGameDescriptor]
+            var discoverySucceeded = true
+            var discoveredIDs = Set<Int>()
             do {
                 descriptors = try await client.gameDescriptors()
+                discoveredIDs = Set(descriptors.map(\.gamePk))
             } catch {
+                discoverySucceeded = false
                 guard !forceGameIDs.isEmpty else { throw error }
                 descriptors = forceGameIDs.compactMap { gameID in
                     guard let cachedGame = cache[gameID] else { return nil }
@@ -160,6 +164,23 @@ final class RecentGameStore {
                     )
                 }
                 guard !descriptors.isEmpty else { throw error }
+            }
+
+            // An explicit retry is also allowed to revalidate a known game
+            // that a successful discovery response omits (including an empty
+            // response). Keep it distinct from normal discovery so that this
+            // forced descriptor cannot make the rest of the displayed cache
+            // look obsolete.
+            let descriptorIDs = Set(descriptors.map(\.gamePk))
+            for gameID in forceGameIDs where !descriptorIDs.contains(gameID) {
+                guard let cachedGame = cache[gameID] else { continue }
+                descriptors.append(
+                    MLBGameDescriptor(
+                        gamePk: gameID,
+                        gameDate: cachedGame.game.gameDate,
+                        isLive: cachedGame.game.isLive
+                    )
+                )
             }
             guard requestID == refreshID, !Task.isCancelled else { return }
 
@@ -223,7 +244,9 @@ final class RecentGameStore {
             }
 
             let replacementIDs = Set(refreshedGames.map(\.gamePk))
-            let fallbackGames = failedFetch
+            let forcedRetryWasOmittedFromDiscovery = !forceGameIDs.isEmpty
+                && !forceGameIDs.isSubset(of: discoveredIDs)
+            let fallbackGames = (!discoverySucceeded || failedFetch || forcedRetryWasOmittedFromDiscovery)
                 ? previousGames.filter { !replacementIDs.contains($0.gamePk) }
                 : []
             let visibleGames = Array((refreshedGames + fallbackGames).prefix(RecentGameSnapshotCache.maxGamesPerTeam))

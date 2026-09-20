@@ -52,6 +52,26 @@ struct HTTPCacheIntegrationTests {
         precondition(cachedGame.venue == "Fenway final 1")
         try await assertGameRequests(1, origin: origin, session: session)
         session.configuration.urlCache?.removeAllCachedResponses()
+
+        // Exercise the production request path twice. The store is not
+        // involved here, so the unchanged origin count proves URLSession
+        // itself reused the fresh response under .useProtocolCachePolicy.
+        let normalClient = MLBGameClient(
+            team: .boston,
+            session: session,
+            backendOrigin: origin
+        )
+        let normalRequest = URLRequest(url: gameURL)
+        precondition(normalRequest.cachePolicy == .useProtocolCachePolicy)
+        print("HTTP cache normal request policy = .useProtocolCachePolicy")
+        let firstNormalGame = try await normalClient.game(gamePk: 9010)
+        precondition(firstNormalGame.venue == "Fenway final 1")
+        try await assertGameRequests(2, origin: origin, session: session)
+        let secondNormalGame = try await normalClient.game(gamePk: 9010)
+        precondition(secondNormalGame.venue == "Fenway final 1")
+        try await assertGameRequests(2, origin: origin, session: session,
+                                     message: "fresh normal-policy request did not reuse URLSession cache")
+
         let firstDirectory = temporaryDirectory("first")
         defer { try? FileManager.default.removeItem(at: firstDirectory) }
         let firstStore = RecentGameStore(
@@ -64,10 +84,9 @@ struct HTTPCacheIntegrationTests {
         await firstStore.load()
         precondition(firstStore.games.first?.venue == "Fenway final 1")
         try await assertGameRequests(2, origin: origin, session: session)
-
-        // The one-second HTTP freshness window expires independently of the
+        // The short HTTP freshness window expires independently of the
         // store's five-minute final window, so this new store must reach origin.
-        try await Task.sleep(for: .seconds(1.2))
+        try await Task.sleep(for: .seconds(2.5))
         now += 301
         try await control(origin, session: session, live: false, version: 2)
         let expiredDirectory = temporaryDirectory("expired")
@@ -84,6 +103,9 @@ struct HTTPCacheIntegrationTests {
         try await assertGameRequests(3, origin: origin, session: session,
                                      message: "expired HTTP response did not reach origin")
 
+        // Let the corrected final response age out before switching the
+        // fixture to a live game, so this is a fresh live-origin request.
+        try await Task.sleep(for: .seconds(2.5))
         // Live polling also revalidates after the short HTTP freshness window,
         // and the following live-to-final descriptor transition is fetched.
         now += 1
@@ -101,7 +123,7 @@ struct HTTPCacheIntegrationTests {
         precondition(liveStore.games.first?.venue == "Fenway live 1")
         try await assertGameRequests(4, origin: origin, session: session)
 
-        try await Task.sleep(for: .seconds(1.2))
+        try await Task.sleep(for: .seconds(2.5))
         now += 20
         try await control(origin, session: session, live: true, version: 2)
         await liveStore.refresh()
@@ -109,7 +131,7 @@ struct HTTPCacheIntegrationTests {
         try await assertGameRequests(5, origin: origin, session: session,
                                      message: "live refresh did not pass the expired HTTP response")
 
-        try await Task.sleep(for: .seconds(1.2))
+        try await Task.sleep(for: .seconds(2.5))
         now += 20
         try await control(origin, session: session, live: false, version: 3)
         await liveStore.refresh()
@@ -171,6 +193,7 @@ struct HTTPCacheIntegrationTests {
         message: String = ""
     ) async throws {
         let actual = try await stats(origin, session: session).gameRequests
+        print("HTTP cache origin gameRequests = \(actual), expected = \(expected)")
         precondition(actual == expected, "\(message) actual=\(actual) expected=\(expected)")
     }
 }

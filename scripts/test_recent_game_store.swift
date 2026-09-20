@@ -6,9 +6,11 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
     nonisolated(unsafe) private static var includeFinalGame = false
     nonisolated(unsafe) private static var gameVersion = 1
     nonisolated(unsafe) private static var gameRequests = 0
+    nonisolated(unsafe) private static var gameRequestIDs: [Int] = []
     nonisolated(unsafe) private static var gameCachePolicies: [URLRequest.CachePolicy] = []
     nonisolated(unsafe) private static var failedGamePk: Int?
     nonisolated(unsafe) private static var failDiscovery = false
+    nonisolated(unsafe) private static var emptyDiscovery = false
     nonisolated(unsafe) private static var stallRequests = false
 
     static func configure(
@@ -18,6 +20,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         version: Int = 1,
         failGamePk: Int? = nil,
         failDiscovery: Bool = false,
+        emptyDiscovery: Bool = false,
         stall: Bool = false
     ) {
         lock.lock()
@@ -28,6 +31,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         gameVersion = version
         failedGamePk = failGamePk
         Self.failDiscovery = failDiscovery
+        Self.emptyDiscovery = emptyDiscovery
         stallRequests = stall
     }
 
@@ -37,6 +41,12 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         lock.lock()
         defer { lock.unlock() }
         return gameCachePolicies
+    }
+
+    static var requestedGameIDs: [Int] {
+        lock.lock()
+        defer { lock.unlock() }
+        return gameRequestIDs
     }
 
     static var gameRequestCount: Int {
@@ -57,11 +67,15 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         let version = Self.gameVersion
         let failedGamePk = Self.failedGamePk
         let failDiscovery = Self.failDiscovery
+        let emptyDiscovery = Self.emptyDiscovery
         let stall = Self.stallRequests
         let gamePk = Int(URLComponents(url: url, resolvingAgainstBaseURL: false)?
             .queryItems?.first(where: { $0.name == "gamePk" })?.value ?? "")
         if url.path.contains("/api/mlb/game") {
             Self.gameRequests += 1
+            if let gamePk {
+                Self.gameRequestIDs.append(gamePk)
+            }
             Self.gameCachePolicies.append(request.cachePolicy)
         }
         Self.lock.unlock()
@@ -87,12 +101,12 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
             let status: [String: String] = live
                 ? ["abstractGameState": "Live", "codedGameState": "I"]
                 : ["abstractGameState": "Final", "codedGameState": "F"]
-            var games: [[String: Any]] = [[
+            var games: [[String: Any]] = emptyDiscovery ? [] : [[
                 "gamePk": scheduleGamePk,
                 "gameDate": "2026-09-18T23:00:00Z",
                 "status": status,
             ]]
-            if includeFinal {
+            if includeFinal && !emptyDiscovery {
                 games.append([
                     "gamePk": 9002,
                     "gameDate": "2026-09-17T23:00:00Z",
@@ -396,6 +410,100 @@ struct RecentGameStoreTests {
             .allSatisfy { $0 == .useProtocolCachePolicy })
         precondition(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
 
+        // Retry recovery during a discovery outage must merge the recovered
+        // game instead of treating the forced-game descriptor as replacement
+        // discovery and pruning the other saved recap.
+        let multiGameDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("recent-game-retry-multi-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: multiGameDirectory) }
+        var multiNow = Date(timeIntervalSince1970: 40_000)
+        RecentGameProtocol.configure(live: false, includeFinal: true, version: 1)
+        let multiStore = RecentGameStore(
+            team: .boston,
+            session: session,
+            now: { multiNow },
+            cacheDirectory: multiGameDirectory
+        )
+        await multiStore.load()
+        precondition(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
+        multiNow += 10
+        RecentGameProtocol.configure(live: false, includeFinal: true, failDiscovery: true)
+        await multiStore.refresh()
+        let multiBeforeRetry = multiStore.games
+        let multiTargetBeforeFailure = multiBeforeRetry.first { $0.gamePk == 9001 }!
+        let multiTargetLastCheckedBeforeFailure = multiStore.freshness(for: multiTargetBeforeFailure)!.lastCheckedAt
+        RecentGameProtocol.configure(live: false, includeFinal: true, version: 8, failGamePk: 9001, failDiscovery: true)
+        await multiStore.retry(game: multiTargetBeforeFailure)
+        precondition(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
+        precondition(multiStore.games.first { $0.gamePk == 9001 }?.venue == "Fenway final 1")
+        precondition(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9001 }!)!.lastCheckedAt == multiTargetLastCheckedBeforeFailure)
+        precondition(multiStore.hasRefreshWarning(for: multiStore.games.first { $0.gamePk == 9001 }!))
+        precondition(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9002 }!) != nil)
+
+        RecentGameProtocol.configure(live: false, includeFinal: true, version: 8, failDiscovery: true)
+        await multiStore.retry(game: multiBeforeRetry.first { $0.gamePk == 9001 }!)
+        print("Retry outage reproduction: displayed IDs after retry = \(multiStore.games.map(\.gamePk)); requested IDs = \(RecentGameProtocol.requestedGameIDs.suffix(3))")
+        precondition(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
+        precondition(multiStore.games.first { $0.gamePk == 9001 }?.venue == "Fenway final 8")
+        precondition(!multiStore.hasRefreshWarning(for: multiStore.games.first { $0.gamePk == 9001 }!))
+        precondition(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9002 }!) != nil)
+        let multiSnapshotIDs = snapshotGameIDs(directory: multiGameDirectory)
+        print("Retry outage recovery snapshot IDs = \(multiSnapshotIDs)")
+        precondition(Set(multiSnapshotIDs) == [9001, 9002])
+
+        // Retry must add a known displayed target when successful discovery
+        // omits it, while retaining a failed replacement game's last good data.
+        let omittedDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("recent-game-retry-omitted-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: omittedDirectory) }
+        let omittedNow = Date(timeIntervalSince1970: 50_000)
+        try FileManager.default.createDirectory(at: omittedDirectory, withIntermediateDirectories: true)
+        try writeTestEnvelope(
+            directory: omittedDirectory,
+            teamID: 111,
+            schemaVersion: RecentGameSnapshotCache.schemaVersion,
+            entries: [RecentGameCacheRecord(
+                game: testGame(gamePk: 9901, teamID: 111),
+                lastCheckedAt: omittedNow,
+                lastFailureAt: nil
+            )]
+        )
+        RecentGameProtocol.configure(scheduleGamePk: 9001, version: 1, failGamePk: 9001)
+        let omittedStore = RecentGameStore(
+            team: .boston,
+            session: session,
+            now: { omittedNow },
+            cacheDirectory: omittedDirectory
+        )
+        await omittedStore.load()
+        let omittedTarget = omittedStore.games.first!
+        precondition(omittedTarget.gamePk == 9901)
+        precondition(omittedStore.hasRefreshWarning(for: omittedTarget))
+        let omittedRequestStart = RecentGameProtocol.requestedGameIDs.count
+        RecentGameProtocol.configure(scheduleGamePk: 9001, version: 9, failGamePk: 9001)
+        await omittedStore.retry(game: omittedTarget)
+        let omittedRequests = Array(RecentGameProtocol.requestedGameIDs.dropFirst(omittedRequestStart))
+        print("Retry omitted-target reproduction: requested IDs = \(omittedRequests), target warning = \(omittedStore.hasRefreshWarning(for: omittedTarget))")
+        precondition(omittedRequests.contains(9901))
+        precondition(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
+        precondition(omittedStore.games.first?.venue == "Fenway final 9 game 9901")
+        precondition(!omittedStore.hasRefreshWarning(for: omittedStore.games.first!))
+
+        // A discovery response that already includes the target must not
+        // create a duplicate forced request.
+        let includedRequestStart = RecentGameProtocol.requestedGameIDs.count
+        RecentGameProtocol.configure(scheduleGamePk: 9901, version: 10)
+        await omittedStore.retry(game: omittedStore.games.first!)
+        precondition(Array(RecentGameProtocol.requestedGameIDs.dropFirst(includedRequestStart)) == [9901])
+        precondition(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
+
+        // An empty successful discovery still retries the displayed target.
+        let emptyRequestStart = RecentGameProtocol.requestedGameIDs.count
+        RecentGameProtocol.configure(scheduleGamePk: 9001, version: 11, emptyDiscovery: true)
+        await omittedStore.retry(game: omittedStore.games.first!)
+        precondition(Array(RecentGameProtocol.requestedGameIDs.dropFirst(emptyRequestStart)) == [9901])
+        precondition(omittedStore.games.first?.venue == "Fenway final 11 game 9901")
+
         // Snapshot validation rejects corruption, wrong-team envelopes, old
         // entries, and incompatible versions without throwing.
         let validationDirectory = FileManager.default.temporaryDirectory
@@ -534,6 +642,17 @@ private func writeTestEnvelope(
     try encoder.encode(envelope).write(
         to: directory.appendingPathComponent("recent-games-\(teamID).json")
     )
+}
+
+private func snapshotGameIDs(directory: URL) -> [Int] {
+    let url = directory.appendingPathComponent("recent-games-111.json")
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    guard let data = try? Data(contentsOf: url),
+          let envelope = try? decoder.decode(TestEnvelope.self, from: data) else {
+        return []
+    }
+    return envelope.entries.map(\.game.gamePk)
 }
 
 private func testGame(gamePk: Int, teamID: Int, live: Bool = false) -> RecentGame {

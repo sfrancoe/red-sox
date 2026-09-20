@@ -85,7 +85,7 @@ class Handler(BaseHTTPRequestHandler):
             if fail:
                 self.send_json({"error": "fixture game failure"}, "public, max-age=1", status=503)
                 return
-            self.send_json(game_payload(live=live, version=version), "public, max-age=1")
+            self.send_json(game_payload(live=live, version=version), "public, max-age=2")
             return
 
         if "/data/" in parsed.path and parsed.path.endswith("schedule.json"):
@@ -106,10 +106,9 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json")
         self.send_header("Cache-Control", cache_control)
         if cache_control.startswith("public"):
-            self.send_header("Expires", formatdate(time.time() + 1, usegmt=True))
+            self.send_header("Expires", formatdate(time.time() + 2, usegmt=True))
             self.send_header("Last-Modified", formatdate(time.time(), usegmt=True))
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Connection", "close")
         self.end_headers()
         self.wfile.write(body)
 
