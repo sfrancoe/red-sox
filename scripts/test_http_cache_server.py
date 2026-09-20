@@ -152,7 +152,9 @@ def game_payload(*, live: bool, version: int) -> dict[str, object]:
 
 def main() -> None:
     ready_file = Path(sys.argv[1])
-    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    # Bind to all local interfaces so an iOS Simulator can reach this
+    # dependency-free fixture through the host's LAN address.
+    server = ThreadingHTTPServer(("0.0.0.0", 0), Handler)
     ready_file.write_text(str(server.server_port), encoding="utf-8")
     server.serve_forever()
 
