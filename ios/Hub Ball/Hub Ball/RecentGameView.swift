@@ -166,6 +166,7 @@ struct RecentGameView: View {
 
         return ScrollView {
             LazyVStack(spacing: 10) {
+                freshnessBanner(game)
                 scoreCard(game)
 
                 if contentWidth >= 720 {
@@ -264,6 +265,40 @@ struct RecentGameView: View {
         .padding(.bottom, 12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColor.nightRaised)
+    }
+
+    private func freshnessBanner(_ game: RecentGame) -> some View {
+        TimelineView(.periodic(from: .now, by: 30)) { context in
+            let message = store.freshnessMessage(for: game, at: context.date)
+            let warning = store.hasRefreshWarning(for: game)
+            if let message {
+                HStack(alignment: .center, spacing: 8) {
+                    Image(systemName: warning ? "exclamationmark.triangle" : "clock")
+                        .font(.caption.weight(.bold))
+                    Text(message)
+                        .font(.caption.weight(.semibold))
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.85)
+                    Spacer(minLength: 4)
+                    if warning {
+                        Button("Retry") {
+                            Task { await store.refresh() }
+                        }
+                        .font(.caption.weight(.bold))
+                        .buttonStyle(.bordered)
+                        .tint(AppColor.red)
+                        .accessibilityLabel("Retry Game Recaps updates")
+                    }
+                }
+                .foregroundStyle(warning ? AppColor.red : AppColor.inkMuted)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(AppColor.paper.opacity(0.82))
+                .overlay(Rectangle().stroke(warning ? AppColor.red.opacity(0.35) : AppColor.border, lineWidth: 1))
+                .accessibilityElement(children: .contain)
+            }
+        }
     }
 
     private func combinedLineScore(_ game: RecentGame) -> some View {
