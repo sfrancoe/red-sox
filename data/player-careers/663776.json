@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "player_id": 663776,
-  "generated_at": "2026-09-20T16:07:12.928618+00:00",
+  "generated_at": "2026-09-20T18:48:26.066273+00:00",
   "data_as_of": "2026-09-20",
   "status": "available",
   "coverage": [
@@ -73,6 +73,29 @@
       "on_base_percentage": 0.25,
       "slugging_percentage": 0.25,
       "ops": 0.5
+    },
+    {
+      "id": "663776-hitting-mlb-2026-1-111",
+      "season": 2026,
+      "team": "Boston Red Sox",
+      "league": "American League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 13,
+      "at_bats": 0,
+      "runs": 0,
+      "hits": 0,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "runs_batted_in": 0,
+      "stolen_bases": 0,
+      "walks": 0,
+      "strikeouts": 0,
+      "average": null,
+      "on_base_percentage": null,
+      "slugging_percentage": null,
+      "ops": null
     }
   ],
   "pitching": [
@@ -503,19 +526,19 @@
       "league": "American League",
       "level": "MLB",
       "row_type": "team_stint",
-      "games": 12,
-      "games_started": 12,
+      "games": 13,
+      "games_started": 13,
       "wins": 1,
       "losses": 6,
       "saves": 0,
-      "innings_outs": 173,
-      "hits": 74,
-      "earned_runs": 32,
-      "home_runs": 6,
-      "walks": 29,
-      "strikeouts": 62,
-      "era": 4.99,
-      "whip": 1.79
+      "innings_outs": 185,
+      "hits": 78,
+      "earned_runs": 37,
+      "home_runs": 7,
+      "walks": 31,
+      "strikeouts": 64,
+      "era": 5.4,
+      "whip": 1.77
     },
     {
       "id": "663776-pitching-minors-2026-12-546",
