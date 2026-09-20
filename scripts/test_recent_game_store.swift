@@ -6,6 +6,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
     nonisolated(unsafe) private static var includeFinalGame = false
     nonisolated(unsafe) private static var gameVersion = 1
     nonisolated(unsafe) private static var gameRequests = 0
+    nonisolated(unsafe) private static var gameCachePolicies: [URLRequest.CachePolicy] = []
     nonisolated(unsafe) private static var failedGamePk: Int?
     nonisolated(unsafe) private static var failDiscovery = false
     nonisolated(unsafe) private static var stallRequests = false
@@ -13,6 +14,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
     static func configure(
         live: Bool = false,
         includeFinal: Bool = false,
+        scheduleGamePk: Int = 9001,
         version: Int = 1,
         failGamePk: Int? = nil,
         failDiscovery: Bool = false,
@@ -22,10 +24,19 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         defer { lock.unlock() }
         scheduleIsLive = live
         includeFinalGame = includeFinal
+        scheduleGameID = scheduleGamePk
         gameVersion = version
         failedGamePk = failGamePk
         Self.failDiscovery = failDiscovery
         stallRequests = stall
+    }
+
+    nonisolated(unsafe) private static var scheduleGameID = 9001
+
+    static var observedGameCachePolicies: [URLRequest.CachePolicy] {
+        lock.lock()
+        defer { lock.unlock() }
+        return gameCachePolicies
     }
 
     static var gameRequestCount: Int {
@@ -42,6 +53,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         Self.lock.lock()
         let live = Self.scheduleIsLive
         let includeFinal = Self.includeFinalGame
+        let scheduleGamePk = Self.scheduleGameID
         let version = Self.gameVersion
         let failedGamePk = Self.failedGamePk
         let failDiscovery = Self.failDiscovery
@@ -50,6 +62,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
             .queryItems?.first(where: { $0.name == "gamePk" })?.value ?? "")
         if url.path.contains("/api/mlb/game") {
             Self.gameRequests += 1
+            Self.gameCachePolicies.append(request.cachePolicy)
         }
         Self.lock.unlock()
 
@@ -75,7 +88,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
                 ? ["abstractGameState": "Live", "codedGameState": "I"]
                 : ["abstractGameState": "Final", "codedGameState": "F"]
             var games: [[String: Any]] = [[
-                "gamePk": 9001,
+                "gamePk": scheduleGamePk,
                 "gameDate": "2026-09-18T23:00:00Z",
                 "status": status,
             ]]
@@ -95,7 +108,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         } else if url.path.contains("/data/schedule.json") {
             body = Data(#"{"generated_at":"fixture","regular_season_end":"2026-09-27","source":"test","team":"Boston","games":[]}"#.utf8)
         } else {
-            body = gamePayload(gamePk: gamePk ?? 9001, live: live, version: version)
+            body = gamePayload(gamePk: gamePk ?? scheduleGamePk, live: live, version: version)
         }
 
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
@@ -202,6 +215,7 @@ struct RecentGameStoreTests {
         )
         await liveStore.load()
         precondition(liveStore.games.first?.isLive == true)
+        precondition(liveStore.presentationState(for: liveStore.games.first!, at: liveNow) == .live)
         let beforeLiveRefresh = RecentGameProtocol.gameRequestCount
 
         liveNow += 20
@@ -250,6 +264,10 @@ struct RecentGameStoreTests {
         RecentGameProtocol.configure(live: true, includeFinal: true, version: 3)
         await mixedStore.refresh()
         precondition(!mixedStore.hasRefreshWarning(for: mixedStore.games.first { $0.gamePk == 9001 }!))
+        precondition(mixedStore.presentationState(
+            for: mixedStore.games.first { $0.gamePk == 9001 }!,
+            at: mixedNow
+        ) == .live)
 
         // A new store restores promptly, discloses saved data, and reports the
         // failed reconnect without turning the saved score into a fresh check.
@@ -273,6 +291,110 @@ struct RecentGameStoreTests {
         precondition(!recoveredLive.isLive)
         precondition(restoredStore.freshness(for: recoveredLive)!.isSavedSnapshot == false)
         precondition(!restoredStore.hasRefreshWarning(for: recoveredLive))
+
+        // A restored live snapshot is qualified before its reconnect finishes,
+        // and age-based presentation changes do not alter the historical state.
+        let savedLiveDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("recent-game-saved-live-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: savedLiveDirectory) }
+        try FileManager.default.createDirectory(at: savedLiveDirectory, withIntermediateDirectories: true)
+        let savedLiveNow = Date(timeIntervalSince1970: 20_000)
+        let savedLiveRecord = RecentGameCacheRecord(
+            game: testGame(gamePk: 9001, teamID: 111, live: true),
+            lastCheckedAt: savedLiveNow,
+            lastFailureAt: nil
+        )
+        try writeTestEnvelope(
+            directory: savedLiveDirectory,
+            teamID: 111,
+            schemaVersion: RecentGameSnapshotCache.schemaVersion,
+            entries: [savedLiveRecord]
+        )
+        RecentGameProtocol.configure(stall: true)
+        let savedLiveStore = RecentGameStore(
+            team: .boston,
+            session: session,
+            now: { savedLiveNow },
+            cacheDirectory: savedLiveDirectory
+        )
+        let savedLoad = Task { await savedLiveStore.load() }
+        for _ in 0..<100 where savedLiveStore.games.isEmpty {
+            try? await Task.sleep(for: .milliseconds(10))
+        }
+        let savedLive = savedLiveStore.games.first { $0.gamePk == 9001 }!
+        precondition(savedLiveStore.presentationState(for: savedLive, at: savedLiveNow) == .savedLive)
+        savedLoad.cancel()
+        await savedLoad.value
+        let delayedLive = mixedStore.games.first { $0.gamePk == 9001 }!
+        precondition(mixedStore.presentationState(for: delayedLive, at: mixedNow + 301) == .delayedLive)
+        RecentGameProtocol.configure(live: false, version: 6)
+
+        // A failed replacement retains the old displayed game and its warning
+        // metadata until a replacement succeeds.
+        let replacementDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("recent-game-replacement-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: replacementDirectory) }
+        try FileManager.default.createDirectory(at: replacementDirectory, withIntermediateDirectories: true)
+        let fallbackNow = Date(timeIntervalSince1970: 10_000)
+        let oldGame = testGame(gamePk: 9901, teamID: 111)
+        try writeTestEnvelope(
+            directory: replacementDirectory,
+            teamID: 111,
+            schemaVersion: RecentGameSnapshotCache.schemaVersion,
+            entries: [RecentGameCacheRecord(game: oldGame, lastCheckedAt: fallbackNow, lastFailureAt: nil)]
+        )
+        RecentGameProtocol.configure(scheduleGamePk: 9001, version: 1, failGamePk: 9001)
+        let replacementStore = RecentGameStore(
+            team: .boston,
+            session: session,
+            now: { fallbackNow },
+            cacheDirectory: replacementDirectory
+        )
+        await replacementStore.load()
+        let fallbackGame = replacementStore.games.first!
+        precondition(fallbackGame.gamePk == 9901)
+        precondition(replacementStore.freshness(for: fallbackGame) != nil)
+        precondition(replacementStore.hasRefreshWarning(for: fallbackGame))
+        precondition(replacementStore.freshnessMessage(for: fallbackGame, at: fallbackNow)?
+            .hasPrefix("Updates unavailable") == true)
+
+        RecentGameProtocol.configure(scheduleGamePk: 9001, version: 2)
+        await replacementStore.refresh()
+        precondition(replacementStore.games.first?.gamePk == 9001)
+        precondition(!replacementStore.hasRefreshWarning(for: replacementStore.games.first!))
+        precondition(replacementStore.presentationState(
+            for: replacementStore.games.first!,
+            at: fallbackNow
+        ) == .final)
+
+        // Explicit retry bypasses the five-minute store window and the HTTP
+        // cache policy, then clears only the recovered game's warning.
+        let retryDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("recent-game-retry-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: retryDirectory) }
+        var retryNow = Date(timeIntervalSince1970: 30_000)
+        RecentGameProtocol.configure(scheduleGamePk: 9001, version: 1)
+        let retryStore = RecentGameStore(
+            team: .boston,
+            session: session,
+            now: { retryNow },
+            cacheDirectory: retryDirectory
+        )
+        await retryStore.load()
+        retryNow += 10
+        RecentGameProtocol.configure(scheduleGamePk: 9001, failDiscovery: true)
+        await retryStore.refresh()
+        let warnedGame = retryStore.games.first!
+        precondition(retryStore.hasRefreshWarning(for: warnedGame))
+        let requestsBeforeRetry = RecentGameProtocol.gameRequestCount
+        RecentGameProtocol.configure(scheduleGamePk: 9001, version: 7)
+        await retryStore.retry(game: warnedGame)
+        precondition(RecentGameProtocol.gameRequestCount == requestsBeforeRetry + 1)
+        precondition(retryStore.games.first?.venue == "Fenway final 7")
+        precondition(!retryStore.hasRefreshWarning(for: retryStore.games.first!))
+        precondition(RecentGameProtocol.observedGameCachePolicies.dropLast()
+            .allSatisfy { $0 == .useProtocolCachePolicy })
+        precondition(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
 
         // Snapshot validation rejects corruption, wrong-team envelopes, old
         // entries, and incompatible versions without throwing.
@@ -414,7 +536,7 @@ private func writeTestEnvelope(
     )
 }
 
-private func testGame(gamePk: Int, teamID: Int) -> RecentGame {
+private func testGame(gamePk: Int, teamID: Int, live: Bool = false) -> RecentGame {
     let away = TeamBoxScore(
         side: "away",
         id: teamID,
@@ -450,9 +572,9 @@ private func testGame(gamePk: Int, teamID: Int) -> RecentGame {
         gameDurationMinutes: nil,
         attendance: nil,
         inningsCount: 0,
-        result: "Win",
-        gameState: "Final",
-        liveStatus: nil,
+        result: live ? "Live" : "Win",
+        gameState: live ? "Live" : "Final",
+        liveStatus: live ? "Bottom 7" : nil,
         summary: "Fixture recap",
         facts: [],
         decisions: Decisions(winner: "", loser: "", save: ""),

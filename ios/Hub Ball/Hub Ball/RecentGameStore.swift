@@ -1,6 +1,34 @@
 import Foundation
 import Observation
 
+nonisolated enum RecentGamePresentationState: Equatable, Sendable {
+    case live
+    case savedLive
+    case interruptedLive
+    case delayedLive
+    case final
+
+    nonisolated var label: String {
+        switch self {
+        case .live: return "Live"
+        case .savedLive: return "Saved score"
+        case .interruptedLive: return "Updates interrupted"
+        case .delayedLive: return "Updates delayed"
+        case .final: return "Final"
+        }
+    }
+
+    nonisolated var accessibilityLabel: String {
+        switch self {
+        case .live: return "Live game"
+        case .savedLive: return "Saved score; live status is not currently verified"
+        case .interruptedLive: return "Updates interrupted; live status may be out of date"
+        case .delayedLive: return "Updates delayed; live status may be out of date"
+        case .final: return "Final game"
+        }
+    }
+}
+
 @MainActor
 @Observable
 final class RecentGameStore {
@@ -22,10 +50,16 @@ final class RecentGameStore {
         team: HubTeam = .boston,
         session: URLSession = .shared,
         now: @escaping () -> Date = Date.init,
-        cacheDirectory: URL? = nil
+        cacheDirectory: URL? = nil,
+        backendOrigin: URL? = nil
     ) {
-        client = MLBGameClient(team: team, session: session)
-        scheduleStore = ScheduleStore(team: team, session: session, now: now)
+        client = MLBGameClient(team: team, session: session, backendOrigin: backendOrigin)
+        scheduleStore = ScheduleStore(
+            team: team,
+            session: session,
+            now: now,
+            backendOrigin: backendOrigin
+        )
         teamID = team.mlbID
         snapshotCache = RecentGameSnapshotCache(directory: cacheDirectory, now: now)
         self.now = now
@@ -42,12 +76,17 @@ final class RecentGameStore {
 
     func load() async {
         await restoreSnapshotIfNeeded()
-        await refresh(showLoadingState: games.isEmpty)
+        await refresh(showLoadingState: games.isEmpty, forceGameIDs: [])
     }
 
     func refresh() async {
         await restoreSnapshotIfNeeded()
-        await refresh(showLoadingState: false)
+        await refresh(showLoadingState: false, forceGameIDs: [])
+    }
+
+    func retry(game: RecentGame) async {
+        await restoreSnapshotIfNeeded()
+        await refresh(showLoadingState: false, forceGameIDs: [game.gamePk])
     }
 
     func freshness(for game: RecentGame) -> RecentGameFreshness? {
@@ -77,11 +116,23 @@ final class RecentGameStore {
         return "Last checked \(checked)"
     }
 
+    func presentationState(
+        for game: RecentGame,
+        at date: Date
+    ) -> RecentGamePresentationState {
+        guard game.isLive else { return .final }
+        guard let status = freshness(for: game) else { return .delayedLive }
+        if status.isSavedSnapshot { return .savedLive }
+        if status.lastFailureAt != nil { return .interruptedLive }
+        if date.timeIntervalSince(status.lastCheckedAt) > 60 { return .delayedLive }
+        return .live
+    }
+
     func hasRefreshWarning(for game: RecentGame) -> Bool {
         freshness(for: game)?.lastFailureAt != nil
     }
 
-    private func refresh(showLoadingState: Bool) async {
+    private func refresh(showLoadingState: Bool, forceGameIDs: Set<Int>) async {
         guard !isLoading, !Task.isCancelled else { return }
 
         refreshID += 1
@@ -95,18 +146,40 @@ final class RecentGameStore {
         async let scheduleRefresh: Void = scheduleStore.load(minimumRefreshInterval: 5 * 60)
 
         do {
-            let descriptors = try await client.gameDescriptors()
+            var descriptors: [MLBGameDescriptor]
+            do {
+                descriptors = try await client.gameDescriptors()
+            } catch {
+                guard !forceGameIDs.isEmpty else { throw error }
+                descriptors = forceGameIDs.compactMap { gameID in
+                    guard let cachedGame = cache[gameID] else { return nil }
+                    return MLBGameDescriptor(
+                        gamePk: gameID,
+                        gameDate: cachedGame.game.gameDate,
+                        isLive: cachedGame.game.isLive
+                    )
+                }
+                guard !descriptors.isEmpty else { throw error }
+            }
             guard requestID == refreshID, !Task.isCancelled else { return }
 
+            var failedFetch = false
             for descriptor in descriptors {
                 let cachedGame = cache[descriptor.gamePk]
-                let needsFreshFeed = cachedGame == nil
+                let needsFreshFeed = forceGameIDs.contains(descriptor.gamePk)
+                    || cachedGame == nil
                     || descriptor.isLive
                     || cachedGame?.game.isLive == true
                     || cachedGame.map { now().timeIntervalSince($0.fetchedAt) >= finalCacheLifetime } == true
                 if needsFreshFeed {
                     do {
-                        let game = try await client.game(gamePk: descriptor.gamePk)
+                        let cachePolicy: URLRequest.CachePolicy = forceGameIDs.contains(descriptor.gamePk)
+                            ? .reloadIgnoringLocalCacheData
+                            : .useProtocolCachePolicy
+                        let game = try await client.game(
+                            gamePk: descriptor.gamePk,
+                            cachePolicy: cachePolicy
+                        )
                         guard requestID == refreshID, !Task.isCancelled else { return }
                         cache[descriptor.gamePk] = CachedGame(
                             game: game,
@@ -116,6 +189,7 @@ final class RecentGameStore {
                         )
                     } catch {
                         guard !Task.isCancelled else { return }
+                        failedFetch = true
                         if var cachedGame = cache[descriptor.gamePk] {
                             cachedGame.failureAt = now()
                             cache[descriptor.gamePk] = cachedGame
@@ -125,18 +199,39 @@ final class RecentGameStore {
             }
 
             guard requestID == refreshID, !Task.isCancelled else { return }
-            if !descriptors.isEmpty {
-                let descriptorIDs = Set(descriptors.map(\.gamePk))
-                cache = cache.filter { descriptorIDs.contains($0.key) }
-            }
             let refreshedGames = descriptors.compactMap { cache[$0.gamePk]?.game }
+            let previousGames = games
             guard !refreshedGames.isEmpty else {
+                if failedFetch, !previousGames.isEmpty {
+                    let failureAt = now()
+                    for game in previousGames {
+                        cache[game.gamePk]?.failureAt = failureAt
+                    }
+                    games = orderedCachedGames()
+                    await scheduleRefresh
+                    try Task.checkCancellation()
+                    errorMessage = nil
+                    await saveSnapshot()
+                    return
+                }
+                if descriptors.isEmpty, !previousGames.isEmpty {
+                    await scheduleRefresh
+                    try Task.checkCancellation()
+                    return
+                }
                 throw RecentGameError.noGames
             }
 
+            let replacementIDs = Set(refreshedGames.map(\.gamePk))
+            let fallbackGames = failedFetch
+                ? previousGames.filter { !replacementIDs.contains($0.gamePk) }
+                : []
+            let visibleGames = Array((refreshedGames + fallbackGames).prefix(RecentGameSnapshotCache.maxGamesPerTeam))
+            let visibleIDs = Set(visibleGames.map(\.gamePk))
+            cache = cache.filter { visibleIDs.contains($0.key) }
             await scheduleRefresh
             try Task.checkCancellation()
-            games = refreshedGames
+            games = visibleGames
             errorMessage = nil
             await saveSnapshot()
         } catch {

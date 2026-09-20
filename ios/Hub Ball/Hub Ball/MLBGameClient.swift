@@ -9,10 +9,16 @@ struct MLBGameDescriptor: Sendable {
 struct MLBGameClient: Sendable {
     private let team: HubTeam
     private let session: URLSession
+    private let backendOrigin: URL?
 
-    init(team: HubTeam = .boston, session: URLSession = .shared) {
+    init(
+        team: HubTeam = .boston,
+        session: URLSession = .shared,
+        backendOrigin: URL? = nil
+    ) {
         self.team = team
         self.session = session
+        self.backendOrigin = backendOrigin
     }
 
     func gameDescriptors(now: Date = Date()) async throws -> [MLBGameDescriptor] {
@@ -24,7 +30,7 @@ struct MLBGameClient: Sendable {
         formatter.timeZone = calendar.timeZone
         formatter.dateFormat = "yyyy-MM-dd"
 
-        var components = URLComponents(url: AppBackend.apiURL("mlb/schedule", team: team), resolvingAgainstBaseURL: false)!
+        var components = URLComponents(url: apiURL("mlb/schedule"), resolvingAgainstBaseURL: false)!
         components.queryItems = (components.queryItems ?? []) + [
             URLQueryItem(name: "sportId", value: "1"),
             URLQueryItem(name: "startDate", value: formatter.string(from: start)),
@@ -55,15 +61,31 @@ struct MLBGameClient: Sendable {
         return (live.map { [$0] } ?? []) + finals
     }
 
-    func game(gamePk: Int) async throws -> RecentGame {
-        let url = AppBackend.apiURL("mlb/game", team: team)
+    func game(
+        gamePk: Int,
+        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
+    ) async throws -> RecentGame {
+        let url = apiURL("mlb/game")
             .appending(queryItems: [URLQueryItem(name: "gamePk", value: "\(gamePk)")])
-        return try buildGame(from: await json(from: url))
+        return try buildGame(from: await json(from: url, cachePolicy: cachePolicy))
     }
 
-    private func json(from url: URL) async throws -> JSON {
+    private func apiURL(_ endpoint: String) -> URL {
+        if let backendOrigin {
+            return backendOrigin
+                .appending(path: "api")
+                .appending(path: endpoint)
+                .appending(queryItems: [URLQueryItem(name: "team", value: team.apiKey)])
+        }
+        return AppBackend.apiURL(endpoint, team: team)
+    }
+
+    private func json(
+        from url: URL,
+        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
+    ) async throws -> JSON {
         var request = URLRequest(url: url)
-        request.cachePolicy = .useProtocolCachePolicy
+        request.cachePolicy = cachePolicy
         request.timeoutInterval = 20
         let (data, response) = try await session.data(for: request)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200,

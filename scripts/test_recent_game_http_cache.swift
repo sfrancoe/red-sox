@@ -1,199 +1,176 @@
 import Foundation
 
-final class HTTPCacheProtocol: URLProtocol, @unchecked Sendable {
-    private static let lock = NSLock()
-    nonisolated(unsafe) private static var live = false
-    nonisolated(unsafe) private static var version = 1
-    nonisolated(unsafe) private static var gameRequests = 0
-    nonisolated(unsafe) private static var cachePolicies: [URLRequest.CachePolicy] = []
-    nonisolated(unsafe) private static var gameCachePolicies: [URLRequest.CachePolicy] = []
-
-    static func configure(live: Bool, version: Int) {
-        lock.lock()
-        defer { lock.unlock() }
-        Self.live = live
-        Self.version = version
-    }
-
-    static var gameRequestCount: Int {
-        lock.lock()
-        defer { lock.unlock() }
-        return gameRequests
-    }
-
-    static var observedCachePolicies: [URLRequest.CachePolicy] {
-        lock.lock()
-        defer { lock.unlock() }
-        return cachePolicies
-    }
-
-    static var observedGameCachePolicies: [URLRequest.CachePolicy] {
-        lock.lock()
-        defer { lock.unlock() }
-        return gameCachePolicies
-    }
-
-    override class func canInit(with request: URLRequest) -> Bool { true }
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
-
-    override func startLoading() {
-        let url = request.url!
-        Self.lock.lock()
-        let isLive = Self.live
-        let currentVersion = Self.version
-        Self.cachePolicies.append(request.cachePolicy)
-        if url.path.contains("/api/mlb/game") {
-            Self.gameRequests += 1
-            Self.gameCachePolicies.append(request.cachePolicy)
-        }
-        Self.lock.unlock()
-
-        let body: Data
-        let cacheControl: String
-        if url.path.contains("/api/mlb/schedule") {
-            let status: [String: String] = isLive
-                ? ["abstractGameState": "Live", "codedGameState": "I"]
-                : ["abstractGameState": "Final", "codedGameState": "F"]
-            body = try! JSONSerialization.data(withJSONObject: [
-                "dates": [[
-                    "games": [[
-                        "gamePk": 9010,
-                        "gameDate": "2026-09-18T23:00:00Z",
-                        "status": status,
-                    ]],
-                ]],
-            ])
-            cacheControl = "no-store"
-        } else if url.path.contains("/data/schedule.json") {
-            body = Data(#"{"generated_at":"fixture","regular_season_end":"2026-09-27","source":"test","team":"Boston","games":[]}"#.utf8)
-            cacheControl = "no-store"
-        } else {
-            body = gamePayload(live: isLive, version: currentVersion)
-            // Deliberately arrive expired. The store clock also advances past
-            // its five-minute final revalidation window.
-            cacheControl = isLive ? "public, max-age=0" : "public, max-age=300"
-        }
-
-        let headers = [
-            "Cache-Control": cacheControl,
-            "Date": HTTPDateFormatter.string(from: Date(timeIntervalSinceNow: -600)),
-            "Content-Type": "application/json",
-        ]
-        let response = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: "HTTP/1.1",
-            headerFields: headers
-        )!
-        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .allowed)
-        client?.urlProtocol(self, didLoad: body)
-        client?.urlProtocolDidFinishLoading(self)
-    }
-
-    override func stopLoading() {}
-
-    private func gamePayload(live: Bool, version: Int) -> Data {
-        let abstract = live ? "Live" : "Final"
-        let code = live ? "I" : "F"
-        let venue = live ? "Fenway live \(version)" : "Fenway final \(version)"
-        let team = ["id": 111, "name": "Boston Red Sox", "abbreviation": "BOS", "record": [
-            "leagueRecord": ["wins": 80, "losses": 70],
-        ]] as [String: Any]
-        let opponent = ["id": 147, "name": "New York Yankees", "abbreviation": "NYY", "record": [
-            "leagueRecord": ["wins": 75, "losses": 75],
-        ]] as [String: Any]
-        let lineTeam = ["runs": 3, "hits": 5, "errors": 0, "leftOnBase": 4] as [String: Any]
-        let lineOpponent = ["runs": 2, "hits": 4, "errors": 1, "leftOnBase": 5] as [String: Any]
-        let emptyBox = ["batters": [], "battingOrder": [], "pitchers": [], "players": [:]] as [String: Any]
-        let payload: [String: Any] = [
-            "gamePk": 9010,
-            "gameData": [
-                "status": ["abstractGameState": abstract, "codedGameState": code],
-                "datetime": ["dateTime": "2026-09-18T23:00:00Z"],
-                "venue": ["name": venue],
-                "gameInfo": ["gameDurationMinutes": 180, "attendance": 30000],
-                "teams": ["away": team, "home": opponent],
-            ],
-            "liveData": [
-                "linescore": ["teams": ["away": lineTeam, "home": lineOpponent], "innings": []],
-                "boxscore": ["teams": ["away": emptyBox, "home": emptyBox]],
-                "plays": ["allPlays": [], "scoringPlays": []],
-                "decisions": [:],
-            ],
-        ]
-        return try! JSONSerialization.data(withJSONObject: payload)
-    }
-}
-
-private enum HTTPDateFormatter {
-    static func string(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss 'GMT'"
-        return formatter.string(from: date)
-    }
+private struct FixtureStats: Decodable {
+    let gameRequests: Int
 }
 
 @main
 struct HTTPCacheIntegrationTests {
     @MainActor
     static func main() async throws {
+        let originString = ProcessInfo.processInfo.environment["HUB_HTTP_CACHE_FIXTURE_ORIGIN"]!
+        let origin = URL(string: originString)!
         let configuration = URLSessionConfiguration.default
-        configuration.protocolClasses = [HTTPCacheProtocol.self]
+        let cachePath = "hub-ball-http-cache-test-\(UUID().uuidString)"
         configuration.urlCache = URLCache(
             memoryCapacity: 2 * 1024 * 1024,
             diskCapacity: 2 * 1024 * 1024,
-            diskPath: "hub-ball-http-cache-test"
+            diskPath: cachePath
         )
         configuration.requestCachePolicy = .useProtocolCachePolicy
         let session = URLSession(configuration: configuration)
         defer { session.invalidateAndCancel() }
 
-        let cacheDirectory = FileManager.default.temporaryDirectory
-            .appendingPathComponent("recent-game-http-cache-\(UUID().uuidString)", isDirectory: true)
-        defer { try? FileManager.default.removeItem(at: cacheDirectory) }
-
         var now = Date(timeIntervalSince1970: 1_000)
-        HTTPCacheProtocol.configure(live: false, version: 1)
-        let finalStore = RecentGameStore(
+        try await control(origin, session: session, live: false, version: 1)
+        let gameURL = origin
+            .appending(path: "api")
+            .appending(path: "mlb/game")
+            .appending(queryItems: [
+                URLQueryItem(name: "team", value: "redsox"),
+                URLQueryItem(name: "gamePk", value: "9010"),
+            ])
+        var seedRequest = URLRequest(url: gameURL, cachePolicy: .reloadIgnoringLocalCacheData)
+        seedRequest.timeoutInterval = 20
+        let (seedData, seedResponse) = try await session.data(for: seedRequest)
+        precondition((seedResponse as? HTTPURLResponse)?.statusCode == 200)
+        session.configuration.urlCache?.storeCachedResponse(
+            CachedURLResponse(response: seedResponse, data: seedData, storagePolicy: .allowed),
+            for: seedRequest
+        )
+        precondition(session.configuration.urlCache?.cachedResponse(for: seedRequest) != nil,
+                     "fixture response was not stored in URLCache")
+        let cacheOnlyClient = MLBGameClient(
+            team: .boston,
+            session: session,
+            backendOrigin: origin
+        )
+        let cachedGame = try await cacheOnlyClient.game(
+            gamePk: 9010,
+            cachePolicy: .returnCacheDataDontLoad
+        )
+        precondition(cachedGame.venue == "Fenway final 1")
+        try await assertGameRequests(1, origin: origin, session: session)
+        session.configuration.urlCache?.removeAllCachedResponses()
+        let firstDirectory = temporaryDirectory("first")
+        defer { try? FileManager.default.removeItem(at: firstDirectory) }
+        let firstStore = RecentGameStore(
             team: .boston,
             session: session,
             now: { now },
-            cacheDirectory: cacheDirectory
+            cacheDirectory: firstDirectory,
+            backendOrigin: origin
         )
-        await finalStore.load()
-        precondition(finalStore.games.first?.venue == "Fenway final 1")
-        precondition(HTTPCacheProtocol.gameRequestCount == 1)
+        await firstStore.load()
+        precondition(firstStore.games.first?.venue == "Fenway final 1")
+        try await assertGameRequests(2, origin: origin, session: session)
 
+        // The one-second HTTP freshness window expires independently of the
+        // store's five-minute final window, so this new store must reach origin.
+        try await Task.sleep(for: .seconds(1.2))
         now += 301
-        HTTPCacheProtocol.configure(live: false, version: 2)
-        await finalStore.refresh()
-        precondition(HTTPCacheProtocol.gameRequestCount == 2, "expired final did not reach the network")
-        precondition(finalStore.games.first?.venue == "Fenway final 2", "expired final did not pick up correction")
+        try await control(origin, session: session, live: false, version: 2)
+        let expiredDirectory = temporaryDirectory("expired")
+        defer { try? FileManager.default.removeItem(at: expiredDirectory) }
+        let expiredStore = RecentGameStore(
+            team: .boston,
+            session: session,
+            now: { now },
+            cacheDirectory: expiredDirectory,
+            backendOrigin: origin
+        )
+        await expiredStore.load()
+        precondition(expiredStore.games.first?.venue == "Fenway final 2")
+        try await assertGameRequests(3, origin: origin, session: session,
+                                     message: "expired HTTP response did not reach origin")
 
-        let liveDirectory = FileManager.default.temporaryDirectory
-            .appendingPathComponent("recent-game-http-cache-live-\(UUID().uuidString)", isDirectory: true)
+        // Live polling also revalidates after the short HTTP freshness window,
+        // and the following live-to-final descriptor transition is fetched.
+        now += 1
+        try await control(origin, session: session, live: true, version: 1)
+        let liveDirectory = temporaryDirectory("live")
         defer { try? FileManager.default.removeItem(at: liveDirectory) }
-        var liveNow = now
-        HTTPCacheProtocol.configure(live: true, version: 1)
         let liveStore = RecentGameStore(
             team: .boston,
             session: session,
-            now: { liveNow },
-            cacheDirectory: liveDirectory
+            now: { now },
+            cacheDirectory: liveDirectory,
+            backendOrigin: origin
         )
         await liveStore.load()
         precondition(liveStore.games.first?.venue == "Fenway live 1")
-        let beforeLiveRefresh = HTTPCacheProtocol.gameRequestCount
+        try await assertGameRequests(4, origin: origin, session: session)
 
-        liveNow += 20
-        HTTPCacheProtocol.configure(live: true, version: 2)
+        try await Task.sleep(for: .seconds(1.2))
+        now += 20
+        try await control(origin, session: session, live: true, version: 2)
         await liveStore.refresh()
-        precondition(HTTPCacheProtocol.gameRequestCount == beforeLiveRefresh + 1, "live game stopped refreshing")
         precondition(liveStore.games.first?.venue == "Fenway live 2")
-        precondition(HTTPCacheProtocol.observedGameCachePolicies.allSatisfy { $0 == .useProtocolCachePolicy })
+        try await assertGameRequests(5, origin: origin, session: session,
+                                     message: "live refresh did not pass the expired HTTP response")
 
-        print("HTTP cache integration: expired finals picked up corrections and live games continued refreshing.")
+        try await Task.sleep(for: .seconds(1.2))
+        now += 20
+        try await control(origin, session: session, live: false, version: 3)
+        await liveStore.refresh()
+        precondition(liveStore.games.first?.venue == "Fenway final 3")
+        precondition(!liveStore.games.first!.isLive)
+        try await assertGameRequests(6, origin: origin, session: session,
+                                     message: "live-to-final transition did not revalidate")
+
+        // Discovery failure raises the warning. Retry then bypasses both the
+        // five-minute store decision and a still-fresh HTTP cached final.
+        try await control(origin, session: session, live: false, version: 3, failDiscovery: true)
+        await liveStore.refresh()
+        let warnedGame = liveStore.games.first!
+        precondition(liveStore.hasRefreshWarning(for: warnedGame))
+        try await control(origin, session: session, live: false, version: 4)
+        await liveStore.retry(game: warnedGame)
+        precondition(liveStore.games.first?.venue == "Fenway final 4")
+        precondition(!liveStore.hasRefreshWarning(for: liveStore.games.first!))
+        try await assertGameRequests(7, origin: origin, session: session,
+                                     message: "Retry did not bypass the fresh HTTP cached final")
+
+        print("HTTP cache integration: observed a fresh cache hit, expiry correction, live refresh, live-to-final transition, and forced Retry revalidation.")
+    }
+
+    private static func temporaryDirectory(_ label: String) -> URL {
+        FileManager.default.temporaryDirectory
+            .appendingPathComponent("recent-game-http-\(label)-\(UUID().uuidString)", isDirectory: true)
+    }
+
+    private static func control(
+        _ origin: URL,
+        session: URLSession,
+        live: Bool,
+        version: Int,
+        failDiscovery: Bool = false
+    ) async throws {
+        var components = URLComponents(url: origin.appending(path: "control"), resolvingAgainstBaseURL: false)!
+        components.queryItems = [
+            URLQueryItem(name: "live", value: live ? "1" : "0"),
+            URLQueryItem(name: "version", value: "\(version)"),
+            URLQueryItem(name: "failDiscovery", value: failDiscovery ? "1" : "0"),
+        ]
+        let request = URLRequest(url: components.url!, cachePolicy: .reloadIgnoringLocalCacheData)
+        let (_, response) = try await session.data(for: request)
+        precondition((response as? HTTPURLResponse)?.statusCode == 200)
+    }
+
+    private static func stats(_ origin: URL, session: URLSession) async throws -> FixtureStats {
+        let request = URLRequest(url: origin.appending(path: "stats"), cachePolicy: .reloadIgnoringLocalCacheData)
+        let (data, response) = try await session.data(for: request)
+        precondition((response as? HTTPURLResponse)?.statusCode == 200)
+        return try JSONDecoder().decode(FixtureStats.self, from: data)
+    }
+
+    private static func assertGameRequests(
+        _ expected: Int,
+        origin: URL,
+        session: URLSession,
+        message: String = ""
+    ) async throws {
+        let actual = try await stats(origin, session: session).gameRequests
+        precondition(actual == expected, "\(message) actual=\(actual) expected=\(expected)")
     }
 }

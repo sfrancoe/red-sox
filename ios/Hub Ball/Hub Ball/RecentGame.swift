@@ -1,6 +1,6 @@
 import Foundation
 
-struct RecentGame: Codable, Sendable {
+nonisolated struct RecentGame: Codable, Sendable {
     let generatedAt: String
     let source: String
     let gamePk: Int
@@ -59,13 +59,13 @@ struct RecentGame: Codable, Sendable {
     }
 }
 
-struct Decisions: Codable, Sendable {
+nonisolated struct Decisions: Codable, Sendable {
     let winner: String
     let loser: String
     let save: String
 }
 
-struct TeamBoxScore: Codable, Sendable {
+nonisolated struct TeamBoxScore: Codable, Sendable {
     let side: String
     let id: Int
     let name: String
@@ -93,7 +93,7 @@ struct TeamBoxScore: Codable, Sendable {
     }
 }
 
-struct Batter: Codable, Identifiable, Sendable {
+nonisolated struct Batter: Codable, Identifiable, Sendable {
     let mlbId: Int?
     let name: String
     let position: String
@@ -114,7 +114,7 @@ struct Batter: Codable, Identifiable, Sendable {
     var id: String { "\(order)-\(name)" }
 }
 
-struct Pitcher: Codable, Identifiable, Sendable {
+nonisolated struct Pitcher: Codable, Identifiable, Sendable {
     let mlbId: Int?
     let name: String
     let position: String
@@ -132,7 +132,7 @@ struct Pitcher: Codable, Identifiable, Sendable {
     var id: String { "\(order)-\(name)" }
 }
 
-struct Inning: Codable, Identifiable, Sendable {
+nonisolated struct Inning: Codable, Identifiable, Sendable {
     let num: Int
     let ordinalNum: String
     let home: InningSide
@@ -141,14 +141,14 @@ struct Inning: Codable, Identifiable, Sendable {
     var id: Int { num }
 }
 
-struct InningSide: Codable, Sendable {
+nonisolated struct InningSide: Codable, Sendable {
     let runs: Int?
     let hits: Int
     let errors: Int
     let leftOnBase: Int
 }
 
-struct ScoringPlay: Codable, Identifiable, Sendable {
+nonisolated struct ScoringPlay: Codable, Identifiable, Sendable {
     let inning: String
     let description: String
     let awayScore: Int
@@ -157,7 +157,7 @@ struct ScoringPlay: Codable, Identifiable, Sendable {
     var id: String { "\(inning)-\(awayScore)-\(homeScore)-\(description)" }
 }
 
-struct OfficialRecap: Codable, Sendable {
+nonisolated struct OfficialRecap: Codable, Sendable {
     let headline: String
     let url: String
 }

@@ -7,6 +7,7 @@ trap 'rm -f "$test_binary"' EXIT HUP INT TERM
 app_root="$repo_root/ios/Hub Ball/Hub Ball"
 
 swiftc -target "$(uname -m)-apple-macos14.0" \
+  -default-isolation MainActor \
   "$app_root/HubTeam.swift" \
   "$app_root/AppBackend.swift" \
   "$app_root/BaseballTime.swift" \

@@ -13,8 +13,17 @@ final class ScheduleStore {
     var isLoading = false
     var errorMessage: String?
 
-    init(team: HubTeam = .boston, session: URLSession = .shared, now: @escaping () -> Date = Date.init) {
-        endpoint = AppBackend.dataURL("schedule.json", team: team)
+    init(
+        team: HubTeam = .boston,
+        session: URLSession = .shared,
+        now: @escaping () -> Date = Date.init,
+        backendOrigin: URL? = nil
+    ) {
+        endpoint = backendOrigin.map {
+            $0.appending(path: "data")
+                .appending(path: team.dataPathComponent ?? "")
+                .appending(path: "schedule.json")
+        } ?? AppBackend.dataURL("schedule.json", team: team)
         self.session = session
         self.now = now
     }

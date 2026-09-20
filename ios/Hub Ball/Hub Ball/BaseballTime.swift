@@ -1,6 +1,6 @@
 import Foundation
 
-enum BaseballTime {
+nonisolated enum BaseballTime {
     static let timeZone = TimeZone(identifier: "America/New_York")!
 
     static var calendar: Calendar {

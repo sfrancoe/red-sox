@@ -68,32 +68,34 @@ struct RecentGameView: View {
     }
 
     private var gameSelector: some View {
-        HStack(spacing: 0) {
-            ForEach(store.games, id: \.gamePk) { game in
-                Button {
-                    selectedGameID = game.gamePk
-                    selectedStatsTeam = .favorite
-                } label: {
-                    VStack(spacing: 3) {
-                        gameTabLabel(game)
-                        gameScoreLabel(game)
+        TimelineView(.periodic(from: .now, by: 30)) { context in
+            HStack(spacing: 0) {
+                ForEach(store.games, id: \.gamePk) { game in
+                    Button {
+                        selectedGameID = game.gamePk
+                        selectedStatsTeam = .favorite
+                    } label: {
+                        VStack(spacing: 3) {
+                            gameTabLabel(game, at: context.date)
+                            gameScoreLabel(game, at: context.date)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 6)
+                        .foregroundStyle(selectedGameID == game.gamePk ? AppColor.ink : AppColor.inkMuted)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 6)
-                    .foregroundStyle(selectedGameID == game.gamePk ? AppColor.ink : AppColor.inkMuted)
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(gameTabAccessibilityLabel(game, at: context.date))
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel(gameTabAccessibilityLabel(game))
             }
+            .padding(.horizontal, 16)
+            .padding(.top, 10)
+            .padding(.bottom, 4)
+            .background(AppColor.paleRed)
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 10)
-        .padding(.bottom, 4)
-        .background(AppColor.paleRed)
     }
 
-    private func gameTabLabel(_ game: RecentGame) -> some View {
-        Text(gameTabTitle(game))
+    private func gameTabLabel(_ game: RecentGame, at date: Date) -> some View {
+        Text(gameTabTitle(game, at: date))
             .font(
                 .system(
                     size: selectedGame?.gamePk == game.gamePk ? 16 : 13,
@@ -104,10 +106,22 @@ struct RecentGameView: View {
             .minimumScaleFactor(0.72)
     }
 
-    private func gameScoreLabel(_ game: RecentGame) -> some View {
+    private func gameScoreLabel(_ game: RecentGame, at date: Date) -> some View {
         let favorite = game.away.id == team.mlbID ? game.away : game.home
         let opponent = game.away.id == team.mlbID ? game.home : game.away
         let result = game.result.lowercased()
+        let state = store.presentationState(for: game, at: date)
+        let textColor: Color
+        switch state {
+        case .live:
+            textColor = AppColor.hunterGreen
+        case .interruptedLive:
+            textColor = AppColor.red
+        case .savedLive, .delayedLive:
+            textColor = AppColor.inkMuted
+        case .final:
+            textColor = result == "win" ? AppColor.resultWinText : AppColor.resultLossText
+        }
         let prefix = game.isLive ? "" : result == "win" ? "W " : "L "
 
         return Text("\(prefix)\(favorite.runs)–\(opponent.runs)")
@@ -120,21 +134,31 @@ struct RecentGameView: View {
             .monospacedDigit()
             .lineLimit(1)
             .minimumScaleFactor(0.8)
-            .foregroundStyle(
-                game.isLive
-                    ? AppColor.hunterGreen
-                    : result == "win" ? AppColor.resultWinText : AppColor.resultLossText
-            )
+            .foregroundStyle(textColor)
     }
 
-    private func gameTabAccessibilityLabel(_ game: RecentGame) -> String {
+    private func gameTabAccessibilityLabel(_ game: RecentGame, at date: Date) -> String {
         let favorite = game.away.id == team.mlbID ? game.away : game.home
         let opponent = game.away.id == team.mlbID ? game.home : game.away
-        return "\(gameTabTitle(game)), \(game.result), \(favorite.abbreviation) \(favorite.runs), \(opponent.abbreviation) \(opponent.runs)"
+        let state = store.presentationState(for: game, at: date)
+        let status = state == .final ? game.result : state.accessibilityLabel
+        return "\(gameTabTitle(game, at: date)), \(status), \(favorite.abbreviation) \(favorite.runs), \(opponent.abbreviation) \(opponent.runs)"
     }
 
-    private func gameTabTitle(_ game: RecentGame) -> String {
-        if game.isLive { return "Live" }
+    private func gameTabTitle(_ game: RecentGame, at date: Date) -> String {
+        let state = store.presentationState(for: game, at: date)
+        switch state {
+        case .live:
+            return "Live"
+        case .savedLive:
+            return "Saved score"
+        case .interruptedLive:
+            return "Updates interrupted"
+        case .delayedLive:
+            return "Updates delayed"
+        case .final:
+            break
+        }
 
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
@@ -222,49 +246,64 @@ struct RecentGameView: View {
     }
 
     private func scoreCard(_ game: RecentGame) -> some View {
-        VStack(spacing: 9) {
-            HStack {
-                Text(game.formattedDate)
-                    .font(.title3.weight(.black))
+        TimelineView(.periodic(from: .now, by: 30)) { context in
+            let state = store.presentationState(for: game, at: context.date)
+            VStack(spacing: 9) {
+                HStack {
+                    Text(game.formattedDate)
+                        .font(.title3.weight(.black))
 
-                Spacer()
+                    Spacer()
 
-                if game.isLive {
-                    LiveGameIndicator()
-                } else {
-                    Text("Final")
-                        .font(AppFont.label)
-                        .foregroundStyle(AppColor.inkMuted)
+                    gameStatusIndicator(state)
                 }
-            }
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text(game.gameDetails(watchSummary: store.watchSummary(for: game)))
-                    .font(.subheadline)
-                    .foregroundStyle(AppColor.bone.opacity(0.85))
-                    .fixedSize(horizontal: false, vertical: true)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(game.gameDetails(watchSummary: store.watchSummary(for: game)))
+                        .font(.subheadline)
+                        .foregroundStyle(AppColor.bone.opacity(0.85))
+                        .fixedSize(horizontal: false, vertical: true)
 
-                if game.isLive, let liveStatus = game.liveStatus {
-                    Text(liveStatus)
-                        .font(.subheadline.weight(.black))
-                        .foregroundStyle(AppColor.hunterGreen)
+                    if game.isLive, let liveStatus = game.liveStatus {
+                        Text(state == .live ? liveStatus : "\(state.label) · \(liveStatus)")
+                            .font(.subheadline.weight(.black))
+                            .foregroundStyle(state == .live ? AppColor.hunterGreen : AppColor.inkMuted)
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                combinedLineScore(game)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 10)
+                    .overlay {
+                        Rectangle()
+                            .stroke(AppColor.border.opacity(0.65), lineWidth: 0.5)
+                    }
             }
+            .padding(.horizontal, 12)
+            .padding(.top, 10)
+            .padding(.bottom, 12)
             .frame(maxWidth: .infinity, alignment: .leading)
-
-            combinedLineScore(game)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 10)
-                .overlay {
-                    Rectangle()
-                        .stroke(AppColor.border.opacity(0.65), lineWidth: 0.5)
-                }
+            .background(AppColor.nightRaised)
         }
-        .padding(.horizontal, 12)
-        .padding(.top, 10)
-        .padding(.bottom, 12)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColor.nightRaised)
+    }
+
+    @ViewBuilder
+    private func gameStatusIndicator(_ state: RecentGamePresentationState) -> some View {
+        switch state {
+        case .live:
+            LiveGameIndicator()
+        case .savedLive:
+            QualifiedGameIndicator(text: "SAVED SCORE", accessibilityLabel: state.accessibilityLabel)
+        case .interruptedLive:
+            QualifiedGameIndicator(text: "UPDATES INTERRUPTED", accessibilityLabel: state.accessibilityLabel)
+        case .delayedLive:
+            QualifiedGameIndicator(text: "UPDATES DELAYED", accessibilityLabel: state.accessibilityLabel)
+        case .final:
+            Text("Final")
+                .font(AppFont.label)
+                .foregroundStyle(AppColor.inkMuted)
+        }
     }
 
     private func freshnessBanner(_ game: RecentGame) -> some View {
@@ -282,7 +321,7 @@ struct RecentGameView: View {
                     Spacer(minLength: 4)
                     if warning {
                         Button("Retry") {
-                            Task { await store.refresh() }
+                        Task { await store.retry(game: game) }
                         }
                         .font(.caption.weight(.bold))
                         .buttonStyle(.bordered)
@@ -681,5 +720,19 @@ struct LiveGameIndicator: View {
         .fixedSize()
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Live game")
+    }
+}
+
+struct QualifiedGameIndicator: View {
+    let text: String
+    let accessibilityLabel: String
+
+    var body: some View {
+        Text(text)
+            .font(AppFont.label)
+            .foregroundStyle(Color(hubHex: "#FFB000"))
+            .fixedSize()
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(accessibilityLabel)
     }
 }

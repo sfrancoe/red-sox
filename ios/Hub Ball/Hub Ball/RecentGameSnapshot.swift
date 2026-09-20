@@ -1,12 +1,12 @@
 import Foundation
 
-struct RecentGameCacheRecord: Codable, Sendable {
+nonisolated struct RecentGameCacheRecord: Codable, Sendable {
     let game: RecentGame
     let lastCheckedAt: Date
     let lastFailureAt: Date?
 }
 
-struct RecentGameFreshness: Sendable {
+nonisolated struct RecentGameFreshness: Sendable {
     let lastCheckedAt: Date
     let lastFailureAt: Date?
     let isSavedSnapshot: Bool
@@ -178,7 +178,7 @@ actor RecentGameSnapshotCache {
     }
 }
 
-private struct Envelope: Codable, Sendable {
+private nonisolated struct Envelope: Codable, Sendable {
     let schemaVersion: Int
     let teamID: Int
     let savedAt: Date
