@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T22:30:06.944183+00:00",
+  "generated_at": "2026-09-20T11:50:09.545507+00:00",
   "season": 2026,
   "team": "Detroit Tigers",
   "games_played": 155,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 15.0,
+    "actual_war": 15.1,
     "forecast_war_to_date": 19.5,
-    "war_gap": -4.6,
-    "innings": 1364.0,
-    "era": 3.64
+    "war_gap": -4.4,
+    "innings": 1372.0,
+    "era": 3.63
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 5.64
       },
       "war_gap": -2.66,
-      "innings_share_pct": 7.1
+      "innings_share_pct": 7.0
     },
     {
       "id": 663554,
@@ -82,7 +82,7 @@
         "war": 2.07
       },
       "war_gap": 0.89,
-      "innings_share_pct": 6.4
+      "innings_share_pct": 6.3
     },
     {
       "id": 672456,
@@ -114,7 +114,7 @@
         "war": 0.27
       },
       "war_gap": 2.03,
-      "innings_share_pct": 11.1
+      "innings_share_pct": 11.0
     },
     {
       "id": 664285,
@@ -146,7 +146,7 @@
         "war": 3.57
       },
       "war_gap": -1.75,
-      "innings_share_pct": 12.4
+      "innings_share_pct": 12.3
     },
     {
       "id": 675512,
@@ -226,7 +226,7 @@
         "ip_value": 38.0,
         "war": 0.87,
         "era": 3.32,
-        "fip": 2.33,
+        "fip": 2.34,
         "k_minus_bb_pct": 28.0
       },
       "forecast": {
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "102.0",
         "ip_value": 102.0,
-        "war": 0.69,
+        "war": 0.68,
         "era": 3.62,
         "fip": 4.19,
         "k_minus_bb_pct": 15.2
@@ -273,8 +273,8 @@
         "ip": 82.0,
         "war": 0.95
       },
-      "war_gap": -0.26,
-      "innings_share_pct": 7.5
+      "war_gap": -0.27,
+      "innings_share_pct": 7.4
     },
     {
       "id": 680744,
@@ -402,7 +402,7 @@
         "war": 0.74
       },
       "war_gap": -0.4,
-      "innings_share_pct": 2.0
+      "innings_share_pct": 1.9
     },
     {
       "id": 676428,
@@ -416,7 +416,7 @@
       "actual": {
         "ip": "31.2",
         "ip_value": 31.667,
-        "war": 0.3,
+        "war": 0.29,
         "era": 2.56,
         "fip": 3.51,
         "k_minus_bb_pct": 6.3
@@ -435,6 +435,38 @@
       },
       "war_gap": -0.05,
       "innings_share_pct": 2.3
+    },
+    {
+      "id": 695549,
+      "name": "Jackson Jobe",
+      "throws": "R",
+      "role": "Starter",
+      "games": 8,
+      "starts": 8,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "40.2",
+        "ip_value": 40.667,
+        "war": 0.28,
+        "era": 3.98,
+        "fip": 4.55,
+        "k_minus_bb_pct": 16.9
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.76,
+        "fip": 4.85,
+        "k_minus_bb_pct": 8.4,
+        "team_at_fetch": "DET"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": 0.28,
+      "innings_share_pct": 3.0
     },
     {
       "id": 445276,
@@ -466,7 +498,7 @@
         "war": 0.27
       },
       "war_gap": -0.09,
-      "innings_share_pct": 3.2
+      "innings_share_pct": 3.1
     },
     {
       "id": 641755,
@@ -499,38 +531,6 @@
       },
       "war_gap": -0.13,
       "innings_share_pct": 0.9
-    },
-    {
-      "id": 695549,
-      "name": "Jackson Jobe",
-      "throws": "R",
-      "role": "Starter",
-      "games": 7,
-      "starts": 7,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "34.2",
-        "ip_value": 34.667,
-        "war": 0.13,
-        "era": 3.89,
-        "fip": 4.86,
-        "k_minus_bb_pct": 14.2
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.76,
-        "fip": 4.85,
-        "k_minus_bb_pct": 8.4,
-        "team_at_fetch": "DET"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.0
-      },
-      "war_gap": 0.13,
-      "innings_share_pct": 2.5
     },
     {
       "id": 572143,
@@ -778,7 +778,7 @@
         "ip": 23.0,
         "war": 0.03
       },
-      "war_gap": -0.12,
+      "war_gap": -0.13,
       "innings_share_pct": 1.5
     },
     {
@@ -811,17 +811,17 @@
       "name": "Jacob Waguespack",
       "throws": "R",
       "role": "Reliever",
-      "games": 32,
+      "games": 33,
       "starts": 1,
       "saves": 0,
       "holds": 5,
       "actual": {
-        "ip": "41.2",
-        "ip_value": 41.667,
-        "war": -0.2,
-        "era": 2.59,
-        "fip": 4.85,
-        "k_minus_bb_pct": 7.4
+        "ip": "43.2",
+        "ip_value": 43.667,
+        "war": -0.17,
+        "era": 2.47,
+        "fip": 4.77,
+        "k_minus_bb_pct": 8.2
       },
       "forecast": {
         "ip": 1.0,
@@ -835,8 +835,8 @@
         "ip": 1.0,
         "war": 0.0
       },
-      "war_gap": -0.2,
-      "innings_share_pct": 3.1
+      "war_gap": -0.17,
+      "innings_share_pct": 3.2
     },
     {
       "id": 676568,

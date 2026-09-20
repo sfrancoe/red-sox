@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T05:25:51.183339+00:00",
+  "generated_at": "2026-09-20T11:50:12.627729+00:00",
   "season": 2026,
   "team": "Seattle Mariners",
   "games_played": 155,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 13.4,
+    "actual_war": 13.7,
     "forecast_war_to_date": 16.7,
-    "war_gap": -3.3,
-    "innings": 1358.3,
+    "war_gap": -3.0,
+    "innings": 1366.3,
     "era": 4.21
   },
   "pitchers": [
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "167.2",
         "ip_value": 167.667,
-        "war": 3.88,
+        "war": 3.89,
         "era": 3.92,
         "fip": 3.27,
         "k_minus_bb_pct": 19.2
@@ -82,7 +82,7 @@
         "war": 3.04
       },
       "war_gap": -0.39,
-      "innings_share_pct": 13.1
+      "innings_share_pct": 13.0
     },
     {
       "id": 669923,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "169.2",
         "ip_value": 169.667,
-        "war": 2.51,
+        "war": 2.52,
         "era": 4.24,
         "fip": 3.85,
         "k_minus_bb_pct": 13.8
@@ -113,8 +113,8 @@
         "ip": 170.5,
         "war": 3.03
       },
-      "war_gap": -0.52,
-      "innings_share_pct": 12.5
+      "war_gap": -0.51,
+      "innings_share_pct": 12.4
     },
     {
       "id": 676106,
@@ -146,7 +146,7 @@
         "war": 0.15
       },
       "war_gap": 1.59,
-      "innings_share_pct": 10.2
+      "innings_share_pct": 10.1
     },
     {
       "id": 662253,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "57.0",
         "ip_value": 57.0,
-        "war": 1.02,
+        "war": 1.03,
         "era": 4.11,
         "fip": 3.06,
         "k_minus_bb_pct": 27.8
@@ -177,7 +177,7 @@
         "ip": 61.2,
         "war": 0.73
       },
-      "war_gap": 0.29,
+      "war_gap": 0.3,
       "innings_share_pct": 4.2
     },
     {
@@ -185,17 +185,17 @@
       "name": "Bryce Miller",
       "throws": "R",
       "role": "Starter",
-      "games": 20,
-      "starts": 19,
+      "games": 21,
+      "starts": 20,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "107.1",
-        "ip_value": 107.333,
-        "war": 0.68,
-        "era": 4.19,
-        "fip": 4.55,
-        "k_minus_bb_pct": 16.5
+        "ip": "112.2",
+        "ip_value": 112.667,
+        "war": 0.88,
+        "era": 3.99,
+        "fip": 4.43,
+        "k_minus_bb_pct": 16.6
       },
       "forecast": {
         "ip": 143.4,
@@ -209,8 +209,8 @@
         "ip": 137.2,
         "war": 1.32
       },
-      "war_gap": -0.64,
-      "innings_share_pct": 7.9
+      "war_gap": -0.44,
+      "innings_share_pct": 8.2
     },
     {
       "id": 622491,
@@ -306,39 +306,7 @@
         "war": -0.04
       },
       "war_gap": 0.34,
-      "innings_share_pct": 2.1
-    },
-    {
-      "id": 681867,
-      "name": "Cooper Criswell",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 33,
-      "starts": 0,
-      "saves": 1,
-      "holds": 3,
-      "actual": {
-        "ip": "37.1",
-        "ip_value": 37.333,
-        "war": 0.25,
-        "era": 3.38,
-        "fip": 3.5,
-        "k_minus_bb_pct": 12.4
-      },
-      "forecast": {
-        "ip": 72.0,
-        "war": 0.25,
-        "era": 3.81,
-        "fip": 3.96,
-        "k_minus_bb_pct": 13.1,
-        "team_at_fetch": "SEA"
-      },
-      "forecast_to_date": {
-        "ip": 68.9,
-        "war": 0.24
-      },
-      "war_gap": 0.02,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.0
     },
     {
       "id": 807739,
@@ -370,17 +338,17 @@
       "name": "Carlos Vargas",
       "throws": "R",
       "role": "Reliever",
-      "games": 12,
+      "games": 13,
       "starts": 0,
       "saves": 0,
-      "holds": 0,
+      "holds": 1,
       "actual": {
-        "ip": "14.1",
-        "ip_value": 14.333,
-        "war": 0.18,
-        "era": 3.77,
+        "ip": "15.1",
+        "ip_value": 15.333,
+        "war": 0.21,
+        "era": 4.7,
         "fip": 3.1,
-        "k_minus_bb_pct": 20.0
+        "k_minus_bb_pct": 18.5
       },
       "forecast": {
         "ip": 56.0,
@@ -394,8 +362,104 @@
         "ip": 53.6,
         "war": -0.02
       },
-      "war_gap": 0.2,
+      "war_gap": 0.22,
       "innings_share_pct": 1.1
+    },
+    {
+      "id": 681867,
+      "name": "Cooper Criswell",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 34,
+      "starts": 0,
+      "saves": 1,
+      "holds": 3,
+      "actual": {
+        "ip": "37.2",
+        "ip_value": 37.667,
+        "war": 0.2,
+        "era": 3.35,
+        "fip": 3.66,
+        "k_minus_bb_pct": 10.8
+      },
+      "forecast": {
+        "ip": 72.0,
+        "war": 0.25,
+        "era": 3.81,
+        "fip": 3.96,
+        "k_minus_bb_pct": 13.1,
+        "team_at_fetch": "SEA"
+      },
+      "forecast_to_date": {
+        "ip": 68.9,
+        "war": 0.24
+      },
+      "war_gap": -0.04,
+      "innings_share_pct": 2.8
+    },
+    {
+      "id": 642100,
+      "name": "Gabe Speier",
+      "throws": "L",
+      "role": "Setup",
+      "games": 52,
+      "starts": 0,
+      "saves": 1,
+      "holds": 21,
+      "actual": {
+        "ip": "44.0",
+        "ip_value": 44.0,
+        "war": 0.16,
+        "era": 3.07,
+        "fip": 4.03,
+        "k_minus_bb_pct": 14.8
+      },
+      "forecast": {
+        "ip": 58.0,
+        "war": 0.53,
+        "era": 3.21,
+        "fip": 3.32,
+        "k_minus_bb_pct": 20.4,
+        "team_at_fetch": "SEA"
+      },
+      "forecast_to_date": {
+        "ip": 55.5,
+        "war": 0.51
+      },
+      "war_gap": -0.35,
+      "innings_share_pct": 3.2
+    },
+    {
+      "id": 678606,
+      "name": "José A. Ferrer",
+      "throws": "L",
+      "role": "Setup",
+      "games": 70,
+      "starts": 0,
+      "saves": 3,
+      "holds": 13,
+      "actual": {
+        "ip": "61.2",
+        "ip_value": 61.667,
+        "war": 0.15,
+        "era": 3.94,
+        "fip": 3.96,
+        "k_minus_bb_pct": 11.5
+      },
+      "forecast": {
+        "ip": 70.0,
+        "war": 0.59,
+        "era": 3.11,
+        "fip": 3.36,
+        "k_minus_bb_pct": 16.0,
+        "team_at_fetch": "SEA"
+      },
+      "forecast_to_date": {
+        "ip": 67.0,
+        "war": 0.56
+      },
+      "war_gap": -0.41,
+      "innings_share_pct": 4.5
     },
     {
       "id": 668984,
@@ -428,70 +492,6 @@
       },
       "war_gap": 0.18,
       "innings_share_pct": 0.9
-    },
-    {
-      "id": 678606,
-      "name": "José A. Ferrer",
-      "throws": "L",
-      "role": "Setup",
-      "games": 69,
-      "starts": 0,
-      "saves": 3,
-      "holds": 13,
-      "actual": {
-        "ip": "61.1",
-        "ip_value": 61.333,
-        "war": 0.14,
-        "era": 3.67,
-        "fip": 3.96,
-        "k_minus_bb_pct": 11.6
-      },
-      "forecast": {
-        "ip": 70.0,
-        "war": 0.59,
-        "era": 3.11,
-        "fip": 3.36,
-        "k_minus_bb_pct": 16.0,
-        "team_at_fetch": "SEA"
-      },
-      "forecast_to_date": {
-        "ip": 67.0,
-        "war": 0.56
-      },
-      "war_gap": -0.42,
-      "innings_share_pct": 4.5
-    },
-    {
-      "id": 642100,
-      "name": "Gabe Speier",
-      "throws": "L",
-      "role": "Setup",
-      "games": 51,
-      "starts": 0,
-      "saves": 1,
-      "holds": 21,
-      "actual": {
-        "ip": "43.0",
-        "ip_value": 43.0,
-        "war": 0.09,
-        "era": 3.14,
-        "fip": 4.14,
-        "k_minus_bb_pct": 13.9
-      },
-      "forecast": {
-        "ip": 58.0,
-        "war": 0.53,
-        "era": 3.21,
-        "fip": 3.32,
-        "k_minus_bb_pct": 20.4,
-        "team_at_fetch": "SEA"
-      },
-      "forecast_to_date": {
-        "ip": 55.5,
-        "war": 0.51
-      },
-      "war_gap": -0.42,
-      "innings_share_pct": 3.2
     },
     {
       "id": 621074,
@@ -829,7 +829,7 @@
       "actual": {
         "ip": "27.1",
         "ip_value": 27.333,
-        "war": -0.18,
+        "war": -0.17,
         "era": 4.94,
         "fip": 4.96,
         "k_minus_bb_pct": 0.0
@@ -911,7 +911,7 @@
         "war": 0.28
       },
       "war_gap": -0.7,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     }
   ]
 }

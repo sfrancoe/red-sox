@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T05:25:54.848141+00:00",
+  "generated_at": "2026-09-20T11:50:16.143663+00:00",
   "season": 2026,
   "team": "Cincinnati Reds",
   "games_played": 155,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 7.7,
+    "actual_war": 7.6,
     "forecast_war_to_date": 15.1,
-    "war_gap": -7.4,
-    "innings": 1363.0,
+    "war_gap": -7.5,
+    "innings": 1372.0,
     "era": 4.87
   },
   "pitchers": [
@@ -49,8 +49,8 @@
         "ip": 109.3,
         "war": 2.19
       },
-      "war_gap": 2.13,
-      "innings_share_pct": 11.3
+      "war_gap": 2.14,
+      "innings_share_pct": 11.2
     },
     {
       "id": 671096,
@@ -82,7 +82,7 @@
         "war": 1.95
       },
       "war_gap": -0.58,
-      "innings_share_pct": 11.7
+      "innings_share_pct": 11.6
     },
     {
       "id": 695076,
@@ -370,7 +370,7 @@
         "war": 2.21
       },
       "war_gap": -2.02,
-      "innings_share_pct": 11.3
+      "innings_share_pct": 11.2
     },
     {
       "id": 663978,
@@ -469,38 +469,6 @@
       "innings_share_pct": 0.4
     },
     {
-      "id": 685112,
-      "name": "Zach McCambley",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 8,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "8.2",
-        "ip_value": 8.667,
-        "war": 0.08,
-        "era": 4.15,
-        "fip": 3.44,
-        "k_minus_bb_pct": 7.0
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": 0.0,
-        "era": 4.23,
-        "fip": 4.34,
-        "k_minus_bb_pct": 10.7,
-        "team_at_fetch": "CIN"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": 0.0
-      },
-      "war_gap": 0.08,
-      "innings_share_pct": 0.6
-    },
-    {
       "id": 687924,
       "name": "Julian Aguiar",
       "throws": "R",
@@ -514,7 +482,7 @@
         "ip_value": 3.0,
         "war": 0.06,
         "era": 6.0,
-        "fip": 2.76,
+        "fip": 2.77,
         "k_minus_bb_pct": 7.1
       },
       "forecast": {
@@ -529,7 +497,7 @@
         "ip": 33.6,
         "war": 0.04
       },
-      "war_gap": 0.02,
+      "war_gap": 0.01,
       "innings_share_pct": 0.2
     },
     {
@@ -581,6 +549,38 @@
       },
       "war_gap": 0.02,
       "innings_share_pct": 0.1
+    },
+    {
+      "id": 685112,
+      "name": "Zach McCambley",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 9,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "9.2",
+        "ip_value": 9.667,
+        "war": -0.0,
+        "era": 4.66,
+        "fip": 4.55,
+        "k_minus_bb_pct": 8.5
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": 0.0,
+        "era": 4.23,
+        "fip": 4.34,
+        "k_minus_bb_pct": 10.7,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": 0.0
+      },
+      "war_gap": -0.0,
+      "innings_share_pct": 0.7
     },
     {
       "id": 628708,
@@ -647,38 +647,6 @@
       "innings_share_pct": 0.4
     },
     {
-      "id": 666157,
-      "name": "Nick Lodolo",
-      "throws": "L",
-      "role": "Starter",
-      "games": 19,
-      "starts": 19,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "96.2",
-        "ip_value": 96.667,
-        "war": -0.13,
-        "era": 5.12,
-        "fip": 5.76,
-        "k_minus_bb_pct": 8.5
-      },
-      "forecast": {
-        "ip": 157.1,
-        "war": 2.45,
-        "era": 4.03,
-        "fip": 4.05,
-        "k_minus_bb_pct": 17.6,
-        "team_at_fetch": "CIN"
-      },
-      "forecast_to_date": {
-        "ip": 150.3,
-        "war": 2.34
-      },
-      "war_gap": -2.47,
-      "innings_share_pct": 7.1
-    },
-    {
       "id": 624431,
       "name": "Jose Trevino",
       "throws": "R",
@@ -708,17 +676,17 @@
       "name": "Pierce Johnson",
       "throws": "R",
       "role": "Reliever",
-      "games": 53,
+      "games": 54,
       "starts": 0,
       "saves": 1,
       "holds": 8,
       "actual": {
-        "ip": "45.2",
-        "ip_value": 45.667,
-        "war": -0.16,
-        "era": 4.73,
-        "fip": 4.94,
-        "k_minus_bb_pct": 9.6
+        "ip": "46.2",
+        "ip_value": 46.667,
+        "war": -0.13,
+        "era": 4.82,
+        "fip": 4.88,
+        "k_minus_bb_pct": 9.9
       },
       "forecast": {
         "ip": 61.0,
@@ -732,8 +700,40 @@
         "ip": 58.4,
         "war": 0.28
       },
-      "war_gap": -0.44,
+      "war_gap": -0.41,
       "innings_share_pct": 3.4
+    },
+    {
+      "id": 666157,
+      "name": "Nick Lodolo",
+      "throws": "L",
+      "role": "Starter",
+      "games": 20,
+      "starts": 20,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "103.2",
+        "ip_value": 103.667,
+        "war": -0.14,
+        "era": 5.04,
+        "fip": 5.77,
+        "k_minus_bb_pct": 7.8
+      },
+      "forecast": {
+        "ip": 157.1,
+        "war": 2.45,
+        "era": 4.03,
+        "fip": 4.05,
+        "k_minus_bb_pct": 17.6,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 150.3,
+        "war": 2.34
+      },
+      "war_gap": -2.48,
+      "innings_share_pct": 7.6
     },
     {
       "id": 676760,
@@ -925,7 +925,7 @@
         "war": -0.1
       },
       "war_gap": -0.12,
-      "innings_share_pct": 1.0
+      "innings_share_pct": 0.9
     },
     {
       "id": 682227,

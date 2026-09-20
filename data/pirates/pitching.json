@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T05:25:55.939520+00:00",
+  "generated_at": "2026-09-20T11:50:17.081766+00:00",
   "season": 2026,
   "team": "Pittsburgh Pirates",
   "games_played": 155,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 19.6,
+    "actual_war": 19.8,
     "forecast_war_to_date": 17.3,
-    "war_gap": 2.4,
-    "innings": 1374.3,
-    "era": 4.19
+    "war_gap": 2.6,
+    "innings": 1383.3,
+    "era": 4.2
   },
   "pitchers": [
     {
@@ -50,7 +50,7 @@
         "war": 5.43
       },
       "war_gap": -1.32,
-      "innings_share_pct": 12.2
+      "innings_share_pct": 12.1
     },
     {
       "id": 677952,
@@ -121,17 +121,17 @@
       "name": "Bubba Chandler",
       "throws": "R",
       "role": "Starter",
-      "games": 29,
-      "starts": 28,
+      "games": 30,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "147.1",
-        "ip_value": 147.333,
-        "war": 2.06,
-        "era": 4.28,
-        "fip": 4.19,
-        "k_minus_bb_pct": 9.0
+        "ip": "151.1",
+        "ip_value": 151.333,
+        "war": 2.07,
+        "era": 4.34,
+        "fip": 4.21,
+        "k_minus_bb_pct": 9.4
       },
       "forecast": {
         "ip": 162.4,
@@ -145,25 +145,25 @@
         "ip": 155.4,
         "war": 1.77
       },
-      "war_gap": 0.29,
-      "innings_share_pct": 10.7
+      "war_gap": 0.3,
+      "innings_share_pct": 10.9
     },
     {
       "id": 682254,
       "name": "Mason Montgomery",
       "throws": "L",
       "role": "Swingman",
-      "games": 65,
+      "games": 66,
       "starts": 5,
-      "saves": 14,
+      "saves": 15,
       "holds": 9,
       "actual": {
-        "ip": "64.0",
-        "ip_value": 64.0,
-        "war": 2.03,
-        "era": 2.67,
-        "fip": 2.3,
-        "k_minus_bb_pct": 27.8
+        "ip": "65.0",
+        "ip_value": 65.0,
+        "war": 2.07,
+        "era": 2.63,
+        "fip": 2.33,
+        "k_minus_bb_pct": 27.4
       },
       "forecast": {
         "ip": 60.0,
@@ -177,7 +177,7 @@
         "ip": 57.4,
         "war": 0.19
       },
-      "war_gap": 1.84,
+      "war_gap": 1.88,
       "innings_share_pct": 4.7
     },
     {
@@ -210,7 +210,7 @@
         "war": 1.01
       },
       "war_gap": 0.72,
-      "innings_share_pct": 8.6
+      "innings_share_pct": 8.5
     },
     {
       "id": 642397,
@@ -305,7 +305,7 @@
         "ip": 172.0,
         "war": 2.19
       },
-      "war_gap": -1.17,
+      "war_gap": -1.16,
       "innings_share_pct": 8.4
     },
     {
@@ -373,6 +373,38 @@
       "innings_share_pct": 3.1
     },
     {
+      "id": 685126,
+      "name": "Brandon Eisert",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 13,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "15.0",
+        "ip_value": 15.0,
+        "war": 0.39,
+        "era": 3.6,
+        "fip": 2.17,
+        "k_minus_bb_pct": 17.5
+      },
+      "forecast": {
+        "ip": 36.0,
+        "war": 0.16,
+        "era": 3.95,
+        "fip": 4.17,
+        "k_minus_bb_pct": 13.4,
+        "team_at_fetch": "PIT"
+      },
+      "forecast_to_date": {
+        "ip": 34.4,
+        "war": 0.16
+      },
+      "war_gap": 0.23,
+      "innings_share_pct": 1.1
+    },
+    {
       "id": 676755,
       "name": "Isaac Mattson",
       "throws": "R",
@@ -405,36 +437,36 @@
       "innings_share_pct": 2.8
     },
     {
-      "id": 685126,
-      "name": "Brandon Eisert",
-      "throws": "L",
+      "id": 666808,
+      "name": "Camilo Doval",
+      "throws": "R",
       "role": "Reliever",
-      "games": 12,
+      "games": 20,
       "starts": 0,
       "saves": 0,
-      "holds": 1,
+      "holds": 4,
       "actual": {
-        "ip": "14.0",
-        "ip_value": 14.0,
-        "war": 0.36,
-        "era": 3.86,
-        "fip": 2.1,
-        "k_minus_bb_pct": 18.6
+        "ip": "19.0",
+        "ip_value": 19.0,
+        "war": 0.13,
+        "era": 3.79,
+        "fip": 3.73,
+        "k_minus_bb_pct": 10.2
       },
       "forecast": {
-        "ip": 36.0,
-        "war": 0.16,
-        "era": 3.95,
-        "fip": 4.17,
-        "k_minus_bb_pct": 13.4,
+        "ip": 64.0,
+        "war": 0.57,
+        "era": 3.41,
+        "fip": 3.59,
+        "k_minus_bb_pct": 16.2,
         "team_at_fetch": "PIT"
       },
       "forecast_to_date": {
-        "ip": 34.4,
-        "war": 0.16
+        "ip": 61.2,
+        "war": 0.55
       },
-      "war_gap": 0.2,
-      "innings_share_pct": 1.0
+      "war_gap": -0.42,
+      "innings_share_pct": 1.4
     },
     {
       "id": 489446,
@@ -450,7 +482,7 @@
         "ip_value": 12.333,
         "war": 0.12,
         "era": 2.19,
-        "fip": 3.58,
+        "fip": 3.59,
         "k_minus_bb_pct": 11.8
       },
       "forecast": {
@@ -473,17 +505,17 @@
       "name": "Luke Weaver",
       "throws": "R",
       "role": "Reliever",
-      "games": 14,
+      "games": 15,
       "starts": 0,
       "saves": 0,
       "holds": 7,
       "actual": {
-        "ip": "13.0",
-        "ip_value": 13.0,
-        "war": 0.08,
-        "era": 6.23,
-        "fip": 4.1,
-        "k_minus_bb_pct": 17.2
+        "ip": "14.0",
+        "ip_value": 14.0,
+        "war": 0.12,
+        "era": 5.79,
+        "fip": 3.88,
+        "k_minus_bb_pct": 18.0
       },
       "forecast": {
         "ip": 67.0,
@@ -497,40 +529,40 @@
         "ip": 64.1,
         "war": 0.32
       },
-      "war_gap": -0.25,
-      "innings_share_pct": 0.9
+      "war_gap": -0.21,
+      "innings_share_pct": 1.0
     },
     {
-      "id": 666808,
-      "name": "Camilo Doval",
+      "id": 669199,
+      "name": "Lake Bachar",
       "throws": "R",
-      "role": "Reliever",
-      "games": 19,
-      "starts": 0,
+      "role": "Starter",
+      "games": 12,
+      "starts": 6,
       "saves": 0,
-      "holds": 4,
+      "holds": 1,
       "actual": {
-        "ip": "18.0",
-        "ip_value": 18.0,
-        "war": 0.07,
-        "era": 3.0,
-        "fip": 3.99,
-        "k_minus_bb_pct": 8.6
+        "ip": "23.2",
+        "ip_value": 23.667,
+        "war": 0.05,
+        "era": 2.66,
+        "fip": 5.08,
+        "k_minus_bb_pct": 11.3
       },
       "forecast": {
-        "ip": 64.0,
-        "war": 0.57,
-        "era": 3.41,
-        "fip": 3.59,
-        "k_minus_bb_pct": 16.2,
+        "ip": 52.0,
+        "war": 0.04,
+        "era": 4.24,
+        "fip": 4.34,
+        "k_minus_bb_pct": 13.0,
         "team_at_fetch": "PIT"
       },
       "forecast_to_date": {
-        "ip": 61.2,
-        "war": 0.55
+        "ip": 49.8,
+        "war": 0.04
       },
-      "war_gap": -0.48,
-      "innings_share_pct": 1.3
+      "war_gap": 0.02,
+      "innings_share_pct": 1.7
     },
     {
       "id": 676702,
@@ -563,38 +595,6 @@
       },
       "war_gap": -0.01,
       "innings_share_pct": 0.2
-    },
-    {
-      "id": 669199,
-      "name": "Lake Bachar",
-      "throws": "R",
-      "role": "Starter",
-      "games": 11,
-      "starts": 6,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "22.2",
-        "ip_value": 22.667,
-        "war": 0.04,
-        "era": 2.78,
-        "fip": 5.35,
-        "k_minus_bb_pct": 9.6
-      },
-      "forecast": {
-        "ip": 52.0,
-        "war": 0.04,
-        "era": 4.24,
-        "fip": 4.34,
-        "k_minus_bb_pct": 13.0,
-        "team_at_fetch": "PIT"
-      },
-      "forecast_to_date": {
-        "ip": 49.8,
-        "war": 0.04
-      },
-      "war_gap": 0.0,
-      "innings_share_pct": 1.6
     },
     {
       "id": 664353,

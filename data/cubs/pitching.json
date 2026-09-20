@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T05:25:54.380700+00:00",
+  "generated_at": "2026-09-20T11:50:15.780486+00:00",
   "season": 2026,
   "team": "Chicago Cubs",
   "games_played": 155,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 4.7,
+    "actual_war": 5.1,
     "forecast_war_to_date": 20.5,
-    "war_gap": -15.7,
-    "innings": 1374.0,
-    "era": 4.21
+    "war_gap": -15.4,
+    "innings": 1383.0,
+    "era": 4.18
   },
   "pitchers": [
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "168.1",
         "ip_value": 168.333,
-        "war": 1.64,
+        "war": 1.63,
         "era": 3.8,
         "fip": 4.54,
         "k_minus_bb_pct": 18.6
@@ -82,23 +82,23 @@
         "war": 1.88
       },
       "war_gap": -0.25,
-      "innings_share_pct": 12.3
+      "innings_share_pct": 12.2
     },
     {
       "id": 571510,
       "name": "Matthew Boyd",
       "throws": "L",
       "role": "Starter",
-      "games": 20,
-      "starts": 20,
+      "games": 21,
+      "starts": 21,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "114.2",
-        "ip_value": 114.667,
-        "war": 1.34,
-        "era": 4.16,
-        "fip": 4.35,
+        "ip": "119.2",
+        "ip_value": 119.667,
+        "war": 1.48,
+        "era": 4.06,
+        "fip": 4.28,
         "k_minus_bb_pct": 11.4
       },
       "forecast": {
@@ -113,8 +113,8 @@
         "ip": 166.2,
         "war": 2.15
       },
-      "war_gap": -0.8,
-      "innings_share_pct": 8.3
+      "war_gap": -0.67,
+      "innings_share_pct": 8.7
     },
     {
       "id": 656849,
@@ -153,17 +153,17 @@
       "name": "Aaron Civale",
       "throws": "R",
       "role": "Reliever",
-      "games": 15,
+      "games": 16,
       "starts": 0,
       "saves": 2,
-      "holds": 0,
+      "holds": 1,
       "actual": {
-        "ip": "31.2",
-        "ip_value": 31.667,
-        "war": 0.59,
-        "era": 1.42,
-        "fip": 2.69,
-        "k_minus_bb_pct": 16.3
+        "ip": "32.1",
+        "ip_value": 32.333,
+        "war": 0.58,
+        "era": 1.39,
+        "fip": 2.79,
+        "k_minus_bb_pct": 15.0
       },
       "forecast": {
         "ip": 133.7,
@@ -177,7 +177,7 @@
         "ip": 127.9,
         "war": 1.24
       },
-      "war_gap": -0.65,
+      "war_gap": -0.66,
       "innings_share_pct": 2.3
     },
     {
@@ -242,7 +242,7 @@
         "war": 2.8
       },
       "war_gap": -2.36,
-      "innings_share_pct": 3.3
+      "innings_share_pct": 3.2
     },
     {
       "id": 607067,
@@ -274,7 +274,39 @@
         "war": 0.44
       },
       "war_gap": -0.06,
-      "innings_share_pct": 9.7
+      "innings_share_pct": 9.6
+    },
+    {
+      "id": 669020,
+      "name": "Ryan Rolison",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 57,
+      "starts": 2,
+      "saves": 3,
+      "holds": 7,
+      "actual": {
+        "ip": "60.2",
+        "ip_value": 60.667,
+        "war": 0.26,
+        "era": 2.97,
+        "fip": 4.04,
+        "k_minus_bb_pct": 9.8
+      },
+      "forecast": {
+        "ip": 36.0,
+        "war": -0.14,
+        "era": 4.31,
+        "fip": 4.55,
+        "k_minus_bb_pct": 8.4,
+        "team_at_fetch": "CHC"
+      },
+      "forecast_to_date": {
+        "ip": 34.4,
+        "war": -0.13
+      },
+      "war_gap": 0.39,
+      "innings_share_pct": 4.4
     },
     {
       "id": 657097,
@@ -305,40 +337,8 @@
         "ip": 51.7,
         "war": -0.02
       },
-      "war_gap": 0.27,
+      "war_gap": 0.26,
       "innings_share_pct": 4.7
-    },
-    {
-      "id": 669020,
-      "name": "Ryan Rolison",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 56,
-      "starts": 2,
-      "saves": 2,
-      "holds": 7,
-      "actual": {
-        "ip": "60.1",
-        "ip_value": 60.333,
-        "war": 0.23,
-        "era": 2.98,
-        "fip": 4.04,
-        "k_minus_bb_pct": 9.9
-      },
-      "forecast": {
-        "ip": 36.0,
-        "war": -0.14,
-        "era": 4.31,
-        "fip": 4.55,
-        "k_minus_bb_pct": 8.4,
-        "team_at_fetch": "CHC"
-      },
-      "forecast_to_date": {
-        "ip": 34.4,
-        "war": -0.13
-      },
-      "war_gap": 0.36,
-      "innings_share_pct": 4.4
     },
     {
       "id": 696136,
@@ -370,7 +370,7 @@
         "war": 0.23
       },
       "war_gap": -0.03,
-      "innings_share_pct": 0.8
+      "innings_share_pct": 0.7
     },
     {
       "id": 702303,
@@ -403,6 +403,70 @@
       },
       "war_gap": 0.17,
       "innings_share_pct": 0.6
+    },
+    {
+      "id": 694037,
+      "name": "Daniel Palencia",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 30,
+      "starts": 0,
+      "saves": 3,
+      "holds": 2,
+      "actual": {
+        "ip": "27.1",
+        "ip_value": 27.333,
+        "war": 0.11,
+        "era": 3.95,
+        "fip": 4.09,
+        "k_minus_bb_pct": 16.5
+      },
+      "forecast": {
+        "ip": 67.0,
+        "war": 0.48,
+        "era": 3.61,
+        "fip": 3.73,
+        "k_minus_bb_pct": 16.8,
+        "team_at_fetch": "CHC"
+      },
+      "forecast_to_date": {
+        "ip": 64.1,
+        "war": 0.46
+      },
+      "war_gap": -0.35,
+      "innings_share_pct": 2.0
+    },
+    {
+      "id": 666171,
+      "name": "Ryan Zeferjahn",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 18,
+      "starts": 0,
+      "saves": 2,
+      "holds": 5,
+      "actual": {
+        "ip": "16.1",
+        "ip_value": 16.333,
+        "war": 0.11,
+        "era": 4.96,
+        "fip": 3.96,
+        "k_minus_bb_pct": 15.1
+      },
+      "forecast": {
+        "ip": 52.0,
+        "war": -0.0,
+        "era": 4.32,
+        "fip": 4.46,
+        "k_minus_bb_pct": 13.1,
+        "team_at_fetch": "CHC"
+      },
+      "forecast_to_date": {
+        "ip": 49.8,
+        "war": -0.0
+      },
+      "war_gap": 0.11,
+      "innings_share_pct": 1.2
     },
     {
       "id": 592826,
@@ -450,7 +514,7 @@
         "ip_value": 3.0,
         "war": 0.05,
         "era": 0.0,
-        "fip": 1.76,
+        "fip": 1.77,
         "k_minus_bb_pct": 22.2
       },
       "forecast": {
@@ -501,38 +565,6 @@
       "innings_share_pct": 0.5
     },
     {
-      "id": 666171,
-      "name": "Ryan Zeferjahn",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 17,
-      "starts": 0,
-      "saves": 2,
-      "holds": 4,
-      "actual": {
-        "ip": "15.1",
-        "ip_value": 15.333,
-        "war": 0.04,
-        "era": 5.28,
-        "fip": 4.27,
-        "k_minus_bb_pct": 13.0
-      },
-      "forecast": {
-        "ip": 52.0,
-        "war": -0.0,
-        "era": 4.32,
-        "fip": 4.46,
-        "k_minus_bb_pct": 13.1,
-        "team_at_fetch": "CHC"
-      },
-      "forecast_to_date": {
-        "ip": 49.8,
-        "war": -0.0
-      },
-      "war_gap": 0.04,
-      "innings_share_pct": 1.1
-    },
-    {
       "id": 605441,
       "name": "Yacksel Ríos",
       "throws": "R",
@@ -563,38 +595,6 @@
       },
       "war_gap": 0.04,
       "innings_share_pct": 0.1
-    },
-    {
-      "id": 694037,
-      "name": "Daniel Palencia",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 29,
-      "starts": 0,
-      "saves": 3,
-      "holds": 1,
-      "actual": {
-        "ip": "25.1",
-        "ip_value": 25.333,
-        "war": 0.01,
-        "era": 4.26,
-        "fip": 4.4,
-        "k_minus_bb_pct": 14.7
-      },
-      "forecast": {
-        "ip": 67.0,
-        "war": 0.48,
-        "era": 3.61,
-        "fip": 3.73,
-        "k_minus_bb_pct": 16.8,
-        "team_at_fetch": "CHC"
-      },
-      "forecast_to_date": {
-        "ip": 64.1,
-        "war": 0.46
-      },
-      "war_gap": -0.45,
-      "innings_share_pct": 1.8
     },
     {
       "id": 681520,
@@ -866,7 +866,7 @@
         "ip_value": 3.0,
         "war": -0.09,
         "era": 6.0,
-        "fip": 11.76,
+        "fip": 11.77,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -955,7 +955,7 @@
         "ip_value": 3.0,
         "war": -0.11,
         "era": 18.0,
-        "fip": 9.76,
+        "fip": 9.77,
         "k_minus_bb_pct": 23.5
       },
       "forecast": {
@@ -1067,7 +1067,7 @@
         "war": 0.16
       },
       "war_gap": -0.38,
-      "innings_share_pct": 6.7
+      "innings_share_pct": 6.6
     },
     {
       "id": 656686,

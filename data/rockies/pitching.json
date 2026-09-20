@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T05:25:57.316115+00:00",
+  "generated_at": "2026-09-20T11:50:18.494779+00:00",
   "season": 2026,
   "team": "Colorado Rockies",
   "games_played": 155,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.5,
+    "actual_war": 6.6,
     "forecast_war_to_date": 7.4,
-    "war_gap": -0.9,
-    "innings": 1351.7,
-    "era": 5.61
+    "war_gap": -0.8,
+    "innings": 1360.7,
+    "era": 5.6
   },
   "pitchers": [
     {
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "52.1",
         "ip_value": 52.333,
-        "war": 1.05,
+        "war": 1.06,
         "era": 3.61,
         "fip": 3.37,
         "k_minus_bb_pct": 13.2
@@ -82,24 +82,24 @@
         "war": 0.0
       },
       "war_gap": 1.05,
-      "innings_share_pct": 3.9
+      "innings_share_pct": 3.8
     },
     {
       "id": 657514,
       "name": "Brennan Bernardino",
       "throws": "L",
       "role": "Setup",
-      "games": 71,
+      "games": 72,
       "starts": 2,
-      "saves": 1,
+      "saves": 2,
       "holds": 13,
       "actual": {
-        "ip": "61.1",
-        "ip_value": 61.333,
-        "war": 0.88,
-        "era": 2.93,
-        "fip": 3.64,
-        "k_minus_bb_pct": 12.1
+        "ip": "62.1",
+        "ip_value": 62.333,
+        "war": 0.95,
+        "era": 2.89,
+        "fip": 3.56,
+        "k_minus_bb_pct": 12.6
       },
       "forecast": {
         "ip": 58.0,
@@ -113,8 +113,8 @@
         "ip": 55.5,
         "war": 0.12
       },
-      "war_gap": 0.77,
-      "innings_share_pct": 4.5
+      "war_gap": 0.84,
+      "innings_share_pct": 4.6
     },
     {
       "id": 607536,
@@ -146,7 +146,7 @@
         "war": 1.44
       },
       "war_gap": -0.57,
-      "innings_share_pct": 9.5
+      "innings_share_pct": 9.4
     },
     {
       "id": 685299,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "100.1",
         "ip_value": 100.333,
-        "war": 0.69,
+        "war": 0.68,
         "era": 6.01,
         "fip": 4.54,
         "k_minus_bb_pct": 14.3
@@ -242,7 +242,7 @@
         "war": 1.06
       },
       "war_gap": -0.58,
-      "innings_share_pct": 8.6
+      "innings_share_pct": 8.5
     },
     {
       "id": 605447,
@@ -274,7 +274,39 @@
         "war": 0.41
       },
       "war_gap": 0.07,
-      "innings_share_pct": 1.8
+      "innings_share_pct": 1.7
+    },
+    {
+      "id": 675848,
+      "name": "Juan Mejia",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 62,
+      "starts": 1,
+      "saves": 4,
+      "holds": 9,
+      "actual": {
+        "ip": "67.0",
+        "ip_value": 67.0,
+        "war": 0.44,
+        "era": 5.24,
+        "fip": 4.28,
+        "k_minus_bb_pct": 7.7
+      },
+      "forecast": {
+        "ip": 66.0,
+        "war": 0.18,
+        "era": 4.65,
+        "fip": 4.46,
+        "k_minus_bb_pct": 11.8,
+        "team_at_fetch": "COL"
+      },
+      "forecast_to_date": {
+        "ip": 63.1,
+        "war": 0.17
+      },
+      "war_gap": 0.27,
+      "innings_share_pct": 4.9
     },
     {
       "id": 801403,
@@ -306,39 +338,7 @@
         "war": 0.56
       },
       "war_gap": -0.14,
-      "innings_share_pct": 3.3
-    },
-    {
-      "id": 675848,
-      "name": "Juan Mejia",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 61,
-      "starts": 1,
-      "saves": 4,
-      "holds": 9,
-      "actual": {
-        "ip": "65.0",
-        "ip_value": 65.0,
-        "war": 0.35,
-        "era": 5.4,
-        "fip": 4.38,
-        "k_minus_bb_pct": 7.3
-      },
-      "forecast": {
-        "ip": 66.0,
-        "war": 0.18,
-        "era": 4.65,
-        "fip": 4.46,
-        "k_minus_bb_pct": 11.8,
-        "team_at_fetch": "COL"
-      },
-      "forecast_to_date": {
-        "ip": 63.1,
-        "war": 0.17
-      },
-      "war_gap": 0.18,
-      "innings_share_pct": 4.8
+      "innings_share_pct": 3.2
     },
     {
       "id": 815081,
@@ -354,7 +354,7 @@
         "ip_value": 13.667,
         "war": 0.26,
         "era": 3.29,
-        "fip": 3.02,
+        "fip": 3.03,
         "k_minus_bb_pct": 8.3
       },
       "forecast": {
@@ -402,39 +402,7 @@
         "war": 0.78
       },
       "war_gap": -0.54,
-      "innings_share_pct": 10.6
-    },
-    {
-      "id": 500779,
-      "name": "Jose Quintana",
-      "throws": "L",
-      "role": "Starter",
-      "games": 9,
-      "starts": 9,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "41.0",
-        "ip_value": 41.0,
-        "war": 0.23,
-        "era": 5.27,
-        "fip": 5.34,
-        "k_minus_bb_pct": 1.7
-      },
-      "forecast": {
-        "ip": 147.8,
-        "war": 1.05,
-        "era": 5.39,
-        "fip": 4.99,
-        "k_minus_bb_pct": 7.1,
-        "team_at_fetch": "COL"
-      },
-      "forecast_to_date": {
-        "ip": 141.4,
-        "war": 1.0
-      },
-      "war_gap": -0.78,
-      "innings_share_pct": 3.0
+      "innings_share_pct": 10.5
     },
     {
       "id": 677955,
@@ -562,7 +530,39 @@
         "war": 0.24
       },
       "war_gap": -0.15,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
+    },
+    {
+      "id": 500779,
+      "name": "Jose Quintana",
+      "throws": "L",
+      "role": "Starter",
+      "games": 10,
+      "starts": 10,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "45.0",
+        "ip_value": 45.0,
+        "war": 0.07,
+        "era": 5.4,
+        "fip": 5.7,
+        "k_minus_bb_pct": 2.0
+      },
+      "forecast": {
+        "ip": 147.8,
+        "war": 1.05,
+        "era": 5.39,
+        "fip": 4.99,
+        "k_minus_bb_pct": 7.1,
+        "team_at_fetch": "COL"
+      },
+      "forecast_to_date": {
+        "ip": 141.4,
+        "war": 1.0
+      },
+      "war_gap": -0.93,
+      "innings_share_pct": 3.3
     },
     {
       "id": 700327,
@@ -610,7 +610,7 @@
         "ip_value": 3.0,
         "war": 0.03,
         "era": 0.0,
-        "fip": 2.76,
+        "fip": 2.77,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -627,6 +627,38 @@
       },
       "war_gap": 0.03,
       "innings_share_pct": 0.2
+    },
+    {
+      "id": 693308,
+      "name": "Nick Frasso",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 17,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "18.2",
+        "ip_value": 18.667,
+        "war": 0.02,
+        "era": 6.75,
+        "fip": 4.38,
+        "k_minus_bb_pct": 15.7
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.01,
+        "era": 4.88,
+        "fip": 5.09,
+        "k_minus_bb_pct": 8.0,
+        "team_at_fetch": "COL"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.01
+      },
+      "war_gap": 0.03,
+      "innings_share_pct": 1.4
     },
     {
       "id": 687859,
@@ -684,38 +716,6 @@
       },
       "war_gap": -0.02,
       "innings_share_pct": 0.5
-    },
-    {
-      "id": 693308,
-      "name": "Nick Frasso",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 16,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "16.2",
-        "ip_value": 16.667,
-        "war": -0.02,
-        "era": 7.56,
-        "fip": 4.6,
-        "k_minus_bb_pct": 15.9
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.01,
-        "era": 4.88,
-        "fip": 5.09,
-        "k_minus_bb_pct": 8.0,
-        "team_at_fetch": "COL"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.01
-      },
-      "war_gap": -0.01,
-      "innings_share_pct": 1.2
     },
     {
       "id": 664954,
@@ -900,7 +900,7 @@
         "war": 0.05
       },
       "war_gap": -0.15,
-      "innings_share_pct": 1.7
+      "innings_share_pct": 1.6
     },
     {
       "id": 669298,

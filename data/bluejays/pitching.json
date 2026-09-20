@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T05:25:46.665207+00:00",
+  "generated_at": "2026-09-20T11:50:08.039066+00:00",
   "season": 2026,
   "team": "Toronto Blue Jays",
   "games_played": 155,
@@ -16,8 +16,8 @@
     "actual_war": 15.5,
     "forecast_war_to_date": 25.0,
     "war_gap": -9.4,
-    "innings": 1368.0,
-    "era": 3.93
+    "innings": 1376.0,
+    "era": 3.94
   },
   "pitchers": [
     {
@@ -49,8 +49,8 @@
         "ip": 170.1,
         "war": 3.59
       },
-      "war_gap": 1.91,
-      "innings_share_pct": 12.4
+      "war_gap": 1.9,
+      "innings_share_pct": 12.3
     },
     {
       "id": 686973,
@@ -81,8 +81,8 @@
         "ip": 64.1,
         "war": 0.72
       },
-      "war_gap": 2.31,
-      "innings_share_pct": 5.6
+      "war_gap": 2.3,
+      "innings_share_pct": 5.5
     },
     {
       "id": 592332,
@@ -178,17 +178,17 @@
       "name": "Tyler Rogers",
       "throws": "R",
       "role": "Setup",
-      "games": 70,
+      "games": 71,
       "starts": 0,
       "saves": 4,
       "holds": 32,
       "actual": {
-        "ip": "67.2",
-        "ip_value": 67.667,
-        "war": 1.17,
-        "era": 1.73,
-        "fip": 3.23,
-        "k_minus_bb_pct": 5.7
+        "ip": "68.2",
+        "ip_value": 68.667,
+        "war": 1.2,
+        "era": 1.7,
+        "fip": 3.2,
+        "k_minus_bb_pct": 6.0
       },
       "forecast": {
         "ip": 74.0,
@@ -202,8 +202,8 @@
         "ip": 70.8,
         "war": 0.24
       },
-      "war_gap": 0.93,
-      "innings_share_pct": 4.9
+      "war_gap": 0.96,
+      "innings_share_pct": 5.0
     },
     {
       "id": 656546,
@@ -217,7 +217,7 @@
       "actual": {
         "ip": "48.0",
         "ip_value": 48.0,
-        "war": 1.14,
+        "war": 1.13,
         "era": 3.94,
         "fip": 2.49,
         "k_minus_bb_pct": 26.5
@@ -274,17 +274,17 @@
       "name": "José Soriano",
       "throws": "R",
       "role": "Starter",
-      "games": 8,
-      "starts": 8,
+      "games": 9,
+      "starts": 9,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "46.1",
-        "ip_value": 46.333,
-        "war": 0.57,
-        "era": 4.27,
-        "fip": 4.0,
-        "k_minus_bb_pct": 8.7
+        "ip": "51.1",
+        "ip_value": 51.333,
+        "war": 0.61,
+        "era": 4.73,
+        "fip": 4.03,
+        "k_minus_bb_pct": 11.0
       },
       "forecast": {
         "ip": 177.3,
@@ -298,8 +298,8 @@
         "ip": 169.6,
         "war": 2.89
       },
-      "war_gap": -2.33,
-      "innings_share_pct": 3.4
+      "war_gap": -2.28,
+      "innings_share_pct": 3.7
     },
     {
       "id": 571578,
@@ -395,39 +395,7 @@
         "war": 1.93
       },
       "war_gap": -1.79,
-      "innings_share_pct": 4.1
-    },
-    {
-      "id": 676454,
-      "name": "Brendan Cellucci",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 2,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "3.0",
-        "ip_value": 3.0,
-        "war": 0.12,
-        "era": 0.0,
-        "fip": 0.43,
-        "k_minus_bb_pct": 44.4
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.46,
-        "fip": 4.79,
-        "k_minus_bb_pct": 7.3,
-        "team_at_fetch": "TOR"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.0
-      },
-      "war_gap": 0.12,
-      "innings_share_pct": 0.2
+      "innings_share_pct": 4.0
     },
     {
       "id": 664074,
@@ -494,8 +462,40 @@
       "innings_share_pct": 0.8
     },
     {
+      "id": 676454,
+      "name": "Brendan Cellucci",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 3,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "4.0",
+        "ip_value": 4.0,
+        "war": 0.07,
+        "era": 0.0,
+        "fip": 2.1,
+        "k_minus_bb_pct": 21.4
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.46,
+        "fip": 4.79,
+        "k_minus_bb_pct": 7.3,
+        "team_at_fetch": "TOR"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": 0.08,
+      "innings_share_pct": 0.3
+    },
+    {
       "id": 692064,
-      "name": "Jose Rodriguez",
+      "name": "José Rodríguez",
       "throws": "R",
       "role": "Reliever",
       "games": 1,
@@ -587,7 +587,7 @@
         "war": 0.25
       },
       "war_gap": -0.22,
-      "innings_share_pct": 5.5
+      "innings_share_pct": 5.4
     },
     {
       "id": 592791,
@@ -658,17 +658,17 @@
       "name": "Paul Sewald",
       "throws": "R",
       "role": "Reliever",
-      "games": 13,
+      "games": 14,
       "starts": 0,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "11.0",
-        "ip_value": 11.0,
-        "war": 0.03,
-        "era": 0.82,
-        "fip": 4.1,
-        "k_minus_bb_pct": 9.3
+        "ip": "12.0",
+        "ip_value": 12.0,
+        "war": 0.02,
+        "era": 0.75,
+        "fip": 4.18,
+        "k_minus_bb_pct": 10.4
       },
       "forecast": {
         "ip": 62.0,
@@ -683,7 +683,7 @@
         "war": 0.06
       },
       "war_gap": -0.04,
-      "innings_share_pct": 0.8
+      "innings_share_pct": 0.9
     },
     {
       "id": 667297,
@@ -1005,7 +1005,7 @@
         "ip_value": 3.0,
         "war": -0.15,
         "era": 12.0,
-        "fip": 9.76,
+        "fip": 9.77,
         "k_minus_bb_pct": -5.6
       },
       "forecast": {
@@ -1117,7 +1117,7 @@
         "war": 1.06
       },
       "war_gap": -1.33,
-      "innings_share_pct": 0.9
+      "innings_share_pct": 0.8
     },
     {
       "id": 681751,
@@ -1149,7 +1149,7 @@
         "war": 0.02
       },
       "war_gap": -0.35,
-      "innings_share_pct": 1.0
+      "innings_share_pct": 0.9
     },
     {
       "id": 681293,
@@ -1197,7 +1197,7 @@
         "ip_value": 6.0,
         "war": -0.52,
         "era": 9.0,
-        "fip": 11.76,
+        "fip": 11.77,
         "k_minus_bb_pct": -12.9
       },
       "forecast": {
@@ -1277,7 +1277,7 @@
         "war": 0.3
       },
       "war_gap": -0.9,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     }
   ]
 }
