@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T22:30:22.441235+00:00",
+  "generated_at": "2026-09-20T00:25:43.346794+00:00",
   "source": "MLB Stats API",
   "season": 2026,
   "league": "National League",
@@ -30,12 +30,12 @@
           "abbreviation": "PHI",
           "rank": "2",
           "wins": 85,
-          "losses": 69,
-          "pct": ".552",
-          "games_back": "5.0",
+          "losses": 70,
+          "pct": ".548",
+          "games_back": "5.5",
           "wild_card_games_back": "-",
           "last_ten": "4-6",
-          "streak": "L1",
+          "streak": "L2",
           "is_favorite": false
         },
         {
@@ -48,7 +48,7 @@
           "losses": 78,
           "pct": ".494",
           "games_back": "14.0",
-          "wild_card_games_back": "9.0",
+          "wild_card_games_back": "8.5",
           "last_ten": "4-6",
           "streak": "L1",
           "is_favorite": false
@@ -63,7 +63,7 @@
           "losses": 82,
           "pct": ".468",
           "games_back": "18.0",
-          "wild_card_games_back": "13.0",
+          "wild_card_games_back": "12.5",
           "last_ten": "5-5",
           "streak": "W1",
           "is_favorite": false
@@ -74,13 +74,13 @@
           "short_name": "NY Mets",
           "abbreviation": "NYM",
           "rank": "5",
-          "wins": 70,
+          "wins": 71,
           "losses": 84,
-          "pct": ".455",
-          "games_back": "20.0",
-          "wild_card_games_back": "15.0",
+          "pct": ".458",
+          "games_back": "19.5",
+          "wild_card_games_back": "14.0",
           "last_ten": "4-6",
-          "streak": "W1",
+          "streak": "W2",
           "is_favorite": false
         }
       ]
@@ -114,7 +114,7 @@
           "losses": 69,
           "pct": ".552",
           "games_back": "11.5",
-          "wild_card_games_back": "-",
+          "wild_card_games_back": "+0.5",
           "last_ten": "4-6",
           "streak": "L1",
           "is_favorite": false
@@ -129,7 +129,7 @@
           "losses": 77,
           "pct": ".500",
           "games_back": "19.5",
-          "wild_card_games_back": "8.0",
+          "wild_card_games_back": "7.5",
           "last_ten": "6-4",
           "streak": "W2",
           "is_favorite": false
@@ -144,7 +144,7 @@
           "losses": 79,
           "pct": ".487",
           "games_back": "21.5",
-          "wild_card_games_back": "10.0",
+          "wild_card_games_back": "9.5",
           "last_ten": "3-7",
           "streak": "L3",
           "is_favorite": true
@@ -159,7 +159,7 @@
           "losses": 82,
           "pct": ".468",
           "games_back": "24.5",
-          "wild_card_games_back": "13.0",
+          "wild_card_games_back": "12.5",
           "last_ten": "3-7",
           "streak": "W1",
           "is_favorite": false
@@ -195,7 +195,7 @@
           "losses": 69,
           "pct": ".552",
           "games_back": "9.0",
-          "wild_card_games_back": "-",
+          "wild_card_games_back": "+0.5",
           "last_ten": "9-1",
           "streak": "W3",
           "is_favorite": false
@@ -210,7 +210,7 @@
           "losses": 74,
           "pct": ".519",
           "games_back": "14.0",
-          "wild_card_games_back": "5.0",
+          "wild_card_games_back": "4.5",
           "last_ten": "4-6",
           "streak": "L3",
           "is_favorite": false
@@ -225,7 +225,7 @@
           "losses": 90,
           "pct": ".416",
           "games_back": "30.0",
-          "wild_card_games_back": "21.0",
+          "wild_card_games_back": "20.5",
           "last_ten": "5-5",
           "streak": "L1",
           "is_favorite": false
@@ -240,7 +240,7 @@
           "losses": 98,
           "pct": ".364",
           "games_back": "38.0",
-          "wild_card_games_back": "29.0",
+          "wild_card_games_back": "28.5",
           "last_ten": "1-9",
           "streak": "L3",
           "is_favorite": false
@@ -259,22 +259,7 @@
       "losses": 69,
       "pct": ".552",
       "games_back": "11.5",
-      "wild_card_games_back": "-",
-      "last_ten": "4-6",
-      "streak": "L1",
-      "is_favorite": false
-    },
-    {
-      "id": 143,
-      "name": "Philadelphia Phillies",
-      "short_name": "Philadelphia",
-      "abbreviation": "PHI",
-      "rank": "2",
-      "wins": 85,
-      "losses": 69,
-      "pct": ".552",
-      "games_back": "5.0",
-      "wild_card_games_back": "-",
+      "wild_card_games_back": "+0.5",
       "last_ten": "4-6",
       "streak": "L1",
       "is_favorite": false
@@ -284,14 +269,29 @@
       "name": "San Diego Padres",
       "short_name": "San Diego",
       "abbreviation": "SD",
-      "rank": "3",
+      "rank": "2",
       "wins": 85,
       "losses": 69,
       "pct": ".552",
       "games_back": "9.0",
-      "wild_card_games_back": "-",
+      "wild_card_games_back": "+0.5",
       "last_ten": "9-1",
       "streak": "W3",
+      "is_favorite": false
+    },
+    {
+      "id": 143,
+      "name": "Philadelphia Phillies",
+      "short_name": "Philadelphia",
+      "abbreviation": "PHI",
+      "rank": "3",
+      "wins": 85,
+      "losses": 70,
+      "pct": ".548",
+      "games_back": "5.5",
+      "wild_card_games_back": "-",
+      "last_ten": "4-6",
+      "streak": "L2",
       "is_favorite": false
     },
     {
@@ -304,7 +304,7 @@
       "losses": 74,
       "pct": ".519",
       "games_back": "14.0",
-      "wild_card_games_back": "5.0",
+      "wild_card_games_back": "4.5",
       "last_ten": "4-6",
       "streak": "L3",
       "is_favorite": false
@@ -319,7 +319,7 @@
       "losses": 77,
       "pct": ".500",
       "games_back": "19.5",
-      "wild_card_games_back": "8.0",
+      "wild_card_games_back": "7.5",
       "last_ten": "6-4",
       "streak": "W2",
       "is_favorite": false
@@ -334,7 +334,7 @@
       "losses": 78,
       "pct": ".494",
       "games_back": "14.0",
-      "wild_card_games_back": "9.0",
+      "wild_card_games_back": "8.5",
       "last_ten": "4-6",
       "streak": "L1",
       "is_favorite": false
@@ -349,7 +349,7 @@
       "losses": 79,
       "pct": ".487",
       "games_back": "21.5",
-      "wild_card_games_back": "10.0",
+      "wild_card_games_back": "9.5",
       "last_ten": "3-7",
       "streak": "L3",
       "is_favorite": true
@@ -364,7 +364,7 @@
       "losses": 82,
       "pct": ".468",
       "games_back": "18.0",
-      "wild_card_games_back": "13.0",
+      "wild_card_games_back": "12.5",
       "last_ten": "5-5",
       "streak": "W1",
       "is_favorite": false
@@ -379,7 +379,7 @@
       "losses": 82,
       "pct": ".468",
       "games_back": "24.5",
-      "wild_card_games_back": "13.0",
+      "wild_card_games_back": "12.5",
       "last_ten": "3-7",
       "streak": "W1",
       "is_favorite": false
@@ -390,13 +390,13 @@
       "short_name": "NY Mets",
       "abbreviation": "NYM",
       "rank": "10",
-      "wins": 70,
+      "wins": 71,
       "losses": 84,
-      "pct": ".455",
-      "games_back": "20.0",
-      "wild_card_games_back": "15.0",
+      "pct": ".458",
+      "games_back": "19.5",
+      "wild_card_games_back": "14.0",
       "last_ten": "4-6",
-      "streak": "W1",
+      "streak": "W2",
       "is_favorite": false
     },
     {
@@ -409,7 +409,7 @@
       "losses": 90,
       "pct": ".416",
       "games_back": "30.0",
-      "wild_card_games_back": "21.0",
+      "wild_card_games_back": "20.5",
       "last_ten": "5-5",
       "streak": "L1",
       "is_favorite": false
@@ -424,7 +424,7 @@
       "losses": 98,
       "pct": ".364",
       "games_back": "38.0",
-      "wild_card_games_back": "29.0",
+      "wild_card_games_back": "28.5",
       "last_ten": "1-9",
       "streak": "L3",
       "is_favorite": false
