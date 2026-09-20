@@ -29,6 +29,7 @@ struct PlayersView: View {
                     errorView
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(AppColor.night)
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Int.self) { playerID in
@@ -39,6 +40,7 @@ struct PlayersView: View {
                 }
             }
         }
+        .background(AppColor.night.ignoresSafeArea())
         .task {
             await store.load()
             openRequestedPlayerIfAvailable()
@@ -68,69 +70,98 @@ struct PlayersView: View {
             .padding(.bottom, 20)
         }
         .refreshable { await store.load() }
-        .background(AppColor.night)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppColor.night.ignoresSafeArea())
     }
 
     private var searchField: some View {
         HStack(spacing: 9) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(AppColor.steel)
-            TextField("Search players", text: $store.searchText)
+            TextField(
+                "Search players",
+                text: $store.searchText,
+                prompt: Text("Search players").foregroundStyle(AppColor.boneDim)
+            )
                 .textInputAutocapitalization(.words)
                 .autocorrectionDisabled()
                 .foregroundStyle(AppColor.bone)
                 .tint(AppColor.steel)
         }
-        .font(AppFont.bodySmall)
+        .font(contentWidth >= 650 ? AppFont.body : AppFont.bodySmall)
         .padding(.horizontal, 12)
-        .frame(height: 38)
+        .frame(height: contentWidth >= 650 ? 48 : 44)
         .background(AppColor.nightRaised)
         .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, directoryHorizontalPadding)
         .padding(.top, 12)
         .padding(.bottom, 12)
     }
 
+    @ViewBuilder
     private var filterBar: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 0) {
+        if contentWidth >= 650 {
+            HStack(spacing: 8) {
                 ForEach(PlayerPositionFilter.allCases) { filter in
-                    Button {
-                        withAnimation(.easeOut(duration: 0.15)) { store.filter = filter }
-                    } label: {
-                        Text(filter.title)
-                            .font(AppFont.label.weight(.semibold))
-                            .foregroundStyle(store.filter == filter ? AppColor.bone : AppColor.boneMuted)
-                            .padding(.horizontal, 14)
-                            .frame(height: 34)
-                            .background(store.filter == filter ? AppColor.nightCell : AppColor.nightRaised)
-                            .overlay(alignment: .bottom) {
-                                if store.filter == filter {
-                                    Rectangle().fill(AppColor.amber).frame(height: 2)
-                                }
-                            }
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityAddTraits(store.filter == filter ? .isSelected : [])
+                    positionFilterButton(filter, expands: true)
                 }
             }
-            .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+            .padding(.horizontal, directoryHorizontalPadding)
+            .padding(.bottom, 14)
+        } else {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    ForEach(PlayerPositionFilter.allCases) { filter in
+                        positionFilterButton(filter, expands: false)
+                    }
+                }
+            }
+            .padding(.horizontal, directoryHorizontalPadding)
+            .padding(.bottom, 12)
         }
-        .padding(.horizontal, 16)
-        .padding(.bottom, 12)
+    }
+
+    private func positionFilterButton(_ filter: PlayerPositionFilter, expands: Bool) -> some View {
+        let isSelected = store.filter == filter
+        return Button {
+            withAnimation(.easeOut(duration: 0.15)) { store.filter = filter }
+        } label: {
+            Text(filter.title)
+                .font((contentWidth >= 650 ? AppFont.bodySmall : AppFont.label).weight(.semibold))
+                .foregroundStyle(isSelected ? AppColor.bone : AppColor.boneDim)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
+                .padding(.horizontal, contentWidth >= 650 ? 10 : 14)
+                .frame(maxWidth: expands ? .infinity : nil)
+                .frame(minHeight: contentWidth >= 650 ? 48 : 44)
+                .background(isSelected ? AppColor.night : AppColor.nightRaised)
+                .overlay {
+                    Rectangle().stroke(isSelected ? AppColor.amber : AppColor.rule, lineWidth: isSelected ? 2 : 1)
+                }
+                .overlay(alignment: .bottom) {
+                    if isSelected {
+                        Rectangle().fill(AppColor.amber).frame(height: 3)
+                    }
+                }
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: expands ? .infinity : nil)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+        .accessibilityValue(isSelected ? "Selected" : "Not selected")
     }
 
     private var spreadsheetHeader: some View {
         HStack(spacing: 0) {
-            sortHeader(.number, width: 42, alignment: .leading)
-            sortHeader(.name, width: contentWidth >= 520 ? 240 : 200, alignment: .leading)
-            sortHeader(.position, width: 48, alignment: .leading)
-            sortHeader(.batsThrows, width: 48, alignment: .leading)
-            if contentWidth >= 520 { sortHeader(.age, width: 40, alignment: .leading) }
+            sortHeader(.number, width: numberColumnWidth, alignment: .leading)
+            sortHeader(.name, alignment: .leading)
+            sortHeader(.position, width: positionColumnWidth, alignment: .leading)
+            sortHeader(.batsThrows, width: batsThrowsColumnWidth, alignment: .leading)
+            if showsAgeColumn { sortHeader(.age, width: ageColumnWidth, alignment: .leading) }
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 33)
-        .padding(.horizontal, 16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: contentWidth >= 650 ? 40 : 36)
+        .padding(.horizontal, directoryHorizontalPadding)
         .background(AppColor.nightRaised)
         .overlay(alignment: .top) { Rectangle().fill(AppColor.rule).frame(height: 1) }
         .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
@@ -159,29 +190,30 @@ struct PlayersView: View {
             Text(player.number ?? "—")
                 .font(AppFont.number.monospacedDigit())
                 .foregroundStyle(AppColor.boneDim)
-                .frame(width: 42, alignment: .leading)
+                .frame(width: numberColumnWidth, alignment: .leading)
             Text(player.name)
-                .font(AppFont.bodySmall.weight(.medium))
+                .font((contentWidth >= 650 ? AppFont.body : AppFont.bodySmall).weight(.medium))
                 .foregroundStyle(AppColor.bone)
                 .lineLimit(1)
-                .frame(width: contentWidth >= 520 ? 240 : 200, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text(player.position.abbreviation)
                 .font(AppFont.label.monospaced())
                 .foregroundStyle(AppColor.boneDim)
-                .frame(width: 48, alignment: .leading)
+                .frame(width: positionColumnWidth, alignment: .leading)
             Text("\(player.bats?.shortHand ?? "—")/\(player.throws?.shortHand ?? "—")")
                 .font(AppFont.label.monospaced())
                 .foregroundStyle(AppColor.boneDim)
-                .frame(width: 48, alignment: .leading)
-            if contentWidth >= 520 {
+                .frame(width: batsThrowsColumnWidth, alignment: .leading)
+            if showsAgeColumn {
                 Text(player.age.map(String.init) ?? "—")
                     .font(AppFont.label.monospacedDigit())
                     .foregroundStyle(AppColor.boneDim)
-                    .frame(width: 40, alignment: .leading)
+                    .frame(width: ageColumnWidth, alignment: .leading)
             }
         }
-        .frame(minHeight: 40)
-        .padding(.horizontal, 16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(minHeight: contentWidth >= 650 ? 48 : 44)
+        .padding(.horizontal, directoryHorizontalPadding)
         .background(AppColor.night)
         .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
         .contentShape(Rectangle())
@@ -196,7 +228,15 @@ struct PlayersView: View {
             .foregroundStyle(AppColor.boneMuted)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(16)
+            .background(AppColor.night)
     }
+
+    private var directoryHorizontalPadding: CGFloat { contentWidth >= 650 ? 24 : 16 }
+    private var numberColumnWidth: CGFloat { contentWidth >= 650 ? 64 : 42 }
+    private var positionColumnWidth: CGFloat { contentWidth >= 650 ? 76 : 48 }
+    private var batsThrowsColumnWidth: CGFloat { contentWidth >= 650 ? 76 : 48 }
+    private var ageColumnWidth: CGFloat { contentWidth >= 650 ? 56 : 40 }
+    private var showsAgeColumn: Bool { contentWidth >= 520 }
 
     private func openRequestedPlayerIfAvailable() {
         guard let requestedPlayerID, store.player(id: requestedPlayerID) != nil else { return }
