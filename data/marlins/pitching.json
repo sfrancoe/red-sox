@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T22:43:05.513277+00:00",
+  "generated_at": "2026-09-21T13:22:27.181774+00:00",
   "season": 2026,
   "team": "Miami Marlins",
   "games_played": 156,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 13.0,
+    "actual_war": 12.9,
     "forecast_war_to_date": 13.8,
     "war_gap": -0.8,
-    "innings": 1364.3,
-    "era": 4.15
+    "innings": 1372.3,
+    "era": 4.17
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Sandy Alcantara",
       "throws": "R",
       "role": "Starter",
-      "games": 33,
-      "starts": 32,
+      "games": 34,
+      "starts": 33,
       "saves": 1,
       "holds": 0,
       "actual": {
-        "ip": "206.0",
-        "ip_value": 206.0,
-        "war": 3.03,
-        "era": 3.84,
-        "fip": 4.08,
-        "k_minus_bb_pct": 10.6
+        "ip": "212.0",
+        "ip_value": 212.0,
+        "war": 3.15,
+        "era": 3.91,
+        "fip": 4.1,
+        "k_minus_bb_pct": 10.5
       },
       "forecast": {
         "ip": 186.6,
@@ -49,8 +49,8 @@
         "ip": 179.7,
         "war": 2.42
       },
-      "war_gap": 0.61,
-      "innings_share_pct": 15.1
+      "war_gap": 0.73,
+      "innings_share_pct": 15.4
     },
     {
       "id": 676974,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "149.0",
         "ip_value": 149.0,
-        "war": 1.95,
+        "war": 1.94,
         "era": 4.17,
         "fip": 4.26,
         "k_minus_bb_pct": 14.6
@@ -146,7 +146,7 @@
         "war": 0.65
       },
       "war_gap": 1.0,
-      "innings_share_pct": 8.4
+      "innings_share_pct": 8.3
     },
     {
       "id": 656848,
@@ -194,7 +194,7 @@
         "ip_value": 65.333,
         "war": 1.09,
         "era": 3.44,
-        "fip": 2.98,
+        "fip": 2.97,
         "k_minus_bb_pct": 11.8
       },
       "forecast": {
@@ -242,7 +242,7 @@
         "war": 0.24
       },
       "war_gap": 0.65,
-      "innings_share_pct": 6.1
+      "innings_share_pct": 6.0
     },
     {
       "id": 669622,
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "34.1",
         "ip_value": 34.333,
-        "war": 0.83,
+        "war": 0.84,
         "era": 2.62,
         "fip": 2.4,
         "k_minus_bb_pct": 20.7
@@ -306,7 +306,7 @@
         "war": 0.11
       },
       "war_gap": 0.35,
-      "innings_share_pct": 9.0
+      "innings_share_pct": 8.9
     },
     {
       "id": 669199,
@@ -386,7 +386,7 @@
         "ip_value": 48.667,
         "war": 0.11,
         "era": 5.36,
-        "fip": 4.15,
+        "fip": 4.14,
         "k_minus_bb_pct": 9.4
       },
       "forecast": {
@@ -402,7 +402,7 @@
         "war": -0.0
       },
       "war_gap": 0.11,
-      "innings_share_pct": 3.6
+      "innings_share_pct": 3.5
     },
     {
       "id": 687531,
@@ -546,7 +546,7 @@
         "ip_value": 3.0,
         "war": 0.01,
         "era": 3.0,
-        "fip": 3.77,
+        "fip": 3.76,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -563,38 +563,6 @@
       },
       "war_gap": 0.1,
       "innings_share_pct": 0.2
-    },
-    {
-      "id": 687134,
-      "name": "Bradley Blalock",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 2,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "6.0",
-        "ip_value": 6.0,
-        "war": -0.0,
-        "era": 3.0,
-        "fip": 4.27,
-        "k_minus_bb_pct": 15.4
-      },
-      "forecast": {
-        "ip": 26.0,
-        "war": -0.15,
-        "era": 4.76,
-        "fip": 4.78,
-        "k_minus_bb_pct": 8.3,
-        "team_at_fetch": "MIA"
-      },
-      "forecast_to_date": {
-        "ip": 25.0,
-        "war": -0.14
-      },
-      "war_gap": 0.14,
-      "innings_share_pct": 0.4
     },
     {
       "id": 666129,
@@ -736,7 +704,7 @@
       "actual": {
         "ip": "5.0",
         "ip_value": 5.0,
-        "war": -0.08,
+        "war": -0.09,
         "era": 5.4,
         "fip": 7.3,
         "k_minus_bb_pct": -9.1
@@ -812,6 +780,38 @@
       },
       "war_gap": -0.31,
       "innings_share_pct": 0.0
+    },
+    {
+      "id": 687134,
+      "name": "Bradley Blalock",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 3,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "8.0",
+        "ip_value": 8.0,
+        "war": -0.15,
+        "era": 5.62,
+        "fip": 6.85,
+        "k_minus_bb_pct": 17.1
+      },
+      "forecast": {
+        "ip": 26.0,
+        "war": -0.15,
+        "era": 4.76,
+        "fip": 4.78,
+        "k_minus_bb_pct": 8.3,
+        "team_at_fetch": "MIA"
+      },
+      "forecast_to_date": {
+        "ip": 25.0,
+        "war": -0.14
+      },
+      "war_gap": -0.01,
+      "innings_share_pct": 0.6
     },
     {
       "id": 667652,

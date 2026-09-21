@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T00:31:15.951605+00:00",
+  "generated_at": "2026-09-21T13:22:22.115382+00:00",
   "season": 2026,
   "team": "Minnesota Twins",
   "games_played": 156,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 10.8,
+    "actual_war": 11.0,
     "forecast_war_to_date": 16.9,
-    "war_gap": -6.1,
-    "innings": 1373.7,
-    "era": 4.63
+    "war_gap": -5.9,
+    "innings": 1382.7,
+    "era": 4.6
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "172.1",
         "ip_value": 172.333,
-        "war": 2.63,
+        "war": 2.62,
         "era": 3.81,
         "fip": 3.86,
         "k_minus_bb_pct": 17.4
@@ -81,8 +81,8 @@
         "ip": 166.4,
         "war": 3.2
       },
-      "war_gap": -0.88,
-      "innings_share_pct": 10.1
+      "war_gap": -0.89,
+      "innings_share_pct": 10.0
     },
     {
       "id": 687570,
@@ -98,7 +98,7 @@
         "ip_value": 120.333,
         "war": 1.89,
         "era": 4.94,
-        "fip": 3.76,
+        "fip": 3.75,
         "k_minus_bb_pct": 16.2
       },
       "forecast": {
@@ -114,24 +114,24 @@
         "war": 0.49
       },
       "war_gap": 1.4,
-      "innings_share_pct": 8.8
+      "innings_share_pct": 8.7
     },
     {
       "id": 641927,
       "name": "Bailey Ober",
       "throws": "R",
       "role": "Starter",
-      "games": 23,
+      "games": 24,
       "starts": 23,
-      "saves": 0,
+      "saves": 1,
       "holds": 0,
       "actual": {
-        "ip": "123.0",
-        "ip_value": 123.0,
-        "war": 1.3,
-        "era": 4.32,
-        "fip": 4.6,
-        "k_minus_bb_pct": 9.9
+        "ip": "126.0",
+        "ip_value": 126.0,
+        "war": 1.35,
+        "era": 4.21,
+        "fip": 4.52,
+        "k_minus_bb_pct": 10.3
       },
       "forecast": {
         "ip": 159.6,
@@ -145,8 +145,8 @@
         "ip": 153.7,
         "war": 1.93
       },
-      "war_gap": -0.64,
-      "innings_share_pct": 9.0
+      "war_gap": -0.58,
+      "innings_share_pct": 9.1
     },
     {
       "id": 702193,
@@ -181,6 +181,38 @@
       "innings_share_pct": 5.1
     },
     {
+      "id": 665152,
+      "name": "Dean Kremer",
+      "throws": "R",
+      "role": "Starter",
+      "games": 9,
+      "starts": 9,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "47.1",
+        "ip_value": 47.333,
+        "war": 0.73,
+        "era": 3.8,
+        "fip": 3.82,
+        "k_minus_bb_pct": 13.8
+      },
+      "forecast": {
+        "ip": 114.9,
+        "war": 0.91,
+        "era": 4.43,
+        "fip": 4.4,
+        "k_minus_bb_pct": 13.5,
+        "team_at_fetch": "MIN"
+      },
+      "forecast_to_date": {
+        "ip": 110.6,
+        "war": 0.88
+      },
+      "war_gap": -0.15,
+      "innings_share_pct": 3.4
+    },
+    {
       "id": 672782,
       "name": "Yoendrys Gómez",
       "throws": "R",
@@ -192,9 +224,9 @@
       "actual": {
         "ip": "47.0",
         "ip_value": 47.0,
-        "war": 0.6,
+        "war": 0.59,
         "era": 3.83,
-        "fip": 3.55,
+        "fip": 3.54,
         "k_minus_bb_pct": 9.7
       },
       "forecast": {
@@ -258,7 +290,7 @@
         "ip_value": 125.333,
         "war": 0.57,
         "era": 4.74,
-        "fip": 4.81,
+        "fip": 4.8,
         "k_minus_bb_pct": 13.0
       },
       "forecast": {
@@ -288,7 +320,7 @@
       "actual": {
         "ip": "20.1",
         "ip_value": 20.333,
-        "war": 0.57,
+        "war": 0.56,
         "era": 3.98,
         "fip": 2.75,
         "k_minus_bb_pct": 14.0
@@ -305,40 +337,8 @@
         "ip": 132.7,
         "war": 0.79
       },
-      "war_gap": -0.22,
+      "war_gap": -0.23,
       "innings_share_pct": 1.5
-    },
-    {
-      "id": 665152,
-      "name": "Dean Kremer",
-      "throws": "R",
-      "role": "Starter",
-      "games": 8,
-      "starts": 8,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "41.1",
-        "ip_value": 41.333,
-        "war": 0.55,
-        "era": 4.35,
-        "fip": 4.02,
-        "k_minus_bb_pct": 12.7
-      },
-      "forecast": {
-        "ip": 114.9,
-        "war": 0.91,
-        "era": 4.43,
-        "fip": 4.4,
-        "k_minus_bb_pct": 13.5,
-        "team_at_fetch": "MIN"
-      },
-      "forecast_to_date": {
-        "ip": 110.6,
-        "war": 0.88
-      },
-      "war_gap": -0.32,
-      "innings_share_pct": 3.0
     },
     {
       "id": 679358,
@@ -434,7 +434,7 @@
         "war": 0.15
       },
       "war_gap": 0.14,
-      "innings_share_pct": 2.2
+      "innings_share_pct": 2.1
     },
     {
       "id": 667297,
@@ -594,7 +594,7 @@
         "war": 0.43
       },
       "war_gap": -0.37,
-      "innings_share_pct": 1.5
+      "innings_share_pct": 1.4
     },
     {
       "id": 670183,
@@ -657,7 +657,7 @@
         "ip": 44.4,
         "war": 0.03
       },
-      "war_gap": -0.04,
+      "war_gap": -0.05,
       "innings_share_pct": 4.0
     },
     {
@@ -793,7 +793,7 @@
       "actual": {
         "ip": "16.2",
         "ip_value": 16.667,
-        "war": -0.13,
+        "war": -0.14,
         "era": 4.86,
         "fip": 5.08,
         "k_minus_bb_pct": 12.8
@@ -916,7 +916,7 @@
         "ip_value": 12.0,
         "war": -0.25,
         "era": 8.25,
-        "fip": 6.02,
+        "fip": 6.01,
         "k_minus_bb_pct": 10.7
       },
       "forecast": {
@@ -1028,7 +1028,7 @@
         "war": 1.42
       },
       "war_gap": -1.85,
-      "innings_share_pct": 3.5
+      "innings_share_pct": 3.4
     },
     {
       "id": 623437,
@@ -1076,7 +1076,7 @@
         "ip_value": 6.0,
         "war": -0.55,
         "era": 18.0,
-        "fip": 13.27,
+        "fip": 13.26,
         "k_minus_bb_pct": 7.7
       },
       "forecast": {

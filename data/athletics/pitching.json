@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T22:43:00.344492+00:00",
+  "generated_at": "2026-09-21T13:22:25.007152+00:00",
   "season": 2026,
   "team": "Athletics",
   "games_played": 156,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.2,
+    "actual_war": 6.6,
     "forecast_war_to_date": 10.9,
-    "war_gap": -4.8,
-    "innings": 1368.0,
-    "era": 5.48
+    "war_gap": -4.4,
+    "innings": 1376.0,
+    "era": 5.45
   },
   "pitchers": [
     {
@@ -49,7 +49,7 @@
         "ip": 83.2,
         "war": 1.08
       },
-      "war_gap": 0.62,
+      "war_gap": 0.63,
       "innings_share_pct": 10.1
     },
     {
@@ -85,21 +85,53 @@
       "innings_share_pct": 7.2
     },
     {
+      "id": 678022,
+      "name": "Jack Perkins",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 36,
+      "starts": 16,
+      "saves": 3,
+      "holds": 1,
+      "actual": {
+        "ip": "116.0",
+        "ip_value": 116.0,
+        "war": 0.94,
+        "era": 5.9,
+        "fip": 4.58,
+        "k_minus_bb_pct": 16.0
+      },
+      "forecast": {
+        "ip": 24.0,
+        "war": 0.18,
+        "era": 3.76,
+        "fip": 3.85,
+        "k_minus_bb_pct": 15.6,
+        "team_at_fetch": "ATH"
+      },
+      "forecast_to_date": {
+        "ip": 23.1,
+        "war": 0.18
+      },
+      "war_gap": 0.76,
+      "innings_share_pct": 8.4
+    },
+    {
       "id": 665622,
       "name": "Luis Medina",
       "throws": "R",
       "role": "Setup",
-      "games": 56,
+      "games": 57,
       "starts": 1,
       "saves": 0,
       "holds": 12,
       "actual": {
-        "ip": "69.1",
-        "ip_value": 69.333,
-        "war": 0.87,
-        "era": 3.25,
-        "fip": 3.57,
-        "k_minus_bb_pct": 17.7
+        "ip": "70.1",
+        "ip_value": 70.333,
+        "war": 0.91,
+        "era": 3.2,
+        "fip": 3.54,
+        "k_minus_bb_pct": 17.8
       },
       "forecast": {
         "ip": 78.1,
@@ -113,7 +145,7 @@
         "ip": 75.2,
         "war": 0.43
       },
-      "war_gap": 0.44,
+      "war_gap": 0.48,
       "innings_share_pct": 5.1
     },
     {
@@ -160,7 +192,7 @@
       "actual": {
         "ip": "117.1",
         "ip_value": 117.333,
-        "war": 0.74,
+        "war": 0.75,
         "era": 5.68,
         "fip": 5.23,
         "k_minus_bb_pct": 9.8
@@ -178,7 +210,7 @@
         "war": 1.41
       },
       "war_gap": -0.66,
-      "innings_share_pct": 8.6
+      "innings_share_pct": 8.5
     },
     {
       "id": 622663,
@@ -213,38 +245,6 @@
       "innings_share_pct": 4.6
     },
     {
-      "id": 678022,
-      "name": "Jack Perkins",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 35,
-      "starts": 15,
-      "saves": 3,
-      "holds": 1,
-      "actual": {
-        "ip": "110.0",
-        "ip_value": 110.0,
-        "war": 0.67,
-        "era": 6.14,
-        "fip": 4.73,
-        "k_minus_bb_pct": 15.9
-      },
-      "forecast": {
-        "ip": 24.0,
-        "war": 0.18,
-        "era": 3.76,
-        "fip": 3.85,
-        "k_minus_bb_pct": 15.6,
-        "team_at_fetch": "ATH"
-      },
-      "forecast_to_date": {
-        "ip": 23.1,
-        "war": 0.18
-      },
-      "war_gap": 0.49,
-      "innings_share_pct": 8.0
-    },
-    {
       "id": 643410,
       "name": "Mark Leiter Jr.",
       "throws": "R",
@@ -274,7 +274,7 @@
         "war": 0.49
       },
       "war_gap": 0.14,
-      "innings_share_pct": 2.5
+      "innings_share_pct": 2.4
     },
     {
       "id": 656240,
@@ -354,7 +354,7 @@
         "ip_value": 74.667,
         "war": 0.32,
         "era": 5.42,
-        "fip": 5.34,
+        "fip": 5.33,
         "k_minus_bb_pct": 10.3
       },
       "forecast": {
@@ -370,7 +370,7 @@
         "war": 1.24
       },
       "war_gap": -0.92,
-      "innings_share_pct": 5.5
+      "innings_share_pct": 5.4
     },
     {
       "id": 669270,
@@ -386,7 +386,7 @@
         "ip_value": 25.667,
         "war": 0.29,
         "era": 4.21,
-        "fip": 3.96,
+        "fip": 3.95,
         "k_minus_bb_pct": 7.4
       },
       "forecast": {
@@ -576,7 +576,7 @@
       "actual": {
         "ip": "11.2",
         "ip_value": 11.667,
-        "war": 0.06,
+        "war": 0.07,
         "era": 1.54,
         "fip": 4.3,
         "k_minus_bb_pct": 4.0
@@ -594,7 +594,7 @@
         "war": 0.03
       },
       "war_gap": 0.04,
-      "innings_share_pct": 0.9
+      "innings_share_pct": 0.8
     },
     {
       "id": 686751,
@@ -625,7 +625,7 @@
         "ip": 19.3,
         "war": -0.07
       },
-      "war_gap": 0.09,
+      "war_gap": 0.1,
       "innings_share_pct": 0.9
     },
     {
@@ -729,16 +729,16 @@
       "name": "Elvis Alvarado",
       "throws": "R",
       "role": "Reliever",
-      "games": 52,
+      "games": 53,
       "starts": 0,
       "saves": 6,
       "holds": 9,
       "actual": {
-        "ip": "51.0",
-        "ip_value": 51.0,
-        "war": -0.1,
-        "era": 4.06,
-        "fip": 4.65,
+        "ip": "52.0",
+        "ip_value": 52.0,
+        "war": -0.04,
+        "era": 3.98,
+        "fip": 4.6,
         "k_minus_bb_pct": 16.1
       },
       "forecast": {
@@ -753,8 +753,8 @@
         "ip": 52.0,
         "war": 0.06
       },
-      "war_gap": -0.16,
-      "innings_share_pct": 3.7
+      "war_gap": -0.1,
+      "innings_share_pct": 3.8
     },
     {
       "id": 621053,
@@ -930,7 +930,7 @@
         "ip_value": 138.333,
         "war": -0.29,
         "era": 6.18,
-        "fip": 5.93,
+        "fip": 5.92,
         "k_minus_bb_pct": 8.7
       },
       "forecast": {
@@ -945,7 +945,7 @@
         "ip": 159.9,
         "war": 1.72
       },
-      "war_gap": -2.01,
+      "war_gap": -2.0,
       "innings_share_pct": 10.1
     },
     {
@@ -987,7 +987,7 @@
         "ip_value": 17.333,
         "war": -0.35,
         "era": 10.9,
-        "fip": 7.43,
+        "fip": 7.42,
         "k_minus_bb_pct": 3.4
       },
       "forecast": {
@@ -1098,7 +1098,7 @@
         "ip": 57.8,
         "war": 0.27
       },
-      "war_gap": -0.91,
+      "war_gap": -0.9,
       "innings_share_pct": 2.4
     },
     {

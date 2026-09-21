@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T00:31:27.126785+00:00",
+  "generated_at": "2026-09-21T13:22:33.326877+00:00",
   "season": 2026,
   "team": "San Francisco Giants",
   "games_played": 156,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 9.5,
+    "actual_war": 9.8,
     "forecast_war_to_date": 11.9,
-    "war_gap": -2.4,
-    "innings": 1367.0,
-    "era": 4.4
+    "war_gap": -2.2,
+    "innings": 1375.0,
+    "era": 4.39
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "160.2",
         "ip_value": 160.667,
-        "war": 3.1,
+        "war": 3.11,
         "era": 4.31,
         "fip": 3.45,
         "k_minus_bb_pct": 13.9
@@ -50,7 +50,7 @@
         "war": 3.94
       },
       "war_gap": -0.84,
-      "innings_share_pct": 11.8
+      "innings_share_pct": 11.7
     },
     {
       "id": 694738,
@@ -81,7 +81,7 @@
         "ip": 127.0,
         "war": 1.09
       },
-      "war_gap": 1.43,
+      "war_gap": 1.44,
       "innings_share_pct": 11.3
     },
     {
@@ -114,7 +114,7 @@
         "war": 1.58
       },
       "war_gap": -0.51,
-      "innings_share_pct": 9.0
+      "innings_share_pct": 8.9
     },
     {
       "id": 641816,
@@ -185,17 +185,17 @@
       "name": "Trent Harris",
       "throws": "R",
       "role": "Reliever",
-      "games": 17,
+      "games": 18,
       "starts": 0,
       "saves": 1,
       "holds": 5,
       "actual": {
-        "ip": "19.1",
-        "ip_value": 19.333,
-        "war": 0.65,
-        "era": 2.33,
-        "fip": 1.6,
-        "k_minus_bb_pct": 23.4
+        "ip": "20.0",
+        "ip_value": 20.0,
+        "war": 0.68,
+        "era": 2.25,
+        "fip": 1.55,
+        "k_minus_bb_pct": 23.5
       },
       "forecast": {
         "ip": 8.0,
@@ -209,8 +209,8 @@
         "ip": 7.7,
         "war": 0.0
       },
-      "war_gap": 0.65,
-      "innings_share_pct": 1.4
+      "war_gap": 0.68,
+      "innings_share_pct": 1.5
     },
     {
       "id": 683627,
@@ -249,17 +249,17 @@
       "name": "Dylan Smith",
       "throws": "R",
       "role": "Reliever",
-      "games": 38,
+      "games": 39,
       "starts": 0,
       "saves": 4,
       "holds": 7,
       "actual": {
-        "ip": "36.0",
-        "ip_value": 36.0,
-        "war": 0.51,
-        "era": 3.5,
-        "fip": 3.68,
-        "k_minus_bb_pct": 13.6
+        "ip": "37.0",
+        "ip_value": 37.0,
+        "war": 0.52,
+        "era": 3.65,
+        "fip": 3.66,
+        "k_minus_bb_pct": 13.3
       },
       "forecast": {
         "ip": 20.0,
@@ -273,8 +273,8 @@
         "ip": 19.3,
         "war": 0.0
       },
-      "war_gap": 0.5,
-      "innings_share_pct": 2.6
+      "war_gap": 0.52,
+      "innings_share_pct": 2.7
     },
     {
       "id": 605288,
@@ -313,17 +313,17 @@
       "name": "Sam Hentges",
       "throws": "L",
       "role": "Setup",
-      "games": 40,
+      "games": 41,
       "starts": 0,
       "saves": 0,
       "holds": 10,
       "actual": {
-        "ip": "33.0",
-        "ip_value": 33.0,
-        "war": 0.41,
-        "era": 3.27,
+        "ip": "33.1",
+        "ip_value": 33.333,
+        "war": 0.42,
+        "era": 3.51,
         "fip": 3.43,
-        "k_minus_bb_pct": 7.8
+        "k_minus_bb_pct": 7.6
       },
       "forecast": {
         "ip": 26.0,
@@ -405,6 +405,38 @@
       "innings_share_pct": 3.2
     },
     {
+      "id": 683363,
+      "name": "Matt Wilkinson",
+      "throws": "L",
+      "role": "Starter",
+      "games": 7,
+      "starts": 5,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "24.2",
+        "ip_value": 24.667,
+        "war": 0.34,
+        "era": 3.65,
+        "fip": 4.23,
+        "k_minus_bb_pct": 14.1
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.95,
+        "fip": 5.09,
+        "k_minus_bb_pct": 7.2,
+        "team_at_fetch": "SFG"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": 0.34,
+      "innings_share_pct": 1.8
+    },
+    {
       "id": 669062,
       "name": "Erik Miller",
       "throws": "L",
@@ -448,9 +480,9 @@
       "actual": {
         "ip": "43.0",
         "ip_value": 43.0,
-        "war": 0.31,
+        "war": 0.32,
         "era": 3.35,
-        "fip": 3.87,
+        "fip": 3.86,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -514,7 +546,7 @@
         "ip_value": 60.333,
         "war": 0.06,
         "era": 3.58,
-        "fip": 4.28,
+        "fip": 4.27,
         "k_minus_bb_pct": 5.2
       },
       "forecast": {
@@ -531,38 +563,6 @@
       },
       "war_gap": -0.05,
       "innings_share_pct": 4.4
-    },
-    {
-      "id": 683363,
-      "name": "Matt Wilkinson",
-      "throws": "L",
-      "role": "Starter",
-      "games": 6,
-      "starts": 4,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "19.2",
-        "ip_value": 19.667,
-        "war": 0.06,
-        "era": 4.58,
-        "fip": 5.13,
-        "k_minus_bb_pct": 9.9
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.95,
-        "fip": 5.09,
-        "k_minus_bb_pct": 7.2,
-        "team_at_fetch": "SFG"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.0
-      },
-      "war_gap": 0.06,
-      "innings_share_pct": 1.4
     },
     {
       "id": 694820,
@@ -761,7 +761,7 @@
       "actual": {
         "ip": "34.2",
         "ip_value": 34.667,
-        "war": -0.01,
+        "war": -0.0,
         "era": 6.49,
         "fip": 5.38,
         "k_minus_bb_pct": 3.0
@@ -882,7 +882,7 @@
       "actual": {
         "ip": "19.1",
         "ip_value": 19.333,
-        "war": -0.04,
+        "war": -0.03,
         "era": 4.66,
         "fip": 5.37,
         "k_minus_bb_pct": 2.4
@@ -899,7 +899,7 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": -0.04,
+      "war_gap": -0.03,
       "innings_share_pct": 1.4
     },
     {
@@ -1138,9 +1138,9 @@
       "actual": {
         "ip": "4.2",
         "ip_value": 4.667,
-        "war": -0.5,
+        "war": -0.49,
         "era": 9.64,
-        "fip": 14.46,
+        "fip": 14.45,
         "k_minus_bb_pct": 4.5
       },
       "forecast": {
@@ -1163,17 +1163,17 @@
       "name": "Carson Seymour",
       "throws": "R",
       "role": "Reliever",
-      "games": 21,
+      "games": 22,
       "starts": 0,
       "saves": 1,
       "holds": 7,
       "actual": {
-        "ip": "27.2",
-        "ip_value": 27.667,
-        "war": -0.5,
-        "era": 4.88,
-        "fip": 5.77,
-        "k_minus_bb_pct": 3.9
+        "ip": "28.2",
+        "ip_value": 28.667,
+        "war": -0.65,
+        "era": 5.02,
+        "fip": 6.13,
+        "k_minus_bb_pct": 3.8
       },
       "forecast": {
         "ip": 31.9,
@@ -1187,8 +1187,8 @@
         "ip": 30.7,
         "war": 0.12
       },
-      "war_gap": -0.62,
-      "innings_share_pct": 2.0
+      "war_gap": -0.77,
+      "innings_share_pct": 2.1
     },
     {
       "id": 657424,

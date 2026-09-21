@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T05:31:03.466313+00:00",
+  "generated_at": "2026-09-21T13:22:19.854710+00:00",
   "season": 2026,
   "team": "Chicago White Sox",
   "games_played": 156,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.1,
+    "actual_war": 12.3,
     "forecast_war_to_date": 13.2,
-    "war_gap": -1.1,
-    "innings": 1378.7,
-    "era": 4.13
+    "war_gap": -1.0,
+    "innings": 1387.7,
+    "era": 4.11
   },
   "pitchers": [
     {
@@ -32,9 +32,9 @@
       "actual": {
         "ip": "167.0",
         "ip_value": 167.0,
-        "war": 3.1,
+        "war": 3.09,
         "era": 3.4,
-        "fip": 3.63,
+        "fip": 3.62,
         "k_minus_bb_pct": 16.8
       },
       "forecast": {
@@ -50,24 +50,24 @@
         "war": 0.89
       },
       "war_gap": 2.21,
-      "innings_share_pct": 12.1
+      "innings_share_pct": 12.0
     },
     {
       "id": 663436,
       "name": "Davis Martin",
       "throws": "R",
       "role": "Starter",
-      "games": 27,
-      "starts": 26,
+      "games": 28,
+      "starts": 27,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "141.0",
-        "ip_value": 141.0,
-        "war": 2.45,
-        "era": 3.96,
-        "fip": 3.86,
-        "k_minus_bb_pct": 12.2
+        "ip": "145.1",
+        "ip_value": 145.333,
+        "war": 2.58,
+        "era": 3.84,
+        "fip": 3.82,
+        "k_minus_bb_pct": 12.5
       },
       "forecast": {
         "ip": 159.1,
@@ -81,8 +81,8 @@
         "ip": 153.2,
         "war": 1.29
       },
-      "war_gap": 1.16,
-      "innings_share_pct": 10.2
+      "war_gap": 1.29,
+      "innings_share_pct": 10.5
     },
     {
       "id": 691799,
@@ -177,7 +177,7 @@
         "ip": 32.7,
         "war": 0.16
       },
-      "war_gap": 1.14,
+      "war_gap": 1.13,
       "innings_share_pct": 4.7
     },
     {
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "149.0",
         "ip_value": 149.0,
-        "war": 1.18,
+        "war": 1.17,
         "era": 4.41,
         "fip": 4.77,
         "k_minus_bb_pct": 10.2
@@ -210,24 +210,24 @@
         "war": 1.54
       },
       "war_gap": -0.36,
-      "innings_share_pct": 10.8
+      "innings_share_pct": 10.7
     },
     {
       "id": 696146,
       "name": "Hagen Smith",
       "throws": "L",
       "role": "Reliever",
-      "games": 15,
+      "games": 16,
       "starts": 1,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "24.2",
-        "ip_value": 24.667,
-        "war": 0.72,
-        "era": 1.09,
-        "fip": 2.21,
-        "k_minus_bb_pct": 25.3
+        "ip": "25.1",
+        "ip_value": 25.333,
+        "war": 0.67,
+        "era": 1.07,
+        "fip": 2.39,
+        "k_minus_bb_pct": 23.2
       },
       "forecast": {
         "ip": 18.5,
@@ -241,7 +241,7 @@
         "ip": 17.8,
         "war": 0.14
       },
-      "war_gap": 0.58,
+      "war_gap": 0.53,
       "innings_share_pct": 1.8
     },
     {
@@ -313,17 +313,17 @@
       "name": "Trevor Richards",
       "throws": "R",
       "role": "Reliever",
-      "games": 48,
+      "games": 49,
       "starts": 0,
       "saves": 1,
       "holds": 1,
       "actual": {
-        "ip": "71.1",
-        "ip_value": 71.333,
-        "war": 0.27,
-        "era": 3.53,
-        "fip": 4.22,
-        "k_minus_bb_pct": 14.6
+        "ip": "73.1",
+        "ip_value": 73.333,
+        "war": 0.3,
+        "era": 3.56,
+        "fip": 4.2,
+        "k_minus_bb_pct": 14.2
       },
       "forecast": {
         "ip": 1.0,
@@ -337,8 +337,8 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": 0.27,
-      "innings_share_pct": 5.2
+      "war_gap": 0.3,
+      "innings_share_pct": 5.3
     },
     {
       "id": 699823,
@@ -354,7 +354,7 @@
         "ip_value": 30.667,
         "war": 0.25,
         "era": 3.52,
-        "fip": 3.82,
+        "fip": 3.81,
         "k_minus_bb_pct": 8.1
       },
       "forecast": {
@@ -369,7 +369,7 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": 0.26,
+      "war_gap": 0.25,
       "innings_share_pct": 2.2
     },
     {
@@ -386,7 +386,7 @@
         "ip_value": 33.667,
         "war": 0.23,
         "era": 4.81,
-        "fip": 4.35,
+        "fip": 4.34,
         "k_minus_bb_pct": 12.7
       },
       "forecast": {
@@ -618,7 +618,7 @@
         "ip": 60.7,
         "war": 0.5
       },
-      "war_gap": -0.52,
+      "war_gap": -0.53,
       "innings_share_pct": 2.8
     },
     {
@@ -795,7 +795,7 @@
         "ip_value": 2.333,
         "war": -0.07,
         "era": 3.86,
-        "fip": 9.96,
+        "fip": 9.95,
         "k_minus_bb_pct": -10.0
       },
       "forecast": null,
@@ -850,7 +850,7 @@
       "actual": {
         "ip": "138.1",
         "ip_value": 138.333,
-        "war": -0.09,
+        "war": -0.1,
         "era": 3.9,
         "fip": 5.03,
         "k_minus_bb_pct": 7.9
@@ -867,7 +867,7 @@
         "ip": 104.0,
         "war": 0.52
       },
-      "war_gap": -0.61,
+      "war_gap": -0.62,
       "innings_share_pct": 10.0
     },
     {
@@ -884,7 +884,7 @@
         "ip_value": 3.0,
         "war": -0.17,
         "era": 18.0,
-        "fip": 14.77,
+        "fip": 14.76,
         "k_minus_bb_pct": -18.8
       },
       "forecast": {
@@ -935,6 +935,38 @@
       "innings_share_pct": 0.6
     },
     {
+      "id": 622491,
+      "name": "Luis Castillo",
+      "throws": "R",
+      "role": "Starter",
+      "games": 8,
+      "starts": 6,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "30.0",
+        "ip_value": 30.0,
+        "war": -0.21,
+        "era": 7.5,
+        "fip": 6.13,
+        "k_minus_bb_pct": 10.6
+      },
+      "forecast": {
+        "ip": 181.5,
+        "war": 2.38,
+        "era": 3.86,
+        "fip": 3.98,
+        "k_minus_bb_pct": 15.8,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 174.8,
+        "war": 2.29
+      },
+      "war_gap": -2.51,
+      "innings_share_pct": 2.2
+    },
+    {
       "id": 656457,
       "name": "Tyler Gilbert",
       "throws": "L",
@@ -967,53 +999,21 @@
       "innings_share_pct": 0.4
     },
     {
-      "id": 622491,
-      "name": "Luis Castillo",
-      "throws": "R",
-      "role": "Starter",
-      "games": 7,
-      "starts": 6,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "29.0",
-        "ip_value": 29.0,
-        "war": -0.27,
-        "era": 7.76,
-        "fip": 6.31,
-        "k_minus_bb_pct": 10.1
-      },
-      "forecast": {
-        "ip": 181.5,
-        "war": 2.38,
-        "era": 3.86,
-        "fip": 3.98,
-        "k_minus_bb_pct": 15.8,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 174.8,
-        "war": 2.29
-      },
-      "war_gap": -2.56,
-      "innings_share_pct": 2.1
-    },
-    {
       "id": 623211,
       "name": "Huascar Brazobán",
       "throws": "R",
       "role": "Reliever",
-      "games": 10,
+      "games": 11,
       "starts": 0,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "10.0",
-        "ip_value": 10.0,
-        "war": -0.29,
-        "era": 6.3,
-        "fip": 6.5,
-        "k_minus_bb_pct": -2.2
+        "ip": "11.0",
+        "ip_value": 11.0,
+        "war": -0.24,
+        "era": 5.73,
+        "fip": 6.19,
+        "k_minus_bb_pct": -2.0
       },
       "forecast": {
         "ip": 52.0,
@@ -1027,8 +1027,8 @@
         "ip": 50.1,
         "war": 0.15
       },
-      "war_gap": -0.43,
-      "innings_share_pct": 0.7
+      "war_gap": -0.39,
+      "innings_share_pct": 0.8
     },
     {
       "id": 673929,
@@ -1060,7 +1060,7 @@
         "war": 0.41
       },
       "war_gap": -0.8,
-      "innings_share_pct": 1.4
+      "innings_share_pct": 1.3
     }
   ]
 }
