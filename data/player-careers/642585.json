@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "player_id": 642585,
-  "generated_at": "2026-09-20T13:40:06.337973+00:00",
-  "data_as_of": "2026-09-20",
+  "generated_at": "2026-09-21T15:59:25.464537+00:00",
+  "data_as_of": "2026-09-21",
   "status": "available",
   "coverage": [
     {
       "league": "MLB",
       "level": "MLB",
       "first_season": 2022,
-      "last_season": 2025,
+      "last_season": 2026,
       "status": "available",
       "note": null
     },
@@ -436,6 +436,27 @@
       "strikeouts": 50,
       "era": 2.6,
       "whip": 1.13
+    },
+    {
+      "id": "642585-pitching-mlb-2026-1-110",
+      "season": 2026,
+      "team": "Baltimore Orioles",
+      "league": "American League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 1,
+      "games_started": 0,
+      "wins": 0,
+      "losses": 0,
+      "saves": 0,
+      "innings_outs": 2,
+      "hits": 2,
+      "earned_runs": 1,
+      "home_runs": 0,
+      "walks": 1,
+      "strikeouts": 2,
+      "era": 13.5,
+      "whip": 4.5
     },
     {
       "id": "642585-pitching-minors-2026-12-418",

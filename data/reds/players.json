@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-20T13:50:41.101204+00:00",
-  "roster_as_of": "September 19, 2026",
+  "generated_at": "2026-09-21T16:10:13.825556+00:00",
+  "roster_as_of": "September 20, 2026",
   "team": {
     "id": 113,
     "name": "Cincinnati Reds"
@@ -703,8 +703,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "2003-01-16",
       "age": 23,
       "birthplace": "Naval Support Activity Naples",
@@ -1016,72 +1016,6 @@
         "through_season": 2025,
         "status": "not_in_2025_release",
         "batting": null,
-        "pitching": null
-      }
-    },
-    {
-      "id": 670770,
-      "mlb_id": 670770,
-      "wikidata_id": "Q26405818",
-      "slug": "tj-friedl",
-      "name": "TJ Friedl",
-      "full_name": "T. J. Friedl",
-      "number": "29",
-      "position": {
-        "name": "Outfielder",
-        "group": "Outfielder",
-        "abbreviation": "CF"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1995-08-14",
-      "age": 31,
-      "birthplace": "Pleasanton",
-      "height": null,
-      "weight": null,
-      "bats": "Left",
-      "throws": "Left",
-      "debut_date": "September 18, 2021",
-      "debut_team": "Cincinnati Reds",
-      "education": {
-        "high_schools": [],
-        "colleges": [
-          {
-            "name": "University of Nevada, Reno"
-          },
-          {
-            "name": "Foothill High School"
-          }
-        ]
-      },
-      "teams": [
-        "Cincinnati Reds"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q26405818",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/TJ_Friedl",
-      "retrosheet_id": "friet001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 461,
-          "plate_appearances": 1876,
-          "at_bats": 1620,
-          "runs": 232,
-          "hits": 417,
-          "doubles": 60,
-          "triples": 16,
-          "home_runs": 54,
-          "runs_batted_in": 201,
-          "walks": 178,
-          "strikeouts": 299,
-          "stolen_bases": 55,
-          "caught_stealing": 12,
-          "average": 0.257,
-          "on_base_percentage": 0.344,
-          "slugging_percentage": 0.414,
-          "ops": 0.758
-        },
         "pitching": null
       }
     },
@@ -2515,6 +2449,84 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
+      }
+    },
+    {
+      "id": 686730,
+      "mlb_id": 686730,
+      "wikidata_id": "Q122173359",
+      "slug": "carson-spiers",
+      "name": "Carson Spiers",
+      "full_name": "Carson Spiers",
+      "number": "68",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1997-11-11",
+      "age": 28,
+      "birthplace": "Greenville",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "September 3, 2023",
+      "debut_team": "Cincinnati Reds",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Cincinnati Reds"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q122173359",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Carson_Spiers",
+      "retrosheet_id": "spiec001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 29,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 29,
+          "games_started": 14,
+          "wins": 5,
+          "losses": 10,
+          "saves": 1,
+          "innings_outs": 351,
+          "hits": 143,
+          "runs": 80,
+          "earned_runs": 74,
+          "home_runs": 24,
+          "walks": 41,
+          "strikeouts": 103,
+          "hit_batters": 6,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.69,
+          "whip": 1.573
+        }
       }
     },
     {

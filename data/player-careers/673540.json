@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "player_id": 673540,
-  "generated_at": "2026-09-20T13:38:44.538331+00:00",
-  "data_as_of": "2026-09-20",
+  "generated_at": "2026-09-21T15:58:17.386674+00:00",
+  "data_as_of": "2026-09-21",
   "status": "available",
   "coverage": [
     {
@@ -27,7 +27,31 @@
     "url": "https://statsapi.mlb.com/api/v1/people/673540/stats",
     "attribution": "Season and minor-league statistics supplied by the MLB Stats API; regular season only."
   },
-  "batting": [],
+  "batting": [
+    {
+      "id": "673540-hitting-mlb-2026-1-121",
+      "season": 2026,
+      "team": "New York Mets",
+      "league": "National League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 30,
+      "at_bats": 0,
+      "runs": 0,
+      "hits": 0,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "runs_batted_in": 0,
+      "stolen_bases": 0,
+      "walks": 0,
+      "strikeouts": 0,
+      "average": null,
+      "on_base_percentage": null,
+      "slugging_percentage": null,
+      "ops": null
+    }
+  ],
   "pitching": [
     {
       "id": "673540-pitching-mlb-2023-1-121",
@@ -246,19 +270,19 @@
       "league": "National League",
       "level": "MLB",
       "row_type": "team_stint",
-      "games": 29,
+      "games": 30,
       "games_started": 8,
       "wins": 0,
       "losses": 9,
       "saves": 7,
-      "innings_outs": 180,
-      "hits": 58,
-      "earned_runs": 47,
+      "innings_outs": 181,
+      "hits": 60,
+      "earned_runs": 50,
       "home_runs": 14,
-      "walks": 38,
+      "walks": 41,
       "strikeouts": 73,
-      "era": 7.05,
-      "whip": 1.6
+      "era": 7.46,
+      "whip": 1.67
     },
     {
       "id": "673540-pitching-minors-2026-14-507",
