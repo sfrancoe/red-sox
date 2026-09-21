@@ -3,6 +3,7 @@ import SafariServices
 
 struct HeadlinesView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: HeadlinesStore
     @State private var secondarySource: NewsSource
     @State private var presentedArticle: PresentedArticle?
@@ -22,7 +23,9 @@ struct HeadlinesView: View {
                 Group {
                     if !store.feeds.isEmpty {
                         GeometryReader { space in
-                            if contentWidth >= 720 && space.size.height > space.size.width {
+                            if usesExpandedReadingLayout {
+                                newspaperColumn(selection: $store.selectedSource)
+                            } else if contentWidth >= 720 && space.size.height > space.size.width {
                                 let rows = team.newsSources.chunked(into: 2)
                                 VStack(spacing: 12) {
                                     ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
@@ -66,6 +69,10 @@ struct HeadlinesView: View {
             SafariView(url: article.url)
                 .ignoresSafeArea()
         }
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
     }
 
     private func newspaperQuadrant(_ source: NewsSource) -> some View {
@@ -181,14 +188,13 @@ struct HeadlinesView: View {
                     newspaperName(
                         source.shortName,
                         source: source,
-                        font: .system(
-                            size: selection.wrappedValue == source ? 16 : 13,
-                            weight: selection.wrappedValue == source ? .black : .semibold
-                        ),
+                        font: selection.wrappedValue == source
+                            ? .headline.weight(.black)
+                            : .subheadline.weight(.semibold),
                         color: selection.wrappedValue == source ? AppColor.ink : AppColor.inkMuted
                     )
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.72)
+                        .lineLimit(usesExpandedReadingLayout ? nil : 1)
+                        .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
                         .overlay(alignment: .bottom) {
@@ -207,12 +213,12 @@ struct HeadlinesView: View {
 
     private func feedHeader(_ feed: NewsFeed, source: NewsSource) -> some View {
         HStack(alignment: .firstTextBaseline) {
-            newspaperName(feed.source, source: source, font: .system(size: 14, weight: .black))
+            newspaperName(feed.source, source: source, font: .headline.weight(.black))
 
             Spacer()
 
             Text("Updated \(feed.refreshedText)")
-                .font(.system(size: 9, weight: .medium))
+                .font(.caption)
                 .foregroundStyle(AppColor.ink.opacity(0.78))
                 .multilineTextAlignment(.trailing)
         }
@@ -279,14 +285,14 @@ struct HeadlinesView: View {
             }
 
             articleHeadline(article, fontSize: contentWidth >= 650 ? 21 : 16,
-                            lineLimit: contentWidth >= 650 ? 5 : 3)
+                            lineLimit: usesExpandedReadingLayout ? nil : (contentWidth >= 650 ? 5 : 3))
 
             if !article.description.isEmpty {
                 Text(article.description)
-                    .font(.system(size: 14))
+                    .font(AppFont.bodySmall)
                     .foregroundStyle(AppColor.ink)
                     .lineSpacing(2)
-                    .lineLimit(4)
+                    .lineLimit(usesExpandedReadingLayout ? nil : 4)
             }
         }
     }

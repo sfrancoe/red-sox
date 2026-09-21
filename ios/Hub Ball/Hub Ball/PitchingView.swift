@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PitchingView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: PitchingStore
     let team: HubTeam
     let onSelectPlayer: (Int) -> Void
@@ -10,6 +11,10 @@ struct PitchingView: View {
         self.team = team
         self.onSelectPlayer = onSelectPlayer
         _store = State(initialValue: PitchingStore(team: team))
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
     }
 
     var body: some View {
@@ -61,9 +66,17 @@ struct PitchingView: View {
                     .tint(AppColor.ink)
                 }
 
-                HubCardGrid {
-                    ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
-                        pitcherCard(pitcher, rank: index + 1)
+                if usesExpandedReadingLayout {
+                    LazyVStack(spacing: 14) {
+                        ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
+                            expandedPitcherCard(pitcher, rank: index + 1)
+                        }
+                    }
+                } else {
+                    HubCardGrid {
+                        ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
+                            pitcherCard(pitcher, rank: index + 1)
+                        }
                     }
                 }
 
@@ -75,6 +88,38 @@ struct PitchingView: View {
         .refreshable {
             await store.load()
         }
+    }
+
+    private func expandedPitcherCard(_ pitcher: PitcherReport, rank: Int) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("\(store.sort.title.uppercased()) RANK \(rank)")
+                .font(.caption.weight(.black))
+                .foregroundStyle(AppColor.red)
+            if team.supportsPlayers {
+                Button { onSelectPlayer(pitcher.id) } label: {
+                    HStack(spacing: 5) {
+                        Text(pitcher.name)
+                        Image(systemName: "person.crop.circle")
+                    }
+                    .font(.headline)
+                    .foregroundStyle(AppColor.navy)
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Open player biography")
+            } else {
+                Text(pitcher.name).font(.headline).foregroundStyle(AppColor.navy)
+            }
+            Text("\(pitcher.handedness) · \(pitcher.role) · \(pitcher.games) G\(pitcher.starts > 0 ? " · \(pitcher.starts) GS" : "")")
+                .font(.subheadline)
+            Text("\(pitcher.warGap.signedText) fWAR")
+                .font(AppFont.numberLarge)
+                .foregroundStyle(pitcher.warGap >= 0 ? AppColor.green : AppColor.red)
+            Text(pitcher.story)
+                .font(.body)
+                .lineSpacing(2)
+            comparisonTable(pitcher)
+        }
+        .cardStyle()
     }
 
     private var rolePicker: some View {
@@ -120,6 +165,18 @@ struct PitchingView: View {
 
             PitchingImpactChart(pitchers: store.visiblePitchers)
                 .frame(height: chartHeight)
+
+            if usesExpandedReadingLayout {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Chart values")
+                        .font(.subheadline.weight(.bold))
+                    ForEach(store.visiblePitchers) { pitcher in
+                        Text("\(pitcher.name): actual \(pitcher.actual.war.twoPlaces) fWAR; forecast \(pitcher.forecastToDate.war.twoPlaces)")
+                            .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
         }
         .cardStyle()
     }

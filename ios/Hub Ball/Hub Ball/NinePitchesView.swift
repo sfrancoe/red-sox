@@ -12,6 +12,7 @@ private struct ImmaculatePitch: Identifiable {
 struct NinePitchesView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var shown = 0
     @State private var playing = false
     @State private var playbackID = UUID()
@@ -29,16 +30,20 @@ struct NinePitchesView: View {
         ImmaculatePitch(number: 9, batter: "Jac Caglianone", velocity: 97.9, type: "Four-seam fastball", result: "Swinging strike — strikeout")
     ]
 
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
+    }
+
     var body: some View {
         ZStack {
             AppColor.navy.ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     Text("VISUAL STORY 02 · FENWAY PARK")
-                        .font(.system(size: 11, weight: .bold, design: .monospaced))
+                        .font(.caption.monospaced().weight(.bold))
                         .foregroundStyle(AppColor.accent)
                     Text("NINE\nPITCHES.")
-                        .font(.system(size: 54, weight: .black, design: .rounded))
+                        .font(.system(.largeTitle, design: .rounded).weight(.black))
                         .tracking(-2)
                     Text("Payton Tolle opened against Kansas City with an immaculate inning. By pitch nine, he knew.")
                         .font(.title3.weight(.semibold))
@@ -71,32 +76,44 @@ struct NinePitchesView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("SEPTEMBER 13, 2026 · KANSAS CITY AT BOSTON")
-                .font(.system(size: 11, weight: .bold, design: .monospaced))
+                .font(.caption.monospaced().weight(.bold))
                 .foregroundStyle(AppColor.cream.opacity(0.62))
             HStack(alignment: .firstTextBaseline) {
-                Text("\(shown)").font(.system(size: 64, weight: .black, design: .rounded)).foregroundStyle(AppColor.accent).monospacedDigit()
-                Text("OF 9 PITCHES").font(.system(size: 14, weight: .bold, design: .monospaced)).foregroundStyle(AppColor.cream.opacity(0.75))
+                Text("\(shown)").font(.largeTitle.weight(.black)).foregroundStyle(AppColor.accent).monospacedDigit()
+                Text("OF 9 PITCHES").font(.subheadline.monospaced().weight(.bold)).foregroundStyle(AppColor.cream.opacity(0.75))
             }
         }
     }
 
+    @ViewBuilder
     private var pitchGrid: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 7), count: 3), spacing: 7) {
-            ForEach(pitches) { pitch in
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("PITCH \(pitch.number)").font(.system(size: 10, weight: .bold, design: .monospaced))
-                    Text(String(format: "%.1f", pitch.velocity)).font(.system(size: 31, weight: .black, design: .rounded)).monospacedDigit()
-                    Text(pitch.type.uppercased()).font(.system(size: 9, weight: .bold, design: .monospaced)).lineLimit(1).minimumScaleFactor(0.7)
-                    Text(pitch.batter).font(.system(size: 10, weight: .semibold)).lineLimit(1)
-                }
-                .frame(maxWidth: .infinity, minHeight: 112, alignment: .leading)
-                .padding(10)
-                .background(pitch.number <= shown ? AppColor.cream.opacity(0.14) : AppColor.cream.opacity(0.045), in: RoundedRectangle(cornerRadius: 10))
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(pitch.number == shown ? AppColor.accent : .clear, lineWidth: 2))
-                .opacity(pitch.number <= shown ? 1 : 0.42)
-                .accessibilityLabel("Pitch \(pitch.number), \(pitch.velocity, specifier: "%.1f") miles per hour, \(pitch.type), to \(pitch.batter)")
+        if usesExpandedReadingLayout {
+            LazyVStack(spacing: 10) {
+                ForEach(pitches) { pitch in pitchCard(pitch) }
+            }
+        } else {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 7), count: 3), spacing: 7) {
+                ForEach(pitches) { pitch in pitchCard(pitch) }
             }
         }
+    }
+
+    private func pitchCard(_ pitch: ImmaculatePitch) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text("PITCH \(pitch.number)").font(.caption.monospaced().weight(.bold))
+            Text(String(format: "%.1f", pitch.velocity)).font(.title.weight(.black)).monospacedDigit()
+            Text(pitch.type.uppercased()).font(.caption.monospaced().weight(.bold)).fixedSize(horizontal: false, vertical: true)
+            Text(pitch.batter).font(.subheadline.weight(.semibold)).fixedSize(horizontal: false, vertical: true)
+            if usesExpandedReadingLayout {
+                Text(pitch.result).font(.subheadline).foregroundStyle(AppColor.cream.opacity(0.78)).fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: usesExpandedReadingLayout ? 0 : 112, alignment: .leading)
+        .padding(10)
+        .background(pitch.number <= shown ? AppColor.cream.opacity(0.14) : AppColor.cream.opacity(0.045), in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(pitch.number == shown ? AppColor.accent : .clear, lineWidth: 2))
+        .opacity(pitch.number <= shown ? 1 : 0.42)
+        .accessibilityLabel("Pitch \(pitch.number), \(pitch.velocity, specifier: "%.1f") miles per hour, \(pitch.type), to \(pitch.batter)")
     }
 
     private var moment: some View {

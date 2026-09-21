@@ -83,6 +83,7 @@ private func cumulativeBattingEvents(_ games: [ShutoutGame], chapter: Int, curso
 
 struct BrewersShutoutView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.scenePhase) private var scenePhase
     @State private var games: [ShutoutGame] = []
     @State private var loadFailed = false
@@ -109,6 +110,7 @@ struct BrewersShutoutView: View {
     private var credits: [HitterCredit] { hitterCredits(cumulativeEvents) }
     private var nonRBI: Int { cumulativeEvents.filter { !$0.top }.reduce(0) { $0 + $1.runs - $1.rbi } }
     private var leaderMaximum: Int { max(1, hitterCredits(games.flatMap(\.events)).map(\.rbi).max() ?? 1) }
+    private var usesExpandedReadingLayout: Bool { dynamicTypeSize >= .xxxLarge }
 
     var body: some View {
         ZStack {
@@ -160,20 +162,33 @@ struct BrewersShutoutView: View {
     }
 
     private var chapterPicker: some View {
-        HStack(spacing: 6) {
+        Group {
+            if usesExpandedReadingLayout {
+                VStack(spacing: 8) {
+                    chapterButtons
+                }
+            } else {
+                HStack(spacing: 6) {
+                    chapterButtons
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var chapterButtons: some View {
             ForEach(0..<3, id: \.self) { index in
                 Button {
                     stop(); chapter = index; cursor = index == 2 ? -1 : games[index].events.count - 1
                 } label: {
                     Text(["01 SEATTLE", "02 CINCINNATI", "03 THE 42"][index])
-                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                        .font(usesExpandedReadingLayout ? .subheadline.weight(.bold) : .system(size: 10, weight: .bold, design: .monospaced))
                         .frame(maxWidth: .infinity).frame(minHeight: 44)
                         .background(chapter == index ? ShutoutStyle.gold : ShutoutStyle.cream.opacity(0.06), in: RoundedRectangle(cornerRadius: 6))
                         .foregroundStyle(chapter == index ? ShutoutStyle.navy : ShutoutStyle.cream)
                 }
                 .buttonStyle(.plain).accessibilityAddTraits(chapter == index ? .isSelected : [])
             }
-        }
     }
 
     private var header: some View {

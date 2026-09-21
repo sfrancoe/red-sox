@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeRunChaseView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store = HomeRunChaseStore()
     @State private var chapter = 0
     @State private var drawProgress = 0.0
@@ -76,10 +77,11 @@ struct HomeRunChaseView: View {
     private func chapterView(_ index: Int) -> some View {
         GeometryReader { proxy in
             let compact = proxy.size.height < 760
+            let expanded = dynamicTypeSize >= .xxxLarge
 
             ScrollView {
                 VStack(alignment: .leading, spacing: compact ? 10 : 16) {
-                    storyHeader(index, compact: compact)
+                    storyHeader(index, compact: compact, expanded: expanded)
 
                     ChaseChart(
                         config: config,
@@ -98,7 +100,7 @@ struct HomeRunChaseView: View {
                     .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
                     .accessibilityLabel(chartAccessibilityLabel(index))
 
-                    chapterPanel(index, compact: compact)
+                    chapterPanel(index, compact: compact, expanded: expanded)
                     navigation
                 }
                 .padding(.horizontal, 16)
@@ -109,15 +111,15 @@ struct HomeRunChaseView: View {
         }
     }
 
-    private func storyHeader(_ index: Int, compact: Bool) -> some View {
+    private func storyHeader(_ index: Int, compact: Bool, expanded: Bool) -> some View {
         VStack(alignment: .leading, spacing: compact ? 3 : 6) {
             HStack(spacing: 8) {
                 Text(kicker(index).uppercased())
                     .font(AppFont.label)
                     .tracking(compact ? 0.7 : 1.2)
                     .foregroundStyle(AppColor.amber)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.82)
+                    .lineLimit(expanded ? nil : 1)
+                    .minimumScaleFactor(expanded ? 1 : 0.82)
 
                 Spacer(minLength: 0)
 
@@ -130,7 +132,9 @@ struct HomeRunChaseView: View {
             }
 
             Text(hero(index))
-                .font(.system(size: compact ? 50 : 68, weight: .bold, design: .serif))
+                .font(expanded
+                    ? .largeTitle.weight(.bold)
+                    : .system(size: compact ? 50 : 68, weight: .bold, design: .serif))
                 .monospacedDigit()
                 .foregroundStyle(AppColor.bone)
                 .contentTransition(.numericText())
@@ -143,14 +147,14 @@ struct HomeRunChaseView: View {
     }
 
     @ViewBuilder
-    private func chapterPanel(_ index: Int, compact: Bool) -> some View {
+    private func chapterPanel(_ index: Int, compact: Bool, expanded: Bool) -> some View {
         switch index {
         case 0:
-            if compact { compactAgeBars } else { ageBars }
+            if compact && !expanded { compactAgeBars } else { ageBars }
         case 1:
-            if compact { compactAtBatBars } else { atBatBars }
+            if compact && !expanded { compactAtBatBars } else { atBatBars }
         case 2:
-            milestoneGrid(compact: compact)
+            milestoneGrid(compact: compact, expanded: expanded)
         default:
             projectionControls
         }
@@ -237,8 +241,8 @@ struct HomeRunChaseView: View {
         .chasePanel()
     }
 
-    private func milestoneGrid(compact: Bool) -> some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 1) {
+    private func milestoneGrid(compact: Bool, expanded: Bool) -> some View {
+        LazyVGrid(columns: expanded ? [GridItem(.flexible())] : [GridItem(.flexible()), GridItem(.flexible())], spacing: 1) {
             ForEach(ChaseEngine.milestones(for: config)) { milestone in
                 VStack(alignment: .leading, spacing: 4) {
                     Text(milestone.label)

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PlayersView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: PlayersStore
     @State private var path: [Int] = []
 
@@ -53,16 +54,26 @@ struct PlayersView: View {
             LazyVStack(spacing: 0) {
                 searchField
                 filterBar
-                spreadsheetHeader
                 if store.visiblePlayers.isEmpty {
                     ContentUnavailableView.search(text: store.searchText)
                         .frame(minHeight: 280)
                 } else {
-                    ForEach(store.visiblePlayers) { player in
-                        NavigationLink(value: player.id) {
-                            spreadsheetRow(player)
+                    if usesExpandedReadingLayout {
+                        expandedSortBar
+                        ForEach(store.visiblePlayers) { player in
+                            NavigationLink(value: player.id) {
+                                expandedDirectoryRow(player)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
+                    } else {
+                        spreadsheetHeader
+                        ForEach(store.visiblePlayers) { player in
+                            NavigationLink(value: player.id) {
+                                spreadsheetRow(player)
+                            }
+                            .buttonStyle(.plain)
+                        }
                     }
                 }
                 sourceFooter(feed.source)
@@ -72,6 +83,80 @@ struct PlayersView: View {
         .refreshable { await store.load() }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColor.night.ignoresSafeArea())
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
+    }
+
+    private var expandedSortBar: some View {
+        ScrollView(.horizontal, showsIndicators: true) {
+            HStack(spacing: 8) {
+                expandedSortButton(.number, title: "Number")
+                expandedSortButton(.name, title: "Player")
+                expandedSortButton(.position, title: "Position")
+                expandedSortButton(.batsThrows, title: "Bats / throws")
+                if showsAgeColumn { expandedSortButton(.age, title: "Age") }
+            }
+            .padding(.horizontal, directoryHorizontalPadding)
+            .padding(.vertical, 8)
+        }
+        .background(AppColor.nightRaised)
+    }
+
+    private func expandedSortButton(_ column: PlayerDirectorySort, title: String) -> some View {
+        Button { store.toggleSort(column) } label: {
+            HStack(spacing: 4) {
+                Text(title)
+                if store.sort == column {
+                    Image(systemName: store.sortsAscending ? "arrow.up" : "arrow.down")
+                }
+            }
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(store.sort == column ? AppColor.bone : AppColor.boneDim)
+            .padding(.horizontal, 12)
+            .frame(minHeight: 44)
+            .background(store.sort == column ? AppColor.night : AppColor.nightCell)
+            .overlay { Rectangle().stroke(store.sort == column ? AppColor.amber : AppColor.rule, lineWidth: 1) }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Sort by \(title)")
+    }
+
+    private func expandedDirectoryRow(_ player: RedSoxPlayer) -> some View {
+        VStack(alignment: .leading, spacing: 7) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(player.name)
+                    .font(.headline.weight(.semibold))
+                    .foregroundStyle(AppColor.bone)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 8)
+                Text(player.number ?? "—")
+                    .font(.body.monospacedDigit())
+                    .foregroundStyle(AppColor.amber)
+            }
+            HStack(spacing: 12) {
+                playerDirectoryValue("Position", player.position.name)
+                playerDirectoryValue("Bats / throws", "\(player.bats?.shortHand ?? "—") / \(player.throws?.shortHand ?? "—")")
+                if showsAgeColumn { playerDirectoryValue("Age", player.age.map(String.init) ?? "—") }
+            }
+        }
+        .padding(.horizontal, directoryHorizontalPadding)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppColor.night)
+        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(player.name), number \(player.number ?? "unassigned"), \(player.position.name), bats \(player.bats ?? "unavailable"), throws \(player.throws ?? "unavailable"), age \(player.age.map(String.init) ?? "unavailable")")
+        .accessibilityHint("Opens career card")
+    }
+
+    private func playerDirectoryValue(_ label: String, _ value: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(label).font(.caption.weight(.semibold)).foregroundStyle(AppColor.boneMuted)
+            Text(value).font(.subheadline).foregroundStyle(AppColor.boneDim).fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var searchField: some View {
@@ -130,7 +215,7 @@ struct PlayersView: View {
                 .font((contentWidth >= 650 ? AppFont.bodySmall : AppFont.label).weight(.semibold))
                 .foregroundStyle(isSelected ? AppColor.bone : AppColor.boneDim)
                 .lineLimit(1)
-                .minimumScaleFactor(0.85)
+                .minimumScaleFactor(usesExpandedReadingLayout ? 1 : 0.85)
                 .padding(.horizontal, contentWidth >= 650 ? 10 : 14)
                 .frame(maxWidth: expands ? .infinity : nil)
                 .frame(minHeight: contentWidth >= 650 ? 48 : 44)
@@ -331,6 +416,7 @@ private enum PitchingCareerSort: String, CaseIterable {
 
 private struct PlayerReferenceView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     let team: HubTeam
     let player: RedSoxPlayer
@@ -349,6 +435,14 @@ private struct PlayerReferenceView: View {
         self.source = source
         self.store = store
         _mode = State(initialValue: player.positionFilter == .pitcher ? .pitching : .batting)
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
+    }
+
+    private var careerRowHeight: CGFloat {
+        usesExpandedReadingLayout ? 54 : 31
     }
 
     var body: some View {
@@ -383,22 +477,37 @@ private struct PlayerReferenceView: View {
         .task { await store.loadCareer(for: player) }
     }
 
+    @ViewBuilder
     private var biographyPanel: some View {
-        Grid(horizontalSpacing: 16, verticalSpacing: 9) {
-            GridRow {
+        if usesExpandedReadingLayout {
+            VStack(alignment: .leading, spacing: 10) {
                 bioValue("BATS", player.bats ?? "—")
                 bioValue("THROWS", player.throws ?? "—")
                 bioValue("BORN", player.formattedShortDate(player.birthDate) ?? "—")
-            }
-            GridRow {
                 bioValue("BIRTHPLACE", player.birthplace.isEmpty ? "—" : player.birthplace)
                 bioValue("MLB DEBUT", player.formattedShortDate(player.debutDate) ?? "—")
                 bioValue("STATUS", player.rosterStatus)
             }
+            .padding(14)
+            .background(AppColor.nightRaised)
+            .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+        } else {
+            Grid(horizontalSpacing: 16, verticalSpacing: 9) {
+                GridRow {
+                    bioValue("BATS", player.bats ?? "—")
+                    bioValue("THROWS", player.throws ?? "—")
+                    bioValue("BORN", player.formattedShortDate(player.birthDate) ?? "—")
+                }
+                GridRow {
+                    bioValue("BIRTHPLACE", player.birthplace.isEmpty ? "—" : player.birthplace)
+                    bioValue("MLB DEBUT", player.formattedShortDate(player.debutDate) ?? "—")
+                    bioValue("STATUS", player.rosterStatus)
+                }
+            }
+            .padding(14)
+            .background(AppColor.nightRaised)
+            .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
         }
-        .padding(14)
-        .background(AppColor.nightRaised)
-        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
     }
 
     @ViewBuilder
@@ -438,8 +547,8 @@ private struct PlayerReferenceView: View {
             Text(player.fullName ?? player.name)
                 .font(AppFont.displayMedium)
                 .foregroundStyle(AppColor.bone)
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
+                .lineLimit(usesExpandedReadingLayout ? 2 : 1)
+                .fixedSize(horizontal: false, vertical: true)
             Text(player.position.abbreviation)
                 .font(AppFont.label.weight(.semibold).monospaced())
                 .foregroundStyle(AppColor.boneDim)
@@ -697,7 +806,7 @@ private struct PlayerReferenceView: View {
             .font(AppFont.label.weight(.semibold))
             .foregroundStyle(isSelected ? AppColor.bone : AppColor.boneMuted)
             .padding(.leading, leading ? 5 : 0)
-            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
+            .frame(width: width, height: careerRowHeight, alignment: leading ? .leading : .center)
             .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
         }
         .buttonStyle(.plain)
@@ -811,7 +920,7 @@ private struct PlayerReferenceView: View {
             .lineLimit(1)
             .truncationMode(.tail)
             .padding(.leading, leading ? 5 : 0)
-            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
+            .frame(width: width, height: careerRowHeight, alignment: leading ? .leading : .center)
             .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
             .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
     }
@@ -825,7 +934,7 @@ private struct PlayerReferenceView: View {
             .lineLimit(1)
             .truncationMode(.tail)
             .padding(.leading, leading ? 5 : 0)
-            .frame(width: width, height: 31, alignment: leading ? .leading : .center)
+            .frame(width: width, height: careerRowHeight, alignment: leading ? .leading : .center)
             .background(AppColor.nightCell)
             .overlay(alignment: .trailing) { Rectangle().fill(AppColor.rule).frame(width: 1) }
             .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }

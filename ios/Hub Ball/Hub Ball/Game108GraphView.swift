@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Game108GraphView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store = Game108GraphStore()
     @State private var activeSeasonIndex = 0
     @State private var gameProgress = 0.0
@@ -40,6 +41,7 @@ struct Game108GraphView: View {
     private var graphContent: some View {
         GeometryReader { proxy in
             let chartHeight = max(260, min(contentWidth >= 650 ? 900 : 430, proxy.size.height - 220))
+            let expanded = dynamicTypeSize >= .xxxLarge
 
             ScrollView {
                 VStack(spacing: 10) {
@@ -82,6 +84,9 @@ struct Game108GraphView: View {
                     .panelElevation()
 
                     controls
+                    if expanded {
+                        seasonSummary
+                    }
                     storyHeader
                 }
                 .padding(.horizontal, 16)
@@ -106,11 +111,11 @@ struct Game108GraphView: View {
                 Button {
                     isPlaying ? pauseAnimation() : startAnimation()
                 } label: {
-                    Label(isPlaying ? "Pause" : "Play", systemImage: isPlaying ? "pause.fill" : "play.fill")
-                        .font(.system(size: 11, weight: .black))
+                        Label(isPlaying ? "Pause" : "Play", systemImage: isPlaying ? "pause.fill" : "play.fill")
+                        .font(.subheadline.weight(.black))
                         .foregroundStyle(AppColor.ink)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 9)
+                        .frame(minHeight: 44)
                         .background(AppColor.nightRaised)
                         .clipShape(Rectangle())
                 }
@@ -120,10 +125,10 @@ struct Game108GraphView: View {
                     restartAnimation()
                 } label: {
                     Label("Restart", systemImage: "arrow.counterclockwise")
-                        .font(.system(size: 11, weight: .black))
+                        .font(.subheadline.weight(.black))
                         .foregroundStyle(AppColor.ink)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 9)
+                        .frame(minHeight: 44)
                         .background(AppColor.nightRaised)
                         .clipShape(Rectangle())
                 }
@@ -140,12 +145,10 @@ struct Game108GraphView: View {
                         isMusicOn ? "Music On" : "Music Off",
                         systemImage: isMusicOn ? "speaker.wave.2.fill" : "speaker.slash.fill"
                     )
-                    .font(.system(size: 10, weight: .black))
+                    .font(.subheadline.weight(.black))
                     .foregroundStyle(AppColor.ink)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.72)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 9)
+                    .frame(minHeight: 44)
                     .background(AppColor.nightRaised)
                     .clipShape(Rectangle())
                 }
@@ -154,7 +157,7 @@ struct Game108GraphView: View {
 
             HStack(spacing: 5) {
                 Text("SPEED")
-                    .font(.system(size: 11, weight: .black))
+                    .font(.caption.weight(.black))
                     .foregroundStyle(AppColor.ink)
                     .padding(.horizontal, 8)
 
@@ -163,10 +166,10 @@ struct Game108GraphView: View {
                         speed = option
                     } label: {
                         Text("\(Int(option))×")
-                            .font(.system(size: 12, weight: .black))
+                            .font(.subheadline.weight(.black))
                             .foregroundStyle(AppColor.ink)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
+                            .frame(minHeight: 44)
                             .background(speed == option ? AppColor.nightRaised : AppColor.paper)
                             .clipShape(Rectangle())
                             .overlay {
@@ -184,6 +187,35 @@ struct Game108GraphView: View {
             .background(AppColor.nightRaised)
             .clipShape(Rectangle())
         }
+    }
+
+    private var seasonSummary: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Season values")
+                .font(.headline.weight(.black))
+
+            ForEach(store.series) { season in
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    Text(String(season.year))
+                        .font(.subheadline.weight(.black).monospacedDigit())
+                        .frame(width: 52, alignment: .leading)
+                    Text("Game 108: \(season.record(through: 108))")
+                        .font(.body.weight(.semibold))
+                    Spacer(minLength: 0)
+                    Text("Final: \(season.record(through: season.endGame))")
+                        .font(.subheadline.monospacedDigit())
+                }
+                .padding(.vertical, 6)
+                .frame(minHeight: 44, alignment: .leading)
+                .overlay(alignment: .bottom) {
+                    Rectangle().fill(AppColor.border).frame(height: 1)
+                }
+            }
+        }
+        .foregroundStyle(AppColor.ink)
+        .padding(12)
+        .background(AppColor.paper)
+        .overlay { Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth) }
     }
 
     @MainActor

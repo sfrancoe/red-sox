@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SeasonLeadersView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: SeasonLeadersStore
     @State private var scope: LeaderboardScope = .team
     @State private var detail: LeaderboardDetail?
@@ -9,6 +10,10 @@ struct SeasonLeadersView: View {
     init(team: HubTeam = .boston) {
         self.team = team
         _store = State(initialValue: SeasonLeadersStore(team: team))
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
     }
 
     var body: some View {
@@ -53,9 +58,17 @@ struct SeasonLeadersView: View {
             LazyVStack(spacing: 14) {
                 if store.seasons.isEmpty { ProgressView("Loading season leaders…").padding(.top, 48) }
                 else {
-                    HubCardGrid {
-                        ForEach(store.sortedYears, id: \.self) { year in
-                            if let season = store.seasons[year] { yearCard(year: year, season: season) }
+                    if usesExpandedReadingLayout {
+                        LazyVStack(spacing: 14) {
+                            ForEach(store.sortedYears, id: \.self) { year in
+                                if let season = store.seasons[year] { yearCard(year: year, season: season) }
+                            }
+                        }
+                    } else {
+                        HubCardGrid {
+                            ForEach(store.sortedYears, id: \.self) { year in
+                                if let season = store.seasons[year] { yearCard(year: year, season: season) }
+                            }
                         }
                     }
                     Text("AVG and OPS use qualified hitters. WHIP requires at least 40 innings.")
@@ -100,7 +113,7 @@ struct SeasonLeadersView: View {
     private func yearHeader(year: String, season: SeasonLeaders) -> some View {
         HStack(alignment: .firstTextBaseline) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(year).font(.system(size: 32, weight: .black, design: .rounded)).foregroundStyle(isCurrentSeason(year) ? AppColor.red : AppColor.navy)
+                Text(year).font(.largeTitle.weight(.black)).foregroundStyle(isCurrentSeason(year) ? AppColor.red : AppColor.navy)
                 Image(systemName: "crown.fill").font(.system(size: 20, weight: .bold)).foregroundStyle(AppColor.accent)
             }
             Spacer()
