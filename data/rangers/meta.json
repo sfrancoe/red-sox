@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-20T14:53:50+00:00",
+ "generated_at": "2026-09-21T17:12:27+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 140,
  "seasons": {
   "2026": {
-   "record": "78-77",
-   "games": 155,
+   "record": "78-78",
+   "games": 156,
    "in_progress": true,
    "war_leader": {
     "name": "Ezequiel Duran",
-    "war": 4.5
+    "war": 4.4
    },
    "war_leaders": [
     {
      "name": "Ezequiel Duran",
-     "war": 4.5
+     "war": 4.4
     },
     {
      "name": "Wyatt Langford",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Corey Seager",
-     "war": 3.1
+     "war": 3.0
     }
    ],
    "pitching_leaders": {
@@ -39,7 +39,7 @@
       },
       {
        "name": "Jacob deGrom",
-       "value": "1.07"
+       "value": "1.10"
       }
      ]
     }
@@ -47,14 +47,13 @@
    "batting_leaders": {
     "hr": {
      "names": [
-      "Jake Burger",
-      "Joc Pederson"
+      "Jake Burger"
      ],
-     "value": 26,
+     "value": 27,
      "top": [
       {
        "name": "Jake Burger",
-       "value": 26
+       "value": 27
       },
       {
        "name": "Joc Pederson",
@@ -70,11 +69,11 @@
      "names": [
       "Jake Burger"
      ],
-     "value": 86,
+     "value": 88,
      "top": [
       {
        "name": "Jake Burger",
-       "value": 86
+       "value": 88
       },
       {
        "name": "Ezequiel Duran",
@@ -90,11 +89,11 @@
      "names": [
       "Ezequiel Duran"
      ],
-     "value": ".266",
+     "value": ".264",
      "top": [
       {
        "name": "Ezequiel Duran",
-       "value": ".266"
+       "value": ".264"
       },
       {
        "name": "Brandon Nimmo",
@@ -102,7 +101,7 @@
       },
       {
        "name": "Jake Burger",
-       "value": ".232"
+       "value": ".233"
       }
      ]
     },
@@ -110,19 +109,19 @@
      "names": [
       "Ezequiel Duran"
      ],
-     "value": ".758",
+     "value": ".756",
      "top": [
       {
        "name": "Ezequiel Duran",
-       "value": ".758"
+       "value": ".756"
+      },
+      {
+       "name": "Jake Burger",
+       "value": ".735"
       },
       {
        "name": "Brandon Nimmo",
        "value": ".732"
-      },
-      {
-       "name": "Jake Burger",
-       "value": ".729"
       }
      ]
     }
