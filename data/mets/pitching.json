@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T22:38:43.849233+00:00",
+  "generated_at": "2026-09-21T13:13:22.548048+00:00",
   "season": 2026,
   "team": "New York Mets",
   "games_played": 156,
@@ -16,8 +16,8 @@
     "actual_war": 14.7,
     "forecast_war_to_date": 15.3,
     "war_gap": -0.6,
-    "innings": 1381.7,
-    "era": 4.15
+    "innings": 1390.7,
+    "era": 4.17
   },
   "pitchers": [
     {
@@ -49,8 +49,8 @@
         "ip": 143.5,
         "war": 1.96
       },
-      "war_gap": 1.26,
-      "innings_share_pct": 12.5
+      "war_gap": 1.25,
+      "innings_share_pct": 12.4
     },
     {
       "id": 681035,
@@ -82,7 +82,7 @@
         "war": 0.3
       },
       "war_gap": 1.81,
-      "innings_share_pct": 8.0
+      "innings_share_pct": 7.9
     },
     {
       "id": 605280,
@@ -145,7 +145,7 @@
         "ip": 162.1,
         "war": 2.64
       },
-      "war_gap": -1.45,
+      "war_gap": -1.46,
       "innings_share_pct": 8.2
     },
     {
@@ -162,7 +162,7 @@
         "ip_value": 44.0,
         "war": 1.13,
         "era": 1.84,
-        "fip": 2.83,
+        "fip": 2.82,
         "k_minus_bb_pct": 20.1
       },
       "forecast": {
@@ -194,7 +194,7 @@
         "ip_value": 52.667,
         "war": 0.87,
         "era": 2.56,
-        "fip": 3.35,
+        "fip": 3.34,
         "k_minus_bb_pct": 12.6
       },
       "forecast": {
@@ -306,7 +306,7 @@
         "war": -0.0
       },
       "war_gap": 0.76,
-      "innings_share_pct": 1.4
+      "innings_share_pct": 1.3
     },
     {
       "id": 656849,
@@ -472,18 +472,18 @@
       "id": 804636,
       "name": "Jonah Tong",
       "throws": "R",
-      "role": "Reliever",
-      "games": 5,
-      "starts": 2,
+      "role": "Starter",
+      "games": 6,
+      "starts": 3,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "21.0",
-        "ip_value": 21.0,
-        "war": 0.26,
-        "era": 3.43,
-        "fip": 3.86,
-        "k_minus_bb_pct": 12.1
+        "ip": "25.2",
+        "ip_value": 25.667,
+        "war": 0.35,
+        "era": 4.21,
+        "fip": 3.8,
+        "k_minus_bb_pct": 10.5
       },
       "forecast": {
         "ip": 25.8,
@@ -497,25 +497,25 @@
         "ip": 24.8,
         "war": 0.39
       },
-      "war_gap": -0.13,
-      "innings_share_pct": 1.5
+      "war_gap": -0.05,
+      "innings_share_pct": 1.8
     },
     {
       "id": 674073,
       "name": "Jack Weisenburger",
       "throws": "R",
       "role": "Reliever",
-      "games": 5,
+      "games": 6,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "10.1",
-        "ip_value": 10.333,
-        "war": 0.17,
-        "era": 2.61,
-        "fip": 1.84,
-        "k_minus_bb_pct": 19.0
+        "ip": "11.2",
+        "ip_value": 11.667,
+        "war": 0.22,
+        "era": 2.31,
+        "fip": 1.64,
+        "k_minus_bb_pct": 21.7
       },
       "forecast": {
         "ip": 1.0,
@@ -529,8 +529,8 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": 0.17,
-      "innings_share_pct": 0.7
+      "war_gap": 0.22,
+      "innings_share_pct": 0.8
     },
     {
       "id": 672335,
@@ -569,17 +569,17 @@
       "name": "Austin Warren",
       "throws": "R",
       "role": "Reliever",
-      "games": 38,
+      "games": 39,
       "starts": 2,
       "saves": 0,
       "holds": 2,
       "actual": {
-        "ip": "46.1",
-        "ip_value": 46.333,
-        "war": 0.13,
-        "era": 4.27,
-        "fip": 4.11,
-        "k_minus_bb_pct": 15.3
+        "ip": "48.0",
+        "ip_value": 48.0,
+        "war": 0.11,
+        "era": 4.13,
+        "fip": 4.14,
+        "k_minus_bb_pct": 14.5
       },
       "forecast": {
         "ip": 48.0,
@@ -593,8 +593,8 @@
         "ip": 46.2,
         "war": 0.16
       },
-      "war_gap": -0.03,
-      "innings_share_pct": 3.4
+      "war_gap": -0.05,
+      "innings_share_pct": 3.5
     },
     {
       "id": 668964,
@@ -729,17 +729,17 @@
       "name": "Jefry Yan",
       "throws": "L",
       "role": "Reliever",
-      "games": 15,
+      "games": 16,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "17.0",
-        "ip_value": 17.0,
-        "war": 0.03,
-        "era": 4.24,
+        "ip": "18.0",
+        "ip_value": 18.0,
+        "war": 0.04,
+        "era": 4.0,
         "fip": 4.04,
-        "k_minus_bb_pct": 15.6
+        "k_minus_bb_pct": 14.8
       },
       "forecast": {
         "ip": 1.0,
@@ -754,7 +754,7 @@
         "war": -0.0
       },
       "war_gap": 0.04,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 1.3
     },
     {
       "id": 605218,
@@ -1227,17 +1227,17 @@
       "name": "Kodai Senga",
       "throws": "R",
       "role": "Swingman",
-      "games": 29,
+      "games": 30,
       "starts": 8,
       "saves": 7,
       "holds": 0,
       "actual": {
-        "ip": "60.0",
-        "ip_value": 60.0,
-        "war": -0.48,
-        "era": 7.05,
-        "fip": 5.75,
-        "k_minus_bb_pct": 12.8
+        "ip": "60.1",
+        "ip_value": 60.333,
+        "war": -0.58,
+        "era": 7.46,
+        "fip": 5.88,
+        "k_minus_bb_pct": 11.5
       },
       "forecast": {
         "ip": 137.4,
@@ -1251,7 +1251,7 @@
         "ip": 132.3,
         "war": 1.57
       },
-      "war_gap": -2.06,
+      "war_gap": -2.15,
       "innings_share_pct": 4.3
     }
   ]
