@@ -2,6 +2,7 @@ import SwiftUI
 
 struct XPostsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: XPostsStore
 
     init(team: HubTeam = .boston) {
@@ -34,7 +35,16 @@ struct XPostsView: View {
 
     @ViewBuilder
     private func feedContent(_ feed: XFeed) -> some View {
-        if contentWidth >= 720 {
+        if usesExpandedReadingLayout {
+            VStack(spacing: 0) {
+                modePicker
+                if store.selectedMode == .recent {
+                    postsPage(feed.recent, feed: feed, mode: .recent)
+                } else {
+                    postsPage(feed.popular, feed: feed, mode: .liked)
+                }
+            }
+        } else if contentWidth >= 720 {
             HStack(spacing: 0) {
                 postsPage(feed.recent, feed: feed, mode: .recent, pinnedHeader: true)
                 Divider().overlay(AppColor.rule)
@@ -53,6 +63,10 @@ struct XPostsView: View {
         }
     }
 
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
+    }
+
     private var modePicker: some View {
         HStack(spacing: 0) {
             ForEach(XFeedMode.allCases) { mode in
@@ -60,14 +74,9 @@ struct XPostsView: View {
                     store.selectedMode = mode
                 } label: {
                     Text(mode.title)
-                        .font(
-                            .system(
-                                size: store.selectedMode == mode ? 16 : 13,
-                                weight: store.selectedMode == mode ? .black : .semibold
-                            )
-                        )
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.78)
+                        .font(store.selectedMode == mode
+                            ? .headline.weight(.black)
+                            : .subheadline.weight(.semibold))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
                         .foregroundStyle(store.selectedMode == mode ? AppColor.ink : AppColor.inkMuted)
@@ -124,7 +133,6 @@ struct XPostsView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .dynamicTypeSize(contentWidth >= 650 ? .large : .xSmall)
     }
 
     private func feedHeader(_ feed: XFeed, mode: XFeedMode) -> some View {
@@ -148,36 +156,11 @@ struct XPostsView: View {
             authorAvatar(post)
 
             VStack(alignment: .leading, spacing: 5) {
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
-                    Text(post.author)
-                        .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .bold))
-                        .foregroundStyle(AppColor.navy)
-                        .lineLimit(1)
-
-                    Text("@\(post.handle)")
-                        .font(.system(size: contentWidth >= 650 ? 12 : 10))
-                        .foregroundStyle(AppColor.ink.opacity(0.58))
-                        .lineLimit(1)
-
-                    Spacer(minLength: 2)
-
-                    if contentWidth < 650 {
-                        Text(post.publishedText)
-                            .font(.system(size: 9))
-                            .foregroundStyle(AppColor.ink.opacity(0.58))
-                            .lineLimit(1)
-                    }
-                }
-
-                if contentWidth >= 650 {
-                    Text(post.publishedText)
-                        .font(.system(size: 12))
-                        .foregroundStyle(AppColor.ink.opacity(0.58))
-                }
+                postMetadata(post)
 
                 Text(post.text)
-                    .font(.system(size: contentWidth >= 650 ? 15 : 13))
-                    .lineSpacing(1)
+                    .font(.body)
+                    .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if !post.quotedText.isEmpty {
@@ -203,7 +186,7 @@ struct XPostsView: View {
 
                 HStack {
                     Label("\(post.likes.formatted())", systemImage: "heart.fill")
-                        .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .bold))
+                        .font(.subheadline.weight(.bold))
                         .foregroundStyle(AppColor.red)
 
                     Spacer()
@@ -211,7 +194,7 @@ struct XPostsView: View {
                     if let url = URL(string: post.url) {
                         Link(destination: url) {
                             Label("Open on X", systemImage: "arrow.up.right")
-                                .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .bold))
+                                .font(.subheadline.weight(.bold))
                                 .foregroundStyle(AppColor.navy)
                         }
                     }
@@ -229,6 +212,38 @@ struct XPostsView: View {
             }
         }
         .panelElevation()
+    }
+
+    @ViewBuilder
+    private func postMetadata(_ post: XPost) -> some View {
+        if usesExpandedReadingLayout {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(post.author)
+                    .font(.headline.weight(.bold))
+                    .foregroundStyle(AppColor.navy)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("@\(post.handle) · \(post.publishedText)")
+                    .font(.caption)
+                    .foregroundStyle(AppColor.ink.opacity(0.58))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        } else {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(post.author)
+                    .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .bold))
+                    .foregroundStyle(AppColor.navy)
+                    .lineLimit(1)
+                Text("@\(post.handle)")
+                    .font(.system(size: contentWidth >= 650 ? 12 : 10))
+                    .foregroundStyle(AppColor.ink.opacity(0.58))
+                    .lineLimit(1)
+                Spacer(minLength: 2)
+                Text(post.publishedText)
+                    .font(.system(size: contentWidth >= 650 ? 12 : 9))
+                    .foregroundStyle(AppColor.ink.opacity(0.58))
+                    .lineLimit(1)
+            }
+        }
     }
 
     private func authorAvatar(_ post: XPost) -> some View {
@@ -256,8 +271,8 @@ struct XPostsView: View {
             }
 
             Text(post.quotedText)
-                .font(.system(size: contentWidth >= 650 ? 13 : 11))
-                .lineSpacing(1)
+                .font(.subheadline)
+                .lineSpacing(2)
         }
         .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
