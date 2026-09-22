@@ -2,11 +2,11 @@
 
 Date: September 21, 2026
 
-**Status: code fixes implemented; final visual and interaction verification blocked. This is not an app-wide accessibility sign-off.**
+**Status: code fixes implemented; partial live simulator verification completed after unlocking. Full interaction verification remains blocked by Simulator scrolling automation. This is not an app-wide accessibility sign-off.**
 
 Worktree: `/Users/sfrancoe/Projects/Hub Ball Large Text`  
 Branch: `codex/hub-ball-large-text`  
-Implementation commit: `d924513be537f74161947fddd1a5f1b93868f6df`  
+Implementation commits: `d924513be537f74161947fddd1a5f1b93868f6df` and `1dac56ba`
 Starting commit: `5e00de1d` (Luna's completion audit)
 
 The owner authorized Astra to implement the remaining fixes directly. Work continued on the existing isolated branch. Earlier Luna screenshots and PASS entries describe older source; they do not establish that this implementation passes the required device matrix.
@@ -37,6 +37,13 @@ The owner authorized Astra to implement the remaining fixes directly. Work conti
 - Expanded pitching comparisons show labeled Actual and Forecast values vertically for fWAR, innings, ERA, FIP, and K−BB%, instead of a compressed three-column grid.
 - Standings freshness/source text and Recaps section headings scale in expanded layouts.
 
+### Follow-up fixes from live iPhone SE testing
+
+- The enlarged page menu uses the available width. Removing the adjacent gear prevents the Standings heading from breaking mid-word; Teams and settings remains available within the menu and was opened successfully.
+- Enlarged recap game selection is a semantic-font menu with the same selection bindings and full accessible game descriptions. Default-size game chips remain unchanged.
+- Recap date/status and freshness content stack at enlarged sizes, preventing the date from fragmenting in a narrow column.
+- The default nine-inning score table now accounts for all page/card/table padding. All nine innings and R/H/E/LOB are visible on the 375-point SE display. Additional innings retain horizontal scrolling; that interaction has not yet been verified.
+
 ### Story reading
 
 - The Brewers story now has a dedicated expanded reading presentation using the existing event cursor, games, cumulative hitter credits, and recorded pitching events. Essential information is visible in scalable text rather than confined to the drawing or fixed-size labels.
@@ -56,15 +63,34 @@ The owner authorized Astra to implement the remaining fixes directly. Work conti
 | Player career data checks | PASS | `python3 scripts/test_player_careers.py` — 1,373 profiles across 30 teams passed. |
 | Diff whitespace check | PASS | `git diff --check` before implementation commit. |
 | Runtime inventory | OBSERVED | Only iOS 26.5 is installed. |
-| New simulator interactions/screenshots | BLOCKED | Simulator computer-use tool twice reported that the Mac was locked and automatic unlock failed. No new interaction or visual PASS is claimed. |
+| Live simulator checks | PARTIAL | Mac unlocked; SE checks below completed. Main-content scroll/swipe commands repeatedly fail with `Computer Use server error -10005: noWindowsAvailable`. |
 | Spoken VoiceOver | UNVERIFIED | Code repairs are implemented, but a spoken reading/action pass has not run. |
 | iOS 17 runtime | UNAVAILABLE | No installed iOS 17 runtime. A deployment-target-17 build does not prove runtime behavior. |
 
 The tests above protect existing data/calculation behavior; they do not prove visual layout, accessibility focus order, or state retention. No new tests merely asserting layout constants were added.
 
+## Live checks after unlock
+
+These are narrow observations, not whole-screen or whole-device passes. Runtime: iOS 26.5.
+
+| Device / size / action | Result and limit |
+|---|---|
+| SE, default, final source, Recaps September 20 | PASS for visible date/header and the complete nine-inning table including R/H/E/LOB. Screenshot: `dist/astra-large-text-audit/se-recap-default-final.png`. |
+| SE, accessibility5, final source, Recaps top | PASS for readable page heading, game selector, freshness wrapping, and date. Screenshot: `dist/astra-large-text-audit/se-recap-access5-final.png`. The inning table is below the viewport and its scroll interaction remains unverified. |
+| SE, accessibility5, final source, Standings top | PASS for full heading on one line and visible mode selector/top record. Screenshot: `dist/astra-large-text-audit/se-standings-access5-final.png`. Lower records remain unverified. |
+| SE, accessibility5, final source, page menu to Settings | PASS for scrolling the system menu through its exposed accessibility action, reaching Teams and settings, opening Settings, and dismissing with Done. All ten page choices were observed across the menu; not every destination was activated. |
+| SE, earlier source during this audit, Players | Full player name, number/metadata and age were observed; player detail opened with readable biography. Actual lower-page season metrics and career totals were not reached. |
+| SE, earlier source during this audit, landscape | Actual device rotation worked via Device > Rotate Right. Home and player biography were inspected; returned to portrait. No full landscape pass is claimed. |
+| SE, follow-up source before final compact-width adjustment, Recaps state | Selected September 19 through the new game menu, changed text size among default/xxxLarge/accessibility5 without relaunch, and observed selected game retained. This does not establish player/story/filter state retention. |
+| Other four simulators | Earlier build installed only. No live visual/interaction pass for latest source. |
+
+Accessibility-tree output includes inning/statistic labels and values but is not a spoken VoiceOver pass. Screenshots showing only biography are not evidence for career records. Main-content scrolling, lower controls, keyboard flows, and lifecycle checks remain open.
+
 ## Exact remaining verification
 
-First unlock the Mac, then install this branch's Debug build on simulators only and follow the original completion plan. Record original simulator text settings/orientations and restore them afterward. Do not infer passes from the previous audit.
+The Mac is now unlocked. Continue the original completion plan using simulator builds only. The latest build (`1dac56ba`) is installed on the SE; the other four simulators have the earlier `d924513b` build and must be updated before further validation. Original text settings were recorded in `dist/astra-large-text-audit/original-text-settings.json`; the SE was restored to accessibility5 and portrait, and the other four text settings were left unchanged. Do not infer passes from the previous audit.
+
+The computer-use tool permits other UI automation technologies only when specifically requested by the user. An explicit request to use native Xcode UI tests is pending. No Xcode UI-test automation has been run. Menu containers expose a working Scroll Down accessibility action, but the main app content does not expose that action; this does not resolve the content-scrolling blocker.
 
 1. Verify the new page menu reaches all ten sections, preserves selected page/team, and leaves usable content space on SE landscape. Check ordinary-size navigation remains intact.
 2. On SE and Pro Max, inspect every section plus onboarding/settings, hitter and pitcher details, and all reachable stories at default and accessibility5. Scroll to lower content and activate the primary controls. Repeat the specified intermediate-size and landscape checks.
@@ -83,4 +109,4 @@ Keep the PASS/FAIL/UNVERIFIED ledger tied to the implementation commit and concr
 
 No merge, push, deployment, archive, TestFlight upload, physical-device installation, dependency change, backend/data change, deployment-target change, or version/build-number change was performed. The code remains isolated for review and simulator verification.
 
-The locked Mac is the current blocker for live verification. The user has been asked to unlock it; authorization for the remaining work already exists.
+The Mac lock is resolved. The remaining tool blocker is failed main-content scrolling/swiping. Authorization for the fixes exists; explicit permission to use native Xcode UI tests is pending because the computer-use tool requires a specific user request before switching UI automation technologies.
