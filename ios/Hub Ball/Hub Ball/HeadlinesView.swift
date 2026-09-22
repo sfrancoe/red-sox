@@ -180,35 +180,54 @@ struct HeadlinesView: View {
     }
 
     private func sourcePicker(selection: Binding<NewsSource>) -> some View {
-        HStack(spacing: 0) {
-            ForEach(team.newsSources) { source in
-                Button {
-                    selection.wrappedValue = source
-                } label: {
-                    newspaperName(
-                        source.shortName,
-                        source: source,
-                        font: selection.wrappedValue == source
-                            ? .headline.weight(.black)
-                            : .subheadline.weight(.semibold),
-                        color: selection.wrappedValue == source ? AppColor.ink : AppColor.inkMuted
-                    )
-                        .lineLimit(usesExpandedReadingLayout ? nil : 1)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 9)
-                        .overlay(alignment: .bottom) {
-                            if selection.wrappedValue == source {
-                                Rectangle().fill(AppColor.accent).frame(height: 2)
-                            }
+        Group {
+            if usesExpandedReadingLayout {
+                ScrollView(.horizontal, showsIndicators: true) {
+                    HStack(spacing: 8) {
+                        ForEach(team.newsSources) { source in
+                            sourceButton(source, selection: selection)
                         }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
                 }
-                .buttonStyle(.plain)
-                .accessibilityAddTraits(selection.wrappedValue == source ? .isSelected : [])
+            } else {
+                HStack(spacing: 0) {
+                    ForEach(team.newsSources) { source in
+                        sourceButton(source, selection: selection)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
+    }
+
+    private func sourceButton(_ source: NewsSource, selection: Binding<NewsSource>) -> some View {
+        Button {
+            selection.wrappedValue = source
+        } label: {
+            newspaperName(
+                source.shortName,
+                source: source,
+                font: selection.wrappedValue == source
+                    ? .headline.weight(.black)
+                    : .subheadline.weight(.semibold),
+                color: selection.wrappedValue == source ? AppColor.ink : AppColor.inkMuted
+            )
+                .lineLimit(usesExpandedReadingLayout ? nil : 1)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity)
+                .frame(minWidth: usesExpandedReadingLayout ? 150 : 0, minHeight: usesExpandedReadingLayout ? 52 : 0)
+                .padding(.vertical, usesExpandedReadingLayout ? 6 : 9)
+                .overlay(alignment: .bottom) {
+                    if selection.wrappedValue == source {
+                        Rectangle().fill(AppColor.accent).frame(height: 2)
+                    }
+                }
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(selection.wrappedValue == source ? .isSelected : [])
     }
 
     private func feedHeader(_ feed: NewsFeed, source: NewsSource) -> some View {

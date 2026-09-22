@@ -68,29 +68,50 @@ struct XPostsView: View {
     }
 
     private var modePicker: some View {
-        HStack(spacing: 0) {
-            ForEach(XFeedMode.allCases) { mode in
-                Button {
-                    store.selectedMode = mode
-                } label: {
-                    Text(mode.title)
-                        .font(store.selectedMode == mode
-                            ? .headline.weight(.black)
-                            : .subheadline.weight(.semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 9)
-                        .foregroundStyle(store.selectedMode == mode ? AppColor.ink : AppColor.inkMuted)
-                        .overlay(alignment: .bottom) {
-                            if store.selectedMode == mode {
-                                Rectangle().fill(AppColor.accent).frame(height: 2)
-                            }
+        Group {
+            if usesExpandedReadingLayout {
+                ScrollView(.horizontal, showsIndicators: true) {
+                    HStack(spacing: 8) {
+                        ForEach(XFeedMode.allCases) { mode in
+                            modeButton(mode)
                         }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
                 }
-                .buttonStyle(.plain)
+            } else {
+                HStack(spacing: 0) {
+                    ForEach(XFeedMode.allCases) { mode in
+                        modeButton(mode)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
+    }
+
+    private func modeButton(_ mode: XFeedMode) -> some View {
+        Button {
+            store.selectedMode = mode
+        } label: {
+            Text(mode.title)
+                .font(store.selectedMode == mode
+                    ? .headline.weight(.black)
+                    : .subheadline.weight(.semibold))
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .frame(minWidth: usesExpandedReadingLayout ? 180 : 0, minHeight: usesExpandedReadingLayout ? 52 : 0)
+                .padding(.vertical, usesExpandedReadingLayout ? 6 : 9)
+                .foregroundStyle(store.selectedMode == mode ? AppColor.ink : AppColor.inkMuted)
+                .overlay(alignment: .bottom) {
+                    if store.selectedMode == mode {
+                        Rectangle().fill(AppColor.accent).frame(height: 2)
+                    }
+                }
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(store.selectedMode == mode ? .isSelected : [])
     }
 
     private func postsPage(
