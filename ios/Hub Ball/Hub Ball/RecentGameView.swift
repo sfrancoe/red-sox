@@ -72,7 +72,43 @@ struct RecentGameView: View {
         return store.games.first
     }
 
+    @ViewBuilder
     private var gameSelector: some View {
+        if usesExpandedReadingLayout {
+            TimelineView(.periodic(from: .now, by: 30)) { context in
+                Menu {
+                    ForEach(store.games, id: \.gamePk) { game in
+                        Button {
+                            selectedGameID = game.gamePk
+                            selectedStatsTeam = .favorite
+                        } label: {
+                            if selectedGame?.gamePk == game.gamePk {
+                                Label(gameTabAccessibilityLabel(game, at: context.date), systemImage: "checkmark")
+                            } else {
+                                Text(gameTabAccessibilityLabel(game, at: context.date))
+                            }
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Text(selectedGame.map { gameTabTitle($0, at: context.date) } ?? "Choose a game")
+                            .font(.body.weight(.semibold))
+                            .fixedSize(horizontal: false, vertical: true)
+                        Image(systemName: "chevron.down").font(.caption)
+                    }
+                    .frame(minHeight: 44)
+                }
+                .accessibilityLabel("Game")
+                .accessibilityValue(selectedGame.map { gameTabAccessibilityLabel($0, at: context.date) } ?? "No game selected")
+                .padding(.horizontal, 16)
+                .padding(.vertical, 4)
+            }
+        } else {
+            compactGameSelector
+        }
+    }
+
+    private var compactGameSelector: some View {
         TimelineView(.periodic(from: .now, by: 30)) { context in
             HStack(spacing: 0) {
                 ForEach(store.games, id: \.gamePk) { game in
@@ -261,7 +297,8 @@ struct RecentGameView: View {
         TimelineView(.periodic(from: .now, by: 30)) { context in
             let state = store.presentationState(for: game, at: context.date)
             VStack(spacing: 9) {
-                HStack {
+                let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout())
+                layout {
                     Text(game.formattedDate)
                         .font(.title3.weight(.black))
 
@@ -323,9 +360,12 @@ struct RecentGameView: View {
             let message = store.freshnessMessage(for: game, at: context.date)
             let warning = store.hasRefreshWarning(for: game)
             if let message {
-                HStack(alignment: .center, spacing: 8) {
-                    Image(systemName: warning ? "exclamationmark.triangle" : "clock")
-                        .font(.caption.weight(.bold))
+                let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .center, spacing: 8))
+                layout {
+                    if !usesExpandedReadingLayout {
+                        Image(systemName: warning ? "exclamationmark.triangle" : "clock")
+                            .font(.caption.weight(.bold))
+                    }
                     Text(message)
                         .font(.caption.weight(.semibold))
                         .lineLimit(usesExpandedReadingLayout ? nil : 2)
@@ -394,8 +434,11 @@ struct RecentGameView: View {
     }
 
     private func compactCombinedLineScore(_ game: RecentGame) -> some View {
-        let minimumTableWidth = max(contentWidth - 40, CGFloat(game.innings.count * 36 + 220))
-        return ScrollView(.horizontal, showsIndicators: usesExpandedReadingLayout) {
+        let teamWidth: CGFloat = contentWidth >= 650 ? 90 : 50
+        // Account for the page (32), card (24), and table (16) horizontal padding.
+        // Nine innings fit on SE; additional innings can scroll at readable cell widths.
+        let tableWidth = max(contentWidth - 72, teamWidth + CGFloat(game.innings.count + 4) * 18)
+        return ScrollView(.horizontal, showsIndicators: true) {
             VStack(spacing: 7) {
                 HStack(spacing: 0) {
                     Text("")
@@ -415,7 +458,7 @@ struct RecentGameView: View {
                 combinedLineScoreRow(game.away, innings: game.innings, isAway: true, isWinner: game.away.runs > game.home.runs)
                 combinedLineScoreRow(game.home, innings: game.innings, isAway: false, isWinner: game.home.runs > game.away.runs)
             }
-            .frame(minWidth: minimumTableWidth)
+            .frame(width: tableWidth)
         }
         .monospacedDigit()
         .frame(maxWidth: .infinity)

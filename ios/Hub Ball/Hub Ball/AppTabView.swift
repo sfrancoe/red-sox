@@ -242,20 +242,13 @@ struct AppTabView: View {
                     Text(selectedTab.title)
                         .font(.body.weight(.semibold))
                         .fixedSize(horizontal: false, vertical: true)
-                    Image(systemName: "chevron.down").font(.caption)
+                    Image(systemName: "chevron.down").font(.system(size: 14, weight: .semibold))
                 }
-                .frame(minHeight: 44, alignment: .leading)
+                .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
             }
             .accessibilityLabel("Page")
             .accessibilityValue("\(selectedTab.title), \(team.shortName)")
-            Spacer(minLength: 0)
-            Button { settingsPresented = true } label: {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 18, weight: .semibold))
-                    .frame(width: 44, height: 44)
-            }
-            .accessibilityLabel("Teams and settings")
-            .accessibilityValue(team.pickerTitle)
+
         }
         .buttonStyle(.plain)
         .padding(.horizontal, 12)
