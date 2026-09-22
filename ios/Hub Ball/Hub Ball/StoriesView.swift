@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct StoriesView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let team: HubTeam
 
     var body: some View {
@@ -78,8 +79,12 @@ struct StoriesView: View {
         systemImage: String,
         @ViewBuilder destination: () -> Destination
     ) -> some View {
-        NavigationLink(destination: destination) {
-            HStack(spacing: 16) {
+        let expanded = dynamicTypeSize.usesExpandedReadingLayout
+        let layout = expanded
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12))
+            : AnyLayout(HStackLayout(spacing: 16))
+        return NavigationLink(destination: destination) {
+            layout {
                 Image(systemName: systemImage)
                     .font(.system(size: 30, weight: .bold))
                     .foregroundStyle(AppColor.ink)
@@ -90,16 +95,21 @@ struct StoriesView: View {
                     Text(title)
                         .font(.headline.weight(.black))
                         .foregroundStyle(AppColor.navy)
+                        .fixedSize(horizontal: false, vertical: true)
                     Text(summary)
                         .font(.subheadline)
                         .foregroundStyle(AppColor.ink.opacity(0.76))
                         .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-                Spacer(minLength: 0)
-                Image(systemName: "chevron.right")
-                    .font(.headline.weight(.bold))
-                    .foregroundStyle(AppColor.hunterGreen)
+                if !expanded {
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.right")
+                        .font(.headline.weight(.bold))
+                        .foregroundStyle(AppColor.hunterGreen)
+                }
             }
             .cardStyle()
         }

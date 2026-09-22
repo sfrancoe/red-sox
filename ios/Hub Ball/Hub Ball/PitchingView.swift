@@ -44,7 +44,9 @@ struct PitchingView: View {
 
     private func pitchingContent(_ feed: PitchingFeed, chartHeight: CGFloat) -> some View {
         ScrollView {
-            LazyVStack(spacing: 14) {
+            // Keep the small page shell eager; only the pitcher records need lazy
+            // layout. Nesting lazy groups can make enlarged records jump on scroll.
+            VStack(spacing: 14) {
                 rolePicker
 
                 impactCard(chartHeight: chartHeight)

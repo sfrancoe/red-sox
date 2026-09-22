@@ -176,14 +176,20 @@ struct StandingsView: View {
         emphasized: Bool,
         valueColor: Color? = nil
     ) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 3))
+            : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 8))
+        return layout {
             Text(label).font(.subheadline.weight(.semibold)).foregroundStyle(AppColor.boneMuted)
-            Spacer(minLength: 8)
+                .fixedSize(horizontal: false, vertical: true)
+            if !dynamicTypeSize.isAccessibilitySize { Spacer(minLength: 8) }
             Text(value)
                 .font(.body.weight(emphasized ? .bold : .regular).monospacedDigit())
                 .foregroundStyle(valueColor ?? (emphasized ? AppColor.amber : AppColor.bone))
-                .multilineTextAlignment(.trailing)
+                .fixedSize(horizontal: false, vertical: true)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
     }
 
     private var phoneStandingsContent: some View {

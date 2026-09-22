@@ -436,33 +436,62 @@ struct BrewersShutoutView: View {
                     .tint(ShutoutStyle.gold).accessibilityLabel("Game progress, play by play")
                     .accessibilityValue(current?.moment ?? "Before first pitch")
             }
-            HStack(spacing: 10) {
+            if usesExpandedReadingLayout {
+                playbackButton
                 if !combined {
-                    Button { stop(); cursor = max(-1, cursor - 1) } label: { Image(systemName: "backward.end.fill").frame(width: 44, height: 44) }
-                        .disabled(cursor < 0).accessibilityLabel("Previous play")
-                }
-                Button {
-                    if playing { stop() }
-                    else if reduceMotion { chapter = 2; cursor = -1 }
-                    else {
-                        replayPlayer = nil
-                        if combined { chapter = 0; cursor = -1 }
-                        if cursor == game.events.count - 1 { cursor = -1 }
-                        playing = true; playbackID = UUID()
+                    HStack {
+                        previousPlayButton
+                        Spacer()
+                        nextPlayButton
                     }
-                } label: {
-                    Label(playing ? "Pause" : combined ? "Replay both nights" : cursor < 0 ? "Light the fuse" : "Continue story", systemImage: playing ? "pause.fill" : "play.fill")
-                        .font(usesExpandedReadingLayout ? .body.bold() : .system(size: 14, weight: .bold))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                        .foregroundStyle(ShutoutStyle.navy).background(ShutoutStyle.gold, in: RoundedRectangle(cornerRadius: 8))
-                }.buttonStyle(.plain)
-                if !combined {
-                    Button { stop(); cursor = min(game.events.count - 1, cursor + 1) } label: { Image(systemName: "forward.end.fill").frame(width: 44, height: 44) }
-                        .disabled(cursor == game.events.count - 1).accessibilityLabel("Next play")
                 }
-            }.tint(ShutoutStyle.cream)
+            } else {
+                HStack(spacing: 10) {
+                    if !combined { previousPlayButton }
+                    playbackButton
+                    if !combined { nextPlayButton }
+                }
+            }
+
         }.padding(.horizontal, 16).padding(.vertical, 8).background(ShutoutStyle.navy)
+    }
+
+    private var previousPlayButton: some View {
+        Button { stop(); cursor = max(-1, cursor - 1) } label: {
+            Image(systemName: "backward.end.fill")
+                .font(usesExpandedReadingLayout ? .system(size: 20) : nil).frame(width: 44, height: 44)
+        }
+        .disabled(cursor < 0).accessibilityLabel("Previous play")
+        .tint(ShutoutStyle.cream)
+    }
+
+    private var nextPlayButton: some View {
+        Button { stop(); cursor = min(game.events.count - 1, cursor + 1) } label: {
+            Image(systemName: "forward.end.fill")
+                .font(usesExpandedReadingLayout ? .system(size: 20) : nil).frame(width: 44, height: 44)
+        }
+        .disabled(cursor == game.events.count - 1).accessibilityLabel("Next play")
+        .tint(ShutoutStyle.cream)
+    }
+
+    private var playbackButton: some View {
+        Button {
+            if playing { stop() }
+            else if reduceMotion { chapter = 2; cursor = -1 }
+            else {
+                replayPlayer = nil
+                if combined { chapter = 0; cursor = -1 }
+                if cursor == game.events.count - 1 { cursor = -1 }
+                playing = true; playbackID = UUID()
+            }
+        } label: {
+            Label(playing ? "Pause" : combined ? "Replay both nights" : cursor < 0 ? "Light the fuse" : "Continue story", systemImage: playing ? "pause.fill" : "play.fill")
+                .font(usesExpandedReadingLayout ? .body.bold() : .system(size: 14, weight: .bold))
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, minHeight: 44)
+                .foregroundStyle(ShutoutStyle.navy).background(ShutoutStyle.gold, in: RoundedRectangle(cornerRadius: 8))
+        }
+        .buttonStyle(.plain)
     }
 
     private var bottomControls: some View {

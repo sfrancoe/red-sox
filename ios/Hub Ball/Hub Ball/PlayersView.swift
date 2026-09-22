@@ -60,20 +60,18 @@ struct PlayersView: View {
                 } else {
                     if usesExpandedReadingLayout {
                         expandedSortBar
-                        ForEach(store.visiblePlayers) { player in
-                            NavigationLink(value: player.id) {
-                                expandedDirectoryRow(player)
-                            }
-                            .buttonStyle(.plain)
-                        }
                     } else {
                         spreadsheetHeader
-                        ForEach(store.visiblePlayers) { player in
-                            NavigationLink(value: player.id) {
+                    }
+                    ForEach(store.visiblePlayers) { player in
+                        NavigationLink(value: player.id) {
+                            if usesExpandedReadingLayout {
+                                expandedDirectoryRow(player)
+                            } else {
                                 spreadsheetRow(player)
                             }
-                            .buttonStyle(.plain)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
                 sourceFooter(feed.source)
@@ -90,37 +88,38 @@ struct PlayersView: View {
     }
 
     private var expandedSortBar: some View {
-        ScrollView(.horizontal, showsIndicators: true) {
-            HStack(spacing: 8) {
-                expandedSortButton(.number, title: "Number")
-                expandedSortButton(.name, title: "Player")
-                expandedSortButton(.position, title: "Position")
-                expandedSortButton(.batsThrows, title: "Bats / throws")
-                expandedSortButton(.age, title: "Age")
+        VStack(alignment: .leading, spacing: 4) {
+            Picker("Player order", selection: Binding(
+                get: { store.sort },
+                set: { store.toggleSort($0) }
+            )) {
+                ForEach(PlayerDirectorySort.allCases) { column in
+                    Text(directorySortTitle(column)).tag(column)
+                }
             }
-            .padding(.horizontal, directoryHorizontalPadding)
-            .padding(.vertical, 8)
+            .accessibilityValue("\(directorySortTitle(store.sort)), \(store.sortsAscending ? "ascending" : "descending")")
+
+            Picker("Sort direction", selection: $store.sortsAscending) {
+                Text("Ascending").tag(true)
+                Text("Descending").tag(false)
+            }
         }
+        .pickerStyle(.menu)
+        .font(.body)
+        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+        .padding(.horizontal, directoryHorizontalPadding)
+        .padding(.vertical, 8)
         .background(AppColor.nightRaised)
     }
 
-    private func expandedSortButton(_ column: PlayerDirectorySort, title: String) -> some View {
-        Button { store.toggleSort(column) } label: {
-            HStack(spacing: 4) {
-                Text(title)
-                if store.sort == column {
-                    Image(systemName: store.sortsAscending ? "arrow.up" : "arrow.down")
-                }
-            }
-            .font(.subheadline.weight(.semibold))
-            .foregroundStyle(store.sort == column ? AppColor.bone : AppColor.boneDim)
-            .padding(.horizontal, 12)
-            .frame(minHeight: 44)
-            .background(store.sort == column ? AppColor.night : AppColor.nightCell)
-            .overlay { Rectangle().stroke(store.sort == column ? AppColor.amber : AppColor.rule, lineWidth: 1) }
+    private func directorySortTitle(_ column: PlayerDirectorySort) -> String {
+        switch column {
+        case .number: "Number"
+        case .name: "Player"
+        case .position: "Position"
+        case .batsThrows: "Bats / throws"
+        case .age: "Age"
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Sort by \(title)")
     }
 
     private func expandedDirectoryRow(_ player: RedSoxPlayer) -> some View {
@@ -193,7 +192,18 @@ struct PlayersView: View {
 
     @ViewBuilder
     private var filterBar: some View {
-        if contentWidth >= 650 && !usesExpandedReadingLayout {
+        if usesExpandedReadingLayout {
+            Picker("Player position", selection: $store.filter) {
+                ForEach(PlayerPositionFilter.allCases) { filter in
+                    Text(filter.title).tag(filter)
+                }
+            }
+            .pickerStyle(.menu)
+            .font(.body)
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            .padding(.horizontal, directoryHorizontalPadding)
+            .padding(.bottom, 12)
+        } else if contentWidth >= 650 {
             HStack(spacing: 8) {
                 ForEach(PlayerPositionFilter.allCases) { filter in
                     positionFilterButton(filter, expands: true)
@@ -455,7 +465,7 @@ private struct PlayerReferenceView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
+            VStack(spacing: 12) {
                 if usesExpandedReadingLayout { expandedPlayerTitle }
                 biographyPanel
                 careerPanel
@@ -904,6 +914,7 @@ private struct PlayerReferenceView: View {
             }
             expandedCareerTotalsHeader("Career totals", detail: "Aggregated across \(summaryRows.count) season record\(summaryRows.count == 1 ? "" : "s")")
             expandedMetrics(battingTotals(summaryRows))
+                .accessibilityIdentifier("career.batting.totals")
         }
         .padding(12)
     }
@@ -924,6 +935,7 @@ private struct PlayerReferenceView: View {
             }
             expandedCareerTotalsHeader("Career totals", detail: "Aggregated across \(summaryRows.count) season record\(summaryRows.count == 1 ? "" : "s")")
             expandedMetrics(pitchingTotals(summaryRows))
+                .accessibilityIdentifier("career.pitching.totals")
         }
         .padding(12)
     }
@@ -931,7 +943,9 @@ private struct PlayerReferenceView: View {
     private func expandedMetrics(_ metrics: [CareerMetric]) -> some View {
         // One full-width record prevents four-digit totals and rates from splitting
         // across lines on narrow phones at the largest accessibility categories.
-        LazyVStack(alignment: .leading, spacing: 8) {
+        // Each record has only 13–15 metrics. Resolve their heights together so
+        // nested lazy estimates cannot move the career totals during scrolling.
+        VStack(alignment: .leading, spacing: 8) {
             ForEach(metrics) { metric in
                 expandedCareerMetric(metric.label, metric.value)
             }

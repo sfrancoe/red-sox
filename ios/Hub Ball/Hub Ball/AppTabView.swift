@@ -87,6 +87,9 @@ struct AppTabView: View {
                     .id(team.id)
                     .environment(\.hubContentWidth, window.size.width)
             }
+            // iPad window controls float over the upper-left corner in narrow
+            // windows. Keep the custom page heading below their touch area.
+            .padding(.top, compactPadWindowInset(width: window.size.width))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(AppColor.cream)
@@ -159,6 +162,13 @@ struct AppTabView: View {
                 if !isPresented { completedTeamOnboarding = true }
             }
         )
+    }
+
+    private func compactPadWindowInset(width: CGFloat) -> CGFloat {
+        if #available(iOS 26.0, *), UIDevice.current.userInterfaceIdiom == .pad, width < 650 {
+            return 32
+        }
+        return 0
     }
 
     @ViewBuilder
@@ -245,6 +255,7 @@ struct AppTabView: View {
                     Image(systemName: "chevron.down").font(.system(size: 14, weight: .semibold))
                 }
                 .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                .contentShape(Rectangle())
             }
             .accessibilityLabel("Page")
             .accessibilityValue("\(selectedTab.title), \(team.shortName)")
