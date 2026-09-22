@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "player_id": 676879,
-  "generated_at": "2026-09-18T13:55:21.157420+00:00",
-  "data_as_of": "2026-09-18",
+  "generated_at": "2026-09-21T16:11:01.745162+00:00",
+  "data_as_of": "2026-09-21",
   "status": "available",
   "coverage": [
     {
@@ -73,6 +73,29 @@
       "on_base_percentage": 0.111,
       "slugging_percentage": 0.0,
       "ops": 0.111
+    },
+    {
+      "id": "676879-hitting-mlb-2026-1-158",
+      "season": 2026,
+      "team": "Milwaukee Brewers",
+      "league": "National League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 73,
+      "at_bats": 0,
+      "runs": 0,
+      "hits": 0,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "runs_batted_in": 0,
+      "stolen_bases": 0,
+      "walks": 0,
+      "strikeouts": 0,
+      "average": null,
+      "on_base_percentage": null,
+      "slugging_percentage": null,
+      "ops": null
     }
   ],
   "pitching": [
@@ -482,19 +505,19 @@
       "league": "National League",
       "level": "MLB",
       "row_type": "team_stint",
-      "games": 72,
+      "games": 73,
       "games_started": 1,
       "wins": 13,
       "losses": 3,
-      "saves": 2,
-      "innings_outs": 253,
+      "saves": 3,
+      "innings_outs": 256,
       "hits": 76,
       "earned_runs": 31,
       "home_runs": 8,
       "walks": 41,
-      "strikeouts": 111,
-      "era": 3.31,
-      "whip": 1.39
+      "strikeouts": 112,
+      "era": 3.27,
+      "whip": 1.37
     }
   ]
 }

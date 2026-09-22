@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "player_id": 682842,
-  "generated_at": "2026-09-18T13:55:26.914811+00:00",
-  "data_as_of": "2026-09-18",
+  "generated_at": "2026-09-21T16:11:04.181533+00:00",
+  "data_as_of": "2026-09-21",
   "status": "available",
   "coverage": [
     {
@@ -27,7 +27,31 @@
     "url": "https://statsapi.mlb.com/api/v1/people/682842/stats",
     "attribution": "Season and minor-league statistics supplied by the MLB Stats API; regular season only."
   },
-  "batting": [],
+  "batting": [
+    {
+      "id": "682842-hitting-mlb-2026-1-158",
+      "season": 2026,
+      "team": "Milwaukee Brewers",
+      "league": "National League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 59,
+      "at_bats": 0,
+      "runs": 0,
+      "hits": 0,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "runs_batted_in": 0,
+      "stolen_bases": 0,
+      "walks": 0,
+      "strikeouts": 0,
+      "average": null,
+      "on_base_percentage": null,
+      "slugging_percentage": null,
+      "ops": null
+    }
+  ],
   "pitching": [
     {
       "id": "682842-pitching-minors-2018-16-607",
@@ -309,18 +333,18 @@
       "league": "National League",
       "level": "MLB",
       "row_type": "team_stint",
-      "games": 57,
+      "games": 59,
       "games_started": 0,
       "wins": 5,
       "losses": 3,
       "saves": 6,
-      "innings_outs": 166,
-      "hits": 38,
+      "innings_outs": 172,
+      "hits": 40,
       "earned_runs": 13,
       "home_runs": 3,
       "walks": 19,
-      "strikeouts": 56,
-      "era": 2.11,
+      "strikeouts": 60,
+      "era": 2.04,
       "whip": 1.03
     },
     {

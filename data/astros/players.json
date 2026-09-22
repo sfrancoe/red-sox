@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-18T13:48:31.378339+00:00",
-  "roster_as_of": "September 17, 2026",
+  "generated_at": "2026-09-21T16:04:07.760887+00:00",
+  "roster_as_of": "September 19, 2026",
   "team": {
     "id": 117,
     "name": "Houston Astros"
   },
   "roster_type": "open-current-roster",
-  "player_count": 44,
+  "player_count": 43,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -361,66 +361,6 @@
           "on_base_percentage": 0.389,
           "slugging_percentage": 0.573,
           "ops": 0.962
-        },
-        "pitching": null
-      }
-    },
-    {
-      "id": 678489,
-      "mlb_id": 678489,
-      "wikidata_id": "Q125274191",
-      "slug": "jorge-barrosa",
-      "name": "Jorge Barrosa",
-      "full_name": "Jorge Barrosa",
-      "number": "14",
-      "position": {
-        "name": "Outfielder",
-        "group": "Outfielder",
-        "abbreviation": "CF"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "2001-02-17",
-      "age": 25,
-      "birthplace": "Puerto Cabello, Venezuela",
-      "height": null,
-      "weight": null,
-      "bats": "Switch",
-      "throws": "Left",
-      "debut_date": "April 1, 2024",
-      "debut_team": "Arizona Diamondbacks",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Arizona Diamondbacks",
-        "Houston Astros"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q125274191",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Jorge_Barrosa",
-      "retrosheet_id": "barrj004",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 41,
-          "plate_appearances": 95,
-          "at_bats": 88,
-          "runs": 11,
-          "hits": 13,
-          "doubles": 5,
-          "triples": 0,
-          "home_runs": 1,
-          "runs_batted_in": 8,
-          "walks": 2,
-          "strikeouts": 24,
-          "stolen_bases": 1,
-          "caught_stealing": 0,
-          "average": 0.148,
-          "on_base_percentage": 0.17,
-          "slugging_percentage": 0.239,
-          "ops": 0.409
         },
         "pitching": null
       }
@@ -977,7 +917,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1998-09-21",
-      "age": 27,
+      "age": 28,
       "birthplace": "Azua, Dominican Republic",
       "height": null,
       "weight": null,
@@ -1522,11 +1462,11 @@
       "number": "0",
       "position": {
         "name": "Outfielder",
-        "group": "Pitcher",
+        "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "60-day injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2002-03-16",
       "age": 24,
       "birthplace": "Houston",
@@ -1991,8 +1931,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1995-12-25",
       "age": 30,
       "birthplace": "San Pedro de Macorís",
@@ -2448,8 +2388,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1999-02-14",
       "age": 27,
       "birthplace": "Joplin, Missouri, U.S.",

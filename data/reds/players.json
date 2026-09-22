@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-18T13:54:41.280399+00:00",
-  "roster_as_of": "September 7, 2026",
+  "generated_at": "2026-09-21T16:10:13.825556+00:00",
+  "roster_as_of": "September 20, 2026",
   "team": {
     "id": 113,
     "name": "Cincinnati Reds"
   },
   "roster_type": "open-current-roster",
-  "player_count": 43,
+  "player_count": 44,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -99,8 +99,8 @@
       }
     },
     {
-      "id": 1904918286,
-      "mlb_id": null,
+      "id": 687924,
+      "mlb_id": 687924,
       "wikidata_id": "Q129485930",
       "slug": "julian-aguiar",
       "name": "Julian Aguiar",
@@ -131,12 +131,49 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q129485930",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Julian_Aguiar",
-      "retrosheet_id": null,
+      "retrosheet_id": "aguij002",
       "career_stats": {
         "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
+        "status": "available",
+        "batting": {
+          "games": 7,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 7,
+          "games_started": 7,
+          "wins": 2,
+          "losses": 1,
+          "saves": 0,
+          "innings_outs": 95,
+          "hits": 30,
+          "runs": 22,
+          "earned_runs": 22,
+          "home_runs": 8,
+          "walks": 12,
+          "strikeouts": 19,
+          "hit_batters": 5,
+          "wild_pitches": 1,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.25,
+          "whip": 1.326
+        }
       }
     },
     {
@@ -666,8 +703,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "2003-01-16",
       "age": 23,
       "birthplace": "Naval Support Activity Naples",
@@ -741,6 +778,85 @@
           "complete_games": 0,
           "era": 4.57,
           "whip": 1.315
+        }
+      }
+    },
+    {
+      "id": 665828,
+      "mlb_id": 665828,
+      "wikidata_id": "Q111112053",
+      "slug": "oswaldo-cabrera",
+      "name": "Oswaldo Cabrera",
+      "full_name": "Oswaldo Cabrera",
+      "number": "16",
+      "position": {
+        "name": "Third Base",
+        "group": "Infielder",
+        "abbreviation": "3B"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1999-03-01",
+      "age": 27,
+      "birthplace": "Guarenas",
+      "height": null,
+      "weight": null,
+      "bats": "Switch",
+      "throws": "Right",
+      "debut_date": "August 17, 2022",
+      "debut_team": "New York Yankees",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "New York Yankees",
+        "Cincinnati Reds"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q111112053",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Oswaldo_Cabrera",
+      "retrosheet_id": "cabro002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 302,
+          "plate_appearances": 949,
+          "at_bats": 858,
+          "runs": 120,
+          "hits": 201,
+          "doubles": 34,
+          "triples": 1,
+          "home_runs": 20,
+          "runs_batted_in": 95,
+          "walks": 72,
+          "strikeouts": 204,
+          "stolen_bases": 15,
+          "caught_stealing": 5,
+          "average": 0.234,
+          "on_base_percentage": 0.295,
+          "slugging_percentage": 0.346,
+          "ops": 0.641
+        },
+        "pitching": {
+          "games": 1,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 1,
+          "hits": 0,
+          "runs": 0,
+          "earned_runs": 0,
+          "home_runs": 0,
+          "walks": 2,
+          "strikeouts": 0,
+          "hit_batters": 0,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 0.0,
+          "whip": 6.0
         }
       }
     },
@@ -904,72 +1020,6 @@
       }
     },
     {
-      "id": 670770,
-      "mlb_id": 670770,
-      "wikidata_id": "Q26405818",
-      "slug": "tj-friedl",
-      "name": "TJ Friedl",
-      "full_name": "T. J. Friedl",
-      "number": "29",
-      "position": {
-        "name": "Outfielder",
-        "group": "Outfielder",
-        "abbreviation": "CF"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "1995-08-14",
-      "age": 31,
-      "birthplace": "Pleasanton",
-      "height": null,
-      "weight": null,
-      "bats": "Left",
-      "throws": "Left",
-      "debut_date": "September 18, 2021",
-      "debut_team": "Cincinnati Reds",
-      "education": {
-        "high_schools": [],
-        "colleges": [
-          {
-            "name": "University of Nevada, Reno"
-          },
-          {
-            "name": "Foothill High School"
-          }
-        ]
-      },
-      "teams": [
-        "Cincinnati Reds"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q26405818",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/TJ_Friedl",
-      "retrosheet_id": "friet001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 461,
-          "plate_appearances": 1876,
-          "at_bats": 1620,
-          "runs": 232,
-          "hits": 417,
-          "doubles": 60,
-          "triples": 16,
-          "home_runs": 54,
-          "runs_batted_in": 201,
-          "walks": 178,
-          "strikeouts": 299,
-          "stolen_bases": 55,
-          "caught_stealing": 12,
-          "average": 0.257,
-          "on_base_percentage": 0.344,
-          "slugging_percentage": 0.414,
-          "ops": 0.758
-        },
-        "pitching": null
-      }
-    },
-    {
       "id": 670062,
       "mlb_id": 670062,
       "wikidata_id": "Q140467749",
@@ -982,8 +1032,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1995-05-13",
       "age": 31,
       "birthplace": "Fort Collins",
@@ -1647,8 +1697,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1999-05-04",
       "age": 27,
       "birthplace": "Netcong, New Jersey, U.S.",
@@ -2402,6 +2452,84 @@
       }
     },
     {
+      "id": 686730,
+      "mlb_id": 686730,
+      "wikidata_id": "Q122173359",
+      "slug": "carson-spiers",
+      "name": "Carson Spiers",
+      "full_name": "Carson Spiers",
+      "number": "68",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1997-11-11",
+      "age": 28,
+      "birthplace": "Greenville",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "September 3, 2023",
+      "debut_team": "Cincinnati Reds",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Cincinnati Reds"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q122173359",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Carson_Spiers",
+      "retrosheet_id": "spiec001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 29,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 29,
+          "games_started": 14,
+          "wins": 5,
+          "losses": 10,
+          "saves": 1,
+          "innings_outs": 351,
+          "hits": 143,
+          "runs": 80,
+          "earned_runs": 74,
+          "home_runs": 24,
+          "walks": 41,
+          "strikeouts": 103,
+          "hit_batters": 6,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.69,
+          "whip": 1.573
+        }
+      }
+    },
+    {
       "id": 668715,
       "mlb_id": 668715,
       "wikidata_id": "Q113679753",
@@ -2411,10 +2539,10 @@
       "number": "7",
       "position": {
         "name": "First Base",
-        "group": "Infielder",
+        "group": "Pitcher",
         "abbreviation": "1B"
       },
-      "roster_status": "Injured list",
+      "roster_status": "60-day injured list",
       "is_active_roster": false,
       "birth_date": "1997-12-07",
       "age": 28,

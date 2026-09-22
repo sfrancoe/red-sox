@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-18T15:11:39+00:00",
+ "generated_at": "2026-09-21T17:12:31+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 115,
  "seasons": {
   "2026": {
-   "record": "56-97",
-   "games": 153,
+   "record": "57-99",
+   "games": 156,
    "in_progress": true,
    "war_leader": {
     "name": "TJ Rumfield",
-    "war": 3.6
+    "war": 3.5
    },
    "war_leaders": [
     {
      "name": "TJ Rumfield",
-     "war": 3.6
+     "war": 3.5
     },
     {
      "name": "Hunter Goodman",
-     "war": 2.4
+     "war": 2.6
     },
     {
      "name": "Jake McCarthy",
-     "war": 2.2
+     "war": 2.5
     }
    ],
    "pitching_leaders": {
@@ -49,11 +49,11 @@
      "names": [
       "Hunter Goodman"
      ],
-     "value": 38,
+     "value": 39,
      "top": [
       {
        "name": "Hunter Goodman",
-       "value": 38
+       "value": 39
       },
       {
        "name": "Mickey Moniak",
@@ -67,21 +67,21 @@
     },
     "rbi": {
      "names": [
-      "Hunter Goodman"
+      "Jake McCarthy"
      ],
-     "value": 81,
+     "value": 83,
      "top": [
       {
-       "name": "Hunter Goodman",
-       "value": 81
+       "name": "Jake McCarthy",
+       "value": 83
       },
       {
-       "name": "Jake McCarthy",
-       "value": 80
+       "name": "Hunter Goodman",
+       "value": 82
       },
       {
        "name": "TJ Rumfield",
-       "value": 69
+       "value": 70
       }
      ]
     },
@@ -89,19 +89,19 @@
      "names": [
       "TJ Rumfield"
      ],
-     "value": ".301",
+     "value": ".300",
      "top": [
       {
        "name": "TJ Rumfield",
-       "value": ".301"
+       "value": ".300"
       },
       {
        "name": "Jake McCarthy",
-       "value": ".295"
+       "value": ".297"
       },
       {
-       "name": "Willi Castro",
-       "value": ".260"
+       "name": "Hunter Goodman",
+       "value": ".245"
       }
      ]
     },
@@ -109,19 +109,19 @@
      "names": [
       "TJ Rumfield"
      ],
-     "value": ".849",
+     "value": ".843",
      "top": [
       {
        "name": "TJ Rumfield",
-       "value": ".849"
+       "value": ".843"
       },
       {
        "name": "Hunter Goodman",
-       "value": ".841"
+       "value": ".840"
       },
       {
        "name": "Jake McCarthy",
-       "value": ".825"
+       "value": ".830"
       }
      ]
     }

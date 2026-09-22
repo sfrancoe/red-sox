@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-18T15:11:39+00:00",
+ "generated_at": "2026-09-21T17:12:31+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 109,
  "seasons": {
   "2026": {
-   "record": "80-73",
-   "games": 153,
+   "record": "82-74",
+   "games": 156,
    "in_progress": true,
    "war_leader": {
     "name": "Gabriel Moreno",
-    "war": 5.7
+    "war": 5.8
    },
    "war_leaders": [
     {
      "name": "Gabriel Moreno",
-     "war": 5.7
-    },
-    {
-     "name": "Eduardo Rodr\u00edguez",
-     "war": 5.0
+     "war": 5.8
     },
     {
      "name": "Corbin Carroll",
-     "war": 4.9
+     "war": 5.0
+    },
+    {
+     "name": "Geraldo Perdomo",
+     "war": 4.7
     }
    ],
    "pitching_leaders": {
@@ -31,15 +31,15 @@
      "top": [
       {
        "name": "Brandyn Garcia",
-       "value": "0.76"
+       "value": "0.73"
       },
       {
        "name": "Taylor Clarke",
-       "value": "0.90"
+       "value": "0.93"
       },
       {
        "name": "Jonathan Lo\u00e1isiga",
-       "value": "1.03"
+       "value": "1.02"
       }
      ]
     }
@@ -49,38 +49,38 @@
      "names": [
       "Nolan Arenado"
      ],
-     "value": 26,
+     "value": 27,
      "top": [
       {
        "name": "Nolan Arenado",
-       "value": 26
+       "value": 27
+      },
+      {
+       "name": "Corbin Carroll",
+       "value": 22
       },
       {
        "name": "Ketel Marte",
        "value": 22
-      },
-      {
-       "name": "Corbin Carroll",
-       "value": 21
       }
      ]
     },
     "rbi": {
      "names": [
-      "Gabriel Moreno"
+      "Nolan Arenado"
      ],
-     "value": 75,
+     "value": 78,
      "top": [
+      {
+       "name": "Nolan Arenado",
+       "value": 78
+      },
       {
        "name": "Gabriel Moreno",
        "value": 75
       },
       {
        "name": "Ketel Marte",
-       "value": 74
-      },
-      {
-       "name": "Nolan Arenado",
        "value": 74
       }
      ]
@@ -97,11 +97,11 @@
       },
       {
        "name": "Geraldo Perdomo",
-       "value": ".252"
+       "value": ".256"
       },
       {
        "name": "Ketel Marte",
-       "value": ".250"
+       "value": ".249"
       }
      ]
     },
@@ -109,19 +109,19 @@
      "names": [
       "Gabriel Moreno"
      ],
-     "value": ".870",
+     "value": ".867",
      "top": [
       {
        "name": "Gabriel Moreno",
-       "value": ".870"
+       "value": ".867"
       },
       {
        "name": "Corbin Carroll",
-       "value": ".795"
+       "value": ".801"
       },
       {
        "name": "Nolan Arenado",
-       "value": ".770"
+       "value": ".777"
       }
      ]
     }
