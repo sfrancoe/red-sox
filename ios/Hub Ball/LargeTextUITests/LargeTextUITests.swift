@@ -485,6 +485,12 @@ final class LargeTextUITests: XCTestCase {
             rotate(.landscapeLeft)
             let follow = app.buttons["FOLLOW THIS TEAM"]
             XCTAssertTrue(reveal(follow, attempts: 30))
+            for _ in 0..<10 {
+                if follow.frame.maxY <= app.frame.maxY - 8 { break }
+                scroll()
+            }
+            XCTAssertLessThanOrEqual(follow.frame.maxY, app.frame.maxY - 8)
+            XCTAssertGreaterThanOrEqual(follow.frame.minY, app.frame.minY)
             capture(size + "-onboarding-landscape-follow")
             XCTAssertTrue(follow.isEnabled)
             follow.tap()
