@@ -121,17 +121,21 @@ struct BrewersShutoutView: View {
                         VStack(alignment: .leading, spacing: 14) {
                             Color.clear.frame(height: 0).id("top")
                             chapterPicker
-                            header
-                            if combined { combinedChart } else { gameStage }
-                            hitterPanel
-                            if combined {
-                                ForEach(games) { game in
-                                    PitchingStrip(events: game.events, title: "vs. \(game.opponent) · 27 outs", select: { selectedPlayer = $0 })
+                            if usesExpandedReadingLayout {
+                                expandedReadingContent
+                            } else {
+                                header
+                                if combined { combinedChart } else { gameStage }
+                                hitterPanel
+                                if combined {
+                                    ForEach(games) { game in
+                                        PitchingStrip(events: game.events, title: "vs. \(game.opponent) · 27 outs", select: { selectedPlayer = $0 })
+                                    }
+                                    Text("Two wins. 42 runs. Every out protected a zero.")
+                                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                                    Label("POSTSEASON CLINCHED · SEPTEMBER 11", systemImage: "ticket.fill")
+                                        .font(.system(size: 11, weight: .bold)).foregroundStyle(ShutoutStyle.gold)
                                 }
-                                Text("Two wins. 42 runs. Every out protected a zero.")
-                                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                                Label("POSTSEASON CLINCHED · SEPTEMBER 11", systemImage: "ticket.fill")
-                                    .font(.system(size: 11, weight: .bold)).foregroundStyle(ShutoutStyle.gold)
                             }
                             bottomControls
                         }
@@ -140,7 +144,9 @@ struct BrewersShutoutView: View {
                     }
                     .onChange(of: chapter) { _, _ in scroll.scrollTo("top", anchor: .top) }
                     .onChange(of: playing) { _, active in if active { scroll.scrollTo("top", anchor: .top) } }
-                    .safeAreaInset(edge: .bottom, spacing: 0) { transport }
+                    .safeAreaInset(edge: .bottom, spacing: 0) {
+                        if !usesExpandedReadingLayout { transport }
+                    }
                 }
             } else if loadFailed {
                 ContentUnavailableView("Story unavailable", systemImage: "exclamationmark.circle", description: Text("The saved game data could not be read."))
@@ -159,6 +165,123 @@ struct BrewersShutoutView: View {
         .onChange(of: reduceMotion) { _, reduced in if reduced { stop() } }
         .sheet(isPresented: $showSources) { sources }
         .sheet(item: $selectedPlayer) { player in playerSheet(player) }
+    }
+
+    // Uses the same event cursor and accumulated credits as the animated chart.
+    // The expanded path exposes the plot's essential information as visible text.
+    private var expandedReadingContent: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text(combined ? "Who built the 42?" : "Milwaukee \(score), \(game.opponent) 0")
+                .font(.title.bold())
+                .fixedSize(horizontal: false, vertical: true)
+            Text(combined ? "Two wins. 42 runs. Every out protected a zero." : "\(game.dateLabel) · \(current?.moment ?? "Before first pitch")")
+                .font(.body)
+            transport
+            if combined {
+                ForEach(games) { game in
+                    Text("\(game.dateLabel): Milwaukee \(game.total), \(game.opponent) 0")
+                        .font(.body)
+                }
+                Text("Postseason clinched · September 11")
+                    .font(.subheadline).foregroundStyle(ShutoutStyle.gold)
+            } else if let event = current {
+                Text(event.top ? event.pitcher.name : event.batter.name)
+                    .font(.headline)
+                Text(event.description).font(.body)
+                Text("\(event.moment) · \(event.event)").font(.subheadline)
+                if event.top {
+                    Text("\(event.outs) outs, \(event.strikeouts) strikeouts, \(event.hits) hits allowed, \(event.walks) walks. No runs allowed.")
+                        .font(.body)
+                } else {
+                    Text("\(event.runs) runs on this play; \(event.rbi) runs batted in; \(event.runs - event.rbi) runs without an RBI.")
+                        .font(.body)
+                    if !event.scorers.isEmpty {
+                        Text("Crossed home: " + event.scorers.map(\.name).joined(separator: ", "))
+                            .font(.body)
+                    }
+                }
+            } else {
+                Text("Start playback or choose a play to follow the score and each player's contribution.")
+                    .font(.body)
+            }
+            Text("Cumulative run producers").font(.headline)
+            Text("Totals carry across both games. Runs scored overlap with RBI and are not added again.")
+                .font(.subheadline)
+            if credits.isEmpty { Text("Contributions appear as the story advances.").font(.body) }
+            ForEach(credits) { hitter in
+                Button { selectedPlayer = hitter.person } label: {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(hitter.person.name).font(.headline)
+                        Text("Runs batted in: \(hitter.rbi)").font(.body)
+                        Text("Runs scored: \(hitter.runs)").font(.body)
+                        Text("Hits: \(hitter.hits)").font(.body)
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .padding(12)
+                    .background(ShutoutStyle.cream.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Opens player moments")
+            }
+            Text("Runs without an RBI: \(nonRBI)").font(.body)
+            if combined {
+                Text("\(credits.reduce(0) { $0 + $1.rbi }) RBI + \(nonRBI) runs without an RBI = 42 runs.")
+                    .font(.body)
+                ForEach(games) { game in
+                    expandedPitching(events: game.events, title: "Pitching against \(game.opponent)")
+                }
+            } else {
+                expandedPitching(events: seen, title: "Protecting the zero")
+                DisclosureGroup("Choose a recorded play") {
+                    LazyVStack(alignment: .leading, spacing: 12) {
+                        ForEach(Array(game.events.enumerated()), id: \.element.id) { index, event in
+                            Button { stop(); cursor = index } label: {
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("\(event.moment) · \(event.event)").font(.headline)
+                                    Text(event.description).font(.body)
+                                    Text("Milwaukee \(event.total), \(game.opponent) 0").font(.body)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityAddTraits(cursor == index ? .isSelected : [])
+                        }
+                    }
+                }
+                .font(.body)
+            }
+        }
+        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private func expandedPitching(events: [ShutoutEvent], title: String) -> some View {
+        let top = events.filter(\.top)
+        let pitcherIDs = top.map { $0.pitcher.id }.reduce(into: [Int]()) { ids, id in
+            if !ids.contains(id) { ids.append(id) }
+        }
+        return VStack(alignment: .leading, spacing: 12) {
+            Text(title).font(.headline)
+            Text("\(top.reduce(0) { $0 + $1.outs }) of 27 outs recorded; \(top.reduce(0) { $0 + $1.strikeouts }) strikeouts")
+                .font(.body)
+            ForEach(pitcherIDs, id: \.self) { id in
+                let work = top.filter { $0.pitcher.id == id }
+                if let pitcher = work.first?.pitcher {
+                    let outs = work.reduce(0) { $0 + $1.outs }
+                    Button { selectedPlayer = pitcher } label: {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text(pitcher.name).font(.headline)
+                            Text("Innings pitched: \(outs / 3).\(outs % 3)").font(.body)
+                            Text("Strikeouts: \(work.reduce(0) { $0 + $1.strikeouts })").font(.body)
+                            Text("Hits allowed: \(work.reduce(0) { $0 + $1.hits })").font(.body)
+                            Text("Walks: \(work.reduce(0) { $0 + $1.walks })").font(.body)
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint("Opens pitcher moments")
+                }
+            }
+        }
     }
 
     private var chapterPicker: some View {
@@ -329,7 +452,9 @@ struct BrewersShutoutView: View {
                     }
                 } label: {
                     Label(playing ? "Pause" : combined ? "Replay both nights" : cursor < 0 ? "Light the fuse" : "Continue story", systemImage: playing ? "pause.fill" : "play.fill")
-                        .font(.system(size: 14, weight: .bold)).frame(maxWidth: .infinity).frame(height: 44)
+                        .font(usesExpandedReadingLayout ? .body.bold() : .system(size: 14, weight: .bold))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, minHeight: 44)
                         .foregroundStyle(ShutoutStyle.navy).background(ShutoutStyle.gold, in: RoundedRectangle(cornerRadius: 8))
                 }.buttonStyle(.plain)
                 if !combined {
@@ -343,12 +468,12 @@ struct BrewersShutoutView: View {
     private var bottomControls: some View {
         VStack(alignment: .leading, spacing: 14) {
             if !combined {
-                if let current { Text(current.description).font(.system(size: 14)).foregroundStyle(ShutoutStyle.cream.opacity(0.7)) }
+                if let current { Text(current.description).font(usesExpandedReadingLayout ? .body : .system(size: 14)).foregroundStyle(ShutoutStyle.cream.opacity(0.7)) }
                 Button("See who built all 42 runs →") { stop(); chapter = 2 }
-                    .font(.system(size: 15, weight: .bold)).padding(.vertical, 10)
+                    .font(usesExpandedReadingLayout ? .headline : .system(size: 15, weight: .bold)).padding(.vertical, 10)
             } else {
                 Text("The first MLB team with two shutout wins of 20+ runs in one season.")
-                    .font(.system(size: 14)).foregroundStyle(ShutoutStyle.cream.opacity(0.7))
+                    .font(usesExpandedReadingLayout ? .body : .system(size: 14)).foregroundStyle(ShutoutStyle.cream.opacity(0.7))
             }
             if let shareURL {
                 ShareLink(item: shareURL, preview: SharePreview("Who Built the 42? — Milwaukee 2026")) {
@@ -356,7 +481,7 @@ struct BrewersShutoutView: View {
                 }
             } else if shareFailed { Button("Retry share poster") { makePoster() } }
             Button("Box scores & story sources") { stop(); showSources = true }
-                .font(.system(size: 13)).padding(.vertical, 10)
+                .font(usesExpandedReadingLayout ? .body : .system(size: 13)).padding(.vertical, 10)
         }.tint(ShutoutStyle.gold)
     }
 

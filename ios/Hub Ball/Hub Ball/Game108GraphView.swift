@@ -107,7 +107,8 @@ struct Game108GraphView: View {
 
     private var controls: some View {
         VStack(spacing: 12) {
-            HStack(spacing: 10) {
+            let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))
+            layout {
                 Button {
                     isPlaying ? pauseAnimation() : startAnimation()
                 } label: {
@@ -155,7 +156,8 @@ struct Game108GraphView: View {
                 .buttonStyle(.plain)
             }
 
-            HStack(spacing: 5) {
+            let speedLayout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(spacing: 5)) : AnyLayout(HStackLayout(spacing: 5))
+            speedLayout {
                 Text("SPEED")
                     .font(.caption.weight(.black))
                     .foregroundStyle(AppColor.ink)

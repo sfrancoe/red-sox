@@ -19,6 +19,7 @@ private enum SettingsTab: String, CaseIterable, Identifiable {
 }
 
 struct TeamSettingsView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     @AppStorage(TeamFavoritesStorage.key) private var favoriteTeamIDs = ""
     @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
@@ -71,7 +72,23 @@ struct TeamSettingsView: View {
         }
     }
 
+    @ViewBuilder
     private var settingsTabBar: some View {
+        if dynamicTypeSize.usesExpandedReadingLayout {
+            Picker("Settings section", selection: $selectedSettingsTab) {
+                ForEach(SettingsTab.allCases) { tab in Text(tab.title).tag(tab) }
+            }
+            .pickerStyle(.menu)
+            .font(.body)
+            .frame(minHeight: 44)
+            .frame(maxWidth: .infinity)
+            .background(AppColor.paper)
+        } else {
+            compactSettingsTabBar
+        }
+    }
+
+    private var compactSettingsTabBar: some View {
         HStack(spacing: 0) {
             ForEach(SettingsTab.allCases) { tab in
                 Button {

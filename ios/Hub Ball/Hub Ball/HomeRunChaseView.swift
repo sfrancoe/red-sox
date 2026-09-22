@@ -258,7 +258,7 @@ struct HomeRunChaseView: View {
             }
 
             Text("Within-season values are linearly estimated. Ruth's early at-bats came mainly as a pitcher. Bonds and McGwire played in the steroid era; this comparison presents the record book without resolving that history.")
-                .font(.system(size: 12))
+                .font(dynamicTypeSize.usesExpandedReadingLayout ? .body : .system(size: 12))
                 .foregroundStyle(AppColor.boneMuted)
                 .lineSpacing(2)
                 .padding(.top, 4)
@@ -313,20 +313,23 @@ struct HomeRunChaseView: View {
         display: Int
     ) -> some View {
         VStack(spacing: 8) {
-            HStack {
+            let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout())
+            layout {
                 Text(title).font(AppFont.label).tracking(0.8)
                 Spacer()
                 Text(String(display)).font(AppFont.displayMedium).monospacedDigit()
             }
             Slider(value: value, in: range, step: 1)
                 .tint(AppColor.amber)
+                .accessibilityLabel(title)
                 .accessibilityValue(String(display))
         }
         .foregroundStyle(AppColor.bone)
     }
 
     private var navigation: some View {
-        HStack(spacing: 14) {
+        let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 14)) : AnyLayout(HStackLayout(spacing: 14))
+        return layout {
             HStack(spacing: 10) {
                 ForEach(0..<4, id: \.self) { index in
                     Button {
@@ -335,7 +338,7 @@ struct HomeRunChaseView: View {
                         Circle()
                             .fill(index == chapter ? AppColor.amber : AppColor.rule)
                             .frame(width: 10, height: 10)
-                            .frame(width: 30, height: 44)
+                            .frame(width: dynamicTypeSize.usesExpandedReadingLayout ? 44 : 30, height: 44)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Chapter \(index + 1)")
@@ -353,7 +356,7 @@ struct HomeRunChaseView: View {
                         .font(AppFont.label)
                         .foregroundStyle(AppColor.night)
                         .padding(.horizontal, 18)
-                        .frame(height: 44)
+                        .frame(minHeight: 44)
                         .background(AppColor.amber)
                 }
                 .buttonStyle(.plain)
@@ -494,6 +497,7 @@ struct HomeRunChaseView: View {
 }
 
 struct ChaseBar: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let name: String
     let value: Double
     let maximum: Double
@@ -502,7 +506,8 @@ struct ChaseBar: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            HStack {
+            let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4)) : AnyLayout(HStackLayout())
+            layout {
                 Text(name)
                 Spacer()
                 Text(String(Int(value.rounded())))

@@ -352,7 +352,48 @@ struct RecentGameView: View {
         }
     }
 
+    @ScaledMetric(relativeTo: .body) private var readingScoreColumnWidth: CGFloat = 72
+
+    @ViewBuilder
     private func combinedLineScore(_ game: RecentGame) -> some View {
+        if usesExpandedReadingLayout {
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack(alignment: .top, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Team").fontWeight(.bold)
+                        Text(game.away.abbreviation)
+                        Text(game.home.abbreviation)
+                    }
+                    .frame(width: readingScoreColumnWidth, alignment: .leading)
+                    ForEach(game.innings) { inning in
+                        readingScoreColumn(String(inning.num), spokenTitle: "Inning \(inning.num)",
+                                           away: inning.away.runs.map(String.init) ?? "—",
+                                           home: inning.home.runs.map(String.init) ?? "—", game: game)
+                    }
+                    readingScoreColumn("R", spokenTitle: "Runs", away: String(game.away.runs), home: String(game.home.runs), game: game)
+                    readingScoreColumn("H", spokenTitle: "Hits", away: String(game.away.hits), home: String(game.home.hits), game: game)
+                    readingScoreColumn("E", spokenTitle: "Errors", away: String(game.away.errors), home: String(game.home.errors), game: game)
+                    readingScoreColumn("LOB", spokenTitle: "Left on base", away: String(game.away.leftOnBase), home: String(game.home.leftOnBase), game: game)
+                }
+                .font(.body.monospacedDigit())
+                .fixedSize(horizontal: true, vertical: false)
+            }
+        } else {
+            compactCombinedLineScore(game)
+        }
+    }
+
+    private func readingScoreColumn(_ title: String, spokenTitle: String, away: String, home: String, game: RecentGame) -> some View {
+        VStack(spacing: 12) {
+            Text(title).fontWeight(.bold).accessibilityLabel(spokenTitle)
+            Text(away).accessibilityLabel("\(game.away.abbreviation), \(spokenTitle), \(away == "—" ? "not recorded" : away)")
+            Text(home).accessibilityLabel("\(game.home.abbreviation), \(spokenTitle), \(home == "—" ? "not recorded" : home)")
+        }
+        .frame(width: readingScoreColumnWidth)
+        .accessibilityElement(children: .contain)
+    }
+
+    private func compactCombinedLineScore(_ game: RecentGame) -> some View {
         let minimumTableWidth = max(contentWidth - 40, CGFloat(game.innings.count * 36 + 220))
         return ScrollView(.horizontal, showsIndicators: usesExpandedReadingLayout) {
             VStack(spacing: 7) {
@@ -528,9 +569,8 @@ struct RecentGameView: View {
         let boxScoreTeam = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
 
         return VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                 sectionTitle("Batting")
-                Spacer(minLength: 0)
                 statsTeamPicker(favorite: favorite, opponent: opponent)
             }
 
@@ -560,9 +600,8 @@ struct RecentGameView: View {
         let boxScoreTeam = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
 
         return VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                 sectionTitle("Pitching")
-                Spacer(minLength: 0)
                 statsTeamPicker(favorite: favorite, opponent: opponent)
             }
 
@@ -589,7 +628,7 @@ struct RecentGameView: View {
 
     @ViewBuilder
     private func playerStatHeading(name: String, playerID: Int?, detail: String) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 6) {
+        VStack(alignment: .leading, spacing: 6) {
             if let playerID {
                 Button { onSelectPlayer(playerID) } label: {
                     Text(name).font(.headline.weight(.semibold)).foregroundStyle(AppColor.navy)
@@ -607,11 +646,12 @@ struct RecentGameView: View {
     }
 
     private func expandedStatValue(_ label: String, _ value: String) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(label).font(.subheadline.weight(.semibold)).foregroundStyle(AppColor.hunterGreen)
-            Spacer(minLength: 8)
             Text(value).font(.body.monospacedDigit()).foregroundStyle(AppColor.ink)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
     }
 
     private func selectedBoxScoreTeam(
@@ -625,7 +665,8 @@ struct RecentGameView: View {
         favorite: TeamBoxScore,
         opponent: TeamBoxScore
     ) -> some View {
-        HStack(spacing: 2) {
+        let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(spacing: 6)) : AnyLayout(HStackLayout(spacing: 2))
+        return layout {
             statsTeamButton(team.cityName, selection: .favorite)
             statsTeamButton(opponent.cityName, selection: .opponent)
         }
@@ -778,13 +819,13 @@ struct RecentGameView: View {
 
     private func sectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
+            .font(usesExpandedReadingLayout ? .headline : .system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
             .foregroundStyle(AppColor.navy)
     }
 
     private func primarySectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
+            .font(usesExpandedReadingLayout ? .headline : .system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
             .foregroundStyle(AppColor.navy)
     }
 

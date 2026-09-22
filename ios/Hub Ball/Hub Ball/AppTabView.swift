@@ -78,7 +78,11 @@ struct AppTabView: View {
     var body: some View {
         GeometryReader { window in
             VStack(spacing: 0) {
-                topNavigation
+                if dynamicTypeSize.usesExpandedReadingLayout {
+                    expandedNavigation
+                } else {
+                    topNavigation
+                }
                 selectedContent
                     .id(team.id)
                     .environment(\.hubContentWidth, window.size.width)
@@ -220,6 +224,44 @@ struct AppTabView: View {
         guard team.supportsPlayers else { return }
         selectedPlayerID = playerID
         selectedTab = .players
+    }
+
+    private var expandedNavigation: some View {
+        HStack(spacing: 12) {
+            Menu {
+                Section(team.pickerTitle) {
+                    Picker("Page", selection: $selectedTab) {
+                        ForEach(availableTabs, id: \.self) { tab in
+                            Text(tab.title).tag(tab)
+                        }
+                    }
+                }
+                Button("Teams and settings") { settingsPresented = true }
+            } label: {
+                HStack(spacing: 8) {
+                    Text(selectedTab.title)
+                        .font(.body.weight(.semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    Image(systemName: "chevron.down").font(.caption)
+                }
+                .frame(minHeight: 44, alignment: .leading)
+            }
+            .accessibilityLabel("Page")
+            .accessibilityValue("\(selectedTab.title), \(team.shortName)")
+            Spacer(minLength: 0)
+            Button { settingsPresented = true } label: {
+                Image(systemName: "gearshape")
+                    .font(.system(size: 18, weight: .semibold))
+                    .frame(width: 44, height: 44)
+            }
+            .accessibilityLabel("Teams and settings")
+            .accessibilityValue(team.pickerTitle)
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 4)
+        .foregroundStyle(AppColor.bone)
+        .background(HubMastheadBackground(palette: palette))
     }
 
     private var topNavigation: some View {

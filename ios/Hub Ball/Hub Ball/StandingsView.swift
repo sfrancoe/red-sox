@@ -302,13 +302,28 @@ struct StandingsView: View {
         let updated = updates.first ?? "—"
         let delayed = store.feeds.values.contains(where: \.isDelayed)
         return Text("\(delayed ? "Data delayed · " : "")Updated \(updated) · MLB Stats API")
-            .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
+            .font(usesExpandedReadingLayout ? .footnote : .system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
             .foregroundStyle(AppColor.ink.opacity(0.72))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 5)
     }
 
+    @ViewBuilder
     private var modePicker: some View {
+        if usesExpandedReadingLayout {
+            Picker("Standings view", selection: $store.mode) {
+                ForEach(StandingsMode.allCases) { mode in Text(mode.title).tag(mode) }
+            }
+            .pickerStyle(.menu)
+            .font(.body)
+            .frame(minHeight: 44)
+            .padding(.horizontal, 12)
+        } else {
+            compactModePicker
+        }
+    }
+
+    private var compactModePicker: some View {
         HStack(spacing: 0) {
             ForEach(StandingsMode.allCases) { mode in
                 Button {
@@ -402,7 +417,8 @@ struct StandingsView: View {
                 Text(team.rank)
                     .font(AppFont.number)
                     .foregroundStyle(AppColor.boneMuted)
-                    .frame(width: compact ? 11 : 15)
+                    .lineLimit(1)
+                    .frame(minWidth: 26)
                 Text(team.cityName)
                     .font(AppFont.body)
                     .foregroundStyle(emphasized ? AppColor.amber : AppColor.bone)

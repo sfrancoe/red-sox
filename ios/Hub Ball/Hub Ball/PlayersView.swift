@@ -96,7 +96,7 @@ struct PlayersView: View {
                 expandedSortButton(.name, title: "Player")
                 expandedSortButton(.position, title: "Position")
                 expandedSortButton(.batsThrows, title: "Bats / throws")
-                if showsAgeColumn { expandedSortButton(.age, title: "Age") }
+                expandedSortButton(.age, title: "Age")
             }
             .padding(.horizontal, directoryHorizontalPadding)
             .padding(.vertical, 8)
@@ -135,17 +135,17 @@ struct PlayersView: View {
                     .foregroundStyle(AppColor.amber)
             }
             let metadataSpacing: CGFloat = contentWidth < 460 ? 7 : 12
-            if contentWidth < 460 {
+            if contentWidth < 460 || dynamicTypeSize.isAccessibilitySize {
                 VStack(alignment: .leading, spacing: metadataSpacing) {
                     playerDirectoryValue("Position", player.position.name)
                     playerDirectoryValue("Bats / throws", "\(player.bats?.shortHand ?? "—") / \(player.throws?.shortHand ?? "—")")
-                    if showsAgeColumn { playerDirectoryValue("Age", player.age.map(String.init) ?? "—") }
+                    playerDirectoryValue("Age", player.age.map(String.init) ?? "—")
                 }
             } else {
                 HStack(spacing: metadataSpacing) {
                     playerDirectoryValue("Position", player.position.name)
                     playerDirectoryValue("Bats / throws", "\(player.bats?.shortHand ?? "—") / \(player.throws?.shortHand ?? "—")")
-                    if showsAgeColumn { playerDirectoryValue("Age", player.age.map(String.init) ?? "—") }
+                    playerDirectoryValue("Age", player.age.map(String.init) ?? "—")
                 }
             }
         }
@@ -456,6 +456,7 @@ private struct PlayerReferenceView: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 12) {
+                if usesExpandedReadingLayout { expandedPlayerTitle }
                 biographyPanel
                 careerPanel
                 if !player.education.entries.isEmpty { educationPanel }
@@ -474,12 +475,12 @@ private struct PlayerReferenceView: View {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundStyle(AppColor.bone)
-                        .frame(width: 28, height: 28)
+                        .frame(width: 44, height: 44)
                 }
                 .accessibilityLabel("Back to players")
             }
             ToolbarItem(placement: .principal) {
-                playerNavigationTitle
+                if !usesExpandedReadingLayout { playerNavigationTitle }
             }
         }
         .task { await store.loadCareer(for: player) }
@@ -520,7 +521,7 @@ private struct PlayerReferenceView: View {
 
     @ViewBuilder
     private func bioValue(_ label: String, _ value: String) -> some View {
-        if contentWidth < 460 {
+        if usesExpandedReadingLayout || contentWidth < 460 {
             VStack(alignment: .leading, spacing: 2) {
                 Text(label)
                     .font(AppFont.label.weight(.semibold))
@@ -545,6 +546,20 @@ private struct PlayerReferenceView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+
+    private var expandedPlayerTitle: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(player.fullName ?? player.name)
+                .font(AppFont.displayMedium)
+                .fixedSize(horizontal: false, vertical: true)
+            Text("Number \(player.number ?? "—") · \(player.position.name)")
+                .font(AppFont.body)
+                .foregroundStyle(AppColor.amber)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
     }
 
     private var playerNavigationTitle: some View {
@@ -602,7 +617,8 @@ private struct PlayerReferenceView: View {
     }
 
     private var recordModePicker: some View {
-        HStack(spacing: 0) {
+        let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(spacing: 6)) : AnyLayout(HStackLayout(spacing: 0))
+        return layout {
             ForEach(PlayerRecordMode.allCases) { option in
                 Button { mode = option } label: {
                     Text(option.title)
@@ -619,7 +635,8 @@ private struct PlayerReferenceView: View {
     }
 
     private var scopePicker: some View {
-        HStack(spacing: 6) {
+        let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(spacing: 6)) : AnyLayout(HStackLayout(spacing: 6))
+        return layout {
             ForEach(CareerScope.allCases) { option in
                 Button { scope = option } label: {
                     Text(option.rawValue)
@@ -723,7 +740,7 @@ private struct PlayerReferenceView: View {
                         summaryValue(rate(battingRate(summaryRows, \.onBasePercentage)), 50); summaryValue(rate(battingRate(summaryRows, \.sluggingPercentage)), 50); summaryValue(rate(battingRate(summaryRows, \.ops)), 50)
                     }
                     .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Career totals and weighted average rates")
+                    .accessibilityLabel("Career totals. " + spokenMetrics(battingTotals(summaryRows)))
                 }
             }
         }
@@ -778,139 +795,148 @@ private struct PlayerReferenceView: View {
                         summaryValue(total(summaryRows.map(\.homeRuns)), 40); summaryValue(total(summaryRows.map(\.walks)), 40); summaryValue(total(summaryRows.map(\.strikeouts)), 40); summaryValue(decimal(earnedRunAverage(summaryRows)), 50); summaryValue(rate(walksAndHitsPerInning(summaryRows)), 54)
                     }
                     .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Career totals and aggregate pitching rates")
+                    .accessibilityLabel("Career totals. " + spokenMetrics(pitchingTotals(summaryRows)))
                 }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var expandedCareerColumns: [GridItem] {
-        [GridItem(.flexible(minimum: 0), alignment: .leading), GridItem(.flexible(minimum: 0), alignment: .leading)]
+    private struct CareerMetric: Identifiable {
+        let label: String
+        let value: String?
+        var id: String { label }
+    }
+
+    private func battingMetrics(_ row: PlayerBattingSeason) -> [CareerMetric] {
+        [
+            .init(label: "Games", value: row.games.map(String.init)),
+            .init(label: "At bats", value: row.atBats.map(String.init)),
+            .init(label: "Runs", value: row.runs.map(String.init)),
+            .init(label: "Hits", value: row.hits.map(String.init)),
+            .init(label: "Home runs", value: row.homeRuns.map(String.init)),
+            .init(label: "Triples", value: row.triples.map(String.init)),
+            .init(label: "Doubles", value: row.doubles.map(String.init)),
+            .init(label: "Runs batted in", value: row.runsBattedIn.map(String.init)),
+            .init(label: "Stolen bases", value: row.stolenBases.map(String.init)),
+            .init(label: "Walks", value: row.walks.map(String.init)),
+            .init(label: "Strikeouts", value: row.strikeouts.map(String.init)),
+            .init(label: "Batting average", value: rate(row.average)),
+            .init(label: "On-base percentage", value: rate(row.onBasePercentage)),
+            .init(label: "Slugging percentage", value: rate(row.sluggingPercentage)),
+            .init(label: "OPS", value: rate(row.ops))
+        ]
+    }
+
+    private func pitchingMetrics(_ row: PlayerPitchingSeason) -> [CareerMetric] {
+        [
+            .init(label: "Games", value: row.games.map(String.init)),
+            .init(label: "Games started", value: row.gamesStarted.map(String.init)),
+            .init(label: "Wins", value: row.wins.map(String.init)),
+            .init(label: "Losses", value: row.losses.map(String.init)),
+            .init(label: "Saves", value: row.saves.map(String.init)),
+            .init(label: "Innings pitched", value: row.inningsPitched),
+            .init(label: "Hits", value: row.hits.map(String.init)),
+            .init(label: "Earned runs", value: row.earnedRuns.map(String.init)),
+            .init(label: "Home runs", value: row.homeRuns.map(String.init)),
+            .init(label: "Walks", value: row.walks.map(String.init)),
+            .init(label: "Strikeouts", value: row.strikeouts.map(String.init)),
+            .init(label: "Earned run average", value: decimal(row.era)),
+            .init(label: "WHIP", value: rate(row.whip))
+        ]
+    }
+
+    private func battingTotals(_ rows: [PlayerBattingSeason]) -> [CareerMetric] {
+        [
+            .init(label: "Games", value: total(rows.map(\.games))),
+            .init(label: "At bats", value: total(rows.map(\.atBats))),
+            .init(label: "Runs", value: total(rows.map(\.runs))),
+            .init(label: "Hits", value: total(rows.map(\.hits))),
+            .init(label: "Home runs", value: total(rows.map(\.homeRuns))),
+            .init(label: "Triples", value: total(rows.map(\.triples))),
+            .init(label: "Doubles", value: total(rows.map(\.doubles))),
+            .init(label: "Runs batted in", value: total(rows.map(\.runsBattedIn))),
+            .init(label: "Stolen bases", value: total(rows.map(\.stolenBases))),
+            .init(label: "Walks", value: total(rows.map(\.walks))),
+            .init(label: "Strikeouts", value: total(rows.map(\.strikeouts))),
+            .init(label: "Batting average", value: rate(battingRate(rows, \.average))),
+            .init(label: "On-base percentage", value: rate(battingRate(rows, \.onBasePercentage))),
+            .init(label: "Slugging percentage", value: rate(battingRate(rows, \.sluggingPercentage))),
+            .init(label: "OPS", value: rate(battingRate(rows, \.ops)))
+        ]
+    }
+
+    private func pitchingTotals(_ rows: [PlayerPitchingSeason]) -> [CareerMetric] {
+        [
+            .init(label: "Games", value: total(rows.map(\.games))),
+            .init(label: "Games started", value: total(rows.map(\.gamesStarted))),
+            .init(label: "Wins", value: total(rows.map(\.wins))),
+            .init(label: "Losses", value: total(rows.map(\.losses))),
+            .init(label: "Saves", value: total(rows.map(\.saves))),
+            .init(label: "Innings pitched", value: inningsPitched(rows)),
+            .init(label: "Hits", value: total(rows.map(\.hits))),
+            .init(label: "Earned runs", value: total(rows.map(\.earnedRuns))),
+            .init(label: "Home runs", value: total(rows.map(\.homeRuns))),
+            .init(label: "Walks", value: total(rows.map(\.walks))),
+            .init(label: "Strikeouts", value: total(rows.map(\.strikeouts))),
+            .init(label: "Earned run average", value: decimal(earnedRunAverage(rows))),
+            .init(label: "WHIP", value: rate(walksAndHitsPerInning(rows)))
+        ]
+    }
+
+    private func spokenMetrics(_ metrics: [CareerMetric]) -> String {
+        metrics.map { "\($0.label): \($0.value ?? "unavailable")" }.joined(separator: "; ")
     }
 
     private func expandedBattingTable(_ rows: [PlayerBattingSeason]) -> some View {
         let summaryRows = battingSummaryRows(rows)
-        let sortedRows = sortedBattingRows(rows)
-        return VStack(alignment: .leading, spacing: 10) {
+        return LazyVStack(alignment: .leading, spacing: 10) {
             expandedBattingSortBar
-            ForEach(sortedRows) { row in
+            ForEach(sortedBattingRows(rows)) { row in
                 VStack(alignment: .leading, spacing: 8) {
-                    expandedCareerRecordHeader(
-                        season: row.season,
-                        team: row.team,
-                        level: row.level ?? row.league,
-                        rowType: row.rowType
-                    )
-                    LazyVGrid(columns: expandedCareerColumns, alignment: .leading, spacing: 8) {
-                        expandedCareerMetric("G", row.games.map(String.init))
-                        expandedCareerMetric("AB", row.atBats.map(String.init))
-                        expandedCareerMetric("R", row.runs.map(String.init))
-                        expandedCareerMetric("H", row.hits.map(String.init))
-                        expandedCareerMetric("HR", row.homeRuns.map(String.init))
-                        expandedCareerMetric("3B", row.triples.map(String.init))
-                        expandedCareerMetric("2B", row.doubles.map(String.init))
-                        expandedCareerMetric("RBI", row.runsBattedIn.map(String.init))
-                        expandedCareerMetric("SB", row.stolenBases.map(String.init))
-                        expandedCareerMetric("BB", row.walks.map(String.init))
-                        expandedCareerMetric("SO", row.strikeouts.map(String.init))
-                        expandedCareerMetric("AVG", rate(row.average))
-                        expandedCareerMetric("OBP", rate(row.onBasePercentage))
-                        expandedCareerMetric("SLG", rate(row.sluggingPercentage))
-                        expandedCareerMetric("OPS", rate(row.ops))
-                    }
+                    expandedCareerRecordHeader(season: row.season, team: row.team, level: row.level ?? row.league, rowType: row.rowType)
+                    expandedMetrics(battingMetrics(row))
                 }
                 .padding(12)
                 .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
                 .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(battingAccessibility(row))
+                .accessibilityElement(children: .contain)
             }
             expandedCareerTotalsHeader("Career totals", detail: "Aggregated across \(summaryRows.count) season record\(summaryRows.count == 1 ? "" : "s")")
-            LazyVGrid(columns: expandedCareerColumns, alignment: .leading, spacing: 8) {
-                expandedCareerMetric("G", total(summaryRows.map(\.games)))
-                expandedCareerMetric("AB", total(summaryRows.map(\.atBats)))
-                expandedCareerMetric("R", total(summaryRows.map(\.runs)))
-                expandedCareerMetric("H", total(summaryRows.map(\.hits)))
-                expandedCareerMetric("HR", total(summaryRows.map(\.homeRuns)))
-                expandedCareerMetric("3B", total(summaryRows.map(\.triples)))
-                expandedCareerMetric("2B", total(summaryRows.map(\.doubles)))
-                expandedCareerMetric("RBI", total(summaryRows.map(\.runsBattedIn)))
-                expandedCareerMetric("SB", total(summaryRows.map(\.stolenBases)))
-                expandedCareerMetric("BB", total(summaryRows.map(\.walks)))
-                expandedCareerMetric("SO", total(summaryRows.map(\.strikeouts)))
-                expandedCareerMetric("AVG", rate(battingRate(summaryRows, \.average)))
-                expandedCareerMetric("OBP", rate(battingRate(summaryRows, \.onBasePercentage)))
-                expandedCareerMetric("SLG", rate(battingRate(summaryRows, \.sluggingPercentage)))
-                expandedCareerMetric("OPS", rate(battingRate(summaryRows, \.ops)))
-            }
-            .padding(12)
-            .background(AppColor.nightCell)
-            .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Career totals and weighted average rates")
+            expandedMetrics(battingTotals(summaryRows))
         }
         .padding(12)
     }
 
     private func expandedPitchingTable(_ rows: [PlayerPitchingSeason]) -> some View {
         let summaryRows = pitchingSummaryRows(rows)
-        let sortedRows = sortedPitchingRows(rows)
-        return VStack(alignment: .leading, spacing: 10) {
+        return LazyVStack(alignment: .leading, spacing: 10) {
             expandedPitchingSortBar
-            ForEach(sortedRows) { row in
+            ForEach(sortedPitchingRows(rows)) { row in
                 VStack(alignment: .leading, spacing: 8) {
-                    expandedCareerRecordHeader(
-                        season: row.season,
-                        team: row.team,
-                        level: row.level ?? row.league,
-                        rowType: row.rowType
-                    )
-                    LazyVGrid(columns: expandedCareerColumns, alignment: .leading, spacing: 8) {
-                        expandedCareerMetric("G", row.games.map(String.init))
-                        expandedCareerMetric("GS", row.gamesStarted.map(String.init))
-                        expandedCareerMetric("W", row.wins.map(String.init))
-                        expandedCareerMetric("L", row.losses.map(String.init))
-                        expandedCareerMetric("SV", row.saves.map(String.init))
-                        expandedCareerMetric("IP", row.inningsPitched)
-                        expandedCareerMetric("H", row.hits.map(String.init))
-                        expandedCareerMetric("ER", row.earnedRuns.map(String.init))
-                        expandedCareerMetric("HR", row.homeRuns.map(String.init))
-                        expandedCareerMetric("BB", row.walks.map(String.init))
-                        expandedCareerMetric("SO", row.strikeouts.map(String.init))
-                        expandedCareerMetric("ERA", decimal(row.era))
-                        expandedCareerMetric("WHIP", rate(row.whip))
-                    }
+                    expandedCareerRecordHeader(season: row.season, team: row.team, level: row.level ?? row.league, rowType: row.rowType)
+                    expandedMetrics(pitchingMetrics(row))
                 }
                 .padding(12)
                 .background(row.rowType == "subtotal" ? AppColor.nightCell : AppColor.night)
                 .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(pitchingAccessibility(row))
+                .accessibilityElement(children: .contain)
             }
             expandedCareerTotalsHeader("Career totals", detail: "Aggregated across \(summaryRows.count) season record\(summaryRows.count == 1 ? "" : "s")")
-            LazyVGrid(columns: expandedCareerColumns, alignment: .leading, spacing: 8) {
-                expandedCareerMetric("G", total(summaryRows.map(\.games)))
-                expandedCareerMetric("GS", total(summaryRows.map(\.gamesStarted)))
-                expandedCareerMetric("W", total(summaryRows.map(\.wins)))
-                expandedCareerMetric("L", total(summaryRows.map(\.losses)))
-                expandedCareerMetric("SV", total(summaryRows.map(\.saves)))
-                expandedCareerMetric("IP", inningsPitched(summaryRows))
-                expandedCareerMetric("H", total(summaryRows.map(\.hits)))
-                expandedCareerMetric("ER", total(summaryRows.map(\.earnedRuns)))
-                expandedCareerMetric("HR", total(summaryRows.map(\.homeRuns)))
-                expandedCareerMetric("BB", total(summaryRows.map(\.walks)))
-                expandedCareerMetric("SO", total(summaryRows.map(\.strikeouts)))
-                expandedCareerMetric("ERA", decimal(earnedRunAverage(summaryRows)))
-                expandedCareerMetric("WHIP", rate(walksAndHitsPerInning(summaryRows)))
-            }
-            .padding(12)
-            .background(AppColor.nightCell)
-            .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Career totals and aggregate pitching rates")
+            expandedMetrics(pitchingTotals(summaryRows))
         }
         .padding(12)
+    }
+
+    private func expandedMetrics(_ metrics: [CareerMetric]) -> some View {
+        // One full-width record prevents four-digit totals and rates from splitting
+        // across lines on narrow phones at the largest accessibility categories.
+        LazyVStack(alignment: .leading, spacing: 8) {
+            ForEach(metrics) { metric in
+                expandedCareerMetric(metric.label, metric.value)
+            }
+        }
+        .accessibilityElement(children: .contain)
     }
 
     private var expandedBattingSortBar: some View {
@@ -960,7 +986,7 @@ private struct PlayerReferenceView: View {
 
     private func expandedCareerRecordHeader(season: Int, team: String, level: String?, rowType: String?) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(String(season))
                     .font(AppFont.body.weight(.bold).monospacedDigit())
                     .foregroundStyle(AppColor.amber)
@@ -1002,6 +1028,9 @@ private struct PlayerReferenceView: View {
         .padding(9)
         .background(AppColor.night)
         .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(label)
+        .accessibilityValue(value ?? "unavailable")
     }
 
     private func battingHeader(_ column: BattingCareerSort, _ width: CGFloat, leading: Bool = false) -> some View {
@@ -1293,11 +1322,11 @@ private struct PlayerReferenceView: View {
     }
 
     private func battingAccessibility(_ row: PlayerBattingSeason) -> String {
-        "\(row.season), \(row.team), \(row.level ?? row.league ?? "level unavailable"). \(row.games ?? 0) games, \(row.hits ?? 0) hits, \(row.homeRuns ?? 0) home runs."
+        "\(row.season), \(row.team), \(row.level ?? row.league ?? "level unavailable"). " + spokenMetrics(battingMetrics(row))
     }
 
     private func pitchingAccessibility(_ row: PlayerPitchingSeason) -> String {
-        "\(row.season), \(row.team), \(row.level ?? row.league ?? "level unavailable"). \(row.games ?? 0) games, \(row.wins ?? 0) wins, \(row.strikeouts ?? 0) strikeouts."
+        "\(row.season), \(row.team), \(row.level ?? row.league ?? "level unavailable"). " + spokenMetrics(pitchingMetrics(row))
     }
 
     @ViewBuilder
