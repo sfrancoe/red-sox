@@ -19,6 +19,7 @@ private enum SettingsTab: String, CaseIterable, Identifiable {
 }
 
 struct TeamSettingsView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     @AppStorage(TeamFavoritesStorage.key) private var favoriteTeamIDs = ""
     @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
@@ -71,7 +72,23 @@ struct TeamSettingsView: View {
         }
     }
 
+    @ViewBuilder
     private var settingsTabBar: some View {
+        if dynamicTypeSize.usesExpandedReadingLayout {
+            Picker("Settings section", selection: $selectedSettingsTab) {
+                ForEach(SettingsTab.allCases) { tab in Text(tab.title).tag(tab) }
+            }
+            .pickerStyle(.menu)
+            .font(.body)
+            .frame(minHeight: 44)
+            .frame(maxWidth: .infinity)
+            .background(AppColor.paper)
+        } else {
+            compactSettingsTabBar
+        }
+    }
+
+    private var compactSettingsTabBar: some View {
         HStack(spacing: 0) {
             ForEach(SettingsTab.allCases) { tab in
                 Button {
@@ -386,12 +403,13 @@ struct TeamOnboardingView: View {
 
     var body: some View {
         GeometryReader { window in
-            let compact = usesAccessibilityLayout || window.size.height < 700
+            let compact = !usesAccessibilityLayout && window.size.height < 700
 
-            ZStack {
-                AppColor.paleRed.ignoresSafeArea()
+            ScrollView {
+                ZStack {
+                    AppColor.paleRed.ignoresSafeArea()
 
-                VStack(spacing: compact ? 14 : 24) {
+                VStack(spacing: usesAccessibilityLayout ? 18 : (compact ? 14 : 24)) {
                     Spacer(minLength: compact ? 4 : 18)
 
                     Image(systemName: "baseball.fill")
@@ -400,16 +418,12 @@ struct TeamOnboardingView: View {
 
                     VStack(spacing: compact ? 5 : 8) {
                         Text("WELCOME TO HUB BALL")
-                            .font(.system(size: compact ? 26 : 30, weight: .black))
+                            .font(.largeTitle.weight(.black))
                             .multilineTextAlignment(.center)
                         Text("Choose your first team to follow")
                             .font(.title3.weight(.bold))
                             .multilineTextAlignment(.center)
-                        Text(
-                            compact
-                                ? "Pick one now. Switch teams later in Settings."
-                                : "Pick one to get started. You can switch teams anytime in Settings."
-                        )
+                        Text("Pick one to get started. You can switch teams anytime in Settings.")
                             .font(.body)
                             .multilineTextAlignment(.center)
                             .foregroundStyle(AppColor.ink.opacity(0.86))
@@ -425,11 +439,7 @@ struct TeamOnboardingView: View {
                             .foregroundStyle(AppColor.amber)
                             .accessibilityHidden(true)
 
-                        Text(
-                            compact
-                                ? "Follow more later: in Settings, tap the star beside each team."
-                                : "Want to follow more teams? In Settings, tap the star beside each team you want to add."
-                        )
+                        Text("Want to follow more teams? In Settings, tap the star beside each team you want to add.")
                             .font(.subheadline)
                             .foregroundStyle(AppColor.ink.opacity(0.86))
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -444,11 +454,11 @@ struct TeamOnboardingView: View {
                     Button(action: completeOnboarding) {
                         Text("FOLLOW THIS TEAM")
                             .font(.headline.weight(.black))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.78)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
                             .foregroundStyle(AppColor.ink)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, compact ? 12 : 15)
+                            .padding(.vertical, 15)
                             .background(pendingTeam == nil ? AppColor.border : AppColor.nightRaised)
                             .clipShape(Rectangle())
                     }
@@ -460,13 +470,13 @@ struct TeamOnboardingView: View {
                 }
                 .padding(.horizontal, 22)
                 .padding(.vertical, compact ? 8 : 16)
-                .frame(maxWidth: 540, maxHeight: .infinity)
+                    .frame(maxWidth: 540, minHeight: window.size.height)
+                }
+                .frame(maxWidth: .infinity, minHeight: window.size.height)
             }
+            .scrollIndicators(.visible)
         }
         .interactiveDismissDisabled()
-        // Keep the single-screen layout intact while honoring the first two
-        // accessibility text sizes.
-        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
 
     private var teamMenu: some View {
@@ -501,7 +511,7 @@ struct TeamOnboardingView: View {
                     .font(.body.weight(.bold))
                     .foregroundStyle(AppColor.inkMuted)
             }
-            .padding(usesAccessibilityLayout ? 12 : 17)
+            .padding(17)
             .background(AppColor.paper)
             .overlay {
                 Rectangle().stroke(AppColor.border, lineWidth: AppColor.panelBorderWidth)

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeRunChaseView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store = HomeRunChaseStore()
     @State private var chapter = 0
     @State private var drawProgress = 0.0
@@ -76,10 +77,11 @@ struct HomeRunChaseView: View {
     private func chapterView(_ index: Int) -> some View {
         GeometryReader { proxy in
             let compact = proxy.size.height < 760
+            let expanded = dynamicTypeSize >= .xxxLarge
 
             ScrollView {
                 VStack(alignment: .leading, spacing: compact ? 10 : 16) {
-                    storyHeader(index, compact: compact)
+                    storyHeader(index, compact: compact, expanded: expanded)
 
                     ChaseChart(
                         config: config,
@@ -98,7 +100,7 @@ struct HomeRunChaseView: View {
                     .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
                     .accessibilityLabel(chartAccessibilityLabel(index))
 
-                    chapterPanel(index, compact: compact)
+                    chapterPanel(index, compact: compact, expanded: expanded)
                     navigation
                 }
                 .padding(.horizontal, 16)
@@ -109,15 +111,15 @@ struct HomeRunChaseView: View {
         }
     }
 
-    private func storyHeader(_ index: Int, compact: Bool) -> some View {
+    private func storyHeader(_ index: Int, compact: Bool, expanded: Bool) -> some View {
         VStack(alignment: .leading, spacing: compact ? 3 : 6) {
             HStack(spacing: 8) {
                 Text(kicker(index).uppercased())
                     .font(AppFont.label)
                     .tracking(compact ? 0.7 : 1.2)
                     .foregroundStyle(AppColor.amber)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.82)
+                    .lineLimit(expanded ? nil : 1)
+                    .minimumScaleFactor(expanded ? 1 : 0.82)
 
                 Spacer(minLength: 0)
 
@@ -130,7 +132,9 @@ struct HomeRunChaseView: View {
             }
 
             Text(hero(index))
-                .font(.system(size: compact ? 50 : 68, weight: .bold, design: .serif))
+                .font(expanded
+                    ? .largeTitle.weight(.bold)
+                    : .system(size: compact ? 50 : 68, weight: .bold, design: .serif))
                 .monospacedDigit()
                 .foregroundStyle(AppColor.bone)
                 .contentTransition(.numericText())
@@ -143,17 +147,42 @@ struct HomeRunChaseView: View {
     }
 
     @ViewBuilder
-    private func chapterPanel(_ index: Int, compact: Bool) -> some View {
+    private func chapterPanel(_ index: Int, compact: Bool, expanded: Bool) -> some View {
         switch index {
         case 0:
-            if compact { compactAgeBars } else { ageBars }
+            if compact && !expanded { compactAgeBars } else { ageBars }
         case 1:
-            if compact { compactAtBatBars } else { atBatBars }
+            if compact && !expanded { compactAtBatBars } else { atBatBars }
         case 2:
-            milestoneGrid(compact: compact)
+            milestoneGrid(compact: compact, expanded: expanded)
         default:
-            projectionControls
+            VStack(alignment: .leading, spacing: 12) {
+                projectionControls
+                if expanded { projectionSummary }
+            }
         }
+    }
+
+    private var projectionSummary: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("PROJECTION OUTPUT")
+                .font(AppFont.label.weight(.semibold))
+                .foregroundStyle(AppColor.amber)
+            Text("At age \(Int(finalAge.rounded())), Judge reaches \(userProjectionTotal.formatted()) career home runs.")
+                .font(AppFont.body.weight(.semibold))
+                .foregroundStyle(AppColor.bone)
+                .fixedSize(horizontal: false, vertical: true)
+            let rank = ChaseEngine.allTimeRank(Double(userProjectionTotal), leaderboard: config.leaderboard)
+            Text(rank.passing.map { "That projects to \(ordinal(rank.rank)) all-time, passing \($0)." } ?? "That projects to \(ordinal(rank.rank)) all-time.")
+                .font(AppFont.bodySmall)
+                .foregroundStyle(AppColor.boneDim)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(AppColor.nightRaised)
+        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+        .accessibilityElement(children: .combine)
     }
 
     private var compactAgeBars: some View {
@@ -229,7 +258,7 @@ struct HomeRunChaseView: View {
             }
 
             Text("Within-season values are linearly estimated. Ruth's early at-bats came mainly as a pitcher. Bonds and McGwire played in the steroid era; this comparison presents the record book without resolving that history.")
-                .font(.system(size: 12))
+                .font(dynamicTypeSize.usesExpandedReadingLayout ? .body : .system(size: 12))
                 .foregroundStyle(AppColor.boneMuted)
                 .lineSpacing(2)
                 .padding(.top, 4)
@@ -237,8 +266,8 @@ struct HomeRunChaseView: View {
         .chasePanel()
     }
 
-    private func milestoneGrid(compact: Bool) -> some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 1) {
+    private func milestoneGrid(compact: Bool, expanded: Bool) -> some View {
+        LazyVGrid(columns: expanded ? [GridItem(.flexible())] : [GridItem(.flexible()), GridItem(.flexible())], spacing: 1) {
             ForEach(ChaseEngine.milestones(for: config)) { milestone in
                 VStack(alignment: .leading, spacing: 4) {
                     Text(milestone.label)
@@ -284,20 +313,23 @@ struct HomeRunChaseView: View {
         display: Int
     ) -> some View {
         VStack(spacing: 8) {
-            HStack {
+            let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout())
+            layout {
                 Text(title).font(AppFont.label).tracking(0.8)
                 Spacer()
                 Text(String(display)).font(AppFont.displayMedium).monospacedDigit()
             }
             Slider(value: value, in: range, step: 1)
                 .tint(AppColor.amber)
+                .accessibilityLabel(title)
                 .accessibilityValue(String(display))
         }
         .foregroundStyle(AppColor.bone)
     }
 
     private var navigation: some View {
-        HStack(spacing: 14) {
+        let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 14)) : AnyLayout(HStackLayout(spacing: 14))
+        return layout {
             HStack(spacing: 10) {
                 ForEach(0..<4, id: \.self) { index in
                     Button {
@@ -306,7 +338,7 @@ struct HomeRunChaseView: View {
                         Circle()
                             .fill(index == chapter ? AppColor.amber : AppColor.rule)
                             .frame(width: 10, height: 10)
-                            .frame(width: 30, height: 44)
+                            .frame(width: dynamicTypeSize.usesExpandedReadingLayout ? 44 : 30, height: 44)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Chapter \(index + 1)")
@@ -324,7 +356,7 @@ struct HomeRunChaseView: View {
                         .font(AppFont.label)
                         .foregroundStyle(AppColor.night)
                         .padding(.horizontal, 18)
-                        .frame(height: 44)
+                        .frame(minHeight: 44)
                         .background(AppColor.amber)
                 }
                 .buttonStyle(.plain)
@@ -465,6 +497,7 @@ struct HomeRunChaseView: View {
 }
 
 struct ChaseBar: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let name: String
     let value: Double
     let maximum: Double
@@ -473,7 +506,8 @@ struct ChaseBar: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            HStack {
+            let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4)) : AnyLayout(HStackLayout())
+            layout {
                 Text(name)
                 Spacer()
                 Text(String(Int(value.rounded())))

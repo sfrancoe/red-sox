@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PitchingView: View {
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: PitchingStore
     let team: HubTeam
     let onSelectPlayer: (Int) -> Void
@@ -10,6 +11,10 @@ struct PitchingView: View {
         self.team = team
         self.onSelectPlayer = onSelectPlayer
         _store = State(initialValue: PitchingStore(team: team))
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
     }
 
     var body: some View {
@@ -39,12 +44,15 @@ struct PitchingView: View {
 
     private func pitchingContent(_ feed: PitchingFeed, chartHeight: CGFloat) -> some View {
         ScrollView {
-            LazyVStack(spacing: 14) {
+            // Keep the small page shell eager; only the pitcher records need lazy
+            // layout. Nesting lazy groups can make enlarged records jump on scroll.
+            VStack(spacing: 14) {
                 rolePicker
 
                 impactCard(chartHeight: chartHeight)
 
-                HStack(alignment: .center) {
+                let sortLayout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .center))
+                sortLayout {
                     Text(store.filter.reportsTitle)
                         .font(AppFont.displaySmall)
                         .foregroundStyle(AppColor.ink)
@@ -61,9 +69,17 @@ struct PitchingView: View {
                     .tint(AppColor.ink)
                 }
 
-                HubCardGrid {
-                    ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
-                        pitcherCard(pitcher, rank: index + 1)
+                if usesExpandedReadingLayout {
+                    LazyVStack(spacing: 14) {
+                        ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
+                            expandedPitcherCard(pitcher, rank: index + 1)
+                        }
+                    }
+                } else {
+                    HubCardGrid {
+                        ForEach(Array(store.visiblePitchers.enumerated()), id: \.element.id) { index, pitcher in
+                            pitcherCard(pitcher, rank: index + 1)
+                        }
                     }
                 }
 
@@ -77,7 +93,53 @@ struct PitchingView: View {
         }
     }
 
+    private func expandedPitcherCard(_ pitcher: PitcherReport, rank: Int) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("\(store.sort.title.uppercased()) RANK \(rank)")
+                .font(.caption.weight(.black))
+                .foregroundStyle(AppColor.red)
+            if team.supportsPlayers {
+                Button { onSelectPlayer(pitcher.id) } label: {
+                    HStack(spacing: 5) {
+                        Text(pitcher.name)
+                        Image(systemName: "person.crop.circle")
+                    }
+                    .font(.headline)
+                    .foregroundStyle(AppColor.navy)
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Open player biography")
+            } else {
+                Text(pitcher.name).font(.headline).foregroundStyle(AppColor.navy)
+            }
+            Text("\(pitcher.handedness) · \(pitcher.role) · \(pitcher.games) G\(pitcher.starts > 0 ? " · \(pitcher.starts) GS" : "")")
+                .font(.subheadline)
+            Text("\(pitcher.warGap.signedText) fWAR")
+                .font(AppFont.numberLarge)
+                .foregroundStyle(pitcher.warGap >= 0 ? AppColor.green : AppColor.red)
+            Text(pitcher.story)
+                .font(.body)
+                .lineSpacing(2)
+            comparisonTable(pitcher)
+        }
+        .cardStyle()
+    }
+
+    @ViewBuilder
     private var rolePicker: some View {
+        if usesExpandedReadingLayout {
+            Picker("Pitcher role", selection: $store.filter) {
+                ForEach(PitcherFilter.allCases) { filter in Text(filter.title).tag(filter) }
+            }
+            .pickerStyle(.menu)
+            .font(.body)
+            .frame(minHeight: 44)
+        } else {
+            compactRolePicker
+        }
+    }
+
+    private var compactRolePicker: some View {
         HStack(spacing: 0) {
             ForEach(PitcherFilter.allCases) { filter in
                 Button {
@@ -120,13 +182,26 @@ struct PitchingView: View {
 
             PitchingImpactChart(pitchers: store.visiblePitchers)
                 .frame(height: chartHeight)
+
+            if usesExpandedReadingLayout {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Chart values")
+                        .font(.subheadline.weight(.bold))
+                    ForEach(store.visiblePitchers) { pitcher in
+                        Text("\(pitcher.name): actual \(pitcher.actual.war.twoPlaces) fWAR; forecast \(pitcher.forecastToDate.war.twoPlaces)")
+                            .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
         }
         .cardStyle()
     }
 
     private func pitcherCard(_ pitcher: PitcherReport, rank: Int) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .top) {
+            let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10)) : AnyLayout(HStackLayout(alignment: .top))
+            layout {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("\(store.sort.title.uppercased()) RANK \(rank)")
                         .font(.caption2.weight(.black))
@@ -191,33 +266,48 @@ struct PitchingView: View {
         .clipShape(Rectangle())
     }
 
+    @ViewBuilder
     private func comparisonTable(_ pitcher: PitcherReport) -> some View {
-        Grid(horizontalSpacing: 14, verticalSpacing: 6) {
-            GridRow {
-                Text("")
-                Text("ACTUAL")
-                Text("FORECAST")
+        if usesExpandedReadingLayout {
+            VStack(alignment: .leading, spacing: 14) {
+                comparisonRows(pitcher)
             }
-            .font(.caption2.weight(.black))
-            .foregroundStyle(AppColor.ink)
-
-            comparisonRow("fWAR", pitcher.actual.war.twoPlaces, pitcher.forecastToDate.war.twoPlaces)
-            comparisonRow("Innings", pitcher.actual.ip, pitcher.forecastToDate.ip.onePlace)
-            comparisonRow("ERA", pitcher.actual.era.twoPlaces, pitcher.forecast?.era.twoPlaces ?? "—")
-            comparisonRow("FIP", pitcher.actual.fip.twoPlaces, pitcher.forecast?.fip.twoPlaces ?? "—")
-            comparisonRow("K−BB%", "\(pitcher.actual.kMinusBbPct.onePlace)%", pitcher.forecast.map { "\($0.kMinusBbPct.onePlace)%" } ?? "—")
+        } else {
+            Grid(horizontalSpacing: 14, verticalSpacing: 6) {
+                GridRow { Text(""); Text("ACTUAL"); Text("FORECAST") }
+                    .font(.caption2.weight(.black))
+                    .foregroundStyle(AppColor.ink)
+                comparisonRows(pitcher)
+            }
+            .font(.caption.monospacedDigit())
         }
-        .font(.caption.monospacedDigit())
     }
 
+    @ViewBuilder
+    private func comparisonRows(_ pitcher: PitcherReport) -> some View {
+        comparisonRow("fWAR", pitcher.actual.war.twoPlaces, pitcher.forecastToDate.war.twoPlaces)
+        comparisonRow("Innings", pitcher.actual.ip, pitcher.forecastToDate.ip.onePlace)
+        comparisonRow("ERA", pitcher.actual.era.twoPlaces, pitcher.forecast?.era.twoPlaces ?? "—")
+        comparisonRow("FIP", pitcher.actual.fip.twoPlaces, pitcher.forecast?.fip.twoPlaces ?? "—")
+        comparisonRow("K−BB%", "\(pitcher.actual.kMinusBbPct.onePlace)%", pitcher.forecast.map { "\($0.kMinusBbPct.onePlace)%" } ?? "—")
+    }
+
+    @ViewBuilder
     private func comparisonRow(_ label: String, _ actual: String, _ forecast: String) -> some View {
-        GridRow {
-            Text(label)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text(actual)
-            Text(forecast)
-                .foregroundStyle(AppColor.ink)
+        if usesExpandedReadingLayout {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(label).font(.headline)
+                Text("Actual: \(actual)").font(.body.monospacedDigit())
+                Text("Forecast: \(forecast)").font(.body.monospacedDigit())
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityElement(children: .combine)
+        } else {
+            GridRow {
+                Text(label).fontWeight(.bold).frame(maxWidth: .infinity, alignment: .leading)
+                Text(actual)
+                Text(forecast).foregroundStyle(AppColor.ink)
+            }
         }
     }
 

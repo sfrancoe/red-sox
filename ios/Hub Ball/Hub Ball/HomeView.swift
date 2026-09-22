@@ -9,6 +9,7 @@ enum HomeDestination {
 struct HomeView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: HomeStore
     let team: HubTeam
     let onSelect: (HomeDestination) -> Void
@@ -22,64 +23,88 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             AppColor.paleRed.ignoresSafeArea()
-            homeMasthead
-            Group {
-                if store.recentGame != nil, store.schedule != nil {
-                    briefing
-                } else if store.isLoading {
-                    ProgressView("Loading today's briefing…")
-                        .tint(AppColor.ink)
-                        .foregroundStyle(AppColor.ink)
-                } else {
-                    errorView
+            VStack(spacing: 0) {
+                homeMasthead
+                Group {
+                    if store.recentGame != nil, store.schedule != nil {
+                        briefing
+                    } else if store.isLoading {
+                        ProgressView("Loading today's briefing…")
+                            .tint(AppColor.ink)
+                            .foregroundStyle(AppColor.ink)
+                    } else {
+                        errorView
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
         }
         .task { await store.load() }
     }
 
     private var homeMasthead: some View {
-        VStack {
-            HStack(spacing: 9) {
-                Image(systemName: "baseball.fill")
-                    .font(.system(size: contentWidth >= 650 ? 42 : 36, weight: .regular))
-                    .foregroundStyle(palette.line)
+        Group {
+            if usesExpandedReadingLayout {
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: "baseball.fill")
+                        .font(.system(size: 36, weight: .regular))
+                        .foregroundStyle(palette.line)
 
-                Text(team.fullName)
-                    .font(AppFont.displayLarge)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.65)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(team.fullName)
+                            .font(AppFont.displayLarge)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Text(todayHeading)
+                            .font(AppFont.label)
+                            .foregroundStyle(AppColor.ink.opacity(0.88))
+                    }
                     .layoutPriority(1)
+                }
+            } else {
+                HStack(spacing: 9) {
+                    Image(systemName: "baseball.fill")
+                        .font(.system(size: contentWidth >= 650 ? 42 : 36, weight: .regular))
+                        .foregroundStyle(palette.line)
 
-                Spacer()
+                    Text(team.fullName)
+                        .font(AppFont.displayLarge)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.65)
+                        .layoutPriority(1)
 
-                Text(todayHeading)
-                    .font(AppFont.label)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.75)
+                    Spacer()
+
+                    Text(todayHeading)
+                        .font(AppFont.label)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                }
             }
-            .foregroundStyle(AppColor.ink)
-            .padding(.horizontal, 12)
-            .padding(.top, 10)
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel("\(team.fullName), \(todayHeading)")
-
-            Spacer()
         }
-        .allowsHitTesting(false)
+        .foregroundStyle(AppColor.ink)
+        .padding(.horizontal, 12)
+        .padding(.top, usesExpandedReadingLayout ? 14 : 10)
+        .padding(.bottom, usesExpandedReadingLayout ? 14 : 10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(team.fullName), \(todayHeading)")
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
     }
 
     private var briefing: some View {
         ScrollView {
             VStack(spacing: 0) {
                 lastGameCard
-                Color.clear.frame(height: 32)
+                Color.clear.frame(height: usesExpandedReadingLayout ? 20 : 32)
                 standingsCard
-                Color.clear.frame(height: 32)
+                Color.clear.frame(height: usesExpandedReadingLayout ? 20 : 32)
                 upcomingBoard
             }
             .padding(.horizontal, contentWidth >= 650 ? 18 : 12)
-            .padding(.top, 87)
+            .padding(.top, usesExpandedReadingLayout ? 4 : 0)
             .padding(.bottom, 12)
         }
         .refreshable { await store.load() }
@@ -91,79 +116,134 @@ struct HomeView: View {
             division.teams.contains(where: \.isFavorite)
         }) {
             Button { onSelect(.standings) } label: {
-                VStack(spacing: 0) {
-                    HStack(spacing: 0) {
-                        Text("Team")
-                            .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
-                            .frame(width: contentWidth >= 650 ? 200 : 135, alignment: .leading)
-                        Text("W").frame(maxWidth: .infinity)
-                        Text("L").frame(maxWidth: .infinity)
-                        Text("GB").frame(maxWidth: .infinity)
-                        Text("L10").frame(maxWidth: .infinity)
-                        Text("STRK").frame(maxWidth: .infinity)
-                    }
-                    .font(AppFont.label)
-                    .padding(.horizontal, 13)
-                    .frame(height: 36)
-                    .modifier(HomeTableHeaderStyle())
-
-                    ForEach(Array(division.teams.enumerated()), id: \.element.id) { index, team in
-                        HStack(spacing: 0) {
-                            HStack(spacing: 8) {
-                                Text(team.rank)
-                                    .font(AppFont.number)
-                                    .foregroundStyle(AppColor.boneMuted)
-                                    .frame(width: 12, alignment: .trailing)
-                                Text(team.cityName)
-                                    .font(.system(size: 15, weight: team.isFavorite ? .black : .bold))
-                                    .foregroundStyle(team.isFavorite ? AppColor.amber : AppColor.bone)
-                                    .lineLimit(1)
-                            }
-                            .frame(width: contentWidth >= 650 ? 200 : 135, alignment: .leading)
-
-                            standingNumber(team.wins, emphasized: team.isFavorite)
-                            standingNumber(team.losses, emphasized: team.isFavorite)
-                            Text(team.gamesBack)
-                                .font(AppFont.number)
-                                .frame(maxWidth: .infinity)
-                            Text(team.lastTen)
-                                .font(AppFont.number)
-                                .frame(maxWidth: .infinity)
-                            Text(team.streak)
-                                .font(AppFont.number)
-                                .foregroundStyle(AppColor.streakColor(team.streak))
-                                .frame(maxWidth: .infinity)
-                        }
-                        .foregroundStyle(AppColor.navy)
-                        .padding(.horizontal, 13)
-                        .frame(height: 35)
-                        .background(team.isFavorite ? palette.tint : AppColor.paper)
-                        .overlay(alignment: .leading) {
-                            if team.isFavorite {
-                                Rectangle().fill(palette.line).frame(width: 3)
-                            }
-                        }
-
-                        if index < division.teams.count - 1 {
-                            Divider().overlay(AppColor.separator).padding(.leading, 13)
-                        }
-                    }
-
-                    if let standings = store.standings, standings.isDelayed {
-                        Label("Standings delayed · Updated \(standings.updatedText)", systemImage: "clock.badge.exclamationmark")
-                            .font(.system(size: 11, weight: .semibold))
-                            .foregroundStyle(AppColor.inkMuted)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 13)
-                            .padding(.vertical, 8)
-                            .background(AppColor.paper)
-                    }
+                if usesExpandedReadingLayout {
+                    expandedStandingsContent(division)
+                } else {
+                    compactStandingsContent(division)
                 }
-                .modifier(HomeCardStyle())
             }
             .buttonStyle(.plain)
             .accessibilityElement(children: .combine)
             .accessibilityHint("Opens the standings")
+        }
+    }
+
+    private func compactStandingsContent(_ division: StandingsDivision) -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Text("Team")
+                    .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
+                    .frame(width: contentWidth >= 650 ? 200 : 135, alignment: .leading)
+                Text("W").frame(maxWidth: .infinity)
+                Text("L").frame(maxWidth: .infinity)
+                Text("GB").frame(maxWidth: .infinity)
+                Text("L10").frame(maxWidth: .infinity)
+                Text("STRK").frame(maxWidth: .infinity)
+            }
+            .font(AppFont.label)
+            .padding(.horizontal, 13)
+            .frame(height: 36)
+            .modifier(HomeTableHeaderStyle())
+
+            ForEach(Array(division.teams.enumerated()), id: \.element.id) { index, team in
+                HStack(spacing: 0) {
+                    HStack(spacing: 8) {
+                        Text(team.rank)
+                            .font(AppFont.number)
+                            .foregroundStyle(AppColor.boneMuted)
+                            .frame(width: 12, alignment: .trailing)
+                        Text(team.cityName)
+                            .font(.system(size: 15, weight: team.isFavorite ? .black : .bold))
+                            .foregroundStyle(team.isFavorite ? AppColor.amber : AppColor.bone)
+                            .lineLimit(1)
+                    }
+                    .frame(width: contentWidth >= 650 ? 200 : 135, alignment: .leading)
+
+                    standingNumber(team.wins, emphasized: team.isFavorite)
+                    standingNumber(team.losses, emphasized: team.isFavorite)
+                    Text(team.gamesBack).font(AppFont.number).frame(maxWidth: .infinity)
+                    Text(team.lastTen).font(AppFont.number).frame(maxWidth: .infinity)
+                    Text(team.streak).font(AppFont.number).foregroundStyle(AppColor.streakColor(team.streak)).frame(maxWidth: .infinity)
+                }
+                .foregroundStyle(AppColor.navy)
+                .padding(.horizontal, 13)
+                .frame(height: 35)
+                .background(team.isFavorite ? palette.tint : AppColor.paper)
+                .overlay(alignment: .leading) {
+                    if team.isFavorite { Rectangle().fill(palette.line).frame(width: 3) }
+                }
+                if index < division.teams.count - 1 {
+                    Divider().overlay(AppColor.separator).padding(.leading, 13)
+                }
+            }
+
+            if let standings = store.standings, standings.isDelayed {
+                Label("Standings delayed · Updated \(standings.updatedText)", systemImage: "clock.badge.exclamationmark")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(AppColor.inkMuted)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 13)
+                    .padding(.vertical, 8)
+                    .background(AppColor.paper)
+            }
+        }
+        .modifier(HomeCardStyle())
+    }
+
+    private func expandedStandingsContent(_ division: StandingsDivision) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Standings")
+                .font(.headline.weight(.black))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .modifier(HomeTableHeaderStyle())
+
+            ForEach(Array(division.teams.enumerated()), id: \.element.id) { index, team in
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text(team.rank).font(AppFont.number).foregroundStyle(AppColor.boneMuted)
+                        Text(team.cityName)
+                            .font(.headline.weight(team.isFavorite ? .black : .bold))
+                            .foregroundStyle(team.isFavorite ? AppColor.amber : AppColor.bone)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 4)
+                        if team.isFavorite { Image(systemName: "star.fill").foregroundStyle(AppColor.amber).accessibilityHidden(true) }
+                    }
+                    VStack(spacing: 5) {
+                        homeMetric("Wins", "\(team.wins)")
+                        homeMetric("Losses", "\(team.losses)")
+                        homeMetric("Games back", team.gamesBack)
+                        homeMetric("Last 10", team.lastTen)
+                        homeMetric("Streak", team.streak, valueColor: AppColor.streakColor(team.streak))
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(team.isFavorite ? palette.tint : AppColor.paper)
+                .overlay(alignment: .leading) {
+                    if team.isFavorite { Rectangle().fill(palette.line).frame(width: 3) }
+                }
+                if index < division.teams.count - 1 { Divider().overlay(AppColor.separator).padding(.leading, 16) }
+            }
+
+            if let standings = store.standings, standings.isDelayed {
+                Label("Standings delayed · Updated \(standings.updatedText)", systemImage: "clock.badge.exclamationmark")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(AppColor.inkMuted)
+                    .padding(16)
+            }
+        }
+        .modifier(HomeCardStyle())
+    }
+
+    private func homeMetric(_ label: String, _ value: String, valueColor: Color? = nil) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Text(label).font(.subheadline.weight(.semibold)).foregroundStyle(AppColor.boneMuted)
+            Spacer(minLength: 8)
+            Text(value).font(.body.weight(.bold).monospacedDigit()).foregroundStyle(valueColor ?? AppColor.bone)
+                .multilineTextAlignment(.trailing)
         }
     }
 
@@ -173,82 +253,145 @@ struct HomeView: View {
             let favorite = favoriteTeam(in: game)
             let opponent = opponent(in: game)
             Button { onSelect(.games) } label: {
-                VStack(spacing: 0) {
-                    HStack(spacing: 0) {
-                        HStack(spacing: 7) {
-                            Text(compactNumericDate(game.gameDate))
-                            if game.isLive {
-                                LiveGameIndicator()
-                            } else {
-                                Text(game.result.lowercased() == "win" ? "W" : "L")
-                                    .foregroundStyle(
-                                        game.result.lowercased() == "win"
-                                            ? AppColor.resultWinText
-                                            : AppColor.resultLossText
-                                    )
+                if usesExpandedReadingLayout {
+                    expandedLastGameContent(game, favorite: favorite, opponent: opponent)
+                        .modifier(HomeCardStyle())
+                } else {
+                    VStack(spacing: 0) {
+                        HStack(spacing: 0) {
+                            HStack(spacing: 7) {
+                                Text(compactNumericDate(game.gameDate))
+                                if game.isLive {
+                                    LiveGameIndicator()
+                                } else {
+                                    Text(game.result.lowercased() == "win" ? "W" : "L")
+                                        .foregroundStyle(
+                                            game.result.lowercased() == "win"
+                                                ? AppColor.resultWinText
+                                                : AppColor.resultLossText
+                                        )
+                                }
                             }
+                            .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("R").frame(width: 38, alignment: .trailing)
+                            Text("H").frame(width: 38, alignment: .trailing)
+                            Text("E").frame(width: 38, alignment: .trailing)
+                            Text("LOB").frame(width: 44, alignment: .trailing)
+                            Text("SB").frame(width: 36, alignment: .trailing)
                         }
-                        .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        Text("R").frame(width: 38, alignment: .trailing)
-                        Text("H").frame(width: 38, alignment: .trailing)
-                        Text("E").frame(width: 38, alignment: .trailing)
-                        Text("LOB").frame(width: 44, alignment: .trailing)
-                        Text("SB").frame(width: 36, alignment: .trailing)
-                    }
-                    .font(.system(size: 11, weight: .black))
-                    .tracking(0.8)
-                    .padding(.horizontal, 13)
-                    .frame(height: 36)
-                    .modifier(HomeTableHeaderStyle())
+                        .font(.system(size: 11, weight: .black))
+                        .tracking(0.8)
+                        .padding(.horizontal, 13)
+                        .frame(height: 36)
+                        .modifier(HomeTableHeaderStyle())
 
-                    gameResultRow(favorite, isWinner: favorite.runs > opponent.runs)
-                    Divider().overlay(AppColor.separator).padding(.leading, 13)
-                    gameResultRow(opponent, isWinner: opponent.runs > favorite.runs)
+                        gameResultRow(favorite, isWinner: favorite.runs > opponent.runs)
+                        Divider().overlay(AppColor.separator).padding(.leading, 13)
+                        gameResultRow(opponent, isWinner: opponent.runs > favorite.runs)
 
-                    HStack(spacing: 8) {
-                        Text("Home runs")
-                            .font(.system(size: 10, weight: .black))
-                            .foregroundStyle(AppColor.boneMuted)
-                        Text(homeRunSummary(for: favorite))
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundStyle(AppColor.navy)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.72)
-                    }
-                    .padding(.horizontal, 13)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .frame(height: 27)
-                    .background(AppColor.nightRaised)
-
-                    HStack(spacing: 8) {
-                        Text(game.isLive ? "Live" : "Pitching")
-                            .foregroundStyle(AppColor.boneMuted)
-                        Text(game.isLive ? game.liveStatus ?? "In progress" : pitchingSummary(for: game))
-                            .foregroundStyle(AppColor.navy)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.78)
-                        if game.isLive, let scheduledGame = scheduledGame(for: game) {
-                            Text("·")
+                        HStack(spacing: 8) {
+                            Text("Home runs")
+                                .font(.system(size: 10, weight: .black))
                                 .foregroundStyle(AppColor.boneMuted)
-                            Text(scheduledGame.watchSummary)
+                            Text(homeRunSummary(for: favorite))
+                                .font(.system(size: 11, weight: .bold))
                                 .foregroundStyle(AppColor.navy)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.72)
                         }
+                        .padding(.horizontal, 13)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(height: 27)
+                        .background(AppColor.nightRaised)
+
+                        HStack(spacing: 8) {
+                            Text(game.isLive ? "Live" : "Pitching")
+                                .foregroundStyle(AppColor.boneMuted)
+                            Text(game.isLive ? game.liveStatus ?? "In progress" : pitchingSummary(for: game))
+                                .foregroundStyle(AppColor.navy)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.78)
+                            if game.isLive, let scheduledGame = scheduledGame(for: game) {
+                                Text("·").foregroundStyle(AppColor.boneMuted)
+                                Text(scheduledGame.watchSummary)
+                                    .foregroundStyle(AppColor.navy)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.72)
+                            }
+                        }
+                        .font(.system(size: 10, weight: .black))
+                        .padding(.horizontal, 13)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(height: 27)
+                        .background(AppColor.nightRaised)
                     }
-                    .font(.system(size: 10, weight: .black))
-                    .padding(.horizontal, 13)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .frame(height: 27)
-                    .background(AppColor.nightRaised)
+                    .modifier(HomeCardStyle())
                 }
-                .modifier(HomeCardStyle())
             }
             .buttonStyle(.plain)
             .accessibilityElement(children: .combine)
             .accessibilityHint("Opens Game Center")
         }
+    }
+
+    private func expandedLastGameContent(
+        _ game: RecentGame,
+        favorite: TeamBoxScore,
+        opponent: TeamBoxScore
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(compactDate(game.gameDate)).font(.headline.weight(.black))
+                    Spacer(minLength: 8)
+                    Text(game.isLive ? "LIVE" : game.result.uppercased()).font(.subheadline.weight(.black)).foregroundStyle(game.isLive ? AppColor.amber : AppColor.steel)
+                }
+                Text("Last game · tap for Game Recaps").font(.caption).foregroundStyle(AppColor.boneMuted)
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .modifier(HomeTableHeaderStyle())
+
+            expandedGameResultRow(favorite, isWinner: favorite.runs > opponent.runs)
+            Divider().overlay(AppColor.separator).padding(.leading, 16)
+            expandedGameResultRow(opponent, isWinner: opponent.runs > favorite.runs)
+
+            VStack(alignment: .leading, spacing: 8) {
+                expandedSummaryRow("Home runs", homeRunSummary(for: favorite))
+                expandedSummaryRow(game.isLive ? "Live" : "Pitching", game.isLive ? game.liveStatus ?? "In progress" : pitchingSummary(for: game))
+                if game.isLive, let scheduledGame = scheduledGame(for: game) {
+                    expandedSummaryRow("Watch", scheduledGame.watchSummary)
+                }
+            }
+            .padding(16)
+        }
+    }
+
+    private func expandedGameResultRow(_ team: TeamBoxScore, isWinner: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(team.cityName).font(.headline.weight(isWinner ? .black : .bold)).foregroundStyle(isWinner ? AppColor.amber : AppColor.bone)
+                Spacer(minLength: 8)
+                Text(isWinner ? "WINNER" : "").font(.caption.weight(.black)).foregroundStyle(AppColor.amber)
+            }
+            homeMetric("Runs", "\(team.runs)", valueColor: isWinner ? AppColor.amber : AppColor.bone)
+            homeMetric("Hits", "\(team.hits)")
+            homeMetric("Errors", "\(team.errors)")
+            homeMetric("Left on base", "\(team.leftOnBase)")
+            homeMetric("Stolen bases", "\(team.batting.reduce(0) { $0 + ($1.stolenBases ?? 0) })")
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppColor.nightRaised)
+    }
+
+    private func expandedSummaryRow(_ label: String, _ value: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(label).font(.caption.weight(.bold)).foregroundStyle(AppColor.boneMuted)
+            Text(value).font(.body.weight(.semibold)).foregroundStyle(AppColor.bone).fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     @ViewBuilder
@@ -279,48 +422,72 @@ struct HomeView: View {
     }
 
     private var tableHeader: some View {
-        HStack(spacing: 8) {
-            Text(contentWidth < 400 ? "Next 3" : "Next 3 games")
-                .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Time").frame(width: 52, alignment: .center)
-            Text("Starter").frame(width: 128, alignment: .trailing)
+        Group {
+            if usesExpandedReadingLayout {
+                Text("Next 3 games")
+                    .font(.headline.weight(.black))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                HStack(spacing: 8) {
+                    Text(contentWidth < 400 ? "Next 3" : "Next 3 games")
+                        .font(.system(size: contentWidth >= 650 ? 20 : 17, weight: .black))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Time").frame(width: 52, alignment: .center)
+                    Text("Starter").frame(width: 128, alignment: .trailing)
+                }
+                .font(.system(size: 11, weight: .black))
+            }
         }
-        .font(.system(size: 11, weight: .black))
         .padding(.horizontal, 13)
-        .frame(height: 36)
+        .padding(.vertical, usesExpandedReadingLayout ? 12 : 0)
+        .frame(minHeight: usesExpandedReadingLayout ? 52 : 36, alignment: .center)
         .modifier(HomeTableHeaderStyle())
     }
 
     private func upcomingRow(_ game: ScheduledGame) -> some View {
-        return HStack(spacing: 8) {
-            VStack(alignment: .leading, spacing: 1) {
-                Text("\(shortGameDate(game.gameDate)) \(game.locationWord) \(game.opponent)")
-                    .font(.system(size: 14, weight: .bold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.82)
-                Text(game.watchSummary)
-                    .font(.system(size: 10, weight: .black))
-                    .foregroundStyle(AppColor.navy.opacity(0.68))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.72)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+        Group {
+            if usesExpandedReadingLayout {
+                VStack(alignment: .leading, spacing: 7) {
+                    Text("\(shortGameDate(game.gameDate)) · \(game.locationWord) \(game.opponent)")
+                        .font(.headline.weight(.bold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    homeMetric("Start time", game.formattedTime)
+                    homeMetric("Starter", projectedStarter(for: game))
+                    expandedSummaryRow("Watch", game.watchSummary)
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                HStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text("\(shortGameDate(game.gameDate)) \(game.locationWord) \(game.opponent)")
+                            .font(.system(size: 14, weight: .bold))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.82)
+                        Text(game.watchSummary)
+                            .font(.system(size: 10, weight: .black))
+                            .foregroundStyle(AppColor.navy.opacity(0.68))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.72)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-            Text(game.formattedTime)
-                .font(.system(size: 13, weight: .medium, design: .monospaced))
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
-                .frame(width: 52, alignment: .center)
-            Text(projectedStarter(for: game))
-                .font(.system(size: 13, weight: .bold))
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-                .frame(width: 128, alignment: .trailing)
+                    Text(game.formattedTime)
+                        .font(.system(size: 13, weight: .medium, design: .monospaced))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .frame(width: 52, alignment: .center)
+                    Text(projectedStarter(for: game))
+                        .font(.system(size: 13, weight: .bold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                        .frame(width: 128, alignment: .trailing)
+                }
+                .padding(.horizontal, 13)
+                .frame(height: 48)
+            }
         }
         .foregroundStyle(AppColor.navy)
-        .padding(.horizontal, 13)
-        .frame(height: 48)
         .accessibilityElement(children: .combine)
     }
 

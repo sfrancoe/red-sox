@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SeasonLeadersView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: SeasonLeadersStore
     @State private var scope: LeaderboardScope = .team
     @State private var detail: LeaderboardDetail?
@@ -9,6 +10,10 @@ struct SeasonLeadersView: View {
     init(team: HubTeam = .boston) {
         self.team = team
         _store = State(initialValue: SeasonLeadersStore(team: team))
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
     }
 
     var body: some View {
@@ -27,18 +32,31 @@ struct SeasonLeadersView: View {
     }
 
     private var scopeControl: some View {
-        HStack(spacing: 4) {
-            ForEach(LeaderboardScope.allCases) { item in
-                Button { scope = item } label: {
-                    Text(item.title(for: team))
-                        .font(.caption.weight(.semibold))
-                        .frame(maxWidth: .infinity, minHeight: 22)
-                        .foregroundStyle(scope == item ? AppColor.night : AppColor.ink)
-                        .background(scope == item ? AppColor.accent : AppColor.nightCell, in: RoundedRectangle(cornerRadius: 4))
+        Group {
+            if usesExpandedReadingLayout {
+                Picker("Leaderboard scope", selection: $scope) {
+                    ForEach(LeaderboardScope.allCases) { item in
+                        Text(item.title(for: team)).tag(item)
+                    }
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel(item.accessibilityTitle(for: team))
-                .accessibilityAddTraits(scope == item ? .isSelected : [])
+                .pickerStyle(.menu)
+                .font(.body)
+                .frame(minHeight: 44)
+            } else {
+                HStack(spacing: 4) {
+                    ForEach(LeaderboardScope.allCases) { item in
+                        Button { scope = item } label: {
+                            Text(item.title(for: team))
+                                .font(.caption.weight(.semibold))
+                                .frame(maxWidth: .infinity, minHeight: 22)
+                                .foregroundStyle(scope == item ? AppColor.night : AppColor.ink)
+                                .background(scope == item ? AppColor.accent : AppColor.nightCell, in: RoundedRectangle(cornerRadius: 4))
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(item.accessibilityTitle(for: team))
+                        .accessibilityAddTraits(scope == item ? .isSelected : [])
+                    }
+                }
             }
         }
         .padding(.horizontal, 16).padding(.top, 8).background(AppColor.paleRed)
@@ -53,9 +71,17 @@ struct SeasonLeadersView: View {
             LazyVStack(spacing: 14) {
                 if store.seasons.isEmpty { ProgressView("Loading season leaders…").padding(.top, 48) }
                 else {
-                    HubCardGrid {
-                        ForEach(store.sortedYears, id: \.self) { year in
-                            if let season = store.seasons[year] { yearCard(year: year, season: season) }
+                    if usesExpandedReadingLayout {
+                        LazyVStack(spacing: 14) {
+                            ForEach(store.sortedYears, id: \.self) { year in
+                                if let season = store.seasons[year] { yearCard(year: year, season: season) }
+                            }
+                        }
+                    } else {
+                        HubCardGrid {
+                            ForEach(store.sortedYears, id: \.self) { year in
+                                if let season = store.seasons[year] { yearCard(year: year, season: season) }
+                            }
                         }
                     }
                     Text("AVG and OPS use qualified hitters. WHIP requires at least 40 innings.")
@@ -100,7 +126,7 @@ struct SeasonLeadersView: View {
     private func yearHeader(year: String, season: SeasonLeaders) -> some View {
         HStack(alignment: .firstTextBaseline) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(year).font(.system(size: 32, weight: .black, design: .rounded)).foregroundStyle(isCurrentSeason(year) ? AppColor.red : AppColor.navy)
+                Text(year).font(.largeTitle.weight(.black)).foregroundStyle(isCurrentSeason(year) ? AppColor.red : AppColor.navy)
                 Image(systemName: "crown.fill").font(.system(size: 20, weight: .bold)).foregroundStyle(AppColor.accent)
             }
             Spacer()
@@ -112,7 +138,8 @@ struct SeasonLeadersView: View {
         VStack(alignment: .leading, spacing: 3) {
             Text(category.title).font(.subheadline.weight(.black)).tracking(0.7).foregroundStyle(AppColor.green)
             ForEach(Array(category.leaders.prefix(10).enumerated()), id: \.element.id) { index, leader in
-                HStack(alignment: .firstTextBaseline, spacing: 5) {
+                let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 5)) : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 5))
+                layout {
                     rankText("\(index + 1)"); LeaderName(name: leader.name, abbreviation: team.abbreviation); Spacer(minLength: 2)
                     Text(leader.value).fontWeight(index == 0 ? .bold : .regular).monospacedDigit()
                 }.font(.callout)
@@ -182,20 +209,23 @@ private struct LeaderboardDetailSheet: View {
 }
 
 private struct LeaderName: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let name: String
     let abbreviation: String
     var body: some View {
         (Text(name) + Text("  \(abbreviation)").font(.caption.weight(.semibold)).foregroundColor(AppColor.ink.opacity(0.65)))
-            .lineLimit(2).fixedSize(horizontal: false, vertical: true)
+            .lineLimit(dynamicTypeSize.usesExpandedReadingLayout ? nil : 2).fixedSize(horizontal: false, vertical: true)
     }
 }
 
 private struct CompactLeaderRow: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let leader: ComparisonLeader
     let selectedTeamID: Int
     private var isSelectedTeam: Bool { leader.teamID == selectedTeamID }
     var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 5) {
+        let layout = dynamicTypeSize.usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 5)) : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 5))
+        return layout {
             Text(leader.rankText).font(.caption.weight(.black)).foregroundStyle(AppColor.red)
                 .frame(minWidth: 30, alignment: .leading)
             LeaderName(name: leader.name, abbreviation: leader.teamAbbreviation ?? "TOT")

@@ -3,6 +3,7 @@ import SwiftUI
 struct ScheduleView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: ScheduleStore
     @State private var selectedGameID: Int?
     let team: HubTeam
@@ -39,10 +40,20 @@ struct ScheduleView: View {
         }
     }
 
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
+    }
+
     private func scheduleContent(_ schedule: Schedule) -> some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                if contentWidth >= 850 {
+                if usesExpandedReadingLayout {
+                    chronologicalGamesList(schedule)
+                    nextThreeGamesCard(schedule)
+                    if let game = selectedGame(in: schedule) {
+                        gameDetailCard(game)
+                    }
+                } else if contentWidth >= 850 {
                     VStack(spacing: 12) {
                         HStack(alignment: .top, spacing: 20) {
                             VStack(spacing: 16) {
@@ -79,6 +90,91 @@ struct ScheduleView: View {
         }
         .refreshable {
             await loadSchedule()
+        }
+    }
+
+    private func chronologicalGamesList(_ schedule: Schedule) -> some View {
+        let games = remainingGames(in: schedule).sorted { lhs, rhs in
+            if lhs.gameDate == rhs.gameDate { return lhs.id < rhs.id }
+            return lhs.gameDate < rhs.gameDate
+        }
+
+        return VStack(alignment: .leading, spacing: 0) {
+            Text("Upcoming games")
+                .font(.title3.weight(.black))
+                .foregroundStyle(AppColor.navy)
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(AppColor.nightRaised)
+
+            ForEach(games) { game in
+                Button {
+                    withAnimation(.easeOut(duration: 0.18)) { selectedGameID = game.id }
+                } label: {
+                    VStack(alignment: .leading, spacing: 8) {
+                        if usesExpandedReadingLayout {
+                            Text(game.fullFormattedDay)
+                                .font(.title3.weight(.black))
+                                .foregroundStyle(AppColor.red)
+                            Text(game.formattedTime)
+                                .font(.headline.weight(.bold).monospacedDigit())
+                                .foregroundStyle(AppColor.hunterGreen)
+                        } else {
+                            HStack(alignment: .firstTextBaseline) {
+                                Text(game.fullFormattedDay)
+                                    .font(.headline.weight(.black))
+                                    .foregroundStyle(AppColor.red)
+                                Spacer(minLength: 8)
+                                Text(game.formattedTime)
+                                    .font(.body.weight(.bold).monospacedDigit())
+                                    .foregroundStyle(AppColor.hunterGreen)
+                            }
+                        }
+                        Text("\(game.locationWord) \(game.opponent)")
+                            .font(.title3.weight(.black))
+                            .foregroundStyle(AppColor.navy)
+                            .fixedSize(horizontal: false, vertical: true)
+                        scheduleMetric("Starter", game.showProbables ? pitcherName(game.favoriteTeamPitcher) : "To be announced")
+                        scheduleMetric("Watch", game.watchSummary)
+                        if game.doubleheader {
+                            Text("Doubleheader · Game \(game.gameNumber)")
+                                .font(.subheadline.weight(.bold))
+                                .foregroundStyle(AppColor.red)
+                        }
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(selectedGameID == game.id ? palette.tint : Color.clear)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("\(game.fullFormattedDay), \(game.locationWord) \(game.opponent), \(game.formattedTime)")
+                Divider().overlay(AppColor.separator).padding(.leading, 16)
+            }
+        }
+        .cardStyle(padding: 0)
+    }
+
+    private func scheduleMetric(_ label: String, _ value: String) -> some View {
+        Group {
+            if usesExpandedReadingLayout {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(label).font(.subheadline.weight(.semibold)).foregroundStyle(AppColor.hunterGreen)
+                    Text(value.isEmpty ? "To be announced" : value)
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(AppColor.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            } else {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(label).font(.subheadline.weight(.semibold)).foregroundStyle(AppColor.hunterGreen)
+                    Spacer(minLength: 8)
+                    Text(value.isEmpty ? "To be announced" : value)
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(AppColor.ink)
+                        .multilineTextAlignment(.trailing)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
         }
     }
 

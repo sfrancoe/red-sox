@@ -59,15 +59,21 @@ enum AppColor {
 }
 
 enum AppFont {
-    static let displayLarge = Font.custom("BarlowCondensed-SemiBold", size: 30)
-    static let displayMedium = Font.custom("BarlowCondensed-SemiBold", size: 22)
-    static let displaySmall = Font.custom("BarlowCondensed-SemiBold", size: 17)
-    static let body = Font.custom("Inter-Regular", size: 16)
-    static let bodySmall = Font.custom("Inter-Regular", size: 14)
-    static let label = Font.custom("Inter-Medium", size: 12)
-    static let numberExtraLarge = Font.custom("Inter-Medium", size: 40)
-    static let numberLarge = Font.custom("Inter-Medium", size: 24)
-    static let number = Font.custom("Inter-Regular", size: 14)
+    static let displayLarge = Font.custom("BarlowCondensed-SemiBold", size: 30, relativeTo: .largeTitle)
+    static let displayMedium = Font.custom("BarlowCondensed-SemiBold", size: 22, relativeTo: .title2)
+    static let displaySmall = Font.custom("BarlowCondensed-SemiBold", size: 17, relativeTo: .headline)
+    static let body = Font.custom("Inter-Regular", size: 16, relativeTo: .body)
+    static let bodySmall = Font.custom("Inter-Regular", size: 14, relativeTo: .subheadline)
+    static let label = Font.custom("Inter-Medium", size: 12, relativeTo: .caption)
+    static let numberExtraLarge = Font.custom("Inter-Medium", size: 40, relativeTo: .largeTitle)
+    static let numberLarge = Font.custom("Inter-Medium", size: 24, relativeTo: .title2)
+    static let number = Font.custom("Inter-Regular", size: 14, relativeTo: .subheadline)
+}
+
+extension DynamicTypeSize {
+    /// Expanded layouts begin before the accessibility categories so content has
+    /// room to reflow instead of discovering overflow at the largest setting.
+    var usesExpandedReadingLayout: Bool { self >= .xxxLarge }
 }
 
 extension Color {

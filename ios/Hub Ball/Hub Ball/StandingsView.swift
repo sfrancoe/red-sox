@@ -4,6 +4,7 @@ struct StandingsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: StandingsStore
 
     init(team: HubTeam = .boston) {
@@ -16,7 +17,9 @@ struct StandingsView: View {
 
             Group {
                 if store.feeds.count == StandingsLeague.allCases.count {
-                    if contentWidth >= 650 {
+                    if usesExpandedReadingLayout {
+                        expandedStandingsContent
+                    } else if contentWidth >= 650 {
                         tabletStandingsContent
                     } else {
                         phoneStandingsContent
@@ -47,6 +50,146 @@ struct StandingsView: View {
             guard phase == .active else { return }
             Task { await store.load() }
         }
+    }
+
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
+    }
+
+    private var expandedStandingsContent: some View {
+        VStack(spacing: 0) {
+            modePicker
+
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 18) {
+                    if let league = store.mode.league,
+                       let feed = store.feeds[league] {
+                        ForEach(feed.divisions) { division in
+                            expandedStandingSection(
+                                title: "\(league.fullName) · \(division.name)",
+                                teams: division.teams,
+                                gamesBackTitle: "GB",
+                                showsCutoff: false,
+                                highlightsFavorite: league == store.selectedLeague
+                            )
+                        }
+                    } else if let feed = store.feeds[store.selectedLeague] {
+                        expandedStandingSection(
+                            title: "\(store.selectedLeague.fullName) · Wild Card",
+                            teams: feed.wildCard,
+                            gamesBackTitle: "WCGB",
+                            showsCutoff: true,
+                            highlightsFavorite: true
+                        )
+                        Text("Top three teams hold the wild-card positions.")
+                            .font(.body.weight(.semibold))
+                            .foregroundStyle(AppColor.ink.opacity(0.82))
+                    }
+
+                    standingsFooter
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 20)
+                .foregroundStyle(AppColor.ink)
+            }
+            .refreshable { await store.load() }
+        }
+        .padding(.top, 8)
+    }
+
+    private func expandedStandingSection(
+        title: String,
+        teams: [StandingsTeam],
+        gamesBackTitle: String,
+        showsCutoff: Bool,
+        highlightsFavorite: Bool
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(title)
+                .font(.title3.weight(.black))
+                .foregroundStyle(AppColor.navy)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(AppColor.nightRaised)
+
+            ForEach(Array(teams.enumerated()), id: \.element.id) { index, team in
+                if showsCutoff && index == 3 {
+                    cutoffLine(compact: false)
+                        .padding(.horizontal, 16)
+                }
+                expandedStandingRow(
+                    team,
+                    gamesBackTitle: gamesBackTitle,
+                    highlightsFavorite: highlightsFavorite
+                )
+                if index < teams.count - 1 {
+                    Divider().overlay(AppColor.rule).padding(.leading, 16)
+                }
+            }
+        }
+        .cardStyle(padding: 0)
+    }
+
+    private func expandedStandingRow(
+        _ team: StandingsTeam,
+        gamesBackTitle: String,
+        highlightsFavorite: Bool
+    ) -> some View {
+        let gamesBack = gamesBackTitle == "WCGB" ? team.wildCardGamesBack : team.gamesBack
+        let emphasized = highlightsFavorite && team.isFavorite
+
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(team.rank).font(AppFont.number).foregroundStyle(AppColor.boneMuted)
+                Text(team.cityName)
+                    .font(.headline.weight(emphasized ? .black : .bold))
+                    .foregroundStyle(emphasized ? AppColor.amber : AppColor.bone)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 4)
+                if team.isFavorite {
+                    Image(systemName: "star.fill")
+                        .foregroundStyle(AppColor.amber)
+                        .accessibilityLabel("Favorite team")
+                }
+            }
+            VStack(spacing: 5) {
+                standingsMetric("Wins", "\(team.wins)", emphasized: emphasized)
+                standingsMetric("Losses", "\(team.losses)", emphasized: emphasized)
+                standingsMetric("Winning percentage", team.pct, emphasized: emphasized)
+                standingsMetric(gamesBackTitle == "WCGB" ? "Wild-card games back" : "Games back", gamesBack, emphasized: emphasized)
+                standingsMetric("Last 10", team.lastTen, emphasized: emphasized)
+                standingsMetric("Streak", team.streak, emphasized: emphasized, valueColor: AppColor.streakColor(team.streak))
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(emphasized ? palette.tint : Color.clear)
+        .overlay(alignment: .leading) {
+            if emphasized { Rectangle().fill(palette.line).frame(width: 3) }
+        }
+    }
+
+    private func standingsMetric(
+        _ label: String,
+        _ value: String,
+        emphasized: Bool,
+        valueColor: Color? = nil
+    ) -> some View {
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 3))
+            : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 8))
+        return layout {
+            Text(label).font(.subheadline.weight(.semibold)).foregroundStyle(AppColor.boneMuted)
+                .fixedSize(horizontal: false, vertical: true)
+            if !dynamicTypeSize.isAccessibilitySize { Spacer(minLength: 8) }
+            Text(value)
+                .font(.body.weight(emphasized ? .bold : .regular).monospacedDigit())
+                .foregroundStyle(valueColor ?? (emphasized ? AppColor.amber : AppColor.bone))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
     }
 
     private var phoneStandingsContent: some View {
@@ -90,7 +233,6 @@ struct StandingsView: View {
                 .padding(.bottom, 12)
                 .foregroundStyle(AppColor.ink)
             }
-            .dynamicTypeSize(contentWidth >= 650 ? .large : .xSmall)
             .refreshable {
                 await store.load()
             }
@@ -115,7 +257,6 @@ struct StandingsView: View {
                 .padding(.vertical, 6)
                 .foregroundStyle(AppColor.ink)
             }
-            .dynamicTypeSize(.xSmall)
             .refreshable { await store.load() }
         }
     }
@@ -167,13 +308,28 @@ struct StandingsView: View {
         let updated = updates.first ?? "—"
         let delayed = store.feeds.values.contains(where: \.isDelayed)
         return Text("\(delayed ? "Data delayed · " : "")Updated \(updated) · MLB Stats API")
-            .font(.system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
+            .font(usesExpandedReadingLayout ? .footnote : .system(size: contentWidth >= 650 ? 12 : 10, weight: .semibold))
             .foregroundStyle(AppColor.ink.opacity(0.72))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 5)
     }
 
+    @ViewBuilder
     private var modePicker: some View {
+        if usesExpandedReadingLayout {
+            Picker("Standings view", selection: $store.mode) {
+                ForEach(StandingsMode.allCases) { mode in Text(mode.title).tag(mode) }
+            }
+            .pickerStyle(.menu)
+            .font(.body)
+            .frame(minHeight: 44)
+            .padding(.horizontal, 12)
+        } else {
+            compactModePicker
+        }
+    }
+
+    private var compactModePicker: some View {
         HStack(spacing: 0) {
             ForEach(StandingsMode.allCases) { mode in
                 Button {
@@ -267,7 +423,8 @@ struct StandingsView: View {
                 Text(team.rank)
                     .font(AppFont.number)
                     .foregroundStyle(AppColor.boneMuted)
-                    .frame(width: compact ? 11 : 15)
+                    .lineLimit(1)
+                    .frame(minWidth: 26)
                 Text(team.cityName)
                     .font(AppFont.body)
                     .foregroundStyle(emphasized ? AppColor.amber : AppColor.bone)

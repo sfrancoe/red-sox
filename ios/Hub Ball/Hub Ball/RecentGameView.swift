@@ -8,6 +8,7 @@ private enum BoxScoreTeamSelection {
 struct RecentGameView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var store: RecentGameStore
     @State private var selectedStatsTeam: BoxScoreTeamSelection = .favorite
     @State private var selectedGameID: Int?
@@ -59,6 +60,10 @@ struct RecentGameView: View {
         }
     }
 
+    private var usesExpandedReadingLayout: Bool {
+        dynamicTypeSize.usesExpandedReadingLayout
+    }
+
     private var selectedGame: RecentGame? {
         if let selectedGameID,
            let game = store.games.first(where: { $0.gamePk == selectedGameID }) {
@@ -67,7 +72,43 @@ struct RecentGameView: View {
         return store.games.first
     }
 
+    @ViewBuilder
     private var gameSelector: some View {
+        if usesExpandedReadingLayout {
+            TimelineView(.periodic(from: .now, by: 30)) { context in
+                Menu {
+                    ForEach(store.games, id: \.gamePk) { game in
+                        Button {
+                            selectedGameID = game.gamePk
+                            selectedStatsTeam = .favorite
+                        } label: {
+                            if selectedGame?.gamePk == game.gamePk {
+                                Label(gameTabAccessibilityLabel(game, at: context.date), systemImage: "checkmark")
+                            } else {
+                                Text(gameTabAccessibilityLabel(game, at: context.date))
+                            }
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Text(selectedGame.map { gameTabTitle($0, at: context.date) } ?? "Choose a game")
+                            .font(.body.weight(.semibold))
+                            .fixedSize(horizontal: false, vertical: true)
+                        Image(systemName: "chevron.down").font(.caption)
+                    }
+                    .frame(minHeight: 44)
+                }
+                .accessibilityLabel("Game")
+                .accessibilityValue(selectedGame.map { gameTabAccessibilityLabel($0, at: context.date) } ?? "No game selected")
+                .padding(.horizontal, 16)
+                .padding(.vertical, 4)
+            }
+        } else {
+            compactGameSelector
+        }
+    }
+
+    private var compactGameSelector: some View {
         TimelineView(.periodic(from: .now, by: 30)) { context in
             HStack(spacing: 0) {
                 ForEach(store.games, id: \.gamePk) { game in
@@ -193,7 +234,7 @@ struct RecentGameView: View {
                 freshnessBanner(game)
                 scoreCard(game)
 
-                if contentWidth >= 720 {
+                if contentWidth >= 720 && !usesExpandedReadingLayout {
                     VStack(spacing: 0) {
                         recapCard(game)
                         reportDivider
@@ -213,9 +254,17 @@ struct RecentGameView: View {
                     VStack(spacing: 0) {
                         recapCard(game)
                         reportDivider
-                        battingCard(favorite: favorite, opponent: opponent)
+                        if usesExpandedReadingLayout {
+                            expandedBattingCard(favorite: favorite, opponent: opponent)
+                        } else {
+                            battingCard(favorite: favorite, opponent: opponent)
+                        }
                         reportDivider
-                        pitchingCard(favorite: favorite, opponent: opponent)
+                        if usesExpandedReadingLayout {
+                            expandedPitchingCard(favorite: favorite, opponent: opponent)
+                        } else {
+                            pitchingCard(favorite: favorite, opponent: opponent)
+                        }
                         reportDivider
                         scoringPlaysCard(game)
                         reportDivider
@@ -236,7 +285,6 @@ struct RecentGameView: View {
             await store.refresh()
             synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
         }
-        .dynamicTypeSize(contentWidth >= 650 ? .large : .xSmall)
     }
 
     private var reportDivider: some View {
@@ -249,7 +297,8 @@ struct RecentGameView: View {
         TimelineView(.periodic(from: .now, by: 30)) { context in
             let state = store.presentationState(for: game, at: context.date)
             VStack(spacing: 9) {
-                HStack {
+                let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout())
+                layout {
                     Text(game.formattedDate)
                         .font(.title3.weight(.black))
 
@@ -311,13 +360,16 @@ struct RecentGameView: View {
             let message = store.freshnessMessage(for: game, at: context.date)
             let warning = store.hasRefreshWarning(for: game)
             if let message {
-                HStack(alignment: .center, spacing: 8) {
-                    Image(systemName: warning ? "exclamationmark.triangle" : "clock")
-                        .font(.caption.weight(.bold))
+                let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .center, spacing: 8))
+                layout {
+                    if !usesExpandedReadingLayout {
+                        Image(systemName: warning ? "exclamationmark.triangle" : "clock")
+                            .font(.caption.weight(.bold))
+                    }
                     Text(message)
                         .font(.caption.weight(.semibold))
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.85)
+                        .lineLimit(usesExpandedReadingLayout ? nil : 2)
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer(minLength: 4)
                     if warning {
                         Button("Retry") {
@@ -340,28 +392,76 @@ struct RecentGameView: View {
         }
     }
 
-    private func combinedLineScore(_ game: RecentGame) -> some View {
-        VStack(spacing: 7) {
-            HStack(spacing: 0) {
-                Text("")
-                    .frame(width: contentWidth >= 650 ? 90 : 50, alignment: .leading)
-                ForEach(game.innings) { inning in
-                    Text("\(inning.num)")
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                }
-                lineScoreLegend("R")
-                lineScoreLegend("H")
-                lineScoreLegend("E")
-                lineScoreLegend("LOB")
-            }
-            .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
-            .foregroundStyle(AppColor.ink)
+    @ScaledMetric(relativeTo: .body) private var readingScoreColumnWidth: CGFloat = 72
 
-            combinedLineScoreRow(game.away, innings: game.innings, isAway: true, isWinner: game.away.runs > game.home.runs)
-            combinedLineScoreRow(game.home, innings: game.innings, isAway: false, isWinner: game.home.runs > game.away.runs)
+    @ViewBuilder
+    private func combinedLineScore(_ game: RecentGame) -> some View {
+        if usesExpandedReadingLayout {
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack(alignment: .top, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Team").fontWeight(.bold)
+                        Text(game.away.abbreviation)
+                        Text(game.home.abbreviation)
+                    }
+                    .frame(width: readingScoreColumnWidth, alignment: .leading)
+                    ForEach(game.innings) { inning in
+                        readingScoreColumn(String(inning.num), spokenTitle: "Inning \(inning.num)",
+                                           away: inning.away.runs.map(String.init) ?? "—",
+                                           home: inning.home.runs.map(String.init) ?? "—", game: game)
+                    }
+                    readingScoreColumn("R", spokenTitle: "Runs", away: String(game.away.runs), home: String(game.home.runs), game: game)
+                    readingScoreColumn("H", spokenTitle: "Hits", away: String(game.away.hits), home: String(game.home.hits), game: game)
+                    readingScoreColumn("E", spokenTitle: "Errors", away: String(game.away.errors), home: String(game.home.errors), game: game)
+                    readingScoreColumn("LOB", spokenTitle: "Left on base", away: String(game.away.leftOnBase), home: String(game.home.leftOnBase), game: game)
+                }
+                .font(.body.monospacedDigit())
+                .fixedSize(horizontal: true, vertical: false)
+            }
+        } else {
+            compactCombinedLineScore(game)
+        }
+    }
+
+    private func readingScoreColumn(_ title: String, spokenTitle: String, away: String, home: String, game: RecentGame) -> some View {
+        VStack(spacing: 12) {
+            Text(title).fontWeight(.bold).accessibilityLabel(spokenTitle)
+            Text(away).accessibilityLabel("\(game.away.abbreviation), \(spokenTitle), \(away == "—" ? "not recorded" : away)")
+            Text(home).accessibilityLabel("\(game.home.abbreviation), \(spokenTitle), \(home == "—" ? "not recorded" : home)")
+        }
+        .frame(width: readingScoreColumnWidth)
+        .accessibilityElement(children: .contain)
+    }
+
+    private func compactCombinedLineScore(_ game: RecentGame) -> some View {
+        let teamWidth: CGFloat = contentWidth >= 650 ? 90 : 50
+        // Account for the page (32), card (24), and table (16) horizontal padding.
+        // Nine innings fit on SE; additional innings can scroll at readable cell widths.
+        let tableWidth = max(contentWidth - 72, teamWidth + CGFloat(game.innings.count + 4) * 18)
+        return ScrollView(.horizontal, showsIndicators: true) {
+            VStack(spacing: 7) {
+                HStack(spacing: 0) {
+                    Text("")
+                        .frame(width: contentWidth >= 650 ? 90 : 50, alignment: .leading)
+                    ForEach(game.innings) { inning in
+                        Text("\(inning.num)")
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                    }
+                    lineScoreLegend("R")
+                    lineScoreLegend("H")
+                    lineScoreLegend("E")
+                    lineScoreLegend("LOB")
+                }
+                .font(.system(size: contentWidth >= 650 ? 12 : 9, weight: .bold))
+                .foregroundStyle(AppColor.ink)
+
+                combinedLineScoreRow(game.away, innings: game.innings, isAway: true, isWinner: game.away.runs > game.home.runs)
+                combinedLineScoreRow(game.home, innings: game.innings, isAway: false, isWinner: game.home.runs > game.away.runs)
+            }
+            .frame(width: tableWidth)
         }
         .monospacedDigit()
-        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(maxWidth: .infinity)
     }
 
     private func combinedLineScoreRow(
@@ -418,7 +518,7 @@ struct RecentGameView: View {
             primarySectionTitle(game.isLive ? "Game So Far" : "Game Recap")
 
             Text(game.summary)
-                .font(.system(size: contentWidth >= 650 ? 17 : 15))
+                .font(AppFont.body)
                 .lineSpacing(4)
 
             if !game.facts.isEmpty {
@@ -432,7 +532,7 @@ struct RecentGameView: View {
                                 .frame(width: 5, height: 5)
                                 .padding(.top, 7)
                             Text(fact)
-                                .font(.system(size: contentWidth >= 650 ? 16 : 14))
+                                .font(AppFont.bodySmall)
                                 .lineSpacing(2)
                         }
                     }
@@ -508,6 +608,95 @@ struct RecentGameView: View {
         .padding(16)
     }
 
+    private func expandedBattingCard(favorite: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let boxScoreTeam = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
+
+        return VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 10) {
+                sectionTitle("Batting")
+                statsTeamPicker(favorite: favorite, opponent: opponent)
+            }
+
+            ForEach(boxScoreTeam.batting.filter { !["P", "SP", "RP"].contains($0.position.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()) }) { batter in
+                VStack(alignment: .leading, spacing: 7) {
+                    playerStatHeading(
+                        name: batter.name,
+                        playerID: self.team.supportsPlayers && selectedStatsTeam == .favorite ? batter.mlbId : nil,
+                        detail: batter.position
+                    )
+                    VStack(spacing: 4) {
+                        expandedStatValue("At bats", "\(batter.atBats)")
+                        expandedStatValue("Runs", "\(batter.runs)")
+                        expandedStatValue("Hits", "\(batter.hits)")
+                        expandedStatValue("RBI", "\(batter.rbi)")
+                        expandedStatValue("Average", batter.average ?? ".---")
+                    }
+                }
+                .padding(.vertical, 8)
+                .overlay(alignment: .bottom) { Divider().overlay(AppColor.rule) }
+            }
+        }
+        .padding(16)
+    }
+
+    private func expandedPitchingCard(favorite: TeamBoxScore, opponent: TeamBoxScore) -> some View {
+        let boxScoreTeam = selectedBoxScoreTeam(favorite: favorite, opponent: opponent)
+
+        return VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 10) {
+                sectionTitle("Pitching")
+                statsTeamPicker(favorite: favorite, opponent: opponent)
+            }
+
+            ForEach(boxScoreTeam.pitching) { pitcher in
+                VStack(alignment: .leading, spacing: 7) {
+                    playerStatHeading(
+                        name: pitcher.name,
+                        playerID: self.team.supportsPlayers && selectedStatsTeam == .favorite ? pitcher.mlbId : nil,
+                        detail: pitcher.note
+                    )
+                    VStack(spacing: 4) {
+                        expandedStatValue("Innings pitched", pitcher.inningsPitched)
+                        expandedStatValue("Hits", "\(pitcher.hits)")
+                        expandedStatValue("Earned runs", "\(pitcher.earnedRuns)")
+                        expandedStatValue("Strikeouts", "\(pitcher.strikeOuts)")
+                    }
+                }
+                .padding(.vertical, 8)
+                .overlay(alignment: .bottom) { Divider().overlay(AppColor.rule) }
+            }
+        }
+        .padding(16)
+    }
+
+    @ViewBuilder
+    private func playerStatHeading(name: String, playerID: Int?, detail: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            if let playerID {
+                Button { onSelectPlayer(playerID) } label: {
+                    Text(name).font(.headline.weight(.semibold)).foregroundStyle(AppColor.navy)
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Open player biography")
+            } else {
+                Text(name).font(.headline.weight(.semibold)).foregroundStyle(AppColor.navy)
+            }
+            if !detail.isEmpty {
+                Text(detail).font(.subheadline).foregroundStyle(AppColor.hunterGreen).fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private func expandedStatValue(_ label: String, _ value: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(label).font(.subheadline.weight(.semibold)).foregroundStyle(AppColor.hunterGreen)
+            Text(value).font(.body.monospacedDigit()).foregroundStyle(AppColor.ink)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+    }
+
     private func selectedBoxScoreTeam(
         favorite: TeamBoxScore,
         opponent: TeamBoxScore
@@ -519,11 +708,12 @@ struct RecentGameView: View {
         favorite: TeamBoxScore,
         opponent: TeamBoxScore
     ) -> some View {
-        HStack(spacing: 2) {
+        let layout = usesExpandedReadingLayout ? AnyLayout(VStackLayout(spacing: 6)) : AnyLayout(HStackLayout(spacing: 2))
+        return layout {
             statsTeamButton(team.cityName, selection: .favorite)
             statsTeamButton(opponent.cityName, selection: .opponent)
         }
-        .frame(width: 166)
+        .frame(maxWidth: usesExpandedReadingLayout ? .infinity : 166)
     }
 
     private func statsTeamButton(
@@ -534,9 +724,9 @@ struct RecentGameView: View {
             selectedStatsTeam = selection
         } label: {
             Text(title)
-                .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
-                .lineLimit(1)
-                .minimumScaleFactor(0.72)
+                .font(.subheadline.weight(.black))
+                .lineLimit(usesExpandedReadingLayout ? nil : 1)
+                .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)
                 .foregroundStyle(AppColor.ink)
@@ -672,13 +862,13 @@ struct RecentGameView: View {
 
     private func sectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
+            .font(usesExpandedReadingLayout ? .headline : .system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
             .foregroundStyle(AppColor.navy)
     }
 
     private func primarySectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
+            .font(usesExpandedReadingLayout ? .headline : .system(size: contentWidth >= 650 ? 15 : 13, weight: .black))
             .foregroundStyle(AppColor.navy)
     }
 

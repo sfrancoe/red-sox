@@ -45,6 +45,7 @@ enum MainTab: String, CaseIterable {
 
 struct AppTabView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage(HubPreferences.selectedTeamKey) private var selectedTeamID = HubTeam.boston.id
     @AppStorage(HubPreferences.completedTeamOnboardingKey) private var completedTeamOnboarding = false
     @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
@@ -77,11 +78,18 @@ struct AppTabView: View {
     var body: some View {
         GeometryReader { window in
             VStack(spacing: 0) {
-                topNavigation
+                if dynamicTypeSize.usesExpandedReadingLayout {
+                    expandedNavigation
+                } else {
+                    topNavigation
+                }
                 selectedContent
                     .id(team.id)
                     .environment(\.hubContentWidth, window.size.width)
             }
+            // iPad window controls float over the upper-left corner in narrow
+            // windows. Keep the custom page heading below their touch area.
+            .padding(.top, compactPadWindowInset(width: window.size.width))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(AppColor.cream)
@@ -156,6 +164,13 @@ struct AppTabView: View {
         )
     }
 
+    private func compactPadWindowInset(width: CGFloat) -> CGFloat {
+        if #available(iOS 26.0, *), UIDevice.current.userInterfaceIdiom == .pad, width < 650 {
+            return 32
+        }
+        return 0
+    }
+
     @ViewBuilder
     private var selectedContent: some View {
         #if DEBUG
@@ -221,6 +236,38 @@ struct AppTabView: View {
         selectedTab = .players
     }
 
+    private var expandedNavigation: some View {
+        HStack(spacing: 12) {
+            Menu {
+                Section(team.pickerTitle) {
+                    Picker("Page", selection: $selectedTab) {
+                        ForEach(availableTabs, id: \.self) { tab in
+                            Text(tab.title).tag(tab)
+                        }
+                    }
+                }
+                Button("Teams and settings") { settingsPresented = true }
+            } label: {
+                HStack(spacing: 8) {
+                    Text(selectedTab.title)
+                        .font(.body.weight(.semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    Image(systemName: "chevron.down").font(.system(size: 14, weight: .semibold))
+                }
+                .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Page")
+            .accessibilityValue("\(selectedTab.title), \(team.shortName)")
+
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 4)
+        .foregroundStyle(AppColor.bone)
+        .background(HubMastheadBackground(palette: palette))
+    }
+
     private var topNavigation: some View {
         VStack(spacing: 0) {
             HStack(spacing: 12) {
@@ -233,7 +280,8 @@ struct AppTabView: View {
 
                         Text(team.shortName)
                             .font(.headline.weight(.bold))
-                            .lineLimit(1)
+                            .lineLimit(dynamicTypeSize.usesExpandedReadingLayout ? 2 : 1)
+                            .fixedSize(horizontal: false, vertical: true)
 
                         Image(systemName: "chevron.down")
                             .font(.caption.weight(.bold))
@@ -270,7 +318,7 @@ struct AppTabView: View {
     private var pageStrip: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
-                HStack(alignment: .lastTextBaseline, spacing: 22) {
+                HStack(alignment: .lastTextBaseline, spacing: dynamicTypeSize.usesExpandedReadingLayout ? 16 : 22) {
                     ForEach(availableTabs, id: \.self) { tab in
                         Button {
                             withAnimation(.easeOut(duration: 0.2)) {
@@ -278,12 +326,9 @@ struct AppTabView: View {
                             }
                         } label: {
                             Text(tab.title)
-                                .font(
-                                    .system(
-                                        size: selectedTab == tab ? 18 : 15,
-                                        weight: selectedTab == tab ? .bold : .medium
-                                    )
-                                )
+                                .font(selectedTab == tab
+                                    ? .headline.weight(.bold)
+                                    : .subheadline.weight(.medium))
                                 .foregroundStyle(
                                     selectedTab == tab ? AppColor.bone : AppColor.boneMuted
                                 )
@@ -330,6 +375,7 @@ private struct MainTabSwipeModifier: ViewModifier {
     let edgeOnly: Bool
 
     @Environment(\.hubContentWidth) private var contentWidth
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private let minimumDistance: CGFloat = 64
     private let edgeWidth: CGFloat = 44
@@ -350,7 +396,7 @@ private struct MainTabSwipeModifier: ViewModifier {
             return
         }
 
-        if edgeOnly {
+        if edgeOnly || dynamicTypeSize.usesExpandedReadingLayout {
             let screenWidth = contentWidth
             let beganAtRequiredEdge = horizontalDistance < 0
                 ? value.startLocation.x >= screenWidth - edgeWidth
