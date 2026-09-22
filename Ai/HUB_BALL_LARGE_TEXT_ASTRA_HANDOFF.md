@@ -1,8 +1,11 @@
 # Hub Ball enlarged-text handoff for Astra
 
-Date: 2026-09-21  
-Branch: `codex/hub-ball-large-text`  
-Worktree: `/Users/sfrancoe/Projects/Hub Ball Large Text`  
+Date: 2026-09-21
+
+Branch: `codex/hub-ball-large-text`
+
+Worktree: `/Users/sfrancoe/Projects/Hub Ball Large Text`
+
 Base: `bfdd5d94` (`main` at the start of the task)
 
 ## What was done
