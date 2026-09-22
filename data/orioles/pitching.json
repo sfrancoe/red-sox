@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T05:24:17.374014+00:00",
+  "generated_at": "2026-09-22T17:18:29.827802+00:00",
   "season": 2026,
   "team": "Baltimore Orioles",
   "games_played": 157,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 15.4,
+    "actual_war": 15.6,
     "forecast_war_to_date": 14.2,
-    "war_gap": 1.2,
-    "innings": 1392.3,
+    "war_gap": 1.4,
+    "innings": 1401.3,
     "era": 4.12
   },
   "pitchers": [
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "165.2",
         "ip_value": 165.667,
-        "war": 3.74,
+        "war": 3.73,
         "era": 4.07,
         "fip": 3.5,
         "k_minus_bb_pct": 16.7
@@ -50,24 +50,24 @@
         "war": 1.96
       },
       "war_gap": 1.77,
-      "innings_share_pct": 11.9
+      "innings_share_pct": 11.8
     },
     {
       "id": 669358,
       "name": "Shane Baz",
       "throws": "R",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "173.0",
-        "ip_value": 173.0,
-        "war": 3.26,
+        "ip": "179.2",
+        "ip_value": 179.667,
+        "war": 3.35,
         "era": 4.11,
-        "fip": 3.61,
-        "k_minus_bb_pct": 12.4
+        "fip": 3.62,
+        "k_minus_bb_pct": 11.8
       },
       "forecast": {
         "ip": 158.9,
@@ -81,8 +81,8 @@
         "ip": 154.0,
         "war": 1.79
       },
-      "war_gap": 1.47,
-      "innings_share_pct": 12.4
+      "war_gap": 1.56,
+      "innings_share_pct": 12.8
     },
     {
       "id": 680694,
@@ -146,7 +146,7 @@
         "war": 0.12
       },
       "war_gap": 1.29,
-      "innings_share_pct": 10.9
+      "innings_share_pct": 10.8
     },
     {
       "id": 664991,
@@ -181,6 +181,38 @@
       "innings_share_pct": 3.7
     },
     {
+      "id": 666974,
+      "name": "Yennier Cano",
+      "throws": "R",
+      "role": "Setup",
+      "games": 67,
+      "starts": 0,
+      "saves": 3,
+      "holds": 13,
+      "actual": {
+        "ip": "49.1",
+        "ip_value": 49.333,
+        "war": 0.93,
+        "era": 2.92,
+        "fip": 2.75,
+        "k_minus_bb_pct": 15.8
+      },
+      "forecast": {
+        "ip": 60.0,
+        "war": 0.4,
+        "era": 3.74,
+        "fip": 3.76,
+        "k_minus_bb_pct": 13.5,
+        "team_at_fetch": "BAL"
+      },
+      "forecast_to_date": {
+        "ip": 58.1,
+        "war": 0.39
+      },
+      "war_gap": 0.54,
+      "innings_share_pct": 3.5
+    },
+    {
       "id": 605135,
       "name": "Chris Bassitt",
       "throws": "R",
@@ -210,39 +242,7 @@
         "war": 1.89
       },
       "war_gap": -1.0,
-      "innings_share_pct": 7.0
-    },
-    {
-      "id": 666974,
-      "name": "Yennier Cano",
-      "throws": "R",
-      "role": "Setup",
-      "games": 66,
-      "starts": 0,
-      "saves": 3,
-      "holds": 13,
-      "actual": {
-        "ip": "48.0",
-        "ip_value": 48.0,
-        "war": 0.88,
-        "era": 3.0,
-        "fip": 2.78,
-        "k_minus_bb_pct": 15.7
-      },
-      "forecast": {
-        "ip": 60.0,
-        "war": 0.4,
-        "era": 3.74,
-        "fip": 3.76,
-        "k_minus_bb_pct": 13.5,
-        "team_at_fetch": "BAL"
-      },
-      "forecast_to_date": {
-        "ip": 58.1,
-        "war": 0.39
-      },
-      "war_gap": 0.49,
-      "innings_share_pct": 3.4
+      "innings_share_pct": 6.9
     },
     {
       "id": 669330,
@@ -273,25 +273,25 @@
         "ip": 70.0,
         "war": 0.35
       },
-      "war_gap": 0.52,
+      "war_gap": 0.51,
       "innings_share_pct": 3.9
     },
     {
       "id": 670329,
       "name": "Rico Garcia",
       "throws": "R",
-      "role": "Setup",
-      "games": 73,
+      "role": "Closer",
+      "games": 74,
       "starts": 0,
-      "saves": 9,
+      "saves": 10,
       "holds": 18,
       "actual": {
-        "ip": "65.0",
-        "ip_value": 65.0,
-        "war": 0.69,
-        "era": 3.18,
-        "fip": 3.97,
-        "k_minus_bb_pct": 17.0
+        "ip": "66.0",
+        "ip_value": 66.0,
+        "war": 0.77,
+        "era": 3.14,
+        "fip": 3.9,
+        "k_minus_bb_pct": 17.6
       },
       "forecast": {
         "ip": 56.0,
@@ -305,7 +305,7 @@
         "ip": 54.3,
         "war": 0.0
       },
-      "war_gap": 0.69,
+      "war_gap": 0.77,
       "innings_share_pct": 4.7
     },
     {
@@ -370,7 +370,7 @@
         "war": 0.0
       },
       "war_gap": 0.44,
-      "innings_share_pct": 2.1
+      "innings_share_pct": 2.0
     },
     {
       "id": 676742,
@@ -466,7 +466,7 @@
         "war": 0.2
       },
       "war_gap": 0.0,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     },
     {
       "id": 608650,
@@ -693,38 +693,6 @@
       "innings_share_pct": 0.1
     },
     {
-      "id": 687721,
-      "name": "Cameron Weston",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 1,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "1.0",
-        "ip_value": 1.0,
-        "war": -0.0,
-        "era": 0.0,
-        "fip": 4.1,
-        "k_minus_bb_pct": 0.0
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.98,
-        "fip": 5.0,
-        "k_minus_bb_pct": 8.0,
-        "team_at_fetch": "NYM"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.0
-      },
-      "war_gap": 0.0,
-      "innings_share_pct": 0.1
-    },
-    {
       "id": 642152,
       "name": "Lou Trivino III",
       "throws": "R",
@@ -755,6 +723,38 @@
       },
       "war_gap": -0.05,
       "innings_share_pct": 0.2
+    },
+    {
+      "id": 687721,
+      "name": "Cameron Weston",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "1.0",
+        "ip_value": 1.0,
+        "war": -0.0,
+        "era": 0.0,
+        "fip": 4.1,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.98,
+        "fip": 5.0,
+        "k_minus_bb_pct": 8.0,
+        "team_at_fetch": "NYM"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": 0.0,
+      "innings_share_pct": 0.1
     },
     {
       "id": 695380,

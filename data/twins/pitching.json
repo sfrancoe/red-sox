@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T05:24:20.992852+00:00",
+  "generated_at": "2026-09-22T17:18:38.235982+00:00",
   "season": 2026,
   "team": "Minnesota Twins",
   "games_played": 157,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 11.0,
+    "actual_war": 11.3,
     "forecast_war_to_date": 17.0,
-    "war_gap": -6.0,
-    "innings": 1382.7,
+    "war_gap": -5.8,
+    "innings": 1390.7,
     "era": 4.6
   },
   "pitchers": [
@@ -50,7 +50,7 @@
         "war": 1.79
       },
       "war_gap": 0.84,
-      "innings_share_pct": 12.5
+      "innings_share_pct": 12.4
     },
     {
       "id": 657746,
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "138.2",
         "ip_value": 138.667,
-        "war": 2.32,
+        "war": 2.31,
         "era": 3.83,
         "fip": 3.75,
         "k_minus_bb_pct": 20.6
@@ -113,7 +113,7 @@
         "ip": 59.8,
         "war": 0.49
       },
-      "war_gap": 1.4,
+      "war_gap": 1.39,
       "innings_share_pct": 8.7
     },
     {
@@ -181,6 +181,38 @@
       "innings_share_pct": 5.1
     },
     {
+      "id": 805673,
+      "name": "Zebby Matthews",
+      "throws": "R",
+      "role": "Starter",
+      "games": 23,
+      "starts": 23,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "130.1",
+        "ip_value": 130.333,
+        "war": 0.73,
+        "era": 4.9,
+        "fip": 4.7,
+        "k_minus_bb_pct": 14.1
+      },
+      "forecast": {
+        "ip": 105.3,
+        "war": 1.48,
+        "era": 4.01,
+        "fip": 3.9,
+        "k_minus_bb_pct": 16.6,
+        "team_at_fetch": "MIN"
+      },
+      "forecast_to_date": {
+        "ip": 102.1,
+        "war": 1.43
+      },
+      "war_gap": -0.71,
+      "innings_share_pct": 9.4
+    },
+    {
       "id": 665152,
       "name": "Dean Kremer",
       "throws": "R",
@@ -209,7 +241,7 @@
         "ip": 111.3,
         "war": 0.88
       },
-      "war_gap": -0.15,
+      "war_gap": -0.16,
       "innings_share_pct": 3.4
     },
     {
@@ -241,7 +273,7 @@
         "ip": 59.1,
         "war": 0.31
       },
-      "war_gap": 0.29,
+      "war_gap": 0.28,
       "innings_share_pct": 3.4
     },
     {
@@ -275,38 +307,6 @@
       },
       "war_gap": -0.18,
       "innings_share_pct": 1.2
-    },
-    {
-      "id": 805673,
-      "name": "Zebby Matthews",
-      "throws": "R",
-      "role": "Starter",
-      "games": 22,
-      "starts": 22,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "125.1",
-        "ip_value": 125.333,
-        "war": 0.57,
-        "era": 4.74,
-        "fip": 4.8,
-        "k_minus_bb_pct": 13.0
-      },
-      "forecast": {
-        "ip": 105.3,
-        "war": 1.48,
-        "era": 4.01,
-        "fip": 3.9,
-        "k_minus_bb_pct": 16.6,
-        "team_at_fetch": "MIN"
-      },
-      "forecast_to_date": {
-        "ip": 102.1,
-        "war": 1.43
-      },
-      "war_gap": -0.86,
-      "innings_share_pct": 9.1
     },
     {
       "id": 690953,
@@ -352,7 +352,7 @@
       "actual": {
         "ip": "41.1",
         "ip_value": 41.333,
-        "war": 0.54,
+        "war": 0.53,
         "era": 5.66,
         "fip": 3.34,
         "k_minus_bb_pct": 7.9
@@ -466,7 +466,7 @@
         "war": 0.35
       },
       "war_gap": -0.07,
-      "innings_share_pct": 1.9
+      "innings_share_pct": 1.8
     },
     {
       "id": 681252,
@@ -505,17 +505,17 @@
       "name": "Taylor Rogers",
       "throws": "L",
       "role": "Reliever",
-      "games": 62,
+      "games": 63,
       "starts": 0,
       "saves": 2,
       "holds": 8,
       "actual": {
-        "ip": "57.0",
-        "ip_value": 57.0,
-        "war": 0.09,
-        "era": 4.58,
-        "fip": 4.31,
-        "k_minus_bb_pct": 7.9
+        "ip": "58.1",
+        "ip_value": 58.333,
+        "war": 0.13,
+        "era": 4.47,
+        "fip": 4.25,
+        "k_minus_bb_pct": 8.1
       },
       "forecast": {
         "ip": 61.0,
@@ -529,8 +529,8 @@
         "ip": 59.1,
         "war": 0.38
       },
-      "war_gap": -0.29,
-      "innings_share_pct": 4.1
+      "war_gap": -0.25,
+      "innings_share_pct": 4.2
     },
     {
       "id": 608723,
@@ -565,6 +565,38 @@
       "innings_share_pct": 0.3
     },
     {
+      "id": 701519,
+      "name": "Travis Adams",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 39,
+      "starts": 0,
+      "saves": 3,
+      "holds": 1,
+      "actual": {
+        "ip": "57.0",
+        "ip_value": 57.0,
+        "war": 0.07,
+        "era": 4.74,
+        "fip": 4.15,
+        "k_minus_bb_pct": 14.2
+      },
+      "forecast": {
+        "ip": 46.2,
+        "war": 0.04,
+        "era": 4.62,
+        "fip": 4.58,
+        "k_minus_bb_pct": 9.6,
+        "team_at_fetch": "MIN"
+      },
+      "forecast_to_date": {
+        "ip": 44.7,
+        "war": 0.03
+      },
+      "war_gap": 0.03,
+      "innings_share_pct": 4.1
+    },
+    {
       "id": 621345,
       "name": "A.J. Minter",
       "throws": "L",
@@ -577,7 +609,7 @@
         "ip": "20.0",
         "ip_value": 20.0,
         "war": 0.06,
-        "era": 3.15,
+        "era": 2.7,
         "fip": 4.6,
         "k_minus_bb_pct": 16.7
       },
@@ -627,38 +659,6 @@
       },
       "war_gap": 0.09,
       "innings_share_pct": 0.8
-    },
-    {
-      "id": 701519,
-      "name": "Travis Adams",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 38,
-      "starts": 0,
-      "saves": 3,
-      "holds": 1,
-      "actual": {
-        "ip": "55.1",
-        "ip_value": 55.333,
-        "war": -0.01,
-        "era": 4.88,
-        "fip": 4.29,
-        "k_minus_bb_pct": 13.2
-      },
-      "forecast": {
-        "ip": 46.2,
-        "war": 0.04,
-        "era": 4.62,
-        "fip": 4.58,
-        "k_minus_bb_pct": 9.6,
-        "team_at_fetch": "MIN"
-      },
-      "forecast_to_date": {
-        "ip": 44.7,
-        "war": 0.03
-      },
-      "war_gap": -0.05,
-      "innings_share_pct": 4.0
     },
     {
       "id": 607455,

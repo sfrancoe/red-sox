@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T13:22:26.613805+00:00",
+  "generated_at": "2026-09-22T17:18:45.987277+00:00",
   "season": 2026,
   "team": "Atlanta Braves",
   "games_played": 156,
@@ -15,7 +15,7 @@
   "team_summary": {
     "actual_war": 15.9,
     "forecast_war_to_date": 16.3,
-    "war_gap": -0.4,
+    "war_gap": -0.3,
     "innings": 1385.0,
     "era": 3.61
   },
@@ -49,7 +49,7 @@
         "ip": 162.3,
         "war": 4.0
       },
-      "war_gap": 1.66,
+      "war_gap": 1.67,
       "innings_share_pct": 11.3
     },
     {
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "142.0",
         "ip_value": 142.0,
-        "war": 1.49,
+        "war": 1.5,
         "era": 3.04,
         "fip": 4.32,
         "k_minus_bb_pct": 6.7
@@ -145,7 +145,7 @@
         "ip": 8.6,
         "war": 0.07
       },
-      "war_gap": 1.42,
+      "war_gap": 1.43,
       "innings_share_pct": 10.3
     },
     {
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "147.2",
         "ip_value": 147.667,
-        "war": 0.95,
+        "war": 0.96,
         "era": 3.47,
         "fip": 4.66,
         "k_minus_bb_pct": 8.8
@@ -273,7 +273,7 @@
         "ip": 141.7,
         "war": 1.36
       },
-      "war_gap": -0.41,
+      "war_gap": -0.4,
       "innings_share_pct": 10.7
     },
     {
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "79.1",
         "ip_value": 79.333,
-        "war": 0.59,
+        "war": 0.6,
         "era": 4.54,
         "fip": 4.38,
         "k_minus_bb_pct": 11.3
@@ -384,7 +384,7 @@
       "actual": {
         "ip": "46.2",
         "ip_value": 46.667,
-        "war": 0.53,
+        "war": 0.54,
         "era": 2.31,
         "fip": 3.65,
         "k_minus_bb_pct": 19.9
@@ -401,7 +401,7 @@
         "ip": 40.4,
         "war": 0.11
       },
-      "war_gap": 0.42,
+      "war_gap": 0.43,
       "innings_share_pct": 3.4
     },
     {
@@ -814,6 +814,38 @@
       "innings_share_pct": 0.7
     },
     {
+      "id": 700363,
+      "name": "AJ Smith-Shawver",
+      "throws": "R",
+      "role": "Starter",
+      "games": 7,
+      "starts": 5,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "28.0",
+        "ip_value": 28.0,
+        "war": -0.06,
+        "era": 6.43,
+        "fip": 5.53,
+        "k_minus_bb_pct": 6.1
+      },
+      "forecast": {
+        "ip": 8.0,
+        "war": 0.05,
+        "era": 3.79,
+        "fip": 3.69,
+        "k_minus_bb_pct": 18.5,
+        "team_at_fetch": "ATL"
+      },
+      "forecast_to_date": {
+        "ip": 7.7,
+        "war": 0.04
+      },
+      "war_gap": -0.11,
+      "innings_share_pct": 2.0
+    },
+    {
       "id": 691548,
       "name": "Rolddy Muñoz",
       "throws": "R",
@@ -844,38 +876,6 @@
       },
       "war_gap": -0.02,
       "innings_share_pct": 0.1
-    },
-    {
-      "id": 700363,
-      "name": "AJ Smith-Shawver",
-      "throws": "R",
-      "role": "Starter",
-      "games": 7,
-      "starts": 5,
-      "saves": 0,
-      "holds": 1,
-      "actual": {
-        "ip": "28.0",
-        "ip_value": 28.0,
-        "war": -0.08,
-        "era": 6.43,
-        "fip": 5.53,
-        "k_minus_bb_pct": 6.1
-      },
-      "forecast": {
-        "ip": 8.0,
-        "war": 0.05,
-        "era": 3.79,
-        "fip": 3.69,
-        "k_minus_bb_pct": 18.5,
-        "team_at_fetch": "ATL"
-      },
-      "forecast_to_date": {
-        "ip": 7.7,
-        "war": 0.04
-      },
-      "war_gap": -0.13,
-      "innings_share_pct": 2.0
     },
     {
       "id": 606303,
@@ -1130,7 +1130,7 @@
         "ip": 17.3,
         "war": 0.06
       },
-      "war_gap": -0.58,
+      "war_gap": -0.57,
       "innings_share_pct": 0.9
     },
     {
