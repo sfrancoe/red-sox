@@ -89,7 +89,7 @@ struct NinePitchesView: View {
     private var pitchGrid: some View {
         if usesExpandedReadingLayout {
             LazyVStack(spacing: 10) {
-                ForEach(pitches) { pitch in pitchCard(pitch) }
+                ForEach(pitches) { pitch in pitchCard(pitch).id("pitch-card-\(pitch.number)") }
             }
         } else {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 7), count: 3), spacing: 7) {
@@ -113,7 +113,7 @@ struct NinePitchesView: View {
         .background(pitch.number <= shown ? AppColor.cream.opacity(0.14) : AppColor.cream.opacity(0.045), in: RoundedRectangle(cornerRadius: 10))
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(pitch.number == shown ? AppColor.accent : .clear, lineWidth: 2))
         .opacity(pitch.number <= shown ? 1 : 0.42)
-        .accessibilityLabel("Pitch \(pitch.number), \(pitch.velocity, specifier: "%.1f") miles per hour, \(pitch.type), to \(pitch.batter)")
+        .accessibilityLabel("Pitch \(pitch.number), \(pitch.velocity, specifier: "%.1f") miles per hour, \(pitch.type), to \(pitch.batter), \(pitch.result)")
     }
 
     private var moment: some View {
@@ -126,9 +126,9 @@ struct NinePitchesView: View {
         HStack(spacing: 12) {
             Button { if playing { stop() } else { start() } } label: {
                 Label(playing ? "Pause" : shown == 9 ? "Replay inning" : "Play inning", systemImage: playing ? "pause.fill" : "play.fill")
-                    .frame(maxWidth: .infinity).frame(height: 46)
+                    .frame(maxWidth: .infinity).frame(minHeight: 46)
             }.buttonStyle(.borderedProminent).tint(AppColor.accent)
-            Button { stop(); shown = 0 } label: { Image(systemName: "arrow.counterclockwise").frame(width: 46, height: 46) }
+            Button { stop(); shown = 0 } label: { Image(systemName: "arrow.counterclockwise").frame(minWidth: 46, minHeight: 46) }
                 .buttonStyle(.bordered).tint(AppColor.cream)
         }
     }

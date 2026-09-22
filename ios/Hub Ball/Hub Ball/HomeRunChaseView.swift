@@ -156,8 +156,33 @@ struct HomeRunChaseView: View {
         case 2:
             milestoneGrid(compact: compact, expanded: expanded)
         default:
-            projectionControls
+            VStack(alignment: .leading, spacing: 12) {
+                projectionControls
+                if expanded { projectionSummary }
+            }
         }
+    }
+
+    private var projectionSummary: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("PROJECTION OUTPUT")
+                .font(AppFont.label.weight(.semibold))
+                .foregroundStyle(AppColor.amber)
+            Text("At age \(Int(finalAge.rounded())), Judge reaches \(userProjectionTotal.formatted()) career home runs.")
+                .font(AppFont.body.weight(.semibold))
+                .foregroundStyle(AppColor.bone)
+                .fixedSize(horizontal: false, vertical: true)
+            let rank = ChaseEngine.allTimeRank(Double(userProjectionTotal), leaderboard: config.leaderboard)
+            Text(rank.passing.map { "That projects to \(ordinal(rank.rank)) all-time, passing \($0)." } ?? "That projects to \(ordinal(rank.rank)) all-time.")
+                .font(AppFont.bodySmall)
+                .foregroundStyle(AppColor.boneDim)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(AppColor.nightRaised)
+        .overlay { Rectangle().stroke(AppColor.rule, lineWidth: 1) }
+        .accessibilityElement(children: .combine)
     }
 
     private var compactAgeBars: some View {
