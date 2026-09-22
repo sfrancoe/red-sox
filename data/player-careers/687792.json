@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "player_id": 687792,
-  "generated_at": "2026-09-21T16:09:06.299046+00:00",
-  "data_as_of": "2026-09-21",
+  "generated_at": "2026-09-22T14:17:31.223847+00:00",
+  "data_as_of": "2026-09-22",
   "status": "available",
   "coverage": [
     {
       "league": "MLB",
       "level": "MLB",
       "first_season": 2024,
-      "last_season": 2024,
+      "last_season": 2026,
       "status": "available",
       "note": null
     },
@@ -364,6 +364,27 @@
       "strikeouts": 12,
       "era": 5.54,
       "whip": 1.23
+    },
+    {
+      "id": "687792-pitching-mlb-2026-1-120",
+      "season": 2026,
+      "team": "Washington Nationals",
+      "league": "National League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 1,
+      "games_started": 1,
+      "wins": 0,
+      "losses": 1,
+      "saves": 0,
+      "innings_outs": 12,
+      "hits": 5,
+      "earned_runs": 4,
+      "home_runs": 1,
+      "walks": 2,
+      "strikeouts": 4,
+      "era": 9.0,
+      "whip": 1.75
     },
     {
       "id": "687792-pitching-minors-2026-21-subtotal",
