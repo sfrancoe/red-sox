@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T07:58:11.110712+00:00",
+  "generated_at": "2026-09-23T13:51:55.509414+00:00",
   "season": 2026,
   "team": "Cleveland Guardians",
   "games_played": 157,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 18.0,
+    "actual_war": 18.2,
     "forecast_war_to_date": 13.0,
-    "war_gap": 4.9,
-    "innings": 1385.7,
-    "era": 3.79
+    "war_gap": 5.2,
+    "innings": 1394.7,
+    "era": 3.78
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Parker Messick",
       "throws": "L",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "178.1",
-        "ip_value": 178.333,
-        "war": 4.6,
-        "era": 2.57,
-        "fip": 3.11,
-        "k_minus_bb_pct": 19.5
+        "ip": "183.1",
+        "ip_value": 183.333,
+        "war": 4.83,
+        "era": 2.55,
+        "fip": 3.07,
+        "k_minus_bb_pct": 19.6
       },
       "forecast": {
         "ip": 138.4,
@@ -49,8 +49,8 @@
         "ip": 134.1,
         "war": 1.4
       },
-      "war_gap": 3.2,
-      "innings_share_pct": 12.9
+      "war_gap": 3.42,
+      "innings_share_pct": 13.1
     },
     {
       "id": 668909,
@@ -66,7 +66,7 @@
         "ip_value": 181.0,
         "war": 3.69,
         "era": 3.63,
-        "fip": 3.38,
+        "fip": 3.39,
         "k_minus_bb_pct": 25.7
       },
       "forecast": {
@@ -82,24 +82,24 @@
         "war": 1.92
       },
       "war_gap": 1.77,
-      "innings_share_pct": 13.1
+      "innings_share_pct": 13.0
     },
     {
       "id": 671922,
       "name": "Cade Smith",
       "throws": "R",
       "role": "Closer",
-      "games": 66,
+      "games": 67,
       "starts": 0,
-      "saves": 39,
+      "saves": 40,
       "holds": 0,
       "actual": {
-        "ip": "71.1",
-        "ip_value": 71.333,
-        "war": 2.4,
-        "era": 2.02,
-        "fip": 2.21,
-        "k_minus_bb_pct": 28.3
+        "ip": "72.1",
+        "ip_value": 72.333,
+        "war": 2.42,
+        "era": 1.99,
+        "fip": 2.24,
+        "k_minus_bb_pct": 27.9
       },
       "forecast": {
         "ip": 70.0,
@@ -113,8 +113,8 @@
         "ip": 67.8,
         "war": 1.02
       },
-      "war_gap": 1.38,
-      "innings_share_pct": 5.1
+      "war_gap": 1.4,
+      "innings_share_pct": 5.2
     },
     {
       "id": 676282,
@@ -146,7 +146,7 @@
         "war": 1.36
       },
       "war_gap": 0.58,
-      "innings_share_pct": 11.1
+      "innings_share_pct": 11.0
     },
     {
       "id": 676440,
@@ -178,24 +178,24 @@
         "war": 2.24
       },
       "war_gap": -0.91,
-      "innings_share_pct": 13.1
+      "innings_share_pct": 13.0
     },
     {
       "id": 681870,
       "name": "Erik Sabrowski",
       "throws": "L",
       "role": "Setup",
-      "games": 57,
+      "games": 58,
       "starts": 0,
       "saves": 1,
-      "holds": 25,
+      "holds": 26,
       "actual": {
-        "ip": "45.1",
-        "ip_value": 45.333,
-        "war": 1.04,
-        "era": 2.78,
-        "fip": 2.92,
-        "k_minus_bb_pct": 21.5
+        "ip": "46.1",
+        "ip_value": 46.333,
+        "war": 1.1,
+        "era": 2.72,
+        "fip": 2.86,
+        "k_minus_bb_pct": 22.1
       },
       "forecast": {
         "ip": 63.0,
@@ -209,7 +209,7 @@
         "ip": 61.1,
         "war": 0.14
       },
-      "war_gap": 0.89,
+      "war_gap": 0.96,
       "innings_share_pct": 3.3
     },
     {
@@ -226,7 +226,7 @@
         "ip_value": 52.667,
         "war": 0.8,
         "era": 2.73,
-        "fip": 3.15,
+        "fip": 3.16,
         "k_minus_bb_pct": 13.5
       },
       "forecast": {
@@ -258,7 +258,7 @@
         "ip_value": 65.0,
         "war": 0.73,
         "era": 3.6,
-        "fip": 3.37,
+        "fip": 3.38,
         "k_minus_bb_pct": 17.4
       },
       "forecast": {
@@ -275,38 +275,6 @@
       },
       "war_gap": 0.69,
       "innings_share_pct": 4.7
-    },
-    {
-      "id": 683769,
-      "name": "Hunter Gaddis",
-      "throws": "R",
-      "role": "Setup",
-      "games": 65,
-      "starts": 0,
-      "saves": 1,
-      "holds": 31,
-      "actual": {
-        "ip": "57.1",
-        "ip_value": 57.333,
-        "war": 0.71,
-        "era": 2.67,
-        "fip": 3.6,
-        "k_minus_bb_pct": 13.6
-      },
-      "forecast": {
-        "ip": 61.0,
-        "war": 0.15,
-        "era": 4.09,
-        "fip": 4.16,
-        "k_minus_bb_pct": 15.2,
-        "team_at_fetch": "CLE"
-      },
-      "forecast_to_date": {
-        "ip": 59.1,
-        "war": 0.14
-      },
-      "war_gap": 0.57,
-      "innings_share_pct": 4.1
     },
     {
       "id": 677944,
@@ -338,7 +306,39 @@
         "war": 1.12
       },
       "war_gap": -0.42,
-      "innings_share_pct": 8.7
+      "innings_share_pct": 8.6
+    },
+    {
+      "id": 683769,
+      "name": "Hunter Gaddis",
+      "throws": "R",
+      "role": "Setup",
+      "games": 66,
+      "starts": 0,
+      "saves": 1,
+      "holds": 31,
+      "actual": {
+        "ip": "58.1",
+        "ip_value": 58.333,
+        "war": 0.6,
+        "era": 2.78,
+        "fip": 3.75,
+        "k_minus_bb_pct": 14.1
+      },
+      "forecast": {
+        "ip": 61.0,
+        "war": 0.15,
+        "era": 4.09,
+        "fip": 4.16,
+        "k_minus_bb_pct": 15.2,
+        "team_at_fetch": "CLE"
+      },
+      "forecast_to_date": {
+        "ip": 59.1,
+        "war": 0.14
+      },
+      "war_gap": 0.45,
+      "innings_share_pct": 4.2
     },
     {
       "id": 656492,
@@ -384,7 +384,7 @@
       "actual": {
         "ip": "19.2",
         "ip_value": 19.667,
-        "war": 0.07,
+        "war": 0.08,
         "era": 4.58,
         "fip": 3.81,
         "k_minus_bb_pct": 25.9
@@ -409,17 +409,17 @@
       "name": "Tim Herrin",
       "throws": "L",
       "role": "Setup",
-      "games": 64,
+      "games": 65,
       "starts": 0,
       "saves": 0,
-      "holds": 15,
+      "holds": 16,
       "actual": {
-        "ip": "54.1",
-        "ip_value": 54.333,
-        "war": 0.06,
-        "era": 2.98,
-        "fip": 4.24,
-        "k_minus_bb_pct": 10.0
+        "ip": "55.0",
+        "ip_value": 55.0,
+        "war": 0.07,
+        "era": 2.95,
+        "fip": 4.23,
+        "k_minus_bb_pct": 9.9
       },
       "forecast": {
         "ip": 56.0,
@@ -433,7 +433,7 @@
         "ip": 54.3,
         "war": 0.19
       },
-      "war_gap": -0.13,
+      "war_gap": -0.12,
       "innings_share_pct": 3.9
     },
     {
@@ -562,17 +562,17 @@
       "name": "Craig Yoho",
       "throws": "R",
       "role": "Reliever",
-      "games": 17,
+      "games": 18,
       "starts": 0,
       "saves": 0,
-      "holds": 2,
+      "holds": 3,
       "actual": {
-        "ip": "17.2",
-        "ip_value": 17.667,
-        "war": -0.02,
-        "era": 6.11,
-        "fip": 4.51,
-        "k_minus_bb_pct": 16.2
+        "ip": "18.0",
+        "ip_value": 18.0,
+        "war": -0.03,
+        "era": 6.0,
+        "fip": 4.54,
+        "k_minus_bb_pct": 15.9
       },
       "forecast": {
         "ip": 42.0,
@@ -628,7 +628,7 @@
         "ip_value": 3.0,
         "war": -0.03,
         "era": 6.0,
-        "fip": 5.76,
+        "fip": 5.77,
         "k_minus_bb_pct": 21.4
       },
       "forecast": {
@@ -658,7 +658,7 @@
       "actual": {
         "ip": "16.2",
         "ip_value": 16.667,
-        "war": -0.05,
+        "war": -0.04,
         "era": 5.94,
         "fip": 4.96,
         "k_minus_bb_pct": 12.3
@@ -692,7 +692,7 @@
         "ip_value": 8.667,
         "war": -0.06,
         "era": 10.38,
-        "fip": 5.4,
+        "fip": 5.41,
         "k_minus_bb_pct": 13.3
       },
       "forecast": {
@@ -739,7 +739,7 @@
         "ip": 65.9,
         "war": 0.29
       },
-      "war_gap": -0.37,
+      "war_gap": -0.36,
       "innings_share_pct": 2.4
     },
     {
@@ -756,7 +756,7 @@
         "ip_value": 20.667,
         "war": -0.12,
         "era": 5.23,
-        "fip": 4.98,
+        "fip": 4.99,
         "k_minus_bb_pct": 6.2
       },
       "forecast": {
@@ -788,7 +788,7 @@
         "ip_value": 16.0,
         "war": -0.31,
         "era": 5.06,
-        "fip": 6.03,
+        "fip": 6.04,
         "k_minus_bb_pct": 17.1
       },
       "forecast": {
@@ -804,7 +804,7 @@
         "war": 0.07
       },
       "war_gap": -0.37,
-      "innings_share_pct": 1.2
+      "innings_share_pct": 1.1
     }
   ]
 }

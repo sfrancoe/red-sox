@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T07:58:19.358021+00:00",
+  "generated_at": "2026-09-23T13:52:11.532258+00:00",
   "season": 2026,
   "team": "Cincinnati Reds",
   "games_played": 157,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 7.6,
+    "actual_war": 7.7,
     "forecast_war_to_date": 15.3,
-    "war_gap": -7.7,
-    "innings": 1381.0,
-    "era": 4.9
+    "war_gap": -7.6,
+    "innings": 1390.0,
+    "era": 4.87
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "154.1",
         "ip_value": 154.333,
-        "war": 4.33,
+        "war": 4.31,
         "era": 2.86,
         "fip": 3.24,
         "k_minus_bb_pct": 20.5
@@ -49,8 +49,8 @@
         "ip": 110.7,
         "war": 2.22
       },
-      "war_gap": 2.11,
-      "innings_share_pct": 11.2
+      "war_gap": 2.09,
+      "innings_share_pct": 11.1
     },
     {
       "id": 671096,
@@ -64,7 +64,7 @@
       "actual": {
         "ip": "159.0",
         "ip_value": 159.0,
-        "war": 1.37,
+        "war": 1.35,
         "era": 4.7,
         "fip": 4.9,
         "k_minus_bb_pct": 7.1
@@ -81,8 +81,8 @@
         "ip": 165.1,
         "war": 1.97
       },
-      "war_gap": -0.6,
-      "innings_share_pct": 11.5
+      "war_gap": -0.62,
+      "innings_share_pct": 11.4
     },
     {
       "id": 695076,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "127.1",
         "ip_value": 127.333,
-        "war": 1.2,
+        "war": 1.19,
         "era": 6.01,
         "fip": 4.76,
         "k_minus_bb_pct": 8.1
@@ -113,7 +113,7 @@
         "ip": 125.2,
         "war": 1.12
       },
-      "war_gap": 0.08,
+      "war_gap": 0.07,
       "innings_share_pct": 9.2
     },
     {
@@ -121,17 +121,17 @@
       "name": "Brock Burke",
       "throws": "L",
       "role": "Setup",
-      "games": 75,
+      "games": 76,
       "starts": 0,
       "saves": 2,
-      "holds": 21,
+      "holds": 22,
       "actual": {
-        "ip": "72.1",
-        "ip_value": 72.333,
+        "ip": "73.1",
+        "ip_value": 73.333,
         "war": 0.83,
-        "era": 2.36,
-        "fip": 3.76,
-        "k_minus_bb_pct": 11.1
+        "era": 2.33,
+        "fip": 3.77,
+        "k_minus_bb_pct": 11.0
       },
       "forecast": {
         "ip": 62.0,
@@ -146,7 +146,7 @@
         "war": 0.17
       },
       "war_gap": 0.66,
-      "innings_share_pct": 5.2
+      "innings_share_pct": 5.3
     },
     {
       "id": 668881,
@@ -185,17 +185,17 @@
       "name": "Tejay Antone",
       "throws": "R",
       "role": "Setup",
-      "games": 55,
+      "games": 56,
       "starts": 0,
       "saves": 1,
       "holds": 10,
       "actual": {
-        "ip": "52.0",
-        "ip_value": 52.0,
-        "war": 0.59,
-        "era": 3.29,
+        "ip": "53.0",
+        "ip_value": 53.0,
+        "war": 0.61,
+        "era": 3.23,
         "fip": 3.85,
-        "k_minus_bb_pct": 17.1
+        "k_minus_bb_pct": 16.7
       },
       "forecast": {
         "ip": 24.0,
@@ -209,7 +209,7 @@
         "ip": 23.3,
         "war": -0.0
       },
-      "war_gap": 0.59,
+      "war_gap": 0.62,
       "innings_share_pct": 3.8
     },
     {
@@ -217,17 +217,17 @@
       "name": "Emilio Pagán",
       "throws": "R",
       "role": "Closer",
-      "games": 43,
+      "games": 44,
       "starts": 0,
       "saves": 24,
       "holds": 0,
       "actual": {
-        "ip": "40.2",
-        "ip_value": 40.667,
-        "war": 0.38,
-        "era": 3.54,
-        "fip": 4.33,
-        "k_minus_bb_pct": 19.3
+        "ip": "41.2",
+        "ip_value": 41.667,
+        "war": 0.42,
+        "era": 3.46,
+        "fip": 4.25,
+        "k_minus_bb_pct": 19.4
       },
       "forecast": {
         "ip": 66.0,
@@ -241,8 +241,8 @@
         "ip": 64.0,
         "war": 0.39
       },
-      "war_gap": -0.01,
-      "innings_share_pct": 2.9
+      "war_gap": 0.03,
+      "innings_share_pct": 3.0
     },
     {
       "id": 668933,
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "56.1",
         "ip_value": 56.333,
-        "war": 0.31,
+        "war": 0.3,
         "era": 4.79,
         "fip": 4.18,
         "k_minus_bb_pct": 10.1
@@ -337,7 +337,7 @@
         "ip": 50.4,
         "war": 0.25
       },
-      "war_gap": 0.06,
+      "war_gap": 0.05,
       "innings_share_pct": 4.1
     },
     {
@@ -352,7 +352,7 @@
       "actual": {
         "ip": "154.0",
         "ip_value": 154.0,
-        "war": 0.19,
+        "war": 0.17,
         "era": 5.67,
         "fip": 5.55,
         "k_minus_bb_pct": 9.2
@@ -369,8 +369,8 @@
         "ip": 172.7,
         "war": 2.24
       },
-      "war_gap": -2.05,
-      "innings_share_pct": 11.2
+      "war_gap": -2.07,
+      "innings_share_pct": 11.1
     },
     {
       "id": 663978,
@@ -482,7 +482,7 @@
         "ip_value": 3.0,
         "war": 0.06,
         "era": 6.0,
-        "fip": 2.76,
+        "fip": 2.77,
         "k_minus_bb_pct": 7.1
       },
       "forecast": {
@@ -512,7 +512,7 @@
       "actual": {
         "ip": "46.0",
         "ip_value": 46.0,
-        "war": 0.03,
+        "war": 0.02,
         "era": 3.13,
         "fip": 4.6,
         "k_minus_bb_pct": 12.3
@@ -522,7 +522,7 @@
         "ip": 0.0,
         "war": 0.0
       },
-      "war_gap": 0.03,
+      "war_gap": 0.02,
       "innings_share_pct": 3.3
     },
     {
@@ -581,6 +581,38 @@
       },
       "war_gap": -0.0,
       "innings_share_pct": 0.7
+    },
+    {
+      "id": 682227,
+      "name": "Brandon Williamson",
+      "throws": "L",
+      "role": "Starter",
+      "games": 11,
+      "starts": 8,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "49.2",
+        "ip_value": 49.667,
+        "war": -0.03,
+        "era": 4.89,
+        "fip": 5.74,
+        "k_minus_bb_pct": 2.8
+      },
+      "forecast": {
+        "ip": 93.9,
+        "war": 0.55,
+        "era": 4.65,
+        "fip": 4.77,
+        "k_minus_bb_pct": 12.3,
+        "team_at_fetch": "CIN"
+      },
+      "forecast_to_date": {
+        "ip": 91.0,
+        "war": 0.54
+      },
+      "war_gap": -0.57,
+      "innings_share_pct": 3.6
     },
     {
       "id": 628708,
@@ -701,7 +733,7 @@
         "war": 0.0
       },
       "war_gap": -0.13,
-      "innings_share_pct": 0.7
+      "innings_share_pct": 0.6
     },
     {
       "id": 572955,
@@ -715,7 +747,7 @@
       "actual": {
         "ip": "46.2",
         "ip_value": 46.667,
-        "war": -0.13,
+        "war": -0.14,
         "era": 4.82,
         "fip": 4.88,
         "k_minus_bb_pct": 9.9
@@ -747,7 +779,7 @@
       "actual": {
         "ip": "103.2",
         "ip_value": 103.667,
-        "war": -0.13,
+        "war": -0.14,
         "era": 5.04,
         "fip": 5.77,
         "k_minus_bb_pct": 7.8
@@ -764,7 +796,7 @@
         "ip": 152.3,
         "war": 2.38
       },
-      "war_gap": -2.51,
+      "war_gap": -2.52,
       "innings_share_pct": 7.5
     },
     {
@@ -924,7 +956,7 @@
         "ip": 46.5,
         "war": 0.14
       },
-      "war_gap": -0.35,
+      "war_gap": -0.36,
       "innings_share_pct": 2.3
     },
     {
@@ -960,38 +992,6 @@
       "innings_share_pct": 0.9
     },
     {
-      "id": 682227,
-      "name": "Brandon Williamson",
-      "throws": "L",
-      "role": "Starter",
-      "games": 10,
-      "starts": 7,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "43.2",
-        "ip_value": 43.667,
-        "war": -0.23,
-        "era": 5.56,
-        "fip": 6.19,
-        "k_minus_bb_pct": 2.0
-      },
-      "forecast": {
-        "ip": 93.9,
-        "war": 0.55,
-        "era": 4.65,
-        "fip": 4.77,
-        "k_minus_bb_pct": 12.3,
-        "team_at_fetch": "CIN"
-      },
-      "forecast_to_date": {
-        "ip": 91.0,
-        "war": 0.54
-      },
-      "war_gap": -0.77,
-      "innings_share_pct": 3.2
-    },
-    {
       "id": 683175,
       "name": "Connor Phillips",
       "throws": "R",
@@ -1003,9 +1003,9 @@
       "actual": {
         "ip": "27.2",
         "ip_value": 27.667,
-        "war": -0.33,
+        "war": -0.34,
         "era": 5.53,
-        "fip": 5.84,
+        "fip": 5.85,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -1035,7 +1035,7 @@
       "actual": {
         "ip": "40.2",
         "ip_value": 40.667,
-        "war": -1.18,
+        "war": -1.19,
         "era": 6.42,
         "fip": 7.06,
         "k_minus_bb_pct": 4.2

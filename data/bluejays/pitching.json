@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T17:18:31.154095+00:00",
+  "generated_at": "2026-09-23T13:51:53.406131+00:00",
   "season": 2026,
   "team": "Toronto Blue Jays",
   "games_played": 157,
@@ -130,7 +130,7 @@
         "ip_value": 94.667,
         "war": 1.98,
         "era": 2.57,
-        "fip": 2.65,
+        "fip": 2.66,
         "k_minus_bb_pct": 17.6
       },
       "forecast": null,
@@ -315,7 +315,7 @@
         "ip_value": 80.0,
         "war": 0.44,
         "era": 5.51,
-        "fip": 4.63,
+        "fip": 4.64,
         "k_minus_bb_pct": 10.6
       },
       "forecast": {
@@ -411,7 +411,7 @@
         "ip_value": 55.667,
         "war": 0.13,
         "era": 4.37,
-        "fip": 5.14,
+        "fip": 5.15,
         "k_minus_bb_pct": 8.3
       },
       "forecast": {
@@ -526,38 +526,6 @@
       "innings_share_pct": 0.3
     },
     {
-      "id": 592791,
-      "name": "Jameson Taillon",
-      "throws": "R",
-      "role": "Starter",
-      "games": 3,
-      "starts": 3,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "10.0",
-        "ip_value": 10.0,
-        "war": 0.03,
-        "era": 3.6,
-        "fip": 5.6,
-        "k_minus_bb_pct": 6.8
-      },
-      "forecast": {
-        "ip": 147.0,
-        "war": 1.46,
-        "era": 4.53,
-        "fip": 4.52,
-        "k_minus_bb_pct": 12.6,
-        "team_at_fetch": "TOR"
-      },
-      "forecast_to_date": {
-        "ip": 142.5,
-        "war": 1.42
-      },
-      "war_gap": -1.39,
-      "innings_share_pct": 0.7
-    },
-    {
       "id": 680755,
       "name": "Braydon Fisher",
       "throws": "R",
@@ -588,6 +556,38 @@
       },
       "war_gap": -0.22,
       "innings_share_pct": 5.4
+    },
+    {
+      "id": 592791,
+      "name": "Jameson Taillon",
+      "throws": "R",
+      "role": "Starter",
+      "games": 3,
+      "starts": 3,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "10.0",
+        "ip_value": 10.0,
+        "war": 0.03,
+        "era": 3.6,
+        "fip": 5.6,
+        "k_minus_bb_pct": 6.8
+      },
+      "forecast": {
+        "ip": 147.0,
+        "war": 1.46,
+        "era": 4.53,
+        "fip": 4.52,
+        "k_minus_bb_pct": 12.6,
+        "team_at_fetch": "TOR"
+      },
+      "forecast_to_date": {
+        "ip": 142.5,
+        "war": 1.42
+      },
+      "war_gap": -1.39,
+      "innings_share_pct": 0.7
     },
     {
       "id": 694357,
@@ -1005,7 +1005,7 @@
         "ip_value": 3.0,
         "war": -0.15,
         "era": 12.0,
-        "fip": 9.76,
+        "fip": 9.77,
         "k_minus_bb_pct": -5.6
       },
       "forecast": {
@@ -1197,7 +1197,7 @@
         "ip_value": 6.0,
         "war": -0.52,
         "era": 9.0,
-        "fip": 11.76,
+        "fip": 11.77,
         "k_minus_bb_pct": -12.9
       },
       "forecast": {

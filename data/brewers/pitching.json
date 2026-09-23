@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T07:58:19.938234+00:00",
+  "generated_at": "2026-09-23T13:52:13.152566+00:00",
   "season": 2026,
   "team": "Milwaukee Brewers",
   "games_played": 157,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 21.9,
-    "forecast_war_to_date": 16.5,
-    "war_gap": 5.4,
-    "innings": 1393.7,
-    "era": 3.54
+    "actual_war": 21.8,
+    "forecast_war_to_date": 16.7,
+    "war_gap": 5.2,
+    "innings": 1401.7,
+    "era": 3.55
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "169.1",
         "ip_value": 169.333,
-        "war": 6.47,
+        "war": 6.45,
         "era": 1.86,
         "fip": 2.16,
         "k_minus_bb_pct": 31.7
@@ -49,8 +49,8 @@
         "ip": 138.4,
         "war": 1.48
       },
-      "war_gap": 4.98,
-      "innings_share_pct": 12.2
+      "war_gap": 4.97,
+      "innings_share_pct": 12.1
     },
     {
       "id": 656730,
@@ -66,7 +66,7 @@
         "ip_value": 59.667,
         "war": 2.41,
         "era": 2.72,
-        "fip": 1.87,
+        "fip": 1.88,
         "k_minus_bb_pct": 22.1
       },
       "forecast": {
@@ -113,7 +113,7 @@
         "ip": 95.1,
         "war": 1.16
       },
-      "war_gap": 1.14,
+      "war_gap": 1.13,
       "innings_share_pct": 6.7
     },
     {
@@ -145,7 +145,7 @@
         "ip": 56.7,
         "war": 0.27
       },
-      "war_gap": 1.61,
+      "war_gap": 1.6,
       "innings_share_pct": 8.6
     },
     {
@@ -153,16 +153,16 @@
       "name": "Kyle Harrison",
       "throws": "L",
       "role": "Starter",
-      "games": 26,
+      "games": 27,
       "starts": 24,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "112.2",
-        "ip_value": 112.667,
-        "war": 1.57,
-        "era": 4.23,
-        "fip": 4.11,
+        "ip": "113.2",
+        "ip_value": 113.667,
+        "war": 1.59,
+        "era": 4.28,
+        "fip": 4.08,
         "k_minus_bb_pct": 20.3
       },
       "forecast": {
@@ -177,7 +177,7 @@
         "ip": 107.8,
         "war": 0.96
       },
-      "war_gap": 0.61,
+      "war_gap": 0.63,
       "innings_share_pct": 8.1
     },
     {
@@ -192,7 +192,7 @@
       "actual": {
         "ip": "57.1",
         "ip_value": 57.333,
-        "war": 1.54,
+        "war": 1.53,
         "era": 2.04,
         "fip": 2.73,
         "k_minus_bb_pct": 18.1
@@ -224,7 +224,7 @@
       "actual": {
         "ip": "85.1",
         "ip_value": 85.333,
-        "war": 1.36,
+        "war": 1.35,
         "era": 3.27,
         "fip": 3.2,
         "k_minus_bb_pct": 19.2
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "103.1",
         "ip_value": 103.333,
-        "war": 1.35,
+        "war": 1.34,
         "era": 4.01,
         "fip": 4.32,
         "k_minus_bb_pct": 13.5
@@ -273,7 +273,7 @@
         "ip": 77.6,
         "war": 0.77
       },
-      "war_gap": 0.58,
+      "war_gap": 0.57,
       "innings_share_pct": 7.4
     },
     {
@@ -306,7 +306,7 @@
         "war": 3.0
       },
       "war_gap": -1.78,
-      "innings_share_pct": 3.3
+      "innings_share_pct": 3.2
     },
     {
       "id": 694477,
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "104.1",
         "ip_value": 104.333,
-        "war": 1.02,
+        "war": 1.01,
         "era": 3.11,
         "fip": 3.97,
         "k_minus_bb_pct": 11.4
@@ -337,8 +337,8 @@
         "ip": 143.4,
         "war": 1.3
       },
-      "war_gap": -0.28,
-      "innings_share_pct": 7.5
+      "war_gap": -0.29,
+      "innings_share_pct": 7.4
     },
     {
       "id": 669060,
@@ -437,38 +437,6 @@
       "innings_share_pct": 1.0
     },
     {
-      "id": 669160,
-      "name": "Dustin May",
-      "throws": "R",
-      "role": "Starter",
-      "games": 8,
-      "starts": 8,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "31.2",
-        "ip_value": 31.667,
-        "war": 0.24,
-        "era": 5.4,
-        "fip": 4.71,
-        "k_minus_bb_pct": 13.6
-      },
-      "forecast": {
-        "ip": 161.2,
-        "war": 1.58,
-        "era": 4.22,
-        "fip": 4.22,
-        "k_minus_bb_pct": 12.7,
-        "team_at_fetch": "MIL"
-      },
-      "forecast_to_date": {
-        "ip": 156.2,
-        "war": 1.53
-      },
-      "war_gap": -1.29,
-      "innings_share_pct": 2.3
-    },
-    {
       "id": 689441,
       "name": "Coleman Crow",
       "throws": "R",
@@ -482,7 +450,7 @@
         "ip_value": 18.667,
         "war": 0.19,
         "era": 5.3,
-        "fip": 4.54,
+        "fip": 4.55,
         "k_minus_bb_pct": 4.7
       },
       "forecast": {
@@ -497,7 +465,7 @@
         "ip": 21.3,
         "war": 0.2
       },
-      "war_gap": -0.0,
+      "war_gap": -0.01,
       "innings_share_pct": 1.3
     },
     {
@@ -529,7 +497,7 @@
         "ip": 54.3,
         "war": 0.07
       },
-      "war_gap": 0.12,
+      "war_gap": 0.11,
       "innings_share_pct": 4.2
     },
     {
@@ -562,7 +530,39 @@
         "war": 0.91
       },
       "war_gap": -0.76,
-      "innings_share_pct": 7.0
+      "innings_share_pct": 6.9
+    },
+    {
+      "id": 669160,
+      "name": "Dustin May",
+      "throws": "R",
+      "role": "Starter",
+      "games": 9,
+      "starts": 9,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "33.2",
+        "ip_value": 33.667,
+        "war": 0.12,
+        "era": 5.61,
+        "fip": 5.06,
+        "k_minus_bb_pct": 12.8
+      },
+      "forecast": {
+        "ip": 161.2,
+        "war": 1.58,
+        "era": 4.22,
+        "fip": 4.22,
+        "k_minus_bb_pct": 12.7,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 156.2,
+        "war": 1.53
+      },
+      "war_gap": -1.41,
+      "innings_share_pct": 2.4
     },
     {
       "id": 702153,
@@ -597,6 +597,38 @@
       "innings_share_pct": 0.5
     },
     {
+      "id": 676467,
+      "name": "Colton Gordon",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "5.0",
+        "ip_value": 5.0,
+        "war": 0.08,
+        "era": 3.6,
+        "fip": 3.3,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 24.0,
+        "war": 0.12,
+        "era": 3.96,
+        "fip": 4.1,
+        "k_minus_bb_pct": 16.0,
+        "team_at_fetch": "MIL"
+      },
+      "forecast_to_date": {
+        "ip": 23.3,
+        "war": 0.12
+      },
+      "war_gap": -0.03,
+      "innings_share_pct": 0.4
+    },
+    {
       "id": 663765,
       "name": "Jake Woodford",
       "throws": "R",
@@ -610,7 +642,7 @@
         "ip_value": 23.333,
         "war": 0.08,
         "era": 6.94,
-        "fip": 3.95,
+        "fip": 3.96,
         "k_minus_bb_pct": 11.6
       },
       "forecast": {
@@ -625,7 +657,7 @@
         "ip": 23.3,
         "war": 0.04
       },
-      "war_gap": 0.05,
+      "war_gap": 0.04,
       "innings_share_pct": 1.7
     },
     {
@@ -827,7 +859,7 @@
         "ip_value": 19.0,
         "war": -0.01,
         "era": 5.68,
-        "fip": 4.62,
+        "fip": 4.63,
         "k_minus_bb_pct": 4.7
       },
       "forecast": {
@@ -906,7 +938,7 @@
         "ip": 40.7,
         "war": 0.08
       },
-      "war_gap": -0.14,
+      "war_gap": -0.15,
       "innings_share_pct": 1.4
     },
     {
@@ -970,7 +1002,7 @@
         "ip": 63.0,
         "war": 0.5
       },
-      "war_gap": -0.62,
+      "war_gap": -0.63,
       "innings_share_pct": 0.5
     },
     {
@@ -1002,7 +1034,7 @@
         "ip": 58.1,
         "war": 0.44
       },
-      "war_gap": -0.59,
+      "war_gap": -0.6,
       "innings_share_pct": 0.9
     },
     {
@@ -1019,7 +1051,7 @@
         "ip_value": 3.0,
         "war": -0.29,
         "era": 30.0,
-        "fip": 25.76,
+        "fip": 25.77,
         "k_minus_bb_pct": -15.4
       },
       "forecast": null,
@@ -1044,7 +1076,7 @@
         "ip_value": 9.667,
         "war": -0.57,
         "era": 6.52,
-        "fip": 9.3,
+        "fip": 9.31,
         "k_minus_bb_pct": 4.1
       },
       "forecast": {
