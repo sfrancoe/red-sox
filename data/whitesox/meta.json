@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-22T15:44:24+00:00",
+ "generated_at": "2026-09-23T15:35:01+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 145,
  "seasons": {
   "2026": {
-   "record": "80-76",
-   "games": 156,
+   "record": "81-76",
+   "games": 157,
    "in_progress": true,
    "war_leader": {
     "name": "Miguel Vargas",
-    "war": 5.3
+    "war": 5.5
    },
    "war_leaders": [
     {
      "name": "Miguel Vargas",
-     "war": 5.3
+     "war": 5.5
+    },
+    {
+     "name": "Chase Meidroth",
+     "war": 4.3
     },
     {
      "name": "Sean Burke",
-     "war": 4.1
-    },
-    {
-     "name": "Tristan Peters",
-     "war": 3.9
+     "war": 4.0
     }
    ],
    "pitching_leaders": {
@@ -35,7 +35,7 @@
       },
       {
        "name": "Trevor Richards",
-       "value": "1.12"
+       "value": "1.16"
       },
       {
        "name": "Sean Burke",
@@ -47,7 +47,8 @@
    "batting_leaders": {
     "hr": {
      "names": [
-      "Miguel Vargas"
+      "Miguel Vargas",
+      "Munetaka Murakami"
      ],
      "value": 33,
      "top": [
@@ -57,7 +58,7 @@
       },
       {
        "name": "Munetaka Murakami",
-       "value": 32
+       "value": 33
       },
       {
        "name": "Colson Montgomery",
@@ -69,11 +70,11 @@
      "names": [
       "Miguel Vargas"
      ],
-     "value": 88,
+     "value": 89,
      "top": [
       {
        "name": "Miguel Vargas",
-       "value": 88
+       "value": 89
       },
       {
        "name": "Colson Montgomery",
@@ -81,23 +82,23 @@
       },
       {
        "name": "Andrew Benintendi",
-       "value": 71
+       "value": 73
       }
      ]
     },
     "avg": {
      "names": [
-      "Sam Antonacci"
+      "Chase Meidroth"
      ],
-     "value": ".270",
+     "value": ".271",
      "top": [
+      {
+       "name": "Chase Meidroth",
+       "value": ".271"
+      },
       {
        "name": "Sam Antonacci",
        "value": ".270"
-      },
-      {
-       "name": "Chase Meidroth",
-       "value": ".268"
       },
       {
        "name": "Miguel Vargas",
@@ -117,11 +118,11 @@
       },
       {
        "name": "Munetaka Murakami",
-       "value": ".809"
+       "value": ".817"
       },
       {
-       "name": "Sam Antonacci",
-       "value": ".754"
+       "name": "Chase Meidroth",
+       "value": ".756"
       }
      ]
     }

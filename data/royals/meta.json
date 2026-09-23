@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-22T15:44:27+00:00",
+ "generated_at": "2026-09-23T15:35:03+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 118,
  "seasons": {
   "2026": {
-   "record": "67-89",
-   "games": 156,
+   "record": "67-90",
+   "games": 157,
    "in_progress": true,
    "war_leader": {
     "name": "Bobby Witt Jr.",
@@ -19,7 +19,7 @@
     },
     {
      "name": "Michael Wacha",
-     "war": 4.2
+     "war": 4.3
     },
     {
      "name": "Carter Jensen",
@@ -30,12 +30,12 @@
     "whip": {
      "top": [
       {
-       "name": "Daniel Lynch IV",
-       "value": "1.07"
-      },
-      {
        "name": "Michael Wacha",
        "value": "1.11"
+      },
+      {
+       "name": "Daniel Lynch IV",
+       "value": "1.14"
       },
       {
        "name": "Noah Cameron",
@@ -77,7 +77,7 @@
       },
       {
        "name": "Salvador Perez",
-       "value": 73
+       "value": 74
       },
       {
        "name": "Jac Caglianone",
@@ -87,17 +87,18 @@
     },
     "avg": {
      "names": [
+      "Bobby Witt Jr.",
       "Jac Caglianone"
      ],
-     "value": ".282",
+     "value": ".283",
      "top": [
       {
-       "name": "Jac Caglianone",
-       "value": ".282"
+       "name": "Bobby Witt Jr.",
+       "value": ".283"
       },
       {
-       "name": "Bobby Witt Jr.",
-       "value": ".279"
+       "name": "Jac Caglianone",
+       "value": ".283"
       },
       {
        "name": "Carter Jensen",
@@ -109,19 +110,19 @@
      "names": [
       "Jac Caglianone"
      ],
-     "value": ".821",
+     "value": ".823",
      "top": [
       {
        "name": "Jac Caglianone",
-       "value": ".821"
+       "value": ".823"
       },
       {
        "name": "Bobby Witt Jr.",
-       "value": ".799"
+       "value": ".806"
       },
       {
        "name": "Carter Jensen",
-       "value": ".773"
+       "value": ".772"
       }
      ]
     }
