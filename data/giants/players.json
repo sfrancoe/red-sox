@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-22T14:24:15.014509+00:00",
-  "roster_as_of": "September 21, 2026",
+  "generated_at": "2026-09-23T14:36:20.495397+00:00",
+  "roster_as_of": "September 22, 2026",
   "team": {
     "id": 137,
     "name": "San Francisco Giants"
@@ -774,7 +774,7 @@
     {
       "id": 815589,
       "mlb_id": 815589,
-      "wikidata_id": null,
+      "wikidata_id": "Q140550774",
       "slug": "bo-davidson",
       "name": "Bo Davidson",
       "full_name": "Bo Davidson",
@@ -788,7 +788,7 @@
       "is_active_roster": true,
       "birth_date": "2002-07-05",
       "age": 24,
-      "birthplace": "Charlotte, North Carolina, U.S.",
+      "birthplace": "Charlotte",
       "height": null,
       "weight": null,
       "bats": "Left",
@@ -797,12 +797,19 @@
       "debut_team": "San Francisco Giants",
       "education": {
         "high_schools": [],
-        "colleges": []
+        "colleges": [
+          {
+            "name": "South Mecklenburg High School"
+          },
+          {
+            "name": "Caldwell Community College & Technical Institute"
+          }
+        ]
       },
       "teams": [
         "San Francisco Giants"
       ],
-      "source_url": null,
+      "source_url": "https://www.wikidata.org/wiki/Q140550774",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Bo_Davidson",
       "retrosheet_id": null,
       "career_stats": {
@@ -828,7 +835,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1999-09-23",
-      "age": 26,
+      "age": 27,
       "birthplace": "Des Moines, Iowa, U.S.",
       "height": null,
       "weight": null,
@@ -2646,8 +2653,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1999-03-12",
       "age": 27,
       "birthplace": "Windber, Pennsylvania, U.S.",
@@ -3030,8 +3037,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "2001-06-08",
       "age": 25,
       "birthplace": "Columbia, Tennessee, U.S.",
