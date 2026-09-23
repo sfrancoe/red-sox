@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T07:58:18.497149+00:00",
+  "generated_at": "2026-09-23T21:48:21.699917+00:00",
   "source": "MLB Stats API",
   "team": "Cubs",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 824625,
       "game_date": "2026-09-23T23:40:00Z",
-      "status": "Scheduled",
+      "status": "Pre-Game",
       "venue": "Wrigley Field",
       "location": "home",
       "opponent": "Marlins",
@@ -73,8 +73,8 @@
       ]
     },
     {
-      "game_pk": 824706,
-      "game_date": "2026-09-25T23:10:00Z",
+      "game_pk": 824703,
+      "game_date": "2026-09-25T17:05:00Z",
       "status": "Scheduled",
       "venue": "Fenway Park",
       "location": "away",
@@ -87,8 +87,42 @@
       "opponent_pitcher_record": "—",
       "show_probables": true,
       "series_description": "Regular Season",
-      "doubleheader": false,
+      "doubleheader": true,
       "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marquee Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
+    },
+    {
+      "game_pk": 824706,
+      "game_date": "2026-09-25T22:05:00Z",
+      "status": "Scheduled",
+      "venue": "Fenway Park",
+      "location": "away",
+      "opponent": "Red Sox",
+      "opponent_record": "84-73",
+      "favorite_team_record": "87-70",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": true,
+      "series_description": "Regular Season",
+      "doubleheader": true,
+      "game_number": 2,
       "broadcasts": [
         {
           "name": "NESN",
@@ -109,40 +143,6 @@
     {
       "game_pk": 824705,
       "game_date": "2026-09-26T23:15:00Z",
-      "status": "Scheduled",
-      "venue": "Fenway Park",
-      "location": "away",
-      "opponent": "Red Sox",
-      "opponent_record": "84-73",
-      "favorite_team_record": "87-70",
-      "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "NESN",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_out_of_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "Marquee Sports Network",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_out_of_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 824703,
-      "game_date": "2026-09-27T19:05:00Z",
       "status": "Scheduled",
       "venue": "Fenway Park",
       "location": "away",
