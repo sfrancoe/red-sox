@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T07:45:42.410973+00:00",
+  "generated_at": "2026-09-23T22:57:06.048832+00:00",
   "source": "MLB Stats API",
   "team": "Red Sox",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 824710,
       "game_date": "2026-09-23T23:10:00Z",
-      "status": "Scheduled",
+      "status": "Warmup",
       "venue": "Fenway Park",
       "location": "home",
       "opponent": "Guardians",
@@ -73,8 +73,8 @@
       ]
     },
     {
-      "game_pk": 824706,
-      "game_date": "2026-09-25T23:10:00Z",
+      "game_pk": 824703,
+      "game_date": "2026-09-25T17:05:00Z",
       "status": "Scheduled",
       "venue": "Fenway Park",
       "location": "home",
@@ -87,8 +87,42 @@
       "opponent_pitcher_record": "—",
       "show_probables": true,
       "series_description": "Regular Season",
-      "doubleheader": false,
+      "doubleheader": true,
       "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NESN",
+          "is_national": false,
+          "home_away": "home",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        },
+        {
+          "name": "Marquee Sports Network",
+          "is_national": false,
+          "home_away": "away",
+          "availability": "local_out_of_market",
+          "available_for_streaming": true
+        }
+      ]
+    },
+    {
+      "game_pk": 824706,
+      "game_date": "2026-09-25T22:05:00Z",
+      "status": "Scheduled",
+      "venue": "Fenway Park",
+      "location": "home",
+      "opponent": "Cubs",
+      "opponent_record": "87-70",
+      "red_sox_record": "84-73",
+      "red_sox_pitcher": "",
+      "opponent_pitcher": "",
+      "red_sox_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": true,
+      "series_description": "Regular Season",
+      "doubleheader": true,
+      "game_number": 2,
       "broadcasts": [
         {
           "name": "NESN",
@@ -109,40 +143,6 @@
     {
       "game_pk": 824705,
       "game_date": "2026-09-26T23:15:00Z",
-      "status": "Scheduled",
-      "venue": "Fenway Park",
-      "location": "home",
-      "opponent": "Cubs",
-      "opponent_record": "87-70",
-      "red_sox_record": "84-73",
-      "red_sox_pitcher": "",
-      "opponent_pitcher": "",
-      "red_sox_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "NESN",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_out_of_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "Marquee Sports Network",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_out_of_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 824703,
-      "game_date": "2026-09-27T19:05:00Z",
       "status": "Scheduled",
       "venue": "Fenway Park",
       "location": "home",
