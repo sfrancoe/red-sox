@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-23T14:28:00.392960+00:00",
-  "roster_as_of": "September 15, 2026",
+  "generated_at": "2026-09-24T14:26:38.399240+00:00",
+  "roster_as_of": "September 23, 2026",
   "team": {
     "id": 144,
     "name": "Atlanta Braves"
@@ -1755,47 +1755,6 @@
       }
     },
     {
-      "id": 702566,
-      "mlb_id": 702566,
-      "wikidata_id": "Q113133571",
-      "slug": "owen-murphy",
-      "name": "Owen Murphy",
-      "full_name": "Owen Murphy",
-      "number": "73",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "2003-09-27",
-      "age": 22,
-      "birthplace": "Chicago, Illinois, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "July 6, 2026",
-      "debut_team": "Atlanta Braves",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Atlanta Braves"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q113133571",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Owen_Murphy_%28baseball%29",
-      "retrosheet_id": null,
-      "career_stats": {
-        "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
-      }
-    },
-    {
       "id": 669221,
       "mlb_id": 669221,
       "wikidata_id": "Q60229705",
@@ -1859,6 +1818,47 @@
           "slugging_percentage": 0.426,
           "ops": 0.751
         },
+        "pitching": null
+      }
+    },
+    {
+      "id": 702566,
+      "mlb_id": 702566,
+      "wikidata_id": "Q113133571",
+      "slug": "owen-murphy",
+      "name": "Owen Murphy",
+      "full_name": "Owen Murphy",
+      "number": "73",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "2003-09-27",
+      "age": 22,
+      "birthplace": "Chicago, Illinois, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "July 6, 2026",
+      "debut_team": "Atlanta Braves",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Atlanta Braves"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q113133571",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Owen_Murphy_%28baseball%29",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
         "pitching": null
       }
     },
@@ -2776,8 +2776,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "60-day injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1991-03-01",
       "age": 35,
       "birthplace": "Bolívar",

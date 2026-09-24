@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-23T14:31:30.536694+00:00",
-  "roster_as_of": "September 18, 2026",
+  "generated_at": "2026-09-24T14:30:19.283082+00:00",
+  "roster_as_of": "September 23, 2026",
   "team": {
     "id": 158,
     "name": "Milwaukee Brewers"
   },
   "roster_type": "open-current-roster",
-  "player_count": 42,
+  "player_count": 43,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -785,8 +785,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1998-12-20",
       "age": 27,
       "birthplace": "Saint Petersburg, Florida, U.S.",
@@ -2036,6 +2036,85 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
+      }
+    },
+    {
+      "id": 680689,
+      "mlb_id": 680689,
+      "wikidata_id": "Q121240517",
+      "slug": "lyon-richardson",
+      "name": "Lyon Richardson",
+      "full_name": "Lyon Richardson",
+      "number": "48",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2000-01-18",
+      "age": 26,
+      "birthplace": "Jensen Beach",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 6, 2023",
+      "debut_team": "Cincinnati Reds",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Cincinnati Reds",
+        "Milwaukee Brewers"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q121240517",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Lyon_Richardson",
+      "retrosheet_id": "richl001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 39,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 39,
+          "games_started": 4,
+          "wins": 0,
+          "losses": 5,
+          "saves": 0,
+          "innings_outs": 165,
+          "hits": 56,
+          "runs": 43,
+          "earned_runs": 37,
+          "home_runs": 9,
+          "walks": 37,
+          "strikeouts": 43,
+          "hit_batters": 2,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.05,
+          "whip": 1.691
+        }
       }
     },
     {

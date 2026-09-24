@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-23T14:19:00.768751+00:00",
-  "roster_as_of": "September 22, 2026",
+  "generated_at": "2026-09-24T14:17:36.882507+00:00",
+  "roster_as_of": "September 23, 2026",
   "team": {
     "id": 121,
     "name": "New York Mets"
@@ -20,6 +20,86 @@
     "stats_attribution": "The information used here was obtained free of charge from and is copyrighted by Retrosheet. Interested parties may contact Retrosheet at 20 Sunset Rd., Newark, DE 19711."
   },
   "players": [
+    {
+      "id": 691769,
+      "mlb_id": 691769,
+      "wikidata_id": "Q136341544",
+      "slug": "philip-abner",
+      "name": "Philip Abner",
+      "full_name": "Philip Abner",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "2002-05-05",
+      "age": 24,
+      "birthplace": "Charlotte, North Carolina, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "September 19, 2025",
+      "debut_team": "Arizona Diamondbacks",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Arizona Diamondbacks",
+        "San Francisco Giants",
+        "New York Mets"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q136341544",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Philip_Abner",
+      "retrosheet_id": "abnep001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 5,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 5,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 11,
+          "hits": 5,
+          "runs": 2,
+          "earned_runs": 2,
+          "home_runs": 0,
+          "walks": 3,
+          "strikeouts": 5,
+          "hit_batters": 0,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 4.91,
+          "whip": 2.182
+        }
+      }
+    },
     {
       "id": 683146,
       "mlb_id": 683146,
@@ -234,86 +314,6 @@
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      }
-    },
-    {
-      "id": 675540,
-      "mlb_id": 675540,
-      "wikidata_id": "Q113524258",
-      "slug": "xzavion-curry",
-      "name": "Xzavion Curry",
-      "full_name": "Xzavion Curry",
-      "number": "53",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1998-07-27",
-      "age": 28,
-      "birthplace": "Orangeburg, South Carolina, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "August 15, 2022",
-      "debut_team": "Cleveland Guardians",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Cleveland Guardians",
-        "Miami Marlins",
-        "New York Mets"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q113524258",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Xzavion_Curry",
-      "retrosheet_id": "currx001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 62,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 62,
-          "games_started": 16,
-          "wins": 5,
-          "losses": 8,
-          "saves": 0,
-          "innings_outs": 450,
-          "hits": 153,
-          "runs": 81,
-          "earned_runs": 73,
-          "home_runs": 21,
-          "walks": 46,
-          "strikeouts": 99,
-          "hit_batters": 3,
-          "wild_pitches": 4,
-          "balks": 2,
-          "complete_games": 0,
-          "era": 4.38,
-          "whip": 1.327
-        }
       }
     },
     {

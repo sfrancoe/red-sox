@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-23T14:34:45.075418+00:00",
-  "roster_as_of": "September 21, 2026",
+  "generated_at": "2026-09-24T14:33:31.576726+00:00",
+  "roster_as_of": "September 23, 2026",
   "team": {
     "id": 119,
     "name": "Los Angeles Dodgers"
   },
   "roster_type": "open-current-roster",
-  "player_count": 45,
+  "player_count": 46,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -1403,8 +1403,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1998-05-30",
       "age": 28,
       "birthplace": "Rancho Santa Fe",
@@ -2025,6 +2025,96 @@
       }
     },
     {
+      "id": 660271,
+      "mlb_id": 660271,
+      "wikidata_id": "Q4391858",
+      "slug": "shohei-ohtani",
+      "name": "Shohei Ohtani",
+      "full_name": "Shohei Ohtani",
+      "number": "17",
+      "position": {
+        "name": "Two-Way Player",
+        "group": "Pitcher",
+        "abbreviation": "TWP"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1994-07-05",
+      "age": 32,
+      "birthplace": "Mizusawa",
+      "height": "6' 4\"",
+      "weight": 214,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "March 29, 2013",
+      "debut_team": "Hokkaidō Nippon-Ham Fighters",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Oshu City Anetai Elementary School"
+          },
+          {
+            "name": "Ōshū City Mizusawa-Minami Junior High School"
+          },
+          {
+            "name": "Hanamaki Higashi High School"
+          }
+        ]
+      },
+      "teams": [
+        "Hokkaido Nippon-Ham Fighters",
+        "Los Angeles Angels",
+        "Los Angeles Dodgers"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q4391858",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Shohei_Ohtani",
+      "retrosheet_id": "ohtas001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 1033,
+          "plate_appearances": 4329,
+          "at_bats": 3730,
+          "runs": 708,
+          "hits": 1050,
+          "doubles": 192,
+          "triples": 45,
+          "home_runs": 280,
+          "runs_batted_in": 669,
+          "walks": 541,
+          "strikeouts": 1104,
+          "stolen_bases": 165,
+          "caught_stealing": 43,
+          "average": 0.282,
+          "on_base_percentage": 0.374,
+          "slugging_percentage": 0.582,
+          "ops": 0.956
+        },
+        "pitching": {
+          "games": 100,
+          "games_started": 100,
+          "wins": 39,
+          "losses": 20,
+          "saves": 0,
+          "innings_outs": 1586,
+          "hits": 388,
+          "runs": 184,
+          "earned_runs": 176,
+          "home_runs": 56,
+          "walks": 182,
+          "strikeouts": 670,
+          "hit_batters": 24,
+          "wild_pitches": 52,
+          "balks": 2,
+          "complete_games": 1,
+          "era": 3.0,
+          "whip": 1.078
+        }
+      }
+    },
+    {
       "id": 681624,
       "mlb_id": 681624,
       "wikidata_id": "Q108109375",
@@ -2096,8 +2186,8 @@
         "group": "Outfielder",
         "abbreviation": "DH"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2005-05-24",
       "age": 21,
       "birthplace": "Brooklyn",
@@ -2626,8 +2716,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1996-11-20",
       "age": 29,
       "birthplace": "Hayward",

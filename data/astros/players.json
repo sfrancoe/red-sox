@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-23T14:24:38.415540+00:00",
-  "roster_as_of": "September 19, 2026",
+  "generated_at": "2026-09-24T14:23:30.245115+00:00",
+  "roster_as_of": "September 23, 2026",
   "team": {
     "id": 117,
     "name": "Houston Astros"
   },
   "roster_type": "open-current-roster",
-  "player_count": 43,
+  "player_count": 44,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -1045,6 +1045,47 @@
       }
     },
     {
+      "id": 681973,
+      "mlb_id": 681973,
+      "wikidata_id": "Q141545873",
+      "slug": "josh-hendrickson",
+      "name": "Josh Hendrickson",
+      "full_name": "Josh Hendrickson",
+      "number": "61",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1997-09-18",
+      "age": 29,
+      "birthplace": "Perth, Australia",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "23 September, 2026",
+      "debut_team": "Houston Astros",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Houston Astros"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q141545873",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Josh_Hendrickson",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
       "id": 837227,
       "mlb_id": 837227,
       "wikidata_id": "Q27917678",
@@ -1103,8 +1144,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1997-03-26",
       "age": 29,
       "birthplace": "Santo Domingo",
@@ -1465,8 +1506,8 @@
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "2002-03-16",
       "age": 24,
       "birthplace": "Houston",
@@ -1525,10 +1566,10 @@
       "number": "6",
       "position": {
         "name": "Outfielder",
-        "group": "Outfielder",
+        "group": "Pitcher",
         "abbreviation": "CF"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "60-day injured list",
       "is_active_roster": false,
       "birth_date": "1996-06-18",
       "age": 30,
@@ -2155,8 +2196,8 @@
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2003-01-27",
       "age": 23,
       "birthplace": "Chicago Heights, Illinois, U.S.",

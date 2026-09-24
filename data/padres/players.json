@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-23T14:35:29.560965+00:00",
-  "roster_as_of": "September 14, 2026",
+  "generated_at": "2026-09-24T14:34:16.953718+00:00",
+  "roster_as_of": "September 23, 2026",
   "team": {
     "id": 135,
     "name": "San Diego Padres"
   },
   "roster_type": "open-current-roster",
-  "player_count": 47,
+  "player_count": 46,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -33,8 +33,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "60-day injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1991-08-04",
       "age": 35,
       "birthplace": "Overland Park",
@@ -510,8 +510,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1996-05-11",
       "age": 30,
       "birthplace": "Mission Viejo",
@@ -960,10 +960,10 @@
         "high_schools": [],
         "colleges": [
           {
-            "name": "San Diego State University"
+            "name": "South Hills High School"
           },
           {
-            "name": "South Hills High School"
+            "name": "San Diego State University"
           }
         ]
       },
@@ -1451,84 +1451,6 @@
           "complete_games": 0,
           "era": 4.72,
           "whip": 1.303
-        }
-      }
-    },
-    {
-      "id": 689690,
-      "mlb_id": 689690,
-      "wikidata_id": "Q120686445",
-      "slug": "alek-jacob",
-      "name": "Alek Jacob",
-      "full_name": "Alek Jacob",
-      "number": "37",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1998-06-16",
-      "age": 28,
-      "birthplace": "Spokane, Washington, U.S.",
-      "height": "6' 3\"",
-      "weight": null,
-      "bats": "Left",
-      "throws": "Right",
-      "debut_date": "July 15, 2023",
-      "debut_team": "San Diego Padres",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "San Diego Padres"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q120686445",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Alek_Jacob",
-      "retrosheet_id": "jacoa001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 39,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 39,
-          "games_started": 0,
-          "wins": 1,
-          "losses": 0,
-          "saves": 0,
-          "innings_outs": 153,
-          "hits": 45,
-          "runs": 24,
-          "earned_runs": 23,
-          "home_runs": 7,
-          "walks": 17,
-          "strikeouts": 47,
-          "hit_batters": 8,
-          "wild_pitches": 0,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 4.06,
-          "whip": 1.216
         }
       }
     },
