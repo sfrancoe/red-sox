@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-23T15:35:08+00:00",
+ "generated_at": "2026-09-24T15:56:18+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 120,
  "seasons": {
   "2026": {
-   "record": "74-84",
-   "games": 158,
+   "record": "75-84",
+   "games": 159,
    "in_progress": true,
    "war_leader": {
     "name": "CJ Abrams",
-    "war": 5.1
+    "war": 5.2
    },
    "war_leaders": [
     {
      "name": "CJ Abrams",
-     "war": 5.1
+     "war": 5.2
     },
     {
      "name": "Cade Cavalli",
@@ -23,7 +23,7 @@
     },
     {
      "name": "James Wood",
-     "war": 3.6
+     "war": 3.5
     }
    ],
    "pitching_leaders": {
@@ -69,11 +69,11 @@
      "names": [
       "CJ Abrams"
      ],
-     "value": 102,
+     "value": 103,
      "top": [
       {
        "name": "CJ Abrams",
-       "value": 102
+       "value": 103
       },
       {
        "name": "Daylen Lile",
@@ -81,23 +81,24 @@
       },
       {
        "name": "James Wood",
-       "value": 76
+       "value": 77
       }
      ]
     },
     "avg": {
      "names": [
+      "CJ Abrams",
       "James Wood"
      ],
-     "value": ".265",
+     "value": ".262",
      "top": [
       {
-       "name": "James Wood",
-       "value": ".265"
+       "name": "CJ Abrams",
+       "value": ".262"
       },
       {
-       "name": "CJ Abrams",
-       "value": ".261"
+       "name": "James Wood",
+       "value": ".262"
       },
       {
        "name": "Daylen Lile",
@@ -109,19 +110,19 @@
      "names": [
       "James Wood"
      ],
-     "value": ".897",
+     "value": ".890",
      "top": [
       {
        "name": "James Wood",
-       "value": ".897"
+       "value": ".890"
       },
       {
        "name": "CJ Abrams",
-       "value": ".835"
+       "value": ".838"
       },
       {
        "name": "Daylen Lile",
-       "value": ".733"
+       "value": ".732"
       }
      ]
     }

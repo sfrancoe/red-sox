@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-09-23T15:35:11+00:00",
+ "generated_at": "2026-09-24T15:56:20+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 115,
  "seasons": {
   "2026": {
-   "record": "57-100",
-   "games": 157,
+   "record": "57-101",
+   "games": 158,
    "in_progress": true,
    "war_leader": {
     "name": "TJ Rumfield",
-    "war": 3.3
+    "war": 3.2
    },
    "war_leaders": [
     {
      "name": "TJ Rumfield",
-     "war": 3.3
+     "war": 3.2
     },
     {
      "name": "Hunter Goodman",
-     "war": 2.5
+     "war": 2.6
     },
     {
      "name": "Jake McCarthy",
@@ -67,17 +67,18 @@
     },
     "rbi": {
      "names": [
+      "Hunter Goodman",
       "Jake McCarthy"
      ],
      "value": 83,
      "top": [
       {
-       "name": "Jake McCarthy",
+       "name": "Hunter Goodman",
        "value": 83
       },
       {
-       "name": "Hunter Goodman",
-       "value": 82
+       "name": "Jake McCarthy",
+       "value": 83
       },
       {
        "name": "TJ Rumfield",
@@ -89,11 +90,11 @@
      "names": [
       "TJ Rumfield"
      ],
-     "value": ".298",
+     "value": ".296",
      "top": [
       {
        "name": "TJ Rumfield",
-       "value": ".298"
+       "value": ".296"
       },
       {
        "name": "Jake McCarthy",
@@ -101,27 +102,27 @@
       },
       {
        "name": "Hunter Goodman",
-       "value": ".243"
+       "value": ".246"
       }
      ]
     },
     "ops": {
      "names": [
-      "TJ Rumfield"
+      "Hunter Goodman"
      ],
-     "value": ".837",
+     "value": ".836",
      "top": [
       {
-       "name": "TJ Rumfield",
-       "value": ".837"
+       "name": "Hunter Goodman",
+       "value": ".836"
       },
       {
-       "name": "Hunter Goodman",
-       "value": ".834"
+       "name": "TJ Rumfield",
+       "value": ".830"
       },
       {
        "name": "Jake McCarthy",
-       "value": ".824"
+       "value": ".821"
       }
      ]
     }

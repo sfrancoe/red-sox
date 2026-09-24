@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-23T15:35:03+00:00",
+ "generated_at": "2026-09-24T15:56:15+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 118,
  "seasons": {
   "2026": {
-   "record": "67-90",
-   "games": 157,
+   "record": "68-90",
+   "games": 158,
    "in_progress": true,
    "war_leader": {
     "name": "Bobby Witt Jr.",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Carter Jensen",
-     "war": 3.0
+     "war": 3.1
     }
    ],
    "pitching_leaders": {
@@ -87,22 +87,21 @@
     },
     "avg": {
      "names": [
-      "Bobby Witt Jr.",
       "Jac Caglianone"
      ],
      "value": ".283",
      "top": [
       {
-       "name": "Bobby Witt Jr.",
-       "value": ".283"
-      },
-      {
        "name": "Jac Caglianone",
        "value": ".283"
       },
       {
+       "name": "Bobby Witt Jr.",
+       "value": ".282"
+      },
+      {
        "name": "Carter Jensen",
-       "value": ".233"
+       "value": ".237"
       }
      ]
     },
@@ -110,19 +109,19 @@
      "names": [
       "Jac Caglianone"
      ],
-     "value": ".823",
+     "value": ".820",
      "top": [
       {
        "name": "Jac Caglianone",
-       "value": ".823"
+       "value": ".820"
       },
       {
        "name": "Bobby Witt Jr.",
-       "value": ".806"
+       "value": ".804"
       },
       {
        "name": "Carter Jensen",
-       "value": ".772"
+       "value": ".777"
       }
      ]
     }

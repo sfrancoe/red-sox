@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-23T15:35:12+00:00",
+ "generated_at": "2026-09-24T15:56:20+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 135,
  "seasons": {
   "2026": {
-   "record": "87-70",
-   "games": 157,
+   "record": "88-70",
+   "games": 158,
    "in_progress": true,
    "war_leader": {
     "name": "Ty France",
@@ -18,12 +18,12 @@
      "war": 4.7
     },
     {
-     "name": "Michael King",
+     "name": "Fernando Tatis Jr.",
      "war": 4.1
     },
     {
-     "name": "Fernando Tatis Jr.",
-     "war": 4.0
+     "name": "Michael King",
+     "war": 4.1
     }
    ],
    "pitching_leaders": {
@@ -49,11 +49,11 @@
      "names": [
       "Manny Machado"
      ],
-     "value": 28,
+     "value": 29,
      "top": [
       {
        "name": "Manny Machado",
-       "value": 28
+       "value": 29
       },
       {
        "name": "Jackson Merrill",
@@ -67,17 +67,17 @@
     },
     "rbi": {
      "names": [
-      "Jackson Merrill"
+      "Manny Machado"
      ],
-     "value": 86,
+     "value": 87,
      "top": [
+      {
+       "name": "Manny Machado",
+       "value": 87
+      },
       {
        "name": "Jackson Merrill",
        "value": 86
-      },
-      {
-       "name": "Manny Machado",
-       "value": 84
       },
       {
        "name": "Fernando Tatis Jr.",
@@ -89,19 +89,19 @@
      "names": [
       "Fernando Tatis Jr."
      ],
-     "value": ".285",
+     "value": ".287",
      "top": [
       {
        "name": "Fernando Tatis Jr.",
-       "value": ".285"
+       "value": ".287"
       },
       {
        "name": "Jackson Merrill",
-       "value": ".254"
+       "value": ".252"
       },
       {
        "name": "Xander Bogaerts",
-       "value": ".229"
+       "value": ".228"
       }
      ]
     },
@@ -109,19 +109,19 @@
      "names": [
       "Fernando Tatis Jr."
      ],
-     "value": ".820",
+     "value": ".825",
      "top": [
       {
        "name": "Fernando Tatis Jr.",
-       "value": ".820"
+       "value": ".825"
       },
       {
        "name": "Jackson Merrill",
-       "value": ".744"
+       "value": ".739"
       },
       {
        "name": "Manny Machado",
-       "value": ".710"
+       "value": ".714"
       }
      ]
     }
