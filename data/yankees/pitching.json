@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T07:46:02.036658+00:00",
+  "generated_at": "2026-09-24T13:43:29.297420+00:00",
   "season": 2026,
   "team": "New York Yankees",
   "games_played": 158,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 21.6,
+    "actual_war": 21.7,
     "forecast_war_to_date": 16.7,
-    "war_gap": 4.9,
-    "innings": 1405.3,
+    "war_gap": 5.0,
+    "innings": 1414.3,
     "era": 3.21
   },
   "pitchers": [
@@ -50,7 +50,7 @@
         "war": 1.55
       },
       "war_gap": 4.56,
-      "innings_share_pct": 13.6
+      "innings_share_pct": 13.5
     },
     {
       "id": 608331,
@@ -66,7 +66,7 @@
         "ip_value": 112.667,
         "war": 3.53,
         "era": 2.8,
-        "fip": 2.65,
+        "fip": 2.64,
         "k_minus_bb_pct": 16.4
       },
       "forecast": {
@@ -81,7 +81,7 @@
         "ip": 184.8,
         "war": 3.6
       },
-      "war_gap": -0.07,
+      "war_gap": -0.08,
       "innings_share_pct": 8.0
     },
     {
@@ -98,7 +98,7 @@
         "ip_value": 137.333,
         "war": 2.54,
         "era": 3.6,
-        "fip": 3.62,
+        "fip": 3.61,
         "k_minus_bb_pct": 18.5
       },
       "forecast": {
@@ -114,56 +114,24 @@
         "war": 1.35
       },
       "war_gap": 1.19,
-      "innings_share_pct": 9.8
-    },
-    {
-      "id": 687396,
-      "name": "Brent Headrick",
-      "throws": "L",
-      "role": "Setup",
-      "games": 79,
-      "starts": 0,
-      "saves": 0,
-      "holds": 28,
-      "actual": {
-        "ip": "77.0",
-        "ip_value": 77.0,
-        "war": 2.12,
-        "era": 2.1,
-        "fip": 2.42,
-        "k_minus_bb_pct": 22.3
-      },
-      "forecast": {
-        "ip": 42.0,
-        "war": 0.15,
-        "era": 3.84,
-        "fip": 4.1,
-        "k_minus_bb_pct": 16.0,
-        "team_at_fetch": "NYY"
-      },
-      "forecast_to_date": {
-        "ip": 41.0,
-        "war": 0.14
-      },
-      "war_gap": 1.98,
-      "innings_share_pct": 5.5
+      "innings_share_pct": 9.7
     },
     {
       "id": 543037,
       "name": "Gerrit Cole",
       "throws": "R",
       "role": "Starter",
-      "games": 21,
-      "starts": 21,
+      "games": 22,
+      "starts": 22,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "121.1",
-        "ip_value": 121.333,
-        "war": 2.02,
-        "era": 3.63,
-        "fip": 3.91,
-        "k_minus_bb_pct": 20.3
+        "ip": "127.0",
+        "ip_value": 127.0,
+        "war": 2.15,
+        "era": 3.61,
+        "fip": 3.92,
+        "k_minus_bb_pct": 20.4
       },
       "forecast": {
         "ip": 134.2,
@@ -177,8 +145,72 @@
         "ip": 130.9,
         "war": 1.94
       },
-      "war_gap": 0.08,
-      "innings_share_pct": 8.6
+      "war_gap": 0.21,
+      "innings_share_pct": 9.0
+    },
+    {
+      "id": 687396,
+      "name": "Brent Headrick",
+      "throws": "L",
+      "role": "Setup",
+      "games": 80,
+      "starts": 0,
+      "saves": 0,
+      "holds": 28,
+      "actual": {
+        "ip": "77.1",
+        "ip_value": 77.333,
+        "war": 2.11,
+        "era": 2.09,
+        "fip": 2.42,
+        "k_minus_bb_pct": 22.2
+      },
+      "forecast": {
+        "ip": 42.0,
+        "war": 0.15,
+        "era": 3.84,
+        "fip": 4.1,
+        "k_minus_bb_pct": 16.0,
+        "team_at_fetch": "NYY"
+      },
+      "forecast_to_date": {
+        "ip": 41.0,
+        "war": 0.14
+      },
+      "war_gap": 1.97,
+      "innings_share_pct": 5.5
+    },
+    {
+      "id": 670280,
+      "name": "David Bednar",
+      "throws": "R",
+      "role": "Closer",
+      "games": 63,
+      "starts": 0,
+      "saves": 35,
+      "holds": 0,
+      "actual": {
+        "ip": "68.1",
+        "ip_value": 68.333,
+        "war": 1.95,
+        "era": 2.5,
+        "fip": 2.54,
+        "k_minus_bb_pct": 20.8
+      },
+      "forecast": {
+        "ip": 65.0,
+        "war": 0.81,
+        "era": 3.25,
+        "fip": 3.31,
+        "k_minus_bb_pct": 21.2,
+        "team_at_fetch": "NYY"
+      },
+      "forecast_to_date": {
+        "ip": 63.4,
+        "war": 0.79
+      },
+      "war_gap": 1.16,
+      "innings_share_pct": 4.8
     },
     {
       "id": 701542,
@@ -192,7 +224,7 @@
       "actual": {
         "ip": "152.1",
         "ip_value": 152.333,
-        "war": 1.94,
+        "war": 1.93,
         "era": 4.02,
         "fip": 4.05,
         "k_minus_bb_pct": 14.7
@@ -209,40 +241,8 @@
         "ip": 130.6,
         "war": 1.4
       },
-      "war_gap": 0.54,
+      "war_gap": 0.53,
       "innings_share_pct": 10.8
-    },
-    {
-      "id": 670280,
-      "name": "David Bednar",
-      "throws": "R",
-      "role": "Closer",
-      "games": 62,
-      "starts": 0,
-      "saves": 35,
-      "holds": 0,
-      "actual": {
-        "ip": "67.1",
-        "ip_value": 67.333,
-        "war": 1.92,
-        "era": 2.54,
-        "fip": 2.56,
-        "k_minus_bb_pct": 20.7
-      },
-      "forecast": {
-        "ip": 65.0,
-        "war": 0.81,
-        "era": 3.25,
-        "fip": 3.31,
-        "k_minus_bb_pct": 21.2,
-        "team_at_fetch": "NYY"
-      },
-      "forecast_to_date": {
-        "ip": 63.4,
-        "war": 0.79
-      },
-      "war_gap": 1.13,
-      "innings_share_pct": 4.8
     },
     {
       "id": 607074,
@@ -281,17 +281,17 @@
       "name": "Paul Blackburn",
       "throws": "R",
       "role": "Setup",
-      "games": 60,
+      "games": 61,
       "starts": 2,
       "saves": 1,
       "holds": 11,
       "actual": {
-        "ip": "83.0",
-        "ip_value": 83.0,
-        "war": 0.66,
-        "era": 1.63,
-        "fip": 3.75,
-        "k_minus_bb_pct": 11.0
+        "ip": "84.0",
+        "ip_value": 84.0,
+        "war": 0.67,
+        "era": 1.61,
+        "fip": 3.74,
+        "k_minus_bb_pct": 10.9
       },
       "forecast": {
         "ip": 61.8,
@@ -305,7 +305,7 @@
         "ip": 60.3,
         "war": 0.47
       },
-      "war_gap": 0.19,
+      "war_gap": 0.2,
       "innings_share_pct": 5.9
     },
     {
@@ -337,7 +337,7 @@
         "ip": 59.5,
         "war": 0.09
       },
-      "war_gap": 0.46,
+      "war_gap": 0.45,
       "innings_share_pct": 4.3
     },
     {
@@ -402,7 +402,7 @@
         "war": -0.02
       },
       "war_gap": 0.16,
-      "innings_share_pct": 0.5
+      "innings_share_pct": 0.4
     },
     {
       "id": 672442,
@@ -465,7 +465,7 @@
         "ip": 7.8,
         "war": 0.06
       },
-      "war_gap": 0.04,
+      "war_gap": 0.03,
       "innings_share_pct": 1.9
     },
     {
@@ -505,17 +505,17 @@
       "name": "John Schreiber",
       "throws": "R",
       "role": "Reliever",
-      "games": 9,
+      "games": 10,
       "starts": 0,
       "saves": 1,
       "holds": 0,
       "actual": {
-        "ip": "9.2",
-        "ip_value": 9.667,
+        "ip": "10.0",
+        "ip_value": 10.0,
         "war": 0.07,
-        "era": 1.86,
-        "fip": 3.72,
-        "k_minus_bb_pct": -2.7
+        "era": 1.8,
+        "fip": 3.7,
+        "k_minus_bb_pct": -2.5
       },
       "forecast": {
         "ip": 64.0,
@@ -562,7 +562,7 @@
         "war": 0.22
       },
       "war_gap": -0.15,
-      "innings_share_pct": 2.2
+      "innings_share_pct": 2.1
     },
     {
       "id": 623437,
@@ -667,7 +667,7 @@
         "ip_value": 8.667,
         "war": -0.1,
         "era": 4.15,
-        "fip": 5.64,
+        "fip": 5.63,
         "k_minus_bb_pct": 15.4
       },
       "forecast": {
@@ -763,7 +763,7 @@
         "ip_value": 5.333,
         "war": -0.23,
         "era": 11.81,
-        "fip": 10.79,
+        "fip": 10.78,
         "k_minus_bb_pct": 23.1
       },
       "forecast": {
@@ -793,7 +793,7 @@
       "actual": {
         "ip": "7.2",
         "ip_value": 7.667,
-        "war": -0.36,
+        "war": -0.37,
         "era": 8.22,
         "fip": 10.53,
         "k_minus_bb_pct": 0.0
@@ -827,7 +827,7 @@
         "ip_value": 25.333,
         "war": -0.41,
         "era": 4.97,
-        "fip": 6.97,
+        "fip": 6.96,
         "k_minus_bb_pct": 2.6
       },
       "forecast": {
@@ -842,7 +842,7 @@
         "ip": 90.2,
         "war": 0.67
       },
-      "war_gap": -1.08,
+      "war_gap": -1.09,
       "innings_share_pct": 1.8
     },
     {
@@ -850,16 +850,16 @@
       "name": "Tim Hill",
       "throws": "L",
       "role": "Setup",
-      "games": 65,
+      "games": 66,
       "starts": 0,
       "saves": 2,
       "holds": 10,
       "actual": {
-        "ip": "57.1",
-        "ip_value": 57.333,
-        "war": -1.17,
-        "era": 4.71,
-        "fip": 5.99,
+        "ip": "58.0",
+        "ip_value": 58.0,
+        "war": -1.15,
+        "era": 4.66,
+        "fip": 5.96,
         "k_minus_bb_pct": 5.1
       },
       "forecast": {
@@ -874,7 +874,7 @@
         "ip": 64.4,
         "war": 0.0
       },
-      "war_gap": -1.17,
+      "war_gap": -1.16,
       "innings_share_pct": 4.1
     }
   ]
