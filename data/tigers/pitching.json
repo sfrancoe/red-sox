@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T21:48:07.513765+00:00",
+  "generated_at": "2026-09-24T13:47:57.187441+00:00",
   "season": 2026,
   "team": "Detroit Tigers",
   "games_played": 159,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 15.1,
+    "actual_war": 15.2,
     "forecast_war_to_date": 20.4,
-    "war_gap": -5.3,
-    "innings": 1398.0,
+    "war_gap": -5.2,
+    "innings": 1407.0,
     "era": 3.65
   },
   "pitchers": [
@@ -98,7 +98,7 @@
         "ip_value": 155.0,
         "war": 2.49,
         "era": 3.48,
-        "fip": 3.98,
+        "fip": 3.97,
         "k_minus_bb_pct": 11.2
       },
       "forecast": {
@@ -114,24 +114,24 @@
         "war": 0.28
       },
       "war_gap": 2.21,
-      "innings_share_pct": 11.1
+      "innings_share_pct": 11.0
     },
     {
       "id": 664285,
       "name": "Framber Valdez",
       "throws": "L",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "168.2",
-        "ip_value": 168.667,
-        "war": 1.8,
-        "era": 4.06,
-        "fip": 4.19,
-        "k_minus_bb_pct": 8.8
+        "ip": "174.0",
+        "ip_value": 174.0,
+        "war": 1.97,
+        "era": 4.03,
+        "fip": 4.14,
+        "k_minus_bb_pct": 9.0
       },
       "forecast": {
         "ip": 190.4,
@@ -145,8 +145,8 @@
         "ip": 186.9,
         "war": 3.66
       },
-      "war_gap": -1.86,
-      "innings_share_pct": 12.1
+      "war_gap": -1.69,
+      "innings_share_pct": 12.4
     },
     {
       "id": 675512,
@@ -162,7 +162,7 @@
         "ip_value": 114.333,
         "war": 1.58,
         "era": 2.76,
-        "fip": 4.09,
+        "fip": 4.08,
         "k_minus_bb_pct": 12.1
       },
       "forecast": {
@@ -177,8 +177,8 @@
         "ip": 52.3,
         "war": 0.45
       },
-      "war_gap": 1.14,
-      "innings_share_pct": 8.2
+      "war_gap": 1.13,
+      "innings_share_pct": 8.1
     },
     {
       "id": 656427,
@@ -210,7 +210,7 @@
         "war": 2.54
       },
       "war_gap": -1.25,
-      "innings_share_pct": 6.2
+      "innings_share_pct": 6.1
     },
     {
       "id": 805427,
@@ -226,7 +226,7 @@
         "ip_value": 39.0,
         "war": 0.76,
         "era": 3.69,
-        "fip": 2.59,
+        "fip": 2.58,
         "k_minus_bb_pct": 28.3
       },
       "forecast": {
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "108.0",
         "ip_value": 108.0,
-        "war": 0.66,
+        "war": 0.65,
         "era": 3.67,
         "fip": 4.27,
         "k_minus_bb_pct": 15.6
@@ -369,7 +369,7 @@
         "ip": 70.7,
         "war": 0.44
       },
-      "war_gap": -0.09,
+      "war_gap": -0.1,
       "innings_share_pct": 5.1
     },
     {
@@ -469,53 +469,21 @@
       "innings_share_pct": 2.9
     },
     {
-      "id": 641755,
-      "name": "Tyler Kinley",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 13,
-      "starts": 0,
-      "saves": 0,
-      "holds": 3,
-      "actual": {
-        "ip": "13.1",
-        "ip_value": 13.333,
-        "war": 0.2,
-        "era": 1.35,
-        "fip": 3.77,
-        "k_minus_bb_pct": 0.0
-      },
-      "forecast": {
-        "ip": 63.0,
-        "war": 0.31,
-        "era": 4.08,
-        "fip": 4.07,
-        "k_minus_bb_pct": 15.2,
-        "team_at_fetch": "DET"
-      },
-      "forecast_to_date": {
-        "ip": 61.8,
-        "war": 0.3
-      },
-      "war_gap": -0.11,
-      "innings_share_pct": 1.0
-    },
-    {
       "id": 445276,
       "name": "Kenley Jansen",
       "throws": "R",
       "role": "Closer",
-      "games": 48,
+      "games": 49,
       "starts": 0,
       "saves": 21,
       "holds": 1,
       "actual": {
-        "ip": "43.0",
-        "ip_value": 43.0,
-        "war": 0.18,
-        "era": 3.35,
-        "fip": 4.61,
-        "k_minus_bb_pct": 14.9
+        "ip": "44.0",
+        "ip_value": 44.0,
+        "war": 0.19,
+        "era": 3.27,
+        "fip": 4.57,
+        "k_minus_bb_pct": 14.7
       },
       "forecast": {
         "ip": 60.0,
@@ -529,7 +497,7 @@
         "ip": 58.9,
         "war": 0.28
       },
-      "war_gap": -0.1,
+      "war_gap": -0.09,
       "innings_share_pct": 3.1
     },
     {
@@ -661,6 +629,38 @@
       "innings_share_pct": 1.2
     },
     {
+      "id": 641755,
+      "name": "Tyler Kinley",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 14,
+      "starts": 0,
+      "saves": 0,
+      "holds": 3,
+      "actual": {
+        "ip": "14.0",
+        "ip_value": 14.0,
+        "war": 0.04,
+        "era": 1.93,
+        "fip": 4.67,
+        "k_minus_bb_pct": 0.0
+      },
+      "forecast": {
+        "ip": 63.0,
+        "war": 0.31,
+        "era": 4.08,
+        "fip": 4.07,
+        "k_minus_bb_pct": 15.2,
+        "team_at_fetch": "DET"
+      },
+      "forecast_to_date": {
+        "ip": 61.8,
+        "war": 0.3
+      },
+      "war_gap": -0.27,
+      "innings_share_pct": 1.0
+    },
+    {
       "id": 668670,
       "name": "Jake Rogers",
       "throws": "R",
@@ -699,7 +699,7 @@
         "ip_value": 5.333,
         "war": -0.04,
         "era": 6.75,
-        "fip": 5.54,
+        "fip": 5.53,
         "k_minus_bb_pct": 8.3
       },
       "forecast": {
@@ -731,7 +731,7 @@
         "ip_value": 22.667,
         "war": -0.04,
         "era": 4.76,
-        "fip": 4.91,
+        "fip": 4.9,
         "k_minus_bb_pct": 16.5
       },
       "forecast": {
@@ -746,7 +746,7 @@
         "ip": 23.6,
         "war": 0.04
       },
-      "war_gap": -0.07,
+      "war_gap": -0.08,
       "innings_share_pct": 1.6
     },
     {
@@ -795,7 +795,7 @@
         "ip_value": 3.667,
         "war": -0.08,
         "era": 12.27,
-        "fip": 7.74,
+        "fip": 7.73,
         "k_minus_bb_pct": -5.3
       },
       "forecast": {
@@ -812,6 +812,38 @@
       },
       "war_gap": -1.69,
       "innings_share_pct": 0.3
+    },
+    {
+      "id": 621097,
+      "name": "Jacob Waguespack",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 34,
+      "starts": 1,
+      "saves": 0,
+      "holds": 5,
+      "actual": {
+        "ip": "45.2",
+        "ip_value": 45.667,
+        "war": -0.14,
+        "era": 2.56,
+        "fip": 4.67,
+        "k_minus_bb_pct": 8.5
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": 0.0,
+        "era": 4.14,
+        "fip": 4.22,
+        "k_minus_bb_pct": 12.6,
+        "team_at_fetch": "DET"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": 0.0
+      },
+      "war_gap": -0.15,
+      "innings_share_pct": 3.2
     },
     {
       "id": 656716,
@@ -837,38 +869,6 @@
       },
       "war_gap": -0.14,
       "innings_share_pct": 0.1
-    },
-    {
-      "id": 621097,
-      "name": "Jacob Waguespack",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 33,
-      "starts": 1,
-      "saves": 0,
-      "holds": 5,
-      "actual": {
-        "ip": "43.2",
-        "ip_value": 43.667,
-        "war": -0.18,
-        "era": 2.47,
-        "fip": 4.77,
-        "k_minus_bb_pct": 8.2
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": 0.0,
-        "era": 4.14,
-        "fip": 4.22,
-        "k_minus_bb_pct": 12.6,
-        "team_at_fetch": "DET"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": 0.0
-      },
-      "war_gap": -0.18,
-      "innings_share_pct": 3.1
     },
     {
       "id": 676568,

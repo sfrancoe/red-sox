@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T07:49:22.296032+00:00",
+  "generated_at": "2026-09-24T13:48:02.501728+00:00",
   "season": 2026,
   "team": "Houston Astros",
   "games_played": 158,
@@ -15,8 +15,8 @@
   "team_summary": {
     "actual_war": 7.0,
     "forecast_war_to_date": 13.8,
-    "war_gap": -6.9,
-    "innings": 1392.7,
+    "war_gap": -6.8,
+    "innings": 1402.0,
     "era": 4.51
   },
   "pitchers": [
@@ -57,17 +57,17 @@
       "name": "Josh Hader",
       "throws": "L",
       "role": "Closer",
-      "games": 44,
+      "games": 45,
       "starts": 0,
       "saves": 26,
       "holds": 0,
       "actual": {
-        "ip": "43.1",
-        "ip_value": 43.333,
-        "war": 2.06,
-        "era": 0.83,
-        "fip": 1.62,
-        "k_minus_bb_pct": 27.8
+        "ip": "44.2",
+        "ip_value": 44.667,
+        "war": 1.89,
+        "era": 1.01,
+        "fip": 1.93,
+        "k_minus_bb_pct": 24.0
       },
       "forecast": {
         "ip": 61.0,
@@ -81,8 +81,8 @@
         "ip": 59.5,
         "war": 0.84
       },
-      "war_gap": 1.22,
-      "innings_share_pct": 3.1
+      "war_gap": 1.05,
+      "innings_share_pct": 3.2
     },
     {
       "id": 686613,
@@ -96,9 +96,9 @@
       "actual": {
         "ip": "102.0",
         "ip_value": 102.0,
-        "war": 1.8,
+        "war": 1.79,
         "era": 3.26,
-        "fip": 3.77,
+        "fip": 3.76,
         "k_minus_bb_pct": 16.2
       },
       "forecast": {
@@ -113,7 +113,7 @@
         "ip": 179.6,
         "war": 3.5
       },
-      "war_gap": -1.7,
+      "war_gap": -1.71,
       "innings_share_pct": 7.3
     },
     {
@@ -146,7 +146,7 @@
         "war": 0.34
       },
       "war_gap": 0.91,
-      "innings_share_pct": 4.9
+      "innings_share_pct": 4.8
     },
     {
       "id": 669713,
@@ -241,7 +241,7 @@
         "ip": 58.5,
         "war": 0.08
       },
-      "war_gap": 0.28,
+      "war_gap": 0.27,
       "innings_share_pct": 5.1
     },
     {
@@ -256,9 +256,9 @@
       "actual": {
         "ip": "88.0",
         "ip_value": 88.0,
-        "war": 0.3,
+        "war": 0.29,
         "era": 4.6,
-        "fip": 5.08,
+        "fip": 5.07,
         "k_minus_bb_pct": 9.6
       },
       "forecast": {
@@ -309,6 +309,38 @@
       "innings_share_pct": 4.5
     },
     {
+      "id": 681973,
+      "name": "Josh Hendrickson",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "2.0",
+        "ip_value": 2.0,
+        "war": 0.18,
+        "era": 4.5,
+        "fip": 0.1,
+        "k_minus_bb_pct": 37.5
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 5.16,
+        "fip": 5.37,
+        "k_minus_bb_pct": 5.9,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": 0.18,
+      "innings_share_pct": 0.1
+    },
+    {
       "id": 678906,
       "name": "Kai-Wei Teng",
       "throws": "R",
@@ -345,17 +377,17 @@
       "name": "Logan VanWey",
       "throws": "R",
       "role": "Reliever",
-      "games": 7,
+      "games": 8,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "10.0",
-        "ip_value": 10.0,
-        "war": 0.12,
-        "era": 1.8,
+        "ip": "10.1",
+        "ip_value": 10.333,
+        "war": 0.14,
+        "era": 1.74,
         "fip": 3.0,
-        "k_minus_bb_pct": 20.0
+        "k_minus_bb_pct": 19.4
       },
       "forecast": {
         "ip": 1.0,
@@ -369,7 +401,7 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": 0.12,
+      "war_gap": 0.15,
       "innings_share_pct": 0.7
     },
     {
@@ -377,17 +409,17 @@
       "name": "AJ Blubaugh",
       "throws": "R",
       "role": "Setup",
-      "games": 62,
+      "games": 63,
       "starts": 0,
       "saves": 1,
       "holds": 11,
       "actual": {
-        "ip": "93.1",
-        "ip_value": 93.333,
-        "war": 0.11,
-        "era": 3.66,
-        "fip": 4.35,
-        "k_minus_bb_pct": 13.0
+        "ip": "95.1",
+        "ip_value": 95.333,
+        "war": 0.12,
+        "era": 3.59,
+        "fip": 4.33,
+        "k_minus_bb_pct": 12.8
       },
       "forecast": {
         "ip": 46.0,
@@ -401,8 +433,8 @@
         "ip": 44.9,
         "war": 0.08
       },
-      "war_gap": 0.03,
-      "innings_share_pct": 6.7
+      "war_gap": 0.04,
+      "innings_share_pct": 6.8
     },
     {
       "id": 621121,
@@ -418,7 +450,7 @@
         "ip_value": 39.333,
         "war": 0.1,
         "era": 6.86,
-        "fip": 5.06,
+        "fip": 5.05,
         "k_minus_bb_pct": 12.2
       },
       "forecast": {
@@ -482,7 +514,7 @@
         "ip_value": 15.333,
         "war": 0.04,
         "era": 1.17,
-        "fip": 3.95,
+        "fip": 3.94,
         "k_minus_bb_pct": 5.1
       },
       "forecast": {
@@ -512,7 +544,7 @@
       "actual": {
         "ip": "12.2",
         "ip_value": 12.667,
-        "war": 0.02,
+        "war": 0.01,
         "era": 2.84,
         "fip": 4.68,
         "k_minus_bb_pct": 16.7
@@ -529,7 +561,7 @@
         "ip": 9.8,
         "war": -0.0
       },
-      "war_gap": 0.02,
+      "war_gap": 0.01,
       "innings_share_pct": 0.9
     },
     {
@@ -672,6 +704,38 @@
       "innings_share_pct": 0.1
     },
     {
+      "id": 814490,
+      "name": "Ethan Pecko",
+      "throws": "R",
+      "role": "Starter",
+      "games": 7,
+      "starts": 5,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "31.1",
+        "ip_value": 31.333,
+        "war": -0.07,
+        "era": 4.31,
+        "fip": 5.36,
+        "k_minus_bb_pct": 5.4
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.54,
+        "fip": 4.58,
+        "k_minus_bb_pct": 11.3,
+        "team_at_fetch": "HOU"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": -0.07,
+      "innings_share_pct": 2.2
+    },
+    {
       "id": 656986,
       "name": "Bennett Sousa",
       "throws": "L",
@@ -685,7 +749,7 @@
         "ip_value": 29.333,
         "war": -0.08,
         "era": 4.91,
-        "fip": 4.67,
+        "fip": 4.66,
         "k_minus_bb_pct": 9.0
       },
       "forecast": {
@@ -768,38 +832,6 @@
       "innings_share_pct": 0.5
     },
     {
-      "id": 814490,
-      "name": "Ethan Pecko",
-      "throws": "R",
-      "role": "Starter",
-      "games": 6,
-      "starts": 4,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "28.2",
-        "ip_value": 28.667,
-        "war": -0.11,
-        "era": 3.77,
-        "fip": 5.51,
-        "k_minus_bb_pct": 6.0
-      },
-      "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.54,
-        "fip": 4.58,
-        "k_minus_bb_pct": 11.3,
-        "team_at_fetch": "HOU"
-      },
-      "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.0
-      },
-      "war_gap": -0.11,
-      "innings_share_pct": 2.1
-    },
-    {
       "id": 685005,
       "name": "Christian Roa",
       "throws": "R",
@@ -813,7 +845,7 @@
         "ip_value": 8.667,
         "war": -0.16,
         "era": 5.19,
-        "fip": 6.68,
+        "fip": 6.67,
         "k_minus_bb_pct": -2.3
       },
       "forecast": {
@@ -836,17 +868,17 @@
       "name": "Bryan Abreu",
       "throws": "R",
       "role": "Setup",
-      "games": 64,
+      "games": 65,
       "starts": 0,
       "saves": 8,
       "holds": 16,
       "actual": {
-        "ip": "60.1",
-        "ip_value": 60.333,
-        "war": -0.3,
-        "era": 3.88,
-        "fip": 4.66,
-        "k_minus_bb_pct": 15.1
+        "ip": "61.1",
+        "ip_value": 61.333,
+        "war": -0.24,
+        "era": 3.82,
+        "fip": 4.6,
+        "k_minus_bb_pct": 15.2
       },
       "forecast": {
         "ip": 68.0,
@@ -860,8 +892,8 @@
         "ip": 66.3,
         "war": 0.93
       },
-      "war_gap": -1.23,
-      "innings_share_pct": 4.3
+      "war_gap": -1.16,
+      "innings_share_pct": 4.4
     },
     {
       "id": 682610,
@@ -941,7 +973,7 @@
         "ip_value": 31.667,
         "war": -0.42,
         "era": 7.11,
-        "fip": 6.67,
+        "fip": 6.66,
         "k_minus_bb_pct": 8.1
       },
       "forecast": {
@@ -1005,7 +1037,7 @@
         "ip_value": 58.333,
         "war": -0.55,
         "era": 5.4,
-        "fip": 4.97,
+        "fip": 4.96,
         "k_minus_bb_pct": 9.0
       },
       "forecast": {
@@ -1035,7 +1067,7 @@
       "actual": {
         "ip": "26.0",
         "ip_value": 26.0,
-        "war": -0.62,
+        "war": -0.63,
         "era": 7.62,
         "fip": 7.1,
         "k_minus_bb_pct": 7.6

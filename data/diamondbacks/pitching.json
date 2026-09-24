@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T07:49:37.929755+00:00",
+  "generated_at": "2026-09-24T13:48:31.256270+00:00",
   "season": 2026,
   "team": "Arizona Diamondbacks",
   "games_played": 158,
@@ -13,10 +13,10 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 11.7,
+    "actual_war": 11.8,
     "forecast_war_to_date": 14.1,
     "war_gap": -2.4,
-    "innings": 1399.0,
+    "innings": 1408.0,
     "era": 4.1
   },
   "pitchers": [
@@ -32,9 +32,9 @@
       "actual": {
         "ip": "183.2",
         "ip_value": 183.667,
-        "war": 3.06,
+        "war": 3.05,
         "era": 2.89,
-        "fip": 3.88,
+        "fip": 3.87,
         "k_minus_bb_pct": 10.2
       },
       "forecast": {
@@ -49,8 +49,8 @@
         "ip": 130.2,
         "war": 1.51
       },
-      "war_gap": 1.56,
-      "innings_share_pct": 13.1
+      "war_gap": 1.55,
+      "innings_share_pct": 13.0
     },
     {
       "id": 647336,
@@ -82,7 +82,7 @@
         "war": 0.96
       },
       "war_gap": 1.75,
-      "innings_share_pct": 8.0
+      "innings_share_pct": 7.9
     },
     {
       "id": 694297,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "128.1",
         "ip_value": 128.333,
-        "war": 1.89,
+        "war": 1.88,
         "era": 3.72,
         "fip": 4.0,
         "k_minus_bb_pct": 10.7
@@ -113,25 +113,25 @@
         "ip": 160.0,
         "war": 1.77
       },
-      "war_gap": 0.12,
-      "innings_share_pct": 9.2
+      "war_gap": 0.11,
+      "innings_share_pct": 9.1
     },
     {
       "id": 666661,
       "name": "Juan Morillo",
       "throws": "R",
       "role": "Setup",
-      "games": 67,
+      "games": 68,
       "starts": 0,
       "saves": 3,
-      "holds": 18,
+      "holds": 19,
       "actual": {
-        "ip": "62.2",
-        "ip_value": 62.667,
-        "war": 1.52,
-        "era": 2.15,
+        "ip": "63.1",
+        "ip_value": 63.333,
+        "war": 1.55,
+        "era": 2.13,
         "fip": 2.73,
-        "k_minus_bb_pct": 19.6
+        "k_minus_bb_pct": 19.4
       },
       "forecast": {
         "ip": 54.0,
@@ -145,7 +145,7 @@
         "ip": 52.7,
         "war": -0.04
       },
-      "war_gap": 1.56,
+      "war_gap": 1.59,
       "innings_share_pct": 4.5
     },
     {
@@ -153,17 +153,17 @@
       "name": "Brandyn Garcia",
       "throws": "L",
       "role": "Setup",
-      "games": 55,
+      "games": 56,
       "starts": 0,
       "saves": 5,
-      "holds": 17,
+      "holds": 18,
       "actual": {
-        "ip": "49.0",
-        "ip_value": 49.0,
-        "war": 1.39,
-        "era": 1.84,
-        "fip": 2.34,
-        "k_minus_bb_pct": 25.3
+        "ip": "50.1",
+        "ip_value": 50.333,
+        "war": 1.28,
+        "era": 1.97,
+        "fip": 2.54,
+        "k_minus_bb_pct": 25.7
       },
       "forecast": {
         "ip": 46.0,
@@ -177,25 +177,25 @@
         "ip": 44.9,
         "war": 0.03
       },
-      "war_gap": 1.36,
-      "innings_share_pct": 3.5
+      "war_gap": 1.25,
+      "innings_share_pct": 3.6
     },
     {
       "id": 642528,
       "name": "Jonathan Loáisiga",
       "throws": "R",
       "role": "Setup",
-      "games": 65,
+      "games": 66,
       "starts": 0,
-      "saves": 1,
+      "saves": 2,
       "holds": 10,
       "actual": {
-        "ip": "64.0",
-        "ip_value": 64.0,
-        "war": 1.08,
-        "era": 2.25,
-        "fip": 2.8,
-        "k_minus_bb_pct": 14.5
+        "ip": "65.0",
+        "ip_value": 65.0,
+        "war": 1.09,
+        "era": 2.22,
+        "fip": 2.85,
+        "k_minus_bb_pct": 13.8
       },
       "forecast": {
         "ip": 60.0,
@@ -209,7 +209,7 @@
         "ip": 58.5,
         "war": 0.3
       },
-      "war_gap": 0.78,
+      "war_gap": 0.79,
       "innings_share_pct": 4.6
     },
     {
@@ -226,7 +226,7 @@
         "ip_value": 65.667,
         "war": 0.66,
         "era": 4.25,
-        "fip": 3.62,
+        "fip": 3.61,
         "k_minus_bb_pct": 19.2
       },
       "forecast": {
@@ -320,7 +320,7 @@
       "actual": {
         "ip": "40.2",
         "ip_value": 40.667,
-        "war": 0.31,
+        "war": 0.3,
         "era": 4.43,
         "fip": 3.81,
         "k_minus_bb_pct": 8.6
@@ -345,17 +345,17 @@
       "name": "Justin Martinez",
       "throws": "R",
       "role": "Reliever",
-      "games": 12,
+      "games": 13,
       "starts": 0,
       "saves": 0,
-      "holds": 1,
+      "holds": 2,
       "actual": {
-        "ip": "11.1",
-        "ip_value": 11.333,
-        "war": 0.23,
+        "ip": "12.0",
+        "ip_value": 12.0,
+        "war": 0.27,
         "era": 0.0,
-        "fip": 2.3,
-        "k_minus_bb_pct": 20.0
+        "fip": 2.18,
+        "k_minus_bb_pct": 21.3
       },
       "forecast": {
         "ip": 20.0,
@@ -369,8 +369,8 @@
         "ip": 19.5,
         "war": 0.29
       },
-      "war_gap": -0.06,
-      "innings_share_pct": 0.8
+      "war_gap": -0.02,
+      "innings_share_pct": 0.9
     },
     {
       "id": 642701,
@@ -448,9 +448,9 @@
       "actual": {
         "ip": "27.0",
         "ip_value": 27.0,
-        "war": 0.12,
+        "war": 0.11,
         "era": 4.33,
-        "fip": 5.14,
+        "fip": 5.13,
         "k_minus_bb_pct": 6.7
       },
       "forecast": {
@@ -482,7 +482,7 @@
         "ip_value": 9.0,
         "war": 0.11,
         "era": 1.0,
-        "fip": 2.99,
+        "fip": 2.98,
         "k_minus_bb_pct": 8.8
       },
       "forecast": {
@@ -603,7 +603,7 @@
         "ip_value": 3.0,
         "war": -0.03,
         "era": 3.0,
-        "fip": 4.77,
+        "fip": 4.76,
         "k_minus_bb_pct": -7.7
       },
       "forecast": {
@@ -620,38 +620,6 @@
       },
       "war_gap": -0.03,
       "innings_share_pct": 0.2
-    },
-    {
-      "id": 669194,
-      "name": "Ryne Nelson",
-      "throws": "R",
-      "role": "Starter",
-      "games": 17,
-      "starts": 15,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "86.0",
-        "ip_value": 86.0,
-        "war": -0.04,
-        "era": 4.81,
-        "fip": 5.34,
-        "k_minus_bb_pct": 10.9
-      },
-      "forecast": {
-        "ip": 163.8,
-        "war": 1.55,
-        "era": 4.32,
-        "fip": 4.19,
-        "k_minus_bb_pct": 12.8,
-        "team_at_fetch": "ARI"
-      },
-      "forecast_to_date": {
-        "ip": 159.8,
-        "war": 1.51
-      },
-      "war_gap": -1.56,
-      "innings_share_pct": 6.1
     },
     {
       "id": 545121,
@@ -709,6 +677,70 @@
       },
       "war_gap": -0.05,
       "innings_share_pct": 0.3
+    },
+    {
+      "id": 669194,
+      "name": "Ryne Nelson",
+      "throws": "R",
+      "role": "Starter",
+      "games": 17,
+      "starts": 15,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "86.0",
+        "ip_value": 86.0,
+        "war": -0.05,
+        "era": 4.81,
+        "fip": 5.34,
+        "k_minus_bb_pct": 10.9
+      },
+      "forecast": {
+        "ip": 163.8,
+        "war": 1.55,
+        "era": 4.32,
+        "fip": 4.19,
+        "k_minus_bb_pct": 12.8,
+        "team_at_fetch": "ARI"
+      },
+      "forecast_to_date": {
+        "ip": 159.8,
+        "war": 1.51
+      },
+      "war_gap": -1.56,
+      "innings_share_pct": 6.1
+    },
+    {
+      "id": 518876,
+      "name": "Merrill Kelly",
+      "throws": "R",
+      "role": "Starter",
+      "games": 29,
+      "starts": 29,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "162.0",
+        "ip_value": 162.0,
+        "war": -0.06,
+        "era": 4.94,
+        "fip": 5.32,
+        "k_minus_bb_pct": 6.1
+      },
+      "forecast": {
+        "ip": 172.7,
+        "war": 2.38,
+        "era": 4.12,
+        "fip": 3.96,
+        "k_minus_bb_pct": 14.3,
+        "team_at_fetch": "ARI"
+      },
+      "forecast_to_date": {
+        "ip": 168.4,
+        "war": 2.32
+      },
+      "war_gap": -2.38,
+      "innings_share_pct": 11.5
     },
     {
       "id": 700270,
@@ -813,7 +845,7 @@
         "ip_value": 3.667,
         "war": -0.14,
         "era": 19.64,
-        "fip": 8.83,
+        "fip": 8.82,
         "k_minus_bb_pct": -9.1
       },
       "forecast": {
@@ -861,7 +893,7 @@
         "war": 2.13
       },
       "war_gap": -2.27,
-      "innings_share_pct": 7.5
+      "innings_share_pct": 7.4
     },
     {
       "id": 691769,
@@ -886,7 +918,7 @@
         "era": 4.09,
         "fip": 4.15,
         "k_minus_bb_pct": 11.5,
-        "team_at_fetch": "SFG"
+        "team_at_fetch": "NYM"
       },
       "forecast_to_date": {
         "ip": 26.3,
@@ -894,38 +926,6 @@
       },
       "war_gap": -0.24,
       "innings_share_pct": 1.0
-    },
-    {
-      "id": 518876,
-      "name": "Merrill Kelly",
-      "throws": "R",
-      "role": "Starter",
-      "games": 28,
-      "starts": 28,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "156.2",
-        "ip_value": 156.667,
-        "war": -0.17,
-        "era": 5.0,
-        "fip": 5.4,
-        "k_minus_bb_pct": 6.1
-      },
-      "forecast": {
-        "ip": 172.7,
-        "war": 2.38,
-        "era": 4.12,
-        "fip": 3.96,
-        "k_minus_bb_pct": 14.3,
-        "team_at_fetch": "ARI"
-      },
-      "forecast_to_date": {
-        "ip": 168.4,
-        "war": 2.32
-      },
-      "war_gap": -2.49,
-      "innings_share_pct": 11.2
     },
     {
       "id": 694851,
@@ -973,7 +973,7 @@
         "ip_value": 20.667,
         "war": -0.19,
         "era": 6.53,
-        "fip": 6.2,
+        "fip": 6.19,
         "k_minus_bb_pct": 10.5
       },
       "forecast": {
@@ -1037,7 +1037,7 @@
         "ip_value": 12.0,
         "war": -0.41,
         "era": 7.5,
-        "fip": 9.02,
+        "fip": 9.01,
         "k_minus_bb_pct": -1.7
       },
       "forecast": {
@@ -1067,7 +1067,7 @@
       "actual": {
         "ip": "39.0",
         "ip_value": 39.0,
-        "war": -0.57,
+        "war": -0.58,
         "era": 6.23,
         "fip": 5.69,
         "k_minus_bb_pct": 21.5

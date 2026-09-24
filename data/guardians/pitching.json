@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T07:49:17.880528+00:00",
+  "generated_at": "2026-09-24T13:47:55.226674+00:00",
   "season": 2026,
   "team": "Cleveland Guardians",
   "games_played": 158,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 18.2,
+    "actual_war": 18.6,
     "forecast_war_to_date": 13.1,
-    "war_gap": 5.1,
-    "innings": 1394.7,
-    "era": 3.78
+    "war_gap": 5.4,
+    "innings": 1402.7,
+    "era": 3.76
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "183.1",
         "ip_value": 183.333,
-        "war": 4.83,
+        "war": 4.82,
         "era": 2.55,
         "fip": 3.07,
         "k_minus_bb_pct": 19.6
@@ -66,7 +66,7 @@
         "ip_value": 181.0,
         "war": 3.69,
         "era": 3.63,
-        "fip": 3.39,
+        "fip": 3.38,
         "k_minus_bb_pct": 25.7
       },
       "forecast": {
@@ -82,7 +82,7 @@
         "war": 1.93
       },
       "war_gap": 1.76,
-      "innings_share_pct": 13.0
+      "innings_share_pct": 12.9
     },
     {
       "id": 671922,
@@ -226,7 +226,7 @@
         "ip_value": 52.667,
         "war": 0.8,
         "era": 2.73,
-        "fip": 3.16,
+        "fip": 3.15,
         "k_minus_bb_pct": 13.5
       },
       "forecast": {
@@ -241,7 +241,7 @@
         "ip": 41.0,
         "war": 0.09
       },
-      "war_gap": 0.71,
+      "war_gap": 0.7,
       "innings_share_pct": 3.8
     },
     {
@@ -249,17 +249,17 @@
       "name": "Matt Festa",
       "throws": "R",
       "role": "Reliever",
-      "games": 64,
+      "games": 65,
       "starts": 0,
       "saves": 1,
       "holds": 7,
       "actual": {
-        "ip": "65.0",
-        "ip_value": 65.0,
-        "war": 0.73,
-        "era": 3.6,
-        "fip": 3.38,
-        "k_minus_bb_pct": 17.4
+        "ip": "65.2",
+        "ip_value": 65.667,
+        "war": 0.74,
+        "era": 3.56,
+        "fip": 3.37,
+        "k_minus_bb_pct": 17.3
       },
       "forecast": {
         "ip": 60.0,
@@ -273,8 +273,40 @@
         "ip": 58.5,
         "war": 0.04
       },
-      "war_gap": 0.69,
+      "war_gap": 0.7,
       "innings_share_pct": 4.7
+    },
+    {
+      "id": 656492,
+      "name": "Foster Griffin",
+      "throws": "L",
+      "role": "Starter",
+      "games": 9,
+      "starts": 9,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "43.1",
+        "ip_value": 43.333,
+        "war": 0.73,
+        "era": 5.19,
+        "fip": 3.53,
+        "k_minus_bb_pct": 13.7
+      },
+      "forecast": {
+        "ip": 141.3,
+        "war": 2.02,
+        "era": 3.93,
+        "fip": 3.98,
+        "k_minus_bb_pct": 13.4,
+        "team_at_fetch": "CLE"
+      },
+      "forecast_to_date": {
+        "ip": 137.8,
+        "war": 1.97
+      },
+      "war_gap": -1.24,
+      "innings_share_pct": 3.1
     },
     {
       "id": 677944,
@@ -290,7 +322,7 @@
         "ip_value": 120.0,
         "war": 0.7,
         "era": 4.95,
-        "fip": 4.56,
+        "fip": 4.55,
         "k_minus_bb_pct": 11.4
       },
       "forecast": {
@@ -320,7 +352,7 @@
       "actual": {
         "ip": "58.1",
         "ip_value": 58.333,
-        "war": 0.6,
+        "war": 0.59,
         "era": 2.78,
         "fip": 3.75,
         "k_minus_bb_pct": 14.1
@@ -341,36 +373,36 @@
       "innings_share_pct": 4.2
     },
     {
-      "id": 656492,
-      "name": "Foster Griffin",
+      "id": 682120,
+      "name": "Tim Herrin",
       "throws": "L",
-      "role": "Starter",
-      "games": 8,
-      "starts": 8,
+      "role": "Setup",
+      "games": 66,
+      "starts": 0,
       "saves": 0,
-      "holds": 0,
+      "holds": 16,
       "actual": {
-        "ip": "37.1",
-        "ip_value": 37.333,
-        "war": 0.44,
-        "era": 5.79,
-        "fip": 3.98,
-        "k_minus_bb_pct": 11.8
+        "ip": "56.0",
+        "ip_value": 56.0,
+        "war": 0.16,
+        "era": 2.89,
+        "fip": 4.1,
+        "k_minus_bb_pct": 11.0
       },
       "forecast": {
-        "ip": 141.3,
-        "war": 2.02,
-        "era": 3.93,
-        "fip": 3.98,
-        "k_minus_bb_pct": 13.4,
+        "ip": 56.0,
+        "war": 0.2,
+        "era": 3.78,
+        "fip": 3.96,
+        "k_minus_bb_pct": 13.5,
         "team_at_fetch": "CLE"
       },
       "forecast_to_date": {
-        "ip": 137.8,
-        "war": 1.97
+        "ip": 54.6,
+        "war": 0.19
       },
-      "war_gap": -1.53,
-      "innings_share_pct": 2.7
+      "war_gap": -0.04,
+      "innings_share_pct": 4.0
     },
     {
       "id": 702021,
@@ -384,7 +416,7 @@
       "actual": {
         "ip": "19.2",
         "ip_value": 19.667,
-        "war": 0.08,
+        "war": 0.07,
         "era": 4.58,
         "fip": 3.81,
         "k_minus_bb_pct": 25.9
@@ -401,40 +433,8 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": 0.08,
+      "war_gap": 0.07,
       "innings_share_pct": 1.4
-    },
-    {
-      "id": 682120,
-      "name": "Tim Herrin",
-      "throws": "L",
-      "role": "Setup",
-      "games": 65,
-      "starts": 0,
-      "saves": 0,
-      "holds": 16,
-      "actual": {
-        "ip": "55.0",
-        "ip_value": 55.0,
-        "war": 0.07,
-        "era": 2.95,
-        "fip": 4.23,
-        "k_minus_bb_pct": 9.9
-      },
-      "forecast": {
-        "ip": 56.0,
-        "war": 0.2,
-        "era": 3.78,
-        "fip": 3.96,
-        "k_minus_bb_pct": 13.5,
-        "team_at_fetch": "CLE"
-      },
-      "forecast_to_date": {
-        "ip": 54.6,
-        "war": 0.19
-      },
-      "war_gap": -0.12,
-      "innings_share_pct": 3.9
     },
     {
       "id": 676051,
@@ -514,7 +514,7 @@
         "ip_value": 4.333,
         "war": 0.05,
         "era": 6.23,
-        "fip": 2.64,
+        "fip": 2.63,
         "k_minus_bb_pct": 5.0
       },
       "forecast": null,
@@ -628,7 +628,7 @@
         "ip_value": 3.0,
         "war": -0.03,
         "era": 6.0,
-        "fip": 5.77,
+        "fip": 5.76,
         "k_minus_bb_pct": 21.4
       },
       "forecast": {
@@ -658,7 +658,7 @@
       "actual": {
         "ip": "16.2",
         "ip_value": 16.667,
-        "war": -0.04,
+        "war": -0.05,
         "era": 5.94,
         "fip": 4.96,
         "k_minus_bb_pct": 12.3
@@ -692,7 +692,7 @@
         "ip_value": 8.667,
         "war": -0.06,
         "era": 10.38,
-        "fip": 5.41,
+        "fip": 5.4,
         "k_minus_bb_pct": 13.3
       },
       "forecast": {
@@ -715,17 +715,17 @@
       "name": "Shawn Armstrong",
       "throws": "R",
       "role": "Reliever",
-      "games": 38,
+      "games": 39,
       "starts": 0,
       "saves": 0,
       "holds": 8,
       "actual": {
-        "ip": "33.0",
-        "ip_value": 33.0,
+        "ip": "33.1",
+        "ip_value": 33.333,
         "war": -0.07,
-        "era": 4.91,
-        "fip": 4.58,
-        "k_minus_bb_pct": 9.6
+        "era": 4.86,
+        "fip": 4.57,
+        "k_minus_bb_pct": 9.5
       },
       "forecast": {
         "ip": 68.0,
@@ -739,7 +739,7 @@
         "ip": 66.3,
         "war": 0.3
       },
-      "war_gap": -0.37,
+      "war_gap": -0.36,
       "innings_share_pct": 2.4
     },
     {
@@ -756,7 +756,7 @@
         "ip_value": 20.667,
         "war": -0.12,
         "era": 5.23,
-        "fip": 4.99,
+        "fip": 4.98,
         "k_minus_bb_pct": 6.2
       },
       "forecast": {
@@ -788,7 +788,7 @@
         "ip_value": 16.0,
         "war": -0.31,
         "era": 5.06,
-        "fip": 6.04,
+        "fip": 6.03,
         "k_minus_bb_pct": 17.1
       },
       "forecast": {
