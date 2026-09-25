@@ -12,7 +12,7 @@ struct RecentGameView: View {
     @State private var store: RecentGameStore
     @State private var selectedStatsTeam: BoxScoreTeamSelection = .favorite
     @State private var selectedGameID: Int?
-    private let statColumnSpacing: CGFloat = 6
+    private let statColumnSpacing: CGFloat = 3
     let team: HubTeam
     let onSelectPlayer: (Int) -> Void
 
@@ -551,7 +551,7 @@ struct RecentGameView: View {
                 Spacer(minLength: 0)
                 statsTeamPicker(favorite: favorite, opponent: opponent)
             }
-            let widths: [CGFloat] = [28, 28, 28, 32, 38]
+            let widths: [CGFloat] = [22, 22, 22, 26, 36]
             VStack(spacing: 4) {
                 statHeader(labels: ["AB", "R", "H", "RBI", "AVG"], widths: widths)
 
@@ -598,8 +598,7 @@ struct RecentGameView: View {
                                 "\(pitcher.hits)",
                                 "\(pitcher.earnedRuns)",
                                 "\(pitcher.strikeOuts)"
-                            ],
-                            detailInline: true
+                            ]
                         )
                     }
                 }
@@ -760,9 +759,9 @@ struct RecentGameView: View {
         detailInline: Bool = false,
         columnWidths: [CGFloat] = []
     ) -> some View {
-        HStack(spacing: statColumnSpacing) {
+        HStack(alignment: .top, spacing: statColumnSpacing) {
             VStack(alignment: .leading, spacing: 1) {
-                HStack(spacing: 4) {
+                HStack(spacing: 3) {
                     if let playerID {
                         Button {
                             onSelectPlayer(playerID)
@@ -771,6 +770,7 @@ struct RecentGameView: View {
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundStyle(AppColor.navy)
                                 .lineLimit(1)
+                                .minimumScaleFactor(0.8)
                         }
                         .buttonStyle(.plain)
                         .accessibilityHint("Open player biography")
@@ -778,6 +778,7 @@ struct RecentGameView: View {
                         Text(name)
                             .font(.subheadline.weight(.semibold))
                             .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                     }
                     if detailInline, !detail.isEmpty {
                         Text("· \(detail)")
@@ -788,7 +789,7 @@ struct RecentGameView: View {
                 }
                 if !detailInline, !detail.isEmpty {
                     Text(detail)
-                        .font(.caption2)
+                        .font(.caption)
                         .foregroundStyle(AppColor.hunterGreen)
                 }
             }
