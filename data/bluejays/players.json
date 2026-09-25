@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-21T16:00:11.470545+00:00",
-  "roster_as_of": "September 19, 2026",
+  "generated_at": "2026-09-25T14:42:33.427317+00:00",
+  "roster_as_of": "September 23, 2026",
   "team": {
     "id": 141,
     "name": "Toronto Blue Jays"
   },
   "roster_type": "open-current-roster",
-  "player_count": 49,
+  "player_count": 48,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -33,8 +33,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2000-01-02",
       "age": 26,
       "birthplace": "Albuquerque, New Mexico, U.S.",
@@ -453,8 +453,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1995-12-28",
       "age": 30,
       "birthplace": "Milton",
@@ -816,8 +816,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2000-06-26",
       "age": 26,
       "birthplace": "Orange, Texas, U.S.",
@@ -857,8 +857,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1998-09-15",
       "age": 28,
       "birthplace": "Q49255",
@@ -1532,8 +1532,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1998-08-13",
       "age": 28,
       "birthplace": "Birmingham",
@@ -1738,94 +1738,6 @@
           "ops": 0.736
         },
         "pitching": null
-      }
-    },
-    {
-      "id": 573009,
-      "mlb_id": 573009,
-      "wikidata_id": "Q19571616",
-      "slug": "joe-mantiply",
-      "name": "Joe Mantiply",
-      "full_name": "Joe Mantiply",
-      "number": "35",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "1991-03-01",
-      "age": 35,
-      "birthplace": "Danville",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Left",
-      "debut_date": "September 3, 2016",
-      "debut_team": "Detroit Tigers",
-      "education": {
-        "high_schools": [],
-        "colleges": [
-          {
-            "name": "Virginia Tech"
-          },
-          {
-            "name": "Tunstall High School"
-          }
-        ]
-      },
-      "teams": [
-        "Detroit Tigers",
-        "New York Yankees",
-        "Arizona Diamondbacks",
-        "Toronto Blue Jays"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q19571616",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Joe_Mantiply",
-      "retrosheet_id": "mantj002",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 256,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 256,
-          "games_started": 5,
-          "wins": 11,
-          "losses": 13,
-          "saves": 3,
-          "innings_outs": 648,
-          "hits": 230,
-          "runs": 124,
-          "earned_runs": 109,
-          "home_runs": 19,
-          "walks": 61,
-          "strikeouts": 194,
-          "hit_batters": 5,
-          "wild_pitches": 9,
-          "balks": 2,
-          "complete_games": 0,
-          "era": 4.54,
-          "whip": 1.347
-        }
       }
     },
     {
@@ -2106,11 +2018,11 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2001-07-18",
       "age": 25,
-      "birthplace": "Oaxaca, Mexico",
+      "birthplace": "Oaxaca",
       "height": null,
       "weight": null,
       "bats": "Switch",
@@ -3171,8 +3083,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2003-07-28",
       "age": 23,
       "birthplace": "Pottstown",

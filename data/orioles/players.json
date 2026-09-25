@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-21T15:59:24.489299+00:00",
-  "roster_as_of": "September 19, 2026",
+  "generated_at": "2026-09-25T14:42:04.094377+00:00",
+  "roster_as_of": "September 24, 2026",
   "team": {
     "id": 110,
     "name": "Baltimore Orioles"
   },
   "roster_type": "open-current-roster",
-  "player_count": 47,
+  "player_count": 48,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -306,8 +306,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "2004-08-13",
       "age": 22,
       "birthplace": "Santo Domingo",
@@ -667,7 +667,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
+      "roster_status": "60-day injured list",
       "is_active_roster": false,
       "birth_date": "1996-09-12",
       "age": 30,
@@ -828,7 +828,7 @@
       "is_active_roster": true,
       "birth_date": "2000-03-20",
       "age": 26,
-      "birthplace": "Houston, Texas, U.S.",
+      "birthplace": "Houston",
       "height": null,
       "weight": null,
       "bats": "Left",
@@ -1730,7 +1730,7 @@
       "is_active_roster": true,
       "birth_date": "2000-03-26",
       "age": 26,
-      "birthplace": "Antioch, Tennessee, U.S.",
+      "birthplace": "Nashville, Tennessee, U.S.",
       "height": null,
       "weight": null,
       "bats": "Right",
@@ -1934,8 +1934,8 @@
         "group": "Outfielder",
         "abbreviation": "LF"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1999-02-12",
       "age": 27,
       "birthplace": "Amarillo",
@@ -1997,8 +1997,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2003-04-14",
       "age": 23,
       "birthplace": "Barahona, Dominican Republic",
@@ -2729,6 +2729,87 @@
           "complete_games": 0,
           "era": 6.2,
           "whip": 1.533
+        }
+      }
+    },
+    {
+      "id": 544150,
+      "mlb_id": 544150,
+      "wikidata_id": "Q24044787",
+      "slug": "albert-suarez",
+      "name": "Albert Suárez",
+      "full_name": "Albert Suárez",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1989-10-08",
+      "age": 36,
+      "birthplace": "Bolívar",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "May 8, 2016",
+      "debut_team": "San Francisco Giants",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "San Francisco Giants",
+        "Tokyo Yakult Swallows",
+        "Samsung Lions",
+        "Baltimore Orioles"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q24044787",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Albert_Su%C3%A1rez",
+      "retrosheet_id": "suara001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 77,
+          "plate_appearances": 26,
+          "at_bats": 23,
+          "runs": 1,
+          "hits": 4,
+          "doubles": 2,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 2,
+          "walks": 0,
+          "strikeouts": 11,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.174,
+          "on_base_percentage": 0.174,
+          "slugging_percentage": 0.261,
+          "ops": 0.435
+        },
+        "pitching": {
+          "games": 77,
+          "games_started": 37,
+          "wins": 14,
+          "losses": 15,
+          "saves": 1,
+          "innings_outs": 783,
+          "hits": 251,
+          "runs": 120,
+          "earned_runs": 116,
+          "home_runs": 32,
+          "walks": 82,
+          "strikeouts": 206,
+          "hit_batters": 9,
+          "wild_pitches": 8,
+          "balks": 1,
+          "complete_games": 0,
+          "era": 4.0,
+          "whip": 1.276
         }
       }
     },

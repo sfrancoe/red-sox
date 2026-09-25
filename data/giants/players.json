@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-21T16:15:33.527559+00:00",
-  "roster_as_of": "September 20, 2026",
+  "generated_at": "2026-09-25T14:58:14.412042+00:00",
+  "roster_as_of": "September 24, 2026",
   "team": {
     "id": 137,
     "name": "San Francisco Giants"
   },
   "roster_type": "open-current-roster",
-  "player_count": 56,
+  "player_count": 57,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -20,85 +20,6 @@
     "stats_attribution": "The information used here was obtained free of charge from and is copyrighted by Retrosheet. Interested parties may contact Retrosheet at 20 Sunset Rd., Newark, DE 19711."
   },
   "players": [
-    {
-      "id": 691769,
-      "mlb_id": 691769,
-      "wikidata_id": "Q136341544",
-      "slug": "philip-abner",
-      "name": "Philip Abner",
-      "full_name": "Philip Abner",
-      "number": "57",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "2002-05-05",
-      "age": 24,
-      "birthplace": "Charlotte, North Carolina, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Left",
-      "throws": "Left",
-      "debut_date": "September 19, 2025",
-      "debut_team": "Arizona Diamondbacks",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Arizona Diamondbacks",
-        "San Francisco Giants"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q136341544",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Philip_Abner",
-      "retrosheet_id": "abnep001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 5,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 5,
-          "games_started": 0,
-          "wins": 0,
-          "losses": 0,
-          "saves": 0,
-          "innings_outs": 11,
-          "hits": 5,
-          "runs": 2,
-          "earned_runs": 2,
-          "home_runs": 0,
-          "walks": 3,
-          "strikeouts": 5,
-          "hit_batters": 0,
-          "wild_pitches": 0,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 4.91,
-          "whip": 2.182
-        }
-      }
-    },
     {
       "id": 642715,
       "mlb_id": 642715,
@@ -851,6 +772,54 @@
       }
     },
     {
+      "id": 815589,
+      "mlb_id": 815589,
+      "wikidata_id": "Q140550774",
+      "slug": "bo-davidson",
+      "name": "Bo Davidson",
+      "full_name": "Bo Davidson",
+      "number": "94",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "LF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2002-07-05",
+      "age": 24,
+      "birthplace": "Charlotte",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "September 21, 2026",
+      "debut_team": "San Francisco Giants",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "South Mecklenburg High School"
+          },
+          {
+            "name": "Caldwell Community College & Technical Institute"
+          }
+        ]
+      },
+      "teams": [
+        "San Francisco Giants"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q140550774",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Bo_Davidson",
+      "retrosheet_id": null,
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
       "id": 701474,
       "mlb_id": 701474,
       "wikidata_id": "Q139198375",
@@ -866,7 +835,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1999-09-23",
-      "age": 26,
+      "age": 27,
       "birthplace": "Des Moines, Iowa, U.S.",
       "height": null,
       "weight": null,
@@ -953,6 +922,86 @@
       }
     },
     {
+      "id": 666808,
+      "mlb_id": 666808,
+      "wikidata_id": "Q106560431",
+      "slug": "camilo-doval",
+      "name": "Camilo Doval",
+      "full_name": "Camilo Doval",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "1997-07-04",
+      "age": 29,
+      "birthplace": "Yamasá, Dominican Republic",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "April 18, 2021",
+      "debut_team": "San Francisco Giants",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "San Francisco Giants",
+        "New York Yankees",
+        "Pittsburgh Pirates"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q106560431",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Camilo_Doval",
+      "retrosheet_id": "dovac001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 297,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 297,
+          "games_started": 0,
+          "wins": 26,
+          "losses": 19,
+          "saves": 108,
+          "innings_outs": 860,
+          "hits": 229,
+          "runs": 138,
+          "earned_runs": 108,
+          "home_runs": 20,
+          "walks": 139,
+          "strikeouts": 354,
+          "hit_batters": 17,
+          "wild_pitches": 27,
+          "balks": 7,
+          "complete_games": 0,
+          "era": 3.39,
+          "whip": 1.284
+        }
+      }
+    },
+    {
       "id": 805811,
       "mlb_id": 805811,
       "wikidata_id": "Q120405708",
@@ -965,8 +1014,8 @@
         "group": "Hitter",
         "abbreviation": "DH"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "2004-10-20",
       "age": 21,
       "birthplace": "Vienna, Virginia, U.S.",
@@ -1853,8 +1902,8 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1998-08-20",
       "age": 28,
       "birthplace": "Nagoya",
@@ -1999,14 +2048,14 @@
       "slug": "marcelo-mayer",
       "name": "Marcelo Mayer",
       "full_name": "Marcelo Mayer",
-      "number": "--",
+      "number": "7",
       "position": {
         "name": "Second Base",
         "group": "Infielder",
         "abbreviation": "2B"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "2002-12-12",
       "age": 23,
       "birthplace": "Chula Vista, California, U.S.",
@@ -2684,8 +2733,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1999-03-12",
       "age": 27,
       "birthplace": "Windber, Pennsylvania, U.S.",
@@ -3068,8 +3117,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "60-day injured list",
+      "is_active_roster": false,
       "birth_date": "2001-06-08",
       "age": 25,
       "birthplace": "Columbia, Tennessee, U.S.",

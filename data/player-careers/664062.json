@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "player_id": 664062,
-  "generated_at": "2026-09-21T16:02:37.161346+00:00",
-  "data_as_of": "2026-09-21",
+  "generated_at": "2026-09-25T14:45:15.912418+00:00",
+  "data_as_of": "2026-09-25",
   "status": "available",
   "coverage": [
     {
       "league": "MLB",
       "level": "MLB",
       "first_season": 2019,
-      "last_season": 2025,
+      "last_season": 2026,
       "status": "available",
       "note": null
     },
@@ -673,6 +673,27 @@
       "strikeouts": 16,
       "era": 3.21,
       "whip": 1.29
+    },
+    {
+      "id": "664062-pitching-mlb-2026-1-118",
+      "season": 2026,
+      "team": "Kansas City Royals",
+      "league": "American League",
+      "level": "MLB",
+      "row_type": "team_stint",
+      "games": 1,
+      "games_started": 0,
+      "wins": 0,
+      "losses": 0,
+      "saves": 0,
+      "innings_outs": 8,
+      "hits": 4,
+      "earned_runs": 5,
+      "home_runs": 1,
+      "walks": 3,
+      "strikeouts": 5,
+      "era": 16.88,
+      "whip": 2.63
     },
     {
       "id": "664062-pitching-minors-2026-11-541",

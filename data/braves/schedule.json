@@ -1,132 +1,9 @@
 {
-  "generated_at": "2026-09-22T05:24:24.108361+00:00",
+  "generated_at": "2026-09-25T18:54:27.415155+00:00",
   "source": "MLB Stats API",
   "team": "Braves",
   "regular_season_end": "2026-09-27",
   "games": [
-    {
-      "game_pk": 824867,
-      "game_date": "2026-09-22T23:15:00Z",
-      "status": "Scheduled",
-      "venue": "Truist Park",
-      "location": "home",
-      "opponent": "Reds",
-      "opponent_record": "72-84",
-      "favorite_team_record": "92-64",
-      "favorite_team_pitcher": "JR Ritchie",
-      "opponent_pitcher": "Brandon Williamson",
-      "favorite_team_pitcher_record": "1-3",
-      "opponent_pitcher_record": "4-4",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "Reds.TV",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "BravesVision",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "Gray TV",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_out_of_market",
-          "available_for_streaming": false
-        }
-      ]
-    },
-    {
-      "game_pk": 824868,
-      "game_date": "2026-09-23T23:15:00Z",
-      "status": "Scheduled",
-      "venue": "Truist Park",
-      "location": "home",
-      "opponent": "Reds",
-      "opponent_record": "72-84",
-      "favorite_team_record": "92-64",
-      "favorite_team_pitcher": "Chris Sale",
-      "opponent_pitcher": "Andrew Abbott",
-      "favorite_team_pitcher_record": "14-9",
-      "opponent_pitcher_record": "6-11",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "Reds.TV",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "BravesVision",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 824866,
-      "game_date": "2026-09-24T23:15:00Z",
-      "status": "Scheduled",
-      "venue": "Truist Park",
-      "location": "home",
-      "opponent": "Reds",
-      "opponent_record": "72-84",
-      "favorite_team_record": "92-64",
-      "favorite_team_pitcher": "Tyler Mahle",
-      "opponent_pitcher": "Brady Singer",
-      "favorite_team_pitcher_record": "7-10",
-      "opponent_pitcher_record": "6-15",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "FS1/ FOX ONE",
-          "is_national": true,
-          "home_away": "home",
-          "availability": "national",
-          "available_for_streaming": false
-        },
-        {
-          "name": "FS1/ FOX ONE",
-          "is_national": true,
-          "home_away": "away",
-          "availability": "national",
-          "available_for_streaming": false
-        },
-        {
-          "name": "Reds.TV",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "BravesVision",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
     {
       "game_pk": 823816,
       "game_date": "2026-09-25T23:10:00Z",
@@ -134,12 +11,12 @@
       "venue": "loanDepot park",
       "location": "away",
       "opponent": "Marlins",
-      "opponent_record": "76-80",
-      "favorite_team_record": "92-64",
-      "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_record": "78-81",
+      "favorite_team_record": "93-66",
+      "favorite_team_pitcher": "Ray Kerr",
+      "opponent_pitcher": "Eury Pérez",
+      "favorite_team_pitcher_record": "0-0",
+      "opponent_pitcher_record": "7-11",
       "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
@@ -168,8 +45,8 @@
       "venue": "loanDepot park",
       "location": "away",
       "opponent": "Marlins",
-      "opponent_record": "76-80",
-      "favorite_team_record": "92-64",
+      "opponent_record": "78-81",
+      "favorite_team_record": "93-66",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
@@ -202,13 +79,13 @@
       "venue": "loanDepot park",
       "location": "away",
       "opponent": "Marlins",
-      "opponent_record": "76-80",
-      "favorite_team_record": "92-64",
+      "opponent_record": "78-81",
+      "favorite_team_record": "93-66",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Janson Junk",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
-      "show_probables": false,
+      "opponent_pitcher_record": "6-9",
+      "show_probables": true,
       "series_description": "Regular Season",
       "doubleheader": false,
       "game_number": 1,

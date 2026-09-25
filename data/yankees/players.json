@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-21T15:57:31.821590+00:00",
-  "roster_as_of": "September 16, 2026",
+  "generated_at": "2026-09-25T14:40:12.038450+00:00",
+  "roster_as_of": "September 24, 2026",
   "team": {
     "id": 147,
     "name": "New York Yankees"
   },
   "roster_type": "open-current-roster",
   "player_count": 42,
-  "active_count": 28,
+  "active_count": 26,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
     "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
@@ -1007,8 +1007,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1998-06-03",
       "age": 28,
       "birthplace": "Azua, Dominican Republic",
@@ -1458,6 +1458,66 @@
       }
     },
     {
+      "id": 665862,
+      "mlb_id": 665862,
+      "wikidata_id": "Q59779771",
+      "slug": "jazz-chisholm-jr",
+      "name": "Jazz Chisholm Jr.",
+      "full_name": "Jazz Chisholm Jr.",
+      "number": "13",
+      "position": {
+        "name": "Second Base",
+        "group": "Infielder",
+        "abbreviation": "2B"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1998-02-01",
+      "age": 28,
+      "birthplace": "Nassau",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "September 1, 2020",
+      "debut_team": "Miami Marlins",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Miami Marlins",
+        "New York Yankees"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q59779771",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jazz_Chisholm_Jr.",
+      "retrosheet_id": "chisj001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 579,
+          "plate_appearances": 2345,
+          "at_bats": 2109,
+          "runs": 316,
+          "hits": 522,
+          "doubles": 79,
+          "triples": 16,
+          "home_runs": 108,
+          "runs_batted_in": 308,
+          "walks": 197,
+          "strikeouts": 648,
+          "stolen_bases": 130,
+          "caught_stealing": 36,
+          "average": 0.248,
+          "on_base_percentage": 0.316,
+          "slugging_percentage": 0.454,
+          "ops": 0.77
+        },
+        "pitching": null
+      }
+    },
+    {
       "id": 671277,
       "mlb_id": 671277,
       "wikidata_id": "Q96707369",
@@ -1563,66 +1623,6 @@
       }
     },
     {
-      "id": 665862,
-      "mlb_id": 665862,
-      "wikidata_id": "Q59779771",
-      "slug": "jazz-chisholm-jr",
-      "name": "Jazz Chisholm Jr.",
-      "full_name": "Jazz Chisholm Jr.",
-      "number": "13",
-      "position": {
-        "name": "Second Base",
-        "group": "Infielder",
-        "abbreviation": "2B"
-      },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
-      "birth_date": "1998-02-01",
-      "age": 28,
-      "birthplace": "Nassau",
-      "height": null,
-      "weight": null,
-      "bats": "Left",
-      "throws": "Right",
-      "debut_date": "September 1, 2020",
-      "debut_team": "Miami Marlins",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Miami Marlins",
-        "New York Yankees"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q59779771",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Jazz_Chisholm_Jr.",
-      "retrosheet_id": "chisj001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 579,
-          "plate_appearances": 2345,
-          "at_bats": 2109,
-          "runs": 316,
-          "hits": 522,
-          "doubles": 79,
-          "triples": 16,
-          "home_runs": 108,
-          "runs_batted_in": 308,
-          "walks": 197,
-          "strikeouts": 648,
-          "stolen_bases": 130,
-          "caught_stealing": 36,
-          "average": 0.248,
-          "on_base_percentage": 0.316,
-          "slugging_percentage": 0.454,
-          "ops": 0.77
-        },
-        "pitching": null
-      }
-    },
-    {
       "id": 592450,
       "mlb_id": 592450,
       "wikidata_id": "Q16234676",
@@ -1635,8 +1635,8 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1992-04-26",
       "age": 34,
       "birthplace": "Sacramento",
@@ -2179,7 +2179,7 @@
       "is_active_roster": true,
       "birth_date": "2001-02-05",
       "age": 25,
-      "birthplace": "Walpole, Massachusetts, U.S.",
+      "birthplace": "Weymouth",
       "height": null,
       "weight": null,
       "bats": "Right",
@@ -2188,7 +2188,14 @@
       "debut_team": "New York Yankees",
       "education": {
         "high_schools": [],
-        "colleges": []
+        "colleges": [
+          {
+            "name": "Walpole High School"
+          },
+          {
+            "name": "Northeastern University"
+          }
+        ]
       },
       "teams": [
         "New York Yankees"
@@ -2253,8 +2260,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1996-02-20",
       "age": 30,
       "birthplace": "Acworth",
@@ -2423,7 +2430,7 @@
       "number": "30",
       "position": {
         "name": "Outfielder",
-        "group": "Infielder",
+        "group": "Outfielder",
         "abbreviation": "LF"
       },
       "roster_status": "Inactive roster",

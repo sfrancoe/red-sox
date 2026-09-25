@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-21T17:12:26+00:00",
+ "generated_at": "2026-09-25T15:56:03+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 142,
  "seasons": {
   "2026": {
-   "record": "73-83",
-   "games": 156,
+   "record": "75-84",
+   "games": 159,
    "in_progress": true,
    "war_leader": {
     "name": "Taj Bradley",
-    "war": 4.0
+    "war": 4.2
    },
    "war_leaders": [
     {
      "name": "Taj Bradley",
-     "war": 4.0
+     "war": 4.2
     },
     {
      "name": "Byron Buxton",
      "war": 3.4
     },
     {
-     "name": "Ryan Jeffers",
-     "war": 2.8
+     "name": "Brooks Lee",
+     "war": 2.7
     }
    ],
    "pitching_leaders": {
@@ -39,7 +39,7 @@
       },
       {
        "name": "Taj Bradley",
-       "value": "1.23"
+       "value": "1.22"
       }
      ]
     }
@@ -61,7 +61,7 @@
       },
       {
        "name": "Brooks Lee",
-       "value": 23
+       "value": 24
       }
      ]
     },
@@ -69,15 +69,15 @@
      "names": [
       "Josh Bell"
      ],
-     "value": 91,
+     "value": 92,
      "top": [
       {
        "name": "Josh Bell",
-       "value": 91
+       "value": 92
       },
       {
        "name": "Brooks Lee",
-       "value": 81
+       "value": 83
       },
       {
        "name": "Kody Clemens",
@@ -89,39 +89,39 @@
      "names": [
       "Luke Keaschall"
      ],
-     "value": ".278",
+     "value": ".276",
      "top": [
       {
        "name": "Luke Keaschall",
-       "value": ".278"
-      },
-      {
-       "name": "Josh Bell",
-       "value": ".258"
+       "value": ".276"
       },
       {
        "name": "Brooks Lee",
-       "value": ".253"
+       "value": ".255"
+      },
+      {
+       "name": "Josh Bell",
+       "value": ".255"
       }
      ]
     },
     "ops": {
      "names": [
-      "Kody Clemens"
+      "Luke Keaschall"
      ],
-     "value": ".761",
+     "value": ".758",
      "top": [
       {
-       "name": "Kody Clemens",
-       "value": ".761"
-      },
-      {
        "name": "Luke Keaschall",
-       "value": ".757"
+       "value": ".758"
       },
       {
-       "name": "Josh Bell",
-       "value": ".741"
+       "name": "Kody Clemens",
+       "value": ".751"
+      },
+      {
+       "name": "Brooks Lee",
+       "value": ".736"
       }
      ]
     }

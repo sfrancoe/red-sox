@@ -156,23 +156,26 @@
    15,
    16,
    17,
-   18
+   18,
+   17,
+   18,
+   19
   ],
-  "seq": "LLWLLWLWWWLWWWWWWWWLWWWLWWLWLLLLWLWWLLWWLWLWWWWLLWWLLLLWLLLLLLWLWLWLWWLLWLWLWWWWLLLLLLLLWLWWLLWWLLWLWLLWWWWWLWWWLWLWLWWWWWWLWLWLWWWLLWLLLWLLWLWWWWWWWWLWWWWW",
-  "record": "87-69",
-  "end_game": 156,
+  "seq": "LLWLLWLWWWLWWWWWWWWLWWWLWWLWLLLLWLWWLLWWLWLWWWWLLWWLLLLWLLLLLLWLWLWLWWLLWLWLWWWWLLLLLLLLWLWWLLWWLLWLWLLWWWWWLWWWLWLWLWWWWWWLWLWLWWWLLWLLLWLLWLWWWWWWWWLWWWWWLWW",
+  "record": "89-70",
+  "end_game": 159,
   "in_progress": true,
-  "last_game_date": "2026-09-20",
+  "last_game_date": "2026-09-24",
   "batting_leaders": {
    "hr": {
     "names": [
      "Manny Machado"
     ],
-    "value": 28,
+    "value": 29,
     "top": [
      {
       "name": "Manny Machado",
-      "value": 28
+      "value": 29
      },
      {
       "name": "Jackson Merrill",
@@ -186,21 +189,21 @@
    },
    "rbi": {
     "names": [
-     "Jackson Merrill"
+     "Manny Machado"
     ],
-    "value": 86,
+    "value": 87,
     "top": [
+     {
+      "name": "Manny Machado",
+      "value": 87
+     },
      {
       "name": "Jackson Merrill",
       "value": 86
      },
      {
-      "name": "Manny Machado",
-      "value": 84
-     },
-     {
       "name": "Fernando Tatis Jr.",
-      "value": 81
+      "value": 82
      }
     ]
    },
@@ -208,19 +211,19 @@
     "names": [
      "Fernando Tatis Jr."
     ],
-    "value": ".285",
+    "value": ".289",
     "top": [
      {
       "name": "Fernando Tatis Jr.",
-      "value": ".285"
+      "value": ".289"
      },
      {
       "name": "Jackson Merrill",
-      "value": ".255"
+      "value": ".252"
      },
      {
       "name": "Xander Bogaerts",
-      "value": ".229"
+      "value": ".227"
      }
     ]
    },
@@ -228,19 +231,19 @@
     "names": [
      "Fernando Tatis Jr."
     ],
-    "value": ".823",
+    "value": ".828",
     "top": [
      {
       "name": "Fernando Tatis Jr.",
-      "value": ".823"
+      "value": ".828"
      },
      {
       "name": "Jackson Merrill",
-      "value": ".749"
+      "value": ".740"
      },
      {
       "name": "Manny Machado",
-      "value": ".713"
+      "value": ".709"
      }
     ]
    }
@@ -266,20 +269,20 @@
   "war_leaders": [
    {
     "name": "Ty France",
-    "war": 4.8
-   },
-   {
-    "name": "Michael King",
-    "war": 4.3
+    "war": 4.5
    },
    {
     "name": "Fernando Tatis Jr.",
+    "war": 4.3
+   },
+   {
+    "name": "Michael King",
     "war": 4.1
    }
   ],
   "war_leader": {
    "name": "Ty France",
-   "war": 4.8
+   "war": 4.5
   }
  },
  "2025": {
