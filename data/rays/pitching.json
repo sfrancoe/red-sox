@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T05:16:43.911215+00:00",
+  "generated_at": "2026-09-25T12:07:06.363069+00:00",
   "season": 2026,
   "team": "Tampa Bay Rays",
   "games_played": 159,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 16.5,
+    "actual_war": 16.4,
     "forecast_war_to_date": 19.3,
-    "war_gap": -2.8,
-    "innings": 1409.0,
-    "era": 3.72
+    "war_gap": -2.9,
+    "innings": 1417.0,
+    "era": 3.74
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "172.0",
         "ip_value": 172.0,
-        "war": 4.97,
+        "war": 4.96,
         "era": 2.67,
         "fip": 2.81,
         "k_minus_bb_pct": 21.2
@@ -50,7 +50,7 @@
         "war": 3.18
       },
       "war_gap": 1.79,
-      "innings_share_pct": 12.2
+      "innings_share_pct": 12.1
     },
     {
       "id": 607259,
@@ -82,7 +82,7 @@
         "war": 1.33
       },
       "war_gap": 1.51,
-      "innings_share_pct": 12.6
+      "innings_share_pct": 12.5
     },
     {
       "id": 663556,
@@ -114,7 +114,39 @@
         "war": 3.17
       },
       "war_gap": -0.76,
-      "innings_share_pct": 8.4
+      "innings_share_pct": 8.3
+    },
+    {
+      "id": 693855,
+      "name": "Ian Seymour",
+      "throws": "L",
+      "role": "Swingman",
+      "games": 46,
+      "starts": 16,
+      "saves": 2,
+      "holds": 9,
+      "actual": {
+        "ip": "132.1",
+        "ip_value": 132.333,
+        "war": 1.55,
+        "era": 4.22,
+        "fip": 4.09,
+        "k_minus_bb_pct": 22.2
+      },
+      "forecast": {
+        "ip": 112.2,
+        "war": 1.08,
+        "era": 4.03,
+        "fip": 4.19,
+        "k_minus_bb_pct": 15.3,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 110.1,
+        "war": 1.06
+      },
+      "war_gap": 0.49,
+      "innings_share_pct": 9.3
     },
     {
       "id": 643377,
@@ -146,7 +178,7 @@
         "war": 1.16
       },
       "war_gap": 0.34,
-      "innings_share_pct": 7.8
+      "innings_share_pct": 7.7
     },
     {
       "id": 687330,
@@ -177,40 +209,8 @@
         "ip": 47.1,
         "war": 0.31
       },
-      "war_gap": 1.06,
-      "innings_share_pct": 5.2
-    },
-    {
-      "id": 693855,
-      "name": "Ian Seymour",
-      "throws": "L",
-      "role": "Swingman",
-      "games": 45,
-      "starts": 15,
-      "saves": 2,
-      "holds": 9,
-      "actual": {
-        "ip": "127.1",
-        "ip_value": 127.333,
-        "war": 1.35,
-        "era": 4.38,
-        "fip": 4.18,
-        "k_minus_bb_pct": 22.3
-      },
-      "forecast": {
-        "ip": 112.2,
-        "war": 1.08,
-        "era": 4.03,
-        "fip": 4.19,
-        "k_minus_bb_pct": 15.3,
-        "team_at_fetch": "TBR"
-      },
-      "forecast_to_date": {
-        "ip": 110.1,
-        "war": 1.06
-      },
-      "war_gap": 0.29,
-      "innings_share_pct": 9.0
+      "war_gap": 1.05,
+      "innings_share_pct": 5.1
     },
     {
       "id": 641329,
@@ -224,7 +224,7 @@
       "actual": {
         "ip": "61.1",
         "ip_value": 61.333,
-        "war": 1.31,
+        "war": 1.3,
         "era": 1.47,
         "fip": 3.06,
         "k_minus_bb_pct": 17.0
@@ -242,7 +242,7 @@
         "war": 0.6
       },
       "war_gap": 0.71,
-      "innings_share_pct": 4.4
+      "innings_share_pct": 4.3
     },
     {
       "id": 592155,
@@ -288,9 +288,9 @@
       "actual": {
         "ip": "50.0",
         "ip_value": 50.0,
-        "war": 0.66,
+        "war": 0.65,
         "era": 3.6,
-        "fip": 4.0,
+        "fip": 3.99,
         "k_minus_bb_pct": 13.8
       },
       "forecast": {
@@ -370,7 +370,7 @@
         "war": 0.15
       },
       "war_gap": 0.36,
-      "innings_share_pct": 3.9
+      "innings_share_pct": 3.8
     },
     {
       "id": 669330,
@@ -514,7 +514,7 @@
         "ip_value": 6.667,
         "war": 0.07,
         "era": 4.05,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 28.6
       },
       "forecast": {
@@ -563,38 +563,6 @@
       },
       "war_gap": -0.05,
       "innings_share_pct": 1.4
-    },
-    {
-      "id": 571927,
-      "name": "Steven Matz",
-      "throws": "L",
-      "role": "Swingman",
-      "games": 34,
-      "starts": 11,
-      "saves": 1,
-      "holds": 1,
-      "actual": {
-        "ip": "78.0",
-        "ip_value": 78.0,
-        "war": 0.02,
-        "era": 5.42,
-        "fip": 4.98,
-        "k_minus_bb_pct": 9.9
-      },
-      "forecast": {
-        "ip": 137.6,
-        "war": 2.0,
-        "era": 4.06,
-        "fip": 4.13,
-        "k_minus_bb_pct": 13.3,
-        "team_at_fetch": "TBR"
-      },
-      "forecast_to_date": {
-        "ip": 135.0,
-        "war": 1.96
-      },
-      "war_gap": -1.95,
-      "innings_share_pct": 5.5
     },
     {
       "id": 686678,
@@ -661,38 +629,6 @@
       "innings_share_pct": 0.4
     },
     {
-      "id": 811315,
-      "name": "Brody Hopkins",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 4,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "4.0",
-        "ip_value": 4.0,
-        "war": -0.04,
-        "era": 4.5,
-        "fip": 5.6,
-        "k_minus_bb_pct": 18.8
-      },
-      "forecast": {
-        "ip": 9.2,
-        "war": 0.06,
-        "era": 4.61,
-        "fip": 4.75,
-        "k_minus_bb_pct": 8.8,
-        "team_at_fetch": "TBR"
-      },
-      "forecast_to_date": {
-        "ip": 9.1,
-        "war": 0.06
-      },
-      "war_gap": -0.1,
-      "innings_share_pct": 0.3
-    },
-    {
       "id": 655889,
       "name": "Manuel Rodríguez",
       "throws": "R",
@@ -738,7 +674,7 @@
         "ip_value": 5.0,
         "war": -0.06,
         "era": 3.6,
-        "fip": 6.3,
+        "fip": 6.29,
         "k_minus_bb_pct": -4.8
       },
       "forecast": null,
@@ -748,6 +684,38 @@
       },
       "war_gap": -0.06,
       "innings_share_pct": 0.4
+    },
+    {
+      "id": 571927,
+      "name": "Steven Matz",
+      "throws": "L",
+      "role": "Swingman",
+      "games": 35,
+      "starts": 11,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "79.1",
+        "ip_value": 79.333,
+        "war": -0.06,
+        "era": 5.56,
+        "fip": 5.06,
+        "k_minus_bb_pct": 10.3
+      },
+      "forecast": {
+        "ip": 137.6,
+        "war": 2.0,
+        "era": 4.06,
+        "fip": 4.13,
+        "k_minus_bb_pct": 13.3,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 135.0,
+        "war": 1.96
+      },
+      "war_gap": -2.03,
+      "innings_share_pct": 5.6
     },
     {
       "id": 669169,
@@ -763,7 +731,7 @@
         "ip_value": 4.0,
         "war": -0.09,
         "era": 11.25,
-        "fip": 8.6,
+        "fip": 8.59,
         "k_minus_bb_pct": 10.5
       },
       "forecast": {
@@ -782,6 +750,70 @@
       "innings_share_pct": 0.3
     },
     {
+      "id": 663765,
+      "name": "Jake Woodford",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 1,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "1.1",
+        "ip_value": 1.333,
+        "war": -0.09,
+        "era": 20.25,
+        "fip": 12.09,
+        "k_minus_bb_pct": 12.5
+      },
+      "forecast": {
+        "ip": 24.0,
+        "war": 0.04,
+        "era": 4.22,
+        "fip": 4.28,
+        "k_minus_bb_pct": 12.3,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 23.6,
+        "war": 0.04
+      },
+      "war_gap": -0.13,
+      "innings_share_pct": 0.1
+    },
+    {
+      "id": 811315,
+      "name": "Brody Hopkins",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 5,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "4.1",
+        "ip_value": 4.333,
+        "war": -0.1,
+        "era": 6.23,
+        "fip": 6.79,
+        "k_minus_bb_pct": 5.0
+      },
+      "forecast": {
+        "ip": 9.2,
+        "war": 0.06,
+        "era": 4.61,
+        "fip": 4.75,
+        "k_minus_bb_pct": 8.8,
+        "team_at_fetch": "TBR"
+      },
+      "forecast_to_date": {
+        "ip": 9.1,
+        "war": 0.06
+      },
+      "war_gap": -0.16,
+      "innings_share_pct": 0.3
+    },
+    {
       "id": 681806,
       "name": "Andrew Wantz",
       "throws": "R",
@@ -795,7 +827,7 @@
         "ip_value": 1.667,
         "war": -0.11,
         "era": 27.0,
-        "fip": 16.9,
+        "fip": 16.89,
         "k_minus_bb_pct": -9.1
       },
       "forecast": {
@@ -923,7 +955,7 @@
         "ip_value": 0.333,
         "war": -0.34,
         "era": 81.0,
-        "fip": 60.1,
+        "fip": 60.09,
         "k_minus_bb_pct": -50.0
       },
       "forecast": {
@@ -985,9 +1017,9 @@
       "actual": {
         "ip": "44.2",
         "ip_value": 44.667,
-        "war": -0.46,
+        "war": -0.47,
         "era": 4.03,
-        "fip": 5.63,
+        "fip": 5.62,
         "k_minus_bb_pct": 10.2
       },
       "forecast": {
