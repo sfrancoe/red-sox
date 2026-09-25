@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-24T15:56:20+00:00",
+ "generated_at": "2026-09-25T15:56:15+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 115,
  "seasons": {
   "2026": {
-   "record": "57-101",
-   "games": 158,
+   "record": "57-102",
+   "games": 159,
    "in_progress": true,
    "war_leader": {
     "name": "TJ Rumfield",
-    "war": 3.2
+    "war": 3.3
    },
    "war_leaders": [
     {
      "name": "TJ Rumfield",
-     "war": 3.2
+     "war": 3.3
     },
     {
      "name": "Hunter Goodman",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Jake McCarthy",
-     "war": 2.2
+     "war": 2.1
     }
    ],
    "pitching_leaders": {
@@ -67,14 +67,13 @@
     },
     "rbi": {
      "names": [
-      "Hunter Goodman",
-      "Jake McCarthy"
+      "Hunter Goodman"
      ],
-     "value": 83,
+     "value": 84,
      "top": [
       {
        "name": "Hunter Goodman",
-       "value": 83
+       "value": 84
       },
       {
        "name": "Jake McCarthy",
@@ -82,7 +81,7 @@
       },
       {
        "name": "TJ Rumfield",
-       "value": 70
+       "value": 71
       }
      ]
     },
@@ -90,11 +89,11 @@
      "names": [
       "TJ Rumfield"
      ],
-     "value": ".296",
+     "value": ".297",
      "top": [
       {
        "name": "TJ Rumfield",
-       "value": ".296"
+       "value": ".297"
       },
       {
        "name": "Jake McCarthy",
@@ -102,27 +101,27 @@
       },
       {
        "name": "Hunter Goodman",
-       "value": ".246"
+       "value": ".245"
       }
      ]
     },
     "ops": {
      "names": [
-      "Hunter Goodman"
+      "TJ Rumfield"
      ],
-     "value": ".836",
+     "value": ".834",
      "top": [
       {
-       "name": "Hunter Goodman",
-       "value": ".836"
+       "name": "TJ Rumfield",
+       "value": ".834"
       },
       {
-       "name": "TJ Rumfield",
-       "value": ".830"
+       "name": "Hunter Goodman",
+       "value": ".832"
       },
       {
        "name": "Jake McCarthy",
-       "value": ".821"
+       "value": ".820"
       }
      ]
     }
