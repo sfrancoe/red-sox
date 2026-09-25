@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T08:11:42.084370+00:00",
+  "generated_at": "2026-09-25T14:10:45.541281+00:00",
   "season": 2026,
   "team": "Atlanta Braves",
   "games_played": 159,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 15.9,
+    "actual_war": 15.8,
     "forecast_war_to_date": 16.6,
-    "war_gap": -0.7,
-    "innings": 1404.0,
-    "era": 3.6
+    "war_gap": -0.8,
+    "innings": 1413.0,
+    "era": 3.62
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "162.2",
         "ip_value": 162.667,
-        "war": 5.82,
+        "war": 5.83,
         "era": 2.16,
         "fip": 2.28,
         "k_minus_bb_pct": 26.1
@@ -50,7 +50,7 @@
         "war": 4.08
       },
       "war_gap": 1.75,
-      "innings_share_pct": 11.6
+      "innings_share_pct": 11.5
     },
     {
       "id": 800311,
@@ -82,7 +82,7 @@
         "war": 0.4
       },
       "war_gap": 1.85,
-      "innings_share_pct": 5.2
+      "innings_share_pct": 5.1
     },
     {
       "id": 669276,
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "142.0",
         "ip_value": 142.0,
-        "war": 1.47,
+        "war": 1.48,
         "era": 3.04,
         "fip": 4.31,
         "k_minus_bb_pct": 6.7
@@ -145,25 +145,25 @@
         "ip": 8.8,
         "war": 0.07
       },
-      "war_gap": 1.4,
-      "innings_share_pct": 10.1
+      "war_gap": 1.41,
+      "innings_share_pct": 10.0
     },
     {
       "id": 641816,
       "name": "Tyler Mahle",
       "throws": "R",
       "role": "Starter",
-      "games": 8,
-      "starts": 8,
+      "games": 9,
+      "starts": 9,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "49.1",
-        "ip_value": 49.333,
-        "war": 1.39,
-        "era": 1.28,
-        "fip": 2.85,
-        "k_minus_bb_pct": 19.7
+        "ip": "54.1",
+        "ip_value": 54.333,
+        "war": 1.23,
+        "era": 1.99,
+        "fip": 3.32,
+        "k_minus_bb_pct": 18.6
       },
       "forecast": {
         "ip": 148.0,
@@ -177,8 +177,8 @@
         "ip": 145.2,
         "war": 1.36
       },
-      "war_gap": 0.03,
-      "innings_share_pct": 3.5
+      "war_gap": -0.13,
+      "innings_share_pct": 3.8
     },
     {
       "id": 693821,
@@ -209,8 +209,8 @@
         "ip": 112.9,
         "war": 0.94
       },
-      "war_gap": 0.21,
-      "innings_share_pct": 10.6
+      "war_gap": 0.22,
+      "innings_share_pct": 10.5
     },
     {
       "id": 628452,
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "147.2",
         "ip_value": 147.667,
-        "war": 0.93,
+        "war": 0.94,
         "era": 3.47,
         "fip": 4.66,
         "k_minus_bb_pct": 8.8
@@ -288,7 +288,7 @@
       "actual": {
         "ip": "33.0",
         "ip_value": 33.0,
-        "war": 0.85,
+        "war": 0.86,
         "era": 0.82,
         "fip": 2.46,
         "k_minus_bb_pct": 16.0
@@ -305,8 +305,40 @@
         "ip": 65.8,
         "war": 0.69
       },
-      "war_gap": 0.16,
-      "innings_share_pct": 2.4
+      "war_gap": 0.17,
+      "innings_share_pct": 2.3
+    },
+    {
+      "id": 689266,
+      "name": "Dylan Dodd",
+      "throws": "L",
+      "role": "Setup",
+      "games": 47,
+      "starts": 0,
+      "saves": 2,
+      "holds": 14,
+      "actual": {
+        "ip": "48.2",
+        "ip_value": 48.667,
+        "war": 0.64,
+        "era": 2.22,
+        "fip": 3.51,
+        "k_minus_bb_pct": 20.9
+      },
+      "forecast": {
+        "ip": 42.0,
+        "war": 0.11,
+        "era": 3.88,
+        "fip": 3.98,
+        "k_minus_bb_pct": 14.2,
+        "team_at_fetch": "ATL"
+      },
+      "forecast_to_date": {
+        "ip": 41.2,
+        "war": 0.11
+      },
+      "war_gap": 0.53,
+      "innings_share_pct": 3.4
     },
     {
       "id": 625643,
@@ -320,7 +352,7 @@
       "actual": {
         "ip": "79.1",
         "ip_value": 79.333,
-        "war": 0.58,
+        "war": 0.59,
         "era": 4.54,
         "fip": 4.38,
         "k_minus_bb_pct": 11.3
@@ -338,7 +370,7 @@
         "war": 1.84
       },
       "war_gap": -1.25,
-      "innings_share_pct": 5.7
+      "innings_share_pct": 5.6
     },
     {
       "id": 682989,
@@ -371,38 +403,6 @@
       },
       "war_gap": 0.57,
       "innings_share_pct": 2.3
-    },
-    {
-      "id": 689266,
-      "name": "Dylan Dodd",
-      "throws": "L",
-      "role": "Setup",
-      "games": 46,
-      "starts": 0,
-      "saves": 2,
-      "holds": 14,
-      "actual": {
-        "ip": "46.2",
-        "ip_value": 46.667,
-        "war": 0.53,
-        "era": 2.31,
-        "fip": 3.65,
-        "k_minus_bb_pct": 19.9
-      },
-      "forecast": {
-        "ip": 42.0,
-        "war": 0.11,
-        "era": 3.88,
-        "fip": 3.98,
-        "k_minus_bb_pct": 14.2,
-        "team_at_fetch": "ATL"
-      },
-      "forecast_to_date": {
-        "ip": 41.2,
-        "war": 0.11
-      },
-      "war_gap": 0.42,
-      "innings_share_pct": 3.3
     },
     {
       "id": 660761,
@@ -448,7 +448,7 @@
       "actual": {
         "ip": "24.2",
         "ip_value": 24.667,
-        "war": 0.18,
+        "war": 0.19,
         "era": 1.82,
         "fip": 3.5,
         "k_minus_bb_pct": 11.9
@@ -466,7 +466,7 @@
         "war": -0.0
       },
       "war_gap": 0.19,
-      "innings_share_pct": 1.8
+      "innings_share_pct": 1.7
     },
     {
       "id": 678061,
@@ -546,7 +546,7 @@
         "ip_value": 3.333,
         "war": 0.05,
         "era": 0.0,
-        "fip": 1.9,
+        "fip": 1.89,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -642,7 +642,7 @@
         "ip_value": 1.0,
         "war": 0.02,
         "era": 0.0,
-        "fip": 1.1,
+        "fip": 1.09,
         "k_minus_bb_pct": 33.3
       },
       "forecast": {
@@ -699,7 +699,7 @@
         "ip_value": 1.0,
         "war": 0.0,
         "era": 9.0,
-        "fip": 4.1,
+        "fip": 4.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -731,7 +731,7 @@
         "ip_value": 5.0,
         "war": -0.04,
         "era": 5.4,
-        "fip": 5.5,
+        "fip": 5.49,
         "k_minus_bb_pct": 4.8
       },
       "forecast": {
@@ -763,7 +763,7 @@
         "ip_value": 10.0,
         "war": -0.06,
         "era": 6.3,
-        "fip": 5.3,
+        "fip": 5.29,
         "k_minus_bb_pct": 2.4
       },
       "forecast": {
@@ -782,38 +782,6 @@
       "innings_share_pct": 0.7
     },
     {
-      "id": 700363,
-      "name": "AJ Smith-Shawver",
-      "throws": "R",
-      "role": "Starter",
-      "games": 7,
-      "starts": 5,
-      "saves": 0,
-      "holds": 1,
-      "actual": {
-        "ip": "28.0",
-        "ip_value": 28.0,
-        "war": -0.07,
-        "era": 6.43,
-        "fip": 5.52,
-        "k_minus_bb_pct": 6.1
-      },
-      "forecast": {
-        "ip": 8.0,
-        "war": 0.05,
-        "era": 3.79,
-        "fip": 3.69,
-        "k_minus_bb_pct": 18.5,
-        "team_at_fetch": "ATL"
-      },
-      "forecast_to_date": {
-        "ip": 7.9,
-        "war": 0.05
-      },
-      "war_gap": -0.11,
-      "innings_share_pct": 2.0
-    },
-    {
       "id": 691548,
       "name": "Rolddy Muñoz",
       "throws": "R",
@@ -827,7 +795,7 @@
         "ip_value": 2.0,
         "war": -0.07,
         "era": 13.5,
-        "fip": 8.1,
+        "fip": 8.09,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -923,7 +891,7 @@
         "ip_value": 16.667,
         "war": -0.17,
         "era": 5.94,
-        "fip": 5.5,
+        "fip": 5.49,
         "k_minus_bb_pct": 5.5
       },
       "forecast": {
@@ -938,8 +906,40 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": -0.17,
+      "war_gap": -0.16,
       "innings_share_pct": 1.2
+    },
+    {
+      "id": 700363,
+      "name": "AJ Smith-Shawver",
+      "throws": "R",
+      "role": "Starter",
+      "games": 8,
+      "starts": 5,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "30.0",
+        "ip_value": 30.0,
+        "war": -0.2,
+        "era": 6.6,
+        "fip": 5.89,
+        "k_minus_bb_pct": 5.8
+      },
+      "forecast": {
+        "ip": 8.0,
+        "war": 0.05,
+        "era": 3.79,
+        "fip": 3.69,
+        "k_minus_bb_pct": 18.5,
+        "team_at_fetch": "ATL"
+      },
+      "forecast_to_date": {
+        "ip": 7.9,
+        "war": 0.05
+      },
+      "war_gap": -0.25,
+      "innings_share_pct": 2.1
     },
     {
       "id": 702566,
@@ -953,7 +953,7 @@
       "actual": {
         "ip": "12.0",
         "ip_value": 12.0,
-        "war": -0.28,
+        "war": -0.27,
         "era": 6.0,
         "fip": 6.93,
         "k_minus_bb_pct": 10.7
@@ -971,7 +971,7 @@
         "war": -0.0
       },
       "war_gap": -0.27,
-      "innings_share_pct": 0.9
+      "innings_share_pct": 0.8
     },
     {
       "id": 694462,
@@ -1017,7 +1017,7 @@
       "actual": {
         "ip": "67.2",
         "ip_value": 67.667,
-        "war": -0.33,
+        "war": -0.32,
         "era": 4.79,
         "fip": 5.53,
         "k_minus_bb_pct": 8.3
@@ -1066,7 +1066,7 @@
         "ip": 61.8,
         "war": 0.3
       },
-      "war_gap": -0.74,
+      "war_gap": -0.73,
       "innings_share_pct": 3.0
     },
     {
@@ -1083,7 +1083,7 @@
         "ip_value": 6.333,
         "war": -0.44,
         "era": 21.32,
-        "fip": 12.89,
+        "fip": 12.88,
         "k_minus_bb_pct": -5.0
       },
       "forecast": {
@@ -1099,7 +1099,7 @@
         "war": 0.0
       },
       "war_gap": -0.45,
-      "innings_share_pct": 0.5
+      "innings_share_pct": 0.4
     },
     {
       "id": 664849,

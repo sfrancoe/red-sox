@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T00:52:17.281204+00:00",
+  "generated_at": "2026-09-25T14:10:53.246649+00:00",
   "season": 2026,
   "team": "Colorado Rockies",
   "games_played": 159,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 6.9,
+    "actual_war": 6.7,
     "forecast_war_to_date": 7.6,
-    "war_gap": -0.7,
-    "innings": 1387.7,
-    "era": 5.55
+    "war_gap": -0.9,
+    "innings": 1396.7,
+    "era": 5.59
   },
   "pitchers": [
     {
@@ -82,7 +82,7 @@
         "war": 0.0
       },
       "war_gap": 1.04,
-      "innings_share_pct": 3.8
+      "innings_share_pct": 3.7
     },
     {
       "id": 607536,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "131.1",
         "ip_value": 131.333,
-        "war": 0.97,
+        "war": 0.98,
         "era": 6.58,
         "fip": 4.95,
         "k_minus_bb_pct": 13.0
@@ -114,7 +114,7 @@
         "war": 1.48
       },
       "war_gap": -0.5,
-      "innings_share_pct": 9.5
+      "innings_share_pct": 9.4
     },
     {
       "id": 657514,
@@ -145,40 +145,8 @@
         "ip": 56.9,
         "war": 0.12
       },
-      "war_gap": 0.82,
+      "war_gap": 0.83,
       "innings_share_pct": 4.5
-    },
-    {
-      "id": 685299,
-      "name": "Tanner Gordon",
-      "throws": "R",
-      "role": "Swingman",
-      "games": 23,
-      "starts": 11,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "100.1",
-        "ip_value": 100.333,
-        "war": 0.67,
-        "era": 6.01,
-        "fip": 4.54,
-        "k_minus_bb_pct": 14.3
-      },
-      "forecast": {
-        "ip": 57.2,
-        "war": 0.26,
-        "era": 5.19,
-        "fip": 4.9,
-        "k_minus_bb_pct": 11.7,
-        "team_at_fetch": "COL"
-      },
-      "forecast_to_date": {
-        "ip": 56.1,
-        "war": 0.26
-      },
-      "war_gap": 0.41,
-      "innings_share_pct": 7.2
     },
     {
       "id": 663372,
@@ -192,7 +160,7 @@
       "actual": {
         "ip": "119.2",
         "ip_value": 119.667,
-        "war": 0.65,
+        "war": 0.66,
         "era": 5.57,
         "fip": 5.11,
         "k_minus_bb_pct": 7.2
@@ -209,7 +177,7 @@
         "ip": 119.0,
         "war": 0.91
       },
-      "war_gap": -0.26,
+      "war_gap": -0.25,
       "innings_share_pct": 8.6
     },
     {
@@ -217,17 +185,17 @@
       "name": "Jordan Romano",
       "throws": "R",
       "role": "Closer",
-      "games": 25,
+      "games": 26,
       "starts": 0,
       "saves": 11,
       "holds": 1,
       "actual": {
-        "ip": "23.2",
-        "ip_value": 23.667,
-        "war": 0.47,
-        "era": 3.42,
-        "fip": 3.69,
-        "k_minus_bb_pct": 11.9
+        "ip": "24.2",
+        "ip_value": 24.667,
+        "war": 0.51,
+        "era": 3.28,
+        "fip": 3.58,
+        "k_minus_bb_pct": 12.4
       },
       "forecast": {
         "ip": 60.0,
@@ -241,8 +209,40 @@
         "ip": 58.9,
         "war": 0.42
       },
-      "war_gap": 0.05,
-      "innings_share_pct": 1.7
+      "war_gap": 0.09,
+      "innings_share_pct": 1.8
+    },
+    {
+      "id": 675848,
+      "name": "Juan Mejia",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 64,
+      "starts": 1,
+      "saves": 4,
+      "holds": 9,
+      "actual": {
+        "ip": "69.0",
+        "ip_value": 69.0,
+        "war": 0.48,
+        "era": 5.09,
+        "fip": 4.21,
+        "k_minus_bb_pct": 7.9
+      },
+      "forecast": {
+        "ip": 66.0,
+        "war": 0.18,
+        "era": 4.65,
+        "fip": 4.46,
+        "k_minus_bb_pct": 11.8,
+        "team_at_fetch": "COL"
+      },
+      "forecast_to_date": {
+        "ip": 64.8,
+        "war": 0.17
+      },
+      "war_gap": 0.31,
+      "innings_share_pct": 4.9
     },
     {
       "id": 547179,
@@ -277,38 +277,6 @@
       "innings_share_pct": 8.3
     },
     {
-      "id": 675848,
-      "name": "Juan Mejia",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 63,
-      "starts": 1,
-      "saves": 4,
-      "holds": 9,
-      "actual": {
-        "ip": "68.0",
-        "ip_value": 68.0,
-        "war": 0.44,
-        "era": 5.16,
-        "fip": 4.26,
-        "k_minus_bb_pct": 7.7
-      },
-      "forecast": {
-        "ip": 66.0,
-        "war": 0.18,
-        "era": 4.65,
-        "fip": 4.46,
-        "k_minus_bb_pct": 11.8,
-        "team_at_fetch": "COL"
-      },
-      "forecast_to_date": {
-        "ip": 64.8,
-        "war": 0.17
-      },
-      "war_gap": 0.27,
-      "innings_share_pct": 4.9
-    },
-    {
       "id": 801403,
       "name": "Chase Dollander",
       "throws": "R",
@@ -341,6 +309,38 @@
       "innings_share_pct": 3.2
     },
     {
+      "id": 685299,
+      "name": "Tanner Gordon",
+      "throws": "R",
+      "role": "Swingman",
+      "games": 24,
+      "starts": 12,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "103.2",
+        "ip_value": 103.667,
+        "war": 0.38,
+        "era": 6.68,
+        "fip": 4.84,
+        "k_minus_bb_pct": 12.9
+      },
+      "forecast": {
+        "ip": 57.2,
+        "war": 0.26,
+        "era": 5.19,
+        "fip": 4.9,
+        "k_minus_bb_pct": 11.7,
+        "team_at_fetch": "COL"
+      },
+      "forecast_to_date": {
+        "ip": 56.1,
+        "war": 0.26
+      },
+      "war_gap": 0.13,
+      "innings_share_pct": 7.4
+    },
+    {
       "id": 608372,
       "name": "Tomoyuki Sugano",
       "throws": "R",
@@ -352,9 +352,9 @@
       "actual": {
         "ip": "147.2",
         "ip_value": 147.667,
-        "war": 0.37,
+        "war": 0.38,
         "era": 5.36,
-        "fip": 5.39,
+        "fip": 5.38,
         "k_minus_bb_pct": 8.7
       },
       "forecast": {
@@ -401,7 +401,7 @@
         "ip": 54.0,
         "war": 0.19
       },
-      "war_gap": 0.09,
+      "war_gap": 0.1,
       "innings_share_pct": 2.8
     },
     {
@@ -418,7 +418,7 @@
         "ip_value": 12.0,
         "war": 0.2,
         "era": 8.25,
-        "fip": 2.85,
+        "fip": 2.84,
         "k_minus_bb_pct": 15.8
       },
       "forecast": {
@@ -530,7 +530,7 @@
         "war": -0.32
       },
       "war_gap": 0.43,
-      "innings_share_pct": 6.6
+      "innings_share_pct": 6.5
     },
     {
       "id": 680767,
@@ -578,7 +578,7 @@
         "ip_value": 45.0,
         "war": 0.06,
         "era": 5.4,
-        "fip": 5.7,
+        "fip": 5.69,
         "k_minus_bb_pct": 2.0
       },
       "forecast": {
@@ -601,17 +601,17 @@
       "name": "Nick Frasso",
       "throws": "R",
       "role": "Reliever",
-      "games": 18,
+      "games": 19,
       "starts": 0,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "19.2",
-        "ip_value": 19.667,
-        "war": 0.03,
-        "era": 6.41,
-        "fip": 4.32,
-        "k_minus_bb_pct": 15.2
+        "ip": "20.2",
+        "ip_value": 20.667,
+        "war": 0.05,
+        "era": 6.1,
+        "fip": 4.26,
+        "k_minus_bb_pct": 14.6
       },
       "forecast": {
         "ip": 1.0,
@@ -625,8 +625,8 @@
         "ip": 1.0,
         "war": -0.01
       },
-      "war_gap": 0.04,
-      "innings_share_pct": 1.4
+      "war_gap": 0.05,
+      "innings_share_pct": 1.5
     },
     {
       "id": 700327,
@@ -706,7 +706,7 @@
         "ip_value": 2.0,
         "war": -0.01,
         "era": 0.0,
-        "fip": 6.1,
+        "fip": 6.09,
         "k_minus_bb_pct": -11.1
       },
       "forecast": null,
@@ -731,7 +731,7 @@
         "ip_value": 6.667,
         "war": -0.02,
         "era": 2.7,
-        "fip": 5.35,
+        "fip": 5.34,
         "k_minus_bb_pct": -14.7
       },
       "forecast": {
@@ -772,7 +772,7 @@
         "war": 0.0
       },
       "war_gap": -0.03,
-      "innings_share_pct": 0.6
+      "innings_share_pct": 0.5
     },
     {
       "id": 680604,
@@ -852,7 +852,7 @@
         "ip_value": 1.0,
         "war": -0.09,
         "era": 45.0,
-        "fip": 22.1,
+        "fip": 22.09,
         "k_minus_bb_pct": -22.2
       },
       "forecast": {
@@ -964,7 +964,7 @@
         "war": -0.0
       },
       "war_gap": -0.12,
-      "innings_share_pct": 0.6
+      "innings_share_pct": 0.5
     },
     {
       "id": 676105,
@@ -980,7 +980,7 @@
         "ip_value": 4.0,
         "war": -0.2,
         "era": 4.5,
-        "fip": 10.35,
+        "fip": 10.34,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -1035,17 +1035,17 @@
       "name": "Jimmy Herget",
       "throws": "R",
       "role": "Setup",
-      "games": 50,
+      "games": 51,
       "starts": 3,
       "saves": 3,
       "holds": 10,
       "actual": {
-        "ip": "51.0",
-        "ip_value": 51.0,
-        "war": -0.26,
-        "era": 5.65,
-        "fip": 5.35,
-        "k_minus_bb_pct": 8.0
+        "ip": "53.2",
+        "ip_value": 53.667,
+        "war": -0.31,
+        "era": 5.7,
+        "fip": 5.39,
+        "k_minus_bb_pct": 8.9
       },
       "forecast": {
         "ip": 77.0,
@@ -1059,8 +1059,8 @@
         "ip": 75.6,
         "war": 0.22
       },
-      "war_gap": -0.48,
-      "innings_share_pct": 3.7
+      "war_gap": -0.53,
+      "innings_share_pct": 3.8
     },
     {
       "id": 678368,

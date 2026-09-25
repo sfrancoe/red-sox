@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T21:50:13.173732+00:00",
+  "generated_at": "2026-09-25T14:10:48.809582+00:00",
   "season": 2026,
   "team": "Chicago Cubs",
   "games_played": 159,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 5.5,
+    "actual_war": 5.7,
     "forecast_war_to_date": 21.0,
-    "war_gap": -15.6,
-    "innings": 1413.0,
-    "era": 4.17
+    "war_gap": -15.4,
+    "innings": 1422.0,
+    "era": 4.15
   },
   "pitchers": [
     {
@@ -82,24 +82,24 @@
         "war": 1.93
       },
       "war_gap": -0.1,
-      "innings_share_pct": 12.3
+      "innings_share_pct": 12.2
     },
     {
       "id": 571510,
       "name": "Matthew Boyd",
       "throws": "L",
       "role": "Starter",
-      "games": 21,
-      "starts": 21,
+      "games": 22,
+      "starts": 22,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "119.2",
-        "ip_value": 119.667,
-        "war": 1.46,
-        "era": 4.06,
-        "fip": 4.27,
-        "k_minus_bb_pct": 11.4
+        "ip": "126.2",
+        "ip_value": 126.667,
+        "war": 1.61,
+        "era": 3.91,
+        "fip": 4.21,
+        "k_minus_bb_pct": 11.0
       },
       "forecast": {
         "ip": 173.8,
@@ -113,8 +113,8 @@
         "ip": 170.5,
         "war": 2.2
       },
-      "war_gap": -0.75,
-      "innings_share_pct": 8.5
+      "war_gap": -0.59,
+      "innings_share_pct": 8.9
     },
     {
       "id": 656849,
@@ -178,7 +178,7 @@
         "war": 2.88
       },
       "war_gap": -2.34,
-      "innings_share_pct": 3.6
+      "innings_share_pct": 3.5
     },
     {
       "id": 650644,
@@ -274,7 +274,7 @@
         "war": 0.46
       },
       "war_gap": -0.08,
-      "innings_share_pct": 9.6
+      "innings_share_pct": 9.5
     },
     {
       "id": 669020,
@@ -322,7 +322,7 @@
         "ip_value": 66.0,
         "war": 0.26,
         "era": 3.41,
-        "fip": 4.07,
+        "fip": 4.06,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -338,7 +338,7 @@
         "war": -0.02
       },
       "war_gap": 0.28,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     },
     {
       "id": 696136,
@@ -386,7 +386,7 @@
         "ip_value": 8.333,
         "war": 0.19,
         "era": 2.16,
-        "fip": 2.98,
+        "fip": 2.97,
         "k_minus_bb_pct": 25.8
       },
       "forecast": {
@@ -409,17 +409,17 @@
       "name": "Daniel Palencia",
       "throws": "R",
       "role": "Reliever",
-      "games": 31,
+      "games": 32,
       "starts": 0,
       "saves": 3,
-      "holds": 2,
+      "holds": 3,
       "actual": {
-        "ip": "28.2",
-        "ip_value": 28.667,
-        "war": 0.15,
-        "era": 3.77,
-        "fip": 3.97,
-        "k_minus_bb_pct": 16.8
+        "ip": "29.2",
+        "ip_value": 29.667,
+        "war": 0.16,
+        "era": 3.64,
+        "fip": 4.04,
+        "k_minus_bb_pct": 15.4
       },
       "forecast": {
         "ip": 67.0,
@@ -434,24 +434,24 @@
         "war": 0.47
       },
       "war_gap": -0.32,
-      "innings_share_pct": 2.0
+      "innings_share_pct": 2.1
     },
     {
       "id": 666171,
       "name": "Ryan Zeferjahn",
       "throws": "R",
       "role": "Reliever",
-      "games": 19,
+      "games": 20,
       "starts": 0,
-      "saves": 2,
+      "saves": 3,
       "holds": 5,
       "actual": {
-        "ip": "17.0",
-        "ip_value": 17.0,
-        "war": 0.11,
-        "era": 4.76,
-        "fip": 3.98,
-        "k_minus_bb_pct": 14.3
+        "ip": "18.0",
+        "ip_value": 18.0,
+        "war": 0.16,
+        "era": 4.5,
+        "fip": 3.93,
+        "k_minus_bb_pct": 13.8
       },
       "forecast": {
         "ip": 52.0,
@@ -465,8 +465,8 @@
         "ip": 51.0,
         "war": -0.0
       },
-      "war_gap": 0.11,
-      "innings_share_pct": 1.2
+      "war_gap": 0.16,
+      "innings_share_pct": 1.3
     },
     {
       "id": 592826,
@@ -482,7 +482,7 @@
         "ip_value": 3.333,
         "war": 0.05,
         "era": 0.0,
-        "fip": 2.5,
+        "fip": 2.49,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -546,7 +546,7 @@
         "ip_value": 7.333,
         "war": 0.04,
         "era": 2.45,
-        "fip": 4.6,
+        "fip": 4.59,
         "k_minus_bb_pct": 7.7
       },
       "forecast": {
@@ -578,7 +578,7 @@
         "ip_value": 1.667,
         "war": 0.03,
         "era": 0.0,
-        "fip": 0.7,
+        "fip": 0.69,
         "k_minus_bb_pct": 40.0
       },
       "forecast": {
@@ -610,7 +610,7 @@
         "ip_value": 1.333,
         "war": 0.0,
         "era": 0.0,
-        "fip": 3.85,
+        "fip": 3.84,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -642,7 +642,7 @@
         "ip_value": 2.0,
         "war": -0.01,
         "era": 4.5,
-        "fip": 4.6,
+        "fip": 4.59,
         "k_minus_bb_pct": -11.1
       },
       "forecast": {
@@ -738,7 +738,7 @@
         "ip_value": 1.0,
         "war": -0.05,
         "era": 9.0,
-        "fip": 14.1,
+        "fip": 14.09,
         "k_minus_bb_pct": 20.0
       },
       "forecast": {
@@ -802,7 +802,7 @@
         "ip_value": 80.0,
         "war": -0.06,
         "era": 5.96,
-        "fip": 5.35,
+        "fip": 5.34,
         "k_minus_bb_pct": 10.0
       },
       "forecast": {
@@ -818,7 +818,7 @@
         "war": 1.91
       },
       "war_gap": -1.97,
-      "innings_share_pct": 5.7
+      "innings_share_pct": 5.6
     },
     {
       "id": 669060,
@@ -987,7 +987,7 @@
         "ip_value": 4.0,
         "war": -0.16,
         "era": 6.75,
-        "fip": 8.35,
+        "fip": 8.34,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -1083,7 +1083,7 @@
         "ip_value": 5.0,
         "war": -0.23,
         "era": 10.8,
-        "fip": 9.7,
+        "fip": 9.69,
         "k_minus_bb_pct": -4.0
       },
       "forecast": {
@@ -1177,7 +1177,7 @@
       "actual": {
         "ip": "27.2",
         "ip_value": 27.667,
-        "war": -0.38,
+        "war": -0.39,
         "era": 6.18,
         "fip": 5.48,
         "k_minus_bb_pct": 11.0
@@ -1194,8 +1194,8 @@
         "ip": 63.8,
         "war": 0.22
       },
-      "war_gap": -0.6,
-      "innings_share_pct": 2.0
+      "war_gap": -0.61,
+      "innings_share_pct": 1.9
     },
     {
       "id": 663423,
@@ -1259,7 +1259,7 @@
         "war": 1.44
       },
       "war_gap": -2.52,
-      "innings_share_pct": 5.4
+      "innings_share_pct": 5.3
     }
   ]
 }

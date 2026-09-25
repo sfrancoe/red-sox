@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T21:50:00.796853+00:00",
+  "generated_at": "2026-09-25T14:10:37.622489+00:00",
   "season": 2026,
   "team": "Chicago White Sox",
   "games_played": 159,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.3,
+    "actual_war": 12.6,
     "forecast_war_to_date": 13.4,
-    "war_gap": -1.1,
-    "innings": 1404.7,
-    "era": 4.15
+    "war_gap": -0.8,
+    "innings": 1413.7,
+    "era": 4.13
   },
   "pitchers": [
     {
@@ -32,7 +32,7 @@
       "actual": {
         "ip": "167.0",
         "ip_value": 167.0,
-        "war": 3.08,
+        "war": 3.09,
         "era": 3.4,
         "fip": 3.62,
         "k_minus_bb_pct": 16.8
@@ -50,7 +50,7 @@
         "war": 0.9
       },
       "war_gap": 2.18,
-      "innings_share_pct": 11.9
+      "innings_share_pct": 11.8
     },
     {
       "id": 663436,
@@ -146,7 +146,7 @@
         "war": 0.42
       },
       "war_gap": 1.14,
-      "innings_share_pct": 6.3
+      "innings_share_pct": 6.2
     },
     {
       "id": 663542,
@@ -178,7 +178,7 @@
         "war": 0.16
       },
       "war_gap": 1.13,
-      "innings_share_pct": 4.7
+      "innings_share_pct": 4.6
     },
     {
       "id": 641743,
@@ -194,7 +194,7 @@
         "ip_value": 153.0,
         "war": 1.15,
         "era": 4.53,
-        "fip": 4.8,
+        "fip": 4.79,
         "k_minus_bb_pct": 10.3
       },
       "forecast": {
@@ -210,7 +210,7 @@
         "war": 1.57
       },
       "war_gap": -0.41,
-      "innings_share_pct": 10.9
+      "innings_share_pct": 10.8
     },
     {
       "id": 696146,
@@ -274,7 +274,7 @@
         "war": 0.25
       },
       "war_gap": 0.26,
-      "innings_share_pct": 5.1
+      "innings_share_pct": 5.0
     },
     {
       "id": 663855,
@@ -309,53 +309,53 @@
       "innings_share_pct": 3.3
     },
     {
-      "id": 670950,
-      "name": "Trevor Richards",
+      "id": 689818,
+      "name": "David Sandlin",
       "throws": "R",
-      "role": "Reliever",
-      "games": 50,
-      "starts": 0,
-      "saves": 1,
-      "holds": 1,
+      "role": "Starter",
+      "games": 8,
+      "starts": 6,
+      "saves": 0,
+      "holds": 0,
       "actual": {
-        "ip": "74.1",
-        "ip_value": 74.333,
-        "war": 0.29,
-        "era": 3.87,
-        "fip": 4.2,
-        "k_minus_bb_pct": 13.9
+        "ip": "40.1",
+        "ip_value": 40.333,
+        "war": 0.39,
+        "era": 5.58,
+        "fip": 4.41,
+        "k_minus_bb_pct": 16.2
       },
       "forecast": {
-        "ip": 1.0,
-        "war": -0.0,
-        "era": 4.64,
-        "fip": 4.8,
-        "k_minus_bb_pct": 11.4,
+        "ip": 18.0,
+        "war": 0.02,
+        "era": 4.3,
+        "fip": 4.49,
+        "k_minus_bb_pct": 12.7,
         "team_at_fetch": "CHW"
       },
       "forecast_to_date": {
-        "ip": 1.0,
-        "war": -0.0
+        "ip": 17.7,
+        "war": 0.02
       },
-      "war_gap": 0.3,
-      "innings_share_pct": 5.3
+      "war_gap": 0.38,
+      "innings_share_pct": 2.9
     },
     {
       "id": 699823,
       "name": "Tyler Davis",
       "throws": "R",
       "role": "Reliever",
-      "games": 29,
+      "games": 30,
       "starts": 0,
       "saves": 1,
       "holds": 0,
       "actual": {
-        "ip": "30.2",
-        "ip_value": 30.667,
-        "war": 0.25,
-        "era": 3.52,
-        "fip": 3.81,
-        "k_minus_bb_pct": 8.1
+        "ip": "31.2",
+        "ip_value": 31.667,
+        "war": 0.28,
+        "era": 3.41,
+        "fip": 3.73,
+        "k_minus_bb_pct": 8.7
       },
       "forecast": {
         "ip": 1.0,
@@ -369,8 +369,40 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": 0.25,
+      "war_gap": 0.28,
       "innings_share_pct": 2.2
+    },
+    {
+      "id": 670950,
+      "name": "Trevor Richards",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 51,
+      "starts": 0,
+      "saves": 1,
+      "holds": 1,
+      "actual": {
+        "ip": "75.1",
+        "ip_value": 75.333,
+        "war": 0.27,
+        "era": 3.82,
+        "fip": 4.22,
+        "k_minus_bb_pct": 13.3
+      },
+      "forecast": {
+        "ip": 1.0,
+        "war": -0.0,
+        "era": 4.64,
+        "fip": 4.8,
+        "k_minus_bb_pct": 11.4,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 1.0,
+        "war": -0.0
+      },
+      "war_gap": 0.28,
+      "innings_share_pct": 5.3
     },
     {
       "id": 669684,
@@ -405,38 +437,6 @@
       "innings_share_pct": 2.4
     },
     {
-      "id": 689818,
-      "name": "David Sandlin",
-      "throws": "R",
-      "role": "Starter",
-      "games": 7,
-      "starts": 5,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "34.1",
-        "ip_value": 34.333,
-        "war": 0.22,
-        "era": 6.29,
-        "fip": 4.67,
-        "k_minus_bb_pct": 13.8
-      },
-      "forecast": {
-        "ip": 18.0,
-        "war": 0.02,
-        "era": 4.3,
-        "fip": 4.49,
-        "k_minus_bb_pct": 12.7,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 17.7,
-        "war": 0.02
-      },
-      "war_gap": 0.2,
-      "innings_share_pct": 2.4
-    },
-    {
       "id": 805326,
       "name": "Tyler Schweitzer",
       "throws": "L",
@@ -466,7 +466,7 @@
         "war": -0.01
       },
       "war_gap": 0.09,
-      "innings_share_pct": 2.7
+      "innings_share_pct": 2.6
     },
     {
       "id": 664353,
@@ -514,7 +514,7 @@
         "ip_value": 1.0,
         "war": 0.02,
         "era": 0.0,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -571,7 +571,7 @@
         "ip_value": 2.0,
         "war": -0.01,
         "era": 4.5,
-        "fip": 5.1,
+        "fip": 5.09,
         "k_minus_bb_pct": -11.1
       },
       "forecast": {
@@ -603,7 +603,7 @@
         "ip_value": 38.333,
         "war": -0.03,
         "era": 3.99,
-        "fip": 4.64,
+        "fip": 4.63,
         "k_minus_bb_pct": 14.5
       },
       "forecast": {
@@ -635,7 +635,7 @@
         "ip_value": 8.333,
         "war": -0.03,
         "era": 10.8,
-        "fip": 5.62,
+        "fip": 5.61,
         "k_minus_bb_pct": 4.1
       },
       "forecast": {
@@ -699,7 +699,7 @@
         "ip_value": 10.0,
         "war": -0.04,
         "era": 4.5,
-        "fip": 4.8,
+        "fip": 4.79,
         "k_minus_bb_pct": 6.5
       },
       "forecast": {
@@ -763,7 +763,7 @@
         "ip_value": 2.0,
         "war": -0.07,
         "era": 4.5,
-        "fip": 10.1,
+        "fip": 10.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -820,7 +820,7 @@
         "ip_value": 0.333,
         "war": -0.08,
         "era": 27.0,
-        "fip": 39.1,
+        "fip": 39.09,
         "k_minus_bb_pct": -60.0
       },
       "forecast": {
@@ -871,6 +871,38 @@
       "innings_share_pct": 10.0
     },
     {
+      "id": 623211,
+      "name": "Huascar Brazobán",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 13,
+      "starts": 0,
+      "saves": 0,
+      "holds": 2,
+      "actual": {
+        "ip": "13.0",
+        "ip_value": 13.0,
+        "war": -0.15,
+        "era": 4.85,
+        "fip": 5.4,
+        "k_minus_bb_pct": 1.8
+      },
+      "forecast": {
+        "ip": 52.0,
+        "war": 0.15,
+        "era": 3.91,
+        "fip": 4.13,
+        "k_minus_bb_pct": 12.1,
+        "team_at_fetch": "CHW"
+      },
+      "forecast_to_date": {
+        "ip": 51.0,
+        "war": 0.15
+      },
+      "war_gap": -0.3,
+      "innings_share_pct": 0.9
+    },
+    {
       "id": 699151,
       "name": "Jedixson Paez",
       "throws": "R",
@@ -916,7 +948,7 @@
         "ip_value": 8.667,
         "war": -0.17,
         "era": 6.23,
-        "fip": 7.37,
+        "fip": 7.36,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -935,38 +967,6 @@
       "innings_share_pct": 0.6
     },
     {
-      "id": 623211,
-      "name": "Huascar Brazobán",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 12,
-      "starts": 0,
-      "saves": 0,
-      "holds": 2,
-      "actual": {
-        "ip": "12.0",
-        "ip_value": 12.0,
-        "war": -0.21,
-        "era": 5.25,
-        "fip": 5.93,
-        "k_minus_bb_pct": -1.9
-      },
-      "forecast": {
-        "ip": 52.0,
-        "war": 0.15,
-        "era": 3.91,
-        "fip": 4.13,
-        "k_minus_bb_pct": 12.1,
-        "team_at_fetch": "CHW"
-      },
-      "forecast_to_date": {
-        "ip": 51.0,
-        "war": 0.15
-      },
-      "war_gap": -0.37,
-      "innings_share_pct": 0.9
-    },
-    {
       "id": 656457,
       "name": "Tyler Gilbert",
       "throws": "L",
@@ -980,7 +980,7 @@
         "ip_value": 6.0,
         "war": -0.23,
         "era": 12.0,
-        "fip": 8.1,
+        "fip": 8.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {

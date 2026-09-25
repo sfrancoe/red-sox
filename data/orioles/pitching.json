@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T13:47:49.906817+00:00",
+  "generated_at": "2026-09-25T14:10:36.018968+00:00",
   "season": 2026,
   "team": "Baltimore Orioles",
   "games_played": 159,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "51.2",
         "ip_value": 51.667,
-        "war": 1.13,
+        "war": 1.14,
         "era": 4.35,
         "fip": 2.69,
         "k_minus_bb_pct": 19.7
@@ -305,7 +305,7 @@
         "ip": 55.0,
         "war": 0.0
       },
-      "war_gap": 0.78,
+      "war_gap": 0.79,
       "innings_share_pct": 4.7
     },
     {
@@ -322,7 +322,7 @@
         "ip_value": 59.0,
         "war": 0.6,
         "era": 3.81,
-        "fip": 3.49,
+        "fip": 3.48,
         "k_minus_bb_pct": 16.1
       },
       "forecast": {
@@ -416,7 +416,7 @@
       "actual": {
         "ip": "19.0",
         "ip_value": 19.0,
-        "war": 0.43,
+        "war": 0.42,
         "era": 2.84,
         "fip": 2.62,
         "k_minus_bb_pct": 17.5
@@ -546,7 +546,7 @@
         "ip_value": 59.0,
         "war": 0.06,
         "era": 4.12,
-        "fip": 4.49,
+        "fip": 4.48,
         "k_minus_bb_pct": 8.5
       },
       "forecast": {
@@ -578,7 +578,7 @@
         "ip_value": 9.333,
         "war": 0.04,
         "era": 1.93,
-        "fip": 3.85,
+        "fip": 3.84,
         "k_minus_bb_pct": 11.1
       },
       "forecast": {
@@ -642,7 +642,7 @@
         "ip_value": 1.0,
         "war": 0.01,
         "era": 0.0,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -674,7 +674,7 @@
         "ip_value": 3.0,
         "war": -0.0,
         "era": 18.0,
-        "fip": 4.1,
+        "fip": 4.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -706,7 +706,7 @@
         "ip_value": 1.0,
         "war": -0.0,
         "era": 0.0,
-        "fip": 4.1,
+        "fip": 4.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -802,7 +802,7 @@
         "ip_value": 1.667,
         "war": -0.07,
         "era": 16.2,
-        "fip": 9.1,
+        "fip": 9.09,
         "k_minus_bb_pct": 20.0
       },
       "forecast": {
@@ -834,7 +834,7 @@
         "ip_value": 1.0,
         "war": -0.08,
         "era": 18.0,
-        "fip": 19.1,
+        "fip": 19.09,
         "k_minus_bb_pct": -16.7
       },
       "forecast": null,
@@ -935,38 +935,6 @@
       "innings_share_pct": 0.2
     },
     {
-      "id": 682274,
-      "name": "Yaramil Hiraldo",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 8,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "9.1",
-        "ip_value": 9.333,
-        "war": -0.18,
-        "era": 8.68,
-        "fip": 6.63,
-        "k_minus_bb_pct": 6.2
-      },
-      "forecast": {
-        "ip": 38.0,
-        "war": 0.2,
-        "era": 4.03,
-        "fip": 4.13,
-        "k_minus_bb_pct": 15.5,
-        "team_at_fetch": "BAL"
-      },
-      "forecast_to_date": {
-        "ip": 37.3,
-        "war": 0.19
-      },
-      "war_gap": -0.37,
-      "innings_share_pct": 0.7
-    },
-    {
       "id": 694346,
       "name": "Trey Gibson",
       "throws": "R",
@@ -997,6 +965,38 @@
       },
       "war_gap": -0.27,
       "innings_share_pct": 2.8
+    },
+    {
+      "id": 682274,
+      "name": "Yaramil Hiraldo",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 8,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "9.1",
+        "ip_value": 9.333,
+        "war": -0.18,
+        "era": 8.68,
+        "fip": 6.63,
+        "k_minus_bb_pct": 6.2
+      },
+      "forecast": {
+        "ip": 38.0,
+        "war": 0.2,
+        "era": 4.03,
+        "fip": 4.13,
+        "k_minus_bb_pct": 15.5,
+        "team_at_fetch": "BAL"
+      },
+      "forecast_to_date": {
+        "ip": 37.3,
+        "war": 0.19
+      },
+      "war_gap": -0.37,
+      "innings_share_pct": 0.7
     },
     {
       "id": 665152,

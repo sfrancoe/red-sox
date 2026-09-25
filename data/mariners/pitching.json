@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T08:11:39.440063+00:00",
+  "generated_at": "2026-09-25T14:10:43.970774+00:00",
   "season": 2026,
   "team": "Seattle Mariners",
   "games_played": 159,
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 13.7,
+    "actual_war": 13.9,
     "forecast_war_to_date": 17.1,
-    "war_gap": -3.4,
-    "innings": 1394.3,
-    "era": 4.2
+    "war_gap": -3.2,
+    "innings": 1403.3,
+    "era": 4.21
   },
   "pitchers": [
     {
@@ -25,16 +25,16 @@
       "name": "Bryan Woo",
       "throws": "R",
       "role": "Starter",
-      "games": 29,
-      "starts": 29,
+      "games": 30,
+      "starts": 30,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "167.2",
-        "ip_value": 167.667,
-        "war": 3.88,
-        "era": 3.92,
-        "fip": 3.27,
+        "ip": "173.0",
+        "ip_value": 173.0,
+        "war": 4.07,
+        "era": 4.01,
+        "fip": 3.24,
         "k_minus_bb_pct": 19.2
       },
       "forecast": {
@@ -49,8 +49,8 @@
         "ip": 191.5,
         "war": 3.25
       },
-      "war_gap": 0.64,
-      "innings_share_pct": 12.0
+      "war_gap": 0.83,
+      "innings_share_pct": 12.3
     },
     {
       "id": 669302,
@@ -82,7 +82,7 @@
         "war": 3.12
       },
       "war_gap": -0.52,
-      "innings_share_pct": 13.1
+      "innings_share_pct": 13.0
     },
     {
       "id": 669923,
@@ -114,7 +114,7 @@
         "war": 3.11
       },
       "war_gap": -0.61,
-      "innings_share_pct": 12.5
+      "innings_share_pct": 12.4
     },
     {
       "id": 676106,
@@ -178,7 +178,7 @@
         "war": 1.36
       },
       "war_gap": -0.48,
-      "innings_share_pct": 8.1
+      "innings_share_pct": 8.0
     },
     {
       "id": 662253,
@@ -283,7 +283,7 @@
         "ip_value": 16.667,
         "war": 0.32,
         "era": 0.54,
-        "fip": 2.92,
+        "fip": 2.91,
         "k_minus_bb_pct": 14.1
       },
       "forecast": {
@@ -298,7 +298,7 @@
         "ip": 61.8,
         "war": 0.64
       },
-      "war_gap": -0.33,
+      "war_gap": -0.32,
       "innings_share_pct": 1.2
     },
     {
@@ -313,7 +313,7 @@
       "actual": {
         "ip": "28.0",
         "ip_value": 28.0,
-        "war": 0.29,
+        "war": 0.3,
         "era": 5.79,
         "fip": 2.88,
         "k_minus_bb_pct": 18.7
@@ -332,38 +332,6 @@
       },
       "war_gap": 0.34,
       "innings_share_pct": 2.0
-    },
-    {
-      "id": 681867,
-      "name": "Cooper Criswell",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 35,
-      "starts": 0,
-      "saves": 1,
-      "holds": 3,
-      "actual": {
-        "ip": "38.2",
-        "ip_value": 38.667,
-        "war": 0.24,
-        "era": 3.26,
-        "fip": 3.59,
-        "k_minus_bb_pct": 11.2
-      },
-      "forecast": {
-        "ip": 72.0,
-        "war": 0.25,
-        "era": 3.81,
-        "fip": 3.96,
-        "k_minus_bb_pct": 13.1,
-        "team_at_fetch": "SEA"
-      },
-      "forecast_to_date": {
-        "ip": 70.6,
-        "war": 0.25
-      },
-      "war_gap": -0.01,
-      "innings_share_pct": 2.8
     },
     {
       "id": 642100,
@@ -398,6 +366,38 @@
       "innings_share_pct": 3.2
     },
     {
+      "id": 681867,
+      "name": "Cooper Criswell",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 36,
+      "starts": 0,
+      "saves": 1,
+      "holds": 3,
+      "actual": {
+        "ip": "39.2",
+        "ip_value": 39.667,
+        "war": 0.18,
+        "era": 3.4,
+        "fip": 3.73,
+        "k_minus_bb_pct": 9.6
+      },
+      "forecast": {
+        "ip": 72.0,
+        "war": 0.25,
+        "era": 3.81,
+        "fip": 3.96,
+        "k_minus_bb_pct": 13.1,
+        "team_at_fetch": "SEA"
+      },
+      "forecast_to_date": {
+        "ip": 70.6,
+        "war": 0.25
+      },
+      "war_gap": -0.07,
+      "innings_share_pct": 2.8
+    },
+    {
       "id": 668984,
       "name": "Casey Legumina",
       "throws": "R",
@@ -411,7 +411,7 @@
         "ip_value": 11.667,
         "war": 0.15,
         "era": 4.63,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 11.3
       },
       "forecast": {
@@ -475,7 +475,7 @@
         "ip_value": 17.333,
         "war": 0.06,
         "era": 5.19,
-        "fip": 3.85,
+        "fip": 3.84,
         "k_minus_bb_pct": 18.7
       },
       "forecast": {
@@ -498,16 +498,16 @@
       "name": "Michael Rucker",
       "throws": "R",
       "role": "Reliever",
-      "games": 35,
+      "games": 36,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "40.1",
-        "ip_value": 40.333,
-        "war": 0.03,
-        "era": 6.02,
-        "fip": 4.06,
+        "ip": "42.0",
+        "ip_value": 42.0,
+        "war": 0.05,
+        "era": 5.79,
+        "fip": 4.0,
         "k_minus_bb_pct": 17.3
       },
       "forecast": {
@@ -522,8 +522,40 @@
         "ip": 1.0,
         "war": 0.0
       },
-      "war_gap": 0.03,
-      "innings_share_pct": 2.9
+      "war_gap": 0.05,
+      "innings_share_pct": 3.0
+    },
+    {
+      "id": 571948,
+      "name": "Hoby Milner",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 5,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "4.1",
+        "ip_value": 4.333,
+        "war": 0.01,
+        "era": 6.23,
+        "fip": 4.02,
+        "k_minus_bb_pct": 25.0
+      },
+      "forecast": {
+        "ip": 60.0,
+        "war": 0.18,
+        "era": 3.79,
+        "fip": 3.98,
+        "k_minus_bb_pct": 12.2,
+        "team_at_fetch": "SEA"
+      },
+      "forecast_to_date": {
+        "ip": 58.9,
+        "war": 0.18
+      },
+      "war_gap": -0.16,
+      "innings_share_pct": 0.3
     },
     {
       "id": 642215,
@@ -539,7 +571,7 @@
         "ip_value": 1.0,
         "war": 0.01,
         "era": 27.0,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -596,7 +628,7 @@
         "ip_value": 27.0,
         "war": -0.0,
         "era": 4.0,
-        "fip": 4.1,
+        "fip": 4.09,
         "k_minus_bb_pct": 8.9
       },
       "forecast": {
@@ -628,7 +660,7 @@
         "ip_value": 2.0,
         "war": -0.01,
         "era": 4.5,
-        "fip": 4.6,
+        "fip": 4.59,
         "k_minus_bb_pct": 9.1
       },
       "forecast": {
@@ -660,7 +692,7 @@
         "ip_value": 1.0,
         "war": -0.01,
         "era": 27.0,
-        "fip": 6.1,
+        "fip": 6.09,
         "k_minus_bb_pct": -11.1
       },
       "forecast": null,
@@ -670,38 +702,6 @@
       },
       "war_gap": -0.01,
       "innings_share_pct": 0.1
-    },
-    {
-      "id": 571948,
-      "name": "Hoby Milner",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 4,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "3.1",
-        "ip_value": 3.333,
-        "war": -0.03,
-        "era": 8.1,
-        "fip": 6.1,
-        "k_minus_bb_pct": 12.5
-      },
-      "forecast": {
-        "ip": 60.0,
-        "war": 0.18,
-        "era": 3.79,
-        "fip": 3.98,
-        "k_minus_bb_pct": 12.2,
-        "team_at_fetch": "SEA"
-      },
-      "forecast_to_date": {
-        "ip": 58.9,
-        "war": 0.18
-      },
-      "war_gap": -0.21,
-      "innings_share_pct": 0.2
     },
     {
       "id": 682445,
@@ -749,7 +749,7 @@
         "ip_value": 0.333,
         "war": -0.06,
         "era": 54.0,
-        "fip": 42.1,
+        "fip": 42.09,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -774,7 +774,7 @@
         "ip_value": 1.333,
         "war": -0.06,
         "era": 6.75,
-        "fip": 11.35,
+        "fip": 11.34,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -806,7 +806,7 @@
         "ip_value": 1.0,
         "war": -0.08,
         "era": 63.0,
-        "fip": 19.1,
+        "fip": 19.09,
         "k_minus_bb_pct": -7.7
       },
       "forecast": null,
@@ -847,7 +847,7 @@
         "war": -0.0
       },
       "war_gap": -0.17,
-      "innings_share_pct": 2.0
+      "innings_share_pct": 1.9
     },
     {
       "id": 681006,
@@ -863,7 +863,7 @@
         "ip_value": 7.333,
         "war": -0.4,
         "era": 9.82,
-        "fip": 9.51,
+        "fip": 9.5,
         "k_minus_bb_pct": 15.8
       },
       "forecast": {

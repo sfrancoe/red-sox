@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T13:47:57.187441+00:00",
+  "generated_at": "2026-09-25T14:10:39.186782+00:00",
   "season": 2026,
   "team": "Detroit Tigers",
   "games_played": 159,
@@ -128,7 +128,7 @@
       "actual": {
         "ip": "174.0",
         "ip_value": 174.0,
-        "war": 1.97,
+        "war": 1.96,
         "era": 4.03,
         "fip": 4.14,
         "k_minus_bb_pct": 9.0
@@ -177,7 +177,7 @@
         "ip": 52.3,
         "war": 0.45
       },
-      "war_gap": 1.13,
+      "war_gap": 1.14,
       "innings_share_pct": 8.1
     },
     {
@@ -384,9 +384,9 @@
       "actual": {
         "ip": "26.2",
         "ip_value": 26.667,
-        "war": 0.33,
+        "war": 0.34,
         "era": 6.08,
-        "fip": 3.4,
+        "fip": 3.39,
         "k_minus_bb_pct": 14.7
       },
       "forecast": {
@@ -514,7 +514,7 @@
         "ip_value": 3.0,
         "war": 0.1,
         "era": 0.0,
-        "fip": 2.1,
+        "fip": 2.09,
         "k_minus_bb_pct": 16.7
       },
       "forecast": {
@@ -674,7 +674,7 @@
         "ip_value": 2.333,
         "war": 0.02,
         "era": 0.0,
-        "fip": 3.1,
+        "fip": 3.09,
         "k_minus_bb_pct": 16.7
       },
       "forecast": null,
@@ -814,6 +814,31 @@
       "innings_share_pct": 0.3
     },
     {
+      "id": 656716,
+      "name": "Zach McKinstry",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 2,
+      "starts": 0,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "2.0",
+        "ip_value": 2.0,
+        "war": -0.14,
+        "era": 18.0,
+        "fip": 18.59,
+        "k_minus_bb_pct": -33.3
+      },
+      "forecast": null,
+      "forecast_to_date": {
+        "ip": 0.0,
+        "war": 0.0
+      },
+      "war_gap": -0.14,
+      "innings_share_pct": 0.1
+    },
+    {
       "id": 621097,
       "name": "Jacob Waguespack",
       "throws": "R",
@@ -825,7 +850,7 @@
       "actual": {
         "ip": "45.2",
         "ip_value": 45.667,
-        "war": -0.14,
+        "war": -0.15,
         "era": 2.56,
         "fip": 4.67,
         "k_minus_bb_pct": 8.5
@@ -844,31 +869,6 @@
       },
       "war_gap": -0.15,
       "innings_share_pct": 3.2
-    },
-    {
-      "id": 656716,
-      "name": "Zach McKinstry",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 2,
-      "starts": 0,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "2.0",
-        "ip_value": 2.0,
-        "war": -0.14,
-        "era": 18.0,
-        "fip": 18.6,
-        "k_minus_bb_pct": -33.3
-      },
-      "forecast": null,
-      "forecast_to_date": {
-        "ip": 0.0,
-        "war": 0.0
-      },
-      "war_gap": -0.14,
-      "innings_share_pct": 0.1
     },
     {
       "id": 676568,
