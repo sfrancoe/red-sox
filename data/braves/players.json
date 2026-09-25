@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-24T14:26:38.399240+00:00",
-  "roster_as_of": "September 23, 2026",
+  "generated_at": "2026-09-25T14:49:33.696062+00:00",
+  "roster_as_of": "September 25, 2026",
   "team": {
     "id": 144,
     "name": "Atlanta Braves"
   },
   "roster_type": "open-current-roster",
-  "player_count": 45,
+  "player_count": 46,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -645,6 +645,88 @@
           "complete_games": 0,
           "era": 5.48,
           "whip": 1.379
+        }
+      }
+    },
+    {
+      "id": 622694,
+      "mlb_id": 622694,
+      "wikidata_id": "Q50807865",
+      "slug": "elieser-hernandez",
+      "name": "Elieser Hernández",
+      "full_name": "Elieser Hernández",
+      "number": "57",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1995-05-03",
+      "age": 31,
+      "birthplace": "Santa Teresa del Tuy",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "May 11, 2018",
+      "debut_team": "Miami Marlins",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Miami Marlins",
+        "Los Angeles Dodgers",
+        "Milwaukee Brewers",
+        "LG Twins",
+        "Atlanta Braves"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q50807865",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Elieser_Hern%C3%A1ndez",
+      "retrosheet_id": "herne002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 99,
+          "plate_appearances": 53,
+          "at_bats": 44,
+          "runs": 1,
+          "hits": 2,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 1,
+          "strikeouts": 24,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.045,
+          "on_base_percentage": 0.067,
+          "slugging_percentage": 0.045,
+          "ops": 0.112
+        },
+        "pitching": {
+          "games": 99,
+          "games_started": 49,
+          "wins": 10,
+          "losses": 22,
+          "saves": 0,
+          "innings_outs": 910,
+          "hits": 300,
+          "runs": 182,
+          "earned_runs": 172,
+          "home_runs": 73,
+          "walks": 99,
+          "strikeouts": 285,
+          "hit_batters": 20,
+          "wild_pitches": 7,
+          "balks": 2,
+          "complete_games": 0,
+          "era": 5.1,
+          "whip": 1.315
         }
       }
     },
@@ -2080,8 +2162,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1991-04-04",
       "age": 35,
       "birthplace": "Guanare",
@@ -3065,7 +3147,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "60-day injured list",
       "is_active_roster": false,
       "birth_date": "2002-03-01",
       "age": 24,

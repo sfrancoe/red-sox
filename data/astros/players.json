@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-24T14:23:30.245115+00:00",
-  "roster_as_of": "September 23, 2026",
+  "generated_at": "2026-09-25T14:46:27.583079+00:00",
+  "roster_as_of": "September 24, 2026",
   "team": {
     "id": 117,
     "name": "Houston Astros"
@@ -95,90 +95,6 @@
           "complete_games": 0,
           "era": 2.65,
           "whip": 1.174
-        }
-      }
-    },
-    {
-      "id": 669920,
-      "mlb_id": 669920,
-      "wikidata_id": "Q112578047",
-      "slug": "jason-alexander",
-      "name": "Jason Alexander",
-      "full_name": "Jason Alexander",
-      "number": "54",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1993-03-01",
-      "age": 33,
-      "birthplace": "Windsor, California, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "June 1, 2022",
-      "debut_team": "Milwaukee Brewers",
-      "education": {
-        "high_schools": [],
-        "colleges": [
-          {
-            "name": "Cardinal Newman High School"
-          }
-        ]
-      },
-      "teams": [
-        "Milwaukee Brewers",
-        "Athletics",
-        "Houston Astros"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q112578047",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Jason_Alexander_%28baseball%29",
-      "retrosheet_id": "alexj001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 36,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 36,
-          "games_started": 24,
-          "wins": 6,
-          "losses": 5,
-          "saves": 1,
-          "innings_outs": 447,
-          "hits": 168,
-          "runs": 92,
-          "earned_runs": 84,
-          "home_runs": 27,
-          "walks": 54,
-          "strikeouts": 111,
-          "hit_batters": 7,
-          "wild_pitches": 2,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 5.07,
-          "whip": 1.49
         }
       }
     },
@@ -361,6 +277,66 @@
           "on_base_percentage": 0.389,
           "slugging_percentage": 0.573,
           "ops": 0.962
+        },
+        "pitching": null
+      }
+    },
+    {
+      "id": 678489,
+      "mlb_id": 678489,
+      "wikidata_id": "Q125274191",
+      "slug": "jorge-barrosa",
+      "name": "Jorge Barrosa",
+      "full_name": "Jorge Barrosa",
+      "number": "--",
+      "position": {
+        "name": "Outfielder",
+        "group": "Outfielder",
+        "abbreviation": "CF"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "2001-02-17",
+      "age": 25,
+      "birthplace": "Puerto Cabello, Venezuela",
+      "height": null,
+      "weight": null,
+      "bats": "Switch",
+      "throws": "Left",
+      "debut_date": "April 1, 2024",
+      "debut_team": "Arizona Diamondbacks",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Arizona Diamondbacks",
+        "Houston Astros"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q125274191",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jorge_Barrosa",
+      "retrosheet_id": "barrj004",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 41,
+          "plate_appearances": 95,
+          "at_bats": 88,
+          "runs": 11,
+          "hits": 13,
+          "doubles": 5,
+          "triples": 0,
+          "home_runs": 1,
+          "runs_batted_in": 8,
+          "walks": 2,
+          "strikeouts": 24,
+          "stolen_bases": 1,
+          "caught_stealing": 0,
+          "average": 0.148,
+          "on_base_percentage": 0.17,
+          "slugging_percentage": 0.239,
+          "ops": 0.409
         },
         "pitching": null
       }
@@ -2507,8 +2483,8 @@
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Injured list",
+      "is_active_roster": false,
       "birth_date": "1996-07-02",
       "age": 30,
       "birthplace": "Chili",

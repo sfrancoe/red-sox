@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-24T14:18:16.121952+00:00",
-  "roster_as_of": "September 23, 2026",
+  "generated_at": "2026-09-25T14:41:17.595277+00:00",
+  "roster_as_of": "September 24, 2026",
   "team": {
     "id": 139,
     "name": "Tampa Bay Rays"
   },
   "roster_type": "open-current-roster",
-  "player_count": 45,
+  "player_count": 46,
   "active_count": 28,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
@@ -680,8 +680,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1999-11-01",
       "age": 26,
       "birthplace": "Forney",
@@ -1151,7 +1151,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "2001-09-25",
-      "age": 24,
+      "age": 25,
       "birthplace": "Rockwall, Texas, U.S.",
       "height": null,
       "weight": null,
@@ -3147,6 +3147,90 @@
           "ops": 0.604
         },
         "pitching": null
+      }
+    },
+    {
+      "id": 663765,
+      "mlb_id": 663765,
+      "wikidata_id": "Q98439563",
+      "slug": "jake-woodford",
+      "name": "Jake Woodford",
+      "full_name": "Jake Woodford",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1996-10-28",
+      "age": 29,
+      "birthplace": "St. Petersburg",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 15, 2020",
+      "debut_team": "St. Louis Cardinals",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "St. Louis Cardinals",
+        "Chicago White Sox",
+        "Pittsburgh Pirates",
+        "Arizona Diamondbacks",
+        "Milwaukee Brewers",
+        "Chicago Cubs",
+        "Tampa Bay Rays"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q98439563",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Jake_Woodford",
+      "retrosheet_id": "woodj003",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 111,
+          "plate_appearances": 20,
+          "at_bats": 18,
+          "runs": 0,
+          "hits": 2,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 9,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": 0.111,
+          "on_base_percentage": 0.111,
+          "slugging_percentage": 0.111,
+          "ops": 0.222
+        },
+        "pitching": {
+          "games": 111,
+          "games_started": 25,
+          "wins": 10,
+          "losses": 17,
+          "saves": 3,
+          "innings_outs": 768,
+          "hits": 283,
+          "runs": 157,
+          "earned_runs": 145,
+          "home_runs": 35,
+          "walks": 85,
+          "strikeouts": 168,
+          "hit_batters": 18,
+          "wild_pitches": 12,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 5.1,
+          "whip": 1.438
+        }
       }
     }
   ]
