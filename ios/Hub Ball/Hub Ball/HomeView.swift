@@ -1,6 +1,7 @@
 import SwiftUI
 
 enum HomeDestination {
+    case october
     case games
     case schedule
     case standings
@@ -10,6 +11,7 @@ struct HomeView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @AppStorage("october.homeInvitationDismissed") private var octoberInvitationDismissed = false
     @State private var store: HomeStore
     let team: HubTeam
     let onSelect: (HomeDestination) -> Void
@@ -25,6 +27,9 @@ struct HomeView: View {
             AppColor.paleRed.ignoresSafeArea()
             VStack(spacing: 0) {
                 homeMasthead
+                if OctoberFeature.homeInvitationEnabled && !octoberInvitationDismissed {
+                    octoberInvitation
+                }
                 Group {
                     if store.recentGame != nil, store.schedule != nil {
                         briefing
@@ -40,6 +45,45 @@ struct HomeView: View {
             }
         }
         .task { await store.load() }
+    }
+
+    private var octoberInvitation: some View {
+        HStack(spacing: 10) {
+            Button { onSelect(.october) } label: {
+                HStack(spacing: 10) {
+                    Image(systemName: "sparkles")
+                        .foregroundStyle(AppColor.amber)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("October is here. Pick a side.")
+                            .font(AppFont.bodySmall.weight(.semibold))
+                            .foregroundStyle(AppColor.bone)
+                        Text("Follow the whole MLB field.")
+                            .font(AppFont.label)
+                            .foregroundStyle(AppColor.boneMuted)
+                    }
+                    Spacer(minLength: 8)
+                    Image(systemName: "arrow.right")
+                        .foregroundStyle(AppColor.bone)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint("Opens the MLB-wide October experience. Your favorite team does not change.")
+
+            Button { octoberInvitationDismissed = true } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(AppColor.boneMuted)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Dismiss October invitation")
+        }
+        .padding(.leading, 14)
+        .padding(.trailing, 4)
+        .background(AppColor.nightRaised)
+        .overlay(alignment: .leading) { Rectangle().fill(AppColor.amber).frame(width: 3) }
     }
 
     private var homeMasthead: some View {

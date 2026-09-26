@@ -2,6 +2,7 @@ import SwiftUI
 
 enum MainTab: String, CaseIterable {
     case home
+    case october
     case recent
     case standings
     case schedule
@@ -15,6 +16,7 @@ enum MainTab: String, CaseIterable {
     var title: String {
         switch self {
         case .home: "Home"
+        case .october: "October"
         case .recent: "Game Recaps"
         case .schedule: "Schedule"
         case .headlines: "Newspapers"
@@ -33,13 +35,16 @@ enum MainTab: String, CaseIterable {
 
     static func ordered(from storedValue: String) -> [MainTab] {
         var seen = Set<MainTab>()
-        let storedTabs = storedValue
+        let savedTabs = storedValue
             .split(separator: ",")
             .compactMap { MainTab(rawValue: String($0)) }
             .filter { seen.insert($0).inserted }
-        let completeOrder = storedTabs + allCases.filter { !seen.contains($0) }
-
-        return [.home] + completeOrder.filter { $0 != .home }
+        let completeOrder = savedTabs + allCases.filter { !seen.contains($0) }
+        var migratedOrder = [.home] + completeOrder.filter { $0 != .home }
+        if !savedTabs.contains(.october) {
+            migratedOrder.insert(.october, at: 1)
+        }
+        return migratedOrder
     }
 }
 
@@ -69,6 +74,7 @@ struct AppTabView: View {
         MainTab.ordered(from: storedPageOrder).filter { tab in
             switch tab {
             case .home: team.supportsHome
+            case .october: OctoberFeature.enabled
             case .players: team.supportsPlayers
             default: true
             }
@@ -100,7 +106,10 @@ struct AppTabView: View {
             guard !hasAppeared else { return }
             #if DEBUG
             let arguments = ProcessInfo.processInfo.arguments
-            if arguments.contains("-show-stories"), team.hasPublishedStories {
+            if arguments.contains("-show-october") {
+                completedTeamOnboarding = true
+                selectedTab = .october
+            } else if arguments.contains("-show-stories"), team.hasPublishedStories {
                 selectedTab = .stories
             } else if arguments.contains("-show-recent") {
                 selectedTab = .recent
@@ -190,12 +199,16 @@ struct AppTabView: View {
         case .home:
                 HomeView(team: team) { destination in
                     switch destination {
+                    case .october: selectedTab = .october
                     case .games: selectedTab = .recent
                     case .schedule: selectedTab = .schedule
                     case .standings: selectedTab = .standings
                     }
                 }
                 .mainTabSwipe(selection: $selectedTab, current: .home, availableTabs: availableTabs)
+        case .october:
+                OctoberView()
+                    .mainTabSwipe(selection: $selectedTab, current: .october, availableTabs: availableTabs)
         case .recent:
                 RecentGameView(team: team, onSelectPlayer: showPlayer)
                     .mainTabSwipe(selection: $selectedTab, current: .recent, availableTabs: availableTabs)

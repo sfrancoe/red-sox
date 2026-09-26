@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1b2b">
+  <title>October — Hub Ball</title>
+  <style>
+    @font-face{font-family:Anton;src:url('/assets/fonts/anton-400.woff2') format('woff2');font-display:swap}
+    @font-face{font-family:Oswald;src:url('/assets/fonts/oswald-500.woff2') format('woff2');font-display:swap}
+    *{box-sizing:border-box}body{margin:0;background:#0b1b2b;color:#f5f2ea;font:17px/1.55 system-ui,-apple-system,sans-serif}
+    main{min-height:100svh;max-width:940px;margin:auto;padding:clamp(24px,7vw,76px) clamp(20px,6vw,64px);display:flex;flex-direction:column;justify-content:center}
+    .eyebrow{font:14px Oswald,sans-serif;letter-spacing:.18em;color:#e8a33d}.hero{margin:8px 0 0;font:clamp(56px,12vw,122px)/.91 Anton,sans-serif;letter-spacing:.01em;text-transform:uppercase}
+    .lede{max-width:620px;color:#c3d0da;font-size:clamp(18px,3vw,23px);margin:22px 0 30px}.route{height:88px;max-width:600px;margin:0 0 18px}
+    .route svg{width:100%;height:100%;overflow:visible}.section{border-top:1px solid #26415a;padding:20px 0;max-width:650px}
+    h2{font:25px Oswald,sans-serif;letter-spacing:.05em;margin:0 0 8px}.section p{margin:0;color:#c3d0da}.beta{margin-top:26px;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 20px;background:#e8a33d;color:#0b1b2b;text-decoration:none;font-weight:800;letter-spacing:.02em;width:max-content}
+    .beta[aria-disabled="true"]{background:#22405c;color:#a9bece;cursor:default}.small{font-size:14px;color:#7c93a8;max-width:650px;margin-top:14px}
+    @media(prefers-reduced-motion:no-preference){.path{stroke-dasharray:700;stroke-dashoffset:700;animation:draw 1.05s ease-out forwards}@keyframes draw{to{stroke-dashoffset:0}}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">HUB BALL PRESENTS</div>
+    <h1 class="hero">October<br>has a path.</h1>
+    <p class="lede">Twelve teams. One ending. Follow the field, see what is at stake tonight, and put your name on a series call.</p>
+    <div class="route" aria-hidden="true">
+      <svg viewBox="0 0 620 88" role="presentation">
+        <path class="path" d="M4 68 C110 8 158 78 254 40 S412 8 526 42 L598 22" fill="none" stroke="#e8a33d" stroke-width="3" stroke-linecap="round"/>
+        <g fill="#0b1b2b" stroke="#f5f2ea" stroke-width="2"><circle cx="42" cy="53" r="6"/><circle cx="139" cy="48" r="6"/><circle cx="238" cy="45" r="6"/><circle cx="337" cy="27" r="6"/><circle cx="439" cy="28" r="6"/></g>
+        <circle cx="598" cy="22" r="9" fill="#e8a33d"/><path d="M598 3v-9m17 28h9m-38 0h-9m34-12 7-7m-28 28-7 7" stroke="#e8a33d" stroke-width="2"/>
+      </svg>
+    </div>
+    <section class="section">
+      <h2>Pick a side. Keep the favorite you have.</h2>
+      <p>October is an MLB-wide experience. Watch the whole bracket, choose a team to root for, and make a separate prediction. Your regular Hub Ball team stays unchanged.</p>
+    </section>
+    <section class="section">
+      <h2>A call worth sending.</h2>
+      <p>Choose a series winner and length. Share a ticket with the call, round, date, and Hub Ball on it. Your pick stays on your device; the group chat is where the argument continues.</p>
+    </section>
+    <div class="beta" id="beta" aria-disabled="true">Internal TestFlight preview · Invite required</div>
+    <p class="small" id="beta-note">Hub Ball is currently limited to approved internal testers; public TestFlight enrollment is not enabled. Approved testers install and update through their TestFlight invitation, then open October from the app navigation.</p>
+  </main>
+</body>
+</html>

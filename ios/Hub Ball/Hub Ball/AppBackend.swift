@@ -48,4 +48,14 @@ enum AppBackend {
             .appending(path: endpoint)
         return url.appending(queryItems: [URLQueryItem(name: "team", value: team.apiKey)])
     }
+
+    nonisolated static func sharedAPIURL(_ endpoint: String) -> URL {
+#if DEBUG
+        if let value = ProcessInfo.processInfo.environment["HUB_API_ROOT"],
+           let override = URL(string: value) {
+            return override.appending(path: "api").appending(path: endpoint)
+        }
+#endif
+        return origin.appending(path: "api").appending(path: endpoint)
+    }
 }
