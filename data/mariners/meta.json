@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-25T15:56:06+00:00",
+ "generated_at": "2026-09-26T15:07:43+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 136,
  "seasons": {
   "2026": {
-   "record": "74-85",
-   "games": 159,
+   "record": "74-86",
+   "games": 160,
    "in_progress": true,
    "war_leader": {
     "name": "Randy Arozarena",
-    "war": 5.5
+    "war": 5.6
    },
    "war_leaders": [
     {
      "name": "Randy Arozarena",
-     "war": 5.5
+     "war": 5.6
     },
     {
      "name": "Cole Young",
-     "war": 4.3
+     "war": 4.2
     },
     {
      "name": "Julio Rodr\u00edguez",
-     "war": 3.1
+     "war": 3.0
     }
    ],
    "pitching_leaders": {
@@ -61,27 +61,28 @@
       },
       {
        "name": "Dominic Canzone",
-       "value": 22
+       "value": 23
       }
      ]
     },
     "rbi": {
      "names": [
+      "Dominic Canzone",
       "Randy Arozarena"
      ],
-     "value": 76,
+     "value": 77,
      "top": [
       {
-       "name": "Randy Arozarena",
-       "value": 76
+       "name": "Dominic Canzone",
+       "value": 77
       },
       {
-       "name": "Dominic Canzone",
-       "value": 75
+       "name": "Randy Arozarena",
+       "value": 77
       },
       {
        "name": "Julio Rodr\u00edguez",
-       "value": 70
+       "value": 71
       }
      ]
     },
@@ -89,19 +90,19 @@
      "names": [
       "Randy Arozarena"
      ],
-     "value": ".279",
+     "value": ".280",
      "top": [
       {
        "name": "Randy Arozarena",
-       "value": ".279"
-      },
-      {
-       "name": "Josh Naylor",
-       "value": ".265"
+       "value": ".280"
       },
       {
        "name": "Dominic Canzone",
-       "value": ".260"
+       "value": ".264"
+      },
+      {
+       "name": "Josh Naylor",
+       "value": ".263"
       }
      ]
     },
@@ -109,19 +110,19 @@
      "names": [
       "Randy Arozarena"
      ],
-     "value": ".859",
+     "value": ".862",
      "top": [
       {
        "name": "Randy Arozarena",
-       "value": ".859"
+       "value": ".862"
       },
       {
        "name": "Dominic Canzone",
-       "value": ".807"
+       "value": ".821"
       },
       {
        "name": "Julio Rodr\u00edguez",
-       "value": ".718"
+       "value": ".714"
       }
      ]
     }
