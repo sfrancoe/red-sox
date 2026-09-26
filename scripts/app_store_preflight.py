@@ -38,6 +38,7 @@ KNOWN_ENDPOINTS = {
     "https://red-sox.netlify.app/api/hr-chase",
     "https://red-sox.netlify.app/api/mlb/schedule?team=red-sox",
     "https://red-sox.netlify.app/api/mlb/standings?team=redsox",
+    "https://red-sox.netlify.app/api/postseason?season=2026",
     "https://red-sox.netlify.app/api/data/athletic.json",
     "https://red-sox.netlify.app/api/data/globe.json",
     "https://red-sox.netlify.app/api/data/herald.json",
@@ -56,6 +57,7 @@ EDITORIAL_LINKS = {
     "https://www.mlb.com/gameday/824708",
     "https://x.com/gingersnaphyde/status/2099245461748002821",
 }
+PUBLIC_WEB_PAGES = {"https://red-sox.netlify.app/october/"}
 JSON_PROBE_OVERRIDES = {
     "https://red-sox.netlify.app": "https://red-sox.netlify.app/api/data/meta.json",
     "https://statsapi.mlb.com": "https://statsapi.mlb.com/api/v1/teams/111",
@@ -265,7 +267,9 @@ def check_transport_security() -> Check:
 
 
 def fetch_url(url: str, fallback: bool = False) -> tuple[int, bytes]:
-    headers = {"Accept": "text/html" if url in EDITORIAL_LINKS else "application/json"}
+    headers = {
+        "Accept": "text/html" if url in EDITORIAL_LINKS or url in PUBLIC_WEB_PAGES else "application/json"
+    }
     if fallback:
         headers["User-Agent"] = FALLBACK_USER_AGENT
     request = urllib.request.Request(url, headers=headers)
@@ -298,6 +302,11 @@ def check_live_endpoints() -> list[Check]:
         if url in EDITORIAL_LINKS:
             valid_html = b"<html" in payload.lower() and b"<title" in payload.lower()
             checks.append(result("PASS" if valid_html else "FAIL", "Editorial source link",
+                                 f"HTTP {status}: {url}" if valid_html else f"{url}: expected an HTML page"))
+            continue
+        if url in PUBLIC_WEB_PAGES:
+            valid_html = b"<html" in payload.lower() and b"<title" in payload.lower()
+            checks.append(result("PASS" if valid_html else "FAIL", "Public web page",
                                  f"HTTP {status}: {url}" if valid_html else f"{url}: expected an HTML page"))
             continue
         try:
