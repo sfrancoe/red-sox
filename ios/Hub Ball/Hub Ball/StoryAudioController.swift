@@ -2,12 +2,20 @@ import AVFoundation
 import Observation
 import OSLog
 
-/// A quiet, locally synthesized eight-second pad. No files, downloads, or services.
+/// A quiet, locally synthesized sixteen-second melody. No files, downloads, or services.
 @MainActor @Observable
 final class StoryAudioController {
     private(set) var isPlaying = false
     private var player: AVAudioPlayer?
     private var loopData: Data?
+
+    init() {
+        // Render before the listener taps Play so the longer melody starts promptly.
+        Task.detached(priority: .utility) { [weak self] in
+            let sound = StoryAudioLoop.makeData()
+            await MainActor.run { self?.loopData = sound }
+        }
+    }
 
     @discardableResult
     func start() -> Bool {
