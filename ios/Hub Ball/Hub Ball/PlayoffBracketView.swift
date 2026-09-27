@@ -3,11 +3,13 @@ import SwiftUI
 struct PlayoffBracketView: View {
     let payload: PostseasonPayload
     let onSelect: (PostseasonSeries) -> Void
-    @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 88.0
-    @ScaledMetric(relativeTo: .caption) private var cardHeight = 76.0
+    @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
+    @ScaledMetric(relativeTo: .caption) private var cardHeight = 68.0
     @ScaledMetric(relativeTo: .caption) private var nameSize = 12.0
     private let columnSpacing = 10.0
-    private let rowSpacing = 14.0
+    private let rowSpacing = 8.0
+    private let leagueRailWidth = 18.0
+    private let leagueRailSpacing = 4.0
 
     private func series(_ slot: PlayoffBracketSlot) -> PostseasonSeries? {
         payload.series.first { $0.id == slot.seriesID(season: payload.season) }
@@ -15,26 +17,19 @@ struct PlayoffBracketView: View {
 
     var body: some View {
         GeometryReader { bounds in
-            let width = max(bounds.size.width - 32, minimumCardWidth * 3 + columnSpacing * 2)
+            let bracketWidth = max(
+                bounds.size.width - 20 - leagueRailWidth - leagueRailSpacing,
+                minimumCardWidth * 3 + columnSpacing * 2
+            )
+            let contentWidth = bracketWidth + leagueRailWidth + leagueRailSpacing
             ScrollView([.horizontal, .vertical]) {
-                VStack(spacing: 30) {
-                    leagueBracket("AL", title: "AMERICAN LEAGUE", color: AppColor.steel, width: width)
-                    worldSeries(width: width)
-                    leagueBracket("NL", title: "NATIONAL LEAGUE", color: AppColor.amber, width: width)
-                    HStack(alignment: .top, spacing: 8) {
-                        Image(systemName: "hand.tap")
-                        Text("Tap a matchup for series details. Numbers are series wins.")
-                    }
-                    .font(AppFont.label)
-                    .foregroundStyle(AppColor.boneDim)
-                    if payload.phase == "field-setting" {
-                        Text("FIELD TAKING SHAPE · Matchups follow MLB’s current schedule. Unsettled places stay open.")
-                            .font(AppFont.label)
-                            .foregroundStyle(AppColor.boneMuted)
-                    }
+                VStack(spacing: 10) {
+                    leagueBracket("AL", title: "AMERICAN LEAGUE", color: AppColor.steel, width: bracketWidth)
+                    worldSeries(width: contentWidth)
+                    leagueBracket("NL", title: "NATIONAL LEAGUE", color: AppColor.amber, width: bracketWidth)
                 }
-                .frame(width: width)
-                .padding(16)
+                .frame(width: contentWidth)
+                .padding(10)
             }
             .defaultScrollAnchor(.topLeading)
             .accessibilityIdentifier("playoffs.bracket")
@@ -69,51 +64,55 @@ struct PlayoffBracketView: View {
         let slots = leagueSlots(league)
         let cell = (width - columnSpacing * 2) / 3
         let bracketHeight = cardHeight * 2 + rowSpacing
-        return VStack(spacing: 12) {
+        return HStack(spacing: leagueRailSpacing) {
             leagueHeading(title, color: color)
-            HStack(spacing: columnSpacing) {
-                roundHeading("WILD CARD").frame(width: cell)
-                roundHeading("DIVISION").frame(width: cell)
-                Color.clear.frame(width: cell, height: 1)
-            }
-            ZStack(alignment: .topLeading) {
-                Canvas { context, _ in
-                    for slot in slots {
-                        guard let destination = slots.first(where: { $0.id == slot.destinationID }) else { continue }
-                        let start = center(slot, width: width)
-                        let end = center(destination, width: width)
-                        let startEdge = CGPoint(x: start.x + cell / 2, y: start.y)
-                        let endEdge = CGPoint(x: end.x - cell / 2, y: end.y)
-                        let elbow = (startEdge.x + endEdge.x) / 2
-                        var path = Path()
-                        path.move(to: startEdge)
-                        path.addLine(to: CGPoint(x: elbow, y: startEdge.y))
-                        path.addLine(to: CGPoint(x: elbow, y: endEdge.y))
-                        path.addLine(to: endEdge)
-                        let confirmed = series(slot)?.winnerTeamId != nil
-                        context.stroke(path, with: .color(confirmed ? AppColor.amber : AppColor.boneMuted.opacity(0.55)), lineWidth: confirmed ? 2 : 1)
+                .frame(width: leagueRailWidth, height: bracketHeight)
+
+            VStack(spacing: 6) {
+                HStack(spacing: columnSpacing) {
+                    roundHeading("WILD CARD").frame(width: cell)
+                    roundHeading("DIVISION").frame(width: cell)
+                    Color.clear.frame(width: cell, height: 1)
+                }
+                ZStack(alignment: .topLeading) {
+                    Canvas { context, _ in
+                        for slot in slots {
+                            guard let destination = slots.first(where: { $0.id == slot.destinationID }) else { continue }
+                            let start = center(slot, width: width)
+                            let end = center(destination, width: width)
+                            let startEdge = CGPoint(x: start.x + cell / 2, y: start.y)
+                            let endEdge = CGPoint(x: end.x - cell / 2, y: end.y)
+                            let elbow = (startEdge.x + endEdge.x) / 2
+                            var path = Path()
+                            path.move(to: startEdge)
+                            path.addLine(to: CGPoint(x: elbow, y: startEdge.y))
+                            path.addLine(to: CGPoint(x: elbow, y: endEdge.y))
+                            path.addLine(to: endEdge)
+                            let confirmed = series(slot)?.winnerTeamId != nil
+                            context.stroke(path, with: .color(confirmed ? AppColor.amber : AppColor.boneMuted.opacity(0.55)), lineWidth: confirmed ? 2 : 1)
+                        }
+                    }
+                    .accessibilityHidden(true)
+
+                    if let championship = slots.first(where: { $0.round == "league-championship" }) {
+                        roundHeading(league == "AL" ? "ALCS" : "NLCS")
+                            .frame(width: cell)
+                            .position(
+                                x: center(championship, width: width).x,
+                                y: center(championship, width: width).y - cardHeight / 2 - 11
+                            )
+                    }
+
+                    ForEach(slots) { slot in
+                        matchup(slot, width: cell)
+                            .frame(width: cell, height: cardHeight)
+                            .position(center(slot, width: width))
                     }
                 }
-                .accessibilityHidden(true)
-
-                if let championship = slots.first(where: { $0.round == "league-championship" }) {
-                    roundHeading(league == "AL" ? "ALCS" : "NLCS")
-                        .frame(width: cell)
-                        .position(
-                            x: center(championship, width: width).x,
-                            y: center(championship, width: width).y - cardHeight / 2 - 14
-                        )
-                }
-
-                ForEach(slots) { slot in
-                    matchup(slot, width: cell)
-                        .frame(width: cell, height: cardHeight)
-                        .position(center(slot, width: width))
-                }
+                .frame(width: width, height: bracketHeight)
             }
-            .frame(width: width, height: bracketHeight)
         }
-        .frame(width: width)
+        .frame(width: width + leagueRailWidth + leagueRailSpacing)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(title) playoff bracket")
     }
@@ -135,7 +134,9 @@ struct PlayoffBracketView: View {
     private func leagueHeading(_ text: String, color: Color) -> some View {
         Text(text).font(.system(size: nameSize, weight: .bold)).tracking(1.5)
             .foregroundStyle(color)
-            .padding(.horizontal, 5).background(AppColor.night)
+            .fixedSize()
+            .rotationEffect(.degrees(-90))
+            .background(AppColor.night)
     }
 
     private func roundHeading(_ text: String) -> some View {

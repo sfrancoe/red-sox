@@ -233,8 +233,7 @@ struct OctoberView: View {
                             historyRanking == .best ? selected.best : selected.worst,
                             payload: payload
                         ),
-                        category: selected,
-                        ranking: historyRanking
+                        category: selected
                     )
                 }
             }
@@ -247,8 +246,7 @@ struct OctoberView: View {
 
     private func historyBoard(
         _ entries: [PostseasonHistoryEntry],
-        category: PostseasonHistoryCategory,
-        ranking: PostseasonHistoryRanking
+        category: PostseasonHistoryCategory
     ) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             if entries.isEmpty {
@@ -288,9 +286,6 @@ struct OctoberView: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 4)
         .background(AppColor.nightRaised)
-        .overlay(alignment: .leading) {
-            Rectangle().fill(ranking == .best ? AppColor.amber : AppColor.steel).frame(width: 3)
-        }
     }
 
     private func filteredHistoryEntries(
