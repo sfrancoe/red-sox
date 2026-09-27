@@ -45,9 +45,25 @@ struct MLB300HitterStory: View {
                                 .font(.caption2).foregroundStyle(HitterStyle.navy.opacity(0.65))
                                 .accessibilityIdentifier("hitter.snapshot")
                         }
-                        TimelineView(.animation(paused: !building)) { _ in
-                            let elapsed = building ? ProcessInfo.processInfo.systemUptime - startedAt : (launched ? MLB300HitterData.duration : 0)
-                            Animated300LineChart(elapsed: elapsed, selectedIndex: $selectedIndex)
+                        ZStack(alignment: .bottom) {
+                            TimelineView(.animation(paused: !building)) { _ in
+                                let elapsed = building ? ProcessInfo.processInfo.systemUptime - startedAt : (launched ? MLB300HitterData.duration : 0)
+                                Animated300LineChart(elapsed: elapsed, selectedIndex: $selectedIndex)
+                            }
+                            Button(action: launch) {
+                                Image(systemName: "play.fill")
+                                    .font(.system(size: 13, weight: .bold))
+                                    .foregroundStyle(.white)
+                                    .frame(width: 32, height: 32)
+                                    .background(HitterStyle.coral, in: Circle())
+                                    .frame(width: 44, height: 44)
+                                    .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel("Replay chart animation")
+                            .accessibilityValue(building ? "Playing" : "Ready")
+                            .accessibilityIdentifier("hitter.replay")
+                            .padding(.bottom, compact ? 22 : 26)
                         }
                         .frame(height: compact ? 220 : 280)
                         yearInspector
@@ -69,16 +85,6 @@ struct MLB300HitterStory: View {
             }
             .safeAreaInset(edge: .top, spacing: 0) {
                 if launched { masthead.padding(.horizontal, 22).background(HitterStyle.paper) }
-            }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                if launched {
-                    controls
-                        .frame(maxWidth: 696, alignment: .leading)
-                        .padding(.horizontal, 22).padding(.vertical, 8)
-                        .frame(maxWidth: .infinity)
-                        .background(HitterStyle.paper)
-                        .overlay(alignment: .top) { Divider() }
-                }
             }
             .foregroundStyle(HitterStyle.navy)
             .tint(HitterStyle.coral)
@@ -129,18 +135,6 @@ struct MLB300HitterStory: View {
         }
         .padding(14)
         .background(HitterStyle.navy.opacity(0.045), in: RoundedRectangle(cornerRadius: 12))
-    }
-
-    private var controls: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Button { launch() } label: {
-                Label("Replay build", systemImage: "arrow.counterclockwise").frame(minHeight: 44)
-            }
-            .buttonStyle(.bordered).accessibilityIdentifier("hitter.replay")
-            Text(building ? "Building · 10 seconds" : MLB300HitterData.endingQuestion)
-                .font(.caption).foregroundStyle(HitterStyle.navy.opacity(0.65))
-                .accessibilityIdentifier(building ? "hitter.building" : "hitter.complete")
-        }
     }
 
     private func launch() {
@@ -207,7 +201,7 @@ private struct StoryLaunchOverlay: View {
                         .background(AppColor.bone.opacity(0.09), in: RoundedRectangle(cornerRadius: 18))
                     }
                     .accessibilityIdentifier("hitter.launch")
-                    Text("10 seconds · 1976–2026 YTD\n2026 snapshot: Sept. 27, before today’s games.\nQualified hitters with a displayed average of .300 or higher.")
+                    Text("5 seconds · 1976–2026 YTD\n2026 snapshot: Sept. 27, before today’s games.\nQualified hitters with a displayed average of .300 or higher.")
                         .font(.caption).foregroundStyle(AppColor.bone.opacity(0.65))
                 }
                 .padding(28).padding(.top, 60)
@@ -352,7 +346,7 @@ private struct Animated300LineChart: View {
                             .position(points[index])
                     }
                 }
-                if elapsed >= 5 {
+                if elapsed >= MLB300HitterData.duration / 2 {
                     callout("\(String(MLB300HitterData.peak.year)) · \(MLB300HitterData.peak.count) players", color: HitterStyle.coral)
                         .position(x: points[MLB300HitterData.peakIndex].x, y: points[MLB300HitterData.peakIndex].y - 23)
                 }

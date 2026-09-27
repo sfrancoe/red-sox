@@ -67,11 +67,10 @@ final class LargeTextUITests: XCTestCase {
 
     private func revealHitter(_ element: XCUIElement) -> Bool {
         for _ in 0..<20 {
-            let footer = app.buttons["hitter.replay"]
             let close = app.buttons["hitter.close"]
             let upper = close.exists ? close.frame.maxY : app.frame.minY + 60
-            let lower = footer.exists ? footer.frame.minY - 8 : app.frame.maxY - 30
-            let isFixed = ["hitter.replay", "hitter.close"].contains(element.identifier)
+            let lower = app.frame.maxY - 30
+            let isFixed = element.identifier == "hitter.close"
             // SwiftUI can report an offscreen scroll child as hittable underneath
             // a safe-area bar. Check its actual tap center before interacting.
             if element.exists && element.isHittable && (isFixed || (element.frame.midY > upper && element.frame.midY < lower)) { return true }
@@ -83,6 +82,14 @@ final class LargeTextUITests: XCTestCase {
         return false
     }
 
+    private func waitForReplay(_ value: String, timeout: TimeInterval = 8) -> Bool {
+        let replay = app.buttons["hitter.replay"]
+        guard replay.waitForExistence(timeout: 5) else { return false }
+        let expected = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "value == %@", value), object: replay)
+        return XCTWaiter.wait(for: [expected], timeout: timeout) == .completed
+    }
+
     func testHitterStoryPlaybackAndAllSeasons() {
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
         XCTAssertTrue(app.buttons["hitter.launch"].waitForExistence(timeout: 10))
@@ -90,9 +97,8 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertFalse(app.switches["hitter.launchMusic"].exists)
         app.buttons["hitter.launch"].tap()
         XCTAssertFalse(app.buttons["hitter.launch"].exists)
-        XCTAssertTrue(app.staticTexts["hitter.complete"].waitForExistence(timeout: 13))
+        XCTAssertTrue(waitForReplay("Ready"))
         XCTAssertTrue(app.staticTexts["hitter.snapshot"].label.contains("Sept. 27, 2026"))
-        XCTAssertTrue(app.staticTexts["hitter.complete"].label.contains("Will it end at seven again?"))
         capture("hitter-complete")
         let chart = app.otherElements["hitter.chart"]
         XCTAssertTrue(revealHitter(chart))
@@ -103,10 +109,14 @@ final class LargeTextUITests: XCTestCase {
             XCTAssertEqual(app.otherElements["hitter.selection"].label, "\(1976 + index)\(index == counts.count - 1 ? " YTD" : ""): \(count) qualified hitters")
         }
         XCTAssertFalse(app.buttons["hitter.music"].exists)
-        app.buttons["hitter.replay"].tap()
-        XCTAssertTrue(app.staticTexts["hitter.building"].exists)
-        XCTAssertTrue(app.staticTexts["hitter.complete"].waitForExistence(timeout: 13))
-        capture("hitter-replay-and-controls")
+        let replay = app.buttons["hitter.replay"]
+        XCTAssertTrue(revealHitter(replay))
+        XCTAssertTrue(chart.frame.contains(CGPoint(x: replay.frame.midX, y: replay.frame.midY)))
+        XCTAssertGreaterThan(replay.frame.midY, chart.frame.midY)
+        replay.tap()
+        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
+        XCTAssertTrue(waitForReplay("Ready"))
+        capture("hitter-replay-in-chart")
         XCTAssertTrue(revealHitter(app.buttons["hitter.methodology"]))
         app.buttons["hitter.methodology"].tap()
         XCTAssertTrue(app.navigationBars["How we count"].waitForExistence(timeout: 5))
@@ -172,7 +182,7 @@ final class LargeTextUITests: XCTestCase {
         capture("hitter-large-chart")
         XCTAssertTrue(revealHitter(app.buttons["hitter.replay"]))
         XCTAssertFalse(app.buttons["hitter.music"].exists)
-        capture("hitter-large-controls")
+        capture("hitter-large-replay")
     }
 
     func testHitterBackgroundAndCompactHeader() {
@@ -194,7 +204,7 @@ final class LargeTextUITests: XCTestCase {
         capture("hitter-compact-playing")
         XCUIDevice.shared.press(.home)
         app.activate()
-        XCTAssertTrue(app.staticTexts["hitter.complete"].waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForReplay("Ready"))
         capture("hitter-background-complete")
         let chart = app.otherElements["hitter.chart"]
         XCTAssertTrue(revealHitter(chart))

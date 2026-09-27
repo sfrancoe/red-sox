@@ -70,9 +70,8 @@ enum MLB300HitterData {
     static let finish = seasons.last!
     static let snapshotLabel = "Sept. 27, 2026 · before today’s games"
     static let coverageLabel = "1976–2025 final · 2026 YTD"
-    static let endingQuestion = "Seven so far. Will it end at seven again?"
     static let decline = Int((100 * (1 - Double(finish.count) / Double(peak.count))).rounded())
-    static let duration: TimeInterval = 10
+    static let duration: TimeInterval = 5
 
     /// Monotonic elapsed time makes timing independent of frame rate.
     static func progress(elapsed: TimeInterval) -> Double {
