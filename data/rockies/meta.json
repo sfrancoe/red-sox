@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-26T15:07:52+00:00",
+ "generated_at": "2026-09-27T15:49:25+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 115,
  "seasons": {
   "2026": {
-   "record": "57-103",
-   "games": 160,
+   "record": "58-103",
+   "games": 161,
    "in_progress": true,
    "war_leader": {
     "name": "TJ Rumfield",
-    "war": 3.4
+    "war": 3.5
    },
    "war_leaders": [
     {
      "name": "TJ Rumfield",
-     "war": 3.4
+     "war": 3.5
     },
     {
      "name": "Hunter Goodman",
-     "war": 2.6
+     "war": 2.7
     },
     {
      "name": "Brennan Bernardino",
-     "war": 2.0
+     "war": 2.2
     }
    ],
    "pitching_leaders": {
@@ -31,7 +31,7 @@
      "top": [
       {
        "name": "Brennan Bernardino",
-       "value": "1.15"
+       "value": "1.16"
       },
       {
        "name": "Antonio Senzatela",
@@ -49,11 +49,11 @@
      "names": [
       "Hunter Goodman"
      ],
-     "value": 39,
+     "value": 41,
      "top": [
       {
        "name": "Hunter Goodman",
-       "value": 39
+       "value": 41
       },
       {
        "name": "Mickey Moniak",
@@ -69,11 +69,11 @@
      "names": [
       "Hunter Goodman"
      ],
-     "value": 84,
+     "value": 88,
      "top": [
       {
        "name": "Hunter Goodman",
-       "value": 84
+       "value": 88
       },
       {
        "name": "Jake McCarthy",
@@ -81,7 +81,7 @@
       },
       {
        "name": "TJ Rumfield",
-       "value": 72
+       "value": 73
       }
      ]
     },
@@ -89,39 +89,40 @@
      "names": [
       "TJ Rumfield"
      ],
-     "value": ".299",
+     "value": ".300",
      "top": [
       {
        "name": "TJ Rumfield",
-       "value": ".299"
+       "value": ".300"
       },
       {
        "name": "Jake McCarthy",
-       "value": ".293"
+       "value": ".292"
       },
       {
        "name": "Hunter Goodman",
-       "value": ".245"
+       "value": ".247"
       }
      ]
     },
     "ops": {
      "names": [
+      "Hunter Goodman",
       "TJ Rumfield"
      ],
-     "value": ".841",
+     "value": ".843",
      "top": [
       {
-       "name": "TJ Rumfield",
-       "value": ".841"
+       "name": "Hunter Goodman",
+       "value": ".843"
       },
       {
-       "name": "Hunter Goodman",
-       "value": ".832"
+       "name": "TJ Rumfield",
+       "value": ".843"
       },
       {
        "name": "Jake McCarthy",
-       "value": ".815"
+       "value": ".814"
       }
      ]
     }
