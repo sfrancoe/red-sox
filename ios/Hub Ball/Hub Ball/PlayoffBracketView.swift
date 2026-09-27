@@ -19,8 +19,8 @@ struct PlayoffBracketView: View {
             ScrollView([.horizontal, .vertical]) {
                 VStack(spacing: 30) {
                     leagueBracket("AL", title: "AMERICAN LEAGUE", color: AppColor.steel, width: width)
-                    leagueBracket("NL", title: "NATIONAL LEAGUE", color: AppColor.amber, width: width)
                     worldSeries(width: width)
+                    leagueBracket("NL", title: "NATIONAL LEAGUE", color: AppColor.amber, width: width)
                     HStack(alignment: .top, spacing: 8) {
                         Image(systemName: "hand.tap")
                         Text("Tap a matchup for series details. Numbers are series wins.")
@@ -74,7 +74,7 @@ struct PlayoffBracketView: View {
             HStack(spacing: columnSpacing) {
                 roundHeading("WILD CARD").frame(width: cell)
                 roundHeading("DIVISION").frame(width: cell)
-                roundHeading(league == "AL" ? "ALCS" : "NLCS").frame(width: cell)
+                Color.clear.frame(width: cell, height: 1)
             }
             ZStack(alignment: .topLeading) {
                 Canvas { context, _ in
@@ -95,6 +95,15 @@ struct PlayoffBracketView: View {
                     }
                 }
                 .accessibilityHidden(true)
+
+                if let championship = slots.first(where: { $0.round == "league-championship" }) {
+                    roundHeading(league == "AL" ? "ALCS" : "NLCS")
+                        .frame(width: cell)
+                        .position(
+                            x: center(championship, width: width).x,
+                            y: center(championship, width: width).y - cardHeight / 2 - 14
+                        )
+                }
 
                 ForEach(slots) { slot in
                     matchup(slot, width: cell)
@@ -139,25 +148,35 @@ struct PlayoffBracketView: View {
         let labelSize = width > 120 ? nameSize * 1.15 : nameSize
         let item = series(slot)
         let rows = participants(item, slot: slot)
+        let hasScheduledDate = nextScheduledGame(for: item) != nil
         return Button {
             if let item { onSelect(item) }
         } label: {
             VStack(spacing: 0) {
                 ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
-                    HStack(spacing: 4) {
-                        Text(compactName(row, width: width))
-                            .font(.system(size: labelSize, weight: .semibold))
-                            .foregroundStyle(row.resolved ? AppColor.bone : AppColor.boneDim)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        if item?.winnerTeamId == row.teamId, row.teamId != nil {
-                            Image(systemName: "checkmark").font(.system(size: labelSize - 2, weight: .bold))
-                                .foregroundStyle(AppColor.amber)
+                    Group {
+                        if row.resolved {
+                            HStack(spacing: 4) {
+                                Text(compactName(row, width: width))
+                                    .font(.system(size: labelSize, weight: .semibold))
+                                    .foregroundStyle(AppColor.bone)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.8)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                if item?.winnerTeamId == row.teamId, row.teamId != nil {
+                                    Image(systemName: "checkmark").font(.system(size: labelSize - 2, weight: .bold))
+                                        .foregroundStyle(AppColor.amber)
+                                }
+                                Text(row.teamId.flatMap { item?.wins(for: $0) }.map(String.init) ?? "–")
+                                    .font(.system(size: labelSize, weight: .bold, design: .monospaced))
+                                    .foregroundStyle(item?.winnerTeamId == row.teamId && row.teamId != nil ? AppColor.amber : AppColor.bone)
+                            }
+                        } else {
+                            Text("TBD")
+                                .font(.system(size: labelSize, weight: .semibold))
+                                .foregroundStyle(AppColor.playoffTBD)
+                                .frame(maxWidth: .infinity, alignment: .center)
                         }
-                        Text(row.teamId.flatMap { item?.wins(for: $0) }.map(String.init) ?? "–")
-                            .font(.system(size: labelSize, weight: .bold, design: .monospaced))
-                            .foregroundStyle(item?.winnerTeamId == row.teamId && row.teamId != nil ? AppColor.amber : AppColor.bone)
                     }
                     .padding(.horizontal, 7)
                     .frame(maxHeight: .infinity)
@@ -165,11 +184,11 @@ struct PlayoffBracketView: View {
                 }
                 Text(status(item))
                     .font(.system(size: labelSize - 3, weight: .medium))
-                    .foregroundStyle(item?.state == "live" ? AppColor.amber : AppColor.boneMuted)
+                    .foregroundStyle(hasScheduledDate ? AppColor.night : (item?.state == "live" ? AppColor.amber : AppColor.boneMuted))
                     .lineLimit(1).minimumScaleFactor(0.8)
                     .padding(.vertical, 4)
                     .frame(maxWidth: .infinity)
-                    .background(AppColor.night)
+                    .background(hasScheduledDate ? AppColor.scheduleGray : AppColor.night)
             }
             .background(AppColor.nightRaised)
             .clipShape(RoundedRectangle(cornerRadius: 6))
@@ -192,7 +211,7 @@ struct PlayoffBracketView: View {
         let fallback: [String]
         switch slot.round {
         case "world-series": fallback = ["AL champion", "NL champion"]
-        case "league-championship": fallback = ["Division winner", "Division winner"]
+        case "league-championship": fallback = ["TBD", "TBD"]
         default: fallback = item?.unresolvedSlots ?? []
         }
         for label in fallback where result.count < 2 {
@@ -224,13 +243,22 @@ struct PlayoffBracketView: View {
         if let live = games.first(where: { $0.abstractState == "Live" }) {
             return "LIVE" + (live.liveInning.map { " · INNING \($0)" } ?? "")
         }
-        if let next = games.filter({ $0.abstractState == "Preview" || $0.abstractState == "Scheduled" })
-            .min(by: { ($0.gameDate ?? "") < ($1.gameDate ?? "") }) {
+        if let next = nextScheduledGame(for: item) {
             // A TBD provider timestamp is a date placeholder, never a local start time.
             if next.timeTBD { return "\(next.gameDate.map { String($0.prefix(10).suffix(5)).replacingOccurrences(of: "-", with: "/") } ?? "DATE TBD") · TIME TBD" }
             if let date = next.startDate { return date.formatted(.dateTime.month(.abbreviated).day()).uppercased() }
         }
         return item.requiredWins.map { "FIRST TO \($0)" } ?? "MATCHUP TBD"
+    }
+
+    private func nextScheduledGame(for item: PostseasonSeries?) -> PostseasonGame? {
+        guard let item else { return nil }
+        return payload.games
+            .filter {
+                $0.seriesId == item.id
+                    && ($0.abstractState == "Preview" || $0.abstractState == "Scheduled")
+            }
+            .min(by: { ($0.gameDate ?? "") < ($1.gameDate ?? "") })
     }
 
 }

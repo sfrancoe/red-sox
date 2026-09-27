@@ -278,11 +278,12 @@ struct AppTabView: View {
             HStack(spacing: 6) {
                 Text(team.shortName)
                     .font(.headline.weight(.bold))
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 Image(systemName: "chevron.down").font(.caption.weight(.bold))
             }
-            .frame(minHeight: 44, alignment: .leading)
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            .clipped()
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -320,23 +321,21 @@ struct AppTabView: View {
     }
 
     private var teamAndPlayoffsNavigation: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(spacing: 10) {
-                teamPickerButton.fixedSize(horizontal: true, vertical: false)
-                Spacer(minLength: 0)
-                HStack(spacing: 10) {
-                    if OctoberFeature.enabled { playoffsButton }
-                    storiesButton
+        HStack(spacing: 0) {
+            teamPickerButton
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            Group {
+                if OctoberFeature.enabled {
+                    playoffsButton
+                } else {
+                    Color.clear.frame(height: 44)
                 }
             }
-            VStack(alignment: .leading, spacing: 2) {
-                teamPickerButton
-                HStack(spacing: 10) {
-                    Spacer(minLength: 0)
-                    if OctoberFeature.enabled { playoffsButton }
-                    storiesButton
-                }
-            }
+            .frame(maxWidth: .infinity, alignment: .center)
+
+            storiesButton
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 4)

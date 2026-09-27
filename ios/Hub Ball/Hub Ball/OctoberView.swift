@@ -2,7 +2,6 @@ import SwiftUI
 
 private enum OctoberSection: String, CaseIterable {
     case race = "Bracket"
-    case tonight = "Tonight"
     case history = "Best/Worst"
 }
 
@@ -14,6 +13,12 @@ private enum PostseasonHistoryGroup: String, CaseIterable {
 private enum PostseasonHistoryRanking: String, CaseIterable {
     case best = "Best"
     case worst = "Worst"
+}
+
+private enum PostseasonHistoryLeague: String, CaseIterable {
+    case both = "Both"
+    case american = "AL"
+    case national = "NL"
 }
 
 private func bracketLabel(_ series: PostseasonSeries) -> String {
@@ -32,6 +37,7 @@ struct OctoberView: View {
     @State private var historyStore = PostseasonHistoryStore(season: OctoberFeature.season)
     @State private var section: OctoberSection = .race
     @State private var historyGroup: PostseasonHistoryGroup = .hitting
+    @State private var historyLeague: PostseasonHistoryLeague = .both
     @State private var historyCategoryKey = "ops"
     @State private var historyRanking: PostseasonHistoryRanking = .best
     @State private var selectedSeries: PostseasonSeries?
@@ -59,7 +65,6 @@ struct OctoberView: View {
                     } else if let payload {
                         switch section {
                         case .race: raceView(payload)
-                        case .tonight: tonightView(payload)
                         case .history: EmptyView()
                         }
                     } else if store.isLoading {
@@ -179,14 +184,23 @@ struct OctoberView: View {
         let selected = categories.first(where: { $0.key == historyCategoryKey }) ?? categories.first
         return ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Picker("Player group", selection: $historyGroup) {
-                    ForEach(PostseasonHistoryGroup.allCases, id: \.self) { group in
-                        Text(group.rawValue).tag(group)
+                HStack(spacing: 8) {
+                    Picker("Player group", selection: $historyGroup) {
+                        ForEach(PostseasonHistoryGroup.allCases, id: \.self) { group in
+                            Text(group.rawValue).tag(group)
+                        }
                     }
-                }
-                .pickerStyle(.segmented)
-                .onChange(of: historyGroup) { _, group in
-                    historyCategoryKey = group == .hitting ? "ops" : "wins"
+                    .pickerStyle(.segmented)
+                    .onChange(of: historyGroup) { _, group in
+                        historyCategoryKey = group == .hitting ? "ops" : "wins"
+                    }
+
+                    Picker("League", selection: $historyLeague) {
+                        ForEach(PostseasonHistoryLeague.allCases, id: \.self) { league in
+                            Text(league.rawValue).tag(league)
+                        }
+                    }
+                    .pickerStyle(.segmented)
                 }
 
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -215,13 +229,17 @@ struct OctoberView: View {
                         .foregroundStyle(AppColor.boneDim)
 
                     historyBoard(
-                        historyRanking == .best ? selected.best : selected.worst,
+                        filteredHistoryEntries(
+                            historyRanking == .best ? selected.best : selected.worst,
+                            payload: payload
+                        ),
                         category: selected,
                         ranking: historyRanking
                     )
                 }
             }
-            .padding(14)
+            .padding(.horizontal, 14)
+            .padding(.bottom, 14)
         }
         .accessibilityIdentifier("playoffs.history")
         .refreshable { await historyStore.refresh() }
@@ -239,23 +257,23 @@ struct OctoberView: View {
                     .foregroundStyle(AppColor.boneDim)
                     .padding(.vertical, 16)
             } else {
-                ForEach(entries) { entry in
+                ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
                     HStack(alignment: .firstTextBaseline, spacing: 10) {
-                        Text(String(entry.rank))
+                        Text(String(index + 1))
                             .font(AppFont.number)
                             .monospacedDigit()
                             .foregroundStyle(AppColor.boneMuted)
                             .frame(width: 24, alignment: .trailing)
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text(entry.name)
-                                .font(AppFont.bodySmall.weight(.semibold))
-                                .foregroundStyle(AppColor.bone)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.8)
-                            Text("\(entry.teamAbbreviation) · \(historySample(entry))")
-                                .font(AppFont.label)
-                                .foregroundStyle(AppColor.boneMuted)
-                        }
+                        Text(entry.name)
+                            .font(AppFont.bodySmall.weight(.semibold))
+                            .foregroundStyle(AppColor.bone)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
+                        Text("\(entry.teamAbbreviation) · \(historySample(entry))")
+                            .font(AppFont.label)
+                            .foregroundStyle(AppColor.boneMuted)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
                         Spacer(minLength: 6)
                         Text(historyValue(entry.value, key: category.key))
                             .font(AppFont.numberLarge)
@@ -273,6 +291,15 @@ struct OctoberView: View {
         .overlay(alignment: .leading) {
             Rectangle().fill(ranking == .best ? AppColor.amber : AppColor.steel).frame(width: 3)
         }
+    }
+
+    private func filteredHistoryEntries(
+        _ entries: [PostseasonHistoryEntry],
+        payload: PostseasonHistoryPayload
+    ) -> [PostseasonHistoryEntry] {
+        guard historyLeague != .both else { return entries }
+        let leagueByTeam = Dictionary(uniqueKeysWithValues: payload.teams.map { ($0.teamId, $0.league) })
+        return entries.filter { leagueByTeam[$0.teamId] == historyLeague.rawValue }
     }
 
     private func historySample(_ entry: PostseasonHistoryEntry) -> String {
@@ -303,7 +330,11 @@ struct OctoberView: View {
                     .font(AppFont.label).foregroundStyle(AppColor.amber)
                 Spacer()
                 Text(game.timeTBD || localDate == nil ? "TIME TBD" : localDate!.formatted(date: .abbreviated, time: .shortened))
-                    .font(AppFont.label).foregroundStyle(AppColor.boneMuted)
+                    .font(AppFont.label)
+                    .foregroundStyle(AppColor.night)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(AppColor.scheduleGray)
             }
             HStack(alignment: .center, spacing: 10) {
                 Text(game.away.name ?? game.away.slot ?? "TBD")
