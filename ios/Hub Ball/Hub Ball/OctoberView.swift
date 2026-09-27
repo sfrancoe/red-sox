@@ -2,7 +2,7 @@ import SwiftUI
 
 private enum OctoberSection: String, CaseIterable {
     case race = "Bracket"
-    case history = "Best/Worst"
+    case history = "Historical Best/Worst"
 }
 
 private enum PostseasonHistoryGroup: String, CaseIterable {

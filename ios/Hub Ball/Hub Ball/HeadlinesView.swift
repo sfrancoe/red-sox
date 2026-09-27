@@ -79,7 +79,6 @@ struct HeadlinesView: View {
         VStack(spacing: 0) {
             newspaperName(
                 store.feeds[source]?.source ?? source.shortName,
-                source: source,
                 font: AppFont.displaySmall
             )
                 .multilineTextAlignment(.center)
@@ -157,7 +156,7 @@ struct HeadlinesView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     if let feed = store.feeds[selection.wrappedValue] {
-                        feedHeader(feed, source: selection.wrappedValue)
+                        feedHeader(feed)
 
                         ForEach(feed.articles) { article in
                             articleCard(article)
@@ -209,7 +208,6 @@ struct HeadlinesView: View {
         } label: {
             newspaperName(
                 source.shortName,
-                source: source,
                 font: selection.wrappedValue == source
                     ? .headline.weight(.black)
                     : .subheadline.weight(.semibold),
@@ -230,9 +228,9 @@ struct HeadlinesView: View {
         .accessibilityAddTraits(selection.wrappedValue == source ? .isSelected : [])
     }
 
-    private func feedHeader(_ feed: NewsFeed, source: NewsSource) -> some View {
+    private func feedHeader(_ feed: NewsFeed) -> some View {
         HStack(alignment: .firstTextBaseline) {
-            newspaperName(feed.source, source: source, font: .headline.weight(.black))
+            newspaperName(feed.source, font: .headline.weight(.black))
 
             Spacer()
 
@@ -245,22 +243,12 @@ struct HeadlinesView: View {
 
     private func newspaperName(
         _ name: String,
-        source: NewsSource,
         font: Font,
         color: Color = AppColor.ink
     ) -> some View {
-        TimelineView(.periodic(from: .now, by: 60)) { timeline in
-            let hasNewStory = store.feeds[source]?.articles.contains {
-                $0.isNew(asOf: timeline.date)
-            } ?? false
-            let badge = Text(hasNewStory ? " ⚡" : "")
-                .foregroundColor(AppColor.red)
-
-            Text("\(Text(name))\(badge)")
-                .font(font)
-                .foregroundStyle(color)
-                .accessibilityLabel(hasNewStory ? "\(name), new stories available" : name)
-        }
+        Text(name)
+            .font(font)
+            .foregroundStyle(color)
     }
 
     private func articleCard(_ article: NewsArticle) -> some View {

@@ -252,15 +252,19 @@ struct PlayoffBracketView: View {
             return "LIVE" + (live.liveInning.map { " · INNING \($0)" } ?? "")
         }
         if let next = nextScheduledGame(for: item) {
-            // A TBD provider timestamp is a date placeholder, never a local start time.
-            if next.timeTBD {
-                let date = next.gameDate.map { String($0.prefix(10).suffix(5)).replacingOccurrences(of: "-", with: "/") }
-                    ?? "DATE \(unresolvedLabel)"
-                return "\(date) · TIME \(unresolvedLabel)"
-            }
-            if let date = next.startDate { return date.formatted(.dateTime.month(.abbreviated).day()).uppercased() }
+            return displayDate(next)
         }
         return item.requiredWins.map { "FIRST TO \($0)" } ?? "MATCHUP \(unresolvedLabel)"
+    }
+
+    private func displayDate(_ game: PostseasonGame) -> String {
+        guard let rawDate = game.gameDate else { return unresolvedLabel }
+        let parts = rawDate.prefix(10).split(separator: "-")
+        guard parts.count == 3,
+              let month = Int(parts[1]), (1...12).contains(month),
+              let day = Int(parts[2]) else { return unresolvedLabel }
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        return "\(months[month - 1]) \(day)"
     }
 
     private func nextScheduledGame(for item: PostseasonSeries?) -> PostseasonGame? {
