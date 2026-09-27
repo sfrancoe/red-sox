@@ -292,9 +292,11 @@ struct OctoberView: View {
         _ entries: [PostseasonHistoryEntry],
         payload: PostseasonHistoryPayload
     ) -> [PostseasonHistoryEntry] {
-        guard historyLeague != .both else { return entries }
         let leagueByTeam = Dictionary(uniqueKeysWithValues: payload.teams.map { ($0.teamId, $0.league) })
-        return entries.filter { leagueByTeam[$0.teamId] == historyLeague.rawValue }
+        let filtered = historyLeague == .both
+            ? entries
+            : entries.filter { ($0.league ?? leagueByTeam[$0.teamId]) == historyLeague.rawValue }
+        return Array(filtered.prefix(10))
     }
 
     private func historySample(_ entry: PostseasonHistoryEntry) -> String {

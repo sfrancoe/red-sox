@@ -53,6 +53,7 @@ struct PostseasonHistoryEntry: Codable, Identifiable, Sendable {
     let name: String
     let teamId: Int
     let teamAbbreviation: String
+    let league: String?
     let value: Double
     let games: Int
     let plateAppearances: Int?

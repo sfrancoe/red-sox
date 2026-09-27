@@ -22,6 +22,7 @@ MLB_API = "https://statsapi.mlb.com/api/v1"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 ROSTER_TYPE = "40Man"
 EXPECTED_FIELD_SIZE = 12
+RANK_LIMIT = 10
 HITTER_MIN_PA = 20
 HITTER_MIN_GAMES = 8
 PITCHER_RATE_MIN_OUTS = 45  # 15 IP
@@ -125,6 +126,7 @@ def fetch_roster(team: dict[str, Any], season: int) -> list[dict[str, Any]]:
                     "name": name,
                     "teamId": team["teamId"],
                     "teamAbbreviation": team["abbreviation"],
+                    "league": team["league"],
                     "positionType": position_type,
                 }
             )
@@ -223,8 +225,13 @@ def ranked(entries: list[dict[str, Any]], descending: bool) -> list[dict[str, An
             entry["name"],
             entry["playerId"],
         ),
-    )[:10]
-    return [{"rank": index, **entry} for index, entry in enumerate(ordered, 1)]
+    )
+    ranked_all = [{"rank": index, **entry} for index, entry in enumerate(ordered, 1)]
+    selected_ids = {entry["playerId"] for entry in ordered[:RANK_LIMIT]}
+    for league in ("AL", "NL"):
+        league_entries = [entry for entry in ordered if entry.get("league") == league]
+        selected_ids.update(entry["playerId"] for entry in league_entries[:RANK_LIMIT])
+    return [entry for entry in ranked_all if entry["playerId"] in selected_ids]
 
 
 def build_categories(

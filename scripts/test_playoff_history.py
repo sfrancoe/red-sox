@@ -9,12 +9,18 @@ from pathlib import Path
 from fetch_playoff_history import build_categories, innings_to_outs, should_write_snapshot
 
 
-def player(player_id: int, name: str, position_type: str = "Two-Way Player") -> dict:
+def player(
+    player_id: int,
+    name: str,
+    position_type: str = "Two-Way Player",
+    league: str = "AL",
+) -> dict:
     return {
         "playerId": player_id,
         "name": name,
         "teamId": 111,
         "teamAbbreviation": "BOS",
+        "league": league,
         "positionType": position_type,
     }
 
@@ -62,6 +68,34 @@ assert pitching["whip"]["worst"][0]["playerId"] == 2
 assert len(hitting["rbi"]["best"]) == 10
 assert all(entry["playerId"] != 1 for entry in pitching["era"]["best"])
 assert pitching["wins"]["best"][0]["value"] == 13
+
+# Preserve enough ranked entries for independent MLB, AL, and NL top tens.
+league_players = [player(index, f"AL Player {index:02d}") for index in range(1, 16)]
+league_players += [player(index, f"NL Player {index:02d}", league="NL") for index in range(101, 116)]
+league_stats = {
+    item["playerId"]: {
+        "hitting": {
+            "gamesPlayed": 8,
+            "plateAppearances": 20,
+            "ops": f"{item['playerId'] / 100:.3f}",
+            "avg": f"{item['playerId'] / 1000:.3f}",
+            "homeRuns": item["playerId"],
+            "rbi": item["playerId"],
+        }
+    }
+    for item in league_players
+}
+league_categories = build_categories(league_players, league_stats)
+home_run_category = next(item for item in league_categories["hitting"] if item["key"] == "homeRuns")
+home_run_best = home_run_category["best"]
+home_run_worst = home_run_category["worst"]
+assert len(home_run_best) == 20
+assert len([entry for entry in home_run_best if entry["league"] == "AL"]) == 10
+assert len([entry for entry in home_run_best if entry["league"] == "NL"]) == 10
+assert [entry["playerId"] for entry in home_run_best[:10]] == list(range(115, 105, -1))
+assert len(home_run_worst) == 20
+assert len([entry for entry in home_run_worst if entry["league"] == "AL"]) == 10
+assert len([entry for entry in home_run_worst if entry["league"] == "NL"]) == 10
 
 # A pitcher's misleading MLB hitting games-played total cannot qualify him as a hitter.
 pitcher = player(99, "Pitcher Hitting Artifact", "Pitcher")
