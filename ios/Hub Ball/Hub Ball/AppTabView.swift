@@ -297,11 +297,10 @@ struct AppTabView: View {
                 Image(systemName: "trophy.fill")
                 Text("Playoffs").fixedSize()
             }
-            .font(.subheadline.weight(.semibold))
+            .font(.headline.weight(.semibold))
             .foregroundStyle(AppColor.amber)
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 6)
             .frame(minHeight: 44)
-            .background(AppColor.amber.opacity(0.10), in: RoundedRectangle(cornerRadius: 8))
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("playoffs.open")
@@ -311,8 +310,8 @@ struct AppTabView: View {
     private var storiesButton: some View {
         Button { storiesPresented = true } label: {
             Text("Stories")
-                .font(.subheadline.weight(.semibold))
-                .padding(.horizontal, 8)
+                .font(.headline.weight(.semibold))
+                .padding(.horizontal, 6)
                 .frame(minHeight: 44)
         }
         .buttonStyle(.plain)
@@ -324,20 +323,22 @@ struct AppTabView: View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 10) {
                 teamPickerButton.fixedSize(horizontal: true, vertical: false)
-                if OctoberFeature.enabled { playoffsButton }
                 Spacer(minLength: 0)
-                storiesButton
+                HStack(spacing: 10) {
+                    if OctoberFeature.enabled { playoffsButton }
+                    storiesButton
+                }
             }
             VStack(alignment: .leading, spacing: 2) {
                 teamPickerButton
-                HStack {
+                HStack(spacing: 10) {
+                    Spacer(minLength: 0)
                     if OctoberFeature.enabled { playoffsButton }
-                    Spacer(minLength: 4)
                     storiesButton
                 }
             }
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 16)
         .padding(.vertical, 4)
         .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
     }

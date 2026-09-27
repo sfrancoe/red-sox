@@ -3,6 +3,17 @@ import SwiftUI
 private enum OctoberSection: String, CaseIterable {
     case race = "Bracket"
     case tonight = "Tonight"
+    case history = "Best/Worst"
+}
+
+private enum PostseasonHistoryGroup: String, CaseIterable {
+    case hitting = "Batting"
+    case pitching = "Pitching"
+}
+
+private enum PostseasonHistoryRanking: String, CaseIterable {
+    case best = "Best"
+    case worst = "Worst"
 }
 
 private func bracketLabel(_ series: PostseasonSeries) -> String {
@@ -18,7 +29,11 @@ private func bracketLabel(_ series: PostseasonSeries) -> String {
 struct OctoberView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var store = PostseasonStore(season: OctoberFeature.season)
+    @State private var historyStore = PostseasonHistoryStore(season: OctoberFeature.season)
     @State private var section: OctoberSection = .race
+    @State private var historyGroup: PostseasonHistoryGroup = .hitting
+    @State private var historyCategoryKey = "ops"
+    @State private var historyRanking: PostseasonHistoryRanking = .best
     @State private var selectedSeries: PostseasonSeries?
 
     private var payload: PostseasonPayload? { store.snapshot }
@@ -39,10 +54,13 @@ struct OctoberView: View {
                 .padding(.vertical, 10)
 
                 Group {
-                    if let payload {
+                    if section == .history {
+                        historyView
+                    } else if let payload {
                         switch section {
                         case .race: raceView(payload)
                         case .tonight: tonightView(payload)
+                        case .history: EmptyView()
                         }
                     } else if store.isLoading {
                         ProgressView("Opening the playoff bracket…").tint(AppColor.amber)
@@ -57,13 +75,22 @@ struct OctoberView: View {
         }
         .task(id: scenePhase) {
             guard scenePhase == .active else { return }
-            await store.refresh()
+            async let postseasonRefresh: Void = store.refresh()
+            async let historyRefresh: Void = historyStore.refresh()
+            _ = await (postseasonRefresh, historyRefresh)
             while !Task.isCancelled, scenePhase == .active {
                 guard store.snapshot?.isLive == true else { break }
                 try? await Task.sleep(for: .seconds(30))
                 guard !Task.isCancelled, scenePhase == .active else { break }
                 await store.refresh()
             }
+        }
+        .onAppear {
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("-show-playoff-history") {
+                section = .history
+            }
+            #endif
         }
         .sheet(item: $selectedSeries) { series in
             OctoberSeriesDetail(series: series, allSeries: self.series, store: store)
@@ -119,6 +146,152 @@ struct OctoberView: View {
             .padding(14)
         }
         .refreshable { await store.refresh() }
+    }
+
+    @ViewBuilder
+    private var historyView: some View {
+        if let history = historyStore.snapshot {
+            playoffHistory(history)
+        } else if historyStore.isLoading {
+            ProgressView("Building career playoff rankings…")
+                .tint(AppColor.amber)
+                .foregroundStyle(AppColor.bone)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Career playoff rankings aren’t available yet.")
+                    .font(AppFont.displayMedium)
+                Text("The bracket is still available while the roster snapshot refreshes.")
+                    .font(AppFont.bodySmall)
+                    .foregroundStyle(AppColor.boneDim)
+                Button("Try again") { Task { await historyStore.refresh() } }
+                    .buttonStyle(HubProminentButtonStyle())
+                    .frame(minHeight: 44)
+            }
+            .padding(24)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .foregroundStyle(AppColor.bone)
+        }
+    }
+
+    private func playoffHistory(_ payload: PostseasonHistoryPayload) -> some View {
+        let categories = historyGroup == .hitting ? payload.categories.hitting : payload.categories.pitching
+        let selected = categories.first(where: { $0.key == historyCategoryKey }) ?? categories.first
+        return ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                Picker("Player group", selection: $historyGroup) {
+                    ForEach(PostseasonHistoryGroup.allCases, id: \.self) { group in
+                        Text(group.rawValue).tag(group)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .onChange(of: historyGroup) { _, group in
+                    historyCategoryKey = group == .hitting ? "ops" : "wins"
+                }
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(categories) { category in
+                            Button(category.label) { historyCategoryKey = category.key }
+                                .font(AppFont.label)
+                                .foregroundStyle(historyCategoryKey == category.key ? AppColor.night : AppColor.bone)
+                                .padding(.horizontal, 14)
+                                .frame(minHeight: 40)
+                                .background(historyCategoryKey == category.key ? AppColor.amber : AppColor.nightRaised)
+                        }
+                    }
+                }
+
+                if let selected {
+                    Picker("Ranking", selection: $historyRanking) {
+                        ForEach(PostseasonHistoryRanking.allCases, id: \.self) { ranking in
+                            Text(ranking.rawValue).tag(ranking)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+
+                    Text("Qualified: \(selected.qualification) · Current 40-man rosters")
+                        .font(AppFont.bodySmall)
+                        .foregroundStyle(AppColor.boneDim)
+
+                    historyBoard(
+                        historyRanking == .best ? selected.best : selected.worst,
+                        category: selected,
+                        ranking: historyRanking
+                    )
+                }
+            }
+            .padding(14)
+        }
+        .accessibilityIdentifier("playoffs.history")
+        .refreshable { await historyStore.refresh() }
+    }
+
+    private func historyBoard(
+        _ entries: [PostseasonHistoryEntry],
+        category: PostseasonHistoryCategory,
+        ranking: PostseasonHistoryRanking
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if entries.isEmpty {
+                Text("No qualified players yet.")
+                    .font(AppFont.bodySmall)
+                    .foregroundStyle(AppColor.boneDim)
+                    .padding(.vertical, 16)
+            } else {
+                ForEach(entries) { entry in
+                    HStack(alignment: .firstTextBaseline, spacing: 10) {
+                        Text(String(entry.rank))
+                            .font(AppFont.number)
+                            .monospacedDigit()
+                            .foregroundStyle(AppColor.boneMuted)
+                            .frame(width: 24, alignment: .trailing)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(entry.name)
+                                .font(AppFont.bodySmall.weight(.semibold))
+                                .foregroundStyle(AppColor.bone)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
+                            Text("\(entry.teamAbbreviation) · \(historySample(entry))")
+                                .font(AppFont.label)
+                                .foregroundStyle(AppColor.boneMuted)
+                        }
+                        Spacer(minLength: 6)
+                        Text(historyValue(entry.value, key: category.key))
+                            .font(AppFont.numberLarge)
+                            .monospacedDigit()
+                            .foregroundStyle(AppColor.bone)
+                    }
+                    .padding(.vertical, 5)
+                    .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+                }
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 4)
+        .background(AppColor.nightRaised)
+        .overlay(alignment: .leading) {
+            Rectangle().fill(ranking == .best ? AppColor.amber : AppColor.steel).frame(width: 3)
+        }
+    }
+
+    private func historySample(_ entry: PostseasonHistoryEntry) -> String {
+        if let plateAppearances = entry.plateAppearances {
+            return "\(plateAppearances) PA · \(entry.games) G"
+        }
+        return "\(entry.inningsPitched ?? "0.0") IP · \(entry.games) G"
+    }
+
+    private func historyValue(_ value: Double, key: String) -> String {
+        switch key {
+        case "ops", "avg":
+            let rendered = value.formatted(.number.precision(.fractionLength(3)))
+            return rendered.hasPrefix("0") ? String(rendered.dropFirst()) : rendered
+        case "whip", "era":
+            return value.formatted(.number.precision(.fractionLength(2)))
+        default:
+            return Int(value).formatted()
+        }
     }
 
     private func tonightCard(_ game: PostseasonGame, payload: PostseasonPayload) -> some View {

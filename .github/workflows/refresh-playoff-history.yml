@@ -1,0 +1,43 @@
+name: Refresh playoff career leaderboards
+
+on:
+  schedule:
+    # The field can change on the season's final day; career totals can change during October.
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refresh roster-scoped postseason career stats
+        run: |
+          scheduled=()
+          if [[ "$GITHUB_EVENT_NAME" == "schedule" ]]; then scheduled+=(--scheduled); fi
+          python3 scripts/fetch_playoff_history.py --season 2026 "${scheduled[@]}"
+      - name: Verify qualification and ranking rules
+        run: python3 scripts/test_playoff_history.py
+      - name: Commit only when the snapshot changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/postseason-history/2026.json; then
+            echo "No playoff-history changes."
+          else
+            git add data/postseason-history/2026.json
+            git commit -m "Refresh playoff career leaderboards ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase origin main
+            git push
+          fi
