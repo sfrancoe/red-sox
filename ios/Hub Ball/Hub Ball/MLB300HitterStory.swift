@@ -292,12 +292,17 @@ private struct StoryRosterSheet: View {
                         HStack(spacing: 12) {
                             Text("\(index + 1)").foregroundStyle(HitterStyle.navy.opacity(0.5))
                                 .frame(width: 26, alignment: .leading)
-                            Text(player.name)
+                            HStack(spacing: 6) {
+                                Text(player.name).lineLimit(1).minimumScaleFactor(0.8)
+                                Text(player.team)
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundStyle(HitterStyle.navy.opacity(0.55))
+                            }
                             Spacer(minLength: 8)
                             Text(player.average).monospacedDigit().fontWeight(.semibold)
                         }
                         .accessibilityElement(children: .combine)
-                        .accessibilityLabel("\(index + 1). \(player.name), batting average \(player.average)")
+                        .accessibilityLabel("\(index + 1). \(player.name), \(player.team), batting average \(player.average)")
                         .accessibilityIdentifier("hitter.roster.row.\(index + 1)")
                     }
                 } header: {

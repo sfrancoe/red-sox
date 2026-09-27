@@ -68,7 +68,27 @@ def fetch_season(year: int) -> dict:
     return extract_season(year, fetch_json(SOURCE.format(year=year)))
 
 
-def write_roster_module(seasons: list[dict]) -> None:
+def roster_team_abbreviations(year: int, player_ids: set[int]) -> dict[int, str]:
+    """Resolve each hitter's season team, including historical franchise names."""
+    rows = fetch_json(SOURCE.format(year=year))['stats'][0]['splits']
+    team_ids = {row['player']['id']: row['team']['id'] for row in rows
+                if row['player']['id'] in player_ids and 'team' in row}
+    if set(team_ids) != player_ids:
+        raise ValueError(f"Missing {year} team for player IDs {sorted(player_ids - set(team_ids))}")
+    teams = fetch_json(f'https://statsapi.mlb.com/api/v1/teams?sportId=1&season={year}')['teams']
+    abbreviations = {team['id']: team['abbreviation'] for team in teams}
+    three_letters = {'AZ': 'ARI', 'KC': 'KCR', 'LA': 'LAD',
+                     'SD': 'SDP', 'SF': 'SFG', 'TB': 'TBD' if year < 2008 else 'TBR'}
+    result = {}
+    for player_id, team_id in team_ids.items():
+        abbreviation = three_letters.get(abbreviations.get(team_id), abbreviations.get(team_id))
+        if not abbreviation or not re.fullmatch(r'[A-Z]{3}', abbreviation):
+            raise ValueError(f"No three-letter abbreviation for {year} team {team_id}")
+        result[player_id] = abbreviation
+    return result
+
+
+def roster_module_contents(seasons: list[dict]) -> str:
     """Keep the two tappable card rosters tied to the same counted snapshot."""
     peak = max(seasons, key=lambda season: season['count'])
     latest = seasons[-1]
@@ -80,6 +100,7 @@ def write_roster_module(seasons: list[dict]) -> None:
         '    struct Player: Identifiable {',
         '        let id: Int',
         '        let name: String',
+        '        let team: String',
         '        let average: String',
         '    }',
     ]
@@ -90,15 +111,21 @@ def write_roster_module(seasons: list[dict]) -> None:
         )
         if len(players) != season['count']:
             raise ValueError(f"Roster count differs from {season['year']} total")
+        teams = roster_team_abbreviations(season['year'], {player['id'] for player in players})
         lines += [f'    static let {label}Year = {season["year"]}',
                   f'    static let {label}: [Player] = [']
         for player in players:
             name = json.dumps(player['name'], ensure_ascii=False)
-            lines.append(f'        .init(id: {player["id"]}, name: {name}, average: "{player["avg"]}"),')
+            lines.append(f'        .init(id: {player["id"]}, name: {name}, team: "{teams[player["id"]]}", average: "{player["avg"]}"),')
         lines.append('    ]')
     lines.append('}')
+    return '\n'.join(lines) + '\n'
+
+
+def write_roster_module(seasons: list[dict]) -> None:
+    """Regenerate player cards without refreshing the archived chart counts."""
     path = ROOT / 'ios/Hub Ball/Hub Ball/MLB300HitterPlayers.swift'
-    path.write_text('\n'.join(lines) + '\n')
+    path.write_text(roster_module_contents(seasons))
 
 
 def main() -> None:
@@ -123,9 +150,10 @@ def main() -> None:
                             swift, flags=re.S)
     if changed != 1:
         raise ValueError('Cannot locate season array; no files updated')
+    roster_swift = roster_module_contents(seasons)
     (ROOT / 'data/mlb300-hitters.json').write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + '\n')
     module.write_text(swift)
-    write_roster_module(seasons)
+    (ROOT / 'ios/Hub Ball/Hub Ball/MLB300HitterPlayers.swift').write_text(roster_swift)
     print('Counts:', ','.join(str(s['count']) for s in seasons))
     peak = max(seasons, key=lambda s: s['count'])
     print(f"Peak: {peak['year']} = {peak['count']}; ending: {seasons[-1]['count']}")

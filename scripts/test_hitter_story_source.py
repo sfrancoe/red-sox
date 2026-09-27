@@ -60,14 +60,20 @@ class HitterSourceTests(unittest.TestCase):
             block = re.search(rf'static let {label}: \[Player\] = \[(.*?)\n    \]', module, re.S)
             self.assertIsNotNone(block)
             actual = [
-                (int(player_id), json.loads(name), average)
-                for player_id, name, average in re.findall(
-                    r'\.init\(id: (\d+), name: ("(?:\\.|[^"\\])*"), average: "(\.\d{3})"\)',
+                (int(player_id), json.loads(name), team, average)
+                for player_id, name, team, average in re.findall(
+                    r'\.init\(id: (\d+), name: ("(?:\\.|[^"\\])*"), team: "([A-Z]{3})", average: "(\.\d{3})"\)',
                     block.group(1),
                 )
             ]
-            self.assertEqual(actual, [(p['id'], p['name'], p['avg']) for p in expected])
+            self.assertEqual([(id, name, avg) for id, name, _, avg in actual],
+                             [(p['id'], p['name'], p['avg']) for p in expected])
             self.assertEqual(len(actual), season['count'])
+            teams_by_name = {name: team for _, name, team, _ in actual}
+            self.assertEqual(teams_by_name['Larry Walker' if year == 1999 else 'Yordan Alvarez'],
+                             'COL' if year == 1999 else 'HOU')
+            self.assertEqual(teams_by_name['Fred McGriff' if year == 1999 else 'Chandler Simpson'],
+                             'TBD' if year == 1999 else 'TBR')
 
 
 if __name__ == '__main__':

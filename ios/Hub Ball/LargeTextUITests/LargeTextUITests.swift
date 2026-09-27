@@ -128,6 +128,7 @@ final class LargeTextUITests: XCTestCase {
         let walker = app.staticTexts["hitter.roster.row.1"]
         XCTAssertTrue(walker.waitForExistence(timeout: 5))
         XCTAssertTrue(walker.label.contains("Larry Walker"))
+        XCTAssertTrue(walker.label.contains("COL"))
         XCTAssertTrue(walker.label.contains(".379"))
         capture("hitter-peak-roster")
         app.buttons["Done"].tap()
@@ -137,10 +138,12 @@ final class LargeTextUITests: XCTestCase {
         let alvarez = app.staticTexts["hitter.roster.row.1"]
         XCTAssertTrue(alvarez.waitForExistence(timeout: 5))
         XCTAssertTrue(alvarez.label.contains("Yordan Alvarez"))
+        XCTAssertTrue(alvarez.label.contains("HOU"))
         XCTAssertTrue(alvarez.label.contains(".316"))
         let rumfield = app.staticTexts["hitter.roster.row.7"]
         XCTAssertTrue(rumfield.exists)
         XCTAssertTrue(rumfield.label.contains("TJ Rumfield"))
+        XCTAssertTrue(rumfield.label.contains("COL"))
         XCTAssertTrue(rumfield.label.contains(".300"))
         capture("hitter-2026-roster")
     }
