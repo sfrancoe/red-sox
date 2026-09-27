@@ -2,6 +2,17 @@
 
 Native, offline MLB story, available through the global Stories button between the team selector and playoffs. The global library also links to the existing Boston, Milwaukee and Yankees stories. Team Stories pages keep their existing team-specific content.
 
+## Current handoff — September 27, 2026
+
+- Canonical checkout: `/Users/sfrancoe/Projects/Hub Ball`, branch `main`. Work from here for the next phone update. The chat’s original `/Users/sfrancoe/Projects/MLB Apps` checkout is archived and must not be used for releases or device installation.
+- Hub Ball 1.0 build **69** is installed and launched on Scott’s wired **iPhone 17** (`B3886736-9848-5385-A29E-9E9E7774EE91`). Code/build commit: `0404af03`. Build 68 introduced the story; build 69 removed the baseball icon from the global team selector. The homepage’s own baseball graphic remains.
+- All changes from `codex/vanishing-hitter-story` were fast-forwarded into canonical main. Its managed worktree at `/Users/sfrancoe/.codex/worktrees/vanishing-hitter-story/MLB Apps` remains available, but is behind main’s release commits. Do not reinstall its older build. No push or TestFlight upload was performed for this work.
+- Accepted visual choices: smaller single-line headline on both launch and story screens; line-only animation with peak/final/selected markers after completion; shared Stories entry; no baseball in the shared team selector. Red Sox, Stories and 2026 Playoffs fit one row at standard iPhone text size; the accessible fallback can still use two rows.
+- Current figures: **55 in 1999, seven in 2025, seven in 2026 YTD, −87%**. Exactly .300 counts. The older .301+ definition and six-player ending are superseded. 2026 is explicitly provisional, dated before September 27 games; never silently relabel it final.
+- Verification completed: all 51 year taps, replay, methodology, source reconciliation and cutoff tests; standard header navigation and Red Sox/Cubs screenshots. Earlier compact and large-text checks also passed. Simulator audio output was unavailable; actual audible playback on the phone has not been confirmed.
+- Release workflow: read `AGENTS.md`, increment both Xcode build configurations and `config/hub-ball-release.json` together for a new phone build, commit intended files, run `python3 scripts/check_hub_ball_release.py`, then `bash scripts/install_hub_ball.sh --device B3886736-9848-5385-A29E-9E9E7774EE91`. Recheck connected devices first. Do not upload to TestFlight merely to update the wired phone.
+- Leave the unrelated untracked planning/review documents and `docs/design/players-ipad-responsive.png` alone. They were present before this work and are not part of these changes.
+
 ## Definition and provenance
 
 `MLB300HitterData.swift` contains generated counts from MLB’s qualified-hitter season totals. The cutoff is officially displayed AVG >= .300, **including exactly .300**. Every year was recalculated from MLB Stats API on September 27, 2026; the original .301+ handoff is superseded. The peak is 55 in 1999. Both 2025 and 2026 YTD have seven, a rounded 87% decline from the peak. 2024 also had seven.
@@ -55,4 +66,4 @@ The current Mac uses a Jump Desktop virtual default audio output. Both AVAudioEn
 - Swift checks: season continuity, endpoints, peak, decline, timing boundaries, generated WAV decoding.
 - Audible playback test: explicitly skipped because the simulator audio route rejected playback. This is not an audio-output pass.
 
-UI evidence is generated under `dist/hitter-preview/` and result bundles under `dist/large-text-ui/`; neither directory is committed. This change is a development implementation, not a device installation or TestFlight release.
+UI evidence is generated under `dist/hitter-preview/` and result bundles under `dist/large-text-ui/`; neither directory is committed. The development build is installed on Scott’s iPhone as build 69. No TestFlight release has been made for this story.
