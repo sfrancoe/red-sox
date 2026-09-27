@@ -1,5 +1,4 @@
 import SwiftUI
-import AVFoundation
 
 private enum HitterStyle {
     static let paper = AppColor.bone
@@ -17,9 +16,6 @@ struct MLB300HitterStory: View {
     @State private var building = false
     @State private var startedAt: TimeInterval = 0
     @State private var playbackID = UUID()
-    @State private var musicEnabled = false
-    @State private var audio = StoryAudioController()
-    @State private var audioUnavailable = false
     @State private var selectedIndex = MLB300HitterData.seasons.count - 1
     @State private var showMethodology = false
 
@@ -68,7 +64,7 @@ struct MLB300HitterStory: View {
                 }
                 .accessibilityHidden(!launched)
                 if !launched {
-                    StoryLaunchOverlay(musicEnabled: $musicEnabled, launch: launch, close: { dismiss() })
+                    StoryLaunchOverlay(launch: launch, close: { dismiss() })
                 }
             }
             .safeAreaInset(edge: .top, spacing: 0) {
@@ -94,13 +90,9 @@ struct MLB300HitterStory: View {
                 guard !Task.isCancelled else { return }
                 building = false
             }
-            .onDisappear { stop() }
+            .onDisappear { building = false }
             .onChange(of: scenePhase) { _, phase in
-                if phase != .active { stop() }
-            }
-            .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { _ in
-                musicEnabled = false
-                audio.stop()
+                if phase != .active { building = false }
             }
             .sheet(isPresented: $showMethodology) { methodology }
         }
@@ -141,57 +133,22 @@ struct MLB300HitterStory: View {
 
     private var controls: some View {
         VStack(alignment: .leading, spacing: 6) {
-            ViewThatFits(in: .horizontal) {
-                HStack(spacing: 16) { replayButton; musicButton }
-                VStack(alignment: .leading, spacing: 10) { replayButton; musicButton }
+            Button { launch() } label: {
+                Label("Replay build", systemImage: "arrow.counterclockwise").frame(minHeight: 44)
             }
+            .buttonStyle(.bordered).accessibilityIdentifier("hitter.replay")
             Text(building ? "Building · 10 seconds" : MLB300HitterData.endingQuestion)
                 .font(.caption).foregroundStyle(HitterStyle.navy.opacity(0.65))
                 .accessibilityIdentifier(building ? "hitter.building" : "hitter.complete")
-            if audioUnavailable {
-                Text("Sound is unavailable. The full story continues without it.").font(.caption).accessibilityIdentifier("hitter.audioUnavailable")
-            }
         }
-    }
-
-    private var replayButton: some View {
-        Button { launch() } label: {
-            Label("Replay build", systemImage: "arrow.counterclockwise").frame(minHeight: 44)
-        }
-        .buttonStyle(.bordered).accessibilityIdentifier("hitter.replay")
-    }
-
-    private var musicButton: some View {
-        Button {
-            musicEnabled.toggle()
-            updateAudio()
-        } label: {
-            Label(musicEnabled ? "Music on" : "Music off", systemImage: musicEnabled ? "speaker.wave.2" : "speaker.slash")
-                .frame(minHeight: 44)
-        }
-        .buttonStyle(.bordered).accessibilityIdentifier("hitter.music")
     }
 
     private func launch() {
-        updateAudio() // This function is called only from a user's tap.
         selectedIndex = MLB300HitterData.seasons.count - 1
         startedAt = ProcessInfo.processInfo.systemUptime
         launched = true
         building = !reduceMotion
         playbackID = UUID()
-    }
-
-    private func updateAudio() {
-        audioUnavailable = false
-        if musicEnabled {
-            if !audio.start() { musicEnabled = false; audioUnavailable = true }
-        } else { audio.stop() }
-    }
-
-    private func stop() {
-        building = false
-        musicEnabled = false
-        audio.stop()
     }
 
     private var methodology: some View {
@@ -224,7 +181,6 @@ struct MLB300HitterStory: View {
 }
 
 private struct StoryLaunchOverlay: View {
-    @Binding var musicEnabled: Bool
     let launch: () -> Void
     let close: () -> Void
 
@@ -251,8 +207,6 @@ private struct StoryLaunchOverlay: View {
                         .background(AppColor.bone.opacity(0.09), in: RoundedRectangle(cornerRadius: 18))
                     }
                     .accessibilityIdentifier("hitter.launch")
-                    Toggle("Music · optional", isOn: $musicEnabled)
-                        .tint(AppColor.amber).accessibilityIdentifier("hitter.launchMusic")
                     Text("10 seconds · 1976–2026 YTD\n2026 snapshot: Sept. 27, before today’s games.\nQualified hitters with a displayed average of .300 or higher.")
                         .font(.caption).foregroundStyle(AppColor.bone.opacity(0.65))
                 }

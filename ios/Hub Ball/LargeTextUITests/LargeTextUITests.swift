@@ -71,7 +71,7 @@ final class LargeTextUITests: XCTestCase {
             let close = app.buttons["hitter.close"]
             let upper = close.exists ? close.frame.maxY : app.frame.minY + 60
             let lower = footer.exists ? footer.frame.minY - 8 : app.frame.maxY - 30
-            let isFixed = ["hitter.replay", "hitter.music", "hitter.close"].contains(element.identifier)
+            let isFixed = ["hitter.replay", "hitter.close"].contains(element.identifier)
             // SwiftUI can report an offscreen scroll child as hittable underneath
             // a safe-area bar. Check its actual tap center before interacting.
             if element.exists && element.isHittable && (isFixed || (element.frame.midY > upper && element.frame.midY < lower)) { return true }
@@ -87,7 +87,7 @@ final class LargeTextUITests: XCTestCase {
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
         XCTAssertTrue(app.buttons["hitter.launch"].waitForExistence(timeout: 10))
         capture("hitter-launch")
-        XCTAssertEqual(app.switches["hitter.launchMusic"].value as? String, "0")
+        XCTAssertFalse(app.switches["hitter.launchMusic"].exists)
         app.buttons["hitter.launch"].tap()
         XCTAssertFalse(app.buttons["hitter.launch"].exists)
         XCTAssertTrue(app.staticTexts["hitter.complete"].waitForExistence(timeout: 13))
@@ -102,15 +102,7 @@ final class LargeTextUITests: XCTestCase {
             chart.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: x, dy: 140)).tap()
             XCTAssertEqual(app.otherElements["hitter.selection"].label, "\(1976 + index)\(index == counts.count - 1 ? " YTD" : ""): \(count) qualified hitters")
         }
-        XCTAssertTrue(revealHitter(app.buttons["hitter.music"]))
-        XCTAssertTrue(app.buttons["hitter.music"].label.contains("Music off"))
-        app.buttons["hitter.music"].tap()
-        if app.buttons["hitter.music"].label.contains("Music on") {
-            app.buttons["hitter.music"].tap()
-        } else {
-            XCTAssertTrue(app.staticTexts["hitter.audioUnavailable"].exists, "Audio failure must be visible and leave the story usable")
-        }
-        XCTAssertTrue(app.buttons["hitter.music"].label.contains("Music off"))
+        XCTAssertFalse(app.buttons["hitter.music"].exists)
         app.buttons["hitter.replay"].tap()
         XCTAssertTrue(app.staticTexts["hitter.building"].exists)
         XCTAssertTrue(app.staticTexts["hitter.complete"].waitForExistence(timeout: 13))
@@ -144,11 +136,11 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(revealHitter(app.otherElements["hitter.chart"]))
         capture("hitter-large-chart")
         XCTAssertTrue(revealHitter(app.buttons["hitter.replay"]))
-        XCTAssertTrue(revealHitter(app.buttons["hitter.music"]))
+        XCTAssertFalse(app.buttons["hitter.music"].exists)
         capture("hitter-large-controls")
     }
 
-    func testHitterSoundLifecycleAndCompactHeader() {
+    func testHitterBackgroundAndCompactHeader() {
         launch(size: "UICTContentSizeCategoryAccessibilityXXXL", team: "arizona")
         XCTAssertTrue(app.buttons["stories.open"].waitForExistence(timeout: 10))
         for identifier in ["stories.open", "playoffs.open", "Switch team"] {
@@ -160,37 +152,20 @@ final class LargeTextUITests: XCTestCase {
         capture("hitter-compact-large-header")
         app.terminate()
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
-        XCTAssertTrue(app.switches["hitter.launchMusic"].waitForExistence(timeout: 10))
-        XCTAssertTrue(revealHitter(app.switches["hitter.launchMusic"]))
-        app.switches["hitter.launchMusic"].tap()
+        XCTAssertFalse(app.switches["hitter.launchMusic"].exists)
         XCTAssertTrue(revealHitter(app.buttons["hitter.launch"]))
         app.buttons["hitter.launch"].tap()
-        XCTAssertTrue(app.buttons["hitter.music"].label.contains("Music on") || app.staticTexts["hitter.audioUnavailable"].exists)
+        XCTAssertFalse(app.buttons["hitter.music"].exists)
         capture("hitter-compact-playing")
         XCUIDevice.shared.press(.home)
         app.activate()
-        XCTAssertTrue(app.buttons["hitter.music"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["hitter.music"].label.contains("Music off"))
-        XCTAssertTrue(app.staticTexts["hitter.complete"].exists)
-        capture("hitter-background-stopped")
+        XCTAssertTrue(app.staticTexts["hitter.complete"].waitForExistence(timeout: 10))
+        capture("hitter-background-complete")
         let chart = app.otherElements["hitter.chart"]
         XCTAssertTrue(revealHitter(chart))
         chart.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: 27, dy: 140)).tap()
-        XCTAssertEqual(app.otherElements["hitter.selection"].label, "1976: 23 qualified hitters")
+        XCTAssertEqual(app.otherElements["hitter.selection"].label, "1976: 24 qualified hitters")
         capture("hitter-compact-selection")
-    }
-
-    func testHitterAudiblePlayback() throws {
-        launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
-        XCTAssertTrue(app.buttons["hitter.launch"].waitForExistence(timeout: 10))
-        app.buttons["hitter.launch"].tap()
-        app.buttons["hitter.music"].tap()
-        if app.staticTexts["hitter.audioUnavailable"].exists {
-            throw XCTSkip("The simulator audio route rejects playback; generated WAV decoding is covered separately. Verify audible playback on a working route or device.")
-        }
-        XCTAssertTrue(app.buttons["hitter.music"].label.contains("Music on"))
-        app.buttons["hitter.music"].tap()
-        XCTAssertTrue(app.buttons["hitter.music"].label.contains("Music off"))
     }
 
     func testPlayoffsBracketAndGlobalNavigation() {

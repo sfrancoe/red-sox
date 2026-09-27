@@ -5,11 +5,11 @@ Native, offline MLB story, available through the global Stories button between t
 ## Current handoff — September 27, 2026
 
 - Canonical checkout: `/Users/sfrancoe/Projects/Hub Ball`, branch `main`. Work from here for the next phone update. The chat’s original `/Users/sfrancoe/Projects/MLB Apps` checkout is archived and must not be used for releases or device installation.
-- Hub Ball 1.0 build **71** is installed and launched on Scott’s wired **iPhone 17** (`B3886736-9848-5385-A29E-9E9E7774EE91`). Build 68 introduced the story; build 69 removed the baseball icon from the global team selector; build 70 tried a sixteen-second ambient melody. Build 71 replaces it with a solo piano piece at Scott’s request. The homepage’s own baseball graphic remains.
+- Hub Ball 1.0 build **72** is prepared for installation on Scott’s wired **iPhone 17** (`B3886736-9848-5385-A29E-9E9E7774EE91`). Build 68 introduced the story; build 69 removed the baseball icon from the global team selector; build 70 tried a sixteen-second ambient melody. Build 71 tried a solo piano piece; build 72 removes music and its controls at Scott’s request. The homepage’s own baseball graphic remains.
 - All changes from `codex/vanishing-hitter-story` were fast-forwarded into canonical main. Its managed worktree at `/Users/sfrancoe/.codex/worktrees/vanishing-hitter-story/MLB Apps` remains available, but is behind main’s release commits. Do not reinstall its older build. No push or TestFlight upload was performed for this work.
 - Accepted visual choices: smaller single-line headline on both launch and story screens; line-only animation with peak/final/selected markers after completion; shared Stories entry; no baseball in the shared team selector. Red Sox, Stories and 2026 Playoffs fit one row at standard iPhone text size; the accessible fallback can still use two rows.
 - Current figures: **55 in 1999, seven in 2025, seven in 2026 YTD, −87%**. Exactly .300 counts. The older .301+ definition and six-player ending are superseded. 2026 is explicitly provisional, dated before September 27 games; never silently relabel it final.
-- Verification completed: all 51 year taps, replay, methodology, source reconciliation and cutoff tests; standard header navigation and Red Sox/Cubs screenshots. Earlier compact and large-text checks also passed. Simulator audio output was unavailable. Scott heard build 70’s ambient melody on his iPhone and asked for a solo piano piece; build 71 awaits his listening review.
+- Verification completed: all 51 year taps, replay, methodology, source reconciliation and cutoff tests; standard header navigation and Red Sox/Cubs screenshots. Earlier compact and large-text checks also passed. Scott asked to remove the soundtrack entirely. Build 72 runs the story silently.
 - Release workflow: read `AGENTS.md`, increment both Xcode build configurations and `config/hub-ball-release.json` together for a new phone build, commit intended files, run `python3 scripts/check_hub_ball_release.py`, then `bash scripts/install_hub_ball.sh --device B3886736-9848-5385-A29E-9E9E7774EE91`. Recheck connected devices first. Do not upload to TestFlight merely to update the wired phone.
 - Leave the unrelated untracked planning/review documents and `docs/design/players-ipad-responsive.png` alone. They were present before this work and are not part of these changes.
 
@@ -25,16 +25,15 @@ Qualification uses MLB’s `playerPool=QUALIFIED` rather than a fixed 502-PA cut
 
 - `MLB300HitterStory.swift`: full-screen presentation, launch overlay, stat cards, native vector chart, inspector, controls and methodology.
 - `MLB300HitterData.swift`: dedicated season module and timing functions.
-- `StoryAudioController.swift` / `StoryAudioLoop.swift`: locally rendered original solo piano piece with a right-hand melody, broken-chord left hand and subtle room reflection as an in-memory PCM WAV through AVAudioPlayer; no downloads or third-party services.
 - `StoriesView.swift`: optional team scope; nil shows the global library.
 
-The primary path trims from zero to one over 10 seconds using monotonic elapsed time. The build shows only the line, with no year dots. Once complete, markers highlight the peak, final year, and tapped year. Reduced Motion reveals the completed chart immediately. Replay resets the clock without stacking audio players. Music defaults off and can start only in response to a launch or music-button tap. It respects silent mode, mixes with other audio, and stops on interruption, dismissal or backgrounding. Returning to the app shows the completed chart without automatically restarting sound.
+The primary path trims from zero to one over 10 seconds using monotonic elapsed time. The build shows only the line, with no year dots. Once complete, markers highlight the peak, final year, and tapped year. Reduced Motion reveals the completed chart immediately. Replay resets the clock. The story has no soundtrack or audio controls. Returning from the background shows the completed chart.
 
 Every year can be selected by tapping its x-position or hovering, with a discrete Season slider for fine selection and VoiceOver. All values are also available in the methodology list. Long content scrolls at larger Dynamic Type sizes.
 
 ## Verification
 
-Run `python3 scripts/test_hitter_story_source.py` to check the inclusive cutoff, complete/unique source rows, and reconciliation of all 51 counts. Run `bash scripts/test_hitter_story_data.sh` for series invariants, boundary timing, and decoding the generated sixteen-second WAV (sample count, amplitude and loop seam).
+Run `python3 scripts/test_hitter_story_source.py` to check the inclusive cutoff, complete/unique source rows, and reconciliation of all 51 counts. Run `bash scripts/test_hitter_story_data.sh` for series invariants and boundary timing.
 
 Run the existing native UI harness with these methods:
 
@@ -43,8 +42,7 @@ bash scripts/test_large_text_ui.sh SIMULATOR_UUID hitter-story \
   testHitterStoryPlaybackAndAllSeasons \
   testHitterStoryGlobalNavigation \
   testHitterStoryLargeText \
-  testHitterSoundLifecycleAndCompactHeader \
-  testHitterAudiblePlayback
+  testHitterBackgroundAndCompactHeader
 ```
 
 Debug routes: `-show-hitter-story` and `-show-story-library`.
@@ -55,15 +53,10 @@ The user authorized including 2026 before the final games on September 27. It is
 
 After the last games, fetch official qualified season totals again, apply the displayed AVG >= .300 cutoff, and update the count if needed. Only then remove the provisional flag and revise the snapshot date, narrative, question, methodology and tests to final-season wording. This snapshot does not refresh automatically.
 
-## Audio verification limitation
-
-The current Mac uses a Jump Desktop virtual default audio output. Both AVAudioEngine and AVAudioPlayer startup were rejected in the iOS simulator. The WAV itself successfully decodes through AVAudioFile. The UI tests assert the visible silent fallback and continue testing the story; the distinct audible-playback check explicitly skips when the route is unavailable. Scott confirmed builds 69 and 70 played on his phone but disliked their music. The solo piano revision still needs his listening review. No Mac sound settings were changed.
-
 ## Verified in this implementation
 
 - iPhone 17 Pro simulator: global navigation, full-screen launch/dismiss, year-by-year taps against the MLB-derived counts (extended to 51 points for the dated 2026 snapshot), ten-second completion, replay, methodology sheet, and largest Dynamic Type layout.
-- Compact iPhone simulator: largest-text header with the Diamondbacks label, launch with optional music enabled, graceful audio fallback, background/return behavior, and on-chart year selection.
-- Swift checks: season continuity, endpoints, peak, decline, timing boundaries, generated WAV decoding.
-- Audible playback test: explicitly skipped because the simulator audio route rejected playback. The solo piano track is available as a local WAV preview and will be installed on Scott’s phone.
+- Compact iPhone simulator: largest-text header with the Diamondbacks label, silent launch, background/return behavior, and on-chart year selection.
+- Swift checks: season continuity, endpoints, peak, decline, and timing boundaries.
 
-UI evidence is generated under `dist/hitter-preview/` and result bundles under `dist/large-text-ui/`; neither directory is committed. The development build is installed on Scott’s iPhone as build 71. No TestFlight release has been made for this story.
+UI evidence is generated under `dist/hitter-preview/` and result bundles under `dist/large-text-ui/`; neither directory is committed. The development build is prepared as build 72 for Scott’s iPhone. No TestFlight release has been made for this story.
