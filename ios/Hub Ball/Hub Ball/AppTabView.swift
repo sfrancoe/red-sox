@@ -276,7 +276,6 @@ struct AppTabView: View {
     private var teamPickerButton: some View {
         Button { settingsPresented = true } label: {
             HStack(spacing: 6) {
-                Image(systemName: "baseball.fill").font(.system(size: 16))
                 Text(team.shortName)
                     .font(.headline.weight(.bold))
                     .lineLimit(2)
