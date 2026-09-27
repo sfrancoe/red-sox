@@ -38,7 +38,7 @@ struct StoriesView: View {
                                             .font(.system(.title, design: .serif).weight(.bold))
                                         Text("Seven in 2025. Seven so far in 2026. Will it end at seven again?")
                                             .font(.subheadline)
-                                        Label("WATCH THE STORY · 10 SECONDS", systemImage: "play.circle.fill")
+                                        Label("WATCH THE STORY · 5 SECONDS", systemImage: "play.circle.fill")
                                             .font(.caption.weight(.bold))
                                             .foregroundStyle(Color(hubHex: "#BC6259"))
                                     }

@@ -92,13 +92,12 @@ final class LargeTextUITests: XCTestCase {
 
     func testHitterStoryPlaybackAndAllSeasons() {
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
-        XCTAssertTrue(app.buttons["hitter.launch"].waitForExistence(timeout: 10))
-        capture("hitter-launch")
-        XCTAssertFalse(app.switches["hitter.launchMusic"].exists)
-        app.buttons["hitter.launch"].tap()
         XCTAssertFalse(app.buttons["hitter.launch"].exists)
+        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
+        capture("hitter-direct-chart")
         XCTAssertTrue(waitForReplay("Ready"))
         XCTAssertTrue(app.staticTexts["hitter.snapshot"].label.contains("Sept. 27, 2026"))
+        XCTAssertFalse(app.sliders["hitter.year"].exists)
         capture("hitter-complete")
         let chart = app.otherElements["hitter.chart"]
         XCTAssertTrue(revealHitter(chart))
@@ -106,7 +105,7 @@ final class LargeTextUITests: XCTestCase {
         for (index, count) in counts.enumerated() {
             let x = 27 + CGFloat(index) / CGFloat(counts.count - 1) * (chart.frame.width - 43)
             chart.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: x, dy: 140)).tap()
-            XCTAssertEqual(app.otherElements["hitter.selection"].label, "\(1976 + index)\(index == counts.count - 1 ? " YTD" : ""): \(count) qualified hitters")
+            XCTAssertEqual(chart.value as? String, "\(1976 + index)\(index == counts.count - 1 ? " YTD" : ""): \(count) qualified hitters")
         }
         XCTAssertFalse(app.buttons["hitter.music"].exists)
         let replay = app.buttons["hitter.replay"]
@@ -125,8 +124,6 @@ final class LargeTextUITests: XCTestCase {
 
     func testHitterStatCardRosters() {
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
-        XCTAssertTrue(app.buttons["hitter.launch"].waitForExistence(timeout: 10))
-        app.buttons["hitter.launch"].tap()
         let peak = app.buttons["hitter.card.peak"]
         let latest = app.buttons["hitter.card.latest"]
         XCTAssertTrue(peak.waitForExistence(timeout: 5))
@@ -166,7 +163,8 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(app.buttons["stories.hitter"].waitForExistence(timeout: 5))
         capture("hitter-library")
         app.buttons["stories.hitter"].tap()
-        XCTAssertTrue(app.buttons["hitter.launch"].waitForExistence(timeout: 5))
+        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
+        XCTAssertFalse(app.buttons["hitter.launch"].exists)
         app.buttons["hitter.close"].tap()
         XCTAssertTrue(app.buttons["stories.close"].waitForExistence(timeout: 5))
         app.buttons["stories.close"].tap()
@@ -175,12 +173,11 @@ final class LargeTextUITests: XCTestCase {
 
     func testHitterStoryLargeText() {
         launch("-show-hitter-story")
-        XCTAssertTrue(revealHitter(app.buttons["hitter.launch"]))
-        capture("hitter-large-launch")
-        app.buttons["hitter.launch"].tap()
+        XCTAssertFalse(app.buttons["hitter.launch"].exists)
         XCTAssertTrue(revealHitter(app.otherElements["hitter.chart"]))
         capture("hitter-large-chart")
         XCTAssertTrue(revealHitter(app.buttons["hitter.replay"]))
+        XCTAssertFalse(app.sliders["hitter.year"].exists)
         XCTAssertFalse(app.buttons["hitter.music"].exists)
         capture("hitter-large-replay")
     }
@@ -197,9 +194,7 @@ final class LargeTextUITests: XCTestCase {
         capture("hitter-compact-large-header")
         app.terminate()
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
-        XCTAssertFalse(app.switches["hitter.launchMusic"].exists)
-        XCTAssertTrue(revealHitter(app.buttons["hitter.launch"]))
-        app.buttons["hitter.launch"].tap()
+        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
         XCTAssertFalse(app.buttons["hitter.music"].exists)
         capture("hitter-compact-playing")
         XCUIDevice.shared.press(.home)
@@ -209,7 +204,7 @@ final class LargeTextUITests: XCTestCase {
         let chart = app.otherElements["hitter.chart"]
         XCTAssertTrue(revealHitter(chart))
         chart.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: 27, dy: 140)).tap()
-        XCTAssertEqual(app.otherElements["hitter.selection"].label, "1976: 24 qualified hitters")
+        XCTAssertEqual(chart.value as? String, "1976: 24 qualified hitters")
         capture("hitter-compact-selection")
     }
 
