@@ -295,15 +295,7 @@ struct AppTabView: View {
         Button { playoffsPresented = true } label: {
             HStack(spacing: 5) {
                 Image(systemName: "trophy.fill")
-                if dynamicTypeSize.usesExpandedReadingLayout {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(String(OctoberFeature.season))
-                        Text("Playoffs")
-                    }
-                    .fixedSize()
-                } else {
-                    Text("\(String(OctoberFeature.season)) Playoffs").fixedSize()
-                }
+                Text("Playoffs").fixedSize()
             }
             .font(.subheadline.weight(.semibold))
             .foregroundStyle(AppColor.amber)
@@ -332,16 +324,16 @@ struct AppTabView: View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 10) {
                 teamPickerButton.fixedSize(horizontal: true, vertical: false)
+                if OctoberFeature.enabled { playoffsButton }
                 Spacer(minLength: 0)
                 storiesButton
-                if OctoberFeature.enabled { playoffsButton }
             }
             VStack(alignment: .leading, spacing: 2) {
                 teamPickerButton
                 HStack {
-                    storiesButton
-                    Spacer(minLength: 4)
                     if OctoberFeature.enabled { playoffsButton }
+                    Spacer(minLength: 4)
+                    storiesButton
                 }
             }
         }

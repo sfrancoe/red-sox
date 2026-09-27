@@ -57,7 +57,10 @@ EDITORIAL_LINKS = {
     "https://www.mlb.com/gameday/824708",
     "https://x.com/gingersnaphyde/status/2099245461748002821",
 }
-PUBLIC_WEB_PAGES = {"https://red-sox.netlify.app/october/"}
+PUBLIC_WEB_PAGES = {
+    "https://red-sox.netlify.app/october/",
+    "https://www.mlb.com/stats/batting-average/2026",
+}
 JSON_PROBE_OVERRIDES = {
     "https://red-sox.netlify.app": "https://red-sox.netlify.app/api/data/meta.json",
     "https://statsapi.mlb.com": "https://statsapi.mlb.com/api/v1/teams/111",

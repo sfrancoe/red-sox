@@ -1,10 +1,8 @@
 import SwiftUI
-import UIKit
 
 private enum OctoberSection: String, CaseIterable {
     case race = "Bracket"
     case tonight = "Tonight"
-    case calls = "My Calls"
 }
 
 private func bracketLabel(_ series: PostseasonSeries) -> String {
@@ -22,7 +20,6 @@ struct OctoberView: View {
     @State private var store = PostseasonStore(season: OctoberFeature.season)
     @State private var section: OctoberSection = .race
     @State private var selectedSeries: PostseasonSeries?
-    @State private var selectedCall: PostseasonSeries?
 
     private var payload: PostseasonPayload? { store.snapshot }
     private var series: [PostseasonSeries] { payload?.series ?? [] }
@@ -46,7 +43,6 @@ struct OctoberView: View {
                         switch section {
                         case .race: raceView(payload)
                         case .tonight: tonightView(payload)
-                        case .calls: callsView(payload)
                         }
                     } else if store.isLoading {
                         ProgressView("Opening the playoff bracket…").tint(AppColor.amber)
@@ -74,64 +70,26 @@ struct OctoberView: View {
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
         }
-        .sheet(item: $selectedCall) { series in
-            OctoberCallEditor(series: series, store: store)
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
-        }
         .preferredColorScheme(.dark)
     }
 
     private var masthead: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack(alignment: .firstTextBaseline) {
-                Text("\(String(OctoberFeature.season)) PLAYOFFS")
-                    .font(AppFont.displayLarge)
-                    .tracking(1.5)
-                    .foregroundStyle(AppColor.bone)
-                Spacer()
-                if let checked = payload?.checkedDate {
-                    Text(store.isDelayed ? "DELAYED UPDATES" : "CHECKED \(checked.formatted(date: .omitted, time: .shortened))")
-                        .font(AppFont.label)
-                        .foregroundStyle(store.isDelayed || store.refreshFailed ? AppColor.amber : AppColor.boneMuted)
-                }
-            }
-            Text("EVERY SERIES. THE WHOLE PICTURE.")
-                .font(AppFont.label)
-                .tracking(1.1)
-                .foregroundStyle(AppColor.boneMuted)
-            if store.refreshFailed {
-                HStack {
-                    Text("Saved data · Updates unavailable")
-                        .font(AppFont.label)
-                        .foregroundStyle(AppColor.amber)
-                    Spacer()
-                    Button("Retry") { Task { await store.refresh() } }
-                        .font(AppFont.label)
-                        .foregroundStyle(AppColor.bone)
-                        .frame(minHeight: 44)
-                }
-            } else if store.isDelayed {
-                Text("Saved live snapshot · Updates may be delayed")
-                    .font(AppFont.label)
-                    .foregroundStyle(AppColor.amber)
-            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColor.nightRaised)
+        Text("\(String(OctoberFeature.season)) PLAYOFFS")
+            .font(AppFont.displayLarge)
+            .tracking(1.5)
+            .foregroundStyle(AppColor.bone)
+            .lineLimit(1)
+            .minimumScaleFactor(0.65)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .background(AppColor.nightRaised)
     }
 
     private func raceView(_ payload: PostseasonPayload) -> some View {
         PlayoffBracketView(payload: payload) { selectedSeries = $0 }
             .refreshable { await store.refresh() }
-    }
-
-    private var rootingChoices: [PostseasonClub] {
-        let all = series.flatMap(\.participants).filter(\.resolved)
-        return Dictionary(grouping: all, by: \.teamId).compactMap { $0.value.first }
-            .sorted { ($0.name ?? "") < ($1.name ?? "") }
     }
 
     private func tonightView(_ payload: PostseasonPayload) -> some View {
@@ -216,80 +174,6 @@ struct OctoberView: View {
             .monospacedDigit()
             .foregroundStyle(AppColor.bone)
             .frame(minWidth: 22)
-    }
-
-    private func callsView(_ payload: PostseasonPayload) -> some View {
-        let established = series.filter {
-            $0.participants.count == 2 && $0.requiredWins != nil
-                && ($0.state != "complete" || store.call(for: $0) != nil)
-        }
-        return ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("MY CALLS").font(AppFont.displayMedium).foregroundStyle(AppColor.bone)
-                    Text("A call stays on this device. A fresh entry opens for every new series.")
-                        .font(AppFont.bodySmall).foregroundStyle(AppColor.boneMuted)
-                }
-                if established.isEmpty {
-                    Text("Calls open when both teams in a series are established.")
-                        .font(AppFont.bodySmall).foregroundStyle(AppColor.boneDim)
-                        .padding(16).frame(maxWidth: .infinity, alignment: .leading).background(AppColor.nightRaised)
-                }
-                ForEach(established) { item in
-                    Button { selectedCall = item } label: { callRow(item) }
-                        .buttonStyle(.plain)
-                        .disabled(!store.mayEdit(item) && store.call(for: item) == nil)
-                }
-                championPicker
-            }
-            .padding(14)
-        }
-    }
-
-    private func callRow(_ item: PostseasonSeries) -> some View {
-        let existing = store.call(for: item)
-        return VStack(alignment: .leading, spacing: 9) {
-            HStack {
-                Text(roundTitle(item.round)).font(AppFont.label).foregroundStyle(AppColor.boneMuted)
-                Spacer()
-                Text(existing?.outcome == "correct" ? "CALLED IT" : existing?.outcome == "missed" ? "OCTOBER HAD OTHER PLANS" : existing?.entryCategory.uppercased() ?? "MAKE A CALL")
-                    .font(AppFont.label).foregroundStyle(AppColor.amber)
-            }
-            Text(item.participants.compactMap(\.name).joined(separator: "  ·  "))
-                .font(AppFont.body.weight(.semibold)).foregroundStyle(AppColor.bone)
-            if let existing {
-                Text("Pick: \(teamName(existing.winnerTeamID)) in \(existing.seriesLength) · \(existing.entryCategory == "pre-series" ? "Pre-series" : "From here")\(existing.exactLength == true ? " · Exact length" : "")")
-                    .font(AppFont.bodySmall).foregroundStyle(AppColor.boneDim)
-            } else {
-                Text("Pick the series winner and length")
-                    .font(AppFont.bodySmall).foregroundStyle(AppColor.boneDim)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
-        .background(AppColor.nightRaised)
-        .overlay(alignment: .top) { Rectangle().fill(AppColor.rule).frame(height: 1) }
-        .contentShape(Rectangle())
-    }
-
-    private var championPicker: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("CHAMPION CALL · OPTIONAL").font(AppFont.label).foregroundStyle(AppColor.boneMuted)
-            Menu {
-                Button("No champion call") { store.saveChampion(nil) }
-                ForEach(rootingChoices, id: \.teamId) { club in
-                    Button(club.name ?? "Team") { if let id = club.teamId { store.saveChampion(id) } }
-                }
-            } label: {
-                Label(store.calls.championTeamID.map(teamName) ?? "Choose a champion", systemImage: "trophy")
-                    .font(AppFont.bodySmall.weight(.semibold))
-                    .foregroundStyle(AppColor.amber)
-                    .frame(minHeight: 44)
-            }
-        }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppColor.nightRaised)
     }
 
     private var emptyState: some View {
@@ -448,169 +332,4 @@ private struct OctoberSeriesDetail: View {
         }
         return bracketLabel(next)
     }
-}
-
-private struct OctoberCallEditor: View {
-    @Environment(\.dismiss) private var dismiss
-    @State private var winnerID: Int?
-    @State private var length = 4
-    @State private var shareItems: [Any] = []
-    @State private var sharing = false
-    let series: PostseasonSeries
-    let store: PostseasonStore
-
-    private var requiredWins: Int { series.requiredWins ?? 2 }
-    private var possibleLengths: [Int] { (requiredWins...(requiredWins * 2 - 1)).map { $0 } }
-
-    var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("PICK A SIDE")
-                    .font(AppFont.displayMedium).foregroundStyle(AppColor.bone)
-                ForEach(series.participants) { participant in
-                    Button {
-                        winnerID = participant.teamId
-                        if length < requiredWins { length = requiredWins }
-                    } label: {
-                        HStack {
-                            Text(participant.name ?? participant.slot ?? "Team")
-                            Spacer()
-                            if winnerID == participant.teamId { Image(systemName: "checkmark.circle.fill").foregroundStyle(AppColor.amber) }
-                        }
-                        .font(AppFont.body.weight(.semibold)).foregroundStyle(AppColor.bone)
-                        .padding(14).background(AppColor.nightRaised)
-                    }
-                    .buttonStyle(.plain)
-                    .frame(minHeight: 44)
-                    .disabled(!store.mayEdit(series) && store.call(for: series) != nil)
-                }
-                Picker("Series length", selection: $length) {
-                    ForEach(possibleLengths, id: \.self) { games in Text("In \(games)").tag(games) }
-                }
-                .pickerStyle(.segmented)
-                .tint(AppColor.amber)
-                .disabled(!store.mayEdit(series) && store.call(for: series) != nil)
-                if let winnerID {
-                    Text("A call is a prediction. It does not change who you are rooting for.")
-                        .font(AppFont.bodySmall).foregroundStyle(AppColor.boneMuted)
-                    Button(store.mayEdit(series) ? "Save and share my call" : "Share my call") {
-                        if store.mayEdit(series) {
-                            store.saveCall(series: series, winner: winnerID, length: length)
-                        }
-                        prepareShare(winnerID: winnerID)
-                    }
-                    .buttonStyle(HubProminentButtonStyle())
-                    .frame(minHeight: 44)
-                }
-                Spacer(minLength: 0)
-            }
-            .padding(20)
-            .background(AppColor.night.ignoresSafeArea())
-            .navigationTitle("My Call")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .topBarTrailing) { Button("Done") { dismiss() }.foregroundStyle(AppColor.bone) } }
-            .sheet(isPresented: $sharing) { OctoberActivitySheet(items: shareItems) }
-        }
-        .preferredColorScheme(.dark)
-        .onAppear {
-            if let existing = store.call(for: series) {
-                winnerID = existing.winnerTeamID
-                length = existing.seriesLength
-            } else {
-                winnerID = series.participants.first?.teamId
-                length = requiredWins
-            }
-        }
-    }
-
-    @MainActor
-    private func prepareShare(winnerID: Int) {
-        let winner = teamName(winnerID)
-        let round = series.round.replacingOccurrences(of: "-", with: " ").capitalized
-        let webURL = URL(string: "https://red-sox.netlify.app/october/")!
-        let savedCall = store.call(for: series)
-        let outcome = savedCall?.outcome == "correct" ? "CALLED IT" : savedCall?.outcome == "missed" ? "OCTOBER HAD OTHER PLANS" : nil
-        let color = HubTeam.allCases.first(where: { $0.mlbID == winnerID })?.definition.colors.teamTint ?? "#E8A33D"
-        let ticket = OctoberTicketCard(
-            winner: winner,
-            round: round,
-            length: length,
-            outcome: outcome,
-            exactLength: savedCall?.exactLength == true,
-            teamColor: Color(hubHex: color)
-        )
-        let renderer = ImageRenderer(content: ticket.frame(width: 1080, height: 1350))
-        renderer.scale = 1
-        guard let image = renderer.uiImage else { return }
-        let message = outcome.map { "\($0): I picked \(winner) in \(length) in the \(round). Your turn." }
-            ?? "I called \(winner) in \(length) in the \(round). I called it. Your turn."
-        shareItems = [image, message, webURL]
-        sharing = true
-    }
-
-    private func teamName(_ id: Int) -> String {
-        HubTeam.allCases.first(where: { $0.mlbID == id })?.fullName ?? "Team"
-    }
-}
-
-private struct OctoberTicketCard: View {
-    let winner: String
-    let round: String
-    let length: Int
-    let outcome: String?
-    let exactLength: Bool
-    let teamColor: Color
-
-    var body: some View {
-        ZStack {
-            AppColor.night
-            VStack(alignment: .leading, spacing: 34) {
-                HStack {
-                    Text("HUB BALL").font(.custom("BarlowCondensed-SemiBold", size: 42)).tracking(4)
-                    Spacer()
-                    Text(Date.now.formatted(.dateTime.month(.abbreviated).day().year()))
-                        .font(.custom("Inter-Regular", size: 24).monospacedDigit())
-                }
-                Rectangle().fill(teamColor).frame(height: 4)
-                VStack(alignment: .leading, spacing: 14) {
-                    Text(outcome ?? "MY PLAYOFF CALL")
-                        .font(.custom("Inter-Medium", size: 25)).tracking(3)
-                        .foregroundStyle(AppColor.boneMuted)
-                    Text(winner.uppercased())
-                        .font(.custom("BarlowCondensed-SemiBold", size: 100))
-                        .minimumScaleFactor(0.62).lineLimit(2)
-                        .foregroundStyle(AppColor.bone)
-                    Text("TO WIN THE \(round.uppercased())")
-                        .font(.custom("Inter-Regular", size: 29)).tracking(1.5)
-                    Text("IN \(length) GAMES")
-                        .font(.custom("Inter-Medium", size: 34).monospacedDigit())
-                        .foregroundStyle(teamColor)
-                    if exactLength {
-                        Text("EXACT LENGTH · BONUS BADGE")
-                            .font(.custom("Inter-Medium", size: 22))
-                            .tracking(1.4)
-                            .foregroundStyle(AppColor.amber)
-                    }
-                }
-                Spacer()
-                    Text("I CALLED IT. YOUR TURN.")
-                    .font(.custom("BarlowCondensed-SemiBold", size: 36)).tracking(1.2)
-                Text("HUB BALL · BASEBALL AFTER DARK")
-                    .font(.custom("Inter-Regular", size: 20)).tracking(2)
-                    .foregroundStyle(AppColor.boneMuted)
-            }
-            .foregroundStyle(AppColor.bone)
-            .padding(62)
-        }
-    }
-}
-
-private struct OctoberActivitySheet: UIViewControllerRepresentable {
-    let items: [Any]
-
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        UIActivityViewController(activityItems: items, applicationActivities: nil)
-    }
-
-    func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
 }

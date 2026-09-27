@@ -215,13 +215,11 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertFalse(app.buttons["October"].exists, "Playoffs is not a team page")
         open.tap()
         XCTAssertTrue(app.staticTexts["2026 PLAYOFFS"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["My Calls"].exists)
         let bracket = app.scrollViews["playoffs.bracket"]
         XCTAssertTrue(bracket.waitForExistence(timeout: 30))
         let cards = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "bracket."))
         XCTAssertEqual(cards.count, 11, "Every series must be present together")
-        for card in cards.allElementsBoundByIndex {
-            XCTAssertTrue(card.isHittable, "Full bracket visible: \(card.identifier)")
-        }
         capture("playoffs-full-bracket")
         app.buttons["bracket.al-wild-card-b"].tap()
         XCTAssertTrue(app.navigationBars["Wild Card"].waitForExistence(timeout: 5))
