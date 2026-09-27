@@ -274,7 +274,7 @@ struct OctoberView: View {
                             .minimumScaleFactor(0.75)
                         Spacer(minLength: 6)
                         Text(historyValue(entry.value, key: category.key))
-                            .font(AppFont.numberLarge)
+                            .font(.custom("Inter-Medium", size: 16, relativeTo: .body))
                             .monospacedDigit()
                             .foregroundStyle(AppColor.bone)
                     }

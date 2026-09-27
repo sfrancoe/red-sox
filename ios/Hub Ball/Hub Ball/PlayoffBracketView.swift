@@ -10,6 +10,7 @@ struct PlayoffBracketView: View {
     private let rowSpacing = 8.0
     private let leagueRailWidth = 18.0
     private let leagueRailSpacing = 4.0
+    private let unresolvedLabel = "- - -"
 
     private func series(_ slot: PlayoffBracketSlot) -> PostseasonSeries? {
         payload.series.first { $0.id == slot.seriesID(season: payload.season) }
@@ -121,12 +122,18 @@ struct PlayoffBracketView: View {
         let slot = PlayoffBracketSlot.all.first { $0.league == "MLB" }!
         let cardWidth = min(max(minimumCardWidth * 1.7, width * 0.52), 280)
         return VStack(spacing: 12) {
-            Label("WORLD SERIES", systemImage: "trophy.fill")
+            Text("WORLD SERIES")
                 .font(.system(size: nameSize, weight: .bold))
                 .tracking(1.2)
                 .foregroundStyle(AppColor.amber)
-            matchup(slot, width: cardWidth)
-                .frame(width: cardWidth, height: cardHeight)
+            HStack(spacing: 10) {
+                Image(systemName: "trophy.fill")
+                matchup(slot, width: cardWidth)
+                    .frame(width: cardWidth, height: cardHeight)
+                Image(systemName: "trophy.fill")
+            }
+            .font(.system(size: nameSize * 1.2, weight: .bold))
+            .foregroundStyle(AppColor.amber)
         }
         .frame(width: width)
     }
@@ -173,7 +180,7 @@ struct PlayoffBracketView: View {
                                     .foregroundStyle(item?.winnerTeamId == row.teamId && row.teamId != nil ? AppColor.amber : AppColor.bone)
                             }
                         } else {
-                            Text("TBD")
+                            Text(unresolvedLabel)
                                 .font(.system(size: labelSize, weight: .semibold))
                                 .foregroundStyle(AppColor.playoffTBD)
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -237,7 +244,7 @@ struct PlayoffBracketView: View {
     }
 
     private func status(_ item: PostseasonSeries?) -> String {
-        guard let item else { return "MATCHUP TBD" }
+        guard let item else { return "MATCHUP \(unresolvedLabel)" }
         if item.state == "complete" { return "FINAL · \(item.completedGameCount) GAMES" }
         if item.state == "unknown" { return "UNDER REVIEW" }
         let games = payload.games.filter { $0.seriesId == item.id }
@@ -246,10 +253,14 @@ struct PlayoffBracketView: View {
         }
         if let next = nextScheduledGame(for: item) {
             // A TBD provider timestamp is a date placeholder, never a local start time.
-            if next.timeTBD { return "\(next.gameDate.map { String($0.prefix(10).suffix(5)).replacingOccurrences(of: "-", with: "/") } ?? "DATE TBD") · TIME TBD" }
+            if next.timeTBD {
+                let date = next.gameDate.map { String($0.prefix(10).suffix(5)).replacingOccurrences(of: "-", with: "/") }
+                    ?? "DATE \(unresolvedLabel)"
+                return "\(date) · TIME \(unresolvedLabel)"
+            }
             if let date = next.startDate { return date.formatted(.dateTime.month(.abbreviated).day()).uppercased() }
         }
-        return item.requiredWins.map { "FIRST TO \($0)" } ?? "MATCHUP TBD"
+        return item.requiredWins.map { "FIRST TO \($0)" } ?? "MATCHUP \(unresolvedLabel)"
     }
 
     private func nextScheduledGame(for item: PostseasonSeries?) -> PostseasonGame? {
