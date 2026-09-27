@@ -35,6 +35,11 @@ try {
   assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/leaderboards/2026.json');
 
   calls = [];
+  response = await handler(new Request('https://example.test/api/data/postseason-history/2026.json'));
+  assert.equal(response.status, 200);
+  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/postseason-history/2026.json');
+
+  calls = [];
   response = await handler(new Request('https://example.test/api/data/yankees/standings.json'));
   assert.equal(response.status, 200);
   assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/yankees/standings.json');
@@ -94,3 +99,5 @@ assert.equal(ALLOWED_PATHS.has('redsox/standings.json'), false);
 assert.equal(ALLOWED_PATHS.has('standings.json'), true);
 assert.equal(ALLOWED_PATHS.has('leaderboards/2026.json'), true);
 assert.equal(ALLOWED_PATHS.has('leaderboards/2022.json'), false);
+assert.equal(ALLOWED_PATHS.has('postseason-history/2026.json'), true);
+assert.equal(ALLOWED_PATHS.has('postseason-history/2025.json'), false);
