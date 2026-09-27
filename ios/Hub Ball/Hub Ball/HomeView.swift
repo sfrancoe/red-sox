@@ -213,9 +213,6 @@ struct HomeView: View {
                 .padding(.horizontal, 13)
                 .frame(height: 35)
                 .background(team.isFavorite ? palette.tint : AppColor.paper)
-                .overlay(alignment: .leading) {
-                    if team.isFavorite { Rectangle().fill(palette.line).frame(width: 3) }
-                }
                 if index < division.teams.count - 1 {
                     Divider().overlay(AppColor.separator).padding(.leading, 13)
                 }
@@ -266,9 +263,6 @@ struct HomeView: View {
                 .padding(.vertical, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(team.isFavorite ? palette.tint : AppColor.paper)
-                .overlay(alignment: .leading) {
-                    if team.isFavorite { Rectangle().fill(palette.line).frame(width: 3) }
-                }
                 if index < division.teams.count - 1 { Divider().overlay(AppColor.separator).padding(.leading, 16) }
             }
 

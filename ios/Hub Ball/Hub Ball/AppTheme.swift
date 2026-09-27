@@ -165,9 +165,6 @@ struct HubMastheadBackground: View {
                 .allowsHitTesting(false)
             }
         }
-        .overlay(alignment: .bottom) {
-            Rectangle().fill(palette.line).frame(height: 3)
-        }
     }
 }
 
