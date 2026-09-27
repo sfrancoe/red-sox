@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-26T14:00:11.594408+00:00",
-  "roster_as_of": "September 25, 2026",
+  "generated_at": "2026-09-27T14:58:15.356983+00:00",
+  "roster_as_of": "September 26, 2026",
   "team": {
     "id": 112,
     "name": "Chicago Cubs"
@@ -20,6 +20,85 @@
     "stats_attribution": "The information used here was obtained free of charge from and is copyrighted by Retrosheet. Interested parties may contact Retrosheet at 20 Sunset Rd., Newark, DE 19711."
   },
   "players": [
+    {
+      "id": 687924,
+      "mlb_id": 687924,
+      "wikidata_id": "Q129485930",
+      "slug": "julian-aguiar",
+      "name": "Julian Aguiar",
+      "full_name": "Julian Aguiar",
+      "number": "--",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "2001-06-04",
+      "age": 25,
+      "birthplace": "Long Beach, California, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Right",
+      "debut_date": "August 19, 2024",
+      "debut_team": "Cincinnati Reds",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Cincinnati Reds",
+        "Chicago Cubs"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q129485930",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Julian_Aguiar",
+      "retrosheet_id": "aguij002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 7,
+          "plate_appearances": 0,
+          "at_bats": 0,
+          "runs": 0,
+          "hits": 0,
+          "doubles": 0,
+          "triples": 0,
+          "home_runs": 0,
+          "runs_batted_in": 0,
+          "walks": 0,
+          "strikeouts": 0,
+          "stolen_bases": 0,
+          "caught_stealing": 0,
+          "average": null,
+          "on_base_percentage": null,
+          "slugging_percentage": null,
+          "ops": null
+        },
+        "pitching": {
+          "games": 7,
+          "games_started": 7,
+          "wins": 2,
+          "losses": 1,
+          "saves": 0,
+          "innings_outs": 95,
+          "hits": 30,
+          "runs": 22,
+          "earned_runs": 22,
+          "home_runs": 8,
+          "walks": 12,
+          "strikeouts": 19,
+          "hit_batters": 5,
+          "wild_pitches": 1,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 6.25,
+          "whip": 1.326
+        }
+      }
+    },
     {
       "id": 682634,
       "mlb_id": 682634,
@@ -663,8 +742,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1998-04-13",
       "age": 28,
       "birthplace": "Santiago de los Caballeros",
@@ -1595,8 +1674,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1997-11-04",
       "age": 28,
       "birthplace": "Somerset, New Jersey, U.S.",
@@ -1987,47 +2066,6 @@
           "era": 7.56,
           "whip": 2.64
         }
-      }
-    },
-    {
-      "id": 681520,
-      "mlb_id": 681520,
-      "wikidata_id": "Q98066355",
-      "slug": "antoine-kelly",
-      "name": "Antoine Kelly",
-      "full_name": "Antoine Kelly",
-      "number": "62",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1999-12-05",
-      "age": 26,
-      "birthplace": "Chicago, Illinois, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Left",
-      "throws": "Left",
-      "debut_date": "July 31, 2026",
-      "debut_team": "Chicago Cubs",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Chicago Cubs"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q98066355",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Antoine_Kelly",
-      "retrosheet_id": null,
-      "career_stats": {
-        "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
       }
     },
     {
