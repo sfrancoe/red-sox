@@ -68,6 +68,39 @@ def fetch_season(year: int) -> dict:
     return extract_season(year, fetch_json(SOURCE.format(year=year)))
 
 
+def write_roster_module(seasons: list[dict]) -> None:
+    """Keep the two tappable card rosters tied to the same counted snapshot."""
+    peak = max(seasons, key=lambda season: season['count'])
+    latest = seasons[-1]
+    lines = [
+        'import Foundation',
+        '',
+        '/// Generated from data/mlb300-hitters.json by scripts/fetch_hitter_story.py.',
+        'enum MLB300HitterPlayers {',
+        '    struct Player: Identifiable {',
+        '        let id: Int',
+        '        let name: String',
+        '        let average: String',
+        '    }',
+    ]
+    for label, season in [('peak', peak), ('latest', latest)]:
+        players = sorted(
+            (p for p in season['players'] if Decimal(p['avg']) >= Decimal('.300')),
+            key=lambda p: (-Decimal(p['avg']), p['name']),
+        )
+        if len(players) != season['count']:
+            raise ValueError(f"Roster count differs from {season['year']} total")
+        lines += [f'    static let {label}Year = {season["year"]}',
+                  f'    static let {label}: [Player] = [']
+        for player in players:
+            name = json.dumps(player['name'], ensure_ascii=False)
+            lines.append(f'        .init(id: {player["id"]}, name: {name}, average: "{player["avg"]}"),')
+        lines.append('    ]')
+    lines.append('}')
+    path = ROOT / 'ios/Hub Ball/Hub Ball/MLB300HitterPlayers.swift'
+    path.write_text('\n'.join(lines) + '\n')
+
+
 def main() -> None:
     # All requests must succeed before either local output is updated.
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
@@ -92,6 +125,7 @@ def main() -> None:
         raise ValueError('Cannot locate season array; no files updated')
     (ROOT / 'data/mlb300-hitters.json').write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + '\n')
     module.write_text(swift)
+    write_roster_module(seasons)
     print('Counts:', ','.join(str(s['count']) for s in seasons))
     peak = max(seasons, key=lambda s: s['count'])
     print(f"Peak: {peak['year']} = {peak['count']}; ending: {seasons[-1]['count']}")

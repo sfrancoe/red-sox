@@ -48,6 +48,27 @@ class HitterSourceTests(unittest.TestCase):
             player = next(p for s in seasons if s['year'] == year for p in s['players'] if p['name'] == name)
             self.assertEqual(player['avg'], '.300')
 
+    def test_tappable_rosters_match_counts_and_sort_by_displayed_average(self):
+        seasons = json.loads((ROOT / 'data/mlb300-hitters.json').read_text())['seasons']
+        module = (ROOT / 'ios/Hub Ball/Hub Ball/MLB300HitterPlayers.swift').read_text()
+        for label, year in [('peak', 1999), ('latest', 2026)]:
+            season = next(s for s in seasons if s['year'] == year)
+            expected = sorted(
+                (p for p in season['players'] if Decimal(p['avg']) >= Decimal('.300')),
+                key=lambda p: (-Decimal(p['avg']), p['name']),
+            )
+            block = re.search(rf'static let {label}: \[Player\] = \[(.*?)\n    \]', module, re.S)
+            self.assertIsNotNone(block)
+            actual = [
+                (int(player_id), json.loads(name), average)
+                for player_id, name, average in re.findall(
+                    r'\.init\(id: (\d+), name: ("(?:\\.|[^"\\])*"), average: "(\.\d{3})"\)',
+                    block.group(1),
+                )
+            ]
+            self.assertEqual(actual, [(p['id'], p['name'], p['avg']) for p in expected])
+            self.assertEqual(len(actual), season['count'])
+
 
 if __name__ == '__main__':
     unittest.main()

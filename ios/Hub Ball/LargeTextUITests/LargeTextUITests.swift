@@ -113,6 +113,38 @@ final class LargeTextUITests: XCTestCase {
         capture("hitter-methodology")
     }
 
+    func testHitterStatCardRosters() {
+        launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
+        XCTAssertTrue(app.buttons["hitter.launch"].waitForExistence(timeout: 10))
+        app.buttons["hitter.launch"].tap()
+        let peak = app.buttons["hitter.card.peak"]
+        let latest = app.buttons["hitter.card.latest"]
+        XCTAssertTrue(peak.waitForExistence(timeout: 5))
+        XCTAssertTrue(latest.exists)
+        capture("hitter-stacked-cards")
+
+        peak.tap()
+        XCTAssertTrue(app.navigationBars["1999 · 55 hitters"].waitForExistence(timeout: 5))
+        let walker = app.staticTexts["hitter.roster.row.1"]
+        XCTAssertTrue(walker.waitForExistence(timeout: 5))
+        XCTAssertTrue(walker.label.contains("Larry Walker"))
+        XCTAssertTrue(walker.label.contains(".379"))
+        capture("hitter-peak-roster")
+        app.buttons["Done"].tap()
+
+        latest.tap()
+        XCTAssertTrue(app.navigationBars["2026 YTD · 7 hitters"].waitForExistence(timeout: 5))
+        let alvarez = app.staticTexts["hitter.roster.row.1"]
+        XCTAssertTrue(alvarez.waitForExistence(timeout: 5))
+        XCTAssertTrue(alvarez.label.contains("Yordan Alvarez"))
+        XCTAssertTrue(alvarez.label.contains(".316"))
+        let rumfield = app.staticTexts["hitter.roster.row.7"]
+        XCTAssertTrue(rumfield.exists)
+        XCTAssertTrue(rumfield.label.contains("TJ Rumfield"))
+        XCTAssertTrue(rumfield.label.contains(".300"))
+        capture("hitter-2026-roster")
+    }
+
     func testHitterStoryGlobalNavigation() {
         launch(size: "UICTContentSizeCategoryL", team: "chicago-cubs")
         XCTAssertTrue(app.buttons["stories.open"].waitForExistence(timeout: 10))

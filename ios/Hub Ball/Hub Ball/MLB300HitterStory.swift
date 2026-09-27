@@ -220,34 +220,98 @@ private struct StoryLaunchOverlay: View {
     }
 }
 
+private enum StoryRoster: String, Identifiable {
+    case peak, latest
+    var id: String { rawValue }
+}
+
 private struct StoryStatCards: View {
     let expanded: Bool
     var compact = false
+    @State private var selectedRoster: StoryRoster?
+
     var body: some View {
         let layout = expanded ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top, spacing: 8))
         layout {
-            stat("\(MLB300HitterData.peak.count)", "Peak · \(String(MLB300HitterData.peak.year))", color: HitterStyle.coral,
-                 accessibility: "Peak: \(MLB300HitterData.peak.count) hitters in \(MLB300HitterData.peak.year)")
-            stat("\(MLB300HitterData.finish.count)", MLB300HitterData.finish.label, color: HitterStyle.gold,
-                 accessibility: "\(MLB300HitterData.finish.count) hitters in \(MLB300HitterData.finish.label)")
-            stat("↓\(MLB300HitterData.decline)%", "", color: HitterStyle.navy,
-                 accessibility: "Down \(MLB300HitterData.decline) percent from the peak")
+            Button { selectedRoster = .peak } label: {
+                card("Peak · \(String(MLB300HitterData.peak.year))", value: "\(MLB300HitterData.peak.count)", color: HitterStyle.coral, tappable: true)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Peak \(MLB300HitterData.peak.count) hitters in \(MLB300HitterData.peak.year). Tap to see players")
+            .accessibilityIdentifier("hitter.card.peak")
+            Button { selectedRoster = .latest } label: {
+                card(MLB300HitterData.finish.label, value: "\(MLB300HitterData.finish.count)", color: HitterStyle.gold, tappable: true)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("\(MLB300HitterData.finish.count) hitters in \(MLB300HitterData.finish.label). Tap to see players")
+            .accessibilityIdentifier("hitter.card.latest")
+            card("vs Peak", value: "−\(MLB300HitterData.decline)%", color: HitterStyle.navy, tappable: false)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Down \(MLB300HitterData.decline) percent from the peak")
+        }
+        .sheet(item: $selectedRoster) { roster in
+            StoryRosterSheet(roster: roster)
+                .presentationDetents([.large])
         }
     }
-    private func stat(_ number: String, _ label: String, color: Color, accessibility: String) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 4) {
-            Text(number).font(.system(.title3, design: .serif).weight(.bold)).foregroundStyle(color)
-            if !label.isEmpty {
-                Text(label).font(.caption2.weight(.semibold))
-            }
+
+    private func card(_ title: String, value: String, color: Color, tappable: Bool) -> some View {
+        VStack(spacing: 2) {
+            Text(title).font(.caption2.weight(.semibold))
+            Text(value).font(.system(.title2, design: .serif).weight(.bold)).foregroundStyle(color)
+            Text("Tap to see").font(.caption2).foregroundStyle(HitterStyle.navy.opacity(0.6))
+                .opacity(tappable ? 1 : 0)
         }
         .lineLimit(1)
         .minimumScaleFactor(0.75)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(compact ? 8 : 10)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, compact ? 4 : 6)
+        .padding(.vertical, compact ? 7 : 9)
         .background(.white.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(accessibility)
+    }
+}
+
+private struct StoryRosterSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let roster: StoryRoster
+
+    private var players: [MLB300HitterPlayers.Player] {
+        roster == .peak ? MLB300HitterPlayers.peak : MLB300HitterPlayers.latest
+    }
+    private var title: String {
+        roster == .peak
+            ? "\(MLB300HitterPlayers.peakYear) · \(players.count) hitters"
+            : "\(MLB300HitterPlayers.latestYear) YTD · \(players.count) hitters"
+    }
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section {
+                    ForEach(Array(players.enumerated()), id: \.element.id) { index, player in
+                        HStack(spacing: 12) {
+                            Text("\(index + 1)").foregroundStyle(HitterStyle.navy.opacity(0.5))
+                                .frame(width: 26, alignment: .leading)
+                            Text(player.name)
+                            Spacer(minLength: 8)
+                            Text(player.average).monospacedDigit().fontWeight(.semibold)
+                        }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityLabel("\(index + 1). \(player.name), batting average \(player.average)")
+                        .accessibilityIdentifier("hitter.roster.row.\(index + 1)")
+                    }
+                } header: {
+                    Text("Qualified hitters · AVG highest first")
+                } footer: {
+                    Text(roster == .latest ? MLB300HitterData.snapshotLabel : "Final 1999 regular season")
+                }
+            }
+            .scrollContentBackground(.hidden)
+            .background(HitterStyle.paper)
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
+        }
     }
 }
 
