@@ -24,18 +24,25 @@ struct StoriesView: View {
                                             .accessibilityIdentifier("stories.close")
                                     }
                                 }
-                                Text(team == nil ? "Every team. The whole game. Baseball stories worth a closer look." : "The numbers that explain a season—and the roads they took to get there.")
-                                    .font(.subheadline)
-                                    .foregroundStyle(AppColor.ink.opacity(0.72))
+                                if team != nil {
+                                    Text("The numbers that explain a season—and the roads they took to get there.")
+                                        .font(.subheadline)
+                                        .foregroundStyle(AppColor.ink.opacity(0.72))
+                                } else {
+                                    Text("MLB · FEATURED")
+                                        .font(AppFont.label)
+                                        .foregroundStyle(AppColor.amber)
+                                }
                             }
                             .foregroundStyle(AppColor.navy)
 
                             if team == nil {
-                                Text("MLB · FEATURED").font(AppFont.label).foregroundStyle(AppColor.amber)
                                 Button { hitterPresented = true } label: {
                                     VStack(alignment: .leading, spacing: 10) {
                                         Text("The vanishing .300 hitter")
-                                            .font(.system(.title, design: .serif).weight(.bold))
+                                            .font(.system(.title2, design: .serif).weight(.bold))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.85)
                                         Text("Seven in 2025. Seven so far in 2026. Will it end at seven again?")
                                             .font(.subheadline)
                                         Label("WATCH THE STORY · 5 SECONDS", systemImage: "play.circle.fill")

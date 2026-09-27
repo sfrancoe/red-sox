@@ -9,6 +9,11 @@ private enum ShutoutStyle {
     static let pitcherColors: [Color] = [.cyan, .mint, .purple, .orange]
 }
 
+private enum ShutoutPlayback {
+    static let speed = 3.0
+    static func duration(_ seconds: Double) -> Double { seconds / speed }
+}
+
 struct ShutoutPerson: Decodable, Identifiable, Hashable {
     let id: Int
     let name: String
@@ -351,7 +356,9 @@ struct BrewersShutoutView: View {
                      progress: combined ? 0 : Double(cursor + 1),
                      credits: credits, maximum: leaderMaximum,
                      activePlayer: current?.top == false && (current?.rbi ?? 0) > 0 ? current?.batter.id : nil,
-                     reduceMotion: reduceMotion, lineDuration: (current?.runs ?? 0) > 0 ? 0.85 : 0.18, select: { selectedPlayer = $0 })
+                     reduceMotion: reduceMotion,
+                     lineDuration: ShutoutPlayback.duration((current?.runs ?? 0) > 0 ? 0.85 : 0.18),
+                     select: { selectedPlayer = $0 })
     }
 
     private var momentCard: some View {
@@ -574,10 +581,11 @@ struct BrewersShutoutView: View {
                     if event.runs > 0 {
                         UIImpactFeedbackGenerator(style: event.runs >= 4 ? .heavy : .soft).impactOccurred()
                     }
-                    let delay = replayPlayer != nil ? 1.6 : event.runs >= 4 ? 2.2 : event.runs > 0 ? 1.4 : event.top && event.strikeouts > 0 ? 0.45 : 0.18
+                    let baseDelay = replayPlayer != nil ? 1.6 : event.runs >= 4 ? 2.2 : event.runs > 0 ? 1.4 : event.top && event.strikeouts > 0 ? 0.45 : 0.18
+                    let delay = ShutoutPlayback.duration(baseDelay)
                     try await Task.sleep(for: .seconds(delay))
                 }
-                try await Task.sleep(for: .seconds(1.5))
+                try await Task.sleep(for: .seconds(ShutoutPlayback.duration(1.5)))
             }
             if replayPlayer == nil { chapter = 2 }
             replayPlayer = nil; playing = false
@@ -757,7 +765,7 @@ private struct RBIRaceChart: View {
                             .frame(width: plotWidth, height: 120).offset(x: left, y: 25)
                     }
                 }
-                .animation(reduceMotion ? nil : .easeInOut(duration: 0.75), value: revision)
+                .animation(reduceMotion ? nil : .easeInOut(duration: ShutoutPlayback.duration(0.75)), value: revision)
             }.frame(height: 242)
             Text(games.count == 1 ? "Line: this game · Bars: cumulative RBI across both games" : "Lines: Seattle (blue), Cincinnati (white) · Bars: both games")
                 .font(.system(size: 9, design: .monospaced)).foregroundStyle(ShutoutStyle.cream.opacity(0.6))
