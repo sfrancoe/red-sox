@@ -224,22 +224,30 @@ private struct StoryStatCards: View {
     let expanded: Bool
     var compact = false
     var body: some View {
-        let layout = expanded ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12)) : AnyLayout(HStackLayout(alignment: .top, spacing: 8))
+        let layout = expanded ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top, spacing: 8))
         layout {
-            stat("\(MLB300HitterData.peak.count)", "Peak, \(String(MLB300HitterData.peak.year))", color: HitterStyle.coral)
-            stat("\(MLB300HitterData.finish.count)", MLB300HitterData.finish.label, color: HitterStyle.gold)
-            stat("−\(MLB300HitterData.decline)%", "From the peak", color: HitterStyle.navy)
+            stat("\(MLB300HitterData.peak.count)", "Peak · \(String(MLB300HitterData.peak.year))", color: HitterStyle.coral,
+                 accessibility: "Peak: \(MLB300HitterData.peak.count) hitters in \(MLB300HitterData.peak.year)")
+            stat("\(MLB300HitterData.finish.count)", MLB300HitterData.finish.label, color: HitterStyle.gold,
+                 accessibility: "\(MLB300HitterData.finish.count) hitters in \(MLB300HitterData.finish.label)")
+            stat("↓\(MLB300HitterData.decline)%", "", color: HitterStyle.navy,
+                 accessibility: "Down \(MLB300HitterData.decline) percent from the peak")
         }
     }
-    private func stat(_ number: String, _ label: String, color: Color) -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(number).font(.system(.title, design: .serif).weight(.bold)).foregroundStyle(color)
-            Text(label).font(compact ? .caption2 : .caption).fixedSize(horizontal: false, vertical: true)
+    private func stat(_ number: String, _ label: String, color: Color, accessibility: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 4) {
+            Text(number).font(.system(.title3, design: .serif).weight(.bold)).foregroundStyle(color)
+            if !label.isEmpty {
+                Text(label).font(.caption2.weight(.semibold))
+            }
         }
+        .lineLimit(1)
+        .minimumScaleFactor(0.75)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(compact ? 10 : 12)
+        .padding(compact ? 8 : 10)
         .background(.white.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibility)
     }
 }
 
