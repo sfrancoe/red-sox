@@ -101,3 +101,5 @@ assert.equal(ALLOWED_PATHS.has('leaderboards/2026.json'), true);
 assert.equal(ALLOWED_PATHS.has('leaderboards/2022.json'), false);
 assert.equal(ALLOWED_PATHS.has('postseason-history/2026.json'), true);
 assert.equal(ALLOWED_PATHS.has('postseason-history/2025.json'), false);
+assert.equal(ALLOWED_PATHS.has('postseason-news/2026.json'), true);
+assert.equal(ALLOWED_PATHS.has('postseason-news/2025.json'), false);
