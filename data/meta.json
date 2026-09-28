@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-27T15:32:42+00:00",
+ "generated_at": "2026-09-28T18:31:01+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 111,
@@ -377,26 +377,26 @@
    }
   },
   "2026": {
-   "record": "87-74",
-   "games": 161,
-   "in_progress": true,
+   "record": "87-75",
+   "games": 162,
+   "in_progress": false,
    "checkpoint_record": "57-51",
    "war_leader": {
-    "name": "Ceddanne Rafaela",
-    "war": 5.7
+    "name": "Wilyer Abreu",
+    "war": 5.8
    },
    "war_leaders": [
+    {
+     "name": "Wilyer Abreu",
+     "war": 5.8
+    },
     {
      "name": "Ceddanne Rafaela",
      "war": 5.7
     },
     {
-     "name": "Wilyer Abreu",
-     "war": 5.7
-    },
-    {
      "name": "Willson Contreras",
-     "war": 4.5
+     "war": 4.6
     }
    ],
    "pitching_leaders": {
@@ -462,19 +462,19 @@
      "names": [
       "Ceddanne Rafaela"
      ],
-     "value": ".282",
+     "value": ".283",
      "top": [
       {
        "name": "Ceddanne Rafaela",
-       "value": ".282"
+       "value": ".283"
       },
       {
        "name": "Willson Contreras",
-       "value": ".276"
+       "value": ".275"
       },
       {
-       "name": "Wilyer Abreu",
-       "value": ".249"
+       "name": "Caleb Durbin",
+       "value": ".248"
       }
      ]
     },
@@ -482,19 +482,19 @@
      "names": [
       "Willson Contreras"
      ],
-     "value": ".905",
+     "value": ".902",
      "top": [
       {
        "name": "Willson Contreras",
-       "value": ".905"
+       "value": ".902"
       },
       {
        "name": "Wilyer Abreu",
-       "value": ".776"
+       "value": ".773"
       },
       {
        "name": "Ceddanne Rafaela",
-       "value": ".760"
+       "value": ".761"
       }
      ]
     }
