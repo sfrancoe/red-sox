@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-09-27T15:49:18+00:00",
+ "generated_at": "2026-09-28T18:44:46+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 141,
  "seasons": {
   "2026": {
-   "record": "78-83",
-   "games": 161,
-   "in_progress": true,
+   "record": "79-83",
+   "games": 162,
+   "in_progress": false,
    "war_leader": {
     "name": "Dylan Cease",
-    "war": 5.7
+    "war": 5.5
    },
    "war_leaders": [
     {
      "name": "Dylan Cease",
-     "war": 5.7
+     "war": 5.5
     },
     {
      "name": "Louis Varland",
      "war": 3.6
     },
     {
-     "name": "Spencer Miles",
+     "name": "Kazuma Okamoto",
      "war": 2.5
     }
    ],
@@ -87,21 +87,21 @@
     },
     "avg": {
      "names": [
-      "Ernie Clement"
+      "Vladimir Guerrero Jr."
      ],
-     "value": ".261",
+     "value": ".260",
      "top": [
-      {
-       "name": "Ernie Clement",
-       "value": ".261"
-      },
       {
        "name": "Vladimir Guerrero Jr.",
        "value": ".260"
       },
       {
+       "name": "Ernie Clement",
+       "value": ".259"
+      },
+      {
        "name": "George Springer",
-       "value": ".248"
+       "value": ".249"
       }
      ]
     },
@@ -109,15 +109,15 @@
      "names": [
       "Kazuma Okamoto"
      ],
-     "value": ".764",
+     "value": ".762",
      "top": [
       {
        "name": "Kazuma Okamoto",
-       "value": ".764"
+       "value": ".762"
       },
       {
        "name": "George Springer",
-       "value": ".722"
+       "value": ".726"
       },
       {
        "name": "Vladimir Guerrero Jr.",

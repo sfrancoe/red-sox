@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-09-27T15:49:21+00:00",
+ "generated_at": "2026-09-28T18:44:52+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 136,
  "seasons": {
   "2026": {
-   "record": "75-86",
-   "games": 161,
-   "in_progress": true,
+   "record": "76-86",
+   "games": 162,
+   "in_progress": false,
    "war_leader": {
     "name": "Randy Arozarena",
-    "war": 5.6
+    "war": 5.7
    },
    "war_leaders": [
     {
      "name": "Randy Arozarena",
-     "war": 5.6
+     "war": 5.7
     },
     {
      "name": "Cole Young",
-     "war": 4.2
+     "war": 4.4
     },
     {
      "name": "Logan Gilbert",
-     "war": 3.1
+     "war": 3.3
     }
    ],
    "pitching_leaders": {
@@ -34,11 +34,11 @@
        "value": "1.09"
       },
       {
-       "name": "Bryan Woo",
-       "value": "1.10"
+       "name": "Logan Gilbert",
+       "value": "1.09"
       },
       {
-       "name": "Logan Gilbert",
+       "name": "Bryan Woo",
        "value": "1.10"
       }
      ]
@@ -67,17 +67,16 @@
     },
     "rbi": {
      "names": [
-      "Dominic Canzone",
       "Randy Arozarena"
      ],
-     "value": 77,
+     "value": 79,
      "top": [
       {
-       "name": "Dominic Canzone",
-       "value": 77
+       "name": "Randy Arozarena",
+       "value": 79
       },
       {
-       "name": "Randy Arozarena",
+       "name": "Dominic Canzone",
        "value": 77
       },
       {
@@ -110,19 +109,19 @@
      "names": [
       "Randy Arozarena"
      ],
-     "value": ".863",
+     "value": ".865",
      "top": [
       {
        "name": "Randy Arozarena",
-       "value": ".863"
+       "value": ".865"
       },
       {
        "name": "Dominic Canzone",
-       "value": ".821"
+       "value": ".820"
       },
       {
        "name": "Julio Rodr\u00edguez",
-       "value": ".714"
+       "value": ".708"
       }
      ]
     }

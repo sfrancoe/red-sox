@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-27T15:49:20+00:00",
+ "generated_at": "2026-09-28T18:44:50+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 142,
  "seasons": {
   "2026": {
-   "record": "76-85",
-   "games": 161,
-   "in_progress": true,
+   "record": "77-85",
+   "games": 162,
+   "in_progress": false,
    "war_leader": {
     "name": "Taj Bradley",
-    "war": 4.3
+    "war": 4.4
    },
    "war_leaders": [
     {
      "name": "Taj Bradley",
-     "war": 4.3
+     "war": 4.4
     },
     {
      "name": "Byron Buxton",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Ryan Jeffers",
-     "war": 2.6
+     "war": 2.8
     }
    ],
    "pitching_leaders": {
@@ -31,7 +31,7 @@
      "top": [
       {
        "name": "Dean Kremer",
-       "value": "1.08"
+       "value": "0.99"
       },
       {
        "name": "Joe Ryan",
@@ -69,11 +69,11 @@
      "names": [
       "Josh Bell"
      ],
-     "value": 93,
+     "value": 96,
      "top": [
       {
        "name": "Josh Bell",
-       "value": 93
+       "value": 96
       },
       {
        "name": "Brooks Lee",
@@ -81,7 +81,7 @@
       },
       {
        "name": "Kody Clemens",
-       "value": 80
+       "value": 81
       }
      ]
     },
@@ -89,15 +89,15 @@
      "names": [
       "Luke Keaschall"
      ],
-     "value": ".283",
+     "value": ".282",
      "top": [
       {
        "name": "Luke Keaschall",
-       "value": ".283"
+       "value": ".282"
       },
       {
        "name": "Josh Bell",
-       "value": ".254"
+       "value": ".255"
       },
       {
        "name": "Brooks Lee",
@@ -117,11 +117,11 @@
       },
       {
        "name": "Kody Clemens",
-       "value": ".760"
+       "value": ".758"
       },
       {
        "name": "Josh Bell",
-       "value": ".731"
+       "value": ".738"
       }
      ]
     }

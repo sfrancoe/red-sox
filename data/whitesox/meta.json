@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-09-27T15:49:18+00:00",
+ "generated_at": "2026-09-28T18:44:47+00:00",
  "source": "MLB Stats API (statsapi.mlb.com)",
  "war_source": "Baseball Reference daily bWAR (baseball-reference.com/data)",
  "team_id": 145,
  "seasons": {
   "2026": {
-   "record": "83-78",
-   "games": 161,
-   "in_progress": true,
+   "record": "84-78",
+   "games": 162,
+   "in_progress": false,
    "war_leader": {
     "name": "Miguel Vargas",
-    "war": 5.5
+    "war": 5.3
    },
    "war_leaders": [
     {
      "name": "Miguel Vargas",
-     "war": 5.5
+     "war": 5.3
     },
     {
      "name": "Chase Meidroth",
@@ -23,7 +23,7 @@
     },
     {
      "name": "Sean Burke",
-     "war": 4.3
+     "war": 4.2
     }
    ],
    "pitching_leaders": {
@@ -35,7 +35,7 @@
       },
       {
        "name": "Trevor Richards",
-       "value": "1.17"
+       "value": "1.13"
       },
       {
        "name": "Sean Newcomb",
@@ -87,17 +87,17 @@
     },
     "avg": {
      "names": [
-      "Chase Meidroth"
+      "Sam Antonacci"
      ],
-     "value": ".276",
+     "value": ".277",
      "top": [
+      {
+       "name": "Sam Antonacci",
+       "value": ".277"
+      },
       {
        "name": "Chase Meidroth",
        "value": ".276"
-      },
-      {
-       "name": "Sam Antonacci",
-       "value": ".275"
       },
       {
        "name": "Miguel Vargas",
@@ -117,11 +117,11 @@
       },
       {
        "name": "Munetaka Murakami",
-       "value": ".826"
+       "value": ".825"
       },
       {
-       "name": "Chase Meidroth",
-       "value": ".765"
+       "name": "Sam Antonacci",
+       "value": ".766"
       }
      ]
     }
