@@ -2,7 +2,8 @@ import SwiftUI
 
 private enum OctoberSection: String, CaseIterable {
     case race = "Bracket"
-    case history = "Historical Best/Worst"
+    case history = "Best / Worst"
+    case news = "Latest News"
 }
 
 private enum PostseasonHistoryGroup: String, CaseIterable {
@@ -35,11 +36,13 @@ struct OctoberView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var store = PostseasonStore(season: OctoberFeature.season)
     @State private var historyStore = PostseasonHistoryStore(season: OctoberFeature.season)
+    @State private var newsStore = PostseasonNewsStore(season: OctoberFeature.season)
     @State private var section: OctoberSection = .race
     @State private var historyGroup: PostseasonHistoryGroup = .hitting
     @State private var historyLeague: PostseasonHistoryLeague = .both
     @State private var historyCategoryKey = "ops"
     @State private var historyRanking: PostseasonHistoryRanking = .best
+    @State private var newsLeague: PostseasonHistoryLeague = .both
     @State private var selectedSeries: PostseasonSeries?
 
     private var payload: PostseasonPayload? { store.snapshot }
@@ -62,10 +65,12 @@ struct OctoberView: View {
                 Group {
                     if section == .history {
                         historyView
+                    } else if section == .news {
+                        newsView
                     } else if let payload {
                         switch section {
                         case .race: raceView(payload)
-                        case .history: EmptyView()
+                        case .history, .news: EmptyView()
                         }
                     } else if store.isLoading {
                         ProgressView("Opening the playoff bracket…").tint(AppColor.amber)
@@ -82,7 +87,8 @@ struct OctoberView: View {
             guard scenePhase == .active else { return }
             async let postseasonRefresh: Void = store.refresh()
             async let historyRefresh: Void = historyStore.refresh()
-            _ = await (postseasonRefresh, historyRefresh)
+            async let newsRefresh: Void = newsStore.refresh()
+            _ = await (postseasonRefresh, historyRefresh, newsRefresh)
             while !Task.isCancelled, scenePhase == .active {
                 guard store.snapshot?.isLive == true else { break }
                 try? await Task.sleep(for: .seconds(30))
@@ -94,6 +100,8 @@ struct OctoberView: View {
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("-show-playoff-history") {
                 section = .history
+            } else if ProcessInfo.processInfo.arguments.contains("-show-playoff-news") {
+                section = .news
             }
             #endif
         }
@@ -242,6 +250,128 @@ struct OctoberView: View {
         }
         .accessibilityIdentifier("playoffs.history")
         .refreshable { await historyStore.refresh() }
+    }
+
+    @ViewBuilder
+    private var newsView: some View {
+        if let news = newsStore.snapshot {
+            postseasonNews(news)
+        } else if newsStore.isLoading {
+            ProgressView("Finding the latest playoff reporting…")
+                .tint(AppColor.amber)
+                .foregroundStyle(AppColor.bone)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Latest playoff reporting isn’t available yet.")
+                    .font(AppFont.displayMedium)
+                Text("The bracket and historical rankings are still available.")
+                    .font(AppFont.bodySmall)
+                    .foregroundStyle(AppColor.boneDim)
+                Button("Try again") { Task { await newsStore.refresh() } }
+                    .buttonStyle(HubProminentButtonStyle())
+                    .frame(minHeight: 44)
+            }
+            .padding(24)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .foregroundStyle(AppColor.bone)
+        }
+    }
+
+    private func postseasonNews(_ payload: PostseasonNewsPayload) -> some View {
+        let articles = payload.articles.filter { article in
+            switch newsLeague {
+            case .both: true
+            case .american: article.league == "AL"
+            case .national: article.league == "NL"
+            }
+        }
+        return ScrollView {
+            LazyVStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .center, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("PAST \(payload.windowHours) HOURS")
+                            .font(AppFont.label)
+                            .foregroundStyle(AppColor.amber)
+                        Text("\(payload.articles.count) stories · \(payload.coveredTeamCount) of \(payload.teamCount) teams")
+                            .font(AppFont.bodySmall)
+                            .foregroundStyle(AppColor.boneDim)
+                    }
+                    Spacer()
+                    Picker("League", selection: $newsLeague) {
+                        ForEach(PostseasonHistoryLeague.allCases, id: \.self) { league in
+                            Text(league.rawValue).tag(league)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(maxWidth: 190)
+                }
+
+                if articles.isEmpty {
+                    Text("No \(newsLeague.rawValue == "Both" ? "" : newsLeague.rawValue + " ")stories were published in this window.")
+                        .font(AppFont.bodySmall)
+                        .foregroundStyle(AppColor.boneDim)
+                        .padding(.vertical, 24)
+                } else {
+                    ForEach(articles) { article in
+                        postseasonNewsCard(article)
+                    }
+                }
+
+                Text("Checked \(payload.generatedText) · Headlines link to their publishers")
+                    .font(AppFont.label)
+                    .foregroundStyle(AppColor.boneDim)
+                    .padding(.top, 4)
+            }
+            .padding(.horizontal, 14)
+            .padding(.bottom, 14)
+        }
+        .accessibilityIdentifier("playoffs.news")
+        .refreshable { await newsStore.refresh() }
+    }
+
+    @ViewBuilder
+    private func postseasonNewsCard(_ article: PostseasonNewsArticle) -> some View {
+        if let url = URL(string: article.url) {
+            Link(destination: url) {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text(article.teamAbbreviation)
+                            .font(AppFont.label.weight(.bold))
+                            .foregroundStyle(AppColor.night)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 4)
+                            .background(AppColor.amber)
+                        Text(article.source)
+                            .font(AppFont.label)
+                            .foregroundStyle(AppColor.boneMuted)
+                        Spacer(minLength: 8)
+                        Text(article.publishedText)
+                            .font(AppFont.label)
+                            .foregroundStyle(AppColor.boneDim)
+                            .multilineTextAlignment(.trailing)
+                    }
+                    Text(article.title)
+                        .font(AppFont.body.weight(.bold))
+                        .foregroundStyle(AppColor.bone)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if !article.description.isEmpty {
+                        Text(article.description)
+                            .font(AppFont.bodySmall)
+                            .foregroundStyle(AppColor.boneMuted)
+                            .lineLimit(3)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(12)
+                .background(AppColor.nightRaised)
+                .overlay(alignment: .bottom) {
+                    Rectangle().fill(AppColor.separator).frame(height: 1)
+                }
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("\(article.teamName), \(article.title), \(article.source), \(article.publishedText)")
+        }
     }
 
     private func historyBoard(

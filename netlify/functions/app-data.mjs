@@ -24,6 +24,7 @@ for (const year of [2023, 2024, 2025, 2026]) {
   ALLOWED_PATHS.add(`leaderboards/${year}.json`);
 }
 ALLOWED_PATHS.add('postseason-history/2026.json');
+ALLOWED_PATHS.add('postseason-news/2026.json');
 
 // A player card requests a single generated career record by the stable numeric
 // ID in its roster feed. Restrict this dynamic collection to a filename only:
