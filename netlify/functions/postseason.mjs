@@ -124,6 +124,7 @@ export function normalizePostseason(payload, season, checkedAt = new Date().toIS
       gameNumber: Number.isInteger(raw.seriesGameNumber) ? raw.seriesGameNumber : null,
       gameType: raw.gameType || null,
       gameDate: typeof raw.gameDate === 'string' ? raw.gameDate : null,
+      officialDate: typeof raw.officialDate === 'string' ? raw.officialDate : null,
       timeTBD: isTBD,
       status: raw.status?.detailedState || raw.status?.abstractGameState || 'Unknown',
       abstractState: raw.status?.abstractGameState || 'Unknown',

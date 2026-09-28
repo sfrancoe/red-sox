@@ -4,7 +4,7 @@ struct PlayoffBracketView: View {
     let payload: PostseasonPayload
     let onSelect: (PostseasonSeries) -> Void
     @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
-    @ScaledMetric(relativeTo: .caption) private var cardHeight = 68.0
+    @ScaledMetric(relativeTo: .caption) private var cardHeight = 90.0
     @ScaledMetric(relativeTo: .caption) private var nameSize = 12.0
     private let columnSpacing = 10.0
     private let rowSpacing = 8.0
@@ -193,7 +193,9 @@ struct PlayoffBracketView: View {
                 Text(status(item))
                     .font(.system(size: labelSize - 3, weight: .medium))
                     .foregroundStyle(hasScheduledDate ? AppColor.night : (item?.state == "live" ? AppColor.amber : AppColor.boneMuted))
-                    .lineLimit(1).minimumScaleFactor(0.8)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2).minimumScaleFactor(0.8)
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding(.vertical, 4)
                     .frame(maxWidth: .infinity)
                     .background(hasScheduledDate ? AppColor.scheduleGray : AppColor.night)
@@ -252,19 +254,37 @@ struct PlayoffBracketView: View {
             return "LIVE" + (live.liveInning.map { " · INNING \($0)" } ?? "")
         }
         if let next = nextScheduledGame(for: item) {
-            return displayDate(next)
+            return displayDetails(next, for: item)
         }
         return item.requiredWins.map { "FIRST TO \($0)" } ?? "MATCHUP \(unresolvedLabel)"
     }
 
     private func displayDate(_ game: PostseasonGame) -> String {
-        guard let rawDate = game.gameDate else { return unresolvedLabel }
+        guard let rawDate = game.calendarDateKey else { return unresolvedLabel }
         let parts = rawDate.prefix(10).split(separator: "-")
         guard parts.count == 3,
               let month = Int(parts[1]), (1...12).contains(month),
               let day = Int(parts[2]) else { return unresolvedLabel }
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         return "\(months[month - 1]) \(day)"
+    }
+
+    private func displayDetails(_ game: PostseasonGame, for item: PostseasonSeries) -> String {
+        let date = displayDate(game)
+        guard item.round == currentRound,
+              !game.timeTBD,
+              let start = game.startDate,
+              let broadcast = game.broadcasts.first else { return date }
+        let time = start.formatted(date: .omitted, time: .shortened)
+        return "\(date) · \(time)\n\(broadcast)"
+    }
+
+    private var currentRound: String? {
+        let order = ["wild-card", "division-series", "league-championship", "world-series"]
+        return payload.series
+            .filter { $0.state != "complete" }
+            .compactMap { series in order.firstIndex(of: series.round).map { ($0, series.round) } }
+            .min { $0.0 < $1.0 }?.1
     }
 
     private func nextScheduledGame(for item: PostseasonSeries?) -> PostseasonGame? {

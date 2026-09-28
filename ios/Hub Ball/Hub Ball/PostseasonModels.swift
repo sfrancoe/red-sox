@@ -64,6 +64,7 @@ struct PostseasonGame: Codable, Identifiable, Sendable {
     let gameNumber: Int?
     let gameType: String?
     let gameDate: String?
+    let officialDate: String?
     let timeTBD: Bool
     let status: String
     let abstractState: String
@@ -77,6 +78,24 @@ struct PostseasonGame: Codable, Identifiable, Sendable {
     let liveInning: Int?
 
     var id: Int { gamePk }
+    var calendarDateKey: String? {
+        if let officialDate, officialDate.count >= 10 {
+            return String(officialDate.prefix(10))
+        }
+        guard let gameDate else { return nil }
+        let parser = ISO8601DateFormatter()
+        parser.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard let date = parser.date(from: gameDate) ?? ISO8601DateFormatter().date(from: gameDate) else {
+            return String(gameDate.prefix(10))
+        }
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "America/New_York")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
+
     var startDate: Date? {
         guard !timeTBD, let gameDate else { return nil }
         let formatter = ISO8601DateFormatter()

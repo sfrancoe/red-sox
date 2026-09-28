@@ -564,9 +564,9 @@ struct OctoberView: View {
         formatter.dateFormat = "yyyy-MM-dd"
         let todayKey = formatter.string(from: Date())
         let upcoming = playable.filter { $0.abstractState == "Preview" || $0.abstractState == "Scheduled" }
-        let nextDate = upcoming.compactMap { $0.gameDate?.prefix(10).description }
+        let nextDate = upcoming.compactMap(\.calendarDateKey)
             .filter { $0 >= todayKey }.min()
-        let next = upcoming.filter { $0.gameDate?.prefix(10).description == nextDate }
+        let next = upcoming.filter { $0.calendarDateKey == nextDate }
         let latestFinal = playable.filter { $0.abstractState == "Final" }
             .max { ($0.gameDate ?? "") < ($1.gameDate ?? "") }
         if next.isEmpty { return latestFinal.map { [$0] } ?? [] }

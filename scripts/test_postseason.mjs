@@ -64,6 +64,14 @@ assert.ok(upcoming.teamsAndSlots.filter(team => !team.unresolved)
   .every(team => team.qualification === 'unknown'));
 assert.ok(upcoming.games.filter(game => game.timeTBD).every(game => game.gameDate));
 
+const lateGameSource = await fixture(2026);
+lateGameSource.dates[0].games[0].gameDate = '2026-09-30T00:00:00Z';
+lateGameSource.dates[0].games[0].officialDate = '2026-09-29';
+const lateGame = normalizePostseason(lateGameSource, '2026').games
+  .find(game => game.gamePk === lateGameSource.dates[0].games[0].gamePk);
+assert.equal(lateGame.gameDate, '2026-09-30T00:00:00Z');
+assert.equal(lateGame.officialDate, '2026-09-29');
+
 let fetchedURL;
 const response = await getPostseasonResponse(
   new Request('https://example.test/api/postseason?season=2026'),
