@@ -5,6 +5,7 @@ struct PlayoffBracketView: View {
     let onSelect: (PostseasonSeries) -> Void
     @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
     @ScaledMetric(relativeTo: .caption) private var cardHeight = 90.0
+    @ScaledMetric(relativeTo: .caption) private var worldSeriesCardHeight = 64.0
     @ScaledMetric(relativeTo: .caption) private var nameSize = 12.0
     private let columnSpacing = 10.0
     private let rowSpacing = 8.0
@@ -120,16 +121,16 @@ struct PlayoffBracketView: View {
 
     private func worldSeries(width: CGFloat) -> some View {
         let slot = PlayoffBracketSlot.all.first { $0.league == "MLB" }!
-        let cardWidth = min(max(minimumCardWidth * 1.7, width * 0.52), 280)
-        return VStack(spacing: 12) {
+        let cardWidth = min(max(minimumCardWidth * 1.5, width * 0.44), 220)
+        return VStack(spacing: 6) {
             Text("WORLD SERIES")
                 .font(.system(size: nameSize, weight: .bold))
                 .tracking(1.2)
                 .foregroundStyle(AppColor.amber)
-            HStack(spacing: 10) {
+            HStack(spacing: 6) {
                 Image(systemName: "trophy.fill")
                 matchup(slot, width: cardWidth)
-                    .frame(width: cardWidth, height: cardHeight)
+                    .frame(width: cardWidth, height: worldSeriesCardHeight)
                 Image(systemName: "trophy.fill")
             }
             .font(.system(size: nameSize * 1.2, weight: .bold))
