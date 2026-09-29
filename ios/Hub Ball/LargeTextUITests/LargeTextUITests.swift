@@ -82,20 +82,16 @@ final class LargeTextUITests: XCTestCase {
         return false
     }
 
-    private func waitForReplay(_ value: String, timeout: TimeInterval = 8) -> Bool {
-        let replay = app.buttons["hitter.replay"]
-        guard replay.waitForExistence(timeout: 5) else { return false }
-        let expected = XCTNSPredicateExpectation(
-            predicate: NSPredicate(format: "value == %@", value), object: replay)
-        return XCTWaiter.wait(for: [expected], timeout: timeout) == .completed
+    private func waitForReplay(timeout: TimeInterval = 8) -> Bool {
+        app.buttons["hitter.replay"].waitForExistence(timeout: timeout)
     }
 
     func testHitterStoryPlaybackAndAllSeasons() {
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
-        XCTAssertFalse(app.buttons["hitter.launch"].exists)
-        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
+        XCTAssertTrue(app.otherElements["hitter.chart"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.buttons.matching(identifier: "hitter.replay").count, 0)
         capture("hitter-direct-chart")
-        XCTAssertTrue(waitForReplay("Ready"))
+        XCTAssertTrue(waitForReplay())
         XCTAssertTrue(app.staticTexts["hitter.finalSeason"].label.contains("Final 2026 regular season"))
         XCTAssertFalse(app.sliders["hitter.year"].exists)
         capture("hitter-complete")
@@ -113,8 +109,8 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(chart.frame.contains(CGPoint(x: replay.frame.midX, y: replay.frame.midY)))
         XCTAssertGreaterThan(replay.frame.midY, chart.frame.midY)
         replay.tap()
-        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
-        XCTAssertTrue(waitForReplay("Ready"))
+        XCTAssertEqual(app.buttons.matching(identifier: "hitter.replay").count, 0)
+        XCTAssertTrue(waitForReplay())
         capture("hitter-replay-in-chart")
         XCTAssertTrue(revealHitter(app.buttons["hitter.methodology"]))
         app.buttons["hitter.methodology"].tap()
@@ -163,8 +159,8 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(app.buttons["stories.hitter"].waitForExistence(timeout: 5))
         capture("hitter-library")
         app.buttons["stories.hitter"].tap()
-        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
-        XCTAssertFalse(app.buttons["hitter.launch"].exists)
+        XCTAssertTrue(app.otherElements["hitter.chart"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.buttons.matching(identifier: "hitter.replay").count, 0)
         app.buttons["hitter.close"].tap()
         XCTAssertTrue(app.buttons["stories.close"].waitForExistence(timeout: 5))
         app.buttons["stories.close"].tap()
@@ -173,7 +169,6 @@ final class LargeTextUITests: XCTestCase {
 
     func testHitterStoryLargeText() {
         launch("-show-hitter-story")
-        XCTAssertFalse(app.buttons["hitter.launch"].exists)
         XCTAssertTrue(revealHitter(app.otherElements["hitter.chart"]))
         capture("hitter-large-chart")
         XCTAssertTrue(revealHitter(app.buttons["hitter.replay"]))
@@ -194,12 +189,13 @@ final class LargeTextUITests: XCTestCase {
         capture("hitter-compact-large-header")
         app.terminate()
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
-        XCTAssertTrue(waitForReplay("Playing", timeout: 2))
+        XCTAssertTrue(app.otherElements["hitter.chart"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.buttons.matching(identifier: "hitter.replay").count, 0)
         XCTAssertFalse(app.buttons["hitter.music"].exists)
         capture("hitter-compact-playing")
         XCUIDevice.shared.press(.home)
         app.activate()
-        XCTAssertTrue(waitForReplay("Ready"))
+        XCTAssertTrue(waitForReplay())
         capture("hitter-background-complete")
         let chart = app.otherElements["hitter.chart"]
         XCTAssertTrue(revealHitter(chart))

@@ -50,20 +50,21 @@ struct MLB300HitterStory: View {
                                 let elapsed = building ? ProcessInfo.processInfo.systemUptime - startedAt : (launched ? MLB300HitterData.duration : 0)
                                 Animated300LineChart(elapsed: elapsed, selectedIndex: $selectedIndex)
                             }
-                            Button(action: launch) {
-                                Image(systemName: "play.fill")
-                                    .font(.system(size: 13, weight: .bold))
-                                    .foregroundStyle(.white)
-                                    .frame(width: 32, height: 32)
-                                    .background(HitterStyle.coral, in: Circle())
-                                    .frame(width: 44, height: 44)
-                                    .contentShape(Rectangle())
+                            if launched && !building {
+                                Button(action: launch) {
+                                    Image(systemName: "play.fill")
+                                        .font(.system(size: 13, weight: .bold))
+                                        .foregroundStyle(.white)
+                                        .frame(width: 32, height: 32)
+                                        .background(HitterStyle.coral, in: Circle())
+                                        .frame(width: 44, height: 44)
+                                        .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel("Replay chart animation")
+                                .accessibilityIdentifier("hitter.replay")
+                                .padding(.bottom, compact ? 22 : 26)
                             }
-                            .buttonStyle(.plain)
-                            .accessibilityLabel("Replay chart animation")
-                            .accessibilityValue(building ? "Playing" : "Ready")
-                            .accessibilityIdentifier("hitter.replay")
-                            .padding(.bottom, compact ? 22 : 26)
                         }
                         .frame(height: compact ? 220 : 280)
                         Text("In \(String(peak.year)), \(peak.count) qualified hitters finished at .300 or higher. In 2026, only \(finish.count) did—matching 2024 and 2025.")
