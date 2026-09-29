@@ -270,7 +270,7 @@ private struct Animated300LineChart: View {
                     Path { p in p.move(to: CGPoint(x: rect.minX, y: y)); p.addLine(to: CGPoint(x: rect.maxX, y: y)) }
                         .stroke(HitterStyle.navy.opacity(0.10), style: StrokeStyle(lineWidth: 1, dash: [3, 4]))
                     Text("\(count)").font(.system(size: 10).monospacedDigit())
-                        .foregroundStyle(HitterStyle.navy.opacity(0.5)).position(x: 10, y: y)
+                        .foregroundStyle(HitterStyle.navy.opacity(0.85)).position(x: 10, y: y)
                 }
                 Path { path in path.addLines(points) }
                     .trim(from: 0, to: progress)
@@ -304,7 +304,7 @@ private struct Animated300LineChart: View {
                 }
                 ForEach([0, 14, 24, 34, seasons.count - 1], id: \.self) { index in
                     Text(seasons[index].label).font(.system(size: 10).monospacedDigit())
-                        .foregroundStyle(HitterStyle.navy.opacity(0.6)).position(x: points[index].x, y: rect.maxY + 20)
+                        .foregroundStyle(HitterStyle.navy.opacity(0.85)).position(x: points[index].x, y: rect.maxY + 20)
                 }
             }
             .contentShape(Rectangle())
