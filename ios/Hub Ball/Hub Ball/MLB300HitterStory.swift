@@ -39,15 +39,8 @@ struct MLB300HitterStory: View {
                         Text("Seven qualified hitters finished at .300 or higher in 2026.")
                             .font(compact ? .subheadline : .title3).foregroundStyle(HitterStyle.navy.opacity(0.72))
                         StoryStatCards(expanded: typeSize.usesExpandedReadingLayout, compact: compact, flashTrigger: cardFlashTrigger)
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("QUALIFIED HITTERS · .300 OR HIGHER")
-                                .font(.caption.weight(.bold)).tracking(1)
-                            Text(MLB300HitterData.coverageLabel)
-                                .font(.caption).foregroundStyle(HitterStyle.navy.opacity(0.65))
-                            Text(MLB300HitterData.finalSeasonLabel)
-                                .font(.caption2).foregroundStyle(HitterStyle.navy.opacity(0.65))
-                                .accessibilityIdentifier("hitter.finalSeason")
-                        }
+                        Text("QUALIFIED HITTERS · .300 OR HIGHER")
+                            .font(.caption.weight(.bold)).tracking(1)
                         ZStack(alignment: .bottom) {
                             TimelineView(.animation(paused: !building)) { _ in
                                 let elapsed = building ? ProcessInfo.processInfo.systemUptime - startedAt : (launched ? MLB300HitterData.duration : 0)
@@ -167,24 +160,24 @@ private struct StoryStatCards: View {
     var compact = false
     let flashTrigger: Int
     @State private var selectedRoster: StoryRoster?
-    @State private var flashing = false
+    @State private var flashingRoster: StoryRoster?
 
     var body: some View {
         let layout = expanded ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top, spacing: 8))
         layout {
             Button { selectedRoster = .peak } label: {
-                card("Peak · \(String(MLB300HitterData.peak.year))", value: "\(MLB300HitterData.peak.count)", color: HitterStyle.coralInk, flashColor: HitterStyle.coral, tappable: true)
+                card("Peak · \(String(MLB300HitterData.peak.year))", value: "\(MLB300HitterData.peak.count)", color: HitterStyle.coralInk, flashColor: HitterStyle.coral, highlighted: flashingRoster == .peak, tappable: true)
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Peak \(MLB300HitterData.peak.count) hitters in \(MLB300HitterData.peak.year). Tap to see who")
             .accessibilityIdentifier("hitter.card.peak")
             Button { selectedRoster = .latest } label: {
-                card(MLB300HitterData.finish.label, value: "\(MLB300HitterData.finish.count)", color: HitterStyle.goldInk, flashColor: HitterStyle.gold, tappable: true)
+                card(MLB300HitterData.finish.label, value: "\(MLB300HitterData.finish.count)", color: HitterStyle.goldInk, flashColor: HitterStyle.gold, highlighted: flashingRoster == .latest, tappable: true)
             }
             .buttonStyle(.plain)
             .accessibilityLabel("\(MLB300HitterData.finish.count) hitters in \(MLB300HitterData.finish.label). Tap to see who")
             .accessibilityIdentifier("hitter.card.latest")
-            card("vs Peak", value: "−\(MLB300HitterData.decline)%", color: HitterStyle.navy, flashColor: HitterStyle.navy, tappable: false)
+            card("vs Peak", value: "−\(MLB300HitterData.decline)%", color: HitterStyle.navy, flashColor: HitterStyle.navy, highlighted: false, tappable: false)
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Down \(MLB300HitterData.decline) percent from the peak")
         }
@@ -193,22 +186,24 @@ private struct StoryStatCards: View {
                 .presentationDetents([.large])
         }
         .task(id: flashTrigger) {
-            flashing = false
+            flashingRoster = nil
             guard flashTrigger > 0, !reduceMotion else { return }
             do {
-                for _ in 0..<3 {
-                    withAnimation(.easeInOut(duration: 0.15)) { flashing = true }
-                    try await Task.sleep(for: .milliseconds(220))
-                    withAnimation(.easeInOut(duration: 0.15)) { flashing = false }
-                    try await Task.sleep(for: .milliseconds(180))
+                for roster in [StoryRoster.peak, .latest] {
+                    for _ in 0..<3 {
+                        withAnimation(.easeInOut(duration: 0.2)) { flashingRoster = roster }
+                        try await Task.sleep(for: .milliseconds(500))
+                        withAnimation(.easeInOut(duration: 0.2)) { flashingRoster = nil }
+                        try await Task.sleep(for: .milliseconds(250))
+                    }
                 }
             } catch {
-                flashing = false
+                flashingRoster = nil
             }
         }
     }
 
-    private func card(_ title: String, value: String, color: Color, flashColor: Color, tappable: Bool) -> some View {
+    private func card(_ title: String, value: String, color: Color, flashColor: Color, highlighted: Bool, tappable: Bool) -> some View {
         VStack(spacing: 2) {
             Text(title).font(.caption2.weight(.semibold))
             Text(value).font(.system(.title2, design: .serif).weight(.bold)).foregroundStyle(color)
@@ -220,8 +215,8 @@ private struct StoryStatCards: View {
         .frame(maxWidth: .infinity)
         .padding(.horizontal, compact ? 4 : 6)
         .padding(.vertical, compact ? 7 : 9)
-        .background(flashing && tappable ? flashColor.opacity(0.23) : .white.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
-        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(flashing && tappable ? flashColor.opacity(0.8) : .clear, lineWidth: 2))
+        .background(highlighted ? flashColor.opacity(0.23) : .white.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(highlighted ? flashColor.opacity(0.8) : .clear, lineWidth: 2))
     }
 }
 
@@ -292,8 +287,8 @@ private struct Animated300LineChart: View {
                     let y = rect.maxY - CGFloat(count) / 60 * rect.height
                     Path { p in p.move(to: CGPoint(x: rect.minX, y: y)); p.addLine(to: CGPoint(x: rect.maxX, y: y)) }
                         .stroke(HitterStyle.navy.opacity(0.10), style: StrokeStyle(lineWidth: 1, dash: [3, 4]))
-                    Text("\(count)").font(.system(size: 10).monospacedDigit())
-                        .foregroundStyle(HitterStyle.navy.opacity(0.85)).position(x: 10, y: y)
+                    Text("\(count)").font(.system(size: 10, weight: .bold).monospacedDigit())
+                        .foregroundStyle(HitterStyle.navy).position(x: 10, y: y)
                 }
                 Path { path in path.addLines(points) }
                     .trim(from: 0, to: progress)
@@ -326,8 +321,8 @@ private struct Animated300LineChart: View {
                                   y: min(rect.maxY - 12, points[selectedIndex].y + 25))
                 }
                 ForEach([0, 14, 24, 34, seasons.count - 1], id: \.self) { index in
-                    Text(seasons[index].label).font(.system(size: 10).monospacedDigit())
-                        .foregroundStyle(HitterStyle.navy.opacity(0.85)).position(x: points[index].x, y: rect.maxY + 20)
+                    Text(seasons[index].label).font(.system(size: 10, weight: .bold).monospacedDigit())
+                        .foregroundStyle(HitterStyle.navy).position(x: points[index].x, y: rect.maxY + 20)
                 }
             }
             .contentShape(Rectangle())

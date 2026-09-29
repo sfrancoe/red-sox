@@ -92,7 +92,8 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertEqual(app.buttons.matching(identifier: "hitter.replay").count, 0)
         capture("hitter-direct-chart")
         XCTAssertTrue(waitForReplay())
-        XCTAssertTrue(app.staticTexts["hitter.finalSeason"].label.contains("Final 2026 regular season"))
+        XCTAssertFalse(app.staticTexts["1976–2026 · final seasons"].exists)
+        XCTAssertFalse(app.staticTexts["Final 2026 regular season · verified Sept. 29"].exists)
         XCTAssertFalse(app.sliders["hitter.year"].exists)
         capture("hitter-complete")
         let chart = app.otherElements["hitter.chart"]
