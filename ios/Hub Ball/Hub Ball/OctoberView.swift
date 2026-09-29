@@ -52,7 +52,6 @@ struct OctoberView: View {
         ZStack {
             AppColor.night.ignoresSafeArea()
             VStack(spacing: 0) {
-                masthead
                 Picker("Playoff view", selection: $section) {
                     ForEach(OctoberSection.allCases, id: \.self) { item in
                         Text(item.rawValue).tag(item)
@@ -111,20 +110,6 @@ struct OctoberView: View {
                 .presentationDragIndicator(.visible)
         }
         .preferredColorScheme(.dark)
-    }
-
-    private var masthead: some View {
-        Text("\(String(OctoberFeature.season)) PLAYOFFS")
-            .font(AppFont.displayLarge)
-            .tracking(1.5)
-            .foregroundStyle(AppColor.bone)
-            .lineLimit(1)
-            .minimumScaleFactor(0.65)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .background(AppColor.nightRaised)
     }
 
     private func raceView(_ payload: PostseasonPayload) -> some View {

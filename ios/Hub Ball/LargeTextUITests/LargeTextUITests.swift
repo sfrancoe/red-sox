@@ -213,7 +213,7 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(open.waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["October"].exists, "Playoffs is not a team page")
         open.tap()
-        XCTAssertTrue(app.staticTexts["2026 PLAYOFFS"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.staticTexts["2026 PLAYOFFS"].exists)
         XCTAssertFalse(app.buttons["My Calls"].exists)
         let bracket = app.scrollViews["playoffs.bracket"]
         XCTAssertTrue(bracket.waitForExistence(timeout: 30))
