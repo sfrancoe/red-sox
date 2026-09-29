@@ -1,114 +1,107 @@
 {
-  "generated_at": "2026-09-25T23:34:21.067222+00:00",
+  "generated_at": "2026-09-29T14:46:00.555648+00:00",
   "source": "MLB Stats API",
   "team": "Braves",
   "regular_season_end": "2026-09-27",
   "games": [
     {
-      "game_pk": 823816,
-      "game_date": "2026-09-25T23:10:00Z",
-      "status": "In Progress",
-      "venue": "loanDepot park",
-      "location": "away",
-      "opponent": "Marlins",
-      "opponent_record": "78-81",
-      "favorite_team_record": "93-66",
-      "favorite_team_pitcher": "Ray Kerr",
-      "opponent_pitcher": "Eury Pérez",
-      "favorite_team_pitcher_record": "0-0",
-      "opponent_pitcher_record": "7-11",
+      "game_pk": 849845,
+      "game_date": "2026-09-29T18:00:00Z",
+      "status": "Pre-Game",
+      "venue": "Truist Park",
+      "location": "home",
+      "opponent": "Phillies",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "Chris Sale",
+      "opponent_pitcher": "Jesús Luzardo",
+      "favorite_team_pitcher_record": "14-9",
+      "opponent_pitcher_record": "14-5",
       "show_probables": true,
-      "series_description": "Regular Season",
+      "series_description": "NL Wild Card Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "Marlins.TV presented by Werner, Hoffman, Greig & Garcia",
-          "is_national": false,
+          "name": "NBC/Peacock",
+          "is_national": true,
           "home_away": "home",
-          "availability": "local_in_market",
+          "availability": "national",
           "available_for_streaming": true
         },
         {
-          "name": "BravesVision",
-          "is_national": false,
+          "name": "NBC/Peacock",
+          "is_national": true,
           "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
+          "availability": "national",
+          "available_for_streaming": false
         }
       ]
     },
     {
-      "game_pk": 823813,
-      "game_date": "2026-09-26T20:10:00Z",
+      "game_pk": 849841,
+      "game_date": "2026-09-30T18:00:00Z",
       "status": "Scheduled",
-      "venue": "loanDepot park",
-      "location": "away",
-      "opponent": "Marlins",
-      "opponent_record": "78-81",
-      "favorite_team_record": "93-66",
+      "venue": "Truist Park",
+      "location": "home",
+      "opponent": "Phillies",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "Tyler Mahle",
+      "opponent_pitcher": "Cristopher Sánchez",
+      "favorite_team_pitcher_record": "7-10",
+      "opponent_pitcher_record": "18-7",
+      "show_probables": true,
+      "series_description": "NL Wild Card Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "NBC/Peacock",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "NBC/Peacock",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849844,
+      "game_date": "2026-10-01T18:00:00Z",
+      "status": "Scheduled",
+      "venue": "Truist Park",
+      "location": "home",
+      "opponent": "Phillies",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
       "opponent_pitcher_record": "—",
       "show_probables": true,
-      "series_description": "Regular Season",
+      "series_description": "NL Wild Card Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "Marlins.TV presented by Werner, Hoffman, Greig & Garcia",
-          "is_national": false,
+          "name": "NBC/Peacock",
+          "is_national": true,
           "home_away": "home",
-          "availability": "local_in_market",
+          "availability": "national",
           "available_for_streaming": true
         },
         {
-          "name": "BravesVision",
-          "is_national": false,
+          "name": "NBC/Peacock",
+          "is_national": true,
           "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 823814,
-      "game_date": "2026-09-27T19:10:00Z",
-      "status": "Scheduled",
-      "venue": "loanDepot park",
-      "location": "away",
-      "opponent": "Marlins",
-      "opponent_record": "78-81",
-      "favorite_team_record": "93-66",
-      "favorite_team_pitcher": "JR Ritchie",
-      "opponent_pitcher": "Janson Junk",
-      "favorite_team_pitcher_record": "1-4",
-      "opponent_pitcher_record": "6-9",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "Marlins.TV presented by Werner, Hoffman, Greig & Garcia",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "BravesVision",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "CW 33 WBFS",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_out_of_market",
+          "availability": "national",
           "available_for_streaming": false
         }
       ]

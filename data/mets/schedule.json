@@ -1,76 +1,7 @@
 {
-  "generated_at": "2026-09-26T05:21:05.754814+00:00",
+  "generated_at": "2026-09-29T14:45:56.355620+00:00",
   "source": "MLB Stats API",
   "team": "Mets",
   "regular_season_end": "2026-09-27",
-  "games": [
-    {
-      "game_pk": 822678,
-      "game_date": "2026-09-26T16:35:00Z",
-      "status": "Scheduled",
-      "venue": "Nationals Park",
-      "location": "away",
-      "opponent": "Nationals",
-      "opponent_record": "76-84",
-      "favorite_team_record": "73-87",
-      "favorite_team_pitcher": "Jonah Tong",
-      "opponent_pitcher": "Connelly Early",
-      "favorite_team_pitcher_record": "2-2",
-      "opponent_pitcher_record": "7-5",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "SNY",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "Nationals.TV",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 822679,
-      "game_date": "2026-09-27T19:05:00Z",
-      "status": "Scheduled",
-      "venue": "Nationals Park",
-      "location": "away",
-      "opponent": "Nationals",
-      "opponent_record": "76-84",
-      "favorite_team_record": "73-87",
-      "favorite_team_pitcher": "Sean Manaea",
-      "opponent_pitcher": "DJ Herz",
-      "favorite_team_pitcher_record": "6-7",
-      "opponent_pitcher_record": "0-1",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "SNY",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "Nationals.TV",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    }
-  ]
+  "games": []
 }

@@ -1,76 +1,7 @@
 {
-  "generated_at": "2026-09-25T23:34:00.674169+00:00",
+  "generated_at": "2026-09-29T14:45:56.898882+00:00",
   "source": "MLB Stats API",
   "team": "Orioles",
   "regular_season_end": "2026-09-27",
-  "games": [
-    {
-      "game_pk": 823489,
-      "game_date": "2026-09-25T20:10:00Z",
-      "status": "In Progress",
-      "venue": "Yankee Stadium",
-      "location": "away",
-      "opponent": "Yankees",
-      "opponent_record": "92-68",
-      "favorite_team_record": "79-81",
-      "favorite_team_pitcher": "Brandon Young",
-      "opponent_pitcher": "Ryan Yarbrough",
-      "favorite_team_pitcher_record": "9-5",
-      "opponent_pitcher_record": "2-1",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": true,
-      "game_number": 2,
-      "broadcasts": [
-        {
-          "name": "YES",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_out_of_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "MASN",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 823490,
-      "game_date": "2026-09-27T19:20:00Z",
-      "status": "Scheduled",
-      "venue": "Yankee Stadium",
-      "location": "away",
-      "opponent": "Yankees",
-      "opponent_record": "92-68",
-      "favorite_team_record": "79-81",
-      "favorite_team_pitcher": "Shane Baz",
-      "opponent_pitcher": "Elmer Rodríguez",
-      "favorite_team_pitcher_record": "6-15",
-      "opponent_pitcher_record": "0-3",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "YES",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_out_of_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "MASN",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    }
-  ]
+  "games": []
 }

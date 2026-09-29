@@ -22,7 +22,7 @@ EASTERN = ZoneInfo("America/New_York")
 MLB = "https://statsapi.mlb.com"
 SCHEDULE_API = (
     MLB + "/api/v1/schedule?sportId=1&teamId={team}&startDate={start}"
-    "&endDate={end}&gameType=R&hydrate=probablePitcher,team,broadcasts(all)"
+    "&endDate={end}&gameTypes=R,F,D,L,W&hydrate=probablePitcher,team,broadcasts(all)"
 )
 SEASON_API = MLB + "/api/v1/seasons/{season}?sportId=1"
 PITCHER_STATS_API = (
@@ -116,12 +116,25 @@ def regular_season_end(payload: dict[str, Any]) -> date:
     return date.fromisoformat(str(value))
 
 
+def season_end(payload: dict[str, Any]) -> date:
+    seasons = payload.get("seasons") or []
+    value = seasons[0].get("seasonEndDate") if seasons else None
+    if not value:
+        raise RuntimeError("MLB did not return the season end date")
+    return date.fromisoformat(str(value))
+
+
 def schedule_feed(team: dict[str, Any]) -> dict[str, Any]:
     today = datetime.now(EASTERN).date()
-    end = regular_season_end(fetch_json(SEASON_API.format(season=today.year)))
-    payload = fetch_json(SCHEDULE_API.format(
-        team=team["mlb_id"], start=today.isoformat(), end=end.isoformat(),
-    ))
+    season_payload = fetch_json(SEASON_API.format(season=today.year))
+    regular_end = regular_season_end(season_payload)
+    end = season_end(season_payload)
+    if today > end:
+        payload = {"dates": []}
+    else:
+        payload = fetch_json(SCHEDULE_API.format(
+            team=team["mlb_id"], start=today.isoformat(), end=end.isoformat(),
+        ))
     probable_ids = {
         value
         for day in payload.get("dates", [])
@@ -171,7 +184,7 @@ def schedule_feed(team: dict[str, Any]) -> dict[str, Any]:
     games.sort(key=lambda game: (game["game_date"], game["game_pk"] or 0))
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(), "source": "MLB Stats API",
-        "team": team["short_name"], "regular_season_end": end.isoformat(), "games": games,
+        "team": team["short_name"], "regular_season_end": regular_end.isoformat(), "games": games,
     }
 
 

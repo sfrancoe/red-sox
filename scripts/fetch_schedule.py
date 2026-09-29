@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "data" / "schedule.json"
 API = (
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId={team}"
-    "&startDate={start}&endDate={end}&gameType=R&hydrate=probablePitcher,team,broadcasts(all)"
+    "&startDate={start}&endDate={end}&gameTypes=R,F,D,L,W&hydrate=probablePitcher,team,broadcasts(all)"
 )
 SEASON_API = "https://statsapi.mlb.com/api/v1/seasons/{season}?sportId=1"
 PITCHER_STATS_API = (
@@ -85,6 +85,17 @@ def regular_season_end(payload: dict[str, Any]) -> date:
         return date.fromisoformat(str(value))
     except ValueError as exc:
         raise RuntimeError("MLB returned an invalid regular-season end date") from exc
+
+
+def season_end(payload: dict[str, Any]) -> date:
+    seasons = payload.get("seasons") or []
+    value = seasons[0].get("seasonEndDate") if seasons else None
+    if not value:
+        raise RuntimeError("MLB did not return the season end date")
+    try:
+        return date.fromisoformat(str(value))
+    except ValueError as exc:
+        raise RuntimeError("MLB returned an invalid season end date") from exc
 
 
 def game_row(game: dict[str, Any], today, pitcher_records: dict[int, str]) -> dict[str, Any] | None:
@@ -168,9 +179,13 @@ def feed_changed(feed: dict[str, Any]) -> bool:
 def main() -> None:
     today = datetime.now(EASTERN).date()
     season_payload = fetch_json(SEASON_API.format(season=today.year))
-    end = regular_season_end(season_payload)
-    url = API.format(team=BOS, start=today.isoformat(), end=end.isoformat())
-    schedule_payload = fetch_json(url)
+    regular_end = regular_season_end(season_payload)
+    end = season_end(season_payload)
+    if today > end:
+        schedule_payload = {"dates": []}
+    else:
+        url = API.format(team=BOS, start=today.isoformat(), end=end.isoformat())
+        schedule_payload = fetch_json(url)
     probable_ids = {
         player_id
         for date_entry in schedule_payload.get("dates", [])
@@ -182,7 +197,7 @@ def main() -> None:
         player_id: pitcher_record(player_id, today.year)
         for player_id in sorted(probable_ids)
     }
-    feed = build_feed(schedule_payload, today, end, pitcher_records)
+    feed = build_feed(schedule_payload, today, regular_end, pitcher_records)
     if not feed_changed(feed):
         print(f"No upcoming schedule changes; kept {OUTPUT_PATH}")
         return

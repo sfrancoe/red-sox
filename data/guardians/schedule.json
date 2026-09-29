@@ -1,108 +1,246 @@
 {
-  "generated_at": "2026-09-25T23:34:06.792432+00:00",
+  "generated_at": "2026-09-29T14:45:57.744475+00:00",
   "source": "MLB Stats API",
   "team": "Guardians",
   "regular_season_end": "2026-09-27",
   "games": [
     {
-      "game_pk": 824058,
-      "game_date": "2026-09-25T23:40:00Z",
-      "status": "Delayed Start",
-      "venue": "Kauffman Stadium",
-      "location": "away",
-      "opponent": "Royals",
-      "opponent_record": "68-91",
-      "favorite_team_record": "83-76",
-      "favorite_team_pitcher": "Gavin Williams",
-      "opponent_pitcher": "Noah Cameron",
-      "favorite_team_pitcher_record": "14-8",
-      "opponent_pitcher_record": "9-8",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "Guardians.TV Presented by Progressive",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "Royals.TV",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 824057,
-      "game_date": "2026-09-26T23:10:00Z",
+      "game_pk": 849829,
+      "game_date": "2026-10-03T07:33:00Z",
       "status": "Scheduled",
-      "venue": "Kauffman Stadium",
-      "location": "away",
-      "opponent": "Royals",
-      "opponent_record": "68-91",
-      "favorite_team_record": "83-76",
-      "favorite_team_pitcher": "Tanner Bibee",
-      "opponent_pitcher": "Michael Wacha",
-      "favorite_team_pitcher_record": "6-15",
-      "opponent_pitcher_record": "9-9",
-      "show_probables": true,
-      "series_description": "Regular Season",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "Guardians.TV Presented by Progressive",
-          "is_national": false,
-          "home_away": "away",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        },
-        {
-          "name": "Royals.TV",
-          "is_national": false,
-          "home_away": "home",
-          "availability": "local_in_market",
-          "available_for_streaming": true
-        }
-      ]
-    },
-    {
-      "game_pk": 824055,
-      "game_date": "2026-09-27T19:10:00Z",
-      "status": "Scheduled",
-      "venue": "Kauffman Stadium",
-      "location": "away",
-      "opponent": "Royals",
-      "opponent_record": "68-91",
-      "favorite_team_record": "83-76",
+      "venue": "Progressive Field",
+      "location": "home",
+      "opponent": "HOU/CWS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "Daniel Lynch IV",
+      "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "6-6",
+      "opponent_pitcher_record": "—",
       "show_probables": true,
-      "series_description": "Regular Season",
+      "series_description": "AL Division Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "Royals.TV",
-          "is_national": false,
+          "name": "TBS/HBO MAX",
+          "is_national": true,
           "home_away": "home",
-          "availability": "local_in_market",
+          "availability": "national",
           "available_for_streaming": true
         },
         {
-          "name": "Guardians.TV Presented by Progressive",
-          "is_national": false,
+          "name": "TBS/HBO MAX",
+          "is_national": true,
           "home_away": "away",
-          "availability": "local_in_market",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849834,
+      "game_date": "2026-10-05T07:33:00Z",
+      "status": "Scheduled",
+      "venue": "Progressive Field",
+      "location": "home",
+      "opponent": "HOU/CWS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
           "available_for_streaming": true
+        },
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849833,
+      "game_date": "2026-10-07T07:33:00Z",
+      "status": "Scheduled",
+      "venue": "AL Stadium",
+      "location": "away",
+      "opponent": "HOU/CWS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849832,
+      "game_date": "2026-10-08T07:33:00Z",
+      "status": "Scheduled",
+      "venue": "AL Stadium",
+      "location": "away",
+      "opponent": "HOU/CWS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849831,
+      "game_date": "2026-10-10T07:33:00Z",
+      "status": "Scheduled",
+      "venue": "Progressive Field",
+      "location": "home",
+      "opponent": "HOU/CWS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
         }
       ]
     }

@@ -1,74 +1,246 @@
 {
-  "generated_at": "2026-09-26T07:57:51.253283+00:00",
+  "generated_at": "2026-09-29T14:45:56.638982+00:00",
   "source": "MLB Stats API",
   "team": "Rays",
   "regular_season_end": "2026-09-27",
   "games": [
     {
-      "game_pk": 823407,
-      "game_date": "2026-09-26T23:15:00Z",
+      "game_pk": 849835,
+      "game_date": "2026-10-03T07:33:00Z",
       "status": "Scheduled",
-      "venue": "Citizens Bank Park",
-      "location": "away",
-      "opponent": "Phillies",
-      "opponent_record": "87-73",
-      "favorite_team_record": "97-63",
-      "favorite_team_pitcher": "Griffin Jax",
+      "venue": "Tropicana Field",
+      "location": "home",
+      "opponent": "NYY/BOS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
       "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "8-10",
+      "favorite_team_pitcher_record": "—",
       "opponent_pitcher_record": "—",
       "show_probables": true,
-      "series_description": "Regular Season",
+      "series_description": "AL Division Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "FOX/ FOX ONE",
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "TBS/HBO MAX",
           "is_national": true,
           "home_away": "away",
           "availability": "national",
           "available_for_streaming": false
         },
         {
-          "name": "FOX/ FOX ONE",
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
           "is_national": true,
           "home_away": "home",
           "availability": "national",
-          "available_for_streaming": true
+          "available_for_streaming": false
         }
       ]
     },
     {
-      "game_pk": 823408,
-      "game_date": "2026-09-27T19:05:00Z",
+      "game_pk": 849839,
+      "game_date": "2026-10-05T07:33:00Z",
       "status": "Scheduled",
-      "venue": "Citizens Bank Park",
-      "location": "away",
-      "opponent": "Phillies",
-      "opponent_record": "87-73",
-      "favorite_team_record": "97-63",
-      "favorite_team_pitcher": "Nick Martinez",
-      "opponent_pitcher": "Zack Wheeler",
-      "favorite_team_pitcher_record": "15-5",
-      "opponent_pitcher_record": "13-5",
-      "show_probables": true,
-      "series_description": "Regular Season",
+      "venue": "Tropicana Field",
+      "location": "home",
+      "opponent": "NYY/BOS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "NBCSP",
-          "is_national": false,
+          "name": "TBS/HBO MAX",
+          "is_national": true,
           "home_away": "home",
-          "availability": "local_in_market",
+          "availability": "national",
           "available_for_streaming": true
         },
         {
-          "name": "Rays.TV",
-          "is_national": false,
+          "name": "TBS/HBO MAX",
+          "is_national": true,
           "home_away": "away",
-          "availability": "local_in_market",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849838,
+      "game_date": "2026-10-07T07:33:00Z",
+      "status": "Scheduled",
+      "venue": "AL Stadium",
+      "location": "away",
+      "opponent": "NYY/BOS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
           "available_for_streaming": true
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849837,
+      "game_date": "2026-10-08T07:33:00Z",
+      "status": "Scheduled",
+      "venue": "AL Stadium",
+      "location": "away",
+      "opponent": "NYY/BOS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849836,
+      "game_date": "2026-10-10T07:33:00Z",
+      "status": "Scheduled",
+      "venue": "Tropicana Field",
+      "location": "home",
+      "opponent": "NYY/BOS",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "AL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        },
+        {
+          "name": "TBS/HBO MAX",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
         }
       ]
     }
