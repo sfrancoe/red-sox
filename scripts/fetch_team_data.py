@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -495,11 +496,25 @@ def main() -> None:
         "--section", action="append",
         choices=("schedule", "recent-game", "standings", "pitching"), default=[],
     )
+    parser.add_argument(
+        "--keep-going", action="store_true",
+        help="Try every selected team, then fail if any team could not be refreshed.",
+    )
     args = parser.parse_args()
     teams = [team_by_key(key) for key in args.team] if args.team else expansion_teams()
     sections = args.section or ["schedule", "recent-game", "standings", "pitching"]
+    failures: list[tuple[str, RuntimeError]] = []
     for team in teams:
-        fetch_team(team, sections)
+        try:
+            fetch_team(team, sections)
+        except RuntimeError as exc:
+            if not args.keep_going:
+                raise
+            failures.append((team["full_name"], exc))
+            print(f"  ERROR: {exc}", file=sys.stderr)
+    if failures:
+        names = ", ".join(name for name, _ in failures)
+        raise RuntimeError(f"Refresh failed for {len(failures)} team(s): {names}") from failures[0][1]
 
 
 if __name__ == "__main__":

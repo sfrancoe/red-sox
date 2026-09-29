@@ -28,7 +28,6 @@ jobs:
           python3 scripts/fetch_yankees_schedule.py
           python3 scripts/fetch_yankees_recent_game.py
           python3 scripts/fetch_yankees_standings.py
-          python3 scripts/fetch_yankees_pitching.py
 
       - name: Commit if game data changed
         run: |

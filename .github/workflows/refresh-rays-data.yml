@@ -28,7 +28,6 @@ jobs:
           python3 scripts/fetch_rays_schedule.py
           python3 scripts/fetch_rays_recent_game.py
           python3 scripts/fetch_rays_standings.py
-          python3 scripts/fetch_rays_pitching.py
 
       - name: Commit if game data changed
         run: |
@@ -42,4 +41,3 @@ jobs:
             git pull --rebase origin main
             git push
           fi
-

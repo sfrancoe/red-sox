@@ -1,8 +1,8 @@
-name: Refresh game, standings, and pitching data
+name: Refresh Red Sox game and standings data
 
 on:
   schedule:
-    # Every two hours keeps standings, records, and player performance useful without excess deploys.
+    # Every two hours keeps schedules, standings, and records useful without excess deploys.
     - cron: '17 */2 * * *'
   workflow_dispatch:
 
@@ -29,7 +29,6 @@ jobs:
           python3 scripts/fetch_schedule.py
           python3 scripts/fetch_recent_game.py
           python3 scripts/fetch_standings.py
-          python3 scripts/fetch_pitching.py
 
       - name: Fetch open player data
         run: python3 scripts/fetch_players.py --team redsox
@@ -40,17 +39,17 @@ jobs:
           python3 scripts/test_players.py --team redsox
 
       - name: Show what changed
-        run: git --no-pager diff --stat -- data/schedule.json data/recent-game.json data/standings.json data/players.json data/pitching.json data/player-careers "ios/Hub Ball/Hub Ball/players.json" || true
+        run: git --no-pager diff --stat -- data/schedule.json data/recent-game.json data/standings.json data/players.json data/player-careers "ios/Hub Ball/Hub Ball/players.json" || true
 
       - name: Commit if game data changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/schedule.json data/recent-game.json data/standings.json data/players.json data/pitching.json data/player-careers "ios/Hub Ball/Hub Ball/players.json"
+          git add data/schedule.json data/recent-game.json data/standings.json data/players.json data/player-careers "ios/Hub Ball/Hub Ball/players.json"
           if git diff --cached --quiet; then
             echo "No game data changes — nothing to commit."
           else
-            git commit -m "Refresh game, standings, and pitching pages ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git commit -m "Refresh game and standings pages ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase origin main
             git push
             echo "Pushed refreshed game data."

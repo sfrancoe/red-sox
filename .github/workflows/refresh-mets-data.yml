@@ -28,7 +28,6 @@ jobs:
           python3 scripts/fetch_mets_schedule.py
           python3 scripts/fetch_mets_recent_game.py
           python3 scripts/fetch_mets_standings.py
-          python3 scripts/fetch_mets_pitching.py
 
       - name: Commit if game data changed
         run: |

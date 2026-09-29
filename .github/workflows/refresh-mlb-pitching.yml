@@ -1,0 +1,68 @@
+name: Refresh MLB pitching data
+
+on:
+  schedule:
+    - cron: '55 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-data-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Red Sox pitching
+        id: red_sox
+        continue-on-error: true
+        run: python3 scripts/fetch_pitching.py
+      - name: Fetch Yankees pitching
+        id: yankees
+        continue-on-error: true
+        run: python3 scripts/fetch_yankees_pitching.py
+      - name: Fetch Mets pitching
+        id: mets
+        continue-on-error: true
+        run: python3 scripts/fetch_mets_pitching.py
+      - name: Fetch Rays pitching
+        id: rays
+        continue-on-error: true
+        run: python3 scripts/fetch_rays_pitching.py
+      - name: Fetch expansion-team pitching
+        id: expansion
+        continue-on-error: true
+        run: python3 scripts/fetch_team_data.py --section pitching --keep-going
+
+      - name: Commit healthy pitching updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pitching.json data/*/pitching.json
+          if git diff --cached --quiet; then
+            echo "No pitching data changes."
+          else
+            git commit -m "Refresh MLB pitching data ($(date -u +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push
+          fi
+
+      - name: Report incomplete pitching refresh
+        if: >-
+          steps.red_sox.outcome == 'failure' ||
+          steps.yankees.outcome == 'failure' ||
+          steps.mets.outcome == 'failure' ||
+          steps.rays.outcome == 'failure' ||
+          steps.expansion.outcome == 'failure'
+        run: |
+          echo "::error::Some FanGraphs pitching feeds failed. Healthy updates were published; existing files were preserved for failed feeds."
+          exit 1
