@@ -1,8 +1,8 @@
 {
-  "retrieved_at_utc": "2026-09-27T14:02:56.798815+00:00",
+  "retrieved_at_utc": "2026-09-29T22:52:46.901289+00:00",
   "definition": "MLB qualified hitters with officially displayed AVG >= .300, including exactly .300",
   "qualification": "MLB playerPool=QUALIFIED; MLB season totals combine traded-player performance",
-  "last_final_year": 2025,
+  "last_final_year": 2026,
   "seasons": [
     {
       "year": 1976,
@@ -57304,18 +57304,18 @@
     },
     {
       "year": 2026,
-      "provisional": true,
+      "provisional": false,
       "source": "https://statsapi.mlb.com/api/v1/stats?stats=season&group=hitting&season=2026&sportIds=1&playerPool=QUALIFIED&sortStat=avg&order=desc&limit=1000",
-      "qualified_total": 134,
+      "qualified_total": 135,
       "count": 7,
       "players": [
         {
           "id": 670541,
           "name": "Yordan Alvarez",
           "avg": ".316",
-          "hits": 178,
-          "at_bats": 563,
-          "plate_appearances": 687
+          "hits": 179,
+          "at_bats": 567,
+          "plate_appearances": 692
         },
         {
           "id": 672515,
@@ -57352,10 +57352,10 @@
         {
           "id": 693304,
           "name": "Nick Gonzales",
-          "avg": ".302",
-          "hits": 165,
-          "at_bats": 547,
-          "plate_appearances": 604
+          "avg": ".303",
+          "hits": 167,
+          "at_bats": 551,
+          "plate_appearances": 608
         },
         {
           "id": 681198,
@@ -57382,20 +57382,20 @@
           "plate_appearances": 686
         },
         {
-          "id": 664983,
-          "name": "Jake McCarthy",
-          "avg": ".292",
-          "hits": 159,
-          "at_bats": 544,
-          "plate_appearances": 592
+          "id": 694192,
+          "name": "Jackson Chourio",
+          "avg": ".291",
+          "hits": 152,
+          "at_bats": 522,
+          "plate_appearances": 573
         },
         {
-          "id": 518692,
-          "name": "Freddie Freeman",
-          "avg": ".290",
-          "hits": 167,
-          "at_bats": 576,
-          "plate_appearances": 654
+          "id": 664983,
+          "name": "Jake McCarthy",
+          "avg": ".291",
+          "hits": 159,
+          "at_bats": 547,
+          "plate_appearances": 596
         },
         {
           "id": 665487,
@@ -57406,20 +57406,20 @@
           "plate_appearances": 704
         },
         {
-          "id": 694192,
-          "name": "Jackson Chourio",
-          "avg": ".288",
-          "hits": 149,
-          "at_bats": 518,
-          "plate_appearances": 569
-        },
-        {
           "id": 695506,
           "name": "Jac Caglianone",
-          "avg": ".287",
-          "hits": 146,
-          "at_bats": 508,
-          "plate_appearances": 549
+          "avg": ".289",
+          "hits": 148,
+          "at_bats": 512,
+          "plate_appearances": 553
+        },
+        {
+          "id": 518692,
+          "name": "Freddie Freeman",
+          "avg": ".288",
+          "hits": 167,
+          "at_bats": 579,
+          "plate_appearances": 657
         },
         {
           "id": 800050,
@@ -57438,44 +57438,44 @@
           "plate_appearances": 615
         },
         {
-          "id": 677951,
-          "name": "Bobby Witt Jr.",
-          "avg": ".283",
-          "hits": 157,
-          "at_bats": 554,
-          "plate_appearances": 628
+          "id": 689414,
+          "name": "Liam Hicks",
+          "avg": ".284",
+          "hits": 136,
+          "at_bats": 479,
+          "plate_appearances": 554
         },
         {
-          "id": 807712,
-          "name": "Luke Keaschall",
+          "id": 678882,
+          "name": "Ceddanne Rafaela",
           "avg": ".283",
-          "hits": 149,
-          "at_bats": 526,
-          "plate_appearances": 615
+          "hits": 153,
+          "at_bats": 541,
+          "plate_appearances": 576
         },
         {
           "id": 682829,
           "name": "Elly De La Cruz",
           "avg": ".283",
-          "hits": 157,
-          "at_bats": 555,
-          "plate_appearances": 632
+          "hits": 158,
+          "at_bats": 559,
+          "plate_appearances": 636
         },
         {
-          "id": 689414,
-          "name": "Liam Hicks",
+          "id": 701807,
+          "name": "Carson Benge",
           "avg": ".282",
-          "hits": 134,
-          "at_bats": 475,
-          "plate_appearances": 550
+          "hits": 168,
+          "at_bats": 595,
+          "plate_appearances": 654
         },
         {
-          "id": 682985,
-          "name": "Riley Greene",
+          "id": 807712,
+          "name": "Luke Keaschall",
           "avg": ".282",
-          "hits": 143,
-          "at_bats": 507,
-          "plate_appearances": 588
+          "hits": 149,
+          "at_bats": 528,
+          "plate_appearances": 620
         },
         {
           "id": 680757,
@@ -57486,20 +57486,20 @@
           "plate_appearances": 637
         },
         {
-          "id": 678882,
-          "name": "Ceddanne Rafaela",
-          "avg": ".282",
-          "hits": 152,
-          "at_bats": 539,
-          "plate_appearances": 574
-        },
-        {
           "id": 668227,
           "name": "Randy Arozarena",
           "avg": ".281",
-          "hits": 160,
-          "at_bats": 569,
-          "plate_appearances": 666
+          "hits": 161,
+          "at_bats": 572,
+          "plate_appearances": 670
+        },
+        {
+          "id": 677951,
+          "name": "Bobby Witt Jr.",
+          "avg": ".281",
+          "hits": 157,
+          "at_bats": 558,
+          "plate_appearances": 632
         },
         {
           "id": 669364,
@@ -57510,12 +57510,20 @@
           "plate_appearances": 595
         },
         {
-          "id": 701807,
-          "name": "Carson Benge",
+          "id": 682985,
+          "name": "Riley Greene",
           "avg": ".280",
-          "hits": 165,
-          "at_bats": 590,
-          "plate_appearances": 649
+          "hits": 143,
+          "at_bats": 511,
+          "plate_appearances": 592
+        },
+        {
+          "id": 691718,
+          "name": "Pete Crow-Armstrong",
+          "avg": ".280",
+          "hits": 175,
+          "at_bats": 626,
+          "plate_appearances": 726
         },
         {
           "id": 676475,
@@ -57526,12 +57534,12 @@
           "plate_appearances": 670
         },
         {
-          "id": 691718,
-          "name": "Pete Crow-Armstrong",
+          "id": 805808,
+          "name": "Kevin McGonigle",
           "avg": ".278",
-          "hits": 174,
-          "at_bats": 625,
-          "plate_appearances": 725
+          "hits": 168,
+          "at_bats": 605,
+          "plate_appearances": 707
         },
         {
           "id": 671277,
@@ -57542,12 +57550,12 @@
           "plate_appearances": 543
         },
         {
-          "id": 691406,
-          "name": "Junior Caminero",
+          "id": 803011,
+          "name": "Sam Antonacci",
           "avg": ".277",
-          "hits": 170,
-          "at_bats": 614,
-          "plate_appearances": 700
+          "hits": 133,
+          "at_bats": 480,
+          "plate_appearances": 557
         },
         {
           "id": 808982,
@@ -57558,20 +57566,20 @@
           "plate_appearances": 579
         },
         {
-          "id": 575929,
-          "name": "Willson Contreras",
+          "id": 643289,
+          "name": "Mauricio Dubón",
           "avg": ".276",
-          "hits": 123,
-          "at_bats": 446,
-          "plate_appearances": 533
+          "hits": 158,
+          "at_bats": 572,
+          "plate_appearances": 619
         },
         {
-          "id": 805808,
-          "name": "Kevin McGonigle",
+          "id": 691406,
+          "name": "Junior Caminero",
           "avg": ".276",
-          "hits": 166,
-          "at_bats": 602,
-          "plate_appearances": 704
+          "hits": 170,
+          "at_bats": 616,
+          "plate_appearances": 702
         },
         {
           "id": 805367,
@@ -57585,49 +57593,33 @@
           "id": 660271,
           "name": "Shohei Ohtani",
           "avg": ".275",
-          "hits": 143,
-          "at_bats": 520,
-          "plate_appearances": 615
+          "hits": 144,
+          "at_bats": 523,
+          "plate_appearances": 618
         },
         {
-          "id": 643289,
-          "name": "Mauricio Dubón",
+          "id": 575929,
+          "name": "Willson Contreras",
           "avg": ".275",
-          "hits": 156,
-          "at_bats": 568,
-          "plate_appearances": 615
+          "hits": 123,
+          "at_bats": 448,
+          "plate_appearances": 535
         },
         {
-          "id": 803011,
-          "name": "Sam Antonacci",
-          "avg": ".275",
-          "hits": 131,
-          "at_bats": 477,
-          "plate_appearances": 553
+          "id": 666018,
+          "name": "Jonathan Aranda",
+          "avg": ".274",
+          "hits": 159,
+          "at_bats": 580,
+          "plate_appearances": 668
         },
         {
           "id": 681624,
           "name": "Andy Pages",
           "avg": ".274",
-          "hits": 139,
-          "at_bats": 508,
-          "plate_appearances": 569
-        },
-        {
-          "id": 666018,
-          "name": "Jonathan Aranda",
-          "avg": ".273",
-          "hits": 158,
-          "at_bats": 578,
-          "plate_appearances": 666
-        },
-        {
-          "id": 691023,
-          "name": "Jordan Walker",
-          "avg": ".271",
-          "hits": 164,
-          "at_bats": 605,
-          "plate_appearances": 663
+          "hits": 140,
+          "at_bats": 511,
+          "plate_appearances": 574
         },
         {
           "id": 661388,
@@ -57646,20 +57638,28 @@
           "plate_appearances": 634
         },
         {
+          "id": 691023,
+          "name": "Jordan Walker",
+          "avg": ".269",
+          "hits": 164,
+          "at_bats": 609,
+          "plate_appearances": 667
+        },
+        {
           "id": 547180,
           "name": "Bryce Harper",
           "avg": ".269",
-          "hits": 154,
-          "at_bats": 572,
-          "plate_appearances": 688
+          "hits": 155,
+          "at_bats": 577,
+          "plate_appearances": 693
         },
         {
           "id": 668930,
           "name": "Brice Turang",
           "avg": ".268",
-          "hits": 155,
-          "at_bats": 578,
-          "plate_appearances": 676
+          "hits": 156,
+          "at_bats": 582,
+          "plate_appearances": 680
         },
         {
           "id": 624413,
@@ -57670,44 +57670,36 @@
           "plate_appearances": 700
         },
         {
-          "id": 695578,
-          "name": "James Wood",
-          "avg": ".267",
-          "hits": 136,
-          "at_bats": 510,
-          "plate_appearances": 619
-        },
-        {
           "id": 641343,
           "name": "Jake Bauers",
           "avg": ".266",
-          "hits": 126,
-          "at_bats": 473,
-          "plate_appearances": 574
+          "hits": 127,
+          "at_bats": 477,
+          "plate_appearances": 578
         },
         {
-          "id": 643446,
-          "name": "Jeff McNeil",
-          "avg": ".266",
-          "hits": 126,
-          "at_bats": 474,
-          "plate_appearances": 516
-        },
-        {
-          "id": 701398,
-          "name": "Sal Stewart",
+          "id": 695578,
+          "name": "James Wood",
           "avg": ".265",
-          "hits": 164,
-          "at_bats": 619,
-          "plate_appearances": 696
+          "hits": 136,
+          "at_bats": 513,
+          "plate_appearances": 623
+        },
+        {
+          "id": 608324,
+          "name": "Alex Bregman",
+          "avg": ".265",
+          "hits": 161,
+          "at_bats": 608,
+          "plate_appearances": 702
         },
         {
           "id": 686527,
           "name": "Dominic Canzone",
           "avg": ".264",
-          "hits": 125,
-          "at_bats": 473,
-          "plate_appearances": 528
+          "hits": 126,
+          "at_bats": 477,
+          "plate_appearances": 533
         },
         {
           "id": 641355,
@@ -57718,12 +57710,12 @@
           "plate_appearances": 562
         },
         {
-          "id": 663538,
-          "name": "Nico Hoerner",
+          "id": 643446,
+          "name": "Jeff McNeil",
           "avg": ".264",
-          "hits": 165,
-          "at_bats": 626,
-          "plate_appearances": 687
+          "hits": 126,
+          "at_bats": 478,
+          "plate_appearances": 520
         },
         {
           "id": 700250,
@@ -57734,84 +57726,68 @@
           "plate_appearances": 667
         },
         {
-          "id": 670623,
-          "name": "Isaac Paredes",
+          "id": 701398,
+          "name": "Sal Stewart",
           "avg": ".263",
-          "hits": 147,
-          "at_bats": 559,
-          "plate_appearances": 655
+          "hits": 164,
+          "at_bats": 623,
+          "plate_appearances": 700
+        },
+        {
+          "id": 663538,
+          "name": "Nico Hoerner",
+          "avg": ".263",
+          "hits": 165,
+          "at_bats": 628,
+          "plate_appearances": 689
         },
         {
           "id": 669003,
           "name": "Garrett Mitchell",
           "avg": ".262",
-          "hits": 120,
-          "at_bats": 458,
-          "plate_appearances": 527
+          "hits": 121,
+          "at_bats": 461,
+          "plate_appearances": 531
         },
         {
-          "id": 677649,
-          "name": "Ezequiel Duran",
+          "id": 670623,
+          "name": "Isaac Paredes",
           "avg": ".262",
-          "hits": 140,
-          "at_bats": 535,
-          "plate_appearances": 593
+          "hits": 147,
+          "at_bats": 562,
+          "plate_appearances": 659
+        },
+        {
+          "id": 672695,
+          "name": "Geraldo Perdomo",
+          "avg": ".262",
+          "hits": 147,
+          "at_bats": 562,
+          "plate_appearances": 680
         },
         {
           "id": 647304,
           "name": "Josh Naylor",
           "avg": ".261",
-          "hits": 155,
-          "at_bats": 593,
-          "plate_appearances": 646
+          "hits": 156,
+          "at_bats": 597,
+          "plate_appearances": 650
         },
         {
-          "id": 672695,
-          "name": "Geraldo Perdomo",
+          "id": 682928,
+          "name": "CJ Abrams",
           "avg": ".261",
-          "hits": 146,
-          "at_bats": 559,
-          "plate_appearances": 676
+          "hits": 151,
+          "at_bats": 579,
+          "plate_appearances": 654
         },
         {
           "id": 668804,
           "name": "Bryan Reynolds",
           "avg": ".261",
           "hits": 155,
-          "at_bats": 594,
-          "plate_appearances": 697
-        },
-        {
-          "id": 682928,
-          "name": "CJ Abrams",
-          "avg": ".261",
-          "hits": 150,
-          "at_bats": 575,
-          "plate_appearances": 650
-        },
-        {
-          "id": 666182,
-          "name": "Bo Bichette",
-          "avg": ".261",
-          "hits": 165,
-          "at_bats": 633,
-          "plate_appearances": 691
-        },
-        {
-          "id": 676391,
-          "name": "Ernie Clement",
-          "avg": ".261",
-          "hits": 153,
-          "at_bats": 587,
-          "plate_appearances": 618
-        },
-        {
-          "id": 669016,
-          "name": "Brandon Marsh",
-          "avg": ".261",
-          "hits": 136,
-          "at_bats": 522,
-          "plate_appearances": 564
+          "at_bats": 595,
+          "plate_appearances": 699
         },
         {
           "id": 664040,
@@ -57822,6 +57798,14 @@
           "plate_appearances": 656
         },
         {
+          "id": 666182,
+          "name": "Bo Bichette",
+          "avg": ".260",
+          "hits": 166,
+          "at_bats": 638,
+          "plate_appearances": 696
+        },
+        {
           "id": 665489,
           "name": "Vladimir Guerrero Jr.",
           "avg": ".260",
@@ -57830,28 +57814,36 @@
           "plate_appearances": 609
         },
         {
-          "id": 608324,
-          "name": "Alex Bregman",
+          "id": 677649,
+          "name": "Ezequiel Duran",
           "avg": ".260",
-          "hits": 157,
-          "at_bats": 604,
-          "plate_appearances": 697
+          "hits": 140,
+          "at_bats": 539,
+          "plate_appearances": 597
         },
         {
           "id": 607043,
           "name": "Brandon Nimmo",
           "avg": ".260",
-          "hits": 153,
-          "at_bats": 589,
-          "plate_appearances": 651
+          "hits": 154,
+          "at_bats": 593,
+          "plate_appearances": 655
         },
         {
-          "id": 605141,
-          "name": "Mookie Betts",
-          "avg": ".258",
-          "hits": 123,
-          "at_bats": 476,
-          "plate_appearances": 526
+          "id": 669016,
+          "name": "Brandon Marsh",
+          "avg": ".260",
+          "hits": 136,
+          "at_bats": 524,
+          "plate_appearances": 568
+        },
+        {
+          "id": 676391,
+          "name": "Ernie Clement",
+          "avg": ".259",
+          "hits": 153,
+          "at_bats": 590,
+          "plate_appearances": 621
         },
         {
           "id": 646240,
@@ -57862,12 +57854,36 @@
           "plate_appearances": 633
         },
         {
+          "id": 605141,
+          "name": "Mookie Betts",
+          "avg": ".257",
+          "hits": 123,
+          "at_bats": 478,
+          "plate_appearances": 528
+        },
+        {
+          "id": 681082,
+          "name": "Bryson Stott",
+          "avg": ".256",
+          "hits": 137,
+          "at_bats": 536,
+          "plate_appearances": 608
+        },
+        {
+          "id": 605137,
+          "name": "Josh Bell",
+          "avg": ".255",
+          "hits": 145,
+          "at_bats": 568,
+          "plate_appearances": 631
+        },
+        {
           "id": 571448,
           "name": "Nolan Arenado",
           "avg": ".255",
-          "hits": 135,
-          "at_bats": 530,
-          "plate_appearances": 596
+          "hits": 136,
+          "at_bats": 533,
+          "plate_appearances": 599
         },
         {
           "id": 701538,
@@ -57876,14 +57892,6 @@
           "hits": 156,
           "at_bats": 613,
           "plate_appearances": 664
-        },
-        {
-          "id": 605137,
-          "name": "Josh Bell",
-          "avg": ".254",
-          "hits": 144,
-          "at_bats": 566,
-          "plate_appearances": 627
         },
         {
           "id": 677587,
@@ -57897,33 +57905,33 @@
           "id": 686797,
           "name": "Brooks Lee",
           "avg": ".253",
-          "hits": 147,
-          "at_bats": 582,
-          "plate_appearances": 627
+          "hits": 148,
+          "at_bats": 586,
+          "plate_appearances": 631
+        },
+        {
+          "id": 571970,
+          "name": "Max Muncy",
+          "avg": ".252",
+          "hits": 123,
+          "at_bats": 488,
+          "plate_appearances": 561
         },
         {
           "id": 621566,
           "name": "Matt Olson",
-          "avg": ".252",
-          "hits": 157,
-          "at_bats": 623,
-          "plate_appearances": 696
-        },
-        {
-          "id": 681082,
-          "name": "Bryson Stott",
           "avg": ".251",
-          "hits": 134,
-          "at_bats": 533,
-          "plate_appearances": 604
+          "hits": 157,
+          "at_bats": 625,
+          "plate_appearances": 698
         },
         {
           "id": 514888,
           "name": "Jose Altuve",
           "avg": ".250",
-          "hits": 130,
-          "at_bats": 519,
-          "plate_appearances": 568
+          "hits": 131,
+          "at_bats": 524,
+          "plate_appearances": 573
         },
         {
           "id": 678246,
@@ -57934,100 +57942,92 @@
           "plate_appearances": 704
         },
         {
-          "id": 664761,
-          "name": "Alec Bohm",
-          "avg": ".250",
-          "hits": 141,
-          "at_bats": 565,
-          "plate_appearances": 625
-        },
-        {
-          "id": 571970,
-          "name": "Max Muncy",
-          "avg": ".249",
-          "hits": 121,
-          "at_bats": 485,
-          "plate_appearances": 556
-        },
-        {
-          "id": 677800,
-          "name": "Wilyer Abreu",
-          "avg": ".249",
-          "hits": 148,
-          "at_bats": 594,
-          "plate_appearances": 677
-        },
-        {
           "id": 606466,
           "name": "Ketel Marte",
           "avg": ".249",
-          "hits": 139,
-          "at_bats": 558,
-          "plate_appearances": 620
+          "hits": 140,
+          "at_bats": 562,
+          "plate_appearances": 624
         },
         {
-          "id": 677594,
-          "name": "Julio Rodríguez",
+          "id": 543807,
+          "name": "George Springer",
           "avg": ".249",
-          "hits": 147,
-          "at_bats": 591,
-          "plate_appearances": 649
+          "hits": 115,
+          "at_bats": 462,
+          "plate_appearances": 517
+        },
+        {
+          "id": 664761,
+          "name": "Alec Bohm",
+          "avg": ".249",
+          "hits": 141,
+          "at_bats": 567,
+          "plate_appearances": 629
         },
         {
           "id": 702332,
           "name": "Caleb Durbin",
           "avg": ".248",
-          "hits": 125,
-          "at_bats": 504,
-          "plate_appearances": 582
+          "hits": 126,
+          "at_bats": 508,
+          "plate_appearances": 586
         },
         {
-          "id": 543807,
-          "name": "George Springer",
+          "id": 677800,
+          "name": "Wilyer Abreu",
           "avg": ".248",
-          "hits": 114,
-          "at_bats": 460,
-          "plate_appearances": 515
-        },
-        {
-          "id": 695734,
-          "name": "Daylen Lile",
-          "avg": ".247",
           "hits": 148,
-          "at_bats": 598,
-          "plate_appearances": 651
+          "at_bats": 597,
+          "plate_appearances": 681
         },
         {
-          "id": 683953,
-          "name": "Travis Bazzana",
+          "id": 677594,
+          "name": "Julio Rodríguez",
           "avg": ".247",
-          "hits": 110,
-          "at_bats": 445,
-          "plate_appearances": 513
-        },
-        {
-          "id": 696100,
-          "name": "Hunter Goodman",
-          "avg": ".247",
-          "hits": 127,
-          "at_bats": 515,
-          "plate_appearances": 570
+          "hits": 147,
+          "at_bats": 596,
+          "plate_appearances": 654
         },
         {
           "id": 702284,
           "name": "Cole Young",
+          "avg": ".246",
+          "hits": 142,
+          "at_bats": 577,
+          "plate_appearances": 638
+        },
+        {
+          "id": 695734,
+          "name": "Daylen Lile",
+          "avg": ".246",
+          "hits": 148,
+          "at_bats": 602,
+          "plate_appearances": 655
+        },
+        {
+          "id": 696100,
+          "name": "Hunter Goodman",
           "avg": ".245",
-          "hits": 141,
-          "at_bats": 575,
-          "plate_appearances": 634
+          "hits": 127,
+          "at_bats": 518,
+          "plate_appearances": 574
+        },
+        {
+          "id": 683953,
+          "name": "Travis Bazzana",
+          "avg": ".245",
+          "hits": 110,
+          "at_bats": 449,
+          "plate_appearances": 517
         },
         {
           "id": 665926,
           "name": "Andrés Giménez",
-          "avg": ".245",
+          "avg": ".244",
           "hits": 114,
-          "at_bats": 466,
-          "plate_appearances": 505
+          "at_bats": 468,
+          "plate_appearances": 508
         },
         {
           "id": 693307,
@@ -58038,28 +58038,20 @@
           "plate_appearances": 607
         },
         {
-          "id": 683737,
-          "name": "Michael Busch",
-          "avg": ".243",
-          "hits": 145,
-          "at_bats": 597,
-          "plate_appearances": 707
-        },
-        {
-          "id": 671056,
-          "name": "Iván Herrera",
-          "avg": ".243",
-          "hits": 146,
-          "at_bats": 602,
-          "plate_appearances": 713
-        },
-        {
           "id": 802139,
           "name": "JJ Wetherholt",
           "avg": ".242",
           "hits": 130,
           "at_bats": 537,
           "plate_appearances": 619
+        },
+        {
+          "id": 607208,
+          "name": "Trea Turner",
+          "avg": ".242",
+          "hits": 156,
+          "at_bats": 645,
+          "plate_appearances": 700
         },
         {
           "id": 545361,
@@ -58070,20 +58062,28 @@
           "plate_appearances": 634
         },
         {
-          "id": 607208,
-          "name": "Trea Turner",
-          "avg": ".241",
-          "hits": 154,
-          "at_bats": 640,
-          "plate_appearances": 695
+          "id": 683737,
+          "name": "Michael Busch",
+          "avg": ".242",
+          "hits": 145,
+          "at_bats": 600,
+          "plate_appearances": 710
         },
         {
-          "id": 687263,
-          "name": "Zach Neto",
+          "id": 671056,
+          "name": "Iván Herrera",
+          "avg": ".241",
+          "hits": 146,
+          "at_bats": 605,
+          "plate_appearances": 717
+        },
+        {
+          "id": 666176,
+          "name": "Jo Adell",
           "avg": ".240",
-          "hits": 148,
-          "at_bats": 616,
-          "plate_appearances": 699
+          "hits": 145,
+          "at_bats": 603,
+          "plate_appearances": 660
         },
         {
           "id": 669065,
@@ -58097,9 +58097,17 @@
           "id": 665019,
           "name": "Kody Clemens",
           "avg": ".239",
-          "hits": 126,
-          "at_bats": 527,
-          "plate_appearances": 579
+          "hits": 127,
+          "at_bats": 531,
+          "plate_appearances": 583
+        },
+        {
+          "id": 687263,
+          "name": "Zach Neto",
+          "avg": ".239",
+          "hits": 148,
+          "at_bats": 619,
+          "plate_appearances": 704
         },
         {
           "id": 695600,
@@ -58112,34 +58120,26 @@
         {
           "id": 682998,
           "name": "Corbin Carroll",
-          "avg": ".238",
-          "hits": 138,
-          "at_bats": 579,
-          "plate_appearances": 668
-        },
-        {
-          "id": 666176,
-          "name": "Jo Adell",
-          "avg": ".238",
-          "hits": 143,
-          "at_bats": 600,
-          "plate_appearances": 656
+          "avg": ".239",
+          "hits": 139,
+          "at_bats": 582,
+          "plate_appearances": 671
         },
         {
           "id": 645277,
           "name": "Ozzie Albies",
-          "avg": ".238",
+          "avg": ".237",
           "hits": 146,
-          "at_bats": 613,
-          "plate_appearances": 681
+          "at_bats": 615,
+          "plate_appearances": 683
         },
         {
           "id": 671732,
           "name": "Lawrence Butler",
-          "avg": ".235",
-          "hits": 110,
-          "at_bats": 468,
-          "plate_appearances": 535
+          "avg": ".237",
+          "hits": 112,
+          "at_bats": 472,
+          "plate_appearances": 539
         },
         {
           "id": 608070,
@@ -58152,18 +58152,26 @@
         {
           "id": 663656,
           "name": "Kyle Tucker",
-          "avg": ".234",
-          "hits": 125,
-          "at_bats": 535,
-          "plate_appearances": 622
+          "avg": ".233",
+          "hits": 126,
+          "at_bats": 540,
+          "plate_appearances": 627
         },
         {
           "id": 672960,
           "name": "Kazuma Okamoto",
-          "avg": ".233",
+          "avg": ".232",
           "hits": 132,
-          "at_bats": 566,
-          "plate_appearances": 633
+          "at_bats": 568,
+          "plate_appearances": 636
+        },
+        {
+          "id": 656941,
+          "name": "Kyle Schwarber",
+          "avg": ".232",
+          "hits": 135,
+          "at_bats": 581,
+          "plate_appearances": 701
         },
         {
           "id": 691026,
@@ -58198,22 +58206,6 @@
           "plate_appearances": 616
         },
         {
-          "id": 656941,
-          "name": "Kyle Schwarber",
-          "avg": ".231",
-          "hits": 133,
-          "at_bats": 577,
-          "plate_appearances": 696
-        },
-        {
-          "id": 679529,
-          "name": "Spencer Torkelson",
-          "avg": ".230",
-          "hits": 121,
-          "at_bats": 525,
-          "plate_appearances": 610
-        },
-        {
           "id": 642715,
           "name": "Willy Adames",
           "avg": ".230",
@@ -58222,20 +58214,44 @@
           "plate_appearances": 505
         },
         {
-          "id": 669394,
-          "name": "Jake Burger",
+          "id": 679529,
+          "name": "Spencer Torkelson",
           "avg": ".230",
-          "hits": 127,
-          "at_bats": 552,
-          "plate_appearances": 616
+          "hits": 121,
+          "at_bats": 526,
+          "plate_appearances": 612
         },
         {
           "id": 521692,
           "name": "Salvador Perez",
           "avg": ".229",
-          "hits": 132,
-          "at_bats": 577,
-          "plate_appearances": 624
+          "hits": 133,
+          "at_bats": 580,
+          "plate_appearances": 627
+        },
+        {
+          "id": 669394,
+          "name": "Jake Burger",
+          "avg": ".228",
+          "hits": 127,
+          "at_bats": 556,
+          "plate_appearances": 620
+        },
+        {
+          "id": 681715,
+          "name": "Heriberto Hernández",
+          "avg": ".228",
+          "hits": 102,
+          "at_bats": 448,
+          "plate_appearances": 505
+        },
+        {
+          "id": 668904,
+          "name": "Royce Lewis",
+          "avg": ".227",
+          "hits": 105,
+          "at_bats": 463,
+          "plate_appearances": 509
         },
         {
           "id": 683002,
@@ -58246,12 +58262,12 @@
           "plate_appearances": 702
         },
         {
-          "id": 681715,
-          "name": "Heriberto Hernández",
-          "avg": ".225",
-          "hits": 100,
-          "at_bats": 444,
-          "plate_appearances": 501
+          "id": 572233,
+          "name": "Christian Walker",
+          "avg": ".226",
+          "hits": 129,
+          "at_bats": 571,
+          "plate_appearances": 635
         },
         {
           "id": 621493,
@@ -58262,22 +58278,6 @@
           "plate_appearances": 607
         },
         {
-          "id": 668904,
-          "name": "Royce Lewis",
-          "avg": ".224",
-          "hits": 103,
-          "at_bats": 459,
-          "plate_appearances": 505
-        },
-        {
-          "id": 572233,
-          "name": "Christian Walker",
-          "avg": ".224",
-          "hits": 127,
-          "at_bats": 568,
-          "plate_appearances": 630
-        },
-        {
           "id": 662139,
           "name": "Daulton Varsho",
           "avg": ".221",
@@ -58286,100 +58286,108 @@
           "plate_appearances": 526
         },
         {
+          "id": 678662,
+          "name": "Ezequiel Tovar",
+          "avg": ".219",
+          "hits": 102,
+          "at_bats": 465,
+          "plate_appearances": 506
+        },
+        {
           "id": 663586,
           "name": "Austin Riley",
-          "avg": ".220",
+          "avg": ".219",
           "hits": 124,
-          "at_bats": 563,
-          "plate_appearances": 626
+          "at_bats": 566,
+          "plate_appearances": 630
         },
         {
           "id": 664023,
           "name": "Ian Happ",
-          "avg": ".220",
+          "avg": ".218",
           "hits": 119,
-          "at_bats": 541,
-          "plate_appearances": 631
-        },
-        {
-          "id": 678662,
-          "name": "Ezequiel Tovar",
-          "avg": ".219",
-          "hits": 101,
-          "at_bats": 462,
-          "plate_appearances": 503
+          "at_bats": 546,
+          "plate_appearances": 636
         },
         {
           "id": 592518,
           "name": "Manny Machado",
-          "avg": ".216",
-          "hits": 127,
-          "at_bats": 587,
-          "plate_appearances": 675
+          "avg": ".217",
+          "hits": 128,
+          "at_bats": 589,
+          "plate_appearances": 677
         },
         {
           "id": 668709,
           "name": "JJ Bleday",
-          "avg": ".214",
-          "hits": 99,
-          "at_bats": 462,
-          "plate_appearances": 541
+          "avg": ".217",
+          "hits": 101,
+          "at_bats": 466,
+          "plate_appearances": 545
         },
         {
           "id": 543760,
           "name": "Marcus Semien",
-          "avg": ".214",
-          "hits": 105,
-          "at_bats": 490,
-          "plate_appearances": 543
+          "avg": ".215",
+          "hits": 106,
+          "at_bats": 494,
+          "plate_appearances": 547
         },
         {
           "id": 686555,
           "name": "Isaac Collins",
-          "avg": ".212",
-          "hits": 93,
-          "at_bats": 439,
-          "plate_appearances": 515
-        },
-        {
-          "id": 680776,
-          "name": "Jarren Duran",
-          "avg": ".208",
-          "hits": 114,
-          "at_bats": 549,
-          "plate_appearances": 606
+          "avg": ".213",
+          "hits": 94,
+          "at_bats": 442,
+          "plate_appearances": 519
         },
         {
           "id": 701358,
           "name": "Cam Smith",
-          "avg": ".208",
-          "hits": 105,
-          "at_bats": 506,
-          "plate_appearances": 563
+          "avg": ".210",
+          "hits": 107,
+          "at_bats": 510,
+          "plate_appearances": 568
         },
         {
           "id": 808959,
           "name": "Munetaka Murakami",
           "avg": ".207",
-          "hits": 93,
-          "at_bats": 450,
-          "plate_appearances": 549
+          "hits": 94,
+          "at_bats": 454,
+          "plate_appearances": 553
+        },
+        {
+          "id": 680776,
+          "name": "Jarren Duran",
+          "avg": ".207",
+          "hits": 114,
+          "at_bats": 551,
+          "plate_appearances": 608
+        },
+        {
+          "id": 656775,
+          "name": "Cedric Mullins",
+          "avg": ".205",
+          "hits": 90,
+          "at_bats": 439,
+          "plate_appearances": 502
         },
         {
           "id": 695657,
           "name": "Colson Montgomery",
-          "avg": ".199",
+          "avg": ".197",
           "hits": 112,
-          "at_bats": 564,
-          "plate_appearances": 634
+          "at_bats": 568,
+          "plate_appearances": 638
         },
         {
           "id": 663728,
           "name": "Cal Raleigh",
-          "avg": ".177",
-          "hits": 79,
-          "at_bats": 446,
-          "plate_appearances": 525
+          "avg": ".182",
+          "hits": 82,
+          "at_bats": 451,
+          "plate_appearances": 530
         }
       ]
     }

@@ -33,7 +33,7 @@ struct MLB300HitterStory: View {
                             .font(.system(.title2, design: .serif).weight(.bold))
                             .lineLimit(1)
                             .minimumScaleFactor(0.65)
-                        Text("Seven last year. Seven so far in 2026.")
+                        Text("Seven qualified hitters finished at .300 or higher in 2026.")
                             .font(compact ? .subheadline : .title3).foregroundStyle(HitterStyle.navy.opacity(0.72))
                         StoryStatCards(expanded: typeSize.usesExpandedReadingLayout, compact: compact)
                         VStack(alignment: .leading, spacing: 6) {
@@ -41,9 +41,9 @@ struct MLB300HitterStory: View {
                                 .font(.caption.weight(.bold)).tracking(1)
                             Text(MLB300HitterData.coverageLabel)
                                 .font(.caption).foregroundStyle(HitterStyle.navy.opacity(0.65))
-                            Text(MLB300HitterData.snapshotLabel)
+                            Text(MLB300HitterData.finalSeasonLabel)
                                 .font(.caption2).foregroundStyle(HitterStyle.navy.opacity(0.65))
-                                .accessibilityIdentifier("hitter.snapshot")
+                                .accessibilityIdentifier("hitter.finalSeason")
                         }
                         ZStack(alignment: .bottom) {
                             TimelineView(.animation(paused: !building)) { _ in
@@ -66,7 +66,7 @@ struct MLB300HitterStory: View {
                             .padding(.bottom, compact ? 22 : 26)
                         }
                         .frame(height: compact ? 220 : 280)
-                        Text("In \(String(peak.year)), \(peak.count) qualified hitters finished at .300 or higher. Only seven did in 2025. Seven qualify so far in 2026—with the final day still to play.")
+                        Text("In \(String(peak.year)), \(peak.count) qualified hitters finished at .300 or higher. In 2026, only \(finish.count) did—matching 2024 and 2025.")
                             .font(.system(.body, design: .serif))
                             .lineSpacing(4)
                         Button("How we count · methodology") { showMethodology = true }
@@ -133,11 +133,10 @@ struct MLB300HitterStory: View {
                     Text("Each player is counted once using his full MLB season totals, including combined totals when he changes teams. The cutoff is applied to MLB’s officially displayed batting average.")
                 }
                 Section("The series") {
-                    Text("Source: MLB Stats API qualified-hitter season totals, recalculated for every year from 1976 through 2026 using the inclusive .300 cutoff. Seasons through 2025 are final; 2026 remains year-to-date.")
+                    Text("Source: MLB Stats API qualified-hitter season totals, recalculated for every final regular season from 1976 through 2026 using the inclusive .300 cutoff.")
                     Text("The decline is rounded to the nearest whole percent: (\(peak.count) − \(finish.count)) ÷ \(peak.count) = \(MLB300HitterData.decline)%. The chart shows player counts, not the share of qualified hitters; MLB’s number of teams has changed over this period.")
-                    Text("2026 is a provisional snapshot from MLB’s qualified-hitter leaderboard, checked before the games on September 27, 2026. Seven players are displayed at .300 or higher. This snapshot does not update automatically, and the final count may change.")
+                    Text("MLB’s final 2026 qualified-hitter totals were verified on September 29, 2026. Seven players finished with a displayed average of .300 or higher. The data in this story does not update automatically.")
                     Link("MLB 2026 batting-average leaderboard", destination: URL(string: "https://www.mlb.com/stats/batting-average/2026")!)
-                    Text("The final 2026 count will replace this YTD point only after the regular season ends and totals are verified with the same cutoff.")
                 }
                 Section("Every season") {
                     ForEach(MLB300HitterData.seasons) { season in
@@ -212,7 +211,7 @@ private struct StoryRosterSheet: View {
     private var title: String {
         roster == .peak
             ? "\(MLB300HitterPlayers.peakYear) · \(players.count) hitters"
-            : "\(MLB300HitterPlayers.latestYear) YTD · \(players.count) hitters"
+            : "\(MLB300HitterPlayers.latestYear) · \(players.count) hitters"
     }
 
     var body: some View {
@@ -239,7 +238,7 @@ private struct StoryRosterSheet: View {
                 } header: {
                     Text("Qualified hitters · AVG highest first")
                 } footer: {
-                    Text(roster == .latest ? MLB300HitterData.snapshotLabel : "Final 1999 regular season")
+                    Text(roster == .latest ? MLB300HitterData.finalSeasonLabel : "Final 1999 regular season")
                 }
             }
             .scrollContentBackground(.hidden)
@@ -313,7 +312,7 @@ private struct Animated300LineChart: View {
                 if case let .active(location) = phase { select(location.x, rect: rect) }
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Qualified hitters at .300 or higher, 1976 through \(MLB300HitterData.finish.label). Peak \(MLB300HitterData.peak.count) in \(String(MLB300HitterData.peak.year)); seven final in 2025 and seven so far in 2026. Snapshot before September 27 games.")
+            .accessibilityLabel("Qualified hitters at .300 or higher, 1976 through \(MLB300HitterData.finish.label). Peak \(MLB300HitterData.peak.count) in \(String(MLB300HitterData.peak.year)); seven in 2025 and seven in the final 2026 regular season.")
             .accessibilityValue("\(seasons[selectedIndex].label): \(seasons[selectedIndex].count) qualified hitters")
             .accessibilityHint("Tap the chart to select a year, or swipe up and down with VoiceOver.")
             .accessibilityAdjustableAction { direction in

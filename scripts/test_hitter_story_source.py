@@ -43,7 +43,8 @@ class HitterSourceTests(unittest.TestCase):
             self.assertEqual(len(players), season['qualified_total'])
             self.assertEqual(len(players), len({p['id'] for p in players}))
             self.assertEqual(season['count'], sum(Decimal(p['avg']) >= Decimal('.300') for p in players))
-            self.assertEqual(season['provisional'], season['year'] == 2026)
+            self.assertFalse(season['provisional'])
+        self.assertEqual(snapshot['last_final_year'], 2026)
         for year, name in [(2025, 'Yandy Díaz'), (2026, 'TJ Rumfield')]:
             player = next(p for s in seasons if s['year'] == year for p in s['players'] if p['name'] == name)
             self.assertEqual(player['avg'], '.300')

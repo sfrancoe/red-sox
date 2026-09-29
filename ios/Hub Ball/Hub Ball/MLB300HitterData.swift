@@ -2,7 +2,7 @@ import Foundation
 
 /// Generated MLB qualified-hitter counts using displayed AVG >= .300, including .300.
 /// Refresh with scripts/fetch_hitter_story.py; player totals live in data/mlb300-hitters.json.
-/// 2026 remains a dated provisional snapshot until final totals have been confirmed.
+/// The series includes the final 2026 regular season.
 enum MLB300HitterData {
     struct Season: Identifiable, Equatable {
         let year: Int
@@ -63,13 +63,13 @@ enum MLB300HitterData {
         .init(year: 2023, count: 9),
         .init(year: 2024, count: 7),
         .init(year: 2025, count: 7),
-        .init(year: 2026, count: 7, isProvisional: true)
+        .init(year: 2026, count: 7)
     ]
     static let peak = seasons.max { $0.count < $1.count }!
     static let peakIndex = seasons.firstIndex(of: peak)!
     static let finish = seasons.last!
-    static let snapshotLabel = "Sept. 27, 2026 · before today’s games"
-    static let coverageLabel = "1976–2025 final · 2026 YTD"
+    static let finalSeasonLabel = "Final 2026 regular season · verified Sept. 29"
+    static let coverageLabel = "1976–2026 · final seasons"
     static let decline = Int((100 * (1 - Double(finish.count) / Double(peak.count))).rounded())
     static let duration: TimeInterval = 5
 

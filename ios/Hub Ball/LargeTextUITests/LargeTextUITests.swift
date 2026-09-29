@@ -96,7 +96,7 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(waitForReplay("Playing", timeout: 2))
         capture("hitter-direct-chart")
         XCTAssertTrue(waitForReplay("Ready"))
-        XCTAssertTrue(app.staticTexts["hitter.snapshot"].label.contains("Sept. 27, 2026"))
+        XCTAssertTrue(app.staticTexts["hitter.finalSeason"].label.contains("Final 2026 regular season"))
         XCTAssertFalse(app.sliders["hitter.year"].exists)
         capture("hitter-complete")
         let chart = app.otherElements["hitter.chart"]
@@ -105,7 +105,7 @@ final class LargeTextUITests: XCTestCase {
         for (index, count) in counts.enumerated() {
             let x = 27 + CGFloat(index) / CGFloat(counts.count - 1) * (chart.frame.width - 43)
             chart.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: x, dy: 140)).tap()
-            XCTAssertEqual(chart.value as? String, "\(1976 + index)\(index == counts.count - 1 ? " YTD" : ""): \(count) qualified hitters")
+            XCTAssertEqual(chart.value as? String, "\(1976 + index): \(count) qualified hitters")
         }
         XCTAssertFalse(app.buttons["hitter.music"].exists)
         let replay = app.buttons["hitter.replay"]
@@ -141,7 +141,7 @@ final class LargeTextUITests: XCTestCase {
         app.buttons["Done"].tap()
 
         latest.tap()
-        XCTAssertTrue(app.navigationBars["2026 YTD · 7 hitters"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["2026 · 7 hitters"].waitForExistence(timeout: 5))
         let alvarez = app.staticTexts["hitter.roster.row.1"]
         XCTAssertTrue(alvarez.waitForExistence(timeout: 5))
         XCTAssertTrue(alvarez.label.contains("Yordan Alvarez"))

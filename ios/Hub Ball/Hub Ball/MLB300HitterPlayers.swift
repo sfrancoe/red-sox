@@ -73,7 +73,7 @@ enum MLB300HitterPlayers {
         .init(id: 650333, name: "Luis Arraez", team: "PHI", average: ".310"),
         .init(id: 802415, name: "Chandler Simpson", team: "TBR", average: ".306"),
         .init(id: 672640, name: "Otto Lopez", team: "MIA", average: ".305"),
-        .init(id: 693304, name: "Nick Gonzales", team: "PIT", average: ".302"),
+        .init(id: 693304, name: "Nick Gonzales", team: "PIT", average: ".303"),
         .init(id: 681198, name: "TJ Rumfield", team: "COL", average: ".300"),
     ]
 }

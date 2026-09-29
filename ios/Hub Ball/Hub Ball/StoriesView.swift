@@ -43,7 +43,7 @@ struct StoriesView: View {
                                             .font(.system(.title2, design: .serif).weight(.bold))
                                             .lineLimit(1)
                                             .minimumScaleFactor(0.85)
-                                        Text("Seven in 2025. Seven so far in 2026. Will it end at seven again?")
+                                        Text("Seven qualified hitters finished at .300 or higher in 2026, matching 2025.")
                                             .font(.subheadline)
                                         Label("WATCH THE STORY · 5 SECONDS", systemImage: "play.circle.fill")
                                             .font(.caption.weight(.bold))

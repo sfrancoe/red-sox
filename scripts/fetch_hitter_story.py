@@ -13,8 +13,8 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "https://statsapi.mlb.com/api/v1/stats?stats=season&group=hitting&season={year}&sportIds=1&playerPool=QUALIFIED&sortStat=avg&order=desc&limit=1000"
 FIRST_YEAR = 1976
-LAST_FINAL_YEAR = 2025
-SNAPSHOT_YEAR = 2026
+LAST_FINAL_YEAR = 2026
+LATEST_YEAR = 2026
 FALLBACK_UA = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 
 
@@ -89,7 +89,7 @@ def roster_team_abbreviations(year: int, player_ids: set[int]) -> dict[int, str]
 
 
 def roster_module_contents(seasons: list[dict]) -> str:
-    """Keep the two tappable card rosters tied to the same counted snapshot."""
+    """Keep the two tappable card rosters tied to the same counted seasons."""
     peak = max(seasons, key=lambda season: season['count'])
     latest = seasons[-1]
     lines = [
@@ -131,7 +131,7 @@ def write_roster_module(seasons: list[dict]) -> None:
 def main() -> None:
     # All requests must succeed before either local output is updated.
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        seasons = list(executor.map(fetch_season, range(FIRST_YEAR, SNAPSHOT_YEAR + 1)))
+        seasons = list(executor.map(fetch_season, range(FIRST_YEAR, LATEST_YEAR + 1)))
     snapshot = {
         'retrieved_at_utc': datetime.now(timezone.utc).isoformat(),
         'definition': 'MLB qualified hitters with officially displayed AVG >= .300, including exactly .300',
@@ -157,7 +157,7 @@ def main() -> None:
     print('Counts:', ','.join(str(s['count']) for s in seasons))
     peak = max(seasons, key=lambda s: s['count'])
     print(f"Peak: {peak['year']} = {peak['count']}; ending: {seasons[-1]['count']}")
-    print('Snapshot labels and editorial copy must be reviewed after each refresh.')
+    print('Season labels and editorial copy must be reviewed after each refresh.')
 
 
 if __name__ == '__main__':
