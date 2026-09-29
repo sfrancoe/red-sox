@@ -296,7 +296,7 @@ struct AppTabView: View {
         Button { playoffsPresented = true } label: {
             HStack(spacing: 5) {
                 Image(systemName: "trophy.fill")
-                Text("Playoffs").fixedSize()
+                Text("Postseason").fixedSize()
             }
             .font(.headline.weight(.semibold))
             .foregroundStyle(AppColor.amber)
