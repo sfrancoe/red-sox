@@ -5,6 +5,8 @@ private enum HitterStyle {
     static let navy = AppColor.night
     static let coral = Color(hubHex: "#BC6259")
     static let gold = Color(hubHex: "#B47B20")
+    static let coralInk = Color(hubHex: "#933E38")
+    static let goldInk = Color(hubHex: "#775014")
 }
 
 struct MLB300HitterStory: View {
@@ -16,6 +18,7 @@ struct MLB300HitterStory: View {
     @State private var building = false
     @State private var startedAt: TimeInterval = 0
     @State private var playbackID = UUID()
+    @State private var cardFlashTrigger = 0
     @State private var selectedIndex = MLB300HitterData.seasons.count - 1
     @State private var showMethodology = false
 
@@ -35,7 +38,7 @@ struct MLB300HitterStory: View {
                             .minimumScaleFactor(0.65)
                         Text("Seven qualified hitters finished at .300 or higher in 2026.")
                             .font(compact ? .subheadline : .title3).foregroundStyle(HitterStyle.navy.opacity(0.72))
-                        StoryStatCards(expanded: typeSize.usesExpandedReadingLayout, compact: compact)
+                        StoryStatCards(expanded: typeSize.usesExpandedReadingLayout, compact: compact, flashTrigger: cardFlashTrigger)
                         VStack(alignment: .leading, spacing: 6) {
                             Text("QUALIFIED HITTERS · .300 OR HIGHER")
                                 .font(.caption.weight(.bold)).tracking(1)
@@ -94,6 +97,7 @@ struct MLB300HitterStory: View {
                 do { try await Task.sleep(for: .seconds(remaining)) } catch { return }
                 guard !Task.isCancelled else { return }
                 building = false
+                cardFlashTrigger += 1
             }
             .onDisappear { building = false }
             .onChange(of: scenePhase) { _, phase in
@@ -116,6 +120,7 @@ struct MLB300HitterStory: View {
     }
 
     private func launch() {
+        cardFlashTrigger = 0
         selectedIndex = MLB300HitterData.seasons.count - 1
         startedAt = ProcessInfo.processInfo.systemUptime
         launched = true
@@ -157,26 +162,29 @@ private enum StoryRoster: String, Identifiable {
 }
 
 private struct StoryStatCards: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let expanded: Bool
     var compact = false
+    let flashTrigger: Int
     @State private var selectedRoster: StoryRoster?
+    @State private var flashing = false
 
     var body: some View {
         let layout = expanded ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top, spacing: 8))
         layout {
             Button { selectedRoster = .peak } label: {
-                card("Peak · \(String(MLB300HitterData.peak.year))", value: "\(MLB300HitterData.peak.count)", color: HitterStyle.coral, tappable: true)
+                card("Peak · \(String(MLB300HitterData.peak.year))", value: "\(MLB300HitterData.peak.count)", color: HitterStyle.coralInk, flashColor: HitterStyle.coral, tappable: true)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Peak \(MLB300HitterData.peak.count) hitters in \(MLB300HitterData.peak.year). Tap to see players")
+            .accessibilityLabel("Peak \(MLB300HitterData.peak.count) hitters in \(MLB300HitterData.peak.year). Tap to see who")
             .accessibilityIdentifier("hitter.card.peak")
             Button { selectedRoster = .latest } label: {
-                card(MLB300HitterData.finish.label, value: "\(MLB300HitterData.finish.count)", color: HitterStyle.gold, tappable: true)
+                card(MLB300HitterData.finish.label, value: "\(MLB300HitterData.finish.count)", color: HitterStyle.goldInk, flashColor: HitterStyle.gold, tappable: true)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("\(MLB300HitterData.finish.count) hitters in \(MLB300HitterData.finish.label). Tap to see players")
+            .accessibilityLabel("\(MLB300HitterData.finish.count) hitters in \(MLB300HitterData.finish.label). Tap to see who")
             .accessibilityIdentifier("hitter.card.latest")
-            card("vs Peak", value: "−\(MLB300HitterData.decline)%", color: HitterStyle.navy, tappable: false)
+            card("vs Peak", value: "−\(MLB300HitterData.decline)%", color: HitterStyle.navy, flashColor: HitterStyle.navy, tappable: false)
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Down \(MLB300HitterData.decline) percent from the peak")
         }
@@ -184,13 +192,27 @@ private struct StoryStatCards: View {
             StoryRosterSheet(roster: roster)
                 .presentationDetents([.large])
         }
+        .task(id: flashTrigger) {
+            flashing = false
+            guard flashTrigger > 0, !reduceMotion else { return }
+            do {
+                for _ in 0..<3 {
+                    withAnimation(.easeInOut(duration: 0.15)) { flashing = true }
+                    try await Task.sleep(for: .milliseconds(220))
+                    withAnimation(.easeInOut(duration: 0.15)) { flashing = false }
+                    try await Task.sleep(for: .milliseconds(180))
+                }
+            } catch {
+                flashing = false
+            }
+        }
     }
 
-    private func card(_ title: String, value: String, color: Color, tappable: Bool) -> some View {
+    private func card(_ title: String, value: String, color: Color, flashColor: Color, tappable: Bool) -> some View {
         VStack(spacing: 2) {
             Text(title).font(.caption2.weight(.semibold))
             Text(value).font(.system(.title2, design: .serif).weight(.bold)).foregroundStyle(color)
-            Text("Tap to see").font(.caption2).foregroundStyle(HitterStyle.navy.opacity(0.6))
+            Text("Tap to see who").font(.caption2).foregroundStyle(HitterStyle.navy.opacity(0.85))
                 .opacity(tappable ? 1 : 0)
         }
         .lineLimit(1)
@@ -198,7 +220,8 @@ private struct StoryStatCards: View {
         .frame(maxWidth: .infinity)
         .padding(.horizontal, compact ? 4 : 6)
         .padding(.vertical, compact ? 7 : 9)
-        .background(.white.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
+        .background(flashing && tappable ? flashColor.opacity(0.23) : .white.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(flashing && tappable ? flashColor.opacity(0.8) : .clear, lineWidth: 2))
     }
 }
 

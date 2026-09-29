@@ -124,6 +124,8 @@ final class LargeTextUITests: XCTestCase {
         let latest = app.buttons["hitter.card.latest"]
         XCTAssertTrue(peak.waitForExistence(timeout: 5))
         XCTAssertTrue(latest.exists)
+        XCTAssertTrue(peak.label.contains("Tap to see who"))
+        XCTAssertTrue(latest.label.contains("Tap to see who"))
         capture("hitter-stacked-cards")
 
         peak.tap()
