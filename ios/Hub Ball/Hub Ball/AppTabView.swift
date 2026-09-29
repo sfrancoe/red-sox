@@ -294,18 +294,25 @@ struct AppTabView: View {
 
     private var playoffsButton: some View {
         Button { playoffsPresented = true } label: {
-            HStack(spacing: 5) {
-                Image(systemName: "trophy.fill")
+            HStack(spacing: 4) {
+                smallTrophy
                 Text("Postseason").fixedSize()
+                smallTrophy
             }
             .font(.headline.weight(.semibold))
             .foregroundStyle(AppColor.amber)
-            .padding(.horizontal, 6)
             .frame(minHeight: 44)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel("Postseason")
         .accessibilityIdentifier("playoffs.open")
         .accessibilityHint("Opens the complete MLB playoff bracket for both leagues")
+    }
+
+    private var smallTrophy: some View {
+        Image(systemName: "trophy.fill")
+            .font(.system(size: 11, weight: .semibold))
+            .accessibilityHidden(true)
     }
 
     private var storiesButton: some View {
