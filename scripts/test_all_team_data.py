@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -22,7 +23,8 @@ def validate(team: dict) -> None:
     root = ROOT / "data" if team["legacy_root_data"] else data_directory(team)
     schedule = load(root, "schedule.json")
     assert schedule["team"] == team["short_name"]
-    assert schedule["games"]
+    season_ended = date.today() > date.fromisoformat(schedule["regular_season_end"])
+    assert schedule["games"] or season_ended
     assert all(game["game_pk"] for game in schedule["games"])
     assert all(isinstance(game.get("broadcasts"), list) for game in schedule["games"])
     assert all(

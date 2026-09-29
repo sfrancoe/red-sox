@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -19,7 +20,8 @@ def load(name: str):
 def main() -> None:
     schedule = load("schedule")
     assert schedule["team"] == "Mets"
-    assert schedule["games"]
+    season_ended = date.today() > date.fromisoformat(schedule["regular_season_end"])
+    assert schedule["games"] or season_ended
     assert all(game["game_pk"] for game in schedule["games"])
     assert all(isinstance(game.get("broadcasts"), list) for game in schedule["games"])
 
