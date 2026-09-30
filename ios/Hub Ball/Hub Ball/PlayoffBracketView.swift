@@ -4,14 +4,19 @@ struct PlayoffBracketView: View {
     let payload: PostseasonPayload
     let onSelect: (PostseasonSeries) -> Void
     @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
-    @ScaledMetric(relativeTo: .caption) private var cardHeight = 128.0
-    @ScaledMetric(relativeTo: .caption) private var worldSeriesCardHeight = 128.0
+    @ScaledMetric(relativeTo: .caption) private var teamRowHeight = 26.0
+    @ScaledMetric(relativeTo: .caption) private var singleLineFooterHeight = 20.0
+    @ScaledMetric(relativeTo: .caption) private var twoLineFooterHeight = 30.0
+    @ScaledMetric(relativeTo: .caption) private var liveFooterBaseHeight = 32.0
+    @ScaledMetric(relativeTo: .caption) private var livePlayerLineHeight = 10.0
     @ScaledMetric(relativeTo: .caption) private var nameSize = 12.0
     private let columnSpacing = 10.0
     private let rowSpacing = 8.0
     private let leagueRailWidth = 18.0
     private let leagueRailSpacing = 4.0
     private let unresolvedLabel = "- - -"
+
+    private var cardHeight: CGFloat { teamRowHeight * 2 + liveFooterBaseHeight + livePlayerLineHeight * 2 }
 
     private func series(_ slot: PlayoffBracketSlot) -> PostseasonSeries? {
         payload.series.first { $0.id == slot.seriesID(season: payload.season) }
@@ -62,6 +67,23 @@ struct PlayoffBracketView: View {
         )
     }
 
+    private func footerHeight(for slot: PlayoffBracketSlot) -> CGFloat {
+        guard let item = series(slot) else { return singleLineFooterHeight }
+        if let game = payload.liveGame(for: item.id) {
+            let playerLines = (game.livePitcherDescription == nil ? 0 : 1)
+                + (game.liveBatterDescription == nil ? 0 : 1)
+            return liveFooterBaseHeight + CGFloat(playerLines) * livePlayerLineHeight
+        }
+        if item.bracketSeriesStatus != nil, nextScheduledGame(for: item) != nil {
+            return twoLineFooterHeight
+        }
+        return singleLineFooterHeight
+    }
+
+    private func matchupHeight(for slot: PlayoffBracketSlot) -> CGFloat {
+        teamRowHeight * 2 + footerHeight(for: slot)
+    }
+
     private func leagueBracket(_ league: String, title: String, color: Color, width: CGFloat) -> some View {
         let slots = leagueSlots(league)
         let cell = (width - columnSpacing * 2) / 3
@@ -101,13 +123,13 @@ struct PlayoffBracketView: View {
                             .frame(width: cell)
                             .position(
                                 x: center(championship, width: width).x,
-                                y: center(championship, width: width).y - cardHeight / 2 - 11
+                                y: center(championship, width: width).y - matchupHeight(for: championship) / 2 - 11
                             )
                     }
 
                     ForEach(slots) { slot in
                         matchup(slot, width: cell)
-                            .frame(width: cell, height: cardHeight)
+                            .frame(width: cell, height: matchupHeight(for: slot))
                             .position(center(slot, width: width))
                     }
                 }
@@ -130,7 +152,7 @@ struct PlayoffBracketView: View {
             HStack(spacing: 6) {
                 Image(systemName: "trophy.fill")
                 matchup(slot, width: cardWidth)
-                    .frame(width: cardWidth, height: worldSeriesCardHeight)
+                    .frame(width: cardWidth, height: matchupHeight(for: slot))
                 Image(systemName: "trophy.fill")
             }
             .font(.system(size: nameSize * 1.2, weight: .bold))
@@ -196,7 +218,7 @@ struct PlayoffBracketView: View {
                         }
                     }
                     .padding(.horizontal, 7)
-                    .frame(maxHeight: .infinity)
+                    .frame(height: teamRowHeight)
                     if index == 0 { Rectangle().fill(AppColor.rule).frame(height: 0.5) }
                 }
                 if let liveGame {
@@ -212,9 +234,14 @@ struct PlayoffBracketView: View {
                         }
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
-                        if let matchup = liveGame.liveMatchupDescription {
-                            Text(matchup)
-                                .lineLimit(2)
+                        if let pitcher = liveGame.livePitcherDescription {
+                            Text(pitcher)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                        }
+                        if let batter = liveGame.liveBatterDescription {
+                            Text(batter)
+                                .lineLimit(1)
                                 .minimumScaleFactor(0.7)
                         }
                     }
@@ -222,7 +249,7 @@ struct PlayoffBracketView: View {
                     .foregroundStyle(AppColor.bone)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 3)
-                    .padding(.vertical, 4)
+                    .frame(height: footerHeight(for: slot))
                     .frame(maxWidth: .infinity)
                     .background(AppColor.night)
                 } else {
@@ -241,7 +268,7 @@ struct PlayoffBracketView: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, 3)
-                    .padding(.vertical, 4)
+                    .frame(height: footerHeight(for: slot))
                     .frame(maxWidth: .infinity)
                     .background(hasLightFooter ? AppColor.scheduleGray : AppColor.night)
                 }

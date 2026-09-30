@@ -133,11 +133,18 @@ struct PostseasonGame: Codable, Identifiable, Sendable {
 
     var liveMatchupDescription: String? {
         guard abstractState == "Live" else { return nil }
-        let parts = [
-            livePitcher.map { "(P) \(Self.shortPlayerName($0))" },
-            liveBatter.map { "(AB) \(Self.shortPlayerName($0))" },
-        ].compactMap { $0 }
+        let parts = [livePitcherDescription, liveBatterDescription].compactMap { $0 }
         return parts.isEmpty ? nil : parts.joined(separator: "  ")
+    }
+
+    var livePitcherDescription: String? {
+        guard abstractState == "Live" else { return nil }
+        return livePitcher.map { "(P) \(Self.shortPlayerName($0))" }
+    }
+
+    var liveBatterDescription: String? {
+        guard abstractState == "Live" else { return nil }
+        return liveBatter.map { "(AB) \(Self.shortPlayerName($0))" }
     }
 
     private static func shortPlayerName(_ fullName: String) -> String {
