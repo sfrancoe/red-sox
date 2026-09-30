@@ -11,6 +11,7 @@ struct HomeView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.scenePhase) private var scenePhase
     @AppStorage("october.homeInvitationDismissed") private var octoberInvitationDismissed = false
     @State private var store: HomeStore
     let team: HubTeam
@@ -44,7 +45,16 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
         }
-        .task { await store.load() }
+        .task(id: scenePhase) {
+            guard scenePhase == .active else { return }
+            await store.load()
+            while !Task.isCancelled {
+                let delay: UInt64 = store.recentGame?.isLive == true ? 20 : 60
+                try? await Task.sleep(nanoseconds: delay * 1_000_000_000)
+                guard !Task.isCancelled else { return }
+                await store.refreshCurrentGame()
+            }
+        }
     }
 
     private var octoberInvitation: some View {
@@ -328,20 +338,27 @@ struct HomeView: View {
                         Divider().overlay(AppColor.separator).padding(.leading, 13)
                         gameResultRow(opponent, isWinner: opponent.runs > favorite.runs)
 
-                        HStack(spacing: 8) {
-                            Text("Home runs")
-                                .font(.system(size: 10, weight: .black))
-                                .foregroundStyle(AppColor.boneMuted)
-                            Text(homeRunSummary(for: favorite))
-                                .font(.system(size: 11, weight: .bold))
-                                .foregroundStyle(AppColor.navy)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.72)
+                        if game.isLive {
+                            liveMatchupRow(game.liveMatchup)
+                                .padding(.horizontal, 13)
+                                .padding(.vertical, 8)
+                                .background(AppColor.nightRaised)
+                        } else {
+                            HStack(spacing: 8) {
+                                Text("Home runs")
+                                    .font(.system(size: 10, weight: .black))
+                                    .foregroundStyle(AppColor.boneMuted)
+                                Text(homeRunSummary(for: favorite))
+                                    .font(.system(size: 11, weight: .bold))
+                                    .foregroundStyle(AppColor.navy)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.72)
+                            }
+                            .padding(.horizontal, 13)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(height: 27)
+                            .background(AppColor.nightRaised)
                         }
-                        .padding(.horizontal, 13)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .frame(height: 27)
-                        .background(AppColor.nightRaised)
 
                         HStack(spacing: 8) {
                             Text(game.isLive ? "Live" : "Pitching")
@@ -396,7 +413,11 @@ struct HomeView: View {
             expandedGameResultRow(opponent, isWinner: opponent.runs > favorite.runs)
 
             VStack(alignment: .leading, spacing: 8) {
-                expandedSummaryRow("Home runs", homeRunSummary(for: favorite))
+                if game.isLive {
+                    liveMatchupRow(game.liveMatchup)
+                } else {
+                    expandedSummaryRow("Home runs", homeRunSummary(for: favorite))
+                }
                 expandedSummaryRow(game.isLive ? "Live" : "Pitching", game.isLive ? game.liveStatus ?? "In progress" : pitchingSummary(for: game))
                 if game.isLive, let scheduledGame = scheduledGame(for: game) {
                     expandedSummaryRow("Watch", scheduledGame.watchSummary)
@@ -404,6 +425,21 @@ struct HomeView: View {
             }
             .padding(16)
         }
+    }
+
+    private func liveMatchupRow(_ matchup: LiveGameMatchup?) -> some View {
+        let matchup = matchup ?? LiveGameMatchup(pitcher: nil, batter: nil, outs: nil)
+        return Text(matchup.compactDescription)
+            .font(usesExpandedReadingLayout ? .body.weight(.semibold)
+                : .system(size: contentWidth >= 650 ? 15 : 13, weight: .semibold))
+            .monospacedDigit()
+            .foregroundStyle(AppColor.ink)
+            .lineLimit(usesExpandedReadingLayout ? nil : 1)
+            .minimumScaleFactor(usesExpandedReadingLayout ? 1 : 0.5)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityLabel(matchup.accessibilityDescription)
+            .accessibilityIdentifier("home.live.matchup")
     }
 
     private func expandedGameResultRow(_ team: TeamBoxScore, isWinner: Bool) -> some View {

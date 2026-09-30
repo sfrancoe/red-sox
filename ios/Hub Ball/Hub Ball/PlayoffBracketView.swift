@@ -157,7 +157,10 @@ struct PlayoffBracketView: View {
         let labelSize = width > 120 ? nameSize * 1.15 : nameSize
         let item = series(slot)
         let rows = participants(item, slot: slot)
-        let hasScheduledDate = nextScheduledGame(for: item) != nil
+        let lastGame = item.flatMap { payload.latestCompletedGame(for: $0.id) }
+        let hasSeriesStatus = item?.bracketSeriesStatus != nil
+        let hasScheduledDate = !hasSeriesStatus && nextScheduledGame(for: item) != nil
+        let hasLightFooter = hasSeriesStatus || hasScheduledDate
         return Button {
             if let item { onSelect(item) }
         } label: {
@@ -176,7 +179,7 @@ struct PlayoffBracketView: View {
                                     Image(systemName: "checkmark").font(.system(size: labelSize - 2, weight: .bold))
                                         .foregroundStyle(AppColor.amber)
                                 }
-                                Text(row.teamId.flatMap { item?.wins(for: $0) }.map(String.init) ?? "–")
+                                Text(row.teamId.flatMap { lastGame?.score(for: $0) }.map(String.init) ?? "–")
                                     .font(.system(size: labelSize, weight: .bold, design: .monospaced))
                                     .foregroundStyle(item?.winnerTeamId == row.teamId && row.teamId != nil ? AppColor.amber : AppColor.bone)
                             }
@@ -192,14 +195,14 @@ struct PlayoffBracketView: View {
                     if index == 0 { Rectangle().fill(AppColor.rule).frame(height: 0.5) }
                 }
                 Text(status(item))
-                    .font(.system(size: labelSize - 3, weight: .medium))
-                    .foregroundStyle(hasScheduledDate ? AppColor.night : (item?.state == "live" ? AppColor.amber : AppColor.boneMuted))
+                    .font(.system(size: labelSize - 3, weight: hasSeriesStatus ? .semibold : .medium))
+                    .foregroundStyle(hasLightFooter ? AppColor.night : (item?.state == "live" ? AppColor.amber : AppColor.boneMuted))
                     .multilineTextAlignment(.center)
                     .lineLimit(2).minimumScaleFactor(0.8)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.vertical, 4)
                     .frame(maxWidth: .infinity)
-                    .background(hasScheduledDate ? AppColor.scheduleGray : AppColor.night)
+                    .background(hasLightFooter ? AppColor.scheduleGray : AppColor.night)
             }
             .background(AppColor.nightRaised)
             .clipShape(RoundedRectangle(cornerRadius: 6))
@@ -212,7 +215,7 @@ struct PlayoffBracketView: View {
         .accessibilityIdentifier("bracket.\(slot.id)")
         .accessibilityLabel("\(slot.league) \(slot.round.replacingOccurrences(of: "-", with: " ")), \(rows.map { $0.name ?? $0.slot ?? "TBD" }.joined(separator: " versus "))")
         .accessibilityValue(rows.map { row in
-            "\(row.name ?? row.slot ?? "TBD"): \(row.teamId.flatMap { item?.wins(for: $0) }.map { "\($0) series wins" } ?? "unresolved")"
+            "\(row.name ?? row.slot ?? "TBD"): \(row.teamId.flatMap { lastGame?.score(for: $0) }.map { "\($0) runs in the last completed game" } ?? "score unavailable")"
         }.joined(separator: ", ") + ". " + status(item))
         .accessibilityHint("Opens series details")
     }
@@ -248,6 +251,7 @@ struct PlayoffBracketView: View {
 
     private func status(_ item: PostseasonSeries?) -> String {
         guard let item else { return "MATCHUP \(unresolvedLabel)" }
+        if let seriesStatus = item.bracketSeriesStatus { return seriesStatus }
         if item.state == "complete" { return "FINAL · \(item.completedGameCount) GAMES" }
         if item.state == "unknown" { return "UNDER REVIEW" }
         let games = payload.games.filter { $0.seriesId == item.id }

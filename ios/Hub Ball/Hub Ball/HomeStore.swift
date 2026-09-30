@@ -29,6 +29,7 @@ final class HomeStore {
     var standings: StandingsFeed?
     var isLoading = false
     var errorMessage: String?
+    private var isRefreshingGame = false
 
     var favoriteStanding: StandingsTeam? {
         standings?.divisions
@@ -61,6 +62,15 @@ final class HomeStore {
         }
     }
 
+    func refreshCurrentGame() async {
+        guard !isLoading, !isRefreshingGame else { return }
+        isRefreshingGame = true
+        defer { isRefreshingGame = false }
+        if let game = await Self.fetchCurrentGame(team: team), !Task.isCancelled {
+            recentGame = game
+        }
+    }
+
     nonisolated private static func fetchData(_ fileName: String, team: HubTeam) async throws -> Data {
         var request = URLRequest(url: AppBackend.dataURL(fileName, team: team))
         request.cachePolicy = .reloadRevalidatingCacheData
@@ -87,7 +97,10 @@ final class HomeStore {
         do {
             let client = MLBGameClient(team: team)
             guard let latest = try await client.gameDescriptors().first else { return nil }
-            return try await client.game(gamePk: latest.gamePk)
+            return try await client.game(
+                gamePk: latest.gamePk,
+                cachePolicy: latest.isLive ? .reloadIgnoringLocalCacheData : .useProtocolCachePolicy
+            )
         } catch {
             // The published snapshot remains available when the live source is unreachable.
             return nil

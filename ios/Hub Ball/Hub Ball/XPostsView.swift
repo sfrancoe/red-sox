@@ -136,7 +136,7 @@ struct XPostsView: View {
             }
 
             ScrollView {
-                LazyVStack(spacing: contentWidth >= 650 ? 12 : 0) {
+                LazyVStack(spacing: contentWidth >= 650 ? 8 : 0) {
                     if !pinnedHeader {
                         feedHeader(feed, mode: mode)
                     }
@@ -173,15 +173,15 @@ struct XPostsView: View {
     }
 
     private func postCard(_ post: XPost) -> some View {
-        HStack(alignment: .top, spacing: 8) {
+        HStack(alignment: .top, spacing: 6) {
             authorAvatar(post)
 
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 4) {
                 postMetadata(post)
 
                 Text(post.text)
-                    .font(.body)
-                    .lineSpacing(2)
+                    .font(usesExpandedReadingLayout ? .body : .subheadline)
+                    .lineSpacing(usesExpandedReadingLayout ? 2 : 1)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if !post.quotedText.isEmpty {
@@ -201,13 +201,15 @@ struct XPostsView: View {
                         .frame(width: media.size.width, height: media.size.height)
                         .clipped()
                     }
-                    .frame(height: contentWidth >= 650 ? 210 : 125)
+                    .frame(height: usesExpandedReadingLayout
+                        ? (contentWidth >= 650 ? 210 : 125)
+                        : (contentWidth >= 650 ? 160 : 100))
                     .clipShape(Rectangle())
                 }
 
                 HStack {
                     Label("\(post.likes.formatted())", systemImage: "heart.fill")
-                        .font(.subheadline.weight(.bold))
+                        .font(usesExpandedReadingLayout ? .subheadline.weight(.bold) : .caption.weight(.semibold))
                         .foregroundStyle(AppColor.red)
 
                     Spacer()
@@ -215,14 +217,14 @@ struct XPostsView: View {
                     if let url = URL(string: post.url) {
                         Link(destination: url) {
                             Label("Open on X", systemImage: "arrow.up.right")
-                                .font(.subheadline.weight(.bold))
+                                .font(usesExpandedReadingLayout ? .subheadline.weight(.bold) : .caption.weight(.semibold))
                                 .foregroundStyle(AppColor.navy)
                         }
                     }
                 }
             }
         }
-        .padding(10)
+        .padding(usesExpandedReadingLayout ? 10 : 8)
         .background(AppColor.nightRaised)
         .clipShape(Rectangle())
         .overlay(alignment: .bottom) {
@@ -279,7 +281,7 @@ struct XPostsView: View {
                     .foregroundStyle(AppColor.navy.opacity(0.55))
             }
         }
-        .frame(width: 34, height: 34)
+        .frame(width: usesExpandedReadingLayout ? 34 : 28, height: usesExpandedReadingLayout ? 34 : 28)
         .clipShape(Circle())
     }
 
@@ -292,10 +294,10 @@ struct XPostsView: View {
             }
 
             Text(post.quotedText)
-                .font(.subheadline)
-                .lineSpacing(2)
+                .font(usesExpandedReadingLayout ? .subheadline : .caption)
+                .lineSpacing(usesExpandedReadingLayout ? 2 : 1)
         }
-        .padding(8)
+        .padding(usesExpandedReadingLayout ? 8 : 6)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColor.nightRaised)
         .clipShape(Rectangle())

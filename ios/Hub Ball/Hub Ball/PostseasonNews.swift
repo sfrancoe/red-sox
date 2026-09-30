@@ -13,8 +13,7 @@ struct PostseasonNewsPayload: Codable, Sendable {
     let articles: [PostseasonNewsArticle]
 
     var generatedText: String {
-        PostseasonNewsDate.date(from: generatedAt)?.formatted(date: .abbreviated, time: .shortened)
-            ?? generatedAt
+        PostseasonNewsDate.text(from: generatedAt)
     }
 }
 
@@ -28,16 +27,27 @@ struct PostseasonNewsArticle: Codable, Identifiable, Sendable {
     let teamName: String
     let teamAbbreviation: String
     let league: String
+    let publishedSource: String?
 
     var id: String { url }
 
     var publishedText: String {
-        PostseasonNewsDate.date(from: published)?.formatted(date: .abbreviated, time: .shortened)
-            ?? published
+        guard publishedSource == "publisher" else { return "Time unavailable" }
+        return PostseasonNewsDate.text(from: published)
     }
 }
 
 private enum PostseasonNewsDate {
+    static func text(from value: String) -> String {
+        guard let date = date(from: value) else { return "—" }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.calendar = BaseballTime.calendar
+        formatter.timeZone = BaseballTime.timeZone
+        formatter.dateFormat = "MM/dd h:mm a"
+        return formatter.string(from: date)
+    }
+
     static func date(from value: String) -> Date? {
         let fractional = ISO8601DateFormatter()
         fractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]

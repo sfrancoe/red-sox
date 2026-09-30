@@ -303,7 +303,7 @@ struct OctoberView: View {
                     }
                 }
 
-                Text("Checked \(payload.generatedText) · Headlines link to their publishers")
+                Text("Checked \(payload.generatedText) · All times ET · Headlines link to their publishers")
                     .font(AppFont.label)
                     .foregroundStyle(AppColor.boneDim)
                     .padding(.top, 4)
@@ -321,31 +321,20 @@ struct OctoberView: View {
             Link(destination: url) {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Text(article.teamAbbreviation)
-                            .font(AppFont.label.weight(.bold))
-                            .foregroundStyle(AppColor.night)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 4)
-                            .background(AppColor.amber)
                         Text(article.source)
                             .font(AppFont.label)
                             .foregroundStyle(AppColor.boneMuted)
                         Spacer(minLength: 8)
                         Text(article.publishedText)
                             .font(AppFont.label)
+                            .monospacedDigit()
                             .foregroundStyle(AppColor.boneDim)
                             .multilineTextAlignment(.trailing)
                     }
-                    Text(article.title)
-                        .font(AppFont.body.weight(.bold))
+                    Text("\(article.title) \(Image(systemName: "arrow.up.right.square"))")
+                        .font(AppFont.body)
                         .foregroundStyle(AppColor.bone)
                         .fixedSize(horizontal: false, vertical: true)
-                    if !article.description.isEmpty {
-                        Text(article.description)
-                            .font(AppFont.bodySmall)
-                            .foregroundStyle(AppColor.boneMuted)
-                            .lineLimit(3)
-                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)
@@ -355,7 +344,7 @@ struct OctoberView: View {
                 }
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("\(article.teamName), \(article.title), \(article.source), \(article.publishedText)")
+            .accessibilityLabel("\(article.title), \(article.source), \(article.publishedText)\(article.publishedSource == "publisher" ? " Eastern Time" : "")")
         }
     }
 

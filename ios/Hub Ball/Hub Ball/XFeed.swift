@@ -9,7 +9,7 @@ enum XFeedMode: String, CaseIterable, Identifiable, Sendable {
     var title: String {
         switch self {
         case .recent: "Most Recent"
-        case .liked: "Most Liked (24 Hours)"
+        case .liked: "Most Like 24H"
         }
     }
 }

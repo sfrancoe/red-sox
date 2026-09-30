@@ -3,6 +3,7 @@ import Foundation
 @main
 struct PlayoffBracketTest {
     static func main() throws {
+        checkLatestGameScores()
         let slots = PlayoffBracketSlot.all
         precondition(slots.count == 11)
         precondition(Set(slots.map(\.id)).count == 11)
@@ -25,5 +26,54 @@ struct PlayoffBracketTest {
             }
         }
         print("All 11 bracket slots and advancement paths agree with recorded postseasons")
+    }
+
+    static func checkLatestGameScores() {
+        let boston = PostseasonClub(teamId: 111, name: "Red Sox", abbreviation: "BOS", slot: nil, resolved: true)
+        let newYork = PostseasonClub(teamId: 147, name: "Yankees", abbreviation: "NYY", slot: nil, resolved: true)
+        func series(_ bostonWins: Int, _ newYorkWins: Int, winner: Int? = nil, state: String = "scheduled") -> PostseasonSeries {
+            PostseasonSeries(id: "test-series", round: "wild-card", league: "AL", bracketSlot: "A",
+                             participants: [boston, newYork], unresolvedSlots: [], requiredWins: 2,
+                             gameIds: [], completedGameCount: bostonWins + newYorkWins,
+                             wins: ["111": bostonWins, "147": newYorkWins], winnerTeamId: winner,
+                             state: state, nextSlots: nil)
+        }
+        func game(_ number: Int, state: String = "Final", winner: Int? = 147,
+                  away: PostseasonClub = boston, home: PostseasonClub = newYork,
+                  awayScore: Int? = 0, homeScore: Int? = 9, seriesID: String = "test-series") -> PostseasonGame {
+            PostseasonGame(gamePk: number, seriesId: seriesID, gameNumber: number, gameType: "F",
+                           gameDate: nil, officialDate: nil, timeTBD: false, status: state,
+                           abstractState: state, broadcasts: [], conditional: false,
+                           away: away, home: home, awayScore: awayScore, homeScore: homeScore,
+                           winnerTeamId: winner, liveInning: nil)
+        }
+        func payload(_ games: [PostseasonGame]) -> PostseasonPayload {
+            PostseasonPayload(schemaVersion: 1, season: 2026, phase: "active", checkedAt: "",
+                              providerUpdatedAt: nil, source: "test", sourceURL: "",
+                              teamsAndSlots: [], series: [series(0, 1)], games: games)
+        }
+
+        let first = game(1)
+        precondition(first.score(for: 111) == 0, "A shutout must display zero, not a missing score")
+        precondition(first.score(for: 147) == 9)
+        precondition(first.score(for: 999) == nil)
+        precondition(series(0, 1).bracketSeriesStatus == "NYY lead 1-0")
+        precondition(series(1, 0).bracketSeriesStatus == "BOS lead 1-0")
+        precondition(series(1, 1).bracketSeriesStatus == "Series tied 1-1")
+        precondition(series(0, 2, winner: 147, state: "complete").bracketSeriesStatus == "NYY win 2-0")
+        precondition(series(0, 0).bracketSeriesStatus == nil)
+        precondition(series(0, 1, state: "unknown").bracketSeriesStatus == nil)
+
+        let second = game(2, winner: 111, away: newYork, home: boston, awayScore: 2, homeScore: 5)
+        let games = [game(3, state: "Preview", winner: nil), second,
+                     game(4, state: "Live", winner: nil), first,
+                     game(5, winner: nil), game(6, seriesID: "other-series")]
+        let latest = payload(games).latestCompletedGame(for: "test-series")
+        precondition(latest?.gamePk == 2, "Ignore input order, future/live/cancelled games, and other series")
+        precondition(latest?.score(for: 111) == 5, "Match scores by team ID when home and away switch")
+        precondition(latest?.score(for: 147) == 2)
+        precondition(payload([game(1, state: "Preview", winner: nil)]).latestCompletedGame(for: "test-series") == nil)
+        precondition(game(2, awayScore: nil).score(for: 111) == nil, "Missing scores must not become zero")
+        print("Latest-game bracket scores and series status passed")
     }
 }

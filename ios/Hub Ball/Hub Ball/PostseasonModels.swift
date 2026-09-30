@@ -15,6 +15,15 @@ struct PostseasonPayload: Codable, Sendable {
     var checkedDate: Date? { Self.parseDate(checkedAt) }
     var isLive: Bool { games.contains { $0.abstractState == "Live" } }
 
+    func latestCompletedGame(for seriesID: String) -> PostseasonGame? {
+        games.filter {
+            $0.seriesId == seriesID && $0.abstractState == "Final" && $0.winnerTeamId != nil
+        }.max {
+            ($0.gameNumber ?? 0, $0.gameDate ?? "", $0.gamePk)
+                < ($1.gameNumber ?? 0, $1.gameDate ?? "", $1.gamePk)
+        }
+    }
+
     private static func parseDate(_ value: String) -> Date? {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
@@ -56,6 +65,18 @@ struct PostseasonSeries: Codable, Identifiable, Sendable {
     let nextSlots: [String]?
 
     func wins(for teamID: Int) -> Int? { wins?[String(teamID)] }
+
+    var bracketSeriesStatus: String? {
+        guard state != "unknown", participants.count == 2,
+              let firstID = participants[0].teamId, let secondID = participants[1].teamId,
+              let firstWins = wins(for: firstID), let secondWins = wins(for: secondID),
+              firstWins + secondWins > 0 else { return nil }
+        if firstWins == secondWins { return "Series tied \(firstWins)-\(secondWins)" }
+        let leader = firstWins > secondWins ? participants[0] : participants[1]
+        let name = leader.abbreviation ?? leader.name ?? "Team"
+        let verb = winnerTeamId == leader.teamId ? "win" : "lead"
+        return "\(name) \(verb) \(max(firstWins, secondWins))-\(min(firstWins, secondWins))"
+    }
 }
 
 struct PostseasonGame: Codable, Identifiable, Sendable {
@@ -78,6 +99,12 @@ struct PostseasonGame: Codable, Identifiable, Sendable {
     let liveInning: Int?
 
     var id: Int { gamePk }
+
+    func score(for teamID: Int) -> Int? {
+        if away.teamId == teamID { return awayScore }
+        if home.teamId == teamID { return homeScore }
+        return nil
+    }
     var calendarDateKey: String? {
         if let officialDate, officialDate.count >= 10 {
             return String(officialDate.prefix(10))
