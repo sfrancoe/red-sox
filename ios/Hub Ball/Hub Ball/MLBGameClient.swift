@@ -35,7 +35,7 @@ struct MLBGameClient: Sendable {
             URLQueryItem(name: "sportId", value: "1"),
             URLQueryItem(name: "startDate", value: formatter.string(from: start)),
             URLQueryItem(name: "endDate", value: formatter.string(from: now)),
-            URLQueryItem(name: "gameType", value: "R")
+            URLQueryItem(name: "gameTypes", value: "R,F,D,L,W")
         ]
 
         let payload = try await json(from: components.url!)

@@ -98,11 +98,15 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
 
         let body: Data
         if url.path.contains("/api/mlb/schedule") {
+            let query = URLComponents(url: url, resolvingAgainstBaseURL: false)!.queryItems!
+            precondition(query.first { $0.name == "gameTypes" }?.value == "R,F,D,L,W",
+                         "live discovery must include every postseason round")
             let status: [String: String] = live
                 ? ["abstractGameState": "Live", "codedGameState": "I"]
                 : ["abstractGameState": "Final", "codedGameState": "F"]
             var games: [[String: Any]] = emptyDiscovery ? [] : [[
                 "gamePk": scheduleGamePk,
+                "gameType": "F",
                 "gameDate": "2026-09-18T23:00:00Z",
                 "status": status,
             ]]

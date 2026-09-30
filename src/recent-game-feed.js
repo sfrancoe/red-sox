@@ -216,7 +216,7 @@ export async function fetchLatestGame(now = new Date(), request = fetchJSON) {
   const end = `${date.year}-${date.month}-${date.day}`;
   const start = new Date(`${end}T12:00:00Z`);
   start.setUTCDate(start.getUTCDate() - 14);
-  const schedule = await request(`${API}/api/v1/schedule?sportId=1&teamId=${BOS}&startDate=${start.toISOString().slice(0, 10)}&endDate=${end}&gameType=R`);
+  const schedule = await request(`${API}/api/v1/schedule?sportId=1&teamId=${BOS}&startDate=${start.toISOString().slice(0, 10)}&endDate=${end}&gameTypes=R,F,D,L,W`);
   const game = latestFinal(schedule);
   if (!game) throw new Error('No recent completed game found');
   const live = await request(`${API}/api/v1.1/game/${game.gamePk}/feed/live?fields=${LIVE_FIELDS}`);

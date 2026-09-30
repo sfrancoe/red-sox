@@ -75,7 +75,8 @@ function upstreamURL(requestURL, team) {
       teamId: String(team.mlb_id),
       startDate,
       endDate,
-      gameType: 'R',
+      // Include every postseason round, even for installed clients sending gameType=R.
+      gameTypes: 'R,F,D,L,W',
     });
     return { route, url };
   }

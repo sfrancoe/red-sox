@@ -195,5 +195,29 @@ for (const [label, status, cacheControl, cdnCacheControl] of cacheHeaderCases) {
   assert.equal(response.headers.get('Netlify-CDN-Cache-Control'), cdnCacheControl, label);
 }
 
+// Old installed apps still send gameType=R. The gateway must discover every
+// postseason round for all teams without waiting for an app update.
+for (const [team, teamID] of TEAMS) {
+  for (const gameType of ['R', 'F', 'D', 'L', 'W']) {
+    globalThis.fetch = async url => {
+      const query = new URL(url).searchParams;
+      assert.equal(query.get('teamId'), String(teamID));
+      assert.equal(query.get('gameType'), null);
+      const included = query.get('gameTypes').split(',');
+      assert.deepEqual(included, ['R', 'F', 'D', 'L', 'W']);
+      return Response.json({ dates: [{ games: included.includes(gameType) ? [{
+        gamePk: 849851, gameType,
+        status: { abstractGameState: 'Live', codedGameState: 'I' },
+      }] : [] }] });
+    };
+    response = await handler(new Request(
+      `https://example.test/api/mlb/schedule?team=${team}&startDate=2026-09-29&endDate=2026-09-29&gameType=R`,
+    ));
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).dates[0].games[0].gameType, gameType);
+    assert.equal(response.headers.get('Cache-Control'), 'public, max-age=5, stale-while-revalidate=15');
+  }
+}
+
 globalThis.fetch = originalFetch;
 console.log('MLB live-data gateway tests passed');
