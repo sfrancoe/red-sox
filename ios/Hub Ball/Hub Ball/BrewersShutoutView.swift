@@ -869,22 +869,3 @@ private struct ContributionPoster: View {
         }.padding(36).foregroundStyle(ShutoutStyle.cream).background(ShutoutStyle.navy)
     }
 }
-
-struct BrewersShutoutStoryCard: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("MILWAUKEE / 2026").font(.system(size: 11, weight: .bold, design: .monospaced)).tracking(2).foregroundStyle(ShutoutStyle.gold)
-            HStack(alignment: .bottom) {
-                Text("WHO BUILT\nTHE 42?").font(.system(size: 36, weight: .black, design: .rounded)).tracking(-1)
-                Spacer()
-                Image(systemName: "chart.xyaxis.line").font(.system(size: 44)).foregroundStyle(ShutoutStyle.blue)
-            }
-            Text("The bats built the lead.\nThe arms kept the zero.").font(.system(size: 16, weight: .medium))
-            HStack {
-                Text("MEET THE RUN PRODUCERS").tracking(1)
-                Spacer()
-                Image(systemName: "play.fill")
-            }.font(.system(size: 11, weight: .bold)).foregroundStyle(ShutoutStyle.gold)
-        }.padding(24).foregroundStyle(ShutoutStyle.cream).background(ShutoutStyle.navy, in: RoundedRectangle(cornerRadius: 12))
-    }
-}

@@ -170,6 +170,33 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(app.buttons["stories.open"].waitForExistence(timeout: 5))
     }
 
+    func testFeaturedStoryCardsShareLayout() {
+        launch("-show-story-library", size: "UICTContentSizeCategoryL")
+        let hitter = app.buttons["stories.hitter"]
+        XCTAssertTrue(hitter.waitForExistence(timeout: 5))
+        let cardWidth = hitter.frame.width
+        capture("stories-cards-top")
+
+        for title in ["Nine pitches", "Four roads, one record", "Who built the 42?", "The home run chase"] {
+            let card = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", title)).firstMatch
+            XCTAssertTrue(reveal(card, attempts: 20), "Story card should be reachable: \(title)")
+            XCTAssertEqual(card.frame.width, cardWidth, accuracy: 2)
+            capture("stories-card-\(title)")
+        }
+    }
+
+    func testFeaturedStoryCardsLargeText() throws {
+        launch("-show-story-library")
+        XCTAssertTrue(app.buttons["stories.hitter"].waitForExistence(timeout: 5))
+        capture("stories-cards-large-top")
+        try app.performAccessibilityAudit(for: [.textClipped])
+
+        let chase = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "The home run chase")).firstMatch
+        XCTAssertTrue(reveal(chase, attempts: 30))
+        capture("stories-cards-large-bottom")
+        try app.performAccessibilityAudit(for: [.textClipped])
+    }
+
     func testHitterStoryLargeText() {
         launch("-show-hitter-story")
         XCTAssertTrue(revealHitter(app.otherElements["hitter.chart"]))
@@ -447,7 +474,7 @@ final class LargeTextUITests: XCTestCase {
 
     func testBostonStoryPlayback() {
         launch("-show-stories")
-        let nine = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "NINE PITCHES")).firstMatch
+        let nine = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Nine pitches")).firstMatch
         XCTAssertTrue(nine.waitForExistence(timeout: 20))
         nine.tap()
         let play = app.buttons["Play inning"]
@@ -461,7 +488,7 @@ final class LargeTextUITests: XCTestCase {
         capture("nine-pitches-paused")
         app.terminate()
         launch("-show-stories")
-        let four = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "FOUR ROADS")).firstMatch
+        let four = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Four roads")).firstMatch
         XCTAssertTrue(reveal(four, attempts: 15))
         four.tap()
         let graphPlay = app.buttons["Play"].firstMatch
@@ -575,7 +602,7 @@ final class LargeTextUITests: XCTestCase {
         capture("players-menus")
         try app.performAccessibilityAudit(for: [.textClipped])
         selectPage("Stories")
-        let nine = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "NINE PITCHES")).firstMatch
+        let nine = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Nine pitches")).firstMatch
         XCTAssertTrue(reveal(nine, attempts: 10))
         scroll()
         scroll()

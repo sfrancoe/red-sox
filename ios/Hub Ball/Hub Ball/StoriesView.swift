@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct StoriesView: View {
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     var team: HubTeam? = nil
     var closeLibrary: (() -> Void)? = nil
     @State private var hitterPresented = false
@@ -38,21 +37,11 @@ struct StoriesView: View {
 
                             if team == nil {
                                 Button { hitterPresented = true } label: {
-                                    VStack(alignment: .leading, spacing: 10) {
-                                        Text("The vanishing .300 hitter")
-                                            .font(.system(.title2, design: .serif).weight(.bold))
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.85)
-                                        Text("Seven qualified hitters finished at .300 or higher in 2026, matching 2025.")
-                                            .font(.subheadline)
-                                        Label("WATCH THE STORY · 5 SECONDS", systemImage: "play.circle.fill")
-                                            .font(.caption.weight(.bold))
-                                            .foregroundStyle(Color(hubHex: "#BC6259"))
-                                    }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(22)
-                                    .foregroundStyle(AppColor.night)
-                                    .background(AppColor.bone, in: RoundedRectangle(cornerRadius: 14))
+                                    StoryPreviewCard(
+                                        title: "The vanishing .300 hitter",
+                                        summary: "Seven qualified hitters finished at .300 or higher in 2026, matching 2025.",
+                                        action: "WATCH THE STORY · 5 SECONDS"
+                                    )
                                 }
                                 .buttonStyle(.plain)
                                 .accessibilityIdentifier("stories.hitter")
@@ -61,17 +50,15 @@ struct StoriesView: View {
                             if team == nil || team == .boston {
                                 if team == nil { teamHeading("BOSTON") }
                                 storyLink(
-                                    title: "NINE PITCHES",
-                                    summary: "Payton Tolle opened against Kansas City with nine pitches, nine strikes and three strikeouts.",
-                                    systemImage: "9.circle.fill"
+                                    title: "Nine pitches",
+                                    summary: "Payton Tolle opened against Kansas City with nine pitches, nine strikes and three strikeouts."
                                 ) {
                                     NinePitchesView()
                                 }
 
                                 storyLink(
-                                    title: "FOUR ROADS, ONE RECORD",
-                                    summary: "Four Boston seasons reached 57–51 after 108 games—then went four different ways.",
-                                    systemImage: "chart.xyaxis.line"
+                                    title: "Four roads, one record",
+                                    summary: "Four Boston seasons reached 57–51 after 108 games—then went four different ways."
                                 ) {
                                     Game108GraphView()
                                 }
@@ -79,20 +66,19 @@ struct StoriesView: View {
 
                             if team == nil || team == .milwaukee {
                                 if team == nil { teamHeading("MILWAUKEE") }
-                                NavigationLink {
+                                storyLink(
+                                    title: "Who built the 42?",
+                                    summary: "The bats built the lead. The arms kept the zero."
+                                ) {
                                     BrewersShutoutView()
-                                } label: {
-                                    BrewersShutoutStoryCard()
                                 }
-                                .buttonStyle(.plain)
                             }
 
                             if team == nil || team == .newYork {
                                 if team == nil { teamHeading("NEW YORK YANKEES") }
                                 storyLink(
-                                    title: "THE HOME RUN CHASE",
-                                    summary: "By age, Aaron Judge trails the legends. Count at-bats instead, and the picture flips.",
-                                    systemImage: "baseball.diamond.bases"
+                                    title: "The home run chase",
+                                    summary: "By age, Aaron Judge trails the legends. Count at-bats instead, and the picture flips."
                                 ) {
                                     HomeRunChaseView()
                                 }
@@ -121,44 +107,36 @@ struct StoriesView: View {
     private func storyLink<Destination: View>(
         title: String,
         summary: String,
-        systemImage: String,
         @ViewBuilder destination: () -> Destination
     ) -> some View {
-        let expanded = dynamicTypeSize.usesExpandedReadingLayout
-        let layout = expanded
-            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12))
-            : AnyLayout(HStackLayout(spacing: 16))
         return NavigationLink(destination: destination) {
-            layout {
-                Image(systemName: systemImage)
-                    .font(.system(size: 30, weight: .bold))
-                    .foregroundStyle(AppColor.ink)
-                    .frame(width: 62, height: 62)
-                    .background(AppColor.nightRaised)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(.headline.weight(.black))
-                        .foregroundStyle(AppColor.navy)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text(summary)
-                        .font(.subheadline)
-                        .foregroundStyle(AppColor.ink.opacity(0.76))
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                if !expanded {
-                    Spacer(minLength: 0)
-                    Image(systemName: "chevron.right")
-                        .font(.headline.weight(.bold))
-                        .foregroundStyle(AppColor.hunterGreen)
-                }
-            }
-            .cardStyle()
+            StoryPreviewCard(title: title, summary: summary, action: "WATCH THE STORY")
         }
         .buttonStyle(.plain)
+    }
+}
+
+private struct StoryPreviewCard: View {
+    let title: String
+    let summary: String
+    let action: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(title)
+                .font(.system(.title2, design: .serif).weight(.bold))
+                .fixedSize(horizontal: false, vertical: true)
+            Text(summary)
+                .font(.subheadline)
+                .fixedSize(horizontal: false, vertical: true)
+            Label(action, systemImage: "play.circle.fill")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(Color(hubHex: "#BC6259"))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(22)
+        .foregroundStyle(AppColor.night)
+        .background(AppColor.bone, in: RoundedRectangle(cornerRadius: 14))
     }
 }
 
