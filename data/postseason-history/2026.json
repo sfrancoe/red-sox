@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "season": 2026,
   "status": "locked",
-  "generatedAt": "2026-09-30T18:22:28.718178Z",
-  "rosterRefreshedAt": "2026-09-30T18:22:28.718178Z",
-  "statsRefreshedAt": "2026-09-30T18:22:28.718178Z",
+  "generatedAt": "2026-09-30T22:32:01.811891Z",
+  "rosterRefreshedAt": "2026-09-30T22:32:01.811891Z",
+  "statsRefreshedAt": "2026-09-30T22:32:01.811891Z",
   "source": "MLB Stats API",
   "sourceURL": "https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026",
   "rosterType": "40Man",
@@ -165,6 +165,18 @@
           },
           {
             "rank": 7,
+            "playerId": 547180,
+            "name": "Bryce Harper",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 0.978,
+            "games": 59,
+            "plateAppearances": 259,
+            "inningsPitched": null
+          },
+          {
+            "rank": 8,
             "playerId": 663538,
             "name": "Nico Hoerner",
             "teamId": 112,
@@ -173,18 +185,6 @@
             "value": 0.975,
             "games": 9,
             "plateAppearances": 37,
-            "inningsPitched": null
-          },
-          {
-            "rank": 8,
-            "playerId": 547180,
-            "name": "Bryce Harper",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
-            "league": "NL",
-            "value": 0.973,
-            "games": 59,
-            "plateAppearances": 255,
             "inningsPitched": null
           },
           {
@@ -218,9 +218,9 @@
             "teamId": 117,
             "teamAbbreviation": "HOU",
             "league": "AL",
-            "value": 0.937,
-            "games": 61,
-            "plateAppearances": 256,
+            "value": 0.929,
+            "games": 62,
+            "plateAppearances": 258,
             "inningsPitched": null
           },
           {
@@ -249,6 +249,18 @@
           },
           {
             "rank": 14,
+            "playerId": 656941,
+            "name": "Kyle Schwarber",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 0.909,
+            "games": 75,
+            "plateAppearances": 305,
+            "inningsPitched": null
+          },
+          {
+            "rank": 15,
             "playerId": 502671,
             "name": "Paul Goldschmidt",
             "teamId": 147,
@@ -257,18 +269,6 @@
             "value": 0.904,
             "games": 30,
             "plateAppearances": 118,
-            "inningsPitched": null
-          },
-          {
-            "rank": 15,
-            "playerId": 656941,
-            "name": "Kyle Schwarber",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
-            "league": "NL",
-            "value": 0.902,
-            "games": 75,
-            "plateAppearances": 301,
             "inningsPitched": null
           },
           {
@@ -314,9 +314,9 @@
             "teamId": 117,
             "teamAbbreviation": "HOU",
             "league": "AL",
-            "value": 0.834,
-            "games": 106,
-            "plateAppearances": 488,
+            "value": 0.836,
+            "games": 107,
+            "plateAppearances": 489,
             "inningsPitched": null
           },
           {
@@ -376,9 +376,9 @@
             "teamId": 117,
             "teamAbbreviation": "HOU",
             "league": "AL",
-            "value": 0.274,
-            "games": 10,
-            "plateAppearances": 26,
+            "value": 0.263,
+            "games": 11,
+            "plateAppearances": 27,
             "inningsPitched": null
           },
           {
@@ -562,7 +562,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 26,
+            "rank": 27,
             "playerId": 650490,
             "name": "Yandy Díaz",
             "teamId": 139,
@@ -631,6 +631,18 @@
           },
           {
             "rank": 5,
+            "playerId": 643289,
+            "name": "Mauricio Dubón",
+            "teamId": 144,
+            "teamAbbreviation": "ATL",
+            "league": "NL",
+            "value": 0.333,
+            "games": 18,
+            "plateAppearances": 40,
+            "inningsPitched": null
+          },
+          {
+            "rank": 6,
             "playerId": 665487,
             "name": "Fernando Tatis Jr.",
             "teamId": 135,
@@ -639,18 +651,6 @@
             "value": 0.333,
             "games": 17,
             "plateAppearances": 74,
-            "inningsPitched": null
-          },
-          {
-            "rank": 6,
-            "playerId": 643289,
-            "name": "Mauricio Dubón",
-            "teamId": 144,
-            "teamAbbreviation": "ATL",
-            "league": "NL",
-            "value": 0.324,
-            "games": 18,
-            "plateAppearances": 35,
             "inningsPitched": null
           },
           {
@@ -744,9 +744,9 @@
             "teamId": 117,
             "teamAbbreviation": "HOU",
             "league": "AL",
-            "value": 0.294,
-            "games": 61,
-            "plateAppearances": 256,
+            "value": 0.291,
+            "games": 62,
+            "plateAppearances": 258,
             "inningsPitched": null
           },
           {
@@ -786,7 +786,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 19,
+            "rank": 20,
             "playerId": 571771,
             "name": "Enrique Hernández",
             "teamId": 119,
@@ -798,7 +798,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 20,
+            "rank": 21,
             "playerId": 547180,
             "name": "Bryce Harper",
             "teamId": 143,
@@ -806,7 +806,7 @@
             "league": "NL",
             "value": 0.272,
             "games": 59,
-            "plateAppearances": 255,
+            "plateAppearances": 259,
             "inningsPitched": null
           },
           {
@@ -909,6 +909,18 @@
           },
           {
             "rank": 8,
+            "playerId": 673237,
+            "name": "Yainer Diaz",
+            "teamId": 117,
+            "teamAbbreviation": "HOU",
+            "league": "AL",
+            "value": 0.115,
+            "games": 11,
+            "plateAppearances": 27,
+            "inningsPitched": null
+          },
+          {
+            "rank": 9,
             "playerId": 807713,
             "name": "Matt Shaw",
             "teamId": 112,
@@ -917,18 +929,6 @@
             "value": 0.118,
             "games": 8,
             "plateAppearances": 23,
-            "inningsPitched": null
-          },
-          {
-            "rank": 9,
-            "playerId": 673237,
-            "name": "Yainer Diaz",
-            "teamId": 117,
-            "teamAbbreviation": "HOU",
-            "league": "AL",
-            "value": 0.12,
-            "games": 10,
-            "plateAppearances": 26,
             "inningsPitched": null
           },
           {
@@ -1040,7 +1040,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 22,
+            "rank": 23,
             "playerId": 650490,
             "name": "Yandy Díaz",
             "teamId": 139,
@@ -1079,8 +1079,8 @@
             "teamAbbreviation": "HOU",
             "league": "AL",
             "value": 27.0,
-            "games": 106,
-            "plateAppearances": 488,
+            "games": 107,
+            "plateAppearances": 489,
             "inningsPitched": null
           },
           {
@@ -1090,9 +1090,9 @@
             "teamId": 143,
             "teamAbbreviation": "PHI",
             "league": "NL",
-            "value": 23.0,
+            "value": 24.0,
             "games": 75,
-            "plateAppearances": 301,
+            "plateAppearances": 305,
             "inningsPitched": null
           },
           {
@@ -1121,6 +1121,18 @@
           },
           {
             "rank": 5,
+            "playerId": 547180,
+            "name": "Bryce Harper",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 18.0,
+            "games": 59,
+            "plateAppearances": 259,
+            "inningsPitched": null
+          },
+          {
+            "rank": 6,
             "playerId": 519317,
             "name": "Giancarlo Stanton",
             "teamId": 147,
@@ -1132,7 +1144,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 6,
+            "rank": 7,
             "playerId": 592450,
             "name": "Aaron Judge",
             "teamId": 147,
@@ -1141,18 +1153,6 @@
             "value": 17.0,
             "games": 65,
             "plateAppearances": 293,
-            "inningsPitched": null
-          },
-          {
-            "rank": 7,
-            "playerId": 547180,
-            "name": "Bryce Harper",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
-            "league": "NL",
-            "value": 17.0,
-            "games": 59,
-            "plateAppearances": 255,
             "inningsPitched": null
           },
           {
@@ -1211,8 +1211,8 @@
             "teamAbbreviation": "HOU",
             "league": "AL",
             "value": 12.0,
-            "games": 61,
-            "plateAppearances": 256,
+            "games": 62,
+            "plateAppearances": 258,
             "inningsPitched": null
           },
           {
@@ -1300,15 +1300,15 @@
             "inningsPitched": null
           },
           {
-            "rank": 31,
-            "playerId": 608070,
-            "name": "José Ramírez",
-            "teamId": 114,
-            "teamAbbreviation": "CLE",
+            "rank": 30,
+            "playerId": 665161,
+            "name": "Jeremy Peña",
+            "teamId": 117,
+            "teamAbbreviation": "HOU",
             "league": "AL",
-            "value": 4.0,
-            "games": 45,
-            "plateAppearances": 190,
+            "value": 5.0,
+            "games": 28,
+            "plateAppearances": 117,
             "inningsPitched": null
           }
         ],
@@ -1322,7 +1322,7 @@
             "league": "NL",
             "value": 0.0,
             "games": 21,
-            "plateAppearances": 25,
+            "plateAppearances": 29,
             "inningsPitched": null
           },
           {
@@ -1358,7 +1358,7 @@
             "league": "NL",
             "value": 0.0,
             "games": 18,
-            "plateAppearances": 35,
+            "plateAppearances": 40,
             "inningsPitched": null
           },
           {
@@ -1394,7 +1394,7 @@
             "league": "NL",
             "value": 0.0,
             "games": 14,
-            "plateAppearances": 51,
+            "plateAppearances": 54,
             "inningsPitched": null
           },
           {
@@ -1423,6 +1423,18 @@
           },
           {
             "rank": 10,
+            "playerId": 673237,
+            "name": "Yainer Diaz",
+            "teamId": 117,
+            "teamAbbreviation": "HOU",
+            "league": "AL",
+            "value": 0.0,
+            "games": 11,
+            "plateAppearances": 27,
+            "inningsPitched": null
+          },
+          {
+            "rank": 11,
             "playerId": 702332,
             "name": "Caleb Durbin",
             "teamId": 111,
@@ -1434,7 +1446,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 11,
+            "rank": 12,
             "playerId": 682668,
             "name": "Luisangel Acuña",
             "teamId": 145,
@@ -1443,18 +1455,6 @@
             "value": 0.0,
             "games": 10,
             "plateAppearances": 3,
-            "inningsPitched": null
-          },
-          {
-            "rank": 12,
-            "playerId": 673237,
-            "name": "Yainer Diaz",
-            "teamId": 117,
-            "teamAbbreviation": "HOU",
-            "league": "AL",
-            "value": 0.0,
-            "games": 10,
-            "plateAppearances": 26,
             "inningsPitched": null
           },
           {
@@ -1549,8 +1549,8 @@
             "teamAbbreviation": "HOU",
             "league": "AL",
             "value": 1.0,
-            "games": 20,
-            "plateAppearances": 81,
+            "games": 21,
+            "plateAppearances": 82,
             "inningsPitched": null
           }
         ]
@@ -1581,8 +1581,8 @@
             "teamAbbreviation": "HOU",
             "league": "AL",
             "value": 56.0,
-            "games": 106,
-            "plateAppearances": 488,
+            "games": 107,
+            "plateAppearances": 489,
             "inningsPitched": null
           },
           {
@@ -1653,8 +1653,8 @@
             "teamAbbreviation": "HOU",
             "league": "AL",
             "value": 41.0,
-            "games": 61,
-            "plateAppearances": 256,
+            "games": 62,
+            "plateAppearances": 258,
             "inningsPitched": null
           },
           {
@@ -1671,6 +1671,18 @@
           },
           {
             "rank": 10,
+            "playerId": 656941,
+            "name": "Kyle Schwarber",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 38.0,
+            "games": 75,
+            "plateAppearances": 305,
+            "inningsPitched": null
+          },
+          {
+            "rank": 11,
             "playerId": 571970,
             "name": "Max Muncy",
             "teamId": 119,
@@ -1682,7 +1694,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 11,
+            "rank": 12,
             "playerId": 641355,
             "name": "Cody Bellinger",
             "teamId": 147,
@@ -1691,18 +1703,6 @@
             "value": 37.0,
             "games": 77,
             "plateAppearances": 302,
-            "inningsPitched": null
-          },
-          {
-            "rank": 12,
-            "playerId": 656941,
-            "name": "Kyle Schwarber",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
-            "league": "NL",
-            "value": 37.0,
-            "games": 75,
-            "plateAppearances": 301,
             "inningsPitched": null
           },
           {
@@ -1724,9 +1724,9 @@
             "teamId": 143,
             "teamAbbreviation": "PHI",
             "league": "NL",
-            "value": 35.0,
+            "value": 36.0,
             "games": 59,
-            "plateAppearances": 255,
+            "plateAppearances": 259,
             "inningsPitched": null
           },
           {
@@ -1766,7 +1766,7 @@
             "inningsPitched": null
           },
           {
-            "rank": 28,
+            "rank": 29,
             "playerId": 502671,
             "name": "Paul Goldschmidt",
             "teamId": 147,
@@ -1919,8 +1919,8 @@
             "teamAbbreviation": "HOU",
             "league": "AL",
             "value": 1.0,
-            "games": 10,
-            "plateAppearances": 26,
+            "games": 11,
+            "plateAppearances": 27,
             "inningsPitched": null
           },
           {
@@ -1968,7 +1968,7 @@
             "league": "NL",
             "value": 2.0,
             "games": 21,
-            "plateAppearances": 25,
+            "plateAppearances": 29,
             "inningsPitched": null
           },
           {
@@ -1992,7 +1992,7 @@
             "league": "NL",
             "value": 2.0,
             "games": 18,
-            "plateAppearances": 35,
+            "plateAppearances": 40,
             "inningsPitched": null
           },
           {
@@ -2417,6 +2417,18 @@
           },
           {
             "rank": 11,
+            "playerId": 686613,
+            "name": "Hunter Brown",
+            "teamId": 117,
+            "teamAbbreviation": "HOU",
+            "league": "AL",
+            "value": 0.0,
+            "games": 9,
+            "plateAppearances": null,
+            "inningsPitched": "17.0"
+          },
+          {
+            "rank": 12,
             "playerId": 657097,
             "name": "Jacob Webb",
             "teamId": 112,
@@ -2428,19 +2440,19 @@
             "inningsPitched": "8.2"
           },
           {
-            "rank": 12,
-            "playerId": 808963,
-            "name": "Roki Sasaki",
-            "teamId": 119,
-            "teamAbbreviation": "LAD",
+            "rank": 13,
+            "playerId": 628452,
+            "name": "Raisel Iglesias",
+            "teamId": 144,
+            "teamAbbreviation": "ATL",
             "league": "NL",
             "value": 0.0,
             "games": 9,
             "plateAppearances": null,
-            "inningsPitched": "10.2"
+            "inningsPitched": "7.1"
           },
           {
-            "rank": 13,
+            "rank": 15,
             "playerId": 681870,
             "name": "Erik Sabrowski",
             "teamId": 114,
@@ -2452,19 +2464,7 @@
             "inningsPitched": "7.0"
           },
           {
-            "rank": 14,
-            "playerId": 686613,
-            "name": "Hunter Brown",
-            "teamId": 117,
-            "teamAbbreviation": "HOU",
-            "league": "AL",
-            "value": 0.0,
-            "games": 8,
-            "plateAppearances": null,
-            "inningsPitched": "16.1"
-          },
-          {
-            "rank": 18,
+            "rank": 19,
             "playerId": 607259,
             "name": "Nick Martinez",
             "teamId": 139,
@@ -2500,7 +2500,7 @@
             "inningsPitched": "4.2"
           },
           {
-            "rank": 38,
+            "rank": 39,
             "playerId": 670280,
             "name": "David Bednar",
             "teamId": 147,
@@ -2512,7 +2512,7 @@
             "inningsPitched": "6.0"
           },
           {
-            "rank": 40,
+            "rank": 41,
             "playerId": 571927,
             "name": "Steven Matz",
             "teamId": 139,
@@ -2524,7 +2524,7 @@
             "inningsPitched": "16.2"
           },
           {
-            "rank": 41,
+            "rank": 42,
             "playerId": 676440,
             "name": "Tanner Bibee",
             "teamId": 114,
@@ -2701,18 +2701,6 @@
           },
           {
             "rank": 14,
-            "playerId": 686613,
-            "name": "Hunter Brown",
-            "teamId": 117,
-            "teamAbbreviation": "HOU",
-            "league": "AL",
-            "value": 0.98,
-            "games": 8,
-            "plateAppearances": null,
-            "inningsPitched": "16.1"
-          },
-          {
-            "rank": 15,
             "playerId": 592332,
             "name": "Kevin Gausman",
             "teamId": 112,
@@ -2724,7 +2712,7 @@
             "inningsPitched": "56.1"
           },
           {
-            "rank": 16,
+            "rank": 15,
             "playerId": 543037,
             "name": "Gerrit Cole",
             "teamId": 147,
@@ -2736,7 +2724,7 @@
             "inningsPitched": "133.1"
           },
           {
-            "rank": 17,
+            "rank": 16,
             "playerId": 642547,
             "name": "Freddy Peralta",
             "teamId": 139,
@@ -2748,7 +2736,7 @@
             "inningsPitched": "33.1"
           },
           {
-            "rank": 18,
+            "rank": 17,
             "playerId": 664299,
             "name": "Cristian Javier",
             "teamId": 117,
@@ -2760,7 +2748,7 @@
             "inningsPitched": "43.2"
           },
           {
-            "rank": 19,
+            "rank": 18,
             "playerId": 622491,
             "name": "Luis Castillo",
             "teamId": 145,
@@ -2772,7 +2760,7 @@
             "inningsPitched": "28.0"
           },
           {
-            "rank": 20,
+            "rank": 19,
             "playerId": 624133,
             "name": "Ranger Suarez",
             "teamId": 111,
@@ -2782,6 +2770,18 @@
             "games": 11,
             "plateAppearances": null,
             "inningsPitched": "42.2"
+          },
+          {
+            "rank": 26,
+            "playerId": 547973,
+            "name": "Aroldis Chapman",
+            "teamId": 111,
+            "teamAbbreviation": "BOS",
+            "league": "AL",
+            "value": 1.16,
+            "games": 46,
+            "plateAppearances": null,
+            "inningsPitched": "51.2"
           }
         ],
         "worst": [
@@ -2943,6 +2943,18 @@
           },
           {
             "rank": 14,
+            "playerId": 686613,
+            "name": "Hunter Brown",
+            "teamId": 117,
+            "teamAbbreviation": "HOU",
+            "league": "AL",
+            "value": 1.29,
+            "games": 9,
+            "plateAppearances": null,
+            "inningsPitched": "17.0"
+          },
+          {
+            "rank": 15,
             "playerId": 595014,
             "name": "Blake Treinen",
             "teamId": 119,
@@ -2954,7 +2966,7 @@
             "inningsPitched": "43.1"
           },
           {
-            "rank": 15,
+            "rank": 16,
             "playerId": 681911,
             "name": "Alex Vesia",
             "teamId": 119,
@@ -2966,7 +2978,7 @@
             "inningsPitched": "19.1"
           },
           {
-            "rank": 16,
+            "rank": 17,
             "playerId": 666200,
             "name": "Jesús Luzardo",
             "teamId": 143,
@@ -2978,7 +2990,19 @@
             "inningsPitched": "27.1"
           },
           {
-            "rank": 17,
+            "rank": 18,
+            "playerId": 650911,
+            "name": "Cristopher Sánchez",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 1.23,
+            "games": 5,
+            "plateAppearances": null,
+            "inningsPitched": "26.0"
+          },
+          {
+            "rank": 19,
             "playerId": 547973,
             "name": "Aroldis Chapman",
             "teamId": 111,
@@ -2990,19 +3014,7 @@
             "inningsPitched": "51.2"
           },
           {
-            "rank": 18,
-            "playerId": 621111,
-            "name": "Walker Buehler",
-            "teamId": 135,
-            "teamAbbreviation": "SD",
-            "league": "NL",
-            "value": 1.15,
-            "games": 19,
-            "plateAppearances": null,
-            "inningsPitched": "94.2"
-          },
-          {
-            "rank": 25,
+            "rank": 26,
             "playerId": 624133,
             "name": "Ranger Suarez",
             "teamId": 111,
@@ -3012,18 +3024,6 @@
             "games": 11,
             "plateAppearances": null,
             "inningsPitched": "42.2"
-          },
-          {
-            "rank": 26,
-            "playerId": 622491,
-            "name": "Luis Castillo",
-            "teamId": 145,
-            "teamAbbreviation": "CWS",
-            "league": "AL",
-            "value": 1.04,
-            "games": 6,
-            "plateAppearances": null,
-            "inningsPitched": "28.0"
           }
         ]
       },
@@ -3107,18 +3107,6 @@
           },
           {
             "rank": 7,
-            "playerId": 686613,
-            "name": "Hunter Brown",
-            "teamId": 117,
-            "teamAbbreviation": "HOU",
-            "league": "AL",
-            "value": 1.65,
-            "games": 8,
-            "plateAppearances": null,
-            "inningsPitched": "16.1"
-          },
-          {
-            "rank": 8,
             "playerId": 660813,
             "name": "Brusdar Graterol",
             "teamId": 119,
@@ -3130,7 +3118,7 @@
             "inningsPitched": "24.1"
           },
           {
-            "rank": 9,
+            "rank": 8,
             "playerId": 681911,
             "name": "Alex Vesia",
             "teamId": 119,
@@ -3142,7 +3130,7 @@
             "inningsPitched": "19.1"
           },
           {
-            "rank": 10,
+            "rank": 9,
             "playerId": 669373,
             "name": "Tarik Skubal",
             "teamId": 119,
@@ -3154,7 +3142,7 @@
             "inningsPitched": "39.2"
           },
           {
-            "rank": 11,
+            "rank": 10,
             "playerId": 650633,
             "name": "Michael King",
             "teamId": 135,
@@ -3166,7 +3154,7 @@
             "inningsPitched": "22.0"
           },
           {
-            "rank": 12,
+            "rank": 11,
             "playerId": 554430,
             "name": "Zack Wheeler",
             "teamId": 143,
@@ -3178,7 +3166,7 @@
             "inningsPitched": "70.1"
           },
           {
-            "rank": 13,
+            "rank": 12,
             "playerId": 808967,
             "name": "Yoshinobu Yamamoto",
             "teamId": 119,
@@ -3190,7 +3178,7 @@
             "inningsPitched": "56.0"
           },
           {
-            "rank": 14,
+            "rank": 13,
             "playerId": 622491,
             "name": "Luis Castillo",
             "teamId": 145,
@@ -3202,7 +3190,7 @@
             "inningsPitched": "28.0"
           },
           {
-            "rank": 15,
+            "rank": 14,
             "playerId": 547973,
             "name": "Aroldis Chapman",
             "teamId": 111,
@@ -3214,7 +3202,7 @@
             "inningsPitched": "51.2"
           },
           {
-            "rank": 16,
+            "rank": 15,
             "playerId": 650556,
             "name": "Bryan Abreu",
             "teamId": 117,
@@ -3226,7 +3214,7 @@
             "inningsPitched": "22.2"
           },
           {
-            "rank": 17,
+            "rank": 16,
             "playerId": 664208,
             "name": "Phil Maton",
             "teamId": 112,
@@ -3238,7 +3226,7 @@
             "inningsPitched": "28.0"
           },
           {
-            "rank": 18,
+            "rank": 17,
             "playerId": 664299,
             "name": "Cristian Javier",
             "teamId": 117,
@@ -3250,7 +3238,7 @@
             "inningsPitched": "43.2"
           },
           {
-            "rank": 19,
+            "rank": 18,
             "playerId": 543037,
             "name": "Gerrit Cole",
             "teamId": 147,
@@ -3262,16 +3250,28 @@
             "inningsPitched": "133.1"
           },
           {
-            "rank": 20,
-            "playerId": 650911,
-            "name": "Cristopher Sánchez",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
+            "rank": 19,
+            "playerId": 571510,
+            "name": "Matthew Boyd",
+            "teamId": 112,
+            "teamAbbreviation": "CHC",
             "league": "NL",
-            "value": 2.79,
-            "games": 4,
+            "value": 2.81,
+            "games": 8,
             "plateAppearances": null,
-            "inningsPitched": "19.1"
+            "inningsPitched": "25.2"
+          },
+          {
+            "rank": 22,
+            "playerId": 642232,
+            "name": "Ryan Yarbrough",
+            "teamId": 147,
+            "teamAbbreviation": "NYY",
+            "league": "AL",
+            "value": 3.06,
+            "games": 8,
+            "plateAppearances": null,
+            "inningsPitched": "17.2"
           }
         ],
         "worst": [
@@ -3468,7 +3468,19 @@
             "inningsPitched": "16.2"
           },
           {
-            "rank": 20,
+            "rank": 19,
+            "playerId": 686613,
+            "name": "Hunter Brown",
+            "teamId": 117,
+            "teamAbbreviation": "HOU",
+            "league": "AL",
+            "value": 3.18,
+            "games": 9,
+            "plateAppearances": null,
+            "inningsPitched": "17.0"
+          },
+          {
+            "rank": 22,
             "playerId": 676440,
             "name": "Tanner Bibee",
             "teamId": 114,
@@ -3480,7 +3492,7 @@
             "inningsPitched": "20.1"
           },
           {
-            "rank": 21,
+            "rank": 23,
             "playerId": 642232,
             "name": "Ryan Yarbrough",
             "teamId": 147,
@@ -3492,7 +3504,7 @@
             "inningsPitched": "17.2"
           },
           {
-            "rank": 26,
+            "rank": 27,
             "playerId": 543037,
             "name": "Gerrit Cole",
             "teamId": 147,
@@ -3502,18 +3514,6 @@
             "games": 22,
             "plateAppearances": null,
             "inningsPitched": "133.1"
-          },
-          {
-            "rank": 27,
-            "playerId": 664299,
-            "name": "Cristian Javier",
-            "teamId": 117,
-            "teamAbbreviation": "HOU",
-            "league": "AL",
-            "value": 2.68,
-            "games": 17,
-            "plateAppearances": null,
-            "inningsPitched": "43.2"
           }
         ]
       },
@@ -3585,6 +3585,18 @@
           },
           {
             "rank": 6,
+            "playerId": 628452,
+            "name": "Raisel Iglesias",
+            "teamId": 144,
+            "teamAbbreviation": "ATL",
+            "league": "NL",
+            "value": 2.0,
+            "games": 9,
+            "plateAppearances": null,
+            "inningsPitched": "7.1"
+          },
+          {
+            "rank": 7,
             "playerId": 621242,
             "name": "Edwin Díaz",
             "teamId": 119,
@@ -3596,7 +3608,7 @@
             "inningsPitched": "11.1"
           },
           {
-            "rank": 7,
+            "rank": 8,
             "playerId": 661395,
             "name": "Jhoan Duran",
             "teamId": 143,
@@ -3606,18 +3618,6 @@
             "games": 8,
             "plateAppearances": null,
             "inningsPitched": "10.2"
-          },
-          {
-            "rank": 8,
-            "playerId": 628452,
-            "name": "Raisel Iglesias",
-            "teamId": 144,
-            "teamAbbreviation": "ATL",
-            "league": "NL",
-            "value": 2.0,
-            "games": 8,
-            "plateAppearances": null,
-            "inningsPitched": "6.1"
           },
           {
             "rank": 9,
@@ -3982,7 +3982,7 @@
             "inningsPitched": "9.2"
           },
           {
-            "rank": 24,
+            "rank": 25,
             "playerId": 642547,
             "name": "Freddy Peralta",
             "teamId": 139,
@@ -3994,16 +3994,16 @@
             "inningsPitched": "33.1"
           },
           {
-            "rank": 27,
-            "playerId": 607074,
-            "name": "Carlos Rodón",
-            "teamId": 147,
-            "teamAbbreviation": "NYY",
+            "rank": 26,
+            "playerId": 686613,
+            "name": "Hunter Brown",
+            "teamId": 117,
+            "teamAbbreviation": "HOU",
             "league": "AL",
             "value": 0.0,
-            "games": 8,
+            "games": 9,
             "plateAppearances": null,
-            "inningsPitched": "28.2"
+            "inningsPitched": "17.0"
           }
         ]
       },
@@ -4401,15 +4401,15 @@
           },
           {
             "rank": 13,
-            "playerId": 669276,
-            "name": "Dylan Lee",
-            "teamId": 144,
-            "teamAbbreviation": "ATL",
+            "playerId": 682842,
+            "name": "Abner Uribe",
+            "teamId": 158,
+            "teamAbbreviation": "MIL",
             "league": "NL",
             "value": 7.0,
-            "games": 8,
+            "games": 7,
             "plateAppearances": null,
-            "inningsPitched": "8.1"
+            "inningsPitched": "7.1"
           },
           {
             "rank": 19,
