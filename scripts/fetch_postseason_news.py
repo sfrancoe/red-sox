@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable
@@ -14,6 +15,7 @@ from urllib.parse import urlsplit, urlunsplit
 
 from team_registry import ROOT, all_teams
 from fetch_team_news import source_feed
+from news_publication import fetch_publication, timestamp
 
 
 DEFAULT_WINDOW_HOURS = 12
@@ -30,10 +32,7 @@ BLOCKED_TITLE_PHRASES = (
 
 
 def parse_timestamp(value: str) -> datetime | None:
-    try:
-        return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
-    except (AttributeError, TypeError, ValueError):
-        return None
+    return timestamp(value)
 
 
 def canonical_url(value: str) -> str:
@@ -78,6 +77,7 @@ def build_feed(
     now: datetime,
     window_hours: int = DEFAULT_WINDOW_HOURS,
     loader: Callable[[dict[str, Any], dict[str, str], Path], dict[str, Any]] = load_cached_source,
+    publication_loader: Callable[[str], str | None] | None = None,
 ) -> tuple[dict[str, Any], list[str]]:
     if history.get("schemaVersion") != 1 or history.get("season") != season:
         raise ValueError(f"Postseason history snapshot does not describe {season}")
@@ -107,7 +107,7 @@ def build_feed(
                 article_url = str(article.get("url", "")).strip()
                 url_key = canonical_url(article_url)
                 if (
-                    not title or not published or published < cutoff or published > now
+                    not title or not published or published < cutoff - timedelta(days=2) or published > now
                     or not url_key
                     or any(phrase in title.lower() for phrase in BLOCKED_TITLE_PHRASES)
                 ):
@@ -124,8 +124,9 @@ def build_feed(
                     "league": team["league"],
                 })
 
-    candidates.sort(key=lambda article: article["published"], reverse=True)
-    articles: list[dict[str, Any]] = []
+    # Bing's time can differ from the publisher by hours. Check a wider candidate
+    # window, then apply the actual news window using the confirmed publication.
+    unique: list[dict[str, Any]] = []
     seen_urls: set[str] = set()
     seen_titles: set[str] = set()
     for article in candidates:
@@ -135,9 +136,37 @@ def build_feed(
             continue
         seen_urls.add(url_key)
         seen_titles.add(title_key)
-        articles.append(article)
-        if len(articles) == MAX_ARTICLES:
-            break
+        unique.append(article)
+
+    def confirmed_publication(article: dict[str, Any]) -> tuple[datetime | None, str | None]:
+        if publication_loader is None:
+            return None, None
+        try:
+            published = parse_timestamp(publication_loader(article["url"]) or "")
+            if published is not None and published <= now:
+                return published, None
+            return None, f"No confirmed publication time: {article['url']}"
+        except Exception as exc:
+            return None, f"Publication time unavailable for {article['url']}: {exc}"
+
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        confirmations = list(pool.map(confirmed_publication, unique))
+
+    dated: list[tuple[datetime, dict[str, Any]]] = []
+    for article, (confirmed, warning) in zip(unique, confirmations):
+        if warning:
+            warnings.append(warning)
+        indexed = parse_timestamp(article["published"])
+        effective = confirmed or indexed
+        if effective is None or effective < cutoff:
+            continue
+        # Search timestamps can bound discovery, but must never masquerade as
+        # publisher-confirmed times in the app. Keep healthy headlines available.
+        article["published"] = confirmed.isoformat() if confirmed else ""
+        article["publishedSource"] = "publisher" if confirmed else "unverified"
+        dated.append((effective, article))
+    dated.sort(key=lambda entry: entry[0], reverse=True)
+    articles = [article for _, article in dated[:MAX_ARTICLES]]
 
     covered_team_ids = {article["teamId"] for article in articles}
     return ({
@@ -189,6 +218,7 @@ def main() -> int:
             datetime.now(timezone.utc),
             args.hours,
             load_cached_source if args.cached else fetch_live_source,
+            None if args.cached else fetch_publication,
         )
     except (FileNotFoundError, json.JSONDecodeError, OSError, ValueError) as exc:
         print(f"ERROR: Could not build postseason news: {exc}", file=sys.stderr)
