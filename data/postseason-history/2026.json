@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "season": 2026,
   "status": "locked",
-  "generatedAt": "2026-09-30T06:34:26.908882Z",
-  "rosterRefreshedAt": "2026-09-30T06:34:26.908882Z",
-  "statsRefreshedAt": "2026-09-30T06:34:26.908882Z",
+  "generatedAt": "2026-09-30T18:22:28.718178Z",
+  "rosterRefreshedAt": "2026-09-30T18:22:28.718178Z",
+  "statsRefreshedAt": "2026-09-30T18:22:28.718178Z",
   "source": "MLB Stats API",
   "sourceURL": "https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026",
   "rosterType": "40Man",
@@ -182,9 +182,9 @@
             "teamId": 143,
             "teamAbbreviation": "PHI",
             "league": "NL",
-            "value": 0.968,
-            "games": 58,
-            "plateAppearances": 254,
+            "value": 0.973,
+            "games": 59,
+            "plateAppearances": 255,
             "inningsPitched": null
           },
           {
@@ -249,18 +249,6 @@
           },
           {
             "rank": 14,
-            "playerId": 656941,
-            "name": "Kyle Schwarber",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
-            "league": "NL",
-            "value": 0.906,
-            "games": 74,
-            "plateAppearances": 300,
-            "inningsPitched": null
-          },
-          {
-            "rank": 15,
             "playerId": 502671,
             "name": "Paul Goldschmidt",
             "teamId": 147,
@@ -269,6 +257,18 @@
             "value": 0.904,
             "games": 30,
             "plateAppearances": 118,
+            "inningsPitched": null
+          },
+          {
+            "rank": 15,
+            "playerId": 656941,
+            "name": "Kyle Schwarber",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 0.902,
+            "games": 75,
+            "plateAppearances": 301,
             "inningsPitched": null
           },
           {
@@ -649,7 +649,7 @@
             "teamAbbreviation": "ATL",
             "league": "NL",
             "value": 0.324,
-            "games": 17,
+            "games": 18,
             "plateAppearances": 35,
             "inningsPitched": null
           },
@@ -804,9 +804,9 @@
             "teamId": 143,
             "teamAbbreviation": "PHI",
             "league": "NL",
-            "value": 0.269,
-            "games": 58,
-            "plateAppearances": 254,
+            "value": 0.272,
+            "games": 59,
+            "plateAppearances": 255,
             "inningsPitched": null
           },
           {
@@ -1091,8 +1091,8 @@
             "teamAbbreviation": "PHI",
             "league": "NL",
             "value": 23.0,
-            "games": 74,
-            "plateAppearances": 300,
+            "games": 75,
+            "plateAppearances": 301,
             "inningsPitched": null
           },
           {
@@ -1151,8 +1151,8 @@
             "teamAbbreviation": "PHI",
             "league": "NL",
             "value": 17.0,
-            "games": 58,
-            "plateAppearances": 254,
+            "games": 59,
+            "plateAppearances": 255,
             "inningsPitched": null
           },
           {
@@ -1315,6 +1315,18 @@
         "worst": [
           {
             "rank": 1,
+            "playerId": 624641,
+            "name": "Edmundo Sosa",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 0.0,
+            "games": 21,
+            "plateAppearances": 25,
+            "inningsPitched": null
+          },
+          {
+            "rank": 2,
             "playerId": 643396,
             "name": "Isiah Kiner-Falefa",
             "teamId": 111,
@@ -1323,18 +1335,6 @@
             "value": 0.0,
             "games": 21,
             "plateAppearances": 60,
-            "inningsPitched": null
-          },
-          {
-            "rank": 2,
-            "playerId": 624641,
-            "name": "Edmundo Sosa",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
-            "league": "NL",
-            "value": 0.0,
-            "games": 20,
-            "plateAppearances": 25,
             "inningsPitched": null
           },
           {
@@ -1351,6 +1351,18 @@
           },
           {
             "rank": 4,
+            "playerId": 643289,
+            "name": "Mauricio Dubón",
+            "teamId": 144,
+            "teamAbbreviation": "ATL",
+            "league": "NL",
+            "value": 0.0,
+            "games": 18,
+            "plateAppearances": 35,
+            "inningsPitched": null
+          },
+          {
+            "rank": 5,
             "playerId": 650333,
             "name": "Luis Arraez",
             "teamId": 143,
@@ -1359,18 +1371,6 @@
             "value": 0.0,
             "games": 17,
             "plateAppearances": 70,
-            "inningsPitched": null
-          },
-          {
-            "rank": 5,
-            "playerId": 643289,
-            "name": "Mauricio Dubón",
-            "teamId": 144,
-            "teamAbbreviation": "ATL",
-            "league": "NL",
-            "value": 0.0,
-            "games": 17,
-            "plateAppearances": 35,
             "inningsPitched": null
           },
           {
@@ -1393,7 +1393,7 @@
             "teamAbbreviation": "ATL",
             "league": "NL",
             "value": 0.0,
-            "games": 13,
+            "games": 14,
             "plateAppearances": 51,
             "inningsPitched": null
           },
@@ -1701,8 +1701,8 @@
             "teamAbbreviation": "PHI",
             "league": "NL",
             "value": 37.0,
-            "games": 74,
-            "plateAppearances": 300,
+            "games": 75,
+            "plateAppearances": 301,
             "inningsPitched": null
           },
           {
@@ -1724,9 +1724,9 @@
             "teamId": 143,
             "teamAbbreviation": "PHI",
             "league": "NL",
-            "value": 34.0,
-            "games": 58,
-            "plateAppearances": 254,
+            "value": 35.0,
+            "games": 59,
+            "plateAppearances": 255,
             "inningsPitched": null
           },
           {
@@ -1961,6 +1961,18 @@
           },
           {
             "rank": 14,
+            "playerId": 624641,
+            "name": "Edmundo Sosa",
+            "teamId": 143,
+            "teamAbbreviation": "PHI",
+            "league": "NL",
+            "value": 2.0,
+            "games": 21,
+            "plateAppearances": 25,
+            "inningsPitched": null
+          },
+          {
+            "rank": 15,
             "playerId": 643396,
             "name": "Isiah Kiner-Falefa",
             "teamId": 111,
@@ -1972,18 +1984,6 @@
             "inningsPitched": null
           },
           {
-            "rank": 15,
-            "playerId": 624641,
-            "name": "Edmundo Sosa",
-            "teamId": 143,
-            "teamAbbreviation": "PHI",
-            "league": "NL",
-            "value": 2.0,
-            "games": 20,
-            "plateAppearances": 25,
-            "inningsPitched": null
-          },
-          {
             "rank": 16,
             "playerId": 643289,
             "name": "Mauricio Dubón",
@@ -1991,7 +1991,7 @@
             "teamAbbreviation": "ATL",
             "league": "NL",
             "value": 2.0,
-            "games": 17,
+            "games": 18,
             "plateAppearances": 35,
             "inningsPitched": null
           },
