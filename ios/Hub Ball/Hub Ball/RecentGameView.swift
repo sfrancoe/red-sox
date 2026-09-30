@@ -344,33 +344,16 @@ struct RecentGameView: View {
     }
 
     private func liveMatchupRow(_ matchup: LiveGameMatchup?) -> some View {
-        let layout = usesExpandedReadingLayout
-            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
-            : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
-        return layout {
-            liveMatchupField("Pitching", value: matchup?.pitcher, identifier: "recap.live.pitcher")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            liveMatchupField("At bat", value: matchup?.batter, identifier: "recap.live.batter")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            liveMatchupField("Outs", value: matchup?.outs.map(String.init), identifier: "recap.live.outs")
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func liveMatchupField(_ title: String, value: String?, identifier: String) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(title)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(AppColor.inkMuted)
-            Text(value ?? "—")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(AppColor.ink)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(title)
-        .accessibilityValue(value ?? "Not available")
-        .accessibilityIdentifier(identifier)
+        let matchup = matchup ?? LiveGameMatchup(pitcher: nil, batter: nil, outs: nil)
+        return Text(matchup.compactDescription)
+            .font(.system(size: contentWidth >= 650 ? 15 : 13, weight: .semibold))
+            .monospacedDigit()
+            .foregroundStyle(AppColor.ink)
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityLabel(matchup.accessibilityDescription)
+            .accessibilityIdentifier("recap.live.matchup")
     }
 
     @ViewBuilder

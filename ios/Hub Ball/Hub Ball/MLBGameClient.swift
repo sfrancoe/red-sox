@@ -135,7 +135,7 @@ struct MLBGameClient: Sendable {
             result: isLive ? "Live" : boston.runs > opponent.runs ? "Win" : "Loss",
             gameState: isLive ? "Live" : "Final",
             liveStatus: isLive ? liveStatus(linescore) : nil,
-            liveMatchup: isLive ? liveMatchup(linescore) : nil,
+            liveMatchup: isLive ? liveMatchup(linescore, players: dictionary(gameData["players"])) : nil,
             summary: summary,
             facts: facts,
             decisions: Decisions(
@@ -152,20 +152,32 @@ struct MLBGameClient: Sendable {
         )
     }
 
-    private func liveMatchup(_ linescore: JSON) -> LiveGameMatchup {
+    private func liveMatchup(_ linescore: JSON, players: JSON) -> LiveGameMatchup {
         let state = (linescore["inningState"] as? String ?? "").lowercased()
         let outs = integer(linescore["outs"]).flatMap { (0...3).contains($0) ? $0 : nil }
         let betweenInnings = ["middle", "end"].contains(state) || outs == 3
         // The linescore advances to the next batter before currentPlay does.
         // Its defense is the fielding team; offense.pitcher belongs to the batting team.
-        let pitcher = personName(dictionary(linescore["defense"])["pitcher"])
+        let pitcherInfo = dictionary(dictionary(linescore["defense"])["pitcher"])
+        let batterInfo = dictionary(dictionary(linescore["offense"])["batter"])
+        let pitcher = personName(pitcherInfo)
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        let batter = personName(dictionary(linescore["offense"])["batter"])
+        let batter = personName(batterInfo)
             .trimmingCharacters(in: .whitespacesAndNewlines)
+        func lastName(_ person: JSON) -> String? {
+            guard let id = integer(person["id"]),
+                  let name = dictionary(players["ID\(id)"])["lastName"] as? String,
+                  !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
+            return name.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
         return LiveGameMatchup(
             pitcher: betweenInnings || pitcher.isEmpty ? nil : pitcher,
             batter: betweenInnings || batter.isEmpty ? nil : batter,
-            outs: outs
+            outs: outs,
+            balls: betweenInnings ? nil : integer(linescore["balls"]).flatMap { (0...4).contains($0) ? $0 : nil },
+            strikes: betweenInnings ? nil : integer(linescore["strikes"]).flatMap { (0...3).contains($0) ? $0 : nil },
+            pitcherLastName: betweenInnings ? nil : lastName(pitcherInfo),
+            batterLastName: betweenInnings ? nil : lastName(batterInfo)
         )
     }
 

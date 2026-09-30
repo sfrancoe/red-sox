@@ -159,11 +159,12 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         let emptyBox = ["batters": [], "battingOrder": [], "pitchers": [], "players": [:]] as [String: Any]
         var linescore = matchup ?? [
             "inningState": "Top", "outs": version == 1 ? 0 : 2,
+            "balls": version == 1 ? 0 : 1, "strikes": version == 1 ? 2 : 1,
             "offense": [
-                "batter": ["fullName": version == 1 ? "Jarren Duran" : "Trevor Story"],
+                "batter": ["id": 2, "fullName": version == 1 ? "Jarren Duran" : "Trevor Story"],
                 "pitcher": ["fullName": "Wrong-team pitcher"],
             ],
-            "defense": ["pitcher": ["fullName": version == 1 ? "Max Fried" : "Luke Weaver"]],
+            "defense": ["pitcher": ["id": 1, "fullName": version == 1 ? "Max Fried" : "Luke Weaver"]],
         ]
         linescore["teams"] = ["away": lineTeam, "home": lineOpponent]
         linescore["innings"] = []
@@ -175,6 +176,10 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
                 "venue": ["name": venue],
                 "gameInfo": ["gameDurationMinutes": 180, "attendance": 30000],
                 "teams": ["away": team, "home": opponent],
+                "players": [
+                    "ID1": ["lastName": version == 1 ? "Fried" : "Weaver"],
+                    "ID2": ["lastName": version == 1 ? "Duran" : "Story"],
+                ],
             ],
             "liveData": [
                 "linescore": linescore,
@@ -250,6 +255,7 @@ struct RecentGameStoreTests {
         precondition(liveStore.games.first?.liveMatchup?.pitcher == "Max Fried")
         precondition(liveStore.games.first?.liveMatchup?.batter == "Jarren Duran")
         precondition(liveStore.games.first?.liveMatchup?.outs == 0)
+        precondition(liveStore.games.first?.liveMatchup?.compactDescription == "(P) Fried  (AB) Duran  0-2, 0 Outs")
         precondition(liveStore.presentationState(for: liveStore.games.first!, at: liveNow) == .live)
         let beforeLiveRefresh = RecentGameProtocol.gameRequestCount
 
@@ -261,6 +267,7 @@ struct RecentGameStoreTests {
         precondition(liveStore.games.first?.liveMatchup?.pitcher == "Luke Weaver")
         precondition(liveStore.games.first?.liveMatchup?.batter == "Trevor Story")
         precondition(liveStore.games.first?.liveMatchup?.outs == 2)
+        precondition(liveStore.games.first?.liveMatchup?.compactDescription == "(P) Weaver  (AB) Story  1-1, 2 Outs")
 
         // A descriptor that has become final must revalidate a cached-live game.
         liveNow += 20
@@ -649,6 +656,7 @@ struct RecentGameStoreTests {
             precondition(game.liveMatchup?.pitcher == nil)
             precondition(game.liveMatchup?.batter == nil)
             precondition(game.liveMatchup?.outs == 3)
+            precondition(game.liveMatchup?.balls == nil && game.liveMatchup?.strikes == nil)
         }
         for missing in [[:], ["outs": 4], ["outs": -1]] as [[String: Any]] {
             RecentGameProtocol.configure(live: true, matchup: missing)
@@ -662,7 +670,16 @@ struct RecentGameStoreTests {
         let encoded = try JSONEncoder().encode(game)
         let decoded = try JSONDecoder().decode(RecentGame.self, from: encoded)
         precondition(decoded.liveMatchup?.batter == "Jarren Duran")
+        let example = LiveGameMatchup(pitcher: "Greg Weissert", batter: "Ryan McMahon", outs: 1, balls: 0, strikes: 2)
+        precondition(example.compactDescription == "(P) Weissert  (AB) McMahon  0-2, 1 Out")
+        let compound = LiveGameMatchup(pitcher: "Greg Weissert", batter: "Elly De La Cruz", outs: 2, balls: 1, strikes: 2, batterLastName: "De La Cruz")
+        precondition(compound.compactDescription.contains("(AB) De La Cruz"))
         var legacy = try JSONSerialization.jsonObject(with: encoded) as! [String: Any]
+        var oldMatchup = legacy["liveMatchup"] as! [String: Any]
+        for key in ["balls", "strikes", "pitcherLastName", "batterLastName"] { oldMatchup.removeValue(forKey: key) }
+        legacy["liveMatchup"] = oldMatchup
+        let legacyMatchupGame = try JSONDecoder().decode(RecentGame.self, from: JSONSerialization.data(withJSONObject: legacy))
+        precondition(legacyMatchupGame.liveMatchup?.balls == nil && legacyMatchupGame.liveMatchup?.strikes == nil)
         legacy.removeValue(forKey: "liveMatchup")
         let legacyGame = try JSONDecoder().decode(RecentGame.self, from: JSONSerialization.data(withJSONObject: legacy))
         precondition(legacyGame.liveMatchup == nil, "older snapshots must still decode")

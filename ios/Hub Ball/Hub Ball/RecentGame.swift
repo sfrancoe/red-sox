@@ -64,6 +64,24 @@ nonisolated struct LiveGameMatchup: Codable, Sendable {
     let pitcher: String?
     let batter: String?
     let outs: Int?
+    var balls: Int? = nil
+    var strikes: Int? = nil
+    var pitcherLastName: String? = nil
+    var batterLastName: String? = nil
+
+    var compactDescription: String {
+        let pitching = pitcherLastName ?? pitcher?.split(separator: " ").last.map(String.init) ?? "—"
+        let batting = batterLastName ?? batter?.split(separator: " ").last.map(String.init) ?? "—"
+        let count = balls.flatMap { balls in strikes.map { "\(balls)-\($0)" } } ?? "—"
+        let outCount = outs.map { "\($0) \($0 == 1 ? "Out" : "Outs")" } ?? "— Outs"
+        return "(P) \(pitching)  (AB) \(batting)  \(count), \(outCount)"
+    }
+
+    var accessibilityDescription: String {
+        "Pitching: \(pitcher ?? "not available"). At bat: \(batter ?? "not available"). "
+            + "Balls: \(balls.map(String.init) ?? "not available"). Strikes: \(strikes.map(String.init) ?? "not available"). "
+            + "Outs: \(outs.map(String.init) ?? "not available")."
+    }
 }
 
 nonisolated struct Decisions: Codable, Sendable {
