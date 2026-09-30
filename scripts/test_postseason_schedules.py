@@ -6,10 +6,14 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from unittest.mock import patch
 
+import fetch_recent_game
+import fetch_mets_recent_game
+import fetch_rays_recent_game
+import fetch_yankees_recent_game
 import fetch_mets_schedule
 import fetch_rays_schedule
 import fetch_schedule
@@ -56,6 +60,20 @@ def postseason_payload(team_id: int) -> dict:
 
 
 class PostseasonScheduleTests(unittest.TestCase):
+    def test_recent_game_snapshots_include_every_postseason_round(self) -> None:
+        for module in (fetch_recent_game, fetch_mets_recent_game,
+                       fetch_rays_recent_game, fetch_yankees_recent_game):
+            for game_type in ("F", "D", "L", "W"):
+                with self.subTest(module=module.__name__, game_type=game_type):
+                    payload = {"dates": [{"games": [{
+                        "gamePk": 849851, "gameType": game_type,
+                        "gameDate": "2026-09-29T23:00:00Z",
+                        "status": {"abstractGameState": "Final", "codedGameState": "F"},
+                    }]}]}
+                    with patch.object(module, "fetch_json", return_value=payload) as fetch:
+                        self.assertEqual(module.latest_final_game(date(2026, 9, 29)), 849851)
+                    self.assertIn("gameTypes=R,F,D,L,W", fetch.call_args.args[0])
+
     def test_registry_schedule_includes_postseason_games(self) -> None:
         team = {"mlb_id": 110, "short_name": "Orioles"}
         with (

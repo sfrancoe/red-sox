@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "data" / "yankees" / "recent-game.json"
 SCHEDULE_API = (
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId={team}"
-    "&startDate={start}&endDate={end}&gameType=R"
+    "&startDate={start}&endDate={end}&gameTypes=R,F,D,L,W"
 )
 LIVE_API = "https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live"
 CONTENT_API = "https://statsapi.mlb.com/api/v1/game/{game_pk}/content"

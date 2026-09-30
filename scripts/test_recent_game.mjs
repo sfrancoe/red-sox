@@ -29,6 +29,7 @@ await assert.rejects(adapter.fetchLatestGame(new Date('2026-08-31T02:00:00Z'), a
   return { dates: [] };
 }), /No recent/);
 assert.match(requestedURL, /endDate=2026-08-30/, 'use Eastern date, not UTC');
+assert.equal(new URL(requestedURL).searchParams.get('gameTypes'), 'R,F,D,L,W');
 
 // Model only the DOM interfaces used by the renderer; no browser dependencies.
 class Element {
