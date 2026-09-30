@@ -68,7 +68,7 @@ struct StoriesView: View {
                                 if team == nil { teamHeading("MILWAUKEE") }
                                 storyLink(
                                     title: "Who built the 42?",
-                                    summary: "The bats built the lead. The arms kept the zero."
+                                    summary: "Two games. Forty-two runs. None allowed. Follow the hitters and pitchers behind Milwaukee’s 22–0 and 20–0 shutouts."
                                 ) {
                                     BrewersShutoutView()
                                 }

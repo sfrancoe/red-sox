@@ -10,8 +10,14 @@ private enum ShutoutStyle {
 }
 
 private enum ShutoutPlayback {
-    static let speed = 3.0
-    static func duration(_ seconds: Double) -> Double { seconds / speed }
+    // Keep each line segment visible for several frames, including routine outs.
+    static func eventDuration(_ event: ShutoutEvent, replay: Bool) -> Double {
+        if replay { return 0.65 }
+        if event.runs >= 4 { return 0.75 }
+        if event.runs > 0 { return 0.55 }
+        if event.top && event.strikeouts > 0 { return 0.30 }
+        return 0.20
+    }
 }
 
 struct ShutoutPerson: Decodable, Identifiable, Hashable {
@@ -345,7 +351,6 @@ struct BrewersShutoutView: View {
     private var gameStage: some View {
         VStack(alignment: .leading, spacing: 12) {
             raceChart
-            momentCard
             PitchingStrip(events: seen, title: "PROTECTING THE ZERO", compact: true, activeOnly: true, select: { selectedPlayer = $0 })
         }
     }
@@ -357,44 +362,8 @@ struct BrewersShutoutView: View {
                      credits: credits, maximum: leaderMaximum,
                      activePlayer: current?.top == false && (current?.rbi ?? 0) > 0 ? current?.batter.id : nil,
                      reduceMotion: reduceMotion,
-                     lineDuration: ShutoutPlayback.duration((current?.runs ?? 0) > 0 ? 0.85 : 0.18),
+                     lineDuration: playing ? current.map { ShutoutPlayback.eventDuration($0, replay: replayPlayer != nil) } ?? 0 : 0,
                      select: { selectedPlayer = $0 })
-    }
-
-    private var momentCard: some View {
-        VStack(alignment: .leading, spacing: 7) {
-            if let event = current {
-                HStack(alignment: .firstTextBaseline) {
-                    Text(event.top ? event.pitcher.name : event.batter.name)
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                    Spacer()
-                    if event.runs > 0 {
-                        Text("+\(event.runs)").font(.system(size: 28, weight: .black, design: .rounded)).foregroundStyle(ShutoutStyle.gold)
-                    } else if event.top && event.strikeouts > 0 {
-                        Text("K").font(.system(size: 28, weight: .black)).foregroundStyle(ShutoutStyle.blue)
-                    }
-                }
-                Text(event.runs == 4 && event.event == "Home Run" ? "GRAND SLAM" : event.event.uppercased())
-                    .font(.system(size: 11, weight: .black, design: .monospaced)).tracking(1).foregroundStyle(event.top ? ShutoutStyle.blue : ShutoutStyle.gold)
-                if !event.scorers.isEmpty {
-                    Label(event.scorers.map(\.surname).joined(separator: " · "), systemImage: "baseball.diamond.bases")
-                        .font(.system(size: 12)).accessibilityLabel("Crossed home: " + event.scorers.map(\.name).joined(separator: ", "))
-                    Text("\(event.rbi) RBI · \(event.runs - event.rbi) RUNS WITHOUT RBI")
-                        .font(.system(size: 9, design: .monospaced)).foregroundStyle(ShutoutStyle.cream.opacity(0.65))
-                } else {
-                    Text(event.top ? "\(event.outs) out\(event.outs == 1 ? "" : "s") recorded on this play. No runs allowed." : "The bats keep working. Every run needs a beginning.")
-                        .font(.system(size: 12)).foregroundStyle(ShutoutStyle.cream.opacity(0.65))
-                }
-            } else {
-                Text("WHO LIGHTS THE FUSE?").font(.system(size: 16, weight: .black, design: .rounded))
-                Text("The line climbs. RBI bars grow and race for the leftmost spot.")
-                    .font(.system(size: 13)).foregroundStyle(ShutoutStyle.cream.opacity(0.7))
-            }
-        }
-        .frame(maxWidth: .infinity, minHeight: 94, alignment: .topLeading)
-        .padding(14)
-        .background((current?.top == true ? ShutoutStyle.blue : ShutoutStyle.gold).opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
-        .accessibilityElement(children: .combine)
     }
 
     private var combinedChart: some View { raceChart }
@@ -581,11 +550,10 @@ struct BrewersShutoutView: View {
                     if event.runs > 0 {
                         UIImpactFeedbackGenerator(style: event.runs >= 4 ? .heavy : .soft).impactOccurred()
                     }
-                    let baseDelay = replayPlayer != nil ? 1.6 : event.runs >= 4 ? 2.2 : event.runs > 0 ? 1.4 : event.top && event.strikeouts > 0 ? 0.45 : 0.18
-                    let delay = ShutoutPlayback.duration(baseDelay)
+                    let delay = ShutoutPlayback.eventDuration(event, replay: replayPlayer != nil)
                     try await Task.sleep(for: .seconds(delay))
                 }
-                try await Task.sleep(for: .seconds(ShutoutPlayback.duration(1.5)))
+                try await Task.sleep(for: .seconds(0.5))
             }
             if replayPlayer == nil { chapter = 2 }
             replayPlayer = nil; playing = false
@@ -723,6 +691,7 @@ private struct RBIRaceChart: View {
                     ContributionGraph(games: games, cursors: cursors, progress: progress, featured: nil,
                                       lineColors: [ShutoutStyle.blue, .white], showInnings: false)
                         .frame(height: 214)
+                        .id(games.map(\.id))
                         .animation(reduceMotion ? nil : .linear(duration: lineDuration), value: progress)
                     ForEach(leaders) { hitter in
                         let rank = leaders.firstIndex { $0.id == hitter.id } ?? 0
@@ -765,7 +734,7 @@ private struct RBIRaceChart: View {
                             .frame(width: plotWidth, height: 120).offset(x: left, y: 25)
                     }
                 }
-                .animation(reduceMotion ? nil : .easeInOut(duration: ShutoutPlayback.duration(0.75)), value: revision)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: revision)
             }.frame(height: 242)
             Text(games.count == 1 ? "Line: this game · Bars: cumulative RBI across both games" : "Lines: Seattle (blue), Cincinnati (white) · Bars: both games")
                 .font(.system(size: 9, design: .monospaced)).foregroundStyle(ShutoutStyle.cream.opacity(0.6))
