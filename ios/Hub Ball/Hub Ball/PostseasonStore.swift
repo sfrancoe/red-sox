@@ -46,8 +46,10 @@ final class PostseasonStore {
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 throw URLError(.badServerResponse)
             }
-            let incoming = try JSONDecoder().decode(PostseasonPayload.self, from: data)
+            var incoming = try JSONDecoder().decode(PostseasonPayload.self, from: data)
             guard incoming.schemaVersion == 1, incoming.season == season else { throw URLError(.cannotDecodeContentData) }
+            snapshot = incoming
+            await enrichLiveGames(in: &incoming)
             snapshot = incoming
             refreshFailed = false
             persist(incoming, at: directory.appending(path: "snapshot-\(season).json"))
@@ -57,6 +59,41 @@ final class PostseasonStore {
             return
         } catch {
             refreshFailed = true
+        }
+    }
+
+    private func enrichLiveGames(in payload: inout PostseasonPayload) async {
+        let liveGames = payload.games.enumerated().filter { $0.element.abstractState == "Live" }
+        guard !liveGames.isEmpty else { return }
+        let session = self.session
+        let updates = await withTaskGroup(of: (Int, RecentGame?).self, returning: [(Int, RecentGame)].self) { group in
+            for (index, game) in liveGames {
+                guard let team = HubTeam.allCases.first(where: { $0.mlbID == game.away.teamId }) else { continue }
+                group.addTask {
+                    let live = try? await MLBGameClient(team: team, session: session)
+                        .game(gamePk: game.gamePk, cachePolicy: .reloadIgnoringLocalCacheData)
+                    return (index, live)
+                }
+            }
+            var results: [(Int, RecentGame)] = []
+            for await (index, game) in group {
+                if let game { results.append((index, game)) }
+            }
+            return results
+        }
+        for (index, live) in updates {
+            guard live.isLive, live.gamePk == payload.games[index].gamePk,
+                  live.away.id == payload.games[index].away.teamId,
+                  live.home.id == payload.games[index].home.teamId else { continue }
+            payload.games[index].awayScore = live.away.runs
+            payload.games[index].homeScore = live.home.runs
+            payload.games[index].liveOuts = live.liveMatchup?.outs
+            payload.games[index].livePitcher = live.liveMatchup?.pitcher
+            payload.games[index].liveBatter = live.liveMatchup?.batter
+            if let status = live.liveStatus {
+                payload.games[index].liveInningState = ["Top", "Bottom", "Middle", "End"]
+                    .first { status.hasPrefix($0) }
+            }
         }
     }
 

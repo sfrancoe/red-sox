@@ -45,7 +45,8 @@ struct PlayoffBracketTest {
                            gameDate: nil, officialDate: nil, timeTBD: false, status: state,
                            abstractState: state, broadcasts: [], conditional: false,
                            away: away, home: home, awayScore: awayScore, homeScore: homeScore,
-                           winnerTeamId: winner, liveInning: nil)
+                           winnerTeamId: winner, liveInning: nil, liveInningState: nil,
+                           liveOuts: nil, livePitcher: nil, liveBatter: nil)
         }
         func payload(_ games: [PostseasonGame]) -> PostseasonPayload {
             PostseasonPayload(schemaVersion: 1, season: 2026, phase: "active", checkedAt: "",
@@ -73,6 +74,16 @@ struct PlayoffBracketTest {
         precondition(latest?.score(for: 111) == 5, "Match scores by team ID when home and away switch")
         precondition(latest?.score(for: 147) == 2)
         precondition(payload([game(1, state: "Preview", winner: nil)]).latestCompletedGame(for: "test-series") == nil)
+        precondition(payload(games).liveGame(for: "test-series")?.gamePk == 4)
+        let liveGame = PostseasonGame(gamePk: 7, seriesId: "test-series", gameNumber: 2,
+                                      gameType: "F", gameDate: nil, officialDate: nil,
+                                      timeTBD: false, status: "In Progress", abstractState: "Live",
+                                      broadcasts: [], conditional: false, away: boston, home: newYork,
+                                      awayScore: 3, homeScore: 2, winnerTeamId: nil,
+                                      liveInning: 9, liveInningState: "Top", liveOuts: 1,
+                                      livePitcher: "Raisel Iglesias", liveBatter: "J.T. Realmuto")
+        precondition(liveGame.liveInningDescription == "Top 9th")
+        precondition(liveGame.liveMatchupDescription == "(P) Iglesias  (AB) Realmuto")
         precondition(game(2, awayScore: nil).score(for: 111) == nil, "Missing scores must not become zero")
         print("Latest-game bracket scores and series status passed")
     }

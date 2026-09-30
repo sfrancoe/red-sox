@@ -89,8 +89,9 @@ struct OctoberView: View {
             async let newsRefresh: Void = newsStore.refresh()
             _ = await (postseasonRefresh, historyRefresh, newsRefresh)
             while !Task.isCancelled, scenePhase == .active {
-                guard store.snapshot?.isLive == true else { break }
-                try? await Task.sleep(for: .seconds(30))
+                if store.snapshot?.phase == "complete" { break }
+                let delay = store.snapshot?.isLive == true ? 30.0 : 60.0
+                try? await Task.sleep(for: .seconds(delay))
                 guard !Task.isCancelled, scenePhase == .active else { break }
                 await store.refresh()
             }

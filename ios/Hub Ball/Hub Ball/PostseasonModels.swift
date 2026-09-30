@@ -10,7 +10,7 @@ struct PostseasonPayload: Codable, Sendable {
     let sourceURL: String
     let teamsAndSlots: [PostseasonSlot]
     let series: [PostseasonSeries]
-    let games: [PostseasonGame]
+    var games: [PostseasonGame]
 
     var checkedDate: Date? { Self.parseDate(checkedAt) }
     var isLive: Bool { games.contains { $0.abstractState == "Live" } }
@@ -22,6 +22,10 @@ struct PostseasonPayload: Codable, Sendable {
             ($0.gameNumber ?? 0, $0.gameDate ?? "", $0.gamePk)
                 < ($1.gameNumber ?? 0, $1.gameDate ?? "", $1.gamePk)
         }
+    }
+
+    func liveGame(for seriesID: String) -> PostseasonGame? {
+        games.first { $0.seriesId == seriesID && $0.abstractState == "Live" }
     }
 
     private static func parseDate(_ value: String) -> Date? {
@@ -93,10 +97,14 @@ struct PostseasonGame: Codable, Identifiable, Sendable {
     let conditional: Bool
     let away: PostseasonClub
     let home: PostseasonClub
-    let awayScore: Int?
-    let homeScore: Int?
+    var awayScore: Int?
+    var homeScore: Int?
     let winnerTeamId: Int?
-    let liveInning: Int?
+    var liveInning: Int?
+    var liveInningState: String?
+    var liveOuts: Int?
+    var livePitcher: String?
+    var liveBatter: String?
 
     var id: Int { gamePk }
 
@@ -104,6 +112,41 @@ struct PostseasonGame: Codable, Identifiable, Sendable {
         if away.teamId == teamID { return awayScore }
         if home.teamId == teamID { return homeScore }
         return nil
+    }
+
+    var liveInningDescription: String? {
+        guard abstractState == "Live", let liveInning else { return nil }
+        let suffix: String
+        switch liveInning % 100 {
+        case 11, 12, 13: suffix = "th"
+        default:
+            switch liveInning % 10 {
+            case 1: suffix = "st"
+            case 2: suffix = "nd"
+            case 3: suffix = "rd"
+            default: suffix = "th"
+            }
+        }
+        let half = liveInningState?.capitalized ?? ""
+        return "\(half) \(liveInning)\(suffix)".trimmingCharacters(in: .whitespaces)
+    }
+
+    var liveMatchupDescription: String? {
+        guard abstractState == "Live" else { return nil }
+        let parts = [
+            livePitcher.map { "(P) \(Self.shortPlayerName($0))" },
+            liveBatter.map { "(AB) \(Self.shortPlayerName($0))" },
+        ].compactMap { $0 }
+        return parts.isEmpty ? nil : parts.joined(separator: "  ")
+    }
+
+    private static func shortPlayerName(_ fullName: String) -> String {
+        let words = fullName.split(separator: " ")
+        guard let last = words.last else { return fullName }
+        if ["Jr.", "Sr.", "II", "III", "IV"].contains(String(last)), words.count > 1 {
+            return "\(words[words.count - 2]) \(last)"
+        }
+        return String(last)
     }
     var calendarDateKey: String? {
         if let officialDate, officialDate.count >= 10 {

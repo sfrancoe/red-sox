@@ -4,8 +4,8 @@ struct PlayoffBracketView: View {
     let payload: PostseasonPayload
     let onSelect: (PostseasonSeries) -> Void
     @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
-    @ScaledMetric(relativeTo: .caption) private var cardHeight = 100.0
-    @ScaledMetric(relativeTo: .caption) private var worldSeriesCardHeight = 74.0
+    @ScaledMetric(relativeTo: .caption) private var cardHeight = 128.0
+    @ScaledMetric(relativeTo: .caption) private var worldSeriesCardHeight = 128.0
     @ScaledMetric(relativeTo: .caption) private var nameSize = 12.0
     private let columnSpacing = 10.0
     private let rowSpacing = 8.0
@@ -157,13 +157,15 @@ struct PlayoffBracketView: View {
         let labelSize = width > 120 ? nameSize * 1.15 : nameSize
         let item = series(slot)
         let rows = participants(item, slot: slot)
+        let liveGame = item.flatMap { payload.liveGame(for: $0.id) }
         let lastGame = item.flatMap { payload.latestCompletedGame(for: $0.id) }
+        let displayedGame = liveGame ?? lastGame
         let hasSeriesStatus = item?.bracketSeriesStatus != nil
         let nextGameDetails = item.flatMap { series in
-            nextScheduledGame(for: series).map { displayDetails($0, for: series) }
+            liveGame == nil ? nextScheduledGame(for: series).map { displayDetails($0, for: series) } : nil
         }
-        let hasScheduledDate = !hasSeriesStatus && nextScheduledGame(for: item) != nil
-        let hasLightFooter = hasSeriesStatus || hasScheduledDate
+        let hasScheduledDate = liveGame == nil && !hasSeriesStatus && nextScheduledGame(for: item) != nil
+        let hasLightFooter = liveGame == nil && (hasSeriesStatus || hasScheduledDate)
         return Button {
             if let item { onSelect(item) }
         } label: {
@@ -182,7 +184,7 @@ struct PlayoffBracketView: View {
                                     Image(systemName: "checkmark").font(.system(size: labelSize - 2, weight: .bold))
                                         .foregroundStyle(AppColor.amber)
                                 }
-                                Text(row.teamId.flatMap { lastGame?.score(for: $0) }.map(String.init) ?? "–")
+                                Text(row.teamId.flatMap { displayedGame?.score(for: $0) }.map(String.init) ?? "–")
                                     .font(.system(size: labelSize, weight: .bold, design: .monospaced))
                                     .foregroundStyle(item?.winnerTeamId == row.teamId && row.teamId != nil ? AppColor.amber : AppColor.bone)
                             }
@@ -197,24 +199,52 @@ struct PlayoffBracketView: View {
                     .frame(maxHeight: .infinity)
                     if index == 0 { Rectangle().fill(AppColor.rule).frame(height: 0.5) }
                 }
-                VStack(spacing: 3) {
-                    Text(status(item))
-                        .font(.system(size: labelSize - 3, weight: hasSeriesStatus ? .semibold : .medium))
-                    if hasSeriesStatus, let nextGameDetails {
-                        Text(nextGameDetails)
-                            .font(.system(size: labelSize - 3, weight: .medium))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                            .accessibilityLabel("Next game: \(nextGameDetails)")
+                if let liveGame {
+                    VStack(spacing: 2) {
+                        LiveGameIndicator()
+                        HStack(spacing: 4) {
+                            if let inning = liveGame.liveInningDescription {
+                                Text(inning)
+                            }
+                            if let outs = liveGame.liveOuts {
+                                Text("· \(outs) \(outs == 1 ? "out" : "outs")")
+                            }
+                        }
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                        if let matchup = liveGame.liveMatchupDescription {
+                            Text(matchup)
+                                .lineLimit(2)
+                                .minimumScaleFactor(0.7)
+                        }
                     }
+                    .font(.system(size: labelSize - 3, weight: .semibold))
+                    .foregroundStyle(AppColor.bone)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 3)
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
+                    .background(AppColor.night)
+                } else {
+                    VStack(spacing: 3) {
+                        Text(status(item))
+                            .font(.system(size: labelSize - 3, weight: hasSeriesStatus ? .semibold : .medium))
+                        if hasSeriesStatus, let nextGameDetails {
+                            Text(nextGameDetails)
+                                .font(.system(size: labelSize - 3, weight: .medium))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
+                                .accessibilityLabel("Next game: \(nextGameDetails)")
+                        }
+                    }
+                    .foregroundStyle(hasLightFooter ? AppColor.night : AppColor.boneMuted)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 3)
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
+                    .background(hasLightFooter ? AppColor.scheduleGray : AppColor.night)
                 }
-                .foregroundStyle(hasLightFooter ? AppColor.night : (item?.state == "live" ? AppColor.amber : AppColor.boneMuted))
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 3)
-                .padding(.vertical, 4)
-                .frame(maxWidth: .infinity)
-                .background(hasLightFooter ? AppColor.scheduleGray : AppColor.night)
             }
             .background(AppColor.nightRaised)
             .clipShape(RoundedRectangle(cornerRadius: 6))
@@ -227,8 +257,12 @@ struct PlayoffBracketView: View {
         .accessibilityIdentifier("bracket.\(slot.id)")
         .accessibilityLabel("\(slot.league) \(slot.round.replacingOccurrences(of: "-", with: " ")), \(rows.map { $0.name ?? $0.slot ?? "TBD" }.joined(separator: " versus "))")
         .accessibilityValue(rows.map { row in
-            "\(row.name ?? row.slot ?? "TBD"): \(row.teamId.flatMap { lastGame?.score(for: $0) }.map { "\($0) runs in the last completed game" } ?? "score unavailable")"
+            "\(row.name ?? row.slot ?? "TBD"): \(row.teamId.flatMap { displayedGame?.score(for: $0) }.map { "\($0) runs \(liveGame == nil ? "in the last completed game" : "now")" } ?? "score unavailable")"
         }.joined(separator: ", ") + ". " + status(item)
+            + (liveGame.flatMap { game in
+                [game.liveInningDescription, game.liveOuts.map { "\($0) outs" }, game.liveMatchupDescription]
+                    .compactMap { $0 }.joined(separator: ", ")
+            }.map { " " + $0 } ?? "")
             + (hasSeriesStatus ? nextGameDetails.map { " Next game: " + $0 } ?? "" : ""))
         .accessibilityHint("Opens series details")
     }
@@ -264,6 +298,7 @@ struct PlayoffBracketView: View {
 
     private func status(_ item: PostseasonSeries?) -> String {
         guard let item else { return "MATCHUP \(unresolvedLabel)" }
+        if payload.liveGame(for: item.id) != nil { return "LIVE" }
         if let seriesStatus = item.bracketSeriesStatus { return seriesStatus }
         if item.state == "complete" { return "FINAL · \(item.completedGameCount) GAMES" }
         if item.state == "unknown" { return "UNDER REVIEW" }
