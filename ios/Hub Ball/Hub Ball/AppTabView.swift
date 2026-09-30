@@ -51,6 +51,7 @@ struct AppTabView: View {
     @State private var selectedTab: MainTab = .home
     @State private var settingsPresented = false
     @State private var playoffsPresented = false
+    @State private var showPostseasonAfterOnboarding = false
     @State private var storiesPresented = false
     @State private var hitterPresented = false
     @State private var hasAppeared = false
@@ -124,9 +125,11 @@ struct AppTabView: View {
                 selectedTab = .players
             } else {
                 selectedTab = team.supportsHome ? .home : .recent
+                playoffsPresented = completedTeamOnboarding
             }
             #else
             selectedTab = team.supportsHome ? .home : .recent
+            playoffsPresented = completedTeamOnboarding
             #endif
             hasAppeared = true
         }
@@ -144,14 +147,21 @@ struct AppTabView: View {
                 if let backgroundedAt,
                    Date().timeIntervalSince(backgroundedAt) >= newSessionInterval {
                     selectedTab = team.supportsHome ? .home : .recent
+                    playoffsPresented = completedTeamOnboarding
                 }
                 backgroundedAt = nil
             default:
                 break
             }
         }
-        .fullScreenCover(isPresented: onboardingPresented) {
+        .fullScreenCover(isPresented: onboardingPresented, onDismiss: {
+            if showPostseasonAfterOnboarding {
+                showPostseasonAfterOnboarding = false
+                playoffsPresented = true
+            }
+        }) {
             TeamOnboardingView(selectedTeamID: $selectedTeamID) {
+                showPostseasonAfterOnboarding = true
                 completedTeamOnboarding = true
                 selectedTab = team.supportsHome ? .home : .recent
             }
