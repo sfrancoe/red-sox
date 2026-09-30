@@ -7,8 +7,8 @@ struct PlayoffBracketView: View {
     @ScaledMetric(relativeTo: .caption) private var teamRowHeight = 26.0
     @ScaledMetric(relativeTo: .caption) private var singleLineFooterHeight = 20.0
     @ScaledMetric(relativeTo: .caption) private var twoLineFooterHeight = 30.0
-    @ScaledMetric(relativeTo: .caption) private var liveFooterBaseHeight = 32.0
-    @ScaledMetric(relativeTo: .caption) private var livePlayerLineHeight = 10.0
+    @ScaledMetric(relativeTo: .caption) private var liveFooterBaseHeight = 28.0
+    @ScaledMetric(relativeTo: .caption) private var liveStandingLineHeight = 10.0
     @ScaledMetric(relativeTo: .caption) private var nameSize = 12.0
     private let columnSpacing = 10.0
     private let rowSpacing = 8.0
@@ -16,7 +16,7 @@ struct PlayoffBracketView: View {
     private let leagueRailSpacing = 4.0
     private let unresolvedLabel = "- - -"
 
-    private var cardHeight: CGFloat { teamRowHeight * 2 + liveFooterBaseHeight + livePlayerLineHeight * 2 }
+    private var cardHeight: CGFloat { teamRowHeight * 2 + liveFooterBaseHeight + liveStandingLineHeight }
 
     private func series(_ slot: PlayoffBracketSlot) -> PostseasonSeries? {
         payload.series.first { $0.id == slot.seriesID(season: payload.season) }
@@ -69,15 +69,27 @@ struct PlayoffBracketView: View {
 
     private func footerHeight(for slot: PlayoffBracketSlot) -> CGFloat {
         guard let item = series(slot) else { return singleLineFooterHeight }
-        if let game = payload.liveGame(for: item.id) {
-            let playerLines = (game.livePitcherDescription == nil ? 0 : 1)
-                + (game.liveBatterDescription == nil ? 0 : 1)
-            return liveFooterBaseHeight + CGFloat(playerLines) * livePlayerLineHeight
+        if payload.liveGame(for: item.id) != nil {
+            return liveFooterBaseHeight + (liveSeriesStanding(item) == nil ? 0 : liveStandingLineHeight)
         }
         if item.bracketSeriesStatus != nil, nextScheduledGame(for: item) != nil {
             return twoLineFooterHeight
         }
         return singleLineFooterHeight
+    }
+
+    private func liveSeriesStanding(_ item: PostseasonSeries?) -> String? {
+        guard let item, item.state != "unknown", item.participants.count == 2,
+              let firstID = item.participants[0].teamId,
+              let secondID = item.participants[1].teamId,
+              let firstWins = item.wins(for: firstID),
+              let secondWins = item.wins(for: secondID) else { return nil }
+        if firstWins == secondWins { return "Series tied \(firstWins)-\(secondWins)" }
+        let leader = firstWins > secondWins ? item.participants[0] : item.participants[1]
+        let abbreviation = leader.abbreviation
+            ?? HubTeam.allCases.first(where: { $0.mlbID == leader.teamId })?.abbreviation
+            ?? leader.name ?? "Team"
+        return "\(abbreviation) leads \(max(firstWins, secondWins))-\(min(firstWins, secondWins))"
     }
 
     private func matchupHeight(for slot: PlayoffBracketSlot) -> CGFloat {
@@ -234,13 +246,8 @@ struct PlayoffBracketView: View {
                         }
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
-                        if let pitcher = liveGame.livePitcherDescription {
-                            Text(pitcher)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.7)
-                        }
-                        if let batter = liveGame.liveBatterDescription {
-                            Text(batter)
+                        if let standing = liveSeriesStanding(item) {
+                            Text(standing)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.7)
                         }
@@ -287,7 +294,7 @@ struct PlayoffBracketView: View {
             "\(row.name ?? row.slot ?? "TBD"): \(row.teamId.flatMap { displayedGame?.score(for: $0) }.map { "\($0) runs \(liveGame == nil ? "in the last completed game" : "now")" } ?? "score unavailable")"
         }.joined(separator: ", ") + ". " + status(item)
             + (liveGame.flatMap { game in
-                [game.liveInningDescription, game.liveOuts.map { "\($0) outs" }, game.liveMatchupDescription]
+                [game.liveInningDescription, game.liveOuts.map { "\($0) outs" }, liveSeriesStanding(item)]
                     .compactMap { $0 }.joined(separator: ", ")
             }.map { " " + $0 } ?? "")
             + (hasSeriesStatus ? nextGameDetails.map { " Next game: " + $0 } ?? "" : ""))
