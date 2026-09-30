@@ -12,6 +12,7 @@ nonisolated struct RecentGame: Codable, Sendable {
     let result: String
     let gameState: String?
     var liveStatus: String? = nil
+    var liveMatchup: LiveGameMatchup? = nil
     let summary: String
     let facts: [String]
     let decisions: Decisions
@@ -57,6 +58,12 @@ nonisolated struct RecentGame: Codable, Sendable {
     var isLive: Bool {
         gameState == "Live"
     }
+}
+
+nonisolated struct LiveGameMatchup: Codable, Sendable {
+    let pitcher: String?
+    let batter: String?
+    let outs: Int?
 }
 
 nonisolated struct Decisions: Codable, Sendable {

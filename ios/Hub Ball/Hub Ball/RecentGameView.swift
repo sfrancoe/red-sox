@@ -321,13 +321,19 @@ struct RecentGameView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                combinedLineScore(game)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 10)
-                    .overlay {
-                        Rectangle()
-                            .stroke(AppColor.border.opacity(0.65), lineWidth: 0.5)
+                VStack(alignment: .leading, spacing: 10) {
+                    combinedLineScore(game)
+                    if game.isLive {
+                        Divider().overlay(AppColor.border.opacity(0.65))
+                        liveMatchupRow(game.liveMatchup)
                     }
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 10)
+                .overlay {
+                    Rectangle()
+                        .stroke(AppColor.border.opacity(0.65), lineWidth: 0.5)
+                }
             }
             .padding(.horizontal, 12)
             .padding(.top, 10)
@@ -335,6 +341,36 @@ struct RecentGameView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(AppColor.nightRaised)
         }
+    }
+
+    private func liveMatchupRow(_ matchup: LiveGameMatchup?) -> some View {
+        let layout = usesExpandedReadingLayout
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
+            : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        return layout {
+            liveMatchupField("Pitching", value: matchup?.pitcher, identifier: "recap.live.pitcher")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            liveMatchupField("At bat", value: matchup?.batter, identifier: "recap.live.batter")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            liveMatchupField("Outs", value: matchup?.outs.map(String.init), identifier: "recap.live.outs")
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func liveMatchupField(_ title: String, value: String?, identifier: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(AppColor.inkMuted)
+            Text(value ?? "—")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(AppColor.ink)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(title)
+        .accessibilityValue(value ?? "Not available")
+        .accessibilityIdentifier(identifier)
     }
 
     @ViewBuilder

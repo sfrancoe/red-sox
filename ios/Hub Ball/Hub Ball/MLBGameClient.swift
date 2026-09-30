@@ -135,6 +135,7 @@ struct MLBGameClient: Sendable {
             result: isLive ? "Live" : boston.runs > opponent.runs ? "Win" : "Loss",
             gameState: isLive ? "Live" : "Final",
             liveStatus: isLive ? liveStatus(linescore) : nil,
+            liveMatchup: isLive ? liveMatchup(linescore) : nil,
             summary: summary,
             facts: facts,
             decisions: Decisions(
@@ -148,6 +149,23 @@ struct MLBGameClient: Sendable {
             scoringPlays: narrativePlays.map(\.display),
             officialRecap: nil,
             gamedayUrl: "https://www.mlb.com/gameday/\(integer(payload["gamePk"]) ?? 0)"
+        )
+    }
+
+    private func liveMatchup(_ linescore: JSON) -> LiveGameMatchup {
+        let state = (linescore["inningState"] as? String ?? "").lowercased()
+        let outs = integer(linescore["outs"]).flatMap { (0...3).contains($0) ? $0 : nil }
+        let betweenInnings = ["middle", "end"].contains(state) || outs == 3
+        // The linescore advances to the next batter before currentPlay does.
+        // Its defense is the fielding team; offense.pitcher belongs to the batting team.
+        let pitcher = personName(dictionary(linescore["defense"])["pitcher"])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let batter = personName(dictionary(linescore["offense"])["batter"])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return LiveGameMatchup(
+            pitcher: betweenInnings || pitcher.isEmpty ? nil : pitcher,
+            batter: betweenInnings || batter.isEmpty ? nil : batter,
+            outs: outs
         )
     }
 

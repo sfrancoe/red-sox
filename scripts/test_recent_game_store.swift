@@ -12,6 +12,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
     nonisolated(unsafe) private static var failDiscovery = false
     nonisolated(unsafe) private static var emptyDiscovery = false
     nonisolated(unsafe) private static var stallRequests = false
+    nonisolated(unsafe) private static var matchupOverride: [String: Any]?
 
     static func configure(
         live: Bool = false,
@@ -21,7 +22,8 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         failGamePk: Int? = nil,
         failDiscovery: Bool = false,
         emptyDiscovery: Bool = false,
-        stall: Bool = false
+        stall: Bool = false,
+        matchup: [String: Any]? = nil
     ) {
         lock.lock()
         defer { lock.unlock() }
@@ -33,6 +35,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         Self.failDiscovery = failDiscovery
         Self.emptyDiscovery = emptyDiscovery
         stallRequests = stall
+        matchupOverride = matchup
     }
 
     nonisolated(unsafe) private static var scheduleGameID = 9001
@@ -69,6 +72,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         let failDiscovery = Self.failDiscovery
         let emptyDiscovery = Self.emptyDiscovery
         let stall = Self.stallRequests
+        let matchup = Self.matchupOverride
         let gamePk = Int(URLComponents(url: url, resolvingAgainstBaseURL: false)?
             .queryItems?.first(where: { $0.name == "gamePk" })?.value ?? "")
         if url.path.contains("/api/mlb/game") {
@@ -126,7 +130,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         } else if url.path.contains("/data/schedule.json") {
             body = Data(#"{"generated_at":"fixture","regular_season_end":"2026-09-27","source":"test","team":"Boston","games":[]}"#.utf8)
         } else {
-            body = gamePayload(gamePk: gamePk ?? scheduleGamePk, live: live, version: version)
+            body = gamePayload(gamePk: gamePk ?? scheduleGamePk, live: live, version: version, matchup: matchup)
         }
 
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
@@ -137,7 +141,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
 
     override func stopLoading() {}
 
-    private func gamePayload(gamePk: Int, live: Bool, version: Int) -> Data {
+    private func gamePayload(gamePk: Int, live: Bool, version: Int, matchup: [String: Any]?) -> Data {
         let gameIsLive = gamePk == 9001 && live
         let abstract = gameIsLive ? "Live" : "Final"
         let code = gameIsLive ? "I" : "F"
@@ -153,6 +157,16 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         let lineTeam = ["runs": 3, "hits": 5, "errors": 0, "leftOnBase": 4] as [String: Any]
         let lineOpponent = ["runs": 2, "hits": 4, "errors": 1, "leftOnBase": 5] as [String: Any]
         let emptyBox = ["batters": [], "battingOrder": [], "pitchers": [], "players": [:]] as [String: Any]
+        var linescore = matchup ?? [
+            "inningState": "Top", "outs": version == 1 ? 0 : 2,
+            "offense": [
+                "batter": ["fullName": version == 1 ? "Jarren Duran" : "Trevor Story"],
+                "pitcher": ["fullName": "Wrong-team pitcher"],
+            ],
+            "defense": ["pitcher": ["fullName": version == 1 ? "Max Fried" : "Luke Weaver"]],
+        ]
+        linescore["teams"] = ["away": lineTeam, "home": lineOpponent]
+        linescore["innings"] = []
         let payload: [String: Any] = [
             "gamePk": gamePk,
             "gameData": [
@@ -163,7 +177,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
                 "teams": ["away": team, "home": opponent],
             ],
             "liveData": [
-                "linescore": ["teams": ["away": lineTeam, "home": lineOpponent], "innings": []],
+                "linescore": linescore,
                 "boxscore": ["teams": ["away": emptyBox, "home": emptyBox]],
                 "plays": ["allPlays": [], "scoringPlays": []],
                 "decisions": [:],
@@ -233,6 +247,9 @@ struct RecentGameStoreTests {
         )
         await liveStore.load()
         precondition(liveStore.games.first?.isLive == true)
+        precondition(liveStore.games.first?.liveMatchup?.pitcher == "Max Fried")
+        precondition(liveStore.games.first?.liveMatchup?.batter == "Jarren Duran")
+        precondition(liveStore.games.first?.liveMatchup?.outs == 0)
         precondition(liveStore.presentationState(for: liveStore.games.first!, at: liveNow) == .live)
         let beforeLiveRefresh = RecentGameProtocol.gameRequestCount
 
@@ -241,6 +258,9 @@ struct RecentGameStoreTests {
         await liveStore.refresh()
         precondition(RecentGameProtocol.gameRequestCount == beforeLiveRefresh + 1)
         precondition(liveStore.games.first?.venue == "Fenway live 2")
+        precondition(liveStore.games.first?.liveMatchup?.pitcher == "Luke Weaver")
+        precondition(liveStore.games.first?.liveMatchup?.batter == "Trevor Story")
+        precondition(liveStore.games.first?.liveMatchup?.outs == 2)
 
         // A descriptor that has become final must revalidate a cached-live game.
         liveNow += 20
@@ -248,6 +268,7 @@ struct RecentGameStoreTests {
         await liveStore.refresh()
         precondition(RecentGameProtocol.gameRequestCount == beforeLiveRefresh + 2)
         precondition(liveStore.games.first?.isLive == false)
+        precondition(liveStore.games.first?.liveMatchup == nil)
         precondition(liveStore.games.first?.venue == "Fenway final 3")
 
         // A failed live request must not inherit the successful final's freshness.
@@ -616,6 +637,36 @@ struct RecentGameStoreTests {
         )
         await writeFailureStore.load()
         precondition(writeFailureStore.games.first != nil)
+
+        let client = MLBGameClient(session: session)
+        for state in ["Middle", "End"] {
+            RecentGameProtocol.configure(live: true, matchup: [
+                "inningState": state, "outs": 3,
+                "offense": ["batter": ["fullName": "Previous batter"]],
+                "defense": ["pitcher": ["fullName": "Previous pitcher"]],
+            ])
+            let game = try await client.game(gamePk: 9001)
+            precondition(game.liveMatchup?.pitcher == nil)
+            precondition(game.liveMatchup?.batter == nil)
+            precondition(game.liveMatchup?.outs == 3)
+        }
+        for missing in [[:], ["outs": 4], ["outs": -1]] as [[String: Any]] {
+            RecentGameProtocol.configure(live: true, matchup: missing)
+            let game = try await client.game(gamePk: 9001)
+            precondition(game.liveMatchup?.pitcher == nil)
+            precondition(game.liveMatchup?.batter == nil)
+            precondition(game.liveMatchup?.outs == nil, "missing outs must not be reported as zero")
+        }
+        RecentGameProtocol.configure(live: true)
+        let game = try await client.game(gamePk: 9001)
+        let encoded = try JSONEncoder().encode(game)
+        let decoded = try JSONDecoder().decode(RecentGame.self, from: encoded)
+        precondition(decoded.liveMatchup?.batter == "Jarren Duran")
+        var legacy = try JSONSerialization.jsonObject(with: encoded) as! [String: Any]
+        legacy.removeValue(forKey: "liveMatchup")
+        let legacyGame = try JSONDecoder().decode(RecentGame.self, from: JSONSerialization.data(withJSONObject: legacy))
+        precondition(legacyGame.liveMatchup == nil, "older snapshots must still decode")
+        print("Live matchup: refresh, final transition, inning breaks, missing data, and snapshot compatibility passed.")
 
         print("RecentGameStore: per-game warnings, snapshot restore/validation, bounds, write failure, partial success, and cancellation coverage passed.")
     }
