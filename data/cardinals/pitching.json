@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-25T14:10:51.771354+00:00",
+  "generated_at": "2026-09-30T18:10:25.264148+00:00",
   "season": 2026,
   "team": "St. Louis Cardinals",
-  "games_played": 159,
-  "season_fraction": 0.9815,
+  "games_played": 162,
+  "season_fraction": 1.0,
   "method": "Actual FanGraphs pitching WAR is compared with preseason Steamer WAR prorated to St. Louis's games played.",
   "sources": {
     "actual": "FanGraphs Major League Leaderboards",
@@ -13,11 +13,11 @@
     "forecast_url": "https://www.fangraphs.com/projections"
   },
   "team_summary": {
-    "actual_war": 12.5,
-    "forecast_war_to_date": 8.1,
-    "war_gap": 4.4,
-    "innings": 1418.7,
-    "era": 4.25
+    "actual_war": 12.9,
+    "forecast_war_to_date": 8.3,
+    "war_gap": 4.6,
+    "innings": 1442.7,
+    "era": 4.27
   },
   "pitchers": [
     {
@@ -25,17 +25,17 @@
       "name": "Andre Pallante",
       "throws": "R",
       "role": "Starter",
-      "games": 28,
-      "starts": 28,
+      "games": 29,
+      "starts": 29,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "157.0",
-        "ip_value": 157.0,
-        "war": 2.67,
-        "era": 3.61,
-        "fip": 3.71,
-        "k_minus_bb_pct": 8.7
+        "ip": "162.0",
+        "ip_value": 162.0,
+        "war": 2.7,
+        "era": 3.83,
+        "fip": 3.74,
+        "k_minus_bb_pct": 8.8
       },
       "forecast": {
         "ip": 136.3,
@@ -46,11 +46,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 133.8,
-        "war": 1.28
+        "ip": 136.3,
+        "war": 1.3
       },
       "war_gap": 1.39,
-      "innings_share_pct": 11.1
+      "innings_share_pct": 11.2
     },
     {
       "id": 669160,
@@ -66,7 +66,7 @@
         "ip_value": 109.0,
         "war": 2.62,
         "era": 4.38,
-        "fip": 3.14,
+        "fip": 3.15,
         "k_minus_bb_pct": 15.5
       },
       "forecast": {
@@ -78,11 +78,11 @@
         "team_at_fetch": "MIL"
       },
       "forecast_to_date": {
-        "ip": 158.2,
-        "war": 1.55
+        "ip": 161.2,
+        "war": 1.58
       },
-      "war_gap": 1.06,
-      "innings_share_pct": 7.7
+      "war_gap": 1.03,
+      "innings_share_pct": 7.6
     },
     {
       "id": 681517,
@@ -96,7 +96,7 @@
       "actual": {
         "ip": "140.0",
         "ip_value": 140.0,
-        "war": 2.55,
+        "war": 2.56,
         "era": 3.66,
         "fip": 3.59,
         "k_minus_bb_pct": 15.3
@@ -110,28 +110,28 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 117.9,
-        "war": 0.59
+        "ip": 120.1,
+        "war": 0.6
       },
-      "war_gap": 1.96,
-      "innings_share_pct": 9.9
+      "war_gap": 1.95,
+      "innings_share_pct": 9.7
     },
     {
       "id": 700241,
       "name": "Michael McGreevy",
       "throws": "R",
       "role": "Starter",
-      "games": 30,
-      "starts": 30,
+      "games": 31,
+      "starts": 31,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "164.0",
-        "ip_value": 164.0,
-        "war": 1.79,
-        "era": 3.84,
-        "fip": 4.24,
-        "k_minus_bb_pct": 9.9
+        "ip": "168.2",
+        "ip_value": 168.667,
+        "war": 1.88,
+        "era": 3.95,
+        "fip": 4.23,
+        "k_minus_bb_pct": 9.5
       },
       "forecast": {
         "ip": 137.4,
@@ -142,11 +142,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 134.8,
-        "war": 1.31
+        "ip": 137.4,
+        "war": 1.34
       },
-      "war_gap": 0.47,
-      "innings_share_pct": 11.6
+      "war_gap": 0.54,
+      "innings_share_pct": 11.7
     },
     {
       "id": 669461,
@@ -160,7 +160,7 @@
       "actual": {
         "ip": "155.0",
         "ip_value": 155.0,
-        "war": 1.12,
+        "war": 1.13,
         "era": 5.23,
         "fip": 4.62,
         "k_minus_bb_pct": 14.7
@@ -174,28 +174,28 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 154.5,
-        "war": 1.28
+        "ip": 157.4,
+        "war": 1.31
       },
-      "war_gap": -0.16,
-      "innings_share_pct": 10.9
+      "war_gap": -0.18,
+      "innings_share_pct": 10.7
     },
     {
       "id": 687273,
       "name": "Quinn Mathews",
       "throws": "L",
       "role": "Starter",
-      "games": 8,
-      "starts": 8,
+      "games": 9,
+      "starts": 9,
       "saves": 0,
       "holds": 0,
       "actual": {
-        "ip": "44.1",
-        "ip_value": 44.333,
-        "war": 0.76,
-        "era": 3.65,
-        "fip": 3.79,
-        "k_minus_bb_pct": 11.1
+        "ip": "49.1",
+        "ip_value": 49.333,
+        "war": 0.81,
+        "era": 3.83,
+        "fip": 3.83,
+        "k_minus_bb_pct": 12.3
       },
       "forecast": {
         "ip": 46.2,
@@ -206,28 +206,28 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 45.3,
-        "war": 0.3
+        "ip": 46.2,
+        "war": 0.31
       },
-      "war_gap": 0.45,
-      "innings_share_pct": 3.1
+      "war_gap": 0.5,
+      "innings_share_pct": 3.4
     },
     {
       "id": 700669,
       "name": "Gordon Graceffo",
       "throws": "R",
       "role": "Reliever",
-      "games": 61,
+      "games": 62,
       "starts": 1,
       "saves": 1,
       "holds": 7,
       "actual": {
-        "ip": "79.0",
-        "ip_value": 79.0,
-        "war": 0.5,
-        "era": 2.73,
-        "fip": 3.84,
-        "k_minus_bb_pct": 7.9
+        "ip": "81.0",
+        "ip_value": 81.0,
+        "war": 0.57,
+        "era": 2.67,
+        "fip": 3.79,
+        "k_minus_bb_pct": 8.3
       },
       "forecast": {
         "ip": 44.0,
@@ -238,10 +238,10 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 43.2,
+        "ip": 44.0,
         "war": 0.02
       },
-      "war_gap": 0.49,
+      "war_gap": 0.55,
       "innings_share_pct": 5.6
     },
     {
@@ -256,7 +256,7 @@
       "actual": {
         "ip": "54.0",
         "ip_value": 54.0,
-        "war": 0.43,
+        "war": 0.44,
         "era": 3.67,
         "fip": 4.3,
         "k_minus_bb_pct": 12.1
@@ -270,28 +270,28 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 87.8,
-        "war": 0.5
+        "ip": 89.4,
+        "war": 0.51
       },
       "war_gap": -0.07,
-      "innings_share_pct": 3.8
+      "innings_share_pct": 3.7
     },
     {
       "id": 677865,
       "name": "Justin Bruihl",
       "throws": "L",
       "role": "Setup",
-      "games": 71,
+      "games": 73,
       "starts": 0,
       "saves": 0,
       "holds": 10,
       "actual": {
-        "ip": "75.2",
-        "ip_value": 75.667,
-        "war": 0.35,
-        "era": 3.69,
-        "fip": 3.93,
-        "k_minus_bb_pct": 7.4
+        "ip": "77.2",
+        "ip_value": 77.667,
+        "war": 0.34,
+        "era": 3.59,
+        "fip": 3.95,
+        "k_minus_bb_pct": 7.2
       },
       "forecast": {
         "ip": 54.0,
@@ -302,11 +302,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 53.0,
+        "ip": 54.0,
         "war": 0.03
       },
       "war_gap": 0.31,
-      "innings_share_pct": 5.3
+      "innings_share_pct": 5.4
     },
     {
       "id": 676617,
@@ -334,11 +334,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 61.8,
-        "war": 0.33
+        "ip": 63.0,
+        "war": 0.34
       },
-      "war_gap": -0.02,
-      "innings_share_pct": 4.5
+      "war_gap": -0.03,
+      "innings_share_pct": 4.4
     },
     {
       "id": 681676,
@@ -366,11 +366,43 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 39.3,
+        "ip": 40.0,
         "war": 0.11
       },
       "war_gap": 0.11,
       "innings_share_pct": 1.6
+    },
+    {
+      "id": 703725,
+      "name": "Luis Gastelum",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 34,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "36.2",
+        "ip_value": 36.667,
+        "war": 0.14,
+        "era": 4.42,
+        "fip": 3.97,
+        "k_minus_bb_pct": 21.1
+      },
+      "forecast": {
+        "ip": 28.0,
+        "war": 0.1,
+        "era": 3.85,
+        "fip": 3.96,
+        "k_minus_bb_pct": 13.1,
+        "team_at_fetch": "STL"
+      },
+      "forecast_to_date": {
+        "ip": 28.0,
+        "war": 0.1
+      },
+      "war_gap": 0.04,
+      "innings_share_pct": 2.5
     },
     {
       "id": 668941,
@@ -386,7 +418,7 @@
         "ip_value": 43.0,
         "war": 0.13,
         "era": 3.35,
-        "fip": 4.0,
+        "fip": 4.01,
         "k_minus_bb_pct": 14.5
       },
       "forecast": {
@@ -398,43 +430,11 @@
         "team_at_fetch": "MIL"
       },
       "forecast_to_date": {
-        "ip": 62.8,
+        "ip": 64.0,
         "war": 0.29
       },
       "war_gap": -0.16,
       "innings_share_pct": 3.0
-    },
-    {
-      "id": 703725,
-      "name": "Luis Gastelum",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 33,
-      "starts": 0,
-      "saves": 0,
-      "holds": 1,
-      "actual": {
-        "ip": "35.2",
-        "ip_value": 35.667,
-        "war": 0.11,
-        "era": 4.29,
-        "fip": 4.02,
-        "k_minus_bb_pct": 21.1
-      },
-      "forecast": {
-        "ip": 28.0,
-        "war": 0.1,
-        "era": 3.85,
-        "fip": 3.96,
-        "k_minus_bb_pct": 13.1,
-        "team_at_fetch": "STL"
-      },
-      "forecast_to_date": {
-        "ip": 27.5,
-        "war": 0.1
-      },
-      "war_gap": 0.01,
-      "innings_share_pct": 2.5
     },
     {
       "id": 687309,
@@ -482,7 +482,7 @@
         "ip_value": 5.0,
         "war": 0.1,
         "era": 5.4,
-        "fip": 2.89,
+        "fip": 2.9,
         "k_minus_bb_pct": 4.8
       },
       "forecast": {
@@ -498,39 +498,7 @@
         "war": -0.0
       },
       "war_gap": 0.1,
-      "innings_share_pct": 0.4
-    },
-    {
-      "id": 685464,
-      "name": "Cade Winquest",
-      "throws": "R",
-      "role": "Reliever",
-      "games": 9,
-      "starts": 0,
-      "saves": 0,
-      "holds": 1,
-      "actual": {
-        "ip": "11.2",
-        "ip_value": 11.667,
-        "war": 0.09,
-        "era": 4.63,
-        "fip": 3.18,
-        "k_minus_bb_pct": 20.8
-      },
-      "forecast": {
-        "ip": 50.0,
-        "war": -0.02,
-        "era": 4.18,
-        "fip": 4.46,
-        "k_minus_bb_pct": 10.3,
-        "team_at_fetch": "STL"
-      },
-      "forecast_to_date": {
-        "ip": 49.1,
-        "war": -0.02
-      },
-      "war_gap": 0.11,
-      "innings_share_pct": 0.8
+      "innings_share_pct": 0.3
     },
     {
       "id": 694335,
@@ -546,7 +514,7 @@
         "ip_value": 43.333,
         "war": 0.05,
         "era": 7.27,
-        "fip": 4.29,
+        "fip": 4.3,
         "k_minus_bb_pct": 9.7
       },
       "forecast": {
@@ -558,11 +526,43 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 63.8,
+        "ip": 65.0,
         "war": 0.2
       },
       "war_gap": -0.15,
-      "innings_share_pct": 3.1
+      "innings_share_pct": 3.0
+    },
+    {
+      "id": 685464,
+      "name": "Cade Winquest",
+      "throws": "R",
+      "role": "Reliever",
+      "games": 11,
+      "starts": 0,
+      "saves": 0,
+      "holds": 1,
+      "actual": {
+        "ip": "13.2",
+        "ip_value": 13.667,
+        "war": 0.05,
+        "era": 3.95,
+        "fip": 3.69,
+        "k_minus_bb_pct": 14.0
+      },
+      "forecast": {
+        "ip": 50.0,
+        "war": -0.02,
+        "era": 4.18,
+        "fip": 4.46,
+        "k_minus_bb_pct": 10.3,
+        "team_at_fetch": "STL"
+      },
+      "forecast_to_date": {
+        "ip": 50.0,
+        "war": -0.02
+      },
+      "war_gap": 0.07,
+      "innings_share_pct": 0.9
     },
     {
       "id": 690155,
@@ -578,7 +578,7 @@
         "ip_value": 7.0,
         "war": 0.03,
         "era": 5.14,
-        "fip": 3.52,
+        "fip": 3.53,
         "k_minus_bb_pct": 6.2
       },
       "forecast": {
@@ -590,7 +590,7 @@
         "team_at_fetch": "MIA"
       },
       "forecast_to_date": {
-        "ip": 49.1,
+        "ip": 50.0,
         "war": -0.09
       },
       "war_gap": 0.13,
@@ -610,7 +610,7 @@
         "ip_value": 9.0,
         "war": 0.01,
         "era": 5.0,
-        "fip": 4.76,
+        "fip": 4.77,
         "k_minus_bb_pct": 5.1
       },
       "forecast": {
@@ -642,7 +642,7 @@
         "ip_value": 2.0,
         "war": 0.0,
         "era": 0.0,
-        "fip": 4.09,
+        "fip": 4.1,
         "k_minus_bb_pct": 0.0
       },
       "forecast": {
@@ -654,7 +654,7 @@
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 23.6,
+        "ip": 24.0,
         "war": -0.08
       },
       "war_gap": 0.09,
@@ -674,7 +674,7 @@
         "ip_value": 2.0,
         "war": -0.0,
         "era": 0.0,
-        "fip": 4.59,
+        "fip": 4.6,
         "k_minus_bb_pct": -12.5
       },
       "forecast": null,
@@ -699,7 +699,7 @@
         "ip_value": 62.667,
         "war": -0.04,
         "era": 4.02,
-        "fip": 4.51,
+        "fip": 4.52,
         "k_minus_bb_pct": 12.4
       },
       "forecast": {
@@ -711,11 +711,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 58.9,
-        "war": 0.16
+        "ip": 60.0,
+        "war": 0.17
       },
-      "war_gap": -0.21,
-      "innings_share_pct": 4.4
+      "war_gap": -0.2,
+      "innings_share_pct": 4.3
     },
     {
       "id": 657265,
@@ -731,7 +731,7 @@
         "ip_value": 14.0,
         "war": -0.06,
         "era": 5.79,
-        "fip": 4.59,
+        "fip": 4.6,
         "k_minus_bb_pct": 3.3
       },
       "forecast": {
@@ -763,7 +763,7 @@
         "ip_value": 2.0,
         "war": -0.06,
         "era": 4.5,
-        "fip": 9.59,
+        "fip": 9.6,
         "k_minus_bb_pct": 0.0
       },
       "forecast": null,
@@ -773,6 +773,38 @@
       },
       "war_gap": -0.06,
       "innings_share_pct": 0.1
+    },
+    {
+      "id": 802408,
+      "name": "Brycen Mautz",
+      "throws": "L",
+      "role": "Reliever",
+      "games": 8,
+      "starts": 1,
+      "saves": 0,
+      "holds": 0,
+      "actual": {
+        "ip": "15.1",
+        "ip_value": 15.333,
+        "war": -0.06,
+        "era": 5.87,
+        "fip": 4.86,
+        "k_minus_bb_pct": 10.7
+      },
+      "forecast": {
+        "ip": 16.0,
+        "war": 0.04,
+        "era": 3.8,
+        "fip": 4.07,
+        "k_minus_bb_pct": 12.9,
+        "team_at_fetch": "STL"
+      },
+      "forecast_to_date": {
+        "ip": 16.0,
+        "war": 0.04
+      },
+      "war_gap": -0.1,
+      "innings_share_pct": 1.1
     },
     {
       "id": 694363,
@@ -788,7 +820,7 @@
         "ip_value": 9.0,
         "war": -0.07,
         "era": 9.0,
-        "fip": 5.65,
+        "fip": 5.66,
         "k_minus_bb_pct": -4.5
       },
       "forecast": {
@@ -807,53 +839,21 @@
       "innings_share_pct": 0.6
     },
     {
-      "id": 802408,
-      "name": "Brycen Mautz",
-      "throws": "L",
-      "role": "Reliever",
-      "games": 7,
-      "starts": 1,
-      "saves": 0,
-      "holds": 0,
-      "actual": {
-        "ip": "14.0",
-        "ip_value": 14.0,
-        "war": -0.08,
-        "era": 6.43,
-        "fip": 4.95,
-        "k_minus_bb_pct": 11.4
-      },
-      "forecast": {
-        "ip": 16.0,
-        "war": 0.04,
-        "era": 3.8,
-        "fip": 4.07,
-        "k_minus_bb_pct": 12.9,
-        "team_at_fetch": "STL"
-      },
-      "forecast_to_date": {
-        "ip": 15.7,
-        "war": 0.04
-      },
-      "war_gap": -0.12,
-      "innings_share_pct": 1.0
-    },
-    {
       "id": 684516,
       "name": "Hancel Rincon",
       "throws": "R",
       "role": "Reliever",
-      "games": 2,
+      "games": 3,
       "starts": 0,
       "saves": 0,
       "holds": 1,
       "actual": {
-        "ip": "1.1",
-        "ip_value": 1.333,
-        "war": -0.17,
-        "era": 47.25,
-        "fip": 15.84,
-        "k_minus_bb_pct": 0.0
+        "ip": "2.1",
+        "ip_value": 2.333,
+        "war": -0.1,
+        "era": 27.0,
+        "fip": 8.67,
+        "k_minus_bb_pct": 14.3
       },
       "forecast": {
         "ip": 1.0,
@@ -867,8 +867,8 @@
         "ip": 1.0,
         "war": -0.0
       },
-      "war_gap": -0.17,
-      "innings_share_pct": 0.1
+      "war_gap": -0.1,
+      "innings_share_pct": 0.2
     },
     {
       "id": 657571,
@@ -884,7 +884,7 @@
         "ip_value": 8.333,
         "war": -0.24,
         "era": 8.64,
-        "fip": 6.93,
+        "fip": 6.94,
         "k_minus_bb_pct": 2.4
       },
       "forecast": {
@@ -896,10 +896,10 @@
         "team_at_fetch": null
       },
       "forecast_to_date": {
-        "ip": 52.0,
+        "ip": 53.0,
         "war": 0.28
       },
-      "war_gap": -0.52,
+      "war_gap": -0.53,
       "innings_share_pct": 0.6
     },
     {
@@ -916,7 +916,7 @@
         "ip_value": 66.0,
         "war": -0.28,
         "era": 4.23,
-        "fip": 4.79,
+        "fip": 4.8,
         "k_minus_bb_pct": 10.7
       },
       "forecast": {
@@ -928,11 +928,11 @@
         "team_at_fetch": "STL"
       },
       "forecast_to_date": {
-        "ip": 56.9,
+        "ip": 58.0,
         "war": -0.09
       },
-      "war_gap": -0.2,
-      "innings_share_pct": 4.7
+      "war_gap": -0.19,
+      "innings_share_pct": 4.6
     },
     {
       "id": 688297,
@@ -948,7 +948,7 @@
         "ip_value": 5.333,
         "war": -0.41,
         "era": 15.19,
-        "fip": 11.53,
+        "fip": 11.54,
         "k_minus_bb_pct": -10.3
       },
       "forecast": {
@@ -960,7 +960,7 @@
         "team_at_fetch": "ATH"
       },
       "forecast_to_date": {
-        "ip": 51.0,
+        "ip": 52.0,
         "war": 0.03
       },
       "war_gap": -0.44,
