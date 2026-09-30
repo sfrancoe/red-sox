@@ -115,6 +115,33 @@ class PostseasonNewsTests(unittest.TestCase):
         self.assertFalse(changed)
         self.assertEqual(json.loads(path.read_text())["generatedAt"], "old")
 
+    def test_publisher_time_corrects_sort_and_news_window(self):
+        self.write_feed(self.data_root / "globe.json", [
+            {"title": "New recap", "published": "2026-09-28T03:00:00Z", "url": "https://example.com/recap"},
+            {"title": "Earlier news", "published": "2026-09-28T15:30:00Z", "url": "https://example.com/earlier"},
+            {"title": "Old story reindexed", "published": "2026-09-28T15:45:00Z", "url": "https://example.com/old"},
+        ], "Globe")
+        times = {"https://example.com/recap": "2026-09-28T15:00:00Z",
+                 "https://example.com/earlier": "2026-09-28T14:00:00Z",
+                 "https://example.com/old": "2026-09-27T14:00:00Z"}
+        feed, _ = news.build_feed(2026, self.history, self.registry, self.data_root, NOW,
+                                  publication_loader=times.get)
+        self.assertEqual([a["title"] for a in feed["articles"]], ["New recap", "Earlier news"])
+        self.assertEqual(feed["articles"][0]["published"], "2026-09-28T15:00:00+00:00")
+        self.assertEqual(feed["articles"][0]["publishedSource"], "publisher")
+
+    def test_failed_verification_keeps_headline_without_false_time(self):
+        self.write_feed(self.data_root / "globe.json", [
+            {"title": "Unverified recap", "published": "2026-09-28T15:00:00Z", "url": "https://example.com/recap"}
+        ], "Globe")
+        def blocked(_url):
+            raise OSError("Publisher unavailable")
+        feed, warnings = news.build_feed(2026, self.history, self.registry, self.data_root, NOW,
+                                        publication_loader=blocked)
+        self.assertEqual(feed["articles"][0]["published"], "")
+        self.assertEqual(feed["articles"][0]["publishedSource"], "unverified")
+        self.assertTrue(any("Publisher unavailable" in warning for warning in warnings))
+
 
 if __name__ == "__main__":
     unittest.main()
