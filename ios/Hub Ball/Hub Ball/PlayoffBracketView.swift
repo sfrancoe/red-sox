@@ -203,6 +203,8 @@ struct PlayoffBracketView: View {
                     if hasSeriesStatus, let nextGameDetails {
                         Text(nextGameDetails)
                             .font(.system(size: labelSize - 3, weight: .medium))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                             .accessibilityLabel("Next game: \(nextGameDetails)")
                     }
                 }
@@ -293,8 +295,8 @@ struct PlayoffBracketView: View {
             let formatter = DateFormatter()
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.timeZone = BaseballTime.timeZone
-            formatter.dateFormat = "h:mm a"
-            time = formatter.string(from: start) + " ET"
+            formatter.dateFormat = BaseballTime.calendar.component(.minute, from: start) == 0 ? "ha" : "h:mma"
+            time = formatter.string(from: start).lowercased()
         } else {
             time = "Time TBD"
         }
