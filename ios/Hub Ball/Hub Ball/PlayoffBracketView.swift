@@ -4,8 +4,8 @@ struct PlayoffBracketView: View {
     let payload: PostseasonPayload
     let onSelect: (PostseasonSeries) -> Void
     @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
-    @ScaledMetric(relativeTo: .caption) private var cardHeight = 90.0
-    @ScaledMetric(relativeTo: .caption) private var worldSeriesCardHeight = 64.0
+    @ScaledMetric(relativeTo: .caption) private var cardHeight = 100.0
+    @ScaledMetric(relativeTo: .caption) private var worldSeriesCardHeight = 74.0
     @ScaledMetric(relativeTo: .caption) private var nameSize = 12.0
     private let columnSpacing = 10.0
     private let rowSpacing = 8.0
@@ -159,6 +159,9 @@ struct PlayoffBracketView: View {
         let rows = participants(item, slot: slot)
         let lastGame = item.flatMap { payload.latestCompletedGame(for: $0.id) }
         let hasSeriesStatus = item?.bracketSeriesStatus != nil
+        let nextGameDetails = item.flatMap { series in
+            nextScheduledGame(for: series).map { displayDetails($0, for: series) }
+        }
         let hasScheduledDate = !hasSeriesStatus && nextScheduledGame(for: item) != nil
         let hasLightFooter = hasSeriesStatus || hasScheduledDate
         return Button {
@@ -194,15 +197,22 @@ struct PlayoffBracketView: View {
                     .frame(maxHeight: .infinity)
                     if index == 0 { Rectangle().fill(AppColor.rule).frame(height: 0.5) }
                 }
-                Text(status(item))
-                    .font(.system(size: labelSize - 3, weight: hasSeriesStatus ? .semibold : .medium))
-                    .foregroundStyle(hasLightFooter ? AppColor.night : (item?.state == "live" ? AppColor.amber : AppColor.boneMuted))
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2).minimumScaleFactor(0.8)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.vertical, 4)
-                    .frame(maxWidth: .infinity)
-                    .background(hasLightFooter ? AppColor.scheduleGray : AppColor.night)
+                VStack(spacing: 3) {
+                    Text(status(item))
+                        .font(.system(size: labelSize - 3, weight: hasSeriesStatus ? .semibold : .medium))
+                    if hasSeriesStatus, let nextGameDetails {
+                        Text(nextGameDetails)
+                            .font(.system(size: labelSize - 3, weight: .medium))
+                            .accessibilityLabel("Next game: \(nextGameDetails)")
+                    }
+                }
+                .foregroundStyle(hasLightFooter ? AppColor.night : (item?.state == "live" ? AppColor.amber : AppColor.boneMuted))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 3)
+                .padding(.vertical, 4)
+                .frame(maxWidth: .infinity)
+                .background(hasLightFooter ? AppColor.scheduleGray : AppColor.night)
             }
             .background(AppColor.nightRaised)
             .clipShape(RoundedRectangle(cornerRadius: 6))
@@ -216,7 +226,8 @@ struct PlayoffBracketView: View {
         .accessibilityLabel("\(slot.league) \(slot.round.replacingOccurrences(of: "-", with: " ")), \(rows.map { $0.name ?? $0.slot ?? "TBD" }.joined(separator: " versus "))")
         .accessibilityValue(rows.map { row in
             "\(row.name ?? row.slot ?? "TBD"): \(row.teamId.flatMap { lastGame?.score(for: $0) }.map { "\($0) runs in the last completed game" } ?? "score unavailable")"
-        }.joined(separator: ", ") + ". " + status(item))
+        }.joined(separator: ", ") + ". " + status(item)
+            + (hasSeriesStatus ? nextGameDetails.map { " Next game: " + $0 } ?? "" : ""))
         .accessibilityHint("Opens series details")
     }
 
@@ -276,12 +287,18 @@ struct PlayoffBracketView: View {
 
     private func displayDetails(_ game: PostseasonGame, for item: PostseasonSeries) -> String {
         let date = displayDate(game)
-        guard item.round == currentRound,
-              !game.timeTBD,
-              let start = game.startDate,
-              let broadcast = game.broadcasts.first else { return date }
-        let time = start.formatted(date: .omitted, time: .shortened)
-        return "\(date) · \(time)\n\(broadcast)"
+        guard item.round == currentRound else { return date }
+        let time: String
+        if let start = game.startDate {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = BaseballTime.timeZone
+            formatter.dateFormat = "h:mm a"
+            time = formatter.string(from: start) + " ET"
+        } else {
+            time = "Time TBD"
+        }
+        return "\(date) · \(time)"
     }
 
     private var currentRound: String? {
@@ -293,7 +310,7 @@ struct PlayoffBracketView: View {
     }
 
     private func nextScheduledGame(for item: PostseasonSeries?) -> PostseasonGame? {
-        guard let item else { return nil }
+        guard let item, item.state != "complete" else { return nil }
         return payload.games
             .filter {
                 $0.seriesId == item.id

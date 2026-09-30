@@ -344,19 +344,19 @@ struct HomeView: View {
                                 .padding(.vertical, 8)
                                 .background(AppColor.nightRaised)
                         } else {
-                            HStack(spacing: 8) {
+                            HStack(alignment: .firstTextBaseline, spacing: 8) {
                                 Text("Home runs")
                                     .font(.system(size: 10, weight: .black))
                                     .foregroundStyle(AppColor.boneMuted)
-                                Text(homeRunSummary(for: favorite))
+                                    .fixedSize()
+                                Text(homeRunSummary(for: game))
                                     .font(.system(size: 11, weight: .bold))
                                     .foregroundStyle(AppColor.navy)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.72)
+                                    .fixedSize(horizontal: false, vertical: true)
                             }
                             .padding(.horizontal, 13)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .frame(height: 27)
+                            .padding(.vertical, 7)
                             .background(AppColor.nightRaised)
                         }
 
@@ -416,7 +416,7 @@ struct HomeView: View {
                 if game.isLive {
                     liveMatchupRow(game.liveMatchup)
                 } else {
-                    expandedSummaryRow("Home runs", homeRunSummary(for: favorite))
+                    expandedSummaryRow("Home runs", homeRunSummary(for: game))
                 }
                 expandedSummaryRow(game.isLive ? "Live" : "Pitching", game.isLive ? game.liveStatus ?? "In progress" : pitchingSummary(for: game))
                 if game.isLive, let scheduledGame = scheduledGame(for: game) {
@@ -600,13 +600,17 @@ struct HomeView: View {
             .frame(width: width, alignment: .trailing)
     }
 
-    private func homeRunSummary(for team: TeamBoxScore) -> String {
-        let hitters = team.batting.filter { $0.homeRuns > 0 }
-        guard !hitters.isEmpty else { return "None" }
-        return hitters.map { batter in
-            let total = batter.seasonHomeRuns.map(String.init) ?? "—"
-            return "\(surname(batter.name)) (\(total))"
-        }.joined(separator: ", ")
+    private func homeRunSummary(for game: RecentGame) -> String {
+        let summaries = [game.away, game.home].compactMap { team -> String? in
+            let hitters = team.batting.filter { $0.homeRuns > 0 }
+            guard !hitters.isEmpty else { return nil }
+            let names = hitters.map { batter in
+                let total = batter.seasonHomeRuns.map(String.init) ?? "—"
+                return "\(surname(batter.name)) (\(total))"
+            }.joined(separator: ", ")
+            return "\(team.abbreviation): \(names)"
+        }
+        return summaries.isEmpty ? "None" : summaries.joined(separator: " · ")
     }
 
     private func pitchingSummary(for game: RecentGame) -> String {
