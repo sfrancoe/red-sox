@@ -40,26 +40,28 @@ struct PostseasonHistoryCategory: Codable, Identifiable, Sendable {
     let key: String
     let label: String
     let higherIsBetter: Bool
-    let qualification: String
-    let best: [PostseasonHistoryEntry]
-    let worst: [PostseasonHistoryEntry]
+    let entries: [PostseasonHistoryEntry]
 
     var id: String { key }
 }
 
 struct PostseasonHistoryEntry: Codable, Identifiable, Sendable {
-    let rank: Int
     let playerId: Int
     let name: String
     let teamId: Int
     let teamAbbreviation: String
     let league: String?
+    let season: PostseasonHistoryStat?
+    let career: PostseasonHistoryStat?
+
+    var id: Int { playerId }
+}
+
+struct PostseasonHistoryStat: Codable, Sendable {
     let value: Double
     let games: Int
     let plateAppearances: Int?
     let inningsPitched: String?
-
-    var id: Int { playerId }
 }
 
 @MainActor
@@ -88,7 +90,7 @@ final class PostseasonHistoryStore {
         defer { isLoading = false }
         do {
             var request = URLRequest(
-                url: AppBackend.sharedDataURL("postseason-history/\(season).json")
+                url: AppBackend.sharedDataURL("postseason-history/\(season)-v2.json")
             )
             request.cachePolicy = .reloadIgnoringLocalCacheData
             request.timeoutInterval = 20
@@ -97,7 +99,7 @@ final class PostseasonHistoryStore {
                 throw URLError(.badServerResponse)
             }
             let incoming = try JSONDecoder().decode(PostseasonHistoryPayload.self, from: data)
-            guard incoming.schemaVersion == 1, incoming.season == season else {
+            guard incoming.schemaVersion == 2, incoming.season == season else {
                 throw URLError(.cannotDecodeContentData)
             }
             snapshot = incoming
@@ -116,6 +118,8 @@ final class PostseasonHistoryStore {
 
     private static func readSnapshot(from url: URL) -> PostseasonHistoryPayload? {
         guard let data = try? Data(contentsOf: url) else { return nil }
-        return try? JSONDecoder().decode(PostseasonHistoryPayload.self, from: data)
+        guard let snapshot = try? JSONDecoder().decode(PostseasonHistoryPayload.self, from: data),
+              snapshot.schemaVersion == 2 else { return nil }
+        return snapshot
     }
 }

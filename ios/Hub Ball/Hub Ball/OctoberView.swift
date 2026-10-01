@@ -2,7 +2,7 @@ import SwiftUI
 
 private enum OctoberSection: String, CaseIterable {
     case race = "Bracket"
-    case history = "Best / Worst"
+    case history = "Statistics"
     case news = "Latest News"
 }
 
@@ -11,9 +11,9 @@ private enum PostseasonHistoryGroup: String, CaseIterable {
     case pitching = "Pitching"
 }
 
-private enum PostseasonHistoryRanking: String, CaseIterable {
-    case best = "Best"
-    case worst = "Worst"
+private enum PostseasonHistorySortColumn {
+    case season
+    case career
 }
 
 private enum PostseasonHistoryLeague: String, CaseIterable {
@@ -40,10 +40,20 @@ struct OctoberView: View {
     @State private var section: OctoberSection = .race
     @State private var historyGroup: PostseasonHistoryGroup = .hitting
     @State private var historyLeague: PostseasonHistoryLeague = .both
+    @State private var historyTeamID: Int?
     @State private var historyCategoryKey = "ops"
-    @State private var historyRanking: PostseasonHistoryRanking = .best
+    @State private var historySortColumn: PostseasonHistorySortColumn = .career
+    @State private var historySortDescending = true
     @State private var newsLeague: PostseasonHistoryLeague = .both
     @State private var selectedSeries: PostseasonSeries?
+    private let historyMetricColumnWidth: CGFloat = 42
+    private var historySampleColumnWidth: CGFloat { historyGroup == .hitting ? 24 : 34 }
+    private let historyStatColumnSpacing: CGFloat = 2
+    private var historyValueColumnWidth: CGFloat {
+        historyMetricColumnWidth + historySampleColumnWidth + historyStatColumnSpacing
+    }
+    private let historyHeaderColor = Color(hubHex: "#647B90")
+    private let historyTeamColumns = Array(repeating: GridItem(.flexible(), spacing: 6), count: 6)
 
     private var payload: PostseasonPayload? { store.snapshot }
     private var series: [PostseasonSeries] { payload?.series ?? [] }
@@ -152,13 +162,13 @@ struct OctoberView: View {
         if let history = historyStore.snapshot {
             playoffHistory(history)
         } else if historyStore.isLoading {
-            ProgressView("Building career playoff rankings…")
+            ProgressView("Loading postseason statistics…")
                 .tint(AppColor.amber)
                 .foregroundStyle(AppColor.bone)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Career playoff rankings aren’t available yet.")
+                Text("Postseason statistics aren’t available yet.")
                     .font(AppFont.displayMedium)
                 Text("The bracket is still available while the roster snapshot refreshes.")
                     .font(AppFont.bodySmall)
@@ -177,7 +187,7 @@ struct OctoberView: View {
         let categories = historyGroup == .hitting ? payload.categories.hitting : payload.categories.pitching
         let selected = categories.first(where: { $0.key == historyCategoryKey }) ?? categories.first
         return ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 12) {
                 HStack(spacing: 8) {
                     Picker("Player group", selection: $historyGroup) {
                         ForEach(PostseasonHistoryGroup.allCases, id: \.self) { group in
@@ -187,6 +197,8 @@ struct OctoberView: View {
                     .pickerStyle(.segmented)
                     .onChange(of: historyGroup) { _, group in
                         historyCategoryKey = group == .hitting ? "ops" : "wins"
+                        historySortColumn = .career
+                        historySortDescending = true
                     }
 
                     Picker("League", selection: $historyLeague) {
@@ -195,39 +207,72 @@ struct OctoberView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .onChange(of: historyLeague) { _, _ in historyTeamID = nil }
                 }
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
-                        ForEach(categories) { category in
-                            Button(category.label) { historyCategoryKey = category.key }
-                                .font(AppFont.label)
-                                .foregroundStyle(historyCategoryKey == category.key ? AppColor.night : AppColor.bone)
-                                .padding(.horizontal, 14)
-                                .frame(minHeight: 40)
-                                .background(historyCategoryKey == category.key ? AppColor.amber : AppColor.nightRaised)
+                LazyVGrid(columns: historyTeamColumns, spacing: 6) {
+                    ForEach(payload.teams) { team in
+                        let selected = historyTeamID == team.teamId
+                        let enabled = historyLeague == .both || historyLeague.rawValue == team.league
+                        Button(historyTeamCode(team.abbreviation)) {
+                            historyTeamID = selected ? nil : team.teamId
                         }
+                        .font(AppFont.label)
+                        .foregroundStyle(selected ? AppColor.night : AppColor.bone)
+                        .frame(maxWidth: .infinity, minHeight: 40)
+                        .background(selected ? AppColor.amber : AppColor.nightRaised, in: Capsule())
+                        .opacity(enabled ? 1 : 0.4)
+                        .disabled(!enabled)
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(team.name)
+                        .accessibilityValue(selected ? "Selected" : "Not selected")
+                        .accessibilityHint("Tap again to show all teams in this league")
                     }
                 }
+
+                HStack(spacing: 10) {
+                    Text("STATISTIC")
+                        .font(AppFont.label.weight(.bold))
+                        .foregroundStyle(AppColor.boneMuted)
+                    Menu {
+                        ForEach(categories) { category in
+                            Button {
+                                historyCategoryKey = category.key
+                                historySortColumn = .career
+                                historySortDescending = category.higherIsBetter
+                            } label: {
+                                if historyCategoryKey == category.key {
+                                    Label(category.label, systemImage: "checkmark")
+                                } else {
+                                    Text(category.label)
+                                }
+                            }
+                        }
+                    } label: {
+                        HStack(spacing: 6) {
+                            Text(selected?.label ?? "Choose")
+                                .font(AppFont.bodySmall.weight(.semibold))
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundStyle(AppColor.amber)
+                        }
+                        .foregroundStyle(AppColor.bone)
+                        .padding(.vertical, 6)
+                        .overlay(alignment: .bottom) {
+                            Rectangle().fill(AppColor.rule).frame(height: 1)
+                        }
+                    }
+                    .accessibilityLabel("Statistic")
+                    .accessibilityValue(selected?.label ?? "None selected")
+                    Spacer(minLength: 0)
+                }
+                .frame(minHeight: 32)
 
                 if let selected {
-                    Picker("Ranking", selection: $historyRanking) {
-                        ForEach(PostseasonHistoryRanking.allCases, id: \.self) { ranking in
-                            Text(ranking.rawValue).tag(ranking)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-
-                    Text("Qualified: \(selected.qualification) · Current 40-man rosters")
-                        .font(AppFont.bodySmall)
-                        .foregroundStyle(AppColor.boneDim)
-
                     historyBoard(
-                        filteredHistoryEntries(
-                            historyRanking == .best ? selected.best : selected.worst,
-                            payload: payload
-                        ),
-                        category: selected
+                        sortedHistoryEntries(selected.entries, payload: payload),
+                        category: selected,
+                        season: payload.season
                     )
                 }
             }
@@ -351,49 +396,124 @@ struct OctoberView: View {
 
     private func historyBoard(
         _ entries: [PostseasonHistoryEntry],
-        category: PostseasonHistoryCategory
+        category: PostseasonHistoryCategory,
+        season: Int
     ) -> some View {
         VStack(alignment: .leading, spacing: 0) {
+            VStack(spacing: -4) {
+                HStack(spacing: 8) {
+                    Spacer(minLength: 0)
+                    Text("POSTSEASON")
+                        .font(AppFont.label.weight(.bold))
+                        .foregroundStyle(.white)
+                        .frame(width: historyValueColumnWidth * 2 + 8)
+                }
+                HStack(spacing: 8) {
+                    Text("PLAYER")
+                        .font(AppFont.label.weight(.bold))
+                        .foregroundStyle(historyHeaderColor)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(height: 22, alignment: .bottomLeading)
+                    historySortButton(.season, title: String(season), category: category)
+                    historySortButton(.career, title: "Career", category: category)
+                }
+            }
+            .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
+
             if entries.isEmpty {
-                Text("No qualified players yet.")
+                Text("No postseason statistics for this selection yet.")
                     .font(AppFont.bodySmall)
                     .foregroundStyle(AppColor.boneDim)
                     .padding(.vertical, 16)
             } else {
-                ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
-                    HStack(alignment: .firstTextBaseline, spacing: 10) {
-                        Text(String(index + 1))
-                            .font(AppFont.number)
-                            .monospacedDigit()
-                            .foregroundStyle(AppColor.boneMuted)
-                            .frame(width: 24, alignment: .trailing)
-                        Text(entry.name)
-                            .font(AppFont.bodySmall.weight(.semibold))
-                            .foregroundStyle(AppColor.bone)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.75)
-                        Text("\(entry.teamAbbreviation) · \(historySample(entry))")
-                            .font(AppFont.label)
-                            .foregroundStyle(AppColor.boneMuted)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.75)
-                        Spacer(minLength: 6)
-                        Text(historyValue(entry.value, key: category.key))
-                            .font(.custom("Inter-Medium", size: 16, relativeTo: .body))
-                            .monospacedDigit()
-                            .foregroundStyle(AppColor.bone)
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(entries) { entry in
+                        HStack(spacing: 8) {
+                            HStack(spacing: 4) {
+                                Text(entry.name)
+                                    .font(AppFont.bodySmall.weight(.semibold))
+                                    .foregroundStyle(AppColor.bone)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
+                                Text(historyTeamCode(entry.teamAbbreviation))
+                                    .font(AppFont.label)
+                                    .foregroundStyle(AppColor.boneMuted)
+                                    .fixedSize(horizontal: true, vertical: false)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            historyStatCell(entry.season, key: category.key)
+                            historyStatCell(entry.career, key: category.key)
+                        }
+                        .padding(.vertical, 5)
+                        .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
                     }
-                    .padding(.vertical, 5)
-                    .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
                 }
             }
+            Text(historyGroup == .hitting
+                 ? "Numbers in parentheses are plate appearances (PA)."
+                 : "Numbers in parentheses are innings pitched (IP).")
+                .font(.caption2)
+                .foregroundStyle(AppColor.boneMuted)
+                .padding(.top, 8)
+                .padding(.bottom, 4)
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 8)
         .padding(.vertical, 4)
         .background(AppColor.nightRaised)
     }
 
-    private func filteredHistoryEntries(
+    private func historySortButton(
+        _ column: PostseasonHistorySortColumn,
+        title: String,
+        category: PostseasonHistoryCategory
+    ) -> some View {
+        let active = historySortColumn == column
+        return Button {
+            if active {
+                historySortDescending.toggle()
+            } else {
+                historySortColumn = column
+                historySortDescending = category.higherIsBetter
+            }
+        } label: {
+            HStack(spacing: 3) {
+                Text(title)
+                    .foregroundStyle(historyHeaderColor)
+                Image(systemName: active ? (historySortDescending ? "chevron.down" : "chevron.up") : "arrow.up.arrow.down")
+                    .font(.system(size: 9, weight: .semibold))
+                    .foregroundStyle(active ? AppColor.amber : historyHeaderColor)
+            }
+            .font(AppFont.label.weight(.bold))
+            .frame(width: historyValueColumnWidth, height: 22, alignment: .bottom)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Sort by \(title) postseason statistics")
+        .accessibilityValue(active ? (historySortDescending ? "Descending" : "Ascending") : "Not selected")
+    }
+
+    @ViewBuilder
+    private func historyStatCell(_ stat: PostseasonHistoryStat?, key: String) -> some View {
+        HStack(spacing: historyStatColumnSpacing) {
+            Text(stat.map { historyValue($0.value, key: key) } ?? "—")
+                .font(.custom("Inter-Medium", size: 14, relativeTo: .body))
+                .foregroundStyle(stat == nil ? AppColor.boneMuted : AppColor.bone)
+                .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+                .frame(width: historyMetricColumnWidth, alignment: .trailing)
+            Text(stat.map { "(\(historySample($0)))" } ?? "")
+                .font(.custom("Inter-Medium", size: 11, relativeTo: .caption))
+                .foregroundStyle(AppColor.boneMuted)
+                .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+                .frame(width: historySampleColumnWidth, alignment: .trailing)
+        }
+        .frame(width: historyValueColumnWidth, alignment: .trailing)
+    }
+
+    private func sortedHistoryEntries(
         _ entries: [PostseasonHistoryEntry],
         payload: PostseasonHistoryPayload
     ) -> [PostseasonHistoryEntry] {
@@ -401,14 +521,37 @@ struct OctoberView: View {
         let filtered = historyLeague == .both
             ? entries
             : entries.filter { ($0.league ?? leagueByTeam[$0.teamId]) == historyLeague.rawValue }
-        return Array(filtered.prefix(10))
+        let teamEntries = historyTeamID.map { teamID in filtered.filter { $0.teamId == teamID } } ?? filtered
+        return teamEntries.sorted { first, second in
+            let firstValue = historySortColumn == .season ? first.season?.value : first.career?.value
+            let secondValue = historySortColumn == .season ? second.season?.value : second.career?.value
+            switch (firstValue, secondValue) {
+            case let (a?, b?) where a != b:
+                return historySortDescending ? a > b : a < b
+            case (.some, .none):
+                return true
+            case (.none, .some):
+                return false
+            default:
+                let nameOrder = first.name.localizedStandardCompare(second.name)
+                return nameOrder == .orderedSame ? first.playerId < second.playerId : nameOrder == .orderedAscending
+            }
+        }
     }
 
-    private func historySample(_ entry: PostseasonHistoryEntry) -> String {
-        if let plateAppearances = entry.plateAppearances {
-            return "\(plateAppearances) PA · \(entry.games) G"
+    private func historySample(_ stat: PostseasonHistoryStat) -> String {
+        if let plateAppearances = stat.plateAppearances {
+            return String(plateAppearances)
         }
-        return "\(entry.inningsPitched ?? "0.0") IP · \(entry.games) G"
+        return stat.inningsPitched ?? "0.0"
+    }
+
+    private func historyTeamCode(_ abbreviation: String) -> String {
+        switch abbreviation {
+        case "TB": "TBR"
+        case "SD": "SDP"
+        default: abbreviation
+        }
     }
 
     private func historyValue(_ value: Double, key: String) -> String {

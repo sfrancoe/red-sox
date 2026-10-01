@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Build roster-scoped career postseason leaderboards from the MLB Stats API."""
+"""Build roster-scoped season and career postseason statistics from the MLB Stats API."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
@@ -22,12 +23,6 @@ MLB_API = "https://statsapi.mlb.com/api/v1"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 ROSTER_TYPE = "40Man"
 EXPECTED_FIELD_SIZE = 12
-RANK_LIMIT = 10
-HITTER_MIN_PA = 20
-HITTER_MIN_GAMES = 8
-PITCHER_RATE_MIN_OUTS = 45  # 15 IP
-PITCHER_COUNT_MIN_GAMES = 5
-PITCHER_COUNT_MIN_OUTS = 30  # 10 IP
 OUTPUT_DIRECTORY = ROOT / "data" / "postseason-history"
 
 CATEGORIES = {
@@ -148,8 +143,27 @@ def fetch_rosters(teams: list[dict[str, Any]], season: int) -> list[dict[str, An
     return list(players.values())
 
 
-def fetch_career_stats(players: list[dict[str, Any]]) -> dict[int, dict[str, dict[str, Any]]]:
-    stats: dict[int, dict[str, dict[str, Any]]] = {}
+def extract_postseason_stats(person: dict[str, Any], season: int) -> dict[str, dict[str, dict[str, Any]]]:
+    player_stats: dict[str, dict[str, dict[str, Any]]] = {"season": {}, "career": {}}
+    for block in person.get("stats", []):
+        scope = (block.get("type") or {}).get("displayName")
+        group = (block.get("group") or {}).get("displayName")
+        if scope not in player_stats or group not in CATEGORIES:
+            continue
+        for split in block.get("splits") or []:
+            if scope == "season" and str(split.get("season")) != str(season):
+                continue
+            stat = split.get("stat")
+            if isinstance(stat, dict):
+                player_stats[scope][group] = stat
+                break
+    return player_stats
+
+
+def fetch_postseason_stats(
+    players: list[dict[str, Any]], season: int
+) -> dict[int, dict[str, dict[str, dict[str, Any]]]]:
+    stats: dict[int, dict[str, dict[str, dict[str, Any]]]] = {}
     player_ids = sorted(player["playerId"] for player in players)
     for start in range(0, len(player_ids), 100):
         batch = player_ids[start:start + 100]
@@ -157,21 +171,18 @@ def fetch_career_stats(players: list[dict[str, Any]]) -> dict[int, dict[str, dic
             "/people",
             {
                 "personIds": ",".join(map(str, batch)),
-                "hydrate": "stats(type=career,group=[hitting,pitching],gameType=P)",
+                "hydrate": (
+                    "stats(type=[career,season],group=[hitting,pitching],"
+                    f"gameType=P,season={season})"
+                ),
             },
         )
         returned = {person.get("id") for person in payload.get("people", [])}
         missing = set(batch) - returned
         if missing:
-            raise RuntimeError(f"MLB omitted {len(missing)} requested players from career stats")
+            raise RuntimeError(f"MLB omitted {len(missing)} requested players from postseason stats")
         for person in payload.get("people", []):
-            player_stats: dict[str, dict[str, Any]] = {}
-            for block in person.get("stats", []):
-                group = (block.get("group") or {}).get("displayName")
-                splits = block.get("splits") or []
-                if group in CATEGORIES and splits and isinstance(splits[0].get("stat"), dict):
-                    player_stats[group] = splits[0]["stat"]
-            stats[person["id"]] = player_stats
+            stats[person["id"]] = extract_postseason_stats(person, season)
     return stats
 
 
@@ -180,7 +191,7 @@ def parse_number(value: Any) -> float | None:
         parsed = float(value)
     except (TypeError, ValueError):
         return None
-    return parsed if parsed == parsed else None
+    return parsed if math.isfinite(parsed) else None
 
 
 def innings_to_outs(value: Any) -> int:
@@ -191,86 +202,64 @@ def innings_to_outs(value: Any) -> int:
     return int(whole) * 3 + int(fraction)
 
 
-def qualified(group: str, category_kind: str, stat: dict[str, Any]) -> bool:
+def has_sample(group: str, category_kind: str, stat: dict[str, Any]) -> bool:
     games = int(stat.get("gamesPlayed") or stat.get("gamesPitched") or 0)
     if group == "hitting":
-        return int(stat.get("plateAppearances") or 0) >= HITTER_MIN_PA or games >= HITTER_MIN_GAMES
+        return int(stat.get("plateAppearances") or 0) > 0
     outs = innings_to_outs(stat.get("inningsPitched"))
     if category_kind == "rate":
-        return outs >= PITCHER_RATE_MIN_OUTS
-    return games >= PITCHER_COUNT_MIN_GAMES or outs >= PITCHER_COUNT_MIN_OUTS
+        return outs > 0
+    return games > 0 or outs > 0
 
 
-def make_entry(player: dict[str, Any], group: str, stat: dict[str, Any], value: float) -> dict[str, Any]:
-    entry = {
-        **{key: value for key, value in player.items() if key != "positionType"},
+def make_stat(group: str, stat: dict[str, Any], value: float) -> dict[str, Any]:
+    result = {
         "value": value,
         "games": int(stat.get("gamesPlayed") or stat.get("gamesPitched") or 0),
     }
     if group == "hitting":
-        entry["plateAppearances"] = int(stat.get("plateAppearances") or 0)
-        entry["inningsPitched"] = None
+        result["plateAppearances"] = int(stat.get("plateAppearances") or 0)
+        result["inningsPitched"] = None
     else:
-        entry["plateAppearances"] = None
-        entry["inningsPitched"] = str(stat.get("inningsPitched") or "0.0")
-    return entry
-
-
-def ranked(entries: list[dict[str, Any]], descending: bool) -> list[dict[str, Any]]:
-    ordered = sorted(
-        entries,
-        key=lambda entry: (
-            -entry["value"] if descending else entry["value"],
-            -entry["games"],
-            entry["name"],
-            entry["playerId"],
-        ),
-    )
-    ranked_all = [{"rank": index, **entry} for index, entry in enumerate(ordered, 1)]
-    selected_ids = {entry["playerId"] for entry in ordered[:RANK_LIMIT]}
-    for league in ("AL", "NL"):
-        league_entries = [entry for entry in ordered if entry.get("league") == league]
-        selected_ids.update(entry["playerId"] for entry in league_entries[:RANK_LIMIT])
-    return [entry for entry in ranked_all if entry["playerId"] in selected_ids]
+        result["plateAppearances"] = None
+        result["inningsPitched"] = str(stat.get("inningsPitched") or "0.0")
+    return result
 
 
 def build_categories(
     players: list[dict[str, Any]],
-    stats_by_player: dict[int, dict[str, dict[str, Any]]],
+    stats_by_player: dict[int, dict[str, dict[str, dict[str, Any]]]],
 ) -> dict[str, list[dict[str, Any]]]:
     output: dict[str, list[dict[str, Any]]] = {}
     for group, definitions in CATEGORIES.items():
         categories = []
         for key, label, higher_is_better, category_kind in definitions:
-            candidates = []
+            entries = []
             for player in players:
                 position_type = player.get("positionType")
                 if group == "hitting" and position_type == "Pitcher":
                     continue
                 if group == "pitching" and position_type not in {None, "Pitcher", "Two-Way Player"}:
                     continue
-                stat = stats_by_player.get(player["playerId"], {}).get(group)
-                if not stat or not qualified(group, category_kind, stat):
-                    continue
-                value = parse_number(stat.get(key))
-                if value is not None:
-                    candidates.append(make_entry(player, group, stat, value))
+                scopes = stats_by_player.get(player["playerId"], {})
+                values = {}
+                for scope in ("season", "career"):
+                    stat = scopes.get(scope, {}).get(group)
+                    value = parse_number(stat.get(key)) if stat and has_sample(group, category_kind, stat) else None
+                    values[scope] = make_stat(group, stat, value) if value is not None else None
+                if values["season"] is not None or values["career"] is not None:
+                    entries.append(
+                        {
+                            **{field: value for field, value in player.items() if field != "positionType"},
+                            **values,
+                        }
+                    )
             categories.append(
                 {
                     "key": key,
                     "label": label,
                     "higherIsBetter": higher_is_better,
-                    "qualification": (
-                        f"{HITTER_MIN_PA}+ PA or {HITTER_MIN_GAMES}+ games"
-                        if group == "hitting"
-                        else (
-                            f"{PITCHER_RATE_MIN_OUTS // 3}+ IP"
-                            if category_kind == "rate"
-                            else f"{PITCHER_COUNT_MIN_GAMES}+ appearances or {PITCHER_COUNT_MIN_OUTS // 3}+ IP"
-                        )
-                    ),
-                    "best": ranked(candidates, descending=higher_is_better),
-                    "worst": ranked(candidates, descending=not higher_is_better),
+                    "entries": sorted(entries, key=lambda entry: (entry["name"], entry["playerId"])),
                 }
             )
         output[group] = categories
@@ -280,10 +269,10 @@ def build_categories(
 def build_snapshot(season: int) -> dict[str, Any]:
     teams = discover_playoff_teams(season)
     players = fetch_rosters(teams, season)
-    stats = fetch_career_stats(players)
+    stats = fetch_postseason_stats(players, season)
     now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "season": season,
         "status": "locked" if len(teams) == EXPECTED_FIELD_SIZE else "finalizing",
         "generatedAt": now,
@@ -328,7 +317,7 @@ def main() -> None:
     ):
         print(f"Outside the {args.season} playoff refresh window; nothing to do")
         return
-    output = args.output or OUTPUT_DIRECTORY / f"{args.season}.json"
+    output = args.output or OUTPUT_DIRECTORY / f"{args.season}-v2.json"
     snapshot = build_snapshot(args.season)
     output.parent.mkdir(parents=True, exist_ok=True)
     if should_write_snapshot(output, snapshot):
