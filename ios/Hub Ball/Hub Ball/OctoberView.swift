@@ -239,17 +239,21 @@ struct OctoberView: View {
                 }
 
                 ViewThatFits(in: .horizontal) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: 0) {
                         historyStatisticControl(categories, selected: selected)
+                        Spacer(minLength: 14)
                         historyMinimumUnit
                             .fixedSize(horizontal: true, vertical: false)
+                        Spacer(minLength: 8)
                         historyMinimumPicker
                     }
                     VStack(alignment: .leading, spacing: 4) {
                         historyStatisticControl(categories, selected: selected)
-                        HStack(spacing: 8) {
+                        HStack(spacing: 0) {
+                            Spacer(minLength: 14)
                             historyMinimumUnit
                                 .fixedSize(horizontal: true, vertical: false)
+                            Spacer(minLength: 8)
                             historyMinimumPicker
                         }
                     }
@@ -303,10 +307,11 @@ struct OctoberView: View {
     }
 
     private var historyMinimumUnit: some View {
-        Text(historyGroup == .hitting ? "PAs" : "Innings")
+        let unit = historyGroup == .hitting ? "Plate Appearances" : "Innings"
+        return Text("\(unit) ()")
             .font(AppFont.label)
             .foregroundStyle(AppColor.boneMuted)
-            .fixedSize(horizontal: false, vertical: true)
+            .fixedSize(horizontal: true, vertical: false)
     }
 
     private var historyMinimumPicker: some View {
