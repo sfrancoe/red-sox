@@ -241,7 +241,7 @@ struct OctoberView: View {
                 ViewThatFits(in: .horizontal) {
                     HStack(spacing: 0) {
                         historyStatisticControl(categories, selected: selected)
-                        Spacer(minLength: 14)
+                        Spacer(minLength: 8)
                         historyMinimumUnit
                             .fixedSize(horizontal: true, vertical: false)
                         Spacer(minLength: 8)
@@ -250,7 +250,7 @@ struct OctoberView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         historyStatisticControl(categories, selected: selected)
                         HStack(spacing: 0) {
-                            Spacer(minLength: 14)
+                            Spacer(minLength: 8)
                             historyMinimumUnit
                                 .fixedSize(horizontal: true, vertical: false)
                             Spacer(minLength: 8)
