@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-09-30T05:59:50.512781+00:00",
+  "generated_at": "2026-10-01T06:34:09.556804+00:00",
   "source": "MLB Stats API",
   "team": "Brewers",
   "regular_season_end": "2026-09-27",
   "games": [
     {
       "game_pk": 849830,
-      "game_date": "2026-10-03T08:33:00Z",
+      "game_date": "2026-10-04T00:30:00Z",
       "status": "Scheduled",
       "venue": "American Family Field",
       "location": "home",
-      "opponent": "SD/CHC",
+      "opponent": "Padres",
       "opponent_record": "0-0",
       "favorite_team_record": "0-0",
       "favorite_team_pitcher": "Jacob Misiorowski",
@@ -23,18 +23,18 @@
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "FOX / FS1",
-          "is_national": true,
-          "home_away": "home",
-          "availability": "national",
-          "available_for_streaming": true
-        },
-        {
-          "name": "FOX / FS1",
+          "name": "FS1/ FOX ONE",
           "is_national": true,
           "home_away": "away",
           "availability": "national",
           "available_for_streaming": false
+        },
+        {
+          "name": "FS1/ FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
         }
       ]
     },
@@ -44,7 +44,7 @@
       "status": "Scheduled",
       "venue": "American Family Field",
       "location": "home",
-      "opponent": "SD/CHC",
+      "opponent": "Padres",
       "opponent_record": "0-0",
       "favorite_team_record": "0-0",
       "favorite_team_pitcher": "Logan Henderson",
@@ -59,16 +59,16 @@
         {
           "name": "FS1/ FOX ONE",
           "is_national": true,
-          "home_away": "home",
+          "home_away": "away",
           "availability": "national",
-          "available_for_streaming": true
+          "available_for_streaming": false
         },
         {
           "name": "FS1/ FOX ONE",
           "is_national": true,
-          "home_away": "away",
+          "home_away": "home",
           "availability": "national",
-          "available_for_streaming": false
+          "available_for_streaming": true
         }
       ]
     },
@@ -76,9 +76,9 @@
       "game_pk": 849826,
       "game_date": "2026-10-06T07:33:00Z",
       "status": "Scheduled",
-      "venue": "NL Stadium",
+      "venue": "Petco Park",
       "location": "away",
-      "opponent": "SD/CHC",
+      "opponent": "Padres",
       "opponent_record": "0-0",
       "favorite_team_record": "0-0",
       "favorite_team_pitcher": "",
@@ -93,16 +93,16 @@
         {
           "name": "FOX / FS1",
           "is_national": true,
-          "home_away": "away",
+          "home_away": "home",
           "availability": "national",
-          "available_for_streaming": false
+          "available_for_streaming": true
         },
         {
           "name": "FOX / FS1",
           "is_national": true,
-          "home_away": "home",
+          "home_away": "away",
           "availability": "national",
-          "available_for_streaming": true
+          "available_for_streaming": false
         }
       ]
     },
@@ -110,9 +110,9 @@
       "game_pk": 849827,
       "game_date": "2026-10-07T07:33:00Z",
       "status": "Scheduled",
-      "venue": "NL Stadium",
+      "venue": "Petco Park",
       "location": "away",
-      "opponent": "SD/CHC",
+      "opponent": "Padres",
       "opponent_record": "0-0",
       "favorite_team_record": "0-0",
       "favorite_team_pitcher": "",
@@ -127,16 +127,16 @@
         {
           "name": "FOX / FS1",
           "is_national": true,
-          "home_away": "away",
+          "home_away": "home",
           "availability": "national",
-          "available_for_streaming": false
+          "available_for_streaming": true
         },
         {
           "name": "FOX / FS1",
           "is_national": true,
-          "home_away": "home",
+          "home_away": "away",
           "availability": "national",
-          "available_for_streaming": true
+          "available_for_streaming": false
         }
       ]
     },
@@ -146,7 +146,7 @@
       "status": "Scheduled",
       "venue": "American Family Field",
       "location": "home",
-      "opponent": "SD/CHC",
+      "opponent": "Padres",
       "opponent_record": "0-0",
       "favorite_team_record": "0-0",
       "favorite_team_pitcher": "",
@@ -161,16 +161,16 @@
         {
           "name": "FOX / FS1",
           "is_national": true,
-          "home_away": "home",
+          "home_away": "away",
           "availability": "national",
-          "available_for_streaming": true
+          "available_for_streaming": false
         },
         {
           "name": "FOX / FS1",
           "is_national": true,
-          "home_away": "away",
+          "home_away": "home",
           "availability": "national",
-          "available_for_streaming": false
+          "available_for_streaming": true
         }
       ]
     }
