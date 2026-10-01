@@ -35,18 +35,21 @@ struct OctoberView: View {
     @State private var historyMinimumByGroup: [PostseasonHistoryGroup: Int] = [:]
     @State private var historySortColumn: PostseasonHistorySortColumn = .career
     @State private var historySortDescending = true
+    @State private var selectedHistoryPlayer: PostseasonPlayerSelection?
     @State private var newsLeague: PostseasonHistoryLeague = .both
     @State private var selectedSeries: PostseasonSeries?
     private let historyMetricColumnWidth: CGFloat = 42
     private var historySampleColumnWidth: CGFloat { historyGroup == .hitting ? 24 : 34 }
     private let historyStatColumnSpacing: CGFloat = 2
-    private func historyValueColumnWidth(showsSample: Bool) -> CGFloat {
-        historyMetricColumnWidth + (showsSample ? historySampleColumnWidth + historyStatColumnSpacing : 0)
+    private func historyValueColumnWidth(showsSample: Bool, isSeason: Bool = false) -> CGFloat {
+        (isSeason ? historySeasonMetricColumnWidth : historyMetricColumnWidth)
+            + (showsSample ? historySampleColumnWidth + historyStatColumnSpacing : 0)
     }
     private let historyHeaderColor = Color(hubHex: "#647B90")
     private let historyTeamColumns = Array(repeating: GridItem(.flexible(), spacing: 6), count: 6)
     private let historyMinimumOptions = [0, 3, 5, 10, 15, 20]
     private var historyMinimum: Int { historyMinimumByGroup[historyGroup, default: 0] }
+    private let historySeasonMetricColumnWidth: CGFloat = 56
 
     private var payload: PostseasonPayload? { store.snapshot }
     private var series: [PostseasonSeries] { payload?.series ?? [] }
@@ -112,6 +115,18 @@ struct OctoberView: View {
             OctoberSeriesDetail(series: series, allSeries: self.series, store: store)
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
+        }
+        .sheet(item: $selectedHistoryPlayer) { selection in
+            if let team = HubTeam.allCases.first(where: { $0.mlbID == selection.teamID }) {
+                PostseasonPlayerCardSheet(team: team, playerID: selection.playerID)
+            } else {
+                ContentUnavailableView("Player card unavailable", systemImage: "person.crop.circle.badge.questionmark")
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button("Done") { selectedHistoryPlayer = nil }
+                        }
+                    }
+            }
         }
         .preferredColorScheme(.dark)
     }
@@ -224,13 +239,19 @@ struct OctoberView: View {
                 }
 
                 ViewThatFits(in: .horizontal) {
-                    HStack(spacing: 12) {
+                    HStack(spacing: 8) {
                         historyStatisticControl(categories, selected: selected)
-                        historyMinimumControl
+                        historyMinimumUnit
+                            .fixedSize(horizontal: true, vertical: false)
+                        historyMinimumPicker
                     }
                     VStack(alignment: .leading, spacing: 4) {
                         historyStatisticControl(categories, selected: selected)
-                        historyMinimumControl
+                        HStack(spacing: 8) {
+                            historyMinimumUnit
+                                .fixedSize(horizontal: true, vertical: false)
+                            historyMinimumPicker
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -281,22 +302,8 @@ struct OctoberView: View {
         .fixedSize(horizontal: true, vertical: false)
     }
 
-    private var historyMinimumControl: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(spacing: 6) {
-                historyMinimumPicker
-                historyMinimumUnit
-                    .fixedSize(horizontal: true, vertical: false)
-            }
-            VStack(alignment: .leading, spacing: 4) {
-                historyMinimumPicker
-                historyMinimumUnit
-            }
-        }
-    }
-
     private var historyMinimumUnit: some View {
-        Text(historyGroup.sampleUnit)
+        Text(historyGroup == .hitting ? "PAs" : "Innings")
             .font(AppFont.label)
             .foregroundStyle(AppColor.boneMuted)
             .fixedSize(horizontal: false, vertical: true)
@@ -470,7 +477,7 @@ struct OctoberView: View {
                     Text("POSTSEASON")
                         .font(AppFont.label.weight(.bold))
                         .foregroundStyle(.white)
-                        .frame(width: historyValueColumnWidth(showsSample: false) + historyValueColumnWidth(showsSample: true) + 8)
+                        .frame(width: historyValueColumnWidth(showsSample: false, isSeason: true) + historyValueColumnWidth(showsSample: true) + 8)
                 }
                 HStack(spacing: 8) {
                     Text("PLAYER")
@@ -496,18 +503,24 @@ struct OctoberView: View {
                     ForEach(entries) { entry in
                         HStack(spacing: 8) {
                             HStack(spacing: 4) {
-                                Text(entry.name)
-                                    .font(AppFont.bodySmall.weight(.semibold))
-                                    .foregroundStyle(AppColor.bone)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.7)
+                                Button {
+                                    selectedHistoryPlayer = PostseasonPlayerSelection(playerID: entry.playerId, teamID: entry.teamId)
+                                } label: {
+                                    Text(entry.name)
+                                        .font(AppFont.bodySmall.weight(.semibold))
+                                        .foregroundStyle(AppColor.bone)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.7)
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityHint("Opens player card")
                                 Text(historyTeamCode(entry.teamAbbreviation))
                                     .font(AppFont.label)
                                     .foregroundStyle(AppColor.boneMuted)
                                     .fixedSize(horizontal: true, vertical: false)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            historyStatCell(entry.season, key: category.key, showsSample: false)
+                            historyStatCell(entry.season, key: category.key, showsSample: false, isSeason: true)
                             historyStatCell(entry.career, key: category.key, showsSample: true)
                         }
                         .padding(.vertical, 5)
@@ -541,6 +554,7 @@ struct OctoberView: View {
     ) -> some View {
         let active = historySortColumn == column
         let showsSample = column == .career
+        let isSeason = column == .season
         return Button {
             if active {
                 historySortDescending.toggle()
@@ -557,7 +571,7 @@ struct OctoberView: View {
                     .foregroundStyle(active ? AppColor.amber : historyHeaderColor)
             }
             .font(AppFont.label.weight(.bold))
-            .frame(width: historyValueColumnWidth(showsSample: showsSample), height: 22, alignment: .bottom)
+            .frame(width: historyValueColumnWidth(showsSample: showsSample, isSeason: isSeason), height: 22, alignment: .bottom)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -566,7 +580,7 @@ struct OctoberView: View {
     }
 
     @ViewBuilder
-    private func historyStatCell(_ stat: PostseasonHistoryStat?, key: String, showsSample: Bool) -> some View {
+    private func historyStatCell(_ stat: PostseasonHistoryStat?, key: String, showsSample: Bool, isSeason: Bool = false) -> some View {
         HStack(spacing: showsSample ? historyStatColumnSpacing : 0) {
             Text(stat.map { historyValue($0.value, key: key) } ?? "—")
                 .font(.custom("Inter-Medium", size: 14, relativeTo: .body))
@@ -574,7 +588,7 @@ struct OctoberView: View {
                 .monospacedDigit()
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-                .frame(width: historyMetricColumnWidth, alignment: .trailing)
+                .frame(width: isSeason ? historySeasonMetricColumnWidth : historyMetricColumnWidth, alignment: .trailing)
             if showsSample {
                 Text(stat.map { "(\(historySample($0)))" } ?? "")
                     .font(.custom("Inter-Medium", size: 11, relativeTo: .caption))
@@ -585,7 +599,7 @@ struct OctoberView: View {
                     .frame(width: historySampleColumnWidth, alignment: .trailing)
             }
         }
-        .frame(width: historyValueColumnWidth(showsSample: showsSample), alignment: .trailing)
+        .frame(width: historyValueColumnWidth(showsSample: showsSample, isSeason: isSeason), alignment: .trailing)
     }
 
     private func sortedHistoryEntries(

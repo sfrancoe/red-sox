@@ -10,6 +10,13 @@ enum PostseasonHistoryGroup: String, CaseIterable {
     }
 }
 
+struct PostseasonPlayerSelection: Identifiable {
+    let playerID: Int
+    let teamID: Int
+
+    var id: String { "\(teamID)-\(playerID)" }
+}
+
 enum PostseasonHistorySortColumn {
     case season
     case career

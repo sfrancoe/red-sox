@@ -432,6 +432,49 @@ private enum PitchingCareerSort: String, CaseIterable {
     }
 }
 
+struct PostseasonPlayerCardSheet: View {
+    let team: HubTeam
+    let playerID: Int
+    @State private var store: PlayersStore
+    @Environment(\.dismiss) private var dismiss
+
+    init(team: HubTeam, playerID: Int) {
+        self.team = team
+        self.playerID = playerID
+        _store = State(initialValue: PlayersStore(team: team))
+    }
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if let player = store.feed?.players.first(where: { $0.id == playerID }) {
+                    PlayerReferenceView(team: team, player: player, source: store.feed?.source, store: store, isModal: true)
+                } else if store.isLoading {
+                    ProgressView("Loading player card…")
+                        .tint(AppColor.amber)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button("Done") { dismiss() }
+                            }
+                        }
+                } else {
+                    ContentUnavailableView("Player card unavailable", systemImage: "person.crop.circle.badge.questionmark")
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button("Done") { dismiss() }
+                            }
+                        }
+                }
+            }
+            .background(AppColor.night.ignoresSafeArea())
+        }
+        .task { await store.load() }
+        .presentationDetents([.large])
+        .presentationDragIndicator(.visible)
+    }
+}
+
 private struct PlayerReferenceView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -440,6 +483,7 @@ private struct PlayerReferenceView: View {
     let player: RedSoxPlayer
     let source: PlayersSource?
     let store: PlayersStore
+    let isModal: Bool
     @State private var mode: PlayerRecordMode
     @State private var scope: CareerScope = .mlb
     @State private var battingSort: BattingCareerSort = .year
@@ -447,11 +491,12 @@ private struct PlayerReferenceView: View {
     @State private var pitchingSort: PitchingCareerSort = .year
     @State private var pitchingSortsAscending = true
 
-    init(team: HubTeam, player: RedSoxPlayer, source: PlayersSource?, store: PlayersStore) {
+    init(team: HubTeam, player: RedSoxPlayer, source: PlayersSource?, store: PlayersStore, isModal: Bool = false) {
         self.team = team
         self.player = player
         self.source = source
         self.store = store
+        self.isModal = isModal
         _mode = State(initialValue: player.positionFilter == .pitcher ? .pitching : .batting)
     }
 
@@ -480,14 +525,21 @@ private struct PlayerReferenceView: View {
         .navigationBarBackButtonHidden()
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button { dismiss() } label: {
-                    Image(systemName: "chevron.backward")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(AppColor.bone)
-                        .frame(width: 44, height: 44)
+            if isModal {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                        .foregroundStyle(AppColor.amber)
                 }
-                .accessibilityLabel("Back to players")
+            } else {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button { dismiss() } label: {
+                        Image(systemName: "chevron.backward")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(AppColor.bone)
+                            .frame(width: 44, height: 44)
+                    }
+                    .accessibilityLabel("Back to players")
+                }
             }
             ToolbarItem(placement: .principal) {
                 if !usesExpandedReadingLayout { playerNavigationTitle }
