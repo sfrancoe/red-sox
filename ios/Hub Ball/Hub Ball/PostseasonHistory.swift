@@ -1,6 +1,20 @@
 import Foundation
 import Observation
 
+enum PostseasonHistoryGroup: String, CaseIterable {
+    case hitting = "Batting"
+    case pitching = "Pitching"
+
+    var sampleUnit: String {
+        self == .hitting ? "plate appearances" : "innings"
+    }
+}
+
+enum PostseasonHistorySortColumn {
+    case season
+    case career
+}
+
 struct PostseasonHistoryPayload: Codable, Sendable {
     let schemaVersion: Int
     let season: Int
@@ -55,6 +69,25 @@ struct PostseasonHistoryEntry: Codable, Identifiable, Sendable {
     let career: PostseasonHistoryStat?
 
     var id: Int { playerId }
+
+    func meetsMinimum(_ minimum: Int, group: PostseasonHistoryGroup, column: PostseasonHistorySortColumn) -> Bool {
+        guard minimum > 0 else { return true }
+        let stat = column == .season ? season : career
+        guard let stat else { return false }
+        switch group {
+        case .hitting:
+            return (stat.plateAppearances ?? 0) >= minimum
+        case .pitching:
+            guard let innings = stat.inningsPitched else { return false }
+            let parts = innings.split(separator: ".", omittingEmptySubsequences: false)
+            guard (1...2).contains(parts.count), let whole = Int(parts[0]), whole >= 0,
+                  let outs = parts.count == 2 ? Int(parts[1]) : 0,
+                  (0...2).contains(outs) else { return false }
+            // Thresholds are whole innings: 2.2 means two innings and two outs,
+            // so it remains below a three-inning minimum.
+            return whole >= minimum
+        }
+    }
 }
 
 struct PostseasonHistoryStat: Codable, Sendable {

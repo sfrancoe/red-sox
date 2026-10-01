@@ -86,6 +86,67 @@ final class LargeTextUITests: XCTestCase {
         app.buttons["hitter.replay"].waitForExistence(timeout: timeout)
     }
 
+    func testPlayoffMinimumFilters() {
+        launch("-show-playoff-history", size: "UICTContentSizeCategoryL")
+        let minimum = app.buttons["playoffs.history.minimum"]
+        XCTAssertTrue(minimum.waitForExistence(timeout: 30))
+        XCTAssertEqual(minimum.label, "Minimum plate appearances")
+        XCTAssertEqual(minimum.value as? String, "No minimum")
+        XCTAssertTrue(app.staticTexts["plate appearances"].exists)
+        capture("playoff-minimum-batting")
+
+        minimum.tap()
+        for option in ["0 (no minimum)", "3", "5", "10", "15", "20"] {
+            XCTAssertTrue(app.buttons[option].exists, "Missing minimum choice \(option)")
+        }
+        app.buttons["20"].tap()
+        XCTAssertEqual(minimum.value as? String, "20")
+        capture("playoff-minimum-batting-20")
+
+        app.segmentedControls.buttons["Pitching"].tap()
+        XCTAssertEqual(minimum.label, "Minimum innings")
+        XCTAssertEqual(minimum.value as? String, "No minimum")
+        XCTAssertTrue(app.staticTexts["innings"].exists)
+        minimum.tap()
+        app.buttons["5"].tap()
+        XCTAssertEqual(minimum.value as? String, "5")
+        capture("playoff-minimum-pitching-5")
+
+        app.segmentedControls.buttons["Batting"].tap()
+        XCTAssertEqual(minimum.value as? String, "20", "Batting retains its own minimum")
+        app.buttons["Sort by 2026 postseason statistics"].tap()
+        let seasonNote = app.staticTexts["Minimum applies to the 2026 column."]
+        XCTAssertTrue(seasonNote.waitForExistence(timeout: 5))
+        capture("playoff-minimum-season-20")
+        minimum.tap()
+        app.buttons["0 (no minimum)"].tap()
+        XCTAssertEqual(minimum.value as? String, "No minimum")
+        XCTAssertFalse(seasonNote.exists)
+
+        app.segmentedControls.buttons["Pitching"].tap()
+        XCTAssertEqual(minimum.value as? String, "5", "Pitching retains its own minimum")
+        app.buttons["Statistic"].tap()
+        app.buttons["Strikeouts"].tap()
+        XCTAssertEqual(minimum.value as? String, "5", "Changing the statistic retains the minimum")
+        capture("playoff-minimum-strikeouts")
+    }
+
+    func testPlayoffMinimumLargeTextLayout() {
+        launch("-show-playoff-history")
+        let minimum = app.buttons["playoffs.history.minimum"]
+        XCTAssertTrue(minimum.waitForExistence(timeout: 30))
+        XCTAssertTrue(minimum.isHittable)
+        XCTAssertGreaterThanOrEqual(minimum.frame.minX, app.frame.minX)
+        XCTAssertLessThanOrEqual(minimum.frame.maxX, app.frame.maxX)
+        let unit = app.staticTexts["plate appearances"]
+        XCTAssertTrue(unit.exists)
+        XCTAssertLessThanOrEqual(unit.frame.maxX, app.frame.maxX)
+        capture("playoff-minimum-large-text")
+        minimum.tap()
+        app.buttons["15"].tap()
+        XCTAssertEqual(minimum.value as? String, "15")
+    }
+
     func testHitterStoryPlaybackAndAllSeasons() {
         launch("-show-hitter-story", size: "UICTContentSizeCategoryL")
         XCTAssertTrue(app.otherElements["hitter.chart"].waitForExistence(timeout: 5))

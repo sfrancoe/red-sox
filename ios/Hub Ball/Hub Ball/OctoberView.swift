@@ -6,16 +6,6 @@ private enum OctoberSection: String, CaseIterable {
     case news = "Latest News"
 }
 
-private enum PostseasonHistoryGroup: String, CaseIterable {
-    case hitting = "Batting"
-    case pitching = "Pitching"
-}
-
-private enum PostseasonHistorySortColumn {
-    case season
-    case career
-}
-
 private enum PostseasonHistoryLeague: String, CaseIterable {
     case both = "Both"
     case american = "AL"
@@ -42,6 +32,7 @@ struct OctoberView: View {
     @State private var historyLeague: PostseasonHistoryLeague = .both
     @State private var historyTeamID: Int?
     @State private var historyCategoryKey = "ops"
+    @State private var historyMinimumByGroup: [PostseasonHistoryGroup: Int] = [:]
     @State private var historySortColumn: PostseasonHistorySortColumn = .career
     @State private var historySortDescending = true
     @State private var newsLeague: PostseasonHistoryLeague = .both
@@ -54,6 +45,8 @@ struct OctoberView: View {
     }
     private let historyHeaderColor = Color(hubHex: "#647B90")
     private let historyTeamColumns = Array(repeating: GridItem(.flexible(), spacing: 6), count: 6)
+    private let historyMinimumOptions = [0, 3, 5, 10, 15, 20]
+    private var historyMinimum: Int { historyMinimumByGroup[historyGroup, default: 0] }
 
     private var payload: PostseasonPayload? { store.snapshot }
     private var series: [PostseasonSeries] { payload?.series ?? [] }
@@ -230,43 +223,17 @@ struct OctoberView: View {
                     }
                 }
 
-                HStack(spacing: 10) {
-                    Text("STATISTIC")
-                        .font(AppFont.label.weight(.bold))
-                        .foregroundStyle(AppColor.boneMuted)
-                    Menu {
-                        ForEach(categories) { category in
-                            Button {
-                                historyCategoryKey = category.key
-                                historySortColumn = .career
-                                historySortDescending = category.higherIsBetter
-                            } label: {
-                                if historyCategoryKey == category.key {
-                                    Label(category.label, systemImage: "checkmark")
-                                } else {
-                                    Text(category.label)
-                                }
-                            }
-                        }
-                    } label: {
-                        HStack(spacing: 6) {
-                            Text(selected?.label ?? "Choose")
-                                .font(AppFont.bodySmall.weight(.semibold))
-                            Image(systemName: "chevron.down")
-                                .font(.system(size: 10, weight: .bold))
-                                .foregroundStyle(AppColor.amber)
-                        }
-                        .foregroundStyle(AppColor.bone)
-                        .padding(.vertical, 6)
-                        .overlay(alignment: .bottom) {
-                            Rectangle().fill(AppColor.rule).frame(height: 1)
-                        }
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 12) {
+                        historyStatisticControl(categories, selected: selected)
+                        historyMinimumControl
                     }
-                    .accessibilityLabel("Statistic")
-                    .accessibilityValue(selected?.label ?? "None selected")
-                    Spacer(minLength: 0)
+                    VStack(alignment: .leading, spacing: 4) {
+                        historyStatisticControl(categories, selected: selected)
+                        historyMinimumControl
+                    }
                 }
-                .frame(minHeight: 32)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 if let selected {
                     historyBoard(
@@ -281,6 +248,103 @@ struct OctoberView: View {
         }
         .accessibilityIdentifier("playoffs.history")
         .refreshable { await historyStore.refresh() }
+    }
+
+    private func historyStatisticControl(
+        _ categories: [PostseasonHistoryCategory],
+        selected: PostseasonHistoryCategory?
+    ) -> some View {
+        HStack(spacing: 8) {
+            Text("STATISTIC")
+                .font(AppFont.label.weight(.bold))
+                .foregroundStyle(AppColor.boneMuted)
+            Menu {
+                ForEach(categories) { category in
+                    Button {
+                        historyCategoryKey = category.key
+                        historySortColumn = .career
+                        historySortDescending = category.higherIsBetter
+                    } label: {
+                        if historyCategoryKey == category.key {
+                            Label(category.label, systemImage: "checkmark")
+                        } else {
+                            Text(category.label)
+                        }
+                    }
+                }
+            } label: {
+                historyMenuLabel(selected?.label ?? "Choose")
+            }
+            .accessibilityLabel("Statistic")
+            .accessibilityValue(selected?.label ?? "None selected")
+        }
+        .fixedSize(horizontal: true, vertical: false)
+    }
+
+    private var historyMinimumControl: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 6) {
+                historyMinimumPicker
+                historyMinimumUnit
+                    .fixedSize(horizontal: true, vertical: false)
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                historyMinimumPicker
+                historyMinimumUnit
+            }
+        }
+    }
+
+    private var historyMinimumUnit: some View {
+        Text(historyGroup.sampleUnit)
+            .font(AppFont.label)
+            .foregroundStyle(AppColor.boneMuted)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var historyMinimumPicker: some View {
+        HStack(spacing: 6) {
+            Text("Minimum")
+                .font(AppFont.label)
+                .foregroundStyle(AppColor.boneMuted)
+            Menu {
+                ForEach(historyMinimumOptions, id: \.self) { minimum in
+                    Button {
+                        historyMinimumByGroup[historyGroup] = minimum
+                    } label: {
+                        let title = minimum == 0 ? "0 (no minimum)" : String(minimum)
+                        if historyMinimum == minimum {
+                            Label(title, systemImage: "checkmark")
+                        } else {
+                            Text(title)
+                        }
+                    }
+                }
+            } label: {
+                historyMenuLabel(String(historyMinimum))
+                    .monospacedDigit()
+            }
+            .accessibilityIdentifier("playoffs.history.minimum")
+            .accessibilityLabel("Minimum \(historyGroup.sampleUnit)")
+            .accessibilityValue(historyMinimum == 0 ? "No minimum" : String(historyMinimum))
+            .accessibilityHint("Filters the \(historySortColumn == .season ? "season" : "career") column. Zero shows all players.")
+        }
+        .fixedSize(horizontal: true, vertical: false)
+    }
+
+    private func historyMenuLabel(_ title: String) -> some View {
+        HStack(spacing: 6) {
+            Text(title)
+                .font(AppFont.bodySmall.weight(.semibold))
+            Image(systemName: "chevron.down")
+                .font(.system(size: 10, weight: .bold))
+                .foregroundStyle(AppColor.amber)
+        }
+        .foregroundStyle(AppColor.bone)
+        .frame(minWidth: 44, minHeight: 44)
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(AppColor.rule).frame(height: 1)
+        }
     }
 
     @ViewBuilder
@@ -421,7 +485,9 @@ struct OctoberView: View {
             .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
 
             if entries.isEmpty {
-                Text("No postseason statistics for this selection yet.")
+                Text(historyMinimum > 0
+                     ? "No players meet the minimum of \(historyMinimum) \(historyGroup.sampleUnit) for \(historySortColumn == .season ? String(season) : "their postseason career") with these filters."
+                     : "No postseason statistics for this selection yet.")
                     .font(AppFont.bodySmall)
                     .foregroundStyle(AppColor.boneDim)
                     .padding(.vertical, 16)
@@ -456,6 +522,12 @@ struct OctoberView: View {
                 .foregroundStyle(AppColor.boneMuted)
                 .padding(.top, 8)
                 .padding(.bottom, 4)
+            if historyMinimum > 0 {
+                Text("Minimum applies to the \(historySortColumn == .season ? String(season) : "Career") column.")
+                    .font(.caption2)
+                    .foregroundStyle(AppColor.boneMuted)
+                    .padding(.bottom, 4)
+            }
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
@@ -522,7 +594,10 @@ struct OctoberView: View {
             ? entries
             : entries.filter { ($0.league ?? leagueByTeam[$0.teamId]) == historyLeague.rawValue }
         let teamEntries = historyTeamID.map { teamID in filtered.filter { $0.teamId == teamID } } ?? filtered
-        return teamEntries.sorted { first, second in
+        let qualified = teamEntries.filter {
+            $0.meetsMinimum(historyMinimum, group: historyGroup, column: historySortColumn)
+        }
+        return qualified.sorted { first, second in
             let firstValue = historySortColumn == .season ? first.season?.value : first.career?.value
             let secondValue = historySortColumn == .season ? second.season?.value : second.career?.value
             switch (firstValue, secondValue) {
