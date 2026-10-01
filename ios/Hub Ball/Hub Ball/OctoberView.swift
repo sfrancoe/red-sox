@@ -242,17 +242,11 @@ struct OctoberView: View {
                     HStack(spacing: 0) {
                         historyStatisticControl(categories, selected: selected)
                         Spacer(minLength: 8)
-                        historyMinimumUnit
-                            .fixedSize(horizontal: true, vertical: false)
-                        Spacer(minLength: 8)
                         historyMinimumPicker
                     }
                     VStack(alignment: .leading, spacing: 4) {
                         historyStatisticControl(categories, selected: selected)
                         HStack(spacing: 0) {
-                            Spacer(minLength: 8)
-                            historyMinimumUnit
-                                .fixedSize(horizontal: true, vertical: false)
                             Spacer(minLength: 8)
                             historyMinimumPicker
                         }
@@ -306,19 +300,13 @@ struct OctoberView: View {
         .fixedSize(horizontal: true, vertical: false)
     }
 
-    private var historyMinimumUnit: some View {
-        let unit = historyGroup == .hitting ? "Plate Appearances" : "Innings"
-        return Text("\(unit) ()")
-            .font(AppFont.label)
-            .foregroundStyle(AppColor.boneMuted)
-            .fixedSize(horizontal: true, vertical: false)
-    }
-
     private var historyMinimumPicker: some View {
         HStack(spacing: 6) {
-            Text("Minimum")
+            Text(historyGroup == .hitting ? "Minimum Plate Appearances" : "Minimum Innings")
                 .font(AppFont.label)
                 .foregroundStyle(AppColor.boneMuted)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
             Menu {
                 ForEach(historyMinimumOptions, id: \.self) { minimum in
                     Button {
@@ -340,8 +328,9 @@ struct OctoberView: View {
             .accessibilityLabel("Minimum \(historyGroup.sampleUnit)")
             .accessibilityValue(historyMinimum == 0 ? "No minimum" : String(historyMinimum))
             .accessibilityHint("Filters the \(historySortColumn == .season ? "season" : "career") column. Zero shows all players.")
+            .fixedSize(horizontal: true, vertical: false)
         }
-        .fixedSize(horizontal: true, vertical: false)
+        .frame(maxWidth: .infinity, alignment: .trailing)
     }
 
     private func historyMenuLabel(_ title: String) -> some View {

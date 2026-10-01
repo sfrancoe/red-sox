@@ -92,7 +92,9 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(minimum.waitForExistence(timeout: 30))
         XCTAssertEqual(minimum.label, "Minimum plate appearances")
         XCTAssertEqual(minimum.value as? String, "No minimum")
-        XCTAssertTrue(app.staticTexts["plate appearances"].exists)
+        let hittingLabel = app.staticTexts["Minimum Plate Appearances"]
+        XCTAssertTrue(hittingLabel.exists)
+        XCTAssertEqual(hittingLabel.frame.midY, minimum.frame.midY, accuracy: 2)
         capture("playoff-minimum-batting")
 
         minimum.tap()
@@ -106,7 +108,9 @@ final class LargeTextUITests: XCTestCase {
         app.segmentedControls.buttons["Pitching"].tap()
         XCTAssertEqual(minimum.label, "Minimum innings")
         XCTAssertEqual(minimum.value as? String, "No minimum")
-        XCTAssertTrue(app.staticTexts["innings"].exists)
+        let pitchingLabel = app.staticTexts["Minimum Innings"]
+        XCTAssertTrue(pitchingLabel.exists)
+        XCTAssertEqual(pitchingLabel.frame.midY, minimum.frame.midY, accuracy: 2)
         minimum.tap()
         app.buttons["5"].tap()
         XCTAssertEqual(minimum.value as? String, "5")
@@ -138,13 +142,24 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertTrue(minimum.isHittable)
         XCTAssertGreaterThanOrEqual(minimum.frame.minX, app.frame.minX)
         XCTAssertLessThanOrEqual(minimum.frame.maxX, app.frame.maxX)
-        let unit = app.staticTexts["plate appearances"]
-        XCTAssertTrue(unit.exists)
-        XCTAssertLessThanOrEqual(unit.frame.maxX, app.frame.maxX)
+        let label = app.staticTexts["Minimum Plate Appearances"]
+        XCTAssertTrue(label.exists)
+        XCTAssertEqual(label.frame.midY, minimum.frame.midY, accuracy: 2)
+        XCTAssertLessThanOrEqual(label.frame.maxX, app.frame.maxX)
         capture("playoff-minimum-large-text")
         minimum.tap()
         app.buttons["15"].tap()
         XCTAssertEqual(minimum.value as? String, "15")
+    }
+
+    func testPostseasonButtonColors() {
+        launch("", size: "UICTContentSizeCategoryM")
+        let close = app.buttons["playoffs.close"]
+        XCTAssertTrue(close.waitForExistence(timeout: 30))
+        close.tap()
+        let postseason = app.buttons["playoffs.open"]
+        XCTAssertTrue(postseason.waitForExistence(timeout: 10))
+        capture("main-postseason-button-colors")
     }
 
     func testHitterStoryPlaybackAndAllSeasons() {
