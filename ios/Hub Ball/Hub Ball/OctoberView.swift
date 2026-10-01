@@ -40,8 +40,8 @@ struct OctoberView: View {
     private let historyMetricColumnWidth: CGFloat = 42
     private var historySampleColumnWidth: CGFloat { historyGroup == .hitting ? 24 : 34 }
     private let historyStatColumnSpacing: CGFloat = 2
-    private var historyValueColumnWidth: CGFloat {
-        historyMetricColumnWidth + historySampleColumnWidth + historyStatColumnSpacing
+    private func historyValueColumnWidth(showsSample: Bool) -> CGFloat {
+        historyMetricColumnWidth + (showsSample ? historySampleColumnWidth + historyStatColumnSpacing : 0)
     }
     private let historyHeaderColor = Color(hubHex: "#647B90")
     private let historyTeamColumns = Array(repeating: GridItem(.flexible(), spacing: 6), count: 6)
@@ -470,7 +470,7 @@ struct OctoberView: View {
                     Text("POSTSEASON")
                         .font(AppFont.label.weight(.bold))
                         .foregroundStyle(.white)
-                        .frame(width: historyValueColumnWidth * 2 + 8)
+                        .frame(width: historyValueColumnWidth(showsSample: false) + historyValueColumnWidth(showsSample: true) + 8)
                 }
                 HStack(spacing: 8) {
                     Text("PLAYER")
@@ -507,8 +507,8 @@ struct OctoberView: View {
                                     .fixedSize(horizontal: true, vertical: false)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            historyStatCell(entry.season, key: category.key)
-                            historyStatCell(entry.career, key: category.key)
+                            historyStatCell(entry.season, key: category.key, showsSample: false)
+                            historyStatCell(entry.career, key: category.key, showsSample: true)
                         }
                         .padding(.vertical, 5)
                         .overlay(alignment: .bottom) { Rectangle().fill(AppColor.rule).frame(height: 1) }
@@ -516,8 +516,8 @@ struct OctoberView: View {
                 }
             }
             Text(historyGroup == .hitting
-                 ? "Numbers in parentheses are plate appearances (PA)."
-                 : "Numbers in parentheses are innings pitched (IP).")
+                 ? "Career sample in parentheses: plate appearances (PA)."
+                 : "Career sample in parentheses: innings pitched (IP).")
                 .font(.caption2)
                 .foregroundStyle(AppColor.boneMuted)
                 .padding(.top, 8)
@@ -540,6 +540,7 @@ struct OctoberView: View {
         category: PostseasonHistoryCategory
     ) -> some View {
         let active = historySortColumn == column
+        let showsSample = column == .career
         return Button {
             if active {
                 historySortDescending.toggle()
@@ -556,7 +557,7 @@ struct OctoberView: View {
                     .foregroundStyle(active ? AppColor.amber : historyHeaderColor)
             }
             .font(AppFont.label.weight(.bold))
-            .frame(width: historyValueColumnWidth, height: 22, alignment: .bottom)
+            .frame(width: historyValueColumnWidth(showsSample: showsSample), height: 22, alignment: .bottom)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -565,8 +566,8 @@ struct OctoberView: View {
     }
 
     @ViewBuilder
-    private func historyStatCell(_ stat: PostseasonHistoryStat?, key: String) -> some View {
-        HStack(spacing: historyStatColumnSpacing) {
+    private func historyStatCell(_ stat: PostseasonHistoryStat?, key: String, showsSample: Bool) -> some View {
+        HStack(spacing: showsSample ? historyStatColumnSpacing : 0) {
             Text(stat.map { historyValue($0.value, key: key) } ?? "—")
                 .font(.custom("Inter-Medium", size: 14, relativeTo: .body))
                 .foregroundStyle(stat == nil ? AppColor.boneMuted : AppColor.bone)
@@ -574,15 +575,17 @@ struct OctoberView: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
                 .frame(width: historyMetricColumnWidth, alignment: .trailing)
-            Text(stat.map { "(\(historySample($0)))" } ?? "")
-                .font(.custom("Inter-Medium", size: 11, relativeTo: .caption))
-                .foregroundStyle(AppColor.boneMuted)
-                .monospacedDigit()
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-                .frame(width: historySampleColumnWidth, alignment: .trailing)
+            if showsSample {
+                Text(stat.map { "(\(historySample($0)))" } ?? "")
+                    .font(.custom("Inter-Medium", size: 11, relativeTo: .caption))
+                    .foregroundStyle(AppColor.boneMuted)
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                    .frame(width: historySampleColumnWidth, alignment: .trailing)
+            }
         }
-        .frame(width: historyValueColumnWidth, alignment: .trailing)
+        .frame(width: historyValueColumnWidth(showsSample: showsSample), alignment: .trailing)
     }
 
     private func sortedHistoryEntries(
