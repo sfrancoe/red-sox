@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T06:15:27.466809+00:00",
+  "generated_at": "2026-10-02T19:32:07.639566+00:00",
   "source": "MLB Stats API",
   "team": "Padres",
   "regular_season_end": "2026-09-27",
@@ -25,16 +25,16 @@
         {
           "name": "FS1/ FOX ONE",
           "is_national": true,
-          "home_away": "away",
+          "home_away": "home",
           "availability": "national",
-          "available_for_streaming": false
+          "available_for_streaming": true
         },
         {
           "name": "FS1/ FOX ONE",
           "is_national": true,
-          "home_away": "home",
+          "home_away": "away",
           "availability": "national",
-          "available_for_streaming": true
+          "available_for_streaming": false
         }
       ]
     },
