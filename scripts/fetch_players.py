@@ -50,14 +50,17 @@ CAREER_SCHEMA_VERSION = 1
 FALLBACK_ID_BASE = 1_900_000_000
 
 SECTION_DETAILS = {
+    "Pitchers": ("Pitcher", "P", True),
     "Starters": ("Pitcher", "P", True),
     "Bullpen": ("Pitcher", "P", True),
     "Closer": ("Pitcher", "P", True),
+    "Two-way": ("Pitcher", "P", True),
     "Catchers": ("Catcher", "C", True),
     "Infielders": ("Infielder", "IF", True),
     "Outfielders": ("Outfielder", "OF", True),
     "DH": ("Hitter", "DH", True),
     "InactivePitchers": ("Pitcher", "P", False),
+    "InactiveTW": ("Pitcher", "P", False),
     "InactiveCatchers": ("Catcher", "C", False),
     "InactiveInfielders": ("Infielder", "IF", False),
     "InactiveOutfielders": ("Outfielder", "OF", False),
@@ -566,30 +569,67 @@ def slugify(value: str, player_id: int) -> str:
 
 
 def parse_roster(wikitext: str) -> tuple[list[dict[str, Any]], str | None]:
+    # Comments and documentation are not part of the displayed roster.
+    wikitext = re.sub(r"<!--.*?-->|<noinclude>.*?</noinclude>", "", wikitext, flags=re.DOTALL | re.IGNORECASE)
+    template_match = re.match(r"\s*\{\{\s*([^|{}\n]+)", wikitext)
+    template = template_match.group(1).strip().lower() if template_match else ""
+    if template not in {"mlb roster", "mlb spring training roster"}:
+        raise RuntimeError(f"Unsupported Wikipedia roster template: {template or 'missing'}")
+    spring_roster = template == "mlb spring training roster"
     date_match = re.search(r"\|Date\s*=\s*([^\n]+)", wikitext)
     roster_date = date_match.group(1).strip() if date_match else None
+
+    # Recognize every parameter boundary, including Two-way and future section
+    # names, so an unknown section cannot be absorbed into the preceding one.
+    sections: dict[str, str] = {}
+    for match in re.finditer(
+        r"^[ \t]*\|([^=|\n]+?)[ \t]*=[ \t]*(.*?)(?=^[ \t]*\|[^=|\n]+?[ \t]*=|\Z)",
+        wikitext, flags=re.MULTILINE | re.DOTALL,
+    ):
+        section, contents = match.group(1).strip(), match.group(2)
+        if section in sections:
+            raise RuntimeError(f"Duplicate Wikipedia roster section: {section}")
+        sections[section] = contents
+        if section not in SECTION_DETAILS and section not in {"Manager", "Coaches"}:
+            if re.search(r"\{\{\s*MLBplayer\s*\|", contents, flags=re.IGNORECASE):
+                raise RuntimeError(f"Unsupported Wikipedia roster player section: {section}")
+
+    pattern = re.compile(
+        r"\{\{\s*MLBplayer\s*\|([^|{}\n]*)\|\s*\[\[([^|\]{}\n]+)(?:\|([^\]{}\n]+))?\]\]"
+        r"\s*(?:\|([^{}\n]*))?\}\}",
+        flags=re.IGNORECASE,
+    )
     rows: list[dict[str, Any]] = []
+    seen_titles: set[str] = set()
+    primary_pitchers = 0
     for section, (group, abbreviation, active) in SECTION_DETAILS.items():
-        match = re.search(
-            rf"\|{re.escape(section)}[ \t]*=[ \t]*(.*?)(?=\n\|[A-Za-z0-9]+[ \t]*=|\Z)",
-            wikitext,
-            flags=re.DOTALL,
-        )
-        if not match:
-            continue
-        pattern = re.compile(
-            r"\{\{MLBplayer\|([^|]+)\|\[\[([^|\]]+)(?:\|([^\]]+))?\]\](?:\|([^}]+))?\}\}"
-        )
-        for player_match in pattern.finditer(match.group(1)):
+        contents = sections.get(section, "")
+        matches = list(pattern.finditer(contents))
+        entry_count = len(re.findall(r"\{\{\s*MLBplayer\s*\|", contents, flags=re.IGNORECASE))
+        if len(matches) != entry_count:
+            raise RuntimeError(f"Unparsed Wikipedia roster player row in section: {section}")
+        if active and group == "Pitcher":
+            primary_pitchers += len(matches)
+        for player_match in matches:
             page_title = player_match.group(2).strip()
+            identity = page_title.replace("_", " ")
+            if identity in seen_titles:
+                raise RuntimeError(f"Duplicate Wikipedia roster player: {page_title}")
+            seen_titles.add(identity)
             display_name = (player_match.group(3) or page_title).strip()
             marker = (player_match.group(4) or "").strip().upper()
+            is_active = active and not spring_roster
             if section == "60DayIL":
                 status = "60-day injured list"
             elif marker == "IL":
                 status = "Injured list"
+                is_active = False
             elif section == "Restricted":
                 status = "Restricted list"
+            elif spring_roster:
+                # The spring template's columns mean 40-man membership and
+                # non-roster invitees, not the regular-season active roster.
+                status = "40-man roster" if active else "Non-roster invitee"
             else:
                 status = "Active" if active else "Inactive roster"
             rows.append(
@@ -599,12 +639,14 @@ def parse_roster(wikitext: str) -> tuple[list[dict[str, Any]], str | None]:
                     "number": clean_number(player_match.group(1)),
                     "group": group,
                     "abbreviation": abbreviation,
-                    "active": active,
+                    "active": is_active,
                     "status": status,
                 }
             )
     if not rows:
         raise RuntimeError("Wikipedia roster template contained no player rows")
+    if not primary_pitchers:
+        raise RuntimeError("Wikipedia roster template contained no primary pitching rows")
     return rows, roster_date
 
 
