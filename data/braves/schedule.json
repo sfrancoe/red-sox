@@ -1,40 +1,176 @@
 {
-  "generated_at": "2026-10-02T00:15:08.678542+00:00",
+  "generated_at": "2026-10-02T06:15:14.978733+00:00",
   "source": "MLB Stats API",
   "team": "Braves",
   "regular_season_end": "2026-09-27",
   "games": [
     {
-      "game_pk": 849844,
-      "game_date": "2026-10-02T00:00:00Z",
-      "status": "In Progress",
-      "venue": "Truist Park",
-      "location": "home",
-      "opponent": "Phillies",
-      "opponent_record": "1-1",
-      "favorite_team_record": "1-1",
-      "favorite_team_pitcher": "Ray Kerr",
-      "opponent_pitcher": "Aaron Nola",
-      "favorite_team_pitcher_record": "0-0",
-      "opponent_pitcher_record": "7-12",
+      "game_pk": 849828,
+      "game_date": "2026-10-03T20:00:00Z",
+      "status": "Scheduled",
+      "venue": "UNIQLO Field at Dodger Stadium",
+      "location": "away",
+      "opponent": "Dodgers",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
       "show_probables": true,
-      "series_description": "NL Wild Card Series",
+      "series_description": "NL Division Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "NBC/Peacock",
+          "name": "FOX/ FOX ONE",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "FOX/ FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        }
+      ]
+    },
+    {
+      "game_pk": 849823,
+      "game_date": "2026-10-05T00:00:00Z",
+      "status": "Scheduled",
+      "venue": "UNIQLO Field at Dodger Stadium",
+      "location": "away",
+      "opponent": "Dodgers",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": true,
+      "series_description": "NL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "FS1/ FOX ONE",
           "is_national": true,
           "home_away": "home",
           "availability": "national",
           "available_for_streaming": true
         },
         {
-          "name": "NBC/Peacock",
+          "name": "FS1/ FOX ONE",
           "is_national": true,
           "home_away": "away",
           "availability": "national",
           "available_for_streaming": false
+        }
+      ]
+    },
+    {
+      "game_pk": 849819,
+      "game_date": "2026-10-06T22:00:00Z",
+      "status": "Scheduled",
+      "venue": "Truist Park",
+      "location": "home",
+      "opponent": "Dodgers",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": true,
+      "series_description": "NL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "FS1/ FOX ONE",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "FS1/ FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        }
+      ]
+    },
+    {
+      "game_pk": 849822,
+      "game_date": "2026-10-07T22:00:00Z",
+      "status": "Scheduled",
+      "venue": "Truist Park",
+      "location": "home",
+      "opponent": "Dodgers",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "NL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "FS1/ FOX ONE",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "FS1/ FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
+        }
+      ]
+    },
+    {
+      "game_pk": 849821,
+      "game_date": "2026-10-10T00:00:00Z",
+      "status": "Scheduled",
+      "venue": "UNIQLO Field at Dodger Stadium",
+      "location": "away",
+      "opponent": "Dodgers",
+      "opponent_record": "0-0",
+      "favorite_team_record": "0-0",
+      "favorite_team_pitcher": "",
+      "opponent_pitcher": "",
+      "favorite_team_pitcher_record": "—",
+      "opponent_pitcher_record": "—",
+      "show_probables": false,
+      "series_description": "NL Division Series",
+      "doubleheader": false,
+      "game_number": 1,
+      "broadcasts": [
+        {
+          "name": "FOX/ FOX ONE",
+          "is_national": true,
+          "home_away": "away",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "FOX/ FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
         }
       ]
     }
