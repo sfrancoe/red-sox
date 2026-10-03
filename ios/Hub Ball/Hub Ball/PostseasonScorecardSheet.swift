@@ -44,7 +44,6 @@ struct PostseasonScorecardSheet: View {
                 .padding(16)
             }
             .background(AppColor.night)
-            .navigationTitle("Game Scorecard")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -75,27 +74,17 @@ struct PostseasonScorecardSheet: View {
     }
 
     private func scorecardHeader(_ scorecard: RecentGame) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("\(scorecard.away.name) at \(scorecard.home.name)")
-                .font(.headline)
-            HStack {
-                if scorecard.isLive, !store.refreshFailed {
-                    LiveGameIndicator()
-                }
-                Text(scorecard.liveStatus ?? scorecard.gameState ?? game.status)
-                    .font(.subheadline.weight(.semibold))
+        HStack {
+            if scorecard.isLive, !store.refreshFailed {
+                LiveGameIndicator()
             }
-            Text(scorecard.venue).foregroundStyle(AppColor.boneMuted)
-            if let checkedAt = store.checkedAt {
-                Text("Updated \(checkedAt.formatted(date: .omitted, time: .standard))")
-                    .font(.caption).foregroundStyle(AppColor.boneMuted)
-            }
+            Text(scorecard.liveStatus ?? scorecard.gameState ?? game.status)
+                .font(.subheadline.weight(.semibold))
         }
     }
 
     private func lineScore(_ scorecard: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Line Score").font(.headline)
             GeometryReader { geometry in
                 let teamWidth: CGFloat = geometry.size.width >= 600 ? 68 : 44
                 let cellWidth = max(18, (geometry.size.width - 16 - teamWidth) / 13)
@@ -138,8 +127,6 @@ struct PostseasonScorecardSheet: View {
             if scorecard.isLive {
                 currentMatchup(scorecard.liveMatchup)
             }
-            Text("R: Runs · H: Hits · E: Errors · LOB: Left on base\n–: Inning not played. Swipe for extra innings and player statistics.")
-                .font(.caption).foregroundStyle(AppColor.boneMuted)
         }
         .accessibilityIdentifier("postseason.scorecard.linescore")
     }
