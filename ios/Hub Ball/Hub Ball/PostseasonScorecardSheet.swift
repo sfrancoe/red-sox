@@ -23,9 +23,6 @@ struct PostseasonScorecardSheet: View {
                             retryButton
                         }
                         lineScore(scorecard)
-                        if scorecard.isLive {
-                            currentMatchup(scorecard.liveMatchup)
-                        }
                         teamBoxScore(scorecard.away)
                         teamBoxScore(scorecard.home)
                     } else if store.refreshFailed {
@@ -123,6 +120,9 @@ struct PostseasonScorecardSheet: View {
                     }
                 }
             }
+            if scorecard.isLive {
+                currentMatchup(scorecard.liveMatchup)
+            }
             Text("R: Runs · H: Hits · E: Errors · LOB: Left on base\n–: Inning not played. Swipe tables to see all columns.")
                 .font(.caption).foregroundStyle(AppColor.boneMuted)
         }
@@ -130,23 +130,14 @@ struct PostseasonScorecardSheet: View {
     }
 
     private func currentMatchup(_ matchup: LiveGameMatchup?) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text("Current pitcher").font(.subheadline.weight(.semibold))
-                    .foregroundStyle(AppColor.boneMuted)
-                Text(matchup?.pitcher ?? "Not available")
-                    .accessibilityIdentifier("postseason.scorecard.currentPitcher")
-            }
-            VStack(alignment: .leading, spacing: 3) {
-                Text("Current batter").font(.subheadline.weight(.semibold))
-                    .foregroundStyle(AppColor.boneMuted)
-                Text(matchup?.batter ?? "Not available")
-                    .accessibilityIdentifier("postseason.scorecard.currentBatter")
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(12)
-        .background(AppColor.nightRaised, in: RoundedRectangle(cornerRadius: 8))
+        Text(matchup?.compactDescription.replacingOccurrences(of: "  (AB)", with: " , (AB)")
+             ?? "(P) — , (AB) —  —, — Outs")
+            .font(AppFont.bodySmall)
+            .lineLimit(1)
+            .minimumScaleFactor(0.75)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityLabel(matchup?.accessibilityDescription ?? "Current matchup unavailable")
+            .accessibilityIdentifier("postseason.scorecard.currentMatchup")
     }
 
     private func teamBoxScore(_ team: TeamBoxScore) -> some View {
