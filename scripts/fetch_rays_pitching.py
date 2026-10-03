@@ -4,12 +4,10 @@
 from __future__ import annotations
 
 import json
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from http_refresh import fetch_json
 
 
 TBR = 139
@@ -33,22 +31,6 @@ STANDINGS_API = (
 )
 
 
-def fetch_json(url: str) -> Any:
-    """Use normal request defaults first, then the approved fallback UA."""
-    last_error: Exception | None = None
-    for headers in ({}, {"User-Agent": FALLBACK_USER_AGENT}):
-        for attempt in range(3):
-            try:
-                request = Request(url, headers=headers)
-                with urlopen(request, timeout=45) as response:
-                    return json.load(response)
-            except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
-                last_error = exc
-                if attempt < 2:
-                    time.sleep(2**attempt)
-        if headers:
-            break
-    raise RuntimeError(f"Could not fetch pitching data: {last_error}")
 
 
 def number(value: Any, default: float = 0.0) -> float:

@@ -30,22 +30,14 @@ jobs:
           python3 scripts/fetch_recent_game.py
           python3 scripts/fetch_standings.py
 
-      - name: Fetch open player data
-        run: python3 scripts/fetch_players.py --team redsox
-
-      - name: Check player data
-        run: |
-          python3 scripts/test_open_players.py
-          python3 scripts/test_players.py --team redsox
-
       - name: Show what changed
-        run: git --no-pager diff --stat -- data/schedule.json data/recent-game.json data/standings.json data/players.json data/player-careers "ios/Hub Ball/Hub Ball/players.json" || true
+        run: git --no-pager diff --stat -- data/schedule.json data/recent-game.json data/standings.json || true
 
       - name: Commit if game data changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/schedule.json data/recent-game.json data/standings.json data/players.json data/player-careers "ios/Hub Ball/Hub Ball/players.json"
+          git add data/schedule.json data/recent-game.json data/standings.json
           if git diff --cached --quiet; then
             echo "No game data changes — nothing to commit."
           else

@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
+import sys
 import re
 import time
 import urllib.error
@@ -22,7 +24,7 @@ FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 SOURCES = {
     "nypost": {
         "name": "New York Post",
-        "url": "https://nypost.com/sports/mets/",
+        "url": "https://nypost.com/new-york-mets/",
         "kind": "nypost",
         "category": "Mets",
     },
@@ -222,9 +224,22 @@ def main() -> int:
     if unknown:
         parser.error(f"unknown source: {', '.join(sorted(unknown))}")
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    failures = []
     for key in args.sources or list(SOURCES):
-        write_feed(key)
-    return 0
+        try:
+            write_feed(key)
+        except (RuntimeError, ET.ParseError) as exc:
+            failure = f"{SOURCES[key]['name']}: {exc}"
+            failures.append(failure)
+            print(f"ERROR: {failure}; retained previous snapshot", file=sys.stderr)
+    summary = f"Mets newspapers: {len(failures)} source failures. Healthy updates are ready to publish.\n"
+    if failures:
+        summary += "\n" + "\n".join(f"- {failure}" for failure in failures) + "\n"
+    print(summary)
+    if summary_path := os.environ.get("GITHUB_STEP_SUMMARY"):
+        with Path(summary_path).open("a", encoding="utf-8") as output:
+            output.write(summary)
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":
