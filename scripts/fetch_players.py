@@ -227,13 +227,15 @@ def integer(row: dict[str, str], key: str) -> int:
 
 
 def stat_rows(archive: zipfile.ZipFile, suffix: str) -> list[dict[str, str]]:
-    filename = next((name for name in archive.namelist() if name.endswith(suffix)), None)
+    filename = next((name for name in archive.namelist() if Path(name).name == suffix), None)
     if not filename:
         return []
     contents = archive.read(filename).decode("utf-8-sig")
     return [
         row for row in csv.DictReader(io.StringIO(contents))
         if row.get("stattype") == "value" and row.get("gametype") == "regular"
+        and (match := re.search(r"(\d{4})\d{5}$", row.get("gid", "")))
+        and int(match.group(1)) <= RETROSHEET_STATS_THROUGH
     ]
 
 
@@ -1013,8 +1015,8 @@ def build_team_feed(
     if skip_new_career_stats:
         cached_stats.update({player_id: unavailable_career_stats() for player_id in missing_ids})
     else:
-        # Retrosheet's public server is intentionally treated gently; two parallel
-        # lookups keep the all-team refresh practical without opening a burst of connections.
+        # Read two archived members at a time; initialization downloads the
+        # published release once, without per-player network requests.
         with ThreadPoolExecutor(max_workers=2) as executor:
             cached_stats.update(zip(missing_ids, executor.map(career_stats, missing_ids)))
     for player in feed["players"]:

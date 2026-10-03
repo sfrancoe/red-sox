@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import io
 import json
 import tempfile
@@ -21,7 +22,7 @@ class RefreshReliabilityTests(unittest.TestCase):
         buffer = io.BytesIO()
         with zipfile.ZipFile(buffer, 'w') as archive:
             archive.writestr('players/other001_b.csv', 'gid,stattype,gametype,b_h,b_ab\nBOS202501010,value,regular,99,99\n')
-            archive.writestr('players/abrew002_b.csv', 'gid,stattype,gametype,b_h,b_ab\nBOS202501010,value,regular,2,4\n')
+            archive.writestr('players/abrew002_b.csv', 'gid,stattype,gametype,b_h,b_ab\nBOS202501010,value,regular,2,4\nBOS202601010,value,regular,99,99\n')
         with zipfile.ZipFile(buffer) as archive, patch.object(players, 'retrosheet_archive', return_value=archive):
             stats = players.career_stats('abrew002')
             self.assertEqual(stats['batting']['hits'], 2)
@@ -54,6 +55,26 @@ class RefreshReliabilityTests(unittest.TestCase):
         self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0]['title'], 'Mets & roster')
         self.assertEqual(articles[0]['published'], '2026-10-03T00:00:00+00:00')
+
+    def test_mets_failed_source_preserves_snapshot_and_continues(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            previous = root / 'nypost.json'
+            previous.write_text('{"articles": [{"title": "Last good Mets headline"}]}\n')
+            before = previous.read_bytes()
+            with patch.object(mets, 'OUTPUT_DIR', root), patch.object(mets, 'fetch', side_effect=[RuntimeError('Provider unavailable'), b'<rss><channel><item><title>Mets roster</title><link>https://example.org/mets</link></item></channel></rss>']), patch('sys.argv', ['fetch_mets_news.py', 'nypost', 'athletic']), contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                status = mets.main()
+            self.assertEqual(status, 1)
+            self.assertEqual(previous.read_bytes(), before)
+            self.assertTrue((root / 'athletic.json').exists())
+
+    def test_invalid_archive_does_not_poison_the_disk_cache(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict('os.environ', {'RETROSHEET_CACHE_DIR': directory}), patch.object(players, 'urlopen', side_effect=lambda *a, **k: io.BytesIO(b'<html>error</html>')), patch.object(players.time, 'sleep'):
+            players.retrosheet_archive.cache_clear()
+            with self.assertRaises(RuntimeError):
+                players.retrosheet_archive()
+            self.assertEqual(list(Path(directory).iterdir()), [])
+            players.retrosheet_archive.cache_clear()
 
     def test_rate_limit_honors_retry_after_and_retries(self):
         error = HTTPError('https://www.fangraphs.com/api/test', 429, 'rate limited', {'Retry-After': '60'}, None)
