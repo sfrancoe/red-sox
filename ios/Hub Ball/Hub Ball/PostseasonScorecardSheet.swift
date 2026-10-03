@@ -19,7 +19,6 @@ struct PostseasonScorecardSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     if let scorecard = store.snapshot {
-                        scorecardHeader(scorecard)
                         if store.refreshFailed {
                             Text("Updates interrupted. Showing the last loaded scorecard.")
                                 .foregroundStyle(AppColor.amber)
@@ -51,11 +50,26 @@ struct PostseasonScorecardSheet: View {
                 .padding(16)
             }
             .background(AppColor.night)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+            .toolbar(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                HStack(spacing: 12) {
+                    if let scorecard = store.snapshot {
+                        scorecardHeader(scorecard)
+                            .foregroundStyle(AppColor.bone)
+                    }
+                    Spacer(minLength: 0)
                     Button("Done") { dismiss() }
+                        .foregroundStyle(AppColor.amber)
+                        .font(.body)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 12)
+                        .background(AppColor.nightRaised, in: Capsule())
+                        .overlay { Capsule().stroke(AppColor.rule, lineWidth: 1) }
+                        .buttonStyle(.plain)
                 }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(AppColor.night)
             }
             .refreshable { await store.refresh() }
             .task(id: scenePhase) {
