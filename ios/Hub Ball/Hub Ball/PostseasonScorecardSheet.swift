@@ -23,6 +23,9 @@ struct PostseasonScorecardSheet: View {
                             retryButton
                         }
                         lineScore(scorecard)
+                        if scorecard.isLive {
+                            currentMatchup(scorecard.liveMatchup)
+                        }
                         teamBoxScore(scorecard.away)
                         teamBoxScore(scorecard.home)
                     } else if store.refreshFailed {
@@ -124,6 +127,26 @@ struct PostseasonScorecardSheet: View {
                 .font(.caption).foregroundStyle(AppColor.boneMuted)
         }
         .accessibilityIdentifier("postseason.scorecard.linescore")
+    }
+
+    private func currentMatchup(_ matchup: LiveGameMatchup?) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Current pitcher").font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppColor.boneMuted)
+                Text(matchup?.pitcher ?? "Not available")
+                    .accessibilityIdentifier("postseason.scorecard.currentPitcher")
+            }
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Current batter").font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppColor.boneMuted)
+                Text(matchup?.batter ?? "Not available")
+                    .accessibilityIdentifier("postseason.scorecard.currentBatter")
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(AppColor.nightRaised, in: RoundedRectangle(cornerRadius: 8))
     }
 
     private func teamBoxScore(_ team: TeamBoxScore) -> some View {
