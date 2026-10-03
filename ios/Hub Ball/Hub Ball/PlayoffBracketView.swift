@@ -3,6 +3,7 @@ import SwiftUI
 struct PlayoffBracketView: View {
     let payload: PostseasonPayload
     let onSelect: (PostseasonSeries) -> Void
+    let onSelectLiveGame: (PostseasonGame) -> Void
     @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
     @ScaledMetric(relativeTo: .caption) private var teamRowHeight = 26.0
     @ScaledMetric(relativeTo: .caption) private var singleLineFooterHeight = 20.0
@@ -201,7 +202,8 @@ struct PlayoffBracketView: View {
         let hasScheduledDate = liveGame == nil && !hasSeriesStatus && nextScheduledGame(for: item) != nil
         let hasLightFooter = liveGame == nil && (hasSeriesStatus || hasScheduledDate)
         return Button {
-            if let item { onSelect(item) }
+            if let liveGame { onSelectLiveGame(liveGame) }
+            else if let item { onSelect(item) }
         } label: {
             VStack(spacing: 0) {
                 ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
@@ -298,7 +300,7 @@ struct PlayoffBracketView: View {
                     .compactMap { $0 }.joined(separator: ", ")
             }.map { " " + $0 } ?? "")
             + (hasSeriesStatus ? nextGameDetails.map { " Next game: " + $0 } ?? "" : ""))
-        .accessibilityHint("Opens series details")
+        .accessibilityHint(liveGame == nil ? "Opens series details" : "Opens live game scorecard")
     }
 
     private func participants(_ item: PostseasonSeries?, slot: PlayoffBracketSlot) -> [PostseasonClub] {

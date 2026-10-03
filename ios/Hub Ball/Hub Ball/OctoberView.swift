@@ -38,6 +38,7 @@ struct OctoberView: View {
     @State private var selectedHistoryPlayer: PostseasonPlayerSelection?
     @State private var newsLeague: PostseasonHistoryLeague = .both
     @State private var selectedSeries: PostseasonSeries?
+    @State private var selectedLiveGame: PostseasonGame?
     private let historyMetricColumnWidth: CGFloat = 42
     private var historySampleColumnWidth: CGFloat { historyGroup == .hitting ? 24 : 34 }
     private let historyStatColumnSpacing: CGFloat = 2
@@ -111,6 +112,11 @@ struct OctoberView: View {
             }
             #endif
         }
+        .sheet(item: $selectedLiveGame) { game in
+            PostseasonScorecardSheet(game: game)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+        }
         .sheet(item: $selectedSeries) { series in
             OctoberSeriesDetail(series: series, allSeries: self.series, store: store)
                 .presentationDetents([.medium, .large])
@@ -132,7 +138,8 @@ struct OctoberView: View {
     }
 
     private func raceView(_ payload: PostseasonPayload) -> some View {
-        PlayoffBracketView(payload: payload) { selectedSeries = $0 }
+        PlayoffBracketView(payload: payload, onSelect: { selectedSeries = $0 },
+                          onSelectLiveGame: { selectedLiveGame = $0 })
             .refreshable { await store.refresh() }
     }
 
