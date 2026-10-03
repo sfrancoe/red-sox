@@ -5,6 +5,7 @@ struct PostseasonScorecardSheet: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var store: PostseasonScorecardStore
     private let game: PostseasonGame
+    @ScaledMetric(relativeTo: .caption) private var scoreRowHeight: CGFloat = 28
 
     init(game: PostseasonGame) {
         self.game = game
@@ -95,38 +96,75 @@ struct PostseasonScorecardSheet: View {
     private func lineScore(_ scorecard: RecentGame) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Line Score").font(.headline)
-            ScrollView(.horizontal) {
-                Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-                    GridRow {
-                        tableCell("Team", width: 72, leading: true, header: true)
-                        ForEach(scorecard.innings) { inning in
-                            tableCell(String(inning.num), header: true)
-                        }
-                        ForEach(["R", "H", "E", "LOB"], id: \.self) { tableCell($0, header: true) }
+            GeometryReader { geometry in
+                let teamWidth: CGFloat = geometry.size.width >= 600 ? 68 : 44
+                let cellWidth = max(18, (geometry.size.width - 16 - teamWidth) / 13)
+                let inningsWidth = max(0, geometry.size.width - 16 - teamWidth - cellWidth * 4)
+                HStack(spacing: 0) {
+                    VStack(spacing: 0) {
+                        scoreCell("", width: teamWidth)
+                        scoreCell(scorecard.away.abbreviation, width: teamWidth, team: true)
+                        scoreCell(scorecard.home.abbreviation, width: teamWidth, team: true)
                     }
-                    ForEach([scorecard.away, scorecard.home], id: \.side) { team in
-                        GridRow {
-                            tableCell(team.abbreviation, width: 72, leading: true)
+                    ScrollView(.horizontal, showsIndicators: true) {
+                        HStack(spacing: 0) {
                             ForEach(scorecard.innings) { inning in
-                                let runs = team.side == "away" ? inning.away.runs : inning.home.runs
-                                tableCell(runs.map(String.init) ?? "–")
-                                    .accessibilityLabel("\(team.abbreviation), inning \(inning.num): \(runs.map { "\($0) runs" } ?? "not played")")
+                                VStack(spacing: 0) {
+                                    scoreCell(String(inning.num), width: cellWidth, header: true)
+                                    scoreCell(inning.away.runs.map(String.init) ?? "–", width: cellWidth)
+                                        .accessibilityLabel("\(scorecard.away.abbreviation), inning \(inning.num): \(inning.away.runs.map { "\($0) runs" } ?? "not played")")
+                                    scoreCell(inning.home.runs.map(String.init) ?? "–", width: cellWidth)
+                                        .accessibilityLabel("\(scorecard.home.abbreviation), inning \(inning.num): \(inning.home.runs.map { "\($0) runs" } ?? "not played")")
+                                }
                             }
-                            tableCell(String(team.runs), header: true)
-                            tableCell(String(team.hits))
-                            tableCell(String(team.errors))
-                            tableCell(String(team.leftOnBase))
                         }
                     }
+                    .frame(width: inningsWidth)
+                    scoreTotal("R", away: scorecard.away.runs, home: scorecard.home.runs,
+                               scorecard: scorecard, width: cellWidth, highlightsLeader: true)
+                    scoreTotal("H", away: scorecard.away.hits, home: scorecard.home.hits,
+                               scorecard: scorecard, width: cellWidth)
+                    scoreTotal("E", away: scorecard.away.errors, home: scorecard.home.errors,
+                               scorecard: scorecard, width: cellWidth)
+                    scoreTotal("LOB", away: scorecard.away.leftOnBase, home: scorecard.home.leftOnBase,
+                               scorecard: scorecard, width: cellWidth)
                 }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 10)
+                .background(AppColor.nightRaised)
+                .overlay(Rectangle().strokeBorder(AppColor.rule, lineWidth: 1))
             }
+            .frame(height: scoreRowHeight * 3 + 20)
             if scorecard.isLive {
                 currentMatchup(scorecard.liveMatchup)
             }
-            Text("R: Runs · H: Hits · E: Errors · LOB: Left on base\n–: Inning not played. Swipe tables to see all columns.")
+            Text("R: Runs · H: Hits · E: Errors · LOB: Left on base\n–: Inning not played. Swipe for extra innings and player statistics.")
                 .font(.caption).foregroundStyle(AppColor.boneMuted)
         }
         .accessibilityIdentifier("postseason.scorecard.linescore")
+    }
+
+    private func scoreCell(_ value: String, width: CGFloat, header: Bool = false,
+                           team: Bool = false, emphasized: Bool = false) -> some View {
+        Text(value)
+            .font(.system(size: emphasized ? 15 : (header ? 10 : 12),
+                          weight: team || header || emphasized ? .bold : .semibold))
+            .monospacedDigit()
+            .foregroundStyle(emphasized ? AppColor.amber : AppColor.bone)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+            .frame(width: width, height: scoreRowHeight, alignment: team ? .leading : .center)
+    }
+
+    private func scoreTotal(_ title: String, away: Int, home: Int, scorecard: RecentGame,
+                            width: CGFloat, highlightsLeader: Bool = false) -> some View {
+        VStack(spacing: 0) {
+            scoreCell(title, width: width, header: true)
+            scoreCell(String(away), width: width, emphasized: highlightsLeader && away > home)
+                .accessibilityLabel("\(scorecard.away.abbreviation), \(title): \(away)")
+            scoreCell(String(home), width: width, emphasized: highlightsLeader && home > away)
+                .accessibilityLabel("\(scorecard.home.abbreviation), \(title): \(home)")
+        }
     }
 
     private func currentMatchup(_ matchup: LiveGameMatchup?) -> some View {
