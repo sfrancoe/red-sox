@@ -4,6 +4,8 @@ struct PostseasonScorecardSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @State private var store: PostseasonScorecardStore
+    @State private var selectedTeamSide = "away"
+    @State private var selectedPlayer: ScorecardPlayerSelection?
     private let game: PostseasonGame
     @ScaledMetric(relativeTo: .caption) private var scoreRowHeight: CGFloat = 28
 
@@ -24,8 +26,13 @@ struct PostseasonScorecardSheet: View {
                             retryButton
                         }
                         lineScore(scorecard)
-                        teamBoxScore(scorecard.away)
-                        teamBoxScore(scorecard.home)
+                        Picker("Box score team", selection: $selectedTeamSide) {
+                            Text(scorecard.away.abbreviation).tag("away")
+                            Text(scorecard.home.abbreviation).tag("home")
+                        }
+                        .pickerStyle(.segmented)
+                        .accessibilityIdentifier("postseason.scorecard.teamTabs")
+                        teamBoxScore(selectedTeamSide == "away" ? scorecard.away : scorecard.home)
                     } else if store.refreshFailed {
                         ContentUnavailableView {
                             Label("Scorecard unavailable", systemImage: "wifi.exclamationmark")
@@ -61,6 +68,11 @@ struct PostseasonScorecardSheet: View {
                     guard !Task.isCancelled, scenePhase == .active else { break }
                     await store.refresh()
                 }
+            }
+        }
+        .sheet(item: $selectedPlayer) { selection in
+            if let team = HubTeam.allCases.first(where: { $0.mlbID == selection.teamID }) {
+                PostseasonPlayerCardSheet(team: team, playerID: selection.playerID)
             }
         }
         .tint(AppColor.amber)
@@ -167,76 +179,121 @@ struct PostseasonScorecardSheet: View {
 
     private func teamBoxScore(_ team: TeamBoxScore) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(team.name).font(.title3.weight(.bold))
             Text("Batting").font(.headline)
-            statsTable(headers: ["AB", "R", "H", "RBI", "BB", "SO", "HR", "SB", "LOB"],
+            statsTable(headers: ["AB", "R", "H", "RBI"], teamID: team.id,
                        rows: team.batting.map { batter in
-                ScorecardRow(id: batter.id,
-                             name: batter.name + "  " + batter.position,
-                             note: batter.note,
-                             values: [batter.atBats, batter.runs, batter.hits, batter.rbi,
-                                      batter.baseOnBalls, batter.strikeOuts, batter.homeRuns]
-                                .map(String.init) + [batter.stolenBases.map(String.init) ?? "–", String(batter.leftOnBase)])
-            })
+                ScorecardRow(id: batter.id, playerID: batter.mlbId, name: batter.name,
+                             position: batter.position,
+                             values: [batter.atBats, batter.runs, batter.hits, batter.rbi].map(String.init))
+            }, fitsScreen: true)
             Text("Pitching").font(.headline)
-            statsTable(headers: ["IP", "H", "R", "ER", "BB", "SO", "HR", "P"],
+            statsTable(headers: ["IP", "H", "R", "ER", "BB", "SO", "HR", "P"], teamID: team.id,
                        rows: team.pitching.map { pitcher in
-                ScorecardRow(id: pitcher.id, name: pitcher.name, note: pitcher.note,
+                ScorecardRow(id: pitcher.id, playerID: pitcher.mlbId, name: pitcher.name,
+                             position: pitcher.note,
                              values: [pitcher.inningsPitched] + [pitcher.hits, pitcher.runs,
                                  pitcher.earnedRuns, pitcher.baseOnBalls, pitcher.strikeOuts,
                                  pitcher.homeRuns, pitcher.numberOfPitches].map(String.init))
-            })
+            }, fitsScreen: false)
         }
         .accessibilityIdentifier("postseason.scorecard.\(team.side)")
     }
 
-    private func statsTable(headers: [String], rows: [ScorecardRow]) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+    private func statsTable(headers: [String], teamID: Int, rows: [ScorecardRow], fitsScreen: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
             if rows.isEmpty {
                 Text("Player statistics aren’t available yet.").foregroundStyle(AppColor.boneMuted)
             } else {
-                ScrollView(.horizontal) {
-                    Grid(alignment: .leading, horizontalSpacing: 0, verticalSpacing: 0) {
-                        GridRow {
-                            tableCell("Player", width: 210, leading: true, header: true)
-                            ForEach(headers, id: \.self) { tableCell($0, header: true) }
-                        }
-                        ForEach(rows) { row in
-                            GridRow {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(row.name)
-                                    if !row.note.isEmpty {
-                                        Text(row.note).font(.caption).foregroundStyle(AppColor.boneMuted)
-                                    }
-                                }
-                                .frame(width: 194, alignment: .leading).padding(8)
-                                ForEach(Array(row.values.enumerated()), id: \.offset) { index, value in
-                                    tableCell(value)
-                                        .accessibilityLabel("\(row.name), \(headers[index]): \(value)")
-                                }
-                            }
-                            .background(AppColor.nightRaised)
+                GeometryReader { geometry in
+                    let statWidth: CGFloat = fitsScreen ? max(28, min(38, geometry.size.width * 0.09)) : 36
+                    let nameWidth = fitsScreen ? max(0, geometry.size.width - statWidth * CGFloat(headers.count) - 16) : 190
+                    if fitsScreen {
+                        compactStatsRows(headers: headers, rows: rows, teamID: teamID,
+                                         nameWidth: nameWidth, statWidth: statWidth)
+                    } else {
+                        ScrollView(.horizontal) {
+                            compactStatsRows(headers: headers, rows: rows, teamID: teamID,
+                                             nameWidth: nameWidth, statWidth: statWidth)
                         }
                     }
                 }
+                .frame(height: CGFloat(rows.count + 1) * boxScoreRowHeight)
             }
         }
     }
 
-    private func tableCell(_ text: String, width: CGFloat = 44,
-                           leading: Bool = false, header: Bool = false) -> some View {
-        Text(text)
-            .font(header ? .subheadline.weight(.bold) : .subheadline)
-            .monospacedDigit()
-            .frame(width: width, alignment: leading ? .leading : .center)
-            .padding(.vertical, 10)
-            .background(header ? AppColor.rule : AppColor.nightRaised)
+    @ScaledMetric(relativeTo: .subheadline) private var boxScoreRowHeight: CGFloat = 30
+
+    private func compactStatsRows(headers: [String], rows: [ScorecardRow], teamID: Int,
+                                  nameWidth: CGFloat, statWidth: CGFloat) -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Text("Player").frame(width: nameWidth, alignment: .leading)
+                ForEach(headers, id: \.self) { header in
+                    Text(header).frame(width: statWidth)
+                }
+            }
+            .font(AppFont.label.weight(.bold))
+            .padding(.horizontal, 8)
+            .frame(height: boxScoreRowHeight)
+            .background(AppColor.rule)
+            ForEach(rows) { row in
+                HStack(spacing: 0) {
+                    Button {
+                        if let playerID = row.playerID {
+                            selectedPlayer = ScorecardPlayerSelection(playerID: playerID, teamID: teamID)
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text(row.name)
+                                .font(AppFont.bodySmall.weight(.semibold))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                                .layoutPriority(1)
+                            if !row.position.isEmpty {
+                                Text(row.position).font(AppFont.label)
+                                    .foregroundStyle(AppColor.boneMuted)
+                                    .lineLimit(1)
+                            }
+                        }
+                        .frame(width: nameWidth, height: boxScoreRowHeight, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .foregroundStyle(AppColor.bone)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(row.playerID == nil)
+                    .accessibilityLabel(row.name)
+                    .accessibilityHint("Opens player card")
+                    .accessibilityIdentifier("postseason.scorecard.player.\(teamID).\(row.playerID ?? 0)")
+                    ForEach(Array(row.values.enumerated()), id: \.offset) { index, value in
+                        Text(value)
+                            .font(AppFont.bodySmall)
+                            .monospacedDigit()
+                            .frame(width: statWidth, height: boxScoreRowHeight)
+                            .accessibilityLabel("\(row.name), \(headers[index]): \(value)")
+                    }
+                }
+                .padding(.horizontal, 8)
+                .background(AppColor.nightRaised)
+                .overlay(alignment: .bottom) {
+                    Rectangle().fill(AppColor.rule).frame(height: 0.5)
+                }
+            }
+        }
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
 private struct ScorecardRow: Identifiable {
     let id: String
+    let playerID: Int?
     let name: String
-    let note: String
+    let position: String
     let values: [String]
+}
+
+private struct ScorecardPlayerSelection: Identifiable {
+    let playerID: Int
+    let teamID: Int
+    var id: String { "\(teamID)-\(playerID)" }
 }
