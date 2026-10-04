@@ -6,13 +6,12 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
+
+from http_refresh import fetch_json as fetch_provider_json
 
 from team_registry import data_directory, expansion_teams, team_by_key
 from schedule_broadcasts import television_broadcasts
@@ -52,20 +51,12 @@ _projections: list[dict[str, Any]] | None = None
 
 
 def fetch_json(url: str, required: bool = True, timeout: int = 45) -> Any:
-    """Use normal defaults first, then the approved fallback UA."""
-    last_error: Exception | None = None
-    for headers in ({}, {"User-Agent": FALLBACK_USER_AGENT}):
-        for attempt in range(3):
-            try:
-                with urlopen(Request(url, headers=headers), timeout=timeout) as response:
-                    return json.load(response)
-            except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
-                last_error = exc
-                if attempt < 2:
-                    time.sleep(2**attempt)
-    if required:
-        raise RuntimeError(f"Could not fetch {url}: {last_error}")
-    return {}
+    try:
+        return fetch_provider_json(url, timeout=timeout)
+    except RuntimeError:
+        if required:
+            raise
+        return {}
 
 
 def write_feed(path: Path, feed: dict[str, Any], ignored: tuple[str, ...] = ("generated_at",)) -> None:

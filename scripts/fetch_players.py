@@ -14,11 +14,15 @@ import argparse
 import csv
 import io
 import json
+import os
+import tempfile
 import re
 import time
 import unicodedata
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
+from threading import Lock
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -40,7 +44,8 @@ FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 CHADWICK_REGISTER_URL = (
     "https://raw.githubusercontent.com/chadwickbureau/register/master/data/people-{suffix}.csv"
 )
-RETROSHEET_PLAYER_URL = "https://www.retrosheet.org/downloads/playerid_.php"
+RETROSHEET_PLAYER_URL = "https://www.retrosheet.org/downloads/playerlogs.zip"
+RETROSHEET_ARCHIVE_LOCK = Lock()
 RETROSHEET_STATS_THROUGH = 2025
 RETROSHEET_NOTICE = (
     "The information used here was obtained free of charge from and is copyrighted by Retrosheet. "
@@ -222,18 +227,54 @@ def integer(row: dict[str, str], key: str) -> int:
 
 
 def stat_rows(archive: zipfile.ZipFile, suffix: str) -> list[dict[str, str]]:
-    filename = next((name for name in archive.namelist() if name.endswith(suffix)), None)
+    filename = next((name for name in archive.namelist() if Path(name).name == suffix), None)
     if not filename:
         return []
     contents = archive.read(filename).decode("utf-8-sig")
     return [
         row for row in csv.DictReader(io.StringIO(contents))
         if row.get("stattype") == "value" and row.get("gametype") == "regular"
+        and (match := re.search(r"(\d{4})\d{5}$", row.get("gid", "")))
+        and int(match.group(1)) <= RETROSHEET_STATS_THROUGH
     ]
 
 
 def rate(numerator: float, denominator: float, digits: int = 3) -> float | None:
     return round(numerator / denominator, digits) if denominator else None
+
+
+@lru_cache(maxsize=1)
+def retrosheet_archive() -> zipfile.ZipFile:
+    """Use the published static release once, never the retired PHP endpoint.
+
+    Historical logs are immutable for the declared release year. The workflow
+    caches this archive, so daily roster refreshes do not download it repeatedly.
+    """
+    directory = Path(os.environ.get("RETROSHEET_CACHE_DIR", str(Path(tempfile.gettempdir()) / "hub-ball-retrosheet")))
+    directory.mkdir(parents=True, exist_ok=True)
+    path = directory / f"playerlogs-{RETROSHEET_STATS_THROUGH}.zip"
+    if path.exists():
+        return zipfile.ZipFile(path)
+    last_error: Exception | None = None
+    for user_agent in (None, FALLBACK_USER_AGENT):
+        headers = {"User-Agent": user_agent} if user_agent else {}
+        for attempt in range(3):
+            temporary = path.with_suffix(".partial")
+            try:
+                with urlopen(Request(RETROSHEET_PLAYER_URL, headers=headers), timeout=60) as response, temporary.open("wb") as output:
+                    while chunk := response.read(1024 * 1024):
+                        output.write(chunk)
+                with zipfile.ZipFile(temporary) as archive:
+                    if not any(name.endswith(("_b.csv", "_p.csv")) for name in archive.namelist()):
+                        raise RuntimeError("Retrosheet archive contains no player batting or pitching logs")
+                temporary.replace(path)
+                return zipfile.ZipFile(path)
+            except (HTTPError, URLError, TimeoutError, zipfile.BadZipFile, RuntimeError) as exc:
+                last_error = exc
+                temporary.unlink(missing_ok=True)
+                if attempt < 2:
+                    time.sleep(2**attempt)
+    raise RuntimeError(f"Could not download Retrosheet player release: {last_error}")
 
 
 def career_stats(retrosheet_id: str | None) -> dict[str, Any]:
@@ -246,18 +287,12 @@ def career_stats(retrosheet_id: str | None) -> dict[str, Any]:
     if not retrosheet_id:
         return empty
 
-    payload = fetch_bytes(
-        RETROSHEET_PLAYER_URL,
-        data=urlencode({"ID": retrosheet_id}).encode(),
-        content_type="application/x-www-form-urlencoded",
-    )
-    try:
-        with zipfile.ZipFile(io.BytesIO(payload)) as archive:
-            batting_rows = stat_rows(archive, "_b.csv")
-            pitching_rows = stat_rows(archive, "_p.csv")
-            fielding_rows = stat_rows(archive, "_f.csv")
-    except zipfile.BadZipFile as exc:
-        raise RuntimeError(f"Retrosheet returned an invalid player log for {retrosheet_id}") from exc
+    # Serialize initialization only; ZipFile supports concurrent member reads.
+    with RETROSHEET_ARCHIVE_LOCK:
+        archive = retrosheet_archive()
+    batting_rows = stat_rows(archive, f"{retrosheet_id}_b.csv")
+    pitching_rows = stat_rows(archive, f"{retrosheet_id}_p.csv")
+    fielding_rows = stat_rows(archive, f"{retrosheet_id}_f.csv")
 
     return aggregate_career_stats(batting_rows, pitching_rows, fielding_rows)
 
@@ -980,8 +1015,8 @@ def build_team_feed(
     if skip_new_career_stats:
         cached_stats.update({player_id: unavailable_career_stats() for player_id in missing_ids})
     else:
-        # Retrosheet's public server is intentionally treated gently; two parallel
-        # lookups keep the all-team refresh practical without opening a burst of connections.
+        # Read two archived members at a time; initialization downloads the
+        # published release once, without per-player network requests.
         with ThreadPoolExecutor(max_workers=2) as executor:
             cached_stats.update(zip(missing_ids, executor.map(career_stats, missing_ids)))
     for player in feed["players"]:
