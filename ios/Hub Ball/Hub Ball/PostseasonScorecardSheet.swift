@@ -333,9 +333,17 @@ private struct ScorecardPresentationSizing: ViewModifier {
     @ViewBuilder
     func body(content: Content) -> some View {
         if #available(iOS 18.0, *), UIDevice.current.userInterfaceIdiom == .pad {
-            content.presentationSizing(.page)
+            content.presentationSizing(ScorecardPageSizing())
         } else {
             content
         }
+    }
+}
+
+@available(iOS 18.0, *)
+private struct ScorecardPageSizing: PresentationSizing {
+    func proposedSize(for root: PresentationSizingRoot, context: PresentationSizingContext) -> ProposedViewSize {
+        let page = PagePresentationSizing.page.proposedSize(for: root, context: context)
+        return ProposedViewSize(width: min(page.width ?? 640, 640), height: page.height)
     }
 }
