@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-28T17:50:32.796204+00:00",
-  "roster_as_of": "September 26, 2026",
+  "generated_at": "2026-10-04T15:00:05.770437+00:00",
+  "roster_as_of": "October 1, 2026",
   "team": {
     "id": 142,
     "name": "Minnesota Twins"
   },
   "roster_type": "open-current-roster",
   "player_count": 46,
-  "active_count": 28,
+  "active_count": 0,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
     "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
@@ -116,7 +116,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1998-06-15",
       "age": 28,
@@ -196,8 +196,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2000-01-19",
       "age": 26,
       "birthplace": "Palm Springs, California, U.S.",
@@ -274,7 +274,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1999-11-23",
       "age": 26,
@@ -295,7 +295,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139759589",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jack_Anderson_%28baseball%2C_born_1999%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "andej006",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -406,11 +406,11 @@
       "number": "56",
       "position": {
         "name": "Designated Hitter",
-        "group": "Infielder",
+        "group": "Hitter",
         "abbreviation": "DH"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1992-08-14",
       "age": 34,
       "birthplace": "Irving",
@@ -474,8 +474,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-03-20",
       "age": 25,
       "birthplace": "Los Angeles, California, U.S.",
@@ -553,7 +553,7 @@
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Injured list",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1993-12-18",
       "age": 32,
@@ -616,8 +616,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1993-08-17",
       "age": 33,
       "birthplace": "Coamo",
@@ -702,8 +702,8 @@
         "group": "Infielder",
         "abbreviation": "2B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1996-05-15",
       "age": 30,
       "birthplace": "Houston",
@@ -789,8 +789,8 @@
         "group": "Infielder",
         "abbreviation": "SS"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2002-12-29",
       "age": 23,
       "birthplace": "Memphis, Tennessee, U.S.",
@@ -809,7 +809,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q125127125",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Kaelen_Culpepper",
-      "retrosheet_id": null,
+      "retrosheet_id": "culpk001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -871,8 +871,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1996-11-27",
       "age": 29,
       "birthplace": "Mesa",
@@ -949,7 +949,7 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2004-01-04",
       "age": 22,
@@ -969,49 +969,12 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q121354907",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Gabriel_Gonz%C3%A1lez_%28baseball%29",
-      "retrosheet_id": "gonzg002",
+      "retrosheet_id": "gonzg004",
       "career_stats": {
         "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 3,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 3,
-          "games_started": 0,
-          "wins": 0,
-          "losses": 0,
-          "saves": 0,
-          "innings_outs": 3,
-          "hits": 1,
-          "runs": 1,
-          "earned_runs": 1,
-          "home_runs": 0,
-          "walks": 1,
-          "strikeouts": 0,
-          "hit_batters": 1,
-          "wild_pitches": 0,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 9.0,
-          "whip": 2.0
-        }
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
       }
     },
     {
@@ -1027,7 +990,7 @@
         "group": "Infielder",
         "abbreviation": "SS"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1996-03-22",
       "age": 30,
@@ -1089,8 +1052,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1999-10-15",
       "age": 26,
       "birthplace": "Nirgua, Venezuela",
@@ -1171,7 +1134,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1993-01-08",
       "age": 33,
@@ -1257,8 +1220,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1997-06-03",
       "age": 29,
       "birthplace": "Raleigh",
@@ -1320,8 +1283,8 @@
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2005-02-19",
       "age": 21,
       "birthplace": "Brunswick County",
@@ -1340,7 +1303,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q116936704",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Walker_Jenkins",
-      "retrosheet_id": null,
+      "retrosheet_id": "jenkw001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1361,8 +1324,8 @@
         "group": "Infielder",
         "abbreviation": "2B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2002-08-15",
       "age": 24,
       "birthplace": "Watsonville, California, U.S.",
@@ -1427,8 +1390,8 @@
         "group": "Infielder",
         "abbreviation": "SS"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1997-11-12",
       "age": 28,
       "birthplace": "Davis, California, U.S.",
@@ -1487,8 +1450,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1996-01-07",
       "age": 30,
       "birthplace": "Stockton",
@@ -1573,7 +1536,7 @@
         "group": "Outfielder",
         "abbreviation": "LF"
       },
-      "roster_status": "Injured list",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1997-02-26",
       "age": 29,
@@ -1639,8 +1602,8 @@
         "group": "Infielder",
         "abbreviation": "3B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-02-14",
       "age": 25,
       "birthplace": "San Luis Obispo",
@@ -1705,8 +1668,8 @@
         "group": "Infielder",
         "abbreviation": "1B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1999-06-05",
       "age": 27,
       "birthplace": "Aliso Viejo",
@@ -1847,8 +1810,8 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1999-03-23",
       "age": 27,
       "birthplace": "DeLand",
@@ -1910,8 +1873,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2000-05-22",
       "age": 26,
       "birthplace": "Cullowhee, North Carolina, U.S.",
@@ -1988,8 +1951,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1993-09-02",
       "age": 33,
       "birthplace": "Tyler",
@@ -2072,8 +2035,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-09-01",
       "age": 25,
       "birthplace": "New York, New York, U.S.",
@@ -2092,7 +2055,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139406958",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Andrew_Morris_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "morra003",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2101,19 +2064,19 @@
       }
     },
     {
-      "id": 1946250440,
-      "mlb_id": null,
+      "id": 694230,
+      "mlb_id": 694230,
       "wikidata_id": null,
       "slug": "hendry-mendez",
       "name": "Hendry Méndez",
       "full_name": "Hendry Méndez",
       "number": "64",
       "position": {
-        "name": "Outfielder",
+        "name": "Outfield",
         "group": "Outfielder",
         "abbreviation": "OF"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": null,
       "age": null,
@@ -2154,8 +2117,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1991-03-19",
       "age": 35,
       "birthplace": "Long Beach, California, U.S.",
@@ -2235,8 +2198,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1995-07-12",
       "age": 31,
       "birthplace": "Huntersville",
@@ -2313,7 +2276,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1997-08-21",
       "age": 29,
@@ -2413,7 +2376,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q140001482",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Mike_Paredes",
-      "retrosheet_id": null,
+      "retrosheet_id": "parem002",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2434,8 +2397,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-01-10",
       "age": 25,
       "birthplace": "Tomah",
@@ -2454,7 +2417,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q111333136",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Connor_Prielipp",
-      "retrosheet_id": null,
+      "retrosheet_id": "priec003",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2475,7 +2438,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2002-08-07",
       "age": 24,
@@ -2495,7 +2458,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139736719",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Marco_Raya",
-      "retrosheet_id": null,
+      "retrosheet_id": "rayam001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2516,8 +2479,8 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1999-12-22",
       "age": 26,
       "birthplace": "Middleton, Wisconsin, U.S.",
@@ -2576,8 +2539,8 @@
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2003-02-28",
       "age": 23,
       "birthplace": "Santiago Province",
@@ -2596,7 +2559,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q115763152",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Emmanuel_Rodr%C3%ADguez_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "rodre008",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2617,8 +2580,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1990-12-17",
       "age": 35,
       "birthplace": "Littleton",
@@ -2707,7 +2670,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2002-11-26",
       "age": 23,
@@ -2727,7 +2690,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139581118",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Kendry_Rojas",
-      "retrosheet_id": null,
+      "retrosheet_id": "rojak001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2748,8 +2711,8 @@
         "group": "Infielder",
         "abbreviation": "SS"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-06-06",
       "age": 25,
       "birthplace": "Springfield, Ohio, U.S.",
@@ -2768,7 +2731,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q123428223",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Ben_Ross_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "rossb002",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2789,8 +2752,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1996-06-05",
       "age": 30,
       "birthplace": "San Francisco",
@@ -2874,8 +2837,8 @@
         "group": "Infielder",
         "abbreviation": "1B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1999-06-04",
       "age": 27,
       "birthplace": "Rye Brook",
@@ -2901,7 +2864,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q86010113",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Aaron_Sabato",
-      "retrosheet_id": null,
+      "retrosheet_id": "sabaa001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -3000,7 +2963,7 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1997-12-12",
       "age": 28,

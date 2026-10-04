@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-28T17:48:00.876903+00:00",
-  "roster_as_of": "September 26, 2026",
+  "generated_at": "2026-10-04T14:57:19.970856+00:00",
+  "roster_as_of": "October 4, 2026",
   "team": {
     "id": 145,
     "name": "Chicago White Sox"
   },
   "roster_type": "open-current-roster",
   "player_count": 46,
-  "active_count": 28,
+  "active_count": 26,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
     "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
@@ -113,7 +113,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139382052",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Sam_Antonacci",
-      "retrosheet_id": null,
+      "retrosheet_id": "antos001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -278,6 +278,9 @@
         "colleges": [
           {
             "name": "Madeira High School"
+          },
+          {
+            "name": "University of Arkansas"
           }
         ]
       },
@@ -407,8 +410,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1989-10-15",
       "age": 36,
       "birthplace": "Villa Mella, Santo Domingo Norte, Dominican Republic",
@@ -818,7 +821,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1998-10-03",
-      "age": 27,
+      "age": 28,
       "birthplace": "Webster, Texas, U.S.",
       "height": null,
       "weight": null,
@@ -835,7 +838,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139761430",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Tyler_Davis_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "davit006",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -869,7 +872,11 @@
       "debut_team": "Colorado Rockies",
       "education": {
         "high_schools": [],
-        "colleges": []
+        "colleges": [
+          {
+            "name": "Kettle Run High School"
+          }
+        ]
       },
       "teams": [
         "Colorado Rockies",
@@ -1530,7 +1537,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139736364",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Tanner_McDougal",
-      "retrosheet_id": null,
+      "retrosheet_id": "mcdot002",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1697,7 +1704,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q106994236",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Braden_Montgomery",
-      "retrosheet_id": null,
+      "retrosheet_id": "montb002",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1743,7 +1750,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q54292783",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Munetaka_Murakami",
-      "retrosheet_id": null,
+      "retrosheet_id": "muram001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1863,7 +1870,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q138939985",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Tanner_Murray",
-      "retrosheet_id": null,
+      "retrosheet_id": "murrt001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2004,7 +2011,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q121355037",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Rikuu_Nishida",
-      "retrosheet_id": null,
+      "retrosheet_id": "nishr001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2183,7 +2190,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q140299739",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Junior_P%C3%A9rez",
-      "retrosheet_id": null,
+      "retrosheet_id": "perej005",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2263,8 +2270,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1993-05-15",
       "age": 33,
       "birthplace": "Aviston",
@@ -2356,8 +2363,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1995-04-18",
       "age": 31,
       "birthplace": "Canyon",
@@ -2441,8 +2448,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2001-08-29",
       "age": 25,
       "birthplace": "Fountain Valley",
@@ -2525,7 +2532,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139736366",
       "wikipedia_url": "https://en.wikipedia.org/wiki/David_Sandlin_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "sandd005",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2566,7 +2573,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q113148634",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Noah_Schultz",
-      "retrosheet_id": null,
+      "retrosheet_id": "schun001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2611,7 +2618,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139051369",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Tyler_Schweitzer",
-      "retrosheet_id": null,
+      "retrosheet_id": "schwt001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2636,7 +2643,7 @@
       "is_active_roster": true,
       "birth_date": "2003-08-19",
       "age": 23,
-      "birthplace": "Bullard, Texas, U.S.",
+      "birthplace": "Bullard",
       "height": null,
       "weight": null,
       "bats": "Left",
@@ -2645,14 +2652,21 @@
       "debut_team": "Chicago White Sox",
       "education": {
         "high_schools": [],
-        "colleges": []
+        "colleges": [
+          {
+            "name": "Bullard High School"
+          },
+          {
+            "name": "University of Arkansas"
+          }
+        ]
       },
       "teams": [
         "Chicago White Sox"
       ],
       "source_url": "https://www.wikidata.org/wiki/Q123240888",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Hagen_Smith",
-      "retrosheet_id": null,
+      "retrosheet_id": "smith001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2898,7 +2912,7 @@
       "roster_status": "Inactive roster",
       "is_active_roster": false,
       "birth_date": "2000-10-01",
-      "age": 25,
+      "age": 26,
       "birthplace": "Washington, Utah, U.S.",
       "height": null,
       "weight": null,
