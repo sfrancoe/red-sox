@@ -3,7 +3,7 @@ import SwiftUI
 struct PlayoffBracketView: View {
     let payload: PostseasonPayload
     let onSelect: (PostseasonSeries) -> Void
-    let onSelectLiveGame: (PostseasonGame) -> Void
+    let onSelectGame: (PostseasonGame) -> Void
     @ScaledMetric(relativeTo: .caption) private var minimumCardWidth = 82.0
     @ScaledMetric(relativeTo: .caption) private var teamRowHeight = 26.0
     @ScaledMetric(relativeTo: .caption) private var singleLineFooterHeight = 20.0
@@ -193,8 +193,7 @@ struct PlayoffBracketView: View {
         let item = series(slot)
         let rows = participants(item, slot: slot)
         let liveGame = item.flatMap { payload.liveGame(for: $0.id) }
-        let lastGame = item.flatMap { payload.latestCompletedGame(for: $0.id) }
-        let displayedGame = liveGame ?? lastGame
+        let displayedGame = item.flatMap { payload.scorecardGame(for: $0.id) }
         let hasSeriesStatus = item?.bracketSeriesStatus != nil
         let nextGameDetails = item.flatMap { series in
             liveGame == nil ? nextScheduledGame(for: series).map { displayDetails($0, for: series) } : nil
@@ -202,7 +201,7 @@ struct PlayoffBracketView: View {
         let hasScheduledDate = liveGame == nil && !hasSeriesStatus && nextScheduledGame(for: item) != nil
         let hasLightFooter = liveGame == nil && (hasSeriesStatus || hasScheduledDate)
         return Button {
-            if let liveGame { onSelectLiveGame(liveGame) }
+            if let displayedGame { onSelectGame(displayedGame) }
             else if let item { onSelect(item) }
         } label: {
             VStack(spacing: 0) {
@@ -300,7 +299,8 @@ struct PlayoffBracketView: View {
                     .compactMap { $0 }.joined(separator: ", ")
             }.map { " " + $0 } ?? "")
             + (hasSeriesStatus ? nextGameDetails.map { " Next game: " + $0 } ?? "" : ""))
-        .accessibilityHint(liveGame == nil ? "Opens series details" : "Opens live game scorecard")
+        .accessibilityHint(displayedGame == nil ? "Opens series details"
+            : liveGame == nil ? "Opens the last completed game scorecard" : "Opens live game scorecard")
     }
 
     private func participants(_ item: PostseasonSeries?, slot: PlayoffBracketSlot) -> [PostseasonClub] {

@@ -75,6 +75,13 @@ struct PlayoffBracketTest {
         precondition(latest?.score(for: 147) == 2)
         precondition(payload([game(1, state: "Preview", winner: nil)]).latestCompletedGame(for: "test-series") == nil)
         precondition(payload(games).liveGame(for: "test-series")?.gamePk == 4)
+        precondition(payload(games).scorecardGame(for: "test-series")?.gamePk == 4, "Open the live game while one is in progress")
+        precondition(payload(games.filter { $0.abstractState != "Live" }).scorecardGame(for: "test-series")?.gamePk == 2,
+                     "Open the latest final for this matchup between games")
+        precondition(payload([first, second]).scorecardGame(for: "test-series")?.gamePk == 2,
+                     "Finished series still open their last game")
+        precondition(payload([game(3, state: "Preview", winner: nil), game(5, winner: nil), game(6, seriesID: "other-series")])
+            .scorecardGame(for: "test-series") == nil, "Matchups without a live or completed game keep series details")
         let liveGame = PostseasonGame(gamePk: 7, seriesId: "test-series", gameNumber: 2,
                                       gameType: "F", gameDate: nil, officialDate: nil,
                                       timeTBD: false, status: "In Progress", abstractState: "Live",

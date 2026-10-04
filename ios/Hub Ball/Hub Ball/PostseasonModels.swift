@@ -24,6 +24,10 @@ struct PostseasonPayload: Codable, Sendable {
         }
     }
 
+    func scorecardGame(for seriesID: String) -> PostseasonGame? {
+        liveGame(for: seriesID) ?? latestCompletedGame(for: seriesID)
+    }
+
     func liveGame(for seriesID: String) -> PostseasonGame? {
         games.first { $0.seriesId == seriesID && $0.abstractState == "Live" }
     }

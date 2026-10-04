@@ -217,10 +217,10 @@ struct PostseasonScorecardTests {
         defer { session.invalidateAndCancel() }
         let away = PostseasonClub(teamId: 111, name: "Boston", abbreviation: "BOS", slot: nil, resolved: true)
         let home = PostseasonClub(teamId: 147, name: "New York", abbreviation: "NYY", slot: nil, resolved: true)
-        func selection(pk: Int = 9001, homeClub: PostseasonClub = home) -> PostseasonGame {
+        func selection(pk: Int = 9001, homeClub: PostseasonClub = home, state: String = "Live") -> PostseasonGame {
             PostseasonGame(gamePk: pk, seriesId: "test", gameNumber: 1, gameType: "F",
-                gameDate: nil, officialDate: nil, timeTBD: false, status: "In Progress",
-                abstractState: "Live", broadcasts: [], conditional: false, away: away, home: homeClub,
+                gameDate: nil, officialDate: nil, timeTBD: false, status: state,
+                abstractState: state, broadcasts: [], conditional: false, away: away, home: homeClub,
                 awayScore: nil, homeScore: nil, winnerTeamId: nil)
         }
         let store = PostseasonScorecardStore(game: selection(), session: session)
@@ -254,10 +254,20 @@ struct PostseasonScorecardTests {
         await store.refresh()
         precondition(store.snapshot?.isLive == false && !store.refreshFailed)
         precondition(ScorecardProtocol.observedGameCachePolicies.allSatisfy { $0 == .reloadIgnoringLocalCacheData })
+        let completedStore = PostseasonScorecardStore(game: selection(state: "Final"), session: session)
+        await completedStore.refresh()
+        let completed = completedStore.snapshot!
+        precondition(completed.gamePk == 9001 && completed.gameState == "Final" && !completed.isLive)
+        precondition(completed.liveMatchup == nil, "A finished game must not show a current batter or pitcher")
+        precondition(!completed.innings.isEmpty && completed.away.runs == 3 && completed.home.runs == 2)
+        for team in [completed.away, completed.home] {
+            precondition(team.batting.count == 2 && team.pitching.count == 2,
+                         "Opening a finished game directly includes both teams’ batting and pitching")
+        }
         let wrongHome = PostseasonClub(teamId: 121, name: "Mets", abbreviation: "NYM", slot: nil, resolved: true)
         let wrong = PostseasonScorecardStore(game: selection(homeClub: wrongHome), session: session)
         await wrong.refresh()
         precondition(wrong.snapshot == nil && wrong.refreshFailed, "Reject mismatched teams")
-        print("Postseason scorecard tests passed: line score, both rosters, extra innings, retry, stale data and final transition")
+        print("Postseason scorecard tests passed: line score, both rosters, extra innings, retry, stale data, direct finished-game loading and final transition")
     }
 }
