@@ -93,6 +93,7 @@ struct PostseasonScorecardSheet: View {
         .tint(AppColor.amber)
         .preferredColorScheme(.dark)
         .accessibilityIdentifier("postseason.scorecard")
+        .modifier(ScorecardPresentationSizing())
     }
 
     private var retryButton: some View {
@@ -326,4 +327,15 @@ private struct ScorecardPlayerSelection: Identifiable {
     let playerID: Int
     let teamID: Int
     var id: String { "\(teamID)-\(playerID)" }
+}
+
+private struct ScorecardPresentationSizing: ViewModifier {
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *), UIDevice.current.userInterfaceIdiom == .pad {
+            content.presentationSizing(.page)
+        } else {
+            content
+        }
+    }
 }
