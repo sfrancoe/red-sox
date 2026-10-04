@@ -25,6 +25,7 @@ struct PostseasonScorecardSheet: View {
                             retryButton
                         }
                         lineScore(scorecard)
+                        gameSummary(scorecard)
                         Picker("Box score team", selection: $selectedTeamSide) {
                             Text(scorecard.away.abbreviation).tag("away")
                             Text(scorecard.home.abbreviation).tag("home")
@@ -107,6 +108,51 @@ struct PostseasonScorecardSheet: View {
             Text(scorecard.liveStatus ?? scorecard.gameState ?? game.status)
                 .font(.subheadline.weight(.semibold))
         }
+    }
+
+    private func gameSummary(_ scorecard: RecentGame) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(scorecard.isLive ? "Game So Far" : "Game Summary")
+                .font(.headline)
+            Text(scorecard.summary)
+                .font(AppFont.bodySmall)
+                .lineSpacing(2)
+
+            if !scorecard.scoringPlays.isEmpty {
+                Text("Scoring Plays").font(AppFont.label.weight(.bold))
+                    .foregroundStyle(AppColor.boneMuted)
+                ForEach(scorecard.scoringPlays) { play in
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text(play.inning)
+                            Spacer()
+                            Text("\(scorecard.away.abbreviation) \(play.awayScore) · \(scorecard.home.abbreviation) \(play.homeScore)")
+                                .monospacedDigit()
+                        }
+                        .font(AppFont.label.weight(.semibold))
+                        .foregroundStyle(AppColor.amber)
+                        Text(play.description)
+                            .font(AppFont.bodySmall)
+                            .lineSpacing(2)
+                    }
+                }
+            }
+            if !scorecard.facts.isEmpty {
+                Text("Notable Facts").font(AppFont.label.weight(.bold))
+                    .foregroundStyle(AppColor.boneMuted)
+                ForEach(scorecard.facts, id: \.self) { fact in
+                    HStack(alignment: .top, spacing: 8) {
+                        Text("•").foregroundStyle(AppColor.amber)
+                        Text(fact).lineSpacing(2)
+                    }
+                    .font(AppFont.bodySmall)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(AppColor.nightRaised, in: RoundedRectangle(cornerRadius: 8))
+        .accessibilityIdentifier("postseason.scorecard.summary")
     }
 
     private func lineScore(_ scorecard: RecentGame) -> some View {
