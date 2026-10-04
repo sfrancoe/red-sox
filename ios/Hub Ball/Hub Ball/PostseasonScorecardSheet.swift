@@ -118,36 +118,6 @@ struct PostseasonScorecardSheet: View {
                 .font(AppFont.bodySmall)
                 .lineSpacing(2)
 
-            if !scorecard.scoringPlays.isEmpty {
-                Text("Scoring Plays").font(AppFont.label.weight(.bold))
-                    .foregroundStyle(AppColor.boneMuted)
-                ForEach(scorecard.scoringPlays) { play in
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack {
-                            Text(play.inning)
-                            Spacer()
-                            Text("\(scorecard.away.abbreviation) \(play.awayScore) · \(scorecard.home.abbreviation) \(play.homeScore)")
-                                .monospacedDigit()
-                        }
-                        .font(AppFont.label.weight(.semibold))
-                        .foregroundStyle(AppColor.amber)
-                        Text(play.description)
-                            .font(AppFont.bodySmall)
-                            .lineSpacing(2)
-                    }
-                }
-            }
-            if !scorecard.facts.isEmpty {
-                Text("Notable Facts").font(AppFont.label.weight(.bold))
-                    .foregroundStyle(AppColor.boneMuted)
-                ForEach(scorecard.facts, id: \.self) { fact in
-                    HStack(alignment: .top, spacing: 8) {
-                        Text("•").foregroundStyle(AppColor.amber)
-                        Text(fact).lineSpacing(2)
-                    }
-                    .font(AppFont.bodySmall)
-                }
-            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
