@@ -39,14 +39,7 @@ jobs:
           python3 scripts/refresh_pitching.py "${args[@]}"
       - name: Stage healthy changed snapshots
         if: always()
-        run: |
-          mkdir -p pitching-updates
-          git diff --name-only -- data/pitching.json 'data/*/pitching.json' > pitching-updates/manifest
-          while IFS= read -r path; do
-            [ -n "$path" ] || continue
-            mkdir -p "pitching-updates/$(dirname "$path")"
-            cp "$path" "pitching-updates/$path"
-          done < pitching-updates/manifest
+        run: python3 scripts/pitching_publication.py stage pitching-updates
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -70,24 +63,30 @@ jobs:
         with:
           name: pitching-updates
           path: pitching-updates
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply snapshots guarded by source and policy versions
+        id: guarded
+        continue-on-error: true
+        run: python3 scripts/pitching_publication.py apply pitching-updates
       - name: Commit healthy pitching updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           while IFS= read -r path; do
             [ -n "$path" ] || continue
-            cp "pitching-updates/$path" "$path"
             git add "$path"
-          done < pitching-updates/manifest
+          done < pitching-updates/accepted-paths
           if git diff --cached --quiet; then
             echo "No pitching data changes."
           else
             git commit -m "Refresh MLB pitching data ($(date -u +%Y-%m-%d))"
-            git pull --rebase origin main
-            git push
+            # Fail on any concurrent main update: never rebase past the source guards.
+            git push origin HEAD:main
           fi
       - name: Report incomplete pitching refresh
-        if: needs.fetch.outputs.outcome == 'failure'
+        if: always() && (needs.fetch.outputs.outcome == 'failure' || steps.guarded.outcome == 'failure')
         run: |
-          echo "::error::Some pitching feeds failed. Healthy updates were published; last-good failed snapshots were preserved. See fetch job for team/provider errors."
+          echo "::error::Pitching fetch or publication guards failed. Only eligible healthy updates were published; failed or newer main snapshots were preserved. See job logs for errors."
           exit 1

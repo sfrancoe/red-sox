@@ -11,13 +11,20 @@ One process downloads projections once successfully per run and shares that list
 across all 30 teams. Every FanGraphs attempt is spaced at least ten seconds apart,
 including transient-error retries. HTTP 429 receives one deferred retry after the
 first team pass; the entire client honors the full Retry-After seconds or HTTP date.
-Absent/invalid Retry-After means a five-minute cooldown. Shared projection 429 can
+Absent, invalid, negative, or non-finite Retry-After means a five-minute cooldown. Shared projection 429 can
 also retry once after cooldown. If the cooldown plus a 45-second request cannot fit
 within the 30-minute fetch budget, it fails without making an early request.
 Healthy snapshots publish even when other teams fail. Failed snapshots keep their
 last-good bytes, and unresolved errors fail the workflow so notifications remain.
 Fetching/cooldowns use a separate pitching lock; only the short publication job
-holds `site-data-writes`. Its artifact contains changed healthy files only.
+holds `site-data-writes`. Its artifact contains changed healthy files only, together
+with original snapshot hashes, result hashes, season, and policy/registry hashes.
+Publication on latest main rejects all artifacts if policy or registry changed,
+and skips any snapshot whose source bytes changed while the fetch ran. Independent
+healthy snapshots can still publish, but guard rejections fail the job explicitly.
+Every artifact feed must match the configured season. The final push uses no
+rebase: a main update after validation causes a non-fast-forward failure instead
+of bypassing the source guards.
 
 ## Manual refresh and season transition
 

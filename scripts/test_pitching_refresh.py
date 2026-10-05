@@ -74,7 +74,7 @@ class PitchingTests(unittest.TestCase):
         self.assertEqual(starts, [1000, 1010, 1020])
 
     def test_full_retry_after_and_fallback(self):
-        for header, delay in [('720', 720), (None, 300), ('garbage', 300)]:
+        for header, delay in [('720', 720), (None, 300), ('garbage', 300), ('-1', 300), ('NaN', 300), ('Infinity', 300), ('-Infinity', 300)]:
             self.clock.now = 1000
             with patch.object(pitching, 'urlopen', side_effect=[limited(header), io.BytesIO(b'[]')]) as request:
                 client = pitching.FanGraphsClient()
@@ -220,8 +220,94 @@ class PitchingTests(unittest.TestCase):
         self.assertNotIn('group: site-data-writes', fetch)
         self.assertIn('group: site-data-writes', publish)
         self.assertIn("needs.fetch.outputs.outcome == 'failure'", publish)
-        self.assertIn('git pull --rebase origin main', publish)
-        self.assertIn('git diff --name-only -- data/pitching.json', fetch)
+        self.assertIn("steps.guarded.outcome == 'failure'", publish)
+        self.assertNotIn('git pull --rebase', publish)
+        self.assertIn('git push origin HEAD:main', publish)
+        self.assertIn('pitching_publication.py apply', publish)
+        self.assertIn('pitching_publication.py stage', fetch)
+
+
+class PublicationTests(unittest.TestCase):
+    def setUp(self):
+        import pitching_publication
+        self.publication = pitching_publication
+        self.directory = tempfile.TemporaryDirectory()
+        self.addCleanup(self.directory.cleanup)
+        self.root = Path(self.directory.name) / 'repo'
+        self.artifact = Path(self.directory.name) / 'artifact'
+        self.teams = all_teams()[:2]
+        self.original = {}
+        for relative in self.publication.GUARDS:
+            path = self.root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(pitching.load_policy() if 'pitching-refresh' in relative else {}))
+        for team in self.teams:
+            path = pitching.output_path(team, self.root)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            old = json.dumps({'season': 2026, 'pitchers': ['original']}).encode()
+            self.original[path.relative_to(self.root).as_posix()] = old
+            path.write_text(json.dumps({'season': 2026, 'pitchers': ['fetched']}))
+        self.team_patch = patch.object(self.publication, 'all_teams', return_value=self.teams)
+        self.team_patch.start()
+        self.addCleanup(self.team_patch.stop)
+        with patch.object(self.publication, 'source_bytes', side_effect=lambda root, path: self.original[path]):
+            self.publication.stage(self.root, self.artifact)
+        # Publication starts from source main, not the fetch working tree.
+        for relative, payload in self.original.items():
+            (self.root / relative).write_bytes(payload)
+
+    def test_matching_sources_publish(self):
+        self.assertEqual(self.publication.apply(self.root, self.artifact), [])
+        self.assertEqual(len((self.artifact / 'accepted-paths').read_text().splitlines()), 2)
+        for team in self.teams:
+            self.assertEqual(json.loads(pitching.output_path(team, self.root).read_text())['pitchers'], ['fetched'])
+
+    def test_newer_snapshot_preserved_while_independent_healthy_publishes(self):
+        newer = pitching.output_path(self.teams[0], self.root)
+        newer.write_text('{"season":2026,"pitchers":["corrected-on-main"]}')
+        original_bytes = newer.read_bytes()
+        errors = self.publication.apply(self.root, self.artifact)
+        self.assertEqual(len(errors), 1)
+        self.assertIn('changed during fetch', errors[0])
+        self.assertEqual(newer.read_bytes(), original_bytes)
+        healthy = pitching.output_path(self.teams[1], self.root)
+        self.assertEqual(json.loads(healthy.read_text())['pitchers'], ['fetched'])
+        self.assertEqual((self.artifact / 'accepted-paths').read_text().splitlines(), [healthy.relative_to(self.root).as_posix()])
+
+    def test_policy_or_registry_change_rejects_all(self):
+        for relative in self.publication.GUARDS:
+            with self.subTest(relative=relative):
+                path = self.root / relative
+                old = path.read_bytes()
+                path.write_bytes(old + b' ')
+                self.assertIn('rejected all', self.publication.apply(self.root, self.artifact)[0])
+                self.assertEqual((self.artifact / 'accepted-paths').read_text(), '')
+                for original_path, payload in self.original.items():
+                    self.assertEqual((self.root / original_path).read_bytes(), payload)
+                path.write_bytes(old)
+
+    def test_wrong_artifact_season_rejected(self):
+        manifest_path = self.artifact / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['season'] = 2027
+        manifest_path.write_text(json.dumps(manifest))
+        self.assertIn('season', self.publication.apply(self.root, self.artifact)[0])
+        self.assertEqual((self.artifact / 'accepted-paths').read_text(), '')
+
+    def test_wrong_feed_season_and_digest_preserve_originals(self):
+        manifest = json.loads((self.artifact / 'manifest.json').read_text())
+        for entry in manifest['files']:
+            (self.artifact / entry['path']).write_text('{"season":2027}')
+        self.assertEqual(len(self.publication.apply(self.root, self.artifact)), 2)
+        for relative, payload in self.original.items():
+            self.assertEqual((self.root / relative).read_bytes(), payload)
+
+    def test_offline_ci_runs_pitching_regressions(self):
+        workflow = (pitching.ROOT / '.github/workflows/validate-refresh.yml').read_text()
+        offline = workflow.split('  live:')[0]
+        self.assertIn("python3 -m unittest discover -s scripts -p 'test_pitching_refresh.py'", offline)
+        self.assertIn("'scripts/pitching_publication.py'", offline)
+        self.assertIn("'config/pitching-refresh.json'", offline)
 
 
 if __name__ == '__main__':

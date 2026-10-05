@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import math
 import sys
 import tempfile
 import time
@@ -71,7 +72,9 @@ class FanGraphsClient:
                 if exc.code == 429:
                     value = exc.headers.get("Retry-After", "") if exc.headers else ""
                     try:
-                        delay = max(0, float(value))
+                        delay = float(value)
+                        if not math.isfinite(delay) or delay < 0:
+                            raise ValueError("Invalid Retry-After seconds")
                     except ValueError:
                         try:
                             delay = max(0, (parsedate_to_datetime(value) - datetime.now(timezone.utc)).total_seconds())
