@@ -48,6 +48,7 @@ DIVISIONS = {
     "NL": ({204: "NL East", 205: "NL Central", 203: "NL West"}, [204, 205, 203], 104),
 }
 _projections: list[dict[str, Any]] | None = None
+_pitching_client = None
 
 
 def fetch_json(url: str, required: bool = True, timeout: int = 45) -> Any:
@@ -384,16 +385,22 @@ def role_for(row: dict[str, Any]) -> str:
 
 
 def pitching_feed(team: dict[str, Any]) -> dict[str, Any]:
-    global _projections
-    season = datetime.now(timezone.utc).year
+    # Direct callers obey the same winter/season policy as the consolidated job.
+    from refresh_pitching import FanGraphsClient, load_policy, output_path, refresh_allowed, build_team
+    policy = load_policy()
+    if not refresh_allowed(policy, datetime.now(timezone.utc).date()):
+        return json.loads(output_path(team).read_text())
+    global _projections, _pitching_client
+    if _pitching_client is None:
+        _pitching_client = FanGraphsClient(policy["request_spacing_seconds"], policy["budget_seconds"])
     if _projections is None:
-        loaded = fetch_json(PROJECTIONS_API)
-        if not isinstance(loaded, list):
-            raise RuntimeError("FanGraphs returned an unexpected projections response")
-        _projections = loaded
-    actual_payload = fetch_json(ACTUAL_API.format(season=season, team=team["fangraphs_id"]))
-    _, _, league_id = DIVISIONS[team["league"]]
-    standings = fetch_json(STANDINGS_API.format(league=league_id, season=season))
+        _projections = _pitching_client.get(policy["projections_url"])
+    return build_team(team, _projections, policy["season"], _pitching_client)
+
+
+def build_pitching_feed(team: dict[str, Any], projections: list[dict[str, Any]],
+                        actual_payload: dict[str, Any], standings: dict[str, Any],
+                        season: int) -> dict[str, Any]:
     actual_rows = actual_payload.get("data") or []
     if not actual_rows:
         raise RuntimeError(f"FanGraphs returned no {team['short_name']} pitching rows")
@@ -404,7 +411,7 @@ def pitching_feed(team: dict[str, Any]) -> dict[str, Any]:
     )
     fraction = played / 162
     projection_by_id = {
-        str(row.get("xMLBAMID")): row for row in _projections if row.get("xMLBAMID")
+        str(row.get("xMLBAMID")): row for row in projections if row.get("xMLBAMID")
     }
     pitchers = []
     for actual in actual_rows:
