@@ -199,18 +199,8 @@ def feed_changed(feed: dict[str, Any]) -> bool:
 
 
 def main() -> None:
-    season = datetime.now(timezone.utc).year
-    projections = fetch_json(PROJECTIONS_API)
-    actual = fetch_json(ACTUAL_API.format(season=season, team=FANGRAPHS_NYY))
-    standings = fetch_json(STANDINGS_API.format(league=AL, season=season))
-    if not isinstance(projections, list):
-        raise RuntimeError("FanGraphs returned an unexpected projections response")
-    feed = build_feed(projections, actual, standings, season)
-    if not feed_changed(feed):
-        print(f"No pitching changes; kept {OUTPUT_PATH}")
-        return
-    OUTPUT_PATH.write_text(json.dumps(feed, indent=2, ensure_ascii=False) + "\n")
-    print(f"Wrote Above the Forecast pitching data to {OUTPUT_PATH}")
+    from refresh_pitching import main as refresh_main
+    refresh_main(["yankees"])
 
 
 if __name__ == "__main__":

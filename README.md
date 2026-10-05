@@ -102,3 +102,8 @@ re-checks the claim the first story is built on — the same 57-51 record after 
 games, four years running — and records the result in `data/meta.json` as
 `premise_holds`. If that ever goes false, the story text needs rewriting rather
 than the check being ignored.
+
+Above the Forecast's pitching refresh is pinned to an explicitly configured season,
+with weekly October updates and a winter freeze. See
+[the pitching refresh controls](docs/pitching-refresh.md) before any manual refresh
+or season transition.

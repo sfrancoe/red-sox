@@ -2,52 +2,83 @@ name: Refresh MLB pitching data
 
 on:
   schedule:
-    - cron: '55 12 * * *'
+    - cron: '55 12 * 10 1'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Explicitly refresh the configured season after its freeze date'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 concurrency:
-  group: site-data-writes
+  group: pitching-refresh
   cancel-in-progress: false
 
 jobs:
-  refresh:
+  fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 35
+    outputs:
+      outcome: ${{ steps.pitching.outcome }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Fetch all pitching with shared projections and pacing
+        id: pitching
+        continue-on-error: true
+        env:
+          FORCE: ${{ inputs.force }}
+        run: |
+          args=()
+          if [ "$FORCE" = "true" ]; then args+=(--force); fi
+          python3 scripts/refresh_pitching.py "${args[@]}"
+      - name: Stage healthy changed snapshots
+        if: always()
+        run: |
+          mkdir -p pitching-updates
+          git diff --name-only -- data/pitching.json 'data/*/pitching.json' > pitching-updates/manifest
+          while IFS= read -r path; do
+            [ -n "$path" ] || continue
+            mkdir -p "pitching-updates/$(dirname "$path")"
+            cp "$path" "pitching-updates/$path"
+          done < pitching-updates/manifest
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pitching-updates
+          path: pitching-updates/
+          retention-days: 3
 
-      - name: Fetch Red Sox pitching
-        id: red_sox
-        continue-on-error: true
-        run: python3 scripts/fetch_pitching.py
-      - name: Fetch Yankees pitching
-        id: yankees
-        continue-on-error: true
-        run: python3 scripts/fetch_yankees_pitching.py
-      - name: Fetch Mets pitching
-        id: mets
-        continue-on-error: true
-        run: python3 scripts/fetch_mets_pitching.py
-      - name: Fetch Rays pitching
-        id: rays
-        continue-on-error: true
-        run: python3 scripts/fetch_rays_pitching.py
-      - name: Fetch expansion-team pitching
-        id: expansion
-        continue-on-error: true
-        run: python3 scripts/fetch_team_data.py --section pitching --keep-going
-
+  publish:
+    needs: fetch
+    if: always() && needs.fetch.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: site-data-writes
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          name: pitching-updates
+          path: pitching-updates
       - name: Commit healthy pitching updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/pitching.json data/*/pitching.json
+          while IFS= read -r path; do
+            [ -n "$path" ] || continue
+            cp "pitching-updates/$path" "$path"
+            git add "$path"
+          done < pitching-updates/manifest
           if git diff --cached --quiet; then
             echo "No pitching data changes."
           else
@@ -55,14 +86,8 @@ jobs:
             git pull --rebase origin main
             git push
           fi
-
       - name: Report incomplete pitching refresh
-        if: >-
-          steps.red_sox.outcome == 'failure' ||
-          steps.yankees.outcome == 'failure' ||
-          steps.mets.outcome == 'failure' ||
-          steps.rays.outcome == 'failure' ||
-          steps.expansion.outcome == 'failure'
+        if: needs.fetch.outputs.outcome == 'failure'
         run: |
-          echo "::error::Some FanGraphs pitching feeds failed. Healthy updates were published; existing files were preserved for failed feeds."
+          echo "::error::Some pitching feeds failed. Healthy updates were published; last-good failed snapshots were preserved. See fetch job for team/provider errors."
           exit 1
