@@ -6,7 +6,8 @@ The Red Sox, Yankees, Mets, Rays and postseason news workflows retain their exis
 alert behavior. No notification account settings change. PR9 source isolation and
 PR10 pitching policy/pacing/publication remain intact.
 
-Only exhausted transient RSS retrieval failures (network errors/timeouts, HTTP 429
+Only exhausted transient RSS retrieval failures (network errors/timeouts, body-read
+connection resets, incomplete reads and remote disconnects, HTTP 429
 or 5xx, malformed XML) qualify for delayed alerts. Every such failure logs the team,
 source, error and streak and appears in the job summary. First failure is a visible
 warning and does not fail the job. The second consecutive eligible failure and each

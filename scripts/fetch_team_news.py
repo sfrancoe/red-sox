@@ -13,6 +13,7 @@ import ssl
 import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from http.client import IncompleteRead, RemoteDisconnected
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -43,7 +44,11 @@ def fetch_xml(url: str) -> ElementTree.Element:
             try:
                 with urlopen(Request(url, headers=headers), timeout=30) as response:
                     return ElementTree.fromstring(response.read())
-            except (HTTPError, URLError, TimeoutError, ElementTree.ParseError) as exc:
+            # Body reads can disconnect after urlopen has returned successfully.
+            # Keep this list narrow: arbitrary OSError/HTTPException/code failures
+            # must still escape into immediate failure reporting.
+            except (HTTPError, URLError, TimeoutError, ElementTree.ParseError,
+                    ConnectionResetError, IncompleteRead, RemoteDisconnected) as exc:
                 if isinstance(exc, HTTPError) and exc.code != 429 and not 500 <= exc.code <= 599:
                     raise  # Authentication, missing URL, configuration: immediate.
                 if isinstance(exc, URLError) and isinstance(exc.reason, ssl.SSLCertVerificationError):

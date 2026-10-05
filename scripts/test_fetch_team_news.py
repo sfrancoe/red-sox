@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import fetch_team_news as news
 
@@ -170,6 +170,63 @@ class NewsRefreshTests(unittest.TestCase):
             with self.assertRaises(URLError):
                 news.fetch_xml("https://example.com")
             self.assertEqual(fetch.call_count, 1)
+
+    def test_body_disconnect_retries_and_then_recovers(self):
+        from http.client import IncompleteRead, RemoteDisconnected
+        for error in (ConnectionResetError("reset"), IncompleteRead(b"partial", 100), RemoteDisconnected("closed")):
+            with self.subTest(error=type(error).__name__):
+                response = MagicMock()
+                response.__enter__.return_value = response
+                response.read.side_effect = [error, b"<rss><channel/></rss>"]
+                with patch.object(news, "urlopen", return_value=response) as fetch, patch.object(news.time, "sleep"):
+                    root = news.fetch_xml("https://example.com")
+                self.assertEqual(root.tag, "rss")
+                self.assertEqual(fetch.call_count, 2)
+                self.assertEqual(response.read.call_count, 2)
+
+    def test_exhausted_body_disconnect_uses_source_streak_and_last_good(self):
+        from http.client import IncompleteRead, RemoteDisconnected
+        previous = self.root / "Team A" / "first.json"
+        previous.parent.mkdir()
+        previous.write_text('{"articles": [{"title": "Last good"}]}')
+        before = previous.read_bytes()
+        for error in (ConnectionResetError("reset"), IncompleteRead(b"partial", 100), RemoteDisconnected("closed")):
+            with self.subTest(error=type(error).__name__):
+                self.state_path.write_text('{"version": 1, "sources": {}}')
+                response = MagicMock()
+                response.__enter__.return_value = response
+                response.read.side_effect = error
+
+                def fetch_source(team, source):
+                    if team["full_name"] == "Team A" and source["key"] == "first":
+                        return news.fetch_xml("https://example.com")
+                    return self.feed
+
+                with patch.object(news, "urlopen", return_value=response) as fetch, patch.object(news.time, "sleep"):
+                    status, _, summary = self.run_refresh(fetch_source)
+                    self.assertEqual(status, 0)
+                    self.assertIn("first failure, alert deferred", summary)
+                    status, _, summary = self.run_refresh(fetch_source)
+                    self.assertEqual(status, 1)
+                    self.assertIn("consecutive eligible failures: 2; ALERT", summary)
+                self.assertEqual(fetch.call_count, 12)
+                self.assertEqual(response.read.call_count, 12)
+                self.assertEqual(previous.read_bytes(), before)
+                self.assertTrue((self.root / "Team B" / "second.json").exists())
+
+    def test_body_read_trust_code_and_integrity_errors_do_not_retry(self):
+        import ssl
+        from http.client import BadStatusLine
+        for error in (ssl.SSLCertVerificationError("bad trust"), OSError("disk/config error"), RuntimeError("code error"), BadStatusLine("invalid status")):
+            with self.subTest(error=type(error).__name__):
+                response = MagicMock()
+                response.__enter__.return_value = response
+                response.read.side_effect = error
+                with patch.object(news, "urlopen", return_value=response) as fetch, patch.object(news.time, "sleep"):
+                    with self.assertRaises(type(error)):
+                        news.fetch_xml("https://example.com")
+                self.assertEqual(fetch.call_count, 1)
+                self.assertEqual(response.read.call_count, 1)
 
     def test_rss_retries_classify_transient_vs_configuration(self):
         from urllib.error import HTTPError
