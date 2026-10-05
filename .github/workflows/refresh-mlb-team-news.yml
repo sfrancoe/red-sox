@@ -18,6 +18,11 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Read latest published source status
+        run: git pull --ff-only origin main
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -26,19 +31,21 @@ jobs:
         continue-on-error: true
         run: python3 scripts/fetch_team_news.py
       - name: Commit if news changed
+        if: steps.news.outputs.publish_ready == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data; then
+          if git diff --quiet -- data .github/news-status/expansion.json; then
             echo "No expansion-team news changes."
           else
-            git add data
+            git add data .github/news-status/expansion.json
             git commit -m "Refresh MLB expansion team news ($(date -u +%Y-%m-%dT%H:%MZ))"
-            git pull --rebase origin main
-            git push
+            # Do not rebase stale streak decisions onto a newer publication.
+            # A racing main change rejects this entire data/status transaction.
+            git push origin HEAD:main
           fi
       - name: Report incomplete refresh
         if: steps.news.outcome == 'failure'
         run: |
-          echo "::error::Some news sources failed. Healthy updates were published; see the fetch log and job summary."
+          echo "::error::News refresh needs attention. See fetch log and job summary; only complete publication-ready batches are published."
           exit 1
