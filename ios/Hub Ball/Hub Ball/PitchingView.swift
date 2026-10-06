@@ -3,14 +3,14 @@ import SwiftUI
 struct PitchingView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: PitchingStore
+    @Environment(TeamSession.self) private var session
+    private var store: PitchingStore { session.pitching }
     let team: HubTeam
     let onSelectPlayer: (Int) -> Void
 
     init(team: HubTeam = .boston, onSelectPlayer: @escaping (Int) -> Void = { _ in }) {
         self.team = team
         self.onSelectPlayer = onSelectPlayer
-        _store = State(initialValue: PitchingStore(team: team))
     }
 
     private var usesExpandedReadingLayout: Bool {
@@ -59,7 +59,7 @@ struct PitchingView: View {
 
                     Spacer()
 
-                    Picker("Report order", selection: $store.sort) {
+                    Picker("Report order", selection: Bindable(store).sort) {
                         ForEach(PitcherSort.allCases) { sort in
                             Text(sort.title).tag(sort)
                         }
@@ -128,7 +128,7 @@ struct PitchingView: View {
     @ViewBuilder
     private var rolePicker: some View {
         if usesExpandedReadingLayout {
-            Picker("Pitcher role", selection: $store.filter) {
+            Picker("Pitcher role", selection: Bindable(store).filter) {
                 ForEach(PitcherFilter.allCases) { filter in Text(filter.title).tag(filter) }
             }
             .pickerStyle(.menu)

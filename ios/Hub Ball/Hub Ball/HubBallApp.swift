@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct HubBallApp: App {
+    @State private var model: AppModel?
     init() {
         #if DEBUG
         // Reset once, rather than pinning the preference through a launch-argument
@@ -21,7 +22,10 @@ struct HubBallApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Group {
+                if let model { ContentView().environment(model) }
+                else { ProgressView().task { model = AppModel() } }
+            }
         }
     }
 }

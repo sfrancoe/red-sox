@@ -5,10 +5,10 @@ struct StandingsView: View {
     @Environment(\.hubTeamPalette) private var palette
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: StandingsStore
+    @Environment(TeamSession.self) private var session
+    private var store: StandingsStore { session.standings }
 
     init(team: HubTeam = .boston) {
-        _store = State(initialValue: StandingsStore(team: team))
     }
 
     var body: some View {
@@ -317,7 +317,7 @@ struct StandingsView: View {
     @ViewBuilder
     private var modePicker: some View {
         if usesExpandedReadingLayout {
-            Picker("Standings view", selection: $store.mode) {
+            Picker("Standings view", selection: Bindable(store).mode) {
                 ForEach(StandingsMode.allCases) { mode in Text(mode.title).tag(mode) }
             }
             .pickerStyle(.menu)

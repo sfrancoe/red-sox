@@ -4,13 +4,13 @@ struct ScheduleView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: ScheduleStore
+    @Environment(TeamSession.self) private var session
+    private var store: ScheduleStore { session.schedule }
     @State private var selectedGameID: Int?
     let team: HubTeam
 
     init(team: HubTeam = .boston) {
         self.team = team
-        _store = State(initialValue: ScheduleStore(team: team))
     }
 
     private let weekdayLabels = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]

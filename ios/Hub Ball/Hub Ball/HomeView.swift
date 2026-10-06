@@ -13,14 +13,14 @@ struct HomeView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("october.homeInvitationDismissed") private var octoberInvitationDismissed = false
-    @State private var store: HomeStore
+    @Environment(TeamSession.self) private var session
+    private var store: HomeStore { session.home }
     let team: HubTeam
     let onSelect: (HomeDestination) -> Void
 
     init(team: HubTeam = .boston, onSelect: @escaping (HomeDestination) -> Void) {
         self.team = team
         self.onSelect = onSelect
-        _store = State(initialValue: HomeStore(team: team))
     }
 
     var body: some View {

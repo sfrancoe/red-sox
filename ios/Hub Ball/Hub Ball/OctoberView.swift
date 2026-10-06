@@ -24,9 +24,10 @@ private func bracketLabel(_ series: PostseasonSeries) -> String {
 
 struct OctoberView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @State private var store = PostseasonStore(season: OctoberFeature.season)
-    @State private var historyStore = PostseasonHistoryStore(season: OctoberFeature.season)
-    @State private var newsStore = PostseasonNewsStore(season: OctoberFeature.season)
+    @Environment(AppModel.self) private var model
+    private var store: PostseasonStore { model.postseason }
+    private var historyStore: PostseasonHistoryStore { model.history }
+    private var newsStore: PostseasonNewsStore { model.news }
     @State private var section: OctoberSection = .race
     @State private var historyGroup: PostseasonHistoryGroup = .hitting
     @State private var historyLeague: PostseasonHistoryLeague = .both

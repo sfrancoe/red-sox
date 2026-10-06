@@ -2,14 +2,14 @@ import SwiftUI
 
 struct SeasonLeadersView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: SeasonLeadersStore
+    @Environment(TeamSession.self) private var session
+    private var store: SeasonLeadersStore { session.leaders }
     @State private var scope: LeaderboardScope = .team
     @State private var detail: LeaderboardDetail?
     private let team: HubTeam
 
     init(team: HubTeam = .boston) {
         self.team = team
-        _store = State(initialValue: SeasonLeadersStore(team: team))
     }
 
     private var usesExpandedReadingLayout: Bool {

@@ -3,13 +3,14 @@ import SwiftUI
 struct Game108GraphView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store = Game108GraphStore()
+    @Environment(AppModel.self) private var model
+    private var store: Game108GraphStore { model.game108 }
     @State private var activeSeasonIndex = 0
     @State private var gameProgress = 0.0
     @State private var isPlaying = false
     @State private var speed = 2.0
     @State private var isMusicOn = true
-    @State private var musicPlayer = GraphMusicPlayer()
+    private var musicPlayer: GraphMusicPlayer { model.graphMusic }
     @State private var animationTask: Task<Void, Never>?
 
     var body: some View {

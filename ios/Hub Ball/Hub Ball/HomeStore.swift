@@ -23,78 +23,30 @@ nonisolated struct HomeGameOdds: Decodable, Sendable {
 @MainActor
 @Observable
 final class HomeStore {
-    private let api: APIClient
-    private let team: HubTeam
-    var recentGame: RecentGame?
-    var schedule: Schedule?
-    var standings: StandingsFeed?
-    var isLoading = false
-    var errorMessage: String?
-    private var isRefreshingGame = false
+    private let recentStore: RecentGameStore
+    private let scheduleStore: ScheduleStore
+    private let standingsStore: StandingsStore
 
+    var recentGame: RecentGame? { recentStore.games.first }
+    var schedule: Schedule? { scheduleStore.schedule }
+    var standings: StandingsFeed? { standingsStore.feeds[standingsStore.selectedLeague] }
+    var isLoading: Bool { recentStore.isLoading || scheduleStore.isLoading || standingsStore.isLoading }
+    var errorMessage: String? { recentStore.errorMessage ?? scheduleStore.errorMessage ?? standingsStore.errorMessage }
     var favoriteStanding: StandingsTeam? {
-        standings?.divisions
-            .first(where: { $0.teams.contains(where: \.isFavorite) })?
-            .teams.first(where: \.isFavorite)
+        standings?.divisions.flatMap(\.teams).first(where: \.isFavorite)
     }
 
-    init(team: HubTeam = .boston, api: APIClient = .shared) {
-        self.api = api
-        self.team = team
+    init(team: HubTeam, recent: RecentGameStore, schedule: ScheduleStore, standings: StandingsStore) {
+        recentStore = recent
+        scheduleStore = schedule
+        standingsStore = standings
     }
 
     func load() async {
-        guard !isLoading else { return }
-        isLoading = true
-        errorMessage = nil
-        defer { isLoading = false }
-
-        do {
-            async let recentData = fetchData("recent-game.json", team: team)
-            async let scheduleData = fetchData("schedule.json", team: team)
-            async let standingsData = fetchStandings(team: team)
-            async let currentGame = fetchCurrentGame(team: team)
-            let loaded = try await (recentData, scheduleData, standingsData, currentGame)
-            let fallbackGame = try await api.decode(RecentGame.self, from: loaded.0)
-            recentGame = loaded.3 ?? fallbackGame
-            schedule = try await api.decode(Schedule.self, from: loaded.1)
-            standings = try await api.decode(StandingsFeed.self, from: loaded.2)
-        } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return }
-            errorMessage = "We couldn't load today's \(team.shortName) briefing. Check your connection and try again."
-        }
+        async let recent: Void = recentStore.load() // Also refreshes the shared schedule.
+        async let standings: Void = standingsStore.load()
+        _ = await (recent, standings)
     }
 
-    func refreshCurrentGame() async {
-        guard !isLoading, !isRefreshingGame else { return }
-        isRefreshingGame = true
-        defer { isRefreshingGame = false }
-        if let game = await fetchCurrentGame(team: team), !Task.isCancelled {
-            recentGame = game
-        }
-    }
-
-    nonisolated private func fetchData(_ fileName: String, team: HubTeam) async throws -> Data {
-        try await api.data(.url(AppBackend.dataURL(fileName, team: team)))
-    }
-
-    nonisolated private func fetchStandings(team: HubTeam) async throws -> Data {
-        try await api.data(.url(AppBackend.apiURL("mlb/standings", team: team)))
-    }
-
-    private func fetchCurrentGame(team: HubTeam) async -> RecentGame? {
-        do {
-            let client = MLBGameClient(team: team, api: api)
-            guard let latest = try await client.gameDescriptors().first else { return nil }
-            return try await client.game(
-                gamePk: latest.gamePk,
-                cachePolicy: latest.isLive ? .reloadIgnoringLocalCacheData : .useProtocolCachePolicy
-            )
-        } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return nil }
-            // The published snapshot remains available when the live source is unreachable.
-            return nil
-        }
-    }
-
+    func refreshCurrentGame() async { await recentStore.refresh() }
 }

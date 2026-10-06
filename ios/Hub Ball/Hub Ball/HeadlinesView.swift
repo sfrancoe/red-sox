@@ -4,14 +4,14 @@ import SafariServices
 struct HeadlinesView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: HeadlinesStore
+    @Environment(TeamSession.self) private var session
+    private var store: HeadlinesStore { session.headlines }
     @State private var secondarySource: NewsSource
     @State private var presentedArticle: PresentedArticle?
     let team: HubTeam
 
     init(team: HubTeam = .boston) {
         self.team = team
-        _store = State(initialValue: HeadlinesStore(team: team))
         _secondarySource = State(initialValue: team.newsSources.dropFirst().first ?? team.newsSources[0])
     }
 
@@ -24,7 +24,7 @@ struct HeadlinesView: View {
                     if !store.feeds.isEmpty {
                         GeometryReader { space in
                             if usesExpandedReadingLayout {
-                                newspaperColumn(selection: $store.selectedSource)
+                                newspaperColumn(selection: Bindable(store).selectedSource)
                             } else if contentWidth >= 720 && space.size.height > space.size.width {
                                 let rows = team.newsSources.chunked(into: 2)
                                 VStack(spacing: 12) {
@@ -43,7 +43,7 @@ struct HeadlinesView: View {
                                 .padding(12)
                             } else {
                                 HStack(spacing: 0) {
-                                    newspaperColumn(selection: $store.selectedSource)
+                                    newspaperColumn(selection: Bindable(store).selectedSource)
                                     if contentWidth >= 720 {
                                         Divider().overlay(AppColor.rule)
                                         newspaperColumn(selection: $secondarySource)

@@ -9,7 +9,8 @@ struct RecentGameView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: RecentGameStore
+    @Environment(TeamSession.self) private var session
+    private var store: RecentGameStore { session.recent }
     @State private var selectedStatsTeam: BoxScoreTeamSelection = .favorite
     @State private var selectedGameID: Int?
     private let statColumnSpacing: CGFloat = 3
@@ -19,7 +20,6 @@ struct RecentGameView: View {
     init(team: HubTeam = .boston, onSelectPlayer: @escaping (Int) -> Void = { _ in }) {
         self.team = team
         self.onSelectPlayer = onSelectPlayer
-        _store = State(initialValue: RecentGameStore(team: team))
     }
 
     var body: some View {

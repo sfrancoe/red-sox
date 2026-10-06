@@ -48,6 +48,7 @@ struct AppTabView: View {
     @AppStorage(HubPreferences.selectedTeamKey) private var selectedTeamID = HubTeam.boston.id
     @AppStorage(HubPreferences.completedTeamOnboardingKey) private var completedTeamOnboarding = false
     @AppStorage(HubPreferences.pageOrderKey) private var storedPageOrder = MainTab.defaultOrderStorageValue
+    @State private var session: TeamSession?
     @State private var selectedTab: MainTab = .home
     @State private var settingsPresented = false
     @State private var playoffsPresented = false
@@ -86,9 +87,12 @@ struct AppTabView: View {
                 } else {
                     topNavigation
                 }
-                selectedContent
-                    .id(team.id)
-                    .environment(\.hubContentWidth, window.size.width)
+                if let session, session.team == team {
+                    selectedContent
+                        .id(team.id)
+                        .environment(session)
+                        .environment(\.hubContentWidth, window.size.width)
+                }
             }
             // iPad window controls float over the upper-left corner in narrow
             // windows. Keep the custom page heading below their touch area.
@@ -100,6 +104,7 @@ struct AppTabView: View {
         .font(AppFont.body)
         .environment(\.hubTeamPalette, palette)
         .onAppear {
+            if session == nil { session = TeamSession(team: team) }
             guard !hasAppeared else { return }
             #if DEBUG
             let arguments = ProcessInfo.processInfo.arguments
@@ -134,6 +139,7 @@ struct AppTabView: View {
             hasAppeared = true
         }
         .onChange(of: selectedTeamID) { _, _ in
+            session = TeamSession(team: team)
             selectedPlayerID = nil
             if !availableTabs.contains(selectedTab) {
                 selectedTab = team.supportsHome ? .home : .recent

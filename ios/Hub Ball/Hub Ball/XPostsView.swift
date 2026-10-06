@@ -3,10 +3,10 @@ import SwiftUI
 struct XPostsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: XPostsStore
+    @Environment(TeamSession.self) private var session
+    private var store: XPostsStore { session.xPosts }
 
     init(team: HubTeam = .boston) {
-        _store = State(initialValue: XPostsStore(team: team))
     }
 
     var body: some View {

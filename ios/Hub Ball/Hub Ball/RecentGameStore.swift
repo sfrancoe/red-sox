@@ -49,14 +49,17 @@ final class RecentGameStore {
     init(
         team: HubTeam = .boston,
         session: URLSession = APIClient.session,
+        api: APIClient? = nil,
+        scheduleStore: ScheduleStore? = nil,
         now: @escaping () -> Date = Date.init,
         cacheDirectory: URL? = nil,
         backendOrigin: URL? = nil
     ) {
-        client = MLBGameClient(team: team, session: session, backendOrigin: backendOrigin)
-        scheduleStore = ScheduleStore(
+        client = MLBGameClient(team: team, session: session, api: api, backendOrigin: backendOrigin)
+        self.scheduleStore = scheduleStore ?? ScheduleStore(
             team: team,
             session: session,
+            api: api,
             now: now,
             backendOrigin: backendOrigin
         )

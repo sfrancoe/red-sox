@@ -3,7 +3,8 @@ import SwiftUI
 struct PostseasonScorecardSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
-    @State private var store: PostseasonScorecardStore
+    @Environment(AppModel.self) private var model
+    private var store: PostseasonScorecardStore { model.scorecard(for: game) }
     @State private var selectedTeamSide = "away"
     @State private var selectedPlayer: ScorecardPlayerSelection?
     private let game: PostseasonGame
@@ -11,7 +12,6 @@ struct PostseasonScorecardSheet: View {
 
     init(game: PostseasonGame) {
         self.game = game
-        _store = State(initialValue: PostseasonScorecardStore(game: game))
     }
 
     var body: some View {

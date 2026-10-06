@@ -3,7 +3,8 @@ import SwiftUI
 struct PlayersView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store: PlayersStore
+    @Environment(TeamSession.self) private var session
+    private var store: PlayersStore { session.players }
     @State private var path: [Int] = []
 
     let team: HubTeam
@@ -12,7 +13,6 @@ struct PlayersView: View {
 
     init(team: HubTeam, requestedPlayerID: Int? = nil, onRequestHandled: @escaping () -> Void = {}) {
         self.team = team
-        _store = State(initialValue: PlayersStore(team: team))
         self.requestedPlayerID = requestedPlayerID
         self.onRequestHandled = onRequestHandled
     }
@@ -99,7 +99,7 @@ struct PlayersView: View {
             }
             .accessibilityValue("\(directorySortTitle(store.sort)), \(store.sortsAscending ? "ascending" : "descending")")
 
-            Picker("Sort direction", selection: $store.sortsAscending) {
+            Picker("Sort direction", selection: Bindable(store).sortsAscending) {
                 Text("Ascending").tag(true)
                 Text("Descending").tag(false)
             }
@@ -172,7 +172,7 @@ struct PlayersView: View {
                 .foregroundStyle(AppColor.steel)
             TextField(
                 "Search players",
-                text: $store.searchText,
+                text: Bindable(store).searchText,
                 prompt: Text("Search players").foregroundStyle(AppColor.boneDim)
             )
                 .textInputAutocapitalization(.words)
@@ -193,7 +193,7 @@ struct PlayersView: View {
     @ViewBuilder
     private var filterBar: some View {
         if usesExpandedReadingLayout {
-            Picker("Player position", selection: $store.filter) {
+            Picker("Player position", selection: Bindable(store).filter) {
                 ForEach(PlayerPositionFilter.allCases) { filter in
                     Text(filter.title).tag(filter)
                 }
@@ -435,13 +435,13 @@ private enum PitchingCareerSort: String, CaseIterable {
 struct PostseasonPlayerCardSheet: View {
     let team: HubTeam
     let playerID: Int
-    @State private var store: PlayersStore
+    @Environment(AppModel.self) private var model
+    private var store: PlayersStore { model.players(for: team) }
     @Environment(\.dismiss) private var dismiss
 
     init(team: HubTeam, playerID: Int) {
         self.team = team
         self.playerID = playerID
-        _store = State(initialValue: PlayersStore(team: team))
     }
 
     var body: some View {

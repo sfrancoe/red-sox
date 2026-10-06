@@ -3,7 +3,8 @@ import SwiftUI
 struct HomeRunChaseView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @State private var store = HomeRunChaseStore()
+    @Environment(AppModel.self) private var model
+    private var store: HomeRunChaseStore { model.homeRunChase }
     @State private var chapter = 0
     @State private var drawProgress = 0.0
     @State private var morphProgress = 0.0
