@@ -35,9 +35,9 @@ struct ScheduleView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        .task {
-            await loadSchedule()
-        }
+        
+        .onAppear { session.setVisible("schedule", true) }
+        .onDisappear { session.setVisible("schedule", false) }
     }
 
     private var usesExpandedReadingLayout: Bool {

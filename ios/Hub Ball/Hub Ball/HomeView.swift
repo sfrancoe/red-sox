@@ -45,16 +45,9 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
         }
-        .task(id: scenePhase) {
-            guard scenePhase == .active else { return }
-            await store.load()
-            while !Task.isCancelled {
-                let delay: UInt64 = store.recentGame?.isLive == true ? 20 : 60
-                try? await Task.sleep(nanoseconds: delay * 1_000_000_000)
-                guard !Task.isCancelled else { return }
-                await store.refreshCurrentGame()
-            }
-        }
+        
+        .onAppear { session.setVisible("home", true) }
+        .onDisappear { session.setVisible("home", false) }
     }
 
     private var octoberInvitation: some View {

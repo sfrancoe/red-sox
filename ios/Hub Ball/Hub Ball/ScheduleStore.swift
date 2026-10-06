@@ -24,7 +24,7 @@ final class ScheduleStore {
                 .appending(path: team.dataPathComponent ?? "")
                 .appending(path: "schedule.json")
         } ?? AppBackend.dataURL("schedule.json", team: team)
-        self.api = api ?? APIClient(session: session)
+        self.api = api ?? (session === APIClient.session ? .shared : APIClient(session: session))
         self.now = now
     }
 

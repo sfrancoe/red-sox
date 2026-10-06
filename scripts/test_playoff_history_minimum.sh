@@ -10,6 +10,8 @@ swiftc -target "$(uname -m)-apple-macos14.0" \
   "$app_root/HubTeam.swift" \
   "$app_root/AppBackend.swift" \
   "$app_root/APIClient.swift" \
+  "$app_root/MLBPayload.swift" \
+  "$app_root/RecentGame.swift" \
   "$app_root/SafeURL.swift" \
   "$app_root/PostseasonHistory.swift" \
   "$repo_root/scripts/test_playoff_history_minimum.swift" \

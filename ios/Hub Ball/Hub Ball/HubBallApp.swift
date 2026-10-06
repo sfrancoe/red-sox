@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct HubBallApp: App {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var model: AppModel?
     init() {
         #if DEBUG
@@ -25,6 +26,10 @@ struct HubBallApp: App {
             Group {
                 if let model { ContentView().environment(model) }
                 else { ProgressView().task { model = AppModel() } }
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .background { model?.scheduler.setBackground(true) }
+                if phase == .active { model?.scheduler.setBackground(false) }
             }
         }
     }

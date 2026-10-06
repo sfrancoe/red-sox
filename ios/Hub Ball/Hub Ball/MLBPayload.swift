@@ -100,3 +100,30 @@ nonisolated struct MLBPlay: Decodable, Sendable {
     }
     struct Matchup: Decodable, Sendable { var batter: MLBPerson? }
 }
+
+/// Share raw data (not team-relative prose) across Home, Recaps and playoff sheets.
+actor MLBGameFeeds {
+    private struct Cached: Sendable { let payload: MLBGamePayload; let checkedAt: Date }
+    private var saved: [Int: Cached] = [:]
+    private var pending: [Int: Task<MLBGamePayload, Error>] = [:]
+
+    func get(_ gamePk: Int, force: Bool,
+             load: @escaping @Sendable () async throws -> MLBGamePayload) async throws -> MLBGamePayload {
+        if let task = pending[gamePk] { return try await task.value }
+        if !force, let cached = saved[gamePk] {
+            let status = cached.payload.gameData?.status
+            let final = status?.abstractGameState == "Final" && ["F", "O"].contains(status?.codedGameState ?? "")
+            if Date().timeIntervalSince(cached.checkedAt) < (final ? 300 : 20) { return cached.payload }
+        }
+        let task = Task { try await load() }
+        pending[gamePk] = task
+        defer { pending[gamePk] = nil }
+        let payload = try await task.value
+        guard payload.gamePk == gamePk else { throw URLError(.cannotDecodeContentData) }
+        saved[gamePk] = Cached(payload: payload, checkedAt: Date())
+        if saved.count > 16, let oldest = saved.min(by: { $0.value.checkedAt < $1.value.checkedAt })?.key {
+            saved[oldest] = nil
+        }
+        return payload
+    }
+}

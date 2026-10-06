@@ -24,11 +24,13 @@ struct SeasonLeadersView: View {
         }
         .navigationTitle("Season Leaders")
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await store.load()
+        
+        .sheet(item: $detail) { LeaderboardDetailSheet(detail: $0) }
+        .onAppear { session.setVisible("leaders", true) }
+        .onDisappear { session.setVisible("leaders", false) }
+        .task(id: store.sortedYears) {
             if scope != .team { for year in store.sortedYears { await store.loadComparison(year: year) } }
         }
-        .sheet(item: $detail) { LeaderboardDetailSheet(detail: $0) }
     }
 
     private var scopeControl: some View {

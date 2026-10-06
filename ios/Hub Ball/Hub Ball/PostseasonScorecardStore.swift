@@ -9,14 +9,14 @@ final class PostseasonScorecardStore {
     private(set) var refreshFailed = false
     private(set) var checkedAt: Date?
     private let selectedGame: PostseasonGame
-    private let session: URLSession
+    private let api: APIClient
 
-    init(game: PostseasonGame, session: URLSession = APIClient.session) {
+    init(game: PostseasonGame, session: URLSession = APIClient.session, api: APIClient? = nil) {
         selectedGame = game
-        self.session = session
+        self.api = api ?? (session === APIClient.session ? .shared : APIClient(session: session))
     }
 
-    func refresh() async {
+    func refresh(force: Bool = false) async {
         guard !isLoading else { return }
         isLoading = true
         defer { isLoading = false }
@@ -24,8 +24,8 @@ final class PostseasonScorecardStore {
             guard let team = HubTeam.allCases.first(where: { $0.mlbID == selectedGame.away.teamId }) else {
                 throw URLError(.unsupportedURL)
             }
-            let incoming = try await MLBGameClient(team: team, session: session)
-                .game(gamePk: selectedGame.gamePk, cachePolicy: .reloadIgnoringLocalCacheData)
+            let incoming = try await MLBGameClient(team: team, api: api)
+                .game(gamePk: selectedGame.gamePk, cachePolicy: force ? .reloadIgnoringLocalCacheData : .useProtocolCachePolicy)
             try Task.checkCancellation()
             guard incoming.gamePk == selectedGame.gamePk,
                   incoming.away.id == selectedGame.away.teamId,

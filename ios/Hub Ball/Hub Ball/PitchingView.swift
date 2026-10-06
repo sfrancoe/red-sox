@@ -37,9 +37,9 @@ struct PitchingView: View {
         }
         .navigationTitle("Pitching")
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await store.load()
-        }
+        
+        .onAppear { session.setVisible("pitching", true) }
+        .onDisappear { session.setVisible("pitching", false) }
     }
 
     private func pitchingContent(_ feed: PitchingFeed, chartHeight: CGFloat) -> some View {

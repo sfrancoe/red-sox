@@ -44,20 +44,10 @@ struct RecentGameView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        .task(id: scenePhase) {
-            guard scenePhase == .active else { return }
-            await store.load()
-            synchronizeSelection()
-
-            while !Task.isCancelled {
-                let delay: UInt64 = store.hasLiveGame ? 20 : 60
-                try? await Task.sleep(nanoseconds: delay * 1_000_000_000)
-                guard !Task.isCancelled else { return }
-                let hadLiveGame = store.hasLiveGame
-                await store.refresh()
-                synchronizeSelection(preferNewLiveGame: !hadLiveGame && store.hasLiveGame)
-            }
-        }
+        
+        .onAppear { session.setVisible("recent", true) }
+        .onDisappear { session.setVisible("recent", false) }
+        .onChange(of: store.games.map(\.gamePk)) { _, _ in synchronizeSelection(preferNewLiveGame: store.hasLiveGame) }
     }
 
     private var usesExpandedReadingLayout: Bool {

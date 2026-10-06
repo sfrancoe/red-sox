@@ -28,9 +28,9 @@ struct XPostsView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        .task {
-            await store.load()
-        }
+        
+        .onAppear { session.setVisible("xPosts", true) }
+        .onDisappear { session.setVisible("xPosts", false) }
     }
 
     @ViewBuilder

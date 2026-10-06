@@ -62,13 +62,13 @@ struct HeadlinesView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        .task {
-            await store.load()
-        }
+        
         .sheet(item: $presentedArticle) { article in
             SafariView(url: article.url)
                 .ignoresSafeArea()
         }
+        .onAppear { session.setVisible("headlines", true) }
+        .onDisappear { session.setVisible("headlines", false) }
     }
 
     private var usesExpandedReadingLayout: Bool {

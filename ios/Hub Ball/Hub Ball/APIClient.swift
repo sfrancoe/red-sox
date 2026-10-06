@@ -46,8 +46,13 @@ nonisolated struct APIClient: Sendable {
     }()
     private let session: URLSession
     private let decoder = APIDecoder()
+    let gameFeeds = MLBGameFeeds()
+    let cachesGameFeeds: Bool
 
-    init(session: URLSession = APIClient.session) { self.session = session }
+    init(session: URLSession = APIClient.session, cachesGameFeeds: Bool? = nil) {
+        self.session = session
+        self.cachesGameFeeds = cachesGameFeeds ?? (session === APIClient.session)
+    }
 
     @concurrent func get<T: Decodable & Sendable>(
         _ endpoint: Endpoint,

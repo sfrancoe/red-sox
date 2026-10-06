@@ -2,7 +2,7 @@ import SwiftUI
 import Charts
 import Observation
 
-nonisolated private struct SoxMarket: Decodable, Identifiable, Sendable {
+nonisolated struct SoxMarket: Decodable, Identifiable, Sendable {
     let id: String
     let provider: String
     let title: String
@@ -30,7 +30,7 @@ nonisolated private struct SoxMarket: Decodable, Identifiable, Sendable {
         f.dateFormat = "EEE, MMM d"; return f.string(from: d)
     }
 }
-nonisolated private struct MarketSnapshot: Decodable, Sendable {
+nonisolated struct MarketSnapshot: Decodable, Sendable {
     nonisolated struct Source: Decodable, Sendable { let name: String; let available: Bool }
     let generatedAt: String
     let markets: [SoxMarket]
@@ -41,7 +41,7 @@ nonisolated private struct MarketSnapshot: Decodable, Sendable {
         return f.date(from: generatedAt) ?? ISO8601DateFormatter().date(from: generatedAt)
     }
 }
-nonisolated private struct MarketPoint: Decodable, Identifiable, Sendable {
+nonisolated struct MarketPoint: Decodable, Identifiable, Sendable {
     let t: Double
     let p: Double
     var id: Double { t }
@@ -69,7 +69,7 @@ private enum ResolveWindow: String, CaseIterable, Identifiable {
 }
 
 @MainActor @Observable
-private final class MarketsStore {
+final class MarketsStore {
     var snapshot: MarketSnapshot?
     var loading = false
     var error: String?
@@ -128,7 +128,8 @@ private final class MarketsStore {
 struct MarketsView: View {
     @Environment(\.hubContentWidth) private var width
     @Environment(\.scenePhase) private var scenePhase
-    @State private var store = MarketsStore()
+    @Environment(AppModel.self) private var model
+    private var store: MarketsStore { model.markets }
     @State private var resolveWindow: ResolveWindow = .today
     @State private var volumeOnly = true
     @State private var detail: SoxMarket?
@@ -163,19 +164,11 @@ struct MarketsView: View {
         .background(AppColor.paleRed.ignoresSafeArea())
         .preferredColorScheme(.light)
         .refreshable { await store.refresh() }
-        .task {
-            await store.refresh()
-            #if DEBUG
-            if ProcessInfo.processInfo.arguments.contains("-market-detail") { detail = markets.first(where: { $0.provider == "Kalshi" && $0.category == "Winner" }) }
-            if ProcessInfo.processInfo.arguments.contains("-market-season") { resolveWindow = .seasonEnd }
-            #endif
-        }
-        .task {
-            while !Task.isCancelled {
-                do { try await Task.sleep(for: .seconds(120)) } catch { break }
-                if scenePhase == .active { await store.refresh() }
-            }
-        }
+        
+        
+
+        .onAppear { model.setMarketsVisible(true) }
+        .onDisappear { model.setMarketsVisible(false) }
         .sheet(item: $detail) { market in MarketDetail(market: market, store: store) }
     }
 

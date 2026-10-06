@@ -42,11 +42,12 @@ struct PlayersView: View {
             }
         }
         .background(AppColor.night.ignoresSafeArea())
-        .task {
-            await store.load()
-            openRequestedPlayerIfAvailable()
-        }
+        
         .onChange(of: requestedPlayerID) { _, _ in openRequestedPlayerIfAvailable() }
+        .onAppear { session.setVisible("players", true) }
+        .onDisappear { session.setVisible("players", false) }
+        .onChange(of: store.feed?.generatedAt) { _, _ in openRequestedPlayerIfAvailable() }
+        .onAppear { openRequestedPlayerIfAvailable() }
     }
 
     private func directory(_ feed: PlayersFeed) -> some View {

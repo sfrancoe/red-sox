@@ -38,18 +38,10 @@ struct StandingsView: View {
         .toolbarBackground(AppColor.paleRed, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.light, for: .navigationBar)
-        .task {
-            await store.load()
-            while !Task.isCancelled {
-                try? await Task.sleep(for: .seconds(60))
-                guard !Task.isCancelled else { break }
-                await store.load()
-            }
-        }
-        .onChange(of: scenePhase) { _, phase in
-            guard phase == .active else { return }
-            Task { await store.load() }
-        }
+        
+        
+        .onAppear { session.setVisible("standings", true) }
+        .onDisappear { session.setVisible("standings", false) }
     }
 
     private var usesExpandedReadingLayout: Bool {

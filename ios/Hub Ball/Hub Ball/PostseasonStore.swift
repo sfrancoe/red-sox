@@ -17,7 +17,7 @@ final class PostseasonStore {
     init(season: Int = Calendar(identifier: .gregorian).component(.year, from: Date()),
          session: URLSession = APIClient.session, api: APIClient? = nil) {
         self.season = season
-        self.api = api ?? APIClient(session: session)
+        self.api = api ?? (session === APIClient.session ? .shared : APIClient(session: session))
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         directory = base.appending(path: "October", directoryHint: .isDirectory)
         calls = Self.readCalls(from: directory.appending(path: "calls-\(season).json"))
@@ -69,7 +69,7 @@ final class PostseasonStore {
                 guard let team = HubTeam.allCases.first(where: { $0.mlbID == game.away.teamId }) else { continue }
                 group.addTask {
                     let live = try? await MLBGameClient(team: team, api: api)
-                        .game(gamePk: game.gamePk, cachePolicy: .reloadIgnoringLocalCacheData)
+                        .game(gamePk: game.gamePk)
                     return (index, live)
                 }
             }

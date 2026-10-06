@@ -68,7 +68,7 @@ final class PostseasonNewsStore {
 
     init(season: Int, session: URLSession = APIClient.session, api: APIClient? = nil) {
         self.season = season
-        self.api = api ?? APIClient(session: session)
+        self.api = api ?? (session === APIClient.session ? .shared : APIClient(session: session))
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let directory = base.appending(path: "October", directoryHint: .isDirectory)
         snapshotURL = directory.appending(path: "news-\(season).json")

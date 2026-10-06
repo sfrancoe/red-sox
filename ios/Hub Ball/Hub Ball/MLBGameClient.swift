@@ -18,7 +18,7 @@ nonisolated struct MLBGameClient: Sendable {
         backendOrigin: URL? = nil
     ) {
         self.team = team
-        self.api = api ?? APIClient(session: session)
+        self.api = api ?? (session === APIClient.session ? .shared : APIClient(session: session))
         self.backendOrigin = backendOrigin
     }
 
@@ -61,7 +61,15 @@ nonisolated struct MLBGameClient: Sendable {
     ) async throws -> RecentGame {
         let url = apiURL("mlb/game")
             .appending(queryItems: [URLQueryItem(name: "gamePk", value: "\(gamePk)")])
-        let payload: MLBGamePayload = try await api.get(.url(url), cachePolicy: cachePolicy, snakeCase: false)
+        let api = self.api
+        if !api.cachesGameFeeds {
+            let payload: MLBGamePayload = try await api.get(.url(url), cachePolicy: cachePolicy, snakeCase: false)
+            return try buildGame(from: payload)
+        }
+        let payload = try await api.gameFeeds.get(gamePk, force: cachePolicy == .reloadIgnoringLocalCacheData) {
+            try await api.get(.url(url), cachePolicy: cachePolicy, snakeCase: false)
+        }
+        try Task.checkCancellation()
         return try buildGame(from: payload)
     }
 

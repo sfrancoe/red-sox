@@ -139,6 +139,7 @@ struct AppTabView: View {
             hasAppeared = true
         }
         .onChange(of: selectedTeamID) { _, _ in
+            session?.scheduler.stop()
             session = TeamSession(team: team)
             selectedPlayerID = nil
             if !availableTabs.contains(selectedTab) {
@@ -146,6 +147,8 @@ struct AppTabView: View {
             }
         }
         .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .background { session?.scheduler.setBackground(true) }
+            if newPhase == .active { session?.scheduler.setBackground(false) }
             switch newPhase {
             case .background:
                 backgroundedAt = Date()

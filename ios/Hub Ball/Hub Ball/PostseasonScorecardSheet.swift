@@ -72,18 +72,10 @@ struct PostseasonScorecardSheet: View {
                 .padding(.vertical, 8)
                 .background(AppColor.night)
             }
-            .refreshable { await store.refresh() }
-            .task(id: scenePhase) {
-                guard scenePhase == .active else { return }
-                await store.refresh()
-                while !Task.isCancelled, scenePhase == .active {
-                    if let snapshot = store.snapshot, !snapshot.isLive { break }
-                    do { try await Task.sleep(for: .seconds(30)) }
-                    catch { break }
-                    guard !Task.isCancelled, scenePhase == .active else { break }
-                    await store.refresh()
-                }
-            }
+            .refreshable { await store.refresh(force: true) }
+            .onAppear { model.setScorecardVisible(game, true) }
+            .onDisappear { model.setScorecardVisible(game, false) }
+            
         }
         .sheet(item: $selectedPlayer) { selection in
             if let team = HubTeam.allCases.first(where: { $0.mlbID == selection.teamID }) {
@@ -97,7 +89,7 @@ struct PostseasonScorecardSheet: View {
     }
 
     private var retryButton: some View {
-        Button("Retry") { Task { await store.refresh() } }
+        Button("Retry") { Task { await store.refresh(force: true) } }
             .disabled(store.isLoading)
     }
 

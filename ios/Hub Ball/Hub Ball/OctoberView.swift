@@ -90,21 +90,10 @@ struct OctoberView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .task(id: scenePhase) {
-            guard scenePhase == .active else { return }
-            async let postseasonRefresh: Void = store.refresh()
-            async let historyRefresh: Void = historyStore.refresh()
-            async let newsRefresh: Void = newsStore.refresh()
-            _ = await (postseasonRefresh, historyRefresh, newsRefresh)
-            while !Task.isCancelled, scenePhase == .active {
-                if store.snapshot?.phase == "complete" { break }
-                let delay = store.snapshot?.isLive == true ? 30.0 : 60.0
-                try? await Task.sleep(for: .seconds(delay))
-                guard !Task.isCancelled, scenePhase == .active else { break }
-                await store.refresh()
-            }
-        }
+        
+        .onDisappear { model.setOctoberVisible(false) }
         .onAppear {
+            model.setOctoberVisible(true)
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("-show-playoff-history") {
                 section = .history
