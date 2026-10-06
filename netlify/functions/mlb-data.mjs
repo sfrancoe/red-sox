@@ -1,3 +1,4 @@
+import { gameNarratives } from '../lib/game-narrative.mjs';
 import { MLB_TEAMS } from './team-registry.mjs';
 
 const MLB_ORIGIN = 'https://statsapi.mlb.com';
@@ -211,6 +212,7 @@ export function projectGame(payload) {
       matchup: { batter: play.matchup?.batter } }));
   return {
     schema: 2,
+    narratives: gameNarratives(payload),
     ...pick(payload, ['gamePk', 'officialRecap']),
     gameData: {
       ...pick(payload.gameData, ['status', 'teams', 'venue', 'datetime', 'gameInfo']),

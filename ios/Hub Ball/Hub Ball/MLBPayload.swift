@@ -12,6 +12,8 @@ nonisolated struct MLBGamePayload: Decodable, Sendable {
     var gameData: MLBGameData?
     var liveData: MLBLiveData?
     var officialRecap: OfficialRecap?
+    var narratives: [String: Narrative]?
+    struct Narrative: Decodable, Sendable { let summary: String; let facts: [String] }
 }
 nonisolated struct MLBStatus: Decodable, Sendable {
     var abstractGameState: String?

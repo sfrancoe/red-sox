@@ -90,26 +90,27 @@ nonisolated struct MLBGameClient: Sendable {
         let away = boxScore(side: "away", gameData: gameData, liveData: liveData)
         let home = boxScore(side: "home", gameData: gameData, liveData: liveData)
         guard away.id == team.mlbID || home.id == team.mlbID else { throw MLBGameError.notFavoriteTeam }
-        let boston = away.id == team.mlbID ? away : home
+        let favorite = away.id == team.mlbID ? away : home
         let opponent = away.id == team.mlbID ? home : away
         let isLive = gameData.status?.abstractGameState == "Live"
         let innings = buildInnings(linescore, minimumCount: isLive ? 9 : 0)
         let narrativePlays = buildScoringPlays(liveData)
         let venue = gameData.venue?.name ?? "the ballpark"
-        let summary = isLive
-            ? liveSummary(boston: boston, opponent: opponent, venue: venue, linescore: linescore)
-            : finalSummary(boston: boston, opponent: opponent, venue: venue, plays: narrativePlays)
-        let facts = interestingFacts(boston: boston, opponent: opponent, inningsCount: innings.count, isLive: isLive)
+        let fallbackSummary = isLive
+            ? liveSummary(favorite: favorite, opponent: opponent, venue: venue, linescore: linescore)
+            : finalSummary(favorite: favorite, opponent: opponent, venue: venue, plays: narrativePlays)
+        let fallbackFacts = interestingFacts(favorite: favorite, opponent: opponent, inningsCount: innings.count, isLive: isLive)
         return RecentGame(
             generatedAt: Date().ISO8601Format(), source: "MLB Stats API",
             gamePk: payload.gamePk ?? 0, gameDate: gameData.datetime?.dateTime ?? "",
             venue: venue, gameDurationMinutes: gameData.gameInfo?.gameDurationMinutes,
             attendance: gameData.gameInfo?.attendance, inningsCount: innings.count,
-            result: isLive ? "Live" : boston.runs > opponent.runs ? "Win" : "Loss",
+            result: isLive ? "Live" : favorite.runs > opponent.runs ? "Win" : "Loss",
             gameState: isLive ? "Live" : "Final",
             liveStatus: isLive ? liveStatus(linescore) : nil,
             liveMatchup: isLive ? liveMatchup(linescore, players: gameData.players ?? [:]) : nil,
-            summary: summary, facts: facts,
+            summary: payload.narratives?[String(team.mlbID)]?.summary ?? fallbackSummary,
+            facts: payload.narratives?[String(team.mlbID)]?.facts ?? fallbackFacts,
             decisions: Decisions(winner: liveData.decisions?.winner?.fullName ?? "",
                                  loser: liveData.decisions?.loser?.fullName ?? "",
                                  save: liveData.decisions?.save?.fullName ?? ""),
@@ -216,19 +217,19 @@ nonisolated struct MLBGameClient: Sendable {
     }
 
     private func liveSummary(
-        boston: TeamBoxScore,
+        favorite: TeamBoxScore,
         opponent: TeamBoxScore,
         venue: String,
         linescore: MLBLineScore
     ) -> String {
         let situation = liveSituation(linescore)
-        if boston.runs > opponent.runs {
-            return "The \(team.shortName) lead the \(clubName(opponent)), \(boston.runs)–\(opponent.runs), \(situation) at \(venue)."
+        if favorite.runs > opponent.runs {
+            return "The \(team.shortName) lead the \(clubName(opponent)), \(favorite.runs)–\(opponent.runs), \(situation) at \(venue)."
         }
-        if boston.runs < opponent.runs {
-            return "The \(team.shortName) trail the \(clubName(opponent)), \(opponent.runs)–\(boston.runs), \(situation) at \(venue)."
+        if favorite.runs < opponent.runs {
+            return "The \(team.shortName) trail the \(clubName(opponent)), \(opponent.runs)–\(favorite.runs), \(situation) at \(venue)."
         }
-        return "The \(team.shortName) and \(clubName(opponent)) are tied, \(boston.runs)–\(opponent.runs), \(situation) at \(venue)."
+        return "The \(team.shortName) and \(clubName(opponent)) are tied, \(favorite.runs)–\(opponent.runs), \(situation) at \(venue)."
     }
 
     private func liveSituation(_ linescore: MLBLineScore) -> String {
@@ -255,24 +256,24 @@ nonisolated struct MLBGameClient: Sendable {
     }
 
     private func finalSummary(
-        boston: TeamBoxScore,
+        favorite: TeamBoxScore,
         opponent: TeamBoxScore,
         venue: String,
         plays: [NarrativePlay]
     ) -> String {
-        let annotated = annotate(plays, bostonAway: boston.side == "away")
-        if boston.runs > opponent.runs {
-            let largestDeficit = annotated.map { $0.afterOpponent - $0.afterBoston }.max() ?? 0
+        let annotated = annotate(plays, favoriteAway: favorite.side == "away")
+        if favorite.runs > opponent.runs {
+            let largestDeficit = annotated.map { $0.afterOpponent - $0.afterFavorite }.max() ?? 0
             let deficitIndex = annotated.lastIndex {
-                $0.afterOpponent - $0.afterBoston == largestDeficit
+                $0.afterOpponent - $0.afterFavorite == largestDeficit
             } ?? 0
             let goAhead = annotated.filter {
-                $0.afterBoston > $0.beforeBoston
-                    && $0.beforeBoston <= $0.beforeOpponent
-                    && $0.afterBoston > $0.afterOpponent
+                $0.afterFavorite > $0.beforeFavorite
+                    && $0.beforeFavorite <= $0.beforeOpponent
+                    && $0.afterFavorite > $0.afterOpponent
             }
             let winningPlay = goAhead.last
-            let walkoff = winningPlay != nil && boston.side == "home"
+            let walkoff = winningPlay != nil && favorite.side == "home"
                 && (winningPlay?.play.inningNum ?? 0) >= 9
                 && winningPlay?.play.id == annotated.last?.play.id
             var sentences: [String] = []
@@ -280,37 +281,37 @@ nonisolated struct MLBGameClient: Sendable {
                 sentences.append(
                     "\(winningPlay.play.batter) delivered a walk-off \(winningPlay.play.event.lowercased()) "
                         + "in the \(ordinal(winningPlay.play.inningNum)) inning as the \(team.shortName) rallied past "
-                        + "the \(clubName(opponent)), \(boston.runs)–\(opponent.runs), at \(venue)."
+                        + "the \(clubName(opponent)), \(favorite.runs)–\(opponent.runs), at \(venue)."
                 )
             } else if largestDeficit >= 2 {
                 sentences.append(
                     "The \(team.shortName) erased a \(largestDeficit)-run deficit to beat the \(clubName(opponent)), "
-                        + "\(boston.runs)–\(opponent.runs), at \(venue)."
+                        + "\(favorite.runs)–\(opponent.runs), at \(venue)."
                 )
             } else if opponent.runs == 0 {
-                sentences.append("The \(team.shortName) shut out the \(clubName(opponent)), \(boston.runs)–\(opponent.runs), at \(venue).")
+                sentences.append("The \(team.shortName) shut out the \(clubName(opponent)), \(favorite.runs)–\(opponent.runs), at \(venue).")
             } else {
-                sentences.append("The \(team.shortName) beat the \(clubName(opponent)), \(boston.runs)–\(opponent.runs), at \(venue).")
+                sentences.append("The \(team.shortName) beat the \(clubName(opponent)), \(favorite.runs)–\(opponent.runs), at \(venue).")
             }
             if largestDeficit >= 2, annotated.indices.contains(deficitIndex) {
                 let lowPoint = annotated[deficitIndex]
                 if let rally = annotated.dropFirst(deficitIndex + 1).first(where: {
-                    $0.afterBoston > $0.beforeBoston
+                    $0.afterFavorite > $0.beforeFavorite
                 }) {
-                    let remaining = rally.afterOpponent - rally.afterBoston
+                    let remaining = rally.afterOpponent - rally.afterFavorite
                     let effect = remaining == 0 ? "tied the game"
                         : remaining < 0 ? "put \(team.cityName) ahead"
                         : "cut the deficit to \(remaining == 1 ? "one" : "\(remaining)")"
                     sentences.append(
-                        "\(team.cityName) trailed \(lowPoint.afterOpponent)–\(lowPoint.afterBoston) before "
+                        "\(team.cityName) trailed \(lowPoint.afterOpponent)–\(lowPoint.afterFavorite) before "
                             + "\(scoringAction(rally.play)) in the \(ordinal(rally.play.inningNum)) \(effect)."
                     )
                 }
             }
             if walkoff, let winningPlay,
                let tying = annotated.dropFirst(deficitIndex + 1).first(where: {
-                   $0.afterBoston > $0.beforeBoston && $0.beforeBoston < $0.beforeOpponent
-                       && $0.afterBoston == $0.afterOpponent
+                   $0.afterFavorite > $0.beforeFavorite && $0.beforeFavorite < $0.beforeOpponent
+                       && $0.afterFavorite == $0.afterOpponent
                }), tying.play.id != winningPlay.play.id {
                 let timing = winningPlay.play.inningNum - tying.play.inningNum == 1 ? "one inning later" : "later"
                 sentences.append(
@@ -326,31 +327,31 @@ nonisolated struct MLBGameClient: Sendable {
             return sentences.joined(separator: " ")
         }
 
-        let largestLead = annotated.map { $0.afterBoston - $0.afterOpponent }.max() ?? 0
+        let largestLead = annotated.map { $0.afterFavorite - $0.afterOpponent }.max() ?? 0
         let opponentGoAhead = annotated.last(where: {
-            $0.afterOpponent > $0.afterBoston
-                && $0.beforeOpponent <= $0.beforeBoston
+            $0.afterOpponent > $0.afterFavorite
+                && $0.beforeOpponent <= $0.beforeFavorite
                 && $0.afterOpponent > $0.beforeOpponent
         })
-        let bostonHighlight = annotated
-            .filter { $0.afterBoston > $0.beforeBoston }
+        let favoriteHighlight = annotated
+            .filter { $0.afterFavorite > $0.beforeFavorite }
             .max {
-                let leftRuns = $0.afterBoston - $0.beforeBoston
-                let rightRuns = $1.afterBoston - $1.beforeBoston
+                let leftRuns = $0.afterFavorite - $0.beforeFavorite
+                let rightRuns = $1.afterFavorite - $1.beforeFavorite
                 return (leftRuns, $0.play.inningNum) < (rightRuns, $1.play.inningNum)
             }
         var sentences: [String] = []
-        if boston.runs == 0 {
-            return "The \(team.shortName) were shut out by the \(clubName(opponent)), \(opponent.runs)–\(boston.runs), at \(venue)."
+        if favorite.runs == 0 {
+            return "The \(team.shortName) were shut out by the \(clubName(opponent)), \(opponent.runs)–\(favorite.runs), at \(venue)."
         }
         if largestLead >= 2 {
             sentences.append(
                 "The \(team.shortName) couldn’t hold a \(largestLead)-run lead and fell to the \(clubName(opponent)), "
-                    + "\(opponent.runs)–\(boston.runs), at \(venue)."
+                    + "\(opponent.runs)–\(favorite.runs), at \(venue)."
             )
         } else {
             sentences.append(
-                "The \(team.shortName) fell to the \(clubName(opponent)), \(opponent.runs)–\(boston.runs), at \(venue)."
+                "The \(team.shortName) fell to the \(clubName(opponent)), \(opponent.runs)–\(favorite.runs), at \(venue)."
             )
         }
         if let opponentGoAhead {
@@ -359,18 +360,18 @@ nonisolated struct MLBGameClient: Sendable {
                     + "put the \(clubName(opponent)) ahead for good."
             )
         }
-        if let bostonHighlight,
-           bostonHighlight.play.id != opponentGoAhead?.play.id {
+        if let favoriteHighlight,
+           favoriteHighlight.play.id != opponentGoAhead?.play.id {
             sentences.append(
-                "\(team.cityName)’s biggest swing came on \(scoringAction(bostonHighlight.play)) "
-                    + "in the \(ordinal(bostonHighlight.play.inningNum))."
+                "\(team.cityName)’s biggest swing came on \(scoringAction(favoriteHighlight.play)) "
+                    + "in the \(ordinal(favoriteHighlight.play.inningNum))."
             )
         }
         return sentences.joined(separator: " ")
     }
 
     private func interestingFacts(
-        boston: TeamBoxScore,
+        favorite: TeamBoxScore,
         opponent: TeamBoxScore,
         inningsCount: Int,
         isLive: Bool
@@ -379,16 +380,16 @@ nonisolated struct MLBGameClient: Sendable {
         if !isLive && inningsCount > 9 {
             facts.append("The game went \(inningsCount) innings.")
         }
-        if let top = boston.batting.max(by: { $0.hits < $1.hits }), top.hits >= 2 {
-            facts.append("\(top.name) has \(top.hits) of the \(team.shortName)’ \(boston.hits) hits\(isLive ? " so far" : "").")
+        if let top = favorite.batting.max(by: { $0.hits < $1.hits }), top.hits >= 2 {
+            facts.append("\(top.name) has \(top.hits) of the \(team.shortName)’ \(favorite.hits) hits\(isLive ? " so far" : "").")
         }
-        let homers = boston.batting.filter { $0.homeRuns > 0 }
+        let homers = favorite.batting.filter { $0.homeRuns > 0 }
         if !homers.isEmpty {
             let total = homers.reduce(0) { $0 + $1.homeRuns }
             let names = homers.map { "\($0.name) (\($0.seasonHomeRuns ?? 0))" }.joined(separator: ", ")
             facts.append("The \(team.shortName) have hit \(total) home run\(total == 1 ? "" : "s"): \(names).")
         }
-        if !isLive, let starter = boston.pitching.first {
+        if !isLive, let starter = favorite.pitching.first {
             facts.append(
                 "\(starter.name) worked \(starter.inningsPitched) innings, allowed "
                     + "\(starter.earnedRuns) earned run\(starter.earnedRuns == 1 ? "" : "s"), "
@@ -398,20 +399,20 @@ nonisolated struct MLBGameClient: Sendable {
         return Array(facts.prefix(5))
     }
 
-    private func annotate(_ plays: [NarrativePlay], bostonAway: Bool) -> [AnnotatedPlay] {
+    private func annotate(_ plays: [NarrativePlay], favoriteAway: Bool) -> [AnnotatedPlay] {
         var away = 0
         var home = 0
         return plays.map { play in
-            let beforeBoston = bostonAway ? away : home
-            let beforeOpponent = bostonAway ? home : away
+            let beforeFavorite = favoriteAway ? away : home
+            let beforeOpponent = favoriteAway ? home : away
             away = play.awayScore
             home = play.homeScore
             return AnnotatedPlay(
                 play: play,
-                beforeBoston: beforeBoston,
+                beforeFavorite: beforeFavorite,
                 beforeOpponent: beforeOpponent,
-                afterBoston: bostonAway ? away : home,
-                afterOpponent: bostonAway ? home : away
+                afterFavorite: favoriteAway ? away : home,
+                afterOpponent: favoriteAway ? home : away
             )
         }
     }
@@ -426,10 +427,7 @@ nonisolated struct MLBGameClient: Sendable {
     }
 
     private func clubName(_ team: TeamBoxScore) -> String {
-        team.name
-            .replacingOccurrences(of: "Boston Red Sox", with: "Red Sox")
-            .replacingOccurrences(of: "Seattle Mariners", with: "Mariners")
-            .replacingOccurrences(of: "New York Yankees", with: "Yankees")
+        HubTeam.allCases.first(where: { $0.mlbID == team.id })?.shortName ?? team.name
     }
 
     private func ordinal(_ value: Int) -> String {
@@ -463,9 +461,9 @@ nonisolated private struct NarrativePlay: Identifiable, Sendable {
 
 nonisolated private struct AnnotatedPlay: Sendable {
     let play: NarrativePlay
-    let beforeBoston: Int
+    let beforeFavorite: Int
     let beforeOpponent: Int
-    let afterBoston: Int
+    let afterFavorite: Int
     let afterOpponent: Int
 }
 

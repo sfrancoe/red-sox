@@ -241,3 +241,14 @@ assert.equal(projected.liveData.plays.allPlays[0].playEvents, undefined);
 assert.equal(projected.gameData.players.ID1.biography, undefined);
 assert.equal(projected.officialRecap.headline, 'Recap');
 console.log('MLB projection preserves scoring indices and removes unused fields');
+const { gameNarratives } = await import('../netlify/lib/game-narrative.mjs');
+const derby = {
+  gameData: { status: { abstractGameState: 'Final', codedGameState: 'F' }, teams: {
+    away: { id: 119, name: 'Los Angeles Dodgers', teamName: 'Dodgers' },
+    home: { id: 137, name: 'San Francisco Giants', teamName: 'Giants' },
+  }, venue: { name: 'Oracle Park' } },
+  liveData: { linescore: { teams: { away: { runs: 4 }, home: { runs: 2 } } } },
+};
+assert.match(gameNarratives(derby)[119].summary, /^The Dodgers beat the Giants, 4–2/);
+assert.match(gameNarratives(derby)[137].summary, /^The Giants fell to the Dodgers, 4–2/);
+assert.doesNotMatch(JSON.stringify(gameNarratives(derby)), /Boston|Red Sox/);
