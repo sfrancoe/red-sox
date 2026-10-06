@@ -32,7 +32,7 @@ struct HomeView: View {
                     octoberInvitation
                 }
                 Group {
-                    if store.recentGame != nil, store.schedule != nil {
+                    if store.recentGame != nil || store.schedule != nil || store.standings != nil {
                         briefing
                     } else if store.isLoading {
                         ProgressView("Loading today's briefing…")
@@ -144,6 +144,11 @@ struct HomeView: View {
     private var briefing: some View {
         ScrollView {
             VStack(spacing: 0) {
+                ForEach(store.sectionErrors, id: \.self) { message in
+                    Label(message, systemImage: "exclamationmark.circle")
+                        .font(.caption).foregroundStyle(AppColor.inkMuted)
+                        .frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, 6)
+                }
                 lastGameCard
                 Color.clear.frame(height: usesExpandedReadingLayout ? 20 : 32)
                 standingsCard

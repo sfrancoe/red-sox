@@ -16,7 +16,7 @@ struct StandingsView: View {
             AppColor.paleRed.ignoresSafeArea()
 
             Group {
-                if store.feeds.count == StandingsLeague.allCases.count {
+                if !store.feeds.isEmpty {
                     if usesExpandedReadingLayout {
                         expandedStandingsContent
                     } else if contentWidth >= 650 {
@@ -31,6 +31,11 @@ struct StandingsView: View {
                 } else {
                     errorView
                 }
+            }
+        }
+        .safeAreaInset(edge: .bottom) {
+            if let error = store.errorMessage {
+                Text(error).font(.caption).foregroundStyle(AppColor.inkMuted).padding(8)
             }
         }
         .navigationTitle("Standings")

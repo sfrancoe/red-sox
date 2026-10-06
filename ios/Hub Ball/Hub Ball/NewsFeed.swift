@@ -52,3 +52,18 @@ private enum NewsDateParser {
         return ISO8601DateFormatter().date(from: value)
     }
 }
+
+nonisolated extension NewsArticle {
+    private enum CodingKeys: String, CodingKey {
+        case title, description, url, published, category
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        title = try values.decode(String.self, forKey: .title)
+        description = try values.decodeIfPresent(String.self, forKey: .description) ?? ""
+        url = try values.decode(String.self, forKey: .url)
+        published = try values.decode(String.self, forKey: .published)
+        category = try values.decodeIfPresent(String.self, forKey: .category) ?? ""
+    }
+}

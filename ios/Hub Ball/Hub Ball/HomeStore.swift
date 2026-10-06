@@ -32,6 +32,13 @@ final class HomeStore {
     var standings: StandingsFeed? { standingsStore.feeds[standingsStore.selectedLeague] }
     var isLoading: Bool { recentStore.isLoading || scheduleStore.isLoading || standingsStore.isLoading }
     var errorMessage: String? { recentStore.errorMessage ?? scheduleStore.errorMessage ?? standingsStore.errorMessage }
+    var sectionErrors: [String] {
+        var errors: [String] = []
+        if recentStore.errorMessage != nil { errors.append("Game recap unavailable") }
+        if scheduleStore.errorMessage != nil { errors.append("Schedule unavailable") }
+        if standingsStore.errors[standingsStore.selectedLeague] != nil { errors.append("Standings unavailable") }
+        return errors
+    }
     var favoriteStanding: StandingsTeam? {
         standings?.divisions.flatMap(\.teams).first(where: \.isFavorite)
     }

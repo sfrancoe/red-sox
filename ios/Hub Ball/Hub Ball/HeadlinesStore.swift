@@ -9,7 +9,8 @@ final class HeadlinesStore {
     var selectedSource: NewsSource
     var feeds: [NewsSource: NewsFeed] = [:]
     var isLoading = false
-    var errorMessage: String?
+    var errors: [NewsSource: String] = [:]
+    var errorMessage: String? { errors.isEmpty ? nil : "Some newspapers are unavailable. Pull to refresh or try again." }
 
     var selectedFeed: NewsFeed? {
         feeds[selectedSource]
@@ -25,32 +26,24 @@ final class HeadlinesStore {
         guard !isLoading else { return }
 
         isLoading = true
-        errorMessage = nil
         defer { isLoading = false }
-
-        do {
-            let loadedFeeds = try await withThrowingTaskGroup(
-                of: (source: NewsSource, feed: NewsFeed).self
-            ) { group in
-                for source in team.newsSources {
-                    group.addTask { [team, api] in
-                        (source, try await api.get(.data("\(source.fileName).json", team: team)) as NewsFeed)
-                    }
+        let api = self.api
+        let team = self.team
+        await withTaskGroup(of: (NewsSource, Result<NewsFeed, Error>).self) { group in
+            for source in team.newsSources {
+                group.addTask {
+                    do { return (source, .success(try await api.get(.data("\(source.fileName).json", team: team)))) }
+                    catch { return (source, .failure(error)) }
                 }
-
-                var results: [(source: NewsSource, feed: NewsFeed)] = []
-                for try await result in group {
-                    results.append(result)
-                }
-                return results
             }
-            feeds = Dictionary(
-                uniqueKeysWithValues: loadedFeeds.map { ($0.source, $0.feed) }
-            )
-        } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return }
-            errorMessage = "We couldn't load the headlines. Check your connection and try again."
+            for await (source, result) in group {
+                guard !Task.isCancelled else { return }
+                switch result {
+                case let .success(feed): feeds[source] = feed; errors[source] = nil
+                case let .failure(error):
+                    if !APIError.isCancellation(error) { errors[source] = "Newspaper unavailable" }
+                }
+            }
         }
     }
-
 }

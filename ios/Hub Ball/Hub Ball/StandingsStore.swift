@@ -11,7 +11,8 @@ final class StandingsStore {
     var feeds: [StandingsLeague: StandingsFeed] = [:]
     var mode: StandingsMode
     var isLoading = false
-    var errorMessage: String?
+    var errors: [StandingsLeague: String] = [:]
+    var errorMessage: String? { errors.isEmpty ? nil : "Some standings are unavailable. Showing the latest loaded sections." }
 
     init(team: HubTeam = .boston, api: APIClient = .shared) {
         self.api = api
@@ -31,29 +32,25 @@ final class StandingsStore {
         guard !isLoading else { return }
 
         isLoading = true
-        errorMessage = nil
         defer { isLoading = false }
-
-        do {
-            guard let americanURL = endpoints[.american],
-                  let nationalURL = endpoints[.national] else {
-                throw URLError(.badServerResponse)
+        let api = self.api
+        await withTaskGroup(of: (StandingsLeague, Result<StandingsFeed, Error>).self) { group in
+            for (league, endpoint) in endpoints {
+                group.addTask {
+                    do { return (league, .success(try await api.get(.url(endpoint)))) }
+                    catch { return (league, .failure(error)) }
+                }
             }
-            async let americanData = fetch(americanURL)
-            async let nationalData = fetch(nationalURL)
-            let (loadedAmericanData, loadedNationalData) = try await (americanData, nationalData)
-            feeds = [
-                .american: try await api.decode(StandingsFeed.self, from: loadedAmericanData),
-                .national: try await api.decode(StandingsFeed.self, from: loadedNationalData),
-            ]
-        } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return }
-            errorMessage = "We couldn't load the standings. Check your connection and try again."
+            for await (league, result) in group {
+                guard !Task.isCancelled else { return }
+                switch result {
+                case let .success(feed):
+                    feeds[league] = feed
+                    errors[league] = nil
+                case let .failure(error):
+                    if !APIError.isCancellation(error) { errors[league] = "Standings unavailable" }
+                }
+            }
         }
     }
-
-    private func fetch(_ url: URL) async throws -> Data {
-        try await api.data(.url(url))
-    }
 }
-

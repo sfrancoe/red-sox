@@ -70,3 +70,25 @@ private enum XDateParser {
         return ISO8601DateFormatter().date(from: value)
     }
 }
+
+nonisolated extension XPost {
+    private enum CodingKeys: String, CodingKey {
+        case id, text, url, published, likes, author, handle, avatar, media, quotedText, quotedAuthor, quotedHandle
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(String.self, forKey: .id)
+        text = try values.decode(String.self, forKey: .text)
+        url = try values.decode(String.self, forKey: .url)
+        published = try values.decode(String.self, forKey: .published)
+        likes = try values.decode(Int.self, forKey: .likes)
+        author = try values.decode(String.self, forKey: .author)
+        handle = try values.decode(String.self, forKey: .handle)
+        avatar = try values.decodeIfPresent(String.self, forKey: .avatar) ?? ""
+        media = try values.decodeIfPresent(String.self, forKey: .media) ?? ""
+        quotedText = try values.decodeIfPresent(String.self, forKey: .quotedText) ?? ""
+        quotedAuthor = try values.decodeIfPresent(String.self, forKey: .quotedAuthor) ?? ""
+        quotedHandle = try values.decodeIfPresent(String.self, forKey: .quotedHandle) ?? ""
+    }
+}
