@@ -107,21 +107,32 @@ nonisolated struct MLBPlay: Decodable, Sendable {
 actor MLBGameFeeds {
     private struct Cached: Sendable { let payload: MLBGamePayload; let checkedAt: Date }
     private var saved: [Int: Cached] = [:]
-    private var pending: [Int: Task<MLBGamePayload, Error>] = [:]
+    private struct Pending {
+        let id: UUID
+        let forced: Bool
+        let task: Task<MLBGamePayload, Error>
+    }
+    private var pending: [Int: Pending] = [:]
 
     func get(_ gamePk: Int, force: Bool,
              load: @escaping @Sendable () async throws -> MLBGamePayload) async throws -> MLBGamePayload {
-        if let task = pending[gamePk] { return try await task.value }
+        if let pending = pending[gamePk], !force || pending.forced {
+            return try await pending.task.value
+        }
         if !force, let cached = saved[gamePk] {
             let status = cached.payload.gameData?.status
             let final = status?.abstractGameState == "Final" && ["F", "O"].contains(status?.codedGameState ?? "")
             if Date().timeIntervalSince(cached.checkedAt) < (final ? 300 : 20) { return cached.payload }
         }
         let task = Task { try await load() }
-        pending[gamePk] = task
-        defer { pending[gamePk] = nil }
+        let id = UUID()
+        pending[gamePk] = Pending(id: id, forced: force, task: task)
+        defer { if pending[gamePk]?.id == id { pending[gamePk] = nil } }
         let payload = try await task.value
         guard payload.gamePk == gamePk else { throw URLError(.cannotDecodeContentData) }
+        // A forced Retry supersedes any ordinary request already in flight.
+        // Its newer result must not be overwritten when the older request finishes.
+        guard pending[gamePk]?.id == id else { return payload }
         saved[gamePk] = Cached(payload: payload, checkedAt: Date())
         if saved.count > 16, let oldest = saved.min(by: { $0.value.checkedAt < $1.value.checkedAt })?.key {
             saved[oldest] = nil

@@ -174,7 +174,19 @@ struct MarketsView: View {
         
         
 
-        .onAppear { model.setMarketsVisible(true) }
+        .onAppear {
+            model.setMarketsVisible(true)
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("-market-season") { resolveWindow = .seasonEnd }
+            #endif
+        }
+        .onChange(of: store.snapshot?.generatedAt) { _, _ in
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("-market-detail") {
+                detail = markets.first(where: { $0.provider == "Kalshi" && $0.category == "Winner" })
+            }
+            #endif
+        }
         .onDisappear { model.setMarketsVisible(false) }
         .sheet(item: $detail) { market in MarketDetail(market: market, store: store) }
     }
