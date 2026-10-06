@@ -50,12 +50,25 @@ def clean_text(value: str | None) -> str:
 
 
 def direct_url(value: str) -> str:
+    value = safe_web_url(value)
     parsed = urlparse(value)
-    if parsed.netloc.endswith("bing.com"):
+    host = parsed.hostname or ""
+    if host == "bing.com" or host.endswith(".bing.com"):
         candidate = parse_qs(parsed.query).get("url", [""])[0]
-        if candidate.startswith("http"):
-            return candidate
+        if candidate:
+            return safe_web_url(candidate)
     return value
+
+
+def safe_web_url(value: str) -> str:
+    value = value.strip()
+    try:
+        parsed = urlparse(value)
+        if parsed.scheme in {"http", "https"} and parsed.hostname:
+            return value
+    except ValueError:
+        pass
+    return ""
 
 
 def published(value: str | None) -> str:
@@ -77,11 +90,12 @@ def source_feed(team: dict[str, Any], source: dict[str, str]) -> dict[str, Any]:
     }
     for item in root.findall("./channel/item"):
         article_url = direct_url(item.findtext("link") or "")
-        article_host = urlparse(article_url).netloc.removeprefix("www.")
+        article_host = (urlparse(article_url).hostname or "").removeprefix("www.")
         title = clean_text(item.findtext("title"))
         context = f"{title} {clean_text(item.findtext('description'))} {article_url}".lower()
         if (
-            not title or source_host not in article_host or article_url in seen
+            not title or not article_url or article_url in seen
+            or not (article_host == source_host or article_host.endswith("." + source_host))
             or not any(term in context for term in team_terms)
         ):
             continue

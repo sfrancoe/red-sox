@@ -13,6 +13,25 @@ import fetch_team_news as news
 
 
 class NewsRefreshTests(unittest.TestCase):
+    def test_article_urls_require_absolute_web_addresses(self):
+        for value in ("/sports/x.html", "mailto:a@b.c", "", "http-not-a-url", "https://[broken"):
+            self.assertEqual(news.direct_url(value), "")
+        self.assertEqual(news.direct_url(" https://example.com/story "), "https://example.com/story")
+        self.assertEqual(news.direct_url("https://bing.com/news?url=mailto%3Aa%40b.c"), "")
+        self.assertEqual(news.direct_url("https://bing.com/news?url=https%3A%2F%2Fexample.com%2Fa"), "https://example.com/a")
+
+    def test_source_host_must_match_exactly_or_be_a_subdomain(self):
+        from xml.etree import ElementTree
+        root = ElementTree.fromstring('''<rss><channel>
+          <item><title>Red Sox news</title><link>https://example.com.evil.test/a</link></item>
+          <item><title>Red Sox news</title><link>javascript://example.com/a</link></item>
+          <item><title>Red Sox news</title><link>https://sports.example.com/a</link></item>
+        </channel></rss>''')
+        team = {"full_name": "Boston Red Sox", "short_name": "Red Sox", "api_key": "redsox"}
+        with patch.object(news, "fetch_xml", return_value=root):
+            feed = news.source_feed(team, {"name": "Example", "url": "https://example.com"})
+        self.assertEqual([article["url"] for article in feed["articles"]], ["https://sports.example.com/a"])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
