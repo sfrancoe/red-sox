@@ -3,7 +3,7 @@ import { MLB_TEAMS } from './team-registry.mjs';
 
 const MLB_ORIGIN = 'https://statsapi.mlb.com';
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
-const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const FALLBACK_USER_AGENT = 'HubBall/1.0 (+https://red-sox.netlify.app)';
 const LIVE_GAME_CACHE_CONTROL = 'public, max-age=5, stale-while-revalidate=15';
 const FINAL_GAME_CACHE_CONTROL = 'public, max-age=300, stale-while-revalidate=60';
 export const TEAMS = new Map(MLB_TEAMS.map(team => [team.api_key, team.mlb_id]));

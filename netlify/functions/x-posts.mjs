@@ -1,6 +1,6 @@
 import { MLB_TEAMS } from './team-registry.mjs';
 
-const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const FALLBACK_USER_AGENT = 'HubBall/1.0 (+https://red-sox.netlify.app)';
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
 const MLB_CLUBS_LIST_URL = 'https://syndication.twitter.com/srv/timeline-list/screen-name/MLB/slug/clubs?lang=en&theme=light&showHeader=false&hideBorder=true';
 export const LIVE_FEED_CACHE_HEADERS = {

@@ -1,7 +1,7 @@
 import { MLB_TEAMS } from './team-registry.mjs';
 
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
-const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const FALLBACK_USER_AGENT = 'HubBall/1.0 (+https://red-sox.netlify.app)';
 
 const STANDARD_FILES = [
   'meta.json', 'pitching.json', 'recent-game.json', 'schedule.json',

@@ -1,6 +1,6 @@
 const MLB_ORIGIN = 'https://statsapi.mlb.com';
 const JUDGE_PLAYER_ID = 592450;
-const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const FALLBACK_USER_AGENT = 'HubBall/1.0 (+https://red-sox.netlify.app)';
 
 function easternYear(date = new Date()) {
   return Number(new Intl.DateTimeFormat('en-US', {

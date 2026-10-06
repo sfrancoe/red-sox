@@ -1,7 +1,7 @@
 import { MLB_TEAMS } from './team-registry.mjs';
 
 const MLB_ORIGIN = 'https://statsapi.mlb.com';
-const FALLBACK_USER_AGENT = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const FALLBACK_USER_AGENT = 'HubBall/1.0 (+https://red-sox.netlify.app)';
 const SUPPORTED_SEASONS = new Set(['2025', '2026']);
 const TEAM_BY_ID = new Map(MLB_TEAMS.map(team => [team.mlb_id, team]));
 const ROUND_BY_TYPE = { F: 'wild-card', D: 'division-series', L: 'league-championship', W: 'world-series' };

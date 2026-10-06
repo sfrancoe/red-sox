@@ -2,7 +2,7 @@
 const KALSHI = 'https://api.elections.kalshi.com/trade-api/v2';
 const GAMMA = 'https://gamma-api.polymarket.com';
 const CLOB = 'https://clob.polymarket.com';
-const FALLBACK = 'OpenAI File Downloader, XaiImageApiFetch/1.0';
+const FALLBACK = 'HubBall/1.0 (+https://red-sox.netlify.app)';
 const series = ['KXMLBGAME', 'KXMLBTOTAL', 'KXMLBSPREAD', 'KXMLB'];
 const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 export function number(value) {
