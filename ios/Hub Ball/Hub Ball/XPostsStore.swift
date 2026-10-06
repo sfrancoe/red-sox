@@ -48,7 +48,7 @@ final class XPostsStore {
     private func mergedFeed(curated: XFeed, discovery: XFeed?) -> XFeed {
         guard let discovery else { return curated }
 
-        var uniquePosts = Dictionary(uniqueKeysWithValues: curated.popular.map { ($0.id, $0) })
+        var uniquePosts = curated.popular.reduce(into: [String: XPost]()) { $0[$1.id] = $1 }
         for post in discovery.popular {
             if let existing = uniquePosts[post.id], existing.likes > post.likes {
                 continue

@@ -21,7 +21,10 @@ nonisolated struct NewsArticle: Codable, Identifiable, Sendable {
     let published: String
     let category: String
 
-    var id: String { url }
+    var id: String {
+        let value = url.trimmingCharacters(in: .whitespacesAndNewlines)
+        return value.isEmpty ? "\(title)\u{1F}\(published)" : value
+    }
 
     func isNew(asOf now: Date) -> Bool {
         guard let date = FeedDate.date(from: published) else { return false }
@@ -50,5 +53,17 @@ nonisolated extension NewsArticle {
         url = try values.decode(String.self, forKey: .url)
         published = try values.decode(String.self, forKey: .published)
         category = try values.decodeIfPresent(String.self, forKey: .category) ?? ""
+    }
+}
+
+nonisolated extension NewsFeed {
+    private enum CodingKeys: String, CodingKey { case generatedAt, source, sourceUrl, articles }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        generatedAt = try values.decode(String.self, forKey: .generatedAt)
+        source = try values.decode(String.self, forKey: .source)
+        sourceUrl = try values.decode(String.self, forKey: .sourceUrl)
+        var seen = Set<String>()
+        articles = try values.decode([NewsArticle].self, forKey: .articles).filter { seen.insert($0.id).inserted }
     }
 }

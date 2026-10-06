@@ -77,3 +77,19 @@ nonisolated extension XPost {
         quotedHandle = try values.decodeIfPresent(String.self, forKey: .quotedHandle) ?? ""
     }
 }
+
+nonisolated extension XFeed {
+    private enum CodingKeys: String, CodingKey { case generatedAt, source, sourceUrl, recent, popular }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        generatedAt = try values.decode(String.self, forKey: .generatedAt)
+        source = try values.decode(String.self, forKey: .source)
+        sourceUrl = try values.decode(String.self, forKey: .sourceUrl)
+        func unique(_ key: CodingKeys) throws -> [XPost] {
+            var seen = Set<String>()
+            return try values.decode([XPost].self, forKey: key).filter { seen.insert($0.id).inserted }
+        }
+        recent = try unique(.recent)
+        popular = try unique(.popular)
+    }
+}
