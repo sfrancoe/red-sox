@@ -44,3 +44,47 @@ const redSoxFeed = buildDiscoveryFeed(payload, generatedAt);
 assert.deepEqual(redSoxFeed.recent, []);
 assert.equal(redSoxFeed.source_url, 'https://x.com/search?q=Red%20Sox');
 console.log('Yankees X discovery feed ordering and team identity: OK');
+
+const { createDiscoveryHandler } = await import('../netlify/functions/x-discovery.mjs');
+const values = new Map();
+const store = {
+  async get(key) { return values.get(key) ?? null; },
+  async setJSON(key, value, options) {
+    if (options?.onlyIfNew && values.has(key)) return { modified: false };
+    values.set(key, value);
+    return { modified: true };
+  },
+};
+let paidCalls = 0;
+let date = new Date(generatedAt);
+const handler = createDiscoveryHandler({
+  openStore: () => store, now: () => date, token: () => 'test-only',
+  requestX: async () => { paidCalls++; return Response.json(payload); },
+});
+const request = query => new Request(`https://example.test/api/x-discovery?${query}`);
+assert.equal((await handler(request('team=redsox&z=1'))).status, 400);
+assert.equal((await handler(request('team=redsox&team=mets'))).status, 400);
+assert.equal((await handler(request('team=unknown'))).status, 400);
+assert.equal(paidCalls, 0);
+await Promise.all(Array.from({ length: 20 }, () => handler(request('team=redsox'))));
+assert.equal(paidCalls, 1, 'Concurrent misses reserve a single paid request');
+const cached = await handler(request('team=REDSOX'));
+assert.equal(cached.status, 200);
+assert.equal(cached.headers.get('Netlify-Vary'), 'query=team');
+assert.equal(paidCalls, 1);
+// A new function instance/deploy still sees the same durable reservation.
+const failed = createDiscoveryHandler({
+  openStore: () => store, now: () => date, token: () => 'test-only',
+  requestX: async () => { paidCalls++; throw new Error('simulated upstream timeout'); },
+});
+date = new Date(date.valueOf() + 25 * 60 * 60 * 1000);
+assert.equal((await failed(request('team=redsox'))).status, 200);
+await failed(request('team=redsox'));
+assert.equal(paidCalls, 2, 'A failed paid call consumes the day reservation');
+const unavailable = createDiscoveryHandler({
+  openStore: () => { throw new Error('simulated storage failure'); },
+  requestX: async () => { paidCalls++; }, token: () => 'test-only',
+});
+assert.equal((await unavailable(request('team=redsox'))).status, 502);
+assert.equal(paidCalls, 2, 'Storage failure must fail closed');
+console.log('X discovery durable spending cap: OK');

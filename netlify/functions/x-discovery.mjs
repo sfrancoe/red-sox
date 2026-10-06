@@ -1,3 +1,5 @@
+import { getStore } from '@netlify/blobs';
+
 const X_RECENT_SEARCH_URL = 'https://api.x.com/2/tweets/search/recent';
 // X bills Post and User resources separately. Sixteen Posts plus, at worst,
 // sixteen distinct authors costs $0.24 per UTC day at the September 2026
@@ -94,39 +96,66 @@ function searchURL(team, now = new Date()) {
   return url;
 }
 
-export default async request => {
-  const requestedTeam = new URL(request.url).searchParams.get('team')?.toLowerCase() || 'redsox';
-  const team = TEAM_CONFIG[requestedTeam];
-  if (!team) {
-    return Response.json({ error: 'Unknown team.' }, { status: 400 });
-  }
-  const bearerToken = process.env.X_BEARER_TOKEN;
-  if (!bearerToken) {
-    return Response.json({ error: 'X discovery is not configured.' }, {
-      status: 503,
-      headers: { 'Cache-Control': 'no-store' },
-    });
-  }
-
-  try {
-    const response = await fetch(searchURL(team), {
-      headers: { Authorization: `Bearer ${bearerToken}` },
-      signal: AbortSignal.timeout(15_000),
-    });
-    if (!response.ok) throw new Error(`X recent search returned ${response.status}`);
-
-    const feed = buildDiscoveryFeed(await response.json(), new Date(), team);
-    return Response.json(feed, { headers: {
-      'Cache-Control': 'public, max-age=300, stale-while-revalidate=300',
-      'Netlify-CDN-Cache-Control': 'public, durable, max-age=86400, stale-while-revalidate=3600',
-    } });
-  } catch (error) {
-    console.error('X discovery refresh failed', error);
-    return Response.json({ error: 'X discovery is temporarily unavailable.' }, {
-      status: 502,
-      headers: { 'Cache-Control': 'no-store' },
-    });
-  }
+const CACHE_HEADERS = {
+  'Netlify-Vary': 'query=team',
+  'Cache-Control': 'public, max-age=300, stale-while-revalidate=300',
+  'Netlify-CDN-Cache-Control': 'public, durable, max-age=86400, stale-while-revalidate=3600',
 };
 
+// Injection keeps tests offline: never exercise production Blobs or paid X calls.
+export function createDiscoveryHandler({
+  openStore = () => getStore({ name: 'x-discovery-budget-v1', consistency: 'strong' }),
+  requestX = fetch,
+  now = () => new Date(),
+  token = () => process.env.X_BEARER_TOKEN,
+} = {}) {
+  return async request => {
+    const query = new URL(request.url).searchParams;
+    const fail = (error, status) => Response.json({ error }, {
+      status, headers: { 'Netlify-Vary': 'query=team', 'Cache-Control': 'no-store' },
+    });
+    if ([...query.keys()].some(key => key !== 'team') || query.getAll('team').length > 1) {
+      return fail('Only one team parameter is supported.', 400);
+    }
+    const requestedTeam = query.get('team')?.toLowerCase() || 'redsox';
+    const team = TEAM_CONFIG[requestedTeam];
+    if (!team) return fail('Unknown team.', 400);
+
+    let saved;
+    try {
+      const store = openStore();
+      saved = await store.get(`feed/${requestedTeam}`, { type: 'json' });
+      const date = now();
+      if (saved && date.valueOf() - Date.parse(saved.generated_at) < DAY_MS) {
+        return Response.json(saved, { headers: CACHE_HEADERS });
+      }
+      if (!token()) return fail('X discovery is not configured.', 503);
+      // An immutable reservation, not a read/increment/write counter. Never remove
+      // a reservation after a failure: even a timeout may have incurred X charges.
+      // With four allowed teams this bounds the entire endpoint to four calls/day.
+      const { modified } = await store.setJSON(
+        `reservation/${date.toISOString().slice(0, 10)}/${requestedTeam}`,
+        { reservedAt: date.toISOString() }, { onlyIfNew: true },
+      );
+      if (!modified) {
+        return saved ? Response.json(saved, { headers: CACHE_HEADERS })
+          : fail('Daily discovery request already reserved. Try again tomorrow.', 503);
+      }
+      const response = await requestX(searchURL(team, date), {
+        headers: { Authorization: `Bearer ${token()}` },
+        signal: AbortSignal.timeout(15_000),
+      });
+      if (!response.ok) throw new Error(`X recent search returned ${response.status}`);
+      const feed = buildDiscoveryFeed(await response.json(), date, team);
+      await store.setJSON(`feed/${requestedTeam}`, feed);
+      return Response.json(feed, { headers: CACHE_HEADERS });
+    } catch (error) {
+      console.error('X discovery refresh failed', error);
+      return saved ? Response.json(saved, { headers: CACHE_HEADERS })
+        : fail('X discovery is temporarily unavailable.', 502);
+    }
+  };
+}
+
+export default createDiscoveryHandler();
 export const config = { path: '/api/x-discovery', method: 'GET' };

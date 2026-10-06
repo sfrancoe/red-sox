@@ -236,7 +236,7 @@ export async function getPostseasonResponse(request, fetchImpl = fetch) {
   if (!SUPPORTED_SEASONS.has(season)) {
     return Response.json({ error: 'Unsupported postseason season.' }, {
       status: 400,
-      headers: { 'Cache-Control': 'no-store' },
+      headers: { 'Netlify-Vary': 'query=season', 'Cache-Control': 'no-store' },
     });
   }
   const providerURL = new URL('/api/v1/schedule', MLB_ORIGIN);
@@ -254,6 +254,7 @@ export async function getPostseasonResponse(request, fetchImpl = fetch) {
     const cache = live ? 'public, max-age=15, stale-while-revalidate=15' : 'public, max-age=300, stale-while-revalidate=60';
     return Response.json(data, {
       headers: {
+        'Netlify-Vary': 'query=season',
         'Cache-Control': cache,
         'Netlify-CDN-Cache-Control': `public, durable, ${cache.slice('public, '.length)}`,
         'Access-Control-Allow-Origin': '*',
@@ -265,7 +266,7 @@ export async function getPostseasonResponse(request, fetchImpl = fetch) {
     console.error('Postseason data unavailable', error);
     return Response.json({ error: 'Postseason data is temporarily unavailable.' }, {
       status: 502,
-      headers: { 'Cache-Control': 'no-store' },
+      headers: { 'Netlify-Vary': 'query=season', 'Cache-Control': 'no-store' },
     });
   }
 }

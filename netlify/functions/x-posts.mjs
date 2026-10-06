@@ -265,7 +265,7 @@ export function buildFeed(entries, players, team = TEAM_CONFIG.redsox, generated
   };
 }
 
-export default async request => {
+const handleRequest = async request => {
   const requestedTeam = new URL(request.url).searchParams.get('team')?.toLowerCase() || 'redsox';
   const team = TEAM_CONFIG[requestedTeam];
   if (!team) {
@@ -301,6 +301,12 @@ export default async request => {
       });
     }
   }
+};
+
+export default async request => {
+  const response = await handleRequest(request);
+  response.headers.set('Netlify-Vary', 'query=team');
+  return response;
 };
 
 export const config = { path: '/api/x-posts', method: 'GET' };

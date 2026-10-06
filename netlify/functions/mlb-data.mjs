@@ -195,7 +195,7 @@ export function gameCacheControl(payload) {
   return isConfirmedFinal ? FINAL_GAME_CACHE_CONTROL : LIVE_GAME_CACHE_CONTROL;
 }
 
-export default async request => {
+const handleRequest = async request => {
   const requestURL = new URL(request.url);
   const team = TEAM_CONFIGS.get(requestURL.searchParams.get('team'));
   const upstream = team ? upstreamURL(requestURL, team) : null;
@@ -269,6 +269,12 @@ export default async request => {
       headers: { 'Cache-Control': 'no-store' },
     });
   }
+};
+
+export default async request => {
+  const response = await handleRequest(request);
+  response.headers.set('Netlify-Vary', 'query=team|gamePk|startDate|endDate');
+  return response;
 };
 
 export const config = { path: '/api/mlb/*', method: 'GET' };
