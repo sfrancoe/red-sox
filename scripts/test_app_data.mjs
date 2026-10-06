@@ -83,7 +83,7 @@ try {
   globalThis.fetch = async (_url, options) => {
     attempt += 1;
     if (attempt === 1) throw new Error('blocked');
-    assert.equal(options.headers['User-Agent'], 'OpenAI File Downloader, XaiImageApiFetch/1.0');
+    assert.equal(options.headers['User-Agent'], 'HubBall/1.0 (+https://red-sox.netlify.app)');
     return new Response('{"fallback":true}', { status: 200 });
   };
   response = await handler(new Request('https://example.test/api/data/meta.json'));
