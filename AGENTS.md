@@ -7,13 +7,13 @@ anything. If you are Claude Code, `CLAUDE.md` covers the same ground in more det
 
 ## What this project is
 
-A small static site of **visual stories built from Boston Red Sox box scores**. Each
-story is a self-contained animated graphic. The first, *Four Roads, One Record*, traces
-four seasons that arrived at the identical record after 108 games and then diverged.
+Hub Ball is a native SwiftUI iPhone/iPad app covering all 30 MLB teams, backed by
+Netlify Functions and generated JSON feeds. This repository also hosts the original
+Boston baseball stories built with plain JavaScript and canvas. Accuracy and clear,
+mobile-first presentation matter across both products.
 
-This is a **storytelling** project, not an analytics tool. The bar for a change is:
-*does this make someone feel something about a number?* Precision matters because the
-story depends on it — but the output is a graphic, not a dashboard.
+The canonical checkout is `/Users/sfrancoe/Projects/Hub Ball`. The old
+`/Users/sfrancoe/Projects/Red-Sox` checkout is archived and is not a release source.
 
 Hosting is Netlify, auto-deploying from `main`. **A merged PR ships to production.**
 
@@ -21,10 +21,18 @@ Hosting is Netlify, auto-deploying from `main`. **A merged PR ships to productio
 
 ## Stack
 
-Plain ES modules + `<canvas>`. Python 3 standard library for the data fetch. No
-framework, no bundler, no backend, no dependencies of any kind.
+Native app: Swift 6, SwiftUI, Observation, Foundation and AVFoundation. Backend:
+Netlify Functions (ES modules), with the approved `@netlify/blobs` dependency for X
+call reservations and last-good feeds. Run `npm ci` for backend development. Web
+stories remain plain ES modules and canvas with no framework or bundler; Python
+fetch scripts use the standard library.
 
 ```
+ios/Hub Ball/Hub Ball/       native app sources
+ios/Hub Ball/HubBallTests/   native Swift Testing target and bundled fixtures
+netlify/functions/          API routes and upstream adapters
+netlify/lib/                team-aware game narrative generation
+config/mlb-teams.json        source of the generated 30-team registry
 index.html                  landing page — one card per story
 src/chart.js                SHARED engine: canvas, animation, scrub, controls
 src/audio.js                SHARED Web Audio engine (createAudio factory)
@@ -50,10 +58,10 @@ Data flows one way: **Python writes `data/*.json` → the browser fetches it at 
 
 These are the mistakes agents actually make here. They are not style preferences.
 
-**1. Do not add a build toolchain or any dependency.** No npm, webpack, Vite, React, no
-charting library, no CDN `<script>` tags. The zero-dependency setup is the point, and
-the CSP on shared builds blocks external hosts anyway. If a change seems to need a
-package, say so and stop — do not install it.
+**1. Do not add dependencies or a frontend build toolchain without approval.** The
+approved exception is backend-only `@netlify/blobs`, locked in `package-lock.json`.
+Do not add webpack, Vite, React, charting packages, CDN scripts or native packages.
+The web stories' CSP blocks external scripts. Ask before introducing another package.
 
 **2. Never hand-edit `data/seasons.json` or `data/meta.json`.** They are generated, and
 the daily CI refresh overwrites them. To change data, change `scripts/fetch_seasons.py`.
@@ -168,3 +176,70 @@ verify representative production requests (including `/data/<team>/standings.jso
 `/api/x-posts?team=<team>`) return successful, team-specific payloads. A local data file
 or passing local test does not make it available to a device build because the app reads
 from `https://red-sox.netlify.app`.
+
+## Native app and backend development
+
+Open `ios/Hub Ball/Hub Ball.xcodeproj`, scheme **Hub Ball**. The app target is **Hub
+Ball** and the unit-test target is **HubBallTests**. A simulator build does not change
+the release manifest or authorize a device installation.
+
+```bash
+xcodebuild -project 'ios/Hub Ball/Hub Ball.xcodeproj' -scheme 'Hub Ball' \
+  -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+python3 scripts/test_hub_ball.py
+# Optional: --device <simulator-UUID>, --suite RecentGameStoreTests
+bash scripts/test_recent_game_store.sh
+bash scripts/test_schedule_store.sh
+node scripts/test_mlb_data.mjs
+node scripts/test_x_discovery.mjs
+node scripts/test_postseason.mjs
+```
+
+The native test runner builds the real app/test targets, starts an isolated local HTTP
+fixture, and runs Swift Testing in a simulator. Existing `test_*.sh` entrypoints are
+thin suite wrappers. Tests belong in `HubBallTests`, use `@testable import Hub_Ball`,
+and inject sessions/clients; do not reconstruct `swiftc` source-file lists. The
+`HUB_UNIT_TESTS` launch environment suppresses normal app network loads. UI tests use
+`scripts/test_large_text_ui.sh <simulator-UUID> <run-name> [method ...]`; its generated
+project and evidence stay under ignored `dist/`.
+
+`AppBackend` maps team data to `/data/<team>/...` in Debug and `/api/data/<team>/...`
+in Release (Boston retains legacy root paths), and functions to `/api/...?...team=...`.
+`HUB_API_ORIGIN` is an Xcode build setting
+embedded in Info.plist. It currently points to `https://red-sox.netlify.app`; changing
+to a custom domain requires the owner's domain choice and verified Netlify DNS/TLS
+configuration. Debug fixtures override function routes with `HUB_API_ROOT` and static
+data with `HUB_DATA_ROOT`.
+
+All store requests go through injectable `APIClient` and `Endpoint`, with typed
+`APIError`, endpoint logging and shared HTTP caching. MLB feeds are projected on the
+server, decoded into Sendable values, and coalesced by game ID before deriving each
+team's perspective. Keep support for older unprojected feeds during rollout. Force
+refreshes must bypass game and HTTP caches. Never make paid X calls in a test.
+
+Swift 6 uses `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor` and approachable concurrency.
+UI and observable stores stay on MainActor. Model/parsing types are explicitly
+`nonisolated` and `Sendable`; CPU-heavy async work uses `@concurrent` or an isolated
+worker actor. Cancellation is quiet, not a user-facing failure. Independent sections
+retain their last good data when another section fails.
+
+`TeamSession` owns per-team stores and survives tab switches; replace it only when
+the selected team changes. `AppModel` owns league-wide stores and lazy audio state.
+Views read these owners from the environment and report visibility to the scheduler.
+Do not recreate stores in view initializers or add network polling loops to views.
+`RefreshScheduler` uses 20 seconds for live games, 60 otherwise, pauses in background,
+and refreshes on foreground only when the last success is over 30 seconds old.
+Inactive transitions such as Control Center do not trigger refreshes. Story animation
+uses SwiftUI timelines, independently of network polling.
+
+Generate `HubTeam.swift` with `python3 scripts/generate_team_registry.py` after editing
+`config/mlb-teams.json`; never hand-edit generated registries or feeds. Stores require
+an explicit team. The Four Roads/Game 108 story intentionally remains Boston-only.
+Persistent feed snapshots belong in bounded Caches-directory files, not UserDefaults.
+Audio preparation may run early, but playback still requires the user's Play gesture.
+
+X discovery uses strongly consistent Netlify Blobs and immutable conditional daily
+reservations before any paid request. Failed upstream calls still consume a reservation;
+storage failure fails closed. Query validation and `Netlify-Vary` must match the endpoint
+parameters. CDN caching alone is not a billing limit. Production upstream requests
+identify as Hub Ball; personal retrieval fallback identities do not belong in shipped code.

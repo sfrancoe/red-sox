@@ -2,31 +2,31 @@
 
 ## Project Overview
 
-A small static site of **visual stories built from Boston Red Sox box scores**. Each
-story is a self-contained animated graphic. The first one, *Four Roads, One Record*,
-traces four seasons that arrived at the identical record after 108 games and then
-diverged.
-
-This is a **storytelling** project, not an analytics tool. The bar for each story is:
-*does this make someone feel something about a number?* Precision matters because the
-story depends on it — but the output is a graphic, not a dashboard.
+Hub Ball is a 30-team native SwiftUI iPhone/iPad app with a Netlify backend and
+an accompanying collection of JavaScript baseball stories. Read **AGENTS.md** first:
+it is the shared source for current native architecture, concurrency, build/test
+commands, dependency policy and canonical release rules. The sections below retain
+additional context for the original web stories.
 
 **Primary developer:** Scott Francoe
 **GitHub repo:** https://github.com/sfrancoe/red-sox (public)
 **Hosting:** Netlify (auto-deploys from `main`)
-**Local path:** `~/Projects/Red-Sox` (i.e. `/Users/sfrancoe/Projects/Red-Sox`)
+**Local path:** `/Users/sfrancoe/Projects/Hub Ball` (the Red-Sox checkout is archived)
 
 ---
 
 ## Tech Stack
 
-- **No framework, no bundler, no backend.** Plain ES modules + `<canvas>`.
+- **Native app:** Swift 6 + SwiftUI, app target `Hub Ball`, test target `HubBallTests`.
+- **Backend:** Netlify Functions with approved backend-only `@netlify/blobs`.
+- **Web stories:** plain ES modules + `<canvas>`, no framework or bundler.
 - **Data:** MLB Stats API (`statsapi.mlb.com`) — free, no key, no rate limit worth worrying about.
 - **Fetch script:** Python 3, **standard library only** (so CI needs no `pip install`).
 - **Hosting:** Netlify, publishing `_site/`.
 - **Refresh:** GitHub Actions cron, daily at 11:00 UTC.
 
-Deliberately dependency-free. If a change wants npm, question it first.
+Native/web code remains dependency-free. `npm ci` installs the approved backend
+package. Additional dependencies require approval.
 
 ---
 
@@ -124,7 +124,8 @@ The engine in `src/` is shared. Prefer extending it with options over forking it
 - 2-space indent, ES modules, no build step
 - `camelCase` functions/vars, `UPPER_CASE` for config constants
 - The chart engine keeps its state in module/function scope — one chart per page
-- No dependencies. No CDN links (the CSP on shared builds blocks them anyway).
+- No frontend dependencies or CDN scripts (the CSP blocks them). Backend dependencies
+  are limited to the approved Blobs package.
 
 ### Python
 - 4-space indent, type hints on signatures, stdlib only
@@ -136,8 +137,8 @@ The engine in `src/` is shared. Prefer extending it with options over forking it
 
 1. **Never hand-edit `data/*.json`.** They are generated; the next CI run overwrites them.
 2. **No paid APIs or services** without asking Scott first.
-3. **Don't add a build toolchain** (npm/webpack/vite) without a real reason — the
-   zero-dependency setup is the point.
+3. **Do not add a frontend build toolchain or additional dependencies without approval.**
+   The existing backend Blobs dependency is the sole approved package exception.
 4. **Accuracy is the product.** If real data contradicts a story's copy, fix the copy.
 5. Do not commit `_site/` or `dist/` — both are generated and gitignored.
 
@@ -154,3 +155,19 @@ The engine in `src/` is shared. Prefer extending it with options over forking it
 - Test in a real browser before claiming something works. `python3 -m http.server` plus
   Playwright catches the module/CORS/canvas failures that static reading misses.
 - Mobile first here, unlike em-dashboard — these get opened on phones and texted around.
+
+## Native architecture and verification
+
+The current native build and test commands are in [AGENTS.md](AGENTS.md#native-app-and-backend-development).
+`APIClient` owns networking/decoding; `AppBackend` resolves the configured API origin.
+`TeamSession` preserves per-team stores across tabs, while `AppModel` owns league-wide
+state. `RefreshScheduler` owns visible-screen polling; views do not poll. Swift 6 keeps
+UI/stores on the default MainActor and Sendable decoding/model work off it. Run
+`python3 scripts/test_hub_ball.py` to exercise the real Swift Testing target with local
+fixtures. The shell harnesses delegate to this runner. Do not add standalone `swiftc`
+file lists. Preserve explicit team arguments and regenerate the team registry from
+`config/mlb-teams.json`.
+
+Only canonical `main` is a release source. Before release/device installation, follow
+AGENTS.md rule 11 and run `python3 scripts/check_hub_ball_release.py`; use the guarded
+installation script. Work on a feature branch is not a released build.
