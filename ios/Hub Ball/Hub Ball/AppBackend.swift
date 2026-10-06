@@ -1,7 +1,7 @@
 import Foundation
 
 enum AppBackend {
-    // Set HUB_API_ORIGIN after verifying the custom domain's DNS, TLS and routes.
+    // HUB_API_ORIGIN uses the verified, owner-controlled api.autumnlane.io domain.
     // Keep the previous hostname available to already installed binaries.
     nonisolated static let origin: URL = {
         let configured = Bundle.main.object(forInfoDictionaryKey: "HubAPIOrigin") as? String

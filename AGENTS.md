@@ -175,7 +175,7 @@ files and Netlify function configuration to `main`, wait for the production depl
 verify representative production requests (including `/data/<team>/standings.json` and
 `/api/x-posts?team=<team>`) return successful, team-specific payloads. A local data file
 or passing local test does not make it available to a device build because the app reads
-from `https://red-sox.netlify.app`.
+from `https://api.autumnlane.io`.
 
 ## Native app and backend development
 
@@ -206,9 +206,10 @@ project and evidence stay under ignored `dist/`.
 `AppBackend` maps team data to `/data/<team>/...` in Debug and `/api/data/<team>/...`
 in Release (Boston retains legacy root paths), and functions to `/api/...?...team=...`.
 `HUB_API_ORIGIN` is an Xcode build setting
-embedded in Info.plist. It currently points to `https://red-sox.netlify.app`; changing
-to a custom domain requires the owner's domain choice and verified Netlify DNS/TLS
-configuration. Debug fixtures override function routes with `HUB_API_ROOT` and static
+embedded in Info.plist. Debug and Release use `https://api.autumnlane.io`, owned by
+Scott and verified on Netlify with valid TLS and working data/API routes on 2026-10-06.
+Keep `red-sox.netlify.app` available for already installed binaries and the configuration
+fallback. Debug fixtures override function routes with `HUB_API_ROOT` and static
 data with `HUB_DATA_ROOT`.
 
 All store requests go through injectable `APIClient` and `Endpoint`, with typed
