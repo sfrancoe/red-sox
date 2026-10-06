@@ -28,7 +28,7 @@ struct XPostsView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        
+
         .onAppear { session.setVisible("xPosts", true) }
         .onDisappear { session.setVisible("xPosts", false) }
     }

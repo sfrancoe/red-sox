@@ -45,7 +45,7 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
         }
-        
+
         .onAppear { session.setVisible("home", true) }
         .onDisappear { session.setVisible("home", false) }
     }

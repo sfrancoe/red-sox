@@ -90,4 +90,3 @@ final class SeasonLeadersStore {
         try await api.data(.url(url))
     }
 }
-

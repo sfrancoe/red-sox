@@ -90,7 +90,7 @@ struct OctoberView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        
+
         .onDisappear { model.setOctoberVisible(false) }
         .onAppear {
             model.setOctoberVisible(true)

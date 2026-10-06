@@ -24,7 +24,7 @@ struct SeasonLeadersView: View {
         }
         .navigationTitle("Season Leaders")
         .navigationBarTitleDisplayMode(.inline)
-        
+
         .sheet(item: $detail) { LeaderboardDetailSheet(detail: $0) }
         .onAppear { session.setVisible("leaders", true) }
         .onDisappear { session.setVisible("leaders", false) }
@@ -246,7 +246,7 @@ private struct CompactLeaderRow: View {
 
 private extension SeasonLeaders { static let categoryTitles = ["HR", "AVG", "OPS", "RBI", "WHIP", "WAR"] }
 
-#Preview { NavigationStack { SeasonLeadersView(team: .boston) } 
+#Preview { NavigationStack { SeasonLeadersView(team: .boston) }
     .environment(TeamSession(team: .boston))
     .environment(AppModel())
 }

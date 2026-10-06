@@ -42,7 +42,7 @@ struct PlayersView: View {
             }
         }
         .background(AppColor.night.ignoresSafeArea())
-        
+
         .onChange(of: requestedPlayerID) { _, _ in openRequestedPlayerIfAvailable() }
         .onAppear { session.setVisible("players", true) }
         .onDisappear { session.setVisible("players", false) }

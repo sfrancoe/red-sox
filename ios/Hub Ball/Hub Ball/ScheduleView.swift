@@ -35,7 +35,7 @@ struct ScheduleView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        
+
         .onAppear { session.setVisible("schedule", true) }
         .onDisappear { session.setVisible("schedule", false) }
     }

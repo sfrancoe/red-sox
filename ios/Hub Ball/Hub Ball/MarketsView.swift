@@ -171,8 +171,6 @@ struct MarketsView: View {
         .background(AppColor.paleRed.ignoresSafeArea())
         .preferredColorScheme(.light)
         .refreshable { await store.refresh() }
-        
-        
 
         .onAppear {
             model.setMarketsVisible(true)

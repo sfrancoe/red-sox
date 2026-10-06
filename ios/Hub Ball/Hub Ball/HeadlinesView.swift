@@ -62,7 +62,7 @@ struct HeadlinesView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        
+
         .sheet(item: $presentedArticle) { article in
             SafariView(url: article.url)
                 .ignoresSafeArea()

@@ -37,7 +37,7 @@ struct PitchingView: View {
         }
         .navigationTitle("Pitching")
         .navigationBarTitleDisplayMode(.inline)
-        
+
         .onAppear { session.setVisible("pitching", true) }
         .onDisappear { session.setVisible("pitching", false) }
     }

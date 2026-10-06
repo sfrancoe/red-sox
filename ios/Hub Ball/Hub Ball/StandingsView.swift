@@ -43,8 +43,7 @@ struct StandingsView: View {
         .toolbarBackground(AppColor.paleRed, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.light, for: .navigationBar)
-        
-        
+
         .onAppear { session.setVisible("standings", true) }
         .onDisappear { session.setVisible("standings", false) }
     }

@@ -75,7 +75,7 @@ struct PostseasonScorecardSheet: View {
             .refreshable { await store.refresh(force: true) }
             .onAppear { model.setScorecardVisible(game, true) }
             .onDisappear { model.setScorecardVisible(game, false) }
-            
+
         }
         .sheet(item: $selectedPlayer) { selection in
             if let team = HubTeam.allCases.first(where: { $0.mlbID == selection.teamID }) {

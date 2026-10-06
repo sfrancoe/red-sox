@@ -40,7 +40,6 @@ nonisolated struct NewsArticle: Codable, Identifiable, Sendable {
     }
 }
 
-
 nonisolated extension NewsArticle {
     private enum CodingKeys: String, CodingKey {
         case title, description, url, published, category

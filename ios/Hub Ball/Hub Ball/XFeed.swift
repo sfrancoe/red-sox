@@ -55,7 +55,6 @@ nonisolated struct XPost: Codable, Identifiable, Sendable {
     }
 }
 
-
 nonisolated extension XPost {
     private enum CodingKeys: String, CodingKey {
         case id, text, url, published, likes, author, handle, avatar, media, quotedText, quotedAuthor, quotedHandle

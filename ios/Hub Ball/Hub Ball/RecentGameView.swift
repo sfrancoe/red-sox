@@ -44,7 +44,7 @@ struct RecentGameView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-        
+
         .onAppear { session.setVisible("recent", true) }
         .onDisappear { session.setVisible("recent", false) }
         .onChange(of: store.games.map(\.gamePk)) { _, _ in synchronizeSelection(preferNewLiveGame: store.hasLiveGame) }
