@@ -1,9 +1,13 @@
 import Foundation
 
 enum AppBackend {
-    // Keep the provider-specific hostname in one place. Replace this with the
-    // app's custom API domain before release without touching every store.
-    nonisolated private static let origin = URL(string: "https://red-sox.netlify.app")!
+    // Set HUB_API_ORIGIN after verifying the custom domain's DNS, TLS and routes.
+    // Keep the previous hostname available to already installed binaries.
+    nonisolated static let origin: URL = {
+        let configured = Bundle.main.object(forInfoDictionaryKey: "HubAPIOrigin") as? String
+        if let configured, let url = URL.safeWeb(configured), url.scheme == "https" { return url }
+        return URL(string: "https://red-sox.netlify.app")!
+    }()
 
     nonisolated static func dataURL(_ path: String, team: HubTeam = .boston) -> URL {
         var root = dataRoot
