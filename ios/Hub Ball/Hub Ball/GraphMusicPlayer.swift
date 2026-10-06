@@ -1,5 +1,6 @@
 import AVFoundation
 import Foundation
+import OSLog
 
 @MainActor
 final class GraphMusicPlayer {
@@ -8,57 +9,95 @@ final class GraphMusicPlayer {
     private var loopBuffer: AVAudioPCMBuffer?
     private var isPrepared = false
     private var isEnabled = true
+    private var wantsPlayback = false
+    private var preparation: Task<Void, Never>?
+    private var interruption: (any NSObjectProtocol)?
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "HubBall", category: "audio")
+
+    init() {
+        interruption = NotificationCenter.default.addObserver(
+            forName: AVAudioSession.interruptionNotification, object: nil, queue: .main
+        ) { [weak self] notification in
+            guard let type = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+                  type == AVAudioSession.InterruptionType.began.rawValue else { return }
+            Task { @MainActor [weak self] in self?.pause() }
+        }
+    }
+
+    isolated deinit {
+        preparation?.cancel()
+        if let interruption { NotificationCenter.default.removeObserver(interruption) }
+    }
 
     func setEnabled(_ enabled: Bool) {
         isEnabled = enabled
-        if !enabled {
-            pause()
-        }
+        if !enabled { pause() }
     }
 
+    /// Called only by the explicit Play/music-on gesture, never by preparation.
     func play() {
         guard isEnabled else { return }
-        prepareIfNeeded()
-        guard isPrepared else { return }
-
-        if !engine.isRunning {
-            try? engine.start()
-        }
-        if !player.isPlaying {
-            player.play()
-        }
+        wantsPlayback = true
+        if isPrepared { startPreparedPlayer() }
+        else { Task { await prepare() } }
     }
 
     func pause() {
+        wantsPlayback = false
         player.pause()
     }
 
     func stop() {
+        wantsPlayback = false
         guard isPrepared else { return }
         player.stop()
         scheduleLoop()
     }
 
-    private func prepareIfNeeded() {
-        guard !isPrepared else { return }
+    func prepare() async {
+        if isPrepared { return }
+        if let preparation { await preparation.value; return }
+        let task = Task { @MainActor [weak self] in
+            guard let self else { return }
+            let sampleRate = 44_100.0
+            let (left, right) = await Self.makeSamples(sampleRate: sampleRate)
+            guard !Task.isCancelled,
+                  let format = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: sampleRate,
+                                             channels: 2, interleaved: false),
+                  let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(left.count)),
+                  let channels = buffer.floatChannelData else { return }
+            buffer.frameLength = AVAudioFrameCount(left.count)
+            left.withUnsafeBufferPointer { source in
+                channels[0].update(from: source.baseAddress!, count: source.count)
+            }
+            right.withUnsafeBufferPointer { source in
+                channels[1].update(from: source.baseAddress!, count: source.count)
+            }
+            engine.attach(player)
+            engine.connect(player, to: engine.mainMixerNode, format: format)
+            engine.mainMixerNode.outputVolume = 0.62
+            loopBuffer = buffer
+            scheduleLoop()
+            engine.prepare()
+            isPrepared = true
+            if wantsPlayback && isEnabled { startPreparedPlayer() }
+        }
+        preparation = task
+        await task.value
+        preparation = nil
+    }
 
-        let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
-        try? session.setActive(true)
-
-        let format = AVAudioFormat(
-            commonFormat: .pcmFormatFloat32,
-            sampleRate: 44_100,
-            channels: 2,
-            interleaved: false
-        )!
-        engine.attach(player)
-        engine.connect(player, to: engine.mainMixerNode, format: format)
-        engine.mainMixerNode.outputVolume = 0.62
-        loopBuffer = makeLoop(format: format)
-        scheduleLoop()
-        engine.prepare()
-        isPrepared = true
+    private func startPreparedPlayer() {
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
+            try session.setActive(true)
+            if !engine.isRunning { try engine.start() }
+            if !player.isPlaying { player.play() }
+        } catch {
+            wantsPlayback = false
+            logger.error("Unable to start story audio: \(String(describing: error), privacy: .public)")
+        }
     }
 
     private func scheduleLoop() {
@@ -66,13 +105,13 @@ final class GraphMusicPlayer {
         player.scheduleBuffer(loopBuffer, at: nil, options: .loops)
     }
 
-    private func makeLoop(format: AVAudioFormat) -> AVAudioPCMBuffer {
+    @concurrent private static func makeSamples(sampleRate: Double) async -> ([Float], [Float]) {
         let bpm = 84.0
         let secondsPerBeat = 60.0 / bpm
         let duration = secondsPerBeat * 16
-        let frameCount = AVAudioFrameCount(duration * format.sampleRate)
-        let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: frameCount)!
-        buffer.frameLength = frameCount
+        let frameCount = Int(duration * sampleRate)
+        var left = [Float](repeating: 0, count: frameCount)
+        var right = left
 
         let roots = [65.41, 51.91, 77.78, 58.27]
         let chords = [
@@ -85,7 +124,7 @@ final class GraphMusicPlayer {
         let twoPi = Double.pi * 2
 
         for frame in 0..<Int(frameCount) {
-            let time = Double(frame) / format.sampleRate
+            let time = Double(frame) / sampleRate
             let beat = time / secondsPerBeat
             let bar = min(Int(beat / 4), 3)
             let beatInBar = beat - Double(bar * 4)
@@ -130,14 +169,14 @@ final class GraphMusicPlayer {
 
             let edgeFade = min(1, min(time / 0.025, (duration - time) / 0.025))
             let output = Float(max(-0.92, min(0.92, sample * edgeFade)))
-            buffer.floatChannelData?[0][frame] = output
-            buffer.floatChannelData?[1][frame] = output * 0.96
+            left[frame] = output
+            right[frame] = output * 0.96
         }
 
-        return buffer
+        return (left, right)
     }
 
-    private func noise(_ seed: Int) -> Double {
+    nonisolated private static func noise(_ seed: Int) -> Double {
         let value = sin(Double(seed) * 12.9898) * 43_758.5453
         return (value - floor(value)) * 2 - 1
     }

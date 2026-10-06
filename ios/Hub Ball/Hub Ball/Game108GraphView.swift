@@ -36,7 +36,9 @@ struct Game108GraphView: View {
         .navigationTitle("Game 108 Graph")
         .navigationBarTitleDisplayMode(.inline)
         .task {
+            async let audioPreparation: Void = musicPlayer.prepare()
             await store.load()
+            await audioPreparation
         }
         .onDisappear {
             stopAnimation()
