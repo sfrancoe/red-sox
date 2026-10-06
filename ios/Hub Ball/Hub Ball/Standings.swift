@@ -11,11 +11,8 @@ nonisolated struct StandingsFeed: Decodable, Sendable {
     let wildCard: [StandingsTeam]
 
     var updatedText: String {
-        let fractionalFormatter = ISO8601DateFormatter()
-        fractionalFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         let value = sourceUpdatedAt ?? generatedAt
-        let date = fractionalFormatter.date(from: value)
-            ?? ISO8601DateFormatter().date(from: value)
+        let date = FeedDate.date(from: value)
         guard let date else { return value }
         return date.formatted(date: .abbreviated, time: .shortened)
     }

@@ -62,7 +62,7 @@ nonisolated struct ScheduledGame: Decodable, Identifiable, Sendable {
     var id: Int { gamePk }
 
     var date: Date? {
-        ISO8601DateFormatter().date(from: gameDate)
+        FeedDate.date(from: gameDate)
     }
 
     var formattedDay: String {

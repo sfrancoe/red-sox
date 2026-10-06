@@ -89,8 +89,7 @@ nonisolated struct LeadersMetadata: Codable, Sendable {
     let warSource: String
 
     var updatedText: String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: generatedAt) else {
+        guard let date = FeedDate.date(from: generatedAt) else {
             return generatedAt
         }
         return date.formatted(date: .abbreviated, time: .shortened)

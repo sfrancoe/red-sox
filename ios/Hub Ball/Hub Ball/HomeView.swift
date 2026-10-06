@@ -734,17 +734,17 @@ struct HomeView: View {
     }
 
     private func compactDate(_ value: String) -> String {
-        guard let date = ISO8601DateFormatter().date(from: value) else { return value }
+        guard let date = FeedDate.date(from: value) else { return value }
         return BaseballTime.format(date, .dateTime.month(.abbreviated).day().year())
     }
 
     private func compactNumericDate(_ value: String) -> String {
-        guard let date = ISO8601DateFormatter().date(from: value) else { return value }
+        guard let date = FeedDate.date(from: value) else { return value }
         return BaseballTime.format(date, .dateTime.month(.defaultDigits).day().year(.twoDigits))
     }
 
     private func shortGameDate(_ value: String) -> String {
-        guard let date = ISO8601DateFormatter().date(from: value) else { return value }
+        guard let date = FeedDate.date(from: value) else { return value }
         return BaseballTime.format(date, .dateTime.weekday(.abbreviated))
             + " "
             + BaseballTime.format(date, .dateTime.month(.defaultDigits).day())

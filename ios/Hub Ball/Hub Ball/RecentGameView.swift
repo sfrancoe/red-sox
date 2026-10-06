@@ -191,12 +191,11 @@ struct RecentGameView: View {
             break
         }
 
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: game.gameDate) else { return game.formattedDate }
+        guard let date = FeedDate.date(from: game.gameDate) else { return game.formattedDate }
         var title = BaseballTime.format(date, .dateTime.month(.abbreviated).day())
         let gamesOnDate = store.games
             .filter { candidate in
-                guard let candidateDate = formatter.date(from: candidate.gameDate) else { return false }
+                guard let candidateDate = FeedDate.date(from: candidate.gameDate) else { return false }
                 return BaseballTime.calendar.isDate(candidateDate, inSameDayAs: date)
             }
             .sorted { $0.gameDate < $1.gameDate }

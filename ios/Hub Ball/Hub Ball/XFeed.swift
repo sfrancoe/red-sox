@@ -22,7 +22,7 @@ nonisolated struct XFeed: Codable, Sendable {
     let popular: [XPost]
 
     var checkedText: String {
-        guard let date = XDateParser.date(from: generatedAt) else {
+        guard let date = FeedDate.date(from: generatedAt) else {
             return generatedAt
         }
         return date.formatted(date: .abbreviated, time: .shortened)
@@ -44,7 +44,7 @@ nonisolated struct XPost: Codable, Identifiable, Sendable {
     let quotedHandle: String
 
     var publishedDate: Date? {
-        XDateParser.date(from: published)
+        FeedDate.date(from: published)
     }
 
     var publishedText: String {
@@ -55,21 +55,6 @@ nonisolated struct XPost: Codable, Identifiable, Sendable {
     }
 }
 
-nonisolated private enum XDateParser {
-    static func date(from value: String) -> Date? {
-        let fractionalFormatter = ISO8601DateFormatter()
-        fractionalFormatter.formatOptions = [
-            .withInternetDateTime,
-            .withFractionalSeconds
-        ]
-
-        if let date = fractionalFormatter.date(from: value) {
-            return date
-        }
-
-        return ISO8601DateFormatter().date(from: value)
-    }
-}
 
 nonisolated extension XPost {
     private enum CodingKeys: String, CodingKey {

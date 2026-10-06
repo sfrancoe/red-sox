@@ -42,11 +42,7 @@ final class HomeRunChaseStore {
 
     private func fetchJudgeSeason() async throws -> LiveJudgeSeason {
         let payload: LiveJudgePayload = try await api.get(.api("hr-chase", team: .newYork), snakeCase: false)
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .gregorian)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(identifier: "America/New_York")
-        formatter.dateFormat = "yyyy-MM-dd"
+        let formatter = BaseballDateFormat.day
         guard let date = formatter.date(from: payload.regularSeasonEndDate) else {
             throw ChaseStoreError.missingStats
         }

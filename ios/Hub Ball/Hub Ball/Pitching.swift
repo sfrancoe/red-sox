@@ -38,10 +38,7 @@ nonisolated struct PitchingFeed: Codable, Sendable {
     let pitchers: [PitcherReport]
 
     var updatedText: String {
-        let fractionalFormatter = ISO8601DateFormatter()
-        fractionalFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let date = fractionalFormatter.date(from: generatedAt)
-            ?? ISO8601DateFormatter().date(from: generatedAt)
+        let date = FeedDate.date(from: generatedAt)
         guard let date else { return generatedAt }
         return date.formatted(date: .abbreviated, time: .shortened)
     }

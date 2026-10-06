@@ -33,9 +33,7 @@ nonisolated struct PostseasonPayload: Codable, Sendable {
     }
 
     private static func parseDate(_ value: String) -> Date? {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter.date(from: value) ?? ISO8601DateFormatter().date(from: value)
+        return FeedDate.date(from: value)
     }
 }
 
@@ -164,24 +162,16 @@ nonisolated struct PostseasonGame: Codable, Identifiable, Sendable {
             return String(officialDate.prefix(10))
         }
         guard let gameDate else { return nil }
-        let parser = ISO8601DateFormatter()
-        parser.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let date = parser.date(from: gameDate) ?? ISO8601DateFormatter().date(from: gameDate) else {
+        guard let date = FeedDate.date(from: gameDate) else {
             return String(gameDate.prefix(10))
         }
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .gregorian)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(identifier: "America/New_York")
-        formatter.dateFormat = "yyyy-MM-dd"
+        let formatter = BaseballDateFormat.day
         return formatter.string(from: date)
     }
 
     var startDate: Date? {
         guard !timeTBD, let gameDate else { return nil }
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter.date(from: gameDate) ?? ISO8601DateFormatter().date(from: gameDate)
+        return FeedDate.date(from: gameDate)
     }
 }
 

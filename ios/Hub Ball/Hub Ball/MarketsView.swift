@@ -25,9 +25,9 @@ nonisolated struct SoxMarket: Decodable, Identifiable, Sendable {
     var percent: String { probability.map { String(format: "%.1f%%", $0 * 100) } ?? "—" }
     var dayLabel: String {
         guard let date else { return "Season outlook" }
-        let f = DateFormatter(); f.dateFormat = "yyyy-MM-dd"; f.timeZone = TimeZone(identifier: "America/New_York")
+        let f = BaseballDateFormat.day
         guard let d = f.date(from: date) else { return date }
-        f.dateFormat = "EEE, MMM d"; return f.string(from: d)
+        return BaseballDateFormat.weekday.string(from: d)
     }
 }
 nonisolated struct MarketSnapshot: Decodable, Sendable {
@@ -36,9 +36,7 @@ nonisolated struct MarketSnapshot: Decodable, Sendable {
     let markets: [SoxMarket]
     let sources: [Source]
     var date: Date? {
-        let f = ISO8601DateFormatter()
-        f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return f.date(from: generatedAt) ?? ISO8601DateFormatter().date(from: generatedAt)
+        return FeedDate.date(from: generatedAt)
     }
 }
 nonisolated struct MarketPoint: Decodable, Identifiable, Sendable {
@@ -405,11 +403,7 @@ struct MarketsView: View {
     }
 
     private func marketDate(_ value: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.calendar = marketCalendar
-        formatter.timeZone = marketCalendar.timeZone
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd"
+        let formatter = BaseballDateFormat.day
         return formatter.date(from: value)
     }
 

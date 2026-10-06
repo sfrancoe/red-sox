@@ -24,8 +24,7 @@ nonisolated struct RecentGame: Codable, Sendable {
     let gamedayUrl: String
 
     var formattedDate: String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: gameDate) else { return gameDate }
+        guard let date = FeedDate.date(from: gameDate) else { return gameDate }
 
         return BaseballTime.format(
             date,

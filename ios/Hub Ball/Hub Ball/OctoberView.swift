@@ -759,10 +759,7 @@ struct OctoberView: View {
         let playable = games.filter { ["Preview", "Live", "Final"].contains($0.abstractState) }
         let live = playable.filter { $0.abstractState == "Live" }
         if !live.isEmpty { return live }
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .gregorian)
-        formatter.timeZone = TimeZone(identifier: "America/New_York")
-        formatter.dateFormat = "yyyy-MM-dd"
+        let formatter = BaseballDateFormat.day
         let todayKey = formatter.string(from: Date())
         let upcoming = playable.filter { $0.abstractState == "Preview" || $0.abstractState == "Scheduled" }
         let nextDate = upcoming.compactMap(\.calendarDateKey)

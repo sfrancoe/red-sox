@@ -26,10 +26,7 @@ nonisolated struct MLBGameClient: Sendable {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(identifier: "America/New_York")!
         let start = calendar.date(byAdding: .day, value: -14, to: now) ?? now
-        let formatter = DateFormatter()
-        formatter.calendar = calendar
-        formatter.timeZone = calendar.timeZone
-        formatter.dateFormat = "yyyy-MM-dd"
+        let formatter = BaseballDateFormat.day
 
         var components = URLComponents(url: apiURL("mlb/schedule"), resolvingAgainstBaseURL: false)!
         components.queryItems = (components.queryItems ?? []) + [

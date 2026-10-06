@@ -146,28 +146,15 @@ nonisolated struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
 
     func formattedDate(_ value: String?) -> String? {
         guard let value else { return nil }
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd"
-        guard let date = formatter.date(from: value) else { return value }
-        return date.formatted(.dateTime.month(.wide).day().year())
+        guard let date = BaseballDateFormat.day.date(from: value) else { return value }
+        return BaseballTime.format(date, .dateTime.month(.wide).day().year())
     }
 
     func formattedShortDate(_ value: String?) -> String? {
         guard let value else { return nil }
-        let parser = DateFormatter()
-        parser.locale = Locale(identifier: "en_US_POSIX")
-        let formats = ["yyyy-MM-dd", "MMMM d, yyyy", "MMM d, yyyy"]
-        guard let date = formats.lazy.compactMap({ format -> Date? in
-            parser.dateFormat = format
-            return parser.date(from: value)
-        }).first else {
-            return value
-        }
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "MM/dd/yy"
-        return formatter.string(from: date)
+        let parsers = [BaseballDateFormat.day, BaseballDateFormat.longDate, BaseballDateFormat.abbreviatedDate]
+        guard let date = parsers.lazy.compactMap({ $0.date(from: value) }).first else { return value }
+        return BaseballDateFormat.shortDate.string(from: date)
     }
 }
 

@@ -94,7 +94,7 @@ actor RecentGameSnapshotCache {
             guard game.gamePk > 0,
                   gameIDs.insert(game.gamePk).inserted,
                   game.away.id == teamID || game.home.id == teamID,
-                  ISO8601DateFormatter().date(from: game.gameDate) != nil,
+                  FeedDate.date(from: game.gameDate) != nil,
                   validTimestamp(entry.lastCheckedAt, now: currentDate),
                   age(of: entry.lastCheckedAt, now: currentDate)
                     <= (game.isLive ? Self.liveRetention : Self.finalRetention) else {

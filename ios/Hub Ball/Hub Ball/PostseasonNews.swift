@@ -40,18 +40,12 @@ nonisolated struct PostseasonNewsArticle: Codable, Identifiable, Sendable {
 private nonisolated enum PostseasonNewsDate {
     static func text(from value: String) -> String {
         guard let date = date(from: value) else { return "—" }
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.calendar = BaseballTime.calendar
-        formatter.timeZone = BaseballTime.timeZone
-        formatter.dateFormat = "MM/dd h:mm a"
+        let formatter = BaseballDateFormat.news
         return formatter.string(from: date)
     }
 
     static func date(from value: String) -> Date? {
-        let fractional = ISO8601DateFormatter()
-        fractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return fractional.date(from: value) ?? ISO8601DateFormatter().date(from: value)
+        return FeedDate.date(from: value)
     }
 }
 

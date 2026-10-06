@@ -37,9 +37,7 @@ nonisolated struct PostseasonHistoryPayload: Codable, Sendable {
     let categories: PostseasonHistoryCategories
 
     var generatedDate: Date? {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter.date(from: generatedAt) ?? ISO8601DateFormatter().date(from: generatedAt)
+        return FeedDate.date(from: generatedAt)
     }
 }
 

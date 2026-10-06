@@ -363,10 +363,8 @@ struct PlayoffBracketView: View {
         guard item.round == currentRound else { return date }
         let time: String
         if let start = game.startDate {
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = BaseballTime.timeZone
-            formatter.dateFormat = BaseballTime.calendar.component(.minute, from: start) == 0 ? "ha" : "h:mma"
+            let formatter = BaseballTime.calendar.component(.minute, from: start) == 0
+                ? BaseballDateFormat.hour : BaseballDateFormat.hourMinute
             time = formatter.string(from: start).lowercased()
         } else {
             time = "Time TBD"
