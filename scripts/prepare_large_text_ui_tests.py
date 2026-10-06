@@ -55,6 +55,8 @@ entry=ET.SubElement(scheme.find('./BuildAction/BuildActionEntries'),'BuildAction
 ET.SubElement(entry,'BuildableReference',ref)
 test=scheme.find('./TestAction')
 test.attrib.pop('shouldAutocreateTestPlan',None)
+for existing in test.findall('Testables'):
+    test.remove(existing)
 testables=ET.SubElement(test,'Testables')
 ET.SubElement(ET.SubElement(testables,'TestableReference',{'skipped':'NO','parallelizable':'NO'}),'BuildableReference',ref)
 scheme_path=OUTPUT/'xcshareddata/xcschemes/LargeTextAudit.xcscheme'

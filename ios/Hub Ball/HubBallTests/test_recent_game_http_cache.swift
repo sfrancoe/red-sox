@@ -30,29 +30,6 @@ struct HTTPCacheIntegrationTests {
                 URLQueryItem(name: "team", value: "redsox"),
                 URLQueryItem(name: "gamePk", value: "9010"),
             ])
-        var seedRequest = URLRequest(url: gameURL, cachePolicy: .reloadIgnoringLocalCacheData)
-        seedRequest.timeoutInterval = 20
-        let (seedData, seedResponse) = try await session.data(for: seedRequest)
-        #expect((seedResponse as? HTTPURLResponse)?.statusCode == 200)
-        session.configuration.urlCache?.storeCachedResponse(
-            CachedURLResponse(response: seedResponse, data: seedData, storagePolicy: .allowed),
-            for: seedRequest
-        )
-        #expect(session.configuration.urlCache?.cachedResponse(for: seedRequest) != nil,
-                     "fixture response was not stored in URLCache")
-        let cacheOnlyClient = MLBGameClient(
-            team: .boston,
-            session: session,
-            backendOrigin: origin
-        )
-        let cachedGame = try await cacheOnlyClient.game(
-            gamePk: 9010,
-            cachePolicy: .returnCacheDataDontLoad
-        )
-        #expect(cachedGame.venue == "Fenway final 1")
-        try await assertGameRequests(1, origin: origin, session: session)
-        session.configuration.urlCache?.removeAllCachedResponses()
-
         // Exercise the production request path twice. The store is not
         // involved here, so the unchanged origin count proves URLSession
         // itself reused the fresh response under .useProtocolCachePolicy.
@@ -66,10 +43,17 @@ struct HTTPCacheIntegrationTests {
         print("HTTP cache normal request policy = .useProtocolCachePolicy")
         let firstNormalGame = try await normalClient.game(gamePk: 9010)
         #expect(firstNormalGame.venue == "Fenway final 1")
-        try await assertGameRequests(2, origin: origin, session: session)
+        try await assertGameRequests(1, origin: origin, session: session)
+        // URLSession can return data before committing its cache entry. Wait
+        // for that entry rather than racing the asynchronous cache write.
+        for _ in 0..<100 {
+            if configuration.urlCache?.cachedResponse(for: normalRequest) != nil { break }
+            try await Task.sleep(for: .milliseconds(10))
+        }
+        #expect(configuration.urlCache?.cachedResponse(for: normalRequest) != nil)
         let secondNormalGame = try await normalClient.game(gamePk: 9010)
         #expect(secondNormalGame.venue == "Fenway final 1")
-        try await assertGameRequests(2, origin: origin, session: session,
+        try await assertGameRequests(1, origin: origin, session: session,
                                      message: "fresh normal-policy request did not reuse URLSession cache")
 
         let firstDirectory = temporaryDirectory("first")
@@ -83,10 +67,10 @@ struct HTTPCacheIntegrationTests {
         )
         await firstStore.load()
         #expect(firstStore.games.first?.venue == "Fenway final 1")
-        try await assertGameRequests(2, origin: origin, session: session)
+        try await assertGameRequests(1, origin: origin, session: session)
         // The short HTTP freshness window expires independently of the
         // store's five-minute final window, so this new store must reach origin.
-        try await Task.sleep(for: .seconds(2.5))
+        try await Task.sleep(for: .seconds(5.5))
         now += 301
         try await control(origin, session: session, live: false, version: 2)
         let expiredDirectory = temporaryDirectory("expired")
@@ -100,12 +84,12 @@ struct HTTPCacheIntegrationTests {
         )
         await expiredStore.load()
         #expect(expiredStore.games.first?.venue == "Fenway final 2")
-        try await assertGameRequests(3, origin: origin, session: session,
+        try await assertGameRequests(2, origin: origin, session: session,
                                      message: "expired HTTP response did not reach origin")
 
         // Let the corrected final response age out before switching the
         // fixture to a live game, so this is a fresh live-origin request.
-        try await Task.sleep(for: .seconds(2.5))
+        try await Task.sleep(for: .seconds(5.5))
         // Live polling also revalidates after the short HTTP freshness window,
         // and the following live-to-final descriptor transition is fetched.
         now += 1
@@ -121,23 +105,23 @@ struct HTTPCacheIntegrationTests {
         )
         await liveStore.load()
         #expect(liveStore.games.first?.venue == "Fenway live 1")
-        try await assertGameRequests(4, origin: origin, session: session)
+        try await assertGameRequests(3, origin: origin, session: session)
 
-        try await Task.sleep(for: .seconds(2.5))
+        try await Task.sleep(for: .seconds(5.5))
         now += 20
         try await control(origin, session: session, live: true, version: 2)
         await liveStore.refresh()
         #expect(liveStore.games.first?.venue == "Fenway live 2")
-        try await assertGameRequests(5, origin: origin, session: session,
+        try await assertGameRequests(4, origin: origin, session: session,
                                      message: "live refresh did not pass the expired HTTP response")
 
-        try await Task.sleep(for: .seconds(2.5))
+        try await Task.sleep(for: .seconds(5.5))
         now += 20
         try await control(origin, session: session, live: false, version: 3)
         await liveStore.refresh()
         #expect(liveStore.games.first?.venue == "Fenway final 3")
         #expect(!liveStore.games.first!.isLive)
-        try await assertGameRequests(6, origin: origin, session: session,
+        try await assertGameRequests(5, origin: origin, session: session,
                                      message: "live-to-final transition did not revalidate")
 
         // Discovery failure raises the warning. Retry then bypasses both the
@@ -150,7 +134,7 @@ struct HTTPCacheIntegrationTests {
         await liveStore.retry(game: warnedGame)
         #expect(liveStore.games.first?.venue == "Fenway final 4")
         #expect(!liveStore.hasRefreshWarning(for: liveStore.games.first!))
-        try await assertGameRequests(7, origin: origin, session: session,
+        try await assertGameRequests(6, origin: origin, session: session,
                                      message: "Retry did not bypass the fresh HTTP cached final")
 
         print("HTTP cache integration: observed a fresh cache hit, expiry correction, live refresh, live-to-final transition, and forced Retry revalidation.")

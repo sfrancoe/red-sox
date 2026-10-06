@@ -473,6 +473,20 @@ final class LargeTextUITests: XCTestCase {
         sections(size: "UICTContentSizeCategoryAccessibilityXXXL")
     }
 
+    func testArchitectureNavigation() {
+        launch("-show-recent", size: "UICTContentSizeCategoryL")
+        XCTAssertTrue(app.buttons["Page"].waitForExistence(timeout: 20))
+        for title in ["Home", "Standings", "Home", "Schedule", "Players", "Game Recaps"] {
+            selectPage(title)
+            capture("architecture-" + title)
+        }
+        XCUIDevice.shared.press(.home)
+        app.activate()
+        XCTAssertTrue(app.buttons["Page"].waitForExistence(timeout: 10))
+        XCTAssertTrue((app.buttons["Page"].value as? String ?? "").hasPrefix("Game Recaps"))
+        capture("architecture-resumed")
+    }
+
     func testAllSectionsDefault() {
         sections(size: "UICTContentSizeCategoryL")
     }
