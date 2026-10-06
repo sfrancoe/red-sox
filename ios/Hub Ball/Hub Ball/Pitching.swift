@@ -126,7 +126,7 @@ nonisolated struct PitcherForecastToDate: Codable, Sendable {
     let war: Double
 }
 
-private extension Double {
+nonisolated private extension Double {
     func signed(places: Int) -> String {
         let value = formatted(.number.precision(.fractionLength(places)))
         return self >= 0 ? "+\(value)" : value

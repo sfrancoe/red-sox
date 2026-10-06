@@ -36,7 +36,7 @@ final class RecentGameStore {
     private let scheduleStore: ScheduleStore
     private let teamID: Int
     private let snapshotCache: RecentGameSnapshotCache
-    private let now: () -> Date
+    private let now: @MainActor @Sendable () -> Date
     private let finalCacheLifetime: TimeInterval = 5 * 60
     private var cache: [Int: CachedGame] = [:]
     private var didRestoreSnapshot = false
@@ -51,7 +51,7 @@ final class RecentGameStore {
         session: URLSession = APIClient.session,
         api: APIClient? = nil,
         scheduleStore: ScheduleStore? = nil,
-        now: @escaping () -> Date = Date.init,
+        now: @escaping @MainActor @Sendable () -> Date = Date.init,
         cacheDirectory: URL? = nil,
         backendOrigin: URL? = nil
     ) {

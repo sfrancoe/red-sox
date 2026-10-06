@@ -21,14 +21,15 @@ actor RecentGameSnapshotCache {
     static let liveRetention: TimeInterval = 24 * 60 * 60
 
     private let directory: URL?
-    private let now: () -> Date
+    private let now: @MainActor @Sendable () -> Date
 
-    init(directory: URL? = nil, now: @escaping () -> Date = Date.init) {
+    init(directory: URL? = nil, now: @escaping @MainActor @Sendable () -> Date = Date.init) {
         self.directory = directory ?? Self.defaultDirectory()
         self.now = now
     }
 
-    func load(teamID: Int) -> [RecentGameCacheRecord]? {
+    func load(teamID: Int) async -> [RecentGameCacheRecord]? {
+        let currentDate = await now()
         guard let fileURL = fileURL(teamID: teamID),
               let data = try? Data(contentsOf: fileURL),
               data.count <= Self.maxBytes,
@@ -36,10 +37,10 @@ actor RecentGameSnapshotCache {
               envelope.schemaVersion == Self.schemaVersion,
               envelope.teamID > 0,
               envelope.teamID == teamID,
-              validTimestamp(envelope.savedAt, now: now()),
-              age(of: envelope.savedAt, now: now()) <= Self.finalRetention,
+              validTimestamp(envelope.savedAt, now: currentDate),
+              age(of: envelope.savedAt, now: currentDate) <= Self.finalRetention,
               envelope.entries.count <= Self.maxGamesPerTeam,
-              let entries = validEntries(envelope.entries, teamID: teamID),
+              let entries = validEntries(envelope.entries, teamID: teamID, currentDate: currentDate),
               !entries.isEmpty else {
             return nil
         }
@@ -47,12 +48,13 @@ actor RecentGameSnapshotCache {
     }
 
     @discardableResult
-    func save(teamID: Int, records: [RecentGameCacheRecord]) -> Bool {
+    func save(teamID: Int, records: [RecentGameCacheRecord]) async -> Bool {
+        let currentDate = await now()
         guard let directory,
               let fileURL = fileURL(teamID: teamID),
               !records.isEmpty,
               records.count <= Self.maxGamesPerTeam,
-              let entries = validEntries(records, teamID: teamID),
+              let entries = validEntries(records, teamID: teamID, currentDate: currentDate),
               !entries.isEmpty else {
             return false
         }
@@ -60,7 +62,7 @@ actor RecentGameSnapshotCache {
         let envelope = Envelope(
             schemaVersion: Self.schemaVersion,
             teamID: teamID,
-            savedAt: now(),
+            savedAt: currentDate,
             entries: entries
         )
         guard let data = encode(envelope), data.count <= Self.maxBytes else { return false }
@@ -81,9 +83,9 @@ actor RecentGameSnapshotCache {
 
     private func validEntries(
         _ entries: [RecentGameCacheRecord],
-        teamID: Int
+        teamID: Int,
+        currentDate: Date
     ) -> [RecentGameCacheRecord]? {
-        let currentDate = now()
         var gameIDs = Set<Int>()
         var valid: [RecentGameCacheRecord] = []
 

@@ -17,7 +17,7 @@ struct PostseasonPlayerSelection: Identifiable {
     var id: String { "\(teamID)-\(playerID)" }
 }
 
-enum PostseasonHistorySortColumn {
+nonisolated enum PostseasonHistorySortColumn {
     case season
     case career
 }

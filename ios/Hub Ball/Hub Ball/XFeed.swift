@@ -55,7 +55,7 @@ nonisolated struct XPost: Codable, Identifiable, Sendable {
     }
 }
 
-private enum XDateParser {
+nonisolated private enum XDateParser {
     static func date(from value: String) -> Date? {
         let fractionalFormatter = ISO8601DateFormatter()
         fractionalFormatter.formatOptions = [

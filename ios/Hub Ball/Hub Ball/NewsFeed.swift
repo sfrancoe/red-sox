@@ -37,7 +37,7 @@ nonisolated struct NewsArticle: Codable, Identifiable, Sendable {
     }
 }
 
-private enum NewsDateParser {
+nonisolated private enum NewsDateParser {
     static func date(from value: String) -> Date? {
         let fractionalFormatter = ISO8601DateFormatter()
         fractionalFormatter.formatOptions = [

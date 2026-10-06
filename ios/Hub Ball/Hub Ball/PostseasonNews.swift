@@ -37,7 +37,7 @@ nonisolated struct PostseasonNewsArticle: Codable, Identifiable, Sendable {
     }
 }
 
-private enum PostseasonNewsDate {
+private nonisolated enum PostseasonNewsDate {
     static func text(from value: String) -> String {
         guard let date = date(from: value) else { return "—" }
         let formatter = DateFormatter()

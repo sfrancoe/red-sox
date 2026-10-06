@@ -68,7 +68,7 @@ final class RefreshScheduler {
             var immediate = refreshImmediately
             while !Task.isCancelled, !background, !job.observers.isEmpty {
                 let interval: TimeInterval = job.isLive() ? 20 : 60
-                let elapsed = job.lastAttempt.map { now().timeIntervalSince($0) } ?? .infinity
+                let elapsed = job.lastAttempt.map { self.now().timeIntervalSince($0) } ?? .infinity
                 if !immediate, elapsed < interval {
                     do { try await Task.sleep(for: .seconds(interval - elapsed)) }
                     catch { break }

@@ -21,7 +21,7 @@ nonisolated struct SoxMarket: Decodable, Identifiable, Sendable {
     let rules: String
     let url: String
     var key: String { provider + id }
-    var tint: Color { provider == "Kalshi" ? AppColor.positive : AppColor.accent }
+    @MainActor var tint: Color { provider == "Kalshi" ? AppColor.positive : AppColor.accent }
     var percent: String { probability.map { String(format: "%.1f%%", $0 * 100) } ?? "—" }
     var dayLabel: String {
         guard let date else { return "Season outlook" }
