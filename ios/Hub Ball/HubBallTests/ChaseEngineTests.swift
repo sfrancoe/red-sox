@@ -1,8 +1,9 @@
 import Foundation
+import Testing
+@testable import Hub_Ball
 
-@main
 enum ChaseEngineTests {
-    static func main() {
+    @Test @MainActor static func scenarios() {
         assertTotal(ChaseData.bonds, equals: 762)
         assertTotal(ChaseData.aaron, equals: 755)
         assertTotal(ChaseData.ruth, equals: 714)
@@ -50,15 +51,12 @@ enum ChaseEngineTests {
         print("Home Run Chase engine tests passed")
     }
 
-    private static func assertTotal(_ player: PlayerHRSeries, equals expected: Int) {
+    @MainActor private static func assertTotal(_ player: PlayerHRSeries, equals expected: Int) {
         let total = Int(ChaseEngine.cumulative(player).last?.hr ?? -1)
         expect(total == expected, "\(player.name) should finish with \(expected) HR, got \(total)")
     }
 
     private static func expect(_ condition: @autoclosure () -> Bool, _ message: String) {
-        guard condition() else {
-            FileHandle.standardError.write(Data("FAIL: \(message)\n".utf8))
-            exit(1)
-        }
+        #expect(condition(), Comment(rawValue: message))
     }
 }

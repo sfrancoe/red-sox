@@ -1,4 +1,6 @@
 import Foundation
+import Testing
+@testable import Hub_Ball
 
 // URLProtocol keeps these tests offline while exercising URLSession, decoding,
 // throttling, failure recovery, and cancellation in the real ScheduleStore.
@@ -39,10 +41,8 @@ final class ScheduleProtocol: URLProtocol, @unchecked Sendable {
     override func stopLoading() {}
 }
 
-@main
 struct ScheduleStoreTests {
-    @MainActor
-    static func main() async throws {
+    @Test @MainActor static func scenarios() async throws {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [ScheduleProtocol.self]
         let session = URLSession(configuration: configuration)
@@ -51,34 +51,34 @@ struct ScheduleStoreTests {
         let store = ScheduleStore(session: session, now: { now })
 
         await store.load(minimumRefreshInterval: 300)
-        precondition(ScheduleProtocol.count == 1 && store.schedule?.generatedAt == "fixture")
+        #expect(ScheduleProtocol.count == 1 && store.schedule?.generatedAt == "fixture")
         // Fourteen live-score refreshes should not trigger schedule downloads.
         for _ in 0..<14 {
             now += 20
             await store.load(minimumRefreshInterval: 300)
         }
-        precondition(ScheduleProtocol.count == 1)
+        #expect(ScheduleProtocol.count == 1)
         now += 20
         await store.load(minimumRefreshInterval: 300)
-        precondition(ScheduleProtocol.count == 2)
+        #expect(ScheduleProtocol.count == 2)
 
         // Schedule-screen/manual loads retain their existing immediate behavior.
         await store.load()
-        precondition(ScheduleProtocol.count == 3)
+        #expect(ScheduleProtocol.count == 3)
 
         // A failed request retains the last good schedule and backs off.
         ScheduleProtocol.configure(status: 503)
         now += 300
         await store.load(minimumRefreshInterval: 300)
-        precondition(ScheduleProtocol.count == 4 && store.errorMessage != nil)
-        precondition(store.schedule?.generatedAt == "fixture")
+        #expect(ScheduleProtocol.count == 4 && store.errorMessage != nil)
+        #expect(store.schedule?.generatedAt == "fixture")
         now += 20
         await store.load(minimumRefreshInterval: 300)
-        precondition(ScheduleProtocol.count == 4)
+        #expect(ScheduleProtocol.count == 4)
         ScheduleProtocol.configure()
         now += 280
         await store.load(minimumRefreshInterval: 300)
-        precondition(ScheduleProtocol.count == 5 && store.errorMessage == nil)
+        #expect(ScheduleProtocol.count == 5 && store.errorMessage == nil)
 
         // Background cancellation must not show an error or delay the next
         // foreground attempt by five minutes. Concurrent loads also coalesce.
@@ -88,15 +88,15 @@ struct ScheduleStoreTests {
         for _ in 0..<100 where ScheduleProtocol.count < 6 {
             try await Task.sleep(for: .milliseconds(10))
         }
-        precondition(ScheduleProtocol.count == 6 && store.isLoading)
+        #expect(ScheduleProtocol.count == 6 && store.isLoading)
         await store.load(minimumRefreshInterval: 300)
-        precondition(ScheduleProtocol.count == 6)
+        #expect(ScheduleProtocol.count == 6)
         pending.cancel()
         await pending.value
-        precondition(!store.isLoading && store.errorMessage == nil)
+        #expect(!store.isLoading && store.errorMessage == nil)
         ScheduleProtocol.configure()
         await store.load(minimumRefreshInterval: 300)
-        precondition(ScheduleProtocol.count == 7)
+        #expect(ScheduleProtocol.count == 7)
         print("ScheduleStore: initial load, 5-minute throttle, explicit refresh, outage recovery, coalescing, and cancellation passed.")
     }
 }

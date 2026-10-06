@@ -1,8 +1,9 @@
 import Foundation
+import Testing
+@testable import Hub_Ball
 
-@main
 enum PostseasonRulesTest {
-    static func main() {
+    @Test @MainActor static func scenarios() {
         let now = Date(timeIntervalSince1970: 1_800_000_000)
         let freshCheck = now.addingTimeInterval(-20)
         let firstPitch = now.addingTimeInterval(3_600)
@@ -13,8 +14,8 @@ let preSeries = PostseasonRules.callTiming(
     hasStarted: false,
     now: now
 )
-precondition(preSeries.category == "pre-series")
-precondition(preSeries.cutoffAt == firstPitch)
+#expect(preSeries.category == "pre-series")
+#expect(preSeries.cutoffAt == firstPitch)
 
 let unknownTime = PostseasonRules.callTiming(
     checkedAt: freshCheck,
@@ -22,8 +23,8 @@ let unknownTime = PostseasonRules.callTiming(
     hasStarted: false,
     now: now
 )
-precondition(unknownTime.category == "from-here")
-precondition(unknownTime.cutoffAt == nil)
+#expect(unknownTime.category == "from-here")
+#expect(unknownTime.cutoffAt == nil)
 
 let stale = PostseasonRules.callTiming(
     checkedAt: now.addingTimeInterval(-120),
@@ -31,8 +32,8 @@ let stale = PostseasonRules.callTiming(
     hasStarted: false,
     now: now
 )
-precondition(stale.category == "from-here")
-precondition(stale.cutoffAt == nil)
+#expect(stale.category == "from-here")
+#expect(stale.cutoffAt == nil)
 
 let observedStarted = PostseasonRules.callTiming(
     checkedAt: freshCheck,
@@ -40,14 +41,14 @@ let observedStarted = PostseasonRules.callTiming(
     hasStarted: true,
     now: now
 )
-precondition(observedStarted.category == "from-here")
-precondition(observedStarted.cutoffAt == freshCheck)
+#expect(observedStarted.category == "from-here")
+#expect(observedStarted.cutoffAt == freshCheck)
 
-precondition(PostseasonRules.canEdit(existingCall: true, hasStarted: false, snapshotAge: 20))
-precondition(!PostseasonRules.canEdit(existingCall: true, hasStarted: true))
-precondition(PostseasonRules.canEdit(existingCall: false, hasStarted: true))
-precondition(!PostseasonRules.canEdit(existingCall: true, hasStarted: false, snapshotAge: 120))
-precondition(!PostseasonRules.canEdit(existingCall: true, hasStarted: false, snapshotAge: -2))
+#expect(PostseasonRules.canEdit(existingCall: true, hasStarted: false, snapshotAge: 20))
+#expect(!PostseasonRules.canEdit(existingCall: true, hasStarted: true))
+#expect(PostseasonRules.canEdit(existingCall: false, hasStarted: true))
+#expect(!PostseasonRules.canEdit(existingCall: true, hasStarted: false, snapshotAge: 120))
+#expect(!PostseasonRules.canEdit(existingCall: true, hasStarted: false, snapshotAge: -2))
 
         print("postseason local-pick cutoff rules passed")
     }

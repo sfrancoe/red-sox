@@ -1,13 +1,13 @@
 import Foundation
+import Testing
+@testable import Hub_Ball
 
 private struct FixtureStats: Decodable {
     let gameRequests: Int
 }
 
-@main
 struct HTTPCacheIntegrationTests {
-    @MainActor
-    static func main() async throws {
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["HUB_HTTP_CACHE_FIXTURE_ORIGIN"] != nil)) @MainActor static func scenarios() async throws {
         let originString = ProcessInfo.processInfo.environment["HUB_HTTP_CACHE_FIXTURE_ORIGIN"]!
         let origin = URL(string: originString)!
         let configuration = URLSessionConfiguration.default
@@ -33,12 +33,12 @@ struct HTTPCacheIntegrationTests {
         var seedRequest = URLRequest(url: gameURL, cachePolicy: .reloadIgnoringLocalCacheData)
         seedRequest.timeoutInterval = 20
         let (seedData, seedResponse) = try await session.data(for: seedRequest)
-        precondition((seedResponse as? HTTPURLResponse)?.statusCode == 200)
+        #expect((seedResponse as? HTTPURLResponse)?.statusCode == 200)
         session.configuration.urlCache?.storeCachedResponse(
             CachedURLResponse(response: seedResponse, data: seedData, storagePolicy: .allowed),
             for: seedRequest
         )
-        precondition(session.configuration.urlCache?.cachedResponse(for: seedRequest) != nil,
+        #expect(session.configuration.urlCache?.cachedResponse(for: seedRequest) != nil,
                      "fixture response was not stored in URLCache")
         let cacheOnlyClient = MLBGameClient(
             team: .boston,
@@ -49,7 +49,7 @@ struct HTTPCacheIntegrationTests {
             gamePk: 9010,
             cachePolicy: .returnCacheDataDontLoad
         )
-        precondition(cachedGame.venue == "Fenway final 1")
+        #expect(cachedGame.venue == "Fenway final 1")
         try await assertGameRequests(1, origin: origin, session: session)
         session.configuration.urlCache?.removeAllCachedResponses()
 
@@ -62,13 +62,13 @@ struct HTTPCacheIntegrationTests {
             backendOrigin: origin
         )
         let normalRequest = URLRequest(url: gameURL)
-        precondition(normalRequest.cachePolicy == .useProtocolCachePolicy)
+        #expect(normalRequest.cachePolicy == .useProtocolCachePolicy)
         print("HTTP cache normal request policy = .useProtocolCachePolicy")
         let firstNormalGame = try await normalClient.game(gamePk: 9010)
-        precondition(firstNormalGame.venue == "Fenway final 1")
+        #expect(firstNormalGame.venue == "Fenway final 1")
         try await assertGameRequests(2, origin: origin, session: session)
         let secondNormalGame = try await normalClient.game(gamePk: 9010)
-        precondition(secondNormalGame.venue == "Fenway final 1")
+        #expect(secondNormalGame.venue == "Fenway final 1")
         try await assertGameRequests(2, origin: origin, session: session,
                                      message: "fresh normal-policy request did not reuse URLSession cache")
 
@@ -82,7 +82,7 @@ struct HTTPCacheIntegrationTests {
             backendOrigin: origin
         )
         await firstStore.load()
-        precondition(firstStore.games.first?.venue == "Fenway final 1")
+        #expect(firstStore.games.first?.venue == "Fenway final 1")
         try await assertGameRequests(2, origin: origin, session: session)
         // The short HTTP freshness window expires independently of the
         // store's five-minute final window, so this new store must reach origin.
@@ -99,7 +99,7 @@ struct HTTPCacheIntegrationTests {
             backendOrigin: origin
         )
         await expiredStore.load()
-        precondition(expiredStore.games.first?.venue == "Fenway final 2")
+        #expect(expiredStore.games.first?.venue == "Fenway final 2")
         try await assertGameRequests(3, origin: origin, session: session,
                                      message: "expired HTTP response did not reach origin")
 
@@ -120,14 +120,14 @@ struct HTTPCacheIntegrationTests {
             backendOrigin: origin
         )
         await liveStore.load()
-        precondition(liveStore.games.first?.venue == "Fenway live 1")
+        #expect(liveStore.games.first?.venue == "Fenway live 1")
         try await assertGameRequests(4, origin: origin, session: session)
 
         try await Task.sleep(for: .seconds(2.5))
         now += 20
         try await control(origin, session: session, live: true, version: 2)
         await liveStore.refresh()
-        precondition(liveStore.games.first?.venue == "Fenway live 2")
+        #expect(liveStore.games.first?.venue == "Fenway live 2")
         try await assertGameRequests(5, origin: origin, session: session,
                                      message: "live refresh did not pass the expired HTTP response")
 
@@ -135,8 +135,8 @@ struct HTTPCacheIntegrationTests {
         now += 20
         try await control(origin, session: session, live: false, version: 3)
         await liveStore.refresh()
-        precondition(liveStore.games.first?.venue == "Fenway final 3")
-        precondition(!liveStore.games.first!.isLive)
+        #expect(liveStore.games.first?.venue == "Fenway final 3")
+        #expect(!liveStore.games.first!.isLive)
         try await assertGameRequests(6, origin: origin, session: session,
                                      message: "live-to-final transition did not revalidate")
 
@@ -145,11 +145,11 @@ struct HTTPCacheIntegrationTests {
         try await control(origin, session: session, live: false, version: 3, failDiscovery: true)
         await liveStore.refresh()
         let warnedGame = liveStore.games.first!
-        precondition(liveStore.hasRefreshWarning(for: warnedGame))
+        #expect(liveStore.hasRefreshWarning(for: warnedGame))
         try await control(origin, session: session, live: false, version: 4)
         await liveStore.retry(game: warnedGame)
-        precondition(liveStore.games.first?.venue == "Fenway final 4")
-        precondition(!liveStore.hasRefreshWarning(for: liveStore.games.first!))
+        #expect(liveStore.games.first?.venue == "Fenway final 4")
+        #expect(!liveStore.hasRefreshWarning(for: liveStore.games.first!))
         try await assertGameRequests(7, origin: origin, session: session,
                                      message: "Retry did not bypass the fresh HTTP cached final")
 
@@ -176,13 +176,13 @@ struct HTTPCacheIntegrationTests {
         ]
         let request = URLRequest(url: components.url!, cachePolicy: .reloadIgnoringLocalCacheData)
         let (_, response) = try await session.data(for: request)
-        precondition((response as? HTTPURLResponse)?.statusCode == 200)
+        #expect((response as? HTTPURLResponse)?.statusCode == 200)
     }
 
     private static func stats(_ origin: URL, session: URLSession) async throws -> FixtureStats {
         let request = URLRequest(url: origin.appending(path: "stats"), cachePolicy: .reloadIgnoringLocalCacheData)
         let (data, response) = try await session.data(for: request)
-        precondition((response as? HTTPURLResponse)?.statusCode == 200)
+        #expect((response as? HTTPURLResponse)?.statusCode == 200)
         return try JSONDecoder().decode(FixtureStats.self, from: data)
     }
 
@@ -194,6 +194,6 @@ struct HTTPCacheIntegrationTests {
     ) async throws {
         let actual = try await stats(origin, session: session).gameRequests
         print("HTTP cache origin gameRequests = \(actual), expected = \(expected)")
-        precondition(actual == expected, "\(message) actual=\(actual) expected=\(expected)")
+        #expect(actual == expected, "\(message) actual=\(actual) expected=\(expected)")
     }
 }

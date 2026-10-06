@@ -24,7 +24,8 @@ struct HubBallApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if let model { ContentView().environment(model) }
+                if ProcessInfo.processInfo.environment["HUB_UNIT_TESTS"] == "1" { Color.clear }
+                else if let model { ContentView().environment(model) }
                 else { ProgressView().task { model = AppModel() } }
             }
             .onChange(of: scenePhase) { _, phase in

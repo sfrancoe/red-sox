@@ -6,6 +6,35 @@
 	objectVersion = 77;
 	objects = {
 
+/* Architecture audit native test target */
+        A0D170000000000000000001 = { isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = HubBallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+        A0D170000000000000000002 = { isa = PBXFileSystemSynchronizedRootGroup; path = HubBallTests; sourceTree = "<group>"; };
+        A0D170000000000000000003 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A0D170000000000000000004 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A0D170000000000000000005 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A0D170000000000000000006 = { isa = PBXContainerItemProxy; containerPortal = 8128DADB30464115004B3947; proxyType = 1; remoteGlobalIDString = 8128DAE230464115004B3947; remoteInfo = "Hub Ball"; };
+        A0D170000000000000000007 = { isa = PBXTargetDependency; target = 8128DAE230464115004B3947; targetProxy = A0D170000000000000000006; };
+        A0D170000000000000000008 = {
+            isa = PBXNativeTarget; name = HubBallTests; productName = HubBallTests;
+            productReference = A0D170000000000000000001; productType = "com.apple.product-type.bundle.unit-test";
+            buildConfigurationList = A0D170000000000000000009; buildPhases = (A0D170000000000000000003, A0D170000000000000000004, A0D170000000000000000005);
+            buildRules = (); dependencies = (A0D170000000000000000007); fileSystemSynchronizedGroups = (A0D170000000000000000002);
+        };
+        A0D170000000000000000009 = { isa = XCConfigurationList; buildConfigurations = (A0D17000000000000000000A, A0D17000000000000000000B); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+        A0D17000000000000000000A = { isa = XCBuildConfiguration; name = Debug; buildSettings = {
+            BUNDLE_LOADER = "$(TEST_HOST)"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hub Ball.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hub Ball";
+            GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+            PRODUCT_BUNDLE_IDENTIFIER = com.scottfrancoeur.HubBallTests; PRODUCT_NAME = "$(TARGET_NAME)";
+            SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2";
+        }; };
+        A0D17000000000000000000B = { isa = XCBuildConfiguration; name = Release; buildSettings = {
+            BUNDLE_LOADER = "$(TEST_HOST)"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hub Ball.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hub Ball";
+            GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+            PRODUCT_BUNDLE_IDENTIFIER = com.scottfrancoeur.HubBallTests; PRODUCT_NAME = "$(TARGET_NAME)";
+            SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2";
+        }; };
+
+
 /* Begin PBXFileReference section */
 		8128DAE330464115004B3947 /* Hub Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hub Ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -45,6 +74,7 @@
 		8128DADA30464115004B3947 = {
 			isa = PBXGroup;
 			children = (
+				A0D170000000000000000002 /* HubBallTests */,
 				8128DAE530464115004B3947 /* Hub Ball */,
 				8128DAE430464115004B3947 /* Products */,
 			);
@@ -54,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				8128DAE330464115004B3947 /* Hub Ball.app */,
+                A0D170000000000000000001,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +143,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+                A0D170000000000000000008,
 				8128DAE230464115004B3947 /* Hub Ball */,
 			);
 		};

@@ -1,28 +1,29 @@
 import Foundation
+import Testing
+@testable import Hub_Ball
 
-@main
 struct PlayoffBracketTest {
-    static func main() throws {
+    @Test @MainActor static func scenarios() throws {
         checkLatestGameScores()
         let slots = PlayoffBracketSlot.all
-        precondition(slots.count == 11)
-        precondition(Set(slots.map(\.id)).count == 11)
-        for path in CommandLine.arguments.dropFirst() {
+        #expect(slots.count == 11)
+        #expect(Set(slots.map(\.id)).count == 11)
+        for path in [testFixture("bracket-2025").path, testFixture("bracket-2026").path] {
             let payload = try JSONDecoder().decode(PostseasonPayload.self, from: Data(contentsOf: URL(fileURLWithPath: path)))
-            precondition(payload.series.count == 11, "Fixture must cover the entire tournament")
+            #expect(payload.series.count == 11, "Fixture must cover the entire tournament")
             for series in payload.series {
                 guard let slot = slots.first(where: { $0.seriesID(season: payload.season) == series.id }) else {
-                    fatalError("Real provider series missing from bracket: \(series.id)")
+                    Issue.record("Real provider series missing from bracket: \(series.id)"); continue
                 }
                 let expected = slot.destinationID.map { "\(payload.season)-\($0)" }
-                precondition(series.nextSlots?.first == expected, "Advancement line must match provider normalization: \(series.id)")
+                #expect(series.nextSlots?.first == expected, "Advancement line must match provider normalization: \(series.id)")
                 var current = slot
                 var visited = Set<String>()
                 while let next = current.destinationID {
-                    precondition(visited.insert(current.id).inserted, "No cycles")
+                    #expect(visited.insert(current.id).inserted, "No cycles")
                     current = slots.first { $0.id == next }!
                 }
-                precondition(current.round == "world-series", "Every path must reach World Series")
+                #expect(current.round == "world-series", "Every path must reach World Series")
             }
         }
         print("All 11 bracket slots and advancement paths agree with recorded postseasons")
@@ -55,32 +56,32 @@ struct PlayoffBracketTest {
         }
 
         let first = game(1)
-        precondition(first.score(for: 111) == 0, "A shutout must display zero, not a missing score")
-        precondition(first.score(for: 147) == 9)
-        precondition(first.score(for: 999) == nil)
-        precondition(series(0, 1).bracketSeriesStatus == "NYY lead 1-0")
-        precondition(series(1, 0).bracketSeriesStatus == "BOS lead 1-0")
-        precondition(series(1, 1).bracketSeriesStatus == "Series tied 1-1")
-        precondition(series(0, 2, winner: 147, state: "complete").bracketSeriesStatus == "NYY win 2-0")
-        precondition(series(0, 0).bracketSeriesStatus == nil)
-        precondition(series(0, 1, state: "unknown").bracketSeriesStatus == nil)
+        #expect(first.score(for: 111) == 0, "A shutout must display zero, not a missing score")
+        #expect(first.score(for: 147) == 9)
+        #expect(first.score(for: 999) == nil)
+        #expect(series(0, 1).bracketSeriesStatus == "NYY lead 1-0")
+        #expect(series(1, 0).bracketSeriesStatus == "BOS lead 1-0")
+        #expect(series(1, 1).bracketSeriesStatus == "Series tied 1-1")
+        #expect(series(0, 2, winner: 147, state: "complete").bracketSeriesStatus == "NYY win 2-0")
+        #expect(series(0, 0).bracketSeriesStatus == nil)
+        #expect(series(0, 1, state: "unknown").bracketSeriesStatus == nil)
 
         let second = game(2, winner: 111, away: newYork, home: boston, awayScore: 2, homeScore: 5)
         let games = [game(3, state: "Preview", winner: nil), second,
                      game(4, state: "Live", winner: nil), first,
                      game(5, winner: nil), game(6, seriesID: "other-series")]
         let latest = payload(games).latestCompletedGame(for: "test-series")
-        precondition(latest?.gamePk == 2, "Ignore input order, future/live/cancelled games, and other series")
-        precondition(latest?.score(for: 111) == 5, "Match scores by team ID when home and away switch")
-        precondition(latest?.score(for: 147) == 2)
-        precondition(payload([game(1, state: "Preview", winner: nil)]).latestCompletedGame(for: "test-series") == nil)
-        precondition(payload(games).liveGame(for: "test-series")?.gamePk == 4)
-        precondition(payload(games).scorecardGame(for: "test-series")?.gamePk == 4, "Open the live game while one is in progress")
-        precondition(payload(games.filter { $0.abstractState != "Live" }).scorecardGame(for: "test-series")?.gamePk == 2,
+        #expect(latest?.gamePk == 2, "Ignore input order, future/live/cancelled games, and other series")
+        #expect(latest?.score(for: 111) == 5, "Match scores by team ID when home and away switch")
+        #expect(latest?.score(for: 147) == 2)
+        #expect(payload([game(1, state: "Preview", winner: nil)]).latestCompletedGame(for: "test-series") == nil)
+        #expect(payload(games).liveGame(for: "test-series")?.gamePk == 4)
+        #expect(payload(games).scorecardGame(for: "test-series")?.gamePk == 4, "Open the live game while one is in progress")
+        #expect(payload(games.filter { $0.abstractState != "Live" }).scorecardGame(for: "test-series")?.gamePk == 2,
                      "Open the latest final for this matchup between games")
-        precondition(payload([first, second]).scorecardGame(for: "test-series")?.gamePk == 2,
+        #expect(payload([first, second]).scorecardGame(for: "test-series")?.gamePk == 2,
                      "Finished series still open their last game")
-        precondition(payload([game(3, state: "Preview", winner: nil), game(5, winner: nil), game(6, seriesID: "other-series")])
+        #expect(payload([game(3, state: "Preview", winner: nil), game(5, winner: nil), game(6, seriesID: "other-series")])
             .scorecardGame(for: "test-series") == nil, "Matchups without a live or completed game keep series details")
         let liveGame = PostseasonGame(gamePk: 7, seriesId: "test-series", gameNumber: 2,
                                       gameType: "F", gameDate: nil, officialDate: nil,
@@ -89,9 +90,9 @@ struct PlayoffBracketTest {
                                       awayScore: 3, homeScore: 2, winnerTeamId: nil,
                                       liveInning: 9, liveInningState: "Top", liveOuts: 1,
                                       livePitcher: "Raisel Iglesias", liveBatter: "J.T. Realmuto")
-        precondition(liveGame.liveInningDescription == "Top 9th")
-        precondition(liveGame.liveMatchupDescription == "(P) Iglesias  (AB) Realmuto")
-        precondition(game(2, awayScore: nil).score(for: 111) == nil, "Missing scores must not become zero")
+        #expect(liveGame.liveInningDescription == "Top 9th")
+        #expect(liveGame.liveMatchupDescription == "(P) Iglesias  (AB) Realmuto")
+        #expect(game(2, awayScore: nil).score(for: 111) == nil, "Missing scores must not become zero")
         print("Latest-game bracket scores and series status passed")
     }
 }

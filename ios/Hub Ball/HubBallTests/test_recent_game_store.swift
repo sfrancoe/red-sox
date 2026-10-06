@@ -1,4 +1,6 @@
 import Foundation
+import Testing
+@testable import Hub_Ball
 
 final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
     private static let lock = NSLock()
@@ -103,7 +105,7 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
         let body: Data
         if url.path.contains("/api/mlb/schedule") {
             let query = URLComponents(url: url, resolvingAgainstBaseURL: false)!.queryItems!
-            precondition(query.first { $0.name == "gameTypes" }?.value == "R,F,D,L,W",
+            #expect(query.first { $0.name == "gameTypes" }?.value == "R,F,D,L,W",
                          "live discovery must include every postseason round")
             let status: [String: String] = live
                 ? ["abstractGameState": "Live", "codedGameState": "I"]
@@ -192,10 +194,8 @@ final class RecentGameProtocol: URLProtocol, @unchecked Sendable {
     }
 }
 
-@main
 struct RecentGameStoreTests {
-    @MainActor
-    static func main() async throws {
+    @Test @MainActor static func scenarios() async throws {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [RecentGameProtocol.self]
         let session = URLSession(configuration: configuration)
@@ -214,33 +214,33 @@ struct RecentGameStoreTests {
         )
 
         await store.load()
-        precondition(store.games.first?.venue == "Fenway final 1")
-        precondition(RecentGameProtocol.gameRequestCount == 1)
+        #expect(store.games.first?.venue == "Fenway final 1")
+        #expect(RecentGameProtocol.gameRequestCount == 1)
 
         now += 299
         RecentGameProtocol.configure(live: false, version: 2)
         await store.refresh()
-        precondition(RecentGameProtocol.gameRequestCount == 1, "unexpired final was re-fetched")
-        precondition(store.games.first?.venue == "Fenway final 1")
+        #expect(RecentGameProtocol.gameRequestCount == 1, "unexpired final was re-fetched")
+        #expect(store.games.first?.venue == "Fenway final 1")
 
         now += 1
         await store.refresh()
-        precondition(RecentGameProtocol.gameRequestCount == 2, "expired final was not revalidated")
-        precondition(store.games.first?.venue == "Fenway final 2")
+        #expect(RecentGameProtocol.gameRequestCount == 2, "expired final was not revalidated")
+        #expect(store.games.first?.venue == "Fenway final 2")
 
         now += 300
         RecentGameProtocol.configure(live: false, version: 3, failGamePk: 9001)
         await store.refresh()
-        precondition(RecentGameProtocol.gameRequestCount == 3)
-        precondition(store.games.first?.venue == "Fenway final 2", "failed final revalidation discarded last good data")
+        #expect(RecentGameProtocol.gameRequestCount == 3)
+        #expect(store.games.first?.venue == "Fenway final 2", "failed final revalidation discarded last good data")
 
         // The failed attempt did not reset the fetch timestamp: the next refresh
         // retries immediately and accepts the corrected response.
         now += 1
         RecentGameProtocol.configure(live: false, version: 3)
         await store.refresh()
-        precondition(RecentGameProtocol.gameRequestCount == 4)
-        precondition(store.games.first?.venue == "Fenway final 3")
+        #expect(RecentGameProtocol.gameRequestCount == 4)
+        #expect(store.games.first?.venue == "Fenway final 3")
 
         var liveNow = now + 1
         RecentGameProtocol.configure(live: true, version: 1)
@@ -251,32 +251,32 @@ struct RecentGameStoreTests {
             cacheDirectory: cacheDirectory
         )
         await liveStore.load()
-        precondition(liveStore.games.first?.isLive == true)
-        precondition(liveStore.games.first?.liveMatchup?.pitcher == "Max Fried")
-        precondition(liveStore.games.first?.liveMatchup?.batter == "Jarren Duran")
-        precondition(liveStore.games.first?.liveMatchup?.outs == 0)
-        precondition(liveStore.games.first?.liveMatchup?.compactDescription == "(P) Fried  (AB) Duran  0-2, 0 Outs")
-        precondition(liveStore.presentationState(for: liveStore.games.first!, at: liveNow) == .live)
+        #expect(liveStore.games.first?.isLive == true)
+        #expect(liveStore.games.first?.liveMatchup?.pitcher == "Max Fried")
+        #expect(liveStore.games.first?.liveMatchup?.batter == "Jarren Duran")
+        #expect(liveStore.games.first?.liveMatchup?.outs == 0)
+        #expect(liveStore.games.first?.liveMatchup?.compactDescription == "(P) Fried  (AB) Duran  0-2, 0 Outs")
+        #expect(liveStore.presentationState(for: liveStore.games.first!, at: liveNow) == .live)
         let beforeLiveRefresh = RecentGameProtocol.gameRequestCount
 
         liveNow += 20
         RecentGameProtocol.configure(live: true, version: 2)
         await liveStore.refresh()
-        precondition(RecentGameProtocol.gameRequestCount == beforeLiveRefresh + 1)
-        precondition(liveStore.games.first?.venue == "Fenway live 2")
-        precondition(liveStore.games.first?.liveMatchup?.pitcher == "Luke Weaver")
-        precondition(liveStore.games.first?.liveMatchup?.batter == "Trevor Story")
-        precondition(liveStore.games.first?.liveMatchup?.outs == 2)
-        precondition(liveStore.games.first?.liveMatchup?.compactDescription == "(P) Weaver  (AB) Story  1-1, 2 Outs")
+        #expect(RecentGameProtocol.gameRequestCount == beforeLiveRefresh + 1)
+        #expect(liveStore.games.first?.venue == "Fenway live 2")
+        #expect(liveStore.games.first?.liveMatchup?.pitcher == "Luke Weaver")
+        #expect(liveStore.games.first?.liveMatchup?.batter == "Trevor Story")
+        #expect(liveStore.games.first?.liveMatchup?.outs == 2)
+        #expect(liveStore.games.first?.liveMatchup?.compactDescription == "(P) Weaver  (AB) Story  1-1, 2 Outs")
 
         // A descriptor that has become final must revalidate a cached-live game.
         liveNow += 20
         RecentGameProtocol.configure(live: false, version: 3)
         await liveStore.refresh()
-        precondition(RecentGameProtocol.gameRequestCount == beforeLiveRefresh + 2)
-        precondition(liveStore.games.first?.isLive == false)
-        precondition(liveStore.games.first?.liveMatchup == nil)
-        precondition(liveStore.games.first?.venue == "Fenway final 3")
+        #expect(RecentGameProtocol.gameRequestCount == beforeLiveRefresh + 2)
+        #expect(liveStore.games.first?.isLive == false)
+        #expect(liveStore.games.first?.liveMatchup == nil)
+        #expect(liveStore.games.first?.venue == "Fenway final 3")
 
         // A failed live request must not inherit the successful final's freshness.
         var mixedNow = liveNow + 300
@@ -301,16 +301,16 @@ struct RecentGameStoreTests {
         await mixedStore.refresh()
         let failedLive = mixedStore.games.first { $0.gamePk == 9001 }!
         let refreshedFinal = mixedStore.games.first { $0.gamePk == 9002 }!
-        precondition(mixedStore.hasRefreshWarning(for: failedLive))
-        precondition(mixedStore.freshness(for: failedLive)!.lastCheckedAt == liveCheckedBeforeFailure)
-        precondition(mixedStore.freshness(for: refreshedFinal)!.lastCheckedAt > finalCheckedBeforeRefresh)
-        precondition(!mixedStore.hasRefreshWarning(for: refreshedFinal))
+        #expect(mixedStore.hasRefreshWarning(for: failedLive))
+        #expect(mixedStore.freshness(for: failedLive)!.lastCheckedAt == liveCheckedBeforeFailure)
+        #expect(mixedStore.freshness(for: refreshedFinal)!.lastCheckedAt > finalCheckedBeforeRefresh)
+        #expect(!mixedStore.hasRefreshWarning(for: refreshedFinal))
 
         mixedNow += 20
         RecentGameProtocol.configure(live: true, includeFinal: true, version: 3)
         await mixedStore.refresh()
-        precondition(!mixedStore.hasRefreshWarning(for: mixedStore.games.first { $0.gamePk == 9001 }!))
-        precondition(mixedStore.presentationState(
+        #expect(!mixedStore.hasRefreshWarning(for: mixedStore.games.first { $0.gamePk == 9001 }!))
+        #expect(mixedStore.presentationState(
             for: mixedStore.games.first { $0.gamePk == 9001 }!,
             at: mixedNow
         ) == .live)
@@ -326,17 +326,17 @@ struct RecentGameStoreTests {
         )
         await restoredStore.load()
         let restoredLive = restoredStore.games.first { $0.gamePk == 9001 }!
-        precondition(restoredStore.freshness(for: restoredLive)!.isSavedSnapshot)
-        precondition(restoredStore.hasRefreshWarning(for: restoredLive))
-        precondition(restoredStore.freshnessMessage(for: restoredLive, at: mixedNow)?.hasPrefix("Updates unavailable") == true)
+        #expect(restoredStore.freshness(for: restoredLive)!.isSavedSnapshot)
+        #expect(restoredStore.hasRefreshWarning(for: restoredLive))
+        #expect(restoredStore.freshnessMessage(for: restoredLive, at: mixedNow)?.hasPrefix("Updates unavailable") == true)
 
         mixedNow += 301
         RecentGameProtocol.configure(live: false, includeFinal: true, version: 4)
         await restoredStore.refresh()
         let recoveredLive = restoredStore.games.first { $0.gamePk == 9001 }!
-        precondition(!recoveredLive.isLive)
-        precondition(restoredStore.freshness(for: recoveredLive)!.isSavedSnapshot == false)
-        precondition(!restoredStore.hasRefreshWarning(for: recoveredLive))
+        #expect(!recoveredLive.isLive)
+        #expect(restoredStore.freshness(for: recoveredLive)!.isSavedSnapshot == false)
+        #expect(!restoredStore.hasRefreshWarning(for: recoveredLive))
 
         // A restored live snapshot is qualified before its reconnect finishes,
         // and age-based presentation changes do not alter the historical state.
@@ -368,11 +368,11 @@ struct RecentGameStoreTests {
             try? await Task.sleep(for: .milliseconds(10))
         }
         let savedLive = savedLiveStore.games.first { $0.gamePk == 9001 }!
-        precondition(savedLiveStore.presentationState(for: savedLive, at: savedLiveNow) == .savedLive)
+        #expect(savedLiveStore.presentationState(for: savedLive, at: savedLiveNow) == .savedLive)
         savedLoad.cancel()
         await savedLoad.value
         let delayedLive = mixedStore.games.first { $0.gamePk == 9001 }!
-        precondition(mixedStore.presentationState(for: delayedLive, at: mixedNow + 301) == .delayedLive)
+        #expect(mixedStore.presentationState(for: delayedLive, at: mixedNow + 301) == .delayedLive)
         RecentGameProtocol.configure(live: false, version: 6)
 
         // A failed replacement retains the old displayed game and its warning
@@ -398,17 +398,17 @@ struct RecentGameStoreTests {
         )
         await replacementStore.load()
         let fallbackGame = replacementStore.games.first!
-        precondition(fallbackGame.gamePk == 9901)
-        precondition(replacementStore.freshness(for: fallbackGame) != nil)
-        precondition(replacementStore.hasRefreshWarning(for: fallbackGame))
-        precondition(replacementStore.freshnessMessage(for: fallbackGame, at: fallbackNow)?
+        #expect(fallbackGame.gamePk == 9901)
+        #expect(replacementStore.freshness(for: fallbackGame) != nil)
+        #expect(replacementStore.hasRefreshWarning(for: fallbackGame))
+        #expect(replacementStore.freshnessMessage(for: fallbackGame, at: fallbackNow)?
             .hasPrefix("Updates unavailable") == true)
 
         RecentGameProtocol.configure(scheduleGamePk: 9001, version: 2)
         await replacementStore.refresh()
-        precondition(replacementStore.games.first?.gamePk == 9001)
-        precondition(!replacementStore.hasRefreshWarning(for: replacementStore.games.first!))
-        precondition(replacementStore.presentationState(
+        #expect(replacementStore.games.first?.gamePk == 9001)
+        #expect(!replacementStore.hasRefreshWarning(for: replacementStore.games.first!))
+        #expect(replacementStore.presentationState(
             for: replacementStore.games.first!,
             at: fallbackNow
         ) == .final)
@@ -431,16 +431,16 @@ struct RecentGameStoreTests {
         RecentGameProtocol.configure(scheduleGamePk: 9001, failDiscovery: true)
         await retryStore.refresh()
         let warnedGame = retryStore.games.first!
-        precondition(retryStore.hasRefreshWarning(for: warnedGame))
+        #expect(retryStore.hasRefreshWarning(for: warnedGame))
         let requestsBeforeRetry = RecentGameProtocol.gameRequestCount
         RecentGameProtocol.configure(scheduleGamePk: 9001, version: 7)
         await retryStore.retry(game: warnedGame)
-        precondition(RecentGameProtocol.gameRequestCount == requestsBeforeRetry + 1)
-        precondition(retryStore.games.first?.venue == "Fenway final 7")
-        precondition(!retryStore.hasRefreshWarning(for: retryStore.games.first!))
-        precondition(RecentGameProtocol.observedGameCachePolicies.dropLast()
+        #expect(RecentGameProtocol.gameRequestCount == requestsBeforeRetry + 1)
+        #expect(retryStore.games.first?.venue == "Fenway final 7")
+        #expect(!retryStore.hasRefreshWarning(for: retryStore.games.first!))
+        #expect(RecentGameProtocol.observedGameCachePolicies.dropLast()
             .allSatisfy { $0 == .useProtocolCachePolicy })
-        precondition(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
+        #expect(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
 
         // Retry recovery during a discovery outage must merge the recovered
         // game instead of treating the forced-game descriptor as replacement
@@ -457,7 +457,7 @@ struct RecentGameStoreTests {
             cacheDirectory: multiGameDirectory
         )
         await multiStore.load()
-        precondition(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
+        #expect(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
         multiNow += 10
         RecentGameProtocol.configure(live: false, includeFinal: true, failDiscovery: true)
         await multiStore.refresh()
@@ -466,22 +466,22 @@ struct RecentGameStoreTests {
         let multiTargetLastCheckedBeforeFailure = multiStore.freshness(for: multiTargetBeforeFailure)!.lastCheckedAt
         RecentGameProtocol.configure(live: false, includeFinal: true, version: 8, failGamePk: 9001, failDiscovery: true)
         await multiStore.retry(game: multiTargetBeforeFailure)
-        precondition(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
-        precondition(multiStore.games.first { $0.gamePk == 9001 }?.venue == "Fenway final 1")
-        precondition(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9001 }!)!.lastCheckedAt == multiTargetLastCheckedBeforeFailure)
-        precondition(multiStore.hasRefreshWarning(for: multiStore.games.first { $0.gamePk == 9001 }!))
-        precondition(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9002 }!) != nil)
+        #expect(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
+        #expect(multiStore.games.first { $0.gamePk == 9001 }?.venue == "Fenway final 1")
+        #expect(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9001 }!)!.lastCheckedAt == multiTargetLastCheckedBeforeFailure)
+        #expect(multiStore.hasRefreshWarning(for: multiStore.games.first { $0.gamePk == 9001 }!))
+        #expect(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9002 }!) != nil)
 
         RecentGameProtocol.configure(live: false, includeFinal: true, version: 8, failDiscovery: true)
         await multiStore.retry(game: multiBeforeRetry.first { $0.gamePk == 9001 }!)
         print("Retry outage reproduction: displayed IDs after retry = \(multiStore.games.map(\.gamePk)); requested IDs = \(RecentGameProtocol.requestedGameIDs.suffix(3))")
-        precondition(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
-        precondition(multiStore.games.first { $0.gamePk == 9001 }?.venue == "Fenway final 8")
-        precondition(!multiStore.hasRefreshWarning(for: multiStore.games.first { $0.gamePk == 9001 }!))
-        precondition(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9002 }!) != nil)
+        #expect(Set(multiStore.games.map(\.gamePk)) == [9001, 9002])
+        #expect(multiStore.games.first { $0.gamePk == 9001 }?.venue == "Fenway final 8")
+        #expect(!multiStore.hasRefreshWarning(for: multiStore.games.first { $0.gamePk == 9001 }!))
+        #expect(multiStore.freshness(for: multiStore.games.first { $0.gamePk == 9002 }!) != nil)
         let multiSnapshotIDs = snapshotGameIDs(directory: multiGameDirectory)
         print("Retry outage recovery snapshot IDs = \(multiSnapshotIDs)")
-        precondition(Set(multiSnapshotIDs) == [9001, 9002])
+        #expect(Set(multiSnapshotIDs) == [9001, 9002])
 
         // Retry must add a known displayed target when successful discovery
         // omits it, while retaining a failed replacement game's last good data.
@@ -509,32 +509,32 @@ struct RecentGameStoreTests {
         )
         await omittedStore.load()
         let omittedTarget = omittedStore.games.first!
-        precondition(omittedTarget.gamePk == 9901)
-        precondition(omittedStore.hasRefreshWarning(for: omittedTarget))
+        #expect(omittedTarget.gamePk == 9901)
+        #expect(omittedStore.hasRefreshWarning(for: omittedTarget))
         let omittedRequestStart = RecentGameProtocol.requestedGameIDs.count
         RecentGameProtocol.configure(scheduleGamePk: 9001, version: 9, failGamePk: 9001)
         await omittedStore.retry(game: omittedTarget)
         let omittedRequests = Array(RecentGameProtocol.requestedGameIDs.dropFirst(omittedRequestStart))
         print("Retry omitted-target reproduction: requested IDs = \(omittedRequests), target warning = \(omittedStore.hasRefreshWarning(for: omittedTarget))")
-        precondition(omittedRequests.contains(9901))
-        precondition(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
-        precondition(omittedStore.games.first?.venue == "Fenway final 9 game 9901")
-        precondition(!omittedStore.hasRefreshWarning(for: omittedStore.games.first!))
+        #expect(omittedRequests.contains(9901))
+        #expect(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
+        #expect(omittedStore.games.first?.venue == "Fenway final 9 game 9901")
+        #expect(!omittedStore.hasRefreshWarning(for: omittedStore.games.first!))
 
         // A discovery response that already includes the target must not
         // create a duplicate forced request.
         let includedRequestStart = RecentGameProtocol.requestedGameIDs.count
         RecentGameProtocol.configure(scheduleGamePk: 9901, version: 10)
         await omittedStore.retry(game: omittedStore.games.first!)
-        precondition(Array(RecentGameProtocol.requestedGameIDs.dropFirst(includedRequestStart)) == [9901])
-        precondition(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
+        #expect(Array(RecentGameProtocol.requestedGameIDs.dropFirst(includedRequestStart)) == [9901])
+        #expect(RecentGameProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
 
         // An empty successful discovery still retries the displayed target.
         let emptyRequestStart = RecentGameProtocol.requestedGameIDs.count
         RecentGameProtocol.configure(scheduleGamePk: 9001, version: 11, emptyDiscovery: true)
         await omittedStore.retry(game: omittedStore.games.first!)
-        precondition(Array(RecentGameProtocol.requestedGameIDs.dropFirst(emptyRequestStart)) == [9901])
-        precondition(omittedStore.games.first?.venue == "Fenway final 11 game 9901")
+        #expect(Array(RecentGameProtocol.requestedGameIDs.dropFirst(emptyRequestStart)) == [9901])
+        #expect(omittedStore.games.first?.venue == "Fenway final 11 game 9901")
 
         // Snapshot validation rejects corruption, wrong-team envelopes, old
         // entries, and incompatible versions without throwing.
@@ -557,11 +557,11 @@ struct RecentGameStoreTests {
             entries: [validationRecord]
         )
         let loadedValidation = await validationCache.load(teamID: 111)
-        precondition(loadedValidation?.count == 1)
+        #expect(loadedValidation?.count == 1)
 
         try Data("corrupt".utf8).write(to: validationDirectory.appendingPathComponent("recent-games-111.json"))
         let corruptValidation = await validationCache.load(teamID: 111)
-        precondition(corruptValidation == nil)
+        #expect(corruptValidation == nil)
         try? FileManager.default.removeItem(at: validationDirectory.appendingPathComponent("recent-games-111.json"))
         try writeTestEnvelope(
             directory: validationDirectory,
@@ -571,7 +571,7 @@ struct RecentGameStoreTests {
             envelopeTeamID: 147
         )
         let wrongTeamValidation = await validationCache.load(teamID: 111)
-        precondition(wrongTeamValidation == nil)
+        #expect(wrongTeamValidation == nil)
         try writeTestEnvelope(
             directory: validationDirectory,
             teamID: 111,
@@ -579,7 +579,7 @@ struct RecentGameStoreTests {
             entries: [validationRecord]
         )
         let versionValidation = await validationCache.load(teamID: 111)
-        precondition(versionValidation == nil)
+        #expect(versionValidation == nil)
         try writeTestEnvelope(
             directory: validationDirectory,
             teamID: 111,
@@ -591,7 +591,7 @@ struct RecentGameStoreTests {
             )]
         )
         let expiredValidation = await validationCache.load(teamID: 111)
-        precondition(expiredValidation == nil)
+        #expect(expiredValidation == nil)
 
         // Team snapshots stay bounded and a failed disk write cannot turn a
         // successful network result into a failed refresh.
@@ -611,7 +611,7 @@ struct RecentGameStoreTests {
             )
         }
         let boundedFiles = try FileManager.default.contentsOfDirectory(at: boundedDirectory, includingPropertiesForKeys: nil)
-        precondition(boundedFiles.filter { $0.lastPathComponent.hasPrefix("recent-games-") }.count <= RecentGameSnapshotCache.maxTeams)
+        #expect(boundedFiles.filter { $0.lastPathComponent.hasPrefix("recent-games-") }.count <= RecentGameSnapshotCache.maxTeams)
 
         // Cancellation while inactive must not create a refresh warning.
         mixedNow += 301
@@ -620,12 +620,12 @@ struct RecentGameStoreTests {
         for _ in 0..<100 where !mixedStore.isLoading {
             try? await Task.sleep(for: .milliseconds(10))
         }
-        precondition(mixedStore.isLoading)
+        #expect(mixedStore.isLoading)
         pendingCancellation.cancel()
         await pendingCancellation.value
         let cancelledGame = mixedStore.games.first { $0.gamePk == 9001 }!
-        precondition(!mixedStore.hasRefreshWarning(for: cancelledGame))
-        precondition(
+        #expect(!mixedStore.hasRefreshWarning(for: cancelledGame))
+        #expect(
             mixedStore.freshnessMessage(for: cancelledGame, at: mixedNow)?
                 .hasPrefix("Updates may be delayed") == true
         )
@@ -643,7 +643,7 @@ struct RecentGameStoreTests {
             cacheDirectory: writeFailurePath
         )
         await writeFailureStore.load()
-        precondition(writeFailureStore.games.first != nil)
+        #expect(writeFailureStore.games.first != nil)
 
         let client = MLBGameClient(session: session)
         for state in ["Middle", "End"] {
@@ -653,36 +653,36 @@ struct RecentGameStoreTests {
                 "defense": ["pitcher": ["fullName": "Previous pitcher"]],
             ])
             let game = try await client.game(gamePk: 9001)
-            precondition(game.liveMatchup?.pitcher == nil)
-            precondition(game.liveMatchup?.batter == nil)
-            precondition(game.liveMatchup?.outs == 3)
-            precondition(game.liveMatchup?.balls == nil && game.liveMatchup?.strikes == nil)
+            #expect(game.liveMatchup?.pitcher == nil)
+            #expect(game.liveMatchup?.batter == nil)
+            #expect(game.liveMatchup?.outs == 3)
+            #expect(game.liveMatchup?.balls == nil && game.liveMatchup?.strikes == nil)
         }
         for missing in [[:], ["outs": 4], ["outs": -1]] as [[String: Any]] {
             RecentGameProtocol.configure(live: true, matchup: missing)
             let game = try await client.game(gamePk: 9001)
-            precondition(game.liveMatchup?.pitcher == nil)
-            precondition(game.liveMatchup?.batter == nil)
-            precondition(game.liveMatchup?.outs == nil, "missing outs must not be reported as zero")
+            #expect(game.liveMatchup?.pitcher == nil)
+            #expect(game.liveMatchup?.batter == nil)
+            #expect(game.liveMatchup?.outs == nil, "missing outs must not be reported as zero")
         }
         RecentGameProtocol.configure(live: true)
         let game = try await client.game(gamePk: 9001)
         let encoded = try JSONEncoder().encode(game)
         let decoded = try JSONDecoder().decode(RecentGame.self, from: encoded)
-        precondition(decoded.liveMatchup?.batter == "Jarren Duran")
+        #expect(decoded.liveMatchup?.batter == "Jarren Duran")
         let example = LiveGameMatchup(pitcher: "Greg Weissert", batter: "Ryan McMahon", outs: 1, balls: 0, strikes: 2)
-        precondition(example.compactDescription == "(P) Weissert  (AB) McMahon  0-2, 1 Out")
+        #expect(example.compactDescription == "(P) Weissert  (AB) McMahon  0-2, 1 Out")
         let compound = LiveGameMatchup(pitcher: "Greg Weissert", batter: "Elly De La Cruz", outs: 2, balls: 1, strikes: 2, batterLastName: "De La Cruz")
-        precondition(compound.compactDescription.contains("(AB) De La Cruz"))
+        #expect(compound.compactDescription.contains("(AB) De La Cruz"))
         var legacy = try JSONSerialization.jsonObject(with: encoded) as! [String: Any]
         var oldMatchup = legacy["liveMatchup"] as! [String: Any]
         for key in ["balls", "strikes", "pitcherLastName", "batterLastName"] { oldMatchup.removeValue(forKey: key) }
         legacy["liveMatchup"] = oldMatchup
         let legacyMatchupGame = try JSONDecoder().decode(RecentGame.self, from: JSONSerialization.data(withJSONObject: legacy))
-        precondition(legacyMatchupGame.liveMatchup?.balls == nil && legacyMatchupGame.liveMatchup?.strikes == nil)
+        #expect(legacyMatchupGame.liveMatchup?.balls == nil && legacyMatchupGame.liveMatchup?.strikes == nil)
         legacy.removeValue(forKey: "liveMatchup")
         let legacyGame = try JSONDecoder().decode(RecentGame.self, from: JSONSerialization.data(withJSONObject: legacy))
-        precondition(legacyGame.liveMatchup == nil, "older snapshots must still decode")
+        #expect(legacyGame.liveMatchup == nil, "older snapshots must still decode")
         print("Live matchup: refresh, final transition, inning breaks, missing data, and snapshot compatibility passed.")
 
         print("RecentGameStore: per-game warnings, snapshot restore/validation, bounds, write failure, partial success, and cancellation coverage passed.")

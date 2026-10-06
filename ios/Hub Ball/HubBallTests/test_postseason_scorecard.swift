@@ -1,4 +1,6 @@
 import Foundation
+import Testing
+@testable import Hub_Ball
 
 final class ScorecardProtocol: URLProtocol, @unchecked Sendable {
     private static let lock = NSLock()
@@ -103,7 +105,7 @@ final class ScorecardProtocol: URLProtocol, @unchecked Sendable {
         let body: Data
         if url.path.contains("/api/mlb/schedule") {
             let query = URLComponents(url: url, resolvingAgainstBaseURL: false)!.queryItems!
-            precondition(query.first { $0.name == "gameTypes" }?.value == "R,F,D,L,W",
+            #expect(query.first { $0.name == "gameTypes" }?.value == "R,F,D,L,W",
                          "live discovery must include every postseason round")
             let status: [String: String] = live
                 ? ["abstractGameState": "Live", "codedGameState": "I"]
@@ -207,10 +209,8 @@ final class ScorecardProtocol: URLProtocol, @unchecked Sendable {
     }
 }
 
-@main
 struct PostseasonScorecardTests {
-    @MainActor
-    static func main() async throws {
+    @Test @MainActor static func scenarios() async throws {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [ScorecardProtocol.self]
         let session = URLSession(configuration: config)
@@ -226,48 +226,50 @@ struct PostseasonScorecardTests {
         let store = PostseasonScorecardStore(game: selection(), session: session)
         ScorecardProtocol.configure(live: true, failGamePk: 9001)
         await store.refresh()
-        precondition(store.snapshot == nil && store.refreshFailed && !store.isLoading)
+        #expect(store.snapshot == nil && store.refreshFailed && !store.isLoading)
         ScorecardProtocol.configure(live: true)
         await store.refresh()
         let live = store.snapshot!
-        precondition(live.isLive && !store.refreshFailed && store.checkedAt != nil)
-        precondition(live.away.runs == 3 && live.away.hits == 5 && live.away.errors == 0 && live.away.leftOnBase == 4)
-        precondition(live.home.runs == 2 && live.home.hits == 4 && live.home.errors == 1 && live.home.leftOnBase == 5)
-        precondition(live.innings.count == 9)
-        precondition(live.innings[0].away.runs == 0 && live.innings[0].home.runs == 2)
-        precondition(live.innings[1].home.runs == nil && live.innings[8].away.runs == nil)
+        #expect(live.isLive && !store.refreshFailed && store.checkedAt != nil)
+        #expect(live.away.runs == 3 && live.away.hits == 5 && live.away.errors == 0 && live.away.leftOnBase == 4)
+        #expect(live.home.runs == 2 && live.home.hits == 4 && live.home.errors == 1 && live.home.leftOnBase == 5)
+        #expect(live.innings.count == 9)
+        #expect(live.innings[0].away.runs == 0 && live.innings[0].home.runs == 2)
+        #expect(live.innings[1].home.runs == nil && live.innings[8].away.runs == nil)
         for team in [live.away, live.home] {
-            precondition(team.batting.map(\.name) == ["Starting Hitter", "Pinch Hitter"])
-            precondition(team.batting[0].rbi == 3 && team.batting[1].hits == 1)
-            precondition(team.pitching.map(\.name) == ["Starting Pitcher", "Relief Pitcher"])
-            precondition(team.pitching[0].inningsPitched == "5.2" && team.pitching[0].strikeOuts == 7)
+            #expect(team.batting.map(\.name) == ["Starting Hitter", "Pinch Hitter"])
+            #expect(team.batting[0].rbi == 3 && team.batting[1].hits == 1)
+            #expect(team.pitching.map(\.name) == ["Starting Pitcher", "Relief Pitcher"])
+            #expect(team.pitching[0].inningsPitched == "5.2" && team.pitching[0].strikeOuts == 7)
         }
         let checked = store.checkedAt
         ScorecardProtocol.configure(live: true, failGamePk: 9001)
         await store.refresh()
-        precondition(store.refreshFailed && store.snapshot?.venue == live.venue && store.checkedAt == checked)
+        #expect(store.refreshFailed && store.snapshot?.venue == live.venue && store.checkedAt == checked)
         ScorecardProtocol.configure(live: true, version: 2)
         await store.refresh()
-        precondition(!store.refreshFailed && store.snapshot?.innings.count == 10)
-        precondition(store.snapshot?.innings.last?.away.runs == 3)
+        #expect(!store.refreshFailed && store.snapshot?.innings.count == 10)
+        #expect(store.snapshot?.innings.last?.away.runs == 3)
         ScorecardProtocol.configure(live: false, version: 3)
         await store.refresh()
-        precondition(store.snapshot?.isLive == false && !store.refreshFailed)
-        precondition(ScorecardProtocol.observedGameCachePolicies.allSatisfy { $0 == .reloadIgnoringLocalCacheData })
+        #expect(store.snapshot?.isLive == false && !store.refreshFailed)
+        #expect(ScorecardProtocol.observedGameCachePolicies.allSatisfy { $0 == .useProtocolCachePolicy })
+        await store.refresh(force: true)
+        #expect(ScorecardProtocol.observedGameCachePolicies.last == .reloadIgnoringLocalCacheData)
         let completedStore = PostseasonScorecardStore(game: selection(state: "Final"), session: session)
         await completedStore.refresh()
         let completed = completedStore.snapshot!
-        precondition(completed.gamePk == 9001 && completed.gameState == "Final" && !completed.isLive)
-        precondition(completed.liveMatchup == nil, "A finished game must not show a current batter or pitcher")
-        precondition(!completed.innings.isEmpty && completed.away.runs == 3 && completed.home.runs == 2)
+        #expect(completed.gamePk == 9001 && completed.gameState == "Final" && !completed.isLive)
+        #expect(completed.liveMatchup == nil, "A finished game must not show a current batter or pitcher")
+        #expect(!completed.innings.isEmpty && completed.away.runs == 3 && completed.home.runs == 2)
         for team in [completed.away, completed.home] {
-            precondition(team.batting.count == 2 && team.pitching.count == 2,
+            #expect(team.batting.count == 2 && team.pitching.count == 2,
                          "Opening a finished game directly includes both teams’ batting and pitching")
         }
         let wrongHome = PostseasonClub(teamId: 121, name: "Mets", abbreviation: "NYM", slot: nil, resolved: true)
         let wrong = PostseasonScorecardStore(game: selection(homeClub: wrongHome), session: session)
         await wrong.refresh()
-        precondition(wrong.snapshot == nil && wrong.refreshFailed, "Reject mismatched teams")
+        #expect(wrong.snapshot == nil && wrong.refreshFailed, "Reject mismatched teams")
         print("Postseason scorecard tests passed: line score, both rosters, extra innings, retry, stale data, direct finished-game loading and final transition")
     }
 }
