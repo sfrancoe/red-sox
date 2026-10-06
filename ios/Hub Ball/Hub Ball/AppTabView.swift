@@ -527,4 +527,7 @@ private extension View {
 
 #Preview {
     AppTabView()
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

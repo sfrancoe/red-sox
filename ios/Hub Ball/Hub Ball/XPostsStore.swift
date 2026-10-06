@@ -13,7 +13,7 @@ final class XPostsStore {
     var isLoading = false
     var errorMessage: String?
 
-    init(team: HubTeam = .boston, api: APIClient = .shared) {
+    init(team: HubTeam, api: APIClient = .shared) {
         self.api = api
         curatedEndpoint = AppBackend.apiURL("x-posts", team: team)
         discoveryEndpoint = AppBackend.apiURL("x-discovery", team: team)

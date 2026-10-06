@@ -123,7 +123,7 @@ struct PlayersView: View {
         }
     }
 
-    private func expandedDirectoryRow(_ player: RedSoxPlayer) -> some View {
+    private func expandedDirectoryRow(_ player: Player) -> some View {
         VStack(alignment: .leading, spacing: 7) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(player.name)
@@ -289,7 +289,7 @@ struct PlayersView: View {
         .accessibilityLabel("Sort by \(column.title)")
     }
 
-    private func spreadsheetRow(_ player: RedSoxPlayer) -> some View {
+    private func spreadsheetRow(_ player: Player) -> some View {
         HStack(spacing: 0) {
             Text(player.number ?? "—")
                 .font(AppFont.number.monospacedDigit())
@@ -481,7 +481,7 @@ private struct PlayerReferenceView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     let team: HubTeam
-    let player: RedSoxPlayer
+    let player: Player
     let source: PlayersSource?
     let store: PlayersStore
     let isModal: Bool
@@ -492,7 +492,7 @@ private struct PlayerReferenceView: View {
     @State private var pitchingSort: PitchingCareerSort = .year
     @State private var pitchingSortsAscending = true
 
-    init(team: HubTeam, player: RedSoxPlayer, source: PlayersSource?, store: PlayersStore, isModal: Bool = false) {
+    init(team: HubTeam, player: Player, source: PlayersSource?, store: PlayersStore, isModal: Bool = false) {
         self.team = team
         self.player = player
         self.source = source
@@ -1485,4 +1485,7 @@ private extension String {
 #Preview {
     PlayersView(team: .boston)
         .environment(\.hubContentWidth, 390)
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

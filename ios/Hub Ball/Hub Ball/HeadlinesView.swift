@@ -10,7 +10,7 @@ struct HeadlinesView: View {
     @State private var presentedArticle: PresentedArticle?
     let team: HubTeam
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam) {
         self.team = team
         _secondarySource = State(initialValue: team.newsSources.dropFirst().first ?? team.newsSources[0])
     }
@@ -372,5 +372,8 @@ private extension Array {
 }
 
 #Preview {
-    HeadlinesView()
+    HeadlinesView(team: .boston)
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

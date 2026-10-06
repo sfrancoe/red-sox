@@ -12,7 +12,7 @@ nonisolated struct MLBGameClient: Sendable {
     private let backendOrigin: URL?
 
     init(
-        team: HubTeam = .boston,
+        team: HubTeam,
         session: URLSession = APIClient.session,
         api: APIClient? = nil,
         backendOrigin: URL? = nil

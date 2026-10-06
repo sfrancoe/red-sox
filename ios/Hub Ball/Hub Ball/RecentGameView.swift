@@ -17,7 +17,7 @@ struct RecentGameView: View {
     let team: HubTeam
     let onSelectPlayer: (Int) -> Void
 
-    init(team: HubTeam = .boston, onSelectPlayer: @escaping (Int) -> Void = { _ in }) {
+    init(team: HubTeam, onSelectPlayer: @escaping (Int) -> Void = { _ in }) {
         self.team = team
         self.onSelectPlayer = onSelectPlayer
     }
@@ -897,7 +897,10 @@ struct RecentGameView: View {
 }
 
 #Preview {
-    RecentGameView()
+    RecentGameView(team: .boston)
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }
 
 struct LiveGameIndicator: View {

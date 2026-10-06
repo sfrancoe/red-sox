@@ -18,7 +18,7 @@ struct HomeView: View {
     let team: HubTeam
     let onSelect: (HomeDestination) -> Void
 
-    init(team: HubTeam = .boston, onSelect: @escaping (HomeDestination) -> Void) {
+    init(team: HubTeam, onSelect: @escaping (HomeDestination) -> Void) {
         self.team = team
         self.onSelect = onSelect
     }

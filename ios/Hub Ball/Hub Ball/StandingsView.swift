@@ -8,7 +8,7 @@ struct StandingsView: View {
     @Environment(TeamSession.self) private var session
     private var store: StandingsStore { session.standings }
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam) {
     }
 
     var body: some View {
@@ -521,6 +521,9 @@ struct StandingsView: View {
 
 #Preview {
     NavigationStack {
-        StandingsView()
+        StandingsView(team: .boston)
     }
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

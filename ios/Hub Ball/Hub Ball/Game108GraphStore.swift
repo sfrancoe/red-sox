@@ -7,7 +7,8 @@ final class Game108GraphStore {
     private let api: APIClient
 
     init(api: APIClient = .shared) { self.api = api }
-    private static let endpoint = AppBackend.dataURL("seasons.json")
+    // Four Roads intentionally tells the four Boston seasons.
+    private static let endpoint = AppBackend.dataURL("seasons.json", team: .boston)
 
     var series: [GraphSeries] = []
     var isLoading = false

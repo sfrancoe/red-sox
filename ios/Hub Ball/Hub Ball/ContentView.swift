@@ -15,4 +15,7 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

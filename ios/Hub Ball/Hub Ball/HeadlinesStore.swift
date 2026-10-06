@@ -16,7 +16,7 @@ final class HeadlinesStore {
         feeds[selectedSource]
     }
 
-    init(team: HubTeam = .boston, api: APIClient = .shared) {
+    init(team: HubTeam, api: APIClient = .shared) {
         self.api = api
         self.team = team
         selectedSource = team.newsSources[0]

@@ -539,6 +539,9 @@ struct TeamOnboardingView: View {
 
 #Preview("Settings") {
     TeamSettingsView(selectedTeamID: .constant(HubTeam.boston.id)) { _ in }
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }
 
 #Preview("Onboarding") {

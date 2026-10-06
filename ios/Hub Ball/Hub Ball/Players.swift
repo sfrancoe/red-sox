@@ -48,7 +48,7 @@ nonisolated struct PlayersFeed: Codable, Sendable {
     let playerCount: Int
     let activeCount: Int
     let source: PlayersSource
-    let players: [RedSoxPlayer]
+    let players: [Player]
 
     var updatedText: String {
         rosterAsOf ?? generatedAt
@@ -72,7 +72,7 @@ nonisolated struct PlayersTeam: Codable, Sendable {
     let name: String
 }
 
-nonisolated struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
+nonisolated struct Player: Codable, Identifiable, Hashable, Sendable {
     let id: Int
     let mlbID: Int?
     let wikidataId: String?

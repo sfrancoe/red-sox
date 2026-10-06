@@ -653,4 +653,7 @@ private struct Game108Canvas: View {
     NavigationStack {
         Game108GraphView()
     }
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

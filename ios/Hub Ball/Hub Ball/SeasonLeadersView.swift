@@ -8,7 +8,7 @@ struct SeasonLeadersView: View {
     @State private var detail: LeaderboardDetail?
     private let team: HubTeam
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam) {
         self.team = team
     }
 
@@ -246,4 +246,7 @@ private struct CompactLeaderRow: View {
 
 private extension SeasonLeaders { static let categoryTitles = ["HR", "AVG", "OPS", "RBI", "WHIP", "WAR"] }
 
-#Preview { NavigationStack { SeasonLeadersView() } }
+#Preview { NavigationStack { SeasonLeadersView(team: .boston) } 
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
+}

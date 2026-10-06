@@ -13,7 +13,7 @@ final class PitchingStore {
     var isLoading = false
     var errorMessage: String?
 
-    init(team: HubTeam = .boston, api: APIClient = .shared) {
+    init(team: HubTeam, api: APIClient = .shared) {
         self.api = api
         endpoint = AppBackend.dataURL("pitching.json", team: team)
     }

@@ -142,4 +142,7 @@ private struct StoryPreviewCard: View {
 
 #Preview {
     StoriesView(team: .boston)
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

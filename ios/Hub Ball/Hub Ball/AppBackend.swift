@@ -9,7 +9,7 @@ enum AppBackend {
         return URL(string: "https://red-sox.netlify.app")!
     }()
 
-    nonisolated static func dataURL(_ path: String, team: HubTeam = .boston) -> URL {
+    nonisolated static func dataURL(_ path: String, team: HubTeam) -> URL {
         var root = dataRoot
         if let teamPath = team.dataPathComponent {
             root = root.appending(path: teamPath)
@@ -37,7 +37,7 @@ enum AppBackend {
         #endif
     }
 
-    nonisolated static func apiURL(_ endpoint: String, team: HubTeam = .boston) -> URL {
+    nonisolated static func apiURL(_ endpoint: String, team: HubTeam) -> URL {
 #if DEBUG
         if let value = ProcessInfo.processInfo.environment["HUB_API_ROOT"],
            let override = URL(string: value) {

@@ -48,7 +48,7 @@ struct ScheduleStoreTests {
         let session = URLSession(configuration: configuration)
         defer { session.invalidateAndCancel() }
         var now = Date(timeIntervalSince1970: 1_000)
-        let store = ScheduleStore(session: session, now: { now })
+        let store = ScheduleStore(team: .boston, session: session, now: { now })
 
         await store.load(minimumRefreshInterval: 300)
         #expect(ScheduleProtocol.count == 1 && store.schedule?.generatedAt == "fixture")

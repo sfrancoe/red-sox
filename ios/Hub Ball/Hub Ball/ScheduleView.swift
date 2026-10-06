@@ -9,7 +9,7 @@ struct ScheduleView: View {
     @State private var selectedGameID: Int?
     let team: HubTeam
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam) {
         self.team = team
     }
 
@@ -620,5 +620,8 @@ private struct CalendarMonth: Identifiable {
 }
 
 #Preview {
-    ScheduleView()
+    ScheduleView(team: .boston)
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

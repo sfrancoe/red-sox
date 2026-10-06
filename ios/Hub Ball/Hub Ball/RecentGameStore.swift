@@ -47,7 +47,7 @@ final class RecentGameStore {
     var errorMessage: String?
 
     init(
-        team: HubTeam = .boston,
+        team: HubTeam,
         session: URLSession = APIClient.session,
         api: APIClient? = nil,
         scheduleStore: ScheduleStore? = nil,

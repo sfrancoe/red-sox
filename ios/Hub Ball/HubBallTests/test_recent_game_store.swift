@@ -645,7 +645,7 @@ struct RecentGameStoreTests {
         await writeFailureStore.load()
         #expect(writeFailureStore.games.first != nil)
 
-        let client = MLBGameClient(session: session)
+        let client = MLBGameClient(team: .boston, session: session)
         for state in ["Middle", "End"] {
             RecentGameProtocol.configure(live: true, matchup: [
                 "inningState": state, "outs": 3,

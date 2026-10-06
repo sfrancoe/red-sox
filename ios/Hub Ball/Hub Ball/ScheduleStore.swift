@@ -14,7 +14,7 @@ final class ScheduleStore {
     var errorMessage: String?
 
     init(
-        team: HubTeam = .boston,
+        team: HubTeam,
         session: URLSession = APIClient.session, api: APIClient? = nil,
         now: @escaping () -> Date = Date.init,
         backendOrigin: URL? = nil

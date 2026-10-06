@@ -23,7 +23,7 @@ final class PlayersStore {
         self.team = team
     }
 
-    var visiblePlayers: [RedSoxPlayer] {
+    var visiblePlayers: [Player] {
         guard let feed else { return [] }
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let filtered = feed.players.filter { player in
@@ -55,19 +55,19 @@ final class PlayersStore {
         }
     }
 
-    func player(id: Int) -> RedSoxPlayer? {
+    func player(id: Int) -> Player? {
         feed?.players.first { $0.id == id }
     }
 
-    func career(for player: RedSoxPlayer) -> PlayerCareerFeed? {
+    func career(for player: Player) -> PlayerCareerFeed? {
         careers[player.id]
     }
 
-    func careerError(for player: RedSoxPlayer) -> String? {
+    func careerError(for player: Player) -> String? {
         careerErrors[player.id]
     }
 
-    func isLoadingCareer(for player: RedSoxPlayer) -> Bool {
+    func isLoadingCareer(for player: Player) -> Bool {
         loadingCareerIDs.contains(player.id)
     }
 
@@ -125,7 +125,7 @@ final class PlayersStore {
         return try decoder.decode(PlayersFeed.self, from: data)
     }
 
-    func loadCareer(for player: RedSoxPlayer) async {
+    func loadCareer(for player: Player) async {
         guard careers[player.id] == nil, !loadingCareerIDs.contains(player.id) else { return }
         loadingCareerIDs.insert(player.id)
         careerErrors[player.id] = nil

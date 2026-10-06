@@ -80,7 +80,7 @@ final class MarketsStore {
             return URL(string: "http://localhost:8768/api/redsox-markets")!
         }
         #endif
-        return AppBackend.apiURL("redsox-markets")
+        return AppBackend.apiURL("redsox-markets", team: .boston)
     }
     private let cacheKey = "redsox.marketSnapshot.v1"
     private let api: APIClient

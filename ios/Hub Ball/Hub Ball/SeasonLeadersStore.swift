@@ -16,7 +16,7 @@ final class SeasonLeadersStore {
     var comparisonErrors: [String: String] = [:]
     private var comparisonTasks: [String: Task<Void, Never>] = [:]
 
-    init(team: HubTeam = .boston, api: APIClient = .shared) {
+    init(team: HubTeam, api: APIClient = .shared) {
         self.api = api
         seasonsURL = AppBackend.dataURL("seasons.json", team: team)
         metadataURL = AppBackend.dataURL("meta.json", team: team)

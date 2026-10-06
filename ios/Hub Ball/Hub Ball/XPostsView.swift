@@ -6,7 +6,7 @@ struct XPostsView: View {
     @Environment(TeamSession.self) private var session
     private var store: XPostsStore { session.xPosts }
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam) {
     }
 
     var body: some View {
@@ -319,5 +319,8 @@ struct XPostsView: View {
 }
 
 #Preview {
-    XPostsView()
+    XPostsView(team: .boston)
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }

@@ -14,7 +14,7 @@ final class StandingsStore {
     var errors: [StandingsLeague: String] = [:]
     var errorMessage: String? { errors.isEmpty ? nil : "Some standings are unavailable. Showing the latest loaded sections." }
 
-    init(team: HubTeam = .boston, api: APIClient = .shared) {
+    init(team: HubTeam, api: APIClient = .shared) {
         self.api = api
         let league: StandingsLeague = team.definition.league == "NL" ? .national : .american
         selectedLeague = league

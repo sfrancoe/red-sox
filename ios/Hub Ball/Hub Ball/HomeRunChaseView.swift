@@ -574,4 +574,7 @@ private extension View {
 
 #Preview {
     NavigationStack { HomeRunChaseView() }
+
+    .environment(TeamSession(team: .boston))
+    .environment(AppModel())
 }
