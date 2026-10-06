@@ -83,22 +83,31 @@ final class MarketsStore {
         return AppBackend.apiURL("redsox-markets", team: .boston)
     }
     private let cacheKey = "redsox.marketSnapshot.v1"
+    private let cache = SnapshotFileCache(name: "markets-v1.json")
+    private var restored = false
     private let api: APIClient
-    init(api: APIClient = .shared) {
-        self.api = api
-        if let data = UserDefaults.standard.data(forKey: cacheKey) {
-            snapshot = try? JSONDecoder().decode(MarketSnapshot.self, from: data)
+    init(api: APIClient = .shared) { self.api = api }
+
+    private func restoreSnapshot() async {
+        guard !restored else { return }
+        restored = true
+        var data = await cache.read()
+        if data == nil, let legacy = UserDefaults.standard.data(forKey: cacheKey) {
+            data = legacy
+            if await cache.write(legacy) { UserDefaults.standard.removeObject(forKey: cacheKey) }
         }
+        if let data { snapshot = try? await api.decode(MarketSnapshot.self, from: data, snakeCase: false) }
     }
     func refresh() async {
         guard !loading else { return }
         loading = true; defer { loading = false }
+        await restoreSnapshot()
         do {
             let data = try await get(base)
             let next = try await api.decode(MarketSnapshot.self, from: data, snakeCase: false)
             snapshot = next; error = nil
             histories.removeAll(); historyErrors.removeAll()
-            UserDefaults.standard.set(data, forKey: cacheKey)
+            await cache.write(data)
         } catch {
             if Task.isCancelled || APIError.isCancellation(error) { return }
             self.error = snapshot == nil ? "The market feeds are unavailable. Please try again." : "Refresh unavailable. Showing the last saved snapshot."
