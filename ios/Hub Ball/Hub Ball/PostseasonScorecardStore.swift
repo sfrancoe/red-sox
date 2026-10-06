@@ -37,7 +37,6 @@ final class PostseasonScorecardStore {
             refreshFailed = false
         } catch {
             if Task.isCancelled || APIError.isCancellation(error) { return }
-            if Task.isCancelled || APIError.isCancellation(error) { return }
             refreshFailed = true
         }
     }

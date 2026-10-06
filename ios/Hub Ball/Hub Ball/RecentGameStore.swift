@@ -213,7 +213,6 @@ final class RecentGameStore {
                             isRestored: false
                         )
                     } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return }
                         guard !Task.isCancelled, !APIError.isCancellation(error) else { return }
                         failedFetch = true
                         if var cachedGame = cache[descriptor.gamePk] {
@@ -263,7 +262,6 @@ final class RecentGameStore {
             errorMessage = nil
             await saveSnapshot()
         } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return }
             guard !Task.isCancelled, !APIError.isCancellation(error) else { return }
             if case RecentGameError.noGames = error {
                 if games.isEmpty {
