@@ -475,15 +475,19 @@ final class LargeTextUITests: XCTestCase {
 
     func testArchitectureNavigation() {
         launch("-show-recent", size: "UICTContentSizeCategoryL")
-        XCTAssertTrue(app.buttons["Page"].waitForExistence(timeout: 20))
+        XCTAssertTrue(app.buttons["Switch team"].waitForExistence(timeout: 20))
         for title in ["Home", "Standings", "Home", "Schedule", "Players", "Game Recaps"] {
             selectPage(title)
             capture("architecture-" + title)
         }
         XCUIDevice.shared.press(.home)
         app.activate()
-        XCTAssertTrue(app.buttons["Page"].waitForExistence(timeout: 10))
-        XCTAssertTrue((app.buttons["Page"].value as? String ?? "").hasPrefix("Game Recaps"))
+        XCTAssertTrue(app.buttons["Switch team"].waitForExistence(timeout: 10))
+        if app.buttons["Page"].exists {
+            XCTAssertTrue((app.buttons["Page"].value as? String ?? "").hasPrefix("Game Recaps"))
+        } else {
+            XCTAssertTrue(app.buttons["Game Recaps"].isSelected)
+        }
         capture("architecture-resumed")
     }
 
