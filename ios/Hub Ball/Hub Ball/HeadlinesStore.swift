@@ -48,6 +48,7 @@ final class HeadlinesStore {
                 uniqueKeysWithValues: loadedFeeds.map { ($0.source, $0.feed) }
             )
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             errorMessage = "We couldn't load the headlines. Check your connection and try again."
         }
     }

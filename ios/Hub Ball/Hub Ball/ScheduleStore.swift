@@ -51,7 +51,7 @@ final class ScheduleStore {
 
             schedule = try await api.decode(Schedule.self, from: data)
         } catch {
-            if Task.isCancelled {
+            if Task.isCancelled || APIError.isCancellation(error) {
                 lastRefreshAttempt = nil
                 return
             }

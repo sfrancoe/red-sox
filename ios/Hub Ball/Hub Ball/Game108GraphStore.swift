@@ -28,6 +28,7 @@ final class Game108GraphStore {
                 return GraphSeries(year: story.year, data: season)
             }
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             errorMessage = "We couldn't load the Game 108 data. Check your connection and try again."
         }
     }

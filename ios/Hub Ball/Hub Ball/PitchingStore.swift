@@ -49,6 +49,7 @@ final class PitchingStore {
         do {
             feed = try await api.get(.url(endpoint))
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             errorMessage = "We couldn't load the pitching outlook. Check your connection and try again."
         }
     }

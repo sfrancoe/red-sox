@@ -47,6 +47,7 @@ final class StandingsStore {
                 .national: try await api.decode(StandingsFeed.self, from: loadedNationalData),
             ]
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             errorMessage = "We couldn't load the standings. Check your connection and try again."
         }
     }

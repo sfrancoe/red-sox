@@ -102,6 +102,7 @@ private final class MarketsStore {
             histories.removeAll(); historyErrors.removeAll()
             UserDefaults.standard.set(data, forKey: cacheKey)
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             self.error = snapshot == nil ? "The market feeds are unavailable. Please try again." : "Refresh unavailable. Showing the last saved snapshot."
         }
     }
@@ -114,7 +115,10 @@ private final class MarketsStore {
         var components = URLComponents(url: base, resolvingAgainstBaseURL: false)!
         components.queryItems = [URLQueryItem(name: "history", value: market.historyId), URLQueryItem(name: "provider", value: market.provider), URLQueryItem(name: "days", value: String(days))]
         do { histories[key] = (try await api.get(.url(components.url!), snakeCase: false) as MarketHistory).points }
-        catch { historyErrors.insert(key) }
+        catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
+            historyErrors.insert(key)
+        }
     }
     private func get(_ url: URL) async throws -> Data {
         try await api.data(.url(url))

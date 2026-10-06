@@ -32,6 +32,7 @@ final class XPostsStore {
             let (curated, discovery) = try await (curatedRequest, discoveryRequest)
             feed = mergedFeed(curated: curated, discovery: discovery)
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             errorMessage = "We couldn't load the X posts. Check your connection and try again."
         }
     }

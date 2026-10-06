@@ -100,6 +100,7 @@ final class PostseasonNewsStore {
         } catch is CancellationError {
             return
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             refreshFailed = true
         }
     }

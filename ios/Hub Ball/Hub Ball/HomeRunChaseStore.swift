@@ -35,6 +35,7 @@ final class HomeRunChaseStore {
             config = ChaseData.config(subject: judge, projectionHR: projectedTotal)
             refreshNote = "Updated from MLB"
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             refreshNote = "Using verified offline totals"
         }
     }

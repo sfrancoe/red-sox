@@ -98,6 +98,7 @@ final class PlayersStore {
                 feed = remote
             }
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             if feed == nil {
                 errorMessage = "We couldn't load the \(team.shortName) roster. Check your connection and try again."
             }
@@ -133,6 +134,7 @@ final class PlayersStore {
         do {
             careers[player.id] = try await api.get(.sharedData("player-careers/\(player.id).json"))
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             // A roster profile remains useful while the independent detailed feed is
             // unavailable. The card makes that gap explicit instead of inventing rows.
             careerErrors[player.id] = "The detailed career record is not available in this snapshot."

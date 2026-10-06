@@ -45,8 +45,8 @@ final class PostseasonStore {
             let data = try await api.data(.url(request.url!), cachePolicy: request.cachePolicy)
             var incoming = try await api.decode(PostseasonPayload.self, from: data, snakeCase: false)
             guard incoming.schemaVersion == 1, incoming.season == season else { throw URLError(.cannotDecodeContentData) }
-            snapshot = incoming
             await enrichLiveGames(in: &incoming)
+            try Task.checkCancellation()
             snapshot = incoming
             refreshFailed = false
             persist(incoming, at: directory.appending(path: "snapshot-\(season).json"))
@@ -55,6 +55,7 @@ final class PostseasonStore {
         } catch is CancellationError {
             return
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             refreshFailed = true
         }
     }
@@ -194,6 +195,7 @@ final class PostseasonStore {
             encoder.dateEncodingStrategy = .iso8601
             try encoder.encode(value).write(to: url, options: .atomic)
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             // Local prediction storage can fail independently of browsing the race.
         }
     }

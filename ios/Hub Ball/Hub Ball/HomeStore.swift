@@ -60,6 +60,7 @@ final class HomeStore {
             schedule = try await api.decode(Schedule.self, from: loaded.1)
             standings = try await api.decode(StandingsFeed.self, from: loaded.2)
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             errorMessage = "We couldn't load today's \(team.shortName) briefing. Check your connection and try again."
         }
     }
@@ -90,6 +91,7 @@ final class HomeStore {
                 cachePolicy: latest.isLive ? .reloadIgnoringLocalCacheData : .useProtocolCachePolicy
             )
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return nil }
             // The published snapshot remains available when the live source is unreachable.
             return nil
         }

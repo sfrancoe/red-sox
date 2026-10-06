@@ -53,6 +53,7 @@ final class SeasonLeadersStore {
                 await loadComparison(year: newest)
             }
         } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             errorMessage = "We couldn't load the season leaders. Check your connection and try again."
         }
     }
@@ -71,6 +72,7 @@ final class SeasonLeadersStore {
                 self.comparisons[year] = payload
                 self.comparisonErrors.removeValue(forKey: year)
             } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
                 self?.comparisonErrors[year] = "League leaders unavailable."
             }
         }

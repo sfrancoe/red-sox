@@ -36,7 +36,8 @@ final class PostseasonScorecardStore {
             checkedAt = Date()
             refreshFailed = false
         } catch {
-            if Task.isCancelled { return }
+            if Task.isCancelled || APIError.isCancellation(error) { return }
+            if Task.isCancelled || APIError.isCancellation(error) { return }
             refreshFailed = true
         }
     }

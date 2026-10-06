@@ -153,6 +153,7 @@ final class RecentGameStore {
                 descriptors = try await client.gameDescriptors()
                 discoveredIDs = Set(descriptors.map(\.gamePk))
             } catch {
+            if Task.isCancelled || APIError.isCancellation(error) { return }
                 discoverySucceeded = false
                 guard !forceGameIDs.isEmpty else { throw error }
                 descriptors = forceGameIDs.compactMap { gameID in
@@ -209,7 +210,8 @@ final class RecentGameStore {
                             isRestored: false
                         )
                     } catch {
-                        guard !Task.isCancelled else { return }
+            if Task.isCancelled || APIError.isCancellation(error) { return }
+                        guard !Task.isCancelled, !APIError.isCancellation(error) else { return }
                         failedFetch = true
                         if var cachedGame = cache[descriptor.gamePk] {
                             cachedGame.failureAt = now()
@@ -258,7 +260,8 @@ final class RecentGameStore {
             errorMessage = nil
             await saveSnapshot()
         } catch {
-            guard !Task.isCancelled else { return }
+            if Task.isCancelled || APIError.isCancellation(error) { return }
+            guard !Task.isCancelled, !APIError.isCancellation(error) else { return }
             if case RecentGameError.noGames = error {
                 if games.isEmpty {
                     errorMessage = "We couldn't load Game Recaps. Check your connection and try again."
