@@ -2,8 +2,8 @@ import { getStore } from '@netlify/blobs';
 
 const X_RECENT_SEARCH_URL = 'https://api.x.com/2/tweets/search/recent';
 // X bills Post and User resources separately. Sixteen Posts plus, at worst,
-// sixteen distinct authors costs $0.24 per UTC day at the September 2026
-// rates. Media expansions are intentionally omitted from this paid feed.
+// sixteen distinct authors are requested per allowed team per UTC day.
+// Media expansions are intentionally omitted from this paid feed.
 const MAX_DAILY_POSTS = 16;
 const DAY_MS = 24 * 60 * 60 * 1000;
 export const TEAM_CONFIG = {
@@ -118,7 +118,7 @@ export function createDiscoveryHandler({
       return fail('Only one team parameter is supported.', 400);
     }
     const requestedTeam = query.get('team')?.toLowerCase() || 'redsox';
-    const team = TEAM_CONFIG[requestedTeam];
+    const team = Object.hasOwn(TEAM_CONFIG, requestedTeam) ? TEAM_CONFIG[requestedTeam] : null;
     if (!team) return fail('Unknown team.', 400);
 
     let saved;

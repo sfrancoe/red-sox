@@ -65,6 +65,8 @@ const request = query => new Request(`https://example.test/api/x-discovery?${que
 assert.equal((await handler(request('team=redsox&z=1'))).status, 400);
 assert.equal((await handler(request('team=redsox&team=mets'))).status, 400);
 assert.equal((await handler(request('team=unknown'))).status, 400);
+assert.equal((await handler(request('team=constructor'))).status, 400);
+assert.equal((await handler(request('team=__proto__'))).status, 400);
 assert.equal(paidCalls, 0);
 await Promise.all(Array.from({ length: 20 }, () => handler(request('team=redsox'))));
 assert.equal(paidCalls, 1, 'Concurrent misses reserve a single paid request');
