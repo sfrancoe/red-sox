@@ -4,6 +4,7 @@ import Observation
 @MainActor
 @Observable
 final class HeadlinesStore {
+    private let api: APIClient
     private let team: HubTeam
     var selectedSource: NewsSource
     var feeds: [NewsSource: NewsFeed] = [:]
@@ -14,7 +15,8 @@ final class HeadlinesStore {
         feeds[selectedSource]
     }
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam = .boston, api: APIClient = .shared) {
+        self.api = api
         self.team = team
         selectedSource = team.newsSources[0]
     }
@@ -31,8 +33,8 @@ final class HeadlinesStore {
                 of: (source: NewsSource, feed: NewsFeed).self
             ) { group in
                 for source in team.newsSources {
-                    group.addTask { [team] in
-                        try await Self.fetch(source, team: team)
+                    group.addTask { [team, api] in
+                        (source, try await api.get(.data("\(source.fileName).json", team: team)) as NewsFeed)
                     }
                 }
 
@@ -50,27 +52,4 @@ final class HeadlinesStore {
         }
     }
 
-    private static func fetch(
-        _ source: NewsSource,
-        team: HubTeam
-    ) async throws -> (source: NewsSource, feed: NewsFeed) {
-        let url = AppBackend.dataURL("\(source.fileName).json", team: team)
-        var request = URLRequest(url: url)
-        request.cachePolicy = .reloadRevalidatingCacheData
-        request.timeoutInterval = 20
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw HeadlinesError.badResponse
-        }
-
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return (source, try decoder.decode(NewsFeed.self, from: data))
-    }
-}
-
-private enum HeadlinesError: Error {
-    case badResponse
 }

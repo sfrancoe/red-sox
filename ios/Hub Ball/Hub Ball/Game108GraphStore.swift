@@ -4,6 +4,9 @@ import Observation
 @MainActor
 @Observable
 final class Game108GraphStore {
+    private let api: APIClient
+
+    init(api: APIClient = .shared) { self.api = api }
     private static let endpoint = AppBackend.dataURL("seasons.json")
 
     var series: [GraphSeries] = []
@@ -18,22 +21,7 @@ final class Game108GraphStore {
         defer { isLoading = false }
 
         do {
-            var request = URLRequest(url: Self.endpoint)
-            request.cachePolicy = .reloadRevalidatingCacheData
-            request.timeoutInterval = 20
-
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                throw Game108GraphError.badResponse
-            }
-
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let decoded = try decoder.decode(
-                [String: GraphSeasonData].self,
-                from: data
-            )
+            let decoded: [String: GraphSeasonData] = try await api.get(.url(Self.endpoint))
 
             series = Game108Story.stories.compactMap { story in
                 guard let season = decoded[String(story.year)] else { return nil }
@@ -45,6 +33,3 @@ final class Game108GraphStore {
     }
 }
 
-private enum Game108GraphError: Error {
-    case badResponse
-}

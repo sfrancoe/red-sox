@@ -1,27 +1,28 @@
 import Foundation
 
-struct MLBGameDescriptor: Sendable {
+nonisolated struct MLBGameDescriptor: Sendable {
     let gamePk: Int
     let gameDate: String
     let isLive: Bool
 }
 
-struct MLBGameClient: Sendable {
+nonisolated struct MLBGameClient: Sendable {
     private let team: HubTeam
-    private let session: URLSession
+    private let api: APIClient
     private let backendOrigin: URL?
 
     init(
         team: HubTeam = .boston,
-        session: URLSession = .shared,
+        session: URLSession = APIClient.session,
+        api: APIClient? = nil,
         backendOrigin: URL? = nil
     ) {
         self.team = team
-        self.session = session
+        self.api = api ?? APIClient(session: session)
         self.backendOrigin = backendOrigin
     }
 
-    func gameDescriptors(now: Date = Date()) async throws -> [MLBGameDescriptor] {
+    @concurrent func gameDescriptors(now: Date = Date()) async throws -> [MLBGameDescriptor] {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(identifier: "America/New_York")!
         let start = calendar.date(byAdding: .day, value: -14, to: now) ?? now
@@ -61,7 +62,7 @@ struct MLBGameClient: Sendable {
         return (live.map { [$0] } ?? []) + finals
     }
 
-    func game(
+    @concurrent func game(
         gamePk: Int,
         cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
     ) async throws -> RecentGame {
@@ -84,14 +85,10 @@ struct MLBGameClient: Sendable {
         from url: URL,
         cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
     ) async throws -> JSON {
-        var request = URLRequest(url: url)
-        request.cachePolicy = cachePolicy
-        request.timeoutInterval = 20
-        let (data, response) = try await session.data(for: request)
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200,
-              let payload = try JSONSerialization.jsonObject(with: data) as? JSON else {
-            throw MLBGameError.badResponse
-        }
+        let data = try await api.data(.url(url), cachePolicy: cachePolicy)
+       guard let payload = try JSONSerialization.jsonObject(with: data) as? JSON else {
+           throw URLError(.cannotDecodeContentData)
+       }
         return payload
     }
 
@@ -577,7 +574,7 @@ struct MLBGameClient: Sendable {
 
 private typealias JSON = [String: Any]
 
-private struct NarrativePlay: Identifiable {
+nonisolated private struct NarrativePlay: Identifiable, Sendable {
     let inningNum: Int
     let half: String
     let batter: String
@@ -598,7 +595,7 @@ private struct NarrativePlay: Identifiable {
     }
 }
 
-private struct AnnotatedPlay {
+nonisolated private struct AnnotatedPlay: Sendable {
     let play: NarrativePlay
     let beforeBoston: Int
     let beforeOpponent: Int
@@ -607,6 +604,5 @@ private struct AnnotatedPlay {
 }
 
 private enum MLBGameError: Error {
-    case badResponse
     case notFavoriteTeam
 }

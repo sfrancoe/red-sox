@@ -1,18 +1,18 @@
 import Foundation
 
-enum ChaseAxis: Sendable {
+nonisolated enum ChaseAxis: Sendable {
     case age
     case atBats
 }
 
-struct HRSeason: Equatable, Sendable {
+nonisolated struct HRSeason: Equatable, Sendable {
     let year: Int
     let age: Int
     let hr: Int
     let ab: Int
 }
 
-struct PlayerHRSeries: Identifiable, Equatable, Sendable {
+nonisolated struct PlayerHRSeries: Identifiable, Equatable, Sendable {
     let id: String
     let name: String
     var seasons: [HRSeason]
@@ -20,13 +20,13 @@ struct PlayerHRSeries: Identifiable, Equatable, Sendable {
     let careerHR: Int?
 }
 
-struct CumulativePoint: Equatable, Sendable {
+nonisolated struct CumulativePoint: Equatable, Sendable {
     let age: Double
     let ab: Double
     let hr: Double
 }
 
-struct ChaseMilestone: Identifiable, Sendable {
+nonisolated struct ChaseMilestone: Identifiable, Sendable {
     let label: String
     let total: Int
     let age: Int
@@ -35,7 +35,7 @@ struct ChaseMilestone: Identifiable, Sendable {
     var id: String { label }
 }
 
-struct ChaseConfig: Sendable {
+nonisolated struct ChaseConfig: Sendable {
     var subject: PlayerHRSeries
     let comparisons: [PlayerHRSeries]
     let leaderboard: [(name: String, total: Int)]

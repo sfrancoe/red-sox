@@ -5,7 +5,7 @@ import Observation
 @Observable
 final class ScheduleStore {
     private let endpoint: URL
-    private let session: URLSession
+    private let api: APIClient
     private let now: () -> Date
     private var lastRefreshAttempt: Date?
 
@@ -15,7 +15,7 @@ final class ScheduleStore {
 
     init(
         team: HubTeam = .boston,
-        session: URLSession = .shared,
+        session: URLSession = APIClient.session, api: APIClient? = nil,
         now: @escaping () -> Date = Date.init,
         backendOrigin: URL? = nil
     ) {
@@ -24,7 +24,7 @@ final class ScheduleStore {
                 .appending(path: team.dataPathComponent ?? "")
                 .appending(path: "schedule.json")
         } ?? AppBackend.dataURL("schedule.json", team: team)
-        self.session = session
+        self.api = api ?? APIClient(session: session)
         self.now = now
     }
 
@@ -47,16 +47,9 @@ final class ScheduleStore {
             request.cachePolicy = .reloadRevalidatingCacheData
             request.timeoutInterval = 20
 
-            let (data, response) = try await session.data(for: request)
-            try Task.checkCancellation()
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                throw ScheduleError.badResponse
-            }
+            let data = try await api.data(.url(request.url!), cachePolicy: request.cachePolicy)
 
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            schedule = try decoder.decode(Schedule.self, from: data)
+            schedule = try await api.decode(Schedule.self, from: data)
         } catch {
             if Task.isCancelled {
                 lastRefreshAttempt = nil
@@ -67,6 +60,3 @@ final class ScheduleStore {
     }
 }
 
-private enum ScheduleError: Error {
-    case badResponse
-}

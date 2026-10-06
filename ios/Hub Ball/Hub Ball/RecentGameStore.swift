@@ -48,7 +48,7 @@ final class RecentGameStore {
 
     init(
         team: HubTeam = .boston,
-        session: URLSession = .shared,
+        session: URLSession = APIClient.session,
         now: @escaping () -> Date = Date.init,
         cacheDirectory: URL? = nil,
         backendOrigin: URL? = nil

@@ -1,14 +1,14 @@
 import Foundation
 import Observation
 
-struct HomeOddsFeed: Decodable, Sendable {
+nonisolated struct HomeOddsFeed: Decodable, Sendable {
     let generatedAt: String?
     let sportsbook: String
     let games: [HomeGameOdds]
     let available: Bool
 }
 
-struct HomeGameOdds: Decodable, Sendable {
+nonisolated struct HomeGameOdds: Decodable, Sendable {
     let eventId: String
     let gameDate: String
     let homeTeam: String
@@ -23,6 +23,7 @@ struct HomeGameOdds: Decodable, Sendable {
 @MainActor
 @Observable
 final class HomeStore {
+    private let api: APIClient
     private let team: HubTeam
     var recentGame: RecentGame?
     var schedule: Schedule?
@@ -37,7 +38,8 @@ final class HomeStore {
             .teams.first(where: \.isFavorite)
     }
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam = .boston, api: APIClient = .shared) {
+        self.api = api
         self.team = team
     }
 
@@ -48,15 +50,15 @@ final class HomeStore {
         defer { isLoading = false }
 
         do {
-            async let recentData = Self.fetchData("recent-game.json", team: team)
-            async let scheduleData = Self.fetchData("schedule.json", team: team)
-            async let standingsData = Self.fetchStandings(team: team)
-            async let currentGame = Self.fetchCurrentGame(team: team)
+            async let recentData = fetchData("recent-game.json", team: team)
+            async let scheduleData = fetchData("schedule.json", team: team)
+            async let standingsData = fetchStandings(team: team)
+            async let currentGame = fetchCurrentGame(team: team)
             let loaded = try await (recentData, scheduleData, standingsData, currentGame)
-            let fallbackGame = try Self.decode(RecentGame.self, from: loaded.0)
+            let fallbackGame = try await api.decode(RecentGame.self, from: loaded.0)
             recentGame = loaded.3 ?? fallbackGame
-            schedule = try Self.decode(Schedule.self, from: loaded.1)
-            standings = try Self.decode(StandingsFeed.self, from: loaded.2)
+            schedule = try await api.decode(Schedule.self, from: loaded.1)
+            standings = try await api.decode(StandingsFeed.self, from: loaded.2)
         } catch {
             errorMessage = "We couldn't load today's \(team.shortName) briefing. Check your connection and try again."
         }
@@ -66,36 +68,22 @@ final class HomeStore {
         guard !isLoading, !isRefreshingGame else { return }
         isRefreshingGame = true
         defer { isRefreshingGame = false }
-        if let game = await Self.fetchCurrentGame(team: team), !Task.isCancelled {
+        if let game = await fetchCurrentGame(team: team), !Task.isCancelled {
             recentGame = game
         }
     }
 
-    nonisolated private static func fetchData(_ fileName: String, team: HubTeam) async throws -> Data {
-        var request = URLRequest(url: AppBackend.dataURL(fileName, team: team))
-        request.cachePolicy = .reloadRevalidatingCacheData
-        request.timeoutInterval = 20
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw HomeStoreError.badResponse
-        }
-        return data
+    nonisolated private func fetchData(_ fileName: String, team: HubTeam) async throws -> Data {
+        try await api.data(.url(AppBackend.dataURL(fileName, team: team)))
     }
 
-    nonisolated private static func fetchStandings(team: HubTeam) async throws -> Data {
-        var request = URLRequest(url: AppBackend.apiURL("mlb/standings", team: team))
-        request.cachePolicy = .reloadRevalidatingCacheData
-        request.timeoutInterval = 20
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw HomeStoreError.badResponse
-        }
-        return data
+    nonisolated private func fetchStandings(team: HubTeam) async throws -> Data {
+        try await api.data(.url(AppBackend.apiURL("mlb/standings", team: team)))
     }
 
-    private static func fetchCurrentGame(team: HubTeam) async -> RecentGame? {
+    private func fetchCurrentGame(team: HubTeam) async -> RecentGame? {
         do {
-            let client = MLBGameClient(team: team)
+            let client = MLBGameClient(team: team, api: api)
             guard let latest = try await client.gameDescriptors().first else { return nil }
             return try await client.game(
                 gamePk: latest.gamePk,
@@ -107,13 +95,4 @@ final class HomeStore {
         }
     }
 
-    private static func decode<Value: Decodable>(_ type: Value.Type, from data: Data) throws -> Value {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(type, from: data)
-    }
-}
-
-private enum HomeStoreError: Error {
-    case badResponse
 }

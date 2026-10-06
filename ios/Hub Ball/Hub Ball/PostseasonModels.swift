@@ -1,6 +1,6 @@
 import Foundation
 
-struct PostseasonPayload: Codable, Sendable {
+nonisolated struct PostseasonPayload: Codable, Sendable {
     let schemaVersion: Int
     let season: Int
     let phase: String
@@ -39,7 +39,7 @@ struct PostseasonPayload: Codable, Sendable {
     }
 }
 
-struct PostseasonSlot: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonSlot: Codable, Identifiable, Sendable {
     let id: String
     let teamId: Int?
     let name: String?
@@ -47,7 +47,7 @@ struct PostseasonSlot: Codable, Identifiable, Sendable {
     let qualification: String
 }
 
-struct PostseasonClub: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonClub: Codable, Identifiable, Sendable {
     let teamId: Int?
     let name: String?
     let abbreviation: String?
@@ -57,7 +57,7 @@ struct PostseasonClub: Codable, Identifiable, Sendable {
     var id: String { teamId.map(String.init) ?? "slot-\(slot ?? "unknown")" }
 }
 
-struct PostseasonSeries: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonSeries: Codable, Identifiable, Sendable {
     let id: String
     let round: String
     let league: String?
@@ -87,7 +87,7 @@ struct PostseasonSeries: Codable, Identifiable, Sendable {
     }
 }
 
-struct PostseasonGame: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonGame: Codable, Identifiable, Sendable {
     let gamePk: Int
     let seriesId: String?
     let gameNumber: Int?
@@ -185,7 +185,7 @@ struct PostseasonGame: Codable, Identifiable, Sendable {
     }
 }
 
-struct OctoberCall: Codable, Identifiable, Sendable {
+nonisolated struct OctoberCall: Codable, Identifiable, Sendable {
     let seriesID: String
     let winnerTeamID: Int
     let seriesLength: Int
@@ -200,7 +200,7 @@ struct OctoberCall: Codable, Identifiable, Sendable {
     var id: String { seriesID }
 }
 
-struct OctoberCallBook: Codable, Sendable {
+nonisolated struct OctoberCallBook: Codable, Sendable {
     var championTeamID: Int?
     var calls: [String: OctoberCall] = [:]
 }

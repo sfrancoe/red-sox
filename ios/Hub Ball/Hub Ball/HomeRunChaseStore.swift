@@ -4,6 +4,9 @@ import Observation
 @MainActor
 @Observable
 final class HomeRunChaseStore {
+    private let api: APIClient
+
+    init(api: APIClient = .shared) { self.api = api }
     var config = ChaseData.config()
     var isRefreshing = false
     var refreshNote: String?
@@ -14,7 +17,7 @@ final class HomeRunChaseStore {
         defer { isRefreshing = false }
 
         do {
-            let live = try await Self.fetchJudgeSeason()
+            let live = try await fetchJudgeSeason()
             let liveSeason = live.season
             var judge = ChaseData.judge
             if let index = judge.seasons.firstIndex(where: { $0.year == liveSeason.year }) {
@@ -36,16 +39,8 @@ final class HomeRunChaseStore {
         }
     }
 
-    private static func fetchJudgeSeason() async throws -> LiveJudgeSeason {
-        var request = URLRequest(url: AppBackend.apiURL("hr-chase", team: .newYork))
-        request.cachePolicy = .reloadRevalidatingCacheData
-        request.timeoutInterval = 20
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw ChaseStoreError.badResponse
-        }
-
-        let payload = try JSONDecoder().decode(LiveJudgePayload.self, from: data)
+    private func fetchJudgeSeason() async throws -> LiveJudgeSeason {
+        let payload: LiveJudgePayload = try await api.get(.api("hr-chase", team: .newYork), snakeCase: false)
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .gregorian)
         formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -90,7 +85,7 @@ private struct LiveJudgeSeason {
     let regularSeasonEnd: Date
 }
 
-private struct LiveJudgePayload: Decodable {
+nonisolated private struct LiveJudgePayload: Decodable, Sendable {
     let year: Int
     let age: Int
     let homeRuns: Int
@@ -99,6 +94,5 @@ private struct LiveJudgePayload: Decodable {
 }
 
 private enum ChaseStoreError: Error {
-    case badResponse
     case missingStats
 }

@@ -4,6 +4,7 @@ import Observation
 @MainActor
 @Observable
 final class PitchingStore {
+    private let api: APIClient
     private let endpoint: URL
 
     var feed: PitchingFeed?
@@ -12,7 +13,8 @@ final class PitchingStore {
     var isLoading = false
     var errorMessage: String?
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam = .boston, api: APIClient = .shared) {
+        self.api = api
         endpoint = AppBackend.dataURL("pitching.json", team: team)
     }
 
@@ -45,25 +47,10 @@ final class PitchingStore {
         defer { isLoading = false }
 
         do {
-            var request = URLRequest(url: endpoint)
-            request.cachePolicy = .reloadRevalidatingCacheData
-            request.timeoutInterval = 20
-
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                throw PitchingError.badResponse
-            }
-
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            feed = try decoder.decode(PitchingFeed.self, from: data)
+            feed = try await api.get(.url(endpoint))
         } catch {
             errorMessage = "We couldn't load the pitching outlook. Check your connection and try again."
         }
     }
 }
 
-private enum PitchingError: Error {
-    case badResponse
-}

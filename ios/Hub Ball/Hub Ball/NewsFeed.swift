@@ -1,6 +1,6 @@
 import Foundation
 
-struct NewsFeed: Codable, Sendable {
+nonisolated struct NewsFeed: Codable, Sendable {
     let generatedAt: String
     let source: String
     let sourceUrl: String
@@ -14,7 +14,7 @@ struct NewsFeed: Codable, Sendable {
     }
 }
 
-struct NewsArticle: Codable, Identifiable, Sendable {
+nonisolated struct NewsArticle: Codable, Identifiable, Sendable {
     let title: String
     let description: String
     let url: String

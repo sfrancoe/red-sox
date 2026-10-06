@@ -4,6 +4,7 @@ import Observation
 @MainActor
 @Observable
 final class XPostsStore {
+    private let api: APIClient
     private let curatedEndpoint: URL
     private let discoveryEndpoint: URL
 
@@ -12,7 +13,8 @@ final class XPostsStore {
     var isLoading = false
     var errorMessage: String?
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam = .boston, api: APIClient = .shared) {
+        self.api = api
         curatedEndpoint = AppBackend.apiURL("x-posts", team: team)
         discoveryEndpoint = AppBackend.apiURL("x-discovery", team: team)
     }
@@ -39,19 +41,7 @@ final class XPostsStore {
     }
 
     private func fetchFeed(from endpoint: URL) async throws -> XFeed {
-        var request = URLRequest(url: endpoint)
-        request.cachePolicy = .reloadRevalidatingCacheData
-        request.timeoutInterval = 20
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw XPostsError.badResponse
-        }
-
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(XFeed.self, from: data)
+        try await api.get(.url(endpoint))
     }
 
     private func mergedFeed(curated: XFeed, discovery: XFeed?) -> XFeed {
@@ -85,6 +75,3 @@ final class XPostsStore {
     }
 }
 
-private enum XPostsError: Error {
-    case badResponse
-}

@@ -1,6 +1,6 @@
 import Foundation
 
-enum PlayerPositionFilter: String, CaseIterable, Identifiable, Sendable {
+nonisolated enum PlayerPositionFilter: String, CaseIterable, Identifiable, Sendable {
     case all
     case pitcher
     case infielder
@@ -20,7 +20,7 @@ enum PlayerPositionFilter: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-enum PlayerDirectorySort: String, CaseIterable, Identifiable, Sendable {
+nonisolated enum PlayerDirectorySort: String, CaseIterable, Identifiable, Sendable {
     case name
     case number
     case position
@@ -40,7 +40,7 @@ enum PlayerDirectorySort: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-struct PlayersFeed: Codable, Sendable {
+nonisolated struct PlayersFeed: Codable, Sendable {
     let generatedAt: String
     let rosterAsOf: String?
     let team: PlayersTeam
@@ -55,7 +55,7 @@ struct PlayersFeed: Codable, Sendable {
     }
 }
 
-struct PlayersSource: Codable, Sendable {
+nonisolated struct PlayersSource: Codable, Sendable {
     let name: String
     let attribution: String
     let license: String
@@ -67,12 +67,12 @@ struct PlayersSource: Codable, Sendable {
     let statsAttribution: String?
 }
 
-struct PlayersTeam: Codable, Sendable {
+nonisolated struct PlayersTeam: Codable, Sendable {
     let id: Int
     let name: String
 }
 
-struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
+nonisolated struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
     let id: Int
     let mlbID: Int?
     let wikidataId: String?
@@ -171,7 +171,7 @@ struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
     }
 }
 
-struct PlayerCareerStats: Codable, Hashable, Sendable {
+nonisolated struct PlayerCareerStats: Codable, Hashable, Sendable {
     let throughSeason: Int
     let status: String
     let batting: PlayerBattingStats?
@@ -183,7 +183,7 @@ struct PlayerCareerStats: Codable, Hashable, Sendable {
 /// A detailed record is intentionally separate from the lightweight roster feed.
 /// The app can therefore open a directory immediately and fetch/cache the longer
 /// career table only when a person is selected.
-struct PlayerCareerFeed: Codable, Hashable, Sendable {
+nonisolated struct PlayerCareerFeed: Codable, Hashable, Sendable {
     let schemaVersion: Int?
     let playerID: Int?
     let generatedAt: String?
@@ -199,7 +199,7 @@ struct PlayerCareerFeed: Codable, Hashable, Sendable {
     var isAvailable: Bool { status == "available" }
 }
 
-struct PlayerCareerCoverage: Codable, Hashable, Sendable {
+nonisolated struct PlayerCareerCoverage: Codable, Hashable, Sendable {
     let league: String?
     let level: String?
     let firstSeason: Int?
@@ -208,7 +208,7 @@ struct PlayerCareerCoverage: Codable, Hashable, Sendable {
     let note: String?
 }
 
-struct PlayerCareerSource: Codable, Hashable, Sendable {
+nonisolated struct PlayerCareerSource: Codable, Hashable, Sendable {
     let name: String?
     let url: String?
     let attribution: String?
@@ -216,7 +216,7 @@ struct PlayerCareerSource: Codable, Hashable, Sendable {
 
 /// A season can be a team stint or an explicitly-labelled combined subtotal.
 /// Counts remain nullable: a blank source value is never turned into a zero.
-struct PlayerBattingSeason: Codable, Identifiable, Hashable, Sendable {
+nonisolated struct PlayerBattingSeason: Codable, Identifiable, Hashable, Sendable {
     let id: String
     let season: Int
     let team: String
@@ -240,7 +240,7 @@ struct PlayerBattingSeason: Codable, Identifiable, Hashable, Sendable {
     let ops: Double?
 }
 
-struct PlayerPitchingSeason: Codable, Identifiable, Hashable, Sendable {
+nonisolated struct PlayerPitchingSeason: Codable, Identifiable, Hashable, Sendable {
     let id: String
     let season: Int
     let team: String
@@ -267,7 +267,7 @@ struct PlayerPitchingSeason: Codable, Identifiable, Hashable, Sendable {
     }
 }
 
-struct PlayerBattingStats: Codable, Hashable, Sendable {
+nonisolated struct PlayerBattingStats: Codable, Hashable, Sendable {
     let games: Int
     let plateAppearances: Int
     let atBats: Int
@@ -287,7 +287,7 @@ struct PlayerBattingStats: Codable, Hashable, Sendable {
     let ops: Double?
 }
 
-struct PlayerPitchingStats: Codable, Hashable, Sendable {
+nonisolated struct PlayerPitchingStats: Codable, Hashable, Sendable {
     let games: Int
     let gamesStarted: Int
     let wins: Int
@@ -312,19 +312,19 @@ struct PlayerPitchingStats: Codable, Hashable, Sendable {
     }
 }
 
-enum PlayerStatusKind: Equatable, Sendable {
+nonisolated enum PlayerStatusKind: Equatable, Sendable {
     case active
     case injured
     case inactive
 }
 
-struct PlayerPosition: Codable, Hashable, Sendable {
+nonisolated struct PlayerPosition: Codable, Hashable, Sendable {
     let name: String
     let group: String
     let abbreviation: String
 }
 
-struct PlayerEducation: Codable, Hashable, Sendable {
+nonisolated struct PlayerEducation: Codable, Hashable, Sendable {
     let highSchools: [PlayerSchool]
     let colleges: [PlayerSchool]
 
@@ -341,7 +341,7 @@ struct PlayerEducation: Codable, Hashable, Sendable {
     }
 }
 
-struct PlayerSchool: Codable, Hashable, Sendable {
+nonisolated struct PlayerSchool: Codable, Hashable, Sendable {
     let name: String
     let city: String?
     let state: String?

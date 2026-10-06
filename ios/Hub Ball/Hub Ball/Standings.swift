@@ -1,6 +1,6 @@
 import Foundation
 
-struct StandingsFeed: Decodable {
+nonisolated struct StandingsFeed: Decodable, Sendable {
     let generatedAt: String
     let sourceUpdatedAt: String?
     let source: String
@@ -23,13 +23,13 @@ struct StandingsFeed: Decodable {
     var isDelayed: Bool { freshness == "stale" }
 }
 
-struct StandingsDivision: Decodable, Identifiable {
+nonisolated struct StandingsDivision: Decodable, Identifiable, Sendable {
     let id: Int
     let name: String
     let teams: [StandingsTeam]
 }
 
-struct StandingsTeam: Decodable, Identifiable {
+nonisolated struct StandingsTeam: Decodable, Identifiable, Sendable {
     let id: Int
     let name: String
     let shortName: String

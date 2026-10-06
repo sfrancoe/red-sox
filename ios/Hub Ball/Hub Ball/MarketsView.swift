@@ -2,7 +2,7 @@ import SwiftUI
 import Charts
 import Observation
 
-private struct SoxMarket: Decodable, Identifiable {
+nonisolated private struct SoxMarket: Decodable, Identifiable, Sendable {
     let id: String
     let provider: String
     let title: String
@@ -30,8 +30,8 @@ private struct SoxMarket: Decodable, Identifiable {
         f.dateFormat = "EEE, MMM d"; return f.string(from: d)
     }
 }
-private struct MarketSnapshot: Decodable {
-    struct Source: Decodable { let name: String; let available: Bool }
+nonisolated private struct MarketSnapshot: Decodable, Sendable {
+    nonisolated struct Source: Decodable, Sendable { let name: String; let available: Bool }
     let generatedAt: String
     let markets: [SoxMarket]
     let sources: [Source]
@@ -41,13 +41,13 @@ private struct MarketSnapshot: Decodable {
         return f.date(from: generatedAt) ?? ISO8601DateFormatter().date(from: generatedAt)
     }
 }
-private struct MarketPoint: Decodable, Identifiable {
+nonisolated private struct MarketPoint: Decodable, Identifiable, Sendable {
     let t: Double
     let p: Double
     var id: Double { t }
     var date: Date { Date(timeIntervalSince1970: t) }
 }
-private struct MarketHistory: Decodable { let points: [MarketPoint] }
+nonisolated private struct MarketHistory: Decodable, Sendable { let points: [MarketPoint] }
 
 private enum ResolveWindow: String, CaseIterable, Identifiable {
     case all
@@ -85,7 +85,9 @@ private final class MarketsStore {
         return AppBackend.apiURL("redsox-markets")
     }
     private let cacheKey = "redsox.marketSnapshot.v1"
-    init() {
+    private let api: APIClient
+    init(api: APIClient = .shared) {
+        self.api = api
         if let data = UserDefaults.standard.data(forKey: cacheKey) {
             snapshot = try? JSONDecoder().decode(MarketSnapshot.self, from: data)
         }
@@ -95,7 +97,7 @@ private final class MarketsStore {
         loading = true; defer { loading = false }
         do {
             let data = try await get(base)
-            let next = try JSONDecoder().decode(MarketSnapshot.self, from: data)
+            let next = try await api.decode(MarketSnapshot.self, from: data, snakeCase: false)
             snapshot = next; error = nil
             histories.removeAll(); historyErrors.removeAll()
             UserDefaults.standard.set(data, forKey: cacheKey)
@@ -111,15 +113,11 @@ private final class MarketsStore {
         defer { pending.remove(key) }
         var components = URLComponents(url: base, resolvingAgainstBaseURL: false)!
         components.queryItems = [URLQueryItem(name: "history", value: market.historyId), URLQueryItem(name: "provider", value: market.provider), URLQueryItem(name: "days", value: String(days))]
-        do { histories[key] = try JSONDecoder().decode(MarketHistory.self, from: await get(components.url!)).points }
+        do { histories[key] = (try await api.get(.url(components.url!), snakeCase: false) as MarketHistory).points }
         catch { historyErrors.insert(key) }
     }
     private func get(_ url: URL) async throws -> Data {
-        var request = URLRequest(url: url); request.timeoutInterval = 30
-        request.cachePolicy = .reloadRevalidatingCacheData
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw URLError(.badServerResponse) }
-        return data
+        try await api.data(.url(url))
     }
 }
 

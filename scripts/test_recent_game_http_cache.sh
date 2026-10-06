@@ -26,6 +26,8 @@ swiftc -target "$(uname -m)-apple-macos14.0" \
   -default-isolation MainActor \
   "$app_root/HubTeam.swift" \
   "$app_root/AppBackend.swift" \
+  "$app_root/APIClient.swift" \
+  "$app_root/SafeURL.swift" \
   "$app_root/BaseballTime.swift" \
   "$app_root/Schedule.swift" \
   "$app_root/ScheduleStore.swift" \

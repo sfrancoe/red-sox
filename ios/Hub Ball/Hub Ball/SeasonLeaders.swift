@@ -1,6 +1,6 @@
 import Foundation
 
-struct SeasonLeaders: Codable, Sendable {
+nonisolated struct SeasonLeaders: Codable, Sendable {
     let lastGameDate: String
     let inProgress: Bool
     let record: String
@@ -25,27 +25,27 @@ struct SeasonLeaders: Codable, Sendable {
     }
 }
 
-struct WARLeader: Codable, Sendable {
+nonisolated struct WARLeader: Codable, Sendable {
     let name: String
     let war: Double
 }
 
-struct BattingLeaders: Codable, Sendable {
+nonisolated struct BattingLeaders: Codable, Sendable {
     let hr: LeaderGroup
     let avg: LeaderGroup
     let ops: LeaderGroup
     let rbi: LeaderGroup
 }
 
-struct PitchingLeaders: Codable, Sendable {
+nonisolated struct PitchingLeaders: Codable, Sendable {
     let whip: LeaderGroup
 }
 
-struct LeaderGroup: Codable, Sendable {
+nonisolated struct LeaderGroup: Codable, Sendable {
     let top: [RankedLeader]
 }
 
-struct RankedLeader: Codable, Identifiable, Sendable {
+nonisolated struct RankedLeader: Codable, Identifiable, Sendable {
     let name: String
     let value: String
 
@@ -76,14 +76,14 @@ struct RankedLeader: Codable, Identifiable, Sendable {
     }
 }
 
-struct LeaderCategory: Identifiable, Sendable {
+nonisolated struct LeaderCategory: Identifiable, Sendable {
     let title: String
     let leaders: [RankedLeader]
 
     var id: String { title }
 }
 
-struct LeadersMetadata: Codable, Sendable {
+nonisolated struct LeadersMetadata: Codable, Sendable {
     let generatedAt: String
     let source: String
     let warSource: String

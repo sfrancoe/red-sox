@@ -4,6 +4,7 @@ import Observation
 @MainActor
 @Observable
 final class PlayersStore {
+    private let api: APIClient
     let team: HubTeam
 
     var feed: PlayersFeed?
@@ -17,7 +18,8 @@ final class PlayersStore {
     private var careerErrors: [Int: String] = [:]
     private var loadingCareerIDs = Set<Int>()
 
-    init(team: HubTeam) {
+    init(team: HubTeam, api: APIClient = .shared) {
+        self.api = api
         self.team = team
     }
 
@@ -103,15 +105,7 @@ final class PlayersStore {
     }
 
     private func loadRemote() async throws -> PlayersFeed {
-        var request = URLRequest(url: AppBackend.dataURL("players.json", team: team))
-        request.cachePolicy = .reloadRevalidatingCacheData
-        request.timeoutInterval = 20
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let response = response as? HTTPURLResponse,
-              response.statusCode == 200 else {
-            throw PlayersError.badResponse
-        }
-        return try decode(data)
+        try await api.get(.data("players.json", team: team))
     }
 
     private func loadBundledSnapshot() throws -> PlayersFeed {
@@ -137,16 +131,7 @@ final class PlayersStore {
         defer { loadingCareerIDs.remove(player.id) }
 
         do {
-            var request = URLRequest(url: AppBackend.sharedDataURL("player-careers/\(player.id).json"))
-            request.cachePolicy = .reloadRevalidatingCacheData
-            request.timeoutInterval = 20
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw PlayersError.missingCareer
-            }
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            careers[player.id] = try decoder.decode(PlayerCareerFeed.self, from: data)
+            careers[player.id] = try await api.get(.sharedData("player-careers/\(player.id).json"))
         } catch {
             // A roster profile remains useful while the independent detailed feed is
             // unavailable. The card makes that gap explicit instead of inventing rows.
@@ -156,7 +141,6 @@ final class PlayersStore {
 }
 
 private enum PlayersError: Error {
-    case badResponse
     case missingSnapshot
     case missingCareer
 }

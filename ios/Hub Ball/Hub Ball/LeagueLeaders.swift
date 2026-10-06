@@ -1,6 +1,6 @@
 import Foundation
 
-enum LeaderboardScope: String, CaseIterable, Identifiable, Sendable {
+nonisolated enum LeaderboardScope: String, CaseIterable, Identifiable, Sendable {
     case team
     case league
     case mlb
@@ -40,7 +40,7 @@ enum LeaderboardScope: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-struct LeagueLeadersPayload: Codable, Sendable {
+nonisolated struct LeagueLeadersPayload: Codable, Sendable {
     let schemaVersion: Int
     let season: Int
     let generatedAt: String
@@ -48,7 +48,7 @@ struct LeagueLeadersPayload: Codable, Sendable {
     let scopes: [String: [String: ComparisonCategory]]
 }
 
-struct ComparisonCategory: Codable, Sendable {
+nonisolated struct ComparisonCategory: Codable, Sendable {
     let availability: String
     let eligibility: String
     let message: String?
@@ -65,7 +65,7 @@ struct ComparisonCategory: Codable, Sendable {
     }
 }
 
-struct ComparisonLeader: Codable, Identifiable, Sendable {
+nonisolated struct ComparisonLeader: Codable, Identifiable, Sendable {
     let playerID: Int
     let provider: String
     let name: String

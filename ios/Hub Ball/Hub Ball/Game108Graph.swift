@@ -1,6 +1,6 @@
 import Foundation
 
-struct GraphSeasonData: Codable, Sendable {
+nonisolated struct GraphSeasonData: Codable, Sendable {
     let checkpointRecord: String
     let diff: [Int]
     let endGame: Int
@@ -9,7 +9,7 @@ struct GraphSeasonData: Codable, Sendable {
     let seq: String
 }
 
-struct GraphSeries: Identifiable, Sendable {
+nonisolated struct GraphSeries: Identifiable, Sendable {
     let year: Int
     let record: String
     let endGame: Int
@@ -45,12 +45,12 @@ struct GraphSeries: Identifiable, Sendable {
     }
 }
 
-struct GraphBeat: Sendable {
+nonisolated struct GraphBeat: Sendable {
     let game: Int
     let text: String
 }
 
-struct GraphStory: Sendable {
+nonisolated struct GraphStory: Sendable {
     let year: Int
     let label: String
     let colorHex: String

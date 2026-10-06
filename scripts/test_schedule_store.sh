@@ -9,6 +9,8 @@ app_root="$repo_root/ios/Hub Ball/Hub Ball"
 swiftc -target "$(uname -m)-apple-macos14.0" \
   "$app_root/HubTeam.swift" \
   "$app_root/AppBackend.swift" \
+  "$app_root/APIClient.swift" \
+  "$app_root/SafeURL.swift" \
   "$app_root/BaseballTime.swift" \
   "$app_root/Schedule.swift" \
   "$app_root/ScheduleStore.swift" \

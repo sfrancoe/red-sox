@@ -11,13 +11,13 @@ final class PostseasonStore {
     private(set) var selectedRootingTeamID: Int?
 
     let season: Int
-    private let session: URLSession
+    private let api: APIClient
     private let directory: URL
 
     init(season: Int = Calendar(identifier: .gregorian).component(.year, from: Date()),
-         session: URLSession = .shared) {
+         session: URLSession = APIClient.session, api: APIClient? = nil) {
         self.season = season
-        self.session = session
+        self.api = api ?? APIClient(session: session)
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         directory = base.appending(path: "October", directoryHint: .isDirectory)
         calls = Self.readCalls(from: directory.appending(path: "calls-\(season).json"))
@@ -42,11 +42,8 @@ final class PostseasonStore {
             var request = URLRequest(url: components.url!)
             request.cachePolicy = .reloadIgnoringLocalCacheData
             request.timeoutInterval = 20
-            let (data, response) = try await session.data(for: request)
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw URLError(.badServerResponse)
-            }
-            var incoming = try JSONDecoder().decode(PostseasonPayload.self, from: data)
+            let data = try await api.data(.url(request.url!), cachePolicy: request.cachePolicy)
+            var incoming = try await api.decode(PostseasonPayload.self, from: data, snakeCase: false)
             guard incoming.schemaVersion == 1, incoming.season == season else { throw URLError(.cannotDecodeContentData) }
             snapshot = incoming
             await enrichLiveGames(in: &incoming)
@@ -65,12 +62,12 @@ final class PostseasonStore {
     private func enrichLiveGames(in payload: inout PostseasonPayload) async {
         let liveGames = payload.games.enumerated().filter { $0.element.abstractState == "Live" }
         guard !liveGames.isEmpty else { return }
-        let session = self.session
+        let api = self.api
         let updates = await withTaskGroup(of: (Int, RecentGame?).self, returning: [(Int, RecentGame)].self) { group in
             for (index, game) in liveGames {
                 guard let team = HubTeam.allCases.first(where: { $0.mlbID == game.away.teamId }) else { continue }
                 group.addTask {
-                    let live = try? await MLBGameClient(team: team, session: session)
+                    let live = try? await MLBGameClient(team: team, api: api)
                         .game(gamePk: game.gamePk, cachePolicy: .reloadIgnoringLocalCacheData)
                     return (index, live)
                 }

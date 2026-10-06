@@ -11,7 +11,7 @@ final class PostseasonScorecardStore {
     private let selectedGame: PostseasonGame
     private let session: URLSession
 
-    init(game: PostseasonGame, session: URLSession = .shared) {
+    init(game: PostseasonGame, session: URLSession = APIClient.session) {
         selectedGame = game
         self.session = session
     }

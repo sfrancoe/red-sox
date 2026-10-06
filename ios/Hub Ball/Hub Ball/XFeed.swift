@@ -1,6 +1,6 @@
 import Foundation
 
-enum XFeedMode: String, CaseIterable, Identifiable, Sendable {
+nonisolated enum XFeedMode: String, CaseIterable, Identifiable, Sendable {
     case recent
     case liked
 
@@ -14,7 +14,7 @@ enum XFeedMode: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-struct XFeed: Codable, Sendable {
+nonisolated struct XFeed: Codable, Sendable {
     let generatedAt: String
     let source: String
     let sourceUrl: String
@@ -29,7 +29,7 @@ struct XFeed: Codable, Sendable {
     }
 }
 
-struct XPost: Codable, Identifiable, Sendable {
+nonisolated struct XPost: Codable, Identifiable, Sendable {
     let id: String
     let text: String
     let url: String

@@ -1,6 +1,6 @@
 import Foundation
 
-enum PitcherFilter: String, CaseIterable, Identifiable, Sendable {
+nonisolated enum PitcherFilter: String, CaseIterable, Identifiable, Sendable {
     case both
     case starters
     case relievers
@@ -17,7 +17,7 @@ enum PitcherFilter: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-enum PitcherSort: String, CaseIterable, Identifiable, Sendable {
+nonisolated enum PitcherSort: String, CaseIterable, Identifiable, Sendable {
     case impact
     case surprise
     case workload
@@ -26,7 +26,7 @@ enum PitcherSort: String, CaseIterable, Identifiable, Sendable {
     var title: String { rawValue.capitalized }
 }
 
-struct PitchingFeed: Codable, Sendable {
+nonisolated struct PitchingFeed: Codable, Sendable {
     let generatedAt: String
     let season: Int
     let team: String
@@ -47,7 +47,7 @@ struct PitchingFeed: Codable, Sendable {
     }
 }
 
-struct PitchingSources: Codable, Sendable {
+nonisolated struct PitchingSources: Codable, Sendable {
     let actual: String
     let forecast: String
     let gamesPlayed: String
@@ -55,7 +55,7 @@ struct PitchingSources: Codable, Sendable {
     let forecastUrl: String
 }
 
-struct PitchingTeamSummary: Codable, Sendable {
+nonisolated struct PitchingTeamSummary: Codable, Sendable {
     let actualWar: Double
     let forecastWarToDate: Double
     let warGap: Double
@@ -63,7 +63,7 @@ struct PitchingTeamSummary: Codable, Sendable {
     let era: Double
 }
 
-struct PitcherReport: Codable, Identifiable, Sendable {
+nonisolated struct PitcherReport: Codable, Identifiable, Sendable {
     let id: Int
     let name: String
     let `throws`: String
@@ -103,7 +103,7 @@ struct PitcherReport: Codable, Identifiable, Sendable {
     }
 }
 
-struct PitcherActual: Codable, Sendable {
+nonisolated struct PitcherActual: Codable, Sendable {
     let ip: String
     let ipValue: Double
     let war: Double
@@ -112,7 +112,7 @@ struct PitcherActual: Codable, Sendable {
     let kMinusBbPct: Double
 }
 
-struct PitcherForecast: Codable, Sendable {
+nonisolated struct PitcherForecast: Codable, Sendable {
     let ip: Double
     let war: Double
     let era: Double
@@ -121,7 +121,7 @@ struct PitcherForecast: Codable, Sendable {
     let teamAtFetch: String?
 }
 
-struct PitcherForecastToDate: Codable, Sendable {
+nonisolated struct PitcherForecastToDate: Codable, Sendable {
     let ip: Double
     let war: Double
 }

@@ -20,13 +20,13 @@ private enum ShutoutPlayback {
     }
 }
 
-struct ShutoutPerson: Decodable, Identifiable, Hashable {
+nonisolated struct ShutoutPerson: Decodable, Identifiable, Hashable, Sendable {
     let id: Int
     let name: String
     var surname: String { name.split(separator: " ").dropFirst().joined(separator: " ") }
 }
 
-struct ShutoutEvent: Decodable, Identifiable {
+nonisolated struct ShutoutEvent: Decodable, Identifiable, Sendable {
     let id: Int
     let inning: Int
     let top: Bool
@@ -49,7 +49,7 @@ struct ShutoutEvent: Decodable, Identifiable {
     }
 }
 
-struct ShutoutGame: Decodable, Identifiable {
+nonisolated struct ShutoutGame: Decodable, Identifiable, Sendable {
     let id: Int
     let date: String
     let opponent: String
@@ -562,7 +562,7 @@ struct BrewersShutoutView: View {
 
     private func load() {
         guard games.isEmpty else { return }
-        struct Payload: Decodable { let games: [ShutoutGame] }
+        nonisolated struct Payload: Decodable, Sendable { let games: [ShutoutGame] }
         do {
             guard let url = Bundle.main.url(forResource: "brewers-shutouts", withExtension: "json") else { throw CocoaError(.fileNoSuchFile) }
             let payload = try JSONDecoder().decode(Payload.self, from: Data(contentsOf: url))

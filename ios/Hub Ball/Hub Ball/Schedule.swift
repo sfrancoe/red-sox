@@ -1,6 +1,6 @@
 import Foundation
 
-struct Schedule: Decodable, Sendable {
+nonisolated struct Schedule: Decodable, Sendable {
     let generatedAt: String
     let regularSeasonEnd: String
     let source: String
@@ -8,7 +8,7 @@ struct Schedule: Decodable, Sendable {
     let games: [ScheduledGame]
 }
 
-struct ScheduledGame: Decodable, Identifiable, Sendable {
+nonisolated struct ScheduledGame: Decodable, Identifiable, Sendable {
     let gamePk: Int
     let gameDate: String
     let status: String
@@ -132,7 +132,7 @@ struct ScheduledGame: Decodable, Identifiable, Sendable {
     }
 }
 
-struct GameBroadcast: Decodable, Sendable {
+nonisolated struct GameBroadcast: Decodable, Sendable {
     let name: String
     let isNational: Bool
     let homeAway: String

@@ -22,7 +22,7 @@ enum PostseasonHistorySortColumn {
     case career
 }
 
-struct PostseasonHistoryPayload: Codable, Sendable {
+nonisolated struct PostseasonHistoryPayload: Codable, Sendable {
     let schemaVersion: Int
     let season: Int
     let status: String
@@ -43,7 +43,7 @@ struct PostseasonHistoryPayload: Codable, Sendable {
     }
 }
 
-struct PostseasonHistoryTeam: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonHistoryTeam: Codable, Identifiable, Sendable {
     let teamId: Int
     let name: String
     let abbreviation: String
@@ -52,12 +52,12 @@ struct PostseasonHistoryTeam: Codable, Identifiable, Sendable {
     var id: Int { teamId }
 }
 
-struct PostseasonHistoryCategories: Codable, Sendable {
+nonisolated struct PostseasonHistoryCategories: Codable, Sendable {
     let hitting: [PostseasonHistoryCategory]
     let pitching: [PostseasonHistoryCategory]
 }
 
-struct PostseasonHistoryCategory: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonHistoryCategory: Codable, Identifiable, Sendable {
     let key: String
     let label: String
     let higherIsBetter: Bool
@@ -66,7 +66,7 @@ struct PostseasonHistoryCategory: Codable, Identifiable, Sendable {
     var id: String { key }
 }
 
-struct PostseasonHistoryEntry: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonHistoryEntry: Codable, Identifiable, Sendable {
     let playerId: Int
     let name: String
     let teamId: Int
@@ -97,7 +97,7 @@ struct PostseasonHistoryEntry: Codable, Identifiable, Sendable {
     }
 }
 
-struct PostseasonHistoryStat: Codable, Sendable {
+nonisolated struct PostseasonHistoryStat: Codable, Sendable {
     let value: Double
     let games: Int
     let plateAppearances: Int?
@@ -112,12 +112,12 @@ final class PostseasonHistoryStore {
     private(set) var refreshFailed = false
 
     let season: Int
-    private let session: URLSession
+    private let api: APIClient
     private let snapshotURL: URL
 
-    init(season: Int, session: URLSession = .shared) {
+    init(season: Int, session: URLSession = APIClient.session, api: APIClient? = nil) {
         self.season = season
-        self.session = session
+        self.api = api ?? APIClient(session: session)
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let directory = base.appending(path: "October", directoryHint: .isDirectory)
         snapshotURL = directory.appending(path: "history-\(season).json")
@@ -134,11 +134,8 @@ final class PostseasonHistoryStore {
             )
             request.cachePolicy = .reloadIgnoringLocalCacheData
             request.timeoutInterval = 20
-            let (data, response) = try await session.data(for: request)
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw URLError(.badServerResponse)
-            }
-            let incoming = try JSONDecoder().decode(PostseasonHistoryPayload.self, from: data)
+            let data = try await api.data(.url(request.url!), cachePolicy: request.cachePolicy)
+            let incoming = try await api.decode(PostseasonHistoryPayload.self, from: data, snakeCase: false)
             guard incoming.schemaVersion == 2, incoming.season == season else {
                 throw URLError(.cannotDecodeContentData)
             }

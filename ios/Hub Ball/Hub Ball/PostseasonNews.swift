@@ -1,7 +1,7 @@
 import Foundation
 import Observation
 
-struct PostseasonNewsPayload: Codable, Sendable {
+nonisolated struct PostseasonNewsPayload: Codable, Sendable {
     let schemaVersion: Int
     let season: Int
     let generatedAt: String
@@ -17,7 +17,7 @@ struct PostseasonNewsPayload: Codable, Sendable {
     }
 }
 
-struct PostseasonNewsArticle: Codable, Identifiable, Sendable {
+nonisolated struct PostseasonNewsArticle: Codable, Identifiable, Sendable {
     let title: String
     let description: String
     let url: String
@@ -63,12 +63,12 @@ final class PostseasonNewsStore {
     private(set) var refreshFailed = false
 
     let season: Int
-    private let session: URLSession
+    private let api: APIClient
     private let snapshotURL: URL
 
-    init(season: Int, session: URLSession = .shared) {
+    init(season: Int, session: URLSession = APIClient.session, api: APIClient? = nil) {
         self.season = season
-        self.session = session
+        self.api = api ?? APIClient(session: session)
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let directory = base.appending(path: "October", directoryHint: .isDirectory)
         snapshotURL = directory.appending(path: "news-\(season).json")
@@ -85,11 +85,8 @@ final class PostseasonNewsStore {
             )
             request.cachePolicy = .reloadIgnoringLocalCacheData
             request.timeoutInterval = 20
-            let (data, response) = try await session.data(for: request)
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw URLError(.badServerResponse)
-            }
-            let incoming = try JSONDecoder().decode(PostseasonNewsPayload.self, from: data)
+            let data = try await api.data(.url(request.url!), cachePolicy: request.cachePolicy)
+            let incoming = try await api.decode(PostseasonNewsPayload.self, from: data, snakeCase: false)
             guard incoming.schemaVersion == 1, incoming.season == season else {
                 throw URLError(.cannotDecodeContentData)
             }

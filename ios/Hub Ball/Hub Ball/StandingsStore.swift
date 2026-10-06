@@ -4,6 +4,7 @@ import Observation
 @MainActor
 @Observable
 final class StandingsStore {
+    private let api: APIClient
     private let endpoints: [StandingsLeague: URL]
 
     let selectedLeague: StandingsLeague
@@ -12,7 +13,8 @@ final class StandingsStore {
     var isLoading = false
     var errorMessage: String?
 
-    init(team: HubTeam = .boston) {
+    init(team: HubTeam = .boston, api: APIClient = .shared) {
+        self.api = api
         let league: StandingsLeague = team.definition.league == "NL" ? .national : .american
         selectedLeague = league
         mode = league.divisionsMode
@@ -35,36 +37,22 @@ final class StandingsStore {
         do {
             guard let americanURL = endpoints[.american],
                   let nationalURL = endpoints[.national] else {
-                throw StandingsError.badResponse
+                throw URLError(.badServerResponse)
             }
-            async let americanData = Self.fetch(americanURL)
-            async let nationalData = Self.fetch(nationalURL)
+            async let americanData = fetch(americanURL)
+            async let nationalData = fetch(nationalURL)
             let (loadedAmericanData, loadedNationalData) = try await (americanData, nationalData)
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             feeds = [
-                .american: try decoder.decode(StandingsFeed.self, from: loadedAmericanData),
-                .national: try decoder.decode(StandingsFeed.self, from: loadedNationalData),
+                .american: try await api.decode(StandingsFeed.self, from: loadedAmericanData),
+                .national: try await api.decode(StandingsFeed.self, from: loadedNationalData),
             ]
         } catch {
             errorMessage = "We couldn't load the standings. Check your connection and try again."
         }
     }
 
-    private static func fetch(_ url: URL) async throws -> Data {
-        var request = URLRequest(url: url)
-        request.cachePolicy = .reloadRevalidatingCacheData
-        request.timeoutInterval = 20
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw StandingsError.badResponse
-        }
-        return data
+    private func fetch(_ url: URL) async throws -> Data {
+        try await api.data(.url(url))
     }
 }
 
-private enum StandingsError: Error {
-    case badResponse
-}
