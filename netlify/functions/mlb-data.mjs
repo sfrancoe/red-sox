@@ -188,6 +188,43 @@ function officialRecap(content) {
   return { headline, url: `https://www.mlb.com/news/${slug}` };
 }
 
+// Schema 2 preserves the installed clients' field names and remaps scoring
+// indices after removing non-scoring plays. Never send pitch events to the app.
+export function projectGame(payload) {
+  const pick = (value, keys) => Object.fromEntries(keys.filter(key => value?.[key] !== undefined)
+    .map(key => [key, value[key]]));
+  const battingKeys = ['note', 'atBats', 'runs', 'hits', 'rbi', 'baseOnBalls', 'strikeOuts', 'leftOnBase', 'homeRuns', 'stolenBases'];
+  const pitchingKeys = ['note', 'inningsPitched', 'hits', 'runs', 'earnedRuns', 'baseOnBalls', 'strikeOuts', 'homeRuns', 'numberOfPitches'];
+  const teams = Object.fromEntries(['away', 'home'].map(side => {
+    const box = payload.liveData?.boxscore?.teams?.[side] || {};
+    const players = Object.fromEntries(Object.entries(box.players || {}).map(([id, player]) => [id, {
+      ...pick(player, ['person', 'position']),
+      stats: { batting: pick(player.stats?.batting, battingKeys), pitching: pick(player.stats?.pitching, pitchingKeys) },
+      seasonStats: { batting: pick(player.seasonStats?.batting, ['avg', 'homeRuns']) },
+    }]));
+    return [side, { ...pick(box, ['battingOrder', 'batters', 'pitchers']), players }];
+  }));
+  const plays = payload.liveData?.plays || {};
+  const scoring = (plays.scoringPlays || []).map(index => plays.allPlays?.[index]).filter(Boolean)
+    .map(play => ({ about: pick(play.about, ['inning', 'halfInning']),
+      result: pick(play.result, ['event', 'rbi', 'description', 'awayScore', 'homeScore']),
+      matchup: { batter: play.matchup?.batter } }));
+  return {
+    schema: 2,
+    ...pick(payload, ['gamePk', 'officialRecap']),
+    gameData: {
+      ...pick(payload.gameData, ['status', 'teams', 'venue', 'datetime', 'gameInfo']),
+      players: Object.fromEntries(Object.entries(payload.gameData?.players || {})
+        .map(([id, player]) => [id, pick(player, ['lastName'])])),
+    },
+    liveData: {
+      ...pick(payload.liveData, ['linescore', 'decisions']),
+      boxscore: { teams },
+      plays: { scoringPlays: scoring.map((_, index) => index), allPlays: scoring },
+    },
+  };
+}
+
 export function gameCacheControl(payload) {
   const status = payload?.gameData?.status;
   const isConfirmedFinal = status?.abstractGameState === 'Final'
@@ -222,6 +259,10 @@ const handleRequest = async request => {
         // A box score is still useful while MLB's delayed editorial feed catches up.
         console.warn(`Official recap unavailable for game ${gamePk}`, error);
       }
+    }
+    if (upstream.route === 'game') {
+      payload = projectGame(payload);
+      body = JSON.stringify(payload);
     }
     if (upstream.route === 'standings') {
       payload = liveStandings(payload, team, upstream.league);

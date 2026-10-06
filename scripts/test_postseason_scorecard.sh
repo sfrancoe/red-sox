@@ -16,6 +16,7 @@ swiftc -target "$(uname -m)-apple-macos14.0" \
   "$app_root/PostseasonModels.swift" \
   "$app_root/RecentGame.swift" \
   "$app_root/MLBGameClient.swift" \
+  "$app_root/MLBPayload.swift" \
   "$app_root/PostseasonScorecardStore.swift" \
   "$repo_root/scripts/test_postseason_scorecard.swift" \
   -o "$test_binary"

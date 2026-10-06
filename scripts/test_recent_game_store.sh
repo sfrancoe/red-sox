@@ -18,6 +18,7 @@ swiftc -target "$(uname -m)-apple-macos14.0" \
   "$app_root/RecentGame.swift" \
   "$app_root/RecentGameSnapshot.swift" \
   "$app_root/MLBGameClient.swift" \
+  "$app_root/MLBPayload.swift" \
   "$app_root/RecentGameStore.swift" \
   "$repo_root/scripts/test_recent_game_store.swift" \
   -o "$test_binary"

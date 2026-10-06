@@ -221,3 +221,23 @@ for (const [team, teamID] of TEAMS) {
 
 globalThis.fetch = originalFetch;
 console.log('MLB live-data gateway tests passed');
+
+const { projectGame } = await import('../netlify/functions/mlb-data.mjs');
+const projected = projectGame({
+  gamePk: 123, gameData: { players: { ID1: { lastName: 'Betts', biography: 'unused' } } },
+  officialRecap: { headline: 'Recap', url: 'https://mlb.com/news/recap' },
+  liveData: { plays: { scoringPlays: [1, 3], allPlays: [
+    { result: { event: 'Out' } },
+    { about: { inning: 1, halfInning: 'top', unused: true }, result: { event: 'Home Run', awayScore: 1 }, matchup: { batter: { fullName: 'Betts' }, pitcher: {} }, playEvents: Array(100).fill('pitch') },
+    { result: { event: 'Out' } },
+    { about: { inning: 3, halfInning: 'bottom' }, result: { event: 'Single', homeScore: 1 } },
+  ] } },
+});
+assert.equal(projected.schema, 2);
+assert.deepEqual(projected.liveData.plays.scoringPlays, [0, 1]);
+assert.equal(projected.liveData.plays.allPlays[0].result.event, 'Home Run');
+assert.equal(projected.liveData.plays.allPlays[1].about.inning, 3);
+assert.equal(projected.liveData.plays.allPlays[0].playEvents, undefined);
+assert.equal(projected.gameData.players.ID1.biography, undefined);
+assert.equal(projected.officialRecap.headline, 'Recap');
+console.log('MLB projection preserves scoring indices and removes unused fields');
