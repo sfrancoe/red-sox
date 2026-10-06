@@ -533,7 +533,7 @@ private struct MarketDetail: View {
                     }
                     Text("What resolves this market?").font(.headline)
                     Text(market.rules).font(.subheadline).foregroundStyle(AppColor.ink).textSelection(.enabled)
-                    if let url = URL(string: market.url) { Link("Source & full market rules ↗", destination: url).font(.headline).tint(market.tint) }
+                    if let url = URL.safeWeb(market.url) { Link("Source & full market rules ↗", destination: url).font(.headline).tint(market.tint) }
                 }.padding(24)
             }.navigationTitle("Market detail").navigationBarTitleDisplayMode(.inline)
                 .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }

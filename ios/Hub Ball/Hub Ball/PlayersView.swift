@@ -1444,7 +1444,7 @@ private struct PlayerReferenceView: View {
                 HStack(spacing: 16) {
                     if let url = player.sourceURL { Link("Wikidata", destination: url) }
                     if let url = player.articleURL { Link("Wikipedia", destination: url) }
-                    if let value = store.career(for: player)?.source?.url, let url = URL(string: value) { Link("Career source", destination: url) }
+                    if let value = store.career(for: player)?.source?.url, let url = URL.safeWeb(value) { Link("Career source", destination: url) }
                 }
                 .font(AppFont.label.weight(.semibold))
                 .foregroundStyle(AppColor.steel)

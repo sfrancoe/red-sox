@@ -435,7 +435,7 @@ struct OctoberView: View {
 
     @ViewBuilder
     private func postseasonNewsCard(_ article: PostseasonNewsArticle) -> some View {
-        if let url = URL(string: article.url) {
+        if let url = URL.safeWeb(article.url) {
             Link(destination: url) {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(alignment: .firstTextBaseline, spacing: 8) {

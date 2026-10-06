@@ -109,12 +109,12 @@ struct RedSoxPlayer: Codable, Identifiable, Hashable, Sendable {
 
     var sourceURL: URL? {
         guard let sourceUrl else { return nil }
-        return URL(string: sourceUrl)
+        return URL.safeWeb(sourceUrl)
     }
 
     var articleURL: URL? {
         guard let wikipediaUrl else { return nil }
-        return URL(string: wikipediaUrl)
+        return URL.safeWeb(wikipediaUrl)
     }
 
     var initials: String {

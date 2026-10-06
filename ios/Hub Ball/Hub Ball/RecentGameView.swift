@@ -853,13 +853,13 @@ struct RecentGameView: View {
     private func linksCard(_ game: RecentGame) -> some View {
         VStack(spacing: 10) {
             if let recap = game.officialRecap,
-               let recapURL = URL(string: recap.url) {
+               let recapURL = URL.safeWeb(recap.url) {
                 Link(destination: recapURL) {
                     linkRow(recap.headline, icon: "newspaper")
                 }
             }
 
-            if let gamedayURL = URL(string: game.gamedayUrl) {
+            if let gamedayURL = URL.safeWeb(game.gamedayUrl) {
                 Link(destination: gamedayURL) {
                     linkRow("Open MLB Gameday", icon: "arrow.up.right.square")
                 }

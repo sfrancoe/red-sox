@@ -114,7 +114,7 @@ struct HeadlinesView: View {
 
     private func newspaperStory(_ article: NewsArticle) -> some View {
         Group {
-            if let url = URL(string: article.url) {
+            if let url = URL.safeWeb(article.url) {
                 Button {
                     presentedArticle = PresentedArticle(url: url)
                 } label: {
@@ -253,7 +253,7 @@ struct HeadlinesView: View {
 
     private func articleCard(_ article: NewsArticle) -> some View {
         Group {
-            if let url = URL(string: article.url) {
+            if let url = URL.safeWeb(article.url) {
                 Button {
                     presentedArticle = PresentedArticle(url: url)
                 } label: {

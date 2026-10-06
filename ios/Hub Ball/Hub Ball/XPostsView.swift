@@ -188,7 +188,7 @@ struct XPostsView: View {
                     quotedPost(post)
                 }
 
-                if let mediaURL = URL(string: post.media), !post.media.isEmpty {
+                if let mediaURL = URL.safeWeb(post.media), !post.media.isEmpty {
                     GeometryReader { media in
                         AsyncImage(url: mediaURL) { image in
                             image.resizable().scaledToFill()
@@ -214,7 +214,7 @@ struct XPostsView: View {
 
                     Spacer()
 
-                    if let url = URL(string: post.url) {
+                    if let url = URL.safeWeb(post.url) {
                         Link(destination: url) {
                             Label("Open on X", systemImage: "arrow.up.right")
                                 .font(usesExpandedReadingLayout ? .subheadline.weight(.bold) : .caption.weight(.semibold))
@@ -270,7 +270,7 @@ struct XPostsView: View {
     }
 
     private func authorAvatar(_ post: XPost) -> some View {
-        AsyncImage(url: URL(string: post.avatar)) { image in
+        AsyncImage(url: URL.safeWeb(post.avatar)) { image in
             image
                 .resizable()
                 .scaledToFill()
