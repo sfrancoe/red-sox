@@ -102,6 +102,8 @@ struct BrewersShutoutView: View {
     @State private var cursor = -1
     @State private var playing = false
     @State private var playbackID = UUID()
+    @State private var playbackDeadline: TimeInterval?
+    @State private var chapterEndPause = false
     @State private var selectedPlayer: ShutoutPerson?
     @State private var replayPlayer: Int?
     @State private var showSources = false
@@ -170,7 +172,12 @@ struct BrewersShutoutView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .task { load() }
-        .task(id: playbackID) { if playing { await animateStory() } }
+        .background { PlaybackClock(active: playing, tick: advanceStory) }
+        .onChange(of: playbackID) { _, _ in
+            playbackDeadline = nil
+            chapterEndPause = false
+            if playing { advanceStory(at: ProcessInfo.processInfo.systemUptime) }
+        }
         .onDisappear { stop() }
         .onChange(of: scenePhase) { _, phase in if phase != .active { stop() } }
         .onChange(of: reduceMotion) { _, reduced in if reduced { stop() } }
@@ -536,28 +543,32 @@ struct BrewersShutoutView: View {
 
     private func stop() { playing = false; playbackID = UUID() }
 
-    @MainActor private func animateStory() async {
-        do {
-            let firstChapter = min(chapter, 1)
-            let lastChapter = replayPlayer == nil ? 1 : firstChapter
-            for index in firstChapter...lastChapter {
-                if index != chapter { chapter = index; cursor = -1 }
-                for next in (cursor + 1)..<games[index].events.count {
-                    try Task.checkCancellation()
-                    let event = games[index].events[next]
-                    if let replayPlayer, !event.involves(replayPlayer) { continue }
-                    cursor = next
-                    if event.runs > 0 {
-                        UIImpactFeedbackGenerator(style: event.runs >= 4 ? .heavy : .soft).impactOccurred()
-                    }
-                    let delay = ShutoutPlayback.eventDuration(event, replay: replayPlayer != nil)
-                    try await Task.sleep(for: .seconds(delay))
-                }
-                try await Task.sleep(for: .seconds(0.5))
+    private func advanceStory(at now: TimeInterval) {
+        guard playing, games.count == 2 else { return }
+        if let playbackDeadline, now < playbackDeadline { return }
+        if chapterEndPause {
+            chapterEndPause = false
+            if replayPlayer == nil, chapter < 1 { chapter += 1; cursor = -1 }
+            else {
+                if replayPlayer == nil { chapter = 2 }
+                replayPlayer = nil
+                playing = false
+                return
             }
-            if replayPlayer == nil { chapter = 2 }
-            replayPlayer = nil; playing = false
-        } catch { /* Pause, navigation, and backgrounding cancel playback. */ }
+        }
+        let events = games[min(chapter, 1)].events
+        let next = events.indices.first { index in
+            index > cursor && (replayPlayer == nil || events[index].involves(replayPlayer!))
+        }
+        guard let next else {
+            chapterEndPause = true
+            playbackDeadline = now + 0.5
+            return
+        }
+        cursor = next
+        let event = events[next]
+        if event.runs > 0 { UIImpactFeedbackGenerator(style: event.runs >= 4 ? .heavy : .soft).impactOccurred() }
+        playbackDeadline = now + ShutoutPlayback.eventDuration(event, replay: replayPlayer != nil)
     }
 
     private func load() {

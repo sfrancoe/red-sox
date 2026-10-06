@@ -84,13 +84,13 @@ struct MLB300HitterStory: View {
             .onAppear {
                 if !launched { launch() }
             }
-            .task(id: playbackID) {
-                guard building else { return }
-                let remaining = max(0, MLB300HitterData.duration - (ProcessInfo.processInfo.systemUptime - startedAt))
-                do { try await Task.sleep(for: .seconds(remaining)) } catch { return }
-                guard !Task.isCancelled else { return }
-                building = false
-                cardFlashTrigger += 1
+            .background {
+                PlaybackClock(active: building) { now in
+                    if now - startedAt >= MLB300HitterData.duration {
+                        building = false
+                        cardFlashTrigger += 1
+                    }
+                }
             }
             .onDisappear { building = false }
             .onChange(of: scenePhase) { _, phase in

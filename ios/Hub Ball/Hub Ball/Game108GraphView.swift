@@ -11,7 +11,9 @@ struct Game108GraphView: View {
     @State private var speed = 2.0
     @State private var isMusicOn = true
     private var musicPlayer: GraphMusicPlayer { model.graphMusic }
-    @State private var animationTask: Task<Void, Never>?
+    @State private var lastFrame: TimeInterval?
+    @State private var holdUntil: TimeInterval?
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack {
@@ -29,6 +31,8 @@ struct Game108GraphView: View {
                 }
             }
         }
+        .background { PlaybackClock(active: isPlaying, tick: advanceAnimation) }
+        .onChange(of: scenePhase) { _, phase in if phase == .background { pauseAnimation() } }
         .navigationTitle("Game 108 Graph")
         .navigationBarTitleDisplayMode(.inline)
         .task {
@@ -232,45 +236,33 @@ struct Game108GraphView: View {
         if isMusicOn {
             musicPlayer.play()
         }
-        animationTask?.cancel()
-        animationTask = Task { @MainActor in
-            var previous = ContinuousClock.now
+        lastFrame = ProcessInfo.processInfo.systemUptime
+        holdUntil = nil
+    }
 
-            while !Task.isCancelled,
-                  isPlaying,
-                  activeSeasonIndex < store.series.count {
-                try? await Task.sleep(for: .milliseconds(16))
-                let now = ContinuousClock.now
-                let elapsed = previous.duration(to: now)
-                previous = now
-                let seconds = Double(elapsed.components.seconds)
-                    + Double(elapsed.components.attoseconds) / 1_000_000_000_000_000_000
-
-                gameProgress += seconds * 26 * speed
-                let season = store.series[activeSeasonIndex]
-
-                if gameProgress >= Double(season.endGame) {
-                    gameProgress = Double(season.endGame)
-                    try? await Task.sleep(for: .milliseconds(450))
-                    guard !Task.isCancelled, isPlaying else { break }
-                    activeSeasonIndex += 1
-                    gameProgress = 0
-                }
-            }
-
-            if activeSeasonIndex >= store.series.count {
-                isPlaying = false
-                musicPlayer.pause()
-            }
+    private func advanceAnimation(at now: TimeInterval) {
+        guard isPlaying, activeSeasonIndex < store.series.count else { return }
+        let elapsed = max(0, now - (lastFrame ?? now))
+        lastFrame = now
+        if let holdUntil {
+            guard now >= holdUntil else { return }
+            self.holdUntil = nil
+            activeSeasonIndex += 1
+            gameProgress = 0
+            if activeSeasonIndex >= store.series.count { pauseAnimation() }
+            return
         }
+        let end = Double(store.series[activeSeasonIndex].endGame)
+        gameProgress = min(end, gameProgress + elapsed * 26 * speed)
+        if gameProgress >= end { holdUntil = now + 0.45 }
     }
 
     @MainActor
     private func pauseAnimation() {
         isPlaying = false
         musicPlayer.pause()
-        animationTask?.cancel()
-        animationTask = nil
+        lastFrame = nil
+        holdUntil = nil
     }
 
     @MainActor
@@ -285,8 +277,8 @@ struct Game108GraphView: View {
     private func stopAnimation() {
         isPlaying = false
         musicPlayer.stop()
-        animationTask?.cancel()
-        animationTask = nil
+        lastFrame = nil
+        holdUntil = nil
     }
 
     private func color(for year: Int) -> Color {

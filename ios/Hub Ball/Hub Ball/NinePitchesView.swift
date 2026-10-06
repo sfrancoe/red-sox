@@ -15,7 +15,7 @@ struct NinePitchesView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var shown = 0
     @State private var playing = false
-    @State private var playbackID = UUID()
+    @State private var lastPitchAt: TimeInterval = 0
     @State private var showSources = false
 
     private let pitches = [
@@ -67,7 +67,7 @@ struct NinePitchesView: View {
         .toolbarBackground(AppColor.navy, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
-        .task(id: playbackID) { if playing { await replay() } }
+        .background { PlaybackClock(active: playing, tick: advancePitch) }
         .onDisappear { stop() }
         .onChange(of: scenePhase) { _, phase in if phase != .active { stop() } }
         .sheet(isPresented: $showSources) { sources }
@@ -149,7 +149,13 @@ struct NinePitchesView: View {
         }
     }
 
-    private func start() { if shown == 9 { shown = 0 }; if reduceMotion { shown = 9 } else { playing = true; playbackID = UUID() } }
+    private func start() { if shown == 9 { shown = 0 }; if reduceMotion { shown = 9 } else { lastPitchAt = ProcessInfo.processInfo.systemUptime; playing = true } }
     private func stop() { playing = false }
-    private func replay() async { while playing && shown < 9 && !Task.isCancelled { try? await Task.sleep(for: .milliseconds(720)); guard playing else { return }; shown += 1 }; if shown == 9 { playing = false } }
+    private func advancePitch(at now: TimeInterval) {
+        let steps = Int((now - lastPitchAt) / 0.72)
+        guard playing, steps > 0 else { return }
+        shown = min(9, shown + steps)
+        lastPitchAt += Double(steps) * 0.72
+        if shown == 9 { playing = false }
+    }
 }
