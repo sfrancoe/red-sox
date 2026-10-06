@@ -79,6 +79,7 @@ const response = await getPostseasonResponse(
     fetchedURL = String(url);
     return new Response(JSON.stringify(await fixture(2026)));
   },
+  new Date('2026-09-26T00:00:00Z'),
 );
 assert.equal(response.status, 200);
 assert.match(fetchedURL, /gameTypes=F%2CD%2CL%2CW/);

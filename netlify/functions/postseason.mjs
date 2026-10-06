@@ -230,9 +230,9 @@ export function normalizePostseason(payload, season, checkedAt = new Date().toIS
   };
 }
 
-export async function getPostseasonResponse(request, fetchImpl = fetch) {
+export async function getPostseasonResponse(request, fetchImpl = fetch, now = new Date()) {
   const url = new URL(request.url);
-  const season = url.searchParams.get('season') || String(new Date().getFullYear());
+  const season = url.searchParams.get('season') || String(now.getFullYear());
   if (!SUPPORTED_SEASONS.has(season)) {
     return Response.json({ error: 'Unsupported postseason season.' }, {
       status: 400,
@@ -243,14 +243,14 @@ export async function getPostseasonResponse(request, fetchImpl = fetch) {
   providerURL.search = new URLSearchParams({ sportId: '1', season, gameTypes: 'F,D,L,W', hydrate: 'linescore,broadcasts' });
   try {
     const payload = await fetchSource(providerURL, fetchImpl);
-    const data = normalizePostseason(payload, season);
+    const data = normalizePostseason(payload, season, now.toISOString());
     const today = new Intl.DateTimeFormat('en-CA', {
       timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit',
-    }).format(new Date());
+    }).format(now);
     const live = data.games.some(game => game.abstractState === 'Live'
       || (game.timeTBD && game.gameDate?.slice(0, 10) === today)
       || (!game.timeTBD && game.gameDate
-        && Math.abs(Date.parse(game.gameDate) - Date.now()) <= 6 * 60 * 60 * 1000));
+        && Math.abs(Date.parse(game.gameDate) - now.valueOf()) <= 6 * 60 * 60 * 1000));
     const cache = live ? 'public, max-age=15, stale-while-revalidate=15' : 'public, max-age=300, stale-while-revalidate=60';
     return Response.json(data, {
       headers: {
