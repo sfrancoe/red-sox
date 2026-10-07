@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import subprocess
 import sys
 from pathlib import Path
@@ -30,20 +29,34 @@ def git(*args: str, cwd: Path = ROOT) -> str:
     return result.stdout.strip()
 
 
-def setting(text: str, name: str) -> str:
-    pattern = rf'^\s*{re.escape(name)}\s*=\s*"?([^;\"]+)"?;'
-    values = sorted(set(re.findall(pattern, text, re.MULTILINE)))
-    if len(values) != 1:
+def setting(configurations: list[dict], name: str) -> str:
+    values = sorted({str(config.get(name, "")).strip() for config in configurations})
+    if len(values) != 1 or not values[0]:
         raise ValueError(f"Expected one {name} value; found {values or 'none'}.")
     return values[0].strip()
 
 
 def project_identity(project_file: Path) -> tuple[str, str, int]:
-    text = project_file.read_text(encoding="utf-8")
+    result = subprocess.run(
+        ["plutil", "-convert", "json", "-o", "-", str(project_file)],
+        capture_output=True, text=True, check=True,
+    )
+    project = json.loads(result.stdout)
+    objects = project["objects"]
+    apps = [
+        objects[target] for target in objects[project["rootObject"]]["targets"]
+        if objects[target].get("productType") == "com.apple.product-type.application"
+    ]
+    if len(apps) != 1:
+        raise ValueError(f"Expected one application target; found {len(apps)}.")
+    configuration_list = objects[apps[0]["buildConfigurationList"]]
+    configurations = [
+        objects[key]["buildSettings"] for key in configuration_list["buildConfigurations"]
+    ]
     return (
-        setting(text, "PRODUCT_BUNDLE_IDENTIFIER"),
-        setting(text, "MARKETING_VERSION"),
-        int(setting(text, "CURRENT_PROJECT_VERSION")),
+        setting(configurations, "PRODUCT_BUNDLE_IDENTIFIER"),
+        setting(configurations, "MARKETING_VERSION"),
+        int(setting(configurations, "CURRENT_PROJECT_VERSION")),
     )
 
 
