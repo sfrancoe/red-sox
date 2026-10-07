@@ -156,6 +156,35 @@ struct ArchitectureTests {
         #expect(requests == 2, "A stale resume refreshes exactly once")
     }
 
+    @Test @MainActor func schedulerRetriesARefreshCancelledByLeaving() async throws {
+        var now = Date(timeIntervalSince1970: 1000)
+        var isLoading = false
+        var started = 0
+        var completed = 0
+        let scheduler = RefreshScheduler(now: { now })
+        defer { scheduler.stop() }
+        // Like the stores: ignore a load while one is in flight, and return
+        // quietly (no error message) when cancelled.
+        scheduler.register("standings") {
+            guard !isLoading else { return true }
+            isLoading = true
+            defer { isLoading = false }
+            started += 1
+            do { try await Task.sleep(for: .milliseconds(200)) } catch { return true }
+            completed += 1
+            return true
+        }
+        scheduler.setVisible(true, observer: "standings", jobs: ["standings"])
+        try await Task.sleep(for: .milliseconds(30))
+        // Swipe away before the first load finishes, then return five seconds later.
+        scheduler.setVisible(false, observer: "standings", jobs: ["standings"])
+        now += 5
+        scheduler.setVisible(true, observer: "standings", jobs: ["standings"])
+        try await Task.sleep(for: .milliseconds(400))
+        #expect(started == 2, "Returning retries the cancelled load instead of waiting out the interval")
+        #expect(completed == 1)
+    }
+
     @Test func sharedDateParsing() {
         #expect(FeedDate.date(from: "2026-10-06T19:00:00Z") == FeedDate.date(from: "2026-10-06T15:00:00.000-04:00"))
         #expect(FeedDate.date(from: "not a date") == nil)

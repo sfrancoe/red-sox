@@ -10,6 +10,8 @@ final class RefreshScheduler {
         var lastSuccess: Date?
         var lastAttempt: Date?
         var task: Task<Void, Never>?
+        /// A cancelled task that may still be unwinding a refresh.
+        var draining: Task<Void, Never>?
         var generation = 0
         init(isLive: @escaping () -> Bool, refresh: @escaping () async -> Bool) {
             self.isLive = isLive
@@ -55,7 +57,10 @@ final class RefreshScheduler {
 
     private func cancel(_ job: Job) {
         job.generation += 1
-        job.task?.cancel()
+        if let task = job.task {
+            task.cancel()
+            job.draining = task
+        }
         job.task = nil
     }
 
@@ -63,7 +68,12 @@ final class RefreshScheduler {
         guard job.task == nil else { return }
         job.generation += 1
         let generation = job.generation
+        let previous = job.draining
+        job.draining = nil
         job.task = Task { [weak self, weak job] in
+            // Stores ignore a load while one is in flight. Let a cancelled refresh
+            // finish unwinding so this one really runs instead of returning early.
+            await previous?.value
             guard let self, let job else { return }
             var immediate = refreshImmediately
             while !Task.isCancelled, !background, !job.observers.isEmpty {
@@ -75,8 +85,9 @@ final class RefreshScheduler {
                 }
                 immediate = false
                 guard !Task.isCancelled, job.generation == generation else { break }
-                job.lastAttempt = now()
                 let succeeded = await job.refresh()
+                // A cancelled refresh does not count as an attempt, so returning to the
+                // screen retries it instead of waiting out the rest of the interval.
                 guard !Task.isCancelled, job.generation == generation else { break }
                 job.lastAttempt = now()
                 if succeeded { job.lastSuccess = now() }
