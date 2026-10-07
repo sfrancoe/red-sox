@@ -7,6 +7,9 @@ RUN_NAME="${2:?Supply a unique run name}"
 shift 2
 case "$RUN_NAME" in *[!a-zA-Z0-9_-]*|'') echo 'Run name must contain only letters, digits, underscores, or hyphens.' >&2; exit 2;; esac
 cd "$ROOT"
+if [[ -z "${HUB_UI_API_ROOT:-}" ]]; then
+  exec python3 scripts/ui_test_proxy.py bash "$0" "$DEVICE" "$RUN_NAME" "$@"
+fi
 python3 scripts/prepare_large_text_ui_tests.py
 OPTIONS=()
 for METHOD in "$@"; do
@@ -19,7 +22,7 @@ set +e
 xcodebuild -project 'dist/large-text-ui/Hub Ball.xcodeproj' -scheme LargeTextAudit \
   -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" \
   -derivedDataPath dist/large-text-ui/derived -resultBundlePath "$RESULT" \
-  -parallel-testing-enabled NO "${OPTIONS[@]}" CODE_SIGNING_ALLOWED=NO test > "$LOG" 2>&1
+  -parallel-testing-enabled NO ${OPTIONS[@]+"${OPTIONS[@]}"} CODE_SIGNING_ALLOWED=NO test > "$LOG" 2>&1
 STATUS=$?
 set -e
 if [[ -d "$RESULT" ]]; then

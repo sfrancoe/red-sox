@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Coordinate native UI assertions with real simctl text-size changes; restore on exit."""
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
+if not os.environ.get('HUB_UI_API_ROOT'):
+    raise SystemExit(subprocess.call([sys.executable, str(root/'scripts/ui_test_proxy.py'), sys.executable, *sys.argv]))
 device, name = sys.argv[1:]
 if not name or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_' for c in name):
     raise SystemExit('Supply a simple unique run name')

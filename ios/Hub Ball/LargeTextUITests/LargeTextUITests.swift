@@ -8,6 +8,9 @@ final class LargeTextUITests: XCTestCase {
         continueAfterFailure = false
         XCUIDevice.shared.orientation = .portrait
         app = XCUIApplication(bundleIdentifier: "com.sfrancoe.HubBall")
+        let apiRoot = try XCTUnwrap(ProcessInfo.processInfo.environment["HUB_UI_API_ROOT"].flatMap { $0.isEmpty ? nil : $0 },
+                                   "Run through the UI test scripts to block paid X discovery")
+        app.launchEnvironment["HUB_API_ROOT"] = apiRoot
     }
 
     override func tearDownWithError() throws {
@@ -16,11 +19,17 @@ final class LargeTextUITests: XCTestCase {
         app.terminate()
     }
 
-    private func launch(_ route: String = "", size: String = "UICTContentSizeCategoryAccessibilityXXXL", team: String = "boston") {
+    private func launch(_ route: String = "", size: String = "UICTContentSizeCategoryAccessibilityXXXL", team: String = "boston", keepPostseason: Bool = false) {
         app.launchArguments = ["-hubCompletedTeamOnboarding", "YES", "-hubSelectedTeam", team]
         if !size.isEmpty { app.launchArguments += ["-UIPreferredContentSizeCategoryName", size] }
         if !route.isEmpty { app.launchArguments.append(route) }
         app.launch()
+        if !keepPostseason && (route.isEmpty || route == "-show-home-run-chase") {
+            let close = app.buttons["playoffs.close"]
+            XCTAssertTrue(close.waitForExistence(timeout: 15), "Normal launch opens the postseason cover")
+            close.tap()
+            XCTAssertTrue(close.waitForNonExistence(timeout: 5))
+        }
     }
 
     private func rotate(_ orientation: UIDeviceOrientation) {
@@ -153,7 +162,7 @@ final class LargeTextUITests: XCTestCase {
     }
 
     func testPostseasonButtonColors() {
-        launch("", size: "UICTContentSizeCategoryM")
+        launch("", size: "UICTContentSizeCategoryM", keepPostseason: true)
         let close = app.buttons["playoffs.close"]
         XCTAssertTrue(close.waitForExistence(timeout: 30))
         close.tap()
@@ -324,9 +333,9 @@ final class LargeTextUITests: XCTestCase {
         XCTAssertEqual(cards.count, 11, "Every series must be present together")
         capture("playoffs-full-bracket")
         app.buttons["bracket.al-wild-card-b"].tap()
-        XCTAssertTrue(app.navigationBars["Wild Card"].waitForExistence(timeout: 5))
-        capture("playoffs-series-details")
-        app.buttons["series.close"].tap()
+        XCTAssertTrue(app.segmentedControls["postseason.scorecard.teamTabs"].waitForExistence(timeout: 30))
+        capture("playoffs-game-scorecard")
+        app.buttons.matching(NSPredicate(format: "label == %@ AND identifier != %@", "Done", "playoffs.close")).firstMatch.tap()
         app.buttons["playoffs.close"].tap()
         XCTAssertTrue(open.waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["Switch team"].exists)
@@ -400,11 +409,17 @@ final class LargeTextUITests: XCTestCase {
         let teamHeader = app.staticTexts["Team"].firstMatch
         XCTAssertTrue(reveal(teamHeader, attempts: 15))
         capture("recap-innings-start")
-        let score = app.scrollViews.allElementsBoundByIndex.first { $0.frame.height < 400 && $0.frame.width > 100 && $0.isHittable }
-        // Save the tree before choosing the nested table, for diagnosable failures.
-        XCTAssertNotNil(score, "Inning scroll view must be reachable")
-        if let score {
-            for _ in 0..<12 { score.swipeLeft() }
+        let score = app.scrollViews["recap.innings"]
+        XCTAssertTrue(score.exists && score.isHittable, "Inning scroll view must be reachable")
+        // Revealing the header alone can leave both totals below the viewport.
+        for _ in 0..<12 {
+            if score.frame.maxY < app.frame.maxY - 20 { break }
+            scroll()
+        }
+        for _ in 0..<12 {
+            let lastColumn = score.staticTexts["Left on base"].firstMatch
+            if lastColumn.exists && lastColumn.isHittable { break }
+            score.swipeLeft()
         }
         capture("recap-innings-end")
         let lob = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", ", Left on base,")).firstMatch
@@ -430,6 +445,13 @@ final class LargeTextUITests: XCTestCase {
     }
 
     private func selectPage(_ title: String) {
+        if title == "Stories" {
+            let open = app.buttons["stories.open"]
+            XCTAssertTrue(open.isHittable)
+            open.tap()
+            XCTAssertTrue(app.buttons["stories.close"].waitForExistence(timeout: 5))
+            return
+        }
         if app.buttons["Page"].exists {
             app.buttons["Page"].tap()
             let option = app.buttons[title].firstMatch
@@ -753,13 +775,7 @@ final class LargeTextUITests: XCTestCase {
     func testSettingsMenus() {
         launch()
         XCTAssertTrue(app.buttons["Page"].waitForExistence(timeout: 20))
-        app.buttons["Page"].tap()
-        let settings = app.buttons["Teams and settings"]
-        for _ in 0..<10 {
-            if settings.exists { break }
-            scrollMenu()
-        }
-        settings.tap()
+        app.buttons["Switch team"].tap()
         let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Settings section")).firstMatch
         XCTAssertTrue(section.waitForExistence(timeout: 10))
         section.tap()

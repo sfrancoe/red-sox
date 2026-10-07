@@ -426,6 +426,7 @@ struct RecentGameView: View {
                 .font(.body.monospacedDigit())
                 .fixedSize(horizontal: true, vertical: false)
             }
+            .accessibilityIdentifier("recap.innings")
         } else {
             compactCombinedLineScore(game)
         }

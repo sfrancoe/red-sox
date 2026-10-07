@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate an isolated, dependency-free Xcode UI-test project under dist/."""
 import json
+import os
 import plistlib
 import subprocess
 from pathlib import Path
@@ -61,9 +62,10 @@ testables=ET.SubElement(test,'Testables')
 ET.SubElement(ET.SubElement(testables,'TestableReference',{'skipped':'NO','parallelizable':'NO'}),'BuildableReference',ref)
 scheme_path=OUTPUT/'xcshareddata/xcschemes/LargeTextAudit.xcscheme'
 scheme_path.parent.mkdir(parents=True,exist_ok=True)
-scheme.write(scheme_path,encoding='utf-8',xml_declaration=True)
 test.set('shouldUseLaunchSchemeArgsEnv', 'NO')
 envs = ET.SubElement(test, 'EnvironmentVariables')
+ET.SubElement(envs, 'EnvironmentVariable', key='HUB_UI_API_ROOT', value=os.environ.get('HUB_UI_API_ROOT', ''), isEnabled='YES')
+scheme.write(scheme_path,encoding='utf-8',xml_declaration=True)
 ET.SubElement(envs, 'EnvironmentVariable', key='HUBBALL_LIVE_SIZE_TEST', value='1', isEnabled='YES')
 scheme.write(scheme_path.with_name('LargeTextLiveSize.xcscheme'), encoding='utf-8', xml_declaration=True)
 print(OUTPUT)
