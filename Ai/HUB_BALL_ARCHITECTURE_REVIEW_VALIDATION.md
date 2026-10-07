@@ -1,8 +1,29 @@
 # Hub Ball review validation and cleanup
 
-October 6, 2026. Prepared by Codex for Scott.
+October 6, 2026; integration update October 7, 2026. Prepared by Codex for Scott.
 
-Work remains on `codex/hub-ball-architecture-audit` in `/Users/sfrancoe/Projects/Hub Ball`. The three review commits were read in full and tested. **The rotation and recap blockers are resolved. Automated validation is green; see the resolution results immediately below.** Cleanup commit: `b49fc08fd`. Additional commits: `2460f9f0f` (CDN ceiling) and `fc344dfed` (safe UI harness and navigation targets). Nothing was merged, pushed, deployed, uploaded, or installed on a physical device. Build 117 remains the declared release.
+The original review was completed on `codex/hub-ball-architecture-audit` in `/Users/sfrancoe/Projects/Hub Ball`. The three review commits were read in full and tested. The rotation and recap blockers were resolved. Cleanup commit: `b49fc08fd`. Additional commits: `2460f9f0f` (CDN ceiling) and `fc344dfed` (safe UI harness and navigation targets). The October 7 integration status below supersedes the earlier branch-status statements. Build 117 remains the declared release.
+
+## October 7 integration with GitHub main
+
+Scott authorized resolving the conflicts and merging. The fresh remote baseline was `origin/main` at `9ec2742ac`; the previous passing UI validation had used the older local baseline. Integration commit `50d0d015e` brings that remote baseline into the audit branch.
+
+The two generated-feed conflicts retain the exact remote versions of `data/postseason-history/2026-v2.json` and `data/postseason-news/2026.json`. The native recent-game test retains the Swift Testing `#expect` assertion for all regular-season and postseason game types. No native production source changed during conflict resolution. Newer upstream news and pitching refresh work is preserved.
+
+Validation uncovered a separate existing upstream data defect: Baltimore's latest saved recap selected game `823490`, cancelled for rain, as a 0–0 loss with no innings or players. MLB reports cancelled games as abstractly Final, with code C. Commit `2cf2b2ed1` excludes codes C and D in the team recap generator, adds two offline selection regression tests, and regenerates Baltimore's feed through the script. The corrected recap is completed game `823489`, a 6–3 loss to the Yankees over nine innings. No generated data was edited by hand.
+
+Combined-code validation:
+
+- Native: **22 tests / 12 suites passed**.
+- Swift 6 Release simulator build: **passed**.
+- Python: **99 unit tests passed**, with all 30 team data sets and the other standalone feed/adapter checks passing after the Orioles correction.
+- Backend: **all seven function test scripts passed**; paid X requests use mocks.
+- Web: **both module checks passed** against the built site over local HTTP.
+- Live system text-size changes on iPhone SE: **1 passed / 0 failed**.
+- Full phone UI suite: **30 passed / 2 expected skips / 0 failed** (32 cases). The two skipped capabilities were verified separately on iPad and with the live text-size coordinator.
+- iPad UI suite: **5 passed / 0 failed**, including maximum text size, architecture navigation, narrow-window resizing, postseason landscape, and rotation across presentation/dismissal.
+
+Evidence is under ignored `dist/architecture-merge-validation/` and `dist/large-text-ui/merge-*.xcresult`. Validation is complete for Scott's approved local merge to main. No push, deployment, device installation, upload, or build-number change has occurred. The five deferred architecture items below remain deferred.
 
 ## Resolution of rotation and recap failures
 
