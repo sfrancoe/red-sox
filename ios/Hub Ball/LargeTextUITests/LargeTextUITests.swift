@@ -39,7 +39,9 @@ final class LargeTextUITests: XCTestCase {
             let frame = self.app.frame
             return landscape ? frame.width > frame.height : frame.height > frame.width
         }, object: nil)
-        XCTAssertEqual(XCTWaiter.wait(for: [settled], timeout: 5), .completed)
+        let result = XCTWaiter.wait(for: [settled], timeout: 5)
+        if result != .completed { capture("rotation-unsettled") }
+        XCTAssertEqual(result, .completed)
         // The window frame updates before UIKit finishes its rotation transform.
         Thread.sleep(forTimeInterval: 1)
     }
@@ -425,12 +427,17 @@ final class LargeTextUITests: XCTestCase {
         let lob = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", ", Left on base,")).firstMatch
         XCTAssertTrue(lob.exists && lob.isHittable, "LOB totals must be visible after horizontal scrolling")
         XCTAssertTrue((app.buttons["Page"].value as? String ?? "").hasPrefix("Game Recaps"))
-        XCTAssertTrue(reveal(app.staticTexts["Batting"].firstMatch, attempts: 20))
+        // Keep an indexed query target while scrolling the heading into view.
+        let batting = app.staticTexts.matching(identifier: "Batting").element(boundBy: 0)
+        XCTAssertTrue(reveal(batting, attempts: 20))
         capture("recap-batting")
-        let player = app.buttons["Roman Anthony"].firstMatch
+        // The latest game's lineup changes; select a player actually in its box score.
+        let player = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "recap.player.")).element(boundBy: 0)
         XCTAssertTrue(reveal(player, attempts: 12))
+        let playerName = player.label
         player.tap()
-        XCTAssertTrue(app.staticTexts["Roman Anthony"].firstMatch.waitForExistence(timeout: 15))
+        XCTAssertTrue(app.buttons["Back to players"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.staticTexts[playerName].firstMatch.waitForExistence(timeout: 15))
         capture("recap-player-detail")
     }
 
@@ -515,6 +522,21 @@ final class LargeTextUITests: XCTestCase {
 
     func testAllSectionsDefault() {
         sections(size: "UICTContentSizeCategoryL")
+    }
+
+    func testRotationAcrossPostseasonPresentation() {
+        launch("-show-players", size: "UICTContentSizeCategoryL")
+        XCTAssertTrue(app.buttons["playoffs.open"].waitForExistence(timeout: 15))
+        rotate(.landscapeLeft)
+        rotate(.portrait)
+        app.buttons["playoffs.open"].tap()
+        XCTAssertTrue(app.buttons["playoffs.close"].waitForExistence(timeout: 15))
+        rotate(.landscapeLeft)
+        rotate(.portrait)
+        app.buttons["playoffs.close"].tap()
+        XCTAssertTrue(app.buttons["playoffs.close"].waitForNonExistence(timeout: 5))
+        rotate(.landscapeLeft)
+        rotate(.portrait)
     }
 
     func testSearchKeyboardRotationAndBackground() {

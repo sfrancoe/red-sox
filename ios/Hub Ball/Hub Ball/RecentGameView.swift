@@ -685,6 +685,7 @@ struct RecentGameView: View {
                     Text(name).font(.headline.weight(.semibold)).foregroundStyle(AppColor.navy)
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("recap.player.\(playerID)")
                 .accessibilityHint("Open player biography")
             } else {
                 Text(name).font(.headline.weight(.semibold)).foregroundStyle(AppColor.navy)
