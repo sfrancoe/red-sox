@@ -2,7 +2,26 @@
 
 October 6, 2026. Prepared by Codex for Scott.
 
-Work remains on `codex/hub-ball-architecture-audit` in `/Users/sfrancoe/Projects/Hub Ball`. The three review commits were read in full and tested. **Validation is not fully green: rotation checks and recap Batting navigation remain unresolved. See the follow-up validation section for the latest results.** Cleanup commit: `b49fc08fd`. Additional commits: `2460f9f0f` (CDN ceiling) and `fc344dfed` (safe UI harness and navigation targets). Nothing was merged, pushed, deployed, uploaded, or installed on a physical device. Build 117 remains the declared release.
+Work remains on `codex/hub-ball-architecture-audit` in `/Users/sfrancoe/Projects/Hub Ball`. The three review commits were read in full and tested. **The rotation and recap blockers are resolved. Automated validation is green; see the resolution results immediately below.** Cleanup commit: `b49fc08fd`. Additional commits: `2460f9f0f` (CDN ceiling) and `fc344dfed` (safe UI harness and navigation targets). Nothing was merged, pushed, deployed, uploaded, or installed on a physical device. Build 117 remains the declared release.
+
+## Resolution of rotation and recap failures
+
+Resolution commit: `c7343af39` (October 6, 2026).
+
+The simulator received landscape events with orientation locking disabled, but did not update the app's interface orientation, even on the Players screen before presenting any sheet. Restarting the existing audit iPhone simulator restored rotation. Restarting the existing iPad simulator restored its rotation checks too. No orientation workaround or relaxation of the five-second assertions was added to the app. A regression test now verifies landscape and portrait before, during, and after the postseason cover; failures also save a dedicated screenshot and accessibility tree.
+
+The recap test now keeps an indexed query for the Batting heading while scrolling, selects a player actually present in the game's box score using `recap.player.<MLB ID>`, and verifies both the detail screen's back button and the selected player's name. It no longer assumes Roman Anthony played in the latest game. The app change is solely an accessibility identifier; navigation, layout, and data behavior are unchanged.
+
+Validation on the resolution commit:
+
+- Full phone suite: **30 passed / 2 expected skips / 0 failed**, 32 cases total (`resolved-phone-full`). The iPad-only and live text-size cases were verified separately in the following runs.
+- Targeted recap and postseason rotation regression: **2 passed** (`rotation-reboot-and-recap`). Screenshots confirm the Batting heading and the opened player's detail page.
+- iPad: **5 passed / 0 failed**, covering all sections at maximum accessibility size, architecture navigation, narrow-window resizing, postseason landscape, and rotation across presentation/dismissal (`resolved-ipad`).
+- Live system text-size changes on iPhone SE: **1 passed / 0 failed**, including state retention across repeated size changes (`resolved-live-size`).
+- Native: **22 tests / 12 suites passed** (`native-ui-resolution.log`).
+- Swift 6 Release simulator build: **passed** (`release-ui-resolution.log`).
+
+Backend and Python sources have not changed in this resolution pass; their passing results below remain applicable. Paid discovery remained blocked by the test proxy. Simulator restarts did not erase their data. No physical device, production deployment, release number, or deferred architecture item was changed.
 
 ## Review commit findings
 
@@ -49,7 +68,7 @@ The stock UI shell runner fails with `OPTIONS[@]: unbound variable` when no meth
 
 Evidence is local and ignored by Git: `dist/architecture-review-validation/` holds native, backend, Python, Release, and proxy logs; `dist/large-text-ui/review-phone-safe.xcresult`, `review-ipad-safe.xcresult`, `review-cleanup-navigation.xcresult`, and `review-ipad-rotation-retry.xcresult` hold the completed UI results. Matching `*-evidence/` folders contain exported screenshots and accessibility trees. The local proxy was stopped after testing.
 
-## Follow-up validation and test harness
+## Earlier follow-up validation and test harness
 
 The test harness now starts a local, standard-library proxy for both ordinary UI runs and the live text-size coordinator. It returns 503 for X discovery without forwarding the request, permits only listed free API routes, and fails unknown routes closed. Three new offline proxy tests pass. Missing proxy configuration stops UI test setup before app launch. The stock shell runner's empty-array failure is also fixed.
 
@@ -66,7 +85,7 @@ Latest completed checks:
 - Postseason button coverage: **passed** in `review-scorecard-final`. That run identified duplicate Done button labels in the scorecard test; its query was subsequently scoped to the scorecard.
 - Final navigation rerun (`review-navigation-final`): **1 passed, 1 failed**. Playoff-to-scorecard navigation passed. Recap horizontal scrolling and LOB visibility passed; the test then failed locating the Batting section, before player-detail navigation could be verified. This remaining failure is not established as an architecture regression.
 
-Rotation remains unresolved: the updated all-sections tests at default and maximum text size, plus the Home Run Chase projection test, time out waiting for a landscape app frame. Earlier iPad postseason rotation also timed out. Do not weaken these assertions or treat the suite as a passing release gate. The full suite has not been rerun after the test-harness adjustments. The earlier postseason statistics clipping still needs a dedicated layout review.
+At this earlier stage, rotation remained unresolved: the updated all-sections tests at default and maximum text size, plus the Home Run Chase projection test, timed out waiting for a landscape app frame. Earlier iPad postseason rotation also timed out. The subsequent resolution pass above cleared these failures without weakening the assertions and reran the full phone suite successfully. The earlier manual observation of postseason statistics clipping remains a separate layout follow-up; this pass did not add a dedicated postseason text-clipping audit.
 
 New UI result bundles and exported evidence are under `dist/large-text-ui/`; native, Release, backend, and Python logs are under `dist/architecture-review-validation/`. These directories are ignored by Git. All changes remain on the audit branch; no production verification or release preparation has been performed.
 
@@ -78,7 +97,7 @@ New UI result bundles and exported evidence are under `dist/large-text-ui/`; nat
 4. **Duplicate player stores:** consolidate the per-team `PlayersStore` owned by `TeamSession` with the separate cache in `AppModel`, preserving detail-view state.
 5. **Recap fallback:** retain the on-device fallback through the server rollout; delete it one release after the server version ships.
 
-The future-date CDN ceiling was subsequently fixed in `2460f9f0f`. UI results above describe the initial validation; see the rerun addendum below for current findings.
+The future-date CDN ceiling was subsequently fixed in `2460f9f0f`. UI results above describe the initial validation; see the resolution section above for current findings.
 
 ## After Scott approves and merges
 
