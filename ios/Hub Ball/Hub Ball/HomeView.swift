@@ -11,7 +11,6 @@ struct HomeView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @Environment(\.scenePhase) private var scenePhase
     @AppStorage("october.homeInvitationDismissed") private var octoberInvitationDismissed = false
     @Environment(TeamSession.self) private var session
     private var store: HomeStore { session.home }

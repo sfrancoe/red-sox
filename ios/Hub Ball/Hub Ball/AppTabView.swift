@@ -265,7 +265,7 @@ struct AppTabView: View {
                 XPostsView(team: team)
                     .mainTabSwipe(selection: $selectedTab, current: .xPosts, availableTabs: availableTabs)
         case .standings:
-                StandingsView(team: team)
+                StandingsView()
                     .mainTabSwipe(selection: $selectedTab, current: .standings, availableTabs: availableTabs)
         case .players:
                 PlayersView(team: team, requestedPlayerID: selectedPlayerID) {

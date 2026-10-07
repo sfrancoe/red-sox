@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PostseasonScorecardSheet: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.scenePhase) private var scenePhase
     @Environment(AppModel.self) private var model
     private var store: PostseasonScorecardStore { model.scorecard(for: game) }
     @State private var selectedTeamSide = "away"

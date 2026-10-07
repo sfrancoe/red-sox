@@ -156,7 +156,7 @@ final class RecentGameStore {
                 descriptors = try await client.gameDescriptors()
                 discoveredIDs = Set(descriptors.map(\.gamePk))
             } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return }
+                if Task.isCancelled || APIError.isCancellation(error) { return }
                 discoverySucceeded = false
                 guard !forceGameIDs.isEmpty else { throw error }
                 descriptors = forceGameIDs.compactMap { gameID in

@@ -1,7 +1,7 @@
 import { MLB_TEAMS } from './team-registry.mjs';
 
 const RAW_DATA_ROOT = 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data';
-const FALLBACK_USER_AGENT = 'HubBall/1.0 (+https://red-sox.netlify.app)';
+const FALLBACK_USER_AGENT = 'HubBall/1.0 (+https://api.autumnlane.io)';
 
 const STANDARD_FILES = [
   'meta.json', 'pitching.json', 'recent-game.json', 'schedule.json',

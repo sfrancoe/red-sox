@@ -195,7 +195,6 @@ final class PostseasonStore {
             encoder.dateEncodingStrategy = .iso8601
             try encoder.encode(value).write(to: url, options: .atomic)
         } catch {
-            if Task.isCancelled || APIError.isCancellation(error) { return }
             // Local prediction storage can fail independently of browsing the race.
         }
     }

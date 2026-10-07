@@ -3,13 +3,9 @@ import SwiftUI
 struct StandingsView: View {
     @Environment(\.hubContentWidth) private var contentWidth
     @Environment(\.hubTeamPalette) private var palette
-    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(TeamSession.self) private var session
     private var store: StandingsStore { session.standings }
-
-    init(team: HubTeam) {
-    }
 
     var body: some View {
         ZStack {
@@ -520,7 +516,7 @@ struct StandingsView: View {
 
 #Preview {
     NavigationStack {
-        StandingsView(team: .boston)
+        StandingsView()
     }
 
     .environment(TeamSession(team: .boston))
