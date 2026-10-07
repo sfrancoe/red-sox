@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T13:57:28.829220+00:00",
+  "generated_at": "2026-10-07T20:10:13.873432+00:00",
   "source": "MLB Stats API",
   "team": "Padres",
   "regular_season_end": "2026-09-27",
@@ -25,16 +25,16 @@
         {
           "name": "FS1 / FOX ONE",
           "is_national": true,
-          "home_away": "home",
+          "home_away": "away",
           "availability": "national",
-          "available_for_streaming": true
+          "available_for_streaming": false
         },
         {
           "name": "FS1 / FOX ONE",
           "is_national": true,
-          "home_away": "away",
+          "home_away": "home",
           "availability": "national",
-          "available_for_streaming": false
+          "available_for_streaming": true
         }
       ]
     },
@@ -48,9 +48,9 @@
       "opponent_record": "2-1",
       "favorite_team_record": "1-2",
       "favorite_team_pitcher": "",
-      "opponent_pitcher": "",
+      "opponent_pitcher": "Jacob Misiorowski",
       "favorite_team_pitcher_record": "—",
-      "opponent_pitcher_record": "—",
+      "opponent_pitcher_record": "16-5",
       "show_probables": true,
       "series_description": "NL Division Series",
       "doubleheader": false,

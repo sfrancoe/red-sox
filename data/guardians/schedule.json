@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T22:48:14.000574+00:00",
+  "generated_at": "2026-10-07T20:09:56.109422+00:00",
   "source": "MLB Stats API",
   "team": "Guardians",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 849833,
       "game_date": "2026-10-07T20:00:00Z",
-      "status": "Scheduled",
+      "status": "In Progress",
       "venue": "Rate Field",
       "location": "away",
       "opponent": "White Sox",
@@ -61,9 +61,9 @@
       "opponent": "White Sox",
       "opponent_record": "2-0",
       "favorite_team_record": "0-2",
-      "favorite_team_pitcher": "",
+      "favorite_team_pitcher": "Parker Messick",
       "opponent_pitcher": "",
-      "favorite_team_pitcher_record": "—",
+      "favorite_team_pitcher_record": "12-9",
       "opponent_pitcher_record": "—",
       "show_probables": true,
       "series_description": "AL Division Series",
@@ -73,19 +73,12 @@
         {
           "name": "TBS/HBO MAX",
           "is_national": true,
-          "home_away": "away",
-          "availability": "national",
-          "available_for_streaming": false
-        },
-        {
-          "name": "TBS/HBO MAX",
-          "is_national": true,
           "home_away": "home",
           "availability": "national",
           "available_for_streaming": true
         },
         {
-          "name": "TruTV",
+          "name": "TBS/HBO MAX",
           "is_national": true,
           "home_away": "away",
           "availability": "national",
@@ -95,6 +88,13 @@
           "name": "TruTV",
           "is_national": true,
           "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": false
+        },
+        {
+          "name": "TruTV",
+          "is_national": true,
+          "home_away": "away",
           "availability": "national",
           "available_for_streaming": false
         }
