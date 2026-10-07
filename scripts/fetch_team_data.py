@@ -290,6 +290,8 @@ def recent_game_feed(team: dict[str, Any]) -> dict[str, Any]:
     finals = [
         game for day in payload.get("dates", []) for game in day.get("games", [])
         if (game.get("status") or {}).get("abstractGameState") == "Final"
+        # MLB also labels cancelled and postponed games as abstractly Final.
+        and (game.get("status") or {}).get("codedGameState") not in {"C", "D"}
     ]
     if not finals:
         raise RuntimeError(f"No completed {team['short_name']} game found in the past 14 days")
