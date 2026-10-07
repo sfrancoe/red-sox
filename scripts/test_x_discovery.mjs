@@ -90,3 +90,25 @@ const unavailable = createDiscoveryHandler({
 assert.equal((await unavailable(request('team=redsox'))).status, 502);
 assert.equal(paidCalls, 2, 'Storage failure must fail closed');
 console.log('X discovery durable spending cap: OK');
+
+// CDN lifetime follows the feed's remaining 24 hours instead of a fixed day.
+const { cacheHeaders } = await import('../netlify/functions/x-discovery.mjs');
+const cdnSeconds = headers => Number(headers['Netlify-CDN-Cache-Control'].match(/max-age=(\d+)/)[1]);
+const born = { generated_at: '2026-09-04T18:00:00.000Z' };
+assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-04T18:00:00Z'))), 86400);
+assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-05T17:00:00Z'))), 3600);
+assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-05T19:00:00Z'))), 300, 'Expired feeds recheck soon');
+assert.equal(cdnSeconds(cacheHeaders({}, new Date())), 300, 'Unparseable dates never cache for a day');
+const agedFeeds = new Map([['feed/redsox', { ...redSoxFeed, generated_at: '2026-09-04T18:00:00.000Z' }]]);
+const aged = createDiscoveryHandler({
+  openStore: () => ({
+    async get(key) { return agedFeeds.get(key) ?? null; },
+    async setJSON() { throw new Error('A fresh saved feed must not reserve a paid call'); },
+  }),
+  now: () => new Date('2026-09-05T17:00:00Z'), token: () => 'test-only',
+  requestX: async () => { throw new Error('A fresh saved feed must not call X'); },
+});
+const agedResponse = await aged(request('team=redsox'));
+assert.equal(agedResponse.status, 200);
+assert.match(agedResponse.headers.get('Netlify-CDN-Cache-Control'), /max-age=3600,/);
+console.log('X discovery CDN lifetime tracks feed age: OK');

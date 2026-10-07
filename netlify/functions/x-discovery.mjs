@@ -96,11 +96,21 @@ function searchURL(team, now = new Date()) {
   return url;
 }
 
-const CACHE_HEADERS = {
-  'Netlify-Vary': 'query=team',
-  'Cache-Control': 'public, max-age=300, stale-while-revalidate=300',
-  'Netlify-CDN-Cache-Control': 'public, durable, max-age=86400, stale-while-revalidate=3600',
-};
+// Cache a feed only for what remains of its 24-hour life. A saved feed that is
+// already 23 hours old must not be pinned at the CDN for another full day:
+// the app drops posts older than 24 hours, so it would contribute nothing.
+// An expired feed (today's paid call already spent) is rechecked every 5 minutes.
+const MIN_CDN_SECONDS = 300;
+export function cacheHeaders(feed, now) {
+  const age = now.valueOf() - Date.parse(feed?.generated_at);
+  const remaining = Number.isFinite(age) ? Math.floor((DAY_MS - age) / 1000) : 0;
+  const cdnSeconds = Math.max(MIN_CDN_SECONDS, remaining);
+  return {
+    'Netlify-Vary': 'query=team',
+    'Cache-Control': `public, max-age=${Math.min(300, cdnSeconds)}, stale-while-revalidate=300`,
+    'Netlify-CDN-Cache-Control': `public, durable, max-age=${cdnSeconds}, stale-while-revalidate=${Math.min(3600, cdnSeconds)}`,
+  };
+}
 
 // Injection keeps tests offline: never exercise production Blobs or paid X calls.
 export function createDiscoveryHandler({
@@ -127,7 +137,7 @@ export function createDiscoveryHandler({
       saved = await store.get(`feed/${requestedTeam}`, { type: 'json' });
       const date = now();
       if (saved && date.valueOf() - Date.parse(saved.generated_at) < DAY_MS) {
-        return Response.json(saved, { headers: CACHE_HEADERS });
+        return Response.json(saved, { headers: cacheHeaders(saved, date) });
       }
       if (!token()) return fail('X discovery is not configured.', 503);
       // An immutable reservation, not a read/increment/write counter. Never remove
@@ -138,7 +148,7 @@ export function createDiscoveryHandler({
         { reservedAt: date.toISOString() }, { onlyIfNew: true },
       );
       if (!modified) {
-        return saved ? Response.json(saved, { headers: CACHE_HEADERS })
+        return saved ? Response.json(saved, { headers: cacheHeaders(saved, date) })
           : fail('Daily discovery request already reserved. Try again tomorrow.', 503);
       }
       const response = await requestX(searchURL(team, date), {
@@ -148,10 +158,10 @@ export function createDiscoveryHandler({
       if (!response.ok) throw new Error(`X recent search returned ${response.status}`);
       const feed = buildDiscoveryFeed(await response.json(), date, team);
       await store.setJSON(`feed/${requestedTeam}`, feed);
-      return Response.json(feed, { headers: CACHE_HEADERS });
+      return Response.json(feed, { headers: cacheHeaders(feed, date) });
     } catch (error) {
       console.error('X discovery refresh failed', error);
-      return saved ? Response.json(saved, { headers: CACHE_HEADERS })
+      return saved ? Response.json(saved, { headers: cacheHeaders(saved, now()) })
         : fail('X discovery is temporarily unavailable.', 502);
     }
   };
