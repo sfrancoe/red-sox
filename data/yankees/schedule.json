@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T09:17:29.341730+00:00",
+  "generated_at": "2026-10-07T20:05:51.322097+00:00",
   "source": "MLB Stats API",
   "team": "Yankees",
   "regular_season_end": "2026-09-27",
@@ -7,7 +7,7 @@
     {
       "game_pk": 849838,
       "game_date": "2026-10-08T00:00:00Z",
-      "status": "Scheduled",
+      "status": "Pre-Game",
       "venue": "Yankee Stadium",
       "location": "home",
       "opponent": "Rays",
@@ -87,14 +87,14 @@
         {
           "name": "TruTV",
           "is_national": true,
-          "home_away": "home",
+          "home_away": "away",
           "availability": "national",
           "available_for_streaming": false
         },
         {
           "name": "TruTV",
           "is_national": true,
-          "home_away": "away",
+          "home_away": "home",
           "availability": "national",
           "available_for_streaming": false
         }
