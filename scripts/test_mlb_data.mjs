@@ -252,3 +252,53 @@ const derby = {
 assert.match(gameNarratives(derby)[119].summary, /^The Dodgers beat the Giants, 4–2/);
 assert.match(gameNarratives(derby)[137].summary, /^The Giants fell to the Dodgers, 4–2/);
 assert.doesNotMatch(JSON.stringify(gameNarratives(derby)), /Boston|Red Sox/);
+
+// Ported sentences from the original on-device recap: go-ahead plays, the
+// losing side's biggest swing, and walk-off wording.
+const scoredGame = (away, home, runs, plays, venue = 'Fenway Park') => ({
+  gameData: { status: { abstractGameState: 'Final', codedGameState: 'F' }, teams: { away, home }, venue: { name: venue } },
+  liveData: {
+    linescore: { teams: { away: { runs: runs[0] }, home: { runs: runs[1] } } },
+    plays: {
+      scoringPlays: plays.map((_, index) => index),
+      allPlays: plays.map(([inning, batter, event, rbi, awayScore, homeScore]) => ({
+        about: { inning }, matchup: { batter: { fullName: batter } },
+        result: { event, rbi, awayScore, homeScore },
+      })),
+    },
+  },
+});
+const royals = { id: 118, name: 'Kansas City Royals', teamName: 'Royals' };
+const redSox = { id: 111, name: 'Boston Red Sox', teamName: 'Red Sox' };
+const yankees = { id: 147, name: 'New York Yankees', teamName: 'Yankees' };
+const mets = { id: 121, name: 'New York Mets', teamName: 'Mets' };
+
+const goAhead = gameNarratives(scoredGame(royals, redSox, [1, 4], [
+  [2, 'Bobby Witt Jr.', 'Single', 1, 1, 0],
+  [6, 'Rafael Devers', 'Home Run', 2, 1, 2],
+  [8, 'Jarren Duran', 'Double', 2, 1, 4],
+]));
+assert.equal(goAhead[111].summary, 'The Red Sox beat the Royals, 4–1, at Fenway Park. '
+  + 'Rafael Devers’ two-run home run in the 6th put Boston ahead for good.');
+assert.equal(goAhead[118].summary, 'The Royals fell to the Red Sox, 4–1, at Fenway Park. '
+  + 'Rafael Devers’ two-run home run in the 6th put the Red Sox ahead for good. '
+  + 'Kansas City’s biggest swing came on Bobby Witt Jr.’s single in the 2nd.');
+
+const walkoff = gameNarratives(scoredGame(yankees, redSox, [2, 3], [
+  [1, 'Aaron Judge', 'Home Run', 2, 2, 0],
+  [5, 'Trevor Story', 'Single', 1, 2, 1],
+  [9, 'Rafael Devers', 'Home Run', 2, 2, 3],
+]));
+assert.equal(walkoff[111].summary, 'Rafael Devers delivered a walk-off home run in the 9th inning as the Red Sox '
+  + 'rallied past the Yankees, 3–2, at Fenway Park. '
+  + 'Boston trailed 2–0 before Trevor Story’s single in the 5th cut the deficit to one.');
+
+const subway = gameNarratives(scoredGame(mets, yankees, [1, 3], [
+  [3, 'Pete Alonso', 'Home Run', 1, 1, 0],
+  [4, 'Aaron Judge', 'Home Run', 3, 1, 3],
+], 'Yankee Stadium'));
+assert.equal(subway[147].summary, 'The Yankees beat the Mets, 3–1, at Yankee Stadium. '
+  + 'Aaron Judge’s three-run home run in the 4th put the Yankees ahead for good.');
+assert.match(subway[121].summary, /The Mets’ biggest swing came on Pete Alonso’s home run in the 3rd\.$/);
+assert.doesNotMatch(JSON.stringify(subway), /New York/, 'Same-city games name the club, not the city');
+console.log('Server recaps keep go-ahead, biggest-swing and walk-off sentences');

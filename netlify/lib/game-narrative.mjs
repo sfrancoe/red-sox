@@ -1,3 +1,7 @@
+import { MLB_TEAMS } from '../functions/team-registry.mjs';
+
+const CITY_BY_ID = new Map(MLB_TEAMS.map(team => [team.mlb_id, team.city_name]));
+
 function ordinal(value) {
   const suffix = value % 100 > 10 && value % 100 < 14 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[value % 10] || 'th');
   return `${value}${suffix}`;
@@ -16,7 +20,21 @@ function scoringAction(play) {
   return `${possessive(batter)} ${runLabel}${event}`.trim();
 }
 
+const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1);
+
+// The city reads naturally ("put Boston ahead"), but two clubs from one city
+// (Yankees–Mets, Cubs–White Sox) would be ambiguous, so fall back to the club.
+function placeName(team, other) {
+  const city = CITY_BY_ID.get(team.id);
+  return city && city !== CITY_BY_ID.get(other.id) ? city : `the ${team.club_name}`;
+}
+
+function placePossessive(place) {
+  return place.startsWith('the ') ? `${place}’` : `${place}’s`;
+}
+
 function gameSummary(favorite, opponent, venue, scoring) {
+  const place = placeName(favorite, opponent);
   let awayScore = 0;
   let homeScore = 0;
   const annotated = scoring.map(play => {
@@ -44,7 +62,7 @@ function gameSummary(favorite, opponent, venue, scoring) {
       && winningPlay === annotated.at(-1);
     let first;
     if (walkoff) {
-      first = `${winningPlay.batter || favorite.club_name} delivered a walk-off ${(winningPlay.event || 'hit').toLowerCase()} in the ${ordinal(winningPlay.inning_num)} inning as the ${favorite.club_name} beat the ${opponent.club_name}, ${favorite.runs}–${opponent.runs}, at ${venue}.`;
+      first = `${winningPlay.batter || favorite.club_name} delivered a walk-off ${(winningPlay.event || 'hit').toLowerCase()} in the ${ordinal(winningPlay.inning_num)} inning as the ${favorite.club_name} rallied past the ${opponent.club_name}, ${favorite.runs}–${opponent.runs}, at ${venue}.`;
     } else if (largestDeficit >= 2) {
       first = `The ${favorite.club_name} erased a ${largestDeficit}-run deficit to beat the ${opponent.club_name}, ${favorite.runs}–${opponent.runs}, at ${venue}.`;
     } else if (opponent.runs === 0) {
@@ -60,9 +78,9 @@ function gameSummary(favorite, opponent, venue, scoring) {
       if (rallyPlay) {
         const remaining = rallyPlay.afterOpponent - rallyPlay.afterFavorite;
         const effect = remaining === 0 ? 'tied the game'
-          : remaining < 0 ? `put ${favorite.club_name} ahead`
+          : remaining < 0 ? `put ${place} ahead`
             : `cut the deficit to ${remaining === 1 ? 'one' : remaining}`;
-        details.push(`The ${favorite.club_name} trailed ${lowPoint.afterOpponent}–${lowPoint.afterFavorite} before ${scoringAction(rallyPlay)} in the ${ordinal(rallyPlay.inning_num)} ${effect}.`);
+        details.push(`${capitalize(place)} trailed ${lowPoint.afterOpponent}–${lowPoint.afterFavorite} before ${scoringAction(rallyPlay)} in the ${ordinal(rallyPlay.inning_num)} ${effect}.`);
       }
     }
     const tyingPlay = annotated.slice(deficitIndex + 1).find(play => play.afterFavorite > play.beforeFavorite
@@ -70,6 +88,9 @@ function gameSummary(favorite, opponent, venue, scoring) {
     if (walkoff && tyingPlay && tyingPlay !== winningPlay) {
       const timing = winningPlay.inning_num - tyingPlay.inning_num === 1 ? 'one inning later' : 'later';
       details.push(`${scoringAction(tyingPlay)} tied it in the ${ordinal(tyingPlay.inning_num)}, and ${winningPlay.batter || favorite.club_name} completed the comeback ${timing}.`);
+    } else if (largestDeficit < 2 && winningPlay && !walkoff) {
+      // A walk-off's opening sentence already names the winning play.
+      details.push(`${scoringAction(winningPlay)} in the ${ordinal(winningPlay.inning_num)} put ${place} ahead for good.`);
     }
     return [first, ...details].join(' ');
   }
@@ -78,10 +99,27 @@ function gameSummary(favorite, opponent, venue, scoring) {
   if (favorite.runs === 0) {
     return `The ${favorite.club_name} were shut out by the ${opponent.club_name}, ${opponent.runs}–${favorite.runs}, at ${venue}.`;
   }
-  if (largestLead >= 2) {
-    return `The ${favorite.club_name} couldn’t hold a ${largestLead}-run lead and fell to the ${opponent.club_name}, ${opponent.runs}–${favorite.runs}, at ${venue}.`;
+  const first = largestLead >= 2
+    ? `The ${favorite.club_name} couldn’t hold a ${largestLead}-run lead and fell to the ${opponent.club_name}, ${opponent.runs}–${favorite.runs}, at ${venue}.`
+    : `The ${favorite.club_name} fell to the ${opponent.club_name}, ${opponent.runs}–${favorite.runs}, at ${venue}.`;
+  const details = [];
+  const opponentGoAhead = annotated.filter(play => play.afterOpponent > play.afterFavorite
+    && play.beforeOpponent <= play.beforeFavorite && play.afterOpponent > play.beforeOpponent).at(-1);
+  if (opponentGoAhead) {
+    details.push(`${scoringAction(opponentGoAhead)} in the ${ordinal(opponentGoAhead.inning_num)} put the ${opponent.club_name} ahead for good.`);
   }
-  return `The ${favorite.club_name} fell to the ${opponent.club_name}, ${opponent.runs}–${favorite.runs}, at ${venue}.`;
+  // Most runs on one play; a later inning breaks ties, else the first such play.
+  const highlight = annotated.filter(play => play.afterFavorite > play.beforeFavorite)
+    .reduce((best, play) => {
+      if (!best) return play;
+      const runs = play.afterFavorite - play.beforeFavorite;
+      const bestRuns = best.afterFavorite - best.beforeFavorite;
+      return runs > bestRuns || (runs === bestRuns && play.inning_num > best.inning_num) ? play : best;
+    }, null);
+  if (highlight) {
+    details.push(`${capitalize(placePossessive(place))} biggest swing came on ${scoringAction(highlight)} in the ${ordinal(highlight.inning_num)}.`);
+  }
+  return [first, ...details].join(' ');
 }
 
 export function gameNarratives(payload) {
