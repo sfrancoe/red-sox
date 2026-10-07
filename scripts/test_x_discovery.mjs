@@ -99,6 +99,10 @@ assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-04T18:00:00Z'))), 8
 assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-05T17:00:00Z'))), 3600);
 assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-05T19:00:00Z'))), 300, 'Expired feeds recheck soon');
 assert.equal(cdnSeconds(cacheHeaders({}, new Date())), 300, 'Unparseable dates never cache for a day');
+assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-04T17:59:00Z'))), 86400,
+  'Future feed timestamps cannot exceed the daily CDN ceiling');
+assert.equal(cdnSeconds(cacheHeaders(born, new Date('2026-09-05T17:59:59Z'))), 300,
+  'Nearly expired feeds retain the five-minute recheck floor');
 const agedFeeds = new Map([['feed/redsox', { ...redSoxFeed, generated_at: '2026-09-04T18:00:00.000Z' }]]);
 const aged = createDiscoveryHandler({
   openStore: () => ({

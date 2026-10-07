@@ -104,7 +104,7 @@ const MIN_CDN_SECONDS = 300;
 export function cacheHeaders(feed, now) {
   const age = now.valueOf() - Date.parse(feed?.generated_at);
   const remaining = Number.isFinite(age) ? Math.floor((DAY_MS - age) / 1000) : 0;
-  const cdnSeconds = Math.max(MIN_CDN_SECONDS, remaining);
+  const cdnSeconds = Math.min(DAY_MS / 1000, Math.max(MIN_CDN_SECONDS, remaining));
   return {
     'Netlify-Vary': 'query=team',
     'Cache-Control': `public, max-age=${Math.min(300, cdnSeconds)}, stale-while-revalidate=300`,
