@@ -95,6 +95,22 @@ assets/fonts/           self-hosted woff2
 scripts/                fetch, build, package
 ```
 
+## Project atlas
+
+[`docs/atlas/hub-ball-atlas.html`](docs/atlas/hub-ball-atlas.html) is an interactive 3D
+map of this repository. Open it in a browser (it works offline from `file://`): spheres
+are sized by lines of code, open into groups and files when clicked, and are linked by
+the imports, API calls, data writes, workflow runs and tests between them. It is
+generated and not deployed. Rebuild it after structural changes:
+
+```bash
+python3 scripts/build_atlas.py        # rewrite docs/atlas/hub-ball-atlas.html
+python3 scripts/test_build_atlas.py   # validate the graph
+```
+
+Edit the viewer in `docs/atlas/template.html`; connections the scanners cannot see
+(fetcher outputs, app endpoints) are listed in `scripts/build_atlas.py`.
+
 ## A note on accuracy
 
 Every game in `data/` comes from the MLB Stats API. The fetch script also
