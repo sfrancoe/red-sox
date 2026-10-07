@@ -4,12 +4,10 @@
 from __future__ import annotations
 
 import json
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from http_refresh import fetch_json
 
 
 NYM = 121
@@ -33,22 +31,6 @@ STANDINGS_API = (
 )
 
 
-def fetch_json(url: str) -> Any:
-    """Use normal request defaults first, then the approved fallback UA."""
-    last_error: Exception | None = None
-    for headers in ({}, {"User-Agent": FALLBACK_USER_AGENT}):
-        for attempt in range(3):
-            try:
-                request = Request(url, headers=headers)
-                with urlopen(request, timeout=45) as response:
-                    return json.load(response)
-            except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
-                last_error = exc
-                if attempt < 2:
-                    time.sleep(2**attempt)
-        if headers:
-            break
-    raise RuntimeError(f"Could not fetch pitching data: {last_error}")
 
 
 def number(value: Any, default: float = 0.0) -> float:
@@ -217,18 +199,8 @@ def feed_changed(feed: dict[str, Any]) -> bool:
 
 
 def main() -> None:
-    season = datetime.now(timezone.utc).year
-    projections = fetch_json(PROJECTIONS_API)
-    actual = fetch_json(ACTUAL_API.format(season=season, team=FANGRAPHS_NYM))
-    standings = fetch_json(STANDINGS_API.format(league=NL, season=season))
-    if not isinstance(projections, list):
-        raise RuntimeError("FanGraphs returned an unexpected projections response")
-    feed = build_feed(projections, actual, standings, season)
-    if not feed_changed(feed):
-        print(f"No pitching changes; kept {OUTPUT_PATH}")
-        return
-    OUTPUT_PATH.write_text(json.dumps(feed, indent=2, ensure_ascii=False) + "\n")
-    print(f"Wrote Above the Forecast pitching data to {OUTPUT_PATH}")
+    from refresh_pitching import main as refresh_main
+    refresh_main(["mets"])
 
 
 if __name__ == "__main__":

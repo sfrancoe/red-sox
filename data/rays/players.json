@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-28T17:46:05.098302+00:00",
-  "roster_as_of": "September 27, 2026",
+  "generated_at": "2026-10-06T16:04:39.072117+00:00",
+  "roster_as_of": "October 4, 2026",
   "team": {
     "id": 139,
     "name": "Tampa Bay Rays"
   },
   "roster_type": "open-current-roster",
   "player_count": 45,
-  "active_count": 28,
+  "active_count": 26,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
     "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
@@ -137,7 +137,7 @@
       "is_active_roster": true,
       "birth_date": "1994-12-02",
       "age": 31,
-      "birthplace": "Fort Walton Beach, Florida, U.S.",
+      "birthplace": "Fort Walton Beach",
       "height": null,
       "weight": null,
       "bats": "Right",
@@ -146,7 +146,14 @@
       "debut_team": "Toronto Blue Jays",
       "education": {
         "high_schools": [],
-        "colleges": []
+        "colleges": [
+          {
+            "name": "Choctawhatchee Senior High School"
+          },
+          {
+            "name": "University of North Florida"
+          }
+        ]
       },
       "teams": [
         "Toronto Blue Jays",
@@ -435,8 +442,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1994-04-23",
       "age": 32,
       "birthplace": "Lawrence",
@@ -539,7 +546,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q140879522",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Alex_Cook_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "cooka003",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1018,8 +1025,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "2002-01-18",
       "age": 24,
       "birthplace": "Summerville, South Carolina, U.S.",
@@ -1038,7 +1045,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139737016",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Brody_Hopkins",
-      "retrosheet_id": null,
+      "retrosheet_id": "hopkb001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1168,7 +1175,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139737018",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Ty_Johnson_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "johnt004",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1327,8 +1334,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1997-06-19",
       "age": 29,
       "birthplace": "Dallas, Texas, U.S.",
@@ -1943,7 +1950,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1994-10-01",
-      "age": 31,
+      "age": 32,
       "birthplace": "Greensboro",
       "height": null,
       "weight": null,
@@ -2255,7 +2262,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q140844808",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Kenny_Piper",
-      "retrosheet_id": null,
+      "retrosheet_id": "pipek001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2292,6 +2299,9 @@
         "colleges": [
           {
             "name": "Mt. Spokane High School"
+          },
+          {
+            "name": "Oregon State University"
           }
         ]
       },
@@ -2359,8 +2369,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1996-08-06",
       "age": 30,
       "birthplace": "Mérida, Yucatán, Mexico",
@@ -2438,8 +2448,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1994-04-06",
       "age": 32,
       "birthplace": "Fairfield",
@@ -2963,8 +2973,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1994-08-26",
       "age": 32,
       "birthplace": "Tulsa",

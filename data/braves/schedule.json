@@ -1,108 +1,74 @@
 {
-  "generated_at": "2026-09-29T14:46:00.555648+00:00",
+  "generated_at": "2026-10-07T06:30:18.806636+00:00",
   "source": "MLB Stats API",
   "team": "Braves",
   "regular_season_end": "2026-09-27",
   "games": [
     {
-      "game_pk": 849845,
-      "game_date": "2026-09-29T18:00:00Z",
-      "status": "Pre-Game",
-      "venue": "Truist Park",
-      "location": "home",
-      "opponent": "Phillies",
-      "opponent_record": "0-0",
-      "favorite_team_record": "0-0",
-      "favorite_team_pitcher": "Chris Sale",
-      "opponent_pitcher": "Jesús Luzardo",
-      "favorite_team_pitcher_record": "14-9",
-      "opponent_pitcher_record": "14-5",
-      "show_probables": true,
-      "series_description": "NL Wild Card Series",
-      "doubleheader": false,
-      "game_number": 1,
-      "broadcasts": [
-        {
-          "name": "NBC/Peacock",
-          "is_national": true,
-          "home_away": "home",
-          "availability": "national",
-          "available_for_streaming": true
-        },
-        {
-          "name": "NBC/Peacock",
-          "is_national": true,
-          "home_away": "away",
-          "availability": "national",
-          "available_for_streaming": false
-        }
-      ]
-    },
-    {
-      "game_pk": 849841,
-      "game_date": "2026-09-30T18:00:00Z",
+      "game_pk": 849822,
+      "game_date": "2026-10-07T22:00:00Z",
       "status": "Scheduled",
       "venue": "Truist Park",
       "location": "home",
-      "opponent": "Phillies",
-      "opponent_record": "0-0",
-      "favorite_team_record": "0-0",
+      "opponent": "Dodgers",
+      "opponent_record": "2-1",
+      "favorite_team_record": "1-2",
       "favorite_team_pitcher": "Tyler Mahle",
-      "opponent_pitcher": "Cristopher Sánchez",
+      "opponent_pitcher": "Tyler Glasnow",
       "favorite_team_pitcher_record": "7-10",
-      "opponent_pitcher_record": "18-7",
+      "opponent_pitcher_record": "5-2",
       "show_probables": true,
-      "series_description": "NL Wild Card Series",
+      "series_description": "NL Division Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "NBC/Peacock",
-          "is_national": true,
-          "home_away": "home",
-          "availability": "national",
-          "available_for_streaming": true
-        },
-        {
-          "name": "NBC/Peacock",
+          "name": "FS1 / FOX ONE",
           "is_national": true,
           "home_away": "away",
           "availability": "national",
           "available_for_streaming": false
+        },
+        {
+          "name": "FS1 / FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
         }
       ]
     },
     {
-      "game_pk": 849844,
-      "game_date": "2026-10-01T18:00:00Z",
+      "game_pk": 849821,
+      "game_date": "2026-10-10T00:00:00Z",
       "status": "Scheduled",
-      "venue": "Truist Park",
-      "location": "home",
-      "opponent": "Phillies",
-      "opponent_record": "0-0",
-      "favorite_team_record": "0-0",
+      "venue": "UNIQLO Field at Dodger Stadium",
+      "location": "away",
+      "opponent": "Dodgers",
+      "opponent_record": "2-1",
+      "favorite_team_record": "1-2",
       "favorite_team_pitcher": "",
       "opponent_pitcher": "",
       "favorite_team_pitcher_record": "—",
       "opponent_pitcher_record": "—",
       "show_probables": true,
-      "series_description": "NL Wild Card Series",
+      "series_description": "NL Division Series",
       "doubleheader": false,
       "game_number": 1,
       "broadcasts": [
         {
-          "name": "NBC/Peacock",
-          "is_national": true,
-          "home_away": "home",
-          "availability": "national",
-          "available_for_streaming": true
-        },
-        {
-          "name": "NBC/Peacock",
+          "name": "FOX / FOX ONE",
           "is_national": true,
           "home_away": "away",
           "availability": "national",
           "available_for_streaming": false
+        },
+        {
+          "name": "FOX / FOX ONE",
+          "is_national": true,
+          "home_away": "home",
+          "availability": "national",
+          "available_for_streaming": true
         }
       ]
     }

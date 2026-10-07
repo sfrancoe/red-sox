@@ -9,9 +9,11 @@ import json
 import os
 import re
 import sys
+import ssl
 import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from http.client import IncompleteRead, RemoteDisconnected
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -20,10 +22,15 @@ from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
 from team_registry import data_directory, expansion_teams, team_by_key
+from news_source_status import STATE_PATH, atomic_json, load_state, observe
 
 
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 BING_NEWS = "https://www.bing.com/news/search"
+
+
+class NewsSourceTransientError(RuntimeError):
+    """Exhausted retries for a network/service or malformed RSS failure."""
 
 
 class NoArticlesReturnedError(RuntimeError):
@@ -37,11 +44,19 @@ def fetch_xml(url: str) -> ElementTree.Element:
             try:
                 with urlopen(Request(url, headers=headers), timeout=30) as response:
                     return ElementTree.fromstring(response.read())
-            except (HTTPError, URLError, TimeoutError, ElementTree.ParseError) as exc:
+            # Body reads can disconnect after urlopen has returned successfully.
+            # Keep this list narrow: arbitrary OSError/HTTPException/code failures
+            # must still escape into immediate failure reporting.
+            except (HTTPError, URLError, TimeoutError, ElementTree.ParseError,
+                    ConnectionResetError, IncompleteRead, RemoteDisconnected) as exc:
+                if isinstance(exc, HTTPError) and exc.code != 429 and not 500 <= exc.code <= 599:
+                    raise  # Authentication, missing URL, configuration: immediate.
+                if isinstance(exc, URLError) and isinstance(exc.reason, ssl.SSLCertVerificationError):
+                    raise  # Broken trust/configuration is not a transient outage.
                 last_error = exc
                 if attempt < 2:
                     time.sleep(2**attempt)
-    raise RuntimeError(f"Could not fetch news RSS: {last_error}")
+    raise NewsSourceTransientError(f"Could not fetch news RSS: {last_error}")
 
 
 def clean_text(value: str | None) -> str:
@@ -83,6 +98,8 @@ def source_feed(team: dict[str, Any], source: dict[str, str]) -> dict[str, Any]:
     query = f"site:{source_host} {team['full_name']}"
     url = BING_NEWS + "?" + urlencode({"q": query, "format": "rss"})
     root = fetch_xml(url)
+    if root.tag != "rss" or root.find("channel") is None:
+        raise ValueError("News response is not an RSS channel")
     articles, seen = [], set()
     team_terms = {
         team["full_name"].lower(), team["short_name"].lower(),
@@ -117,12 +134,14 @@ def source_feed(team: dict[str, Any], source: dict[str, str]) -> dict[str, Any]:
     }
 
 
-def fetch_team(team: dict[str, Any]) -> list[str]:
-    failures = []
+def fetch_team(team: dict[str, Any], state: dict[str, Any]) -> tuple[list[str], list[str], int, int]:
+    failures, immediate = [], []
+    escalated = attempted = 0
     output = data_directory(team)
     output.mkdir(parents=True, exist_ok=True)
     print(f"{team['full_name']} news:")
     for source in team["news_sources"]:
+        attempted += 1
         try:
             feed = source_feed(team, source)
         except NoArticlesReturnedError as exc:
@@ -130,13 +149,21 @@ def fetch_team(team: dict[str, Any]) -> list[str]:
             # snapshot instead of failing the entire league refresh or overwriting it.
             print(f"  warning: {exc}; keeping the previous snapshot")
             continue
-        except Exception as exc:
-            # A broken publisher must not prevent other sources/teams publishing.
-            # Report the failed run only after all healthy feeds have been saved.
+        except NewsSourceTransientError as exc:
             failure = f"{team['full_name']} / {source['name']}: {exc}"
+            streak = observe(state, team, source, str(exc) or type(exc).__name__)
+            escalated += streak >= 2
+            failure += f" (consecutive eligible failures: {streak}; {'ALERT' if streak >= 2 else 'first failure, alert deferred'})"
             failures.append(failure)
+            print(f"  {'ERROR' if streak >= 2 else 'WARNING'}: {failure}; keeping the previous snapshot", file=sys.stderr)
+            continue
+        except Exception as exc:
+            # Unexpected code/configuration failures remain immediately actionable.
+            failure = f"{team['full_name']} / {source['name']}: {exc}"
+            immediate.append(failure)
             print(f"  ERROR: {failure}; keeping the previous snapshot", file=sys.stderr)
             continue
+        observe(state, team, source)  # A verified success resets only this source.
         path = output / f"{source['key']}.json"
         try:
             current = json.loads(path.read_text())
@@ -145,9 +172,9 @@ def fetch_team(team: dict[str, Any]) -> list[str]:
         if current and current.get("articles") == feed["articles"]:
             print(f"  unchanged {path}")
             continue
-        path.write_text(json.dumps(feed, indent=2, ensure_ascii=False) + "\n")
+        atomic_json(path, feed)
         print(f"  wrote {path}")
-    return failures
+    return failures, immediate, escalated, attempted
 
 
 def main() -> int:
@@ -155,20 +182,53 @@ def main() -> int:
     parser.add_argument("--team", action="append", default=[])
     args = parser.parse_args()
     teams = [team_by_key(key) for key in args.team] if args.team else expansion_teams()
-    failures = []
+    state = load_state(STATE_PATH)
+    original_state = json.dumps(state, sort_keys=True)
+    # Validate identities before any fetch/write. Repeated identities would count
+    # one refresh twice; source URL changes require an explicit state migration.
+    identities = set()
     for team in teams:
-        failures.extend(fetch_team(team))
+        for source in team["news_sources"]:
+            identity = f"{team['api_key']}/{source['key']}"
+            if identity in identities:
+                raise ValueError(f"Duplicate source: {identity}")
+            identities.add(identity)
+            previous = state["sources"].get(identity)
+            if not source["url"].startswith("https://") or (previous and previous["url"] != source["url"]):
+                raise ValueError(f"Invalid or changed source URL: {identity}")
+    failures, immediate = [], []
+    escalated = attempted = 0
+    for team in teams:
+        failed, fatal, alerts, count = fetch_team(team, state)
+        failures.extend(failed)
+        immediate.extend(fatal)
+        escalated += alerts
+        attempted += count
+    if not attempted:
+        raise ValueError("No news sources configured")
+    outage = len(failures) == attempted
+    if outage:
+        immediate.append("Whole-update outage: every configured source failed")
+    if json.dumps(state, sort_keys=True) != original_state:
+        atomic_json(STATE_PATH, state)
     summary = (
-        f"News refresh: {len(teams)} teams processed; {len(failures)} source failures.\n"
-        "Successful updates are ready to publish. Failed sources retain their previous snapshots.\n"
+        f"News refresh: {len(teams)} teams processed; {len(failures)} source failures; "
+        f"{escalated} persistent source alerts; {len(immediate)} immediate failures.\n"
+        "Healthy updates and source status are ready to publish together. "
+        "Failed sources retain their previous snapshots.\n"
     )
-    if failures:
-        summary += "\n" + "\n".join(f"- {failure}" for failure in failures) + "\n"
+    if failures or immediate:
+        summary += "\n" + "\n".join(f"- {failure}" for failure in failures + immediate) + "\n"
     print(summary)
     if summary_path := os.environ.get("GITHUB_STEP_SUMMARY"):
         with Path(summary_path).open("a", encoding="utf-8") as handle:
             handle.write(summary)
-    return 1 if failures else 0
+    # Set this only after the complete fetch, writes, strict state persistence and
+    # summary succeed. Integrity/I/O failures must not publish a partial batch.
+    if output_path := os.environ.get("GITHUB_OUTPUT"):
+        with Path(output_path).open("a", encoding="utf-8") as handle:
+            handle.write("publish_ready=true\n")
+    return 1 if escalated or immediate else 0
 
 
 if __name__ == "__main__":

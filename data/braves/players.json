@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-28T17:54:18.160527+00:00",
-  "roster_as_of": "September 25, 2026",
+  "generated_at": "2026-10-06T16:13:18.592018+00:00",
+  "roster_as_of": "October 3, 2026",
   "team": {
     "id": 144,
     "name": "Atlanta Braves"
   },
   "roster_type": "open-current-roster",
   "player_count": 46,
-  "active_count": 28,
+  "active_count": 26,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
     "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
@@ -178,7 +178,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139736316",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Blake_Burkhalter",
-      "retrosheet_id": null,
+      "retrosheet_id": "burkb002",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -203,7 +203,7 @@
       "is_active_roster": true,
       "birth_date": "1998-06-06",
       "age": 28,
-      "birthplace": "Elk Grove, Illinois, U.S.",
+      "birthplace": "Elk Grove Village",
       "height": null,
       "weight": null,
       "bats": "Left",
@@ -212,7 +212,17 @@
       "debut_team": "Atlanta Braves",
       "education": {
         "high_schools": [],
-        "colleges": []
+        "colleges": [
+          {
+            "name": "Bismarck Henning High School"
+          },
+          {
+            "name": "Kankakee Community College"
+          },
+          {
+            "name": "Southeast Missouri State University"
+          }
+        ]
       },
       "teams": [
         "Atlanta Braves"
@@ -414,11 +424,11 @@
       "number": "15",
       "position": {
         "name": "Designated Hitter",
-        "group": "Hitter",
+        "group": "Infielder",
         "abbreviation": "DH"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1990-08-17",
       "age": 36,
       "birthplace": "Atlanta",
@@ -643,88 +653,6 @@
           "complete_games": 0,
           "era": 5.48,
           "whip": 1.379
-        }
-      }
-    },
-    {
-      "id": 622694,
-      "mlb_id": 622694,
-      "wikidata_id": "Q50807865",
-      "slug": "elieser-hernandez",
-      "name": "Elieser Hernández",
-      "full_name": "Elieser Hernández",
-      "number": "57",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "1995-05-03",
-      "age": 31,
-      "birthplace": "Santa Teresa del Tuy",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "May 11, 2018",
-      "debut_team": "Miami Marlins",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Miami Marlins",
-        "Los Angeles Dodgers",
-        "Milwaukee Brewers",
-        "LG Twins",
-        "Atlanta Braves"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q50807865",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Elieser_Hern%C3%A1ndez",
-      "retrosheet_id": "herne002",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 99,
-          "plate_appearances": 53,
-          "at_bats": 44,
-          "runs": 1,
-          "hits": 2,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 1,
-          "strikeouts": 24,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": 0.045,
-          "on_base_percentage": 0.067,
-          "slugging_percentage": 0.045,
-          "ops": 0.112
-        },
-        "pitching": {
-          "games": 99,
-          "games_started": 49,
-          "wins": 10,
-          "losses": 22,
-          "saves": 0,
-          "innings_outs": 910,
-          "hits": 300,
-          "runs": 182,
-          "earned_runs": 172,
-          "home_runs": 73,
-          "walks": 99,
-          "strikeouts": 285,
-          "hit_batters": 20,
-          "wild_pitches": 7,
-          "balks": 2,
-          "complete_games": 0,
-          "era": 5.1,
-          "whip": 1.315
         }
       }
     },
@@ -1052,7 +980,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q139717966",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jim_Jarvis_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "jarvj001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1215,8 +1143,8 @@
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1997-05-13",
       "age": 29,
       "birthplace": "San Diego, California, U.S.",
@@ -1685,7 +1613,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1994-09-29",
-      "age": 31,
+      "age": 32,
       "birthplace": "Newport Beach",
       "height": null,
       "weight": null,
@@ -1850,7 +1778,7 @@
       "roster_status": "Active",
       "is_active_roster": true,
       "birth_date": "1994-10-04",
-      "age": 31,
+      "age": 32,
       "birthplace": "Peekskill",
       "height": null,
       "weight": null,
@@ -1934,7 +1862,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q113133571",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Owen_Murphy_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "murpo001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2331,7 +2259,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q112838443",
       "wikipedia_url": "https://en.wikipedia.org/wiki/JR_Ritchie",
-      "retrosheet_id": null,
+      "retrosheet_id": "ritcj001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2514,11 +2442,11 @@
       "number": "8",
       "position": {
         "name": "Designated Hitter",
-        "group": "Infielder",
+        "group": "Outfielder",
         "abbreviation": "DH"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
       "birth_date": "1995-06-15",
       "age": 31,
       "birthplace": "Los Angeles",
@@ -2782,10 +2710,10 @@
         "high_schools": [],
         "colleges": [
           {
-            "name": "Harvard University"
+            "name": "Moeller High School"
           },
           {
-            "name": "Moeller High School"
+            "name": "Harvard University"
           }
         ]
       },
@@ -2925,6 +2853,93 @@
       }
     },
     {
+      "id": 642133,
+      "mlb_id": 642133,
+      "wikidata_id": "Q29446153",
+      "slug": "rowdy-tellez",
+      "name": "Rowdy Tellez",
+      "full_name": "Rowdy Tellez",
+      "number": "11",
+      "position": {
+        "name": "First Base",
+        "group": "Infielder",
+        "abbreviation": "1B"
+      },
+      "roster_status": "Active",
+      "is_active_roster": true,
+      "birth_date": "1995-03-16",
+      "age": 31,
+      "birthplace": "Sacramento",
+      "height": null,
+      "weight": null,
+      "bats": "Left",
+      "throws": "Left",
+      "debut_date": "September 5, 2018",
+      "debut_team": "Toronto Blue Jays",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Elk Grove High School"
+          }
+        ]
+      },
+      "teams": [
+        "Toronto Blue Jays",
+        "Milwaukee Brewers",
+        "Pittsburgh Pirates",
+        "Seattle Mariners",
+        "Texas Rangers",
+        "Atlanta Braves"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q29446153",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Rowdy_Tellez",
+      "retrosheet_id": "tellr001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 778,
+          "plate_appearances": 2617,
+          "at_bats": 2362,
+          "runs": 278,
+          "hits": 552,
+          "doubles": 108,
+          "triples": 3,
+          "home_runs": 122,
+          "runs_batted_in": 368,
+          "walks": 210,
+          "strikeouts": 601,
+          "stolen_bases": 5,
+          "caught_stealing": 3,
+          "average": 0.234,
+          "on_base_percentage": 0.3,
+          "slugging_percentage": 0.437,
+          "ops": 0.737
+        },
+        "pitching": {
+          "games": 5,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 17,
+          "hits": 11,
+          "runs": 5,
+          "earned_runs": 5,
+          "home_runs": 1,
+          "walks": 1,
+          "strikeouts": 1,
+          "hit_batters": 3,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 7.94,
+          "whip": 2.118
+        }
+      }
+    },
+    {
       "id": 657041,
       "mlb_id": 657041,
       "wikidata_id": "Q63197888",
@@ -2937,8 +2952,8 @@
         "group": "Outfielder",
         "abbreviation": "LF"
       },
-      "roster_status": "Injured list",
-      "is_active_roster": false,
+      "roster_status": "Active",
+      "is_active_roster": true,
       "birth_date": "1995-08-23",
       "age": 31,
       "birthplace": "Knoxville",
@@ -3044,92 +3059,12 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q138939955",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Tyler_Uberstine",
-      "retrosheet_id": null,
+      "retrosheet_id": "ubert001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
         "batting": null,
         "pitching": null
-      }
-    },
-    {
-      "id": 676568,
-      "mlb_id": 676568,
-      "wikidata_id": "Q113297072",
-      "slug": "ricky-vanasco",
-      "name": "Ricky Vanasco",
-      "full_name": "Ricky Vanasco",
-      "number": "--",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "1998-10-13",
-      "age": 27,
-      "birthplace": "Morriston, Florida, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "April 15, 2024",
-      "debut_team": "Los Angeles Dodgers",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Los Angeles Dodgers",
-        "Detroit Tigers",
-        "Atlanta Braves"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q113297072",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Ricky_Vanasco",
-      "retrosheet_id": "vanar001",
-      "career_stats": {
-        "through_season": 2025,
-        "status": "available",
-        "batting": {
-          "games": 4,
-          "plate_appearances": 0,
-          "at_bats": 0,
-          "runs": 0,
-          "hits": 0,
-          "doubles": 0,
-          "triples": 0,
-          "home_runs": 0,
-          "runs_batted_in": 0,
-          "walks": 0,
-          "strikeouts": 0,
-          "stolen_bases": 0,
-          "caught_stealing": 0,
-          "average": null,
-          "on_base_percentage": null,
-          "slugging_percentage": null,
-          "ops": null
-        },
-        "pitching": {
-          "games": 4,
-          "games_started": 0,
-          "wins": 1,
-          "losses": 0,
-          "saves": 0,
-          "innings_outs": 12,
-          "hits": 3,
-          "runs": 3,
-          "earned_runs": 3,
-          "home_runs": 0,
-          "walks": 0,
-          "strikeouts": 1,
-          "hit_batters": 0,
-          "wild_pitches": 0,
-          "balks": 0,
-          "complete_games": 0,
-          "era": 6.75,
-          "whip": 0.75
-        }
       }
     },
     {
@@ -3226,7 +3161,7 @@
       "roster_status": "60-day injured list",
       "is_active_roster": false,
       "birth_date": "1997-10-06",
-      "age": 28,
+      "age": 29,
       "birthplace": "Leawood",
       "height": null,
       "weight": null,
@@ -3292,6 +3227,92 @@
           "complete_games": 0,
           "era": 5.57,
           "whip": 1.535
+        }
+      }
+    },
+    {
+      "id": 663897,
+      "mlb_id": 663897,
+      "wikidata_id": "Q107210196",
+      "slug": "luke-williams",
+      "name": "Luke Williams",
+      "full_name": "Luke Williams",
+      "number": "37",
+      "position": {
+        "name": "Shortstop",
+        "group": "Infielder",
+        "abbreviation": "SS"
+      },
+      "roster_status": "Inactive roster",
+      "is_active_roster": false,
+      "birth_date": "1996-08-09",
+      "age": 30,
+      "birthplace": "Park Ridge, Illinois, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "June 8, 2021",
+      "debut_team": "Philadelphia Phillies",
+      "education": {
+        "high_schools": [],
+        "colleges": [
+          {
+            "name": "Dana Hills High School"
+          }
+        ]
+      },
+      "teams": [
+        "Philadelphia Phillies",
+        "San Francisco Giants",
+        "Miami Marlins",
+        "Los Angeles Dodgers",
+        "Atlanta Braves"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q107210196",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Luke_Williams_%28baseball%29",
+      "retrosheet_id": "willl001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "available",
+        "batting": {
+          "games": 230,
+          "plate_appearances": 349,
+          "at_bats": 321,
+          "runs": 43,
+          "hits": 68,
+          "doubles": 14,
+          "triples": 1,
+          "home_runs": 2,
+          "runs_batted_in": 21,
+          "walks": 24,
+          "strikeouts": 96,
+          "stolen_bases": 25,
+          "caught_stealing": 6,
+          "average": 0.212,
+          "on_base_percentage": 0.27,
+          "slugging_percentage": 0.28,
+          "ops": 0.55
+        },
+        "pitching": {
+          "games": 10,
+          "games_started": 0,
+          "wins": 0,
+          "losses": 0,
+          "saves": 0,
+          "innings_outs": 33,
+          "hits": 11,
+          "runs": 4,
+          "earned_runs": 4,
+          "home_runs": 1,
+          "walks": 2,
+          "strikeouts": 4,
+          "hit_batters": 1,
+          "wild_pitches": 0,
+          "balks": 0,
+          "complete_games": 0,
+          "era": 3.27,
+          "whip": 1.182
         }
       }
     },

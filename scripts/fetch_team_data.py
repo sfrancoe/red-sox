@@ -6,13 +6,12 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
+
+from http_refresh import fetch_json as fetch_provider_json
 
 from team_registry import data_directory, expansion_teams, team_by_key
 from schedule_broadcasts import television_broadcasts
@@ -49,23 +48,16 @@ DIVISIONS = {
     "NL": ({204: "NL East", 205: "NL Central", 203: "NL West"}, [204, 205, 203], 104),
 }
 _projections: list[dict[str, Any]] | None = None
+_pitching_client = None
 
 
 def fetch_json(url: str, required: bool = True, timeout: int = 45) -> Any:
-    """Use normal defaults first, then the approved fallback UA."""
-    last_error: Exception | None = None
-    for headers in ({}, {"User-Agent": FALLBACK_USER_AGENT}):
-        for attempt in range(3):
-            try:
-                with urlopen(Request(url, headers=headers), timeout=timeout) as response:
-                    return json.load(response)
-            except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
-                last_error = exc
-                if attempt < 2:
-                    time.sleep(2**attempt)
-    if required:
-        raise RuntimeError(f"Could not fetch {url}: {last_error}")
-    return {}
+    try:
+        return fetch_provider_json(url, timeout=timeout)
+    except RuntimeError:
+        if required:
+            raise
+        return {}
 
 
 def write_feed(path: Path, feed: dict[str, Any], ignored: tuple[str, ...] = ("generated_at",)) -> None:
@@ -393,16 +385,22 @@ def role_for(row: dict[str, Any]) -> str:
 
 
 def pitching_feed(team: dict[str, Any]) -> dict[str, Any]:
-    global _projections
-    season = datetime.now(timezone.utc).year
+    # Direct callers obey the same winter/season policy as the consolidated job.
+    from refresh_pitching import FanGraphsClient, load_policy, output_path, refresh_allowed, build_team
+    policy = load_policy()
+    if not refresh_allowed(policy, datetime.now(timezone.utc).date()):
+        return json.loads(output_path(team).read_text())
+    global _projections, _pitching_client
+    if _pitching_client is None:
+        _pitching_client = FanGraphsClient(policy["request_spacing_seconds"], policy["budget_seconds"])
     if _projections is None:
-        loaded = fetch_json(PROJECTIONS_API)
-        if not isinstance(loaded, list):
-            raise RuntimeError("FanGraphs returned an unexpected projections response")
-        _projections = loaded
-    actual_payload = fetch_json(ACTUAL_API.format(season=season, team=team["fangraphs_id"]))
-    _, _, league_id = DIVISIONS[team["league"]]
-    standings = fetch_json(STANDINGS_API.format(league=league_id, season=season))
+        _projections = _pitching_client.get(policy["projections_url"])
+    return build_team(team, _projections, policy["season"], _pitching_client)
+
+
+def build_pitching_feed(team: dict[str, Any], projections: list[dict[str, Any]],
+                        actual_payload: dict[str, Any], standings: dict[str, Any],
+                        season: int) -> dict[str, Any]:
     actual_rows = actual_payload.get("data") or []
     if not actual_rows:
         raise RuntimeError(f"FanGraphs returned no {team['short_name']} pitching rows")
@@ -413,7 +411,7 @@ def pitching_feed(team: dict[str, Any]) -> dict[str, Any]:
     )
     fraction = played / 162
     projection_by_id = {
-        str(row.get("xMLBAMID")): row for row in _projections if row.get("xMLBAMID")
+        str(row.get("xMLBAMID")): row for row in projections if row.get("xMLBAMID")
     }
     pitchers = []
     for actual in actual_rows:

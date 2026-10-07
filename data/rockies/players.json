@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-28T18:00:27.814052+00:00",
-  "roster_as_of": "September 19, 2026",
+  "generated_at": "2026-10-06T16:19:27.364361+00:00",
+  "roster_as_of": "September 29, 2026",
   "team": {
     "id": 115,
     "name": "Colorado Rockies"
   },
   "roster_type": "open-current-roster",
   "player_count": 46,
-  "active_count": 28,
+  "active_count": 0,
   "source": {
     "name": "Wikimedia, Retrosheet, and Chadwick Baseball Bureau",
     "attribution": "Facts: Wikidata (CC0) · Roster and team history: Wikipedia contributors · Career statistics: Retrosheet",
@@ -21,47 +21,6 @@
   },
   "players": [
     {
-      "id": 690279,
-      "mlb_id": 690279,
-      "wikidata_id": "Q139736360",
-      "slug": "mason-adams",
-      "name": "Mason Adams",
-      "full_name": "Mason Adams",
-      "number": "38",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Active",
-      "is_active_roster": true,
-      "birth_date": "2000-02-23",
-      "age": 26,
-      "birthplace": "Davenport, Iowa, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Right",
-      "debut_date": "August 25, 2026",
-      "debut_team": "Colorado Rockies",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Colorado Rockies"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q139736360",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Mason_Adams_%28baseball%29",
-      "retrosheet_id": null,
-      "career_stats": {
-        "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
-      }
-    },
-    {
       "id": 687060,
       "mlb_id": 687060,
       "wikidata_id": "Q141169186",
@@ -74,7 +33,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2000-09-11",
       "age": 26,
@@ -94,7 +53,48 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q141169186",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Blake_Adams_%28baseball%29",
-      "retrosheet_id": null,
+      "retrosheet_id": "adamb001",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
+      "id": 690279,
+      "mlb_id": 690279,
+      "wikidata_id": "Q139736360",
+      "slug": "mason-adams",
+      "name": "Mason Adams",
+      "full_name": "Mason Adams",
+      "number": "38",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
+      "birth_date": "2000-02-23",
+      "age": 26,
+      "birthplace": "Davenport, Iowa, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Right",
+      "debut_date": "August 25, 2026",
+      "debut_team": "Colorado Rockies",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Colorado Rockies"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q139736360",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Mason_Adams_%28baseball%29",
+      "retrosheet_id": "adamm003",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -115,8 +115,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2000-08-15",
       "age": 26,
       "birthplace": "Haymarket, Virginia, U.S.",
@@ -193,8 +193,8 @@
         "group": "Infielder",
         "abbreviation": "2B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2003-04-11",
       "age": 23,
       "birthplace": "Santiago de los Caballeros",
@@ -250,10 +250,10 @@
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
-        "abbreviation": "LF"
+        "abbreviation": "RF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-04-19",
       "age": 25,
       "birthplace": "Hazel Green",
@@ -311,8 +311,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1992-01-15",
       "age": 34,
       "birthplace": "Valencia, California, U.S.",
@@ -528,14 +528,14 @@
       "slug": "cole-carrigg",
       "name": "Cole Carrigg",
       "full_name": "Cole Carrigg",
-      "number": "18",
+      "number": "16",
       "position": {
         "name": "Outfielder",
         "group": "Outfielder",
         "abbreviation": "CF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2002-05-08",
       "age": 24,
       "birthplace": "Modesto, California, U.S.",
@@ -554,7 +554,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q120969599",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Cole_Carrigg",
-      "retrosheet_id": null,
+      "retrosheet_id": "carrc006",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -575,7 +575,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1998-09-08",
       "age": 28,
@@ -654,7 +654,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2001-05-09",
       "age": 25,
@@ -674,7 +674,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q136737535",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Eiberson_Castellano",
-      "retrosheet_id": null,
+      "retrosheet_id": "caste002",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -692,10 +692,10 @@
       "number": "3",
       "position": {
         "name": "Second Base",
-        "group": "Outfielder",
+        "group": "Infielder",
         "abbreviation": "2B"
       },
-      "roster_status": "Injured list",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1997-04-24",
       "age": 29,
@@ -776,7 +776,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1999-03-10",
       "age": 27,
@@ -936,8 +936,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1996-09-02",
       "age": 30,
       "birthplace": "Orlando, Florida, U.S.",
@@ -1018,8 +1018,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1998-10-18",
       "age": 27,
       "birthplace": "Torrance",
@@ -1042,7 +1042,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q121355127",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Nick_Frasso",
-      "retrosheet_id": null,
+      "retrosheet_id": "frasn001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1063,8 +1063,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1993-05-14",
       "age": 33,
       "birthplace": "Denver",
@@ -1148,8 +1148,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1998-12-09",
       "age": 27,
       "birthplace": "Lubbock",
@@ -1214,8 +1214,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1999-10-08",
       "age": 26,
       "birthplace": "Arlington",
@@ -1273,8 +1273,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1997-10-26",
       "age": 28,
       "birthplace": "Champaign, Illinois, U.S.",
@@ -1339,8 +1339,8 @@
       }
     },
     {
-      "id": 1902237840,
-      "mlb_id": null,
+      "id": 802686,
+      "mlb_id": 802686,
       "wikidata_id": "Q136087593",
       "slug": "hayden-harris",
       "name": "Hayden Harris",
@@ -1351,7 +1351,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1999-03-02",
       "age": 27,
@@ -1430,8 +1430,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1993-09-09",
       "age": 33,
       "birthplace": "Q49255",
@@ -1536,7 +1536,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q135314183",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Welinton_Herrera",
-      "retrosheet_id": null,
+      "retrosheet_id": "herrw001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1557,8 +1557,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1999-12-22",
       "age": 26,
       "birthplace": "Ashdown",
@@ -1639,7 +1639,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2001-08-22",
       "age": 25,
@@ -1666,7 +1666,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q111830802",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Gabriel_Hughes",
-      "retrosheet_id": null,
+      "retrosheet_id": "hughg001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1687,8 +1687,8 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1997-06-22",
       "age": 29,
       "birthplace": "Washington",
@@ -1747,8 +1747,8 @@
         "group": "Infielder",
         "abbreviation": "3B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2002-07-26",
       "age": 24,
       "birthplace": "Los Angeles",
@@ -1813,8 +1813,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2000-01-29",
       "age": 26,
       "birthplace": "Highland Heights, Ohio, U.S.",
@@ -1833,7 +1833,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q141130545",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Mark_Manfredi",
-      "retrosheet_id": null,
+      "retrosheet_id": "manfm001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -1854,8 +1854,8 @@
         "group": "Outfielder",
         "abbreviation": "LF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1997-07-30",
       "age": 29,
       "birthplace": "Scranton, Pennsylvania, U.S.",
@@ -1921,8 +1921,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2000-07-04",
       "age": 26,
       "birthplace": "Santo Domingo, Dominican Republic",
@@ -1999,8 +1999,8 @@
         "group": "Outfielder",
         "abbreviation": "LF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1998-05-13",
       "age": 28,
       "birthplace": "Encinitas",
@@ -2064,11 +2064,11 @@
         "group": "Infielder",
         "abbreviation": "2B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2000-06-08",
       "age": 26,
-      "birthplace": "Brooklyn Park, Minnesota, U.S.",
+      "birthplace": "Brooklyn Park",
       "height": null,
       "weight": null,
       "bats": "Right",
@@ -2077,7 +2077,11 @@
       "debut_team": "Baltimore Orioles",
       "education": {
         "high_schools": [],
-        "colleges": []
+        "colleges": [
+          {
+            "name": "East Forsyth High School"
+          }
+        ]
       },
       "teams": [
         "Baltimore Orioles",
@@ -2245,8 +2249,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1989-01-24",
       "age": 37,
       "birthplace": "Arjona",
@@ -2331,7 +2335,7 @@
         "group": "Infielder",
         "abbreviation": "SS"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2000-11-10",
       "age": 25,
@@ -2390,8 +2394,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1993-04-21",
       "age": 33,
       "birthplace": "Markham",
@@ -2481,8 +2485,8 @@
         "group": "Infielder",
         "abbreviation": "1B"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": null,
       "age": null,
       "birthplace": "",
@@ -2501,7 +2505,7 @@
       ],
       "source_url": null,
       "wikipedia_url": "https://en.wikipedia.org/wiki/T._J._Rumfield",
-      "retrosheet_id": null,
+      "retrosheet_id": "rumft001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2522,7 +2526,7 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1998-05-29",
       "age": 28,
@@ -2542,7 +2546,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q140027923",
       "wikipedia_url": "https://en.wikipedia.org/wiki/TJ_Shook",
-      "retrosheet_id": null,
+      "retrosheet_id": "shoot001",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2563,7 +2567,7 @@
         "group": "Infielder",
         "abbreviation": "2B"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "1999-02-03",
       "age": 27,
@@ -2623,8 +2627,8 @@
         "group": "Pitcher",
         "abbreviation": "P"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1989-10-11",
       "age": 36,
       "birthplace": "Minami-ku",
@@ -2704,6 +2708,47 @@
       }
     },
     {
+      "id": 807743,
+      "mlb_id": 807743,
+      "wikidata_id": "Q120507756",
+      "slug": "sean-sullivan",
+      "name": "Sean Sullivan",
+      "full_name": "Sean Sullivan",
+      "number": "85",
+      "position": {
+        "name": "Pitcher",
+        "group": "Pitcher",
+        "abbreviation": "P"
+      },
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
+      "birth_date": "2002-07-22",
+      "age": 24,
+      "birthplace": "Boston, Massachusetts, U.S.",
+      "height": null,
+      "weight": null,
+      "bats": "Right",
+      "throws": "Left",
+      "debut_date": "June 12, 2026",
+      "debut_team": "Colorado Rockies",
+      "education": {
+        "high_schools": [],
+        "colleges": []
+      },
+      "teams": [
+        "Colorado Rockies"
+      ],
+      "source_url": "https://www.wikidata.org/wiki/Q120507756",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sean_Sullivan_%28baseball%29",
+      "retrosheet_id": "sulls002",
+      "career_stats": {
+        "through_season": 2025,
+        "status": "not_in_2025_release",
+        "batting": null,
+        "pitching": null
+      }
+    },
+    {
       "id": 664954,
       "mlb_id": 664954,
       "wikidata_id": "Q117771022",
@@ -2716,8 +2761,8 @@
         "group": "Catcher",
         "abbreviation": "C"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "1994-02-22",
       "age": 32,
       "birthplace": "Stockton",
@@ -2772,47 +2817,6 @@
       }
     },
     {
-      "id": 807743,
-      "mlb_id": 807743,
-      "wikidata_id": "Q120507756",
-      "slug": "sean-sullivan",
-      "name": "Sean Sullivan",
-      "full_name": "Sean Sullivan",
-      "number": "85",
-      "position": {
-        "name": "Pitcher",
-        "group": "Pitcher",
-        "abbreviation": "P"
-      },
-      "roster_status": "Inactive roster",
-      "is_active_roster": false,
-      "birth_date": "2002-07-22",
-      "age": 24,
-      "birthplace": "Boston, Massachusetts, U.S.",
-      "height": null,
-      "weight": null,
-      "bats": "Right",
-      "throws": "Left",
-      "debut_date": "June 12, 2026",
-      "debut_team": "Colorado Rockies",
-      "education": {
-        "high_schools": [],
-        "colleges": []
-      },
-      "teams": [
-        "Colorado Rockies"
-      ],
-      "source_url": "https://www.wikidata.org/wiki/Q120507756",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Sean_Sullivan_%28baseball%29",
-      "retrosheet_id": null,
-      "career_stats": {
-        "through_season": 2025,
-        "status": "not_in_2025_release",
-        "batting": null,
-        "pitching": null
-      }
-    },
-    {
       "id": 694514,
       "mlb_id": 694514,
       "wikidata_id": "Q112079887",
@@ -2825,7 +2829,7 @@
         "group": "Outfielder",
         "abbreviation": "RF"
       },
-      "roster_status": "Inactive roster",
+      "roster_status": "40-man roster",
       "is_active_roster": false,
       "birth_date": "2001-06-26",
       "age": 25,
@@ -2845,7 +2849,7 @@
       ],
       "source_url": "https://www.wikidata.org/wiki/Q112079887",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Sterlin_Thompson",
-      "retrosheet_id": null,
+      "retrosheet_id": "thoms002",
       "career_stats": {
         "through_season": 2025,
         "status": "not_in_2025_release",
@@ -2866,8 +2870,8 @@
         "group": "Infielder",
         "abbreviation": "SS"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-08-01",
       "age": 25,
       "birthplace": "Maracay, Venezuela",
@@ -2925,8 +2929,8 @@
         "group": "Outfielder",
         "abbreviation": "LF"
       },
-      "roster_status": "Active",
-      "is_active_roster": true,
+      "roster_status": "40-man roster",
+      "is_active_roster": false,
       "birth_date": "2001-12-12",
       "age": 24,
       "birthplace": "Port Orange",
