@@ -60,6 +60,13 @@ class EndpointTests(unittest.TestCase):
         self.assertEqual(self.check(url, b'<html><title>Error</title></html>').status, 'FAIL')
         self.assertEqual(self.check(url, b'{"2026": {}}').status, 'PASS')
 
+    def test_configured_data_directory_probes_existing_feed(self):
+        for host in ['red-sox.netlify.app', 'api.autumnlane.io']:
+            url = f'https://{host}/api/data'
+            with patch.object(preflight, 'discovered_urls', return_value=[url]), patch.object(preflight, 'fetch_url', return_value=(200, b'{}')) as fetch:
+                self.assertEqual(preflight.check_live_endpoints()[0].status, 'PASS')
+                fetch.assert_called_once_with(f'https://{host}/api/data/meta.json')
+
 
 class ApplicationIdentityTests(unittest.TestCase):
     def project(self, bundle):

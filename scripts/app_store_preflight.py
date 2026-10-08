@@ -63,6 +63,10 @@ PUBLIC_WEB_PAGES = {
 }
 JSON_PROBE_OVERRIDES = {
     "https://red-sox.netlify.app": "https://red-sox.netlify.app/api/data/meta.json",
+    # A configured data directory is not a JSON document; probe a real feed.
+    "https://red-sox.netlify.app/api/data": "https://red-sox.netlify.app/api/data/meta.json",
+    "https://api.autumnlane.io": "https://api.autumnlane.io/api/data/meta.json",
+    "https://api.autumnlane.io/api/data": "https://api.autumnlane.io/api/data/meta.json",
     "https://statsapi.mlb.com": "https://statsapi.mlb.com/api/v1/teams/111",
 }
 UNLICENSED_RUNTIME_HOSTS = {"statsapi.mlb.com", "img.mlbstatic.com"}

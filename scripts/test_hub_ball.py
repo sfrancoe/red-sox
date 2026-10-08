@@ -66,6 +66,8 @@ def main() -> None:
                            '-destination', destination, '-parallel-testing-enabled', 'NO']
                 if args.suite: command.append(f'-only-testing:HubBallTests/{args.suite}')
                 run(command, 'test-results')
+                if 'Test run with 0 tests' in (derived / 'test-results.log').read_text():
+                    raise SystemExit('Native test selection executed zero tests; verification failed.')
                 for line in (derived / 'test-results.log').read_text().splitlines():
                     if 'Test run with' in line or 'TEST SUCCEEDED' in line or 'passed' in line:
                         print(line)

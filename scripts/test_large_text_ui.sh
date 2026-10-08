@@ -13,7 +13,9 @@ fi
 python3 scripts/prepare_large_text_ui_tests.py
 OPTIONS=()
 for METHOD in "$@"; do
-  if [[ "$METHOD" == */* ]]; then
+  if [[ "$METHOD" == StoryUITests || "$METHOD" == LargeTextUITests ]]; then
+    OPTIONS+=("-only-testing:LargeTextUITests/$METHOD")
+  elif [[ "$METHOD" == */* ]]; then
     OPTIONS+=("-only-testing:LargeTextUITests/$METHOD")
   else
     OPTIONS+=("-only-testing:LargeTextUITests/LargeTextUITests/$METHOD")
@@ -29,6 +31,10 @@ xcodebuild -project 'dist/large-text-ui/Hub Ball.xcodeproj' -scheme LargeTextAud
   -parallel-testing-enabled NO ${OPTIONS[@]+"${OPTIONS[@]}"} CODE_SIGNING_ALLOWED=NO test > "$LOG" 2>&1
 STATUS=$?
 set -e
+if [[ "$STATUS" -eq 0 ]] && ! rg -q 'Executed [1-9][0-9]* tests?' "$LOG"; then
+  echo 'UI test selection executed zero tests; verification failed.' >&2
+  STATUS=2
+fi
 if [[ -d "$RESULT" ]]; then
   xcrun xcresulttool export attachments --path "$RESULT" --output-path "dist/large-text-ui/$RUN_NAME-evidence" > "dist/large-text-ui/$RUN_NAME-export.log" 2>&1 || true
 fi
