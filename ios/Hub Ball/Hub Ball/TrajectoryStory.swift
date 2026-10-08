@@ -1,0 +1,121 @@
+import Foundation
+
+nonisolated enum StoryDocument: Sendable {
+    case guess(RemoteStory)
+    case trajectory(TrajectoryStory)
+    var title: String { switch self { case .guess(let s): s.title; case .trajectory(let s): s.title } }
+}
+
+/// A finite, declarative chart contract. No code, formulas or arbitrary assets.
+nonisolated struct TrajectoryStory: Codable, Sendable {
+    struct Chart: Codable, Sendable {
+        struct Axis: Codable, Sendable {
+            let label: String
+            let minimum: Double
+            let maximum: Double
+            let ticks: [Double]
+        }
+        struct Point: Codable, Sendable { let x: Double; let y: Double }
+        struct Series: Codable, Identifiable, Sendable {
+            let id: String
+            let label: String
+            let color: String
+            let points: [Point]
+        }
+        struct Emphasis: Codable, Identifiable, Sendable {
+            let id: String
+            let x: Double
+            let y: Double
+            let holdSeconds: Double
+            let title: String
+            let detail: String
+        }
+        let kind: String
+        let xAxis: Axis
+        let yAxis: Axis
+        let durationSeconds: Double
+        let series: [Series]
+        let emphasis: [Emphasis]
+        var sweepSeconds: Double { durationSeconds - emphasis.reduce(0) { $0 + $1.holdSeconds } }
+        func x(at elapsed: Double) -> Double {
+            var remaining = max(0, elapsed)
+            var previous = xAxis.minimum
+            for beat in emphasis {
+                let segment = (beat.x - previous) / (xAxis.maximum - xAxis.minimum) * sweepSeconds
+                if remaining < segment { return previous + remaining / sweepSeconds * (xAxis.maximum - xAxis.minimum) }
+                remaining -= segment
+                if remaining < beat.holdSeconds { return beat.x }
+                remaining -= beat.holdSeconds; previous = beat.x
+            }
+            return min(xAxis.maximum, previous + remaining / sweepSeconds * (xAxis.maximum - xAxis.minimum))
+        }
+        func value(in series: Series, at x: Double) -> Double {
+            let points = series.points
+            guard let first = points.first, let last = points.last else { return 0 }
+            if x <= first.x { return first.y }
+            if x >= last.x { return last.y }
+            let upper = points.firstIndex { $0.x > x }!
+            let a = points[upper - 1], b = points[upper]
+            return kind == "line" ? a.y + (b.y - a.y) * (x - a.x) / (b.x - a.x) : a.y
+        }
+        func validate() throws {
+            try StoryContract.check(["line", "step", "bar"].contains(kind) && durationSeconds.isFinite && (2...20).contains(durationSeconds))
+            for axis in [xAxis, yAxis] {
+                try StoryContract.text(axis.label, limit: 80)
+                try StoryContract.check(axis.minimum.isFinite && axis.maximum.isFinite && axis.minimum < axis.maximum && abs(axis.minimum) <= 1_000_000 && abs(axis.maximum) <= 1_000_000)
+                try StoryContract.check((2...8).contains(axis.ticks.count) && Set(axis.ticks).count == axis.ticks.count && axis.ticks == axis.ticks.sorted() && axis.ticks.allSatisfy { $0.isFinite && $0 >= axis.minimum && $0 <= axis.maximum })
+            }
+            try StoryContract.check((1...6).contains(series.count) && Set(series.map(\.id)).count == series.count && series.reduce(0) { $0 + $1.points.count } <= 2_000)
+            for row in series {
+                try StoryContract.check(StoryContract.slug(row.id) && ["coral", "navy", "gold", "teal", "purple", "gray"].contains(row.color))
+                try StoryContract.text(row.label, limit: 80)
+                try StoryContract.check((2...600).contains(row.points.count) && row.points.first?.x == xAxis.minimum && row.points.last?.x == xAxis.maximum)
+                if kind == "bar" { try StoryContract.check(row.points.count <= 60 && yAxis.minimum <= 0 && yAxis.maximum >= 0) }
+                for (index, point) in row.points.enumerated() {
+                    try StoryContract.check(point.x.isFinite && point.y.isFinite && point.x >= xAxis.minimum && point.x <= xAxis.maximum && point.y >= yAxis.minimum && point.y <= yAxis.maximum && (index == 0 || point.x > row.points[index - 1].x))
+                }
+            }
+            try StoryContract.check(emphasis.count <= 8 && Set(emphasis.map(\.id)).count == emphasis.count && emphasis.map(\.x) == emphasis.map(\.x).sorted() && Set(emphasis.map(\.x)).count == emphasis.count && sweepSeconds >= 1)
+            for beat in emphasis {
+                try StoryContract.check(StoryContract.slug(beat.id) && beat.x.isFinite && beat.y.isFinite && beat.holdSeconds.isFinite && (0...2).contains(beat.holdSeconds) && beat.x >= xAxis.minimum && beat.x <= xAxis.maximum && beat.y >= yAxis.minimum && beat.y <= yAxis.maximum)
+                try StoryContract.text(beat.title, limit: 160); try StoryContract.text(beat.detail, limit: 500)
+            }
+        }
+    }
+    let schemaVersion: Int
+    let id: String
+    let renderer: String
+    let rendererVersion: Int
+    let title: String
+    let kicker: String
+    let intro: String
+    let chart: Chart
+    let conclusion: String
+    let methodology: [String]
+    let sources: [RemoteStory.Source]
+    func validate() throws {
+        guard schemaVersion == 1 && renderer == "chart-trajectory" && rendererVersion == 1 else { throw StoryContentError.unsupported }
+        try StoryContract.check(StoryContract.slug(id))
+        try StoryContract.text(title, limit: 160); try StoryContract.text(kicker, limit: 160)
+        try StoryContract.text(intro); try StoryContract.text(conclusion)
+        try chart.validate()
+        try StoryContract.check((1...12).contains(methodology.count) && (1...12).contains(sources.count) && Set(sources.map(\.id)).count == sources.count)
+        for text in methodology { try StoryContract.text(text) }
+        for source in sources {
+            try StoryContract.check(StoryContract.slug(source.id) && StoryContract.sourceURL(source.url) != nil && StoryContract.timestamp(source.retrievedAt))
+            try StoryContract.text(source.title, limit: 200)
+        }
+    }
+}
+
+/// Elapsed time is frozen outside the foreground; returning resumes without jumping or restarting.
+struct TrajectoryPlayback {
+    private(set) var elapsed = 0.0
+    private var anchor: TimeInterval?
+    mutating func start(now: TimeInterval, reducedMotion: Bool, duration: Double) {
+        elapsed = reducedMotion ? duration : 0; anchor = reducedMotion ? nil : now
+    }
+    func time(now: TimeInterval, duration: Double) -> Double { min(duration, elapsed + max(0, now - (anchor ?? now))) }
+    mutating func pause(now: TimeInterval, duration: Double) { elapsed = time(now: now, duration: duration); anchor = nil }
+    mutating func resume(now: TimeInterval, duration: Double) { if elapsed < duration { anchor = now } }
+}

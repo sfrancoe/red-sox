@@ -1,8 +1,22 @@
 {
-  "publishedAt": "2026-10-08T11:24:00Z",
-  "revision": "release-540455db65b845269c9ed12fb4613a02",
+  "publishedAt": "2026-10-08T23:03:31Z",
+  "revision": "preview-chart-trajectory",
   "schemaVersion": 1,
   "stories": [
+    {
+      "fallback": "On June 23, Chicago had matched a whole season of wins. Win 42 came on June 26. By August 9, Chicago had passed 2025’s 60 wins, too. The 2026 finish: 84–78—43 more wins than two years earlier.",
+      "id": "whole-season-by-june",
+      "minimumRendererVersion": 2,
+      "publishedAt": "2026-10-08T23:03:31Z",
+      "renderer": "chart-trajectory",
+      "rendererVersion": 1,
+      "revision": "19053fba60d898c3a17ef01f1f4f5e6d246778208b27d9c45a93d28f34a6a8e7",
+      "summary": "Three seasons. One scale. Chicago matched its entire 2024 win total by Game 78 in 2026.",
+      "teamIDs": [
+        145
+      ],
+      "title": "A Whole Season of Wins. By June."
+    },
     {
       "fallback": "Ball A was caught. Ball B cleared the right-field wall. The shorter swing put a run on the board. Where a ball goes matters as much as how far it goes.",
       "id": "this-stadium",

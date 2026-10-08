@@ -5,7 +5,7 @@ nonisolated enum StoryContentError: Error { case invalid, unsupported, oversized
 
 /// Content can select these bundled capabilities; it cannot supply code or formulas.
 nonisolated enum StoryContract {
-    static let rendererVersion = 1
+    static let rendererVersion = 2
     static let catalogLimit = 128 * 1_024
     static let payloadLimit = 512 * 1_024
 
@@ -41,6 +41,17 @@ nonisolated enum StoryContract {
         try check(story.id == entry.id && story.title == entry.title && story.renderer == entry.renderer && story.rendererVersion == entry.rendererVersion)
         return story
     }
+    static func decodeDocument(_ data: Data, entry: StoryEntry) throws -> StoryDocument {
+        guard data.count <= payloadLimit else { throw StoryContentError.oversized }
+        guard entry.isSupported else { throw StoryContentError.unsupported }
+        guard hash(data) == entry.revision else { throw StoryContentError.integrity }
+        if entry.renderer == "guess-reveal" { return .guess(try decodeStory(data, entry: entry)) }
+        try check(entry.minimumRendererVersion >= 2)
+        let story = try JSONDecoder().decode(TrajectoryStory.self, from: data)
+        try story.validate()
+        try check(story.id == entry.id && story.title == entry.title && story.renderer == entry.renderer && story.rendererVersion == entry.rendererVersion)
+        return .trajectory(story)
+    }
 }
 
 nonisolated struct StoryCatalog: Codable, Sendable {
@@ -70,7 +81,12 @@ nonisolated struct StoryEntry: Codable, Identifiable, Sendable, Equatable {
     let minimumRendererVersion: Int
     var payloadPath: String { "stories/\(id)/\(revision).json" }
     var cacheKey: String { "\(id)-\(revision)" }
-    var isSupported: Bool { renderer == "guess-reveal" && rendererVersion == 1 && minimumRendererVersion <= StoryContract.rendererVersion }
+    func isSupported(by capability: Int) -> Bool {
+        minimumRendererVersion <= capability && rendererVersion == 1 &&
+        (renderer == "guess-reveal" || (renderer == "chart-trajectory" && capability >= 2))
+    }
+    var isSupported: Bool { isSupported(by: StoryContract.rendererVersion) }
+    var actionLabel: String { !isSupported ? "READ THE SUMMARY" : renderer == "chart-trajectory" ? "WATCH THE CHART" : "GUESS · REVEAL · EXPLORE" }
     func validate() throws {
         try StoryContract.check(StoryContract.slug(id) && StoryContract.slug(renderer))
         try StoryContract.check(revision.count == 64 && revision.range(of: "^[a-f0-9]{64}$", options: .regularExpression) != nil)

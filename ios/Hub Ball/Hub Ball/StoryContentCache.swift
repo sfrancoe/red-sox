@@ -3,7 +3,7 @@ import Foundation
 nonisolated struct CachedStory: Codable, Sendable {
     let entry: StoryEntry
     let data: Data
-    func decoded() throws -> RemoteStory { try entry.validate(); return try StoryContract.decodeStory(data, entry: entry) }
+    func decoded() throws -> StoryDocument { try entry.validate(); return try StoryContract.decodeDocument(data, entry: entry) }
 }
 
 /// A bounded last-good slot per story keeps yesterday's valid revision on partial failure.

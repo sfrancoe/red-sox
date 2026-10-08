@@ -21,7 +21,7 @@ private actor StoryFixtureTransport {
 struct StoryContentTests {
     private func folder() -> URL { FileManager.default.temporaryDirectory.appending(path: "story-test-\(UUID().uuidString)") }
     private func fixture(id: String = "this-stadium", title: String? = nil) throws -> (StoryEntry, Data) {
-        let original = try #require(StorySeed.catalog.stories.first)
+        let original = try #require(StorySeed.catalog.stories.first(where: { $0.id == "this-stadium" }))
         let bytes = try #require(StorySeed.payload(original))
         var payload = try #require(JSONSerialization.jsonObject(with: bytes) as? [String: Any])
         payload["id"] = id
@@ -40,7 +40,7 @@ struct StoryContentTests {
     }
 
     @Test func bundledStoryReconcilesAndWorksColdOffline() async throws {
-        let entry = try #require(StorySeed.catalog.stories.first)
+        let entry = try #require(StorySeed.catalog.stories.first(where: { $0.id == "this-stadium" }))
         let bytes = try #require(StorySeed.payload(entry))
         let story = try StoryContract.decodeStory(bytes, entry: entry)
         #expect(story.choices.map(\.value) == ["356", "340"])

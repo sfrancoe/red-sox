@@ -23,6 +23,7 @@ class FixtureState:
         self.game_requests = 0
         self.schedule_requests = 0
         self.story_redirect_hits = 0
+        self.trajectory_mode = "reset"
 
 
 STATE = FixtureState()
@@ -56,6 +57,23 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == '/story-fixture-good/stories/catalog-v1.json':
             self.send_json(json.loads((Path(__file__).resolve().parents[1] / 'data/stories/catalog-v1.json').read_text()), 'no-store')
             return
+
+        if parsed.path == '/trajectory-fixture-control':
+            with STATE.lock: STATE.trajectory_mode = query.get('mode', ['reset'])[0]
+            self.send_json({'ok': True}, 'no-store'); return
+        if parsed.path.startswith('/trajectory-fixture/stories/'):
+            app = Path(__file__).resolve().parents[1] / 'ios/Hub Ball/Hub Ball'
+            catalog = json.loads((app / 'story-catalog.json').read_text())
+            with STATE.lock: mode = STATE.trajectory_mode
+            if mode == 'offline': self.send_json({'offline': True}, 'no-store', status=503); return
+            if parsed.path.endswith('/catalog-v1.json'):
+                if mode == 'reset': catalog['stories'] = [e for e in catalog['stories'] if e['renderer'] == 'guess-reveal']
+                self.send_json(catalog, 'no-store'); return
+            entry = next((e for e in catalog['stories'] if parsed.path == '/trajectory-fixture/' + f"stories/{e['id']}/{e['revision']}.json"), None)
+            if entry:
+                body = (app / f"story-seed-{entry['id']}.json").read_bytes()
+                self.send_response(200); self.send_header('Content-Type', 'application/json'); self.send_header('Cache-Control', 'no-store'); self.send_header('Content-Length', str(len(body))); self.end_headers(); self.wfile.write(body); return
+            self.send_json({'error': 'not found'}, 'no-store', status=404); return
 
         if parsed.path == "/control":
             with STATE.lock:

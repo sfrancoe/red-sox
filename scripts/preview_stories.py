@@ -14,7 +14,7 @@ def preview_server(root, port=0, fixtures=False):
     paths = {entry_path(e): (root / entry_path(e)).read_bytes() for e in original['stories']}
     second = copy.deepcopy(original)
     if fixtures:
-        first = original['stories'][0]
+        first = next(e for e in original['stories'] if e['renderer'] == 'guess-reveal')
         story = json.loads(paths[entry_path(first)])
         story.update(id='fixture-second-story', title='Another story, same app', kicker='LOCAL TEST FIXTURE',
                      intro='This sample checks remote discovery. It is not a published baseball story.',
@@ -28,14 +28,31 @@ def preview_server(root, port=0, fixtures=False):
         entry = {**first, 'id': story['id'], 'title': story['title'], 'revision': digest(payload), 'summary': story['intro'], 'fallback': story['answer']}
         paths[entry_path(entry)] = payload
         second.update(revision='fixture-second-catalog', stories=[entry] + original['stories'])
-    state = {'mode': 'normal', 'catalog': original, 'redirectHits': 0}
+    variants = {}
+    if fixtures:
+        chart_entry = next((e for e in original['stories'] if e['renderer'] == 'chart-trajectory'), None)
+        if chart_entry:
+            for kind in ['line', 'bar']:
+                story = json.loads(paths[entry_path(chart_entry)])
+                story.update(id='fixture-chart-' + kind, title='Chart renderer fixture · ' + kind,
+                             kicker='LOCAL RENDERER TEST', intro='Synthetic presentation check. Never publish this fixture.')
+                story['chart']['kind'] = kind
+                if kind == 'bar':
+                    for row in story['chart']['series']:
+                        row['points'] = row['points'][::10] + [row['points'][-1]]
+                payload = encoded(story)
+                entry = {**chart_entry, 'id': story['id'], 'title': story['title'], 'revision': digest(payload)}
+                paths[entry_path(entry)] = payload
+                variants['chart-' + kind] = {**original, 'revision': 'fixture-chart-' + kind, 'stories': [entry] + original['stories']}
+    state = {'mode': 'normal' , 'catalog': original, 'redirectHits': 0}
 
     class Handler(http.server.BaseHTTPRequestHandler):
         def do_GET(self):
             path = urlsplit(self.path).path
             if fixtures and path.startswith('/__fixture/'):
                 action = path.removeprefix('/__fixture/')
-                if action == 'next': state.update(mode='normal', catalog=second)
+                if action in variants: state.update(mode='normal', catalog=variants[action])
+                elif action == 'next': state.update(mode='normal', catalog=second)
                 elif action == 'rollback': state.update(mode='normal', catalog=original)
                 elif action == 'reset': state.update(mode='normal', catalog=original, redirectHits=0)
                 elif action in ['offline', 'malformed', 'unsupported', 'payload-failure', 'redirect']: state['mode'] = action

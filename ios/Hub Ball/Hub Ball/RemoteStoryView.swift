@@ -22,8 +22,13 @@ struct RemoteStoryView: View {
                     Text(entry.fallback + "\n\nUpdate Hub Ball to open the interactive version.")
                 }
             } else if let story = store.stories[entry.id] {
-                GuessRevealStoryView(story: story, note: store.notes[entry.id]) {
-                    await store.load(entry, force: true)
+                Group {
+                    switch story {
+                    case .guess(let value):
+                        GuessRevealStoryView(story: value, note: store.notes[entry.id]) { await store.load(entry, force: true) }
+                    case .trajectory(let value):
+                        TrajectoryStoryView(story: value, note: store.notes[entry.id]) { await store.load(entry, force: true) }
+                    }
                 }
                 .id(store.contentRevision(for: entry.id))
             } else if store.loading.contains(entry.id) {
