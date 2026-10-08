@@ -13,7 +13,11 @@ fi
 python3 scripts/prepare_large_text_ui_tests.py
 OPTIONS=()
 for METHOD in "$@"; do
-  OPTIONS+=("-only-testing:LargeTextUITests/LargeTextUITests/$METHOD")
+  if [[ "$METHOD" == */* ]]; then
+    OPTIONS+=("-only-testing:LargeTextUITests/$METHOD")
+  else
+    OPTIONS+=("-only-testing:LargeTextUITests/LargeTextUITests/$METHOD")
+  fi
 done
 RESULT="dist/large-text-ui/$RUN_NAME.xcresult"
 LOG="dist/large-text-ui/$RUN_NAME.log"

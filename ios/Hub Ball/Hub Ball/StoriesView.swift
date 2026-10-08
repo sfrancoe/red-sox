@@ -4,19 +4,26 @@ struct StoriesView: View {
     var team: HubTeam? = nil
     var closeLibrary: (() -> Void)? = nil
     @State private var hitterPresented = false
+    @Environment(AppModel.self) private var model
+    private var remoteEntries: [StoryEntry] {
+        model.stories.catalog.stories.filter { team == nil || $0.teamIDs.contains(team!.mlbID) }
+    }
 
     var body: some View {
         NavigationStack {
             ZStack {
                 AppColor.paleRed.ignoresSafeArea()
 
-                if team == nil || team?.hasPublishedStories == true {
+                if team == nil || team?.hasPublishedStories == true || !remoteEntries.isEmpty {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 14) {
                             VStack(alignment: .leading, spacing: 5) {
                                 HStack {
                                     Text("STORIES").font(.title2.weight(.black))
                                     Spacer()
+                                    Button { Task { await model.stories.refresh(force: true) } } label: {
+                                        Image(systemName: "arrow.clockwise").frame(width: 44, height: 44)
+                                    }.accessibilityLabel("Refresh stories").accessibilityIdentifier("stories.refresh")
                                     if let closeLibrary {
                                         Button("Done", action: closeLibrary)
                                             .frame(minHeight: 44)
@@ -34,6 +41,23 @@ struct StoriesView: View {
                                 }
                             }
                             .foregroundStyle(AppColor.navy)
+
+                            if model.stories.refreshFailed {
+                                Text("Showing saved stories. New stories will appear when connected.")
+                                    .font(.footnote).foregroundStyle(AppColor.navy)
+                                    .accessibilityIdentifier("stories.offline")
+                            }
+                            if !remoteEntries.isEmpty {
+                                teamHeading("NEW IN HUB BALL")
+                                ForEach(remoteEntries) { entry in
+                                    NavigationLink {
+                                        RemoteStoryView(entry: entry)
+                                    } label: {
+                                        StoryPreviewCard(title: entry.title, summary: entry.summary,
+                                                         action: entry.isSupported ? "GUESS · REVEAL · EXPLORE" : "READ THE SUMMARY")
+                                    }.buttonStyle(.plain).accessibilityIdentifier("stories.remote.\(entry.id)")
+                                }
+                            }
 
                             if team == nil {
                                 Button { hitterPresented = true } label: {
@@ -96,6 +120,9 @@ struct StoriesView: View {
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
+            .task { await model.stories.restore(); model.setStoriesVisible(true) }
+            .onDisappear { model.setStoriesVisible(false) }
+            .refreshable { await model.stories.refresh(force: true) }
             .fullScreenCover(isPresented: $hitterPresented) { MLB300HitterStory() }
         }
     }

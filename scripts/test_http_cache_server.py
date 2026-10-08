@@ -22,6 +22,7 @@ class FixtureState:
         self.fail_game = False
         self.game_requests = 0
         self.schedule_requests = 0
+        self.story_redirect_hits = 0
 
 
 STATE = FixtureState()
@@ -36,6 +37,25 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         query = parse_qs(parsed.query)
+
+        if parsed.path == '/story-fixture/stories/catalog-v1.json':
+            self.send_response(302)
+            self.send_header('Location', '/story-fixture/redirect-target')
+            self.send_header('Content-Length', '0')
+            self.send_header('Cache-Control', 'no-store')
+            self.end_headers()
+            return
+        if parsed.path == '/story-fixture/redirect-target':
+            with STATE.lock: STATE.story_redirect_hits += 1
+            self.send_json({'schemaVersion': 1, 'revision': 'redirect', 'publishedAt': '2026-10-08T11:00:00Z', 'stories': []}, 'no-store')
+            return
+        if parsed.path == '/story-fixture/stats':
+            with STATE.lock: hits = STATE.story_redirect_hits
+            self.send_json({'redirectHits': hits}, 'no-store')
+            return
+        if parsed.path == '/story-fixture-good/stories/catalog-v1.json':
+            self.send_json(json.loads((Path(__file__).resolve().parents[1] / 'data/stories/catalog-v1.json').read_text()), 'no-store')
+            return
 
         if parsed.path == "/control":
             with STATE.lock:

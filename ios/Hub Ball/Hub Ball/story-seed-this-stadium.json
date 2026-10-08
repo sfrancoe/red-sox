@@ -1,0 +1,311 @@
+{
+  "answer": "Ball A was caught. Ball B cleared the right-field wall. The shorter swing put a run on the board. Where a ball goes matters as much as how far it goes.",
+  "answerTitle": "Sixteen feet shorter. One home run.",
+  "barMaximum": 30,
+  "bars": [
+    {
+      "detail": "Statcast’s park estimate, as reported by MLB. Actual result: flyout.",
+      "label": "Ball A · 356 ft",
+      "unit": "of 30 parks",
+      "value": 6
+    },
+    {
+      "detail": "Statcast’s park estimate, as reported by MLB. Actual result: home run.",
+      "label": "Ball B · 340 ft",
+      "unit": "of 30 parks",
+      "value": 1
+    }
+  ],
+  "choices": [
+    {
+      "detail": "Second inning · left field",
+      "id": "ball-a",
+      "label": "Ball A",
+      "unit": "feet",
+      "value": "356"
+    },
+    {
+      "detail": "Fourth inning · right field",
+      "id": "ball-b",
+      "label": "Ball B",
+      "unit": "feet",
+      "value": "340"
+    }
+  ],
+  "conclusion": "Same hitter. A longer out and a shorter homer. Distance tells part of the story; the stadium helps write the ending.",
+  "correctChoiceID": "ball-b",
+  "id": "this-stadium",
+  "intro": "Ryan Vilade. Two swings. Same night in the Bronx. One ball traveled farther. Only one left the yard.",
+  "kicker": "Tampa Bay · ALDS Game 3 · October 7, 2026",
+  "methodology": [
+    "The two actual outcomes, Statcast-projected distances, exit velocities and launch angles come from MLB’s game feed for Rays at Yankees, October 7, 2026. The earlier ball: 356 ft, 95.2 mph, 31°. The later ball: 340 ft, 97.1 mph, 37°.",
+    "The cross-park counts are Statcast modeled estimates reported by MLB: six parks for the earlier flyout and only Yankee Stadium for the later homer. We do not calculate park outcomes from distance alone.",
+    "A modeled home run is an estimate about a batted ball and park geometry, not a guarantee of what another game would produce. Conditions, defense and other differences can change an actual result.",
+    "The passport covers the 340-foot ball only. MLB’s report identifies its sole modeled home-run park. The report gives six parks for the 356-foot ball without naming all six, so we do not assign that ball individual park outcomes.",
+    "Park names come from MLB’s 2026 team/venue registry. The flight motifs and passport stamps are original illustrations, not measured trajectories or stadium diagrams. No video, photographs, logos or music are copied into this story."
+  ],
+  "passport": {
+    "intro": "Take Ball B around the league. One park earns a home-run stamp. Tap any park to inspect the reported model result.",
+    "items": [
+      {
+        "detail": "MLB reports this as the only park where the 340-foot ball was modeled as a home run. It was also the actual venue.",
+        "id": "147",
+        "label": "NYY",
+        "name": "Yankee Stadium",
+        "result": "yes"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "133",
+        "label": "ATH",
+        "name": "Sutter Health Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "144",
+        "label": "ATL",
+        "name": "Truist Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "109",
+        "label": "AZ",
+        "name": "Chase Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "110",
+        "label": "BAL",
+        "name": "Oriole Park at Camden Yards",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "111",
+        "label": "BOS",
+        "name": "Fenway Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "112",
+        "label": "CHC",
+        "name": "Wrigley Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "113",
+        "label": "CIN",
+        "name": "Great American Ball Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "114",
+        "label": "CLE",
+        "name": "Progressive Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "115",
+        "label": "COL",
+        "name": "Coors Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "145",
+        "label": "CWS",
+        "name": "Rate Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "116",
+        "label": "DET",
+        "name": "Comerica Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "117",
+        "label": "HOU",
+        "name": "Daikin Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "118",
+        "label": "KC",
+        "name": "Kauffman Stadium",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "108",
+        "label": "LAA",
+        "name": "Angel Stadium",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "119",
+        "label": "LAD",
+        "name": "UNIQLO Field at Dodger Stadium",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "146",
+        "label": "MIA",
+        "name": "loanDepot park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "158",
+        "label": "MIL",
+        "name": "American Family Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "142",
+        "label": "MIN",
+        "name": "Target Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "121",
+        "label": "NYM",
+        "name": "Citi Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "143",
+        "label": "PHI",
+        "name": "Citizens Bank Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "134",
+        "label": "PIT",
+        "name": "PNC Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "135",
+        "label": "SD",
+        "name": "Petco Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "136",
+        "label": "SEA",
+        "name": "T-Mobile Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "137",
+        "label": "SF",
+        "name": "Oracle Park",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "138",
+        "label": "STL",
+        "name": "Busch Stadium",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "139",
+        "label": "TB",
+        "name": "Tropicana Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "140",
+        "label": "TEX",
+        "name": "Globe Life Field",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "141",
+        "label": "TOR",
+        "name": "Rogers Centre",
+        "result": "no"
+      },
+      {
+        "detail": "MLB reports that the 340-foot ball was not modeled as a home run here. This does not predict its actual result in a game played at this park.",
+        "id": "120",
+        "label": "WSH",
+        "name": "Nationals Park",
+        "result": "no"
+      }
+    ],
+    "title": "One stamp in a 30-park passport"
+  },
+  "question": "Which ball became the home run?",
+  "renderer": "guess-reveal",
+  "rendererVersion": 1,
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "game",
+      "retrievedAt": "2026-10-08T14:59:00Z",
+      "title": "MLB game feed · actual at-bats and measurements",
+      "url": "https://statsapi.mlb.com/api/v1.1/game/849838/feed/live"
+    },
+    {
+      "id": "article",
+      "retrievedAt": "2026-10-08T14:59:00Z",
+      "title": "MLB report · Vilade and the park estimates",
+      "url": "https://www.mlb.com/rays/news/ryan-vilade-hits-first-career-playoff-homer-in-game-3-of-2026-alds"
+    },
+    {
+      "id": "story",
+      "retrievedAt": "2026-10-08T14:59:00Z",
+      "title": "MLB Game 3 story · one-park home run",
+      "url": "https://www.mlb.com/stories/game/849838?storylocal=web-scores-game-embed"
+    },
+    {
+      "id": "teams",
+      "retrievedAt": "2026-10-08T14:59:00Z",
+      "title": "MLB 2026 teams and venues",
+      "url": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2026&hydrate=venue"
+    }
+  ],
+  "stats": [
+    {
+      "label": "Ball A",
+      "note": "356 ft · 95.2 mph off the bat",
+      "value": "Flyout"
+    },
+    {
+      "label": "Ball B",
+      "note": "340 ft · 97.1 mph off the bat",
+      "value": "Home run"
+    },
+    {
+      "label": "Ball B · park model",
+      "note": "Only Yankee Stadium",
+      "value": "1 / 30"
+    }
+  ],
+  "title": "The home run that needed this stadium"
+}

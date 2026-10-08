@@ -1,0 +1,28 @@
+name: Validate story content
+on:
+  pull_request:
+    paths:
+      - 'data/stories/**'
+      - 'docs/stories/stadium-story*.json'
+      - 'scripts/*stor*.py'
+      - 'scripts/test_story_gateway.mjs'
+      - 'netlify/functions/app-data.mjs'
+      - '.github/workflows/validate-stories.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python3 scripts/validate_stories.py
+      - run: python3 scripts/test_story_content.py
+      - run: node scripts/test_story_gateway.mjs
+      - run: node scripts/test_app_data.mjs

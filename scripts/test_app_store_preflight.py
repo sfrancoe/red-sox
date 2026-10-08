@@ -61,5 +61,32 @@ class EndpointTests(unittest.TestCase):
         self.assertEqual(self.check(url, b'{"2026": {}}').status, 'PASS')
 
 
+class ApplicationIdentityTests(unittest.TestCase):
+    def project(self, bundle):
+        return {'rootObject': 'root', 'objects': {
+            'root': {'targets': ['app', 'tests']},
+            'app': {'productType': 'com.apple.product-type.application', 'buildConfigurationList': 'app-list'},
+            'tests': {'productType': 'com.apple.product-type.bundle.unit-test', 'buildConfigurationList': 'test-list'},
+            'app-list': {'buildConfigurations': ['app-debug', 'app-release']},
+            'test-list': {'buildConfigurations': ['test-debug']},
+            'app-debug': {'buildSettings': {'PRODUCT_BUNDLE_IDENTIFIER': bundle}},
+            'app-release': {'buildSettings': {'PRODUCT_BUNDLE_IDENTIFIER': bundle}},
+            'test-debug': {'buildSettings': {'PRODUCT_BUNDLE_IDENTIFIER': 'com.scottfrancoeur.HubBallTests'}},
+        }}
+
+    def check(self, bundle):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'project.pbxproj'
+            path.write_bytes(plistlib.dumps(self.project(bundle)))
+            text = preflight.application_settings_text(path)
+            return next(check for check in preflight.check_project_settings(text) if check.name == 'Bundle identifier')
+
+    def test_unit_test_bundle_does_not_poison_app_identity(self):
+        self.assertEqual(self.check('com.sfrancoe.HubBall').status, 'PASS')
+
+    def test_wrong_application_bundle_still_fails(self):
+        self.assertEqual(self.check('com.sfrancoe.OtherApp').status, 'FAIL')
+
+
 if __name__ == '__main__':
     unittest.main()

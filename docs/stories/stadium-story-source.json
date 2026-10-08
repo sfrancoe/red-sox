@@ -1,0 +1,253 @@
+{
+  "retrievedAt": "2026-10-08T14:59:00Z",
+  "gameID": 849838,
+  "officialDate": "2026-10-07",
+  "batterID": 668723,
+  "batter": "Ryan Vilade",
+  "venue": "Yankee Stadium",
+  "plays": [
+    {
+      "atBatIndex": 7,
+      "inning": 2,
+      "event": "Flyout",
+      "distance": 356.0,
+      "exitVelocity": 95.2,
+      "launchAngle": 31.0,
+      "direction": "left field"
+    },
+    {
+      "atBatIndex": 26,
+      "inning": 4,
+      "event": "Home Run",
+      "distance": 340.0,
+      "exitVelocity": 97.1,
+      "launchAngle": 37.0,
+      "direction": "right field"
+    }
+  ],
+  "model": {
+    "earlierHomeRunParks": 6,
+    "laterHomeRunParks": 1,
+    "laterOnlyPark": "Yankee Stadium",
+    "earlierParkIdentitiesVerified": false
+  },
+  "teams": [
+    {
+      "id": 133,
+      "name": "Athletics",
+      "abbreviation": "ATH",
+      "venue": "Sutter Health Park",
+      "venueID": 2529
+    },
+    {
+      "id": 134,
+      "name": "Pittsburgh Pirates",
+      "abbreviation": "PIT",
+      "venue": "PNC Park",
+      "venueID": 31
+    },
+    {
+      "id": 135,
+      "name": "San Diego Padres",
+      "abbreviation": "SD",
+      "venue": "Petco Park",
+      "venueID": 2680
+    },
+    {
+      "id": 136,
+      "name": "Seattle Mariners",
+      "abbreviation": "SEA",
+      "venue": "T-Mobile Park",
+      "venueID": 680
+    },
+    {
+      "id": 137,
+      "name": "San Francisco Giants",
+      "abbreviation": "SF",
+      "venue": "Oracle Park",
+      "venueID": 2395
+    },
+    {
+      "id": 138,
+      "name": "St. Louis Cardinals",
+      "abbreviation": "STL",
+      "venue": "Busch Stadium",
+      "venueID": 2889
+    },
+    {
+      "id": 139,
+      "name": "Tampa Bay Rays",
+      "abbreviation": "TB",
+      "venue": "Tropicana Field",
+      "venueID": 12
+    },
+    {
+      "id": 140,
+      "name": "Texas Rangers",
+      "abbreviation": "TEX",
+      "venue": "Globe Life Field",
+      "venueID": 5325
+    },
+    {
+      "id": 141,
+      "name": "Toronto Blue Jays",
+      "abbreviation": "TOR",
+      "venue": "Rogers Centre",
+      "venueID": 14
+    },
+    {
+      "id": 142,
+      "name": "Minnesota Twins",
+      "abbreviation": "MIN",
+      "venue": "Target Field",
+      "venueID": 3312
+    },
+    {
+      "id": 143,
+      "name": "Philadelphia Phillies",
+      "abbreviation": "PHI",
+      "venue": "Citizens Bank Park",
+      "venueID": 2681
+    },
+    {
+      "id": 144,
+      "name": "Atlanta Braves",
+      "abbreviation": "ATL",
+      "venue": "Truist Park",
+      "venueID": 4705
+    },
+    {
+      "id": 145,
+      "name": "Chicago White Sox",
+      "abbreviation": "CWS",
+      "venue": "Rate Field",
+      "venueID": 4
+    },
+    {
+      "id": 146,
+      "name": "Miami Marlins",
+      "abbreviation": "MIA",
+      "venue": "loanDepot park",
+      "venueID": 4169
+    },
+    {
+      "id": 147,
+      "name": "New York Yankees",
+      "abbreviation": "NYY",
+      "venue": "Yankee Stadium",
+      "venueID": 3313
+    },
+    {
+      "id": 158,
+      "name": "Milwaukee Brewers",
+      "abbreviation": "MIL",
+      "venue": "American Family Field",
+      "venueID": 32
+    },
+    {
+      "id": 108,
+      "name": "Los Angeles Angels",
+      "abbreviation": "LAA",
+      "venue": "Angel Stadium",
+      "venueID": 1
+    },
+    {
+      "id": 109,
+      "name": "Arizona Diamondbacks",
+      "abbreviation": "AZ",
+      "venue": "Chase Field",
+      "venueID": 15
+    },
+    {
+      "id": 110,
+      "name": "Baltimore Orioles",
+      "abbreviation": "BAL",
+      "venue": "Oriole Park at Camden Yards",
+      "venueID": 2
+    },
+    {
+      "id": 111,
+      "name": "Boston Red Sox",
+      "abbreviation": "BOS",
+      "venue": "Fenway Park",
+      "venueID": 3
+    },
+    {
+      "id": 112,
+      "name": "Chicago Cubs",
+      "abbreviation": "CHC",
+      "venue": "Wrigley Field",
+      "venueID": 17
+    },
+    {
+      "id": 113,
+      "name": "Cincinnati Reds",
+      "abbreviation": "CIN",
+      "venue": "Great American Ball Park",
+      "venueID": 2602
+    },
+    {
+      "id": 114,
+      "name": "Cleveland Guardians",
+      "abbreviation": "CLE",
+      "venue": "Progressive Field",
+      "venueID": 5
+    },
+    {
+      "id": 115,
+      "name": "Colorado Rockies",
+      "abbreviation": "COL",
+      "venue": "Coors Field",
+      "venueID": 19
+    },
+    {
+      "id": 116,
+      "name": "Detroit Tigers",
+      "abbreviation": "DET",
+      "venue": "Comerica Park",
+      "venueID": 2394
+    },
+    {
+      "id": 117,
+      "name": "Houston Astros",
+      "abbreviation": "HOU",
+      "venue": "Daikin Park",
+      "venueID": 2392
+    },
+    {
+      "id": 118,
+      "name": "Kansas City Royals",
+      "abbreviation": "KC",
+      "venue": "Kauffman Stadium",
+      "venueID": 7
+    },
+    {
+      "id": 119,
+      "name": "Los Angeles Dodgers",
+      "abbreviation": "LAD",
+      "venue": "UNIQLO Field at Dodger Stadium",
+      "venueID": 22
+    },
+    {
+      "id": 120,
+      "name": "Washington Nationals",
+      "abbreviation": "WSH",
+      "venue": "Nationals Park",
+      "venueID": 3309
+    },
+    {
+      "id": 121,
+      "name": "New York Mets",
+      "abbreviation": "NYM",
+      "venue": "Citi Field",
+      "venueID": 3289
+    }
+  ],
+  "sourceURLs": {
+    "game": "https://statsapi.mlb.com/api/v1.1/game/849838/feed/live",
+    "article": "https://www.mlb.com/rays/news/ryan-vilade-hits-first-career-playoff-homer-in-game-3-of-2026-alds",
+    "story": "https://www.mlb.com/stories/game/849838?storylocal=web-scores-game-embed",
+    "teams": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2026&hydrate=venue"
+  },
+  "verification": "Game measurements and venue names retrieved directly from MLB Stats API. MLB article and game-story text retrieved through web search on 2026-10-08 independently confirm reported Statcast park counts. No six-park membership inferred."
+}

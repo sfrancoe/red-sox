@@ -62,6 +62,7 @@ final class AppModel {
     let postseason = PostseasonStore(season: OctoberFeature.season)
     let history = PostseasonHistoryStore(season: OctoberFeature.season)
     let news = PostseasonNewsStore(season: OctoberFeature.season)
+    let stories = StoryCatalogStore()
     let game108 = Game108GraphStore()
     let homeRunChase = HomeRunChaseStore()
     let markets = MarketsStore()
@@ -77,6 +78,12 @@ final class AppModel {
         }
         scheduler.register("history") { await history.refresh(); return !history.refreshFailed }
         scheduler.register("news") { await news.refresh(); return !news.refreshFailed }
+    }
+
+    func setStoriesVisible(_ visible: Bool) {
+        let stories = self.stories
+        scheduler.register("stories") { await stories.refresh(); return !stories.refreshFailed }
+        scheduler.setVisible(visible, observer: "stories", jobs: ["stories"])
     }
 
     func setMarketsVisible(_ visible: Bool) {

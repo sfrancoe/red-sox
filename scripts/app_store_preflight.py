@@ -88,6 +88,20 @@ def setting_values(project_text: str, key: str) -> list[str]:
     return sorted({match.group(1).strip().strip('"') for match in pattern.finditer(project_text)})
 
 
+def application_settings_text(project_file: Path) -> str:
+    """Inspect the shipped application, excluding unit-test target identities."""
+    completed = subprocess.run(['plutil', '-convert', 'json', '-o', '-', str(project_file)], capture_output=True, text=True, check=True)
+    project = json.loads(completed.stdout)
+    objects = project['objects']
+    apps = [objects[key] for key in objects[project['rootObject']]['targets']
+            if objects[key].get('productType') == 'com.apple.product-type.application']
+    if len(apps) != 1:
+        raise ValueError('Expected exactly one application target')
+    configurations = objects[apps[0]['buildConfigurationList']]['buildConfigurations']
+    return '\n'.join(f'{key} = {value};' for configuration in configurations
+                     for key, value in objects[configuration]['buildSettings'].items())
+
+
 def check_project_settings(project_text: str) -> list[Check]:
     checks: list[Check] = []
     bundle_ids = setting_values(project_text, "PRODUCT_BUNDLE_IDENTIFIER")
@@ -423,7 +437,7 @@ def main() -> int:
     if not PBXPROJ.exists():
         render([result("FAIL", "Xcode project", f"Missing {PBXPROJ}")], args.json)
         return 1
-    project_text = read_text(PBXPROJ)
+    project_text = application_settings_text(PBXPROJ)
     checks = [result("PASS", "Xcode project", str(PROJECT.relative_to(ROOT)))]
     checks.extend(check_project_settings(project_text))
     checks.append(check_app_icon())
