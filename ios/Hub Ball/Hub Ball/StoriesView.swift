@@ -47,6 +47,14 @@ struct StoriesView: View {
                                     .font(.footnote).foregroundStyle(AppColor.navy)
                                     .accessibilityIdentifier("stories.offline")
                             }
+                            if team == nil && !PrivateStoryPreviews.items.isEmpty {
+                                teamHeading("PRIVATE PREVIEW")
+                                NavigationLink {
+                                    PrivateStoryComparisonView(closeLibrary: closeLibrary)
+                                } label: {
+                                    StoryPreviewCard(title: "Three October 9 stories", summary: "Cleveland’s sixth. Milwaukee’s margins. Baker’s breakout. Watch all three and choose your favorite.", action: "COMPARE ALL THREE")
+                                }.buttonStyle(.plain).accessibilityIdentifier("stories.private-previews")
+                            }
                             if !remoteEntries.isEmpty {
                                 teamHeading("NEW IN HUB BALL")
                                 ForEach(remoteEntries) { entry in

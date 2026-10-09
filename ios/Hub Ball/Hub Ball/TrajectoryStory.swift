@@ -66,6 +66,10 @@ nonisolated struct TrajectoryStory: Codable, Sendable {
             let a = points[upper - 1], b = points[upper]
             return kind == "line" ? a.y + (b.y - a.y) * (x - a.x) / (b.x - a.x) : a.y
         }
+        func displayedProgress(_ progress: Double) -> Double {
+            if kind == "step" || kind == "bar" { return series[0].points.last { $0.x <= progress }?.x ?? xAxis.minimum }
+            return progress.rounded(.down)
+        }
         func validate() throws {
             try StoryContract.check(["line", "step", "bar"].contains(kind) && durationSeconds.isFinite && (2...20).contains(durationSeconds))
             for axis in [xAxis, yAxis] {
