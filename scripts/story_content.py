@@ -170,6 +170,24 @@ def validate_trajectory(payload, entry=None):
         for key in ['x', 'y', 'holdSeconds']: number(beat[key])
         require(xa['minimum'] <= beat['x'] <= xa['maximum'] and ya['minimum'] <= beat['y'] <= ya['maximum'] and 0 <= beat['holdSeconds'] <= 2, 'Invalid emphasis')
     require(chart['durationSeconds'] - sum(b['holdSeconds'] for b in beats) >= 1, 'Holds exceed duration')
+    sequence = chart.get('sequence')
+    if sequence is not None:
+        require(type(sequence) is dict and 'secondsPerSeries' in sequence, 'Invalid sequence')
+        number(sequence['secondsPerSeries'])
+        require(1 <= sequence['secondsPerSeries'] <= 4 and abs(sequence['secondsPerSeries'] * len(series) + sum(b['holdSeconds'] for b in beats) - chart['durationSeconds']) < .001, 'Invalid sequence timing')
+    for beat in beats:
+        comparison = beat.get('comparison')
+        if comparison is None: continue
+        require(type(comparison) is dict and {'sourceSeriesID', 'targetSeriesID'} <= comparison.keys(), 'Invalid comparison')
+        ids = [r['id'] for r in series]
+        require(sequence and comparison['sourceSeriesID'] in ids and comparison['targetSeriesID'] in ids, 'Invalid comparison identity')
+        source, target = ids.index(comparison['sourceSeriesID']), ids.index(comparison['targetSeriesID'])
+        source_points = series[source]['points']
+        lower = max(i for i,p in enumerate(source_points) if p['x'] <= beat['x'])
+        value = source_points[lower]['y']
+        if chart['kind'] == 'line' and source_points[lower]['x'] < beat['x']:
+            a,b = source_points[lower:lower+2]; value += (b['y']-a['y']) * (beat['x']-a['x']) / (b['x']-a['x'])
+        require(target < source and value == beat['y'] and series[target]['points'][-1]['y'] == beat['y'] and beat['holdSeconds'] >= 1.9, 'Comparison must join equal factual values on an earlier completed series')
     require(1 <= len(payload['methodology']) <= 12 and 1 <= len(payload['sources']) <= 12, 'Missing methodology or sources'); unique(payload['sources'])
     for paragraph in payload['methodology']: text(paragraph)
     for source in payload['sources']:
@@ -178,6 +196,7 @@ def validate_trajectory(payload, entry=None):
         require(url.scheme == 'https' and url.hostname and not url.username and not url.password and len(source['url']) <= 2000, 'Unsafe source URL')
     if entry:
         require(all(payload[k] == entry[k] for k in ['id', 'title', 'renderer', 'rendererVersion']) and entry['minimumRendererVersion'] >= 2, 'Chart capability or identity mismatch')
+        require(entry['minimumRendererVersion'] >= (3 if sequence or any(b.get('comparison') for b in beats) else 2), 'Sequence/comparison capability mismatch')
     return payload
 
 

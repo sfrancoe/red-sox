@@ -63,6 +63,7 @@ final class AppModel {
     let history = PostseasonHistoryStore(season: OctoberFeature.season)
     let news = PostseasonNewsStore(season: OctoberFeature.season)
     let stories = StoryCatalogStore()
+    var featuredStoryLaunch = FeaturedStoryLaunch()
     let game108 = Game108GraphStore()
     let homeRunChase = HomeRunChaseStore()
     let markets = MarketsStore()

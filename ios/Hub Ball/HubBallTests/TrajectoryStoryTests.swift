@@ -27,15 +27,15 @@ struct TrajectoryStoryTests {
         #expect(current.points[77].y == 40 && current.points[78].y == 41)
         #expect(current.points[79].y == 41 && current.points[80].y == 42)
         #expect(current.points[116].y == 60 && current.points[117].y == 61)
-        let holdStart = 78.0 / 162 * chart.sweepSeconds
-        #expect(chart.x(at: holdStart + 0.01) == 78 && chart.x(at: holdStart + 0.89) == 78)
-        #expect(chart.x(at: 8) == 162)
+        let holdStart = 4 + 78.0 / 162 * 2
+        #expect(chart.frame(at: holdStart + 0.01).progress == 78 && chart.frame(at: holdStart + 1.99).progress == 78)
+        #expect(chart.frame(at: 8).progress == 162)
         #expect(chart.value(in: current, at: 77.99) == 40)
     }
     @Test func rendererCapabilityAndOld118Fallback() throws {
         let (entry, _, _) = try fixture()
-        #expect(entry.isSupported && entry.isSupported(by: 2))
-        #expect(!entry.isSupported(by: 1) && entry.minimumRendererVersion == 2)
+        #expect(entry.isSupported && entry.isSupported(by: 3))
+        #expect(!entry.isSupported(by: 1) && entry.minimumRendererVersion == 3)
         #expect(!entry.fallback.isEmpty && entry.fallback.contains("84"))
         #expect(entry.actionLabel == "WATCH THE CHART")
         let previous = try #require(StorySeed.catalog.stories.first { $0.renderer == "guess-reveal" })
@@ -60,7 +60,7 @@ struct TrajectoryStoryTests {
         let original = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
         func validate(_ json: [String: Any]) throws {
             let bytes = try JSONSerialization.data(withJSONObject: json, options: [.sortedKeys])
-            let updated = StoryEntry(id: entry.id, revision: StoryContract.hash(bytes), title: entry.title, summary: entry.summary, fallback: entry.fallback, publishedAt: entry.publishedAt, teamIDs: entry.teamIDs, renderer: entry.renderer, rendererVersion: 1, minimumRendererVersion: 2)
+            let updated = StoryEntry(id: entry.id, revision: StoryContract.hash(bytes), title: entry.title, summary: entry.summary, fallback: entry.fallback, publishedAt: entry.publishedAt, teamIDs: entry.teamIDs, renderer: entry.renderer, rendererVersion: 1, minimumRendererVersion: 3)
             _ = try StoryContract.decodeDocument(bytes, entry: updated)
         }
         for field in ["durationSeconds", "kind", "series", "xAxis", "emphasis"] {
@@ -78,6 +78,8 @@ struct TrajectoryStoryTests {
         for kind in ["line", "step", "bar"] {
             var valid = original; var chart = try #require(valid["chart"] as? [String: Any]); chart["kind"] = kind
             if kind == "bar" {
+                var beats = try #require(chart["emphasis"] as? [[String: Any]])
+                for i in beats.indices { beats[i].removeValue(forKey: "comparison") }; chart["emphasis"] = beats
                 var rows = try #require(chart["series"] as? [[String: Any]])
                 for i in rows.indices { rows[i]["points"] = [["x": 0, "y": 0], ["x": 162, "y": 40]] }
                 chart["series"] = rows

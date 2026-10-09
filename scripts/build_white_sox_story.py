@@ -66,11 +66,13 @@ def build(proof):
         'intro': 'In 2024, Chicago needed 162 games to win 41. In 2026, it got there in 78. Watch three seasons climb the same scale.',
         'chart': {
             'kind': 'step', 'durationSeconds': 8,
+            'sequence': {'secondsPerSeries': 2},
             'xAxis': {'label': 'Games played', 'minimum': 0, 'maximum': 162, 'ticks': [0, 40, 80, 120, 162]},
             'yAxis': {'label': 'Cumulative wins', 'minimum': 0, 'maximum': 90, 'ticks': [0, 30, 60, 90]},
             'series': [{'id': f'season-{r["year"]}', 'label': str(r['year']), 'color': color,
                         'points': [{'x': 0, 'y': 0}] + [{'x': g['game'], 'y': g['wins']} for g in r['games']]} for r, color in zip(rows, ['navy', 'gold', 'coral'])],
-            'emphasis': [{'id': 'june-crossing', 'x': 78, 'y': 41, 'holdSeconds': 0.9,
+            'emphasis': [{'id': 'june-crossing', 'x': 78, 'y': 41, 'holdSeconds': 2,
+                          'comparison': {'sourceSeriesID': 'season-2026', 'targetSeriesID': 'season-2024'},
                           'title': 'A whole season. In 78 games.',
                           'detail': 'June 23, 2026 · 41–37. Chicago matched all 41 wins from 2024 before halfway through the season.'}],
         },
@@ -80,7 +82,7 @@ def build(proof):
             'Games are ordered by official game date, then doubleheader game number, start time and gamePk. We count the winner flag and reconcile every cumulative win–loss record against the schedule’s leagueRecord. Each season has 162 distinct final games.',
             'All three lines use the same games-played axis (0–162) and wins axis (0–90). The steps show actual wins, without smoothing. A loss keeps the line level. Matching game numbers compares progress through a season, not the same calendar dates.',
             'Verified finishes: 2024, 41–121; 2025, 60–102; 2026, 84–78. The 2026 milestones are win 41 at Game 78 on June 23, win 42 at Game 80 on June 26, and win 61 at Game 117 on August 9.',
-            'The animation lasts eight seconds, including a brief hold at Game 78. Playback timing is editorial emphasis; it does not represent time between real games. This is original text and an original native chart of factual game results. No MLB photographs, video, logos or music are included.',
+            'The seasons draw one after another: two seconds for 2024, two for 2025, then two for 2026, with a two-second comparison pause at Game 78. The arrow points to 2024’s 41-win finish and gently pulses twice. Reduced Motion shows the completed chart and a static comparison. Playback timing is editorial emphasis; it does not represent time between real games. This is original text and an original native chart of factual game results. No MLB photographs, video, logos or music are included.',
         ],
         'sources': [{'id': f'mlb-{y}', 'title': f'MLB official White Sox regular-season schedule · {y}', 'url': source_url(y), 'retrievedAt': proof['retrievedAt']} for y in YEARS],
     }

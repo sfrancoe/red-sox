@@ -43,6 +43,7 @@ enum MainTab: String, CaseIterable {
 }
 
 struct AppTabView: View {
+    @Environment(AppModel.self) private var model
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage(HubPreferences.selectedTeamKey) private var selectedTeamID = HubTeam.boston.id
@@ -52,14 +53,12 @@ struct AppTabView: View {
     @State private var selectedTab: MainTab = .home
     @State private var settingsPresented = false
     @State private var playoffsPresented = false
-    @State private var showPostseasonAfterOnboarding = false
+    @State private var showFeaturedAfterOnboarding = false
     @State private var storiesPresented = false
     @State private var hitterPresented = false
+    @State private var featuredStory: StoryEntry?
     @State private var hasAppeared = false
-    @State private var backgroundedAt: Date?
     @State private var selectedPlayerID: Int?
-
-    private let newSessionInterval: TimeInterval = 15 * 60
 
     private var team: HubTeam {
         HubTeam(rawValue: selectedTeamID) ?? .boston
@@ -130,11 +129,11 @@ struct AppTabView: View {
                 selectedTab = .players
             } else {
                 selectedTab = team.supportsHome ? .home : .recent
-                playoffsPresented = completedTeamOnboarding
+                presentLaunchStory()
             }
             #else
             selectedTab = team.supportsHome ? .home : .recent
-            playoffsPresented = completedTeamOnboarding
+            presentLaunchStory()
             #endif
             hasAppeared = true
         }
@@ -149,28 +148,16 @@ struct AppTabView: View {
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background { session?.scheduler.setBackground(true) }
             if newPhase == .active { session?.scheduler.setBackground(false) }
-            switch newPhase {
-            case .background:
-                backgroundedAt = Date()
-            case .active:
-                if let backgroundedAt,
-                   Date().timeIntervalSince(backgroundedAt) >= newSessionInterval {
-                    selectedTab = team.supportsHome ? .home : .recent
-                    playoffsPresented = completedTeamOnboarding
-                }
-                backgroundedAt = nil
-            default:
-                break
-            }
+
         }
         .fullScreenCover(isPresented: onboardingPresented, onDismiss: {
-            if showPostseasonAfterOnboarding {
-                showPostseasonAfterOnboarding = false
-                playoffsPresented = true
+            if showFeaturedAfterOnboarding {
+                showFeaturedAfterOnboarding = false
+                presentLaunchStory()
             }
         }) {
             TeamOnboardingView(selectedTeamID: $selectedTeamID) {
-                showPostseasonAfterOnboarding = true
+                showFeaturedAfterOnboarding = true
                 completedTeamOnboarding = true
                 selectedTab = team.supportsHome ? .home : .recent
             }
@@ -200,6 +187,9 @@ struct AppTabView: View {
             StoriesView(closeLibrary: { storiesPresented = false })
         }
         .fullScreenCover(isPresented: $hitterPresented) { MLB300HitterStory() }
+        .sheet(item: $featuredStory) { entry in
+            FeaturedStoryOfferView(entry: entry) { featuredStory = nil }
+        }
         .sheet(isPresented: $settingsPresented) {
             TeamSettingsView(selectedTeamID: $selectedTeamID) { selectedTeam in
                 selectedPlayerID = nil
@@ -208,6 +198,16 @@ struct AppTabView: View {
             }
             .presentationDragIndicator(.visible)
         }
+    }
+
+    private func presentLaunchStory() {
+        guard !model.featuredStoryLaunch.consumed else { return }
+        let entry = model.stories.catalog.stories.first { $0.id == "whole-season-by-june" }
+            ?? StorySeed.catalog.stories.first { $0.id == "whole-season-by-june" }
+        featuredStory = model.featuredStoryLaunch.offer(completedOnboarding: completedTeamOnboarding,
+                                                      busy: playoffsPresented || storiesPresented || hitterPresented || settingsPresented,
+                                                      entry: entry)
+        if completedTeamOnboarding && featuredStory == nil { playoffsPresented = true }
     }
 
     private var onboardingPresented: Binding<Bool> {

@@ -143,10 +143,12 @@ struct StoriesView: View {
     }
 }
 
-private struct StoryPreviewCard: View {
+struct StoryPreviewCard: View {
     let title: String
     let summary: String
     let action: String
+    var watch: (() -> Void)? = nil
+    var dismiss: (() -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -156,9 +158,20 @@ private struct StoryPreviewCard: View {
             Text(summary)
                 .font(.subheadline)
                 .fixedSize(horizontal: false, vertical: true)
-            Label(action, systemImage: "play.circle.fill")
-                .font(.caption.weight(.bold))
-                .foregroundStyle(Color(hubHex: "#BC6259"))
+            HStack(spacing: 16) {
+                if let watch {
+                    Button(action: watch) { Label(action, systemImage: "play.circle.fill").fixedSize(horizontal: false, vertical: true)
+                            .frame(minHeight: 48).contentShape(Rectangle()) }
+                        .buttonStyle(.plain).accessibilityLabel("Watch the chart").accessibilityIdentifier("featured.watch")
+                } else {
+                    Label(action, systemImage: "play.circle.fill")
+                }
+                if let dismiss {
+                    Button(action: dismiss) { Text("Dismiss").frame(minWidth: 70, minHeight: 48).contentShape(Rectangle()) }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Dismiss featured story").accessibilityIdentifier("featured.dismiss")
+                }
+            }.font(.caption.weight(.bold)).foregroundStyle(Color(hubHex: watch == nil ? "#BC6259" : "#A84138"))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(22)

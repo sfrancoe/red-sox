@@ -35,6 +35,12 @@ struct TrajectoryStoryView: View {
         #endif
     }
     private var now: TimeInterval { ProcessInfo.processInfo.systemUptime }
+    private var previewTime: Double? {
+        #if DEBUG
+        if let raw = ProcessInfo.processInfo.environment["HUB_STORY_PREVIEW_TIME"], let value = Double(raw), value.isFinite, (0...story.chart.durationSeconds).contains(value) { return value }
+        #endif
+        return nil
+    }
     private var finalSummary: String {
         story.chart.series.map { "\($0.label): \(($0.points.last?.y ?? 0).formatted()) \(story.chart.yAxis.label)" }.joined(separator: ". ")
     }
@@ -50,31 +56,39 @@ struct TrajectoryStoryView: View {
                             .fixedSize(horizontal: false, vertical: true).accessibilityIdentifier("remote.title")
                         Text(story.intro).font(.body).foregroundStyle(TrajectoryStyle.ink.opacity(0.78)).fixedSize(horizontal: false, vertical: true)
                     }
-                    TimelineView(.animation(paused: paused || reduced || scenePhase != .active)) { _ in
-                        let time = playback.time(now: now, duration: story.chart.durationSeconds)
-                        let progress = story.chart.x(at: time)
+                    TimelineView(.animation(paused: paused || reduced || previewTime != nil || scenePhase != .active)) { _ in
+                        let time = previewTime ?? playback.time(now: now, duration: story.chart.durationSeconds)
+                        let frame = story.chart.frame(at: time)
+                        let progress = frame.progress
                         VStack(alignment: .leading, spacing: 12) {
-                            seriesLegend(at: progress)
+                            seriesLegend(frame: frame)
                             chartMetadataLayout {
                                 Text(story.chart.yAxis.label.uppercased()).font(.caption.weight(.bold)).tracking(0.7)
                                 if !typeSize.isAccessibilitySize { Spacer() }
-                                Text("\(story.chart.xAxis.label): \(progress.rounded(.down).formatted())")
+                                Text("\(story.chart.sequence == nil ? "" : story.chart.series[frame.activeSeries].label + " · ")\(story.chart.xAxis.label): \(progress.rounded(.down).formatted())")
                                     .font(.caption.monospacedDigit()).accessibilityIdentifier("trajectory.progress")
                             }
-                            TrajectoryCanvas(chart: story.chart, progress: progress)
-                                .frame(height: typeSize.isAccessibilitySize ? 250 : compact ? 220 : window.size.width >= 650 ? 340 : 260)
-                                .accessibilityElement(children: .ignore)
-                                .accessibilityLabel("\(story.chart.kind) chart. \(story.chart.xAxis.label), \(story.chart.xAxis.minimum.formatted()) to \(story.chart.xAxis.maximum.formatted()); \(story.chart.yAxis.label), \(story.chart.yAxis.minimum.formatted()) to \(story.chart.yAxis.maximum.formatted()).")
-                                .accessibilityValue(finalSummary)
-                                .accessibilityHint("Use Explore the data for each plotted value")
-                                .accessibilityIdentifier("trajectory.chart")
+                            ZStack(alignment: .bottomTrailing) {
+                                TrajectoryCanvas(chart: story.chart, frame: frame)
+                                    .frame(height: typeSize.isAccessibilitySize ? 250 : compact ? 220 : window.size.width >= 650 ? 340 : 260)
+                                    .accessibilityElement(children: .ignore)
+                                    .accessibilityLabel("\(story.chart.kind) chart. \(story.chart.xAxis.label), \(story.chart.xAxis.minimum.formatted()) to \(story.chart.xAxis.maximum.formatted()); \(story.chart.yAxis.label), \(story.chart.yAxis.minimum.formatted()) to \(story.chart.yAxis.maximum.formatted()).")
+                                    .accessibilityValue(frame.beat?.comparison == nil ? finalSummary : finalSummary + ". " + (frame.beat?.detail ?? ""))
+                                    .accessibilityHint("Use Explore the data for each plotted value")
+                                    .accessibilityIdentifier("trajectory.chart")
+                                Button { replay() } label: {
+                                    Image(systemName: "play.fill").font(.system(size: 15, weight: .bold))
+                                        .foregroundStyle(TrajectoryStyle.color("coral"))
+                                        .frame(width: 44, height: 44)
+                                        .background(TrajectoryStyle.paper.opacity(0.95), in: Circle())
+                                }.buttonStyle(.plain)
+                                    .accessibilityLabel("Replay chart from the beginning")
+                                    .accessibilityIdentifier("trajectory.replay")
+                                    .padding(.trailing, 22).padding(.bottom, 32)
+                            }
                             Text(story.chart.xAxis.label).font(.caption.weight(.semibold)).frame(maxWidth: .infinity)
-                            emphasis(at: progress)
+                            emphasis(beat: frame.beat)
                             HStack(spacing: 20) {
-                                Button {
-                                    playback.start(now: now, reducedMotion: reduced, duration: story.chart.durationSeconds); paused = reduced
-                                } label: { Label("Replay", systemImage: "arrow.counterclockwise") }
-                                .accessibilityIdentifier("trajectory.replay")
                                 if !reduced && time < story.chart.durationSeconds {
                                     Button {
                                         if paused { playback.resume(now: now, duration: story.chart.durationSeconds) }
@@ -106,7 +120,7 @@ struct TrajectoryStoryView: View {
             else if !paused { playback.resume(now: now, duration: story.chart.durationSeconds) }
         }
         .background {
-            PlaybackClock(active: launched && !paused && scenePhase == .active) { clock in
+            PlaybackClock(active: launched && !paused && previewTime == nil && scenePhase == .active) { clock in
                 if playback.time(now: clock, duration: story.chart.durationSeconds) >= story.chart.durationSeconds {
                     playback.pause(now: clock, duration: story.chart.durationSeconds); paused = true
                 }
@@ -152,10 +166,13 @@ struct TrajectoryStoryView: View {
             }.preferredColorScheme(.light)
         }
     }
+    private func replay() {
+        playback.start(now: now, reducedMotion: reduced, duration: story.chart.durationSeconds); paused = reduced
+    }
     private var chartMetadataLayout: AnyLayout {
         typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6)) : AnyLayout(HStackLayout())
     }
-    private func seriesLegend(at x: Double) -> some View {
+    private func seriesLegend(frame: TrajectoryStory.Chart.Frame) -> some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(minimum: 85), alignment: .leading), count: min(story.chart.series.count, typeSize.isAccessibilitySize ? 1 : 3)), alignment: .leading, spacing: 10) {
             ForEach(Array(story.chart.series.enumerated()), id: \.element.id) { index, series in
                 VStack(alignment: .leading, spacing: 4) {
@@ -163,7 +180,7 @@ struct TrajectoryStoryView: View {
                         Rectangle().fill(TrajectoryStyle.color(series.color)).frame(width: 18, height: index == story.chart.series.count - 1 ? 4 : 2)
                         Text(series.label).font(.caption.weight(.bold))
                     }
-                    Text(story.chart.value(in: series, at: x).formatted(.number.precision(.fractionLength(0...1))))
+                    Text(frame.progresses[index].map { story.chart.value(in: series, at: $0).formatted(.number.precision(.fractionLength(0...1))) } ?? "—")
                         .font(.system(.title2, design: .serif).weight(.bold)).monospacedDigit()
                     Text(story.chart.yAxis.label).font(.caption)
                 }.foregroundStyle(TrajectoryStyle.color(series.color))
@@ -171,8 +188,8 @@ struct TrajectoryStoryView: View {
             }
         }
     }
-    @ViewBuilder private func emphasis(at x: Double) -> some View {
-        if let beat = story.chart.emphasis.last(where: { $0.x <= x }) {
+    @ViewBuilder private func emphasis(beat: TrajectoryStory.Chart.Emphasis?) -> some View {
+        if let beat {
             VStack(alignment: .leading, spacing: 5) {
                 Text(beat.title).font(.system(.headline, design: .serif)).accessibilityIdentifier("trajectory.emphasis")
                 Text(beat.detail).font(.subheadline).fixedSize(horizontal: false, vertical: true)
@@ -187,10 +204,10 @@ struct TrajectoryStoryView: View {
 
 private struct TrajectoryCanvas: View {
     let chart: TrajectoryStory.Chart
-    let progress: Double
+    let frame: TrajectoryStory.Chart.Frame
     var body: some View {
         Canvas { context, size in
-            let plot = CGRect(x: 30, y: 8, width: max(1, size.width - 53), height: max(1, size.height - 38))
+            let plot = CGRect(x: 30, y: 8, width: max(1, size.width - 72), height: max(1, size.height - 38))
             func px(_ x: Double) -> CGFloat { plot.minX + (x - chart.xAxis.minimum) / (chart.xAxis.maximum - chart.xAxis.minimum) * plot.width }
             func py(_ y: Double) -> CGFloat { plot.maxY - (y - chart.yAxis.minimum) / (chart.yAxis.maximum - chart.yAxis.minimum) * plot.height }
             for y in chart.yAxis.ticks {
@@ -201,12 +218,13 @@ private struct TrajectoryCanvas: View {
             for x in chart.xAxis.ticks {
                 context.draw(Text(x.formatted()).font(.system(size: 11, weight: .medium)).foregroundStyle(TrajectoryStyle.ink), at: CGPoint(x: px(x), y: plot.maxY + 16))
             }
-            if let beat = chart.emphasis.last(where: { $0.x <= progress }) {
+            if let beat = frame.beat, beat.comparison == nil {
                 var reference = Path(); reference.move(to: CGPoint(x: plot.minX, y: py(beat.y))); reference.addLine(to: CGPoint(x: plot.maxX, y: py(beat.y)))
                 context.stroke(reference, with: .color(TrajectoryStyle.color("coral").opacity(0.5)), style: StrokeStyle(lineWidth: 1, dash: [4, 4]))
                 context.draw(Text(beat.y.formatted()).font(.system(size: 11, weight: .bold)).foregroundStyle(TrajectoryStyle.color("coral")), at: CGPoint(x: plot.maxX + 5, y: py(beat.y)), anchor: .leading)
             }
             for (index, series) in chart.series.enumerated() {
+                guard let progress = frame.progresses[index] else { continue }
                 let color = TrajectoryStyle.color(series.color)
                 if chart.kind == "bar" {
                     let slot = plot.width / CGFloat(series.points.count) / CGFloat(chart.series.count)
@@ -227,8 +245,22 @@ private struct TrajectoryCanvas: View {
                     context.fill(Path(ellipseIn: CGRect(x: px(progress) - 3, y: py(chart.value(in: series, at: progress)) - 3, width: 6, height: 6)), with: .color(color))
                 }
             }
-            if let beat = chart.emphasis.last(where: { $0.x <= progress }) {
+            if let beat = frame.beat {
                 context.stroke(Path(ellipseIn: CGRect(x: px(beat.x) - 5, y: py(beat.y) - 5, width: 10, height: 10)), with: .color(TrajectoryStyle.ink), lineWidth: 1.5)
+                if let comparison = beat.comparison, let target = chart.series.first(where: { $0.id == comparison.targetSeriesID }), let endpoint = target.points.last {
+                    let start = CGPoint(x: px(beat.x) + 7, y: py(beat.y))
+                    let end = CGPoint(x: px(endpoint.x) - 5, y: py(endpoint.y))
+                    let color = TrajectoryStyle.color("coral").opacity(frame.comparisonStrength)
+                    var arrow = Path(); arrow.move(to: start); arrow.addLine(to: end)
+                    context.stroke(arrow.trimmedPath(from: 0, to: frame.comparisonDraw), with: .color(color), style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                    if frame.comparisonDraw >= 1 {
+                        var head = Path(); head.move(to: CGPoint(x: end.x - 7, y: end.y - 5)); head.addLine(to: end); head.addLine(to: CGPoint(x: end.x - 7, y: end.y + 5))
+                        context.stroke(head, with: .color(color), style: StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
+                    }
+                    let radius = 5 + 3 * frame.comparisonStrength
+                    context.stroke(Path(ellipseIn: CGRect(x: px(endpoint.x) - radius, y: py(endpoint.y) - radius, width: radius * 2, height: radius * 2)), with: .color(color), lineWidth: 2)
+                    context.draw(Text(endpoint.y.formatted()).font(.system(size: 13, weight: .bold)).foregroundStyle(color), at: CGPoint(x: px(endpoint.x) + 12, y: py(endpoint.y)), anchor: .leading)
+                }
             }
         }
     }

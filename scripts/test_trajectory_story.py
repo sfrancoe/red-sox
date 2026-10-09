@@ -31,6 +31,24 @@ class TrajectoryTests(unittest.TestCase):
             source = copy.deepcopy(self.proof); source['seasons'][2]['games'][number]['wins'] += 1
             with self.assertRaises(ValueError): build(source)
 
+    def test_sequence_comparison_and_legacy_capabilities(self):
+        chart = self.story['chart']
+        self.assertEqual(chart['sequence']['secondsPerSeries'], 2)
+        self.assertEqual(chart['emphasis'][0]['holdSeconds'], 2)
+        for change in [lambda p: p['chart']['sequence'].update(secondsPerSeries=float('nan')),
+                       lambda p: p['chart']['sequence'].update(secondsPerSeries=3),
+                       lambda p: p['chart']['emphasis'][0]['comparison'].update(targetSeriesID='season-2025'),
+                       lambda p: p['chart']['emphasis'][0]['comparison'].update(sourceSeriesID='missing')]:
+            p = copy.deepcopy(self.story); change(p)
+            with self.assertRaises(ValueError): validate_payload(p)
+        legacy = copy.deepcopy(self.story)
+        legacy['chart'].pop('sequence'); legacy['chart']['emphasis'][0].pop('comparison')
+        legacy['chart']['emphasis'][0]['holdSeconds'] = .9
+        validate_payload(legacy)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); payload = root / 'story.json'; payload.write_bytes(encoded(legacy))
+            self.assertEqual(stage(payload, root / 'data', 'Legacy', [145])['stories'][0]['minimumRendererVersion'], 2)
+
     def test_final_duplicate_and_postponement_filter(self):
         game = {'gamePk': 7, 'gameType': 'R', 'officialDate': '2026-06-23', 'gameNumber': 1, 'gameDate': '2026-06-23T23:00:00Z',
                 'status': {'abstractGameState': 'Final', 'codedGameState': 'F'},
@@ -57,13 +75,14 @@ class TrajectoryTests(unittest.TestCase):
         for kind in ['line', 'step', 'bar']:
             story = copy.deepcopy(self.story); story['chart']['kind'] = kind
             if kind == 'bar':
+                story['chart']['emphasis'][0].pop('comparison')
                 for row in story['chart']['series']: row['points'] = [row['points'][0], row['points'][-1]]
             validate_payload(story)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); payload = root / 'story.json'; payload.write_bytes(encoded(self.story))
             catalog = stage(payload, root / 'data', 'Chart first', [145])
             entry = catalog['stories'][0]
-            self.assertEqual(entry['minimumRendererVersion'], 2)
+            self.assertEqual(entry['minimumRendererVersion'], 3)
             self.assertEqual(entry['renderer'], 'chart-trajectory')
             self.assertIn('84', entry['fallback'])
             self.assertEqual(validate_tree(root / 'data'), catalog)

@@ -23,19 +23,27 @@ nonisolated struct TrajectoryStory: Codable, Sendable {
             let points: [Point]
         }
         struct Emphasis: Codable, Identifiable, Sendable {
+            struct Comparison: Codable, Sendable {
+                let sourceSeriesID: String
+                let targetSeriesID: String
+            }
             let id: String
             let x: Double
             let y: Double
             let holdSeconds: Double
             let title: String
             let detail: String
+            let comparison: Comparison?
         }
+        struct Sequence: Codable, Sendable { let secondsPerSeries: Double }
         let kind: String
         let xAxis: Axis
         let yAxis: Axis
         let durationSeconds: Double
         let series: [Series]
         let emphasis: [Emphasis]
+        let sequence: Sequence?
+        var minimumCapability: Int { sequence != nil || emphasis.contains { $0.comparison != nil } ? 3 : 2 }
         var sweepSeconds: Double { durationSeconds - emphasis.reduce(0) { $0 + $1.holdSeconds } }
         func x(at elapsed: Double) -> Double {
             var remaining = max(0, elapsed)
@@ -79,6 +87,15 @@ nonisolated struct TrajectoryStory: Codable, Sendable {
             for beat in emphasis {
                 try StoryContract.check(StoryContract.slug(beat.id) && beat.x.isFinite && beat.y.isFinite && beat.holdSeconds.isFinite && (0...2).contains(beat.holdSeconds) && beat.x >= xAxis.minimum && beat.x <= xAxis.maximum && beat.y >= yAxis.minimum && beat.y <= yAxis.maximum)
                 try StoryContract.text(beat.title, limit: 160); try StoryContract.text(beat.detail, limit: 500)
+                if let comparison = beat.comparison {
+                    guard let source = series.firstIndex(where: { $0.id == comparison.sourceSeriesID }),
+                          let target = series.firstIndex(where: { $0.id == comparison.targetSeriesID }) else { throw StoryContentError.invalid }
+                    try StoryContract.check(sequence != nil && target < source && value(in: series[source], at: beat.x) == beat.y && series[target].points.last?.y == beat.y && beat.holdSeconds >= 1.9)
+                }
+            }
+            if let sequence {
+                try StoryContract.check(sequence.secondsPerSeries.isFinite && (1...4).contains(sequence.secondsPerSeries))
+                try StoryContract.check(abs(sequence.secondsPerSeries * Double(series.count) + emphasis.reduce(0) { $0 + $1.holdSeconds } - durationSeconds) < 0.001)
             }
         }
     }
