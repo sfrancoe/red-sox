@@ -105,6 +105,7 @@ WORKFLOW_GROUPS = [
     ("Players, Pitching & Playoffs", "Player careers, pitching refresh with staged publication, playoff history."),
     ("Social", "X post refreshers every 6 hours."),
     ("Validation", "CI checks run on pull requests."),
+    ("Repository Upkeep", "Weekly rebuild of this project atlas."),
     ("Status Files", "Health ledgers the news workflows write so failing sources can alert."),
 ]
 
@@ -328,6 +329,8 @@ def workflow_group(f: str) -> list[str]:
         return ["Social"]
     if "validate" in name:
         return ["Validation"]
+    if "atlas" in name:
+        return ["Repository Upkeep"]
     if "leaders" in name or name == "refresh-data.yml":
         return ["Seasons & Leaders"]
     if any(k in name for k in ("players", "pitching", "playoff")):

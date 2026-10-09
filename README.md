@@ -108,7 +108,8 @@ python3 scripts/build_atlas.py        # rewrite docs/atlas/hub-ball-atlas.html
 python3 scripts/test_build_atlas.py   # validate the graph
 ```
 
-Edit the viewer in `docs/atlas/template.html`; connections the scanners cannot see
+The **Refresh project atlas** workflow rebuilds it every Monday and can be run by hand
+from the Actions tab. Edit the viewer in `docs/atlas/template.html`; connections the scanners cannot see
 (fetcher outputs, app endpoints) are listed in `scripts/build_atlas.py`.
 
 ## A note on accuracy
