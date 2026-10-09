@@ -21,7 +21,7 @@ from urllib.parse import parse_qs, urlencode, urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
-from team_registry import data_directory, expansion_teams, team_by_key
+from team_registry import data_directory, shared_news_teams, team_by_key
 from news_source_status import STATE_PATH, atomic_json, load_state, observe
 
 
@@ -181,7 +181,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--team", action="append", default=[])
     args = parser.parse_args()
-    teams = [team_by_key(key) for key in args.team] if args.team else expansion_teams()
+    teams = [team_by_key(key) for key in args.team] if args.team else shared_news_teams()
     state = load_state(STATE_PATH)
     original_state = json.dumps(state, sort_keys=True)
     # Validate identities before any fetch/write. Repeated identities would count

@@ -12,6 +12,12 @@ on:
       - 'scripts/test_pitching_refresh.py'
       - 'scripts/fetch*pit*.py'
       - 'scripts/fetch_team_data.py'
+      - 'scripts/fetch_team_leaders.py'
+      - 'scripts/team_registry.py'
+      - 'scripts/compare_feed_snapshots.py'
+      - 'scripts/test_fetch_team_data.py'
+      - 'scripts/test_postseason_schedules.py'
+      - 'scripts/test_no_team_specific_fetchers.py'
       - 'scripts/fetch_team_news.py'
       - 'scripts/news_source_status.py'
       - 'scripts/test_fetch_team_news.py'
@@ -39,6 +45,12 @@ jobs:
         run: python3 -m unittest discover -s scripts -p 'test_pitching_refresh.py'
       - run: python3 scripts/test_open_players.py
       - run: python3 scripts/test_fetch_team_news.py
+      - name: Shared game-data fetcher, recaps and postseason schedules
+        run: |
+          python3 scripts/test_fetch_team_data.py
+          python3 scripts/test_postseason_schedules.py
+      - name: No new team-specific fetch scripts or workflows
+        run: python3 scripts/test_no_team_specific_fetchers.py
       - name: Offline news status and publication transactions
         run: python3 scripts/test_news_alert_publication.py
   live:
@@ -67,6 +79,51 @@ jobs:
       - name: Check Mets newspapers
         if: '!cancelled()'
         run: python3 scripts/fetch_mets_news.py
-      - name: Check pitching provider pacing across all expansion teams
+      - name: Check pitching provider pacing across all shared-fetcher teams
         if: '!cancelled()'
         run: python3 scripts/fetch_team_data.py --section pitching --keep-going
+
+  # Proves a migrated team's shared-fetcher output matches what its old
+  # team-specific scripts last published. Report-only for value changes;
+  # fails if any field the app could read went missing.
+  shadow:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TEAMS: yankees mets rays
+    steps:
+      - name: Check out published data on main (baseline)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: baseline
+      - name: Check out this change (candidate)
+        uses: actions/checkout@v4
+        with:
+          path: candidate
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run the shared fetchers for the migrated teams
+        working-directory: candidate
+        run: |
+          args=()
+          for team in $TEAMS; do args+=(--team "$team"); done
+          python3 scripts/fetch_team_data.py "${args[@]}" \
+            --section schedule --section recent-game --section standings --section pitching \
+            --keep-going
+          python3 scripts/fetch_team_leaders.py "${args[@]}"
+          python3 scripts/test_all_team_data.py "${args[@]}"
+      - name: Compare with what the old scripts published
+        run: |
+          status=0
+          for team in $TEAMS; do
+            python3 candidate/scripts/compare_feed_snapshots.py \
+              "baseline/data/$team" "candidate/data/$team" \
+              schedule.json recent-game.json standings.json pitching.json seasons.json meta.json \
+              --label "$team" >> shadow-report.md || status=1
+          done
+          cat shadow-report.md
+          cat shadow-report.md >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"

@@ -1,4 +1,4 @@
-name: Refresh MLB expansion team data
+name: Refresh MLB team data
 
 on:
   schedule:
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch MLB-owned data for the 26 expansion teams
+      - name: Fetch MLB-owned data for every team except Boston (own scripts, root data paths)
         run: |
           python3 scripts/fetch_team_data.py \
             --section schedule \
@@ -32,10 +32,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- data; then
-            echo "No expansion-team data changes."
+            echo "No team data changes."
           else
             git add data
-            git commit -m "Refresh MLB expansion team data ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git commit -m "Refresh MLB team data ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase origin main
             git push
           fi

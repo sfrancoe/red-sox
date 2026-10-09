@@ -11,14 +11,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 import fetch_recent_game
-import fetch_mets_recent_game
-import fetch_rays_recent_game
-import fetch_yankees_recent_game
-import fetch_mets_schedule
-import fetch_rays_schedule
 import fetch_schedule
 import fetch_team_data
-import fetch_yankees_schedule
 
 
 SEASON_PAYLOAD = {"seasons": [{
@@ -61,8 +55,7 @@ def postseason_payload(team_id: int) -> dict:
 
 class PostseasonScheduleTests(unittest.TestCase):
     def test_recent_game_snapshots_include_every_postseason_round(self) -> None:
-        for module in (fetch_recent_game, fetch_mets_recent_game,
-                       fetch_rays_recent_game, fetch_yankees_recent_game):
+        for module in (fetch_recent_game,):
             for game_type in ("F", "D", "L", "W"):
                 with self.subTest(module=module.__name__, game_type=game_type):
                     payload = {"dates": [{"games": [{
@@ -73,6 +66,23 @@ class PostseasonScheduleTests(unittest.TestCase):
                     with patch.object(module, "fetch_json", return_value=payload) as fetch:
                         self.assertEqual(module.latest_final_game(date(2026, 9, 29)), 849851)
                     self.assertIn("gameTypes=R,F,D,L,W", fetch.call_args.args[0])
+
+    def test_registry_recent_game_includes_every_postseason_round(self) -> None:
+        team = {"mlb_id": 147, "short_name": "Yankees"}
+        for game_type in ("F", "D", "L", "W"):
+            with self.subTest(game_type=game_type):
+                payload = {"dates": [{"games": [{
+                    "gamePk": 849851, "gameType": game_type,
+                    "gameDate": "2026-09-29T23:00:00Z",
+                    "status": {"abstractGameState": "Final", "codedGameState": "F"},
+                }]}]}
+                with patch.object(fetch_team_data, "fetch_json", side_effect=[
+                    payload, RuntimeError("selected game requested"),
+                ]) as fetch:
+                    with self.assertRaisesRegex(RuntimeError, "selected game requested"):
+                        fetch_team_data.recent_game_feed(team)
+                self.assertIn("gameTypes=R,F,D,L,W", fetch.call_args_list[0].args[0])
+                self.assertIn("849851", fetch.call_args_list[1].args[0])
 
     def test_registry_schedule_includes_postseason_games(self) -> None:
         team = {"mlb_id": 110, "short_name": "Orioles"}
@@ -95,9 +105,6 @@ class PostseasonScheduleTests(unittest.TestCase):
     def test_legacy_schedules_include_postseason_games(self) -> None:
         modules = (
             (fetch_schedule, fetch_schedule.BOS),
-            (fetch_yankees_schedule, fetch_yankees_schedule.NYY),
-            (fetch_mets_schedule, fetch_mets_schedule.NYM),
-            (fetch_rays_schedule, fetch_rays_schedule.TBR),
         )
         with tempfile.TemporaryDirectory() as directory:
             for index, (module, team_id) in enumerate(modules):
@@ -132,12 +139,7 @@ class PostseasonScheduleTests(unittest.TestCase):
         fetch.assert_called_once_with(fetch_team_data.SEASON_API.format(season=2026))
 
     def test_legacy_schedules_stop_after_season_end(self) -> None:
-        modules = (
-            fetch_schedule,
-            fetch_yankees_schedule,
-            fetch_mets_schedule,
-            fetch_rays_schedule,
-        )
+        modules = (fetch_schedule,)
         with tempfile.TemporaryDirectory() as directory:
             for index, module in enumerate(modules):
                 output = Path(directory) / f"schedule-{index}.json"

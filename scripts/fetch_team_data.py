@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 
 from http_refresh import fetch_json as fetch_provider_json
 
-from team_registry import data_directory, expansion_teams, team_by_key
+from team_registry import data_directory, shared_game_data_teams, team_by_key
 from schedule_broadcasts import television_broadcasts
 
 
@@ -282,6 +282,187 @@ def decision(live_data: dict[str, Any], key: str) -> str:
     return ((live_data.get("decisions") or {}).get(key) or {}).get("fullName") or ""
 
 
+class NoRecentGameError(RuntimeError):
+    """No completed game inside the lookback window (off days, offseason)."""
+
+
+def ordinal(value: int) -> str:
+    if 10 < value % 100 < 14:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(value % 10, "th")
+    return f"{value}{suffix}"
+
+
+def possessive(name: str) -> str:
+    return f"{name}’" if name.endswith("s") else f"{name}’s"
+
+
+def scoring_action(play: dict[str, Any], team: dict[str, Any]) -> str:
+    batter = play.get("batter") or team["city_name"]
+    event = str(play.get("event") or "scoring play").lower()
+    event = {"sac fly": "sacrifice fly", "field error": "error"}.get(event, event)
+    runs = int(play.get("rbi") or 0)
+    run_label = {2: "two-run ", 3: "three-run ", 4: "grand slam "}.get(runs, "")
+    if runs == 4 and event == "home run":
+        event = ""
+    return f"{possessive(batter)} {run_label}{event}".strip()
+
+
+def build_summary(team: dict[str, Any], favorite: dict[str, Any], opponent: dict[str, Any],
+                  venue: str, scoring: list[dict[str, Any]]) -> str:
+    """One-paragraph recap: comebacks, walk-offs, shutouts and blown leads."""
+    name, place = team["short_name"], team["city_name"]
+    ours, theirs = favorite["runs"], opponent["runs"]
+    score = f"{ours}–{theirs}"
+    opponent_name = opponent["club_name"]
+    annotated = []
+    away_score = home_score = 0
+    for play in scoring:
+        before_ours = away_score if favorite["side"] == "away" else home_score
+        before_theirs = home_score if favorite["side"] == "away" else away_score
+        away_score = int(play.get("away_score") or 0)
+        home_score = int(play.get("home_score") or 0)
+        annotated.append({
+            **play,
+            "before_ours": before_ours, "before_theirs": before_theirs,
+            "after_ours": away_score if favorite["side"] == "away" else home_score,
+            "after_theirs": home_score if favorite["side"] == "away" else away_score,
+        })
+
+    if ours > theirs:
+        largest_deficit = max(
+            (play["after_theirs"] - play["after_ours"] for play in annotated), default=0,
+        )
+        deficit_index = max(
+            range(len(annotated)),
+            key=lambda index: annotated[index]["after_theirs"] - annotated[index]["after_ours"],
+            default=0,
+        )
+        go_ahead = [
+            play for play in annotated
+            if play["after_ours"] > play["before_ours"]
+            and play["before_ours"] <= play["before_theirs"]
+            and play["after_ours"] > play["after_theirs"]
+        ]
+        winning_play = go_ahead[-1] if go_ahead else None
+        walkoff = (
+            winning_play is not None and favorite["side"] == "home"
+            and int(winning_play.get("inning_num") or 0) >= 9
+            and winning_play is annotated[-1]
+        )
+        if walkoff:
+            first = (
+                f"{winning_play.get('batter') or place} delivered a walk-off "
+                f"{str(winning_play.get('event') or 'hit').lower()} in the "
+                f"{ordinal(int(winning_play['inning_num']))} inning as the {name} rallied past "
+                f"the {opponent_name}, {score}, at {venue}."
+            )
+        elif largest_deficit >= 2:
+            first = (
+                f"The {name} erased a {largest_deficit}-run deficit to beat the "
+                f"{opponent_name}, {score}, at {venue}."
+            )
+        elif theirs == 0:
+            first = f"The {name} shut out the {opponent_name}, {score}, at {venue}."
+        else:
+            first = f"The {name} beat the {opponent_name}, {score}, at {venue}."
+
+        details = []
+        if largest_deficit >= 2 and annotated:
+            low_point = annotated[deficit_index]
+            rally_play = next((
+                play for play in annotated[deficit_index + 1:]
+                if play["after_ours"] > play["before_ours"]
+            ), None)
+            if rally_play:
+                remaining = rally_play["after_theirs"] - rally_play["after_ours"]
+                effect = (
+                    "tied the game" if remaining == 0
+                    else f"put {place} ahead" if remaining < 0
+                    else f"cut the deficit to {'one' if remaining == 1 else remaining}"
+                )
+                details.append(
+                    f"{place} trailed {low_point['after_theirs']}–{low_point['after_ours']} before "
+                    f"{scoring_action(rally_play, team)} in the "
+                    f"{ordinal(int(rally_play['inning_num']))} {effect}."
+                )
+        tying_play = next((
+            play for play in annotated[deficit_index + 1:]
+            if play["after_ours"] > play["before_ours"]
+            and play["before_ours"] < play["before_theirs"]
+            and play["after_ours"] == play["after_theirs"]
+        ), None)
+        if walkoff and tying_play and tying_play is not winning_play:
+            innings_later = int(winning_play["inning_num"]) - int(tying_play["inning_num"])
+            timing = "one inning later" if innings_later == 1 else "later"
+            details.append(
+                f"{scoring_action(tying_play, team)} tied it in the "
+                f"{ordinal(int(tying_play['inning_num']))}, and "
+                f"{winning_play.get('batter') or place} completed the comeback {timing}."
+            )
+        return " ".join([first, *details])
+
+    largest_lead = max((play["after_ours"] - play["after_theirs"] for play in annotated), default=0)
+    if ours == 0:
+        return f"The {name} were shut out by the {opponent_name}, {theirs}–{ours}, at {venue}."
+    if largest_lead >= 2:
+        return (
+            f"The {name} couldn’t hold a {largest_lead}-run lead and fell to the "
+            f"{opponent_name}, {theirs}–{ours}, at {venue}."
+        )
+    return f"The {name} fell to the {opponent_name}, {theirs}–{ours}, at {venue}."
+
+
+def interesting_facts(team: dict[str, Any], favorite: dict[str, Any],
+                      opponent: dict[str, Any], innings_count: int) -> list[str]:
+    name = team["short_name"]
+    facts = []
+    if innings_count > 9:
+        facts.append(f"The game went {innings_count} innings.")
+    if favorite["runs"] == 0:
+        facts.append(f"The {name} were held scoreless despite putting {favorite['hits']} hits on the board.")
+    elif opponent["runs"] == 0:
+        facts.append(f"{name} pitchers combined for a {innings_count}-inning shutout.")
+
+    earned = sum(int(row.get("earnedRuns") or 0) for row in favorite["pitching"])
+    unearned = max(0, opponent["runs"] - earned)
+    if favorite["errors"] >= 2:
+        detail = f"; {unearned} opponent runs were unearned" if unearned else ""
+        facts.append(f"The {name} committed {favorite['errors']} errors{detail}.")
+
+    opponent_batting = opponent.get("team_batting") or {}
+    steals = int(opponent_batting.get("stolenBases") or 0)
+    caught = int(opponent_batting.get("caughtStealing") or 0)
+    if steals >= 3:
+        facts.append(
+            f"The {opponent['club_name']} went {steals}-for-{steals + caught} on stolen-base attempts."
+        )
+
+    top_hitter = max(favorite["batting"], key=lambda row: int(row.get("hits") or 0), default=None)
+    if top_hitter and int(top_hitter.get("hits") or 0) >= 2:
+        facts.append(
+            f"{top_hitter['name']} collected {top_hitter['hits']} of the "
+            f"{possessive(name)} {favorite['hits']} hits."
+        )
+
+    homers = [row for row in favorite["batting"] if int(row.get("homeRuns") or 0)]
+    if homers:
+        names = ", ".join(f"{row['name']} ({row['season_home_runs']})" for row in homers)
+        total = sum(int(row["homeRuns"]) for row in homers)
+        facts.append(f"The {name} hit {total} home run{'s' if total != 1 else ''}: {names}.")
+
+    starter = favorite["pitching"][0] if favorite["pitching"] else None
+    if starter:
+        earned_runs = int(starter.get("earnedRuns") or 0)
+        facts.append(
+            f"{starter['name']} worked {starter['inningsPitched']} innings, allowed "
+            f"{earned_runs} earned run{'s' if earned_runs != 1 else ''}, and struck out "
+            f"{starter['strikeOuts']}."
+        )
+    return facts[:5]
+
+
 def recent_game_feed(team: dict[str, Any]) -> dict[str, Any]:
     today = datetime.now(EASTERN).date()
     payload = fetch_json(SCHEDULE_API.format(
@@ -294,35 +475,23 @@ def recent_game_feed(team: dict[str, Any]) -> dict[str, Any]:
         and (game.get("status") or {}).get("codedGameState") not in {"C", "D"}
     ]
     if not finals:
-        raise RuntimeError(f"No completed {team['short_name']} game found in the past 14 days")
+        raise NoRecentGameError(f"No completed {team['short_name']} game found in the past 14 days")
     finals.sort(key=lambda game: (game.get("gameDate") or "", game.get("gamePk") or 0))
     game_pk = int(finals[-1]["gamePk"])
     live = fetch_json(LIVE_API.format(game_pk=game_pk))
     content = fetch_json(CONTENT_API.format(game_pk=game_pk), required=False)
+    return build_recent_game_feed(team, game_pk, live, content)
+
+
+def build_recent_game_feed(team: dict[str, Any], game_pk: int, live: dict[str, Any],
+                           content: dict[str, Any]) -> dict[str, Any]:
     game_data, live_data = live["gameData"], live["liveData"]
     away, home = team_box("away", game_data, live_data), team_box("home", game_data, live_data)
     favorite = away if away["id"] == team["mlb_id"] else home
     opponent = home if favorite is away else away
     won = favorite["runs"] > opponent["runs"]
     venue = (game_data.get("venue") or {}).get("name") or "the ballpark"
-    score = f"{favorite['runs']}–{opponent['runs']}" if won else f"{opponent['runs']}–{favorite['runs']}"
-    summary = (
-        f"The {team['short_name']} beat the {opponent['club_name']}, {score}, at {venue}."
-        if won else f"The {team['short_name']} fell to the {opponent['club_name']}, {score}, at {venue}."
-    )
-    facts = []
     innings = live_data["linescore"].get("innings") or []
-    if len(innings) > 9:
-        facts.append(f"The game went {len(innings)} innings.")
-    top_hitter = max(favorite["batting"], key=lambda row: int(row.get("hits") or 0), default=None)
-    if top_hitter and int(top_hitter.get("hits") or 0) >= 2:
-        facts.append(f"{top_hitter['name']} collected {top_hitter['hits']} hits.")
-    starter = favorite["pitching"][0] if favorite["pitching"] else None
-    if starter:
-        facts.append(
-            f"{starter['name']} worked {starter['inningsPitched']} innings and struck out "
-            f"{starter['strikeOuts']}."
-        )
     all_plays = (live_data.get("plays") or {}).get("allPlays") or []
     scoring = []
     for index in (live_data.get("plays") or {}).get("scoringPlays") or []:
@@ -345,7 +514,9 @@ def recent_game_feed(team: dict[str, Any]) -> dict[str, Any]:
         "game_pk": game_pk, "game_date": (game_data.get("datetime") or {}).get("dateTime") or "",
         "venue": venue, "game_duration_minutes": game_info.get("gameDurationMinutes"),
         "attendance": game_info.get("attendance"), "innings_count": len(innings),
-        "result": "Win" if won else "Loss", "summary": summary, "facts": facts[:5],
+        "result": "Win" if won else "Loss",
+        "summary": build_summary(team, favorite, opponent, venue, scoring),
+        "facts": interesting_facts(team, favorite, opponent, len(innings)),
         "decisions": {key: decision(live_data, key) for key in ("winner", "loser", "save")},
         "away": away, "home": home, "innings": innings, "scoring_plays": scoring,
         "official_recap": {
@@ -486,7 +657,16 @@ def fetch_team(team: dict[str, Any], sections: list[str]) -> None:
     }
     for section in sections:
         file_name, builder = builders[section]
-        write_feed(output / file_name, builder(team))
+        try:
+            feed = builder(team)
+        except NoRecentGameError as exc:
+            # Off days and the offseason: the last completed game stays the
+            # right recap, so keep it rather than failing every later team.
+            if not (output / file_name).exists():
+                raise
+            print(f"  kept {output / file_name} ({exc})")
+            continue
+        write_feed(output / file_name, feed)
 
 
 def main() -> None:
@@ -501,7 +681,7 @@ def main() -> None:
         help="Try every selected team, then fail if any team could not be refreshed.",
     )
     args = parser.parse_args()
-    teams = [team_by_key(key) for key in args.team] if args.team else expansion_teams()
+    teams = [team_by_key(key) for key in args.team] if args.team else shared_game_data_teams()
     sections = args.section or ["schedule", "recent-game", "standings", "pitching"]
     failures: list[tuple[str, RuntimeError]] = []
     for team in teams:
