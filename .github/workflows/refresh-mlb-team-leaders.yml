@@ -1,4 +1,4 @@
-name: Refresh MLB expansion team leaders
+name: Refresh MLB team leaders
 
 on:
   schedule:
@@ -27,10 +27,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- data; then
-            echo "No expansion-team leader changes."
+            echo "No team leader changes."
           else
             git add data
-            git commit -m "Refresh MLB expansion team leaders ($(date -u +%Y-%m-%d))"
+            git commit -m "Refresh MLB team leaders ($(date -u +%Y-%m-%d))"
             git pull --rebase origin main
             git push
           fi

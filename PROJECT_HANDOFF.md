@@ -80,10 +80,17 @@ Never make paid X calls during testing.
 Python fetch scripts use the standard library and write generated `data/*.json`.
 GitHub Actions workflows in `.github/workflows/` refresh team data, newspapers,
 social feeds, leaderboards and postseason history on their configured schedules;
-separate checks validate story payloads. The expansion-team adapters are
-`scripts/fetch_team_data.py` and
-`scripts/fetch_team_news.py`. Pitching publication has season, pacing and freeze
-controls described in [docs/pitching-refresh.md](docs/pitching-refresh.md).
+separate checks validate story payloads. Every team refreshes through the shared
+registry fetchers: `scripts/fetch_team_data.py` (schedule, recap, standings,
+pitching), `scripts/fetch_team_leaders.py` and `scripts/fetch_team_news.py`, run by
+the `refresh-mlb-team-*.yml` workflows. Two exceptions remain, tracked in
+`scripts/team_registry.py` and due to be retired: Boston's game data still uses its
+own unprefixed scripts because shipped builds read its root `data/*.json` paths, and
+Boston, Yankees, Mets and Rays newspapers still use direct-source scrapers
+(`fetch_globe_news.py`, `fetch_herald_news.py`, `fetch_<team>_news.py`). Do not add
+team-named fetch scripts or workflows; `scripts/test_no_team_specific_fetchers.py`
+enforces this. Pitching publication has season, pacing and freeze controls described
+in [docs/pitching-refresh.md](docs/pitching-refresh.md).
 
 `config/mlb-teams.json` is the source for the 30-team registry. After changing it,
 run `python3 scripts/generate_team_registry.py`; do not hand-edit generated registries

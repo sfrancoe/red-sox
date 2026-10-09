@@ -51,7 +51,7 @@ class NewsRefreshTests(unittest.TestCase):
         summary = self.root / "summary.md"
         with (
             patch.object(news, "STATE_PATH", self.state_path),
-            patch.object(news, "expansion_teams", return_value=self.teams),
+            patch.object(news, "shared_news_teams", return_value=self.teams),
             patch.object(news, "data_directory", side_effect=lambda team: self.root / team["full_name"]),
             patch.object(news, "source_feed", side_effect=results) as fetch,
             patch.dict(os.environ, {"GITHUB_STEP_SUMMARY": str(summary)}),

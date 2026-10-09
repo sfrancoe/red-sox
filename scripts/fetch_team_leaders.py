@@ -15,7 +15,7 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from team_registry import data_directory, expansion_teams, team_by_key
+from team_registry import data_directory, shared_game_data_teams, team_by_key
 
 
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
@@ -260,7 +260,7 @@ def main() -> int:
         help="also refresh the three seasons preceding --season",
     )
     args = parser.parse_args()
-    teams = [team_by_key(key) for key in args.team] if args.team else expansion_teams()
+    teams = [team_by_key(key) for key in args.team] if args.team else shared_game_data_teams()
     seasons = [args.season]
     if args.include_history:
         seasons.extend(args.season - offset for offset in range(1, 4))

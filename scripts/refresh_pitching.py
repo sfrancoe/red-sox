@@ -21,8 +21,9 @@ from team_registry import all_teams, team_by_key
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "config" / "pitching-refresh.json"
-LEGACY = {"redsox": "fetch_pitching", "yankees": "fetch_yankees_pitching",
-          "mets": "fetch_mets_pitching", "rays": "fetch_rays_pitching"}
+# Boston's pitching still comes from its own script (root data path); every
+# other team uses the shared fetch_team_data builder.
+LEGACY = {"redsox": "fetch_pitching"}
 
 
 def load_policy() -> dict[str, Any]:
