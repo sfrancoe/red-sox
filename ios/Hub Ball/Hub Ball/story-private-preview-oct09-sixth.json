@@ -1,0 +1,238 @@
+{
+  "chart": {
+    "durationSeconds": 7,
+    "emphasis": [
+      {
+        "detail": "After the top of the sixth: Cleveland 9, Chicago 4. Six runs turned a one-run deficit into a five-run lead.",
+        "holdSeconds": 0.7,
+        "id": "six-run-sixth",
+        "title": "Six in the sixth. October stays open.",
+        "x": 5.5,
+        "y": 9
+      }
+    ],
+    "kind": "step",
+    "series": [
+      {
+        "color": "coral",
+        "id": "cleveland",
+        "label": "Cleveland",
+        "points": [
+          {
+            "x": 0.0,
+            "y": 0
+          },
+          {
+            "x": 0.5,
+            "y": 0
+          },
+          {
+            "x": 1.0,
+            "y": 0
+          },
+          {
+            "x": 1.5,
+            "y": 0
+          },
+          {
+            "x": 2.0,
+            "y": 0
+          },
+          {
+            "x": 2.5,
+            "y": 0
+          },
+          {
+            "x": 3.0,
+            "y": 0
+          },
+          {
+            "x": 3.5,
+            "y": 0
+          },
+          {
+            "x": 4.0,
+            "y": 0
+          },
+          {
+            "x": 4.5,
+            "y": 3
+          },
+          {
+            "x": 5.0,
+            "y": 3
+          },
+          {
+            "x": 5.5,
+            "y": 9
+          },
+          {
+            "x": 6.0,
+            "y": 9
+          },
+          {
+            "x": 6.5,
+            "y": 9
+          },
+          {
+            "x": 7.0,
+            "y": 9
+          },
+          {
+            "x": 7.5,
+            "y": 9
+          },
+          {
+            "x": 8.0,
+            "y": 9
+          },
+          {
+            "x": 8.5,
+            "y": 9
+          },
+          {
+            "x": 9.0,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "color": "navy",
+        "id": "chicago",
+        "label": "Chicago White Sox",
+        "points": [
+          {
+            "x": 0.0,
+            "y": 0
+          },
+          {
+            "x": 0.5,
+            "y": 0
+          },
+          {
+            "x": 1.0,
+            "y": 0
+          },
+          {
+            "x": 1.5,
+            "y": 0
+          },
+          {
+            "x": 2.0,
+            "y": 0
+          },
+          {
+            "x": 2.5,
+            "y": 0
+          },
+          {
+            "x": 3.0,
+            "y": 2
+          },
+          {
+            "x": 3.5,
+            "y": 2
+          },
+          {
+            "x": 4.0,
+            "y": 2
+          },
+          {
+            "x": 4.5,
+            "y": 2
+          },
+          {
+            "x": 5.0,
+            "y": 4
+          },
+          {
+            "x": 5.5,
+            "y": 4
+          },
+          {
+            "x": 6.0,
+            "y": 4
+          },
+          {
+            "x": 6.5,
+            "y": 4
+          },
+          {
+            "x": 7.0,
+            "y": 4
+          },
+          {
+            "x": 7.5,
+            "y": 4
+          },
+          {
+            "x": 8.0,
+            "y": 4
+          },
+          {
+            "x": 8.5,
+            "y": 4
+          },
+          {
+            "x": 9.0,
+            "y": 5
+          }
+        ]
+      }
+    ],
+    "xAxis": {
+      "label": "Inning",
+      "maximum": 9,
+      "minimum": 0,
+      "ticks": [
+        0,
+        1,
+        3,
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    "yAxis": {
+      "label": "Runs",
+      "maximum": 10,
+      "minimum": 0,
+      "ticks": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ]
+    }
+  },
+  "conclusion": "Cleveland finished the job, 9–5. The elimination game became an invitation to Game 5. Sometimes the whole shape of a postseason changes in one half-inning.",
+  "id": "preview-oct09-sixth",
+  "intro": "Down 4–3 after five innings, Cleveland needed a way to keep October open. Six runs in the top of the sixth changed the score, and the series. Watch both teams after each half-inning.",
+  "kicker": "CLEVELAND · ELIMINATION GAME · OCTOBER 8",
+  "methodology": [
+    "Each point records the score after a completed half-inning: n−0.5 marks the end of the top of inning n, and n marks the end of its bottom half. The x=5.5 point is after the top of the sixth, not halfway through a batting turn. Lines step at these checkpoints without smoothing. Animation timing is editorial, not real elapsed game time.",
+    "Official MLB linescore for ALDS Game 4, game 849832, completed October 8, 2026. Cleveland was the visiting team; Chicago was home. The seven-second playback includes a 0.7-second hold after Cleveland’s sixth-inning rally.",
+    "Original writing and native graphics of factual statistics. No third-party photos, logos, video, music or article prose are included. Source links support verification; public access is not a commercial reuse license."
+  ],
+  "renderer": "chart-trajectory",
+  "rendererVersion": 1,
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "mlb-linescore",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "MLB official ALDS Game 4 linescore",
+      "url": "https://statsapi.mlb.com/api/v1/game/849832/linescore"
+    },
+    {
+      "id": "mlb-report",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "MLB · Cleveland forces Game 5",
+      "url": "https://www.mlb.com/news/guardians-win-alds-game-4-2026"
+    }
+  ],
+  "title": "The Sixth That Saved October"
+}

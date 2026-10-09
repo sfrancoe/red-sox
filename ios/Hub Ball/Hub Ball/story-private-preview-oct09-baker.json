@@ -1,0 +1,118 @@
+{
+  "chart": {
+    "durationSeconds": 6,
+    "emphasis": [],
+    "kind": "bar",
+    "series": [
+      {
+        "color": "coral",
+        "id": "bryan-baker",
+        "label": "Bryan Baker",
+        "points": [
+          {
+            "x": 2021,
+            "y": 0
+          },
+          {
+            "x": 2022,
+            "y": 1
+          },
+          {
+            "x": 2023,
+            "y": 0
+          },
+          {
+            "x": 2024,
+            "y": 0
+          },
+          {
+            "x": 2025,
+            "y": 3
+          },
+          {
+            "x": 2026,
+            "y": 41
+          }
+        ]
+      }
+    ],
+    "xAxis": {
+      "label": "Season",
+      "maximum": 2026,
+      "minimum": 2021,
+      "ticks": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    "yAxis": {
+      "label": "Regular-season saves",
+      "maximum": 45,
+      "minimum": 0,
+      "ticks": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        45
+      ]
+    }
+  },
+  "conclusion": "Then he closed all three ALDS wins.",
+  "id": "preview-oct09-baker",
+  "intro": "Five seasons, four saves combined. Then came 2026: forty-one in a single year. Watch the annual bars, from his 2021 debut through his first full season as Tampa Bay’s closer.",
+  "kicker": "BRYAN BAKER · REGULAR-SEASON SAVES",
+  "methodology": [
+    "The six bars show MLB regular-season saves only, by year: 2021–2026 = 0, 1, 0, 0, 3, 41. The baseline is zero and the vertical scale is 0–45; every zero remains a labeled year. The 2026 bar is 41, verified in the current official StatsAPI rather than stale indexed player snippets.",
+    "For 2025, the combined-team row is three saves. We select that total once instead of adding it to the separate Baltimore and Tampa Bay rows. The first five seasons total four saves.",
+    "The closing caption is a separate postseason fact. Official ALDS box scores credit Baker with one save in each of Tampa Bay’s three wins (games 849835, 849839 and 849838). Those three saves are not added to the regular-season 2026 bar. The six-second chart holds its ending; Reduced Motion shows all bars immediately.",
+    "Original writing and native graphics of factual statistics. No third-party photos, logos, video, music or article prose are included. Source links support verification; public access is not a commercial reuse license."
+  ],
+  "renderer": "chart-trajectory",
+  "rendererVersion": 1,
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "mlb-yearly",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "MLB official Bryan Baker yearly pitching statistics",
+      "url": "https://statsapi.mlb.com/api/v1/people/641329/stats?stats=yearByYear&group=pitching"
+    },
+    {
+      "id": "savant",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "Baseball Savant · Bryan Baker",
+      "url": "https://baseballsavant.mlb.com/savant-player/bryan-baker-641329"
+    },
+    {
+      "id": "mlb-report",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "MLB · Tampa Bay wins the ALDS",
+      "url": "https://www.mlb.com/news/rays-win-alds-2026"
+    },
+    {
+      "id": "mlb-save-1",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "MLB official ALDS save · game 849835",
+      "url": "https://statsapi.mlb.com/api/v1/game/849835/boxscore"
+    },
+    {
+      "id": "mlb-save-2",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "MLB official ALDS save · game 849839",
+      "url": "https://statsapi.mlb.com/api/v1/game/849839/boxscore"
+    },
+    {
+      "id": "mlb-save-3",
+      "retrievedAt": "2026-10-09T12:17:57Z",
+      "title": "MLB official ALDS save · game 849838",
+      "url": "https://statsapi.mlb.com/api/v1/game/849838/boxscore"
+    }
+  ],
+  "title": "Four Saves. Then Forty-One."
+}

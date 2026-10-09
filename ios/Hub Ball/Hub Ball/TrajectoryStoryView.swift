@@ -65,14 +65,14 @@ struct TrajectoryStoryView: View {
                             chartMetadataLayout {
                                 Text(story.chart.yAxis.label.uppercased()).font(.caption.weight(.bold)).tracking(0.7)
                                 if !typeSize.isAccessibilitySize { Spacer() }
-                                Text("\(story.chart.sequence == nil ? "" : story.chart.series[frame.activeSeries].label + " · ")\(story.chart.xAxis.label): \(progress.rounded(.down).formatted())")
+                                Text("\(story.chart.sequence == nil ? "" : story.chart.series[frame.activeSeries].label + " · ")\(story.chart.xAxis.label): \(story.chart.displayedProgress(progress).formatted(.number.grouping(.never)))")
                                     .font(.caption.monospacedDigit()).accessibilityIdentifier("trajectory.progress")
                             }
                             ZStack(alignment: .bottomTrailing) {
                                 TrajectoryCanvas(chart: story.chart, frame: frame)
                                     .frame(height: typeSize.isAccessibilitySize ? 250 : compact ? 220 : window.size.width >= 650 ? 340 : 260)
                                     .accessibilityElement(children: .ignore)
-                                    .accessibilityLabel("\(story.chart.kind) chart. \(story.chart.xAxis.label), \(story.chart.xAxis.minimum.formatted()) to \(story.chart.xAxis.maximum.formatted()); \(story.chart.yAxis.label), \(story.chart.yAxis.minimum.formatted()) to \(story.chart.yAxis.maximum.formatted()).")
+                                    .accessibilityLabel("\(story.chart.kind) chart. \(story.chart.xAxis.label), \(story.chart.xAxis.minimum.formatted(.number.grouping(.never))) to \(story.chart.xAxis.maximum.formatted(.number.grouping(.never))); \(story.chart.yAxis.label), \(story.chart.yAxis.minimum.formatted()) to \(story.chart.yAxis.maximum.formatted()).")
                                     .accessibilityValue(frame.beat?.comparison == nil ? finalSummary : finalSummary + ". " + (frame.beat?.detail ?? ""))
                                     .accessibilityHint("Use Explore the data for each plotted value")
                                     .accessibilityIdentifier("trajectory.chart")
@@ -156,8 +156,8 @@ struct TrajectoryStoryView: View {
                     ForEach(story.chart.series) { series in
                         Section(series.label) {
                             ForEach(Array(series.points.enumerated()), id: \.offset) { _, point in
-                                Text("\(story.chart.xAxis.label): \(point.x.formatted()) · \(story.chart.yAxis.label): \(point.y.formatted())")
-                                    .accessibilityLabel("\(series.label). \(story.chart.xAxis.label), \(point.x.formatted()). \(story.chart.yAxis.label), \(point.y.formatted()).")
+                                Text("\(story.chart.xAxis.label): \(point.x.formatted(.number.grouping(.never))) · \(story.chart.yAxis.label): \(point.y.formatted())")
+                                    .accessibilityLabel("\(series.label). \(story.chart.xAxis.label), \(point.x.formatted(.number.grouping(.never))). \(story.chart.yAxis.label), \(point.y.formatted()).")
                             }
                         }
                     }
@@ -207,16 +207,21 @@ private struct TrajectoryCanvas: View {
     let frame: TrajectoryStory.Chart.Frame
     var body: some View {
         Canvas { context, size in
-            let plot = CGRect(x: 30, y: 8, width: max(1, size.width - 72), height: max(1, size.height - 38))
-            func px(_ x: Double) -> CGFloat { plot.minX + (x - chart.xAxis.minimum) / (chart.xAxis.maximum - chart.xAxis.minimum) * plot.width }
+            let plot = CGRect(x: 30, y: 8, width: max(1, size.width - (chart.kind == "bar" ? 110 : 72)), height: max(1, size.height - 38))
+            let barInset = chart.kind == "bar" ? plot.width / CGFloat(chart.series[0].points.count) / 2 : 0
+            func px(_ x: Double) -> CGFloat { plot.minX + barInset + (x - chart.xAxis.minimum) / (chart.xAxis.maximum - chart.xAxis.minimum) * (plot.width - 2 * barInset) }
             func py(_ y: Double) -> CGFloat { plot.maxY - (y - chart.yAxis.minimum) / (chart.yAxis.maximum - chart.yAxis.minimum) * plot.height }
             for y in chart.yAxis.ticks {
                 var path = Path(); path.move(to: CGPoint(x: plot.minX, y: py(y))); path.addLine(to: CGPoint(x: plot.maxX, y: py(y)))
                 context.stroke(path, with: .color(TrajectoryStyle.ink.opacity(0.13)), style: StrokeStyle(lineWidth: 1, dash: [3, 4]))
                 context.draw(Text(y.formatted()).font(.system(size: 11, weight: .medium)).foregroundStyle(TrajectoryStyle.ink), at: CGPoint(x: plot.minX - 7, y: py(y)), anchor: .trailing)
             }
+            if chart.yAxis.minimum < 0 && chart.yAxis.maximum > 0 {
+                var baseline = Path(); baseline.move(to: CGPoint(x: plot.minX, y: py(0))); baseline.addLine(to: CGPoint(x: plot.maxX, y: py(0)))
+                context.stroke(baseline, with: .color(TrajectoryStyle.ink.opacity(0.55)), lineWidth: 1.5)
+            }
             for x in chart.xAxis.ticks {
-                context.draw(Text(x.formatted()).font(.system(size: 11, weight: .medium)).foregroundStyle(TrajectoryStyle.ink), at: CGPoint(x: px(x), y: plot.maxY + 16))
+                context.draw(Text(x.formatted(.number.grouping(.never))).font(.system(size: 11, weight: .medium)).foregroundStyle(TrajectoryStyle.ink), at: CGPoint(x: px(x), y: plot.maxY + 16))
             }
             if let beat = frame.beat, beat.comparison == nil {
                 var reference = Path(); reference.move(to: CGPoint(x: plot.minX, y: py(beat.y))); reference.addLine(to: CGPoint(x: plot.maxX, y: py(beat.y)))
@@ -231,6 +236,9 @@ private struct TrajectoryCanvas: View {
                     for point in series.points where point.x <= progress {
                         let rect = CGRect(x: px(point.x) - slot * CGFloat(chart.series.count) / 2 + slot * CGFloat(index), y: min(py(0), py(point.y)), width: max(1, slot * 0.8), height: abs(py(0) - py(point.y)))
                         context.fill(Path(rect), with: .color(color))
+                        if series.points.count <= 8 {
+                            context.draw(Text(point.y.formatted()).font(.system(size: 11, weight: .bold)).foregroundStyle(color), at: CGPoint(x: rect.midX, y: rect.minY - 9))
+                        }
                     }
                 } else {
                     var path = Path(); let first = series.points[0]

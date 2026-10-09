@@ -1,0 +1,801 @@
+{
+  "bakerALDS": {
+    "games": [
+      {
+        "date": "2026-10-03",
+        "game": 849835,
+        "player": "Bryan Baker",
+        "saves": 1
+      },
+      {
+        "date": "2026-10-05",
+        "game": 849839,
+        "player": "Bryan Baker",
+        "saves": 1
+      },
+      {
+        "date": "2026-10-07",
+        "game": 849838,
+        "player": "Bryan Baker",
+        "saves": 1
+      }
+    ],
+    "sourceURL": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=139&season=2026&gameType=D"
+  },
+  "bakerRawSHA256": "02ae58fd6e698a59e42ecac717eb46f5f4feaec67e03f455b14dbcfc230df613",
+  "bakerSaves": [
+    0,
+    1,
+    0,
+    0,
+    3,
+    41
+  ],
+  "cutoff": "2026-10-08",
+  "games": [
+    {
+      "awayTeamID": 114,
+      "date": "2026-10-08",
+      "gameID": 849832,
+      "homeTeamID": 145,
+      "innings": [
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 3,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 1,
+          "ordinalNum": "1st"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 2,
+          "ordinalNum": "2nd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 2,
+            "runs": 2
+          },
+          "num": 3,
+          "ordinalNum": "3rd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 4,
+          "ordinalNum": "4th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 0,
+            "runs": 3
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 3,
+            "runs": 2
+          },
+          "num": 5,
+          "ordinalNum": "5th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 5,
+            "leftOnBase": 1,
+            "runs": 6
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 6,
+          "ordinalNum": "6th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 7,
+          "ordinalNum": "7th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 8,
+          "ordinalNum": "8th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 2,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 2,
+            "runs": 1
+          },
+          "num": 9,
+          "ordinalNum": "9th"
+        }
+      ],
+      "rawSHA256": "b422e892bd5f6c6250e858e2574259976f73a9ca5813d34b1cbe690d538af56f"
+    },
+    {
+      "awayTeamID": 135,
+      "date": "2026-10-03",
+      "gameID": 849830,
+      "homeTeamID": 158,
+      "innings": [
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 1,
+          "ordinalNum": "1st"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 3,
+            "runs": 2
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 2,
+          "ordinalNum": "2nd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 3,
+            "runs": 2
+          },
+          "num": 3,
+          "ordinalNum": "3rd"
+        },
+        {
+          "away": {
+            "errors": 1,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 4,
+          "ordinalNum": "4th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 2,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 5,
+          "ordinalNum": "5th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 6,
+          "ordinalNum": "6th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 3,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 2,
+            "runs": 1
+          },
+          "num": 7,
+          "ordinalNum": "7th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 2,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 8,
+          "ordinalNum": "8th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0
+          },
+          "num": 9,
+          "ordinalNum": "9th"
+        }
+      ],
+      "rawSHA256": "bbbf0a33c733b61f85ace3a3a79da54aa79652cb71905a8c6d1641518207eac9"
+    },
+    {
+      "awayTeamID": 135,
+      "date": "2026-10-04",
+      "gameID": 849825,
+      "homeTeamID": 158,
+      "innings": [
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 1
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 1,
+          "ordinalNum": "1st"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 2,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 2,
+          "ordinalNum": "2nd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 3,
+          "ordinalNum": "3rd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 4,
+          "ordinalNum": "4th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 1
+          },
+          "home": {
+            "errors": 2,
+            "hits": 3,
+            "leftOnBase": 2,
+            "runs": 1
+          },
+          "num": 5,
+          "ordinalNum": "5th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 2,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 6,
+          "ordinalNum": "6th"
+        },
+        {
+          "away": {
+            "errors": 2,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 1
+          },
+          "home": {
+            "errors": 1,
+            "hits": 1,
+            "leftOnBase": 2,
+            "runs": 1
+          },
+          "num": 7,
+          "ordinalNum": "7th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 8,
+          "ordinalNum": "8th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 2,
+            "runs": 2
+          },
+          "num": 9,
+          "ordinalNum": "9th"
+        }
+      ],
+      "rawSHA256": "a02914874f27e8b1802d6259927dd89ca5d2588ddd204f576933e5002e32c872"
+    },
+    {
+      "awayTeamID": 158,
+      "date": "2026-10-06",
+      "gameID": 849826,
+      "homeTeamID": 135,
+      "innings": [
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 1,
+          "ordinalNum": "1st"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 2,
+          "ordinalNum": "2nd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 1,
+            "runs": 2
+          },
+          "num": 3,
+          "ordinalNum": "3rd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 0,
+            "runs": 1
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 4,
+          "ordinalNum": "4th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 3,
+            "runs": 1
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 0,
+            "runs": 1
+          },
+          "num": 5,
+          "ordinalNum": "5th"
+        },
+        {
+          "away": {
+            "errors": 1,
+            "hits": 1,
+            "leftOnBase": 2,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 0,
+            "runs": 1
+          },
+          "num": 6,
+          "ordinalNum": "6th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 2,
+            "runs": 1
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 7,
+          "ordinalNum": "7th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 8,
+          "ordinalNum": "8th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0
+          },
+          "num": 9,
+          "ordinalNum": "9th"
+        }
+      ],
+      "rawSHA256": "b7da34ff488a7e8cd859a64d676a1cef9b091f89d6a78b24570c7df68b124f77"
+    },
+    {
+      "awayTeamID": 158,
+      "date": "2026-10-07",
+      "gameID": 849827,
+      "homeTeamID": 135,
+      "innings": [
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 3,
+            "runs": 0
+          },
+          "num": 1,
+          "ordinalNum": "1st"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 2,
+          "ordinalNum": "2nd"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 1,
+            "runs": 1
+          },
+          "home": {
+            "errors": 0,
+            "hits": 1,
+            "leftOnBase": 0,
+            "runs": 1
+          },
+          "num": 3,
+          "ordinalNum": "3rd"
+        },
+        {
+          "away": {
+            "errors": 1,
+            "hits": 1,
+            "leftOnBase": 2,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 4,
+          "ordinalNum": "4th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 3,
+            "leftOnBase": 2,
+            "runs": 1
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 5,
+          "ordinalNum": "5th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 1,
+            "runs": 1
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 6,
+          "ordinalNum": "6th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 2,
+            "leftOnBase": 3,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 7,
+          "ordinalNum": "7th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "num": 8,
+          "ordinalNum": "8th"
+        },
+        {
+          "away": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 1,
+            "runs": 0
+          },
+          "home": {
+            "errors": 0,
+            "hits": 0,
+            "leftOnBase": 0,
+            "runs": 0
+          },
+          "num": 9,
+          "ordinalNum": "9th"
+        }
+      ],
+      "rawSHA256": "f19a02cdbb70d6d7b8c2ab04435c64b8fe59f689eff9a83d8d814ec299676cef"
+    }
+  ],
+  "retrievedAt": "2026-10-09T12:17:57Z"
+}
