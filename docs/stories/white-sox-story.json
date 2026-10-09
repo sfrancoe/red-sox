@@ -3,8 +3,12 @@
     "durationSeconds": 8,
     "emphasis": [
       {
+        "comparison": {
+          "sourceSeriesID": "season-2026",
+          "targetSeriesID": "season-2024"
+        },
         "detail": "June 23, 2026 · 41–37. Chicago matched all 41 wins from 2024 before halfway through the season.",
-        "holdSeconds": 0.9,
+        "holdSeconds": 2,
         "id": "june-crossing",
         "title": "A whole season. In 78 games.",
         "x": 78,
@@ -12,6 +16,9 @@
       }
     ],
     "kind": "step",
+    "sequence": {
+      "secondsPerSeries": 2
+    },
     "series": [
       {
         "color": "navy",
@@ -2024,7 +2031,7 @@
     "Games are ordered by official game date, then doubleheader game number, start time and gamePk. We count the winner flag and reconcile every cumulative win–loss record against the schedule’s leagueRecord. Each season has 162 distinct final games.",
     "All three lines use the same games-played axis (0–162) and wins axis (0–90). The steps show actual wins, without smoothing. A loss keeps the line level. Matching game numbers compares progress through a season, not the same calendar dates.",
     "Verified finishes: 2024, 41–121; 2025, 60–102; 2026, 84–78. The 2026 milestones are win 41 at Game 78 on June 23, win 42 at Game 80 on June 26, and win 61 at Game 117 on August 9.",
-    "The animation lasts eight seconds, including a brief hold at Game 78. Playback timing is editorial emphasis; it does not represent time between real games. This is original text and an original native chart of factual game results. No MLB photographs, video, logos or music are included."
+    "The seasons draw one after another: two seconds for 2024, two for 2025, then two for 2026, with a two-second comparison pause at Game 78. The arrow points to 2024’s 41-win finish and gently pulses twice. Reduced Motion shows the completed chart and a static comparison. Playback timing is editorial emphasis; it does not represent time between real games. This is original text and an original native chart of factual game results. No MLB photographs, video, logos or music are included."
   ],
   "renderer": "chart-trajectory",
   "rendererVersion": 1,

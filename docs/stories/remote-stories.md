@@ -186,3 +186,41 @@ the preserved build-118 simulator app, never against the new renderer.
 Read-only fixture controls `chart-line` and `chart-bar` generate explicitly
 synthetic local renderer checks in memory. They are never written into the
 production catalog or included as bundled stories.
+
+## Sequential chart and launch-card refinement (local, unreleased)
+
+The native capability is now 3 in this candidate. Existing payloads without the
+new optional fields retain simultaneous playback and remain compatible. A chart
+can opt into `sequence: {"secondsPerSeries": 2}`. The duration must equal the sum
+of all series sweeps plus all holds; the per-series sweep is bounded to 1–4 seconds.
+Completed series stay visible; later series are not drawn until their turn.
+
+An emphasis may include `comparison: {"sourceSeriesID": "season-2026",
+"targetSeriesID": "season-2024"}`. The target must be an earlier series, its final
+value must equal the source's actual value at the milestone, and its hold must be
+1.9–2 seconds. An arrow draws over 0.3 seconds, then the arrow and endpoint use
+two gentle 0.8-second cosine pulses between 65% and 100% emphasis. The comparison
+stays visible afterward. Reduced Motion shows the complete chart and a static
+arrow. No team, year or factual milestone is hardcoded into the renderer.
+
+The White Sox candidate uses two seconds per season, plus two seconds at Game 78:
+2024 draws at 0–2 seconds, 2025 at 2–4, 2026 starts at 4, pauses at about 4.963–6.963,
+and finishes at 8. The red replay icon is above the x-axis at the lower right, with
+a 44-by-44-point target and “Replay chart from the beginning” accessibility label.
+
+`FeaturedStoryLaunch` is owned by AppModel and claims one offer per cold app
+session. AppTabView presents the White Sox preview card after completed onboarding;
+fresh onboarding remains first and offers the card only after dismissal. Watch
+pushes the story inside the same sheet and begins playback; Dismiss closes without
+loading or playing the chart. Back returns to the card, and Done closes the story
+to the underlying page. The launch actions keep Watch at the card's lower left and
+Dismiss immediately to its right, both with actual 44-point targets. Foreground
+events now resume refresh/playback without the previous 15-minute page reset or
+automatic postseason cover. Explicit debug routes retain their intended screens.
+
+The publisher sets minimum native capability 3 for sequence/comparison payloads.
+Build 119 supports capability 2 and cannot apply this refinement from remote JSON
+alone. Release approval must precede a new native bootstrap and live pointer switch.
+The candidate catalog, immutable payload and matching bundled seeds in this local
+checkout are staging artifacts. Nothing from this refinement has been pushed,
+deployed, uploaded to TestFlight or distributed.

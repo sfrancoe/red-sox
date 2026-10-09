@@ -38,6 +38,7 @@ def preview_server(root, port=0, fixtures=False):
                              kicker='LOCAL RENDERER TEST', intro='Synthetic presentation check. Never publish this fixture.')
                 story['chart']['kind'] = kind
                 if kind == 'bar':
+                    for beat in story['chart']['emphasis']: beat.pop('comparison', None)
                     for row in story['chart']['series']:
                         row['points'] = row['points'][::10] + [row['points'][-1]]
                 payload = encoded(story)

@@ -25,8 +25,8 @@ final class LargeTextUITests: XCTestCase {
         if !route.isEmpty { app.launchArguments.append(route) }
         app.launch()
         if !keepPostseason && (route.isEmpty || route == "-show-home-run-chase") {
-            let close = app.buttons["playoffs.close"]
-            XCTAssertTrue(close.waitForExistence(timeout: 15), "Normal launch opens the postseason cover")
+            let close = app.buttons["featured.dismiss"]
+            XCTAssertTrue(close.waitForExistence(timeout: 15), "Normal launch offers the featured story")
             close.tap()
             XCTAssertTrue(close.waitForNonExistence(timeout: 5))
         }
@@ -164,7 +164,7 @@ final class LargeTextUITests: XCTestCase {
     }
 
     func testPostseasonButtonColors() {
-        launch("", size: "UICTContentSizeCategoryM", keepPostseason: true)
+        launch("-show-october", size: "UICTContentSizeCategoryM", keepPostseason: true)
         let close = app.buttons["playoffs.close"]
         XCTAssertTrue(close.waitForExistence(timeout: 30))
         close.tap()

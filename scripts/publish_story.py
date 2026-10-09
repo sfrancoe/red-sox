@@ -50,7 +50,7 @@ def stage(payload_path, root, summary, teams, published_at=None):
     timestamp = published_at or now()
     entry = {'id': payload['id'], 'revision': digest(data), 'title': payload['title'], 'summary': summary,
              'fallback': payload.get('answer', payload['conclusion']), 'teamIDs': teams, 'publishedAt': timestamp,
-             'renderer': payload['renderer'], 'rendererVersion': payload['rendererVersion'], 'minimumRendererVersion': 2 if payload['renderer'] == 'chart-trajectory' else 1}
+             'renderer': payload['renderer'], 'rendererVersion': payload['rendererVersion'], 'minimumRendererVersion': (3 if payload['chart'].get('sequence') or any(b.get('comparison') for b in payload['chart']['emphasis']) else 2) if payload['renderer'] == 'chart-trajectory' else 1}
     catalog = {'schemaVersion': 1, 'revision': 'release-' + uuid4().hex, 'publishedAt': timestamp,
                'stories': [entry] + [e for e in previous['stories'] if e['id'] != entry['id']]}
     validate_catalog(catalog)
