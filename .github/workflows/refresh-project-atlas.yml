@@ -2,8 +2,8 @@ name: Refresh project atlas
 
 # Rebuilds docs/atlas/hub-ball-atlas.html, the interactive 3D map of this
 # repository, so its sizes and connections follow the code as it grows.
-# docs/ is not deployed and is a Netlify ignore path, so this never redeploys
-# the site.
+# The site serves it at /atlas/, so a changed atlas redeploys the site; the
+# rest of docs/ stays a Netlify ignore path.
 
 on:
   schedule:
