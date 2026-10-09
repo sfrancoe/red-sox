@@ -97,17 +97,35 @@ export const MLB_TEAMS = Object.freeze([
       {
         "key": "dailynews",
         "name": "Daily News",
-        "url": "https://www.nydailynews.com/sports/mlb/new-york-yankees/"
+        "url": "https://www.nydailynews.com/sports/mlb/new-york-yankees/",
+        "adapter": {
+          "kind": "dailynews",
+          "url": "https://www.nydailynews.com/sports/mlb/new-york-yankees/",
+          "match": "yankee"
+        }
       },
       {
         "key": "nypost",
         "name": "NY Post",
-        "url": "https://nypost.com/sports/yankees/"
+        "url": "https://nypost.com/sports/yankees/",
+        "adapter": {
+          "kind": "nypost",
+          "url": "https://nypost.com/sports/yankees/",
+          "match": "yankee"
+        }
       },
       {
         "key": "athletic",
         "name": "The Athletic",
-        "url": "https://www.nytimes.com/athletic/mlb/team/yankees/"
+        "url": "https://www.nytimes.com/athletic/mlb/team/yankees/",
+        "adapter": {
+          "kind": "rss",
+          "url": "https://www.nytimes.com/athletic/rss/mlb/yankees/",
+          "match": "yankee",
+          "exclude_phrases": [
+            "red sox folk hero"
+          ]
+        }
       }
     ],
     "features": {
@@ -156,17 +174,35 @@ export const MLB_TEAMS = Object.freeze([
       {
         "key": "dailynews",
         "name": "Daily News",
-        "url": "https://www.nydailynews.com/sports/mlb/new-york-mets/"
+        "url": "https://www.nydailynews.com/sports/mlb/new-york-mets/",
+        "adapter": {
+          "kind": "dailynews",
+          "url": "https://www.nydailynews.com/sports/mlb/new-york-mets/",
+          "match": "mets"
+        }
       },
       {
         "key": "nypost",
         "name": "NY Post",
-        "url": "https://nypost.com/sports/mets/"
+        "url": "https://nypost.com/sports/mets/",
+        "adapter": {
+          "kind": "nypost",
+          "url": "https://nypost.com/new-york-mets/",
+          "match": "mets"
+        }
       },
       {
         "key": "athletic",
         "name": "The Athletic",
-        "url": "https://www.nytimes.com/athletic/mlb/team/mets/"
+        "url": "https://www.nytimes.com/athletic/mlb/team/mets/",
+        "adapter": {
+          "kind": "rss",
+          "url": "https://www.nytimes.com/athletic/rss/mlb/mets/",
+          "match": "mets",
+          "exclude_phrases": [
+            "red sox folk hero"
+          ]
+        }
       }
     ],
     "features": {
@@ -216,12 +252,22 @@ export const MLB_TEAMS = Object.freeze([
       {
         "key": "tampabay",
         "name": "Tampa Bay Times",
-        "url": "https://www.tampabay.com/sports/rays/"
+        "url": "https://www.tampabay.com/sports/rays/",
+        "adapter": {
+          "kind": "fusion",
+          "url": "https://www.tampabay.com/sports/rays/",
+          "path_prefix": "/sports/rays/"
+        }
       },
       {
         "key": "athletic",
         "name": "The Athletic",
-        "url": "https://www.nytimes.com/athletic/mlb/team/rays/"
+        "url": "https://www.nytimes.com/athletic/mlb/team/rays/",
+        "adapter": {
+          "kind": "rss",
+          "url": "https://www.nytimes.com/athletic/rss/mlb/rays/",
+          "match": "rays"
+        }
       }
     ],
     "features": {

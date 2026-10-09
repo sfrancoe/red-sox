@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Fetch configured team-news sources through Bing News RSS."""
+"""Fetch configured team-news sources.
+
+Sources with an `adapter` in config/mlb-teams.json are read from the publisher
+directly (see news_adapters.py); every other source goes through Bing News RSS.
+"""
 
 from __future__ import annotations
 
@@ -21,6 +25,7 @@ from urllib.parse import parse_qs, urlencode, urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
+import news_adapters
 from team_registry import data_directory, shared_news_teams, team_by_key
 from news_source_status import STATE_PATH, atomic_json, load_state, observe
 
@@ -59,6 +64,40 @@ def fetch_xml(url: str) -> ElementTree.Element:
     raise NewsSourceTransientError(f"Could not fetch news RSS: {last_error}")
 
 
+def fetch_page(url: str) -> bytes:
+    """Fetch a publisher page or feed. Some publishers refuse the default client
+    but serve the approved fallback identity, so any HTTP refusal moves on to it."""
+    last_error: Exception | None = None
+    for headers in ({}, {"User-Agent": FALLBACK_USER_AGENT}):
+        for attempt in range(3):
+            try:
+                with urlopen(Request(url, headers=headers), timeout=30) as response:
+                    return response.read()
+            except (HTTPError, URLError, TimeoutError,
+                    ConnectionResetError, IncompleteRead, RemoteDisconnected) as exc:
+                if isinstance(exc, URLError) and isinstance(exc.reason, ssl.SSLCertVerificationError):
+                    raise  # Broken trust/configuration is not a transient outage.
+                last_error = exc
+                if isinstance(exc, HTTPError) and exc.code != 429 and not 500 <= exc.code <= 599:
+                    break  # Refused: retrying the same identity will not help.
+                if attempt < 2:
+                    time.sleep(2**attempt)
+    raise NewsSourceTransientError(f"Could not fetch {url}: {last_error}")
+
+
+def adapter_feed(team: dict[str, Any], source: dict[str, Any]) -> list[dict[str, str]]:
+    adapter = source["adapter"]
+    parser = news_adapters.PARSERS[adapter["kind"]]
+    articles = parser(fetch_page(adapter["url"]), adapter, team)
+    if not articles:
+        # A publisher section page is never legitimately empty; count it toward
+        # the source's failure streak so a markup change raises an alert.
+        raise NewsSourceTransientError(
+            f"No articles parsed from {adapter['url']} ({adapter['kind']} adapter)"
+        )
+    return articles
+
+
 def clean_text(value: str | None) -> str:
     without_tags = re.sub(r"<[^>]+>", " ", value or "")
     return re.sub(r"\s+", " ", html.unescape(without_tags)).strip()
@@ -93,7 +132,13 @@ def published(value: str | None) -> str:
         return ""
 
 
-def source_feed(team: dict[str, Any], source: dict[str, str]) -> dict[str, Any]:
+def source_feed(team: dict[str, Any], source: dict[str, Any]) -> dict[str, Any]:
+    if source.get("adapter"):
+        return {
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "source": source["name"], "source_url": source["url"],
+            "articles": adapter_feed(team, source),
+        }
     source_host = urlparse(source["url"]).netloc.removeprefix("www.")
     query = f"site:{source_host} {team['full_name']}"
     url = BING_NEWS + "?" + urlencode({"q": query, "format": "rss"})

@@ -13,7 +13,6 @@ from unittest.mock import patch
 from urllib.error import HTTPError
 
 import fetch_players as players
-import fetch_mets_news as mets
 import http_refresh as http
 
 
@@ -46,27 +45,6 @@ class RefreshReliabilityTests(unittest.TestCase):
             self.assertIn('abrew002_b.csv', archive.namelist())
             archive.close()
             players.retrosheet_archive.cache_clear()
-
-    def test_mets_headlines_keep_team_filter_and_parse_current_markup(self):
-        payload = b'''<h3 class="story__headline headline headline--archive">
-        <a href="https://nypost.com/2026/10/03/sports/mets-roster/" target="_self">Mets &amp; roster</a></h3>
-        <h3 class="story__headline"><a href="https://nypost.com/2026/10/03/sports/yankees/">Yankees win</a></h3>'''
-        articles = mets.ny_post_articles(payload, 'Mets')
-        self.assertEqual(len(articles), 1)
-        self.assertEqual(articles[0]['title'], 'Mets & roster')
-        self.assertEqual(articles[0]['published'], '2026-10-03T00:00:00+00:00')
-
-    def test_mets_failed_source_preserves_snapshot_and_continues(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            previous = root / 'nypost.json'
-            previous.write_text('{"articles": [{"title": "Last good Mets headline"}]}\n')
-            before = previous.read_bytes()
-            with patch.object(mets, 'OUTPUT_DIR', root), patch.object(mets, 'fetch', side_effect=[RuntimeError('Provider unavailable'), b'<rss><channel><item><title>Mets roster</title><link>https://example.org/mets</link></item></channel></rss>']), patch('sys.argv', ['fetch_mets_news.py', 'nypost', 'athletic']), contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-                status = mets.main()
-            self.assertEqual(status, 1)
-            self.assertEqual(previous.read_bytes(), before)
-            self.assertTrue((root / 'athletic.json').exists())
 
     def test_invalid_archive_does_not_poison_the_disk_cache(self):
         with tempfile.TemporaryDirectory() as directory, patch.dict('os.environ', {'RETROSHEET_CACHE_DIR': directory}), patch.object(players, 'urlopen', side_effect=lambda *a, **k: io.BytesIO(b'<html>error</html>')), patch.object(players.time, 'sleep'):

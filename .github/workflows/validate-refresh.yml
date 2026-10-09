@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - 'scripts/fetch_players.py'
-      - 'scripts/fetch_mets_news.py'
       - 'scripts/http_refresh.py'
       - 'scripts/test_refresh_reliability.py'
       - 'scripts/refresh_pitching.py'
@@ -19,6 +18,9 @@ on:
       - 'scripts/test_postseason_schedules.py'
       - 'scripts/test_no_team_specific_fetchers.py'
       - 'scripts/fetch_team_news.py'
+      - 'scripts/news_adapters.py'
+      - 'scripts/test_news_adapters.py'
+      - 'config/mlb-teams.json'
       - 'scripts/news_source_status.py'
       - 'scripts/test_fetch_team_news.py'
       - 'scripts/test_news_alert_publication.py'
@@ -45,6 +47,7 @@ jobs:
         run: python3 -m unittest discover -s scripts -p 'test_pitching_refresh.py'
       - run: python3 scripts/test_open_players.py
       - run: python3 scripts/test_fetch_team_news.py
+      - run: python3 scripts/test_news_adapters.py
       - name: Shared game-data fetcher, recaps and postseason schedules
         run: |
           python3 scripts/test_fetch_team_data.py
@@ -76,9 +79,9 @@ jobs:
           python3 scripts/fetch_players.py --team redsox
           python3 scripts/test_players.py --team redsox
           python3 scripts/test_player_careers.py --team redsox
-      - name: Check Mets newspapers
+      - name: Check direct-source newspapers (Yankees, Mets, Rays)
         if: '!cancelled()'
-        run: python3 scripts/fetch_mets_news.py
+        run: python3 scripts/fetch_team_news.py --team yankees --team mets --team rays
       - name: Check pitching provider pacing across all shared-fetcher teams
         if: '!cancelled()'
         run: python3 scripts/fetch_team_data.py --section pitching --keep-going
@@ -114,6 +117,7 @@ jobs:
             --section schedule --section recent-game --section standings --section pitching \
             --keep-going
           python3 scripts/fetch_team_leaders.py "${args[@]}"
+          python3 scripts/fetch_team_news.py "${args[@]}"
           python3 scripts/test_all_team_data.py "${args[@]}"
       - name: Compare with what the old scripts published
         run: |
@@ -122,6 +126,7 @@ jobs:
             python3 candidate/scripts/compare_feed_snapshots.py \
               "baseline/data/$team" "candidate/data/$team" \
               schedule.json recent-game.json standings.json pitching.json seasons.json meta.json \
+              dailynews.json nypost.json athletic.json tampabay.json \
               --label "$team" >> shadow-report.md || status=1
           done
           cat shadow-report.md

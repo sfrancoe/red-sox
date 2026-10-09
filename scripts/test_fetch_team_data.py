@@ -110,10 +110,10 @@ class RegistrySplitTests(unittest.TestCase):
         self.assertNotIn("redsox", keys)
         self.assertTrue({"yankees", "mets", "rays"} <= keys)
 
-    def test_direct_newspaper_teams_stay_off_the_shared_news_fetcher(self) -> None:
+    def test_only_boston_keeps_its_own_newspaper_scrapers(self) -> None:
         keys = {team["api_key"] for team in team_registry.shared_news_teams()}
-        self.assertEqual(len(keys), 26)
-        self.assertFalse(keys & {"redsox", "yankees", "mets", "rays"})
+        self.assertEqual(len(keys), 29)
+        self.assertNotIn("redsox", keys)
 
 
 class FailureIsolationTests(unittest.TestCase):
