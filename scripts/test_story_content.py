@@ -79,6 +79,7 @@ class StoryContentTests(unittest.TestCase):
             with self.assertRaises(ValueError): validate_catalog(traversal)
 
     def test_offline_preview_is_strict_and_serves_both_legacy_paths(self):
+        base_count = len(validate_tree(ROOT / 'data')['stories'])
         server = preview_server(ROOT / 'data', fixtures=True)
         worker = threading.Thread(target=server.serve_forever, daemon=True); worker.start()
         origin = f'http://127.0.0.1:{server.server_port}'
@@ -87,9 +88,9 @@ class StoryContentTests(unittest.TestCase):
         try:
             self.assertEqual(get('/data/stories/catalog-v1.json'), get('/api/data/stories/catalog-v1.json'))
             get('/__fixture/next')
-            self.assertEqual(len(json.loads(get('/data/stories/catalog-v1.json'))['stories']), 2)
+            self.assertEqual(len(json.loads(get('/data/stories/catalog-v1.json'))['stories']), base_count + 1)
             get('/__fixture/rollback')
-            self.assertEqual(len(json.loads(get('/data/stories/catalog-v1.json'))['stories']), 1)
+            self.assertEqual(len(json.loads(get('/data/stories/catalog-v1.json'))['stories']), base_count)
             for path in ['/api/x-discovery', '/data/../docs/stories/stadium-story-source.json', '/data/stories/catalog-history/no.json']:
                 with self.assertRaises(urllib.error.HTTPError) as error: get(path)
                 self.assertEqual(error.exception.code, 404)

@@ -54,7 +54,7 @@ struct StoriesView: View {
                                         RemoteStoryView(entry: entry)
                                     } label: {
                                         StoryPreviewCard(title: entry.title, summary: entry.summary,
-                                                         action: entry.isSupported ? "GUESS · REVEAL · EXPLORE" : "READ THE SUMMARY")
+                                                         action: entry.actionLabel)
                                     }.buttonStyle(.plain).accessibilityIdentifier("stories.remote.\(entry.id)")
                                 }
                             }

@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'data/stories/**'
-      - 'docs/stories/stadium-story*.json'
+      - 'docs/stories/*story*.json'
       - 'scripts/*stor*.py'
       - 'scripts/test_story_gateway.mjs'
       - 'netlify/functions/app-data.mjs'
@@ -24,5 +24,6 @@ jobs:
           node-version: '24'
       - run: python3 scripts/validate_stories.py
       - run: python3 scripts/test_story_content.py
+      - run: python3 scripts/test_trajectory_story.py
       - run: node scripts/test_story_gateway.mjs
       - run: node scripts/test_app_data.mjs

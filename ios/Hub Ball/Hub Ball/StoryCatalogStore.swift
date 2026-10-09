@@ -25,6 +25,9 @@ private nonisolated final class StoryRedirectPolicy: NSObject, URLSessionTaskDel
 
 nonisolated enum StorySeed {
     static var catalog: StoryCatalog {
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["HUB_STORY_NO_SEED"] == "1" { return .empty }
+        #endif
         guard let url = Bundle.main.url(forResource: "story-catalog", withExtension: "json"), let data = try? Data(contentsOf: url),
               let result = try? StoryContract.decodeCatalog(data) else { return .empty }
         return result
@@ -32,7 +35,7 @@ nonisolated enum StorySeed {
     static func payload(_ entry: StoryEntry) -> Data? {
         guard let seed = catalog.stories.first(where: { $0.id == entry.id && $0.revision == entry.revision }),
               let url = Bundle.main.url(forResource: "story-seed-\(seed.id)", withExtension: "json"),
-              let data = try? Data(contentsOf: url), (try? StoryContract.decodeStory(data, entry: seed)) != nil else { return nil }
+              let data = try? Data(contentsOf: url), (try? StoryContract.decodeDocument(data, entry: seed)) != nil else { return nil }
         return data
     }
 }
@@ -43,7 +46,7 @@ final class StoryCatalogStore {
     private(set) var catalog: StoryCatalog
     private(set) var isRefreshing = false
     private(set) var refreshFailed = false
-    private(set) var stories: [String: RemoteStory] = [:]
+    private(set) var stories: [String: StoryDocument] = [:]
     private(set) var notes: [String: String] = [:]
     private(set) var loading = Set<String>()
     private let cache: StoryContentCache

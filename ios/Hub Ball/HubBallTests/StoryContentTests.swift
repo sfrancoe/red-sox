@@ -21,7 +21,7 @@ private actor StoryFixtureTransport {
 struct StoryContentTests {
     private func folder() -> URL { FileManager.default.temporaryDirectory.appending(path: "story-test-\(UUID().uuidString)") }
     private func fixture(id: String = "this-stadium", title: String? = nil) throws -> (StoryEntry, Data) {
-        let original = try #require(StorySeed.catalog.stories.first)
+        let original = try #require(StorySeed.catalog.stories.first(where: { $0.id == "this-stadium" }))
         let bytes = try #require(StorySeed.payload(original))
         var payload = try #require(JSONSerialization.jsonObject(with: bytes) as? [String: Any])
         payload["id"] = id
@@ -40,7 +40,7 @@ struct StoryContentTests {
     }
 
     @Test func bundledStoryReconcilesAndWorksColdOffline() async throws {
-        let entry = try #require(StorySeed.catalog.stories.first)
+        let entry = try #require(StorySeed.catalog.stories.first(where: { $0.id == "this-stadium" }))
         let bytes = try #require(StorySeed.payload(entry))
         let story = try StoryContract.decodeStory(bytes, entry: entry)
         #expect(story.choices.map(\.value) == ["356", "340"])
@@ -166,7 +166,7 @@ struct StoryContentTests {
         let directory = folder(); defer { try? FileManager.default.removeItem(at: directory) }
         let normal = StoryCatalogStore(root: URL(string: origin + "/story-fixture-good")!, cache: StoryContentCache(directory: directory), seed: .empty, seedPayload: { _ in nil })
         await normal.refresh()
-        #expect(!normal.refreshFailed && normal.catalog.stories.first?.id == "this-stadium")
+        #expect(!normal.refreshFailed && normal.catalog.stories.contains { $0.id == "this-stadium" })
         let blocked = StoryCatalogStore(root: URL(string: origin + "/story-fixture")!, cache: StoryContentCache(directory: directory.appending(path: "blocked")), seed: .empty, seedPayload: { _ in nil })
         await blocked.refresh()
         #expect(blocked.refreshFailed && blocked.catalog.stories.isEmpty)
