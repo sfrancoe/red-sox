@@ -38,8 +38,8 @@ SYSTEMS = [
      "stores live in TeamSession, league-wide state in AppModel, networking in APIClient, and "
      "RefreshScheduler drives polling for whatever screen is visible."),
     ("backend", "Netlify Backend", "Netlify Functions (ES modules) that sit between the app and upstream "
-     "sources: proxying MLB Stats API calls, serving generated JSON under /api/data, and talking to X, "
-     "Kalshi and Polymarket. Uses the one approved dependency, @netlify/blobs, for last-good caches."),
+     "sources: proxying MLB Stats API calls, serving generated JSON under /api/data, and talking to X. "
+     "Uses the one approved dependency, @netlify/blobs, for last-good caches and call reservations."),
     ("web", "Website & Stories", "The original dependency-free website: plain ES modules + <canvas>. "
      "Pages for recent game, schedule, standings, pitching, news and X posts, plus the animated "
      "'Four Roads, One Record' story built on the shared chart/audio engine."),
@@ -76,7 +76,6 @@ IOS_FEATURES = [
      "shutouts.", ["StoriesView", "Game108", "GraphMusicPlayer", "MLB300Hitter", "BrewersShutout",
                    "brewers-shutouts"]),
     ("Home Run Chase", "Live home-run chase tracker and chart.", ["HomeRunChase"]),
-    ("Markets", "Red Sox prediction-market odds (Kalshi / Polymarket).", ["MarketsView"]),
 ]
 
 PIPELINE_GROUPS = [
@@ -156,8 +155,6 @@ EXTERNALS = {
     "herald": ("Boston Herald", "Red Sox headlines."),
     "rss": ("News RSS Feeds", "The Athletic, MassLive, NY Times and other team news feeds."),
     "x": ("X (Twitter)", "Post feeds via the X API and syndication lists."),
-    "kalshi": ("Kalshi", "Prediction-market odds for the Markets screen."),
-    "polymarket": ("Polymarket", "Prediction-market odds for the Markets screen."),
     "blobs": ("Netlify Blobs", "Key-value storage for X call reservations and last-good feeds."),
 }
 PYTHON_UPSTREAMS = [("statsapi.mlb.com", "ext:mlb"), ("baseball-reference.com", "ext:bref"),
@@ -209,7 +206,6 @@ APP_ENDPOINTS = [
     ("TeamSession.swift", ["netlify/functions/postseason.mjs"], "/api/postseason"),
     ("MLBGameClient.swift", ["netlify/functions/mlb-data.mjs"], "/api/mlb/schedule, /api/mlb/game"),
     ("StandingsStore.swift", ["netlify/functions/mlb-data.mjs"], "/api/mlb/standings"),
-    ("MarketsView.swift", ["netlify/functions/redsox-markets.mjs"], "/api/redsox-markets"),
     ("XPostsStore.swift", ["netlify/functions/x-posts.mjs", "netlify/functions/x-discovery.mjs"],
      "/api/x-posts, /api/x-discovery"),
     ("AppBackend.swift", ["netlify/functions/app-data.mjs"], "/api/data/* (release builds)"),
@@ -612,7 +608,6 @@ class Atlas:
                     self.edge(f, target, "tests" if is_test else "uses")
             lower = text.lower()
             for needle, ext, label in (("statsapi.mlb.com", "ext:mlb", "statsapi.mlb.com"),
-                                       ("kalshi", "ext:kalshi", ""), ("polymarket", "ext:polymarket", ""),
                                        ("api.x.com", "ext:x", "X API"),
                                        ("@netlify/blobs", "ext:blobs", "@netlify/blobs")):
                 if needle in lower:

@@ -1,25 +1,6 @@
 import Foundation
 import Observation
 
-nonisolated struct HomeOddsFeed: Decodable, Sendable {
-    let generatedAt: String?
-    let sportsbook: String
-    let games: [HomeGameOdds]
-    let available: Bool
-}
-
-nonisolated struct HomeGameOdds: Decodable, Sendable {
-    let eventId: String
-    let gameDate: String
-    let homeTeam: String
-    let awayTeam: String
-    let sportsbook: String
-    let moneyline: Int?
-    let runLine: Double?
-    let runLinePrice: Int?
-    let updatedAt: String?
-}
-
 @MainActor
 @Observable
 final class HomeStore {

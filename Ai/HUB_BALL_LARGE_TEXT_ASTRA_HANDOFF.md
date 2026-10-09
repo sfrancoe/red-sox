@@ -47,7 +47,7 @@ The implementation keeps the default-size presentation intact and switches to ex
 
 - Debug simulator build passed with `xcodebuild` and dedicated DerivedData at `dist/large-text-derived-stage3`.
 - Release generic iOS device build passed with signing disabled at `dist/large-text-derived-release`.
-- Existing unrelated warnings remain in `MarketsView.swift`, `SeasonLeadersView.swift`, and App Intents metadata extraction.
+- Existing unrelated warnings remain in `SeasonLeadersView.swift` and App Intents metadata extraction.
 
 ### Device and text-size combinations
 

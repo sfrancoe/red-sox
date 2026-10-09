@@ -17,6 +17,11 @@ The canonical checkout is `/Users/sfrancoe/Projects/Hub Ball`. The old
 
 Hosting is Netlify, auto-deploying from `main`. **A merged PR ships to production.**
 
+For the current feature inventory, backend routes and handoff, read
+[`PROJECT_HANDOFF.md`](PROJECT_HANDOFF.md). Keep that inventory aligned with
+`MainTab` and the implemented full-screen features; deleted experiments are not
+supported product surfaces. News headlines remain faithful to their sources.
+
 ---
 
 ## Stack

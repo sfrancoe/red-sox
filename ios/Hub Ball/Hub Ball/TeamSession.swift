@@ -66,7 +66,6 @@ final class AppModel {
     var featuredStoryLaunch = FeaturedStoryLaunch()
     let game108 = Game108GraphStore()
     let homeRunChase = HomeRunChaseStore()
-    let markets = MarketsStore()
     // Lazy construction avoids AVAudioEngine allocation during SwiftUI redraws.
     @ObservationIgnored lazy var graphMusic = GraphMusicPlayer()
     private var playerStores: [HubTeam: PlayersStore] = [:]
@@ -85,12 +84,6 @@ final class AppModel {
         let stories = self.stories
         scheduler.register("stories") { await stories.refresh(); return !stories.refreshFailed }
         scheduler.setVisible(visible, observer: "stories", jobs: ["stories"])
-    }
-
-    func setMarketsVisible(_ visible: Bool) {
-        let markets = self.markets
-        scheduler.register("markets") { await markets.refresh(); return markets.error == nil }
-        scheduler.setVisible(visible, observer: "markets", jobs: ["markets"])
     }
 
     func setOctoberVisible(_ visible: Bool) {

@@ -8,6 +8,11 @@ it is the shared source for current native architecture, concurrency, build/test
 commands, dependency policy and canonical release rules. The sections below retain
 additional context for the original web stories.
 
+[`PROJECT_HANDOFF.md`](PROJECT_HANDOFF.md) describes the current native features,
+backend routes, data refreshes and verification workflow. Use the active app
+navigation and current source as the feature inventory; preserve source wording in
+news feeds.
+
 **Primary developer:** Scott Francoe
 **GitHub repo:** https://github.com/sfrancoe/red-sox (public)
 **Hosting:** Netlify (auto-deploys from `main`)

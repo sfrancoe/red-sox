@@ -711,15 +711,6 @@ struct HomeView: View {
             .clipShape(Rectangle())
     }
 
-    private func oddsCell(_ value: String, width: CGFloat) -> some View {
-        Text(value)
-            .font(.system(size: 13, weight: .bold, design: .monospaced))
-            .foregroundStyle(value == "—" ? AppColor.navy.opacity(0.36) : AppColor.navy)
-            .lineLimit(1)
-            .minimumScaleFactor(0.72)
-            .frame(width: width, alignment: .trailing)
-    }
-
     private func favoriteTeam(in game: RecentGame) -> TeamBoxScore {
         game.away.id == team.mlbID ? game.away : game.home
     }
@@ -747,15 +738,6 @@ struct HomeView: View {
         return BaseballTime.format(date, .dateTime.weekday(.abbreviated))
             + " "
             + BaseballTime.format(date, .dateTime.month(.defaultDigits).day())
-    }
-
-    private func signed(_ value: Int) -> String { value > 0 ? "+\(value)" : "\(value)" }
-    private func american(_ value: Int?) -> String { value.map(signed) ?? "—" }
-
-    private func runLine(_ odds: HomeGameOdds?) -> String {
-        guard let line = odds?.runLine else { return "—" }
-        let lineText = line > 0 ? "+\(line.formatted())" : line.formatted()
-        return odds?.runLinePrice.map { "\(lineText) \(signed($0))" } ?? lineText
     }
 
     private var errorView: some View {

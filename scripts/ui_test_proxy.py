@@ -19,7 +19,7 @@ class UIProxy(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'{"error":"Paid discovery disabled during UI tests"}')
             return
-        free_routes = {'/api/x-posts', '/api/postseason', '/api/hr-chase', '/api/redsox-markets'}
+        free_routes = {'/api/x-posts', '/api/postseason', '/api/hr-chase'}
         if path not in free_routes and not path.startswith(('/api/mlb/', '/api/data/')):
             self.send_error(404)
             return
