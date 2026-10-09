@@ -1,0 +1,53 @@
+name: Refresh project atlas
+
+# Rebuilds docs/atlas/hub-ball-atlas.html, the interactive 3D map of this
+# repository, so its sizes and connections follow the code as it grows.
+# The site serves it at /atlas/, so a changed atlas redeploys the site; the
+# rest of docs/ stays a Netlify ignore path.
+
+on:
+  schedule:
+    # Mondays 12:43 UTC, clear of the daily data refreshes.
+    - cron: '43 12 * * 1'
+  workflow_dispatch:        # lets a human (or Claude) trigger a run on demand
+
+permissions:
+  contents: write
+
+concurrency:
+  group: project-atlas
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate the atlas graph
+        run: python3 scripts/test_build_atlas.py
+
+      - name: Rebuild the atlas
+        run: python3 scripts/build_atlas.py
+
+      - name: Commit if the atlas changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- docs/atlas/hub-ball-atlas.html; then
+            echo "Atlas unchanged — nothing to commit."
+          else
+            git add docs/atlas/hub-ball-atlas.html
+            git commit -m "Refresh project atlas ($(date -u +%Y-%m-%d))"
+            # Data workflows push to main often; retry on a moved branch.
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              sleep $((attempt * 10))
+            done
+            git log origin/main -1 --format=%H | grep -q "$(git rev-parse HEAD)"
+            echo "Pushed refreshed atlas."
+          fi

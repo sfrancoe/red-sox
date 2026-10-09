@@ -57,8 +57,12 @@ IOS=$(commit_file ios/Hub/App.swift)
 expect_result 0 "$DATA_DELETED" "$IOS" "iOS-only skips"
 DOCS=$(commit_file docs/backend.md)
 expect_result 0 "$IOS" "$DOCS" "docs-only skips"
+ATLAS_TEMPLATE=$(commit_file docs/atlas/template.html)
+expect_result 0 "$DOCS" "$ATLAS_TEMPLATE" "atlas template skips"
+ATLAS=$(commit_file docs/atlas/hub-ball-atlas.html)
+expect_result 1 "$ATLAS_TEMPLATE" "$ATLAS" "published atlas builds"
 BACKEND=$(commit_file netlify/functions/app-data.mjs)
-expect_result 1 "$DOCS" "$BACKEND" "backend builds"
+expect_result 1 "$ATLAS" "$BACKEND" "backend builds"
 REGISTRY=$(commit_file netlify/functions/team-registry.mjs)
 expect_result 1 "$BACKEND" "$REGISTRY" "generated registry builds"
 REGISTRY_SOURCE=$(commit_file config/mlb-teams.json)

@@ -39,6 +39,10 @@ fi
 
 while IFS= read -r path; do
   case "$path" in
+    # The generated atlas is published at /atlas/, unlike the rest of docs/.
+    docs/atlas/hub-ball-atlas.html)
+      build "$path changed"
+      ;;
     # These files are consumed from GitHub at runtime or are not part of the
     # Netlify release. A commit containing only these paths can safely skip.
     data/*|ios/*|app-store/*|docs/*|.github/*|README.md|AGENTS.md|CLAUDE.md|PROJECT_HANDOFF.md)
