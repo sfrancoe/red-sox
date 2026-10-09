@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Hub Ball Atlas</title>
-<meta name="robots" content="noindex">
 <style>
 :root{
   color-scheme:dark;
@@ -12,6 +11,7 @@
   --text:#e8eefb; --muted:#93a1bd; --dim:#5d6a85; --accent:#ff5a4f; --chip:rgba(255,255,255,.06);
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--text);
   font:14px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased}
@@ -20,6 +20,9 @@ canvas.dragging{cursor:grabbing} canvas.pointing{cursor:pointer}
 button{font:inherit;color:inherit;touch-action:manipulation}
 header{position:fixed;left:16px;top:calc(14px + env(safe-area-inset-top,0px));right:396px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;pointer-events:none;z-index:3}
 header>*{pointer-events:auto}
+.back{display:inline-block;margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.back:hover,.back:focus-visible{color:var(--text)}
+.back:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
 .brand h1{margin:0;font-size:22px;letter-spacing:.02em;font-weight:800}
 .brand h1 span{color:var(--accent)}
 .brand p{margin:2px 0 0;color:var(--muted);font-size:12.5px}
@@ -128,6 +131,7 @@ kbd{font:11px ui-monospace,Menlo,monospace;background:rgba(255,255,255,.08);bord
 
 <header>
   <div class="brand">
+    <a class="back" id="back" href="../recent-game/" hidden>← Hub Ball</a>
     <h1>Hub Ball <span>Atlas</span></h1>
     <p id="sub"></p>
   </div>
@@ -980,6 +984,9 @@ addEventListener('keydown', e => {
 });
 
 // ------------------------------------------------------------------ go
+// On the website (/atlas/) link back to the other tabs; a downloaded copy or an
+// embedded artifact has no site to return to, so the link stays hidden there.
+if (/\/atlas\/(index\.html)?$/.test(location.pathname)) document.getElementById('back').hidden = false;
 // Phones start with the map full-screen; selecting anything raises the panel.
 if (narrow()) { panel.classList.add('min'); document.body.classList.add('pmin'); }
 relayout();

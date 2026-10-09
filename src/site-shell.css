@@ -56,13 +56,23 @@
   box-shadow:0 1px 5px rgba(34,43,38,.12),inset 0 -3px 0 var(--site-accent);
 }
 
+/* Nine tabs need tighter spacing to fit a single row on smaller laptops. */
+@media (max-width:1180px){
+  .site-nav__link{padding:8px 10px;font-size:13px;letter-spacing:.05em;}
+}
+@media (max-width:980px){
+  .site-nav__link{padding:8px 7px;letter-spacing:.03em;}
+}
+
 @media (max-width:900px){
-  :root{--site-header-height:198px;}
+  :root{--site-header-height:242px;}
   .site-header__inner{
     width:calc(100% - 20px);padding:8px 0;
   }
   .site-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:2px;padding:3px;}
   .site-nav__link{min-width:0;min-height:42px;padding:8px 5px;font-size:12px;letter-spacing:.035em;}
+  /* An odd tab count leaves the last tab alone; let it fill its row. */
+  .site-nav__link:last-child:nth-child(odd){grid-column:1 / -1;}
 }
 
 @media (prefers-reduced-motion:reduce){

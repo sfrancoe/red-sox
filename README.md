@@ -101,8 +101,7 @@ scripts/                fetch, build, package
 map of this repository. Open it in a browser (it works offline from `file://`): spheres
 are sized by lines of code, open into groups and files when clicked, and are linked by
 the imports, API calls, data writes, workflow runs and tests between them. The site
-serves it, unlisted and marked `noindex`, at https://red-sox.netlify.app/atlas/ for
-sharing by link. Rebuild it after structural changes:
+serves it at https://red-sox.netlify.app/atlas/, linked from the **Atlas** tab. Rebuild it after structural changes:
 
 ```bash
 python3 scripts/build_atlas.py        # rewrite docs/atlas/hub-ball-atlas.html
