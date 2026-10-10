@@ -129,6 +129,10 @@ jobs:
               "$baseline" "candidate/data/$team" \
               schedule.json recent-game.json standings.json pitching.json \
               globe.json herald.json athletic.json masslive.json \
+              --renamed is_red_sox=is_favorite \
+              --renamed red_sox_record=favorite_team_record \
+              --renamed red_sox_pitcher=favorite_team_pitcher \
+              --renamed red_sox_pitcher_record=favorite_team_pitcher_record \
               --label "$team" >> shadow-report.md || status=1
           done
           cat shadow-report.md

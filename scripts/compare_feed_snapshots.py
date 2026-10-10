@@ -6,7 +6,8 @@ the shared registry fetchers: run the shared fetchers against live APIs, then
 compare their output with the snapshot the old scripts last published.
 
 Exit status is 1 only when a field present in the baseline is missing from the
-new feed (a schema regression the app could notice). Value changes are
+new feed (a schema regression the app could notice). `--renamed old=new` marks a
+field the app already reads under its new name, so the old name may disappear. Value changes are
 reported for review, since live data moves between runs.
 """
 
@@ -53,8 +54,15 @@ def flat(value: Any, prefix: str = "") -> dict[str, Any]:
     return {prefix: value}
 
 
-def compare(baseline: Any, new: Any) -> tuple[list[str], list[str], list[tuple[str, Any, Any]]]:
+def compare(baseline: Any, new: Any, renamed: dict[str, str] | None = None
+            ) -> tuple[list[str], list[str], list[tuple[str, Any, Any]]]:
     old_shape, new_shape = shape(baseline), shape(new)
+    for path in list(old_shape):
+        leaf = path.rsplit(".", 1)[-1]
+        if leaf in (renamed or {}):
+            successor = path[: len(path) - len(leaf)] + renamed[leaf]
+            if successor in new_shape:
+                old_shape.discard(path)
     old_values, new_values = flat(baseline), flat(new)
     changed = [
         (path, old_values[path], new_values.get(path))
@@ -76,8 +84,11 @@ def main() -> int:
     parser.add_argument("files", nargs="+")
     parser.add_argument("--samples", type=int, default=6)
     parser.add_argument("--label", help="heading for the report (defaults to the new directory)")
+    parser.add_argument("--renamed", action="append", default=[], metavar="OLD=NEW",
+                        help="a field the app also reads under a new name")
     args = parser.parse_args()
 
+    renamed = dict(item.split("=", 1) for item in args.renamed)
     regressions = 0
     print(f"### {args.label or args.new.name}\n")
     for name in args.files:
@@ -90,7 +101,7 @@ def main() -> int:
             regressions += 1
             continue
         missing, added, changed = compare(json.loads(old_path.read_text()),
-                                          json.loads(new_path.read_text()))
+                                          json.loads(new_path.read_text()), renamed)
         regressions += len(missing)
         status = "❌" if missing else "✅"
         print(f"- **{name}** {status} — {len(missing)} missing fields, {len(added)} new fields, "
