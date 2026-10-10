@@ -3,15 +3,10 @@
 
 from __future__ import annotations
 
-import json
-import tempfile
 import unittest
-from datetime import date, datetime
-from pathlib import Path
+from datetime import datetime
 from unittest.mock import patch
 
-import fetch_recent_game
-import fetch_schedule
 import fetch_team_data
 
 
@@ -54,19 +49,6 @@ def postseason_payload(team_id: int) -> dict:
 
 
 class PostseasonScheduleTests(unittest.TestCase):
-    def test_recent_game_snapshots_include_every_postseason_round(self) -> None:
-        for module in (fetch_recent_game,):
-            for game_type in ("F", "D", "L", "W"):
-                with self.subTest(module=module.__name__, game_type=game_type):
-                    payload = {"dates": [{"games": [{
-                        "gamePk": 849851, "gameType": game_type,
-                        "gameDate": "2026-09-29T23:00:00Z",
-                        "status": {"abstractGameState": "Final", "codedGameState": "F"},
-                    }]}]}
-                    with patch.object(module, "fetch_json", return_value=payload) as fetch:
-                        self.assertEqual(module.latest_final_game(date(2026, 9, 29)), 849851)
-                    self.assertIn("gameTypes=R,F,D,L,W", fetch.call_args.args[0])
-
     def test_registry_recent_game_includes_every_postseason_round(self) -> None:
         team = {"mlb_id": 147, "short_name": "Yankees"}
         for game_type in ("F", "D", "L", "W"):
@@ -102,31 +84,6 @@ class PostseasonScheduleTests(unittest.TestCase):
         self.assertIn("endDate=2026-10-31", schedule_url)
         self.assertIn("gameTypes=R,F,D,L,W", schedule_url)
 
-    def test_legacy_schedules_include_postseason_games(self) -> None:
-        modules = (
-            (fetch_schedule, fetch_schedule.BOS),
-        )
-        with tempfile.TemporaryDirectory() as directory:
-            for index, (module, team_id) in enumerate(modules):
-                output = Path(directory) / f"schedule-{index}.json"
-                with self.subTest(module=module.__name__):
-                    with (
-                        patch.object(module, "datetime", PostseasonDatetime),
-                        patch.object(module, "OUTPUT_PATH", output),
-                        patch.object(
-                            module,
-                            "fetch_json",
-                            side_effect=(SEASON_PAYLOAD, postseason_payload(team_id)),
-                        ) as fetch,
-                    ):
-                        module.main()
-
-                    feed = json.loads(output.read_text())
-                    self.assertEqual([game["game_pk"] for game in feed["games"]], [849851])
-                    schedule_url = fetch.call_args_list[1].args[0]
-                    self.assertIn("endDate=2026-10-31", schedule_url)
-                    self.assertIn("gameTypes=R,F,D,L,W", schedule_url)
-
     def test_registry_schedule_stops_after_season_end(self) -> None:
         team = {"mlb_id": 110, "short_name": "Orioles"}
         with (
@@ -138,21 +95,6 @@ class PostseasonScheduleTests(unittest.TestCase):
         self.assertEqual(feed["games"], [])
         fetch.assert_called_once_with(fetch_team_data.SEASON_API.format(season=2026))
 
-    def test_legacy_schedules_stop_after_season_end(self) -> None:
-        modules = (fetch_schedule,)
-        with tempfile.TemporaryDirectory() as directory:
-            for index, module in enumerate(modules):
-                output = Path(directory) / f"schedule-{index}.json"
-                with self.subTest(module=module.__name__):
-                    with (
-                        patch.object(module, "datetime", AfterPostseasonDatetime),
-                        patch.object(module, "OUTPUT_PATH", output),
-                        patch.object(module, "fetch_json", return_value=SEASON_PAYLOAD) as fetch,
-                    ):
-                        module.main()
-
-                    self.assertEqual(json.loads(output.read_text())["games"], [])
-                    fetch.assert_called_once_with(module.SEASON_API.format(season=2026))
 
 
 if __name__ == "__main__":

@@ -36,7 +36,8 @@ PRIORITY=(
   stories/war-room/index.html
   stories/war-room/story.js
   scripts/fetch_seasons.py
-  scripts/fetch_herald_news.py
+  scripts/fetch_team_news.py
+  scripts/news_adapters.py
   scripts/story_facts.py
   scripts/build_site.sh
   scripts/build_single_file.py

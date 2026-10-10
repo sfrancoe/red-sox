@@ -32,22 +32,55 @@ export const MLB_TEAMS = Object.freeze([
       {
         "key": "globe",
         "name": "Globe",
-        "url": "https://www.bostonglobe.com/sports/red-sox/"
+        "url": "https://www.bostonglobe.com/sports/red-sox/",
+        "adapter": {
+          "kind": "arc_stories",
+          "url": "https://www.bostonglobe.com/sports/baseball/redsox/",
+          "section": "red sox",
+          "max": 16,
+          "source_name": "The Boston Globe"
+        }
       },
       {
         "key": "herald",
         "name": "Herald",
-        "url": "https://www.bostonherald.com/sports/mlb/boston-red-sox/"
+        "url": "https://www.bostonherald.com/sports/mlb/boston-red-sox/",
+        "adapter": {
+          "kind": "wordpress",
+          "url": "https://www.bostonherald.com/wp-json/wp/v2/posts?categories=11890&per_page=16&orderby=date&order=desc&_fields=link%2Cdate_gmt%2Ctitle%2Cexcerpt",
+          "url_prefix": "https://www.bostonherald.com/",
+          "category": "Boston Red Sox",
+          "max": 16,
+          "source_name": "The Boston Herald"
+        }
       },
       {
         "key": "athletic",
         "name": "The Athletic",
-        "url": "https://www.nytimes.com/athletic/mlb/team/red-sox/"
+        "url": "https://www.nytimes.com/athletic/mlb/team/red-sox/",
+        "adapter": {
+          "kind": "rss",
+          "url": "https://www.nytimes.com/athletic/rss/mlb/redsox/",
+          "url_prefix": "https://www.nytimes.com/athletic/",
+          "require_description": true,
+          "category": "Boston Red Sox",
+          "strip_title_prefix": "^season(?=[A-Z])",
+          "max": 16
+        }
       },
       {
         "key": "masslive",
         "name": "MassLive",
-        "url": "https://www.masslive.com/redsox/"
+        "url": "https://www.masslive.com/redsox/",
+        "adapter": {
+          "kind": "rss",
+          "url": "https://www.masslive.com/arc/outboundfeeds/rss/category/redsox/?outputType=xml",
+          "url_prefix": "https://www.masslive.com/",
+          "require_description": true,
+          "category": "Red Sox",
+          "strip_title_prefix": "^season(?=[A-Z])",
+          "max": 16
+        }
       }
     ],
     "features": {
@@ -101,7 +134,8 @@ export const MLB_TEAMS = Object.freeze([
         "adapter": {
           "kind": "dailynews",
           "url": "https://www.nydailynews.com/sports/mlb/new-york-yankees/",
-          "match": "yankee"
+          "match": "yankee",
+          "source_name": "New York Daily News"
         }
       },
       {
@@ -111,7 +145,8 @@ export const MLB_TEAMS = Object.freeze([
         "adapter": {
           "kind": "nypost",
           "url": "https://nypost.com/sports/yankees/",
-          "match": "yankee"
+          "match": "yankee",
+          "source_name": "New York Post"
         }
       },
       {
@@ -178,7 +213,8 @@ export const MLB_TEAMS = Object.freeze([
         "adapter": {
           "kind": "dailynews",
           "url": "https://www.nydailynews.com/sports/mlb/new-york-mets/",
-          "match": "mets"
+          "match": "mets",
+          "source_name": "New York Daily News"
         }
       },
       {
@@ -188,7 +224,8 @@ export const MLB_TEAMS = Object.freeze([
         "adapter": {
           "kind": "nypost",
           "url": "https://nypost.com/new-york-mets/",
-          "match": "mets"
+          "match": "mets",
+          "source_name": "New York Post"
         }
       },
       {

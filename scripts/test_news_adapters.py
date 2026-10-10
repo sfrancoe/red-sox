@@ -73,6 +73,57 @@ class AdapterParserTests(unittest.TestCase):
             news_adapters.fusion(b"<html>redesigned</html>", times["adapter"], team)
 
 
+class BostonAdapterTests(unittest.TestCase):
+    def test_globe_keeps_dated_red_sox_stories(self):
+        team, globe = source("redsox", "globe")
+        cache = {"page": [
+            {"type": "story", "headlines": {"basic": "Sox clinch"}, "description": {"basic": "Big night"},
+             "website_url": "/2026/09/20/sports/sox-clinch/", "display_date": "2026-09-20T02:00:00Z",
+             "taxonomy": {"primary_section": {"name": "Red Sox"}}},
+            {"type": "story", "headlines": {"basic": "Bruins open camp"}, "description": {"basic": "Hockey"},
+             "website_url": "/2026/09/20/sports/bruins/", "taxonomy": {"primary_section": {"name": "Bruins"}}},
+            {"type": "story", "headlines": {"basic": "Undated"}, "description": {"basic": "Red Sox note"},
+             "website_url": "/sports/undated/"},
+        ]}
+        payload = f"Fusion.contentCache={json.dumps(cache)};".encode()
+        [article] = news_adapters.arc_stories(payload, globe["adapter"], team)
+        self.assertEqual(article["url"], "https://www.bostonglobe.com/2026/09/20/sports/sox-clinch/")
+        self.assertEqual(article["category"], "Red Sox")
+
+    def test_herald_reads_wordpress_posts(self):
+        team, herald = source("redsox", "herald")
+        posts = [
+            {"title": {"rendered": "Cora &amp; co."}, "excerpt": {"rendered": "<p>Offseason plans</p>"},
+             "link": "https://www.bostonherald.com/2026/10/08/cora/", "date_gmt": "2026-10-08T14:00:00"},
+            {"title": {"rendered": "Elsewhere"}, "excerpt": {"rendered": "x"}, "link": "https://example.com/x"},
+        ]
+        [article] = news_adapters.wordpress(json.dumps(posts).encode(), herald["adapter"], team)
+        self.assertEqual((article["title"], article["description"]), ("Cora & co.", "Offseason plans"))
+        self.assertEqual(article["published"], "2026-10-08T14:00:00Z")
+        self.assertEqual(article["category"], "Boston Red Sox")
+
+    def test_masslive_strips_season_label_and_requires_description(self):
+        team, masslive = source("redsox", "masslive")
+        payload = b"""<rss><channel>
+          <item><title>seasonState of the Sox</title><link>https://www.masslive.com/redsox/a</link>
+            <description>Where things stand</description></item>
+          <item><title>No summary</title><link>https://www.masslive.com/redsox/b</link></item>
+        </channel></rss>"""
+        [article] = news_adapters.rss(payload, masslive["adapter"], team)
+        self.assertEqual(article["title"], "State of the Sox")
+        self.assertEqual(article["category"], "Red Sox")
+
+    def test_mastheads_keep_publication_names(self):
+        for team_key, source_key, masthead in (
+            ("redsox", "globe", "The Boston Globe"), ("redsox", "herald", "The Boston Herald"),
+            ("yankees", "nypost", "New York Post"), ("mets", "dailynews", "New York Daily News"),
+        ):
+            team, item = source(team_key, source_key)
+            with self.subTest(source=f"{team_key}/{source_key}"), \
+                    patch.object(news, "adapter_feed", return_value=[{"title": "x"}]):
+                self.assertEqual(news.source_feed(team, item)["source"], masthead)
+
+
 class AdapterFetchTests(unittest.TestCase):
     def test_adapter_source_is_fetched_directly_and_labelled_from_the_registry(self):
         team, mets_post = source("mets", "nypost")
@@ -80,9 +131,9 @@ class AdapterFetchTests(unittest.TestCase):
         with patch.object(news, "fetch_page", return_value=payload) as fetch, \
                 patch.object(news, "fetch_xml") as bing:
             feed = news.source_feed(team, mets_post)
-        fetch.assert_called_once_with(mets_post["adapter"]["url"])
+        fetch.assert_called_once_with(mets_post["adapter"]["url"], news.IDENTITIES)
         bing.assert_not_called()
-        self.assertEqual((feed["source"], feed["source_url"]), (mets_post["name"], mets_post["url"]))
+        self.assertEqual((feed["source"], feed["source_url"]), ("New York Post", mets_post["url"]))
         self.assertEqual(len(feed["articles"]), 1)
 
     def test_empty_publisher_page_counts_toward_the_failure_streak(self):
@@ -90,6 +141,22 @@ class AdapterFetchTests(unittest.TestCase):
         with patch.object(news, "fetch_page", return_value=b"<html></html>"):
             with self.assertRaises(news.NewsSourceTransientError):
                 news.source_feed(team, mets_post)
+
+    def test_unreadable_page_is_refetched_with_fallback_identity(self):
+        team, globe = source("redsox", "globe")
+        cache = {"a": [{"type": "story", "headlines": {"basic": "Sox"}, "description": {"basic": "Red Sox win"},
+                        "website_url": "/2026/10/08/sports/sox/", "taxonomy": {"primary_section": {"name": "Red Sox"}}}]}
+        real = f"Fusion.contentCache={json.dumps(cache)};".encode()
+        with patch.object(news, "fetch_page", side_effect=[b"<html>checking your browser</html>", real]) as fetch:
+            feed = news.source_feed(team, globe)
+        self.assertEqual(len(feed["articles"]), 1)
+        self.assertEqual(fetch.call_args_list[1].args[1], news.IDENTITIES[1:])
+
+    def test_persistently_unreadable_page_counts_toward_failure_streak(self):
+        team, globe = source("redsox", "globe")
+        with patch.object(news, "fetch_page", return_value=b"<html>redesigned</html>"):
+            with self.assertRaises(news.NewsSourceTransientError):
+                news.source_feed(team, globe)
 
     def test_refused_default_client_falls_back_to_approved_identity(self):
         refused = HTTPError("https://nypost.com/new-york-mets/", 403, "Forbidden", {}, None)
@@ -100,7 +167,7 @@ class AdapterFetchTests(unittest.TestCase):
         self.assertEqual(request.call_args.args[0].get_header("User-agent"), news.FALLBACK_USER_AGENT)
 
     def test_every_adapter_names_a_known_parser_and_https_url(self):
-        for team in news.shared_news_teams():
+        for team in news.all_teams():
             for item in team["news_sources"]:
                 adapter = item.get("adapter")
                 if adapter:

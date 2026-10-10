@@ -9,15 +9,31 @@ const STANDARD_FILES = [
   'seasons.json', 'standings.json', 'x-posts.json',
 ];
 
-export const ALLOWED_PATHS = new Set(MLB_TEAMS.flatMap(team => {
-  const prefix = team.legacy_root_data ? '' : `${team.data_directory}/`;
+function teamFiles(team) {
   const files = [
     ...STANDARD_FILES,
     ...team.news_sources.map(source => `${source.key}.json`),
   ];
   if (team.features.players) files.push('players.json');
-  return files.map(file => `${prefix}${file}`);
-}));
+  return files;
+}
+
+// Every team's feeds live in data/<team>/. Boston's shipped app builds (and the
+// original Red Sox web pages) still request its feeds at the data root, so those
+// root paths are served from data/redsox/. The exception is the Four Roads /
+// Game 108 story data, which stays at the root and is built by fetch_seasons.py.
+const ROOT_STORY_FILES = new Set(['seasons.json', 'meta.json']);
+
+export const ROOT_ALIASES = new Map(MLB_TEAMS
+  .filter(team => team.legacy_root_data)
+  .flatMap(team => teamFiles(team)
+    .filter(file => !ROOT_STORY_FILES.has(file))
+    .map(file => [file, `${team.data_directory}/${file}`])));
+
+export const ALLOWED_PATHS = new Set(MLB_TEAMS.flatMap(team => [
+  ...teamFiles(team).map(file => `${team.data_directory}/${file}`),
+  ...(team.legacy_root_data ? teamFiles(team) : []),
+]));
 
 // Shared comparison artifacts never carry a team-directory prefix. Keep the
 // allowlist finite: a new season is a deliberate gateway/deployment change.
@@ -110,7 +126,7 @@ export default async request => {
   }
 
   try {
-    const body = await fetchSource(path);
+    const body = await fetchSource(ROOT_ALIASES.get(path) ?? path);
     const catalog = path === 'stories/catalog-v1.json';
     const story = path.startsWith('stories/');
     const etag = story ? `"${hash(body)}"` : null;

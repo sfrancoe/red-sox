@@ -209,7 +209,8 @@ and inject sessions/clients; do not reconstruct `swiftc` source-file lists. The
 project and evidence stay under ignored `dist/`.
 
 `AppBackend` maps team data to `/data/<team>/...` in Debug and `/api/data/<team>/...`
-in Release (Boston retains legacy root paths), and functions to `/api/...?...team=...`.
+in Release (Boston builds request root paths; `app-data.mjs` serves them from
+`data/redsox/`), and functions to `/api/...?...team=...`.
 `HUB_API_ORIGIN` is an Xcode build setting
 embedded in Info.plist. Debug and Release use `https://api.autumnlane.io`, owned by
 Scott and verified on Netlify with valid TLS and working data/API routes on 2026-10-06.
@@ -242,10 +243,12 @@ Generate `HubTeam.swift` with `python3 scripts/generate_team_registry.py` after 
 `config/mlb-teams.json`; never hand-edit generated registries or feeds. Stores require
 an explicit team. Backend data for every team comes from the shared registry fetchers
 (`fetch_team_data.py`, `fetch_team_leaders.py`, `fetch_team_news.py`); never add
-team-named `fetch_<team>_*.py` scripts or `refresh-<team>-*.yml` workflows. The only
-remaining exception is Boston (game data and newspapers), listed in
-`scripts/team_registry.py`; it should only shrink. Direct publisher scraping is a
-per-source `adapter` in `config/mlb-teams.json`, not a new script. The Four Roads/Game 108 story intentionally remains Boston-only.
+team-named `fetch_<team>_*.py` scripts or `refresh-<team>-*.yml` workflows. Every team's
+feeds live in `data/<team>/`; only the Four Roads/Game 108 story data
+(`data/seasons.json`, `data/meta.json`, built by `fetch_seasons.py`) sits at the root.
+`legacy_root_data` now only means installed builds request that team's feeds at root
+paths, which the gateway aliases. Direct publisher scraping is a per-source `adapter`
+in `config/mlb-teams.json`, not a new script. The Four Roads/Game 108 story intentionally remains Boston-only.
 Persistent feed snapshots belong in bounded Caches-directory files, not UserDefaults.
 Audio preparation may run early, but playback still requires the user's Play gesture.
 

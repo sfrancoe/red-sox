@@ -30,7 +30,7 @@ assert output_path(orioles).as_posix().endswith("/data/orioles/x-posts.json")
 assert feed["source"] == "X"
 assert [post["id"] for post in feed["recent"]] == ["123"]
 assert [post["id"] for post in feed["popular"]] == ["123"]
-assert output_path(team_by_key("redsox")).as_posix().endswith("/data/x-posts.json")
+assert output_path(team_by_key("redsox")).as_posix().endswith("/data/redsox/x-posts.json")
 
 with TemporaryDirectory() as directory:
     fallback_path = Path(directory) / "x-posts.json"

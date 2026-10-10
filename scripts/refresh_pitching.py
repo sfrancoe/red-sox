@@ -21,9 +21,6 @@ from team_registry import all_teams, team_by_key
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "config" / "pitching-refresh.json"
-# Boston's pitching still comes from its own script (root data path); every
-# other team uses the shared fetch_team_data builder.
-LEGACY = {"redsox": "fetch_pitching"}
 
 
 def load_policy() -> dict[str, Any]:
@@ -42,7 +39,7 @@ def refresh_allowed(policy: dict[str, Any], today: date) -> bool:
 
 
 def output_path(team: dict[str, Any], root: Path = ROOT) -> Path:
-    return root / "data" / ("" if team["legacy_root_data"] else team["data_directory"]) / "pitching.json"
+    return root / "data" / team["data_directory"] / "pitching.json"
 
 
 class RateLimited(RuntimeError):
@@ -92,7 +89,7 @@ class FanGraphsClient:
 
 
 def build_team(team: dict[str, Any], projections: list, season: int, client: FanGraphsClient) -> dict:
-    module = importlib.import_module(LEGACY.get(team["api_key"], "fetch_team_data"))
+    module = importlib.import_module("fetch_team_data")
     actual = client.get(module.ACTUAL_API.format(season=season, team=team["fangraphs_id"]))
     league = 103 if team["league"] == "AL" else 104
     standings = fetch_json(module.STANDINGS_API.format(league=league, season=season))
@@ -100,8 +97,6 @@ def build_team(team: dict[str, Any], projections: list, season: int, client: Fan
         raise RuntimeError("FanGraphs returned invalid actuals")
     if not all(isinstance(row, dict) for row in actual["data"]) or not isinstance(standings, dict):
         raise RuntimeError("Invalid actuals or MLB standings response")
-    if team["api_key"] in LEGACY:
-        return module.build_feed(projections, actual, standings, season)
     return module.build_pitching_feed(team, projections, actual, standings, season)
 
 

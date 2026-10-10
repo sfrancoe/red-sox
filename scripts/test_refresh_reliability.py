@@ -71,10 +71,10 @@ class RefreshReliabilityTests(unittest.TestCase):
         self.assertEqual(request.call_args.args[0].headers['User-agent'], http.FALLBACK_USER_AGENT)
 
     def test_game_refresh_has_no_player_provider_dependency(self):
-        workflow = (players.ROOT / '.github/workflows/refresh-schedule.yml').read_text()
+        workflow = (players.ROOT / '.github/workflows/refresh-mlb-team-data.yml').read_text()
         self.assertNotIn('fetch_players.py', workflow)
-        self.assertNotIn('data/players.json', workflow)
-        self.assertIn('fetch_standings.py', workflow)
+        self.assertNotIn('players.json', workflow)
+        self.assertIn('fetch_team_data.py', workflow)
 
 
 if __name__ == '__main__':

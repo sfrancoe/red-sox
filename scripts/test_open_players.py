@@ -165,13 +165,13 @@ class RosterParsingTests(unittest.TestCase):
         self.assertFalse(players["Example Injured Pitcher"]["is_active_roster"])
 
     def test_rejected_roster_preserves_files_and_does_not_prune_careers(self) -> None:
-        team = {"api_key": "redsox", "full_name": "Boston Red Sox", "legacy_root_data": True}
+        team = {"api_key": "redsox", "full_name": "Boston Red Sox", "data_directory": "redsox"}
         invalid = SPRING_ROSTER.replace("|Pitchers=", "|Future-Pitchers=")
         with TemporaryDirectory() as directory:
             root = Path(directory)
             bundled = root / "ios" / "players.json"
             careers = root / "data" / "player-careers"
-            for path in (root / "data" / "players.json", bundled, careers / "123.json"):
+            for path in (root / "data" / "redsox" / "players.json", bundled, careers / "123.json"):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text('{"sentinel": "previous snapshot"}\n')
             before = {path: path.read_bytes() for path in root.rglob("*.json")}

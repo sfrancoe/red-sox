@@ -51,7 +51,7 @@ class PostseasonNewsTests(unittest.TestCase):
             "published": "2026-09-28T15:00:00+00:00",
             "url": "https://example.com/astros?utm_source=feed",
         }
-        self.write_feed(self.data_root / "globe.json", [
+        self.write_feed(self.data_root / "redsox" / "globe.json", [
             {
                 "title": "Red Sox announce Game 1 starter",
                 "description": "Boston opens the Wild Card Series.",
@@ -90,7 +90,7 @@ class PostseasonNewsTests(unittest.TestCase):
         self.assertIn("?utm_source=feed", feed["articles"][0]["url"])
 
     def test_missing_source_warns_without_losing_healthy_articles(self):
-        self.write_feed(self.data_root / "globe.json", [{
+        self.write_feed(self.data_root / "redsox" / "globe.json", [{
             "title": "Red Sox roster set",
             "description": "The club announced its roster.",
             "published": "2026-09-28T15:00:00Z",
@@ -116,7 +116,7 @@ class PostseasonNewsTests(unittest.TestCase):
         self.assertEqual(json.loads(path.read_text())["generatedAt"], "old")
 
     def test_publisher_time_corrects_sort_and_news_window(self):
-        self.write_feed(self.data_root / "globe.json", [
+        self.write_feed(self.data_root / "redsox" / "globe.json", [
             {"title": "New recap", "published": "2026-09-28T03:00:00Z", "url": "https://example.com/recap"},
             {"title": "Earlier news", "published": "2026-09-28T15:30:00Z", "url": "https://example.com/earlier"},
             {"title": "Old story reindexed", "published": "2026-09-28T15:45:00Z", "url": "https://example.com/old"},
@@ -131,7 +131,7 @@ class PostseasonNewsTests(unittest.TestCase):
         self.assertEqual(feed["articles"][0]["publishedSource"], "publisher")
 
     def test_failed_verification_keeps_headline_without_false_time(self):
-        self.write_feed(self.data_root / "globe.json", [
+        self.write_feed(self.data_root / "redsox" / "globe.json", [
             {"title": "Unverified recap", "published": "2026-09-28T15:00:00Z", "url": "https://example.com/recap"}
         ], "Globe")
         def blocked(_url):
