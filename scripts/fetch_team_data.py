@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 
 from http_refresh import fetch_json as fetch_provider_json
 
-from team_registry import data_directory, shared_game_data_teams, team_by_key
+from team_registry import all_teams, data_directory, team_by_key
 from schedule_broadcasts import television_broadcasts
 
 
@@ -681,7 +681,7 @@ def main() -> None:
         help="Try every selected team, then fail if any team could not be refreshed.",
     )
     args = parser.parse_args()
-    teams = [team_by_key(key) for key in args.team] if args.team else shared_game_data_teams()
+    teams = [team_by_key(key) for key in args.team] if args.team else all_teams()
     sections = args.section or ["schedule", "recent-game", "standings", "pitching"]
     failures: list[tuple[str, RuntimeError]] = []
     for team in teams:

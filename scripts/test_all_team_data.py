@@ -20,7 +20,7 @@ def load(root: Path, name: str):
 
 
 def validate(team: dict) -> None:
-    root = ROOT / "data" if team["legacy_root_data"] else data_directory(team)
+    root = data_directory(team)
     schedule = load(root, "schedule.json")
     assert schedule["team"] == team["short_name"]
     season_ended = date.today() > date.fromisoformat(schedule["regular_season_end"])

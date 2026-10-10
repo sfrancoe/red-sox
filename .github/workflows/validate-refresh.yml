@@ -73,15 +73,14 @@ jobs:
           key: retrosheet-playerlogs-2025-v1
       - name: Check the Red Sox refresh and Retrosheet archive
         run: |
-          python3 scripts/fetch_schedule.py
-          python3 scripts/fetch_recent_game.py
-          python3 scripts/fetch_standings.py
+          python3 scripts/fetch_team_data.py --team redsox \
+            --section schedule --section recent-game --section standings
           python3 scripts/fetch_players.py --team redsox
           python3 scripts/test_players.py --team redsox
           python3 scripts/test_player_careers.py --team redsox
-      - name: Check direct-source newspapers (Yankees, Mets, Rays)
+      - name: Check direct-source newspapers (Red Sox, Yankees, Mets, Rays)
         if: '!cancelled()'
-        run: python3 scripts/fetch_team_news.py --team yankees --team mets --team rays
+        run: python3 scripts/fetch_team_news.py --team redsox --team yankees --team mets --team rays
       - name: Check pitching provider pacing across all shared-fetcher teams
         if: '!cancelled()'
         run: python3 scripts/fetch_team_data.py --section pitching --keep-going
@@ -94,7 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      TEAMS: yankees mets rays
+      TEAMS: redsox
     steps:
       - name: Check out published data on main (baseline)
         uses: actions/checkout@v4
@@ -123,10 +122,13 @@ jobs:
         run: |
           status=0
           for team in $TEAMS; do
+            # Boston's feeds lived at the data root before they moved to data/redsox/.
+            baseline="baseline/data/$team"
+            [ -d "$baseline" ] || baseline="baseline/data"
             python3 candidate/scripts/compare_feed_snapshots.py \
-              "baseline/data/$team" "candidate/data/$team" \
-              schedule.json recent-game.json standings.json pitching.json seasons.json meta.json \
-              dailynews.json nypost.json athletic.json tampabay.json \
+              "$baseline" "candidate/data/$team" \
+              schedule.json recent-game.json standings.json pitching.json \
+              globe.json herald.json athletic.json masslive.json \
               --label "$team" >> shadow-report.md || status=1
           done
           cat shadow-report.md

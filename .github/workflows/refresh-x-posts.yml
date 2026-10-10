@@ -28,16 +28,16 @@ jobs:
         run: python3 scripts/fetch_x_posts.py
 
       - name: Show what changed
-        run: git --no-pager diff --stat -- data/x-posts.json || true
+        run: git --no-pager diff --stat -- data/redsox/x-posts.json || true
 
       - name: Commit if filtered posts changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/x-posts.json; then
+          if git diff --quiet -- data/redsox/x-posts.json; then
             echo "No filtered X post changes — nothing to commit."
           else
-            git add data/x-posts.json
+            git add data/redsox/x-posts.json
             git commit -m "Refresh filtered X posts ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase origin main
             git push

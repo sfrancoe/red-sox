@@ -26,7 +26,7 @@ from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
 import news_adapters
-from team_registry import data_directory, shared_news_teams, team_by_key
+from team_registry import all_teams, data_directory, team_by_key
 from news_source_status import STATE_PATH, atomic_json, load_state, observe
 
 
@@ -136,8 +136,8 @@ def source_feed(team: dict[str, Any], source: dict[str, Any]) -> dict[str, Any]:
     if source.get("adapter"):
         return {
             "generated_at": datetime.now(timezone.utc).isoformat(),
-            "source": source["name"], "source_url": source["url"],
-            "articles": adapter_feed(team, source),
+            "source": source["adapter"].get("source_name") or source["name"],
+            "source_url": source["url"], "articles": adapter_feed(team, source),
         }
     source_host = urlparse(source["url"]).netloc.removeprefix("www.")
     query = f"site:{source_host} {team['full_name']}"
@@ -226,7 +226,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--team", action="append", default=[])
     args = parser.parse_args()
-    teams = [team_by_key(key) for key in args.team] if args.team else shared_news_teams()
+    teams = [team_by_key(key) for key in args.team] if args.team else all_teams()
     state = load_state(STATE_PATH)
     original_state = json.dumps(state, sort_keys=True)
     # Validate identities before any fetch/write. Repeated identities would count

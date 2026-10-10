@@ -66,17 +66,17 @@ cd _site && python3 -m http.server 8765
 ## Refresh the data
 
 ```bash
-python3 scripts/fetch_seasons.py          # all seasons
-python3 scripts/fetch_seasons.py 2026     # one season
-python3 scripts/fetch_standings.py        # AL divisions and Wild Card
-python3 scripts/fetch_globe_news.py       # Globe headline metadata
-python3 scripts/fetch_herald_news.py      # Herald headline metadata
+python3 scripts/fetch_team_data.py --team redsox   # schedule, recap, standings, pitching
+python3 scripts/fetch_team_leaders.py --team redsox # season paths and leaders
+python3 scripts/fetch_team_news.py --team redsox    # newspaper headlines
+python3 scripts/fetch_seasons.py                    # Four Roads / Game 108 story data
 ```
 
-Writes the generated files in `data/`. Standard library only — no dependencies
-to install. GitHub Actions refreshes MLB data daily and checks both newspaper
-pages every five minutes. It commits only when content changes; Netlify
-redeploys on that commit.
+Every team's feeds are generated into `data/<team>/` by the shared registry
+fetchers; only the Four Roads story data (`data/seasons.json`, `data/meta.json`)
+sits at the root. Standard library only — no dependencies to install. GitHub
+Actions refreshes on the `refresh-mlb-team-*.yml` schedules and commits only when
+content changes; Netlify redeploys on that commit.
 
 ## Deploy
 

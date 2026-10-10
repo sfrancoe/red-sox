@@ -566,8 +566,7 @@ def write_detailed_careers(players: list[dict[str, Any]], skip_new: bool) -> Non
 
 
 def output_path(team: dict[str, Any]) -> Path:
-    root = ROOT / "data" if team["legacy_root_data"] else data_directory(team)
-    return root / "players.json"
+    return data_directory(team) / "players.json"
 
 
 def cached_career_stats() -> dict[str, dict[str, Any]]:

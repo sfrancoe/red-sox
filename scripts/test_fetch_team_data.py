@@ -103,19 +103,6 @@ class RecapWordingTests(unittest.TestCase):
         self.assertNotIn("New York", summary)
 
 
-class RegistrySplitTests(unittest.TestCase):
-    def test_only_boston_keeps_its_own_game_data_scripts(self) -> None:
-        keys = {team["api_key"] for team in team_registry.shared_game_data_teams()}
-        self.assertEqual(len(keys), 29)
-        self.assertNotIn("redsox", keys)
-        self.assertTrue({"yankees", "mets", "rays"} <= keys)
-
-    def test_only_boston_keeps_its_own_newspaper_scrapers(self) -> None:
-        keys = {team["api_key"] for team in team_registry.shared_news_teams()}
-        self.assertEqual(len(keys), 29)
-        self.assertNotIn("redsox", keys)
-
-
 class FailureIsolationTests(unittest.TestCase):
     def test_keep_going_attempts_every_team_then_fails(self) -> None:
         teams = [
@@ -123,7 +110,7 @@ class FailureIsolationTests(unittest.TestCase):
             {"full_name": "Second Team"},
         ]
         with (
-            patch.object(fetch_team_data, "shared_game_data_teams", return_value=teams),
+            patch.object(fetch_team_data, "all_teams", return_value=teams),
             patch.object(
                 fetch_team_data,
                 "fetch_team",

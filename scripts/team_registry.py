@@ -10,16 +10,6 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "config" / "mlb-teams.json"
 
-# Teams still refreshed by their own team-named scripts instead of the shared
-# registry fetchers. Shrink these sets as each team migrates; never add to them.
-# Boston keeps its own game-data scripts until its root `data/*.json` paths are
-# retired from shipped app builds.
-LEGACY_GAME_DATA_KEYS = frozenset({"redsox"})
-# Boston's newspapers still come from its own scrapers (fetch_globe_news,
-# fetch_herald_news, fetch_rss_news) because they write the root data paths.
-LEGACY_NEWS_KEYS = frozenset({"redsox"})
-
-
 def all_teams() -> list[dict[str, Any]]:
     return json.loads(REGISTRY_PATH.read_text())["teams"]
 
@@ -37,13 +27,3 @@ def team_by_key(key: str) -> dict[str, Any]:
 
 def data_directory(team: dict[str, Any]) -> Path:
     return ROOT / "data" / team["data_directory"]
-
-
-def shared_game_data_teams() -> list[dict[str, Any]]:
-    """Teams whose schedule, recap, standings, pitching and leaders use shared fetchers."""
-    return [team for team in all_teams() if team["api_key"] not in LEGACY_GAME_DATA_KEYS]
-
-
-def shared_news_teams() -> list[dict[str, Any]]:
-    """Teams whose newspaper feeds use the shared news fetcher."""
-    return [team for team in all_teams() if team["api_key"] not in LEGACY_NEWS_KEYS]

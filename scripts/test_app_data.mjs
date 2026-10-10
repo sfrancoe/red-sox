@@ -10,11 +10,12 @@ try {
     return new Response('{"ok":true}', { status: 200 });
   };
 
+  // Installed Boston builds request root paths; the feeds live in data/redsox/.
   let response = await handler(new Request('https://example.test/api/data/schedule.json'));
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), { ok: true });
   assert.equal(calls.length, 1);
-  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/schedule.json');
+  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/redsox/schedule.json');
   assert.equal(calls[0].options.headers['User-Agent'], undefined);
   assert.match(response.headers.get('Netlify-CDN-Cache-Control'), /durable/);
   assert.match(response.headers.get('Netlify-CDN-Cache-Control'), /stale-while-revalidate=3600/);
@@ -22,7 +23,28 @@ try {
   calls = [];
   response = await handler(new Request('https://example.test/data/schedule.json'));
   assert.equal(response.status, 200);
-  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/schedule.json');
+  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/redsox/schedule.json');
+
+  for (const file of ['globe.json', 'herald.json', 'athletic.json', 'masslive.json', 'players.json',
+    'pitching.json', 'recent-game.json', 'standings.json', 'x-posts.json']) {
+    calls = [];
+    response = await handler(new Request(`https://example.test/api/data/${file}`));
+    assert.equal(response.status, 200, file);
+    assert.equal(calls[0].url, `https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/redsox/${file}`);
+  }
+
+  // The Four Roads / Game 108 story data stays at the root.
+  for (const file of ['seasons.json', 'meta.json']) {
+    calls = [];
+    response = await handler(new Request(`https://example.test/api/data/${file}`));
+    assert.equal(response.status, 200, file);
+    assert.equal(calls[0].url, `https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/${file}`);
+  }
+
+  calls = [];
+  response = await handler(new Request('https://example.test/api/data/redsox/schedule.json'));
+  assert.equal(response.status, 200);
+  assert.equal(calls[0].url, 'https://raw.githubusercontent.com/sfrancoe/red-sox/main/data/redsox/schedule.json');
 
   calls = [];
   response = await handler(new Request('https://example.test/api/data/leaderboards/2026.json'));
@@ -100,7 +122,7 @@ assert.equal(ALLOWED_PATHS.has('orioles/standings.json'), true);
 assert.equal(ALLOWED_PATHS.has('orioles/x-posts.json'), true);
 assert.equal(ALLOWED_PATHS.has('orioles/players.json'), true);
 assert.equal(ALLOWED_PATHS.has('dodgers/los-angeles-times.json'), true);
-assert.equal(ALLOWED_PATHS.has('redsox/standings.json'), false);
+assert.equal(ALLOWED_PATHS.has('redsox/standings.json'), true);
 assert.equal(ALLOWED_PATHS.has('standings.json'), true);
 assert.equal(ALLOWED_PATHS.has('leaderboards/2026.json'), true);
 assert.equal(ALLOWED_PATHS.has('leaderboards/2022.json'), false);

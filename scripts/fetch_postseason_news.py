@@ -47,10 +47,7 @@ def normalized_title(value: str) -> str:
 
 
 def feed_path(team: dict[str, Any], source: dict[str, str], data_root: Path) -> Path:
-    team_path = data_root / team["data_directory"] / f"{source['key']}.json"
-    if team_path.exists() or not team.get("legacy_root_data"):
-        return team_path
-    return data_root / f"{source['key']}.json"
+    return data_root / team["data_directory"] / f"{source['key']}.json"
 
 
 def load_json(path: Path) -> dict[str, Any]:

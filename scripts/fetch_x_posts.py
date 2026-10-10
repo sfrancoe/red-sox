@@ -24,7 +24,7 @@ ROSTER_URL = (
     "https://statsapi.mlb.com/api/v1/teams/111/roster"
     "?rosterType=fullSeason&season={year}&hydrate=person"
 )
-OUTPUT_PATH = Path(__file__).resolve().parents[1] / "data" / "x-posts.json"
+OUTPUT_PATH = Path(__file__).resolve().parents[1] / "data" / "redsox" / "x-posts.json"
 FALLBACK_USER_AGENT = "OpenAI File Downloader, XaiImageApiFetch/1.0"
 MAX_RECENT_POSTS = 24
 MAX_POPULAR_POSTS = 12

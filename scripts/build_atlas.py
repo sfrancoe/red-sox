@@ -91,9 +91,7 @@ PIPELINE_GROUPS = [
      "preflight, UI-test tooling and this atlas."),
     ("Tests", "Python, Node and shell test suites for the pipeline, the Netlify functions and the native app."),
 ]
-RED_SOX_FETCHERS = {"fetch_seasons.py", "fetch_schedule.py", "fetch_recent_game.py", "fetch_standings.py",
-                    "fetch_pitching.py", "fetch_globe_news.py", "fetch_herald_news.py", "fetch_rss_news.py",
-                    "fetch_x_posts.py", "story_facts.py"}
+RED_SOX_FETCHERS = {"fetch_seasons.py", "fetch_x_posts.py", "story_facts.py"}
 SHARED_HELPERS = {"http_refresh.py", "schedule_broadcasts.py", "team_registry.py", "generate_team_registry.py"}
 
 WORKFLOW_GROUPS = [
@@ -166,20 +164,13 @@ PYTHON_UPSTREAMS = [("statsapi.mlb.com", "ext:mlb"), ("baseball-reference.com", 
 D = "data/"
 SCRIPT_WRITES = {
     "fetch_seasons.py": [D + "seasons.json", D + "meta.json", "data/brewers", IOS + "brewers-shutouts.json"],
-    "fetch_schedule.py": [D + "schedule.json"],
-    "fetch_recent_game.py": [D + "recent-game.json"],
-    "fetch_standings.py": [D + "standings.json"],
-    "fetch_pitching.py": [D + "pitching.json"],
-    "fetch_globe_news.py": [D + "globe.json"],
-    "fetch_herald_news.py": [D + "herald.json"],
-    "fetch_rss_news.py": [D + "athletic.json", D + "masslive.json"],
-    "fetch_x_posts.py": [D + "x-posts.json"],
+    "fetch_x_posts.py": ["data/Team Feeds"],
     "fetch_hitter_story.py": [D + "mlb300-hitters.json"],
     "fetch_team_data.py": ["data/Team Feeds"],
     "fetch_team_news.py": ["data/Team Feeds", ".github/news-status/expansion.json"],
     "fetch_team_leaders.py": ["data/Team Feeds"],
     "fetch_team_x_posts.py": ["data/Team Feeds"],
-    "fetch_players.py": [D + "players.json", "data/Player Careers", IOS + "players.json"],
+    "fetch_players.py": ["data/Team Feeds", "data/Player Careers", IOS + "players.json"],
     "fetch_playoff_history.py": ["data/League Feeds/Postseason History"],
     "fetch_postseason_news.py": ["data/League Feeds/Postseason News"],
     "fetch_league_leaders.py": ["data/League Feeds/Leaderboards"],

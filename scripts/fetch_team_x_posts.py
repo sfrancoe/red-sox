@@ -29,8 +29,6 @@ def source_url(team: dict[str, Any]) -> str:
 
 
 def output_path(team: dict[str, Any]) -> Path:
-    if team["api_key"] == "redsox":
-        return ROOT / "data" / "x-posts.json"
     return ROOT / "data" / team["data_directory"] / "x-posts.json"
 
 

@@ -58,7 +58,8 @@ Audio playback requires the user's Play gesture.
 `HUB_API_ORIGIN` is embedded in Info.plist from Xcode build settings. Debug and Release
 use `https://api.autumnlane.io`, with `red-sox.netlify.app` retained as the fallback
 and for older installed binaries. `AppBackend` uses `/data/<team>/...` in Debug and
-`/api/data/<team>/...` in Release; Boston keeps legacy root data paths. Debug fixtures
+`/api/data/<team>/...` in Release; Boston builds still request root paths, which the
+`app-data.mjs` gateway serves from `data/redsox/`. Debug fixtures
 override function routes with `HUB_API_ROOT` and static feeds with `HUB_DATA_ROOT`.
 
 | Function | Route and responsibility |
@@ -85,10 +86,10 @@ registry fetchers: `scripts/fetch_team_data.py` (schedule, recap, standings,
 pitching), `scripts/fetch_team_leaders.py` and `scripts/fetch_team_news.py`, run by
 the `refresh-mlb-team-*.yml` workflows. A news source is fetched through Bing News
 unless its registry entry has an `adapter`, which reads the publisher's page or feed
-directly (parsers in `scripts/news_adapters.py`). One exception remains, tracked in
-`scripts/team_registry.py` and due to be retired: Boston's game data and newspapers
-still use its own unprefixed scripts because shipped builds read its root
-`data/*.json` paths. Do not add
+directly (parsers in `scripts/news_adapters.py`); an adapter's `source_name` is the
+masthead the app shows. Boston's only own scripts are `fetch_seasons.py` (Four Roads /
+Game 108 story data at the data root) and `fetch_x_posts.py` (its curated X list,
+written to `data/redsox/`). Do not add
 team-named fetch scripts or workflows; `scripts/test_no_team_specific_fetchers.py`
 enforces this. Pitching publication has season, pacing and freeze controls described
 in [docs/pitching-refresh.md](docs/pitching-refresh.md).

@@ -89,7 +89,10 @@ function makeGameRow(game, index) {
   if (game.doubleheader) addText(matchup, 'span', 'schedule-row-dh', `DH Game ${game.game_number}`);
 
   details.appendChild(matchup);
-  if (game.show_probables || game.red_sox_pitcher || game.opponent_pitcher) {
+  // Shared registry feeds name the favorite team's starter `favorite_team_pitcher`;
+  // older Red Sox snapshots used `red_sox_pitcher`.
+  const favoritePitcher = game.favorite_team_pitcher || game.red_sox_pitcher;
+  if (game.show_probables || favoritePitcher || game.opponent_pitcher) {
     const pitchers = document.createElement('div');
     pitchers.className = 'schedule-row-pitchers';
     addText(pitchers, 'span', 'pitching-label', 'Projected starters');
@@ -97,7 +100,7 @@ function makeGameRow(game, index) {
       pitchers,
       'span',
       '',
-      `${game.red_sox_pitcher || 'TBD'} vs. ${game.opponent_pitcher || 'TBD'}`,
+      `${favoritePitcher || 'TBD'} vs. ${game.opponent_pitcher || 'TBD'}`,
     );
     addText(pitchers, 'span', 'schedule-row-venue', game.venue);
     details.appendChild(pitchers);

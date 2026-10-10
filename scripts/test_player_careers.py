@@ -15,7 +15,7 @@ CAREER_DIRECTORY = ROOT / "data" / "player-careers"
 
 
 def player_path(team: dict) -> Path:
-    root = ROOT / "data" if team["legacy_root_data"] else data_directory(team)
+    root = data_directory(team)
     return root / "players.json"
 
 

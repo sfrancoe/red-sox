@@ -159,15 +159,15 @@ class PitchingTests(unittest.TestCase):
             self.assertEqual(build.call_args.args[2], 2026)
 
     def test_generic_builder_equals_current_shape(self):
+        """Frozen output of Boston's retired fetch_pitching.py for the same inputs."""
         import fetch_team_data
-        import fetch_pitching
         team = all_teams()[0]
         projections = [{'xMLBAMID': 123, 'WAR': 3, 'IP': 160}]
         actual = {'data': [{'xMLBAMID': 123, 'PlayerName': 'Pitcher', 'IP': '100.2', 'WAR': 4}]}
         standings = {'records': [{'teamRecords': [{'team': {'id': 111}, 'wins': 90, 'losses': 72}]}]}
-        expected = fetch_pitching.build_feed(projections, actual, standings, 2026)
+        expected = {'season': 2026, 'team': 'Boston Red Sox', 'games_played': 162, 'season_fraction': 1.0, 'method': "Actual FanGraphs pitching WAR is compared with preseason Steamer WAR prorated to Boston's games played.", 'sources': {'actual': 'FanGraphs Major League Leaderboards', 'forecast': 'FanGraphs Steamer preseason projections', 'games_played': 'MLB Stats API', 'actual_url': 'https://www.fangraphs.com/leaders/major-league', 'forecast_url': 'https://www.fangraphs.com/projections'}, 'team_summary': {'actual_war': 4.0, 'forecast_war_to_date': 3.0, 'war_gap': 1.0, 'innings': 100.7, 'era': 0.0}, 'pitchers': [{'id': 123, 'name': 'Pitcher', 'throws': '—', 'role': 'Reliever', 'games': 0, 'starts': 0, 'saves': 0, 'holds': 0, 'actual': {'ip': '100.2', 'ip_value': 100.667, 'war': 4.0, 'era': 0.0, 'fip': 0.0, 'k_minus_bb_pct': 0.0}, 'forecast': {'ip': 160.0, 'war': 3.0, 'era': 0.0, 'fip': 0.0, 'k_minus_bb_pct': 0.0, 'team_at_fetch': None}, 'forecast_to_date': {'ip': 160.0, 'war': 3.0}, 'war_gap': 1.0, 'innings_share_pct': 100.0}]}
         actual = fetch_team_data.build_pitching_feed(team, projections, actual, standings, 2026)
-        expected.pop('generated_at'); actual.pop('generated_at')
+        actual.pop('generated_at')
         self.assertEqual(actual, expected)
 
     def test_all_real_builders_share_transport_and_projection_response(self):

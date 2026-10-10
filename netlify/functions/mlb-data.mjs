@@ -168,7 +168,7 @@ function liveStandings(payload, team, league) {
 }
 
 function snapshotPath(team) {
-  return `${team.legacy_root_data ? '' : `${team.data_directory}/`}standings.json`;
+  return `${team.data_directory}/standings.json`;
 }
 
 async function savedStandings(team) {
