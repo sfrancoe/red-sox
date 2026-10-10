@@ -19,11 +19,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 WORKFLOWS = ROOT / ".github" / "workflows"
 
-# Remaining exceptions, each owned by a legacy set in team_registry.py.
-# Boston's own game-data scripts are unprefixed (fetch_schedule.py etc.), so
-# they are covered by LEGACY_GAME_DATA_KEYS rather than by file names here.
-ALLOWED_NEWS_SCRIPTS = {f"fetch_{key}_news.py" for key in ("yankees", "mets", "rays")}
-ALLOWED_NEWS_WORKFLOWS = {f"refresh-{key}-news.yml" for key in ("yankees", "mets", "rays")}
+# Boston's own scripts are unprefixed (fetch_schedule.py, fetch_globe_news.py,
+# ...), so they are covered by the legacy sets in team_registry.py rather than
+# by file names here. No team-named exceptions remain.
+ALLOWED_SCRIPTS: set[str] = set()
+ALLOWED_WORKFLOWS: set[str] = set()
 
 
 class TeamSpecificFetcherTests(unittest.TestCase):
@@ -39,7 +39,7 @@ class TeamSpecificFetcherTests(unittest.TestCase):
             path.name for token in self.team_tokens()
             for path in SCRIPTS.glob(f"fetch_{token}_*.py")
         }
-        self.assertEqual(found - ALLOWED_NEWS_SCRIPTS, set(),
+        self.assertEqual(found - ALLOWED_SCRIPTS, set(),
                          "Add teams through config/mlb-teams.json and the shared fetchers")
 
     def test_no_team_named_refresh_workflows(self) -> None:
@@ -47,17 +47,12 @@ class TeamSpecificFetcherTests(unittest.TestCase):
             path.name for token in self.team_tokens()
             for path in WORKFLOWS.glob(f"refresh-{token}-*.yml")
         }
-        self.assertEqual(found - ALLOWED_NEWS_WORKFLOWS, set(),
+        self.assertEqual(found - ALLOWED_WORKFLOWS, set(),
                          "Refresh teams through the shared refresh-mlb-team-*.yml workflows")
-
-    def test_news_exceptions_belong_to_legacy_news_teams(self) -> None:
-        for name in ALLOWED_NEWS_SCRIPTS | ALLOWED_NEWS_WORKFLOWS:
-            key = name.removeprefix("fetch_").removeprefix("refresh-").split("_")[0].split("-")[0]
-            self.assertIn(key, team_registry.LEGACY_NEWS_KEYS, name)
 
     def test_legacy_sets_only_shrink(self) -> None:
         self.assertLessEqual(team_registry.LEGACY_GAME_DATA_KEYS, {"redsox"})
-        self.assertLessEqual(team_registry.LEGACY_NEWS_KEYS, {"redsox", "yankees", "mets", "rays"})
+        self.assertLessEqual(team_registry.LEGACY_NEWS_KEYS, {"redsox"})
 
 
 if __name__ == "__main__":

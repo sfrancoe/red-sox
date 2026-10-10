@@ -83,11 +83,12 @@ social feeds, leaderboards and postseason history on their configured schedules;
 separate checks validate story payloads. Every team refreshes through the shared
 registry fetchers: `scripts/fetch_team_data.py` (schedule, recap, standings,
 pitching), `scripts/fetch_team_leaders.py` and `scripts/fetch_team_news.py`, run by
-the `refresh-mlb-team-*.yml` workflows. Two exceptions remain, tracked in
-`scripts/team_registry.py` and due to be retired: Boston's game data still uses its
-own unprefixed scripts because shipped builds read its root `data/*.json` paths, and
-Boston, Yankees, Mets and Rays newspapers still use direct-source scrapers
-(`fetch_globe_news.py`, `fetch_herald_news.py`, `fetch_<team>_news.py`). Do not add
+the `refresh-mlb-team-*.yml` workflows. A news source is fetched through Bing News
+unless its registry entry has an `adapter`, which reads the publisher's page or feed
+directly (parsers in `scripts/news_adapters.py`). One exception remains, tracked in
+`scripts/team_registry.py` and due to be retired: Boston's game data and newspapers
+still use its own unprefixed scripts because shipped builds read its root
+`data/*.json` paths. Do not add
 team-named fetch scripts or workflows; `scripts/test_no_team_specific_fetchers.py`
 enforces this. Pitching publication has season, pacing and freeze controls described
 in [docs/pitching-refresh.md](docs/pitching-refresh.md).

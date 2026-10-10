@@ -243,8 +243,9 @@ Generate `HubTeam.swift` with `python3 scripts/generate_team_registry.py` after 
 an explicit team. Backend data for every team comes from the shared registry fetchers
 (`fetch_team_data.py`, `fetch_team_leaders.py`, `fetch_team_news.py`); never add
 team-named `fetch_<team>_*.py` scripts or `refresh-<team>-*.yml` workflows. The only
-remaining exceptions are listed in `scripts/team_registry.py` (Boston game data,
-four teams' direct newspaper scrapers) and should only shrink. The Four Roads/Game 108 story intentionally remains Boston-only.
+remaining exception is Boston (game data and newspapers), listed in
+`scripts/team_registry.py`; it should only shrink. Direct publisher scraping is a
+per-source `adapter` in `config/mlb-teams.json`, not a new script. The Four Roads/Game 108 story intentionally remains Boston-only.
 Persistent feed snapshots belong in bounded Caches-directory files, not UserDefaults.
 Audio preparation may run early, but playback still requires the user's Play gesture.
 

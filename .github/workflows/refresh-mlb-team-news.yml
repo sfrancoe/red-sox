@@ -1,8 +1,10 @@
-name: Refresh MLB expansion team news
+name: Refresh MLB team news
 
 on:
   schedule:
-    - cron: '14,44 * * * *'
+    # Every 10 minutes: the cadence the Yankees, Mets and Rays scrapers ran at
+    # before they moved here, so no team's newspapers got slower.
+    - cron: '9-59/10 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -36,10 +38,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- data .github/news-status/expansion.json; then
-            echo "No expansion-team news changes."
+            echo "No team news changes."
           else
             git add data .github/news-status/expansion.json
-            git commit -m "Refresh MLB expansion team news ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git commit -m "Refresh MLB team news ($(date -u +%Y-%m-%dT%H:%MZ))"
             # Do not rebase stale streak decisions onto a newer publication.
             # A racing main change rejects this entire data/status transaction.
             git push origin HEAD:main

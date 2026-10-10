@@ -15,9 +15,9 @@ REGISTRY_PATH = ROOT / "config" / "mlb-teams.json"
 # Boston keeps its own game-data scripts until its root `data/*.json` paths are
 # retired from shipped app builds.
 LEGACY_GAME_DATA_KEYS = frozenset({"redsox"})
-# Direct newspaper scrapers (fetch_globe_news, fetch_<team>_news, ...) still own
-# news for these teams until the shared news fetcher can scrape direct sources.
-LEGACY_NEWS_KEYS = frozenset({"redsox", "yankees", "mets", "rays"})
+# Boston's newspapers still come from its own scrapers (fetch_globe_news,
+# fetch_herald_news, fetch_rss_news) because they write the root data paths.
+LEGACY_NEWS_KEYS = frozenset({"redsox"})
 
 
 def all_teams() -> list[dict[str, Any]]:
