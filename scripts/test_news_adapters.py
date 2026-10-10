@@ -131,7 +131,7 @@ class AdapterFetchTests(unittest.TestCase):
         with patch.object(news, "fetch_page", return_value=payload) as fetch, \
                 patch.object(news, "fetch_xml") as bing:
             feed = news.source_feed(team, mets_post)
-        fetch.assert_called_once_with(mets_post["adapter"]["url"])
+        fetch.assert_called_once_with(mets_post["adapter"]["url"], news.IDENTITIES)
         bing.assert_not_called()
         self.assertEqual((feed["source"], feed["source_url"]), ("New York Post", mets_post["url"]))
         self.assertEqual(len(feed["articles"]), 1)
@@ -141,6 +141,22 @@ class AdapterFetchTests(unittest.TestCase):
         with patch.object(news, "fetch_page", return_value=b"<html></html>"):
             with self.assertRaises(news.NewsSourceTransientError):
                 news.source_feed(team, mets_post)
+
+    def test_unreadable_page_is_refetched_with_fallback_identity(self):
+        team, globe = source("redsox", "globe")
+        cache = {"a": [{"type": "story", "headlines": {"basic": "Sox"}, "description": {"basic": "Red Sox win"},
+                        "website_url": "/2026/10/08/sports/sox/", "taxonomy": {"primary_section": {"name": "Red Sox"}}}]}
+        real = f"Fusion.contentCache={json.dumps(cache)};".encode()
+        with patch.object(news, "fetch_page", side_effect=[b"<html>checking your browser</html>", real]) as fetch:
+            feed = news.source_feed(team, globe)
+        self.assertEqual(len(feed["articles"]), 1)
+        self.assertEqual(fetch.call_args_list[1].args[1], news.IDENTITIES[1:])
+
+    def test_persistently_unreadable_page_counts_toward_failure_streak(self):
+        team, globe = source("redsox", "globe")
+        with patch.object(news, "fetch_page", return_value=b"<html>redesigned</html>"):
+            with self.assertRaises(news.NewsSourceTransientError):
+                news.source_feed(team, globe)
 
     def test_refused_default_client_falls_back_to_approved_identity(self):
         refused = HTTPError("https://nypost.com/new-york-mets/", 403, "Forbidden", {}, None)

@@ -64,11 +64,14 @@ def fetch_xml(url: str) -> ElementTree.Element:
     raise NewsSourceTransientError(f"Could not fetch news RSS: {last_error}")
 
 
-def fetch_page(url: str) -> bytes:
+IDENTITIES = ({}, {"User-Agent": FALLBACK_USER_AGENT})
+
+
+def fetch_page(url: str, identities: tuple[dict[str, str], ...] = IDENTITIES) -> bytes:
     """Fetch a publisher page or feed. Some publishers refuse the default client
     but serve the approved fallback identity, so any HTTP refusal moves on to it."""
     last_error: Exception | None = None
-    for headers in ({}, {"User-Agent": FALLBACK_USER_AGENT}):
+    for headers in identities:
         for attempt in range(3):
             try:
                 with urlopen(Request(url, headers=headers), timeout=30) as response:
@@ -88,14 +91,22 @@ def fetch_page(url: str) -> bytes:
 def adapter_feed(team: dict[str, Any], source: dict[str, Any]) -> list[dict[str, str]]:
     adapter = source["adapter"]
     parser = news_adapters.PARSERS[adapter["kind"]]
-    articles = parser(fetch_page(adapter["url"]), adapter, team)
-    if not articles:
-        # A publisher section page is never legitimately empty; count it toward
-        # the source's failure streak so a markup change raises an alert.
-        raise NewsSourceTransientError(
-            f"No articles parsed from {adapter['url']} ({adapter['kind']} adapter)"
-        )
-    return articles
+    problem = ""
+    # Some publishers answer the default client with a bot-check or empty page
+    # (HTTP 200) but serve the real page to the fallback identity, so a page the
+    # parser cannot read is fetched once more under that identity.
+    for identities in (IDENTITIES, IDENTITIES[1:]):
+        try:
+            articles = parser(fetch_page(adapter["url"], identities), adapter, team)
+        except news_adapters.AdapterError as exc:
+            problem = str(exc)
+            continue
+        if articles:
+            return articles
+        problem = "no articles parsed"
+    # Count toward the source's failure streak: a one-off block page clears on the
+    # next run, while a real redesign persists and raises the alert.
+    raise NewsSourceTransientError(f"{adapter['url']} ({adapter['kind']} adapter): {problem}")
 
 
 def clean_text(value: str | None) -> str:
@@ -265,6 +276,9 @@ def main() -> int:
     if failures or immediate:
         summary += "\n" + "\n".join(f"- {failure}" for failure in failures + immediate) + "\n"
     print(summary)
+    if os.environ.get("GITHUB_ACTIONS"):
+        for failure in failures + immediate:
+            print(f"::warning title=News source::{failure}")
     if summary_path := os.environ.get("GITHUB_STEP_SUMMARY"):
         with Path(summary_path).open("a", encoding="utf-8") as handle:
             handle.write(summary)

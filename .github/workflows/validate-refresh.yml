@@ -112,12 +112,13 @@ jobs:
         run: |
           args=()
           for team in $TEAMS; do args+=(--team "$team"); done
-          python3 scripts/fetch_team_data.py "${args[@]}" \
+          step() { "$@" || { echo "::error title=Shadow run::$* failed"; exit 1; }; }
+          step python3 scripts/fetch_team_data.py "${args[@]}" \
             --section schedule --section recent-game --section standings --section pitching \
             --keep-going
-          python3 scripts/fetch_team_leaders.py "${args[@]}"
-          python3 scripts/fetch_team_news.py "${args[@]}"
-          python3 scripts/test_all_team_data.py "${args[@]}"
+          step python3 scripts/fetch_team_leaders.py "${args[@]}"
+          step python3 scripts/fetch_team_news.py "${args[@]}"
+          step python3 scripts/test_all_team_data.py "${args[@]}"
       - name: Compare with what the old scripts published
         run: |
           status=0
